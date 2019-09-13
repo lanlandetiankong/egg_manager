@@ -45,10 +45,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
@@ -101,6 +97,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
             <!-- 指定JDK编译版本 -->
             <plugin>

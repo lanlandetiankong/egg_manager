@@ -63,13 +63,14 @@ public class MpGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { ""});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "em_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        String[] willAddTableNameArr = new String[] {
-                "define_group","define_menu","define_permission","define_role",
-                "role_permission",
-                "user_account","user_group","user_role"
+        String[] allTableNameArr = new String[] {
+                "em_define_group","em_define_menu","em_define_permission","em_define_role",
+                "em_role_permission",
+                "em_user_account","em_user_group","em_user_role"
                 } ;
+        String[] willAddTableNameArr = new String[] {"em_operation_log"} ;
          strategy.setInclude(willAddTableNameArr); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类

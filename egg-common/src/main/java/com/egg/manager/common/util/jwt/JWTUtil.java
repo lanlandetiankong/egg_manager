@@ -11,7 +11,6 @@ import java.util.Date;
 
 /**
  * @author zhouchengjie
- * @since 2018-05-07
  */
 public class JWTUtil {
 
@@ -41,10 +40,10 @@ public class JWTUtil {
      * 获得token中的信息无需secret解密也能获得
      * @return token中包含的用户名
      */
-    public static String getUserNo(String token) {
+    public static String getUserAccountId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("userNo").asString();
+            return jwt.getClaim("userId").asString();
         } catch (JWTDecodeException e) {
             return null;
         }

@@ -25,6 +25,7 @@ public class DefineGroup extends Model<DefineGroup> {
 
     private String name ;
     private String pid ;
+    @TableField(value="is_inherit")
     private Integer isInherit ; //是否成员可继承组权限
 
 

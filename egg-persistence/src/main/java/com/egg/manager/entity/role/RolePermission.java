@@ -21,8 +21,9 @@ import java.util.Date;
 public class RolePermission extends Model<RolePermission> {
     @TableId
     private String fid ;
-
+    @TableField("define_role_id")
     private String defineRoleId;
+    @TableField("define_permission_id")
     private String definePermissionId;
 
     private String type;

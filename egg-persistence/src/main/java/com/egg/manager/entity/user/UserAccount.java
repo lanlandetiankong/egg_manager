@@ -22,8 +22,6 @@ public class UserAccount extends Model<UserAccount> {
     @TableId
     private String fid ;
 
-
-
     @TableField("user_name")
     private String userName ;
     private String account ;

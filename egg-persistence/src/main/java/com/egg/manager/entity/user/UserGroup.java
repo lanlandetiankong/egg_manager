@@ -22,8 +22,9 @@ public class UserGroup extends Model<UserGroup> {
     @TableId
     private String fid ;
 
-
+    @TableField("define_group_id")
     private String defineGroupId ;
+    @TableField("user_account_id")
     private String userAccountId ;
 
     private String type;

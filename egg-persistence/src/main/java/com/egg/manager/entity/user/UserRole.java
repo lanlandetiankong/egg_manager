@@ -21,8 +21,9 @@ public class UserRole extends Model<UserRole> {
     @TableId
     private String fid ;
 
-
+    @TableField(value = "user_account_id")
     private String userAccountId ;
+    @TableField(value = "user_role_id")
     private  String userRoleId ;
     private String type;
     @Version

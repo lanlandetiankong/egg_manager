@@ -2,6 +2,7 @@ package com.egg.manager.config.aspect;
 
 
 import com.egg.manager.annotation.log.OperLog;
+import com.egg.manager.annotation.shiro.ShiroPass;
 import com.egg.manager.aspect.MyAspectApiImpl;
 import com.egg.manager.aspect.log.RecordOperationLogAspe;
 import com.egg.manager.common.util.str.ComUtil;
@@ -29,19 +30,18 @@ public class ControllerAspect {
         Method method = currentMethod(pjp,pjp.getSignature().getName()) ;
         //创建被装饰者
         MyAspectApiImpl aspectApiImpl = new MyAspectApiImpl() ;
+
+
         //是否需要记录日志
         if(method.isAnnotationPresent(OperLog.class)) {
             return new RecordOperationLogAspe(aspectApiImpl).handleAspect(pjp,method);
         }
         return pjp.proceed(pjp.getArgs());
-
-
-
     }
 
 
 
-    private Method currentMethod ( ProceedingJoinPoint joinPoint , String methodName ) {
+    private Method currentMethod(ProceedingJoinPoint joinPoint , String methodName ) {
         Method[] methods = joinPoint.getTarget().getClass().getMethods() ;
         Method resultMethod =  null ;
         for (Method method : methods){

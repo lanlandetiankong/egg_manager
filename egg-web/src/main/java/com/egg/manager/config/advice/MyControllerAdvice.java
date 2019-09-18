@@ -1,6 +1,6 @@
 package com.egg.manager.config.advice;
 
-import com.baomidou.mybatisplus.activerecord.Model;
+import org.springframework.ui.Model;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.web.helper.MyCommonResult;

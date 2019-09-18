@@ -13,6 +13,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -21,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * \* note: TODO 还没开始写
+ * \* note:
  * \* User: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 23:02
@@ -68,9 +69,9 @@ public class MyShiroRelam extends AuthorizingRealm {
         String userAccountId = JWTUtil.getUserAccountId(principalCollection.toString()) ;
         UserAccount userAccount = userAccountService.selectById(userAccountId);
         List<UserRole> userRoles = userRoleService.selectByAccountId() ;
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
-
-        return null;
+        return simpleAuthorizationInfo;
     }
 
     @Override

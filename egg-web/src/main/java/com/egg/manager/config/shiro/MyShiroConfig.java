@@ -61,7 +61,6 @@ public class MyShiroConfig {
         //添加自定义过滤器,命名为jwt
         Map<String,Filter> filterMap = new HashMap<String,Filter>() ;
         filterMap.put("jwt",new JwtShiroFilter());
-        filterFactoryBean.setFilters(filterMap);
 
 
         //自定义url规则
@@ -77,10 +76,9 @@ public class MyShiroConfig {
         filterRuleMap.put("/v2/api-docs", "anon");
         filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
         // 所有请求通过我们自己的JWT Filter
-        filterRuleMap.put("/**", "jwt");
+        filterRuleMap.put("/**", "anon");
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         filterFactoryBean.setFilters(filterMap);
-
 
         //设置securityManager (必要，不设置会启动失败！
         filterFactoryBean.setSecurityManager(securityManager);

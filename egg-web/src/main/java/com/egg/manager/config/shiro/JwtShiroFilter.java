@@ -2,7 +2,6 @@ package com.egg.manager.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.constant.Constant;
-import com.egg.manager.common.base.constant.PublicResultConstant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.common.web.helper.MyResponseHelper;
@@ -11,7 +10,6 @@ import com.egg.manager.service.SpringContextBeanService;
 import com.egg.manager.service.user.UserAccountService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -51,7 +49,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String authorization =httpServletRequest.getHeader("Authorization");
+        String authorization = httpServletRequest.getHeader("Authorization");
         JwtShiroToken token = new JwtShiroToken(authorization);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request,response).login(token);
@@ -91,6 +89,9 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+        if(1 == 1){
+            return true ;
+        }
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin"));
@@ -122,6 +123,9 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      * @throws Exception
      */
     private boolean handleVerificationPassAnnotation(ServletRequest request, ServletResponse response, HttpServletRequest httpServletRequest, String authorization) throws Exception {
+        if(Constant.METHOD_URL_SET.size() == 0) {
+            return true ;
+        }
         for (String urlMethod : Constant.METHOD_URL_SET) {
             String[] urlSplit = urlMethod.split(":--:");
             if(urlSplit[0].equals(httpServletRequest.getRequestURI())

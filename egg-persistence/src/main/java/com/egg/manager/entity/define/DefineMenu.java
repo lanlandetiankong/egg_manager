@@ -20,8 +20,8 @@ import java.util.Date;
 public class DefineMenu extends Model<DefineMenu> {
     @TableId
     private String fid ;
-    @TableField(value="define_module_id")
-    private String defineModuleId ;
+    @TableField(value="parent_id")
+    private String parentId ;
     @TableField(value="menu_name")
     private String menuName ;
     private String type;

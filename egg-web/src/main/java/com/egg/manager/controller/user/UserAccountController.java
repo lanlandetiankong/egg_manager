@@ -17,7 +17,7 @@ public class UserAccountController {
     @Autowired
     private UserAccountMapper userAccountMapper ;
 
-    @OperLog(action="test",modelName = "test login",description = "测试日志记录")
+
     @PostMapping("/test")
     public void test(String name1) {
         List<UserAccount> all = userAccountMapper.selectList(null);

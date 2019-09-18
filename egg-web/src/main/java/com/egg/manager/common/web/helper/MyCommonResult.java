@@ -1,11 +1,19 @@
 package com.egg.manager.common.web.helper;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class MyCommonResult<T> implements Serializable {
+
+
     private String token ;
     //提示信息、错误信息等，用于展示
     private String info ;
@@ -30,8 +38,6 @@ public class MyCommonResult<T> implements Serializable {
     private Map resultMap ;
     //存储 不重复的集合
     private Set resultSet ;
-
-
 
     private T bean;
     private String code;

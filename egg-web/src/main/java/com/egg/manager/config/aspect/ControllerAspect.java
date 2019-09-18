@@ -40,7 +40,12 @@ public class ControllerAspect {
     }
 
 
-
+    /**
+     * 根据方法名取得对应 Method
+     * @param joinPoint
+     * @param methodName
+     * @return
+     */
     private Method currentMethod(ProceedingJoinPoint joinPoint , String methodName ) {
         Method[] methods = joinPoint.getTarget().getClass().getMethods() ;
         Method resultMethod =  null ;

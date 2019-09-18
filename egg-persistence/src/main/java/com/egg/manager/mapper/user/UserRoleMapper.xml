@@ -12,11 +12,13 @@
         <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_account_id AS userAccountId, user_role_id AS userRoleId, type, state, version, create_time AS createTime, update_time AS updateTime
+        fid, user_account_id AS userAccountId, user_role_id AS userRoleId, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 </mapper>

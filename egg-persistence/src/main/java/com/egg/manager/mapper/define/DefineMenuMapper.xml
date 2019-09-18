@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.entity.define.DefineMenu">
         <id column="fid" property="fid" />
+        <result column="define_module_id" property="defineModuleId" />
         <result column="parent_id" property="parentId" />
         <result column="menu_name" property="menuName" />
         <result column="type" property="type" />
@@ -12,11 +13,13 @@
         <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, define_module_id AS defineModuleId, menu_name AS menuName, type, state, version, create_time AS createTime, update_time AS updateTime
+        fid, define_module_id AS defineModuleId,parent_id AS parentId,menu_name AS menuName, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 </mapper>

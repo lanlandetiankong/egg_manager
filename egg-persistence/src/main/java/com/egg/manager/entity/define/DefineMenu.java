@@ -20,6 +20,9 @@ import java.util.Date;
 public class DefineMenu extends Model<DefineMenu> {
     @TableId
     private String fid ;
+
+    @TableField(value="define_module_id")
+    private String defineModuleId ;
     @TableField(value="parent_id")
     private String parentId ;
     @TableField(value="menu_name")
@@ -33,7 +36,10 @@ public class DefineMenu extends Model<DefineMenu> {
     @TableField("update_time")
     private Date updateTime ;
 
-
+    @TableField(value = "create_user")
+    private String createUser ;
+    @TableField(value = "last_modifyer")
+    private String lastModifyer;
 
     @Override
     protected Serializable pkVal() {

@@ -34,6 +34,10 @@ public class UserRole extends Model<UserRole> {
     @TableField("update_time")
     private Date updateTime ;
 
+    @TableField(value = "create_user")
+    private String createUser ;
+    @TableField(value = "last_modifyer")
+    private String lastModifyer;
 
     @Override
     protected Serializable pkVal() {

@@ -39,12 +39,12 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/apis/**")
+        registry.addMapping("/egg_manager/**")
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .maxAge(1800)
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8070") ;
+                .allowedOrigins("http://localhost:8081") ;
     }
 }
 

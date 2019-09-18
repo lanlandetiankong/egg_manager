@@ -1,6 +1,5 @@
 package com.egg.manager.entity.define;
 
-
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -17,14 +16,17 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TableName("em_define_role")
-public class DefineRole extends Model<DefineRole> {
+@TableName("em_define_menu")
+public class DefineModule extends Model<DefineModule> {
     @TableId
     private String fid ;
 
-
-    private String name ;
-    private String code ;
+    @TableField(value="moduleId")
+    private String moduleId ;
+    @TableField(value="parent_id")
+    private String parentId ;
+    @TableField(value="menu_name")
+    private String menuName ;
     private String type;
     @Version
     private Integer version ;
@@ -43,4 +45,6 @@ public class DefineRole extends Model<DefineRole> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
+
 }

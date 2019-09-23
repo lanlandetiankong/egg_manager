@@ -44,6 +44,7 @@ public class MyCommonResult<T> implements Serializable {
     private Integer status ;
     private String errorMsg;
 
+
     public Integer getStatus() {
         return status;
     }

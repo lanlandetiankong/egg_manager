@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.annotations.Version;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +29,10 @@ public class DefineMenu extends Model<DefineMenu> {
     @TableField(value="menu_name")
     private String menuName ;
     private String type;
+    @TableField(value="icon_name")
+    private String iconName ;
+    private String label ;
+    private Integer level ;
     @Version
     private Integer version ;
     private Integer state ;

@@ -24,6 +24,7 @@ public class CommonTree {
     private String pid ;
     private String moduleId;
     private String name ;
+    private String path ;
     private String label ;
     private String iconName ;
     private boolean  selected ;

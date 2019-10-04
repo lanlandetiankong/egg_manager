@@ -82,6 +82,7 @@ public class DefineMenuController {
         tree.setModuleId(menu.getDefineModuleId());
         tree.setLabel(menu.getLabel());
         tree.setKey(menu.getFid());
+        tree.setPath(menu.getRouterUrl());
         return tree;
     }
 
@@ -91,28 +92,4 @@ public class DefineMenuController {
 
 
 
-
-
-
-
-    public List<CommonTree> dealGetMenuTree(List<DefineMenu> defineMenus) {
-        List<DefineMenu> firstLevelMenu = new ArrayList<DefineMenu>() ;
-        List<DefineMenu> secondLevelMenu = new ArrayList<DefineMenu>() ;
-        List<DefineMenu> thirdLevelMenu = new ArrayList<DefineMenu>() ;
-        for (DefineMenu menu :defineMenus) {
-            Integer menuLevel = menu.getLevel() ;
-            if(new Integer(1).equals(menuLevel)){
-                firstLevelMenu.add(menu);
-            }   else if(new Integer(2).equals(menuLevel)){
-                secondLevelMenu.add(menu);
-            }   else if(new Integer(3).equals(menuLevel)){
-                thirdLevelMenu.add(menu);
-            }
-        }
-        return dealSetChildNodes(firstLevelMenu,secondLevelMenu,thirdLevelMenu);
-    }
-    private List<CommonTree> dealSetChildNodes(List<DefineMenu> firstLevelMenu,List<DefineMenu> secondLevelMenu,List<DefineMenu> thirdLevelMenu) {
-
-        return null ;
-    }
 }

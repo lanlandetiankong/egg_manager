@@ -31,6 +31,8 @@ public class DefineMenu extends Model<DefineMenu> {
     private String type;
     @TableField(value="icon_name")
     private String iconName ;
+    @TableField(value="router_url")
+    private String routerUrl ;
     private String label ;
     private Integer level ;
     @Version

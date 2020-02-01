@@ -1,10 +1,9 @@
 package com.egg.manager.config.shiro;
 
 import com.egg.manager.common.util.jwt.JWTUtil;
-import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
-import com.egg.manager.service.SpringContextBeanService;
+import com.egg.manager.spring.SpringContextBeanService;
 import com.egg.manager.service.define.DefineMenuService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.user.UserAccountService;
@@ -16,7 +15,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

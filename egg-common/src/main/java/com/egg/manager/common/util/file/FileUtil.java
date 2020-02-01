@@ -3,7 +3,7 @@ package com.egg.manager.common.util.file;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.date.DateTimeUtil;
 import com.egg.manager.common.util.str.ComUtil;
-import com.egg.manager.common.util.str.StringUtil;
+import com.egg.manager.common.util.str.MyStringUtil;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
@@ -498,7 +498,7 @@ public class FileUtil {
      * @return
      */
     public static File[] getFiles(String str) {
-        File dir = new File(StringUtil.utf8Decoding(str));
+        File dir = new File(MyStringUtil.utf8Decoding(str));
         File[] result = null;
         if (dir.isDirectory()) {
             result = dir.listFiles();
@@ -514,7 +514,7 @@ public class FileUtil {
      * @return 顶层文件夹路径
      */
     public static String getTopClassPath(Class<?> clazz) {
-        String path = StringUtil.utf8Decoding(clazz.getResource("/").getPath());
+        String path = MyStringUtil.utf8Decoding(clazz.getResource("/").getPath());
         return path;
     }
 
@@ -538,7 +538,7 @@ public class FileUtil {
      * @return
      */
     public static String getCurrPath(Class<?> clazz) {
-        return StringUtil.utf8Decoding(clazz.getResource("/").getPath() + clazz.getName().replace(".", File.separator));
+        return MyStringUtil.utf8Decoding(clazz.getResource("/").getPath() + clazz.getName().replace(".", File.separator));
     }
 
     /**
@@ -549,7 +549,7 @@ public class FileUtil {
      */
     public static boolean createDir(String path) {
         boolean flag = false;
-        File file = new File(StringUtil.utf8Decoding(path));
+        File file = new File(MyStringUtil.utf8Decoding(path));
         if (!file.exists()) {
             if (!file.isDirectory()) {
                 flag = file.mkdir();
@@ -581,7 +581,7 @@ public class FileUtil {
      */
     public static boolean createFile(String path, boolean isDelete) throws IOException {
         // 加载文件
-        File file = new File(StringUtil.utf8Decoding(path));
+        File file = new File(MyStringUtil.utf8Decoding(path));
         // 文件是否创建成功
         boolean flag = true;
         // 判断文件是否存在
@@ -611,7 +611,7 @@ public class FileUtil {
     public static boolean moveFileTo(File oldFile, String newDir) {
         StringBuilder sb = new StringBuilder(newDir);
         sb.append(File.separator).append(oldFile.getName());
-        File toDir = new File(StringUtil.utf8Decoding(sb.toString()));
+        File toDir = new File(MyStringUtil.utf8Decoding(sb.toString()));
         boolean flag = false;
         if (!toDir.exists()) {
             flag = oldFile.renameTo(toDir);
@@ -664,7 +664,7 @@ public class FileUtil {
             }
         }
 
-        return StringUtil.utf8Decoding(result) + File.separator;
+        return MyStringUtil.utf8Decoding(result) + File.separator;
     }
 
     public static String getParent(String path, int floor) {
@@ -744,7 +744,7 @@ public class FileUtil {
         str.append("/pre/");
         str.append(url.substring(url.lastIndexOf("/")+1));
         String preUrl = fileUploadPath + str.toString();
-        File filePath = new File(StringUtil.utf8Decoding(preUrl.substring(0,preUrl.lastIndexOf("/"))));
+        File filePath = new File(MyStringUtil.utf8Decoding(preUrl.substring(0,preUrl.lastIndexOf("/"))));
         if(!filePath.exists()){
             filePath.mkdirs();
         }

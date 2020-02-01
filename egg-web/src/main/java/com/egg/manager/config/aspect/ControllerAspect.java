@@ -2,13 +2,8 @@ package com.egg.manager.config.aspect;
 
 
 import com.egg.manager.annotation.log.OperLog;
-import com.egg.manager.annotation.shiro.ShiroPass;
 import com.egg.manager.aspect.MyAspectApiImpl;
 import com.egg.manager.aspect.log.RecordOperationLogAspe;
-import com.egg.manager.common.util.str.ComUtil;
-import com.egg.manager.common.util.str.StringUtil;
-import com.egg.manager.entity.log.OperationLog;
-import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

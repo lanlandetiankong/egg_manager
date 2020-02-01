@@ -1,4 +1,4 @@
-package com.egg.manager.common.constant.define;
+package com.egg.manager.common.base.constant.define;
 
 public interface DefineMenuConstant {
     //菜单的顶级id

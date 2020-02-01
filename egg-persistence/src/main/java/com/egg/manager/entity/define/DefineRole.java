@@ -22,7 +22,6 @@ public class DefineRole extends Model<DefineRole> {
     @TableId
     private String fid ;
 
-
     private String name ;
     private String code ;
     private String type;

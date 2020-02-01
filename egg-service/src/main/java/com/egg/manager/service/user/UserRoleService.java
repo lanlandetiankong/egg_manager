@@ -2,6 +2,7 @@ package com.egg.manager.service.user;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.entity.define.DefineGroup;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 
 import java.util.List;
@@ -17,4 +18,10 @@ import java.util.List;
 public interface UserRoleService extends IService<UserRole> {
 
     public List<UserRole> selectByAccountId() ;
+
+    List<UserRole> dealGetAllUserRoleByAccount(UserAccount account);
+
+    List<UserRole> dealGetAllUserRoleByAccountFromDb(UserAccount userAccount);
+
+    List<UserRole> dealGetAllUserRoleByAccountFromRedis(UserAccount userAccount);
 }

@@ -3,6 +3,9 @@ package com.egg.manager.service.define;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.entity.define.DefineRole;
+
+import java.util.List;
 
 /**
  * \* note:
@@ -14,5 +17,5 @@ import com.egg.manager.entity.define.DefinePermission;
  */
 public interface DefinePermissionService extends IService<DefinePermission> {
 
-    
+    List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) ;
 }

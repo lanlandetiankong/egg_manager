@@ -1,24 +1,24 @@
 package com.egg.manager.controller.define;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.common.constant.define.DefineMenuConstant;
+import com.egg.manager.common.base.constant.define.DefineMenuConstant;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.tree.CommonTree;
 import com.egg.manager.entity.define.DefineMenu;
-import com.egg.manager.mapper.define.DefineMenuMapper;
+import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefineMenuService;
+import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.service.user.UserAccountService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.runtime.directive.Define;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -35,6 +35,17 @@ public class DefineMenuController {
     @Autowired
     private DefineMenuService defineMenuService ;
 
+    @Autowired
+    private UserAccountMapper userAccountMapper ;
+    @Autowired
+    private UserAccountService userAccountService ;
+    @Autowired
+    private RedisHelper redisHelper ;
+
+    @Autowired
+    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 

@@ -3,6 +3,9 @@ package com.egg.manager.service.define;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
+
+import java.util.List;
 
 /**
  * \* note:
@@ -14,5 +17,14 @@ import com.egg.manager.entity.define.DefineRole;
  */
 public interface DefineRoleService extends IService<DefineRole> {
 
-    
+    List<DefineRole> dealGetRolesByAccount(UserAccount userAccount) ;
+
+    List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
+
+    List<DefineRole> dealGetAllDefineRoles();
+
+    List<DefineRole> dealGetAllDefineRolesFromDb();
+
+    List<DefineRole> dealGetAllDefineRolesFromRedis(boolean refreshRedis);
+
 }

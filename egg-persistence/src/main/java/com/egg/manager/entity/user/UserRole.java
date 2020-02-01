@@ -23,8 +23,8 @@ public class UserRole extends Model<UserRole> {
 
     @TableField(value = "user_account_id")
     private String userAccountId ;
-    @TableField(value = "user_role_id")
-    private  String userRoleId ;
+    @TableField(value = "define_role_id")
+    private  String defineRoleId ;
     private String type;
     @Version
     private Integer version ;

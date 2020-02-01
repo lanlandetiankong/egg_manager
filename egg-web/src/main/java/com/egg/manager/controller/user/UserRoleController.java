@@ -1,5 +1,12 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.service.user.UserAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +26,16 @@ import java.util.List;
 @RequestMapping("/user/user_role")
 public class UserRoleController  {
 
+    @Autowired
+    private UserAccountMapper userAccountMapper ;
+    @Autowired
+    private UserAccountService userAccountService ;
+    @Autowired
+    private RedisHelper redisHelper ;
+
+    @Autowired
+    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 }

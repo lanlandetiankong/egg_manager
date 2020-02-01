@@ -6,7 +6,7 @@ import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.common.web.helper.MyResponseHelper;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.service.SpringContextBeanService;
+import com.egg.manager.spring.SpringContextBeanService;
 import com.egg.manager.service.user.UserAccountService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;

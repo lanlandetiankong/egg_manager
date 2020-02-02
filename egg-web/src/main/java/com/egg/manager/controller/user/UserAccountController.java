@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.egg.manager.annotation.log.OperLog;
+import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
@@ -73,6 +74,7 @@ public class UserAccountController extends BaseController {
                     throw new Exception("账号密码不匹配！");
                 }
             }
+            dealCommonSuccessCatch(result,"用户登录:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;
         }
@@ -88,12 +90,27 @@ public class UserAccountController extends BaseController {
             Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
             List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
             result.setResultList(userAccounts);
+            dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;
         }
         return  result;
     }
 
+
+    @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = String.class)
+    @PostMapping(value = "/getUserAccountById")
+    public MyCommonResult<UserAccount> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
+        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
+        try{
+            UserAccount vo = userAccountMapper.selectById(accountId);
+            result.setBean(vo);
+            dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
 
 
 
@@ -108,9 +125,11 @@ public class UserAccountController extends BaseController {
             }   else {
                 UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
                 userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
+                userAccount.setPassword(UserAccountConstant.DEFAULT_PWD);
                 addCount = userAccountMapper.insert(userAccount) ;
             }
             result.setCount(addCount);
+            dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;
         }
@@ -131,6 +150,7 @@ public class UserAccountController extends BaseController {
                 changeCount = userAccountMapper.updateById(userAccount) ;
             }
             result.setCount(changeCount);
+            dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;
         }
@@ -147,6 +167,7 @@ public class UserAccountController extends BaseController {
                 List<String> delIdList = Arrays.asList(delIds) ;
                 int delCount = userAccountMapper.deleteBatchIds(delIdList) ;
                 result.setCount(delCount);
+                dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
             }
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;

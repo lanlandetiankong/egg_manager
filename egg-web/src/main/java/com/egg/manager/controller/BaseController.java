@@ -17,6 +17,7 @@ import java.util.Map;
  * \
  */
 public class BaseController {
+    public String actionSuccessMsg = "操作成功" ;
 
     public static boolean checkFieldStrBlank(String... strs) {
         boolean blankFlag = false ;
@@ -33,20 +34,46 @@ public class BaseController {
 
 
     public  void dealCommonErrorCatch(MyCommonResult result,Exception e) {
-        dealCommonErrorCatch(result,e,null) ;
+        dealCommonErrorCatch(result,e,null,true) ;
     }
-    public  void dealCommonErrorCatch(MyCommonResult result,Exception e,String appendMsg) {
+
+
+
+    /**
+     *
+     * @param result
+     * @param e
+     * @param appendMsg 异常信息
+     * @param isAppend appendMsg是否追加到 errorMsg 后面
+     */
+    public  void dealCommonErrorCatch(MyCommonResult result,Exception e,String appendMsg,boolean isAppend) {
         result.setHasError(true);
-        String errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg) ;
+        String errmsg = null ;
+        if(isAppend){
+            errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg) ;
+        }   else {
+            errmsg = appendMsg ;
+        }
         result.setErrorMsg(errmsg);
     }
 
+    public  void dealCommonSuccessCatch(MyCommonResult result,String info) {
+        result.setInfo(info);
+    }
+
+
+    /**
+     * 解析 搜索条件 map
+     * @param queryJson
+     * @return
+     */
     public Map<String,Object> parseQueryJsonToMap(String queryJson) {
         Map<String,Object> map = new HashMap<>() ;
         if(StringUtils.isNotBlank(queryJson) && queryJson != "{}"){
             JSONObject jsonObject = JSONObject.parseObject(queryJson);
             if(jsonObject != null && jsonObject.isEmpty() == false){
                 for (String jsonKey : jsonObject.keySet()){
+                    //驼峰参数 转 下划线 参数 风格
                     String jsonStr = MyStringUtil.camelToUnderline(jsonKey,false);
                     String jsonVal = jsonObject.getString(jsonKey) ;
                     if(StringUtils.isNotBlank(jsonVal)){

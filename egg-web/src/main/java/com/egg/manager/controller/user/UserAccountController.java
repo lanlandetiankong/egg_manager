@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.constant.redis.RedisShiroKeyConstant;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -20,6 +21,7 @@ import com.egg.manager.vo.session.UserAccountToken;
 import com.egg.manager.vo.user.UserAccountVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{
             Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
+            queryMap.put("state", BaseStateEnum.ENABLED.getValue());
             List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
             result.setResultList(userAccounts);
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
@@ -160,12 +163,13 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = String.class)
     @PostMapping(value = "/batchDelUserAccountByIds")
-    public MyCommonResult doDeleteUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(delIds != null && delIds.length > 0) {
                 List<String> delIdList = Arrays.asList(delIds) ;
-                int delCount = userAccountMapper.deleteBatchIds(delIdList) ;
+                //批量伪删除
+                int delCount = userAccountMapper.batchFakeDelByIds(delIdList);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
             }
@@ -175,5 +179,22 @@ public class UserAccountController extends BaseController {
         return  result;
     }
 
+
+    @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = String.class)
+    @PostMapping(value = "/delOneUserAccountByIds")
+    public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String delId){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            if(StringUtils.isNotBlank(delId)){
+                UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+                int delCount = userAccountMapper.updateById(userAccount);
+                result.setCount(delCount);
+                dealCommonSuccessCatch(result,"删除用户:"+actionSuccessMsg);
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
 
 }

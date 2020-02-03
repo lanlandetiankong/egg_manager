@@ -1,10 +1,13 @@
 package com.egg.manager.vo.user;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
+@Accessors(chain = true)
 @Getter
 @Setter
 @NoArgsConstructor

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liugh.mapper.OperationLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.entity.log.OperationLog">
+        <id column="fid" property="fid" />
+        <result column="log_description" property="logDescription" />
+        <result column="action_args" property="actionArgs" />
+        <result column="user_account_id" property="userAccountId" />
+        <result column="class_name" property="className" />
+        <result column="method_name" property="methodName" />
+        <result column="model_name" property="modelName" />
+        <result column="action" property="action" />
+        <result column="is_success" property="isSuccess" />
+        <result column="ip_addr" property="ipAddr" />
+        <result column="version" property="version" />
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="message" property="message" />
+        <result column="action" property="action" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        operation_log_id AS operationLogId,model_name AS modelName,action, log_description AS logDescription, action_args AS actionArgs, user_no AS userNo, class_name AS className, method_name AS methodName, ip, create_time AS createTime, succeed, message,create_user AS createUser,last_modifyer AS lastModifyer,create_user AS createUser,last_modifyer AS lastModifyer
+    </sql>
+
+</mapper>

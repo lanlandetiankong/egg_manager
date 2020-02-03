@@ -34,7 +34,7 @@ public class BaseController {
 
 
     public  void dealCommonErrorCatch(MyCommonResult result,Exception e) {
-        dealCommonErrorCatch(result,e,null,true) ;
+        dealCommonErrorCatch(result,e,null,true,true) ;
     }
 
 
@@ -46,13 +46,16 @@ public class BaseController {
      * @param appendMsg 异常信息
      * @param isAppend appendMsg是否追加到 errorMsg 后面
      */
-    public  void dealCommonErrorCatch(MyCommonResult result,Exception e,String appendMsg,boolean isAppend) {
+    public  void dealCommonErrorCatch(MyCommonResult result,Exception e,String appendMsg,boolean isAppend,boolean isPrintStackTrace) {
         result.setHasError(true);
         String errmsg = null ;
         if(isAppend){
             errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg) ;
         }   else {
             errmsg = appendMsg ;
+        }
+        if(isPrintStackTrace){
+            e.printStackTrace();
         }
         result.setErrorMsg(errmsg);
     }

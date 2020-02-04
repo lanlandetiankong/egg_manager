@@ -1,5 +1,6 @@
 package com.egg.manager.common.web.helper;
 
+import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.session.UserAccountToken;
 import lombok.*;
@@ -56,5 +57,14 @@ public class MyCommonResult<T> implements Serializable {
     private Integer status ;
     private String errorMsg;
 
+    private AntdvPaginationBean paginationBean ;    //分页bean
 
+
+
+    public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean,Integer total){
+        if(paginationBean != null){
+            paginationBean.setTotal(total);
+        }
+        this.paginationBean = paginationBean ;
+    }
 }

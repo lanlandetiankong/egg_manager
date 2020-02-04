@@ -1,11 +1,16 @@
 package com.egg.manager.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.session.RowBounds;
+import scala.Int;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -87,6 +92,8 @@ public class BaseController {
         }
         return map ;
     }
+
+
     public JSONObject parseQueryJsonToObject(String queryJson) {
         JSONObject jsonObject = null ;
         if(StringUtils.isNotBlank(queryJson) && queryJson != "{}"){
@@ -94,5 +101,47 @@ public class BaseController {
         }
         jsonObject = jsonObject != null ? jsonObject : new JSONObject() ;
         return jsonObject ;
+    }
+
+    /**
+     * 取得分页 bean
+     * @param paginationJson
+     * @return
+     */
+    public AntdvPaginationBean parsePaginationJsonToBean(String paginationJson) {
+        AntdvPaginationBean paginationBean = null ;
+        if(StringUtils.isNotBlank(paginationJson)){
+            paginationBean = JSONObject.parseObject(paginationJson, AntdvPaginationBean.class) ;
+        }
+        return paginationBean ;
+    }
+
+    /**
+     * 取得分页 配置 -> mybatis-plus
+     * @param paginationBean
+     * @return
+     */
+    public RowBounds parsePaginationToRowBounds(AntdvPaginationBean paginationBean) {
+        if(paginationBean != null){
+            Integer current = paginationBean.getCurrent();
+            Integer pageSize = paginationBean.getPageSize();
+            current = current != null ? current : 1;
+            pageSize = pageSize != null ? pageSize : 0;
+            int offset = (current - 1) * pageSize ;
+            return new RowBounds(offset,pageSize) ;
+        }   else {
+            return new RowBounds() ;
+        }
+    }
+
+
+    public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, Map<String,Object> queryMap){
+        if(queryMap != null && queryMap.isEmpty() == false){
+            Iterator<String> queryKeyIter = queryMap.keySet().iterator();
+            while (queryKeyIter.hasNext()){
+                String queryKey = queryKeyIter.next() ;
+                entityWrapper.eq(queryKey,queryMap.get(queryKey)) ;
+            }
+        }
     }
 }

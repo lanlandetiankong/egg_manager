@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.annotations.Version;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.egg.manager.entity.define.DefineRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -44,9 +45,9 @@ public class UserAccount extends Model<UserAccount> {
     @Version
     private Integer version ;
     private Integer state ;
-    @TableField("create_time")
+    @TableField(value="create_time",fill = FieldFill.INSERT)
     private Date createTime ;
-    @TableField("update_time")
+    @TableField(value="update_time",fill = FieldFill.UPDATE)
     private Date updateTime ;
 
     @TableField(value = "create_user")

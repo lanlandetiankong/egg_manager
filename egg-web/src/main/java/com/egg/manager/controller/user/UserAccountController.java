@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
+import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -22,19 +23,16 @@ import com.egg.manager.vo.user.UserAccountVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import scala.Int;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Api(value = "API -  UserAccountController ",description = "用户账号接口")
 @RestController
@@ -86,12 +84,23 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = String.class)
     @PostMapping(value = "/getAllUserAccounts")
-    public MyCommonResult<UserAccount> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response,String queryObj) {
+    public MyCommonResult<UserAccount> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{
+            //解析 搜索条件
             Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
             queryMap.put("state", BaseStateEnum.ENABLED.getValue());
-            List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
+            EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
+            //取得 分页配置
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            RowBounds rowBounds = this.parsePaginationToRowBounds(paginationBean) ;
+            //取得 总数
+            Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
+            result.myAntdvPaginationBeanSet(paginationBean,total);
+            //调用方法将查询条件设置到userAccountEntityWrapper
+            dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryMap) ;
+            List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
+            //List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
             result.setResultList(userAccounts);
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
@@ -126,9 +135,13 @@ public class UserAccountController extends BaseController {
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
+                Date now = new Date() ;
                 UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
                 userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
+                userAccount.setState(BaseStateEnum.ENABLED.getValue());
                 userAccount.setPassword(UserAccountConstant.DEFAULT_PWD);
+                userAccount.setCreateTime(now);
+                userAccount.setUpdateTime(now);
                 addCount = userAccountMapper.insert(userAccount) ;
             }
             result.setCount(addCount);
@@ -149,6 +162,8 @@ public class UserAccountController extends BaseController {
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
+                Date now = new Date() ;
+                userAccountVo.setUpdateTime(now);
                 UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
                 changeCount = userAccountMapper.updateById(userAccount) ;
             }

@@ -101,7 +101,7 @@ public class UserAccountController extends BaseController {
             dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryMap) ;
             List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
             //List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
-            result.setResultList(userAccounts);
+            result.setResultList(UserAccountVo.transferEntityToVoList(userAccounts));
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;

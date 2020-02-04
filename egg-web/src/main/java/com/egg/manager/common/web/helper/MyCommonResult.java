@@ -50,6 +50,9 @@ public class MyCommonResult<T> implements Serializable {
     private Map resultMap ;
     //存储 不重复的集合
     private Set resultSet ;
+    //枚举 列表
+    private List enumList;
+
 
     private T bean;
     private UserAccountToken accountToken ;

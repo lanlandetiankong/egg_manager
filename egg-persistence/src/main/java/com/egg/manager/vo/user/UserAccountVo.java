@@ -1,9 +1,13 @@
 package com.egg.manager.vo.user;
 
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
+import org.apache.catalina.User;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -21,8 +25,9 @@ public class UserAccountVo {
     private String phone ;
     private String email ;
     private Integer sex ;
-    private String userType ;
-    private String userTypeNum;
+    private Integer userType ;
+    private Integer userTypeNum;
+    private String userTypeStr;
     private Integer version ;
     private Integer state ;
     private Date createTime ;
@@ -56,5 +61,46 @@ public class UserAccountVo {
         userAccount.setCreateUser(userAccountVo.getCreateUser());
         userAccount.setLastModifyer(userAccountVo.getLastModifyer());
         return userAccount ;
+    }
+
+    public static UserAccountVo transferEntityToVo(UserAccount userAccount) {
+        if(userAccount == null){
+            return null ;
+        }
+        UserAccountVo userAccountVo = new UserAccountVo() ;
+        userAccountVo.setFid(userAccount.getFid());
+        userAccountVo.setUserName(userAccount.getUserName());
+        userAccountVo.setAccount(userAccount.getAccount());
+        userAccountVo.setNickName(userAccount.getNickName());
+        userAccountVo.setAvatarUrl(userAccount.getAvatarUrl());
+        userAccountVo.setPassword(userAccount.getPassword());
+        userAccountVo.setPhone(userAccount.getPhone());
+        userAccountVo.setEmail(userAccount.getEmail());
+        userAccountVo.setSex(userAccount.getSex());
+        userAccountVo.setUserType(userAccount.getUserType());
+        userAccountVo.setUserTypeNum(userAccount.getUserTypeNum());
+        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(userAccount.getUserType());
+        if(userAccountBaseTypeEnums != null){
+            userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
+        }
+        userAccountVo.setVersion(userAccount.getVersion());
+        userAccountVo.setState(userAccount.getState());
+        userAccountVo.setCreateTime(userAccount.getCreateTime());
+        userAccountVo.setUpdateTime(userAccount.getUpdateTime());
+        userAccountVo.setCreateUser(userAccount.getCreateUser());
+        userAccountVo.setLastModifyer(userAccount.getLastModifyer());
+        return userAccountVo ;
+    }
+
+    public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts){
+        if(userAccounts == null){
+            return null ;
+        }   else {
+            List<UserAccountVo> list = new ArrayList<>() ;
+            for (UserAccount account : userAccounts){
+                list.add(transferEntityToVo(account));
+            }
+            return list ;
+        }
     }
 }

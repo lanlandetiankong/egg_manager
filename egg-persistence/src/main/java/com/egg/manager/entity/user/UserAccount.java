@@ -39,9 +39,9 @@ public class UserAccount extends Model<UserAccount> {
     private Integer sex ;
 
     @TableField("user_type")
-    private String userType ;
+    private Integer userType ;
     @TableField("user_type_num")
-    private String userTypeNum;
+    private Integer userTypeNum;
     @Version
     private Integer version ;
     private Integer state ;

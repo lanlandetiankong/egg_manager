@@ -84,8 +84,8 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = String.class)
     @PostMapping(value = "/getAllUserAccounts")
-    public MyCommonResult<UserAccount> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
+    public MyCommonResult<UserAccountVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             //解析 搜索条件
             Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
@@ -94,13 +94,12 @@ public class UserAccountController extends BaseController {
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             RowBounds rowBounds = this.parsePaginationToRowBounds(paginationBean) ;
+            //调用方法将查询条件设置到userAccountEntityWrapper
+            dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryMap) ;
             //取得 总数
             Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
             result.myAntdvPaginationBeanSet(paginationBean,total);
-            //调用方法将查询条件设置到userAccountEntityWrapper
-            dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryMap) ;
             List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
-            //List<UserAccount> userAccounts = userAccountMapper.selectByMap(queryMap);
             result.setResultList(UserAccountVo.transferEntityToVoList(userAccounts));
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
@@ -112,11 +111,11 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = String.class)
     @PostMapping(value = "/getUserAccountById")
-    public MyCommonResult<UserAccount> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
+    public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
-            UserAccount vo = userAccountMapper.selectById(accountId);
-            result.setBean(vo);
+            UserAccount account = userAccountMapper.selectById(accountId);
+            result.setBean(UserAccountVo.transferEntityToVo(account));
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

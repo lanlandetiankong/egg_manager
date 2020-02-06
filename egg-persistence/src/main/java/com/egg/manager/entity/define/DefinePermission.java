@@ -24,7 +24,7 @@ public class DefinePermission extends Model<DefinePermission> {
     private String name ;
     private String code ;
 
-    private String type;
+    private Integer type;
     @Version
     private Integer version ;
     private Integer state ;
@@ -37,6 +37,7 @@ public class DefinePermission extends Model<DefinePermission> {
     private String createUser ;
     @TableField(value = "last_modifyer")
     private String lastModifyer;
+    private String remark ;
 
     @Override
     protected Serializable pkVal() {

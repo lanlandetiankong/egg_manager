@@ -1,19 +1,30 @@
 package com.egg.manager.controller.define;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.service.redis.RedisHelper;
-import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.define.DefinePermissionVo;
+import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -25,18 +36,137 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/define/define_permission")
-public class DefinePermissionController  {
+public class DefinePermissionController  extends BaseController{
 
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
     @Autowired
-    private UserAccountService userAccountService ;
+    private DefinePermissionMapper definePermissionMapper ;
+    @Autowired
+    private DefinePermissionService definePermissionService;
     @Autowired
     private RedisHelper redisHelper ;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+
+    @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = String.class)
+    @PostMapping(value = "/getAllDefinePermissions")
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
+        try{
+            //解析 搜索条件
+            Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
+            queryMap.put("state", BaseStateEnum.ENABLED.getValue());
+            EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
+            //取得 分页配置
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            RowBounds rowBounds = this.parsePaginationToRowBounds(paginationBean) ;
+            //调用方法将查询条件设置到definePermissionEntityWrapper
+            dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryMap) ;
+            //取得 总数
+            Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
+            result.myAntdvPaginationBeanSet(paginationBean,total);
+            List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
+            result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+            dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = String.class)
+    @PostMapping(value = "/getDefinePermissionById")
+    public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String definePermissionId) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
+        try{
+            DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
+            result.setBean(DefinePermissionVo.transferEntityToVo(definePermission));
+            dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = String.class)
+    @PostMapping(value = "/doAddDefinePermission")
+    public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
+        Integer addCount = 0 ;
+        try{
+            if(definePermissionVo == null) {
+                throw new Exception("未接收到有效的权限定义！");
+            }   else {
+                addCount = definePermissionService.dealAddDefinePermission(definePermissionVo) ;
+            }
+            result.setCount(addCount);
+            dealCommonSuccessCatch(result,"新增权限定义:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = String.class)
+    @PostMapping(value = "/doUpdateDefinePermission")
+    public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
+        MyCommonResult result = new MyCommonResult() ;
+        Integer changeCount = 0 ;
+        try{
+            if(definePermissionVo == null) {
+                throw new Exception("未接收到有效的权限定义！");
+            }   else {
+                changeCount = definePermissionService.dealUpdateDefinePermission(definePermissionVo,false);
+            }
+            result.setCount(changeCount);
+            dealCommonSuccessCatch(result,"更新权限定义:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "批量删除权限定义", notes = "根据用户id批量删除权限定义", response = String.class)
+    @PostMapping(value = "/batchDelDefinePermissionByIds")
+    public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+        MyCommonResult result = new MyCommonResult() ;
+        Integer delCount = 0;
+        try{
+            if(delIds != null && delIds.length > 0) {
+                delCount = definePermissionService.dealDelDefinePermissionByArr(delIds);
+                dealCommonSuccessCatch(result,"批量删除权限定义:"+actionSuccessMsg);
+            }
+            result.setCount(delCount);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "删除权限定义", notes = "根据权限id删除权限定义", response = String.class)
+    @PostMapping(value = "/delOneDefinePermissionByIds")
+    public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, HttpServletResponse response,String delId){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            if(StringUtils.isNotBlank(delId)){
+                Integer delCount = definePermissionService.dealDelDefinePermission(delId);
+                result.setCount(delCount);
+                dealCommonSuccessCatch(result,"删除权限定义:"+actionSuccessMsg);
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
 }

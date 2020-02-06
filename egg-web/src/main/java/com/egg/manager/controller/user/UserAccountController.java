@@ -1,12 +1,8 @@
 package com.egg.manager.controller.user;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
@@ -17,8 +13,8 @@ import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
-import com.egg.manager.vo.login.LoginAccountVo;
-import com.egg.manager.vo.session.UserAccountToken;
+import com.egg.manager.webvo.login.LoginAccountVo;
+import com.egg.manager.webvo.session.UserAccountToken;
 import com.egg.manager.vo.user.UserAccountVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import scala.Int;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,7 +79,7 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = String.class)
     @PostMapping(value = "/getAllUserAccounts")
-    public MyCommonResult<UserAccountVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
+    public MyCommonResult<UserAccountVo> doGetAllUserAccounts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             //解析 搜索条件
@@ -167,7 +162,7 @@ public class UserAccountController extends BaseController {
                 changeCount = userAccountMapper.updateById(userAccount) ;
             }
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
+            dealCommonSuccessCatch(result,"更新用户:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }

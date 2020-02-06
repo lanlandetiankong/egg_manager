@@ -1,9 +1,11 @@
 package com.egg.manager.controller.common;
 
 import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,19 +26,19 @@ import java.util.List;
  * \
  */
 @RestController
-@RequestMapping("/common_api/user")
-public class UserCommonController extends BaseController{
+@RequestMapping("/common_api/permission")
+public class PermissionCommonController extends BaseController{
 
 
-    @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = String.class)
-    @PostMapping(value = "/getAllUserTypeEnumList")
-    public MyCommonResult<UserAccount> doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
+    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = String.class)
+    @PostMapping(value = "/getAllPermissionTypeEnumList")
+    public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
         try{
-            UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
+            DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
             if(enums != null && enums.length > 0){
-                for (UserAccountBaseTypeEnum enumObj : enums){
+                for (DefinePermissionTypeEnum enumObj : enums){
                     beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
                 }
             }

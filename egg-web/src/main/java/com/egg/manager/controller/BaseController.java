@@ -7,6 +7,8 @@ import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.Int;
 
 import java.util.HashMap;
@@ -24,6 +26,9 @@ import java.util.Map;
 public class BaseController {
     public String actionSuccessMsg = "操作成功" ;
 
+
+    private Logger baseLogger = LoggerFactory.getLogger(this.getClass());
+
     public static boolean checkFieldStrBlank(String... strs) {
         boolean blankFlag = false ;
         if(strs.length > 0){
@@ -37,9 +42,13 @@ public class BaseController {
         return blankFlag ;
     }
 
-
     public  void dealCommonErrorCatch(MyCommonResult result,Exception e) {
-        dealCommonErrorCatch(result,e,null,true,true) ;
+        dealCommonErrorCatch(baseLogger,result,e,null,true,true) ;
+    }
+
+
+    public  void dealCommonErrorCatch(Logger logger,MyCommonResult result,Exception e) {
+        dealCommonErrorCatch(logger,result,e,null,true,true) ;
     }
 
 
@@ -51,7 +60,7 @@ public class BaseController {
      * @param appendMsg 异常信息
      * @param isAppend appendMsg是否追加到 errorMsg 后面
      */
-    public  void dealCommonErrorCatch(MyCommonResult result,Exception e,String appendMsg,boolean isAppend,boolean isPrintStackTrace) {
+    public  void dealCommonErrorCatch(Logger logger,MyCommonResult result,Exception e,String appendMsg,boolean isAppend,boolean isPrintStackTrace) {
         result.setHasError(true);
         String errmsg = null ;
         if(isAppend){
@@ -60,12 +69,13 @@ public class BaseController {
             errmsg = appendMsg ;
         }
         if(isPrintStackTrace){
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            //e.printStackTrace();
         }
         result.setErrorMsg(errmsg);
     }
 
-    public  void dealCommonSuccessCatch(MyCommonResult result,String info) {
+    public  void dealCommonSuccessCatch(MyCommonResult result, String info) {
         result.setInfo(info);
     }
 

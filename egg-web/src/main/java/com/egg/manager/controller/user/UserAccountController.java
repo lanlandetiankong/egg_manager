@@ -76,7 +76,7 @@ public class UserAccountController extends BaseController {
             }
             dealCommonSuccessCatch(result,"用户登录:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return result ;
     }
@@ -104,7 +104,7 @@ public class UserAccountController extends BaseController {
             result.setResultList(UserAccountVo.transferEntityToVoList(userAccounts));
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -119,7 +119,7 @@ public class UserAccountController extends BaseController {
             result.setBean(vo);
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -147,7 +147,7 @@ public class UserAccountController extends BaseController {
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -170,7 +170,7 @@ public class UserAccountController extends BaseController {
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -189,7 +189,7 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -207,7 +207,7 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,"删除用户:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }

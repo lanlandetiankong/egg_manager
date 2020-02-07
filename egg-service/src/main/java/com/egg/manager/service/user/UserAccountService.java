@@ -1,12 +1,17 @@
 package com.egg.manager.service.user;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.dto.login.LoginAccountDTO;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.define.DefinePermissionVo;
+import com.egg.manager.vo.user.UserAccountVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -27,4 +32,42 @@ public interface UserAccountService extends IService<UserAccount> {
      */
     List<DefinePermission> dealGetAllPermssionByAccount(UserAccount userAccount);
 
+
+
+    /**
+     * 分页查询 用户列表
+     * @param result
+     * @param queryMap
+     * @param paginationBean
+     */
+    void dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean);
+
+    /**
+     * 用户账号-新增
+     * @param userAccountVo
+     * @throws Exception
+     */
+    Integer dealAddUserAccount(UserAccountVo userAccountVo) throws Exception ;
+
+    /**
+     * 用户账号-更新
+     * @param userAccountVo
+     * @param updateAll 是否更新所有字段
+     * @throws Exception
+     */
+    Integer dealUpdateUserAccount(UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
+
+    /**
+     * 用户账号-删除
+     * @param delIds 要删除的用户id 集合
+     * @throws Exception
+     */
+    Integer dealDelUserAccountByArr(String[] delIds) throws Exception ;
+
+    /**
+     * 用户账号-删除
+     * @param delId 要删除的用户id
+     * @throws Exception
+     */
+    Integer dealDelUserAccount(String delId) throws Exception ;
 }

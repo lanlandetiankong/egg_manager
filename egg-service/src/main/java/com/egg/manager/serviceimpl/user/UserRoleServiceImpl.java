@@ -8,18 +8,24 @@ import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserRoleMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.service.user.UserRoleService;
+import com.egg.manager.vo.user.UserAccountVo;
+import com.egg.manager.vo.user.UserRoleVo;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -32,6 +38,11 @@ import java.util.List;
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> implements UserRoleService {
+
+    @Autowired
+    private UserRoleMapper userRoleMapper ;
+    @Autowired
+    private CommonFuncService commonFuncService ;
 
     @Autowired
     private RedisHelper redisHelper ;
@@ -110,5 +121,102 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
             return true ;
         }
         return false;
+    }
+
+
+
+
+
+
+
+    /**
+     * 分页查询 用户角色列表
+     * @param result
+     * @param queryMap
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean){
+        //解析 搜索条件
+        EntityWrapper<UserRole> userRoleEntityWrapper = new EntityWrapper<UserRole>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到userRoleEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(userRoleEntityWrapper,queryMap) ;
+        //取得 总数
+        Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds,userRoleEntityWrapper) ;
+        result.setResultList(UserRoleVo.transferEntityToVoList(userRoles));
+    }
+
+
+    /**
+     * 用户角色-新增
+     * @param userRoleVo
+     * @throws Exception
+     */
+    @Override
+    public Integer dealAddUserRole(UserRoleVo userRoleVo) throws Exception{
+        Date now = new Date() ;
+        UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
+        userRole.setFid(MyUUIDUtil.renderSimpleUUID());
+        userRole.setVersion(commonFuncService.defaultVersion);
+        userRole.setState(BaseStateEnum.ENABLED.getValue());
+        userRole.setCreateTime(now);
+        userRole.setUpdateTime(now);
+        Integer addCount = userRoleMapper.insert(userRole) ;
+        return addCount ;
+    }
+
+
+    /**
+     * 用户角色-更新
+     * @param userRoleVo
+     * @param updateAll 是否更新所有字段
+     * @throws Exception
+     */
+    @Override
+    public Integer dealUpdateUserRole(UserRoleVo userRoleVo,boolean updateAll) throws Exception{
+        Integer changeCount = 0;
+        Date now = new Date() ;
+        userRoleVo.setUpdateTime(now);
+        UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
+        if(updateAll){  //是否更新所有字段
+            changeCount = userRoleMapper.updateAllColumnById(userRole) ;
+        }   else {
+            changeCount = userRoleMapper.updateById(userRole) ;
+        }
+        return changeCount ;
+    }
+
+
+
+    /**
+     * 用户角色-删除
+     * @param delIds 要删除的用户角色id 集合
+     * @throws Exception
+     */
+    @Override
+    public Integer dealDelUserRoleByArr(String[] delIds) throws Exception{
+        Integer delCount = 0 ;
+        if(delIds != null && delIds.length > 0) {
+            List<String> delIdList = Arrays.asList(delIds) ;
+            //批量伪删除
+            delCount = userRoleMapper.batchFakeDelByIds(delIdList);
+        }
+        return delCount ;
+    }
+
+    /**
+     * 用户角色-删除
+     * @param delId 要删除的用户角色id
+     * @throws Exception
+     */
+    @Override
+    public Integer dealDelUserRole(String delId) throws Exception{
+        UserRole userRole = UserRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        Integer delCount = userRoleMapper.updateById(userRole);
+        return delCount ;
     }
 }

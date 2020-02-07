@@ -1,8 +1,9 @@
-package com.egg.manager.common.base.constant.pagination;
+package com.egg.manager.common.web.pagination;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
 
 /**
  * \* note:
@@ -19,9 +20,6 @@ public class AntdvPaginationBean {
     private Integer current ;
     private Integer pageSize ;
     private int total ;
-
-
-
 
 
 

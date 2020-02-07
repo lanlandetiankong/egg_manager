@@ -2,12 +2,14 @@ package com.egg.manager.service.define;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.vo.define.DefinePermissionVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -20,6 +22,15 @@ import java.util.List;
 public interface DefinePermissionService extends IService<DefinePermission> {
 
     List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) ;
+
+
+    /**
+     * 分页查询 权限
+     * @param result
+     * @param queryMap
+     * @param paginationBean
+     */
+    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean);
 
     /**
      * 权限定义-新增

@@ -1,6 +1,6 @@
 package com.egg.manager.common.web.helper;
 
-import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import lombok.*;
 

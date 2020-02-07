@@ -1,9 +1,8 @@
 package com.egg.manager.controller.define;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.egg.manager.common.base.constant.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
@@ -13,7 +12,6 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,17 +58,9 @@ public class DefinePermissionController  extends BaseController{
             //解析 搜索条件
             Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
             queryMap.put("state", BaseStateEnum.ENABLED.getValue());
-            EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            RowBounds rowBounds = this.parsePaginationToRowBounds(paginationBean) ;
-            //调用方法将查询条件设置到definePermissionEntityWrapper
-            dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryMap) ;
-            //取得 总数
-            Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
-            result.myAntdvPaginationBeanSet(paginationBean,total);
-            List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
-            result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+            definePermissionService.dealGetDefinePermissionPages(result,queryMap,paginationBean) ;
             dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

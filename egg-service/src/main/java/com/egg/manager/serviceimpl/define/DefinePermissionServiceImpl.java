@@ -1,25 +1,25 @@
 package com.egg.manager.serviceimpl.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
-import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
-import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefinePermissionVo;
-import com.egg.manager.vo.user.UserAccountVo;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -32,10 +32,11 @@ import java.util.List;
 @Service
 public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMapper,DefinePermission> implements DefinePermissionService {
 
-    private int defaultVersion = 0 ;
 
     @Autowired
     private DefinePermissionMapper definePermissionMapper ;
+    @Autowired
+    private CommonFuncService commonFuncService ;
 
     /**
      * 根据 DefineRoleBean 取得 所有权限
@@ -52,6 +53,30 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
 
 
     /**
+     * 分页查询 权限
+     * @param result
+     * @param queryMap
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result,Map<String,Object> queryMap,AntdvPaginationBean paginationBean) {
+        //解析 搜索条件
+        EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到definePermissionEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryMap) ;
+        //取得 总数
+        Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
+        result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+    }
+
+
+
+
+    /**
      * 权限定义-新增
      * @param definePermissionVo
      * @throws Exception
@@ -61,7 +86,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
-        definePermission.setVersion(defaultVersion);
+        definePermission.setVersion(commonFuncService.defaultVersion);
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
         definePermission.setCreateTime(now);
         definePermission.setUpdateTime(now);

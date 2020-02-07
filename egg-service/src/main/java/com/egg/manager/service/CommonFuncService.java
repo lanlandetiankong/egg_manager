@@ -2,9 +2,11 @@ package com.egg.manager.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import scala.Int;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +21,7 @@ public interface CommonFuncService {
 
     Integer defaultVersion = 0 ;
 
-    void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, Map<String,Object> queryMap);
+    void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList);
 
     /**
      * 取得分页 配置 -> mybatis-plus

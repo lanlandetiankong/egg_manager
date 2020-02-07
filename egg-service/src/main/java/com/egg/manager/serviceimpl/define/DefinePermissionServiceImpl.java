@@ -12,6 +12,7 @@ import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.vo.define.DefinePermissionVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,17 +56,17 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     /**
      * 分页查询 权限
      * @param result
-     * @param queryMap
+     * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result,Map<String,Object> queryMap,AntdvPaginationBean paginationBean) {
+    public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean) {
         //解析 搜索条件
         EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
         //取得 分页配置
         RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到definePermissionEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryMap) ;
+        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryFieldBeanList) ;
         //取得 总数
         Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);

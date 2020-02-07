@@ -7,6 +7,7 @@ import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.vo.define.DefinePermissionVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 
 import java.util.List;
 import java.util.Map;
@@ -27,10 +28,10 @@ public interface DefinePermissionService extends IService<DefinePermission> {
     /**
      * 分页查询 权限
      * @param result
-     * @param queryMap
+     * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean);
+    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean);
 
     /**
      * 权限定义-新增

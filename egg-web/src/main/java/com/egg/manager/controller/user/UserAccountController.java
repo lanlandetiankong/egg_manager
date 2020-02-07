@@ -12,6 +12,7 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -83,11 +84,11 @@ public class UserAccountController extends BaseController {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             //解析 搜索条件
-            Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
-            queryMap.put("state", BaseStateEnum.ENABLED.getValue());
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            userAccountService.dealGetUserAccountPages(result,queryMap,paginationBean) ;
+            userAccountService.dealGetUserAccountPages(result,queryFormFieldBeanList,paginationBean) ;
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

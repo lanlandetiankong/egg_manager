@@ -10,6 +10,7 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.vo.define.DefinePermissionVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,11 +58,11 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             //解析 搜索条件
-            Map<String,Object> queryMap = this.parseQueryJsonToMap(queryObj) ;
-            queryMap.put("state", BaseStateEnum.ENABLED.getValue());
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            definePermissionService.dealGetDefinePermissionPages(result,queryMap,paginationBean) ;
+            definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean) ;
             dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

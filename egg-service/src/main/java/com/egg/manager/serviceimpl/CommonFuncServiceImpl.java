@@ -3,10 +3,12 @@ package com.egg.manager.serviceimpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.service.CommonFuncService;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,12 +23,20 @@ import java.util.Map;
 public class CommonFuncServiceImpl implements CommonFuncService {
 
     @Override
-    public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, Map<String,Object> queryMap){
-        if(queryMap != null && queryMap.isEmpty() == false){
-            Iterator<String> queryKeyIter = queryMap.keySet().iterator();
-            while (queryKeyIter.hasNext()){
-                String queryKey = queryKeyIter.next() ;
-                entityWrapper.eq(queryKey,queryMap.get(queryKey)) ;
+    public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList){
+        if(queryFieldBeanList != null && queryFieldBeanList.isEmpty() == false){
+            for(QueryFormFieldBean queryFormFieldBean : queryFieldBeanList){
+                Object fieldValue = queryFormFieldBean.getValue();
+                if(fieldValue == null){
+                    continue;
+                }   else {
+                    if("equals".equals(queryFormFieldBean.getMatching())){
+                        entityWrapper.eq(queryFormFieldBean.getFieldName(),fieldValue) ;
+                    }   else if("like".equals(queryFormFieldBean.getMatching())){
+                        String fieldValueStr = String.valueOf(fieldValue) ;
+                        entityWrapper.like(queryFormFieldBean.getFieldName(),fieldValueStr) ;
+                    }
+                }
             }
         }
     }

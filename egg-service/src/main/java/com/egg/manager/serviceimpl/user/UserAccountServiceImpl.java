@@ -14,6 +14,7 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.user.UserAccountVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,17 +70,17 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 分页查询 用户列表
      * @param result
-     * @param queryMap
+     * @param queryFormFieldBeanList
      * @param paginationBean
      */
     @Override
-    public void dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean){
+    public void dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean){
         //解析 搜索条件
         EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
         //取得 分页配置
         RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到userAccountEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryMap) ;
+        commonFuncService.dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryFormFieldBeanList) ;
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);

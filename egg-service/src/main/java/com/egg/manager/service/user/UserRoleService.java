@@ -7,6 +7,7 @@ import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.vo.user.UserRoleVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 
 import java.util.List;
 import java.util.Map;
@@ -33,10 +34,10 @@ public interface UserRoleService extends IService<UserRole> {
     /**
      * 分页查询 用户角色列表
      * @param result
-     * @param queryMap
+     * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, Map<String,Object> queryMap, AntdvPaginationBean paginationBean);
+    void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean);
 
 
     /**

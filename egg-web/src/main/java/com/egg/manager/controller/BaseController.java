@@ -1,18 +1,18 @@
 package com.egg.manager.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * \* note:
@@ -84,6 +84,7 @@ public class BaseController {
      * @param queryJson
      * @return
      */
+    @Deprecated
     public Map<String,Object> parseQueryJsonToMap(String queryJson) {
         Map<String,Object> map = new HashMap<>() ;
         if(StringUtils.isNotBlank(queryJson) && queryJson != "{}"){
@@ -100,6 +101,28 @@ public class BaseController {
             }
         }
         return map ;
+    }
+
+
+    /**
+     * 解析 搜索条件 map
+     * @param queryJson
+     * @return
+     */
+    public List<QueryFormFieldBean> parseQueryJsonToBeanList(String queryJson) {
+        List<QueryFormFieldBean> fieldBeanList = new ArrayList<>() ;
+        if(StringUtils.isNotBlank(queryJson) && "[]".equals(queryJson) == false){
+            List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson,QueryFormFieldBean.class);
+            if(fieldBeansTemp != null && fieldBeansTemp.isEmpty() == false) {
+                for (QueryFormFieldBean fieldBean : fieldBeansTemp){
+                    //驼峰参数 转 下划线 参数 风格
+                    String fieldName = MyStringUtil.camelToUnderline(fieldBean.getFieldName(),false);
+                    fieldBean.setFieldName(fieldName);
+                    fieldBeanList.add(fieldBean);
+                }
+            }
+        }
+        return fieldBeanList ;
     }
 
 

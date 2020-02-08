@@ -1,6 +1,7 @@
 package com.egg.manager.controller.user;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
@@ -14,6 +15,7 @@ import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -173,7 +175,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = String.class)
-    @PostMapping(value = "/delOneUserAccountByIds")
+    @PostMapping(value = "/delOneUserAccountById")
     public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
@@ -189,4 +191,46 @@ public class UserAccountController extends BaseController {
         return  result;
     }
 
+
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = String.class)
+    @PostMapping(value = "/batchLockUserAccountByIds")
+    public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] lockIds,Boolean lockFlag){
+        MyCommonResult result = new MyCommonResult() ;
+        Integer lockCount = 0;
+        try{
+            //操作类型为锁定？如果没传递值默认锁定
+            lockFlag = lockFlag != null ? lockFlag : true ;
+            String lockMsg = lockFlag ? "锁定" : "解锁" ;
+            if(lockIds != null && lockIds.length > 0) {
+                //批量伪删除
+                lockCount = userAccountService.dealLockUserAccountByArr(lockIds,lockFlag);
+                result.setCount(lockCount);
+                dealCommonSuccessCatch(result,"批量"+lockMsg+"用户:"+actionSuccessMsg);
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = String.class)
+    @PostMapping(value = "/lockOneUserAccountById")
+    public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String lockId,Boolean lockFlag){
+        MyCommonResult result = new MyCommonResult() ;
+        Integer lockCount = 0;
+        try{
+            //操作类型为锁定？如果没传递值默认锁定
+            lockFlag = lockFlag != null ? lockFlag : true ;
+            String lockMsg = lockFlag ? "锁定" : "解锁" ;
+            if(StringUtils.isNotBlank(lockId)){
+                lockCount = userAccountService.dealLockUserAccount(lockId,lockFlag);
+                dealCommonSuccessCatch(result,lockMsg+"用户:"+actionSuccessMsg);
+            }
+            result.setCount(lockCount);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 }

@@ -36,4 +36,11 @@
           </foreach>
         )
     </update>
+    <update id="batchLockUserByIds" >
+        UPDATE em_user_account SET locked = #{lockState}
+        WHERE fid IN
+            <foreach collection="lockIds" item="item" index="index" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+    </update>
 </mapper>

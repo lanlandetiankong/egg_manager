@@ -31,8 +31,8 @@ public class UserCommonController extends BaseController{
 
     @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = String.class)
     @PostMapping(value = "/getAllUserTypeEnumList")
-    public MyCommonResult<UserAccount> doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
+    public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult result = new MyCommonResult() ;
         try{
             UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -41,6 +41,21 @@ public class UserCommonController extends BaseController{
                     beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
                 }
             }
+            result.setEnumList(beanList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
+
+    @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = String.class)
+    @PostMapping(value = "/getAllUserLockStateEnumList")
+    public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            List<FrontSelectBean> beanList = new ArrayList<>();
+            beanList.add(new FrontSelectBean(0,"未锁定"));
+            beanList.add(new FrontSelectBean(1,"已锁定"));
             result.setEnumList(beanList);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;

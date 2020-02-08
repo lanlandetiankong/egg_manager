@@ -38,7 +38,7 @@ public interface UserAccountService extends IService<UserAccount> {
     /**
      * 分页查询 用户列表
      * @param result
-     * @param queryMap
+     * @param queryFormFieldBeanList
      * @param paginationBean
      */
     void dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean);
@@ -71,4 +71,21 @@ public interface UserAccountService extends IService<UserAccount> {
      * @throws Exception
      */
     Integer dealDelUserAccount(String delId) throws Exception ;
+
+
+
+    /**
+     * 用户账号-锁定
+     * @param lockIds 要锁定的用户账号id 集合
+     * @param isLock 是否锁定
+     * @throws Exception
+     */
+    Integer dealLockUserAccountByArr(String[] lockIds,boolean isLock) throws Exception ;
+    /**
+     * 用户账号-锁定
+     * @param lockId 要锁定的用户账号id
+     * @param isLock 是否锁定
+     * @throws Exception
+     */
+    Integer dealLockUserAccount(String lockId,boolean isLock) throws Exception ;
 }

@@ -3,7 +3,9 @@ package com.egg.manager.serviceimpl.user;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
@@ -153,8 +155,41 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Override
     public Integer dealDelUserAccount(String delId) throws Exception{
-        UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        UserAccount userAccount = UserAccount.builder().fid(delId).locked(BaseStateEnum.DELETE.getValue()).build() ;
         Integer delCount = userAccountMapper.updateById(userAccount);
         return delCount ;
+    }
+
+
+    /**
+     * 用户账号-锁定
+     * @param lockIds 要锁定的用户账号id 集合
+     * @param isLock 是否锁定
+     * @throws Exception
+     */
+    @Override
+    public Integer dealLockUserAccountByArr(String[] lockIds,boolean isLock) throws Exception{
+        int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
+        Integer lockCount = 0 ;
+        if(lockIds != null && lockIds.length > 0) {
+            List<String> lockIdList = Arrays.asList(lockIds) ;
+            //批量设置为 锁定
+            lockCount = userAccountMapper.batchLockUserByIds(lockIdList,lockState);
+        }
+        return lockCount ;
+    }
+
+    /**
+     * 用户账号-锁定
+     * @param lockId 要锁定的用户账号id
+     * @param isLock 是否锁定
+     * @throws Exception
+     */
+    @Override
+    public Integer dealLockUserAccount(String lockId,boolean isLock) throws Exception{
+        int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
+        UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
+        Integer lockCount = userAccountMapper.updateById(userAccount);
+        return lockCount ;
     }
 }

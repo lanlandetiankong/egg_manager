@@ -30,6 +30,7 @@ public class UserAccountVo {
     private String userTypeStr;
     private Integer version ;
     private Integer state ;
+    private Integer locked ;
     private Date createTime ;
     private Date updateTime ;
     private String createUser ;
@@ -56,6 +57,7 @@ public class UserAccountVo {
         userAccount.setUserTypeNum(userAccountVo.getUserTypeNum());
         userAccount.setVersion(userAccountVo.getVersion());
         userAccount.setState(userAccountVo.getState());
+        userAccount.setLocked(userAccountVo.getLocked());
         userAccount.setCreateTime(userAccountVo.getCreateTime());
         userAccount.setUpdateTime(userAccountVo.getUpdateTime());
         userAccount.setCreateUser(userAccountVo.getCreateUser());
@@ -85,6 +87,7 @@ public class UserAccountVo {
         }
         userAccountVo.setVersion(userAccount.getVersion());
         userAccountVo.setState(userAccount.getState());
+        userAccountVo.setLocked(userAccount.getLocked());
         userAccountVo.setCreateTime(userAccount.getCreateTime());
         userAccountVo.setUpdateTime(userAccount.getUpdateTime());
         userAccountVo.setCreateUser(userAccount.getCreateUser());

@@ -2,6 +2,7 @@ package com.egg.manager.mapper.user;
 
 import com.egg.manager.entity.user.UserAccount;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,8 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     //批量 伪删除
     int batchFakeDelByIds(List<String> delIds) ;
+
+    int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState) ;
+
+
 }

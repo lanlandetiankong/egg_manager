@@ -11,7 +11,7 @@ package com.egg.manager.common.base.enums.base;
 public enum  BaseStateEnum {
     ENABLED(1,"启用","启用"),
     DISABLED(0,"禁用","禁用"),
-    DELETE(-10,"删除","用户已被删除")
+    DELETE(-1,"删除","删除")
     ;
 
     BaseStateEnum(Integer value, String name, String info) {

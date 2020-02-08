@@ -2,6 +2,7 @@ package com.egg.manager.controller.common;
 
 import com.egg.manager.common.base.beans.FrontSelectBean;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
+import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
@@ -39,6 +40,25 @@ public class PermissionCommonController extends BaseController{
             List<FrontSelectBean> beanList = new ArrayList<>();
             if(enums != null && enums.length > 0){
                 for (DefinePermissionTypeEnum enumObj : enums){
+                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+                }
+            }
+            result.setEnumList(beanList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
+
+    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = String.class)
+    @PostMapping(value = "/getAllRoleTypeEnumList")
+    public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
+            List<FrontSelectBean> beanList = new ArrayList<>();
+            if(enums != null && enums.length > 0){
+                for (DefineRoleTypeEnum enumObj : enums){
                     beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
                 }
             }

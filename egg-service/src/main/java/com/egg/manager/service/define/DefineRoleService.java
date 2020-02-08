@@ -1,9 +1,12 @@
 package com.egg.manager.service.define;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.entity.define.DefineGroup;
+import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.define.DefineRoleVo;
+import com.egg.manager.webvo.query.QueryFormFieldBean;
 
 import java.util.List;
 
@@ -26,5 +29,46 @@ public interface DefineRoleService extends IService<DefineRole> {
     List<DefineRole> dealGetAllDefineRolesFromDb();
 
     List<DefineRole> dealGetAllDefineRolesFromRedis(boolean refreshRedis);
+
+
+
+
+
+    /**
+     * 分页查询 角色
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean);
+
+    /**
+     * 角色定义-新增
+     * @param defineRoleVo
+     * @throws Exception
+     */
+    Integer dealAddDefineRole(DefineRoleVo defineRoleVo) throws Exception ;
+
+    /**
+     * 角色定义-更新
+     * @param defineRoleVo
+     * @param updateAll 是否更新所有字段
+     * @throws Exception
+     */
+    Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
+
+    /**
+     * 角色定义-批量删除
+     * @param delIds 要删除的角色id 集合
+     * @throws Exception
+     */
+    Integer dealDelDefineRoleByArr(String[] delIds) throws Exception;
+
+    /**
+     * 角色定义-删除
+     * @param delId 要删除的角色id
+     * @throws Exception
+     */
+    Integer dealDelDefineRole(String delId) throws Exception;
 
 }

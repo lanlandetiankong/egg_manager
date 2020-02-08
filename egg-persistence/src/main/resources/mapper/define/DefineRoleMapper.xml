@@ -21,4 +21,13 @@
         fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
+
+    <update id="batchFakeDelByIds" parameterType="java.util.List">
+        UPDATE em_define_role
+        SET state = -1
+        WHERE fid IN
+        <foreach collection="list" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

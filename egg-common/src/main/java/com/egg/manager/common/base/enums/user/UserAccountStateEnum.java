@@ -3,8 +3,8 @@ package com.egg.manager.common.base.enums.user;
 public enum UserAccountStateEnum {
     ENABLED(1,"启用","启用"),
     DISABLED(0,"禁用","禁用"),
-    LOCKED(-1,"锁定","用户已被锁定"),
-    DELETE(-10,"删除","用户已被删除")
+    DELETE(-1,"删除","用户已被删除"),
+    LOCKED(-10,"锁定","用户已被锁定"),
     ;
 
     UserAccountStateEnum(Integer value, String name, String info) {

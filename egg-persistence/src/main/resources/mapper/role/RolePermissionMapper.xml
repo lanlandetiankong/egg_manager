@@ -12,13 +12,51 @@
         <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="remark" property="remark" />
         <result column="create_user" property="createUser" />
         <result column="last_modifyer" property="lastModifyer" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, define_role_id AS defineRoleId, define_permission_id AS definePermissionId, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, define_role_id AS defineRoleId, define_permission_id AS definePermissionId, type, state, version, create_time AS createTime, update_time AS updateTime,remark,create_user AS createUser,last_modifyer AS lastModifyer
+    </sql>
+    <sql id="Base_Insert_Column_List">
+        fid, define_role_id,define_permission_id,type, state, version, create_time, update_time,remark,create_user,last_modifyer
     </sql>
 
+    <sql id="Base_Insert_Item_Column_List">
+          #{item.fid},
+          #{item.defineRoleId},
+          #{item.definePermissionId},
+          #{item.type},
+          #{item.state},
+          #{item.version},
+          #{item.createTime},
+          #{item.updateTime},
+          #{item.remark},
+          #{item.createUser},
+          #{item.lastModifyer}
+    </sql>
+
+    <insert id="customBatchInsert">
+        INSERT INTO em_role_permission(
+          <include refid="Base_Insert_Column_List" />
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (
+              <include refid="Base_Insert_Item_Column_List" />
+            )
+        </foreach>
+    </insert>
+    <update id="batchUpdateStateByRole">
+        UPDATE em_role_permission
+        SET  state = #{stateVal}
+        where define_role_id = #{roleId}
+        and define_permission_id IN
+        <foreach collection="permissionIdList" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

@@ -71,4 +71,12 @@ public interface DefineRoleService extends IService<DefineRole> {
      */
     Integer dealDelDefineRole(String delId) throws Exception;
 
+    /**
+     * 角色授权
+     * @param roleId 要授权的角色id
+     * @param checkIds 权限id集合
+     * @throws Exception
+     */
+    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String userId) throws Exception;
+
 }

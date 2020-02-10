@@ -1,12 +1,16 @@
 package com.egg.manager.controller.define;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
+import com.egg.manager.mapper.role.RolePermissionMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.redis.RedisHelper;
@@ -42,15 +46,15 @@ public class DefineRoleController extends BaseController {
     @Autowired
     private UserAccountMapper userAccountMapper ;
     @Autowired
-    private DefineRoleMapper defineRoleMapper ;
+    private DefinePermissionMapper definePermissionMapper;
     @Autowired
-    private UserAccountService userAccountService ;
+    private DefineRoleMapper defineRoleMapper ;
     @Autowired
     private DefineRoleService defineRoleService;
 
+
     @Autowired
     private RedisHelper redisHelper ;
-
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
@@ -90,6 +94,22 @@ public class DefineRoleController extends BaseController {
         }
         return  result;
     }
+
+    @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = String.class)
+    @PostMapping(value = "/getAllPermissionByRoleId")
+    public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
+        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
+        try{
+            List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
+            result.setResultList(definePermissionList);
+            dealCommonSuccessCatch(result,"查询角色所拥有的权限:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
 
 
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = String.class)
@@ -159,6 +179,27 @@ public class DefineRoleController extends BaseController {
                 Integer delCount = defineRoleService.dealDelDefineRole(delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除角色定义:"+actionSuccessMsg);
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = String.class)
+    @PostMapping(value = "/grantPermissionToRole")
+    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, HttpServletResponse response, String roleId,String[] checkIds){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            //TODO 取得当前登录用户id
+            String loginUserId = null ;
+            if(StringUtils.isNotBlank(roleId)){
+                Integer grantCount = defineRoleService.dealGrantPermissionToRole(roleId,checkIds,loginUserId);
+                result.setCount(grantCount);
+                dealCommonSuccessCatch(result,"角色授权:"+actionSuccessMsg);
+            }   else {
+                throw new BusinessException("未知要授权的角色id");
             }
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

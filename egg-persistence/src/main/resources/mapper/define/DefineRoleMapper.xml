@@ -14,11 +14,12 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
         <result column="last_modifyer" property="lastModifyer" />
+        <result column="remark" property="remark" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
 
 
@@ -30,4 +31,6 @@
             #{item}
         </foreach>
     </update>
+
+
 </mapper>

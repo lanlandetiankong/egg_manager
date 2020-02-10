@@ -10,10 +10,14 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.role.RolePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
+import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
+import com.egg.manager.mapper.role.RolePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.redis.RedisHelper;
@@ -41,11 +45,22 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Autowired
     private DefineRoleMapper defineRoleMapper;
     @Autowired
+    private DefinePermissionMapper definePermissionMapper;
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
+
+    @Autowired
     private UserRoleService userRoleService ;
+    @Autowired
+    private CommonFuncService commonFuncService ;
+
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
     @Autowired
     private RedisHelper redisHelper ;
+
+
+
 
     @Override
     public List<DefineRole> dealGetRolesByAccount(UserAccount userAccount) {
@@ -120,8 +135,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
 
 
 
-    @Autowired
-    private CommonFuncService commonFuncService ;
+
 
 
 
@@ -215,5 +229,64 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         DefineRole defineRole = DefineRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         Integer delCount = defineRoleMapper.updateById(defineRole);
         return delCount ;
+    }
+
+
+    /**
+     * 角色授权
+     * @param roleId 要授权的角色id
+     * @param checkIds 权限id集合
+     * @throws Exception
+     */
+    @Override
+    public Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String loginUserId) throws Exception{
+        Integer changeCount = 0 ;
+        if(checkIds == null || checkIds.length == 0){   //清空所有权限
+            changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId);
+        }   else {
+            changeCount = checkIds.length ;
+            //取得曾勾选的权限id 集合
+            List<String> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId,false);
+            if(oldCheckPermIds == null || oldCheckPermIds.isEmpty()){
+                List<RolePermission> addEntitys = new ArrayList<>() ;
+                for (String checkId : checkIds){
+                    addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUserId));
+                }
+                //批量新增行
+                rolePermissionMapper.customBatchInsert(addEntitys);
+            }   else {
+                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> enableIds = new ArrayList<>() ;
+                List<String> disabledIds = new ArrayList<>() ;
+                Iterator<String> oldCheckIter = oldCheckPermIds.iterator();
+                while (oldCheckIter.hasNext()){
+                    String oldCheckId = oldCheckIter.next() ;
+                    boolean isOldRow = checkIdList.contains(oldCheckId);
+                    if(isOldRow){   //原本有的数据行
+                        enableIds.add(oldCheckId) ;
+                        checkIdList.remove(oldCheckId);
+                    }   else {
+                        disabledIds.add(oldCheckId);
+                    }
+                }
+                if(enableIds.isEmpty() == false){   //批量启用
+                    rolePermissionMapper.batchUpdateStateByRole(roleId,enableIds,BaseStateEnum.ENABLED.getValue());
+                }
+                if(disabledIds.isEmpty() == false){   //批量禁用
+                    rolePermissionMapper.batchUpdateStateByRole(roleId,disabledIds,BaseStateEnum.DELETE.getValue());
+                }
+                if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
+                    //批量新增行
+                    List<RolePermission> addEntitys = new ArrayList<>() ;
+                    for (String checkId : checkIdList){
+                        addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUserId));
+                    }
+                    //批量新增行
+                    rolePermissionMapper.customBatchInsert(addEntitys);
+                }
+            }
+        }
+
+        return changeCount ;
     }
 }

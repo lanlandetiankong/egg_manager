@@ -14,11 +14,15 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
         <result column="last_modifyer" property="lastModifyer" />
+        <result column="remark" property="remark" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+    </sql>
+    <sql id="Base_Dp_Column_List">
+        dp.fid, dp.name, dp.code, dp.type, dp.state, dp.version, dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user AS createUser,dp.last_modifyer AS lastModifyer,dp.remark
     </sql>
 
 
@@ -30,4 +34,32 @@
             #{item}
         </foreach>
     </update>
+
+    <update id="clearAllPermissionByRoleId" parameterType="java.lang.String">
+        UPDATE em_role_permission
+        SET state = -1
+        WHERE define_role_id = #{roleId}
+    </update>
+
+    <select id="findAllPermissionByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Dp_Column_List" />
+        FROM em_define_permission dp
+        left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
+        WHERE rp.define_role_id = #{roleId} and rp.state = 1
+    </select>
+
+    <select id="findAllPermissionIdByRoleId"  resultType="java.lang.String">
+        SELECT dp.fid FROM em_define_permission dp
+        left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
+        <where>
+            and rp.define_role_id = #{roleId}
+            <if test="filterEnable == true">
+                and rp.state = 1
+            </if>
+        </where>
+
+    </select>
+
+
 </mapper>

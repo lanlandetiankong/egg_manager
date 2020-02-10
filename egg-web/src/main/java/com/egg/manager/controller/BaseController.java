@@ -69,7 +69,7 @@ public class BaseController {
         }
         if(isPrintStackTrace){
             logger.error(e.getMessage());
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         result.setErrorMsg(errmsg);
     }

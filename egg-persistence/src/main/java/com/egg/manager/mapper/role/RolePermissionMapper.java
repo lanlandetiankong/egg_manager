@@ -2,6 +2,9 @@ package com.egg.manager.mapper.role;
 
 import com.egg.manager.entity.role.RolePermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,20 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
+
+    /**
+     * 批量新增 角色-权限 关联
+     * @param permissionList
+     * @return
+     */
+    int customBatchInsert(List<RolePermission> permissionList);
+
+    /**
+     * 根据角色id 修改指定权限 的可用状态
+     * @param roleId
+     * @param permissionIdList
+     * @param stateVal
+     * @return
+     */
+    int batchUpdateStateByRole(@Param("roleId") String roleId,@Param("permissionIdList")List<String> permissionIdList,@Param("stateVal")Integer stateVal);
 }

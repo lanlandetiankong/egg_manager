@@ -15,11 +15,12 @@ public class RolePermissionVo {
     private String defineRoleId;
     private String definePermissionId;
 
-    private String type;
+    private Integer type;
     private Integer version ;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUser ;
     private String lastModifyer;
+    private String remark;
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.annotations.Version;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.entity.define.DefineRole;
 import lombok.*;
 
@@ -26,7 +28,7 @@ public class RolePermission extends Model<RolePermission> {
     @TableField("define_permission_id")
     private String definePermissionId;
 
-    private String type;
+    private Integer type;
     @Version
     private Integer version ;
     private Integer state ;
@@ -39,7 +41,32 @@ public class RolePermission extends Model<RolePermission> {
     private String createUser ;
     @TableField(value = "last_modifyer")
     private String lastModifyer;
+    private String remark;
 
+
+    /**
+     * 返回一个通用的 entity实例
+     * @param defineRoleId
+     * @param definePermissionId
+     * @param createUser
+     * @return
+     */
+    public static RolePermission generateSimpleInsertEntity(String defineRoleId,String definePermissionId,String createUser){
+        RolePermission rolePermission = new RolePermission() ;
+        Date now = new Date() ;
+        rolePermission.setFid(MyUUIDUtil.renderSimpleUUID());
+        rolePermission.setDefineRoleId(defineRoleId);
+        rolePermission.setDefinePermissionId(definePermissionId);
+        rolePermission.setType(1);
+        rolePermission.setVersion(0);
+        rolePermission.setState(BaseStateEnum.ENABLED.getValue());
+        rolePermission.setCreateTime(now);
+        rolePermission.setUpdateTime(now);
+        rolePermission.setCreateUser(createUser);
+        rolePermission.setLastModifyer(createUser);
+        rolePermission.setRemark(null);
+        return rolePermission ;
+    }
     @Override
     protected Serializable pkVal() {
         return this.fid;

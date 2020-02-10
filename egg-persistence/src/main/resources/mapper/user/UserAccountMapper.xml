@@ -13,12 +13,13 @@
         <result column="email" property="email" />
         <result column="sex" property="sex" />
         <result column="user_type" property="userType" />
-        <result column="type" property="type" />
+        <result column="user_type_num" property="userTypeNum" />
         <result column="state" property="state" />
         <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
         <result column="last_modifyer" property="lastModifyer" />
     </resultMap>
 

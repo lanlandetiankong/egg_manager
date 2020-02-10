@@ -44,6 +44,13 @@ public class RolePermission extends Model<RolePermission> {
     private String remark;
 
 
+
+    @Override
+    protected Serializable pkVal() {
+        return this.fid;
+    }
+
+
     /**
      * 返回一个通用的 entity实例
      * @param defineRoleId
@@ -66,9 +73,5 @@ public class RolePermission extends Model<RolePermission> {
         rolePermission.setLastModifyer(createUser);
         rolePermission.setRemark(null);
         return rolePermission ;
-    }
-    @Override
-    protected Serializable pkVal() {
-        return this.fid;
     }
 }

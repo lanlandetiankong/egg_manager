@@ -2,15 +2,20 @@ package com.egg.manager.controller.user;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
+import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
@@ -39,6 +44,8 @@ public class UserAccountController extends BaseController {
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
+    @Autowired
+    private DefineRoleMapper defineRoleMapper ;
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
@@ -113,6 +120,19 @@ public class UserAccountController extends BaseController {
         return  result;
     }
 
+    @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = String.class)
+    @PostMapping(value = "/getAllRoleByUserAccountId")
+    public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
+        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+        try{
+            List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
+            result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
+            dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 
 
     @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = String.class)
@@ -228,6 +248,27 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,lockMsg+"用户:"+actionSuccessMsg);
             }
             result.setCount(lockCount);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = String.class)
+    @PostMapping(value = "/grantRoleToUser")
+    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            //TODO 取得当前登录用户id
+            String loginUserId = null ;
+            if(StringUtils.isNotBlank(userAccountId)){
+                Integer grantCount = userAccountService.dealGrantRoleToUser(userAccountId,checkIds,loginUserId);
+                result.setCount(grantCount);
+                dealCommonSuccessCatch(result,"用户分配角色:"+actionSuccessMsg);
+            }   else {
+                throw new BusinessException("未知要分配角色的用户id");
+            }
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }

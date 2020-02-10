@@ -11,8 +11,11 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.dto.login.LoginAccountDTO;
 import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.entity.role.RolePermission;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.user.UserAccountVo;
@@ -21,10 +24,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * \* note:
@@ -39,6 +39,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
+    @Autowired
+    private UserRoleMapper userRoleMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
 
@@ -191,5 +193,65 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
         Integer lockCount = userAccountMapper.updateById(userAccount);
         return lockCount ;
+    }
+
+
+
+    /**
+     * 用户分配角色
+     * @param userAccountId 用户id
+     * @param checkIds 角色id集合
+     * @throws Exception
+     */
+    @Override
+    public Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception{
+        Integer changeCount = 0 ;
+        if(checkIds == null || checkIds.length == 0){   //清空所有权限
+            changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId);
+        }   else {
+            changeCount = checkIds.length ;
+            //取得曾勾选的角色id 集合
+            List<String> oldCheckRoleIds = userRoleMapper.findAllRoleIdByUserAccountId(userAccountId,false);
+            if(oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()){
+                List<UserRole> addEntitys = new ArrayList<>() ;
+                for (String checkId : checkIds){
+                    addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                }
+                //批量新增行
+                userRoleMapper.customBatchInsert(addEntitys);
+            }   else {
+                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> enableIds = new ArrayList<>() ;
+                List<String> disabledIds = new ArrayList<>() ;
+                Iterator<String> oldCheckIter = oldCheckRoleIds.iterator();
+                while (oldCheckIter.hasNext()){
+                    String oldCheckId = oldCheckIter.next() ;
+                    boolean isOldRow = checkIdList.contains(oldCheckId);
+                    if(isOldRow){   //原本有的数据行
+                        enableIds.add(oldCheckId) ;
+                        checkIdList.remove(oldCheckId);
+                    }   else {
+                        disabledIds.add(oldCheckId);
+                    }
+                }
+                if(enableIds.isEmpty() == false){   //批量启用
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue());
+                }
+                if(disabledIds.isEmpty() == false){   //批量禁用
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue());
+                }
+                if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
+                    //批量新增行
+                    List<UserRole> addEntitys = new ArrayList<>() ;
+                    for (String checkId : checkIdList){
+                        addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                    }
+                    //批量新增行
+                    userRoleMapper.customBatchInsert(addEntitys);
+                }
+            }
+        }
+
+        return changeCount ;
     }
 }

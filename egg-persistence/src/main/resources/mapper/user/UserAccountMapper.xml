@@ -44,4 +44,12 @@
                 #{item}
             </foreach>
     </update>
+
+    <update id="clearAllRoleByUserId" parameterType="java.lang.String">
+        UPDATE em_user_role
+        SET state = -1
+        WHERE user_account_id = #{userAccountId}
+    </update>
+
+
 </mapper>

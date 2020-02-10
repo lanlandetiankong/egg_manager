@@ -21,6 +21,9 @@
     <sql id="Base_Column_List">
         fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
+    <sql id="Base_Dr_Column_List">
+        dr.fid, dr.name, dr.code, dr.type, dr.state, dr.version, dr.create_time AS createTime, dr.update_time AS updateTime,dr.create_user AS createUser,dr.last_modifyer AS lastModifyer,dr.remark
+    </sql>
 
 
     <update id="batchFakeDelByIds" parameterType="java.util.List">
@@ -32,5 +35,13 @@
         </foreach>
     </update>
 
-
+    <select id="findAllRoleByUserAcccountId"  resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Dr_Column_List" />
+        FROM em_define_role dr
+        left JOIN em_user_role ur on dr.fid = ur.define_role_id
+        WHERE
+            ur.user_account_id = #{userAccountId}
+            and  ur.state = #{stateVal}
+    </select>
 </mapper>

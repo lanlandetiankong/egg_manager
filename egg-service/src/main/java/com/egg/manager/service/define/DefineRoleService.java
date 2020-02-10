@@ -75,8 +75,9 @@ public interface DefineRoleService extends IService<DefineRole> {
      * 角色授权
      * @param roleId 要授权的角色id
      * @param checkIds 权限id集合
+     * @param loginUserId 当前登录用户id
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String userId) throws Exception;
+    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String loginUserId) throws Exception;
 
 }

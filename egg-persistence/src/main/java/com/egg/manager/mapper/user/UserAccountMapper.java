@@ -22,5 +22,10 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState) ;
 
-
+    /**
+     * 批量伪删除 指定用户的所有角色关联
+     * @param userAccountId
+     * @return
+     */
+    int clearAllRoleByUserId(String userAccountId) ;
 }

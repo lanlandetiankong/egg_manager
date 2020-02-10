@@ -88,4 +88,13 @@ public interface UserAccountService extends IService<UserAccount> {
      * @throws Exception
      */
     Integer dealLockUserAccount(String lockId,boolean isLock) throws Exception ;
+
+
+    /**
+     * 用户分配角色
+     * @param userAccountId 用户id
+     * @param checkIds 角色id集合
+     * @throws Exception
+     */
+    Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception;
 }

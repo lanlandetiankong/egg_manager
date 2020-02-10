@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.annotations.Version;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.entity.role.RolePermission;
 import lombok.*;
 
 import java.io.Serializable;
@@ -25,7 +28,7 @@ public class UserRole extends Model<UserRole> {
     private String userAccountId ;
     @TableField(value = "define_role_id")
     private  String defineRoleId ;
-    private String type;
+    private Integer type;
     @Version
     private Integer version ;
     private Integer state ;
@@ -38,9 +41,34 @@ public class UserRole extends Model<UserRole> {
     private String createUser ;
     @TableField(value = "last_modifyer")
     private String lastModifyer;
+    private String remark;
 
     @Override
     protected Serializable pkVal() {
         return this.fid;
+    }
+
+
+    /**
+     * 返回一个通用的 entity实例
+     * @param userAccountId
+     * @param defineRoleId
+     * @param createUserId
+     * @return
+     */
+    public static UserRole generateSimpleInsertEntity(String userAccountId, String defineRoleId, String createUserId){
+        UserRole userRole = new UserRole() ;
+        Date now = new Date() ;
+        userRole.setFid(MyUUIDUtil.renderSimpleUUID());
+        userRole.setUserAccountId(userAccountId);
+        userRole.setDefineRoleId(defineRoleId);
+        userRole.setType(1);
+        userRole.setVersion(0);
+        userRole.setState(BaseStateEnum.ENABLED.getValue());
+        userRole.setCreateTime(now);
+        userRole.setUpdateTime(now);
+        userRole.setCreateUser(createUserId);
+        userRole.setLastModifyer(createUserId);
+        return userRole ;
     }
 }

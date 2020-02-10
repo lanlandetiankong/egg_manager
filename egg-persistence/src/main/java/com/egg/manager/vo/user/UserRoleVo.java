@@ -19,7 +19,7 @@ public class UserRoleVo {
     private String fid;
     private String userAccountId;
     private String defineRoleId;
-    private String type;
+    private Integer type;
     private Integer version;
     private Integer state;
     private Date createTime;

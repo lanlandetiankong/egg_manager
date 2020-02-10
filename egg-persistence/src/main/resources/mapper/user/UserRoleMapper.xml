@@ -14,12 +14,44 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
         <result column="last_modifyer" property="lastModifyer" />
+        <result column="remark" property="remark" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_account_id AS userAccountId, define_role_id AS userRoleId, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, user_account_id AS userAccountId, define_role_id AS userRoleId, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
+    <sql id="Base_Insert_Column_List">
+        fid, user_account_id, define_role_id, type, state, version, create_time, update_time,create_user,last_modifyer,remark
+    </sql>
+
+    <sql id="Base_Insert_Item_Column_List">
+        #{item.fid},
+        #{item.userAccountId},
+        #{item.defineRoleId},
+        #{item.type},
+        #{item.state},
+        #{item.version},
+        #{item.createTime},
+        #{item.updateTime},
+        #{item.createUser},
+        #{item.lastModifyer},
+        #{item.remark}
+    </sql>
+
+
+
+    <insert id="customBatchInsert">
+        INSERT INTO em_user_role(
+          <include refid="Base_Insert_Column_List" />
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (
+            <include refid="Base_Insert_Item_Column_List" />
+            )
+        </foreach>
+    </insert>
 
     <update id="batchFakeDelByIds" parameterType="java.util.List">
         UPDATE em_user_role
@@ -29,4 +61,26 @@
             #{item}
         </foreach>
     </update>
+
+    <update id="batchUpdateStateByUserAccountId">
+        UPDATE em_user_role
+        SET  state = #{stateVal}
+        where user_account_id = #{userAccountId}
+        and define_role_id IN
+        <foreach collection="roleIdList" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="findAllRoleIdByUserAccountId"  resultType="java.lang.String">
+        SELECT dr.fid FROM em_define_role dr
+        left JOIN em_user_role ur on dr.fid = ur.define_role_id
+        <where>
+            and ur.user_account_id = #{userAccountId}
+            <if test="filterEnable == true">
+                and ur.state = 1
+            </if>
+        </where>
+
+    </select>
 </mapper>

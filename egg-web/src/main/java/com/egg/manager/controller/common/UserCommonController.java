@@ -1,6 +1,7 @@
 package com.egg.manager.controller.common;
 
 import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
@@ -56,6 +57,26 @@ public class UserCommonController extends BaseController{
             List<FrontSelectBean> beanList = new ArrayList<>();
             beanList.add(new FrontSelectBean(0,"未锁定"));
             beanList.add(new FrontSelectBean(1,"已锁定"));
+            result.setEnumList(beanList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = String.class)
+    @PostMapping(value = "/getAllDefineJobTypeEnumList")
+    public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
+            List<FrontSelectBean> beanList = new ArrayList<>();
+            if(enums != null && enums.length > 0){
+                for (DefineJobTypeEnum enumObj : enums){
+                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+                }
+            }
             result.setEnumList(beanList);
         }   catch (Exception e){
             this.dealCommonErrorCatch(result,e) ;

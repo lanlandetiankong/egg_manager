@@ -157,7 +157,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Override
     public Integer dealDelUserAccount(String delId) throws Exception{
-        UserAccount userAccount = UserAccount.builder().fid(delId).locked(BaseStateEnum.DELETE.getValue()).build() ;
+        UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         Integer delCount = userAccountMapper.updateById(userAccount);
         return delCount ;
     }

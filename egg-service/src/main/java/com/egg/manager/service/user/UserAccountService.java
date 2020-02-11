@@ -97,4 +97,12 @@ public interface UserAccountService extends IService<UserAccount> {
      * @throws Exception
      */
     Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception;
+
+    /**
+     * 用户分配职务
+     * @param userAccountId 用户id
+     * @param checkIds 职务id集合
+     * @throws Exception
+     */
+    Integer dealGrantJobToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception;
 }

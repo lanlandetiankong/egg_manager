@@ -22,6 +22,20 @@
         fid, name,description , type, state, version,remark, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
+    <sql id="Base_Dj_Column_List">
+        dj.fid, dj.name,dj.description , dj.type, dj.state, dj.version,dj.remark, dj.create_time AS createTime, dj.update_time AS updateTime,dj.create_user AS createUser,dj.last_modifyer AS lastModifyer
+    </sql>
+
+
+    <select id="findAllJobByUserAcccountId"  resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Dj_Column_List" />
+        FROM em_define_job dj
+        left JOIN em_user_job uj on dj.fid = uj.define_job_id
+        WHERE
+        uj.user_account_id = #{userAccountId}
+        and  uj.state = #{stateVal}
+    </select>
 
 
     <update id="batchFakeDelByIds" parameterType="java.util.List" >

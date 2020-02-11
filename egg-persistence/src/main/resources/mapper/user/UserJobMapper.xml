@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.mapper.user.UserJobMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.entity.user.UserJob">
+        <id column="fid" property="fid" />
+        <result column="user_account_id" property="userAccountId" />
+        <result column="define_job_id" property="defineJobId" />
+        <result column="state" property="state" />
+        <result column="version" property="version" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid, user_account_id AS userAccountId, define_job_id AS defineJobId,state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+    </sql>
+    <sql id="Base_Insert_Column_List">
+        fid, user_account_id, define_job_id, state, version, create_time, update_time,create_user,last_modifyer,remark
+    </sql>
+
+    <sql id="Base_Insert_Item_Column_List">
+        #{item.fid},
+        #{item.userAccountId},
+        #{item.defineJobId},
+        #{item.state},
+        #{item.version},
+        #{item.createTime},
+        #{item.updateTime},
+        #{item.createUser},
+        #{item.lastModifyer},
+        #{item.remark}
+    </sql>
+
+
+
+    <insert id="customBatchInsert">
+        INSERT INTO em_user_job(
+          <include refid="Base_Insert_Column_List" />
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (
+            <include refid="Base_Insert_Item_Column_List" />
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchFakeDelByIds" parameterType="java.util.List">
+        UPDATE em_user_job
+        SET state = -1
+        where fid IN
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateStateByUserAccountId">
+        UPDATE em_user_job
+        SET  state = #{stateVal}
+        where user_account_id = #{userAccountId}
+        and define_job_id IN
+        <foreach collection="jobIdList" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="findAllJobIdByUserAccountId"  resultType="java.lang.String">
+        SELECT dr.fid FROM em_define_job dr
+        left JOIN em_user_job uj on dr.fid = uj.define_job_id
+        <where>
+            and uj.user_account_id = #{userAccountId}
+            <if test="filterEnable == true">
+                and uj.state = 1
+            </if>
+        </where>
+
+    </select>
+
+
+
+</mapper>

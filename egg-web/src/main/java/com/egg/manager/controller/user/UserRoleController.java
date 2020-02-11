@@ -66,7 +66,7 @@ public class UserRoleController  extends BaseController{
 
     @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = String.class)
     @PostMapping(value = "/getAllUserRoles")
-    public MyCommonResult<UserRoleVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
+    public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
             //解析 搜索条件

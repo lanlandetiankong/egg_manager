@@ -7,14 +7,17 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
+import com.egg.manager.mapper.define.DefineJobMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
@@ -46,6 +49,8 @@ public class UserAccountController extends BaseController {
     private UserAccountMapper userAccountMapper ;
     @Autowired
     private DefineRoleMapper defineRoleMapper ;
+    @Autowired
+    private DefineJobMapper defineJobMapper ;
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
@@ -128,6 +133,21 @@ public class UserAccountController extends BaseController {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = String.class)
+    @PostMapping(value = "/getAllJobByUserAccountId")
+    public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
+        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+        try{
+            List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
+            result.setResultList(DefineJobVo.transferEntityToVoList(defineJobList));
+            dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }
@@ -268,6 +288,28 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,"用户分配角色:"+actionSuccessMsg);
             }   else {
                 throw new BusinessException("未知要分配角色的用户id");
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+
+    @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = String.class)
+    @PostMapping(value = "/grantJobToUser")
+    public MyCommonResult doGrantJobToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            //TODO 取得当前登录用户id
+            String loginUserId = null ;
+            if(StringUtils.isNotBlank(userAccountId)){
+                Integer grantCount = userAccountService.dealGrantJobToUser(userAccountId,checkIds,loginUserId);
+                result.setCount(grantCount);
+                dealCommonSuccessCatch(result,"用户分配职务:"+actionSuccessMsg);
+            }   else {
+                throw new BusinessException("未知要分配职务的用户id");
             }
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

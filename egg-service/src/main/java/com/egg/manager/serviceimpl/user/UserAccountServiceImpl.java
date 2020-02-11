@@ -13,8 +13,10 @@ import com.egg.manager.dto.login.LoginAccountDTO;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.role.RolePermission;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
@@ -41,6 +43,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     private UserAccountMapper userAccountMapper ;
     @Autowired
     private UserRoleMapper userRoleMapper ;
+    @Autowired
+    private UserJobMapper userJobMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
 
@@ -252,6 +256,64 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             }
         }
 
+        return changeCount ;
+    }
+
+
+    /**
+     * 用户分配职务
+     * @param userAccountId 用户id
+     * @param checkIds 职务id集合
+     * @throws Exception
+     */
+    @Override
+    public Integer dealGrantJobToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception{
+        Integer changeCount = 0 ;
+        if(checkIds == null || checkIds.length == 0){   //清空所有权限
+            changeCount = userAccountMapper.clearAllJobByUserId(userAccountId);
+        }   else {
+            changeCount = checkIds.length ;
+            //取得曾勾选的职务id 集合
+            List<String> oldCheckJobIds = userJobMapper.findAllJobIdByUserAccountId(userAccountId,false);
+            if(oldCheckJobIds == null || oldCheckJobIds.isEmpty()){
+                List<UserJob> addEntitys = new ArrayList<>() ;
+                for (String checkId : checkIds){
+                    addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                }
+                //批量新增行
+                userJobMapper.customBatchInsert(addEntitys);
+            }   else {
+                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> enableIds = new ArrayList<>() ;
+                List<String> disabledIds = new ArrayList<>() ;
+                Iterator<String> oldCheckIter = oldCheckJobIds.iterator();
+                while (oldCheckIter.hasNext()){
+                    String oldCheckId = oldCheckIter.next() ;
+                    boolean isOldRow = checkIdList.contains(oldCheckId);
+                    if(isOldRow){   //原本有的数据行
+                        enableIds.add(oldCheckId) ;
+                        checkIdList.remove(oldCheckId);
+                    }   else {
+                        disabledIds.add(oldCheckId);
+                    }
+                }
+                if(enableIds.isEmpty() == false){   //批量启用
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue());
+                }
+                if(disabledIds.isEmpty() == false){   //批量禁用
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue());
+                }
+                if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
+                    //批量新增行
+                    List<UserJob> addEntitys = new ArrayList<>() ;
+                    for (String checkId : checkIdList){
+                        addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                    }
+                    //批量新增行
+                    userJobMapper.customBatchInsert(addEntitys);
+                }
+            }
+        }
         return changeCount ;
     }
 }

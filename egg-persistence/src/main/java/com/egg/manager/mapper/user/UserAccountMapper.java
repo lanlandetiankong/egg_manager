@@ -28,4 +28,11 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @return
      */
     int clearAllRoleByUserId(String userAccountId) ;
+
+    /**
+     * 批量伪删除 指定用户的所有职务关联
+     * @param userAccountId
+     * @return
+     */
+    int clearAllJobByUserId(String userAccountId) ;
 }

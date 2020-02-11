@@ -3,6 +3,8 @@ package com.egg.manager.mapper.define;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefineJob;
+import com.egg.manager.entity.define.DefineRole;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +23,14 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
      * 批量 伪删除
      */
     int batchFakeDelByIds(List<String> delIds) ;
+
+
+
+    /**
+     * 查询指定用户的 用户-职务 关联表
+     * @param userAccountId
+     * @param stateVal 指定state的值
+     * @return
+     */
+    List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal")Integer stateVal) ;
 }

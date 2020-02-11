@@ -52,4 +52,11 @@
     </update>
 
 
+    <update id="clearAllJobByUserId" parameterType="java.lang.String">
+        UPDATE em_user_job
+        SET state = -1
+        WHERE user_account_id = #{userAccountId}
+    </update>
+
+
 </mapper>

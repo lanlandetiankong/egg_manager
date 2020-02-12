@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.Version;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.io.Serializable;
@@ -55,10 +56,10 @@ public class RolePermission extends Model<RolePermission> {
      * 返回一个通用的 entity实例
      * @param defineRoleId
      * @param definePermissionId
-     * @param createUser
+     * @param loginUser
      * @return
      */
-    public static RolePermission generateSimpleInsertEntity(String defineRoleId,String definePermissionId,String createUser){
+    public static RolePermission generateSimpleInsertEntity(String defineRoleId,String definePermissionId,UserAccount loginUser){
         RolePermission rolePermission = new RolePermission() ;
         Date now = new Date() ;
         rolePermission.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -69,8 +70,10 @@ public class RolePermission extends Model<RolePermission> {
         rolePermission.setState(BaseStateEnum.ENABLED.getValue());
         rolePermission.setCreateTime(now);
         rolePermission.setUpdateTime(now);
-        rolePermission.setCreateUser(createUser);
-        rolePermission.setLastModifyer(createUser);
+        if(loginUser != null){
+            rolePermission.setCreateUser(loginUser.getFid());
+            rolePermission.setLastModifyer(loginUser.getFid());
+        }
         rolePermission.setRemark(null);
         return rolePermission ;
     }

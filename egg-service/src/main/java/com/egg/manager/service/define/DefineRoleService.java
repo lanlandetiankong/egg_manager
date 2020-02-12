@@ -47,7 +47,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param defineRoleVo
      * @throws Exception
      */
-    Integer dealAddDefineRole(DefineRoleVo defineRoleVo) throws Exception ;
+    Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception ;
 
     /**
      * 角色定义-更新
@@ -55,29 +55,29 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser,boolean updateAll) throws Exception ;
 
     /**
      * 角色定义-批量删除
      * @param delIds 要删除的角色id 集合
      * @throws Exception
      */
-    Integer dealDelDefineRoleByArr(String[] delIds) throws Exception;
+    Integer dealDelDefineRoleByArr(String[] delIds,UserAccount loginUser) throws Exception;
 
     /**
      * 角色定义-删除
      * @param delId 要删除的角色id
      * @throws Exception
      */
-    Integer dealDelDefineRole(String delId) throws Exception;
+    Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception;
 
     /**
      * 角色授权
      * @param roleId 要授权的角色id
      * @param checkIds 权限id集合
-     * @param loginUserId 当前登录用户id
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String loginUserId) throws Exception;
+    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,UserAccount loginUser) throws Exception;
 
 }

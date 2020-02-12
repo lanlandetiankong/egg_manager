@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.Version;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import lombok.*;
+import org.apache.catalina.User;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -47,14 +48,15 @@ public class UserJob extends Model<UserJob> {
     }
 
 
+
     /**
      * 返回一个通用的 entity实例
      * @param userAccountId
      * @param defineJobId
-     * @param createUserId
+     * @param loginUser 当前登录用户
      * @return
      */
-    public static UserJob generateSimpleInsertEntity(String userAccountId, String defineJobId, String createUserId){
+    public static UserJob generateSimpleInsertEntity(String userAccountId, String defineJobId,UserAccount loginUser){
         UserJob userJob = new UserJob() ;
         Date now = new Date() ;
         userJob.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -64,8 +66,10 @@ public class UserJob extends Model<UserJob> {
         userJob.setState(BaseStateEnum.ENABLED.getValue());
         userJob.setCreateTime(now);
         userJob.setUpdateTime(now);
-        userJob.setCreateUser(createUserId);
-        userJob.setLastModifyer(createUserId);
+        if(loginUser != null){
+            userJob.setCreateUser(loginUser.getFid());
+            userJob.setLastModifyer(loginUser.getFid());
+        }
         return userJob ;
     }
 }

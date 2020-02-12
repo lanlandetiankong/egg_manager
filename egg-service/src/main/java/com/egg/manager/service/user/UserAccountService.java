@@ -46,31 +46,36 @@ public interface UserAccountService extends IService<UserAccount> {
     /**
      * 用户账号-新增
      * @param userAccountVo
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealAddUserAccount(UserAccountVo userAccountVo) throws Exception ;
+    Integer dealAddUserAccount(UserAccountVo userAccountVo,UserAccount loginUser) throws Exception ;
 
     /**
      * 用户账号-更新
      * @param userAccountVo
+     * @param loginUser 当前登录用户
      * @param updateAll 是否更新所有字段
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealUpdateUserAccount(UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
+    Integer dealUpdateUserAccount(UserAccountVo userAccountVo,UserAccount loginUser,boolean updateAll) throws Exception ;
 
     /**
      * 用户账号-删除
      * @param delIds 要删除的用户id 集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccountByArr(String[] delIds) throws Exception ;
+    Integer dealDelUserAccountByArr(String[] delIds,UserAccount loginUser) throws Exception ;
 
     /**
      * 用户账号-删除
      * @param delId 要删除的用户id
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccount(String delId) throws Exception ;
+    Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception ;
 
 
 
@@ -78,31 +83,35 @@ public interface UserAccountService extends IService<UserAccount> {
      * 用户账号-锁定
      * @param lockIds 要锁定的用户账号id 集合
      * @param isLock 是否锁定
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccountByArr(String[] lockIds,boolean isLock) throws Exception ;
+    Integer dealLockUserAccountByArr(String[] lockIds,UserAccount loginUser,boolean isLock) throws Exception ;
     /**
      * 用户账号-锁定
      * @param lockId 要锁定的用户账号id
      * @param isLock 是否锁定
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccount(String lockId,boolean isLock) throws Exception ;
+    Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception ;
 
 
     /**
      * 用户分配角色
      * @param userAccountId 用户id
      * @param checkIds 角色id集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception;
+    Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception;
 
     /**
      * 用户分配职务
      * @param userAccountId 用户id
      * @param checkIds 职务id集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantJobToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception;
+    Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception;
 }

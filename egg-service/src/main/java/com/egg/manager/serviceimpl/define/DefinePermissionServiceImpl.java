@@ -8,6 +8,7 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
@@ -83,7 +84,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @throws Exception
      */
     @Override
-    public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo) throws Exception{
+    public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -91,6 +92,10 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
         definePermission.setCreateTime(now);
         definePermission.setUpdateTime(now);
+        if(loginUser != null){
+            definePermission.setCreateUser(loginUser.getFid());
+            definePermission.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = definePermissionMapper.insert(definePermission) ;
         return addCount ;
     }
@@ -103,11 +108,14 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         definePermissionVo.setUpdateTime(now);
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
+        if(loginUser != null){
+            definePermission.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = definePermissionMapper.updateAllColumnById(definePermission) ;
         }   else {
@@ -122,12 +130,12 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefinePermissionByArr(String[] delIds) throws Exception{
+    public Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = definePermissionMapper.batchFakeDelByIds(delIdList);
+            delCount = definePermissionMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -138,8 +146,11 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefinePermission(String delId) throws Exception{
+    public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
         DefinePermission definePermission = DefinePermission.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            definePermission.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = definePermissionMapper.updateById(definePermission);
         return delCount ;
     }

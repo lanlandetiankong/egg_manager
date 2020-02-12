@@ -2,6 +2,7 @@ package com.egg.manager.mapper.role;
 
 import com.egg.manager.entity.role.RolePermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,5 +32,6 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByRole(@Param("roleId") String roleId,@Param("permissionIdList")List<String> permissionIdList,@Param("stateVal")Integer stateVal);
+    int batchUpdateStateByRole(@Param("roleId") String roleId,@Param("permissionIdList")List<String> permissionIdList,@Param("stateVal")Integer stateVal
+                                    ,@Param("loginUser")UserAccount loginUser);
 }

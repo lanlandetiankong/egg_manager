@@ -7,6 +7,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.vo.user.UserJobVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param UserJobVo
      * @throws Exception
      */
-    Integer dealAddUserJob(UserJobVo UserJobVo) throws Exception;
+    Integer dealAddUserJob(UserJobVo UserJobVo,UserAccount loginUser) throws Exception;
 
     /**
      * 用户职务-更新
@@ -42,19 +43,19 @@ public interface UserJobService extends IService<UserJob> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserJob(UserJobVo UserJobVo, boolean updateAll) throws Exception;
+    Integer dealUpdateUserJob(UserJobVo UserJobVo,UserAccount loginUser,boolean updateAll) throws Exception;
 
     /**
      * 用户职务-删除
      * @param delIds 要删除的用户职务id 集合
      * @throws Exception
      */
-    Integer dealDelUserJobByArr(String[] delIds) throws Exception ;
+    Integer dealDelUserJobByArr(String[] delIds, UserAccount loginUser) throws Exception ;
 
     /**
      * 用户职务-删除
      * @param delId 要删除的用户职务id
      * @throws Exception
      */
-    Integer dealDelUserJob(String delId) throws Exception ;
+    Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception ;
 }

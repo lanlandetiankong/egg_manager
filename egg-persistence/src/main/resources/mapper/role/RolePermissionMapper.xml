@@ -53,6 +53,9 @@
     <update id="batchUpdateStateByRole">
         UPDATE em_role_permission
         SET  state = #{stateVal}
+        <if test="loginUser != null">
+            ,last_modifyer = #{loginUser.fid}
+        </if>
         where define_role_id = #{roleId}
         and define_permission_id IN
         <foreach collection="permissionIdList" item="item" index="index" separator="," open="(" close=")">

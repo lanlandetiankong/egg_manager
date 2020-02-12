@@ -53,10 +53,10 @@ public class UserRole extends Model<UserRole> {
      * 返回一个通用的 entity实例
      * @param userAccountId
      * @param defineRoleId
-     * @param createUserId
+     * @param loginUser 当前登录用户
      * @return
      */
-    public static UserRole generateSimpleInsertEntity(String userAccountId, String defineRoleId, String createUserId){
+    public static UserRole generateSimpleInsertEntity(String userAccountId, String defineRoleId, UserAccount loginUser){
         UserRole userRole = new UserRole() ;
         Date now = new Date() ;
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -67,8 +67,10 @@ public class UserRole extends Model<UserRole> {
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
         userRole.setUpdateTime(now);
-        userRole.setCreateUser(createUserId);
-        userRole.setLastModifyer(createUserId);
+        if(loginUser != null){
+            userRole.setCreateUser(loginUser.getFid());
+            userRole.setLastModifyer(loginUser.getFid());
+        }
         return userRole ;
     }
 }

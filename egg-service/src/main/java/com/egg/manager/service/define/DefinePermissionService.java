@@ -6,6 +6,7 @@ import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 
@@ -38,7 +39,7 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param definePermissionVo
      * @throws Exception
      */
-    Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo) throws Exception ;
+    Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser) throws Exception ;
 
     /**
      * 权限定义-更新
@@ -46,19 +47,19 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception ;
+    Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser,boolean updateAll) throws Exception ;
 
     /**
      * 权限定义-批量删除
      * @param delIds 要删除的权限id 集合
      * @throws Exception
      */
-    Integer dealDelDefinePermissionByArr(String[] delIds) throws Exception;
+    Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) throws Exception;
 
     /**
      * 权限定义-删除
      * @param delId 要删除的权限id
      * @throws Exception
      */
-    Integer dealDelDefinePermission(String delId) throws Exception;
+    Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception;
 }

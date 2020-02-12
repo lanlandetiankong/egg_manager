@@ -7,9 +7,11 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.service.user.UserRoleService;
@@ -52,6 +54,8 @@ public class UserRoleController  extends BaseController{
     @Autowired
     private UserRoleService userRoleService ;
     @Autowired
+    private CommonFuncService commonFuncService ;
+    @Autowired
     private RedisHelper redisHelper ;
 
     @Autowired
@@ -69,6 +73,7 @@ public class UserRoleController  extends BaseController{
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -88,6 +93,7 @@ public class UserRoleController  extends BaseController{
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, HttpServletResponse response,String roleId) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleVo.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户角色信息:"+actionSuccessMsg);
@@ -105,10 +111,11 @@ public class UserRoleController  extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userRoleVo == null) {
                 throw new Exception("未接收到有效的用户角色信息！");
             }   else {
-                addCount = userRoleService.dealAddUserRole(userRoleVo);
+                addCount = userRoleService.dealAddUserRole(userRoleVo,loginUser);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户角色:"+actionSuccessMsg);
@@ -127,8 +134,9 @@ public class UserRoleController  extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
-                delCount = userRoleService.dealDelUserRoleByArr(delIds);
+                delCount = userRoleService.dealDelUserRoleByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除用户角色:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -145,8 +153,9 @@ public class UserRoleController  extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
-                delCount = userRoleService.dealDelUserRole(delId);
+                delCount = userRoleService.dealDelUserRole(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除用户角色:"+actionSuccessMsg);
             }
             result.setCount(delCount);

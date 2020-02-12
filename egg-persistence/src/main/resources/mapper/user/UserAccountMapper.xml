@@ -9,6 +9,7 @@
         <result column="account" property="account" />
         <result column="nick_name" property="nickName" />
         <result column="avatar_url" property="avatarUrl" />
+        <result column="password" property="password" />
         <result column="phone" property="phone" />
         <result column="email" property="email" />
         <result column="sex" property="sex" />
@@ -20,41 +21,49 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
         <result column="last_modifyer" property="lastModifyer" />
-        <result column="last_modifyer" property="lastModifyer" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl, phone, email, sex, user_type AS userType, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl,password, phone, email, sex, user_type AS userType, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 
-    <update id="batchFakeDelByIds" parameterType="java.util.List" >
-        UPDATE em_user_account SET  state = -1
+    <update id="batchFakeDelByIds" >
+        UPDATE em_user_account SET  state = -1,last_modifyer = #{loginUser.fid}
         WHERE fid IN (
-          <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+          <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
               #{item}
           </foreach>
         )
     </update>
     <update id="batchLockUserByIds" >
         UPDATE em_user_account SET locked = #{lockState}
+            <if test="loginUser != null">
+                ,last_modifyer = #{loginUser.fid}
+            </if>
         WHERE fid IN
             <foreach collection="lockIds" item="item" index="index" separator="," open="(" close=")">
                 #{item}
             </foreach>
     </update>
 
-    <update id="clearAllRoleByUserId" parameterType="java.lang.String">
+    <update id="clearAllRoleByUserId" >
         UPDATE em_user_role
         SET state = -1
+            <if test="loginUser != null">
+                ,last_modifyer = #{loginUser.fid}
+            </if>
         WHERE user_account_id = #{userAccountId}
     </update>
 
 
-    <update id="clearAllJobByUserId" parameterType="java.lang.String">
+    <update id="clearAllJobByUserId">
         UPDATE em_user_job
         SET state = -1
+            <if test="loginUser != null">
+                ,last_modifyer = #{loginUser.fid}
+            </if>
         WHERE user_account_id = #{userAccountId}
     </update>
 

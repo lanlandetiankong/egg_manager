@@ -15,6 +15,7 @@ import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.mapper.define.DefineJobMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineJobVo;
@@ -54,6 +55,8 @@ public class UserAccountController extends BaseController {
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
+    private CommonFuncService commonFuncService ;
+    @Autowired
     private RedisHelper redisHelper ;
 
     @Autowired
@@ -79,7 +82,7 @@ public class UserAccountController extends BaseController {
                      //账号密码验证通过
                     result.setAccountToken(userAccountToken);
                     //redis30分钟过期
-                    redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAccountKey(),userAccountToken.getAccount(),userAccountToken,redisPropsOfShiroCache.getUserAccountTtl());
+                    this.dealSetTokenToRedis(userAccountToken) ;
                 }   else {
                     throw new Exception("账号密码不匹配！");
                 }
@@ -97,6 +100,7 @@ public class UserAccountController extends BaseController {
     public MyCommonResult<UserAccountVo> doGetAllUserAccounts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -116,6 +120,7 @@ public class UserAccountController extends BaseController {
     public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserAccount account = userAccountMapper.selectById(accountId);
             result.setBean(UserAccountVo.transferEntityToVo(account));
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
@@ -130,6 +135,7 @@ public class UserAccountController extends BaseController {
     public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
@@ -145,6 +151,7 @@ public class UserAccountController extends BaseController {
     public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobVo.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
@@ -161,10 +168,11 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
-                addCount = userAccountService.dealAddUserAccount(userAccountVo) ;
+                addCount = userAccountService.dealAddUserAccount(userAccountVo,loginUser) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
@@ -181,10 +189,11 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
-                changeCount = userAccountService.dealUpdateUserAccount(userAccountVo,false) ;
+                changeCount = userAccountService.dealUpdateUserAccount(userAccountVo,loginUser,false) ;
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新用户:"+actionSuccessMsg);
@@ -201,9 +210,10 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 //批量伪删除
-                delCount = userAccountService.dealDelUserAccountByArr(delIds);
+                delCount = userAccountService.dealDelUserAccountByArr(delIds,loginUser);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
             }
@@ -220,8 +230,9 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
-                delCount = userAccountService.dealDelUserAccount(delId);
+                delCount = userAccountService.dealDelUserAccount(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除用户:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -238,12 +249,13 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer lockCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true ;
             String lockMsg = lockFlag ? "锁定" : "解锁" ;
             if(lockIds != null && lockIds.length > 0) {
                 //批量伪删除
-                lockCount = userAccountService.dealLockUserAccountByArr(lockIds,lockFlag);
+                lockCount = userAccountService.dealLockUserAccountByArr(lockIds,loginUser,lockFlag);
                 result.setCount(lockCount);
                 dealCommonSuccessCatch(result,"批量"+lockMsg+"用户:"+actionSuccessMsg);
             }
@@ -260,11 +272,12 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer lockCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true ;
             String lockMsg = lockFlag ? "锁定" : "解锁" ;
             if(StringUtils.isNotBlank(lockId)){
-                lockCount = userAccountService.dealLockUserAccount(lockId,lockFlag);
+                lockCount = userAccountService.dealLockUserAccount(lockId,loginUser,lockFlag);
                 dealCommonSuccessCatch(result,lockMsg+"用户:"+actionSuccessMsg);
             }
             result.setCount(lockCount);
@@ -280,10 +293,9 @@ public class UserAccountController extends BaseController {
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            //TODO 取得当前登录用户id
-            String loginUserId = null ;
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(userAccountId)){
-                Integer grantCount = userAccountService.dealGrantRoleToUser(userAccountId,checkIds,loginUserId);
+                Integer grantCount = userAccountService.dealGrantRoleToUser(userAccountId,checkIds,loginUser);
                 result.setCount(grantCount);
                 dealCommonSuccessCatch(result,"用户分配角色:"+actionSuccessMsg);
             }   else {
@@ -302,10 +314,9 @@ public class UserAccountController extends BaseController {
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            //TODO 取得当前登录用户id
-            String loginUserId = null ;
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(userAccountId)){
-                Integer grantCount = userAccountService.dealGrantJobToUser(userAccountId,checkIds,loginUserId);
+                Integer grantCount = userAccountService.dealGrantJobToUser(userAccountId,checkIds,loginUser);
                 result.setCount(grantCount);
                 dealCommonSuccessCatch(result,"用户分配职务:"+actionSuccessMsg);
             }   else {

@@ -158,7 +158,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @throws Exception
      */
     @Override
-    public Integer dealAddUserRole(UserRoleVo userRoleVo) throws Exception{
+    public Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -166,6 +166,10 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
         userRole.setUpdateTime(now);
+        if(loginUser != null){
+            userRole.setCreateUser(loginUser.getFid());
+            userRole.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = userRoleMapper.insert(userRole) ;
         return addCount ;
     }
@@ -178,11 +182,14 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateUserRole(UserRoleVo userRoleVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserRole(UserRoleVo userRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userRoleVo.setUpdateTime(now);
         UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
+        if(loginUser != null){
+            userRole.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = userRoleMapper.updateAllColumnById(userRole) ;
         }   else {
@@ -199,12 +206,12 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserRoleByArr(String[] delIds) throws Exception{
+    public Integer dealDelUserRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = userRoleMapper.batchFakeDelByIds(delIdList);
+            delCount = userRoleMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -215,8 +222,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserRole(String delId) throws Exception{
+    public Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception{
         UserRole userRole = UserRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            userRole.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = userRoleMapper.updateById(userRole);
         return delCount ;
     }

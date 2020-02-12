@@ -5,8 +5,10 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.vo.define.DefinePermissionVo;
@@ -37,13 +39,12 @@ import java.util.Map;
 @RequestMapping("/define/define_permission")
 public class DefinePermissionController  extends BaseController{
 
-
-    @Autowired
-    private UserAccountMapper userAccountMapper ;
     @Autowired
     private DefinePermissionMapper definePermissionMapper ;
     @Autowired
     private DefinePermissionService definePermissionService;
+    @Autowired
+    private CommonFuncService commonFuncService ;
     @Autowired
     private RedisHelper redisHelper ;
 
@@ -57,6 +58,7 @@ public class DefinePermissionController  extends BaseController{
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -76,6 +78,7 @@ public class DefinePermissionController  extends BaseController{
     public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String definePermissionId) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionVo.transferEntityToVo(definePermission));
             dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
@@ -92,10 +95,11 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         Integer addCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             }   else {
-                addCount = definePermissionService.dealAddDefinePermission(definePermissionVo) ;
+                addCount = definePermissionService.dealAddDefinePermission(definePermissionVo,loginUser) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增权限定义:"+actionSuccessMsg);
@@ -112,10 +116,11 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             }   else {
-                changeCount = definePermissionService.dealUpdateDefinePermission(definePermissionVo,false);
+                changeCount = definePermissionService.dealUpdateDefinePermission(definePermissionVo,loginUser,false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新权限定义:"+actionSuccessMsg);
@@ -132,8 +137,9 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
-                delCount = definePermissionService.dealDelDefinePermissionByArr(delIds);
+                delCount = definePermissionService.dealDelDefinePermissionByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除权限定义:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -149,8 +155,9 @@ public class DefinePermissionController  extends BaseController{
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
-                Integer delCount = definePermissionService.dealDelDefinePermission(delId);
+                Integer delCount = definePermissionService.dealDelDefinePermission(delId,loginUser);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除权限定义:"+actionSuccessMsg);
             }

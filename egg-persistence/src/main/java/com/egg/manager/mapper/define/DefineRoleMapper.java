@@ -2,6 +2,7 @@ package com.egg.manager.mapper.define;
 
 import com.egg.manager.entity.define.DefineRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface DefineRoleMapper extends BaseMapper<DefineRole> {
     //批量 伪删除
-    int batchFakeDelByIds(List<String> delIds) ;
+    int batchFakeDelByIds(@Param("delIds")List<String> delIds, @Param("loginUser")UserAccount loginUser) ;
 
     /**
      * 查询指定用户的 用户-角色 关联表

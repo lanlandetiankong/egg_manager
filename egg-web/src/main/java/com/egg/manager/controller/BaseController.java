@@ -3,15 +3,25 @@ package com.egg.manager.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.common.web.helper.ErrorActionEnum;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.webvo.session.UserAccountToken;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -25,6 +35,11 @@ import java.util.*;
 public class BaseController {
     public String actionSuccessMsg = "操作成功" ;
 
+    @Autowired
+    private RedisHelper redisHelper ;
+
+    @Autowired
+    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger baseLogger = LoggerFactory.getLogger(this.getClass());
 
@@ -51,6 +66,16 @@ public class BaseController {
     }
 
 
+    public void dealSetTokenToRedis(UserAccountToken userAccountToken) throws InvocationTargetException, IllegalAccessException {   //将用户token分别存入到redis
+        if(userAccountToken != null){
+            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAccountKey(),userAccountToken.getAccount(),userAccountToken,redisPropsOfShiroCache.getUserAccountTtl());
+            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAccountIdKey(),userAccountToken.getUserAccountId(),userAccountToken,redisPropsOfShiroCache.getUserAccountIdTtl());
+            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserTokenKey(),userAccountToken.getToken(),userAccountToken,redisPropsOfShiroCache.getUserTokenTtl());
+        }   else {
+
+        }
+    }
+
 
     /**
      *
@@ -72,6 +97,9 @@ public class BaseController {
             e.printStackTrace();
         }
         result.setErrorMsg(errmsg);
+        if(e instanceof MyAuthenticationExpiredException) {
+            result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
+        }
     }
 
     public  void dealCommonSuccessCatch(MyCommonResult result, String info) {

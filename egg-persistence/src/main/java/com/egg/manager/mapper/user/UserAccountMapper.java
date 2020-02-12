@@ -18,21 +18,21 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
 
     //批量 伪删除
-    int batchFakeDelByIds(List<String> delIds) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
 
-    int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState) ;
+    int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState,@Param("loginUser")UserAccount loginUser) ;
 
     /**
      * 批量伪删除 指定用户的所有角色关联
      * @param userAccountId
      * @return
      */
-    int clearAllRoleByUserId(String userAccountId) ;
+    int clearAllRoleByUserId(@Param("userAccountId") String userAccountId,@Param("loginUser") UserAccount loginUser) ;
 
     /**
      * 批量伪删除 指定用户的所有职务关联
      * @param userAccountId
      * @return
      */
-    int clearAllJobByUserId(String userAccountId) ;
+    int clearAllJobByUserId(@Param("userAccountId")String userAccountId,@Param("loginUser") UserAccount loginUser) ;
 }

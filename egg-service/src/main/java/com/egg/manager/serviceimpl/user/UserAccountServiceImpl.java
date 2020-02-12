@@ -2,6 +2,7 @@ package com.egg.manager.serviceimpl.user;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
@@ -22,6 +23,7 @@ import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,10 +102,11 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-新增
      * @param userAccountVo
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
     @Override
-    public Integer dealAddUserAccount(UserAccountVo userAccountVo) throws Exception{
+    public Integer dealAddUserAccount(UserAccountVo userAccountVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -111,6 +114,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         userAccount.setState(BaseStateEnum.ENABLED.getValue());
         userAccount.setCreateTime(now);
         userAccount.setUpdateTime(now);
+        if(StringUtils.isBlank(userAccountVo.getPassword())){
+            String pwd = UserAccountConstant.DEFAULT_PWD ;
+            userAccountVo.setPassword(pwd);
+            userAccount.setPassword(pwd);
+        }
+        if(loginUser != null){
+            userAccount.setCreateUser(loginUser.getFid());
+            userAccount.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = userAccountMapper.insert(userAccount) ;
         return addCount ;
     }
@@ -119,15 +131,19 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-更新
      * @param userAccountVo
+     * @param loginUser 当前登录用户
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateUserAccount(UserAccountVo userAccountVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserAccount(UserAccountVo userAccountVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userAccountVo.setUpdateTime(now);
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
+        if(loginUser != null){
+            userAccount.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = userAccountMapper.updateAllColumnById(userAccount) ;
         }   else {
@@ -141,15 +157,16 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-删除
      * @param delIds 要删除的用户账号id 集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserAccountByArr(String[] delIds) throws Exception{
+    public Integer dealDelUserAccountByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = userAccountMapper.batchFakeDelByIds(delIdList);
+            delCount = userAccountMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -157,11 +174,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-删除
      * @param delId 要删除的用户账号id
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserAccount(String delId) throws Exception{
+    public Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception{
         UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            userAccount.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = userAccountMapper.updateById(userAccount);
         return delCount ;
     }
@@ -170,17 +191,18 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-锁定
      * @param lockIds 要锁定的用户账号id 集合
+     *  @param loginUser 当前登录用户
      * @param isLock 是否锁定
      * @throws Exception
      */
     @Override
-    public Integer dealLockUserAccountByArr(String[] lockIds,boolean isLock) throws Exception{
+    public Integer dealLockUserAccountByArr(String[] lockIds,UserAccount loginUser,boolean isLock) throws Exception{
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         Integer lockCount = 0 ;
         if(lockIds != null && lockIds.length > 0) {
             List<String> lockIdList = Arrays.asList(lockIds) ;
             //批量设置为 锁定
-            lockCount = userAccountMapper.batchLockUserByIds(lockIdList,lockState);
+            lockCount = userAccountMapper.batchLockUserByIds(lockIdList,lockState,loginUser);
         }
         return lockCount ;
     }
@@ -188,13 +210,17 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     /**
      * 用户账号-锁定
      * @param lockId 要锁定的用户账号id
+     * @param loginUser 当前登录用户
      * @param isLock 是否锁定
      * @throws Exception
      */
     @Override
-    public Integer dealLockUserAccount(String lockId,boolean isLock) throws Exception{
+    public Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception{
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
+        if(loginUser != null){
+            userAccount.setLastModifyer(loginUser.getFid());
+        }
         Integer lockCount = userAccountMapper.updateById(userAccount);
         return lockCount ;
     }
@@ -205,13 +231,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * 用户分配角色
      * @param userAccountId 用户id
      * @param checkIds 角色id集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
     @Override
-    public Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception{
+    public Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;
+        String loginUserId = loginUser != null ? loginUser.getFid() : null ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
-            changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId);
+            changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId,loginUser);
         }   else {
             changeCount = checkIds.length ;
             //取得曾勾选的角色id 集合
@@ -219,7 +247,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             if(oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()){
                 List<UserRole> addEntitys = new ArrayList<>() ;
                 for (String checkId : checkIds){
-                    addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                    addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUser));
                 }
                 //批量新增行
                 userRoleMapper.customBatchInsert(addEntitys);
@@ -239,16 +267,16 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
                     }
                 }
                 if(enableIds.isEmpty() == false){   //批量启用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue());
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue(),loginUser);
                 }
                 if(disabledIds.isEmpty() == false){   //批量禁用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue());
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue(),loginUser);
                 }
                 if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserRole> addEntitys = new ArrayList<>() ;
                     for (String checkId : checkIdList){
-                        addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                        addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId,checkId,loginUser));
                     }
                     //批量新增行
                     userRoleMapper.customBatchInsert(addEntitys);
@@ -264,13 +292,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * 用户分配职务
      * @param userAccountId 用户id
      * @param checkIds 职务id集合
+     * @param loginUser 当前登录用户
      * @throws Exception
      */
     @Override
-    public Integer dealGrantJobToUser(String userAccountId,String[] checkIds,String loginUserId) throws Exception{
+    public Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;
+        String loginUserId = loginUser != null ? loginUser.getFid() : null ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
-            changeCount = userAccountMapper.clearAllJobByUserId(userAccountId);
+            changeCount = userAccountMapper.clearAllJobByUserId(userAccountId,loginUser);
         }   else {
             changeCount = checkIds.length ;
             //取得曾勾选的职务id 集合
@@ -278,7 +308,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             if(oldCheckJobIds == null || oldCheckJobIds.isEmpty()){
                 List<UserJob> addEntitys = new ArrayList<>() ;
                 for (String checkId : checkIds){
-                    addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                    addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUser));
                 }
                 //批量新增行
                 userJobMapper.customBatchInsert(addEntitys);
@@ -298,16 +328,16 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
                     }
                 }
                 if(enableIds.isEmpty() == false){   //批量启用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue());
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,enableIds,BaseStateEnum.ENABLED.getValue(),loginUser);
                 }
                 if(disabledIds.isEmpty() == false){   //批量禁用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue());
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId,disabledIds,BaseStateEnum.DELETE.getValue(),loginUser);
                 }
                 if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserJob> addEntitys = new ArrayList<>() ;
                     for (String checkId : checkIdList){
-                        addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUserId));
+                        addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId,checkId,loginUser));
                     }
                     //批量新增行
                     userJobMapper.customBatchInsert(addEntitys);

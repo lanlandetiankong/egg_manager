@@ -45,7 +45,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param userRoleVo
      * @throws Exception
      */
-    Integer dealAddUserRole(UserRoleVo userRoleVo) throws Exception;
+    Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception;
 
     /**
      * 用户角色-更新
@@ -53,19 +53,19 @@ public interface UserRoleService extends IService<UserRole> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserRole(UserRoleVo userRoleVo,boolean updateAll) throws Exception;
+    Integer dealUpdateUserRole(UserRoleVo userRoleVo,UserAccount loginUser,boolean updateAll) throws Exception;
 
     /**
      * 用户角色-删除
      * @param delIds 要删除的用户角色id 集合
      * @throws Exception
      */
-    Integer dealDelUserRoleByArr(String[] delIds) throws Exception ;
+    Integer dealDelUserRoleByArr(String[] delIds,UserAccount loginUser) throws Exception ;
 
     /**
      * 用户角色-删除
      * @param delId 要删除的用户角色id
      * @throws Exception
      */
-    Integer dealDelUserRole(String delId) throws Exception ;
+    Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception ;
 }

@@ -170,7 +170,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @throws Exception
      */
     @Override
-    public Integer dealAddDefineRole(DefineRoleVo defineRoleVo) throws Exception{
+    public Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
         defineRole.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -178,6 +178,10 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         defineRole.setState(BaseStateEnum.ENABLED.getValue());
         defineRole.setCreateTime(now);
         defineRole.setUpdateTime(now);
+        if(loginUser != null){
+            defineRole.setCreateUser(loginUser.getFid());
+            defineRole.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = defineRoleMapper.insert(defineRole) ;
         return addCount ;
     }
@@ -190,11 +194,14 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineRoleVo.setUpdateTime(now);
         DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
+        if(loginUser != null){
+            defineRole.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = defineRoleMapper.updateAllColumnById(defineRole) ;
         }   else {
@@ -209,12 +216,12 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefineRoleByArr(String[] delIds) throws Exception{
+    public Integer dealDelDefineRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = defineRoleMapper.batchFakeDelByIds(delIdList);
+            delCount = defineRoleMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -225,8 +232,11 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefineRole(String delId) throws Exception{
+    public Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception{
         DefineRole defineRole = DefineRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            defineRole.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = defineRoleMapper.updateById(defineRole);
         return delCount ;
     }
@@ -239,10 +249,10 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @throws Exception
      */
     @Override
-    public Integer dealGrantPermissionToRole(String roleId,String[] checkIds,String loginUserId) throws Exception{
+    public Integer dealGrantPermissionToRole(String roleId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
-            changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId);
+            changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId,loginUser);
         }   else {
             changeCount = checkIds.length ;
             //取得曾勾选的权限id 集合
@@ -250,7 +260,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
             if(oldCheckPermIds == null || oldCheckPermIds.isEmpty()){
                 List<RolePermission> addEntitys = new ArrayList<>() ;
                 for (String checkId : checkIds){
-                    addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUserId));
+                    addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUser));
                 }
                 //批量新增行
                 rolePermissionMapper.customBatchInsert(addEntitys);
@@ -270,16 +280,16 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
                     }
                 }
                 if(enableIds.isEmpty() == false){   //批量启用
-                    rolePermissionMapper.batchUpdateStateByRole(roleId,enableIds,BaseStateEnum.ENABLED.getValue());
+                    rolePermissionMapper.batchUpdateStateByRole(roleId,enableIds,BaseStateEnum.ENABLED.getValue(),loginUser);
                 }
                 if(disabledIds.isEmpty() == false){   //批量禁用
-                    rolePermissionMapper.batchUpdateStateByRole(roleId,disabledIds,BaseStateEnum.DELETE.getValue());
+                    rolePermissionMapper.batchUpdateStateByRole(roleId,disabledIds,BaseStateEnum.DELETE.getValue(),loginUser);
                 }
                 if(checkIdList.isEmpty() == false){     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<RolePermission> addEntitys = new ArrayList<>() ;
                     for (String checkId : checkIdList){
-                        addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUserId));
+                        addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId,checkId,loginUser));
                     }
                     //批量新增行
                     rolePermissionMapper.customBatchInsert(addEntitys);

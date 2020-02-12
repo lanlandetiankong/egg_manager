@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.define.DefineJob;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 
@@ -33,7 +34,7 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param defineJobVo
      * @throws Exception
      */
-    Integer dealAddDefineJob(DefineJobVo defineJobVo) throws Exception ;
+    Integer dealAddDefineJob(DefineJobVo defineJobVo,UserAccount loginUser) throws Exception ;
 
     /**
      * 职务账号-更新
@@ -41,21 +42,21 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineJob(DefineJobVo defineJobVo, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineJob(DefineJobVo defineJobVo,UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 职务账号-删除
      * @param delIds 要删除的职务id 集合
      * @throws Exception
      */
-    Integer dealDelDefineJobByArr(String[] delIds) throws Exception ;
+    Integer dealDelDefineJobByArr(String[] delIds,UserAccount loginUser) throws Exception ;
 
     /**
      * 职务账号-删除
      * @param delId 要删除的职务id
      * @throws Exception
      */
-    Integer dealDelDefineJob(String delId) throws Exception ;
+    Integer dealDelDefineJob(String delId,UserAccount loginUser) throws Exception ;
 
 
 

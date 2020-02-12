@@ -20,6 +20,7 @@ import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.vo.user.UserJobVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import org.apache.catalina.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @throws Exception
      */
     @Override
-    public Integer dealAddUserJob(UserJobVo userJobVo) throws Exception{
+    public Integer dealAddUserJob(UserJobVo userJobVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
         userJob.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -91,6 +92,10 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         userJob.setState(BaseStateEnum.ENABLED.getValue());
         userJob.setCreateTime(now);
         userJob.setUpdateTime(now);
+        if(loginUser != null){
+            userJob.setCreateUser(loginUser.getFid());
+            userJob.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = userJobMapper.insert(userJob) ;
         return addCount ;
     }
@@ -103,11 +108,14 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateUserJob(UserJobVo userJobVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserJob(UserJobVo userJobVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userJobVo.setUpdateTime(now);
         UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
+        if(loginUser != null){
+            userJob.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = userJobMapper.updateAllColumnById(userJob) ;
         }   else {
@@ -124,12 +132,12 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserJobByArr(String[] delIds) throws Exception{
+    public Integer dealDelUserJobByArr(String[] delIds, UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = userJobMapper.batchFakeDelByIds(delIdList);
+            delCount = userJobMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -140,8 +148,11 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @throws Exception
      */
     @Override
-    public Integer dealDelUserJob(String delId) throws Exception{
+    public Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception{
         UserJob userJob = UserJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            userJob.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = userJobMapper.updateById(userJob);
         return delCount ;
     }

@@ -56,8 +56,11 @@
     <update id="batchFakeDelByIds" parameterType="java.util.List">
         UPDATE em_user_role
         SET state = -1
+            <if test="loginUser != null">
+                ,last_modifyer=#{loginUser.fid}
+            </if>
         where fid IN
-        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+        <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
             #{item}
         </foreach>
     </update>
@@ -65,6 +68,9 @@
     <update id="batchUpdateStateByUserAccountId">
         UPDATE em_user_role
         SET  state = #{stateVal}
+            <if test="loginUser != null">
+                ,last_modifyer=#{loginUser.fid}
+            </if>
         where user_account_id = #{userAccountId}
         and define_role_id IN
         <foreach collection="roleIdList" item="item" index="index" separator="," open="(" close=")">

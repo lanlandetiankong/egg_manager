@@ -1,11 +1,17 @@
 package com.egg.manager.service;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.webvo.session.UserAccountToken;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import scala.Int;
 
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +35,38 @@ public interface CommonFuncService {
      * @return
      */
     RowBounds parsePaginationToRowBounds(AntdvPaginationBean paginationBean);
+
+
+    /**
+     *  将取得请求的token转化为 UserAccountToken
+     * @param request
+     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @return UserAccountToken
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    UserAccountToken gainUserAccountTokenBeanByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException;
+
+
+
+    /**
+     *  将取得请求的token转化为 UserAccount
+     * @param request
+     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @return UserAccountToken
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    UserAccount gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
+
+
+    /**
+     *  用userAccountToken 取得 UserAccount
+     * @param userAccountToken
+     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @return UserAccount
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken,boolean isRequired) throws InvocationTargetException, IllegalAccessException;
 }

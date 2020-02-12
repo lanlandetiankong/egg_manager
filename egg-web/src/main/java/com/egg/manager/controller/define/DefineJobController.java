@@ -6,7 +6,9 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineJobMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineJobService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
@@ -44,6 +46,10 @@ public class DefineJobController extends BaseController {
     @Autowired
     private DefineJobService defineJobService ;
     @Autowired
+    private CommonFuncService commonFuncService ;
+
+
+    @Autowired
     private RedisHelper redisHelper ;
 
     @Autowired
@@ -59,6 +65,7 @@ public class DefineJobController extends BaseController {
     public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -78,6 +85,7 @@ public class DefineJobController extends BaseController {
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, HttpServletResponse response,String defineJobId) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobVo.transferEntityToVo(defineJob));
             dealCommonSuccessCatch(result,"查询职务信息:"+actionSuccessMsg);
@@ -95,10 +103,11 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             }   else {
-                addCount = defineJobService.dealAddDefineJob(defineJobVo) ;
+                addCount = defineJobService.dealAddDefineJob(defineJobVo,loginUser) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增职务:"+actionSuccessMsg);
@@ -115,10 +124,11 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             }   else {
-                changeCount = defineJobService.dealUpdateDefineJob(defineJobVo,false) ;
+                changeCount = defineJobService.dealUpdateDefineJob(defineJobVo,loginUser,false) ;
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新职务:"+actionSuccessMsg);
@@ -135,9 +145,10 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 //批量伪删除
-                delCount = defineJobService.dealDelDefineJobByArr(delIds);
+                delCount = defineJobService.dealDelDefineJobByArr(delIds,loginUser);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"批量删除职务:"+actionSuccessMsg);
             }
@@ -154,8 +165,9 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
-                delCount = defineJobService.dealDelDefineJob(delId);
+                delCount = defineJobService.dealDelDefineJob(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除职务:"+actionSuccessMsg);
             }
             result.setCount(delCount);

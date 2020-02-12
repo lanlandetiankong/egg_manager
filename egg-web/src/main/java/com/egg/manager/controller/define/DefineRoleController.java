@@ -8,10 +8,12 @@ import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.role.RolePermissionMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
@@ -51,7 +53,8 @@ public class DefineRoleController extends BaseController {
     private DefineRoleMapper defineRoleMapper ;
     @Autowired
     private DefineRoleService defineRoleService;
-
+    @Autowired
+    private CommonFuncService commonFuncService ;
 
     @Autowired
     private RedisHelper redisHelper ;
@@ -67,6 +70,7 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -86,6 +90,7 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
             result.setBean(DefineRoleVo.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
@@ -100,6 +105,7 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
             result.setResultList(definePermissionList);
             dealCommonSuccessCatch(result,"查询角色所拥有的权限:"+actionSuccessMsg);
@@ -118,10 +124,11 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         Integer addCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             }   else {
-                addCount = defineRoleService.dealAddDefineRole(defineRoleVo) ;
+                addCount = defineRoleService.dealAddDefineRole(defineRoleVo,loginUser) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增角色定义:"+actionSuccessMsg);
@@ -138,10 +145,11 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             }   else {
-                changeCount = defineRoleService.dealUpdateDefineRole(defineRoleVo,false);
+                changeCount = defineRoleService.dealUpdateDefineRole(defineRoleVo,loginUser,false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新角色定义:"+actionSuccessMsg);
@@ -158,8 +166,9 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
-                delCount = defineRoleService.dealDelDefineRoleByArr(delIds);
+                delCount = defineRoleService.dealDelDefineRoleByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除角色定义:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -175,8 +184,9 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, HttpServletResponse response, String delId){
         MyCommonResult result = new MyCommonResult() ;
         try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
-                Integer delCount = defineRoleService.dealDelDefineRole(delId);
+                Integer delCount = defineRoleService.dealDelDefineRole(delId,loginUser);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除角色定义:"+actionSuccessMsg);
             }
@@ -192,10 +202,9 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, HttpServletResponse response, String roleId,String[] checkIds){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            //TODO 取得当前登录用户id
-            String loginUserId = null ;
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(roleId)){
-                Integer grantCount = defineRoleService.dealGrantPermissionToRole(roleId,checkIds,loginUserId);
+                Integer grantCount = defineRoleService.dealGrantPermissionToRole(roleId,checkIds,loginUser);
                 result.setCount(grantCount);
                 dealCommonSuccessCatch(result,"角色授权:"+actionSuccessMsg);
             }   else {

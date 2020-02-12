@@ -70,7 +70,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @throws Exception
      */
     @Override
-    public Integer dealAddDefineJob(DefineJobVo defineJobVo) throws Exception{
+    public Integer dealAddDefineJob(DefineJobVo defineJobVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
         defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -78,6 +78,10 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         defineJob.setState(BaseStateEnum.ENABLED.getValue());
         defineJob.setCreateTime(now);
         defineJob.setUpdateTime(now);
+        if(loginUser != null){
+            defineJob.setCreateUser(loginUser.getFid());
+            defineJob.setLastModifyer(loginUser.getFid());
+        }
         Integer addCount = defineJobMapper.insert(defineJob) ;
         return addCount ;
     }
@@ -90,11 +94,14 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @throws Exception
      */
     @Override
-    public Integer dealUpdateDefineJob(DefineJobVo defineJobVo,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineJob(DefineJobVo defineJobVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineJobVo.setUpdateTime(now);
         DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
+        if(loginUser != null){
+            defineJob.setLastModifyer(loginUser.getFid());
+        }
         if(updateAll){  //是否更新所有字段
             changeCount = defineJobMapper.updateAllColumnById(defineJob) ;
         }   else {
@@ -111,12 +118,12 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefineJobByArr(String[] delIds) throws Exception{
+    public Integer dealDelDefineJobByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
-            delCount = defineJobMapper.batchFakeDelByIds(delIdList);
+            delCount = defineJobMapper.batchFakeDelByIds(delIdList,loginUser);
         }
         return delCount ;
     }
@@ -127,8 +134,11 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @throws Exception
      */
     @Override
-    public Integer dealDelDefineJob(String delId) throws Exception{
+    public Integer dealDelDefineJob(String delId,UserAccount loginUser) throws Exception{
         DefineJob defineJob = DefineJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
+        if(loginUser != null){
+            defineJob.setLastModifyer(loginUser.getFid());
+        }
         Integer delCount = defineJobMapper.updateById(defineJob);
         return delCount ;
     }

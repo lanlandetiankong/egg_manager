@@ -2,6 +2,7 @@ package com.egg.manager.mapper.define;
 
 import com.egg.manager.entity.define.DefinePermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,14 +17,14 @@ import java.util.List;
  */
 public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
     //批量 伪删除
-    int batchFakeDelByIds(List<String> delIds) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
 
     /**
      * 删除指定角色id下的所有权限
-     * @param roleIds
+     * @param roleId
      * @return
      */
-    int clearAllPermissionByRoleId(String roleIds) ;
+    int clearAllPermissionByRoleId(@Param("roleId")String roleId,@Param("loginUser") UserAccount loginUser) ;
     /**
      * 取得角色拥有的所有权限集合
      * @param roleId

@@ -1,6 +1,7 @@
 package com.egg.manager.mapper.user;
 
 import com.egg.manager.entity.role.RolePermission;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
     //批量 伪删除
-    int batchFakeDelByIds(List<String> delIds) ;
+    int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
     /**
      * 取得用户拥有的所有角色id集合
      * @param userAccountId
@@ -41,5 +42,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId,@Param("roleIdList")List<String> roleIdList,@Param("stateVal")Integer stateVal);
+    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId,@Param("roleIdList")List<String> roleIdList,@Param("stateVal")Integer stateVal
+                                            ,@Param("loginUser") UserAccount loginUser);
 }

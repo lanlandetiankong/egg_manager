@@ -50,6 +50,10 @@ public class RedisPropsOfShiroCache {
     //user
     @Value("userAccountKey")
     private String userAccountKey ;
+    @Value("userAccountIdKey")
+    private String userAccountIdKey ;
+    @Value("userTokenKey")
+    private String userTokenKey ;
     @Value("userGroupKey")
     private String userGroupKey ;
     @Value("userRoleKey")
@@ -87,6 +91,11 @@ public class RedisPropsOfShiroCache {
     //user
     @Value("userAccountTtl")
     private String userAccountTtl ;
+    @Value("userAccountIdTtl")
+    private String userAccountIdTtl ;
+    @Value("userTokenTtl")
+    private String userTokenTtl ;
+
     @Value("userGroupTtl")
     private String userGroupTtl ;
     @Value("userRoleTtl")
@@ -118,6 +127,13 @@ public class RedisPropsOfShiroCache {
 
     public void setUserAccountKey(String userAccountKey) {
         this.userAccountKey = userAccountKey;
+    }
+
+    public void setUserAccountIdKey(String userAccountIdKey) {
+        this.userAccountIdKey = userAccountIdKey;
+    }
+    public void setUserTokenKey(String userTokenKey) {
+        this.userTokenKey = userTokenKey;
     }
 
     public void setUserGroupKey(String userGroupKey) {
@@ -154,6 +170,14 @@ public class RedisPropsOfShiroCache {
 
     public void setUserAccountTtl(String userAccountTtl) {
         this.userAccountTtl = userAccountTtl;
+    }
+
+    public void setUserAccountIdTtl(String userAccountIdTtl) {
+        this.userAccountIdTtl = userAccountIdTtl;
+    }
+
+    public void setUserTokenTtl(String userTokenTtl) {
+        this.userTokenTtl = userTokenTtl;
     }
 
     public void setUserGroupTtl(String userGroupTtl) {
@@ -249,6 +273,14 @@ public class RedisPropsOfShiroCache {
         return userAccountKey.trim();
     }
 
+    public String getUserAccountIdKey() {
+        return userAccountIdKey.trim();
+    }
+
+    public String getUserTokenKey() {
+        return userTokenKey.trim();
+    }
+
     public String getUserGroupKey() {
         return userGroupKey.trim();
     }
@@ -283,6 +315,13 @@ public class RedisPropsOfShiroCache {
 
     public Long getUserAccountTtl() {
         return StringUtils.isBlank(userAccountTtl) ? 0L : Long.parseLong(userAccountTtl.trim()) ;
+    }
+
+    public Long getUserAccountIdTtl() {
+        return StringUtils.isBlank(userAccountIdTtl) ? 0L : Long.parseLong(userAccountIdTtl.trim()) ;
+    }
+    public Long getUserTokenTtl() {
+        return StringUtils.isBlank(userTokenTtl) ? 0L : Long.parseLong(userTokenTtl.trim()) ;
     }
 
     public Long getUserGroupTtl() {

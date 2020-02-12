@@ -3,6 +3,7 @@ package com.egg.manager.controller.define;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
@@ -55,7 +56,7 @@ public class DefinePermissionController  extends BaseController{
 
     @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = String.class)
     @PostMapping(value = "/getAllDefinePermissions")
-    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
@@ -64,7 +65,9 @@ public class DefinePermissionController  extends BaseController{
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean) ;
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

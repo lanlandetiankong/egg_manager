@@ -3,6 +3,7 @@ package com.egg.manager.service.define;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.define.DefineRoleVo;
@@ -40,7 +41,8 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean);
+    void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                List<AntdvSortBean> sortBeans);
 
     /**
      * 角色定义-新增

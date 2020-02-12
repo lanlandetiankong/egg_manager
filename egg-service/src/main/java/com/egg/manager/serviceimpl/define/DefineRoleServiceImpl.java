@@ -10,6 +10,7 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.role.RolePermission;
@@ -147,13 +148,20 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean) {
+    public void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                       List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
         //取得 分页配置
         RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到defineRoleEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(defineRoleEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineRoleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
         //取得 总数
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);

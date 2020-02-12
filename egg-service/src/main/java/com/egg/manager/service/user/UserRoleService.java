@@ -3,6 +3,7 @@ package com.egg.manager.service.user;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
@@ -37,7 +38,8 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean);
+    void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                List<AntdvSortBean> sortBeans);
 
 
     /**

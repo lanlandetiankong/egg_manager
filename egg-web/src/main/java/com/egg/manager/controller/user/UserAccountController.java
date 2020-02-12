@@ -6,6 +6,7 @@ import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
@@ -97,7 +98,7 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = String.class)
     @PostMapping(value = "/getAllUserAccounts")
-    public MyCommonResult<UserAccountVo> doGetAllUserAccounts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj) {
+    public MyCommonResult<UserAccountVo> doGetAllUserAccounts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj,String sortObj) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
@@ -106,7 +107,9 @@ public class UserAccountController extends BaseController {
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            userAccountService.dealGetUserAccountPages(result,queryFormFieldBeanList,paginationBean) ;
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            userAccountService.dealGetUserAccountPages(result,queryFormFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询用户信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

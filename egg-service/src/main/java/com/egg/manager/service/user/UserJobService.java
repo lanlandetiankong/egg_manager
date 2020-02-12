@@ -3,6 +3,7 @@ package com.egg.manager.service.user;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.vo.user.UserJobVo;
@@ -27,7 +28,8 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean);
+    void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                List<AntdvSortBean> sortBeans);
 
 
     /**

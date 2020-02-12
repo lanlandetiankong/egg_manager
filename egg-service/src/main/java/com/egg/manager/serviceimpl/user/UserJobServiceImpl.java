@@ -10,6 +10,7 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.mapper.user.UserJobMapper;
@@ -63,13 +64,20 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean){
+    public void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                    List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserJob> userJobEntityWrapper = new EntityWrapper<UserJob>();
         //取得 分页配置
         RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 userJobEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(userJobEntityWrapper,queryFormFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                userJobEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
         //取得 总数
         Integer total = userJobMapper.selectCount(userJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);

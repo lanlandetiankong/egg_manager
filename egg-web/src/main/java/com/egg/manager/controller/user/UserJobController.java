@@ -4,6 +4,7 @@ import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.mapper.user.UserAccountMapper;
@@ -57,7 +58,7 @@ public class UserJobController extends BaseController{
 
     @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = String.class)
     @PostMapping(value = "/getAllUserJobs")
-    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj) {
+    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             //解析 搜索条件
@@ -65,7 +66,9 @@ public class UserJobController extends BaseController{
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
-            userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean);
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

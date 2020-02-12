@@ -9,6 +9,7 @@ import com.egg.manager.common.web.helper.ErrorActionEnum;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.service.redis.RedisHelper;
@@ -175,6 +176,25 @@ public class BaseController {
         }
         return paginationBean ;
     }
+
+
+    /**
+     * 取得排序 bean
+     * @param sortObj
+     * @return
+     */
+    public List<AntdvSortBean> parseSortJsonToBean(String sortObj,boolean addCreateTimeDesc) {
+        List<AntdvSortBean> sortBeans = new ArrayList<>() ;
+        if(StringUtils.isNotBlank(sortObj) && "{}".equals(sortObj) == false){
+            sortBeans.add(JSONObject.parseObject(sortObj, AntdvSortBean.class));
+        }
+        if(addCreateTimeDesc == true){  //添加日期排序
+            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
+        }
+        return sortBeans ;
+    }
+
+
 
 
 

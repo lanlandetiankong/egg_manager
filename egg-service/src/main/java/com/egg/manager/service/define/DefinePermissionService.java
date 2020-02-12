@@ -3,6 +3,7 @@ package com.egg.manager.service.define;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
@@ -32,7 +33,8 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean);
+    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                      List<AntdvSortBean> sortBeans);
 
     /**
      * 权限定义-新增

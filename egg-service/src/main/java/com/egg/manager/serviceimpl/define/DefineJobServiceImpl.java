@@ -8,6 +8,7 @@ import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.dto.login.LoginAccountDTO;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
@@ -49,13 +50,20 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean){
+    public void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                      List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<DefineJob> defineJobEntityWrapper = new EntityWrapper<DefineJob>();
         //取得 分页配置
         RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 defineJobEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(defineJobEntityWrapper,queryFormFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineJobEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
         //取得 总数
         Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);

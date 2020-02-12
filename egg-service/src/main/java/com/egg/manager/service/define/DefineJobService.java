@@ -3,6 +3,7 @@ package com.egg.manager.service.define;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.define.DefineJobVo;
@@ -27,7 +28,8 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean);
+    void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                               List<AntdvSortBean> sortBeans);
 
     /**
      * 职务账号-新增

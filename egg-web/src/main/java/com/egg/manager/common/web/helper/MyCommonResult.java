@@ -1,6 +1,8 @@
 package com.egg.manager.common.web.helper;
 
+import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import lombok.*;
 
@@ -56,8 +58,10 @@ public class MyCommonResult<T> implements Serializable {
     private Integer status ;
     private String errorMsg;
 
+    private FileResBean fileResBean ;
     private AntdvPaginationBean paginationBean ;    //分页bean
 
+    private UploadProps uploadProps ;
 
 
     public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean,Integer total){

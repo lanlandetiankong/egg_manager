@@ -1,7 +1,7 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -9,7 +9,6 @@ import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
-import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
@@ -25,22 +24,17 @@ import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Api(value = "API -  UserAccountController ",description = "用户账号接口")
 @RestController
@@ -167,10 +161,12 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = String.class)
     @PostMapping(value = "/doAddUserAccount")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response, UserAccountVo userAccountVo){
+    public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
+            //当前登录用户
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
@@ -188,10 +184,11 @@ public class UserAccountController extends BaseController {
 
     @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = String.class)
     @PostMapping(value = "/doUpdateUserAccount")
-    public MyCommonResult doUpdateUserAccount(HttpServletRequest request, HttpServletResponse response, UserAccountVo userAccountVo){
+    public MyCommonResult doUpdateUserAccount(HttpServletRequest request, HttpServletResponse response){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");

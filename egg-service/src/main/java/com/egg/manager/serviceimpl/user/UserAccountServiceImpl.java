@@ -26,6 +26,7 @@ import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -121,6 +122,9 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
         userAccount.setVersion(commonFuncService.defaultVersion);
+        if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
+            userAccount.setLocked(SwitchStateEnum.Close.getValue());
+        }
         userAccount.setState(BaseStateEnum.ENABLED.getValue());
         userAccount.setCreateTime(now);
         userAccount.setUpdateTime(now);

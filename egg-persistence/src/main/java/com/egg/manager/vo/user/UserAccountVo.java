@@ -1,5 +1,6 @@
 package com.egg.manager.vo.user;
 
+import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
@@ -35,6 +36,7 @@ public class UserAccountVo {
     private Date updateTime ;
     private String createUser ;
     private String lastModifyer;
+    private FileResBean uploadImgBean ;
 
 
 

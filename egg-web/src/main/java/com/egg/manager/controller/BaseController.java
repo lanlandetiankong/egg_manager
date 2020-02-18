@@ -3,6 +3,7 @@ package com.egg.manager.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.ErrorActionEnum;
@@ -18,10 +19,12 @@ import com.egg.manager.webvo.session.UserAccountToken;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -77,6 +80,21 @@ public class BaseController {
         }
     }
 
+
+    public <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws BusinessException {
+        String queryJson = request.getParameter(paramKey) ;
+        T bean = null ;
+        if(StringUtils.isNotBlank(queryJson)){
+            if(StringUtils.isNotBlank(queryJson) && queryJson != "{}"){
+                bean = JSONObject.parseObject(queryJson,clazz);
+
+            }
+        }
+        if(bean == null && isRequired){
+            throw new BusinessException("未取得有效的值："+paramKey);
+        }
+        return bean ;
+    }
 
     /**
      *

@@ -1,6 +1,7 @@
 package com.egg.manager.controller.user;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -70,6 +71,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = String.class)
+    @OperLog(modelName="UserRoleController",action="查询用户角色列表",description = "查询用户角色列表")
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
@@ -92,6 +94,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = String.class)
+    @OperLog(modelName="UserRoleController",action="查询用户角色信息",description = "根据用户角色id查询用户角色信息")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, HttpServletResponse response,String roleId) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
@@ -109,6 +112,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = String.class)
+    @OperLog(modelName="UserRoleController",action="新增用户角色",description = "表单方式新增用户角色")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, HttpServletResponse response, UserRoleVo userRoleVo){
         MyCommonResult result = new MyCommonResult() ;
@@ -132,6 +136,7 @@ public class UserRoleController  extends BaseController{
     
 
     @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = String.class)
+    @OperLog(modelName="UserRoleController",action="批量删除用户角色",description = "根据用户角色id批量删除用户角色")
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -151,6 +156,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = String.class)
+    @OperLog(modelName="UserRoleController",action="删除用户角色",description = "根据用户角色id删除用户角色")
     @PostMapping(value = "/delOneUserRoleByIds")
     public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;

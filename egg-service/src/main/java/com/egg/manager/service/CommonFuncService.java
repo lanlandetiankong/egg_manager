@@ -2,8 +2,10 @@ package com.egg.manager.service;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
@@ -47,8 +49,11 @@ public interface CommonFuncService {
      */
     UserAccountToken gainUserAccountTokenBeanByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException;
 
-
-
+    /**
+     *  将取得请求的header转化为 RequestHeaderBean
+     * @param request
+     */
+    RequestHeaderBean gainRequestHeaderBeanByRequest(HttpServletRequest request) ;
     /**
      *  将取得请求的token转化为 UserAccount
      * @param request
@@ -69,4 +74,12 @@ public interface CommonFuncService {
      * @throws IllegalAccessException
      */
     UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken,boolean isRequired) throws InvocationTargetException, IllegalAccessException;
+
+
+    /**
+     * 取得springmvc 所有映射的请求 path路径
+     * @param request
+     * @return
+     */
+    List<String> gainMvcMappingUrl(HttpServletRequest request);
 }

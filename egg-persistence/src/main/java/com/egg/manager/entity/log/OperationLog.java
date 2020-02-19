@@ -32,59 +32,56 @@ public class OperationLog extends Model<OperationLog> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId(value = "fid", type = IdType.AUTO)
-    private Integer fid;
-    /**
-     * 日志描述
-     */
+    @TableId(value = "fid")
+    private String fid;
     @TableField("log_description")
-    private String logDescription;
-    /**
-     * 方法参数
-     */
+    private String logDescription;  //日志描述
     @TableField("action_args")
-    private String actionArgs;
-    /**
-     * 用户主键
-     */
+    private String actionArgs;  //方法参数->json
     @TableField("user_account_id")
-    private String userAccountId;
-    /**
-     * 类名称
-     */
+    private String userAccountId;       //登录的用户id
     @TableField("class_name")
-    private String className;
-    /**
-     * 方法名称
-     */
+    private String className;   //类名称
+
     @TableField("method_name")
-    private String methodName;
-    /**
-     * 模块名称
-     */
+    private String methodName;  //方法名称
     @TableField("model_name")
-    private String modelName;
-    /**
-     * 操作
-     */
-    private String action;
-    /**
-     * 是否成功 1:成功 2异常
-     */
+    private String modelName;   //模块名称
+    private String action;  //操作
+
     @TableField("is_success")
-    private Integer isSuccess;
-    /**
-     * 异常堆栈信息
-     */
-    private String message;
+    private Integer isSuccess;  //是否成功 1:成功 2异常
+    private String message; //异常堆栈信息
     @TableField(value="ip_addr")
     private String ipAddr ;
-    private String type;
-    @Version
-    private Integer version ;
+
+
+    @TableField("signature_long")
+    private String signatureLong ;   //请求的方法完整内容
+    @TableField("aspect_kind")
+    private String aspectKind ;
+    @TableField("aspect_notify_type")
+    private String aspectNotifyType ;   //aop通知方式
+    /**
+     * request
+     */
+    @TableField("token_bean")
+    private String tokenBean;   //发起请求的token ->json
+    private String headers ;    //发起请求的header ->json
+    @TableField("request_uri")
+    private String requestUri ;     //发起请求的uri
+    @TableField("request_url")
+    private String requestUrl ;     //发起请求的路径
+
+    /**
+     * method
+     */
+    @TableField("return_type_name")
+    private String returnTypeName;  //返回值类型
+    @TableField("declared_annotations")
+    private String declaredAnnotations ;    //定义的注解->json
+
+
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;
@@ -96,8 +93,19 @@ public class OperationLog extends Model<OperationLog> {
     @TableField(value = "last_modifyer")
     private String lastModifyer;
 
+
+
+
+
+
+
     @Override
     protected Serializable pkVal() {
         return this.fid;
+    }
+
+
+    public OperationLog(String fid) {
+        this.fid = fid;
     }
 }

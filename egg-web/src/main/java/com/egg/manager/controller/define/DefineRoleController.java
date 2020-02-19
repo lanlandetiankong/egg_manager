@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -67,6 +68,7 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = String.class)
+    @OperLog(modelName="DefineRoleController",action="查询角色定义信息列表",description = "查询角色定义信息列表")
     @PostMapping(value = "/getAllDefineRoles")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -89,6 +91,7 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = String.class)
+    @OperLog(modelName="DefineRoleController",action="查询角色定义信息",description = "根据角色定义id查询角色定义信息")
     @PostMapping(value = "/getDefineRoleById")
     public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -104,6 +107,7 @@ public class DefineRoleController extends BaseController {
     }
 
     @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = String.class)
+
     @PostMapping(value = "/getAllPermissionByRoleId")
     public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;

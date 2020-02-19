@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -9,6 +10,7 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefineMenuService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +50,8 @@ public class DefineMenuController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-
+    @ApiOperation(value = "查询路由菜单", notes = "查询路由菜单", response = MyCommonResult.class)
+    @OperLog(modelName="DefineMenuController",action="查询路由菜单",description = "查询路由菜单")
     @PostMapping("/get/all_menu")
     public MyCommonResult<DefineMenu> doGetAllMenu() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;

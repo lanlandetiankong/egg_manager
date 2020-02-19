@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
@@ -55,6 +56,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="查询权限定义信息列表",description = "查询权限定义信息列表")
     @PostMapping(value = "/getAllDefinePermissions")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
@@ -77,6 +79,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="查询权限定义信息",description = "根据权限定义id查询权限定义信息")
     @PostMapping(value = "/getDefinePermissionById")
     public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String definePermissionId) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
@@ -93,6 +96,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="新增权限定义",description = "表单方式新增权限定义")
     @PostMapping(value = "/doAddDefinePermission")
     public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
@@ -114,6 +118,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="更新权限定义",description = "表单方式更新权限定义")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
         MyCommonResult result = new MyCommonResult() ;
@@ -135,6 +140,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "批量删除权限定义", notes = "根据用户id批量删除权限定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="批量删除权限定义",description = "根据用户id批量删除权限定义")
     @PostMapping(value = "/batchDelDefinePermissionByIds")
     public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -154,6 +160,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "删除权限定义", notes = "根据权限id删除权限定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="删除权限定义",description = "根据权限id删除权限定义")
     @PostMapping(value = "/delOneDefinePermissionByIds")
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;

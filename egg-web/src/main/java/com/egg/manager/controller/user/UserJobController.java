@@ -1,5 +1,6 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -57,6 +58,7 @@ public class UserJobController extends BaseController{
 
 
     @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = String.class)
+    @OperLog(modelName="UserJobController",action="查询用户职务列表",description = "查询用户职务列表")
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
@@ -78,6 +80,7 @@ public class UserJobController extends BaseController{
 
 
     @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = String.class)
+    @OperLog(modelName="UserJobController",action="查询用户职务信息",description = "根据用户职务id查询用户职务信息")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, HttpServletResponse response,String jobId) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;

@@ -67,5 +67,17 @@
 
     </select>
 
+    <select id="findAllPermissionByUserAcccountId"  resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Dp_Column_List" />
+        FROM em_define_permission dp
+        left JOIN em_role_permission rp on rp.define_permission_id = dp.fid
+        left JOIN em_user_role ur on ur.define_role_id = rp.define_role_id
+        WHERE
+            ur.user_account_id = #{userAccountId}
+            and  dp.state = 1
+            and  rp.state = 1
+            and  ur.state = 1
+    </select>
 
 </mapper>

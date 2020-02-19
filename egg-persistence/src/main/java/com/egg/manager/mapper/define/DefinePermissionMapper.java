@@ -38,4 +38,12 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
      * @return
      */
     List<String> findAllPermissionIdByRoleId(@Param("roleId") String roleId,@Param("filterEnable")boolean filterEnable) ;
+
+
+    /**
+     * 查询 用户拥有的所有权限
+     * @param userAccountId
+     * @return
+     */
+    List<DefinePermission> findAllPermissionByUserAcccountId(@Param("userAccountId")String userAccountId) ;
 }

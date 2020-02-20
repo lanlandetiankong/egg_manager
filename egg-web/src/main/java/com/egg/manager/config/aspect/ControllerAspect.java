@@ -11,6 +11,7 @@ import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.entity.log.OperationLog;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.log.OperationLogMapper;
@@ -91,11 +92,19 @@ public class ControllerAspect {
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(operationLog,joinPoint,request) ;
-                //请求成功并返回
-                operationLog.setIsSuccess(SwitchStateEnum.Open.getValue());
+
+                boolean isSuccess = true ;
                 if(result != null){
+                    if(result instanceof MyCommonResult){   //如果是封装的结果
+                        MyCommonResult commonResult = (MyCommonResult) result ;
+                        if(commonResult.isHasError() == true){
+                            isSuccess = false ;
+                            operationLog.setException(commonResult.getErrorMsg());
+                        }
+                    }
                     operationLog.setResult(JSON.toJSONString(result));
                 }
+                operationLog.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
                 operationLogMapper.insert(operationLog);
             }
         }

@@ -73,21 +73,71 @@ public class ControllerAspect {
 
     @After(value = "aspect()")
     public void afterController(JoinPoint joinPoint) throws Throwable {
-        System.out.println("后。。。afterController");
+        //System.out.println("后。。。afterController");
     }
 
 
     @AfterReturning(value = "aspect()",returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint,Object result) throws Throwable {
-        System.out.println("返回。。。afterControllerReturn");
+        Method method = controllerAspectService.gainReqMethod(joinPoint);
+        //是否需要记录日志
+        if(method.isAnnotationPresent(OperLog.class)) {
+            OperLog operLog = method.getAnnotation(OperLog.class);
+            if(operLog.flag() == true){
+                OperationLog operationLog = new OperationLog();
+                //当前log的通知方式是 Before
+                operationLog.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue()) ;
+
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                //设置一些必要值到log
+                controllerAspectService.dealSetValToOperationLog(operationLog,joinPoint,request) ;
+                //请求成功并返回
+                operationLog.setIsSuccess(SwitchStateEnum.Open.getValue());
+                if(result != null){
+                    operationLog.setResult(JSON.toJSONString(result));
+                }
+                operationLogMapper.insert(operationLog);
+            }
+        }
+        //System.out.println("返回。。。afterControllerReturn");
     }
 
 
 
     @AfterThrowing(value = "aspect()",throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
-        System.out.println("异常。。。afterControllerThrowing");
+        Method method = controllerAspectService.gainReqMethod(joinPoint);
+        //是否需要记录日志
+        if(method.isAnnotationPresent(OperLog.class)) {
+            OperLog operLog = method.getAnnotation(OperLog.class);
+            if(operLog.flag() == true){
+                OperationLog operationLog = new OperationLog();
+                //当前log的通知方式是 Before
+                operationLog.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue()) ;
+
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                //设置一些必要值到log
+                controllerAspectService.dealSetValToOperationLog(operationLog,joinPoint,request) ;
+                //请求失败
+                operationLog.setIsSuccess(SwitchStateEnum.Close.getValue());
+                if(exception != null){
+                    operationLog.setException(JSON.toJSONString(exception));
+                }
+                operationLogMapper.insert(operationLog);
+            }
+        }
+        //System.out.println("异常。。。afterControllerThrowing");
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public Object validationPoint(ProceedingJoinPoint pjp) throws Throwable {
@@ -103,8 +153,6 @@ public class ControllerAspect {
         }
         return pjp.proceed(pjp.getArgs());
     }
-
-
 
     /**
      * 根据方法名取得对应 Method

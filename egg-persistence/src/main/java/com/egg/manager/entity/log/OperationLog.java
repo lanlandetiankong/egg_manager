@@ -34,26 +34,35 @@ public class OperationLog extends Model<OperationLog> {
 
     @TableId(value = "fid")
     private String fid;
-    @TableField("log_description")
-    private String logDescription;  //日志描述
-    @TableField("action_args")
-    private String actionArgs;  //方法参数->json
+
     @TableField("user_account_id")
     private String userAccountId;       //登录的用户id
     @TableField("class_name")
     private String className;   //类名称
-
     @TableField("method_name")
     private String methodName;  //方法名称
+
+    /**
+     * @OperLog
+     */
+    private String action;  //操作
     @TableField("model_name")
     private String modelName;   //模块名称
-    private String action;  //操作
+    @TableField("log_description")
+    private String logDescription;  //日志描述
+
+    @TableField("action_args")
+    private String actionArgs;  //方法参数->json
+
 
     @TableField("is_success")
     private Integer isSuccess;  //是否成功 1:成功 2异常
     private String message; //异常堆栈信息
     @TableField(value="ip_addr")
     private String ipAddr ;
+
+    private String result ;     //返回结果-json
+    private String exception ;     //返回结果-json
 
 
     @TableField("signature_long")

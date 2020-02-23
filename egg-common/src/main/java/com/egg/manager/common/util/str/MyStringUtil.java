@@ -26,8 +26,8 @@ public class MyStringUtil {
         pinyinOutputFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
         pinyinOutputFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         String[] pinyinArray = null;
-        for(char ch : chinese.toCharArray()){
-            pinyinArray = PinyinHelper.toHanyuPinyinStringArray(ch,pinyinOutputFormat);
+        for (char ch : chinese.toCharArray()) {
+            pinyinArray = PinyinHelper.toHanyuPinyinStringArray(ch, pinyinOutputFormat);
             pinyin += ComUtil.isEmpty(pinyinArray) ? ch : pinyinArray[0];
         }
         return pinyin;
@@ -35,18 +35,19 @@ public class MyStringUtil {
 
     /**
      * 获取方法中指定注解的value值返回
-     * @param method 方法名
+     *
+     * @param method               方法名
      * @param validationParamValue 注解的类名
      * @return
      */
     public static String getMethodAnnotationOne(Method method, String validationParamValue) {
-        String retParam =null;
+        String retParam = null;
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
         for (int i = 0; i < parameterAnnotations.length; i++) {
             for (int j = 0; j < parameterAnnotations[i].length; j++) {
                 String str = parameterAnnotations[i][j].toString();
-                if(str.indexOf(validationParamValue) >0){
-                    retParam = str.substring(str.indexOf("=")+1,str.indexOf(")"));
+                if (str.indexOf(validationParamValue) > 0) {
+                    retParam = str.substring(str.indexOf("=") + 1, str.indexOf(")"));
                 }
             }
         }
@@ -57,20 +58,19 @@ public class MyStringUtil {
         String pattern = "([h]|[H])([t]|[T])([t]|[T])([p]|[P])([s]|[S]){0,1}://([^:/]+)(:([0-9]+))?(/\\S*)*";
         return url.matches(pattern);
     }
+
     /**
      * 将utf-8编码的汉字转为中文
-     * @author zhaoqiang
+     *
      * @param str
      * @return
+     * @author zhaoqiang
      */
-    public static String utf8Decoding(String str){
+    public static String utf8Decoding(String str) {
         String result = str;
-        try
-        {
+        try {
             result = URLDecoder.decode(str, "UTF-8");
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return result;
@@ -91,8 +91,10 @@ public class MyStringUtil {
         }
         return flag;
     }
+
     /**
      * 验证手机号码，11位数字，1开通，第二位数必须是3456789这些数字之一 *
+     *
      * @param mobileNumber
      * @return
      */
@@ -158,5 +160,25 @@ public class MyStringUtil {
             }
         }
         return sb.toString();
+    }
+
+
+    public static String htmlDomToText(String input, Integer length) {
+        if (input == null || input.trim().equals("")) {
+            return "";
+        }
+        // 去掉所有html元素,
+        String str = input.replaceAll("\\&[a-zA-Z]{1,10};", "").replaceAll(
+                "<[^>]*>", "");
+        str = str.replaceAll("[(/>)<]", "");
+        length = length != null ? length : 50 ;
+        int len = str.length();
+        if (len <= length) {
+            return str;
+        } else {
+            str = str.substring(0, length);
+            str += "......";
+        }
+        return str;
     }
 }

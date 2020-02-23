@@ -30,6 +30,10 @@ public class AntdvSortBean {
         return new AntdvSortBean("create_time",ORDER_DESC) ;
     }
 
+    public static AntdvSortBean gainOrderSortBean(boolean isAsc){       //排序字段
+        return new AntdvSortBean("order",isAsc ? ORDER_ASC :ORDER_DESC) ;
+    }
+
     public boolean getOrderIsAsc(){
         return this.ORDER_ASC.equalsIgnoreCase(this.order);
     }

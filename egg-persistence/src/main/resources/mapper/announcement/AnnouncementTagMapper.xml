@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.mapper.announcement.AnnouncementTagMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.entity.announcement.AnnouncementTag">
+        <id column="fid" property="fid" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="ordering" property="ordering" />
+
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid, name, description, ordering,
+        state,create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+    </sql>
+
+    <update id="batchFakeDelByIds" >
+        UPDATE em_announcement_tag
+        SET state = -1
+        <if test="loginUser != null">
+            ,last_modifyer = #{loginUser.fid}
+        </if>
+        WHERE fid IN
+        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

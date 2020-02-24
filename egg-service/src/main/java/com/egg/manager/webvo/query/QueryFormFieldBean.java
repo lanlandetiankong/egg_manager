@@ -25,6 +25,14 @@ public class QueryFormFieldBean {
         return bean ;
     }
 
+    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName,Object value){
+        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+        bean.setFieldName(fieldName);
+        bean.setValue(value);
+        bean.setMatching("notEquals");
+        return bean ;
+    }
+
     public static QueryFormFieldBean dealGetLikeBean(String fieldName,Object value){
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);

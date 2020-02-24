@@ -54,6 +54,8 @@ public class CommonFuncServiceImpl implements CommonFuncService {
                     }   else if("like".equals(queryFormFieldBean.getMatching())){
                         String fieldValueStr = String.valueOf(fieldValue) ;
                         entityWrapper.like(queryFormFieldBean.getFieldName(),fieldValueStr) ;
+                    }   else if("notEquals".equals(queryFormFieldBean.getMatching())){
+                        entityWrapper.ne(queryFormFieldBean.getFieldName(),fieldValue) ;
                     }
                 }
             }

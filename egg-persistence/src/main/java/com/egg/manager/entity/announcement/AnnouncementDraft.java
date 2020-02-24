@@ -23,8 +23,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TableName("em_announcement_traft")
-public class AnnouncementTraft extends Model<AnnouncementTraft> {
+@TableName("em_announcement_draft")
+public class AnnouncementDraft extends Model<AnnouncementDraft> {
 
     @TableId
     private String fid ;
@@ -38,6 +38,8 @@ public class AnnouncementTraft extends Model<AnnouncementTraft> {
     @TableField("tag_ids")
     private String tagIds ; //公告标签 集合
     private String accessory ;      //附件
+    @TableField("is_published")
+    private Integer isPublished ;      //是否已提交
 
     private Integer state ;
     private String remark;

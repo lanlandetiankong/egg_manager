@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
@@ -29,7 +30,12 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      */
     Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
 
-
+    /**
+     * 更新公告草稿
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
     /**
      * 分页查询 公告草稿
      * @param result
@@ -67,5 +73,8 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      * @param draftId 要发布的公告草稿id
      * @throws Exception
      */
-    Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser) throws Exception ;
+    Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser,boolean insertFlag) throws Exception ;
+
+
+    Announcement draftTranslateToAnnouncement(AnnouncementDraft announcementDraft, UserAccount loginUser);
 }

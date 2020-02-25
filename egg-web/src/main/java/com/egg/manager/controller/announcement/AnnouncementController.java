@@ -13,6 +13,7 @@ import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
@@ -80,6 +81,27 @@ public class AnnouncementController extends BaseController {
         return  result;
     }
 
+
+    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = String.class)
+    @OperLog(modelName="AnnouncementController",action="公告草稿发布",description = "表单方式发布公告草稿")
+    @PostMapping(value = "/addAnnouncementFromDraft")
+    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, HttpServletResponse response,AnnouncementDraftVo announcementDraftVo){
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+        Integer addCount = 0 ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            if(announcementDraftVo == null) {
+                throw new Exception("未接收到有效的公告草稿！");
+            }   else {
+                addCount = announcementService.dealAddAnnouncementFromDraft(announcementDraftVo,loginUser) ;
+            }
+            result.setCount(addCount);
+            dealCommonSuccessCatch(result,"公告草稿发布:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 
     @ApiOperation(value = "查询公告信息列表", notes = "查询公告信息列表", response = String.class)
     @OperLog(modelName="AnnouncementController",action="查询公告信息列表",description = "查询公告信息列表")

@@ -8,14 +8,17 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.entity.announcement.Announcement;
+import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.service.CommonFuncService;
+import com.egg.manager.service.announcement.AnnouncementDraftService;
 import com.egg.manager.service.announcement.AnnouncementService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
+import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
@@ -47,6 +50,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     private CommonFuncService commonFuncService ;
     @Autowired
     private AnnouncementTagService announcementTagService ;
+    @Autowired
+    private AnnouncementDraftService announcementDraftService ;
 
     /**
      * 新增公告
@@ -68,6 +73,34 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         Integer addCount = announcementMapper.insert(announcement) ;
         return addCount ;
     }
+
+
+    /**
+     * 公告草稿发布
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    @Override
+    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        //公告草稿id
+        String draftId = announcementDraftVo.getFid();
+        //发布公告
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftVo.transferVoToEntity(announcementDraftVo),loginUser);
+        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
+        announcement.setState(BaseStateEnum.ENABLED.getValue());
+        announcement.setCreateTime(now);
+        announcement.setUpdateTime(now);
+        if(loginUser != null){
+            announcement.setCreateUser(loginUser.getFid());
+            announcement.setLastModifyer(loginUser.getFid());
+        }
+        //修改 公告草稿 状态
+        announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,false);
+        Integer addCount = announcementMapper.insert(announcement) ;
+        return addCount ;
+    }
+
 
     /**
      * 分页查询 公告

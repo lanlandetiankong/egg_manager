@@ -1,5 +1,6 @@
 package com.egg.manager.serviceimpl.announcement;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -66,6 +67,35 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
             announcementDraft.setLastModifyer(loginUser.getFid());
         }
         Integer addCount = announcementDraftMapper.insert(announcementDraft) ;
+        return addCount ;
+    }
+
+    /**
+     * 更新公告草稿
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    @Override
+    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
+        announcementDraft.setTitle(announcementDraftVo.getTitle());
+        announcementDraft.setKeyWord(announcementDraftVo.getKeyWord());
+        announcementDraft.setPublishDepartment(announcementDraftVo.getPublishDepartment());
+        announcementDraft.setContent(announcementDraftVo.getContent());
+        List<String> tagIds = announcementDraftVo.getTagIds();
+        if(tagIds != null && tagIds.size() > 0){
+            announcementDraft.setTagIds(JSON.toJSONString(tagIds));
+        }   else {
+            announcementDraft.setTagIds("");
+        }
+        announcementDraft.setAccessory(announcementDraftVo.getAccessory());
+
+        announcementDraft.setUpdateTime(now);
+        if(loginUser != null){
+            announcementDraft.setLastModifyer(loginUser.getFid());
+        }
+        Integer addCount = announcementDraftMapper.updateById(announcementDraft) ;
         return addCount ;
     }
 
@@ -146,7 +176,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
             List<String> delIdList = Arrays.asList(draftIds) ;
             //批量伪删除
             for(String draftId : draftIds){
-                Integer addCount = this.dealPublishAnnouncementDraft(draftId,loginUser) ;
+                Integer addCount = this.dealPublishAnnouncementDraft(draftId,loginUser,true) ;
                 if(addCount != null){
                     delCount += addCount ;
                 }
@@ -155,16 +185,17 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         return delCount ;
     }
 
+
     /**
      * 公告草稿-发布
      * @param draftId 要发布的公告草稿id
      * @throws Exception
      */
     @Override
-    public Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser) throws Exception{
+    public Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser,boolean insertFlag) throws Exception{
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
         Announcement announcement = this.draftTranslateToAnnouncement(announcementDraft,loginUser);
-        if(announcement != null){       //发布
+        if(announcement != null && insertFlag == true){       //发布
             announcementMapper.insert(announcement);
         }
         announcementDraft.setState(BaseStateEnum.DELETE.getValue());
@@ -178,7 +209,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     }
 
 
-
+    @Override
     public Announcement draftTranslateToAnnouncement(AnnouncementDraft announcementDraft,UserAccount loginUser){
         Announcement announcement = null;
         if(announcementDraft != null){

@@ -60,6 +60,7 @@ public class AnnouncementDraftVo {
         announcementDraft.setTitle(announcementDraftVo.getTitle());
         announcementDraft.setKeyWord(announcementDraftVo.getKeyWord());
         announcementDraft.setPublishDepartment(announcementDraftVo.getPublishDepartment());
+        announcementDraft.setIsPublished(announcementDraftVo.getIsPublished());
         announcementDraft.setContent(announcementDraftVo.getContent());
         List<String> tagIds = announcementDraftVo.getTagIds();
         if(tagIds != null && tagIds.size() > 0){

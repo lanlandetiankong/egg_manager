@@ -7,13 +7,20 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.announcement.AnnouncementDraft;
+import com.egg.manager.entity.announcement.AnnouncementTag;
+import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementDraftService;
+import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
+import com.egg.manager.vo.announcement.AnnouncementTagVo;
+import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -43,9 +51,13 @@ public class AnnouncementDraftController extends BaseController{
     @Autowired
     private UserAccountMapper userAccountMapper ;
     @Autowired
+    private AnnouncementDraftMapper announcementDraftMapper ;
+    @Autowired
     private CommonFuncService commonFuncService ;
     @Autowired
     private AnnouncementDraftService announcementDraftService;
+    @Autowired
+    private AnnouncementTagService announcementTagService;
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
@@ -83,6 +95,24 @@ public class AnnouncementDraftController extends BaseController{
     }
 
 
+    @ApiOperation(value = "查询公告草稿信息", notes = "根据id查询公告草稿信息", response = String.class)
+    @OperLog(modelName="AnnouncementDraftController",action="查询公告草稿信息",description = "根据id查询公告草稿信息")
+    @PostMapping(value = "/getAnnouncementDraftById")
+    public MyCommonResult<AnnouncementDraftVo> doGetAnnouncementDraftById(HttpServletRequest request, HttpServletResponse response, String draftId) {
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
+            //取得 公告标签 map
+            Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+            result.setBean(AnnouncementDraftVo.transferEntityToVo(announcementDraft,announcementTagMap));
+            dealCommonSuccessCatch(result,"查询公告草稿信息:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
     @ApiOperation(value = "新增公告草稿", notes = "表单方式新增公告草稿", response = String.class)
     @OperLog(modelName="AnnouncementDraftController",action="新增公告草稿",description = "表单方式新增公告草稿")
     @PostMapping(value = "/addAnnouncementDraft")
@@ -99,6 +129,28 @@ public class AnnouncementDraftController extends BaseController{
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增公告草稿:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+    @ApiOperation(value = "更新公告草稿", notes = "表单方式更新公告草稿", response = String.class)
+    @OperLog(modelName="AnnouncementDraftController",action="更新公告草稿",description = "表单方式更新公告草稿")
+    @PostMapping(value = "/updateAnnouncementDraft")
+    public MyCommonResult<AnnouncementDraftVo> doUpdateAnnouncementDraft(HttpServletRequest request, HttpServletResponse response, AnnouncementDraftVo announcementDraftVo){
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
+        Integer updateCount = 0 ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            if(announcementDraftVo == null) {
+                throw new Exception("未接收到有效的公告草稿！");
+            }   else {
+                announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
+                updateCount = announcementDraftService.dealUpdateAnnouncementDraft(announcementDraftVo,loginUser) ;
+            }
+            result.setCount(updateCount);
+            dealCommonSuccessCatch(result,"更新公告草稿:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }
@@ -179,7 +231,7 @@ public class AnnouncementDraftController extends BaseController{
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(draftId)){
-                Integer publishCount = announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser);
+                Integer publishCount = announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,true);
                 result.setCount(publishCount);
                 dealCommonSuccessCatch(result,"发布公告草稿:"+actionSuccessMsg);
             }

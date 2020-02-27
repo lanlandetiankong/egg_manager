@@ -22,5 +22,7 @@ public class AntdvPaginationBean {
     private int total ;
 
 
-
+    public static AntdvPaginationBean gainLimitPaginationBean(Integer pageSize){
+        return new AntdvPaginationBean(1,pageSize,0);
+    }
 }

@@ -7,15 +7,17 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.announcement.Announcement;
+import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementService;
+import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
-import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -24,12 +26,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * \* note:
@@ -45,11 +47,15 @@ public class AnnouncementController extends BaseController {
 
 
     @Autowired
+    private AnnouncementMapper announcementMapper ;
+    @Autowired
     private UserAccountService userAccountService ;
     @Autowired
     private CommonFuncService commonFuncService ;
     @Autowired
     private AnnouncementService announcementService ;
+    @Autowired
+    private AnnouncementTagService announcementTagService ;
     @Autowired
     private RedisHelper redisHelper ;
 
@@ -130,6 +136,53 @@ public class AnnouncementController extends BaseController {
 
 
 
+    @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class)
+    @OperLog(modelName="AnnouncementController",action="查询公告信息部分列表",description = "查询公告信息部分列表")
+    @PostMapping(value = "/getSomeAnnouncements")
+    public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, HttpServletResponse response,Integer limitSize, Boolean onlySelf) {
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+        try{
+            //这些查询条件暂时用不到
+            String queryObj = null,paginationObj = null,sortObj = null ;
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            //解析 搜索条件
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            if(Boolean.TRUE.equals(onlySelf)){  //只查询自己发布的公告
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user",loginUser.getFid() )) ;
+            }
+            //取得 分页配置
+            AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
+            announcementService.dealGetAnnouncementPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
+            dealCommonSuccessCatch(result,"查询公告信息部分列表:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+
+    @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = String.class)
+    @OperLog(modelName="AnnouncementController",action="查询公告信息",description = "根据id查询公告信息")
+    @PostMapping(value = "/getAnnouncementById")
+    public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, HttpServletResponse response, String announcementId) {
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            Announcement announcement = announcementMapper.selectById(announcementId);
+            //取得 公告标签 map
+            Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+            result.setBean(AnnouncementVo.transferEntityToVo(announcement,announcementTagMap));
+            dealCommonSuccessCatch(result,"查询公告信息:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 
     @ApiOperation(value = "批量删除公告", notes = "根据用户id批量删除公告", response = String.class)
     @OperLog(modelName="AnnouncementController",action="批量删除公告",description = "根据用户id批量删除公告")

@@ -1,13 +1,13 @@
-package com.egg.manager.controller.define;
+package com.egg.manager.controller.module;
 
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.tree.CommonTree;
-import com.egg.manager.entity.define.DefineMenu;
+import com.egg.manager.entity.module.DefineMenu;
 import com.egg.manager.mapper.user.UserAccountMapper;
-import com.egg.manager.service.define.DefineMenuService;
+import com.egg.manager.service.module.DefineMenuService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ import java.util.List;
  * \
  */
 @RestController
-@RequestMapping("/define/define_menu")
+@RequestMapping("/module/define_menu")
 public class DefineMenuController {
     @Autowired
     private DefineMenuService defineMenuService ;

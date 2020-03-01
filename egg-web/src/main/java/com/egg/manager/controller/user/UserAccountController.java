@@ -1,7 +1,6 @@
 package com.egg.manager.controller.user;
 
 import com.egg.manager.annotation.log.OperLog;
-import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;

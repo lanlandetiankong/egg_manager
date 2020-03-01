@@ -5,15 +5,12 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.dto.login.LoginAccountDTO;
-import com.egg.manager.entity.define.DefineGroup;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * \* note:

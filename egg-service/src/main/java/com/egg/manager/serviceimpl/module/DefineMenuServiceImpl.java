@@ -1,9 +1,9 @@
-package com.egg.manager.serviceimpl.define;
+package com.egg.manager.serviceimpl.module;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.entity.define.DefineMenu;
-import com.egg.manager.mapper.define.DefineMenuMapper;
-import com.egg.manager.service.define.DefineMenuService;
+import com.egg.manager.entity.module.DefineMenu;
+import com.egg.manager.mapper.module.DefineMenuMapper;
+import com.egg.manager.service.module.DefineMenuService;
 import org.springframework.stereotype.Service;
 
 

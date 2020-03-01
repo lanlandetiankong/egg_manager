@@ -9,7 +9,6 @@ import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
-import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.service.redis.RedisHelper;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 /**
  * \* note:

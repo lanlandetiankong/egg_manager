@@ -1,4 +1,4 @@
-package com.egg.manager.entity.define;
+package com.egg.manager.entity.module;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.annotations.Version;
 import lombok.*;
-import lombok.experimental.FieldNameConstants;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,32 +16,24 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TableName("em_define_menu")
-public class DefineMenu extends Model<DefineMenu> {
+@TableName("em_define_module")
+public class DefineModule extends Model<DefineModule> {
     @TableId
     private String fid ;
 
-    @TableField(value="define_module_id")
-    private String defineModuleId ;
-    @TableField(value="parent_id")
-    private String parentId ;
-    @TableField(value="menu_name")
-    private String menuName ;
-    private String type;
-    @TableField(value="icon_name")
-    private String iconName ;
-    @TableField(value="router_url")
-    private String routerUrl ;
-    private String label ;
-    private Integer level ;
-    @Version
-    private Integer version ;
+    private String name ;
+    private String code ;
+    private String icon ;
+    private String style ;
+    private Integer type;
+
+
     private Integer state ;
+    private String remark ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user")
     private String createUser ;
     @TableField(value = "last_modifyer")

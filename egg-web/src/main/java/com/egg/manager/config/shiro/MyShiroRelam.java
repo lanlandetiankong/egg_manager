@@ -4,7 +4,7 @@ import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.spring.SpringContextBeanService;
-import com.egg.manager.service.define.DefineMenuService;
+import com.egg.manager.service.module.DefineMenuService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.service.user.UserRoleService;

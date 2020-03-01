@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.mapper.organization.DefineTenantMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.entity.organization.DefineTenant">
+        <id column="fid" property="fid" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="db_code" property="dbCode" />
+        <result column="state" property="state" />
+        <result column="version" property="version" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="last_modifyer" property="lastModifyer" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+    </sql>
+    <sql id="Base_Dp_Column_List">
+        dp.fid, dp.name, dp.code, dp.type, dp.state, dp.version, dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user AS createUser,dp.last_modifyer AS lastModifyer,dp.remark
+    </sql>
+
+
+    <update id="batchFakeDelByIds" >
+        UPDATE em_define_tenant
+        SET state = -1
+        <if test="loginUser != null">
+            ,last_modifyer = #{loginUser.fid}
+        </if>
+        WHERE fid IN
+        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+
+
+
+</mapper>

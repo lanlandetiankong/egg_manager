@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CommonTree {
+public class CommonMenuTree {
     private String id  ;
     private String key  ;
     private String pid ;
@@ -29,7 +29,7 @@ public class CommonTree {
     private String iconName ;
     private boolean  selected ;
     private String componentsName ;
-    private List<CommonTree> children;
+    private List<CommonMenuTree> children;
 
 
 

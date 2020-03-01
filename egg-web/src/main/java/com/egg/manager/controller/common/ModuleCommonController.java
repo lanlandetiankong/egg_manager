@@ -1,12 +1,11 @@
 package com.egg.manager.controller.common;
 
 import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
-import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
-import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.vo.module.DefineMenuVo;
 import com.egg.manager.vo.module.DefineModuleVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +39,26 @@ public class ModuleCommonController extends BaseController{
             List<FrontSelectBean> beanList = new ArrayList<>();
             if(enums != null && enums.length > 0){
                 for (DefineModuleTypeEnum enumObj : enums){
+                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+                }
+            }
+            result.setEnumList(beanList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = String.class)
+    @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
+    public MyCommonResult<DefineMenuVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
+        try{
+            DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
+            List<FrontSelectBean> beanList = new ArrayList<>();
+            if(enums != null && enums.length > 0){
+                for (DefineMenuUrlJumpTypeEnum enumObj : enums){
                     beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
                 }
             }

@@ -21,17 +21,18 @@ public class DefineMenu extends Model<DefineMenu> {
     @TableId
     private String fid ;
 
-    @TableField(value="define_module_id")
-    private String defineModuleId ;
     @TableField(value="parent_id")
     private String parentId ;
     @TableField(value="menu_name")
     private String menuName ;
-    private String type;
+    @TableField(value="url_jump_type")
+    private Integer urlJumpType;
     @TableField(value="icon_name")
     private String iconName ;
     @TableField(value="router_url")
     private String routerUrl ;
+    @TableField(value="href_url")
+    private String hrefUrl ;
     private String label ;
     private Integer level ;
 

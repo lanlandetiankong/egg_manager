@@ -1,5 +1,7 @@
 package com.egg.manager.vo.module;
 
+import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.entity.module.DefineMenu;
 import lombok.*;
 
@@ -15,12 +17,13 @@ import java.util.List;
 @ToString
 public class DefineMenuVo {
     private String fid ;
-    private String defineModuleId ;
     private String parentId ;
     private String menuName ;
-    private String type;
     private String iconName ;
     private String routerUrl ;
+    private String hrefUrl ;
+    private Integer urlJumpType;
+    private String urlJumpTypeStr;
     private String label ;
     private Integer level ;
     private Integer state ;
@@ -39,13 +42,14 @@ public class DefineMenuVo {
         }
         DefineMenu defineMenu = new DefineMenu() ;
         defineMenu.setFid(defineMenuVo.getFid());
-        defineMenu.setDefineModuleId(defineMenuVo.getDefineModuleId());
         defineMenu.setParentId(defineMenuVo.getParentId());
         defineMenu.setMenuName(defineMenuVo.getMenuName());
-        defineMenu.setType(defineMenuVo.getType());
+        defineMenu.setUrlJumpType(defineMenuVo.getUrlJumpType());
         defineMenu.setIconName(defineMenuVo.getIconName());
         defineMenu.setRouterUrl(defineMenuVo.getRouterUrl());
+        defineMenu.setHrefUrl(defineMenuVo.getHrefUrl());
         defineMenu.setLabel(defineMenuVo.getLabel());
+        defineMenu.setLevel(defineMenuVo.getLevel());
 
         defineMenu.setState(defineMenuVo.getState());
         defineMenu.setCreateTime(defineMenuVo.getCreateTime());
@@ -62,13 +66,22 @@ public class DefineMenuVo {
         }
         DefineMenuVo defineMenuVo = new DefineMenuVo() ;
         defineMenuVo.setFid(defineMenu.getFid());
-        defineMenuVo.setDefineModuleId(defineMenu.getDefineModuleId());
         defineMenuVo.setParentId(defineMenu.getParentId());
         defineMenuVo.setMenuName(defineMenu.getMenuName());
-        defineMenuVo.setType(defineMenu.getType());
         defineMenuVo.setIconName(defineMenu.getIconName());
         defineMenuVo.setRouterUrl(defineMenu.getRouterUrl());
+        defineMenuVo.setHrefUrl(defineMenu.getHrefUrl());
+        defineMenuVo.setUrlJumpType(defineMenu.getUrlJumpType());
+        if(defineMenu.getUrlJumpType() != null){
+            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(defineMenu.getUrlJumpType());
+            if(typeEnum != null){
+                defineMenuVo.setUrlJumpTypeStr(typeEnum.getLabel());
+            }   else {
+                defineMenuVo.setUrlJumpTypeStr("");
+            }
+        }
         defineMenuVo.setLabel(defineMenu.getLabel());
+        defineMenuVo.setLevel(defineMenu.getLevel());
 
         defineMenuVo.setState(defineMenu.getState());
         defineMenuVo.setCreateTime(defineMenu.getCreateTime());

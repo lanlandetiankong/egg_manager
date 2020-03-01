@@ -5,10 +5,16 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.entity.module.DefineMenu">
         <id column="fid" property="fid" />
-        <result column="define_module_id" property="defineModuleId" />
         <result column="parent_id" property="parentId" />
         <result column="menu_name" property="menuName" />
-        <result column="type" property="type" />
+        <result column="url_jump_type" property="urlJumpType" />
+        <result column="icon_name" property="iconName" />
+        <result column="router_url" property="routerUrl" />
+        <result column="href_url" property="hrefUrl" />
+        <result column="label" property="label" />
+        <result column="level" property="level" />
+
+
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -18,7 +24,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, define_module_id AS defineModuleId,parent_id AS parentId,menu_name AS menuName, type, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid,parent_id AS parentId,menu_name AS menuName, url_jump_type,icon_name,router_url,href_url,label,level,
+        state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 

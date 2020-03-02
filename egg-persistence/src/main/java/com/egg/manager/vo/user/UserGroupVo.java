@@ -18,7 +18,6 @@ public class UserGroupVo {
     private String defineGroupId ;
     private String userAccountId ;
     private String type;
-    private Integer version ;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;

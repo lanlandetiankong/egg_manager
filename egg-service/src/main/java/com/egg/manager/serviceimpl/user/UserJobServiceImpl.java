@@ -96,7 +96,6 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         Date now = new Date() ;
         UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
         userJob.setFid(MyUUIDUtil.renderSimpleUUID());
-        userJob.setVersion(commonFuncService.defaultVersion);
         userJob.setState(BaseStateEnum.ENABLED.getValue());
         userJob.setCreateTime(now);
         userJob.setUpdateTime(now);

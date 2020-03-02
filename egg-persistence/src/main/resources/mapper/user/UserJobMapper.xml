@@ -8,7 +8,6 @@
         <result column="user_account_id" property="userAccountId" />
         <result column="define_job_id" property="defineJobId" />
         <result column="state" property="state" />
-        <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
@@ -18,10 +17,10 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_account_id AS userAccountId, define_job_id AS defineJobId,state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+        fid, user_account_id AS userAccountId, define_job_id AS defineJobId,state,create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
     <sql id="Base_Insert_Column_List">
-        fid, user_account_id, define_job_id, state, version, create_time, update_time,create_user,last_modifyer,remark
+        fid, user_account_id, define_job_id, state, create_time, update_time,create_user,last_modifyer,remark
     </sql>
 
     <sql id="Base_Insert_Item_Column_List">
@@ -29,7 +28,6 @@
         #{item.userAccountId},
         #{item.defineJobId},
         #{item.state},
-        #{item.version},
         #{item.createTime},
         #{item.updateTime},
         #{item.createUser},

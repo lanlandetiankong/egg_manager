@@ -25,8 +25,6 @@ public class DefineRole extends Model<DefineRole> {
     private String name ;
     private String code ;
     private Integer type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;

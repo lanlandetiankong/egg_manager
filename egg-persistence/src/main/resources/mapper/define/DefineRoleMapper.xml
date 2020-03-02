@@ -19,10 +19,10 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+        fid, name, code, type, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
     <sql id="Base_Dr_Column_List">
-        dr.fid, dr.name, dr.code, dr.type, dr.state, dr.version, dr.create_time AS createTime, dr.update_time AS updateTime,dr.create_user AS createUser,dr.last_modifyer AS lastModifyer,dr.remark
+        dr.fid, dr.name, dr.code, dr.type, dr.state, dr.create_time AS createTime, dr.update_time AS updateTime,dr.create_user AS createUser,dr.last_modifyer AS lastModifyer,dr.remark
     </sql>
 
 

@@ -29,7 +29,6 @@ public class UserAccountVo {
     private Integer userType ;
     private Integer userTypeNum;
     private String userTypeStr;
-    private Integer version ;
     private Integer state ;
     private Integer locked ;
     private Date createTime ;
@@ -57,7 +56,6 @@ public class UserAccountVo {
         userAccount.setSex(userAccountVo.getSex());
         userAccount.setUserType(userAccountVo.getUserType());
         userAccount.setUserTypeNum(userAccountVo.getUserTypeNum());
-        userAccount.setVersion(userAccountVo.getVersion());
         userAccount.setState(userAccountVo.getState());
         userAccount.setLocked(userAccountVo.getLocked());
         userAccount.setCreateTime(userAccountVo.getCreateTime());
@@ -87,7 +85,6 @@ public class UserAccountVo {
         if(userAccountBaseTypeEnums != null){
             userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
         }
-        userAccountVo.setVersion(userAccount.getVersion());
         userAccountVo.setState(userAccount.getState());
         userAccountVo.setLocked(userAccount.getLocked());
         userAccountVo.setCreateTime(userAccount.getCreateTime());

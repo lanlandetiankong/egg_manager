@@ -28,8 +28,6 @@ public class UserGroup extends Model<UserGroup> {
     private String userAccountId ;
 
     private String type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;

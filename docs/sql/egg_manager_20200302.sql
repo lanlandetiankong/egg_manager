@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50562
 File Encoding         : 65001
 
-Date: 2020-02-21 23:55:23
+Date: 2020-03-02 21:03:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `em_announcement` (
   `key_word` varchar(100) DEFAULT NULL COMMENT '关键字',
   `publish_department` char(36) DEFAULT NULL COMMENT '发布的部门',
   `content` text,
-  `tag_ids` varchar(36) DEFAULT NULL COMMENT '公告标签',
+  `tag_ids` varchar(1000) DEFAULT NULL COMMENT '公告标签',
   `accessory` varchar(255) DEFAULT NULL COMMENT '附件',
   `state` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
@@ -46,8 +46,9 @@ CREATE TABLE `em_announcement_draft` (
   `key_word` varchar(100) DEFAULT NULL COMMENT '关键字',
   `publish_department` char(36) DEFAULT NULL COMMENT '发布的部门',
   `content` text,
-  `tag_ids` varchar(36) DEFAULT NULL COMMENT '公告标签',
+  `tag_ids` varchar(1000) DEFAULT NULL COMMENT '公告标签',
   `accessory` varchar(255) DEFAULT NULL COMMENT '附件',
+  `is_published` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
@@ -86,7 +87,6 @@ CREATE TABLE `em_define_group` (
   `is_inherit` int(11) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -104,7 +104,6 @@ CREATE TABLE `em_define_job` (
   `name` varchar(255) DEFAULT NULL,
   `type` int(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -120,13 +119,13 @@ CREATE TABLE `em_define_job` (
 DROP TABLE IF EXISTS `em_define_menu`;
 CREATE TABLE `em_define_menu` (
   `fid` char(36) NOT NULL DEFAULT '',
-  `define_module_id` char(36) NOT NULL,
   `parent_id` char(36) DEFAULT NULL,
   `menu_name` varchar(255) DEFAULT NULL,
-  `icon_name` varchar(100) DEFAULT NULL,
-  `router_url` varchar(255) DEFAULT NULL,
   `label` varchar(100) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
+  `icon_name` varchar(100) DEFAULT NULL,
+  `router_url` varchar(255) DEFAULT NULL,
+  `href_url` varchar(255) DEFAULT NULL,
   `url_jump_type` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
@@ -144,9 +143,10 @@ DROP TABLE IF EXISTS `em_define_module`;
 CREATE TABLE `em_define_module` (
   `fid` char(36) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
+  `code` varchar(100) DEFAULT NULL,
   `icon` varchar(100) DEFAULT NULL,
   `style` varchar(255) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
+  `type` int(50) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -166,7 +166,6 @@ CREATE TABLE `em_define_permission` (
   `code` varchar(255) DEFAULT NULL,
   `type` int(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -185,7 +184,6 @@ CREATE TABLE `em_define_role` (
   `code` varchar(255) DEFAULT NULL,
   `type` int(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -193,6 +191,24 @@ CREATE TABLE `em_define_role` (
   `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色定义表';
+
+-- ----------------------------
+-- Table structure for em_define_tenant
+-- ----------------------------
+DROP TABLE IF EXISTS `em_define_tenant`;
+CREATE TABLE `em_define_tenant` (
+  `fid` char(36) NOT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '租户名',
+  `code` varchar(255) DEFAULT NULL,
+  `db_code` varchar(255) DEFAULT NULL COMMENT '数据库标识',
+  `state` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `last_modifyer` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='租户定义表';
 
 -- ----------------------------
 -- Table structure for em_operation_log
@@ -204,7 +220,7 @@ CREATE TABLE `em_operation_log` (
   `ip_addr` varchar(32) DEFAULT NULL,
   `class_name` varchar(300) DEFAULT NULL COMMENT '类名称',
   `method_name` varchar(64) DEFAULT NULL COMMENT '方法名称',
-  `action_args` varchar(300) DEFAULT NULL COMMENT '方法参数',
+  `action_args` text COMMENT '方法参数',
   `result` text,
   `exception` text,
   `action` varchar(50) DEFAULT NULL COMMENT '操作',
@@ -240,7 +256,6 @@ CREATE TABLE `em_role_permission` (
   `define_permission_id` char(36) DEFAULT NULL,
   `type` int(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -267,7 +282,6 @@ CREATE TABLE `em_user_account` (
   `user_type` int(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `locked` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -286,7 +300,6 @@ CREATE TABLE `em_user_group` (
   `user_account_id` char(36) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -304,7 +317,6 @@ CREATE TABLE `em_user_job` (
   `user_account_id` char(36) DEFAULT NULL,
   `define_job_id` char(36) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -323,7 +335,6 @@ CREATE TABLE `em_user_role` (
   `define_role_id` char(36) DEFAULT NULL,
   `type` int(255) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -343,7 +354,6 @@ CREATE TABLE `em_user_thirdparty` (
   `provider_type` varchar(100) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `version` int(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
@@ -351,20 +361,3 @@ CREATE TABLE `em_user_thirdparty` (
   `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `em_define_tenant` (
-  `fid` char(36) NOT NULL,
-  `name` varchar(255) DEFAULT NULL COMMENT '租户名',
-  `code` varchar(255) DEFAULT NULL,
-  `db_code` varchar(255) DEFAULT NULL COMMENT '数据库标识',
-  `state` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='租户定义表';
-
-

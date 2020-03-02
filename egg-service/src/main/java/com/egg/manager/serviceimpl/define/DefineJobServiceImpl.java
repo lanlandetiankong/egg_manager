@@ -82,7 +82,6 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Date now = new Date() ;
         DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
         defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineJob.setVersion(commonFuncService.defaultVersion);
         defineJob.setState(BaseStateEnum.ENABLED.getValue());
         defineJob.setCreateTime(now);
         defineJob.setUpdateTime(now);

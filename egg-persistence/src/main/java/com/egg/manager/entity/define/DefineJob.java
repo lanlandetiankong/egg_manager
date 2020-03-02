@@ -24,8 +24,6 @@ public class DefineJob extends Model<DefineJob> {
     private String name ;
     private String description;
     private Integer type;
-    @Version
-    private Integer version ;
     private String remark ;
     private Integer state ;
     @TableField("create_time")

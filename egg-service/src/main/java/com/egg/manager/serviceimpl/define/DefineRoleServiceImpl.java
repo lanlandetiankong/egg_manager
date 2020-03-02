@@ -182,7 +182,6 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         Date now = new Date() ;
         DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
         defineRole.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineRole.setVersion(commonFuncService.defaultVersion);
         defineRole.setState(BaseStateEnum.ENABLED.getValue());
         defineRole.setCreateTime(now);
         defineRole.setUpdateTime(now);

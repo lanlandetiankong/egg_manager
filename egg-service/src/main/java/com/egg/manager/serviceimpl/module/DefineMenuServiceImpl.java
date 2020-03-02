@@ -104,7 +104,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @return
      */
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,boolean withRootItem,List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,List<DefineMenu> allMenus) {
         if(allMenus == null || allMenus.size() == 0){
             return null ;
         }
@@ -125,18 +125,24 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             return null ;
         }
         for (CommonTreeSelect treeItem : childList) {
-            treeItem.setChildren(this.getTreeSelectChildNodes(treeItem.getKey(),withRootItem,allMenus));
+            treeItem.setChildren(this.getTreeSelectChildNodes(treeItem.getKey(),allMenus));
         }
-
-        if(withRootItem){   //将ROOT层 作为顶层项
-            CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineMenuConstant.ROOT_ID).title("菜单首层项").value(DefineMenuConstant.ROOT_ID).children(childList).build();
-            List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>() ;
-            treeSelectListWithRoot.add(rootItem);
-            return treeSelectListWithRoot ;
-        }   else {
-            return childList ;
-        }
-
+        return childList ;
+    }
+    /**
+     * [菜单展示]的子节点 构建的 TreeSelect 结构(包含最顶层)
+     * 用于 a-tree-select
+     * @param rootId
+     * @param allMenus
+     * @return
+     */
+    @Override
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId,List<DefineMenu> allMenus) {
+        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(rootId,allMenus);
+        CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineMenuConstant.ROOT_ID).title("菜单首层项").value(DefineMenuConstant.ROOT_ID).children(childList).build();
+        List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>() ;
+        treeSelectListWithRoot.add(rootItem);
+        return treeSelectListWithRoot ;
     }
 
 

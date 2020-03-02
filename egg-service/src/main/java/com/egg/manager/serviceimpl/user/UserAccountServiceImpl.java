@@ -121,7 +121,6 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Date now = new Date() ;
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
-        userAccount.setVersion(commonFuncService.defaultVersion);
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
         }

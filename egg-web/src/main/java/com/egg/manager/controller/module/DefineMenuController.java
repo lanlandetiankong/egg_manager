@@ -67,7 +67,7 @@ public class DefineMenuController extends BaseController{
     public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
         List<DefineMenu> allMenus  = defineMenuService.selectList(null);
-        List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodes(DefineMenuConstant.ROOT_ID,true,allMenus);
+        List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
         result.setResultList(treeList);
         return result ;
     }

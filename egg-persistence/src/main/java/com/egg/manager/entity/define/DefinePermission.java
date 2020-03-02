@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.annotations.Version;
 import lombok.*;
 
 import java.io.Serializable;
@@ -25,8 +24,6 @@ public class DefinePermission extends Model<DefinePermission> {
     private String code ;
 
     private Integer type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;

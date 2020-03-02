@@ -83,7 +83,6 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         Date now = new Date() ;
         DefineTenant defineTenant = DefineTenantVo.transferVoToEntity(defineTenantVo);
         defineTenant.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineTenant.setVersion(commonFuncService.defaultVersion);
         defineTenant.setState(BaseStateEnum.ENABLED.getValue());
         defineTenant.setCreateTime(now);
         defineTenant.setUpdateTime(now);

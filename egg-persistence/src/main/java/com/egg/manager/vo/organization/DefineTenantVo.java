@@ -19,7 +19,6 @@ public class DefineTenantVo {
     private String code ;
     private String dbCode;
     private String typeStr ;
-    private Integer version ;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;
@@ -46,7 +45,6 @@ public class DefineTenantVo {
         defineTenant.setName(defineTenantVo.getName());
         defineTenant.setCode(defineTenantVo.getCode());
         defineTenant.setDbCode(defineTenantVo.getDbCode());
-        defineTenant.setVersion(defineTenantVo.getVersion());
         defineTenant.setState(defineTenantVo.getState());
         defineTenant.setCreateTime(defineTenantVo.getCreateTime());
         defineTenant.setUpdateTime(defineTenantVo.getUpdateTime());
@@ -65,7 +63,6 @@ public class DefineTenantVo {
         defineTenantVo.setName(defineTenant.getName());
         defineTenantVo.setCode(defineTenant.getCode());
         defineTenantVo.setDbCode(defineTenant.getDbCode());
-        defineTenantVo.setVersion(defineTenant.getVersion());
         defineTenantVo.setState(defineTenant.getState());
         defineTenantVo.setCreateTime(defineTenant.getCreateTime());
         defineTenantVo.setUpdateTime(defineTenant.getUpdateTime());

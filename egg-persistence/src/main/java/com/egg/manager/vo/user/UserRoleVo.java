@@ -20,7 +20,6 @@ public class UserRoleVo {
     private String userAccountId;
     private String defineRoleId;
     private Integer type;
-    private Integer version;
     private Integer state;
     private Date createTime;
     private Date updateTime;
@@ -38,7 +37,6 @@ public class UserRoleVo {
         userRole.setUserAccountId(userRoleVo.getUserAccountId());
         userRole.setDefineRoleId(userRoleVo.getDefineRoleId());
         userRole.setType(userRoleVo.getType());
-        userRole.setVersion(userRoleVo.getVersion());
         userRole.setState(userRoleVo.getState());
         userRole.setCreateTime(userRoleVo.getCreateTime());
         userRole.setUpdateTime(userRoleVo.getUpdateTime());
@@ -57,7 +55,6 @@ public class UserRoleVo {
         userRoleVo.setUserAccountId(userRole.getUserAccountId());
         userRoleVo.setDefineRoleId(userRole.getDefineRoleId());
         userRoleVo.setType(userRole.getType());
-        userRoleVo.setVersion(userRole.getVersion());
         userRoleVo.setState(userRole.getState());
         userRoleVo.setCreateTime(userRole.getCreateTime());
         userRoleVo.setUpdateTime(userRole.getUpdateTime());

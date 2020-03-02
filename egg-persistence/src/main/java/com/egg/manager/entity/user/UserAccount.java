@@ -42,8 +42,6 @@ public class UserAccount extends Model<UserAccount> {
     private Integer userType ;
     @TableField("user_type_num")
     private Integer userTypeNum;
-    @Version
-    private Integer version ;
     private Integer state ;
     private Integer locked ;    //是否被锁定
     @TableField(value="create_time",fill = FieldFill.INSERT)

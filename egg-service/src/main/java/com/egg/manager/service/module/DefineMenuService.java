@@ -32,11 +32,18 @@ public interface DefineMenuService extends IService<DefineMenu> {
     /**
      * [菜单展示]的子节点 构建的TreeSelect结构
      * @param rootId 最顶层的菜单id
-     * @param withRootItem 是否包含顶层菜单项
      * @param allMenus
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,boolean withRootItem, List<DefineMenu> allMenus);
+    List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,List<DefineMenu> allMenus);
+
+    /**
+     * [菜单展示]的子节点 构建的TreeSelect结构(包含最顶层)
+     * @param rootId 最顶层的菜单id
+     * @param allMenus
+     * @return
+     */
+    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId,List<DefineMenu> allMenus);
 
 
 

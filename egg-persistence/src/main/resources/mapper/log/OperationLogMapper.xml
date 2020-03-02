@@ -14,7 +14,6 @@
         <result column="action" property="action" />
         <result column="is_success" property="isSuccess" />
         <result column="ip_addr" property="ipAddr" />
-        <result column="version" property="version" />
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />

@@ -29,8 +29,6 @@ public class UserRole extends Model<UserRole> {
     @TableField(value = "define_role_id")
     private  String defineRoleId ;
     private Integer type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;
@@ -63,7 +61,6 @@ public class UserRole extends Model<UserRole> {
         userRole.setUserAccountId(userAccountId);
         userRole.setDefineRoleId(defineRoleId);
         userRole.setType(1);
-        userRole.setVersion(0);
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
         userRole.setUpdateTime(now);

@@ -30,8 +30,6 @@ public class RolePermission extends Model<RolePermission> {
     private String definePermissionId;
 
     private Integer type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;
@@ -66,7 +64,6 @@ public class RolePermission extends Model<RolePermission> {
         rolePermission.setDefineRoleId(defineRoleId);
         rolePermission.setDefinePermissionId(definePermissionId);
         rolePermission.setType(1);
-        rolePermission.setVersion(0);
         rolePermission.setState(BaseStateEnum.ENABLED.getValue());
         rolePermission.setCreateTime(now);
         rolePermission.setUpdateTime(now);

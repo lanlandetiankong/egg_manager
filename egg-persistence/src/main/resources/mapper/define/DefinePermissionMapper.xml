@@ -9,7 +9,6 @@
         <result column="code" property="code" />
         <result column="type" property="type" />
         <result column="state" property="state" />
-        <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
@@ -19,10 +18,10 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name, code, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+        fid, name, code, type, state,  create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
     </sql>
     <sql id="Base_Dp_Column_List">
-        dp.fid, dp.name, dp.code, dp.type, dp.state, dp.version, dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user AS createUser,dp.last_modifyer AS lastModifyer,dp.remark
+        dp.fid, dp.name, dp.code, dp.type, dp.state,dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user AS createUser,dp.last_modifyer AS lastModifyer,dp.remark
     </sql>
 
 

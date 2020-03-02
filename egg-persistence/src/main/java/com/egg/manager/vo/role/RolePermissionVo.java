@@ -16,7 +16,6 @@ public class RolePermissionVo {
     private String definePermissionId;
 
     private Integer type;
-    private Integer version ;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;

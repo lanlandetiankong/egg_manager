@@ -17,7 +17,6 @@ public class UserJobVo {
     private String fid;
     private String userAccountId;
     private String defineJobId;
-    private Integer version;
     private Integer state;
     private Date createTime;
     private Date updateTime;
@@ -34,7 +33,6 @@ public class UserJobVo {
         userJob.setFid(userJobVo.getFid());
         userJob.setUserAccountId(userJobVo.getUserAccountId());
         userJob.setDefineJobId(userJobVo.getDefineJobId());
-        userJob.setVersion(userJobVo.getVersion());
         userJob.setState(userJobVo.getState());
         userJob.setCreateTime(userJobVo.getCreateTime());
         userJob.setUpdateTime(userJobVo.getUpdateTime());
@@ -52,7 +50,6 @@ public class UserJobVo {
         userJobVo.setFid(userJob.getFid());
         userJobVo.setUserAccountId(userJob.getUserAccountId());
         userJobVo.setDefineJobId(userJob.getDefineJobId());
-        userJobVo.setVersion(userJob.getVersion());
         userJobVo.setState(userJob.getState());
         userJobVo.setCreateTime(userJob.getCreateTime());
         userJobVo.setUpdateTime(userJob.getUpdateTime());

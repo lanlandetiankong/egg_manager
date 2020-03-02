@@ -95,7 +95,6 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
-        definePermission.setVersion(commonFuncService.defaultVersion);
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
         definePermission.setCreateTime(now);
         definePermission.setUpdateTime(now);

@@ -21,7 +21,6 @@ public class DefineJobVo {
     private String typeStr;
     private String description;
     private Integer state ;
-    private Integer version ;
     private String remark ;
     private Date createTime ;
     private Date updateTime ;
@@ -40,7 +39,6 @@ public class DefineJobVo {
         defineJob.setType(defineJobVo.getType());
         defineJob.setDescription(defineJobVo.getDescription());
         defineJob.setState(defineJobVo.getState());
-        defineJob.setVersion(defineJobVo.getVersion());
         defineJob.setRemark(defineJobVo.getRemark());
         defineJob.setCreateTime(defineJobVo.getCreateTime());
         defineJob.setUpdateTime(defineJobVo.getUpdateTime());
@@ -62,7 +60,6 @@ public class DefineJobVo {
             defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
         }
         defineJobVo.setDescription(defineJob.getDescription());
-        defineJobVo.setVersion(defineJob.getVersion());
         defineJobVo.setState(defineJob.getState());
         defineJobVo.setRemark(defineJob.getRemark());
         defineJobVo.setCreateTime(defineJob.getCreateTime());

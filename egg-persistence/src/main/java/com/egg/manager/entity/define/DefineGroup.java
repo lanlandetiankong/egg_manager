@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.annotations.Version;
-import com.egg.manager.entity.user.UserRole;
 import lombok.*;
 
 import java.io.Serializable;
@@ -30,8 +28,6 @@ public class DefineGroup extends Model<DefineGroup> {
 
 
     private String type;
-    @Version
-    private Integer version ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;

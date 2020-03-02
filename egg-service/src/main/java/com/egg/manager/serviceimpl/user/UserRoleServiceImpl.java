@@ -170,7 +170,6 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Date now = new Date() ;
         UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
-        userRole.setVersion(commonFuncService.defaultVersion);
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
         userRole.setUpdateTime(now);

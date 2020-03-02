@@ -20,7 +20,6 @@ public class DefinePermissionVo {
     private String code ;
     private Integer type;
     private String typeStr ;
-    private Integer version ;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;
@@ -47,7 +46,6 @@ public class DefinePermissionVo {
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
         definePermission.setType(definePermissionVo.getType());
-        definePermission.setVersion(definePermissionVo.getVersion());
         definePermission.setState(definePermissionVo.getState());
         definePermission.setCreateTime(definePermissionVo.getCreateTime());
         definePermission.setUpdateTime(definePermissionVo.getUpdateTime());
@@ -74,7 +72,6 @@ public class DefinePermissionVo {
                 definePermissionVo.setTypeStr("");
             }
         }
-        definePermissionVo.setVersion(definePermission.getVersion());
         definePermissionVo.setState(definePermission.getState());
         definePermissionVo.setCreateTime(definePermission.getCreateTime());
         definePermissionVo.setUpdateTime(definePermission.getUpdateTime());

@@ -16,7 +16,6 @@
         <result column="user_type" property="userType" />
         <result column="user_type_num" property="userTypeNum" />
         <result column="state" property="state" />
-        <result column="version" property="version" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="create_user" property="createUser" />
@@ -25,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl,password, phone, email, sex, user_type AS userType, type, state, version, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl,password, phone, email, sex, user_type AS userType, type, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 

@@ -104,10 +104,11 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @return
      */
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId, List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,boolean withRootItem,List<DefineMenu> allMenus) {
         if(allMenus == null || allMenus.size() == 0){
             return null ;
         }
+        //添加最底层的根节点
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>() ;
         CommonTreeSelect tree = null ;
         for (DefineMenu menu : allMenus) {
@@ -124,10 +125,20 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             return null ;
         }
         for (CommonTreeSelect treeItem : childList) {
-            treeItem.setChildren(this.getTreeSelectChildNodes(treeItem.getKey(),allMenus));
+            treeItem.setChildren(this.getTreeSelectChildNodes(treeItem.getKey(),withRootItem,allMenus));
         }
-        return childList ;
+
+        if(withRootItem){   //将ROOT层 作为顶层项
+            CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineMenuConstant.ROOT_ID).title("菜单首层项").value(DefineMenuConstant.ROOT_ID).children(childList).build();
+            List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>() ;
+            treeSelectListWithRoot.add(rootItem);
+            return treeSelectListWithRoot ;
+        }   else {
+            return childList ;
+        }
+
     }
+
 
 
     /**
@@ -140,7 +151,6 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         tree.setKey(menu.getFid());
         tree.setValue(menu.getFid());
         tree.setTitle(menu.getMenuName());
-        tree.setKey(menu.getFid());
         return tree;
     }
 

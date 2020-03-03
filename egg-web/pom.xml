@@ -39,6 +39,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.5.1.RELEASE</version>
+                <configuration>
+                    <!-- 工程主入口-->
+                    <mainClass>com.egg.manager.EggManagerApplication</mainClass>
+                    <!--<classifier>exec</classifier>-->
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -46,9 +51,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
             </plugin>
             <!-- 指定JDK编译版本 -->
             <plugin>

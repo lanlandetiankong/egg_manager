@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 
 @SpringBootApplication
-@MapperScan("com.egg.manager.mapper")
+//@MapperScan("com.egg.manager.mapper")
 @EnableCaching
 public class EggManagerApplication {
 	public static void main(String[] args) {

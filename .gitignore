@@ -20,5 +20,18 @@
 *.gz
 *.rar
 
+#target
+\target\
+#idea conf
+*.iml
+.idea/
+egg-common/target/
+egg-persistence/target/
+egg-service/target/
+egg-web/target/
+
+
+
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

@@ -1,4 +1,4 @@
-package com.egg.manager.controller.module;
+package com.egg.manager.controller.define;
 
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
@@ -45,7 +45,7 @@ import java.util.List;
  */
 @Api(value = "API ==>>  DefineMenuController ",description = "菜单定义接口")
 @RestController
-@RequestMapping("/module/define_menu")
+@RequestMapping("/define/define_menu")
 public class DefineMenuController extends BaseController{
     @Autowired
     private DefineMenuService defineMenuService ;

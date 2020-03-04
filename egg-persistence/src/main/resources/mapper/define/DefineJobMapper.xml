@@ -22,7 +22,7 @@
     </sql>
 
     <sql id="Base_Dj_Column_List">
-        dj.fid, dj.name,dj.description , dj.type, dj.state,dj.remark, dj.create_time AS createTime, dj.update_time AS updateTime,dj.create_user AS createUser,dj.last_modifyer AS lastModifyer
+        dj.fid, dj.name,dj.description , dj.type, dj.state,dj.remark,dj.create_time AS createTime, dj.update_time AS updateTime,dj.create_user AS createUser,dj.last_modifyer AS lastModifyer
     </sql>
 
 

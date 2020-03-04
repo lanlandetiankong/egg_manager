@@ -44,6 +44,13 @@
 	<!--<logger name="com.alibaba" level="error"/>-->
 	<!--<logger name="org.apache.kafka.clients.producer.ProducerConfig" level="warn"/>-->
 
+	<logger name="com.fasterxml" level="error" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="springfox.documentation" level="error" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
 	<root level="INFO">
 		<appender-ref ref="FILE"/>
 		<appender-ref ref="STDOUT" />

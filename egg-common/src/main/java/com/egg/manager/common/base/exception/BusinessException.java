@@ -2,7 +2,6 @@ package com.egg.manager.common.base.exception;
 
 /**
  * @author zhouchengjie
- * @since on 2018/5/8.
  */
 public class BusinessException extends Exception{
     /**

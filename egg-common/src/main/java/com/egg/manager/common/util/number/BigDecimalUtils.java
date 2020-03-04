@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 /**
  * @author zhouchengjie
- * @since on 2018/5/8.
  */
 public class BigDecimalUtils {
 

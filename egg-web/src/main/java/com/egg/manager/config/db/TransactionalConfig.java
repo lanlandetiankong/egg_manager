@@ -14,8 +14,7 @@ import java.util.Collections;
 
 /**
  * 声明式事物配置
- * @author liugh
- * @since 2018-05-06
+ * @author zhouchengjie
  */
 @Configuration
 public class TransactionalConfig {

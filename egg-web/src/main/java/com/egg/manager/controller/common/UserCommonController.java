@@ -6,6 +6,7 @@ import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.user.UserAccount;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,13 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  UserCommonController ",description = "通用接口 - 用户")
 @RestController
 @RequestMapping("/common_api/user")
 public class UserCommonController extends BaseController{
 
 
-    @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = String.class)
+    @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllUserTypeEnumList")
     public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = new MyCommonResult() ;
@@ -49,7 +51,7 @@ public class UserCommonController extends BaseController{
         return  result;
     }
 
-    @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = String.class)
+    @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = new MyCommonResult() ;
@@ -65,7 +67,7 @@ public class UserCommonController extends BaseController{
     }
 
 
-    @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = String.class)
+    @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = new MyCommonResult() ;

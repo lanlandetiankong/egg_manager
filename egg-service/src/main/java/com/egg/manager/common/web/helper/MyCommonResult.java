@@ -1,5 +1,7 @@
 package com.egg.manager.common.web.helper;
 
+import com.egg.manager.common.base.beans.file.FileResBean;
+import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import lombok.*;
@@ -17,7 +19,6 @@ import java.util.Set;
 @EqualsAndHashCode
 @Builder
 public class MyCommonResult<T> implements Serializable {
-
 
     private String token ;
     //提示信息、错误信息等，用于展示
@@ -47,6 +48,8 @@ public class MyCommonResult<T> implements Serializable {
     //枚举 列表
     private List enumList;
 
+    //前端接收到异常后的操作标识，需与前端一致(axios拦截器设置必须hasError为true才会处理到这个
+    private String errorActionType ;
 
     private T bean;
     private UserAccountToken accountToken ;
@@ -54,8 +57,10 @@ public class MyCommonResult<T> implements Serializable {
     private Integer status ;
     private String errorMsg;
 
+    private FileResBean fileResBean ;
     private AntdvPaginationBean paginationBean ;    //分页bean
 
+    private UploadProps uploadProps ;
 
 
     public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean,Integer total){

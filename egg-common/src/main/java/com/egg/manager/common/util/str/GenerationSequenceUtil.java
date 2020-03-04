@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author zhouchengjie
- * @since on 2018/5/8.
  */
 public class GenerationSequenceUtil {
 

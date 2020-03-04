@@ -47,7 +47,7 @@ public class ImgUploadController extends BaseController{
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @ApiOperation(value = "上传头像", notes = "上传头像", response = String.class)
+    @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file") MultipartFile file){
         MyCommonResult result = new MyCommonResult() ;

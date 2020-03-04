@@ -19,6 +19,9 @@ import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.service.user.UserRoleService;
 import com.egg.manager.vo.user.UserRoleVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -45,6 +48,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  UserRoleController ",description = "用户角色接口")
 @RestController
 @RequestMapping("/user/user_role")
 public class UserRoleController  extends BaseController{
@@ -70,8 +74,13 @@ public class UserRoleController  extends BaseController{
 
 
 
-    @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = String.class)
     @OperLog(modelName="UserRoleController",action="查询用户角色列表",description = "查询用户角色列表")
+    @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
@@ -93,7 +102,7 @@ public class UserRoleController  extends BaseController{
     }
 
 
-    @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = String.class)
+    @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserRoleController",action="查询用户角色信息",description = "根据用户角色id查询用户角色信息")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, HttpServletResponse response,String roleId) {
@@ -111,7 +120,7 @@ public class UserRoleController  extends BaseController{
 
 
 
-    @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = String.class)
+    @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserRoleController",action="新增用户角色",description = "表单方式新增用户角色")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, HttpServletResponse response, UserRoleVo userRoleVo){
@@ -135,8 +144,11 @@ public class UserRoleController  extends BaseController{
 
     
 
-    @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = String.class)
     @OperLog(modelName="UserRoleController",action="批量删除用户角色",description = "根据用户角色id批量删除用户角色")
+    @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的用户角色id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -155,8 +167,11 @@ public class UserRoleController  extends BaseController{
     }
 
 
-    @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = String.class)
     @OperLog(modelName="UserRoleController",action="删除用户角色",description = "根据用户角色id删除用户角色")
+    @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的用户角色id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneUserRoleByIds")
     public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;

@@ -5,7 +5,6 @@ import java.util.Set;
 
 /**
  * @author zhouchengjie
- * @since 2018-05-03
  */
 public class Constant {
 

@@ -5,6 +5,7 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  UserGroupController ",description = "用户组别接口")
 @RestController
 @RequestMapping("/user/user_group")
 public class UserGroupController  {

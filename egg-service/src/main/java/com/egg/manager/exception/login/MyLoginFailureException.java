@@ -2,8 +2,7 @@ package com.egg.manager.exception.login;
 
 /**
  * 登录失败
- * @author liugh
- * @since 2018-05-06
+ * @author zhouchengjie
  */
 public class MyLoginFailureException extends RuntimeException{
 

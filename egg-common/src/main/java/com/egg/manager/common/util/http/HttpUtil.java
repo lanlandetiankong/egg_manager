@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 /**
  * @author zhouchengjie
- * @since on 2018/7/25
  */
 public final class HttpUtil {
 

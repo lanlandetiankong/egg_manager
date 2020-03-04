@@ -8,6 +8,7 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.define.DefineGroupService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  DefineGroupController ",description = "组别定义接口")
 @RestController
 @RequestMapping("/define/define_group")
 public class DefineGroupController {

@@ -14,6 +14,9 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.vo.user.UserJobVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +38,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  UserJobController ",description = "用户职务接口")
 @RestController
 @RequestMapping("/user/user_job")
 public class UserJobController extends BaseController{
@@ -57,8 +61,13 @@ public class UserJobController extends BaseController{
 
 
 
-    @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = String.class)
     @OperLog(modelName="UserJobController",action="查询用户职务列表",description = "查询用户职务列表")
+    @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
@@ -79,7 +88,7 @@ public class UserJobController extends BaseController{
     }
 
 
-    @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = String.class)
+    @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserJobController",action="查询用户职务信息",description = "根据用户职务id查询用户职务信息")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, HttpServletResponse response,String jobId) {

@@ -204,7 +204,12 @@ public class BaseController {
     public List<AntdvSortBean> parseSortJsonToBean(String sortObj,boolean addCreateTimeDesc) {
         List<AntdvSortBean> sortBeans = new ArrayList<>() ;
         if(StringUtils.isNotBlank(sortObj) && "{}".equals(sortObj) == false){
-            sortBeans.add(JSONObject.parseObject(sortObj, AntdvSortBean.class));
+            AntdvSortBean antdvSortBean = JSONObject.parseObject(sortObj, AntdvSortBean.class);
+            if(antdvSortBean != null){
+                String fieldName = MyStringUtil.camelToUnderline(antdvSortBean.getField(),false);
+                antdvSortBean.setField(fieldName);
+                sortBeans.add(antdvSortBean);
+            }
         }
         if(addCreateTimeDesc == true){  //添加日期排序
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());

@@ -2,6 +2,8 @@ package com.egg.manager.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -11,6 +13,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ import java.util.List;
  * \
  */
 @Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
     /**
@@ -41,16 +45,17 @@ public class SwaggerConfig {
         List<Parameter> aParameters = new ArrayList<Parameter>();
         aParameters.add(parameterBuilder.build());
         return new Docket(DocumentationType.SWAGGER_2).groupName("v1").select()
-                .apis(RequestHandlerSelectors.basePackage("com.liugh.controller"))
-                .paths(PathSelectors.ant("/**")).build().apiInfo(apiInfo1()).globalOperationParameters(aParameters);
+                .apis(RequestHandlerSelectors.basePackage("com.egg.manager.controller"))
+                .paths(PathSelectors.any()).build().apiInfo(apiInfo1()).globalOperationParameters(aParameters);
     }
 
 
     private ApiInfo apiInfo1() {
         return new ApiInfoBuilder()
                 .title("egg-manager后端APIs")
-                .contact("zhouchengjie")
                 .version("v0.01")
                 .build();
     }
+
+
 }

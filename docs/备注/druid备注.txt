@@ -1,0 +1,8 @@
+#监控页面
+    访问路径:
+        http://127.0.0.1:8083/egg_manager/druid/sql.html
+    默认账号： root
+    默认密码： root
+
+#配置文件路径：
+    com/egg/manager/config/db/druid/DruidConfig.java

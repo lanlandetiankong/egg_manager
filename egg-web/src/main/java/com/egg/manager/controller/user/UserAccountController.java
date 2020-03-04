@@ -28,6 +28,8 @@ import com.egg.manager.webvo.login.LoginAccountVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,7 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Api(value = "API -  UserAccountController ",description = "用户账号接口")
+@Api(value = "API ==>>  UserAccountController ",description = "用户账号接口")
 @RestController
 @RequestMapping("/user/user_account")
 public class UserAccountController extends BaseController {
@@ -64,8 +66,12 @@ public class UserAccountController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = String.class)
+
     @OperLog(modelName="UserAccountController",action="用户登录接口",description = "账号密码方式登录接口")
+    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的信息", required = true,dataTypeClass=LoginAccountVo.class),
+    })
     @PostMapping(value = "/login/account")
     public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, HttpServletResponse response, LoginAccountVo loginAccountVo) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
@@ -96,8 +102,13 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = String.class)
     @OperLog(modelName="UserAccountController",action="查询用户信息列表",description = "查询用户信息列表")
+    @ApiOperation(value = "查询用户信息列表", notes = "查询用户信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllUserAccounts")
     public MyCommonResult<UserAccountVo> doGetAllUserAccounts(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj,String sortObj) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
@@ -119,7 +130,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = String.class)
+    @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户信息",description = "根据用户id查询用户信息")
     @PostMapping(value = "/getUserAccountById")
     public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
@@ -135,7 +146,7 @@ public class UserAccountController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = String.class)
+    @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色")
     @PostMapping(value = "/getAllRoleByUserAccountId")
     public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
@@ -151,7 +162,7 @@ public class UserAccountController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = String.class)
+    @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
     public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
@@ -168,7 +179,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = String.class)
+    @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务")
     @PostMapping(value = "/getAllJobByUserAccountId")
     public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
@@ -185,7 +196,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = String.class)
+    @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="新增用户",description = "表单方式新增用户")
     @PostMapping(value = "/doAddUserAccount")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response){
@@ -209,7 +220,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = String.class)
+    @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="更新用户信息",description = "表单方式更新用户信息")
     @PostMapping(value = "/doUpdateUserAccount")
     public MyCommonResult doUpdateUserAccount(HttpServletRequest request, HttpServletResponse response){
@@ -232,8 +243,11 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = String.class)
     @OperLog(modelName="UserAccountController",action="批量删除用户",description = "根据用户id批量删除用户")
+    @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的用户id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelUserAccountByIds")
     public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -253,8 +267,11 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = String.class)
     @OperLog(modelName="UserAccountController",action="删除用户",description = "根据用户id删除用户")
+    @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的用户id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneUserAccountById")
     public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;
@@ -273,7 +290,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = String.class)
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="修改用户锁定状态",description = "根据用户id批量锁定或解锁用户")
     @PostMapping(value = "/batchLockUserAccountByIds")
     public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] lockIds,Boolean lockFlag){
@@ -297,7 +314,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = String.class)
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="修改用户锁定状态",description = "根据用户id锁定或解锁用户")
     @PostMapping(value = "/lockOneUserAccountById")
     public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String lockId,Boolean lockFlag){
@@ -320,7 +337,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = String.class)
+    @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="用户分配角色",description = "为用户分配角色")
     @PostMapping(value = "/grantRoleToUser")
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
@@ -342,7 +359,7 @@ public class UserAccountController extends BaseController {
 
 
 
-    @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = String.class)
+    @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="用户分配职务",description = "为用户分配职务")
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){

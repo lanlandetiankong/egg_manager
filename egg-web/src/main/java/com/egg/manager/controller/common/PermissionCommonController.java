@@ -8,6 +8,7 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +27,13 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  PermissionCommonController ",description = "通用接口 - 权限")
 @RestController
 @RequestMapping("/common_api/permission")
 public class PermissionCommonController extends BaseController{
 
 
-    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = String.class)
+    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
@@ -50,7 +52,7 @@ public class PermissionCommonController extends BaseController{
         return  result;
     }
 
-    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = String.class)
+    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = new MyCommonResult() ;

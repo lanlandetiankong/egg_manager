@@ -2,8 +2,7 @@ package com.egg.manager.exception;
 
 /**
  * 参数异常
- * @author liugh
- * @since 2018-05-06
+ * @author zhouchengjie
  */
 public class MyParamJsonException extends RuntimeException{
 

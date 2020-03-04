@@ -19,6 +19,9 @@ import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +44,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Api(value = "API -  AnnouncementController ",description = "发布公告接口")
 @RestController
 @RequestMapping("/announcement")
 public class AnnouncementController extends BaseController {
@@ -66,8 +70,8 @@ public class AnnouncementController extends BaseController {
 
 
 
-    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = String.class)
     @OperLog(modelName="AnnouncementController",action="新增公告",description = "表单方式新增公告")
+    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/addAnnouncement")
     public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, HttpServletResponse response,AnnouncementVo announcementVo){
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
@@ -88,7 +92,7 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = String.class)
+    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementController",action="公告草稿发布",description = "表单方式发布公告草稿")
     @PostMapping(value = "/addAnnouncementFromDraft")
     public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, HttpServletResponse response,AnnouncementDraftVo announcementDraftVo){
@@ -109,8 +113,13 @@ public class AnnouncementController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询公告信息列表", notes = "查询公告信息列表", response = String.class)
     @OperLog(modelName="AnnouncementController",action="查询公告信息列表",description = "查询公告信息列表")
+    @ApiOperation(value = "查询公告信息列表", notes = "查询公告信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetAllAnnouncements(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj,Boolean onlySelf) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
@@ -136,7 +145,7 @@ public class AnnouncementController extends BaseController {
 
 
 
-    @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class)
+    @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementController",action="查询公告信息部分列表",description = "查询公告信息部分列表")
     @PostMapping(value = "/getSomeAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, HttpServletResponse response,Integer limitSize, Boolean onlySelf) {
@@ -166,8 +175,8 @@ public class AnnouncementController extends BaseController {
 
 
 
-    @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = String.class)
     @OperLog(modelName="AnnouncementController",action="查询公告信息",description = "根据id查询公告信息")
+    @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, HttpServletResponse response, String announcementId) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
@@ -184,8 +193,11 @@ public class AnnouncementController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "批量删除公告", notes = "根据用户id批量删除公告", response = String.class)
-    @OperLog(modelName="AnnouncementController",action="批量删除公告",description = "根据用户id批量删除公告")
+    @OperLog(modelName="AnnouncementController",action="批量删除公告",description = "根据公告id批量删除公告")
+    @ApiOperation(value = "批量删除公告", notes = "根据公告id批量删除公告", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的公告id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelAnnouncementByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -204,8 +216,11 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除公告", notes = "根据公告id删除公告", response = String.class)
+    @ApiOperation(value = "删除公告", notes = "根据公告id删除公告", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementController",action="删除公告",description = "根据公告id删除公告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的公告id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneAnnouncementByIds")
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;

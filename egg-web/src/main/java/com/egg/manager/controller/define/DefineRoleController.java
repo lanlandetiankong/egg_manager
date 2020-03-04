@@ -21,6 +21,9 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -42,6 +45,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  DefineRoleController ",description = "角色定义接口")
 @RestController
 @RequestMapping("/define/define_role")
 public class DefineRoleController extends BaseController {
@@ -66,9 +70,13 @@ public class DefineRoleController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-
-    @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = String.class)
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息列表",description = "查询角色定义信息列表")
+    @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllDefineRoles")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -90,7 +98,7 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = String.class)
+    @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息",description = "根据角色定义id查询角色定义信息")
     @PostMapping(value = "/getDefineRoleById")
     public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
@@ -106,7 +114,7 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = String.class)
+    @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = MyCommonResult.class,httpMethod = "POST")
 
     @PostMapping(value = "/getAllPermissionByRoleId")
     public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
@@ -125,7 +133,7 @@ public class DefineRoleController extends BaseController {
 
 
 
-    @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = String.class)
+    @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
     public MyCommonResult<DefineRoleVo> doAddDefineRole(HttpServletRequest request, HttpServletResponse response, DefineRoleVo defineRoleVo){
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -146,7 +154,7 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = String.class)
+    @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
     public MyCommonResult doUpdateDefineRole(HttpServletRequest request, HttpServletResponse response, DefineRoleVo defineRoleVo){
         MyCommonResult result = new MyCommonResult() ;
@@ -166,8 +174,11 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-
-    @ApiOperation(value = "批量删除角色定义", notes = "根据用户id批量删除角色定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="批量删除角色定义",description = "根据角色id批量删除角色定义")
+    @ApiOperation(value = "批量删除角色定义", notes = "根据角色id批量删除角色定义", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的权限定义id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelDefineRoleByIds")
     public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -185,8 +196,11 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-
-    @ApiOperation(value = "删除角色定义", notes = "根据角色id删除角色定义", response = String.class)
+    @OperLog(modelName="DefinePermissionController",action="删除角色定义",description = "根据角色id删除角色定义")
+    @ApiOperation(value = "删除角色定义", notes = "根据角色id删除角色定义", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的角色定义id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneDefineRoleByIds")
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, HttpServletResponse response, String delId){
         MyCommonResult result = new MyCommonResult() ;
@@ -204,7 +218,7 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = String.class)
+    @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/grantPermissionToRole")
     public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, HttpServletResponse response, String roleId,String[] checkIds){
         MyCommonResult result = new MyCommonResult() ;

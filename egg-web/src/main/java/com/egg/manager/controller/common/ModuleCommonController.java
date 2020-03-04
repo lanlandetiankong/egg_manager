@@ -7,6 +7,7 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.vo.module.DefineMenuVo;
 import com.egg.manager.vo.module.DefineModuleVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,13 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  ModuleCommonController ",description = "通用接口 - 模块")
 @RestController
 @RequestMapping("/common_api/module")
 public class ModuleCommonController extends BaseController{
 
 
-    @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = String.class)
+    @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult<DefineModuleVo> doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
@@ -50,7 +52,7 @@ public class ModuleCommonController extends BaseController{
     }
 
 
-    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = String.class)
+    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult<DefineMenuVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;

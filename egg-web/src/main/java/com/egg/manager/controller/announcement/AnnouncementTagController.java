@@ -17,6 +17,9 @@ import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,6 +40,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API -  AnnouncementTagController ",description = "公告标签接口")
 @RestController
 @RequestMapping("/announcement_tag")
 public class AnnouncementTagController extends BaseController {
@@ -62,8 +66,13 @@ public class AnnouncementTagController extends BaseController {
 
 
 
-    @ApiOperation(value = "查询公告标签信息Select列表", notes = "查询公告标签信息Select列表", response = String.class)
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息Select列表",description = "查询公告标签信息Select列表")
+    @ApiOperation(value = "查询公告标签信息Select列表", notes = "查询公告标签信息Select列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllAnnouncementTagEnums")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, HttpServletResponse response,String queryObj, String paginationObj, String sortObj) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
@@ -83,7 +92,7 @@ public class AnnouncementTagController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询公告标签信息列表", notes = "查询公告标签信息列表", response = String.class)
+    @ApiOperation(value = "查询公告标签信息列表", notes = "查询公告标签信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息列表",description = "查询公告标签信息列表")
     @PostMapping(value = "/getAllAnnouncementTags")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTags(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
@@ -105,7 +114,7 @@ public class AnnouncementTagController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = String.class)
+    @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息",description = "根据公告标签id查询公告标签信息")
     @PostMapping(value = "/getAnnouncementTagById")
     public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, HttpServletResponse response,String announcementTagId) {
@@ -122,7 +131,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = String.class)
+    @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="新增公告标签",description = "表单方式新增公告标签")
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, HttpServletResponse response,AnnouncementTagVo AnnouncementTagVo){
@@ -144,7 +153,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = String.class)
+    @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="更新公告标签",description = "表单方式更新公告标签")
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, HttpServletResponse response, AnnouncementTagVo AnnouncementTagVo){
@@ -166,8 +175,11 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "批量删除公告标签", notes = "根据用户id批量删除公告标签", response = String.class)
-    @OperLog(modelName="AnnouncementTagController",action="批量删除公告标签",description = "根据用户id批量删除公告标签")
+    @OperLog(modelName="AnnouncementTagController",action="批量删除公告标签",description = "根据公告标签id批量删除公告标签")
+    @ApiOperation(value = "批量删除公告标签", notes = "根据公告标签id批量删除公告标签", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的公告标签id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelAnnouncementTagByIds")
     public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -186,8 +198,11 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除公告标签", notes = "根据id删除公告标签", response = String.class)
     @OperLog(modelName="AnnouncementTagController",action="删除公告标签",description = "根据id删除公告标签")
+    @ApiOperation(value = "删除公告标签", notes = "根据id删除公告标签", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的公告标签id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneAnnouncementTagById")
     public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, HttpServletResponse response, String delId){
         MyCommonResult result = new MyCommonResult() ;

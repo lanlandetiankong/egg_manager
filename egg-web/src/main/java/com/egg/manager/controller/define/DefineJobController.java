@@ -16,6 +16,9 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,6 +40,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Api(value = "API ==>>  DefineJobController ",description = "职务定义接口")
 @RestController
 @RequestMapping("/define/define_job")
 public class DefineJobController extends BaseController {
@@ -62,8 +66,13 @@ public class DefineJobController extends BaseController {
 
 
 
-    @ApiOperation(value = "查询职务信息列表", notes = "查询职务信息列表", response = String.class)
     @OperLog(modelName="DefineJobController",action="查询职务信息列表",description = "查询职务信息列表")
+    @ApiOperation(value = "查询职务信息列表", notes = "查询职务信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/getAllDefineJobs")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
@@ -85,7 +94,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = String.class)
+    @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="查询职务信息",description = "根据职务id查询职务信息")
     @PostMapping(value = "/getDefineJobById")
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, HttpServletResponse response,String defineJobId) {
@@ -103,7 +112,7 @@ public class DefineJobController extends BaseController {
 
 
 
-    @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = String.class)
+    @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="新增职务",description = "表单方式新增职务")
     @PostMapping(value = "/doAddDefineJob")
     public MyCommonResult doAddDefineJob(HttpServletRequest request, HttpServletResponse response, DefineJobVo defineJobVo){
@@ -125,7 +134,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = String.class)
+    @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="更新职务信息",description = "表单方式更新职务信息")
     @PostMapping(value = "/doUpdateDefineJob")
     public MyCommonResult doUpdateDefineJob(HttpServletRequest request, HttpServletResponse response, DefineJobVo defineJobVo){
@@ -147,8 +156,11 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "批量删除职务", notes = "根据职务id批量删除职务", response = String.class)
     @OperLog(modelName="DefineJobController",action="批量删除职务",description = "根据职务id批量删除职务")
+    @ApiOperation(value = "批量删除职务", notes = "根据职务id批量删除职务", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要删除的职务定义id数组", required = true,dataTypeClass=String[].class),
+    })
     @PostMapping(value = "/batchDelDefineJobByIds")
     public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request, HttpServletResponse response,String[] delIds){
         MyCommonResult result = new MyCommonResult() ;
@@ -168,8 +180,11 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除职务", notes = "根据职务id删除职务", response = String.class)
     @OperLog(modelName="DefineJobController",action="删除职务",description = "根据职务id删除职务")
+    @ApiOperation(value = "删除职务", notes = "根据职务id删除职务", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delId",value = "要删除的职务定义id", required = true,dataTypeClass=String.class),
+    })
     @PostMapping(value = "/delOneDefineJobById")
     public MyCommonResult doDelOneDefineJobById(HttpServletRequest request, HttpServletResponse response,String delId){
         MyCommonResult result = new MyCommonResult() ;

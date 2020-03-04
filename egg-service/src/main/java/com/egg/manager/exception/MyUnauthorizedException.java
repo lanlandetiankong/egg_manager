@@ -2,8 +2,7 @@ package com.egg.manager.exception;
 
 /**
  * 身份认证异常
- * @author liugh
- * @since 2018-05-06
+ * @author zhouchengjie
  */
 public class MyUnauthorizedException extends RuntimeException {
     public MyUnauthorizedException(String msg) {

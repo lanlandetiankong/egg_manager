@@ -26,6 +26,8 @@ public class DefineMenuVo {
     private String urlJumpTypeStr;
     private String label ;
     private Integer level ;
+    private Integer orderNum ;
+
     private Integer state ;
     private String remark ;
     private Date createTime ;
@@ -50,6 +52,7 @@ public class DefineMenuVo {
         defineMenu.setHrefUrl(defineMenuVo.getHrefUrl());
         defineMenu.setLabel(defineMenuVo.getLabel());
         defineMenu.setLevel(defineMenuVo.getLevel());
+        defineMenu.setOrderNum(defineMenuVo.getOrderNum());
 
         defineMenu.setState(defineMenuVo.getState());
         defineMenu.setCreateTime(defineMenuVo.getCreateTime());
@@ -82,6 +85,7 @@ public class DefineMenuVo {
         }
         defineMenuVo.setLabel(defineMenu.getLabel());
         defineMenuVo.setLevel(defineMenu.getLevel());
+        defineMenuVo.setOrderNum(defineMenu.getOrderNum());
 
         defineMenuVo.setState(defineMenu.getState());
         defineMenuVo.setCreateTime(defineMenu.getCreateTime());

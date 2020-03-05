@@ -127,6 +127,7 @@ CREATE TABLE `em_define_menu` (
   `router_url` varchar(255) DEFAULT NULL,
   `href_url` varchar(255) DEFAULT NULL,
   `url_jump_type` int(11) DEFAULT NULL,
+  `order_num` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,

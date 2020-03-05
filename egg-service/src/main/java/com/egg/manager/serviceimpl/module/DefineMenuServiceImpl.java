@@ -10,6 +10,7 @@ import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
+import com.egg.manager.common.web.tree.CommonTreeSelectTranslate;
 import com.egg.manager.entity.module.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.module.DefineMenuMapper;
@@ -116,7 +117,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
                 if(rootId != null){
                     if(rootId.equals(menu.getParentId())){
                         tree = new CommonTreeSelect() ;
-                        childList.add(setDefineMenuParamToTreeSelect(menu,tree)) ;
+                        childList.add(CommonTreeSelectTranslate.setDefineMenuParamToTreeSelect(menu,tree)) ;
                     }
                 }
             }
@@ -147,18 +148,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
 
 
 
-    /**
-     * 菜单 树选择 ->entity 转 CommonTreeSelect
-     * @param menu
-     * @param tree
-     * @return
-     */
-    private CommonTreeSelect setDefineMenuParamToTreeSelect(DefineMenu menu, CommonTreeSelect tree) {
-        tree.setKey(menu.getFid());
-        tree.setValue(menu.getFid());
-        tree.setTitle(menu.getMenuName());
-        return tree;
-    }
+
 
 
     /**

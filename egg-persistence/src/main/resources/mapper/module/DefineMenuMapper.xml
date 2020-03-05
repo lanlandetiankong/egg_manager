@@ -13,7 +13,7 @@
         <result column="href_url" property="hrefUrl" />
         <result column="label" property="label" />
         <result column="level" property="level" />
-
+        <result column="order_num" property="orderNum" />
 
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
@@ -24,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,parent_id AS parentId,menu_name AS menuName, url_jump_type,icon_name,router_url,href_url,label,level,
+        fid,parent_id AS parentId,menu_name AS menuName, url_jump_type,icon_name,router_url,href_url,label,level,order_num,
         state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 

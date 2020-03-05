@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
@@ -106,7 +107,13 @@ public class DefineDepartmentController extends BaseController{
     @PostMapping("/getAllDepartmentTreeSelect")
     public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect() {
         MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
-        List<DefineDepartment> allDepartments  = defineDepartmentService.selectList(null);
+        //筛选与排序
+        EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
+        defineDepartmentEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        defineDepartmentEntityWrapper.orderBy("level",true);
+        defineDepartmentEntityWrapper.orderBy("order_num",true);
+        defineDepartmentEntityWrapper.orderBy("create_time",false);
+        List<DefineDepartment> allDepartments  = defineDepartmentService.selectList(defineDepartmentEntityWrapper);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartments);
         result.setResultList(treeList);
         return result ;

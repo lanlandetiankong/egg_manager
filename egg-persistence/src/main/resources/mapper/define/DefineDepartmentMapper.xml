@@ -7,10 +7,11 @@
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />
-        <result column="pid" property="pid" />
+        <result column="parent_id" property="parentId" />
         <result column="level" property="level" />
         <result column="order_num" property="orderNum" />
         <result column="description" property="description" />
+
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -20,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name,code, pid, level,order,description, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, name,code, parent_id, level,order_num,description, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
 

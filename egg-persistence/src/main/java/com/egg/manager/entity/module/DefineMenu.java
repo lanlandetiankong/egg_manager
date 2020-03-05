@@ -35,6 +35,9 @@ public class DefineMenu extends Model<DefineMenu> {
     private String hrefUrl ;
     private String label ;
     private Integer level ;
+    @TableField("order_num")
+    private Integer orderNum ;
+
 
     private Integer state ;
     private String remark ;

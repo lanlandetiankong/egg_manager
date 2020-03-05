@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -10,6 +11,7 @@ import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.controller.BaseController;
+import com.egg.manager.entity.define.DefineDepartment;
 import com.egg.manager.entity.module.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.module.DefineMenuMapper;
@@ -70,7 +72,13 @@ public class DefineMenuController extends BaseController{
     @PostMapping("/getAllMenuTreeSelect")
     public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
-        List<DefineMenu> allMenus  = defineMenuService.selectList(null);
+        //筛选与排序
+        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
+        defineMenuEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        defineMenuEntityWrapper.orderBy("level",true);
+        defineMenuEntityWrapper.orderBy("order_num",true);
+        defineMenuEntityWrapper.orderBy("create_time",false);
+        List<DefineMenu> allMenus  = defineMenuService.selectList(defineMenuEntityWrapper);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
         result.setResultList(treeList);
         return result ;
@@ -82,7 +90,13 @@ public class DefineMenuController extends BaseController{
     @PostMapping("/user/getGrantedMenuTree")
     public MyCommonResult<DefineMenu> doGetAllMenu() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
-        List<DefineMenu> allMenus  = defineMenuService.selectList(null);
+        //筛选与排序
+        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
+        defineMenuEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        defineMenuEntityWrapper.orderBy("level",true);
+        defineMenuEntityWrapper.orderBy("order_num",true);
+        defineMenuEntityWrapper.orderBy("create_time",false);
+        List<DefineMenu> allMenus  = defineMenuService.selectList(defineMenuEntityWrapper);
         List<CommonMenuTree> treeList = defineMenuService.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID,allMenus);
         result.setResultList(treeList);
         return result ;

@@ -361,3 +361,24 @@ CREATE TABLE `em_user_thirdparty` (
   `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `em_define_department` (
+  `fid` char(36) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `parent_id` char(36) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `order_num` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `last_modifyer` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义的部门';
+
+
+
+

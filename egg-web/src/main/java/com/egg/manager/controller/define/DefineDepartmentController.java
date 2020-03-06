@@ -13,6 +13,7 @@ import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineDepartment;
 import com.egg.manager.entity.module.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineDepartmentService;
 import com.egg.manager.service.redis.RedisHelper;
@@ -47,6 +48,8 @@ import java.util.List;
 @RequestMapping("/define/define_department")
 public class DefineDepartmentController extends BaseController{
 
+    @Autowired
+    private DefineDepartmentMapper defineDepartmentMapper;
     @Autowired
     private DefineDepartmentService defineDepartmentService;
     @Autowired
@@ -119,7 +122,17 @@ public class DefineDepartmentController extends BaseController{
         return result ;
     }
 
-
+    @OperLog(modelName="DefineDepartmentController",action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)")
+    @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
+    @PostMapping("/getDepartmentTreeSelectFilterChildrens")
+    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId) {
+        MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
+        List<DefineDepartment> allDepartment  =  defineDepartmentMapper.getDepartmentFilterChildrens(filterId,true);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartment);
+        result.setResultList(treeList);
+        return result ;
+    }
+    
     @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineDepartmentController",action="新增部门定义",description = "表单方式新增部门定义")
     @PostMapping(value = "/doAddDefineDepartment")

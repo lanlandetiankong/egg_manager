@@ -24,6 +24,10 @@
         fid, name,code, parent_id, level,order_num,description, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
+    <sql id="Base_Dd_Column_List">
+        dd.fid, dd.name,dd.code, dd.parent_id, dd.level,dd.order_num,dd.description, dd.state, dd.create_time, dd.update_time,dd.create_user,dd.last_modifyer
+    </sql>
+
 
     <update id="batchFakeDelByIds" >
         UPDATE em_define_department
@@ -36,4 +40,19 @@
             #{item}
         </foreach>
     </update>
+
+
+
+
+    <select id="getDepartmentFilterChildrens" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Dd_Column_List" />
+        from em_define_department dd
+        left join em_define_department ddc
+        on dd.parent_id = ddc.fid
+        where dd.parent_id != #{filterId}
+        <if test="onlyEnable == true">
+            and dd.state = 1
+        </if>
+        order by level,order_num,create_time desc
+    </select>
 </mapper>

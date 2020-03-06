@@ -20,6 +20,7 @@ public class CommonTreeSelectTranslate {
         tree.setKey(defineDepartment.getFid());
         tree.setValue(defineDepartment.getFid());
         tree.setTitle(defineDepartment.getName());
+        tree.setParentId(defineDepartment.getParentId());
         return tree;
     }
 
@@ -34,6 +35,7 @@ public class CommonTreeSelectTranslate {
         tree.setKey(menu.getFid());
         tree.setValue(menu.getFid());
         tree.setTitle(menu.getMenuName());
+        tree.setParentId(menu.getParentId());
         return tree;
     }
 }

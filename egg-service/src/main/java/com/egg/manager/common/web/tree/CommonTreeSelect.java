@@ -22,6 +22,7 @@ public class CommonTreeSelect {
     private String title  ;
     private String value  ;
     private String key ;
+    private String parentId ;
     private List<CommonTreeSelect> children;
 
 

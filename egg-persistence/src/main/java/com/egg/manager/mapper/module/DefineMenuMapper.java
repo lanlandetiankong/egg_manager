@@ -19,4 +19,15 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     //批量 伪删除
     int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+
+
+    /**
+     * 查询菜单(过滤指定节点下的所有节点
+     * @param filterId
+     * @param onlyEnable 是否只查询 状态为 可用 的数据
+     * @return
+     */
+    List<DefineMenu> getMenusFilterChildrens(@Param("filterId")String filterId,@Param("onlyEnable")boolean onlyEnable);
+
+
 }

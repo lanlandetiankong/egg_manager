@@ -24,8 +24,14 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,parent_id AS parentId,menu_name AS menuName, url_jump_type,icon_name,router_url,href_url,label,level,order_num,
+        fid,parent_id AS parentId,menu_name AS menuName, url_jump_type AS urlJumpType,icon_name AS iconName,router_url AS routerUrl,href_url AS hrefUrl,label,level,order_num  AS orderNum,
         state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Dm_Column_List">
+        dm.fid,dm.parent_id,dm.menu_name, dm.url_jump_type,dm.icon_name,dm.router_url,dm.href_url,dm.label,dm.level,dm.order_num,
+        dm.state, dm.create_time, dm.update_time,dm.create_user,dm.last_modifyer
     </sql>
 
 
@@ -40,4 +46,16 @@
             #{item}
         </foreach>
     </update>
+
+    <select id="getMenusFilterChildrens" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Dm_Column_List" />
+        from em_define_menu dm
+        left join em_define_menu dmc
+        on dm.parent_id = dmc.fid
+        where dm.parent_id != #{filterId}
+        <if test="onlyEnable == true">
+            and dm.state = 1
+        </if>
+        order by level,order_num,create_time desc
+    </select>
 </mapper>

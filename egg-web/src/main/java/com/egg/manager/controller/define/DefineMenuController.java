@@ -21,10 +21,12 @@ import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.module.DefineMenuVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -67,8 +71,8 @@ public class DefineMenuController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    @OperLog(modelName="DefineMenuController",action="查询路由菜单TreeSelect",description = "查询路由菜单TreeSelect")
-    @ApiOperation(value = "查询路由菜单TreeSelect", notes = "查询路由菜单TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="DefineMenuController",action="查询所有路由菜单TreeSelect",description = "查询所有路由菜单TreeSelect")
+    @ApiOperation(value = "查询所有路由菜单TreeSelect", notes = "查询所有路由菜单TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllMenuTreeSelect")
     public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
@@ -79,6 +83,17 @@ public class DefineMenuController extends BaseController{
         defineMenuEntityWrapper.orderBy("order_num",true);
         defineMenuEntityWrapper.orderBy("create_time",false);
         List<DefineMenu> allMenus  = defineMenuService.selectList(defineMenuEntityWrapper);
+        List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
+        result.setResultList(treeList);
+        return result ;
+    }
+
+    @OperLog(modelName="DefineMenuController",action="查询被过滤的路由菜单TreeSelect",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)")
+    @ApiOperation(value = "查询被过滤的路由菜单TreeSelect", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
+    @PostMapping("/getMenuTreeSelectFilterChildrens")
+    public MyCommonResult<DefineMenu> doGetMenuTreeSelectFilterChildrens(String filterId) {
+        MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
+        List<DefineMenu> allMenus  =  defineMenuMapper.getMenusFilterChildrens(filterId,true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
         result.setResultList(treeList);
         return result ;

@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONException;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.announcement.AnnouncementTag;
+import com.google.common.base.Joiner;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,6 +40,7 @@ public class AnnouncementDraftVo {
     private String shortContent ;   //概要的 公告内容
     private List<String> tagIds ; //公告标签 集合
     private List<String> tagNames ; //公告标签 集合
+    private String tagNameOfStr ; //公告标签 集合转字符串
     private String accessory ;      //附件
     private Integer isPublished ;      //是否已提交
 
@@ -109,6 +111,7 @@ public class AnnouncementDraftVo {
                         }
                     }
                     announcementDraftVo.setTagNames(tagNameList);
+                    announcementDraftVo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             }   catch (JSONException e){
                 e.printStackTrace();

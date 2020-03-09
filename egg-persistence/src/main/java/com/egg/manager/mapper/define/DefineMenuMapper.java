@@ -1,6 +1,6 @@
-package com.egg.manager.mapper.module;
+package com.egg.manager.mapper.define;
 
-import com.egg.manager.entity.module.DefineMenu;
+import com.egg.manager.entity.define.DefineMenu;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.egg.manager.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;

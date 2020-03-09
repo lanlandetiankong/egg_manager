@@ -6,9 +6,9 @@ import com.egg.manager.common.web.pagination.AntdvPaginationBean;
 import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
-import com.egg.manager.entity.module.DefineMenu;
+import com.egg.manager.entity.define.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.vo.module.DefineMenuVo;
+import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
 
 import java.util.List;

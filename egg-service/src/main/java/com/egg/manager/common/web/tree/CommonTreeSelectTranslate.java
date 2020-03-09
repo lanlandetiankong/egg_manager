@@ -1,10 +1,7 @@
 package com.egg.manager.common.web.tree;
 
 import com.egg.manager.entity.define.DefineDepartment;
-import com.egg.manager.entity.module.DefineMenu;
-import lombok.*;
-
-import java.util.List;
+import com.egg.manager.entity.define.DefineMenu;
 
 
 public class CommonTreeSelectTranslate {

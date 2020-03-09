@@ -11,22 +11,19 @@ import com.egg.manager.common.web.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.controller.BaseController;
-import com.egg.manager.entity.define.DefineDepartment;
-import com.egg.manager.entity.module.DefineMenu;
+import com.egg.manager.entity.define.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.mapper.module.DefineMenuMapper;
+import com.egg.manager.mapper.define.DefineMenuMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineMenuService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
-import com.egg.manager.vo.module.DefineMenuVo;
+import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.webvo.query.QueryFormFieldBean;
-import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 /**

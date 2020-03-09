@@ -1,8 +1,7 @@
-package com.egg.manager.vo.module;
+package com.egg.manager.vo.define;
 
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.entity.module.DefineMenu;
+import com.egg.manager.entity.define.DefineMenu;
 import lombok.*;
 
 import java.util.ArrayList;

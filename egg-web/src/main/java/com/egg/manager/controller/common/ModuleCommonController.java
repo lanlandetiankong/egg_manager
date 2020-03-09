@@ -5,7 +5,7 @@ import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
-import com.egg.manager.vo.module.DefineMenuVo;
+import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.vo.module.DefineModuleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

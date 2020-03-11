@@ -1,13 +1,11 @@
 package com.egg.manager.controller.announcement;
 
 import com.egg.manager.annotation.log.OperLog;
-import com.egg.manager.common.base.beans.FrontEntitySelectBean;
-import com.egg.manager.common.base.beans.FrontSelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
@@ -16,7 +14,7 @@ import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.vo.announcement.AnnouncementTagVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

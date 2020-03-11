@@ -2,13 +2,13 @@ package com.egg.manager.service.announcement;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 
 import java.util.List;
 

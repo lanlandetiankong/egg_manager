@@ -1,4 +1,4 @@
-package com.egg.manager.webvo.query;
+package com.egg.manager.common.base.query;
 
 import lombok.Data;
 
@@ -14,6 +14,7 @@ import lombok.Data;
 public class QueryFormFieldBean {
     private String fieldName;
     private String matching ;
+    private String sqlMatching ;
     private Object value ;
 
 
@@ -22,6 +23,7 @@ public class QueryFormFieldBean {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         bean.setMatching("equals");
+        bean.setSqlMatching("=");
         return bean ;
     }
 
@@ -30,6 +32,7 @@ public class QueryFormFieldBean {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         bean.setMatching("notEquals");
+        bean.setSqlMatching("!=");
         return bean ;
     }
 
@@ -38,6 +41,7 @@ public class QueryFormFieldBean {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         bean.setMatching("like");
+        bean.setSqlMatching("like");
         return bean ;
     }
 }

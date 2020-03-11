@@ -2,24 +2,18 @@ package com.egg.manager.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.ErrorActionEnum;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
-import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.service.redis.RedisHelper;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.session.RowBounds;
-import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,6 +185,8 @@ public class BaseController {
         AntdvPaginationBean paginationBean = null ;
         if(StringUtils.isNotBlank(paginationJson)){
             paginationBean = JSONObject.parseObject(paginationJson, AntdvPaginationBean.class) ;
+        }   else {
+            paginationBean = AntdvPaginationBean.gainDefaultPaginationBean();
         }
         return paginationBean ;
     }

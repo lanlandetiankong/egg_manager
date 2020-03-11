@@ -16,6 +16,11 @@ import java.util.List;
  */
 public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
+    /**
+     * [通用查询] 根据用户id查询用户entity
+     * @return
+     */
+    UserAccount commonSelectUserAccountById() ;
 
     //批量 伪删除
     int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser")UserAccount loginUser) ;

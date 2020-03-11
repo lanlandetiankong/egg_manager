@@ -24,9 +24,14 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl,password, phone, email, sex, user_type AS userType, type, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, user_name AS userName, account, nick_name AS nickName, avatar_url AS avatarUrl,password, phone, email, sex, user_type AS userType, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
     </sql>
 
+    <select id="commonSelectUserAccountById" parameterType="string" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM em_user_account
+        WHERE  fid = #{fid}
+     </select>
 
     <update id="batchFakeDelByIds" >
         UPDATE em_user_account SET  state = -1,last_modifyer = #{loginUser.fid}

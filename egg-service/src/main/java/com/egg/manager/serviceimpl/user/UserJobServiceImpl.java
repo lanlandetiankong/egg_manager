@@ -1,33 +1,25 @@
 package com.egg.manager.serviceimpl.user;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
-import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserJobService;
-import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.vo.user.UserJobVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
-import org.apache.catalina.User;
-import org.apache.commons.lang3.StringUtils;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;

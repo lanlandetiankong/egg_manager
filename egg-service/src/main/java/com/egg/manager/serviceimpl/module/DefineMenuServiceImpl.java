@@ -1,23 +1,25 @@
 package com.egg.manager.serviceimpl.module;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.common.web.tree.CommonTreeSelectTranslate;
+import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.entity.define.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineMenuMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineMenuService;
 import com.egg.manager.vo.define.DefineMenuVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,7 +153,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
 
 
     /**
-     * 分页查询 模块
+     * 分页查询 菜单定义
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
@@ -159,23 +161,10 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     @Override
     public void dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                        List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineMenuEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineMenuEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineMenuEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds,defineMenuEntityWrapper) ;
-        result.setResultList(DefineMenuVo.transferEntityToVoList(defineMenus));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefineMenuVo.transferDtoToVoList(defineMenuDtoList));
     }
 
 
@@ -211,8 +200,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         defineMenu.setCreateTime(now);
         defineMenu.setUpdateTime(now);
         if(loginUser != null){
-            defineMenu.setCreateUser(loginUser.getFid());
-            defineMenu.setLastModifyer(loginUser.getFid());
+            defineMenu.setCreateUserId(loginUser.getFid());
+            defineMenu.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineMenuMapper.insert(defineMenu) ;
         return addCount ;
@@ -250,7 +239,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
         if(loginUser != null){
-            defineMenu.setLastModifyer(loginUser.getFid());
+            defineMenu.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineMenuMapper.updateAllColumnById(defineMenu) ;
@@ -285,7 +274,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     public Integer dealDelDefineMenu(String delId,UserAccount loginUser) throws Exception{
         DefineMenu defineMenu = DefineMenu.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineMenu.setLastModifyer(loginUser.getFid());
+            defineMenu.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineMenuMapper.updateById(defineMenu);
         return delCount ;

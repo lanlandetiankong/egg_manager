@@ -4,42 +4,98 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.entity.define.DefineMenu">
-        <id column="fid" property="fid" />
-        <result column="parent_id" property="parentId" />
-        <result column="menu_name" property="menuName" />
-        <result column="url_jump_type" property="urlJumpType" />
-        <result column="icon_name" property="iconName" />
-        <result column="router_url" property="routerUrl" />
-        <result column="href_url" property="hrefUrl" />
-        <result column="label" property="label" />
-        <result column="level" property="level" />
-        <result column="order_num" property="orderNum" />
+        <id column="fid" property="fid"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="url_jump_type" property="urlJumpType"/>
+        <result column="icon_name" property="iconName"/>
+        <result column="router_url" property="routerUrl"/>
+        <result column="href_url" property="hrefUrl"/>
+        <result column="label" property="label"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
 
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user" property="createUser" />
-        <result column="last_modifyer" property="lastModifyer" />
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+    </resultMap>
+
+    <resultMap id="DtoResultMap" type="com.egg.manager.dto.define.DefineMenuDto">
+        <id column="fid" property="fid"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="url_jump_type" property="urlJumpType"/>
+        <result column="icon_name" property="iconName"/>
+        <result column="router_url" property="routerUrl"/>
+        <result column="href_url" property="hrefUrl"/>
+        <result column="label" property="label"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="parent_id" columnPrefix="parent_" property="parentMenuDto"
+                     javaType="com.egg.manager.dto.define.DefineMenuDto">
+            <id column="fid" property="fid"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="menu_name" property="menuName"/>
+            <result column="url_jump_type" property="urlJumpType"/>
+            <result column="icon_name" property="iconName"/>
+            <result column="router_url" property="routerUrl"/>
+            <result column="href_url" property="hrefUrl"/>
+            <result column="label" property="label"/>
+            <result column="level" property="level"/>
+            <result column="order_num" property="orderNum"/>
+            <result column="state" property="state"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="create_user_id" property="createUserId"/>
+            <result column="last_modifyer_id" property="lastModifyerId"/>
+        </association>
+        <association column="create_user_id" property="createUser" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         fid,parent_id AS parentId,menu_name AS menuName, url_jump_type AS urlJumpType,icon_name AS iconName,router_url AS routerUrl,href_url AS hrefUrl,label,level,order_num  AS orderNum,
-        state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        state, create_time AS createTime, update_time AS updateTime,create_user_id AS createUser,last_modifyer_id AS lastModifyer
     </sql>
 
-    <!-- 通用查询结果列 -->
+    <!-- 通用查询结果列(多表查询用)-->
     <sql id="Base_Dm_Column_List">
         dm.fid,dm.parent_id,dm.menu_name, dm.url_jump_type,dm.icon_name,dm.router_url,dm.href_url,dm.label,dm.level,dm.order_num,
-        dm.state, dm.create_time, dm.update_time,dm.create_user,dm.last_modifyer
+        dm.state, dm.create_time, dm.update_time,dm.create_user_id,dm.last_modifyer_id
     </sql>
 
 
-    <update id="batchFakeDelByIds" >
+    <!-- 通用查询结果列(分页查询用，默认表别名为 qpc)-->
+    <sql id="QueryPaging_Column_List">
+        qpc.fid,qpc.parent_id,qpc.menu_name, qpc.url_jump_type,qpc.icon_name,qpc.router_url,qpc.href_url,qpc.label,qpc.level,qpc.order_num,
+        qpc.state, qpc.create_time, qpc.update_time,qpc.create_user_id,qpc.last_modifyer_id
+    </sql>
+
+    <!-- 通用查询结果列(parentId,外键表)-->
+    <sql id="par_dm_Column_List">
+        par_dm.fid AS parent_fid,par_dm.parent_id AS parent_parent_id,par_dm.menu_name AS parent_menu_name, par_dm.url_jump_type AS parent_url_jump_type,
+        par_dm.icon_name AS parent_icon_name,par_dm.router_url AS parent_router_url,par_dm.href_url AS parent_href_url,par_dm.label AS parent_label,
+        par_dm.level AS parent_level,par_dm.order_num AS parent_order_num,
+        par_dm.state AS parent_state, par_dm.create_time AS parent_create_time, par_dm.update_time AS parent_update_time,
+        par_dm.create_user_id AS parent_create_user_id,par_dm.last_modifyer_id AS parent_last_modifyer_id
+    </sql>
+
+
+
+
+    <update id="batchFakeDelByIds">
         UPDATE em_define_menu
         SET state = -1
         <if test="loginUser != null">
-            ,last_modifyer = #{loginUser.fid}
+            ,last_modifyer_id = #{loginUser.fid}
         </if>
         WHERE fid IN
         <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
@@ -48,7 +104,8 @@
     </update>
 
     <select id="getMenusFilterChildrens" resultMap="BaseResultMap">
-        SELECT  <include refid="Base_Dm_Column_List" />
+        SELECT
+        <include refid="Base_Dm_Column_List"/>
         from em_define_menu dm
         left join em_define_menu dmc
         on dm.parent_id = dmc.fid
@@ -58,4 +115,48 @@
         </if>
         order by level,order_num,create_time desc
     </select>
+
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT <include refid="QueryPaging_Column_List" />
+        , <include refid="par_dm_Column_List"/>
+        FROM em_define_menu qpc
+        LEFT JOIN em_define_menu par_dm
+        on qpc.parent_id = par_dm.fid
+        <where>
+            <if test="sortFieldList != null and sortFieldList.size()>0">
+                <foreach collection="queryFieldList" index="index" item="item" separator="">
+                    AND qpc.${item.fieldName}
+                    <choose>
+                        <when test="item.matching == 'equals' ">
+                            = ${item.value}
+                        </when>
+                        <when test="item.matching == 'notEquals' ">
+                            != ${item.value}
+                        </when>
+                        <when test="item.matching == 'like' ">
+                            like  '%' + ${item.value} + '%'
+                        </when>
+                    </choose>
+                </foreach>
+            </if>
+        </where>
+        <if test="sortFieldList != null and sortFieldList.size()>0">
+            ORDER  BY
+            <foreach collection="sortFieldList" index="index" item="item" separator=",">
+                qpc.${item.field}
+                <choose>
+                    <when test="item.isAsc == true">
+                        asc
+                    </when>
+                    <when test="item.isAsc == false">
+                        desc
+                    </when>
+                </choose>
+            </foreach>
+        </if>
+
+    </select>
+
+
 </mapper>

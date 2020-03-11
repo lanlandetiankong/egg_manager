@@ -3,14 +3,14 @@ package com.egg.manager.serviceimpl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.vo.user.UserAccountVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -186,4 +186,22 @@ public class CommonFuncServiceImpl implements CommonFuncService {
         }
         return uList;
     }
+
+
+    /**
+     * 取得 mybatisplus-分页查询Pagination
+     * @param paginationBean
+     * @return
+     */
+    @Override
+    public Pagination dealAntvPageToPagination(AntdvPaginationBean paginationBean){
+        Pagination pagination = new Pagination();
+        if(paginationBean != null){
+            pagination.setCurrent(paginationBean.getCurrent());
+            pagination.setSize(paginationBean.getPageSize());
+        }
+        return pagination ;
+    }
+
+
 }

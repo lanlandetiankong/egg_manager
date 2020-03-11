@@ -1,21 +1,17 @@
 package com.egg.manager.service;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
-import scala.Int;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * \* note:
@@ -82,4 +78,13 @@ public interface CommonFuncService {
      * @return
      */
     List<String> gainMvcMappingUrl(HttpServletRequest request);
+
+
+
+    /**
+     * 取得 mybatisplus-分页查询Pagination
+     * @param paginationBean 分页bean
+     * @return
+     */
+    Pagination dealAntvPageToPagination(AntdvPaginationBean paginationBean);
 }

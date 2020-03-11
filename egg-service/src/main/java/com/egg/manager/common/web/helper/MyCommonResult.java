@@ -2,7 +2,7 @@ package com.egg.manager.common.web.helper;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import lombok.*;
 

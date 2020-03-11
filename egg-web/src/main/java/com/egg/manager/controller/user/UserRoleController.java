@@ -1,13 +1,11 @@
 package com.egg.manager.controller.user;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.annotation.log.OperLog;
-import com.egg.manager.common.web.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
-import com.egg.manager.common.web.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
@@ -15,16 +13,14 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
-import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.service.user.UserRoleService;
 import com.egg.manager.vo.user.UserRoleVo;
-import com.egg.manager.webvo.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 /**

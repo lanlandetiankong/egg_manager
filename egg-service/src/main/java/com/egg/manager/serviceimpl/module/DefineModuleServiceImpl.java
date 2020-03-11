@@ -89,8 +89,8 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         defineModule.setCreateTime(now);
         defineModule.setUpdateTime(now);
         if(loginUser != null){
-            defineModule.setCreateUser(loginUser.getFid());
-            defineModule.setLastModifyer(loginUser.getFid());
+            defineModule.setCreateUserId(loginUser.getFid());
+            defineModule.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineModuleMapper.insert(defineModule) ;
         return addCount ;
@@ -110,7 +110,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         defineModuleVo.setUpdateTime(now);
         DefineModule defineModule = DefineModuleVo.transferVoToEntity(defineModuleVo);
         if(loginUser != null){
-            defineModule.setLastModifyer(loginUser.getFid());
+            defineModule.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineModuleMapper.updateAllColumnById(defineModule) ;
@@ -145,7 +145,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     public Integer dealDelDefineModule(String delId,UserAccount loginUser) throws Exception{
         DefineModule defineModule = DefineModule.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineModule.setLastModifyer(loginUser.getFid());
+            defineModule.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineModuleMapper.updateById(defineModule);
         return delCount ;

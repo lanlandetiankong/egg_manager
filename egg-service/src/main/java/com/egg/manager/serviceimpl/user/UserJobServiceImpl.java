@@ -92,8 +92,8 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         userJob.setCreateTime(now);
         userJob.setUpdateTime(now);
         if(loginUser != null){
-            userJob.setCreateUser(loginUser.getFid());
-            userJob.setLastModifyer(loginUser.getFid());
+            userJob.setCreateUserId(loginUser.getFid());
+            userJob.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = userJobMapper.insert(userJob) ;
         return addCount ;
@@ -113,7 +113,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         userJobVo.setUpdateTime(now);
         UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
         if(loginUser != null){
-            userJob.setLastModifyer(loginUser.getFid());
+            userJob.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = userJobMapper.updateAllColumnById(userJob) ;
@@ -150,7 +150,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
     public Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception{
         UserJob userJob = UserJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            userJob.setLastModifyer(loginUser.getFid());
+            userJob.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = userJobMapper.updateById(userJob);
         return delCount ;

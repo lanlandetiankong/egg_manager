@@ -21,8 +21,21 @@ import java.util.List;
  */
 public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
+    /**
+     * [分页搜索查询] - 菜单定义
+     * @param page
+     * @param queryFieldBeanList
+     * @param sortBeans
+     * @return
+     */
+    List<DefineMenuDto> selectQueryPage(Pagination page,@Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,@Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
-    //批量 伪删除
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
     int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
 
 
@@ -35,12 +48,5 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
     List<DefineMenu> getMenusFilterChildrens(@Param("filterId")String filterId,@Param("onlyEnable")boolean onlyEnable);
 
 
-    /**
-     * [分页查询] - 菜单定义
-     * @param page
-     * @param queryFieldBeanList
-     * @param sortBeans
-     * @return
-     */
-    List<DefineMenuDto> selectQueryPage(Pagination page,@Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,@Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
 }

@@ -3,6 +3,7 @@ package com.egg.manager.vo.module;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.entity.module.DefineModule;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -28,8 +29,13 @@ public class DefineModuleVo {
     private String remark ;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
 
@@ -48,8 +54,8 @@ public class DefineModuleVo {
         defineModule.setState(defineModuleVo.getState());
         defineModule.setCreateTime(defineModuleVo.getCreateTime());
         defineModule.setUpdateTime(defineModuleVo.getUpdateTime());
-        defineModule.setCreateUser(defineModuleVo.getCreateUser());
-        defineModule.setLastModifyer(defineModuleVo.getLastModifyer());
+        defineModule.setCreateUserId(defineModuleVo.getCreateUserId());
+        defineModule.setLastModifyerId(defineModuleVo.getLastModifyerId());
         defineModule.setRemark(defineModuleVo.getRemark());
         return defineModule ;
     }
@@ -76,8 +82,8 @@ public class DefineModuleVo {
         defineModuleVo.setState(defineModule.getState());
         defineModuleVo.setCreateTime(defineModule.getCreateTime());
         defineModuleVo.setUpdateTime(defineModule.getUpdateTime());
-        defineModuleVo.setCreateUser(defineModule.getCreateUser());
-        defineModuleVo.setLastModifyer(defineModule.getLastModifyer());
+        defineModuleVo.setCreateUserId(defineModule.getCreateUserId());
+        defineModuleVo.setLastModifyerId(defineModule.getLastModifyerId());
         defineModuleVo.setRemark(defineModule.getRemark());
         return defineModuleVo ;
     }

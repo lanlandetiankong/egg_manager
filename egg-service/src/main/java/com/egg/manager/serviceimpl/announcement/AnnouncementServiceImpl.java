@@ -65,8 +65,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         announcement.setCreateTime(now);
         announcement.setUpdateTime(now);
         if(loginUser != null){
-            announcement.setCreateUser(loginUser.getFid());
-            announcement.setLastModifyer(loginUser.getFid());
+            announcement.setCreateUserId(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = announcementMapper.insert(announcement) ;
         return addCount ;
@@ -90,8 +90,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         announcement.setCreateTime(now);
         announcement.setUpdateTime(now);
         if(loginUser != null){
-            announcement.setCreateUser(loginUser.getFid());
-            announcement.setLastModifyer(loginUser.getFid());
+            announcement.setCreateUserId(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
         }
         //修改 公告草稿 状态
         announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,false);
@@ -157,7 +157,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     public Integer dealDelAnnouncement(String delId,UserAccount loginUser) throws Exception{
         Announcement announcement = Announcement.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            announcement.setLastModifyer(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = announcementMapper.updateById(announcement);
         return delCount ;

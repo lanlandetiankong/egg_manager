@@ -115,8 +115,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     operationLog.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     String userAccountId = userAccountToken.getUserAccountId() ;
                     operationLog.setUserAccountId(userAccountId);
-                    operationLog.setCreateUser(userAccountId);
-                    operationLog.setLastModifyer(userAccountId);
+                    operationLog.setCreateUserId(userAccountId);
+                    operationLog.setLastModifyerId(userAccountId);
                 }
                 //取得 请求头bean
                 RequestHeaderBean requestHeaderBean = commonFuncService.gainRequestHeaderBeanByRequest(request);

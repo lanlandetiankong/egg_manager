@@ -1,6 +1,7 @@
 package com.egg.manager.vo.organization;
 
 import com.egg.manager.entity.organization.DefineTenant;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -20,12 +21,17 @@ public class DefineTenantVo {
     private String dbCode;
     private String typeStr ;
     private Integer state ;
+    private String remark ;
     private Date createTime ;
     private Date updateTime ;
 
-    private String createUser ;
-    private String lastModifyer;
-    private String remark ;
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
+
 
 
 
@@ -48,8 +54,8 @@ public class DefineTenantVo {
         defineTenant.setState(defineTenantVo.getState());
         defineTenant.setCreateTime(defineTenantVo.getCreateTime());
         defineTenant.setUpdateTime(defineTenantVo.getUpdateTime());
-        defineTenant.setCreateUser(defineTenantVo.getCreateUser());
-        defineTenant.setLastModifyer(defineTenantVo.getLastModifyer());
+        defineTenant.setCreateUserId(defineTenantVo.getCreateUserId());
+        defineTenant.setLastModifyerId(defineTenantVo.getLastModifyerId());
         defineTenant.setRemark(defineTenantVo.getRemark());
         return defineTenant ;
     }
@@ -66,8 +72,8 @@ public class DefineTenantVo {
         defineTenantVo.setState(defineTenant.getState());
         defineTenantVo.setCreateTime(defineTenant.getCreateTime());
         defineTenantVo.setUpdateTime(defineTenant.getUpdateTime());
-        defineTenantVo.setCreateUser(defineTenant.getCreateUser());
-        defineTenantVo.setLastModifyer(defineTenant.getLastModifyer());
+        defineTenantVo.setCreateUserId(defineTenant.getCreateUserId());
+        defineTenantVo.setLastModifyerId(defineTenant.getLastModifyerId());
         defineTenantVo.setRemark(defineTenant.getRemark());
         return defineTenantVo ;
     }

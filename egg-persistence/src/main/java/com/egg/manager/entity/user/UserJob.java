@@ -27,16 +27,17 @@ public class UserJob extends Model<UserJob> {
     @TableField(value = "define_job_id")
     private  String defineJobId ;
     private Integer state ;
+    private String remark;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
 
-    @TableField(value = "create_user")
-    private String createUser ;
-    @TableField(value = "last_modifyer")
-    private String lastModifyer;
-    private String remark;
+    @TableField(value = "create_user_id")
+    private String createUserId ;
+    @TableField(value = "last_modifyer_id")
+    private String lastModifyerId;
+
 
     @Override
     protected Serializable pkVal() {
@@ -62,8 +63,8 @@ public class UserJob extends Model<UserJob> {
         userJob.setCreateTime(now);
         userJob.setUpdateTime(now);
         if(loginUser != null){
-            userJob.setCreateUser(loginUser.getFid());
-            userJob.setLastModifyer(loginUser.getFid());
+            userJob.setCreateUserId(loginUser.getFid());
+            userJob.setLastModifyerId(loginUser.getFid());
         }
         return userJob ;
     }

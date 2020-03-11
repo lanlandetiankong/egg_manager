@@ -3,9 +3,12 @@ package com.egg.manager.vo.announcement;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.announcement.AnnouncementTag;
+import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import com.google.common.base.Joiner;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
@@ -48,8 +51,13 @@ public class AnnouncementDraftVo {
     private String remark;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
+
 
 
 
@@ -74,8 +82,8 @@ public class AnnouncementDraftVo {
         announcementDraft.setRemark(announcementDraftVo.getRemark());
         announcementDraft.setCreateTime(announcementDraftVo.getCreateTime());
         announcementDraft.setUpdateTime(announcementDraftVo.getUpdateTime());
-        announcementDraft.setCreateUser(announcementDraftVo.getCreateUser());
-        announcementDraft.setLastModifyer(announcementDraftVo.getLastModifyer());
+        announcementDraft.setCreateUserId(announcementDraftVo.getCreateUserId());
+        announcementDraft.setLastModifyerId(announcementDraftVo.getLastModifyerId());
         return announcementDraft ;
     }
 
@@ -123,8 +131,8 @@ public class AnnouncementDraftVo {
         announcementDraftVo.setRemark(announcementDraft.getRemark());
         announcementDraftVo.setCreateTime(announcementDraft.getCreateTime());
         announcementDraftVo.setUpdateTime(announcementDraft.getUpdateTime());
-        announcementDraftVo.setCreateUser(announcementDraft.getCreateUser());
-        announcementDraftVo.setLastModifyer(announcementDraft.getLastModifyer());
+        announcementDraftVo.setCreateUserId(announcementDraft.getCreateUserId());
+        announcementDraftVo.setLastModifyerId(announcementDraft.getLastModifyerId());
         return announcementDraftVo ;
     }
 

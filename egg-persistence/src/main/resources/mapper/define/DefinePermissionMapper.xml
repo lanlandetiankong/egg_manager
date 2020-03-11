@@ -11,17 +11,17 @@
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
-        <result column="create_user" property="createUser" />
-        <result column="last_modifyer" property="lastModifyer" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="last_modifyer_id" property="lastModifyerId" />
         <result column="remark" property="remark" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name, code, type, state,  create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+        fid, name, code, type, state,  create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId,remark
     </sql>
     <sql id="Base_Dp_Column_List">
-        dp.fid, dp.name, dp.code, dp.type, dp.state,dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user AS createUser,dp.last_modifyer AS lastModifyer,dp.remark
+        dp.fid, dp.name, dp.code, dp.type, dp.state,dp.create_time AS createTime, dp.update_time AS updateTime,dp.create_user_id AS createUserId,dp.last_modifyer_id AS lastModifyerId,dp.remark
     </sql>
 
 
@@ -29,7 +29,7 @@
         UPDATE em_define_permission
         SET state = -1
         <if test="loginUser != null">
-            ,last_modifyer = #{loginUser.fid}
+            ,last_modifyer_id = #{loginUser.fid}
         </if>
         WHERE fid IN
         <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
@@ -41,7 +41,7 @@
         UPDATE em_role_permission
         SET state = -1
         <if test="loginUser != null">
-            ,last_modifyer = #{loginUser.fid}
+            ,last_modifyer_id = #{loginUser.fid}
         </if>
         WHERE define_role_id = #{roleId}
     </update>

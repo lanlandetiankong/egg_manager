@@ -1,5 +1,6 @@
 package com.egg.manager.vo.user;
 
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
 import lombok.*;
 
@@ -20,8 +21,13 @@ public class UserJobVo {
     private Integer state;
     private Date createTime;
     private Date updateTime;
-    private String createUser;
-    private String lastModifyer;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
 
@@ -36,8 +42,8 @@ public class UserJobVo {
         userJob.setState(userJobVo.getState());
         userJob.setCreateTime(userJobVo.getCreateTime());
         userJob.setUpdateTime(userJobVo.getUpdateTime());
-        userJob.setCreateUser(userJobVo.getCreateUser());
-        userJob.setLastModifyer(userJobVo.getLastModifyer());
+        userJob.setCreateUserId(userJobVo.getCreateUserId());
+        userJob.setLastModifyerId(userJobVo.getLastModifyerId());
         return userJob ;
     }
 
@@ -53,8 +59,8 @@ public class UserJobVo {
         userJobVo.setState(userJob.getState());
         userJobVo.setCreateTime(userJob.getCreateTime());
         userJobVo.setUpdateTime(userJob.getUpdateTime());
-        userJobVo.setCreateUser(userJob.getCreateUser());
-        userJobVo.setLastModifyer(userJob.getLastModifyer());
+        userJobVo.setCreateUserId(userJob.getCreateUserId());
+        userJobVo.setLastModifyerId(userJob.getLastModifyerId());
         return userJobVo ;
     }
 

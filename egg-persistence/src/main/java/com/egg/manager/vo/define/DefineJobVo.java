@@ -2,6 +2,7 @@ package com.egg.manager.vo.define;
 
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.entity.define.DefineJob;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -24,8 +25,12 @@ public class DefineJobVo {
     private String remark ;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
 
@@ -42,8 +47,8 @@ public class DefineJobVo {
         defineJob.setRemark(defineJobVo.getRemark());
         defineJob.setCreateTime(defineJobVo.getCreateTime());
         defineJob.setUpdateTime(defineJobVo.getUpdateTime());
-        defineJob.setCreateUser(defineJobVo.getCreateUser());
-        defineJob.setLastModifyer(defineJobVo.getLastModifyer());
+        defineJob.setCreateUserId(defineJobVo.getCreateUserId());
+        defineJob.setLastModifyerId(defineJobVo.getLastModifyerId());
         return defineJob ;
     }
 
@@ -64,8 +69,8 @@ public class DefineJobVo {
         defineJobVo.setRemark(defineJob.getRemark());
         defineJobVo.setCreateTime(defineJob.getCreateTime());
         defineJobVo.setUpdateTime(defineJob.getUpdateTime());
-        defineJobVo.setCreateUser(defineJob.getCreateUser());
-        defineJobVo.setLastModifyer(defineJob.getLastModifyer());
+        defineJobVo.setCreateUserId(defineJob.getCreateUserId());
+        defineJobVo.setLastModifyerId(defineJob.getLastModifyerId());
         return defineJobVo ;
     }
 

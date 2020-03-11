@@ -86,8 +86,8 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         defineTenant.setCreateTime(now);
         defineTenant.setUpdateTime(now);
         if(loginUser != null){
-            defineTenant.setCreateUser(loginUser.getFid());
-            defineTenant.setLastModifyer(loginUser.getFid());
+            defineTenant.setCreateUserId(loginUser.getFid());
+            defineTenant.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineTenantMapper.insert(defineTenant) ;
         return addCount ;
@@ -107,7 +107,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         defineTenantVo.setUpdateTime(now);
         DefineTenant defineTenant = DefineTenantVo.transferVoToEntity(defineTenantVo);
         if(loginUser != null){
-            defineTenant.setLastModifyer(loginUser.getFid());
+            defineTenant.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineTenantMapper.updateAllColumnById(defineTenant) ;
@@ -142,7 +142,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     public Integer dealDelDefineTenant(String delId,UserAccount loginUser) throws Exception{
         DefineTenant defineTenant = DefineTenant.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineTenant.setLastModifyer(loginUser.getFid());
+            defineTenant.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineTenantMapper.updateById(defineTenant);
         return delCount ;

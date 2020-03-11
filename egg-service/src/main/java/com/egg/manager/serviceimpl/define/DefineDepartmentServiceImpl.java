@@ -155,8 +155,8 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         defineDepartment.setCreateTime(now);
         defineDepartment.setUpdateTime(now);
         if(loginUser != null){
-            defineDepartment.setCreateUser(loginUser.getFid());
-            defineDepartment.setLastModifyer(loginUser.getFid());
+            defineDepartment.setCreateUserId(loginUser.getFid());
+            defineDepartment.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineDepartmentMapper.insert(defineDepartment) ;
         return addCount ;
@@ -192,7 +192,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
         if(loginUser != null){
-            defineDepartment.setLastModifyer(loginUser.getFid());
+            defineDepartment.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineDepartmentMapper.updateAllColumnById(defineDepartment) ;
@@ -227,7 +227,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     public Integer dealDelDefineDepartment(String delId,UserAccount loginUser) throws Exception{
         DefineDepartment defineDepartment = DefineDepartment.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineDepartment.setLastModifyer(loginUser.getFid());
+            defineDepartment.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineDepartmentMapper.updateById(defineDepartment);
         return delCount ;

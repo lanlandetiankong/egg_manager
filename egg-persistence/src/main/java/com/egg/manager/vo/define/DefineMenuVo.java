@@ -4,6 +4,7 @@ import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.entity.define.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -33,11 +34,13 @@ public class DefineMenuVo {
     private String remark ;
     private Date createTime ;
     private Date updateTime ;
+
     private String createUserId ;
     private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
 
-    private String createUserNickName ;
-    private String lastModifyerNickName;
+
 
 
 
@@ -131,14 +134,9 @@ public class DefineMenuVo {
         defineMenuVo.setUpdateTime(defineMenuDto.getUpdateTime());
         defineMenuVo.setCreateUserId(defineMenuDto.getCreateUserId());
         defineMenuVo.setLastModifyerId(defineMenuDto.getLastModifyerId());
-        UserAccount createUser = defineMenuDto.getCreateUser();
-        if(createUser != null){
-            defineMenuVo.setCreateUserNickName(createUser.getNickName());
-        }
-        UserAccount lastModifyer = defineMenuDto.getLastModifyer();
-        if(lastModifyer != null){
-            defineMenuVo.setLastModifyerNickName(lastModifyer.getNickName());
-        }
+        defineMenuVo.setCreateUser(UserAccountVo.transferEntityToVo(defineMenuDto.getCreateUser()));
+        defineMenuVo.setLastModifyer(UserAccountVo.transferEntityToVo(defineMenuDto.getLastModifyer()));
+
         defineMenuVo.setRemark(defineMenuDto.getRemark());
         return defineMenuVo ;
     }

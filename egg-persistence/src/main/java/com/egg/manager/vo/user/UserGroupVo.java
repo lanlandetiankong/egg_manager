@@ -1,5 +1,6 @@
 package com.egg.manager.vo.user;
 
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -21,6 +22,13 @@ public class UserGroupVo {
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
+
+
 }

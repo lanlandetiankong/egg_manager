@@ -10,17 +10,17 @@
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
-        <result column="create_user" property="createUser" />
-        <result column="last_modifyer" property="lastModifyer" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="last_modifyer_id" property="lastModifyerId" />
         <result column="remark" property="remark" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_account_id AS userAccountId, define_job_id AS defineJobId,state,create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer,remark
+        fid, user_account_id AS userAccountId, define_job_id AS defineJobId,state,create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId,remark
     </sql>
     <sql id="Base_Insert_Column_List">
-        fid, user_account_id, define_job_id, state, create_time, update_time,create_user,last_modifyer,remark
+        fid, user_account_id, define_job_id, state, create_time, update_time,create_user_id,last_modifyer_id,remark
     </sql>
 
     <sql id="Base_Insert_Item_Column_List">
@@ -30,8 +30,8 @@
         #{item.state},
         #{item.createTime},
         #{item.updateTime},
-        #{item.createUser},
-        #{item.lastModifyer},
+        #{item.createUserId},
+        #{item.lastModifyerId},
         #{item.remark}
     </sql>
 
@@ -53,7 +53,7 @@
         UPDATE em_user_job
         SET state = -1
             <if test="loginUser != null">
-                ,last_modifyer=#{loginUser.fid}
+                ,last_modifyer_id=#{loginUser.fid}
             </if>
         where fid IN
         <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
@@ -65,7 +65,7 @@
         UPDATE em_user_job
         SET  state = #{stateVal}
             <if test="loginUser != null">
-                ,last_modifyer=#{loginUser.fid}
+                ,last_modifyer_id=#{loginUser.fid}
             </if>
         where user_account_id = #{userAccountId}
         and define_job_id IN

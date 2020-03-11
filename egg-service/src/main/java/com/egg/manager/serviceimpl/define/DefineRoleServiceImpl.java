@@ -185,8 +185,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         defineRole.setCreateTime(now);
         defineRole.setUpdateTime(now);
         if(loginUser != null){
-            defineRole.setCreateUser(loginUser.getFid());
-            defineRole.setLastModifyer(loginUser.getFid());
+            defineRole.setCreateUserId(loginUser.getFid());
+            defineRole.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineRoleMapper.insert(defineRole) ;
         return addCount ;
@@ -206,7 +206,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         defineRoleVo.setUpdateTime(now);
         DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
         if(loginUser != null){
-            defineRole.setLastModifyer(loginUser.getFid());
+            defineRole.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineRoleMapper.updateAllColumnById(defineRole) ;
@@ -241,7 +241,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     public Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception{
         DefineRole defineRole = DefineRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineRole.setLastModifyer(loginUser.getFid());
+            defineRole.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineRoleMapper.updateById(defineRole);
         return delCount ;

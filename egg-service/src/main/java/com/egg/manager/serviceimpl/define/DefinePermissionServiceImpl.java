@@ -99,8 +99,8 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         definePermission.setCreateTime(now);
         definePermission.setUpdateTime(now);
         if(loginUser != null){
-            definePermission.setCreateUser(loginUser.getFid());
-            definePermission.setLastModifyer(loginUser.getFid());
+            definePermission.setCreateUserId(loginUser.getFid());
+            definePermission.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = definePermissionMapper.insert(definePermission) ;
         return addCount ;
@@ -120,7 +120,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         definePermissionVo.setUpdateTime(now);
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
         if(loginUser != null){
-            definePermission.setLastModifyer(loginUser.getFid());
+            definePermission.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = definePermissionMapper.updateAllColumnById(definePermission) ;
@@ -155,7 +155,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
         DefinePermission definePermission = DefinePermission.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            definePermission.setLastModifyer(loginUser.getFid());
+            definePermission.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = definePermissionMapper.updateById(definePermission);
         return delCount ;

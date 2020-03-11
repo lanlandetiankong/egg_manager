@@ -130,8 +130,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             userAccount.setPassword(pwd);
         }
         if(loginUser != null){
-            userAccount.setCreateUser(loginUser.getFid());
-            userAccount.setLastModifyer(loginUser.getFid());
+            userAccount.setCreateUserId(loginUser.getFid());
+            userAccount.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = userAccountMapper.insert(userAccount) ;
         return addCount ;
@@ -152,7 +152,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         userAccountVo.setUpdateTime(now);
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
         if(loginUser != null){
-            userAccount.setLastModifyer(loginUser.getFid());
+            userAccount.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = userAccountMapper.updateAllColumnById(userAccount) ;
@@ -191,7 +191,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     public Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception{
         UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            userAccount.setLastModifyer(loginUser.getFid());
+            userAccount.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = userAccountMapper.updateById(userAccount);
         return delCount ;
@@ -229,7 +229,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
         if(loginUser != null){
-            userAccount.setLastModifyer(loginUser.getFid());
+            userAccount.setLastModifyerId(loginUser.getFid());
         }
         Integer lockCount = userAccountMapper.updateById(userAccount);
         return lockCount ;

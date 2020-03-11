@@ -63,8 +63,8 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         announcementDraft.setCreateTime(now);
         announcementDraft.setUpdateTime(now);
         if(loginUser != null){
-            announcementDraft.setCreateUser(loginUser.getFid());
-            announcementDraft.setLastModifyer(loginUser.getFid());
+            announcementDraft.setCreateUserId(loginUser.getFid());
+            announcementDraft.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = announcementDraftMapper.insert(announcementDraft) ;
         return addCount ;
@@ -93,7 +93,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
 
         announcementDraft.setUpdateTime(now);
         if(loginUser != null){
-            announcementDraft.setLastModifyer(loginUser.getFid());
+            announcementDraft.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = announcementDraftMapper.updateById(announcementDraft) ;
         return addCount ;
@@ -157,7 +157,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     public Integer dealDelAnnouncementDraft(String delId,UserAccount loginUser) throws Exception{
         AnnouncementDraft announcementDraft = AnnouncementDraft.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            announcementDraft.setLastModifyer(loginUser.getFid());
+            announcementDraft.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = announcementDraftMapper.updateById(announcementDraft);
         return delCount ;
@@ -201,7 +201,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         announcementDraft.setState(BaseStateEnum.DELETE.getValue());
         announcementDraft.setIsPublished(BaseStateEnum.ENABLED.getValue());
         if(loginUser != null){
-            announcementDraft.setLastModifyer(loginUser.getFid());
+            announcementDraft.setLastModifyerId(loginUser.getFid());
         }
         //修稿 草稿标识
         Integer delCount = announcementDraftMapper.updateById(announcementDraft);
@@ -227,11 +227,11 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
             announcement.setCreateTime(now);
             announcement.setUpdateTime(now);
             if(loginUser != null){
-                announcement.setCreateUser(loginUser.getFid());
-                announcement.setLastModifyer(loginUser.getFid());
+                announcement.setCreateUserId(loginUser.getFid());
+                announcement.setLastModifyerId(loginUser.getFid());
             }   else {
-                announcement.setCreateUser(announcementDraft.getCreateUser());
-                announcement.setLastModifyer(announcementDraft.getLastModifyer());
+                announcement.setCreateUserId(announcementDraft.getCreateUserId());
+                announcement.setLastModifyerId(announcementDraft.getLastModifyerId());
             }
         }
         return announcement ;

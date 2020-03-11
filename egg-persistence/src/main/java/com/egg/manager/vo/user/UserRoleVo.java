@@ -23,8 +23,13 @@ public class UserRoleVo {
     private Integer state;
     private Date createTime;
     private Date updateTime;
-    private String createUser;
-    private String lastModifyer;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
 
@@ -40,8 +45,8 @@ public class UserRoleVo {
         userRole.setState(userRoleVo.getState());
         userRole.setCreateTime(userRoleVo.getCreateTime());
         userRole.setUpdateTime(userRoleVo.getUpdateTime());
-        userRole.setCreateUser(userRoleVo.getCreateUser());
-        userRole.setLastModifyer(userRoleVo.getLastModifyer());
+        userRole.setCreateUserId(userRoleVo.getCreateUserId());
+        userRole.setLastModifyerId(userRoleVo.getLastModifyerId());
         return userRole ;
     }
 
@@ -58,8 +63,8 @@ public class UserRoleVo {
         userRoleVo.setState(userRole.getState());
         userRoleVo.setCreateTime(userRole.getCreateTime());
         userRoleVo.setUpdateTime(userRole.getUpdateTime());
-        userRoleVo.setCreateUser(userRole.getCreateUser());
-        userRoleVo.setLastModifyer(userRole.getLastModifyer());
+        userRoleVo.setCreateUserId(userRole.getCreateUserId());
+        userRoleVo.setLastModifyerId(userRole.getLastModifyerId());
         return userRoleVo ;
     }
 

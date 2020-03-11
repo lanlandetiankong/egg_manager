@@ -29,13 +29,20 @@ public class UserAccountVo {
     private Integer userType ;
     private Integer userTypeNum;
     private String userTypeStr;
+    private FileResBean uploadImgBean ;
+
     private Integer state ;
     private Integer locked ;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
-    private FileResBean uploadImgBean ;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
+
 
 
 
@@ -60,8 +67,8 @@ public class UserAccountVo {
         userAccount.setLocked(userAccountVo.getLocked());
         userAccount.setCreateTime(userAccountVo.getCreateTime());
         userAccount.setUpdateTime(userAccountVo.getUpdateTime());
-        userAccount.setCreateUser(userAccountVo.getCreateUser());
-        userAccount.setLastModifyer(userAccountVo.getLastModifyer());
+        userAccount.setCreateUserId(userAccountVo.getCreateUserId());
+        userAccount.setLastModifyerId(userAccountVo.getLastModifyerId());
         return userAccount ;
     }
 
@@ -89,8 +96,8 @@ public class UserAccountVo {
         userAccountVo.setLocked(userAccount.getLocked());
         userAccountVo.setCreateTime(userAccount.getCreateTime());
         userAccountVo.setUpdateTime(userAccount.getUpdateTime());
-        userAccountVo.setCreateUser(userAccount.getCreateUser());
-        userAccountVo.setLastModifyer(userAccount.getLastModifyer());
+        userAccountVo.setCreateUserId(userAccount.getCreateUserId());
+        userAccountVo.setLastModifyerId(userAccount.getLastModifyerId());
         return userAccountVo ;
     }
 

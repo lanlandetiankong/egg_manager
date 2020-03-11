@@ -1,44 +1,44 @@
-package com.egg.manager.entity.define;
+package com.egg.manager.dto.define;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * \* note:
+ * \* User: zhouchengjie
+ * \* Description:
+ * \
+ */
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TableName("em_define_permission")
-public class DefinePermission extends Model<DefinePermission> {
-    @TableId
+public class DefineDepartmentDto{
     private String fid ;
 
     private String name ;
     private String code ;
-
-    private Integer type;
+    private String parentId ;
+    private Integer level ;
+    private Integer orderNum ;
+    private String description ;
     private Integer state ;
-    private String remark ;
-    @TableField("create_time")
+    private String remark;
     private Date createTime ;
-    @TableField("update_time")
     private Date updateTime ;
-
-    @TableField(value = "create_user_id")
     private String createUserId ;
-    @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
+    private UserAccount createUser ;
+    private UserAccount lastModifyer;
 
-
-    @Override
-    protected Serializable pkVal() {
-        return this.fid;
-    }
 }

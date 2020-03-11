@@ -63,7 +63,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         fid,parent_id AS parentId,menu_name AS menuName, url_jump_type AS urlJumpType,icon_name AS iconName,router_url AS routerUrl,href_url AS hrefUrl,label,level,order_num  AS orderNum,
-        state, create_time AS createTime, update_time AS updateTime,create_user_id AS createUser,last_modifyer_id AS lastModifyer
+        state, create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
     </sql>
 
     <!-- 通用查询结果列(多表查询用)-->
@@ -72,12 +72,6 @@
         dm.state, dm.create_time, dm.update_time,dm.create_user_id,dm.last_modifyer_id
     </sql>
 
-
-    <!-- 通用查询结果列(分页查询用，默认表别名为 qpc)-->
-    <sql id="QueryPaging_Column_List">
-        qpc.fid,qpc.parent_id,qpc.menu_name, qpc.url_jump_type,qpc.icon_name,qpc.router_url,qpc.href_url,qpc.label,qpc.level,qpc.order_num,
-        qpc.state, qpc.create_time, qpc.update_time,qpc.create_user_id,qpc.last_modifyer_id
-    </sql>
 
     <!-- 通用查询结果列(parentId,外键表)-->
     <sql id="par_dm_Column_List">
@@ -118,43 +112,19 @@
 
 
     <select id="selectQueryPage" resultMap="DtoResultMap">
-        SELECT <include refid="QueryPaging_Column_List" />
+        SELECT <include refid="Base_Dm_Column_List" />
         , <include refid="par_dm_Column_List"/>
-        FROM em_define_menu qpc
+        FROM em_define_menu dm
         LEFT JOIN em_define_menu par_dm
-        on qpc.parent_id = par_dm.fid
+        on dm.parent_id = par_dm.fid
         <where>
-            <if test="sortFieldList != null and sortFieldList.size()>0">
-                <foreach collection="queryFieldList" index="index" item="item" separator="">
-                    AND qpc.${item.fieldName}
-                    <choose>
-                        <when test="item.matching == 'equals' ">
-                            = ${item.value}
-                        </when>
-                        <when test="item.matching == 'notEquals' ">
-                            != ${item.value}
-                        </when>
-                        <when test="item.matching == 'like' ">
-                            like  '%' + ${item.value} + '%'
-                        </when>
-                    </choose>
-                </foreach>
-            </if>
+            <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+                <property name="table_name_alias" value="dm" />
+            </include>
         </where>
-        <if test="sortFieldList != null and sortFieldList.size()>0">
-            ORDER  BY
-            <foreach collection="sortFieldList" index="index" item="item" separator=",">
-                qpc.${item.field}
-                <choose>
-                    <when test="item.isAsc == true">
-                        asc
-                    </when>
-                    <when test="item.isAsc == false">
-                        desc
-                    </when>
-                </choose>
-            </foreach>
-        </if>
+        <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+            <property name="table_name_alias" value="dm" />
+        </include>
 
     </select>
 

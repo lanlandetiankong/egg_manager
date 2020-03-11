@@ -171,8 +171,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         userRole.setCreateTime(now);
         userRole.setUpdateTime(now);
         if(loginUser != null){
-            userRole.setCreateUser(loginUser.getFid());
-            userRole.setLastModifyer(loginUser.getFid());
+            userRole.setCreateUserId(loginUser.getFid());
+            userRole.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = userRoleMapper.insert(userRole) ;
         return addCount ;
@@ -192,7 +192,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         userRoleVo.setUpdateTime(now);
         UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
         if(loginUser != null){
-            userRole.setLastModifyer(loginUser.getFid());
+            userRole.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = userRoleMapper.updateAllColumnById(userRole) ;
@@ -229,7 +229,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     public Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception{
         UserRole userRole = UserRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            userRole.setLastModifyer(loginUser.getFid());
+            userRole.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = userRoleMapper.updateById(userRole);
         return delCount ;

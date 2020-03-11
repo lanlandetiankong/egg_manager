@@ -103,8 +103,8 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         announcementTag.setCreateTime(now);
         announcementTag.setUpdateTime(now);
         if(loginUser != null){
-            announcementTag.setCreateUser(loginUser.getFid());
-            announcementTag.setLastModifyer(loginUser.getFid());
+            announcementTag.setCreateUserId(loginUser.getFid());
+            announcementTag.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = announcementTagMapper.insert(announcementTag) ;
         return addCount ;
@@ -124,7 +124,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         announcementTagVo.setUpdateTime(now);
         AnnouncementTag announcementTag = AnnouncementTagVo.transferVoToEntity(announcementTagVo);
         if(loginUser != null){
-            announcementTag.setLastModifyer(loginUser.getFid());
+            announcementTag.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = announcementTagMapper.updateAllColumnById(announcementTag) ;
@@ -159,7 +159,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     public Integer dealDelAnnouncementTag(String delId,UserAccount loginUser) throws Exception{
         AnnouncementTag announcementTag = AnnouncementTag.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            announcementTag.setLastModifyer(loginUser.getFid());
+            announcementTag.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = announcementTagMapper.updateById(announcementTag);
         return delCount ;

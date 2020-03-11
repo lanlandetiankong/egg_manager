@@ -29,16 +29,17 @@ public class DefineGroup extends Model<DefineGroup> {
 
     private String type;
     private Integer state ;
+    private String remark;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
 
-    @TableField(value = "create_user")
-    private String createUser ;
-    @TableField(value = "last_modifyer")
-    private String lastModifyer;
-    private String remark;
+    @TableField(value = "create_user_id")
+    private String createUserId ;
+    @TableField(value = "last_modifyer_id")
+    private String lastModifyerId;
+
 
 
 

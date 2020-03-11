@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONException;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementTag;
+import com.egg.manager.entity.user.UserAccount;
 import com.google.common.base.Joiner;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
@@ -50,8 +51,12 @@ public class AnnouncementVo {
     private Date createTime ;
     private Date updateTime ;
 
-    private String createUser ;
-    private String lastModifyer;
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
 
@@ -77,8 +82,8 @@ public class AnnouncementVo {
         announcement.setRemark(announcementVo.getRemark());
         announcement.setCreateTime(announcementVo.getCreateTime());
         announcement.setUpdateTime(announcementVo.getUpdateTime());
-        announcement.setCreateUser(announcementVo.getCreateUser());
-        announcement.setLastModifyer(announcementVo.getLastModifyer());
+        announcement.setCreateUserId(announcementVo.getCreateUserId());
+        announcement.setLastModifyerId(announcementVo.getLastModifyerId());
         return announcement ;
     }
 
@@ -126,8 +131,8 @@ public class AnnouncementVo {
         announcementVo.setRemark(announcement.getRemark());
         announcementVo.setCreateTime(announcement.getCreateTime());
         announcementVo.setUpdateTime(announcement.getUpdateTime());
-        announcementVo.setCreateUser(announcement.getCreateUser());
-        announcementVo.setLastModifyer(announcement.getLastModifyer());
+        announcementVo.setCreateUserId(announcement.getCreateUserId());
+        announcementVo.setLastModifyerId(announcement.getLastModifyerId());
         return announcementVo ;
     }
 

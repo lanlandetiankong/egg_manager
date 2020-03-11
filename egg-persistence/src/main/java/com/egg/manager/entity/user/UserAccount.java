@@ -49,10 +49,10 @@ public class UserAccount extends Model<UserAccount> {
     @TableField(value="update_time",fill = FieldFill.UPDATE)
     private Date updateTime ;
 
-    @TableField(value = "create_user")
-    private String createUser ;
-    @TableField(value = "last_modifyer")
-    private String lastModifyer;
+    @TableField(value = "create_user_id")
+    private String createUserId ;
+    @TableField(value = "last_modifyer_id")
+    private String lastModifyerId;
 
 
     @Override

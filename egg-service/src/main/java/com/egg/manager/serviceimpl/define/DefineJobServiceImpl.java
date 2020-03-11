@@ -80,8 +80,8 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         defineJob.setCreateTime(now);
         defineJob.setUpdateTime(now);
         if(loginUser != null){
-            defineJob.setCreateUser(loginUser.getFid());
-            defineJob.setLastModifyer(loginUser.getFid());
+            defineJob.setCreateUserId(loginUser.getFid());
+            defineJob.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = defineJobMapper.insert(defineJob) ;
         return addCount ;
@@ -101,7 +101,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         defineJobVo.setUpdateTime(now);
         DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
         if(loginUser != null){
-            defineJob.setLastModifyer(loginUser.getFid());
+            defineJob.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineJobMapper.updateAllColumnById(defineJob) ;
@@ -138,7 +138,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     public Integer dealDelDefineJob(String delId,UserAccount loginUser) throws Exception{
         DefineJob defineJob = DefineJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
         if(loginUser != null){
-            defineJob.setLastModifyer(loginUser.getFid());
+            defineJob.setLastModifyerId(loginUser.getFid());
         }
         Integer delCount = defineJobMapper.updateById(defineJob);
         return delCount ;

@@ -2,6 +2,7 @@ package com.egg.manager.vo.define;
 
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.entity.define.DefinePermission;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -21,13 +22,14 @@ public class DefinePermissionVo {
     private Integer type;
     private String typeStr ;
     private Integer state ;
+    private String remark ;
     private Date createTime ;
     private Date updateTime ;
 
-    private String createUser ;
-    private String lastModifyer;
-    private String remark ;
-
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
 
 
 
@@ -49,8 +51,8 @@ public class DefinePermissionVo {
         definePermission.setState(definePermissionVo.getState());
         definePermission.setCreateTime(definePermissionVo.getCreateTime());
         definePermission.setUpdateTime(definePermissionVo.getUpdateTime());
-        definePermission.setCreateUser(definePermissionVo.getCreateUser());
-        definePermission.setLastModifyer(definePermissionVo.getLastModifyer());
+        definePermission.setCreateUserId(definePermissionVo.getCreateUserId());
+        definePermission.setLastModifyerId(definePermissionVo.getLastModifyerId());
         definePermission.setRemark(definePermissionVo.getRemark());
         return definePermission ;
     }
@@ -75,8 +77,8 @@ public class DefinePermissionVo {
         definePermissionVo.setState(definePermission.getState());
         definePermissionVo.setCreateTime(definePermission.getCreateTime());
         definePermissionVo.setUpdateTime(definePermission.getUpdateTime());
-        definePermissionVo.setCreateUser(definePermission.getCreateUser());
-        definePermissionVo.setLastModifyer(definePermission.getLastModifyer());
+        definePermissionVo.setCreateUserId(definePermission.getCreateUserId());
+        definePermissionVo.setLastModifyerId(definePermission.getLastModifyerId());
         definePermissionVo.setRemark(definePermission.getRemark());
         return definePermissionVo ;
     }

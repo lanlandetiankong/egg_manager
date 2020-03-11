@@ -15,17 +15,17 @@
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
-        <result column="create_user" property="createUser" />
-        <result column="last_modifyer" property="lastModifyer" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="last_modifyer_id" property="lastModifyerId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, name,code, parent_id, level,order_num,description, state, create_time AS createTime, update_time AS updateTime,create_user AS createUser,last_modifyer AS lastModifyer
+        fid, name,code, parent_id, level,order_num,description, state, create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
     </sql>
 
     <sql id="Base_Dd_Column_List">
-        dd.fid, dd.name,dd.code, dd.parent_id, dd.level,dd.order_num,dd.description, dd.state, dd.create_time, dd.update_time,dd.create_user,dd.last_modifyer
+        dd.fid, dd.name,dd.code, dd.parent_id, dd.level,dd.order_num,dd.description, dd.state, dd.create_time, dd.update_time,dd.create_user_id,dd.last_modifyer_id
     </sql>
 
 
@@ -33,7 +33,7 @@
         UPDATE em_define_department
         SET state = -1
         <if test="loginUser != null">
-            ,last_modifyer = #{loginUser.fid}
+            ,last_modifyer_id = #{loginUser.fid}
         </if>
         WHERE fid IN
         <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">

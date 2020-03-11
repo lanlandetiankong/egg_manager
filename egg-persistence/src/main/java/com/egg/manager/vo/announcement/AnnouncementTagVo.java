@@ -1,6 +1,7 @@
 package com.egg.manager.vo.announcement;
 
 import com.egg.manager.entity.announcement.AnnouncementTag;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -31,8 +32,12 @@ public class AnnouncementTagVo {
     private String remark;
     private Date createTime;
     private Date updateTime;
-    private String createUser;
-    private String lastModifyer;
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
 
 
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo announcementTagVo) {
@@ -48,8 +53,8 @@ public class AnnouncementTagVo {
         announcementTag.setRemark(announcementTagVo.getRemark());
         announcementTag.setCreateTime(announcementTagVo.getCreateTime());
         announcementTag.setUpdateTime(announcementTagVo.getUpdateTime());
-        announcementTag.setCreateUser(announcementTagVo.getCreateUser());
-        announcementTag.setLastModifyer(announcementTagVo.getLastModifyer());
+        announcementTag.setCreateUserId(announcementTagVo.getCreateUserId());
+        announcementTag.setLastModifyerId(announcementTagVo.getLastModifyerId());
         return announcementTag;
     }
 
@@ -66,8 +71,8 @@ public class AnnouncementTagVo {
         announcementTagVo.setRemark(announcementTag.getRemark());
         announcementTagVo.setCreateTime(announcementTag.getCreateTime());
         announcementTagVo.setUpdateTime(announcementTag.getUpdateTime());
-        announcementTagVo.setCreateUser(announcementTag.getCreateUser());
-        announcementTagVo.setLastModifyer(announcementTag.getLastModifyer());
+        announcementTagVo.setCreateUserId(announcementTag.getCreateUserId());
+        announcementTagVo.setLastModifyerId(announcementTag.getLastModifyerId());
         return announcementTagVo;
     }
 

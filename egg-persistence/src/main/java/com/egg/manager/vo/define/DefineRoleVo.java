@@ -3,6 +3,7 @@ package com.egg.manager.vo.define;
 
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.user.UserAccount;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -22,11 +23,17 @@ public class DefineRoleVo {
     private Integer type;
     private String typeStr ;
     private Integer state ;
+    private String remark ;
     private Date createTime ;
     private Date updateTime ;
-    private String createUser ;
-    private String lastModifyer;
-    private String remark ;
+
+    private String createUserId ;
+    private String lastModifyerId;
+    private UserAccountVo createUser ;
+    private UserAccountVo lastModifyer;
+
+
+
 
 
 
@@ -43,8 +50,8 @@ public class DefineRoleVo {
         defineRole.setState(defineRoleVo.getState());
         defineRole.setCreateTime(defineRoleVo.getCreateTime());
         defineRole.setUpdateTime(defineRoleVo.getUpdateTime());
-        defineRole.setCreateUser(defineRoleVo.getCreateUser());
-        defineRole.setLastModifyer(defineRoleVo.getLastModifyer());
+        defineRole.setCreateUserId(defineRoleVo.getCreateUserId());
+        defineRole.setLastModifyerId(defineRoleVo.getLastModifyerId());
         defineRole.setRemark(defineRoleVo.getRemark());
         return defineRole ;
     }
@@ -69,8 +76,8 @@ public class DefineRoleVo {
         defineRoleVo.setState(defineRole.getState());
         defineRoleVo.setCreateTime(defineRole.getCreateTime());
         defineRoleVo.setUpdateTime(defineRole.getUpdateTime());
-        defineRoleVo.setCreateUser(defineRole.getCreateUser());
-        defineRoleVo.setLastModifyer(defineRole.getLastModifyer());
+        defineRoleVo.setCreateUserId(defineRole.getCreateUserId());
+        defineRoleVo.setLastModifyerId(defineRole.getLastModifyerId());
         defineRoleVo.setRemark(defineRole.getRemark());
         return defineRoleVo ;
     }

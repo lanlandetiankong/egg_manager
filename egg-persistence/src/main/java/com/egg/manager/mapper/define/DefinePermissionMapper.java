@@ -1,5 +1,10 @@
 package com.egg.manager.mapper.define;
 
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.dto.define.DefineJobDto;
+import com.egg.manager.dto.define.DefinePermissionDto;
 import com.egg.manager.entity.define.DefinePermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.egg.manager.entity.user.UserAccount;
@@ -16,7 +21,22 @@ import java.util.List;
  * @since 2019-09-12
  */
 public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
-    //批量 伪删除
+
+    /**
+     * [分页搜索查询] - 权限定义
+     * @param page
+     * @param queryFieldBeanList
+     * @param sortBeans
+     * @return
+     */
+    List<DefinePermissionDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
     int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
 
     /**

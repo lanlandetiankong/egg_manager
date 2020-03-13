@@ -29,6 +29,7 @@ public class DefineDepartmentDto{
     private String name ;
     private String code ;
     private String parentId ;
+    private DefineDepartmentDto parentDepartment ;
     private Integer level ;
     private Integer orderNum ;
     private String description ;

@@ -1,6 +1,7 @@
 package com.egg.manager.serviceimpl.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -10,11 +11,14 @@ import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.common.web.tree.CommonTreeSelectTranslate;
+import com.egg.manager.dto.announcement.AnnouncementTagDto;
+import com.egg.manager.dto.define.DefineDepartmentDto;
 import com.egg.manager.entity.define.DefineDepartment;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineDepartmentService;
+import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang.StringUtils;
@@ -53,23 +57,10 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Override
     public void dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineDepartmentEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineDepartmentEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineDepartmentEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineDepartmentMapper.selectCount(defineDepartmentEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
-        result.setResultList(DefineDepartmentVo.transferEntityToVoList(defineDepartments));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefineDepartmentVo.transferDtoToVoList(defineDepartmentDtoList));
     }
 
 

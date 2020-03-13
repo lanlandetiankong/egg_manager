@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.dto.define.DefineDepartmentDto;
 import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.entity.define.DefineDepartment;
 import com.egg.manager.entity.user.UserAccount;
@@ -23,13 +24,13 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
 
     /**
-     * [分页搜索查询] - 菜单定义
+     * [分页搜索查询] - 部门定义
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
      * @return
      */
-    List<DefineMenuDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineDepartmentDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 批量 伪删除

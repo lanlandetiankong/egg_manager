@@ -2,6 +2,7 @@ package com.egg.manager.vo.define;
 
 
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
+import com.egg.manager.dto.define.DefineRoleDto;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.user.UserAccountVo;
@@ -82,6 +83,33 @@ public class DefineRoleVo {
         defineRoleVo.setRemark(defineRole.getRemark());
         return defineRoleVo ;
     }
+    public static DefineRoleVo transferDtoToVo(DefineRoleDto defineRoleDto) {
+        if(defineRoleDto == null){
+            return null ;
+        }
+        DefineRoleVo defineRoleVo = new DefineRoleVo() ;
+        defineRoleVo.setFid(defineRoleDto.getFid());
+        defineRoleVo.setName(defineRoleDto.getName());
+        defineRoleVo.setCode(defineRoleDto.getCode());
+        defineRoleVo.setType(defineRoleDto.getType());
+        if(defineRoleDto.getType() != null){
+            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(defineRoleDto.getType());
+            if(typeEnum != null){
+                defineRoleVo.setTypeStr(typeEnum.getLabel());
+            }   else {
+                defineRoleVo.setTypeStr("");
+            }
+        }
+        defineRoleVo.setState(defineRoleDto.getState());
+        defineRoleVo.setRemark(defineRoleDto.getRemark());
+        defineRoleVo.setCreateTime(defineRoleDto.getCreateTime());
+        defineRoleVo.setUpdateTime(defineRoleDto.getUpdateTime());
+        defineRoleVo.setCreateUserId(defineRoleDto.getCreateUserId());
+        defineRoleVo.setLastModifyerId(defineRoleDto.getLastModifyerId());
+        defineRoleVo.setCreateUser(UserAccountVo.transferEntityToVo(defineRoleDto.getCreateUser()));
+        defineRoleVo.setLastModifyer(UserAccountVo.transferEntityToVo(defineRoleDto.getLastModifyer()));
+        return defineRoleVo ;
+    }
 
     public static List<DefineRoleVo> transferEntityToVoList(List<DefineRole> definePermissions){
         if(definePermissions == null){
@@ -90,6 +118,18 @@ public class DefineRoleVo {
             List<DefineRoleVo> list = new ArrayList<>() ;
             for (DefineRole definePermission : definePermissions){
                 list.add(transferEntityToVo(definePermission));
+            }
+            return list ;
+        }
+    }
+
+    public static List<DefineRoleVo> transferDtoToVoList(List<DefineRoleDto> defineRoleDtos){
+        if(defineRoleDtos == null){
+            return null ;
+        }   else {
+            List<DefineRoleVo> list = new ArrayList<>() ;
+            for (DefineRoleDto defineRoleDto : defineRoleDtos){
+                list.add(transferDtoToVo(defineRoleDto));
             }
             return list ;
         }

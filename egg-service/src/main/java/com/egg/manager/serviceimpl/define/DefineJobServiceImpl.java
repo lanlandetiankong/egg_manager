@@ -1,17 +1,21 @@
 package com.egg.manager.serviceimpl.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineDepartmentDto;
+import com.egg.manager.dto.define.DefineJobDto;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineJobMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineJobService;
+import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
@@ -38,31 +42,18 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     private CommonFuncService commonFuncService;
 
     /**
-     * 分页查询 职务列表
+     * 分页查询 职务定义
      * @param result
-     * @param queryFormFieldBeanList
+     * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans){
-        //解析 搜索条件
-        EntityWrapper<DefineJob> defineJobEntityWrapper = new EntityWrapper<DefineJob>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineJobEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineJobEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineJobEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds,defineJobEntityWrapper) ;
-        result.setResultList(DefineJobVo.transferEntityToVoList(defineJobs));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefineJobVo.transferDtoToVoList(defineDepartmentDtoList));
     }
 
 

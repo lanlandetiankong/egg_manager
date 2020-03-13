@@ -1,18 +1,22 @@
 package com.egg.manager.serviceimpl.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineJobDto;
+import com.egg.manager.dto.define.DefinePermissionDto;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
+import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
@@ -63,23 +67,10 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Override
     public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到definePermissionEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                definePermissionEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
-        result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefinePermissionVo.transferDtoToVoList(definePermissionDtos));
     }
 
 

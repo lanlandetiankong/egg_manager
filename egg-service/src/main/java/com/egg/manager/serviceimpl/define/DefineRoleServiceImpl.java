@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -11,6 +12,8 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefinePermissionDto;
+import com.egg.manager.dto.define.DefineRoleDto;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.role.RolePermission;
 import com.egg.manager.entity.user.UserAccount;
@@ -22,6 +25,7 @@ import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
+import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
@@ -149,23 +153,10 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Override
     public void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                        List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到defineRoleEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineRoleEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineRoleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineRole> defineRoles = defineRoleMapper.selectPage(rowBounds,defineRoleEntityWrapper) ;
-        result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoles));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefineRoleVo.transferDtoToVoList(defineRoleDtoList));
     }
 
 

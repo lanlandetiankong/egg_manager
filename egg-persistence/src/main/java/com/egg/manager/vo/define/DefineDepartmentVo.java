@@ -1,5 +1,6 @@
 package com.egg.manager.vo.define;
 
+import com.egg.manager.dto.define.DefineDepartmentDto;
 import com.egg.manager.entity.define.DefineDepartment;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.user.UserAccountVo;
@@ -20,6 +21,7 @@ public class DefineDepartmentVo {
     private String name ;
     private String code ;
     private String parentId ;
+    private DefineDepartmentVo parentDepartment ;
     private Integer level ;
 
     private Integer orderNum ;
@@ -81,6 +83,31 @@ public class DefineDepartmentVo {
         return defineDepartmentVo ;
     }
 
+
+    public static DefineDepartmentVo transferDtoToVo(DefineDepartmentDto defineDepartmentDto) {
+        if(defineDepartmentDto == null){
+            return null ;
+        }
+        DefineDepartmentVo defineDepartmentVo = new DefineDepartmentVo() ;
+        defineDepartmentVo.setFid(defineDepartmentDto.getFid());
+        defineDepartmentVo.setName(defineDepartmentDto.getName());
+        defineDepartmentVo.setParentId(defineDepartmentDto.getParentId());
+        defineDepartmentVo.setParentDepartment(DefineDepartmentVo.transferDtoToVo(defineDepartmentDto.getParentDepartment()));
+        defineDepartmentVo.setCode(defineDepartmentDto.getCode());
+        defineDepartmentVo.setLevel(defineDepartmentDto.getLevel());
+        defineDepartmentVo.setOrderNum(defineDepartmentDto.getOrderNum());
+        defineDepartmentVo.setDescription(defineDepartmentDto.getDescription());
+        defineDepartmentVo.setState(defineDepartmentDto.getState());
+        defineDepartmentVo.setRemark(defineDepartmentDto.getRemark());
+        defineDepartmentVo.setCreateTime(defineDepartmentDto.getCreateTime());
+        defineDepartmentVo.setUpdateTime(defineDepartmentDto.getUpdateTime());
+        defineDepartmentVo.setCreateUserId(defineDepartmentDto.getCreateUserId());
+        defineDepartmentVo.setLastModifyerId(defineDepartmentDto.getLastModifyerId());
+        defineDepartmentVo.setCreateUser(UserAccountVo.transferEntityToVo(defineDepartmentDto.getCreateUser()));
+        defineDepartmentVo.setLastModifyer(UserAccountVo.transferEntityToVo(defineDepartmentDto.getLastModifyer()));
+        return defineDepartmentVo ;
+    }
+
     public static List<DefineDepartmentVo> transferEntityToVoList(List<DefineDepartment> defineDepartments){
         if(defineDepartments == null){
             return null ;
@@ -88,6 +115,18 @@ public class DefineDepartmentVo {
             List<DefineDepartmentVo> list = new ArrayList<>() ;
             for (DefineDepartment defineDepartment : defineDepartments){
                 list.add(transferEntityToVo(defineDepartment));
+            }
+            return list ;
+        }
+    }
+
+    public static List<DefineDepartmentVo> transferDtoToVoList(List<DefineDepartmentDto> defineDepartmentDtos){
+        if(defineDepartmentDtos == null){
+            return null ;
+        }   else {
+            List<DefineDepartmentVo> list = new ArrayList<>() ;
+            for (DefineDepartmentDto defineDepartmentDto : defineDepartmentDtos){
+                list.add(transferDtoToVo(defineDepartmentDto));
             }
             return list ;
         }

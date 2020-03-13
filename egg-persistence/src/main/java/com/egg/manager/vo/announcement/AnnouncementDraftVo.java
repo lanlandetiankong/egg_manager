@@ -4,10 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.util.str.MyStringUtil;
+import com.egg.manager.dto.announcement.AnnouncementDraftDto;
+import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.google.common.base.Joiner;
 import lombok.*;
@@ -136,6 +140,59 @@ public class AnnouncementDraftVo {
         return announcementDraftVo ;
     }
 
+
+    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto announcementDraftDto,Map<String,AnnouncementTag> announcementTagMap) {
+        if(announcementDraftDto == null){
+            return null ;
+        }
+        AnnouncementDraftVo announcementDraftVo = new AnnouncementDraftVo() ;
+        announcementDraftVo.setFid(announcementDraftDto.getFid());
+        announcementDraftVo.setTitle(announcementDraftDto.getTitle());
+        announcementDraftVo.setKeyWord(announcementDraftDto.getKeyWord());
+        announcementDraftVo.setPublishDepartment(announcementDraftDto.getPublishDepartment());
+        String content = announcementDraftDto.getContent() ;
+        announcementDraftVo.setContent(content);
+        announcementDraftVo.setContent(content);
+        if(StringUtils.isNotBlank(content)){
+            announcementDraftVo.setShortContent(MyStringUtil.htmlDomToText(content,null));
+        }   else {
+            announcementDraftVo.setShortContent(content);
+        }
+        String tagIds = announcementDraftDto.getTagIds() ;
+        if(StringUtils.isNotBlank(tagIds)){
+            try{
+                List<String> tagList = JSONArray.parseArray(tagIds,String.class);
+                if(tagList != null && tagList.isEmpty() == false){
+                    announcementDraftVo.setTagIds(tagList);
+                    List<String> tagNameList = new ArrayList<>() ;
+                    if(announcementTagMap != null && announcementTagMap.isEmpty() == false){
+                        for (String tagId : tagList){
+                            AnnouncementTag announcementTag = announcementTagMap.get(tagId);
+                            if(announcementTag != null){
+                                tagNameList.add(announcementTag.getName());
+                            }
+                        }
+                    }
+                    announcementDraftVo.setTagNames(tagNameList);
+                    announcementDraftVo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
+                }
+            }   catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        announcementDraftVo.setAccessory(announcementDraftDto.getAccessory());
+        announcementDraftVo.setIsPublished(announcementDraftDto.getIsPublished());
+        announcementDraftVo.setState(announcementDraftDto.getState());
+        announcementDraftVo.setRemark(announcementDraftDto.getRemark());
+        announcementDraftVo.setCreateTime(announcementDraftDto.getCreateTime());
+        announcementDraftVo.setUpdateTime(announcementDraftDto.getUpdateTime());
+        announcementDraftVo.setCreateUserId(announcementDraftDto.getCreateUserId());
+        announcementDraftVo.setLastModifyerId(announcementDraftDto.getLastModifyerId());
+        announcementDraftVo.setCreateUser(UserAccountVo.transferEntityToVo(announcementDraftDto.getCreateUser()));
+        announcementDraftVo.setLastModifyer(UserAccountVo.transferEntityToVo(announcementDraftDto.getLastModifyer()));
+        return announcementDraftVo ;
+    }
+
     public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts,Map<String,AnnouncementTag> announcementTagMap){
         if(announcementDrafts == null){
             return null ;
@@ -143,6 +200,19 @@ public class AnnouncementDraftVo {
             List<AnnouncementDraftVo> list = new ArrayList<>() ;
             for (AnnouncementDraft announcementDraft : announcementDrafts){
                 list.add(transferEntityToVo(announcementDraft,announcementTagMap));
+            }
+            return list ;
+        }
+    }
+
+
+    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos,Map<String,AnnouncementTag> announcementTagMap){
+        if(announcementDraftDtos == null){
+            return null ;
+        }   else {
+            List<AnnouncementDraftVo> list = new ArrayList<>() ;
+            for (AnnouncementDraftDto announcementDraftDto : announcementDraftDtos){
+                list.add(transferDtoToVo(announcementDraftDto,announcementTagMap));
             }
             return list ;
         }

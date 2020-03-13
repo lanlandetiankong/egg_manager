@@ -20,6 +20,7 @@ import java.util.List;
 public class DefineMenuVo {
     private String fid ;
     private String parentId ;
+    private DefineMenuVo parentMenu ;
     private String menuName ;
     private String iconName ;
     private String routerUrl ;
@@ -112,6 +113,7 @@ public class DefineMenuVo {
         DefineMenuVo defineMenuVo = new DefineMenuVo() ;
         defineMenuVo.setFid(defineMenuDto.getFid());
         defineMenuVo.setParentId(defineMenuDto.getParentId());
+        defineMenuVo.setParentMenu(DefineMenuVo.transferDtoToVo(defineMenuDto.getParentMenuDto()));
         defineMenuVo.setMenuName(defineMenuDto.getMenuName());
         defineMenuVo.setIconName(defineMenuDto.getIconName());
         defineMenuVo.setRouterUrl(defineMenuDto.getRouterUrl());

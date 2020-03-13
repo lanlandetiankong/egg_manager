@@ -2,12 +2,15 @@ package com.egg.manager.serviceimpl.announcement;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.announcement.AnnouncementDraftDto;
+import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementDraft;
 import com.egg.manager.entity.announcement.AnnouncementTag;
@@ -19,6 +22,7 @@ import com.egg.manager.service.announcement.AnnouncementDraftService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.vo.define.DefineMenuVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,25 +113,13 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Override
     public void dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<AnnouncementDraft> announcementDraftEntityWrapper = new EntityWrapper<AnnouncementDraft>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementDraftEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementDraftEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementDraftEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = announcementDraftMapper.selectCount(announcementDraftEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<AnnouncementDraft> announcementDrafts = announcementDraftMapper.selectPage(rowBounds,announcementDraftEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementDraftVo.transferEntityToVoList(announcementDrafts,announcementTagMap));
+
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(AnnouncementDraftVo.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
     }
 
 

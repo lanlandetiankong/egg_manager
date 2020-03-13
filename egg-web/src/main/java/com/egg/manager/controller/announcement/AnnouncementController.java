@@ -129,7 +129,7 @@ public class AnnouncementController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             if(Boolean.TRUE.equals(onlySelf)){  //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user",loginUser.getFid() )) ;
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id",loginUser.getFid() )) ;
             }
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
@@ -158,7 +158,7 @@ public class AnnouncementController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             if(Boolean.TRUE.equals(onlySelf)){  //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user",loginUser.getFid() )) ;
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id",loginUser.getFid() )) ;
             }
             //取得 分页配置
             AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);

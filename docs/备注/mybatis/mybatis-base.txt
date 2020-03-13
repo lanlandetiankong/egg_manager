@@ -1,0 +1,12 @@
+1、多表分页查询必要定义
+
+Base_Alias_Table_List
+	base_alias_name
+Base_Alias_TableColumn_List
+	base_alias_name
+	base_alias_col_prefix
+
+com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql
+	table_name_alias
+com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql
+	table_name_alias

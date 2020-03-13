@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.common.util.str.MyStringUtil;
+import com.egg.manager.dto.announcement.AnnouncementDto;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import com.google.common.base.Joiner;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
@@ -143,6 +145,70 @@ public class AnnouncementVo {
             List<AnnouncementVo> list = new ArrayList<>() ;
             for (Announcement announcement : announcements){
                 list.add(transferEntityToVo(announcement,announcementTagMap));
+            }
+            return list ;
+        }
+    }
+
+
+    public static AnnouncementVo transferDtoToVo(AnnouncementDto announcementDto,Map<String,AnnouncementTag> announcementTagMap) {
+        if(announcementDto == null){
+            return null ;
+        }
+        AnnouncementVo announcementVo = new AnnouncementVo() ;
+        announcementVo.setFid(announcementDto.getFid());
+        announcementVo.setTitle(announcementDto.getTitle());
+        announcementVo.setKeyWord(announcementDto.getKeyWord());
+        announcementVo.setPublishDepartment(announcementDto.getPublishDepartment());
+        String content = announcementDto.getContent() ;
+        announcementVo.setContent(content);
+        announcementVo.setContent(content);
+        if(StringUtils.isNotBlank(content)){
+            announcementVo.setShortContent(MyStringUtil.htmlDomToText(content,null));
+        }   else {
+            announcementVo.setShortContent(content);
+        }
+        String tagIds = announcementDto.getTagIds() ;
+        if(StringUtils.isNotBlank(tagIds)){
+            try{
+                List<String> tagList = JSONArray.parseArray(tagIds,String.class);
+                if(tagList != null && tagList.isEmpty() == false){
+                    announcementVo.setTagIds(tagList);
+                    List<String> tagNameList = new ArrayList<>() ;
+                    if(announcementTagMap != null && announcementTagMap.isEmpty() == false){
+                        for (String tagId : tagList){
+                            AnnouncementTag announcementTag = announcementTagMap.get(tagId);
+                            if(announcementTag != null){
+                                tagNameList.add(announcementTag.getName());
+                            }
+                        }
+                    }
+                    announcementVo.setTagNames(tagNameList);
+                    announcementVo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
+                }
+            }   catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        announcementVo.setAccessory(announcementDto.getAccessory());
+        announcementVo.setState(announcementDto.getState());
+        announcementVo.setRemark(announcementDto.getRemark());
+        announcementVo.setCreateTime(announcementDto.getCreateTime());
+        announcementVo.setUpdateTime(announcementDto.getUpdateTime());
+        announcementVo.setCreateUserId(announcementDto.getCreateUserId());
+        announcementVo.setLastModifyerId(announcementDto.getLastModifyerId());
+        announcementVo.setCreateUser(UserAccountVo.transferEntityToVo(announcementDto.getCreateUser()));
+        announcementVo.setLastModifyer(UserAccountVo.transferEntityToVo(announcementDto.getLastModifyer()));
+        return announcementVo ;
+    }
+    
+    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> announcementDtos, Map<String,AnnouncementTag> announcementTagMap){
+        if(announcementDtos == null){
+            return null ;
+        }   else {
+            List<AnnouncementVo> list = new ArrayList<>() ;
+            for (AnnouncementDto announcementDto : announcementDtos){
+                list.add(transferDtoToVo(announcementDto,announcementTagMap));
             }
             return list ;
         }

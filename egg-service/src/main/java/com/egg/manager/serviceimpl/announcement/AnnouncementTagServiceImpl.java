@@ -1,6 +1,7 @@
 package com.egg.manager.serviceimpl.announcement;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -8,6 +9,8 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.announcement.AnnouncementDto;
+import com.egg.manager.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.announcement.AnnouncementTagMapper;
@@ -15,6 +18,7 @@ import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
 import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.vo.announcement.AnnouncementVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,23 +55,10 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Override
     public void dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementTagEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementTagEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementTagEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
-        result.setResultList(AnnouncementTagVo.transferEntityToVoList(announcementTags));
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(AnnouncementTagVo.transferDtoToVoList(announcementTagDtoList));
     }
 
     /***

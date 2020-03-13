@@ -1,12 +1,15 @@
 package com.egg.manager.serviceimpl.announcement;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.announcement.AnnouncementDraftDto;
+import com.egg.manager.dto.announcement.AnnouncementDto;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementTag;
 import com.egg.manager.entity.user.UserAccount;
@@ -109,25 +112,13 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     @Override
     public void dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
-        //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = announcementMapper.selectCount(announcementEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementVo.transferEntityToVoList(announcements,announcementTagMap));
+
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(AnnouncementVo.transferDtoToVoList(announcementDtoList,announcementTagMap));
     }
 
 

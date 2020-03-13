@@ -1,6 +1,6 @@
 package com.egg.manager.vo.define;
 
-import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import lombok.*;
 
 import java.util.Date;

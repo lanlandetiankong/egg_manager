@@ -2,7 +2,7 @@ package com.egg.manager.vo.define;
 
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.entity.define.DefinePermission;
-import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import lombok.*;
 
 import java.util.ArrayList;

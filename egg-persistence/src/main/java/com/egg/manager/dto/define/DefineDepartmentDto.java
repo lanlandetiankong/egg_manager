@@ -32,6 +32,7 @@ public class DefineDepartmentDto{
     private Integer level ;
     private Integer orderNum ;
     private String description ;
+
     private Integer state ;
     private String remark;
     private Date createTime ;

@@ -35,7 +35,6 @@ public class DefineMenuDto {
     private Date updateTime ;
     private String createUserId ;
     private String lastModifyerId;
-
     private UserAccount createUser ;
     private UserAccount lastModifyer;
 

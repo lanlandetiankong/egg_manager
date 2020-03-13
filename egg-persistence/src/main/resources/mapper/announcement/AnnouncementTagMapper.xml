@@ -16,11 +16,80 @@
         <result column="last_modifyer_id" property="lastModifyerId" />
     </resultMap>
 
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="DtoResultMap" type="com.egg.manager.dto.announcement.AnnouncementTagDto">
+        <id column="fid" property="fid" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="ordering" property="ordering" />
+
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="last_modifyer_id" property="lastModifyerId" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         fid, name, description, ordering,
-        state,create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
+        state,create_time, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
     </sql>
+
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+        ${base_alias_name}.fid,
+        ${base_alias_name}.name,
+        ${base_alias_name}.description,
+        ${base_alias_name}.ordering,
+        ${base_alias_name}.state,
+        ${base_alias_name}.create_time,
+         ${base_alias_name}.update_time,
+         ${base_alias_name}.create_user_id,
+         ${base_alias_name}.last_modifyer_id
+    </sql>
+
+
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+        ${base_alias_name}.name AS ${base_alias_col_prefix}name,
+        ${base_alias_name}.description AS ${base_alias_col_prefix}description,
+        ${base_alias_name}.ordering AS ${base_alias_col_prefix}ordering,
+        ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+        ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+        ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+        ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+        ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
+    </sql>
+
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="eat" />
+        </include>
+        FROM em_announcement_tag eat
+        <where>
+            <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+                <property name="table_name_alias" value="eat" />
+            </include>
+        </where>
+        <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+            <property name="table_name_alias" value="eat" />
+        </include>
+    </select>
+
 
     <update id="batchFakeDelByIds" >
         UPDATE em_announcement_tag

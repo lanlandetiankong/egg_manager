@@ -2,6 +2,7 @@ package com.egg.manager.vo.organization;
 
 import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.user.UserAccountVo;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class DefineTenantVo {
 
     private String createUserId ;
     private String lastModifyerId;
-    private UserAccountVo createUser ;
-    private UserAccountVo lastModifyer;
+    private UserAccount createUser ;
+    private UserAccount lastModifyer;
 
 
 

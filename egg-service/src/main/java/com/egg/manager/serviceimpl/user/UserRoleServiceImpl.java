@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -11,12 +12,15 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineDepartmentDto;
+import com.egg.manager.dto.user.UserRoleDto;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
+import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.user.UserRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
@@ -154,6 +158,23 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds,userRoleEntityWrapper) ;
         result.setResultList(UserRoleVo.transferEntityToVoList(userRoles));
+    }
+
+
+    /**
+     * 分页查询 用户角色 Dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                     List<AntdvSortBean> sortBeans){
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(UserRoleVo.transferDtoToVoList(userRoleDtoList));
     }
 
 

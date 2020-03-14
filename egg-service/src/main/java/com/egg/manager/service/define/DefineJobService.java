@@ -23,12 +23,22 @@ public interface DefineJobService extends IService<DefineJob> {
 
 
     /**
-     * 分页查询 职务列表
+     * 分页查询 职务定义 列表
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
     void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                               List<AntdvSortBean> sortBeans);
+
+    /**
+     * 分页查询 职务定义 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFormFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                List<AntdvSortBean> sortBeans);
 
     /**

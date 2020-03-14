@@ -150,16 +150,44 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
 
 
 
-
-
     /**
-     * 分页查询 菜单定义
+     * 分页查询 模块
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                       List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到 defineMenuEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(defineMenuEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineMenuEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds,defineMenuEntityWrapper) ;
+        result.setResultList(DefineMenuVo.transferEntityToVoList(defineMenus));
+    }
+
+
+    /**
+     * 分页查询 菜单定义
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                        List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

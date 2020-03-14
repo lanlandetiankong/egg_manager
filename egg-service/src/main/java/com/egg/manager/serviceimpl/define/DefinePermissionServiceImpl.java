@@ -10,6 +10,7 @@ import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.dto.define.DefineJobDto;
 import com.egg.manager.dto.define.DefinePermissionDto;
+import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.user.UserAccount;
@@ -57,15 +58,43 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         return null;
     }
 
-
     /**
-     * 分页查询 权限
+     * 分页查询 权限定义 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                             List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到definePermissionEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                definePermissionEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
+        result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+    }
+
+    /**
+     * 分页查询 权限定义 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

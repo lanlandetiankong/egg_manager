@@ -49,13 +49,42 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
 
 
     /**
-     * 分页查询 部门
+     * 分页查询 部门定义 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                             List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到 defineDepartmentEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(defineDepartmentEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineDepartmentEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = defineDepartmentMapper.selectCount(defineDepartmentEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
+        result.setResultList(DefineDepartmentVo.transferEntityToVoList(defineDepartments));
+    }
+
+    /**
+     * 分页查询 部门定义 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

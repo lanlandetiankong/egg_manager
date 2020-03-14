@@ -1,20 +1,24 @@
 package com.egg.manager.serviceimpl.module;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineMenuDto;
 import com.egg.manager.dto.module.DefineModuleDto;
 import com.egg.manager.entity.module.DefineModule;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.module.DefineModuleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineModuleService;
+import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.vo.module.DefineModuleVo;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,17 +45,46 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Autowired
     private CommonFuncService commonFuncService ;
 
-  
 
 
     /**
-     * 分页查询 模块
+     * 分页查询 模块 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<DefineModule> defineModuleEntityWrapper = new EntityWrapper<DefineModule>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到 defineModuleEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(defineModuleEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineModuleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefineModule> defineModules = defineModuleMapper.selectPage(rowBounds,defineModuleEntityWrapper) ;
+        result.setResultList(DefineModuleVo.transferEntityToVoList(defineModules));
+    }
+
+
+    /**
+     * 分页查询 模块 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

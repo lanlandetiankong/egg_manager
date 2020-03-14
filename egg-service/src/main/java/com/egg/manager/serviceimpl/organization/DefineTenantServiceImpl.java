@@ -1,17 +1,21 @@
 package com.egg.manager.serviceimpl.organization;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineDepartmentDto;
+import com.egg.manager.dto.organization.DefineTenantDto;
 import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.organization.DefineTenantMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.organization.DefineTenantService;
+import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.organization.DefineTenantVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
@@ -67,6 +71,23 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineTenant> defineTenants = defineTenantMapper.selectPage(rowBounds,defineTenantEntityWrapper) ;
         result.setResultList(DefineTenantVo.transferEntityToVoList(defineTenants));
+    }
+
+
+    /**
+     * 分页查询 租户
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(DefineTenantVo.transferDtoToVoList(defineTenantDtoList));
     }
 
 

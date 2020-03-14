@@ -43,6 +43,16 @@ public interface UserAccountService extends IService<UserAccount> {
                                  List<AntdvSortBean> sortBeans);
 
     /**
+     * 分页查询 用户 Dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFormFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                 List<AntdvSortBean> sortBeans);
+
+    /**
      * 用户账号-新增
      * @param userAccountVo
      * @param loginUser 当前登录用户

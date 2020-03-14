@@ -45,15 +45,43 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     private CommonFuncService commonFuncService ;
 
 
-
     /**
-     * 分页查询 公告标签
+     * 分页查询 公告标签 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到 announcementTagEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementTagEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                announcementTagEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
+        result.setResultList(AnnouncementTagVo.transferEntityToVoList(announcementTags));
+    }
+
+    /**
+     * 分页查询 公告标签 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

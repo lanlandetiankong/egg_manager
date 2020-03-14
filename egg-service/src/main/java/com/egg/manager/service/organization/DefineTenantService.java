@@ -33,6 +33,16 @@ public interface DefineTenantService extends IService<DefineTenant> {
                                   List<AntdvSortBean> sortBeans);
 
     /**
+     * 分页查询 租户
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                  List<AntdvSortBean> sortBeans);
+
+    /**
      * 租户定义-新增
      * @param defineTenantVo
      * @throws Exception

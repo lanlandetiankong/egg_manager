@@ -142,16 +142,44 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
 
 
 
-
-
     /**
-     * 分页查询 角色
+     * 分页查询 角色定义 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
     public void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                       List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到defineRoleEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(defineRoleEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                defineRoleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<DefineRole> defineRoles = defineRoleMapper.selectPage(rowBounds,defineRoleEntityWrapper) ;
+        result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoles));
+    }
+
+
+    /**
+     * 分页查询 角色定义 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                        List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);

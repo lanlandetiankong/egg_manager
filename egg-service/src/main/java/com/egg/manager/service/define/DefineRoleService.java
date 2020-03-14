@@ -36,12 +36,22 @@ public interface DefineRoleService extends IService<DefineRole> {
 
 
     /**
-     * 分页查询 角色
+     * 分页查询 角色定义 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     void dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                List<AntdvSortBean> sortBeans);
+
+    /**
+     * 分页查询 角色定义 列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                 List<AntdvSortBean> sortBeans);
 
     /**

@@ -30,6 +30,16 @@ public interface UserJobService extends IService<UserJob> {
     void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                 List<AntdvSortBean> sortBeans);
 
+    /**
+     * 分页查询 用户职务 Dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFormFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                             List<AntdvSortBean> sortBeans);
+
 
     /**
      * 用户职务-新增

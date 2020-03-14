@@ -102,7 +102,6 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         return addCount ;
     }
 
-
     /**
      * 分页查询 公告
      * @param result
@@ -111,6 +110,37 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Override
     public void dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
+        //解析 搜索条件
+        EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
+        //取得 分页配置
+        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        //调用方法将查询条件设置到 announcementEntityWrapper
+        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementEntityWrapper,queryFieldBeanList) ;
+        //添加排序
+        if(sortBeans != null && sortBeans.isEmpty() == false){
+            for(AntdvSortBean sortBean : sortBeans){
+                announcementEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
+            }
+        }
+        //取得 总数
+        Integer total = announcementMapper.selectCount(announcementEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean,total);
+        List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
+        //取得 公告标签 map
+        Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+        result.setResultList(AnnouncementVo.transferEntityToVoList(announcements,announcementTagMap));
+    }
+
+    /**
+     * 分页查询 公告 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();

@@ -26,12 +26,22 @@ public interface DefinePermissionService extends IService<DefinePermission> {
 
 
     /**
-     * 分页查询 权限
+     * 分页查询 权限定义 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                      List<AntdvSortBean> sortBeans);
+
+    /**
+     * 分页查询 权限定义 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans);
 
     /**

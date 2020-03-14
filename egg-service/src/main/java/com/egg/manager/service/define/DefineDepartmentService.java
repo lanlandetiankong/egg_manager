@@ -23,12 +23,22 @@ import java.util.List;
 public interface DefineDepartmentService extends IService<DefineDepartment> {
 
     /**
-     * 分页查询 部门
+     * 分页查询 部门 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     void dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                      List<AntdvSortBean> sortBeans);
+
+    /**
+     * 分页查询 部门 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans);
 
 

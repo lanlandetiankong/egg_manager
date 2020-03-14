@@ -1,6 +1,7 @@
 package com.egg.manager.serviceimpl.user;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -10,7 +11,9 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.dto.define.DefineDepartmentDto;
 import com.egg.manager.dto.login.LoginAccountDTO;
+import com.egg.manager.dto.user.UserAccountDto;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
@@ -20,6 +23,7 @@ import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
@@ -104,6 +108,22 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
         result.setResultList(UserAccountVo.transferEntityToVoList(userAccounts));
+    }
+
+    /**
+     * 分页查询 用户 Dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    @Override
+    public void dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                        List<AntdvSortBean> sortBeans){
+        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.setResultList(UserAccountVo.transferDtoToVoList(userAccountDtoList));
     }
 
 

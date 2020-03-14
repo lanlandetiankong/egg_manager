@@ -39,13 +39,23 @@ public interface AnnouncementService extends IService<Announcement> {
     Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
 
     /**
-     * 分页查询 公告
+     * 分页查询 公告 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     void dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans);
+
+    /**
+     * 分页查询 公告 dto列表
+     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param result
+     * @param queryFieldBeanList
+     * @param paginationBean
+     */
+    void dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 公告-删除

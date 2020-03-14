@@ -90,10 +90,10 @@ public class AnnouncementTagController extends BaseController {
         return  result;
     }
 
-    @ApiOperation(value = "查询公告标签信息列表", notes = "查询公告标签信息列表", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息列表",description = "查询公告标签信息列表")
-    @PostMapping(value = "/getAllAnnouncementTags")
-    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTags(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
+    @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息-Dto列表",description = "查询公告标签信息-Dto列表")
+    @PostMapping(value = "/getAllAnnouncementTagDtos")
+    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
@@ -104,8 +104,8 @@ public class AnnouncementTagController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            announcementTagService.dealGetAnnouncementTagPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询公告标签信息列表:"+actionSuccessMsg);
+            announcementTagService.dealGetAnnouncementTagDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            dealCommonSuccessCatch(result,"查询公告标签信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }

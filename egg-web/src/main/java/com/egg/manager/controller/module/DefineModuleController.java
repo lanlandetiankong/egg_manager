@@ -57,15 +57,15 @@ public class DefineModuleController extends BaseController{
 
 
 
-    @OperLog(modelName="DefineModuleController",action="查询模块定义信息列表",description = "查询模块定义信息列表")
-    @ApiOperation(value = "查询模块定义信息列表", notes = "查询模块定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="DefineModuleController",action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表")
+    @ApiOperation(value = "查询模块定义信息-Dto列表", notes = "查询模块定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
             @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
-    @PostMapping(value = "/getAllDefineModules")
-    public MyCommonResult<DefineModuleVo> doGetAllDefineModules(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
+    @PostMapping(value = "/getAllDefineModuleDtos")
+    public MyCommonResult<DefineModuleVo> doGetAllDefineModuleDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
@@ -76,8 +76,8 @@ public class DefineModuleController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineModuleService.dealGetDefineModulePages(result,queryFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询模块定义信息列表:"+actionSuccessMsg);
+            defineModuleService.dealGetDefineModuleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            dealCommonSuccessCatch(result,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }

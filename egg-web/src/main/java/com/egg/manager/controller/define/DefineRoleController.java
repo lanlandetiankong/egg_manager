@@ -95,6 +95,33 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
+    @OperLog(modelName="DefineRoleController",action="查询角色定义信息-Dto列表",description = "查询角色定义信息-Dto列表")
+    @ApiOperation(value = "查询角色定义信息-Dto列表", notes = "查询角色定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
+    @PostMapping(value = "/getAllDefineRoleDtos")
+    public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            //解析 搜索条件
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            //取得 分页配置
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            defineRoleService.dealGetDefineRoleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            dealCommonSuccessCatch(result,"查询角色定义信息-Dto列表:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
 
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息",description = "根据角色定义id查询角色定义信息")

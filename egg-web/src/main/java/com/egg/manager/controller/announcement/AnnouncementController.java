@@ -113,15 +113,15 @@ public class AnnouncementController extends BaseController {
         return  result;
     }
 
-    @OperLog(modelName="AnnouncementController",action="查询公告信息列表",description = "查询公告信息列表")
-    @ApiOperation(value = "查询公告信息列表", notes = "查询公告信息列表", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="AnnouncementController",action="查询公告信息-Dto列表",description = "查询公告信息-Dto列表")
+    @ApiOperation(value = "查询公告信息-Dto列表", notes = "查询公告信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
             @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
-    @PostMapping(value = "/getAllAnnouncements")
-    public MyCommonResult<AnnouncementVo> doGetAllAnnouncements(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj,Boolean onlySelf) {
+    @PostMapping(value = "/getAllAnnouncementDtos")
+    public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj,Boolean onlySelf) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
@@ -135,8 +135,8 @@ public class AnnouncementController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            announcementService.dealGetAnnouncementPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
-            dealCommonSuccessCatch(result,"查询公告信息列表:"+actionSuccessMsg);
+            announcementService.dealGetAnnouncementDtoPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
+            dealCommonSuccessCatch(result,"查询公告信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
         }

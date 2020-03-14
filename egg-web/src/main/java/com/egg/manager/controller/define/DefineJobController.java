@@ -94,6 +94,34 @@ public class DefineJobController extends BaseController {
     }
 
 
+    @OperLog(modelName="DefineJobController",action="查询职务信息-Dto列表",description = "查询职务信息-Dto列表")
+    @ApiOperation(value = "查询职务信息-Dto列表", notes = "查询职务信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
+    @PostMapping(value = "/getAllDefineJobDtos")
+    public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            //解析 搜索条件
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            //取得 分页配置
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            defineJobService.dealGetDefineJobDtoPages(result,queryFormFieldBeanList,paginationBean,sortBeans); ;
+            dealCommonSuccessCatch(result,"查询职务信息-Dto列表:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
     @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="查询职务信息",description = "根据职务id查询职务信息")
     @PostMapping(value = "/getDefineJobById")

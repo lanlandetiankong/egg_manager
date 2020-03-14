@@ -19,7 +19,6 @@ import java.util.Date;
 public class DefineMenu extends Model<DefineMenu> {
     @TableId
     private String fid ;
-
     @TableField(value="parent_id")
     private String parentId ;
     @TableField(value="menu_name")
@@ -37,9 +36,8 @@ public class DefineMenu extends Model<DefineMenu> {
     @TableField("order_num")
     private Integer orderNum ;
 
-
-    private Integer state ;
     private String remark ;
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

@@ -27,8 +27,8 @@ public class DefineDepartmentVo {
     private Integer orderNum ;
     private String description ;
 
-    private Integer state ;
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;
@@ -53,8 +53,9 @@ public class DefineDepartmentVo {
         defineDepartment.setLevel(defineDepartmentVo.getLevel());
         defineDepartment.setOrderNum(defineDepartmentVo.getOrderNum());
         defineDepartment.setDescription(defineDepartmentVo.getDescription());
-        defineDepartment.setState(defineDepartmentVo.getState());
+
         defineDepartment.setRemark(defineDepartmentVo.getRemark());
+        defineDepartment.setState(defineDepartmentVo.getState());
         defineDepartment.setCreateTime(defineDepartmentVo.getCreateTime());
         defineDepartment.setUpdateTime(defineDepartmentVo.getUpdateTime());
         defineDepartment.setCreateUserId(defineDepartmentVo.getCreateUserId());
@@ -74,8 +75,9 @@ public class DefineDepartmentVo {
         defineDepartmentVo.setLevel(defineDepartment.getLevel());
         defineDepartmentVo.setOrderNum(defineDepartment.getOrderNum());
         defineDepartmentVo.setDescription(defineDepartment.getDescription());
-        defineDepartmentVo.setState(defineDepartment.getState());
+
         defineDepartmentVo.setRemark(defineDepartment.getRemark());
+        defineDepartmentVo.setState(defineDepartment.getState());
         defineDepartmentVo.setCreateTime(defineDepartment.getCreateTime());
         defineDepartmentVo.setUpdateTime(defineDepartment.getUpdateTime());
         defineDepartmentVo.setCreateUserId(defineDepartment.getCreateUserId());
@@ -97,8 +99,9 @@ public class DefineDepartmentVo {
         defineDepartmentVo.setLevel(defineDepartmentDto.getLevel());
         defineDepartmentVo.setOrderNum(defineDepartmentDto.getOrderNum());
         defineDepartmentVo.setDescription(defineDepartmentDto.getDescription());
-        defineDepartmentVo.setState(defineDepartmentDto.getState());
+
         defineDepartmentVo.setRemark(defineDepartmentDto.getRemark());
+        defineDepartmentVo.setState(defineDepartmentDto.getState());
         defineDepartmentVo.setCreateTime(defineDepartmentDto.getCreateTime());
         defineDepartmentVo.setUpdateTime(defineDepartmentDto.getUpdateTime());
         defineDepartmentVo.setCreateUserId(defineDepartmentDto.getCreateUserId());

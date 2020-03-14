@@ -32,8 +32,8 @@ public class AnnouncementTagVo {
     private String description;
     private Integer ordering;
 
-    private Integer state;
     private String remark;
+    private Integer state;
     private Date createTime;
     private Date updateTime;
     private String createUserId ;
@@ -53,8 +53,9 @@ public class AnnouncementTagVo {
         announcementTag.setName(announcementTagVo.getName());
         announcementTag.setDescription(announcementTagVo.getDescription());
         announcementTag.setOrdering(announcementTagVo.getOrdering());
-        announcementTag.setState(announcementTagVo.getState());
+
         announcementTag.setRemark(announcementTagVo.getRemark());
+        announcementTag.setState(announcementTagVo.getState());
         announcementTag.setCreateTime(announcementTagVo.getCreateTime());
         announcementTag.setUpdateTime(announcementTagVo.getUpdateTime());
         announcementTag.setCreateUserId(announcementTagVo.getCreateUserId());
@@ -71,8 +72,9 @@ public class AnnouncementTagVo {
         announcementTagVo.setName(announcementTag.getName());
         announcementTagVo.setDescription(announcementTag.getDescription());
         announcementTagVo.setOrdering(announcementTag.getOrdering());
-        announcementTagVo.setState(announcementTag.getState());
+
         announcementTagVo.setRemark(announcementTag.getRemark());
+        announcementTagVo.setState(announcementTag.getState());
         announcementTagVo.setCreateTime(announcementTag.getCreateTime());
         announcementTagVo.setUpdateTime(announcementTag.getUpdateTime());
         announcementTagVo.setCreateUserId(announcementTag.getCreateUserId());
@@ -89,8 +91,9 @@ public class AnnouncementTagVo {
         announcementTagVo.setName(announcementTagDto.getName());
         announcementTagVo.setDescription(announcementTagDto.getDescription());
         announcementTagVo.setOrdering(announcementTagDto.getOrdering());
-        announcementTagVo.setState(announcementTagDto.getState());
+
         announcementTagVo.setRemark(announcementTagDto.getRemark());
+        announcementTagVo.setState(announcementTagDto.getState());
         announcementTagVo.setCreateTime(announcementTagDto.getCreateTime());
         announcementTagVo.setUpdateTime(announcementTagDto.getUpdateTime());
         announcementTagVo.setCreateUserId(announcementTagDto.getCreateUserId());

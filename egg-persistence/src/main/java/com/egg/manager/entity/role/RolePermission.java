@@ -28,7 +28,6 @@ public class RolePermission extends Model<RolePermission> {
     private String defineRoleId;
     @TableField("define_permission_id")
     private String definePermissionId;
-
     private Integer type;
 
     private Integer state ;
@@ -37,7 +36,6 @@ public class RolePermission extends Model<RolePermission> {
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

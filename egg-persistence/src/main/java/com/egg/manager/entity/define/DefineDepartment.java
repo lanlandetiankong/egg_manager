@@ -37,8 +37,8 @@ public class DefineDepartment extends Model<DefineDepartment> {
     private Integer orderNum ;
     private String description ;
 
-    private Integer state ;
     private String remark;
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

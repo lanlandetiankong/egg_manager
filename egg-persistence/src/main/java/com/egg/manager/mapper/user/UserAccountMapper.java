@@ -1,5 +1,10 @@
 package com.egg.manager.mapper.user;
 
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.dto.module.DefineModuleDto;
+import com.egg.manager.dto.user.UserAccountDto;
 import com.egg.manager.entity.user.UserAccount;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,9 +27,33 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      */
     UserAccount commonSelectUserAccountById() ;
 
-    //批量 伪删除
+
+
+    /**
+     * [分页搜索查询] - 用户
+     * @param page
+     * @param queryFieldBeanList
+     * @param sortBeans
+     * @return
+     */
+    List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
+
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
     int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
 
+    /**
+     * 批量 锁定用户
+     * @param lockIds
+     * @param lockState
+     * @param loginUser
+     * @return
+     */
     int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState,@Param("loginUser")UserAccount loginUser) ;
 
     /**

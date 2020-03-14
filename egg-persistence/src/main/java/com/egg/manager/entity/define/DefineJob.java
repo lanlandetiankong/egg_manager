@@ -24,6 +24,7 @@ public class DefineJob extends Model<DefineJob> {
     private String name ;
     private String description;
     private Integer type;
+
     private String remark ;
     private Integer state ;
     @TableField("create_time")
@@ -34,9 +35,6 @@ public class DefineJob extends Model<DefineJob> {
     private String createUserId ;
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
-
-
-
 
     @Override
     protected Serializable pkVal() {

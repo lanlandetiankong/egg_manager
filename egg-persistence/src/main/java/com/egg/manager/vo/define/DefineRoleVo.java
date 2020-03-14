@@ -24,11 +24,11 @@ public class DefineRoleVo {
     private String code ;
     private Integer type;
     private String typeStr ;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccountVo createUser ;
@@ -49,12 +49,13 @@ public class DefineRoleVo {
         defineRole.setName(defineRoleVo.getName());
         defineRole.setCode(defineRoleVo.getCode());
         defineRole.setType(defineRoleVo.getType());
+        defineRole.setRemark(defineRoleVo.getRemark());
         defineRole.setState(defineRoleVo.getState());
         defineRole.setCreateTime(defineRoleVo.getCreateTime());
         defineRole.setUpdateTime(defineRoleVo.getUpdateTime());
         defineRole.setCreateUserId(defineRoleVo.getCreateUserId());
         defineRole.setLastModifyerId(defineRoleVo.getLastModifyerId());
-        defineRole.setRemark(defineRoleVo.getRemark());
+
         return defineRole ;
     }
 
@@ -75,12 +76,13 @@ public class DefineRoleVo {
                 defineRoleVo.setTypeStr("");
             }
         }
+        defineRoleVo.setRemark(defineRole.getRemark());
         defineRoleVo.setState(defineRole.getState());
         defineRoleVo.setCreateTime(defineRole.getCreateTime());
         defineRoleVo.setUpdateTime(defineRole.getUpdateTime());
         defineRoleVo.setCreateUserId(defineRole.getCreateUserId());
         defineRoleVo.setLastModifyerId(defineRole.getLastModifyerId());
-        defineRoleVo.setRemark(defineRole.getRemark());
+
         return defineRoleVo ;
     }
     public static DefineRoleVo transferDtoToVo(DefineRoleDto defineRoleDto) {

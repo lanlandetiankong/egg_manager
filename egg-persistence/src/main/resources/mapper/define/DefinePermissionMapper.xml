@@ -8,6 +8,8 @@
         <result column="name" property="name" />
         <result column="code" property="code" />
         <result column="type" property="type" />
+
+        <result column="remark" property="remark" />
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -24,6 +26,7 @@
         <result column="code" property="code" />
         <result column="type" property="type" />
 
+        <result column="remark" property="remark" />
         <result column="state" property="state" />
         <result column="remark" property="remark" />
         <result column="create_time" property="createTime" />
@@ -48,6 +51,7 @@
         ${base_alias_name}.name,
         ${base_alias_name}.code,
         ${base_alias_name}.type,
+        ${base_alias_name}.remark,
         ${base_alias_name}.state,
         ${base_alias_name}.create_time,
         ${base_alias_name}.update_time,
@@ -67,6 +71,7 @@
         ${base_alias_name}.code AS ${base_alias_col_prefix}code,
         ${base_alias_name}.type AS ${base_alias_col_prefix}type,
 
+        ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
         ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
         ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,

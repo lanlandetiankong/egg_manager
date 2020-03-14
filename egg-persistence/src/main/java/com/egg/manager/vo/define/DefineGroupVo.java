@@ -17,6 +17,8 @@ public class DefineGroupVo {
     private String pid ;
     private Integer isInherit ; //是否成员可继承组权限
     private String type;
+
+    private String remark;
     private Integer state ;
     private Date createTime ;
     private Date updateTime ;

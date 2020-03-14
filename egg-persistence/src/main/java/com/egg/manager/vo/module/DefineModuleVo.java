@@ -2,6 +2,7 @@ package com.egg.manager.vo.module;
 
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
+import com.egg.manager.dto.module.DefineModuleDto;
 import com.egg.manager.entity.module.DefineModule;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.user.UserAccountVo;
@@ -26,11 +27,11 @@ public class DefineModuleVo {
     private String styleVal ;
     private Integer typeVal;
     private String typeStr;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccountVo createUser ;
@@ -89,6 +90,34 @@ public class DefineModuleVo {
         return defineModuleVo ;
     }
 
+    public static DefineModuleVo transferDtoToVo(DefineModuleDto defineModuleDto) {
+        if(defineModuleDto == null){
+            return null ;
+        }
+        DefineModuleVo defineModuleVo = new DefineModuleVo() ;
+        defineModuleVo.setFid(defineModuleDto.getFid());
+        defineModuleVo.setName(defineModuleDto.getName());
+        defineModuleVo.setCode(defineModuleDto.getCode());
+        defineModuleVo.setIconVal(defineModuleDto.getIcon());
+        defineModuleVo.setStyleVal(defineModuleDto.getStyle());
+        defineModuleVo.setTypeVal(defineModuleDto.getType());
+        if(defineModuleDto.getType() != null){
+            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(defineModuleDto.getType());
+            if(typeEnum != null){
+                defineModuleVo.setTypeStr(typeEnum.getLabel());
+            }   else {
+                defineModuleVo.setTypeStr("");
+            }
+        }
+        defineModuleVo.setState(defineModuleDto.getState());
+        defineModuleVo.setCreateTime(defineModuleDto.getCreateTime());
+        defineModuleVo.setUpdateTime(defineModuleDto.getUpdateTime());
+        defineModuleVo.setCreateUserId(defineModuleDto.getCreateUserId());
+        defineModuleVo.setLastModifyerId(defineModuleDto.getLastModifyerId());
+        defineModuleVo.setRemark(defineModuleDto.getRemark());
+        return defineModuleVo ;
+    }
+
     public static List<DefineModuleVo> transferEntityToVoList(List<DefineModule> defineModules){
         if(defineModules == null){
             return null ;
@@ -96,6 +125,18 @@ public class DefineModuleVo {
             List<DefineModuleVo> list = new ArrayList<>() ;
             for (DefineModule defineModule : defineModules){
                 list.add(transferEntityToVo(defineModule));
+            }
+            return list ;
+        }
+    }
+
+    public static List<DefineModuleVo> transferDtoToVoList(List<DefineModuleDto> defineModuleDtos){
+        if(defineModuleDtos == null){
+            return null ;
+        }   else {
+            List<DefineModuleVo> list = new ArrayList<>() ;
+            for (DefineModuleDto defineModuleDto : defineModuleDtos){
+                list.add(transferDtoToVo(defineModuleDto));
             }
             return list ;
         }

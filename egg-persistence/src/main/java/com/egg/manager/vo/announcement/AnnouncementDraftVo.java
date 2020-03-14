@@ -51,8 +51,8 @@ public class AnnouncementDraftVo {
     private String accessory ;      //附件
     private Integer isPublished ;      //是否已提交
 
-    private Integer state ;
     private String remark;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;
@@ -82,8 +82,8 @@ public class AnnouncementDraftVo {
         }
         announcementDraft.setAccessory(announcementDraftVo.getAccessory());
 
-        announcementDraft.setState(announcementDraftVo.getState());
         announcementDraft.setRemark(announcementDraftVo.getRemark());
+        announcementDraft.setState(announcementDraftVo.getState());
         announcementDraft.setCreateTime(announcementDraftVo.getCreateTime());
         announcementDraft.setUpdateTime(announcementDraftVo.getUpdateTime());
         announcementDraft.setCreateUserId(announcementDraftVo.getCreateUserId());
@@ -129,10 +129,10 @@ public class AnnouncementDraftVo {
                 e.printStackTrace();
             }
         }
-
         announcementDraftVo.setAccessory(announcementDraft.getAccessory());
-        announcementDraftVo.setState(announcementDraft.getState());
+
         announcementDraftVo.setRemark(announcementDraft.getRemark());
+        announcementDraftVo.setState(announcementDraft.getState());
         announcementDraftVo.setCreateTime(announcementDraft.getCreateTime());
         announcementDraftVo.setUpdateTime(announcementDraft.getUpdateTime());
         announcementDraftVo.setCreateUserId(announcementDraft.getCreateUserId());
@@ -182,8 +182,9 @@ public class AnnouncementDraftVo {
         }
         announcementDraftVo.setAccessory(announcementDraftDto.getAccessory());
         announcementDraftVo.setIsPublished(announcementDraftDto.getIsPublished());
-        announcementDraftVo.setState(announcementDraftDto.getState());
+
         announcementDraftVo.setRemark(announcementDraftDto.getRemark());
+        announcementDraftVo.setState(announcementDraftDto.getState());
         announcementDraftVo.setCreateTime(announcementDraftDto.getCreateTime());
         announcementDraftVo.setUpdateTime(announcementDraftDto.getUpdateTime());
         announcementDraftVo.setCreateUserId(announcementDraftDto.getCreateUserId());

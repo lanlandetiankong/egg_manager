@@ -42,13 +42,14 @@ public class UserAccount extends Model<UserAccount> {
     private Integer userType ;
     @TableField("user_type_num")
     private Integer userTypeNum;
+
+    private String remark ;
     private Integer state ;
     private Integer locked ;    //是否被锁定
     @TableField(value="create_time",fill = FieldFill.INSERT)
     private Date createTime ;
     @TableField(value="update_time",fill = FieldFill.UPDATE)
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

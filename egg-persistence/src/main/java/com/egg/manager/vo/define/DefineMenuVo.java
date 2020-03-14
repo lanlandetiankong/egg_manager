@@ -31,11 +31,10 @@ public class DefineMenuVo {
     private Integer level ;
     private Integer orderNum ;
 
-    private Integer state ;
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccountVo createUser ;
@@ -63,12 +62,13 @@ public class DefineMenuVo {
         defineMenu.setLevel(defineMenuVo.getLevel());
         defineMenu.setOrderNum(defineMenuVo.getOrderNum());
 
+        defineMenu.setRemark(defineMenuVo.getRemark());
         defineMenu.setState(defineMenuVo.getState());
         defineMenu.setCreateTime(defineMenuVo.getCreateTime());
         defineMenu.setUpdateTime(defineMenuVo.getUpdateTime());
         defineMenu.setCreateUserId(defineMenuVo.getCreateUserId());
         defineMenu.setLastModifyerId(defineMenuVo.getLastModifyerId());
-        defineMenu.setRemark(defineMenuVo.getRemark());
+
         return defineMenu ;
     }
 
@@ -96,12 +96,12 @@ public class DefineMenuVo {
         defineMenuVo.setLevel(defineMenu.getLevel());
         defineMenuVo.setOrderNum(defineMenu.getOrderNum());
 
+        defineMenuVo.setRemark(defineMenu.getRemark());
         defineMenuVo.setState(defineMenu.getState());
         defineMenuVo.setCreateTime(defineMenu.getCreateTime());
         defineMenuVo.setUpdateTime(defineMenu.getUpdateTime());
         defineMenuVo.setCreateUserId(defineMenu.getCreateUserId());
         defineMenuVo.setLastModifyerId(defineMenu.getLastModifyerId());
-        defineMenuVo.setRemark(defineMenu.getRemark());
         return defineMenuVo ;
     }
 
@@ -131,6 +131,7 @@ public class DefineMenuVo {
         defineMenuVo.setLevel(defineMenuDto.getLevel());
         defineMenuVo.setOrderNum(defineMenuDto.getOrderNum());
 
+        defineMenuVo.setRemark(defineMenuDto.getRemark());
         defineMenuVo.setState(defineMenuDto.getState());
         defineMenuVo.setCreateTime(defineMenuDto.getCreateTime());
         defineMenuVo.setUpdateTime(defineMenuDto.getUpdateTime());
@@ -138,8 +139,6 @@ public class DefineMenuVo {
         defineMenuVo.setLastModifyerId(defineMenuDto.getLastModifyerId());
         defineMenuVo.setCreateUser(UserAccountVo.transferEntityToVo(defineMenuDto.getCreateUser()));
         defineMenuVo.setLastModifyer(UserAccountVo.transferEntityToVo(defineMenuDto.getLastModifyer()));
-
-        defineMenuVo.setRemark(defineMenuDto.getRemark());
         return defineMenuVo ;
     }
 

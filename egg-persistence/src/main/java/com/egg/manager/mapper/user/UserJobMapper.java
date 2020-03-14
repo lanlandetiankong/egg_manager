@@ -1,9 +1,12 @@
 package com.egg.manager.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.dto.user.UserJobDto;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
-import com.egg.manager.entity.user.UserRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +20,22 @@ import java.util.List;
  * @since 2019-09-12
  */
 public interface UserJobMapper extends BaseMapper<UserJob> {
-    //批量 伪删除
+
+    /**
+     * [分页搜索查询] - 用户职务
+     * @param page
+     * @param queryFieldBeanList
+     * @param sortBeans
+     * @return
+     */
+    List<UserJobDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
     int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
 
     /**

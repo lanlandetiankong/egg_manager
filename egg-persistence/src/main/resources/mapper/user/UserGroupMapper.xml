@@ -8,6 +8,7 @@
         <result column="define_group_id" property="defineGroupId" />
         <result column="user_account_id" property="userAccountId" />
         <result column="type" property="type" />
+        <result column="remark" property="remark" />
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -17,7 +18,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, define_group_id AS defineGroupId, user_account_id AS userAccountId, type, state, create_time AS createTime, update_time AS updateTime,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
+        fid, define_group_id, user_account_id, type,remark, state, create_time, update_time,create_user_id,last_modifyer_id
     </sql>
 
 </mapper>

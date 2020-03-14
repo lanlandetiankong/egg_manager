@@ -1,5 +1,9 @@
 package com.egg.manager.mapper.user;
 
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.dto.user.UserAccountDto;
 import com.egg.manager.entity.role.RolePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
@@ -17,8 +21,15 @@ import java.util.List;
  * @since 2019-09-12
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
-    //批量 伪删除
-    int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
+    /**
+     * [分页搜索查询] - 用户角色
+     * @param page
+     * @param queryFieldBeanList
+     * @param sortBeans
+     * @return
+     */
+    List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
     /**
      * 取得用户拥有的所有角色id集合
      * @param userAccountId
@@ -26,6 +37,15 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
      * @return
      */
     List<String> findAllRoleIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable")boolean filterEnable) ;
+
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
+    int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
+
 
 
     /**

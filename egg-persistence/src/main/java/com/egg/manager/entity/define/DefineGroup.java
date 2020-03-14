@@ -25,16 +25,14 @@ public class DefineGroup extends Model<DefineGroup> {
     private String pid ;
     @TableField(value="is_inherit")
     private Integer isInherit ; //是否成员可继承组权限
-
-
     private String type;
-    private Integer state ;
+
     private String remark;
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

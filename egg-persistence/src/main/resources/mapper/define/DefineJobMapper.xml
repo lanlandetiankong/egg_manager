@@ -47,6 +47,7 @@
         ${base_alias_name}.name,
         ${base_alias_name}.description,
         ${base_alias_name}.type,
+        ${base_alias_name}.remark,
         ${base_alias_name}.state,
         ${base_alias_name}.create_time,
         ${base_alias_name}.update_time,
@@ -66,6 +67,7 @@
         ${base_alias_name}.description AS ${base_alias_col_prefix}description,
         ${base_alias_name}.type AS ${base_alias_col_prefix}type,
 
+        ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
         ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
         ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,

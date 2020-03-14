@@ -23,8 +23,9 @@ public class DefineJobVo {
     private Integer type;
     private String typeStr;
     private String description;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;
@@ -45,8 +46,9 @@ public class DefineJobVo {
         defineJob.setName(defineJobVo.getName());
         defineJob.setType(defineJobVo.getType());
         defineJob.setDescription(defineJobVo.getDescription());
-        defineJob.setState(defineJobVo.getState());
+
         defineJob.setRemark(defineJobVo.getRemark());
+        defineJob.setState(defineJobVo.getState());
         defineJob.setCreateTime(defineJobVo.getCreateTime());
         defineJob.setUpdateTime(defineJobVo.getUpdateTime());
         defineJob.setCreateUserId(defineJobVo.getCreateUserId());
@@ -67,8 +69,9 @@ public class DefineJobVo {
             defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
         }
         defineJobVo.setDescription(defineJob.getDescription());
-        defineJobVo.setState(defineJob.getState());
+
         defineJobVo.setRemark(defineJob.getRemark());
+        defineJobVo.setState(defineJob.getState());
         defineJobVo.setCreateTime(defineJob.getCreateTime());
         defineJobVo.setUpdateTime(defineJob.getUpdateTime());
         defineJobVo.setCreateUserId(defineJob.getCreateUserId());
@@ -89,8 +92,9 @@ public class DefineJobVo {
             defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
         }
         defineJobVo.setDescription(defineJobDto.getDescription());
-        defineJobVo.setState(defineJobDto.getState());
+
         defineJobVo.setRemark(defineJobDto.getRemark());
+        defineJobVo.setState(defineJobDto.getState());
         defineJobVo.setCreateTime(defineJobDto.getCreateTime());
         defineJobVo.setUpdateTime(defineJobDto.getUpdateTime());
         defineJobVo.setCreateUserId(defineJobDto.getCreateUserId());

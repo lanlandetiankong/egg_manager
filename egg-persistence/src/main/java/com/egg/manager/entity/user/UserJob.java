@@ -26,13 +26,13 @@ public class UserJob extends Model<UserJob> {
     private String userAccountId ;
     @TableField(value = "define_job_id")
     private  String defineJobId ;
+
+    private String remark ;
     private Integer state ;
-    private String remark;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

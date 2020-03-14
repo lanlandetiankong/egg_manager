@@ -47,12 +47,10 @@ public class AnnouncementVo {
     private String tagNameOfStr ; //公告标签 集合转字符串
     private String accessory ;      //附件
 
-    private Integer state ;
     private String remark;
-
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccountVo createUser ;
@@ -80,8 +78,8 @@ public class AnnouncementVo {
         }
         announcement.setAccessory(announcementVo.getAccessory());
 
-        announcement.setState(announcementVo.getState());
         announcement.setRemark(announcementVo.getRemark());
+        announcement.setState(announcementVo.getState());
         announcement.setCreateTime(announcementVo.getCreateTime());
         announcement.setUpdateTime(announcementVo.getUpdateTime());
         announcement.setCreateUserId(announcementVo.getCreateUserId());
@@ -127,10 +125,10 @@ public class AnnouncementVo {
                 e.printStackTrace();
             }
         }
-
         announcementVo.setAccessory(announcement.getAccessory());
-        announcementVo.setState(announcement.getState());
+
         announcementVo.setRemark(announcement.getRemark());
+        announcementVo.setState(announcement.getState());
         announcementVo.setCreateTime(announcement.getCreateTime());
         announcementVo.setUpdateTime(announcement.getUpdateTime());
         announcementVo.setCreateUserId(announcement.getCreateUserId());
@@ -191,8 +189,9 @@ public class AnnouncementVo {
             }
         }
         announcementVo.setAccessory(announcementDto.getAccessory());
-        announcementVo.setState(announcementDto.getState());
+
         announcementVo.setRemark(announcementDto.getRemark());
+        announcementVo.setState(announcementDto.getState());
         announcementVo.setCreateTime(announcementDto.getCreateTime());
         announcementVo.setUpdateTime(announcementDto.getUpdateTime());
         announcementVo.setCreateUserId(announcementDto.getCreateUserId());

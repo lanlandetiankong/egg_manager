@@ -25,7 +25,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        operation_log_id AS operationLogId,model_name AS modelName,action, log_description AS logDescription, action_args AS actionArgs, user_no AS userNo, class_name AS className, method_name AS methodName, ip, create_time AS createTime, succeed, message,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId,create_user_id AS createUserId,last_modifyer_id AS lastModifyerId
+        operation_log_id,model_name,action, log_description, action_args, user_no, class_name, method_name, ip,
+        create_time, succeed, message,create_user_id ,last_modifyer_id,create_user_id,last_modifyer_id
     </sql>
 
 </mapper>

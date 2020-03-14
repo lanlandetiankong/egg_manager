@@ -41,14 +41,12 @@ public class AnnouncementDraft extends Model<AnnouncementDraft> {
     @TableField("is_published")
     private Integer isPublished ;      //是否已提交
 
-    private Integer state ;
     private String remark;
-
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

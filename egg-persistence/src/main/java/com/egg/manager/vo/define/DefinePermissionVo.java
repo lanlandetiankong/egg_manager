@@ -22,11 +22,11 @@ public class DefinePermissionVo {
     private String code ;
     private Integer type;
     private String typeStr ;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccountVo createUser ;
@@ -49,12 +49,13 @@ public class DefinePermissionVo {
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
         definePermission.setType(definePermissionVo.getType());
+        definePermission.setRemark(definePermissionVo.getRemark());
         definePermission.setState(definePermissionVo.getState());
         definePermission.setCreateTime(definePermissionVo.getCreateTime());
         definePermission.setUpdateTime(definePermissionVo.getUpdateTime());
         definePermission.setCreateUserId(definePermissionVo.getCreateUserId());
         definePermission.setLastModifyerId(definePermissionVo.getLastModifyerId());
-        definePermission.setRemark(definePermissionVo.getRemark());
+
         return definePermission ;
     }
 
@@ -75,12 +76,13 @@ public class DefinePermissionVo {
                 definePermissionVo.setTypeStr("");
             }
         }
+        definePermissionVo.setRemark(definePermission.getRemark());
         definePermissionVo.setState(definePermission.getState());
         definePermissionVo.setCreateTime(definePermission.getCreateTime());
         definePermissionVo.setUpdateTime(definePermission.getUpdateTime());
         definePermissionVo.setCreateUserId(definePermission.getCreateUserId());
         definePermissionVo.setLastModifyerId(definePermission.getLastModifyerId());
-        definePermissionVo.setRemark(definePermission.getRemark());
+
         return definePermissionVo ;
     }
 
@@ -101,12 +103,12 @@ public class DefinePermissionVo {
                 definePermissionVo.setTypeStr("");
             }
         }
+        definePermissionVo.setRemark(definePermissionDto.getRemark());
         definePermissionVo.setState(definePermissionDto.getState());
         definePermissionVo.setCreateTime(definePermissionDto.getCreateTime());
         definePermissionVo.setUpdateTime(definePermissionDto.getUpdateTime());
         definePermissionVo.setCreateUserId(definePermissionDto.getCreateUserId());
         definePermissionVo.setLastModifyerId(definePermissionDto.getLastModifyerId());
-        definePermissionVo.setRemark(definePermissionDto.getRemark());
         definePermissionVo.setCreateUser(UserAccountVo.transferEntityToVo(definePermissionDto.getCreateUser()));
         definePermissionVo.setLastModifyer(UserAccountVo.transferEntityToVo(definePermissionDto.getLastModifyer()));
         return definePermissionVo ;

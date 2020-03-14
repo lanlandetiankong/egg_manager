@@ -1,5 +1,6 @@
 package com.egg.manager.vo.organization;
 
+import com.egg.manager.dto.organization.DefineTenantDto;
 import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.vo.user.UserAccountVo;
@@ -21,11 +22,11 @@ public class DefineTenantVo {
     private String code ;
     private String dbCode;
     private String typeStr ;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     private Date createTime ;
     private Date updateTime ;
-
     private String createUserId ;
     private String lastModifyerId;
     private UserAccount createUser ;
@@ -52,12 +53,12 @@ public class DefineTenantVo {
         defineTenant.setName(defineTenantVo.getName());
         defineTenant.setCode(defineTenantVo.getCode());
         defineTenant.setDbCode(defineTenantVo.getDbCode());
+        defineTenant.setRemark(defineTenantVo.getRemark());
         defineTenant.setState(defineTenantVo.getState());
         defineTenant.setCreateTime(defineTenantVo.getCreateTime());
         defineTenant.setUpdateTime(defineTenantVo.getUpdateTime());
         defineTenant.setCreateUserId(defineTenantVo.getCreateUserId());
         defineTenant.setLastModifyerId(defineTenantVo.getLastModifyerId());
-        defineTenant.setRemark(defineTenantVo.getRemark());
         return defineTenant ;
     }
 
@@ -70,12 +71,30 @@ public class DefineTenantVo {
         defineTenantVo.setName(defineTenant.getName());
         defineTenantVo.setCode(defineTenant.getCode());
         defineTenantVo.setDbCode(defineTenant.getDbCode());
+        defineTenantVo.setRemark(defineTenant.getRemark());
         defineTenantVo.setState(defineTenant.getState());
         defineTenantVo.setCreateTime(defineTenant.getCreateTime());
         defineTenantVo.setUpdateTime(defineTenant.getUpdateTime());
         defineTenantVo.setCreateUserId(defineTenant.getCreateUserId());
         defineTenantVo.setLastModifyerId(defineTenant.getLastModifyerId());
-        defineTenantVo.setRemark(defineTenant.getRemark());
+        return defineTenantVo ;
+    }
+
+    public static DefineTenantVo transferDtoToVo(DefineTenantDto defineTenantDto) {
+        if(defineTenantDto == null){
+            return null ;
+        }
+        DefineTenantVo defineTenantVo = new DefineTenantVo() ;
+        defineTenantVo.setFid(defineTenantDto.getFid());
+        defineTenantVo.setName(defineTenantDto.getName());
+        defineTenantVo.setCode(defineTenantDto.getCode());
+        defineTenantVo.setDbCode(defineTenantDto.getDbCode());
+        defineTenantVo.setRemark(defineTenantDto.getRemark());
+        defineTenantVo.setState(defineTenantDto.getState());
+        defineTenantVo.setCreateTime(defineTenantDto.getCreateTime());
+        defineTenantVo.setUpdateTime(defineTenantDto.getUpdateTime());
+        defineTenantVo.setCreateUserId(defineTenantDto.getCreateUserId());
+        defineTenantVo.setLastModifyerId(defineTenantDto.getLastModifyerId());
         return defineTenantVo ;
     }
 
@@ -86,6 +105,18 @@ public class DefineTenantVo {
             List<DefineTenantVo> list = new ArrayList<>() ;
             for (DefineTenant defineTenant : defineTenants){
                 list.add(transferEntityToVo(defineTenant));
+            }
+            return list ;
+        }
+    }
+
+    public static List<DefineTenantVo> transferDtoToVoList(List<DefineTenantDto> defineTenantDtoList){
+        if(defineTenantDtoList == null){
+            return null ;
+        }   else {
+            List<DefineTenantVo> list = new ArrayList<>() ;
+            for (DefineTenantDto defineTenantDto : defineTenantDtoList){
+                list.add(transferDtoToVo(defineTenantDto));
             }
             return list ;
         }

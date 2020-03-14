@@ -21,12 +21,12 @@ import java.util.Date;
 public class DefineRole extends Model<DefineRole> {
     @TableId
     private String fid ;
-
     private String name ;
     private String code ;
     private Integer type;
-    private Integer state ;
+
     private String remark ;
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

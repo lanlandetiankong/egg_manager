@@ -91,12 +91,12 @@ public class OperationLog extends Model<OperationLog> {
     private String declaredAnnotations ;    //定义的注解->json
 
 
+    private String remark ;
     private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
     private Date updateTime ;
-
     @TableField(value = "create_user_id")
     private String createUserId ;
     @TableField(value = "last_modifyer_id")

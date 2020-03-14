@@ -19,16 +19,14 @@ import java.util.Date;
 public class DefineModule extends Model<DefineModule> {
     @TableId
     private String fid ;
-
     private String name ;
     private String code ;
     private String icon ;
     private String style ;
     private Integer type;
 
-
-    private Integer state ;
     private String remark ;
+    private Integer state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

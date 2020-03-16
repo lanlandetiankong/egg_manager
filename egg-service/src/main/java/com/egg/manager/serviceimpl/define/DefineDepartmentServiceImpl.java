@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -150,6 +151,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param defineDepartmentVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -189,6 +191,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -227,6 +230,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param delIds 要删除的部门id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineDepartmentByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -243,6 +247,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param delId 要删除的部门id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineDepartment(String delId,UserAccount loginUser) throws Exception{
         DefineDepartment defineDepartment = DefineDepartment.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

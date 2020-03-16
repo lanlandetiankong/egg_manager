@@ -1,6 +1,9 @@
 package com.egg.manager.config.http;
 
+import com.egg.manager.common.base.props.build.deploy.DeployConfProps;
 import com.egg.manager.config.shiro.CurrentUserAccountMethodArgumentResolver;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -21,6 +24,9 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfigured extends WebMvcConfigurationSupport{
+
+    @Autowired
+    private DeployConfProps deployConfProps;
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
@@ -46,7 +52,7 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
                 .allowedMethods("*")
                 .maxAge(1800)
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8081") ;
+                .allowedOrigins(deployConfProps.getAllowedOrigins()) ;
     }
 
     /**

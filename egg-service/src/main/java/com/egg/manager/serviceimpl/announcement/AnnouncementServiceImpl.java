@@ -25,6 +25,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -54,53 +55,6 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     @Autowired
     private AnnouncementDraftService announcementDraftService ;
 
-    /**
-     * 新增公告
-     * @param announcementVo
-     * @throws Exception
-     */
-    @Override
-    public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        Announcement announcement = AnnouncementVo.transferVoToEntity(announcementVo);
-        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcement.setState(BaseStateEnum.ENABLED.getValue());
-        announcement.setCreateTime(now);
-        announcement.setUpdateTime(now);
-        if(loginUser != null){
-            announcement.setCreateUserId(loginUser.getFid());
-            announcement.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementMapper.insert(announcement) ;
-        return addCount ;
-    }
-
-
-    /**
-     * 公告草稿发布
-     * @param announcementDraftVo
-     * @throws Exception
-     */
-    @Override
-    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        //公告草稿id
-        String draftId = announcementDraftVo.getFid();
-        //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftVo.transferVoToEntity(announcementDraftVo),loginUser);
-        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcement.setState(BaseStateEnum.ENABLED.getValue());
-        announcement.setCreateTime(now);
-        announcement.setUpdateTime(now);
-        if(loginUser != null){
-            announcement.setCreateUserId(loginUser.getFid());
-            announcement.setLastModifyerId(loginUser.getFid());
-        }
-        //修改 公告草稿 状态
-        announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,false);
-        Integer addCount = announcementMapper.insert(announcement) ;
-        return addCount ;
-    }
 
     /**
      * 分页查询 公告
@@ -141,7 +95,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Override
     public void dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                             List<AntdvSortBean> sortBeans) {
+                                            List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
@@ -151,6 +105,58 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         result.setResultList(AnnouncementVo.transferDtoToVoList(announcementDtoList,announcementTagMap));
     }
 
+    /**
+     * 新增公告
+     * @param announcementVo
+     * @throws Exception
+     */
+    @Transactional(rollbackFor=Exception.class)
+    @Override
+    public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        Announcement announcement = AnnouncementVo.transferVoToEntity(announcementVo);
+        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
+        announcement.setState(BaseStateEnum.ENABLED.getValue());
+        announcement.setCreateTime(now);
+        announcement.setUpdateTime(now);
+        if(loginUser != null){
+            announcement.setCreateUserId(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
+        }
+        Integer addCount = announcementMapper.insert(announcement) ;
+        return addCount ;
+    }
+
+
+    /**
+     * 公告草稿发布
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    @Transactional(rollbackFor=Exception.class)
+    @Override
+    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        //公告草稿id
+        String draftId = announcementDraftVo.getFid();
+        //发布公告
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftVo.transferVoToEntity(announcementDraftVo),loginUser);
+        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
+        announcement.setState(BaseStateEnum.ENABLED.getValue());
+        announcement.setCreateTime(now);
+        announcement.setUpdateTime(now);
+        if(loginUser != null){
+            announcement.setCreateUserId(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
+        }
+        //修改 公告草稿 状态
+        announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,false);
+        Integer addCount = announcementMapper.insert(announcement) ;
+        return addCount ;
+    }
+
+
+
 
 
     /**
@@ -158,6 +164,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param delIds 要删除的公告id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -174,6 +181,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param delId 要删除的公告id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncement(String delId,UserAccount loginUser) throws Exception{
         Announcement announcement = Announcement.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

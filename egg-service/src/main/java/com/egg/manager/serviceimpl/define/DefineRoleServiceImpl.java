@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -195,6 +196,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param defineRoleVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -218,6 +220,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -240,6 +243,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param delIds 要删除的角色id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -256,6 +260,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param delId 要删除的角色id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception{
         DefineRole defineRole = DefineRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
@@ -273,6 +278,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param checkIds 权限id集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealGrantPermissionToRole(String roleId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;

@@ -23,6 +23,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -103,6 +104,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param userJobVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserJob(UserJobVo userJobVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -126,6 +128,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateUserJob(UserJobVo userJobVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -150,6 +153,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param delIds 要删除的用户职务id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserJobByArr(String[] delIds, UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -166,6 +170,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param delId 要删除的用户职务id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception{
         UserJob userJob = UserJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

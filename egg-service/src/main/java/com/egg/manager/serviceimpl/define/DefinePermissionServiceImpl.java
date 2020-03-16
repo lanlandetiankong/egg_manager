@@ -23,6 +23,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -110,6 +111,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param definePermissionVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -133,6 +135,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -155,6 +158,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param delIds 要删除的权限id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -171,6 +175,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param delId 要删除的权限id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
         DefinePermission definePermission = DefinePermission.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

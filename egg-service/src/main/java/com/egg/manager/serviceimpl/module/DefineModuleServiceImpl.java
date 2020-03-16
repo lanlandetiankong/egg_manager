@@ -21,6 +21,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -100,6 +101,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param defineModuleVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineModule(DefineModuleVo defineModuleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -123,6 +125,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefineModule(DefineModuleVo defineModuleVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -145,6 +148,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param delIds 要删除的模块id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineModuleByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -161,6 +165,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param delId 要删除的模块id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineModule(String delId,UserAccount loginUser) throws Exception{
         DefineModule defineModule = DefineModule.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

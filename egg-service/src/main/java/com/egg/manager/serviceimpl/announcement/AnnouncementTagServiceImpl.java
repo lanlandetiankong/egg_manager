@@ -22,6 +22,7 @@ import com.egg.manager.vo.announcement.AnnouncementVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -113,6 +114,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param announcementTagVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -136,6 +138,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -158,6 +161,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param delIds 要删除的公告标签id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementTagByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -174,6 +178,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param delId 要删除的公告标签id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementTag(String delId,UserAccount loginUser) throws Exception{
         AnnouncementTag announcementTag = AnnouncementTag.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

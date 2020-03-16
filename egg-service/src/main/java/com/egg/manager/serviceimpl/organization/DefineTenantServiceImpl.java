@@ -21,6 +21,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -98,6 +99,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param defineTenantVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineTenant(DefineTenantVo defineTenantVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -121,6 +123,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -143,6 +146,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param delIds 要删除的租户id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineTenantByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -159,6 +163,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param delId 要删除的租户id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineTenant(String delId,UserAccount loginUser) throws Exception{
         DefineTenant defineTenant = DefineTenant.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

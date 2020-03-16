@@ -26,6 +26,7 @@ import com.egg.manager.vo.define.DefineMenuVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -52,56 +53,6 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     private CommonFuncService commonFuncService ;
     @Autowired
     private AnnouncementTagService announcementTagService ;
-
-    /**
-     * 新增公告草稿
-     * @param announcementDraftVo
-     * @throws Exception
-     */
-    @Override
-    public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        AnnouncementDraft announcementDraft = AnnouncementDraftVo.transferVoToEntity(announcementDraftVo);
-        announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
-        announcementDraft.setCreateTime(now);
-        announcementDraft.setUpdateTime(now);
-        if(loginUser != null){
-            announcementDraft.setCreateUserId(loginUser.getFid());
-            announcementDraft.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementDraftMapper.insert(announcementDraft) ;
-        return addCount ;
-    }
-
-    /**
-     * 更新公告草稿
-     * @param announcementDraftVo
-     * @throws Exception
-     */
-    @Override
-    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
-        announcementDraft.setTitle(announcementDraftVo.getTitle());
-        announcementDraft.setKeyWord(announcementDraftVo.getKeyWord());
-        announcementDraft.setPublishDepartment(announcementDraftVo.getPublishDepartment());
-        announcementDraft.setContent(announcementDraftVo.getContent());
-        List<String> tagIds = announcementDraftVo.getTagIds();
-        if(tagIds != null && tagIds.size() > 0){
-            announcementDraft.setTagIds(JSON.toJSONString(tagIds));
-        }   else {
-            announcementDraft.setTagIds("");
-        }
-        announcementDraft.setAccessory(announcementDraftVo.getAccessory());
-
-        announcementDraft.setUpdateTime(now);
-        if(loginUser != null){
-            announcementDraft.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementDraftMapper.updateById(announcementDraft) ;
-        return addCount ;
-    }
 
 
     /**
@@ -143,7 +94,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      */
     @Override
     public void dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+                                                 List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
@@ -153,6 +104,61 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         result.setResultList(AnnouncementDraftVo.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
     }
 
+    /**
+     * 新增公告草稿
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    @Transactional(rollbackFor=Exception.class)
+    @Override
+    public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        AnnouncementDraft announcementDraft = AnnouncementDraftVo.transferVoToEntity(announcementDraftVo);
+        announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
+        announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
+        announcementDraft.setCreateTime(now);
+        announcementDraft.setUpdateTime(now);
+        if(loginUser != null){
+            announcementDraft.setCreateUserId(loginUser.getFid());
+            announcementDraft.setLastModifyerId(loginUser.getFid());
+        }
+        Integer addCount = announcementDraftMapper.insert(announcementDraft) ;
+        return addCount ;
+    }
+
+    /**
+     * 更新公告草稿
+     * @param announcementDraftVo
+     * @throws Exception
+     */
+    @Transactional(rollbackFor=Exception.class)
+    @Override
+    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+        Date now = new Date() ;
+        AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
+        announcementDraft.setTitle(announcementDraftVo.getTitle());
+        announcementDraft.setKeyWord(announcementDraftVo.getKeyWord());
+        announcementDraft.setPublishDepartment(announcementDraftVo.getPublishDepartment());
+        announcementDraft.setContent(announcementDraftVo.getContent());
+        List<String> tagIds = announcementDraftVo.getTagIds();
+        if(tagIds != null && tagIds.size() > 0){
+            announcementDraft.setTagIds(JSON.toJSONString(tagIds));
+        }   else {
+            announcementDraft.setTagIds("");
+        }
+        announcementDraft.setAccessory(announcementDraftVo.getAccessory());
+
+        announcementDraft.setUpdateTime(now);
+        if(loginUser != null){
+            announcementDraft.setLastModifyerId(loginUser.getFid());
+        }
+        Integer addCount = announcementDraftMapper.updateById(announcementDraft) ;
+        return addCount ;
+    }
+
+
+
+
 
 
     /**
@@ -160,6 +166,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param delIds 要删除的公告草稿id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementDraftByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -176,6 +183,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param delId 要删除的公告草稿id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementDraft(String delId,UserAccount loginUser) throws Exception{
         AnnouncementDraft announcementDraft = AnnouncementDraft.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
@@ -192,6 +200,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param draftIds 要发布的公告草稿id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealPublishAnnouncementDraftByArr(String[] draftIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -214,6 +223,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param draftId 要发布的公告草稿id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser,boolean insertFlag) throws Exception{
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);

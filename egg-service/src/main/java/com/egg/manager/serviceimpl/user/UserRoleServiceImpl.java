@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -183,6 +184,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param userRoleVo
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -206,6 +208,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateUserRole(UserRoleVo userRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -230,6 +233,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param delIds 要删除的用户角色id 集合
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -246,6 +250,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param delId 要删除的用户角色id
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception{
         UserRole userRole = UserRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;

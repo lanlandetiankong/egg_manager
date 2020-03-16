@@ -7,6 +7,7 @@ import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -30,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -133,6 +135,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param loginUser 当前登录用户
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserAccount(UserAccountVo userAccountVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
@@ -165,6 +168,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateUserAccount(UserAccountVo userAccountVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Integer changeCount = 0;
@@ -190,6 +194,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param loginUser 当前登录用户
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserAccountByArr(String[] delIds,UserAccount loginUser) throws Exception{
         Integer delCount = 0 ;
@@ -207,6 +212,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param loginUser 当前登录用户
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception{
         UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
@@ -225,6 +231,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param isLock 是否锁定
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealLockUserAccountByArr(String[] lockIds,UserAccount loginUser,boolean isLock) throws Exception{
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
@@ -244,6 +251,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param isLock 是否锁定
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception{
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
@@ -264,6 +272,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param loginUser 当前登录用户
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;
@@ -325,6 +334,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param loginUser 当前登录用户
      * @throws Exception
      */
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
         Integer changeCount = 0 ;

@@ -1,6 +1,8 @@
 package com.egg.manager.dto.user;
 
+import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.organization.DefineTenantVo;
 import lombok.*;
 
 import java.util.Date;
@@ -35,4 +37,8 @@ public class UserAccountDto {
     private String lastModifyerId;
     private UserAccount createUser ;
     private UserAccount lastModifyer;
+
+
+    private String belongTenantId ;
+    private DefineTenant belongTenant ;
 }

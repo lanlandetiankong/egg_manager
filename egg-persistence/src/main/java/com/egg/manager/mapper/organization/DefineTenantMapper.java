@@ -30,6 +30,8 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
      * @return
      */
     List<DefineTenantDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
+    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId")String userAccountId);
     /**
      * 批量 伪删除
      * @param delIds

@@ -70,4 +70,11 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @throws Exception
      */
     Integer dealDelDefineTenant(String delId, UserAccount loginUser) throws Exception;
+
+
+    /**
+     * 取得的结果 转为 枚举类型
+     * @param result
+     */
+    void dealResultListSetToEntitySelect(MyCommonResult result);
 }

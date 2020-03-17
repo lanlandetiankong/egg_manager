@@ -3,6 +3,8 @@
 <mapper namespace="com.egg.manager.mapper.common.DefaultCommonFuncMapper" >
 
 
+
+
     <!--
         [Common]分页搜索-where 语句拼接
         必须采用QueryFormFieldBean作为搜索字段集合传入，且别名必须为 queryFieldList
@@ -47,6 +49,22 @@
                 </choose>
             </foreach>
         </if>
+    </sql>
+
+
+    <sql id="Default_Common_QueryPage_Where_ForItem_Sql">
+        AND ${table_name_alias}.${item.fieldName}
+        <choose>
+            <when test="item.matching == 'equals' ">
+                = #{item.value}
+            </when>
+            <when test="item.matching == 'notEquals' ">
+                != #{item.value}
+            </when>
+            <when test="item.matching == 'like' ">
+                LIKE CONCAT(CONCAT('%', #{item.value}), '%')
+            </when>
+        </choose>
     </sql>
 
 </mapper>

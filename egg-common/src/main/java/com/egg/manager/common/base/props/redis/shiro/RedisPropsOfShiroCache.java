@@ -58,6 +58,8 @@ public class RedisPropsOfShiroCache {
     private String userGroupKey ;
     @Value("userRoleKey")
     private String userRoleKey ;
+    @Value("userTenantKey")
+    private String userTenantKey ;
 
 
 
@@ -100,6 +102,8 @@ public class RedisPropsOfShiroCache {
     private String userGroupTtl ;
     @Value("userRoleTtl")
     private String userRoleTtl ;
+    @Value("userTenantTtl")
+    private String userTenantTtl ;
 
     public void setTokenKey(String tokenKey) {
         this.tokenKey = tokenKey;
@@ -142,6 +146,9 @@ public class RedisPropsOfShiroCache {
 
     public void setUserRoleKey(String userRoleKey) {
         this.userRoleKey = userRoleKey;
+    }
+    public void setUserTenantKey(String userTenantKey) {
+        this.userTenantKey = userTenantKey;
     }
 
     public void setTokenTtl(String tokenTtl) {
@@ -186,6 +193,9 @@ public class RedisPropsOfShiroCache {
 
     public void setUserRoleTtl(String userRoleTtl) {
         this.userRoleTtl = userRoleTtl;
+    }
+    public void setUserTenantTtl(String userTenantTtl) {
+        this.userTenantTtl = userTenantTtl;
     }
 
     public void setDefineGroupAllKey(String defineGroupAllKey) {
@@ -288,6 +298,9 @@ public class RedisPropsOfShiroCache {
     public String getUserRoleKey() {
         return userRoleKey.trim();
     }
+    public String getUserTenantKey() {
+        return userTenantKey.trim();
+    }
 
     public Long getTokenTtl() {
         return StringUtils.isBlank(tokenTtl) ? 0L : Long.parseLong(tokenTtl.trim()) ;
@@ -330,6 +343,9 @@ public class RedisPropsOfShiroCache {
 
     public Long getUserRoleTtl() {
         return StringUtils.isBlank(userRoleTtl) ? 0L : Long.parseLong(userRoleTtl.trim()) ;
+    }
+    public Long getUserTenantTtl() {
+        return StringUtils.isBlank(userTenantTtl) ? 0L : Long.parseLong(userTenantTtl.trim()) ;
     }
 
     public Long getDefineGroupAllTtl() {

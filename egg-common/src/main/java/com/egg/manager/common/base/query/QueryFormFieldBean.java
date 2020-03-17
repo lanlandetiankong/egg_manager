@@ -14,8 +14,10 @@ import lombok.Data;
 public class QueryFormFieldBean {
     private String fieldName;
     private String matching ;
+    private String foreignName ;
     private String sqlMatching ;
     private Object value ;
+
 
 
     public static QueryFormFieldBean dealGetEqualsBean(String fieldName,Object value){
@@ -42,6 +44,36 @@ public class QueryFormFieldBean {
         bean.setValue(value);
         bean.setMatching("like");
         bean.setSqlMatching("like");
+        return bean ;
+    }
+
+    public static QueryFormFieldBean dealGetEqualsBean(String fieldName,Object value,String foreignName){
+        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+        bean.setFieldName(fieldName);
+        bean.setValue(value);
+        bean.setMatching("equals");
+        bean.setSqlMatching("=");
+        bean.setForeignName(foreignName);
+        return bean ;
+    }
+
+    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName,Object value,String foreignName){
+        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+        bean.setFieldName(fieldName);
+        bean.setValue(value);
+        bean.setMatching("notEquals");
+        bean.setSqlMatching("!=");
+        bean.setForeignName(foreignName);
+        return bean ;
+    }
+
+    public static QueryFormFieldBean dealGetLikeBean(String fieldName,Object value,String foreignName){
+        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+        bean.setFieldName(fieldName);
+        bean.setValue(value);
+        bean.setMatching("like");
+        bean.setSqlMatching("like");
+        bean.setForeignName(foreignName);
         return bean ;
     }
 }

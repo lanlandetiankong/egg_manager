@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -100,6 +101,35 @@ public class DefineTenantController extends BaseController{
         }
         return  result;
     }
+
+
+    @OperLog(modelName="DefineTenantController",action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表")
+    @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+    })
+    @PostMapping(value = "/getAllDefineTenantEnums")
+    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
+        try{
+            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
+            //解析 搜索条件
+            List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>() ;
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            //取得 排序配置
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,null,sortBeans); ;
+            defineTenantService.dealResultListSetToEntitySelect(result) ;
+            dealCommonSuccessCatch(result,"查询公告标签信息Select列表:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
 
 
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class,httpMethod = "POST")

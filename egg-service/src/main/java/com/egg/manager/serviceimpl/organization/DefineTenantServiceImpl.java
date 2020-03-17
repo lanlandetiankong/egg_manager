@@ -3,6 +3,7 @@ package com.egg.manager.serviceimpl.organization;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -15,6 +16,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.organization.DefineTenantMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.organization.DefineTenantService;
+import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.organization.DefineTenantVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -23,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -172,5 +175,23 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         }
         Integer delCount = defineTenantMapper.updateById(defineTenant);
         return delCount ;
+    }
+
+
+
+    /**
+     * 取得的结果 转为 枚举类型
+     * @param result
+     */
+    @Override
+    public void dealResultListSetToEntitySelect(MyCommonResult result){
+        List<FrontEntitySelectBean> enumList = new ArrayList<>();
+        List<DefineTenantVo> resultList = result.getResultList() ;
+        if(resultList != null && resultList.isEmpty() == false){
+            for(DefineTenantVo defineTenantVo : resultList){
+                enumList.add(new FrontEntitySelectBean(defineTenantVo.getFid(),defineTenantVo.getName())) ;
+            }
+        }
+        result.setEnumList(enumList);
     }
 }

@@ -88,6 +88,18 @@
         </include>
     </select>
 
+
+    <select id="selectOneOfUserBelongTenant" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edt" />
+        </include>
+        FROM em_define_tenant edt
+        LEFT  JOIN  em_user_tenant eum
+        ON edt.fid = eum.define_tenant_id
+        WHERE eum.user_account_id = #{userAccountId}
+    </select>
+
     <update id="batchFakeDelByIds" >
         UPDATE em_define_tenant
         SET state = -1

@@ -22,6 +22,10 @@ import java.util.List;
  */
 public interface UserAccountService extends IService<UserAccount> {
 
+    String FOREIGN_NAME_OF_USER_TENANT = "userTenant" ;
+
+
+
     UserAccount dealGetAccountByDTO(LoginAccountDTO loginAccountDTO) ;
 
     /**

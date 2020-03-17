@@ -3,9 +3,12 @@ package com.egg.manager.vo.user;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.dto.user.UserAccountDto;
+import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
+import com.egg.manager.vo.organization.DefineTenantVo;
 import lombok.*;
 import org.apache.catalina.User;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +36,7 @@ public class UserAccountVo {
     private FileResBean uploadImgBean ;
     private Integer locked ;
 
+
     private String remark ;
     private Integer state ;
     private Date createTime ;
@@ -43,6 +47,8 @@ public class UserAccountVo {
     private UserAccountVo lastModifyer;
 
 
+    private String belongTenantId ;
+    private DefineTenantVo belongTenant ;
 
 
 
@@ -131,6 +137,15 @@ public class UserAccountVo {
         userAccountVo.setUpdateTime(userAccountDto.getUpdateTime());
         userAccountVo.setCreateUserId(userAccountDto.getCreateUserId());
         userAccountVo.setLastModifyerId(userAccountDto.getLastModifyerId());
+
+        userAccountVo.setBelongTenantId(userAccountDto.getBelongTenantId());
+        DefineTenantVo belongTenantVo = DefineTenantVo.transferEntityToVo(userAccountDto.getBelongTenant()) ;
+        if(belongTenantVo != null){
+            userAccountVo.setBelongTenant(belongTenantVo);
+            if(StringUtils.isBlank(userAccountVo.getBelongTenantId())){
+                userAccountVo.setBelongTenantId(belongTenantVo.getFid());
+            }
+        }
         return userAccountVo ;
     }
 

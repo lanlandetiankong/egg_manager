@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -34,9 +35,13 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
+     * @param sortBeans
      * @return
      */
-    List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
+                                         @Param("sortFieldList") List<AntdvSortBean> sortBeans,
+                                         @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList
+                                );
 
 
     /**

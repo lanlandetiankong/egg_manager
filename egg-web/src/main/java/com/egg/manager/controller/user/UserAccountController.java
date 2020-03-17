@@ -11,15 +11,18 @@ import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
+import com.egg.manager.entity.organization.DefineTenant;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.mapper.define.DefineJobMapper;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
+import com.egg.manager.mapper.user.UserTenantMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.redis.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.service.user.UserTenantService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.define.DefineRoleVo;
@@ -56,6 +59,8 @@ public class UserAccountController extends BaseController {
     private DefineJobMapper defineJobMapper ;
     @Autowired
     private UserAccountService userAccountService ;
+    @Autowired
+    private UserTenantMapper userTenantMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
     @Autowired
@@ -138,7 +143,13 @@ public class UserAccountController extends BaseController {
         try{
             UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserAccount account = userAccountMapper.selectById(accountId);
-            result.setBean(UserAccountVo.transferEntityToVo(account));
+            UserAccountVo userAccountVo = UserAccountVo.transferEntityToVo(account);
+            //取得 所属的 租户定义
+            DefineTenant belongTenant = userTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
+            if(belongTenant != null){
+                userAccountVo.setBelongTenantId(belongTenant.getFid());
+            }
+            result.setBean(userAccountVo);
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;

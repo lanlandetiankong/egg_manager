@@ -20,9 +20,11 @@ import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.entity.user.UserRole;
+import com.egg.manager.entity.user.UserTenant;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
+import com.egg.manager.mapper.user.UserTenantMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineDepartmentVo;
@@ -47,12 +49,16 @@ import java.util.*;
 @Service
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
 
+
+
     @Autowired
     private UserAccountMapper userAccountMapper ;
     @Autowired
     private UserRoleMapper userRoleMapper ;
     @Autowired
     private UserJobMapper userJobMapper ;
+    @Autowired
+    private UserTenantMapper userTenantMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
 
@@ -124,7 +130,21 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     public void dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                         List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
+        //用户与租户关联 的外表-搜索条件
+        List<QueryFormFieldBean> queryTenantFieldBeanList = new ArrayList<QueryFormFieldBean>();
+        for(QueryFormFieldBean queryFormFieldBean : queryFieldBeanList){
+            //外部关联名，条件需单独识别
+            String foreignName = queryFormFieldBean.getForeignName() ;
+            if(StringUtils.isBlank(foreignName)){
+                queryFieldBeanListTemp.add(queryFormFieldBean);
+            }   else {
+                if(FOREIGN_NAME_OF_USER_TENANT.equals(foreignName)){   //foreignName匹配一致的会被认定为 指定表的 搜索条件
+                    queryTenantFieldBeanList.add(queryFormFieldBean);
+                }
+            }
+        }
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(UserAccountVo.transferDtoToVoList(userAccountDtoList));
     }
@@ -159,6 +179,13 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             userAccount.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = userAccountMapper.insert(userAccount) ;
+        //关联 租户
+        if(StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())){
+            UserTenant userTenant = UserTenant.generateSimpleInsertEntity(userAccount.getFid(),userAccountVo.getBelongTenantId(),loginUser);
+            userTenantMapper.insert(userTenant);
+        }   else {
+            throw new BusinessException("关联用户与租户失败！创建用户失败！") ;
+        }
         return addCount ;
     }
 
@@ -184,6 +211,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             changeCount = userAccountMapper.updateAllColumnById(userAccount) ;
         }   else {
             changeCount = userAccountMapper.updateById(userAccount) ;
+        }
+        //关联 租户
+        if(StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())){
+            UserTenant userTenantQuery = UserTenant.builder().userAccountId(userAccount.getFid()).state(BaseStateEnum.ENABLED.getValue()).build();
+            UserTenant userTenant = userTenantMapper.selectOne(userTenantQuery);
+            userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
+            userTenantMapper.updateById(userTenant);
+        }   else {
+            throw new BusinessException("关联用户与租户失败！更新用户失败！") ;
         }
         return changeCount ;
     }

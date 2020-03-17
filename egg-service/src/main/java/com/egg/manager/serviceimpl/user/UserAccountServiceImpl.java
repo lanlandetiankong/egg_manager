@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.util.str.MyUUIDUtil;
@@ -144,6 +145,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
         }
+        userAccount.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
         userAccount.setState(BaseStateEnum.ENABLED.getValue());
         userAccount.setCreateTime(now);
         userAccount.setUpdateTime(now);

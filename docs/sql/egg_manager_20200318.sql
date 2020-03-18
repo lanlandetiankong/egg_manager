@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50562
 File Encoding         : 65001
 
-Date: 2020-03-02 21:03:01
+Date: 2020-03-18 21:34:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,10 +29,10 @@ CREATE TABLE `em_announcement` (
   `accessory` varchar(255) DEFAULT NULL COMMENT '附件',
   `state` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -51,10 +51,10 @@ CREATE TABLE `em_announcement_draft` (
   `is_published` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -69,12 +69,33 @@ CREATE TABLE `em_announcement_tag` (
   `ordering` int(11) DEFAULT NULL COMMENT '排序',
   `state` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for em_define_department
+-- ----------------------------
+DROP TABLE IF EXISTS `em_define_department`;
+CREATE TABLE `em_define_department` (
+  `fid` char(36) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `parent_id` char(36) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `order_num` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义的部门';
 
 -- ----------------------------
 -- Table structure for em_define_group
@@ -90,8 +111,8 @@ CREATE TABLE `em_define_group` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义的用户组';
 
@@ -108,8 +129,8 @@ CREATE TABLE `em_define_job` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
-  `create_user` varchar(255) DEFAULT NULL,
-  `last_modifyer` varchar(255) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -132,8 +153,8 @@ CREATE TABLE `em_define_menu` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
@@ -152,8 +173,8 @@ CREATE TABLE `em_define_module` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(36) DEFAULT NULL,
-  `last_modifyer` varchar(36) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -170,8 +191,8 @@ CREATE TABLE `em_define_permission` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
 
@@ -188,8 +209,8 @@ CREATE TABLE `em_define_role` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色定义表';
 
@@ -206,8 +227,8 @@ CREATE TABLE `em_define_tenant` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='租户定义表';
 
@@ -242,8 +263,8 @@ CREATE TABLE `em_operation_log` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
@@ -260,8 +281,8 @@ CREATE TABLE `em_role_permission` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限';
 
@@ -277,17 +298,17 @@ CREATE TABLE `em_user_account` (
   `avatar_url` varchar(255) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
   `phone` varchar(36) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `sex` int(11) DEFAULT NULL,
   `user_type_num` int(11) DEFAULT NULL,
   `user_type` int(255) DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `locked` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户账号表';
 
@@ -304,8 +325,8 @@ CREATE TABLE `em_user_group` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户组';
 
@@ -319,10 +340,10 @@ CREATE TABLE `em_user_job` (
   `define_job_id` char(36) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户-职务';
 
@@ -339,10 +360,29 @@ CREATE TABLE `em_user_role` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色';
+
+-- ----------------------------
+-- Table structure for em_user_tenant
+-- ----------------------------
+DROP TABLE IF EXISTS `em_user_tenant`;
+CREATE TABLE `em_user_tenant` (
+  `fid` char(36) NOT NULL,
+  `user_account_id` char(36) DEFAULT NULL,
+  `define_tenant_id` char(36) DEFAULT NULL,
+  `type` int(255) DEFAULT NULL,
+  `is_manager` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `remark` varchar(100) DEFAULT NULL,
+  `create_user_id` varchar(50) DEFAULT NULL,
+  `last_modifyer_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与租户关联';
 
 -- ----------------------------
 -- Table structure for em_user_thirdparty
@@ -358,42 +398,7 @@ CREATE TABLE `em_user_thirdparty` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `em_define_department` (
-  `fid` char(36) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `parent_id` char(36) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
-  `order_num` int(11) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `remark` varchar(100) DEFAULT NULL,
-  `create_user` varchar(50) DEFAULT NULL,
-  `last_modifyer` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义的部门';
-
-CREATE TABLE `em_user_tenant` (
-  `fid` char(36) NOT NULL,
-  `user_account_id` char(36) DEFAULT NULL,
-  `define_tenant_id` char(36) DEFAULT NULL,
-  `type` int(255) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `remark` varchar(100) DEFAULT NULL,
   `create_user_id` varchar(50) DEFAULT NULL,
   `last_modifyer_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与租户关联';
-
-
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

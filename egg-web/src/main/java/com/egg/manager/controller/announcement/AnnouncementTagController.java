@@ -1,8 +1,8 @@
 package com.egg.manager.controller.announcement;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -12,7 +12,6 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
@@ -26,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,12 +49,6 @@ public class AnnouncementTagController extends BaseController {
     @Autowired
     private AnnouncementTagService announcementTagService ;
 
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -72,10 +64,10 @@ public class AnnouncementTagController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllAnnouncementTagEnums")
-    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, HttpServletResponse response,String queryObj, String paginationObj, String sortObj) {
+    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
+                                                                          @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>() ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -93,10 +85,10 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息-Dto列表",description = "查询公告标签信息-Dto列表")
     @PostMapping(value = "/getAllAnnouncementTagDtos")
-    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
+    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
+                                                                         @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -115,10 +107,10 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息",description = "根据公告标签id查询公告标签信息")
     @PostMapping(value = "/getAnnouncementTagById")
-    public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, HttpServletResponse response,String announcementTagId) {
+    public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request,String announcementTagId,
+                                                                      @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagVo.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result,"查询公告标签信息:"+actionSuccessMsg);
@@ -132,11 +124,11 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="新增公告标签",description = "表单方式新增公告标签")
     @PostMapping(value = "/doAddAnnouncementTag")
-    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, HttpServletResponse response,AnnouncementTagVo AnnouncementTagVo){
+    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request,AnnouncementTagVo AnnouncementTagVo,
+                                                                  @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(AnnouncementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             }   else {
@@ -154,11 +146,11 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementTagController",action="更新公告标签",description = "表单方式更新公告标签")
     @PostMapping(value = "/doUpdateAnnouncementTag")
-    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, HttpServletResponse response, AnnouncementTagVo AnnouncementTagVo){
+    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request,AnnouncementTagVo AnnouncementTagVo,
+                                                  @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(AnnouncementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             }   else {
@@ -179,11 +171,11 @@ public class AnnouncementTagController extends BaseController {
             @ApiImplicitParam(name = "delIds",value = "要删除的公告标签id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelAnnouncementTagByIds")
-    public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request,String[] delIds,
+                                                           @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = announcementTagService.dealDelAnnouncementTagByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除公告标签:"+actionSuccessMsg);
@@ -202,10 +194,10 @@ public class AnnouncementTagController extends BaseController {
             @ApiImplicitParam(name = "delId",value = "要删除的公告标签id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneAnnouncementTagById")
-    public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, HttpServletResponse response, String delId){
+    public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request,String delId,
+                                                      @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 Integer delCount = announcementTagService.dealDelAnnouncementTag(delId,loginUser);
                 result.setCount(delCount);

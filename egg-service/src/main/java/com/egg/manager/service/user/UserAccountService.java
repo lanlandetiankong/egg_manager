@@ -28,14 +28,6 @@ public interface UserAccountService extends IService<UserAccount> {
 
     UserAccount dealGetAccountByDTO(LoginAccountDTO loginAccountDTO) ;
 
-    /**
-     * 取得 用户 的所有权限
-     * @param userAccount
-     * @return
-     */
-    List<DefinePermission> dealGetAllPermssionByAccount(UserAccount userAccount);
-
-
 
     /**
      * 分页查询 用户列表

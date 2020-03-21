@@ -28,11 +28,6 @@ public class DefineGroupController {
     private UserAccountMapper userAccountMapper ;
     @Autowired
     private UserAccountService userAccountService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

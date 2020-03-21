@@ -16,5 +16,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CurrentUserAccount {
+public @interface CurrentLoginUser {
+    boolean required() default true;
 }

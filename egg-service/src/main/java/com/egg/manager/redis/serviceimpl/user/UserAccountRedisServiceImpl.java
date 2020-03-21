@@ -12,7 +12,9 @@ import com.egg.manager.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
 import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.service.define.DefineRoleService;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.webvo.session.UserAccountToken;
 import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,44 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     public DefineRoleService defineRoleService ;
     @Autowired
     public DefinePermissionService definePermissionService ;
+
+    /**
+     * 根据 jwt的authorization值 取得 当前用户 Entity
+     * @param authorization jwt值
+     * @return
+     */
+    @Override
+    public UserAccount dealGetCurrentLoginUserByAuthorization(String authorization) {
+        if(StringUtils.isNotBlank(authorization)){
+            Object obj = redisHelper.hashGet(redisPropsOfShiroCache.getAuthorizationKey(),authorization);
+            if(obj != null){
+                String objStr = "" ;
+                if(obj instanceof String){
+                    objStr = (String) obj ;
+                }   else {
+                    objStr = JSONObject.toJSONString(obj);
+                }
+                UserAccountToken accountToken = JSONObject.parseObject(objStr,UserAccountToken.class) ;
+                if(accountToken != null){
+                    String accountId = accountToken.getUserAccountId();
+                    return dealGetCurrentUserEntity(authorization,accountId,false);
+                }
+            }
+        }
+        return null ;
+    }
+
+
+    /**
+     * 取得 当前用户 Entity
+     *
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public UserAccount dealGetCurrentUserEntity(String authorization,String userAccountId,boolean almostRefresh) {
+        return dealAutoGetRedisObjectCache(redisPropsOfShiroCache.getUserAccountKey(),authorization,userAccountId,UserAccount.class,almostRefresh);
+    }
 
     /**
      * 取得 当前用户 的所有 角色-Set<String>
@@ -114,6 +154,9 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
             //TODO
         }  else if(redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)){  //用户拥有的[菜单按钮code-Set]
             //TODO
+        }   else if(redisPropsOfShiroCache.getUserAccountKey().equals(key)){    //用户信息 缓存
+            UserAccount userAccount = userAccountService.selectById(userAccountId);
+            redisHelper.hashPut(key,hashKey,userAccount);
         }
     }
 

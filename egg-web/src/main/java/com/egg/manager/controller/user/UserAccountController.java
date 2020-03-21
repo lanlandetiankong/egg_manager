@@ -1,14 +1,15 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.annotation.shiro.ShiroPass;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.util.jwt.JWTUtil;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.config.shiro.JwtShiroToken;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
@@ -23,14 +24,12 @@ import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserTenantMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.vo.user.UserAccountVo;
 import com.egg.manager.webvo.login.LoginAccountVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.webvo.session.UserAccountToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -44,10 +43,11 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api(value = "API ==>>  UserAccountController ",description = "用户账号接口")
@@ -69,11 +69,6 @@ public class UserAccountController extends BaseController {
     private UserTenantMapper userTenantMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -85,7 +80,7 @@ public class UserAccountController extends BaseController {
     })
     @ShiroPass
     @PostMapping(value = "/login/account")
-    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, HttpServletResponse response, LoginAccountVo loginAccountVo) {
+    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request,  LoginAccountVo loginAccountVo) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{
             //判断前端传递的
@@ -113,7 +108,7 @@ public class UserAccountController extends BaseController {
 
                     userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
-                    this.dealSetTokenToRedis(userAccountToken) ;
+                    this.dealSetTokenToRedis(userAccountToken,userAccount) ;
                     //返回给前端 jwt jwt值
                     result.setAuthorization(authorization);
                 }   else {
@@ -138,10 +133,10 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserAccountDtos")
-    public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, HttpServletResponse response,String queryObj,String paginationObj,String sortObj) {
+    public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
+                                                                 @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -161,10 +156,9 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户信息",description = "根据用户id查询用户信息")
     @PostMapping(value = "/getUserAccountById")
-    public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, HttpServletResponse response,String accountId) {
+    public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserAccount account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountVo.transferEntityToVo(account);
             //取得 所属的 租户定义
@@ -183,10 +177,9 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色")
     @PostMapping(value = "/getAllRoleByUserAccountId")
-    public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
+    public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request,String userAccountId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
@@ -199,10 +192,10 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
-    public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
+    public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request,String userAccountId,
+                                                                                @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissionList));
             dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
@@ -216,10 +209,9 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务")
     @PostMapping(value = "/getAllJobByUserAccountId")
-    public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, HttpServletResponse response, String userAccountId) {
+    public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request,  String userAccountId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobVo.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
@@ -233,13 +225,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="新增用户",description = "表单方式新增用户")
     @PostMapping(value = "/doAddUserAccount")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response){
+    public MyCommonResult doAddUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
             UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
-            //当前登录用户
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
@@ -257,12 +247,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="更新用户信息",description = "表单方式更新用户信息")
     @PostMapping(value = "/doUpdateUserAccount")
-    public MyCommonResult doUpdateUserAccount(HttpServletRequest request, HttpServletResponse response){
+    public MyCommonResult doUpdateUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
             UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
@@ -283,11 +272,10 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delIds",value = "要删除的用户id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelUserAccountByIds")
-    public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 //批量伪删除
                 delCount = userAccountService.dealDelUserAccountByArr(delIds,loginUser);
@@ -307,11 +295,10 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delId",value = "要删除的用户id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneUserAccountById")
-    public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 delCount = userAccountService.dealDelUserAccount(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除用户:"+actionSuccessMsg);
@@ -327,11 +314,10 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="修改用户锁定状态",description = "根据用户id批量锁定或解锁用户")
     @PostMapping(value = "/batchLockUserAccountByIds")
-    public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request, HttpServletResponse response,String[] lockIds,Boolean lockFlag){
+    public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request,String[] lockIds,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer lockCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true ;
             String lockMsg = lockFlag ? "锁定" : "解锁" ;
@@ -351,11 +337,10 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="修改用户锁定状态",description = "根据用户id锁定或解锁用户")
     @PostMapping(value = "/lockOneUserAccountById")
-    public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, HttpServletResponse response,String lockId,Boolean lockFlag){
+    public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, String lockId,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer lockCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true ;
             String lockMsg = lockFlag ? "锁定" : "解锁" ;
@@ -374,10 +359,9 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="用户分配角色",description = "为用户分配角色")
     @PostMapping(value = "/grantRoleToUser")
-    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
+    public MyCommonResult doGrantRoleToUser(HttpServletRequest request,String userAccountId,String[] checkIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(userAccountId)){
                 Integer grantCount = userAccountService.dealGrantRoleToUser(userAccountId,checkIds,loginUser);
                 result.setCount(grantCount);
@@ -396,10 +380,10 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserAccountController",action="用户分配职务",description = "为用户分配职务")
     @PostMapping(value = "/grantJobToUser")
-    public MyCommonResult doGrantJobToUser(HttpServletRequest request, HttpServletResponse response, String userAccountId,String[] checkIds){
+    public MyCommonResult doGrantJobToUser(HttpServletRequest request,String userAccountId,String[] checkIds,
+                                           @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(userAccountId)){
                 Integer grantCount = userAccountService.dealGrantJobToUser(userAccountId,checkIds,loginUser);
                 result.setCount(grantCount);

@@ -39,6 +39,9 @@ public class MyResponseHelper {
         result.setStatus(HttpStatus.BAD_REQUEST.value());
         result.setCode(HttpStatus.BAD_REQUEST.getReasonPhrase());
         result.setErrorMsg(errorMsg);
+        if(PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())){
+            result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
+        }
         return result ;
     }
 

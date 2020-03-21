@@ -30,6 +30,7 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        //方法注入增强 Resolver
         argumentResolvers.add(getCurrentUserAccountMethodArgumentResolver()) ;
         super.addArgumentResolvers(argumentResolvers);
     }

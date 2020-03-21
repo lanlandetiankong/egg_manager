@@ -47,6 +47,32 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
     public DefineRoleService defineRoleService ;
 
 
+    protected  <T> T dealAutoGetRedisObjectCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh){
+        T t = null;
+        boolean retryFlag = false ;
+        if(almostRefresh == true){    //为true的话进来总是取数据库，并刷新到 redis
+            dealRedisListCacheRefresh(key,hashKey,userAccountId);
+            retryFlag = true;
+        }   else {
+            Object obj = redisHelper.hashGet(key,hashKey);
+            if(obj != null){
+                String objStr = (String) obj ;
+                t = JSONObject.parseObject(objStr,tClass);
+            }   else {
+                //从数据库中取得
+                dealRedisListCacheRefresh(key,hashKey,userAccountId);
+                retryFlag = true;
+            }
+        }
+        if(retryFlag){
+            Object obj =  redisHelper.hashGet(key,hashKey);
+            if(obj != null){
+                String objStr = (String) obj ;
+                t = JSONObject.parseObject(objStr,tClass);
+            }
+        }
+        return t ;
+    }
 
 
     protected  <T> List<T> dealAutoGetRedisListCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh){

@@ -58,7 +58,7 @@ public interface CommonFuncService {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    UserAccount gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
+    //UserAccount gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
 
 
     /**

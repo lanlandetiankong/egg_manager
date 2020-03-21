@@ -2,17 +2,17 @@ package com.egg.manager.controller.user;
 
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.mapper.user.UserJobMapper;
 import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.vo.user.UserJobVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -68,7 +67,7 @@ public class UserJobController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserJobs")
-    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request,String queryObj, String paginationObj,String sortObj) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             //解析 搜索条件
@@ -90,7 +89,7 @@ public class UserJobController extends BaseController{
     @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserJobController",action="查询用户职务信息",description = "根据用户职务id查询用户职务信息")
     @PostMapping(value = "/getUserJobById")
-    public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, HttpServletResponse response,String jobId) {
+    public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request,String jobId) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             UserJob vo = userJobMapper.selectById(jobId);

@@ -56,19 +56,6 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    /**
-     * TODO
-     * @return
-     */
-    @Override
-    public List<UserTenant> selectByAccountId() {
-        EntityWrapper<UserTenant> ew = new EntityWrapper<>() ;
-        ew.where("");
-
-        return null;
-    }
-
-
 
     /**
      * 取得当前用户关联的 UserTenant

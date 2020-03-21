@@ -127,13 +127,15 @@ public class CommonFuncServiceImpl implements CommonFuncService {
 
     /**
      *  将取得请求的token转化为 UserAccount
+     *  (已改用注解方式注入)
      * @param request
      * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
      * @return UserAccount
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    @Override
+    //@Override
+    @Deprecated
     public UserAccount gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws MyAuthenticationExpiredException{
         UserAccount userAccount = null ;
         UserAccountToken accountToken = this.gainUserAccountTokenBeanByRequest(request,isRequired);

@@ -67,7 +67,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public MyCommonResult handleUnauthorized(MyUnauthorizedException e) {
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
+        return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -93,7 +93,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(TemplateInputException.class)
     @ResponseBody
     public MyCommonResult handleTemplateInputException(TemplateInputException e) {
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
+        return MyResponseHelper.handleRequestFailure(PublicResultEnum.TemplacteException);
     }
 
     @ResponseStatus(HttpStatus.OK)

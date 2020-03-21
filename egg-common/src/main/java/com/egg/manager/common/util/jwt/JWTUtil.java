@@ -5,7 +5,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -13,14 +15,12 @@ import java.util.Date;
 /**
  * @author zhouchengjie
  */
+@Component
 public class JWTUtil {
 
-    //TODO 修改为从配置文件 读取
-    // 默认过期时间1天
-    //@Value("#{egg.conf.jwt.expires.time}:86400000")
-    public static Long EXPIRE_TIME =  86400000L ;
-    //@Value("#{egg.conf.jwt.secret}:EggPwd")
-    public static String DEFAULT_PWD = "EggPwd" ;
+    // 默认过期时间1
+    public static Long EXPIRE_TIME  ;
+    public static String DEFAULT_SECRET ;
 
 
     /**
@@ -30,7 +30,7 @@ public class JWTUtil {
      */
     public static boolean verify(String token, String userAccountId) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(DEFAULT_PWD);
+            Algorithm algorithm = Algorithm.HMAC256(DEFAULT_SECRET);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withClaim("userAccountId", userAccountId)
                     .build();
@@ -62,7 +62,7 @@ public class JWTUtil {
     public static String sign(String userAccountId) {
         try {
             Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
-            Algorithm algorithm = Algorithm.HMAC256(DEFAULT_PWD);
+            Algorithm algorithm = Algorithm.HMAC256(DEFAULT_SECRET);
             // 附带username信息
             return JWT.create()
                     .withClaim("userAccountId", userAccountId)
@@ -73,4 +73,15 @@ public class JWTUtil {
         }
     }
 
+
+    @Value("${egg.conf.jwt.expires.time}")
+    public void setExpireTime(String expireTime) {
+        expireTime = StringUtils.isBlank(expireTime) ? "86400000" : expireTime;
+        EXPIRE_TIME = Long.valueOf(expireTime);
+    }
+
+    @Value("${egg.conf.jwt.secret}")
+    public void setDefaultPwd(String defaultSecret) {
+        DEFAULT_SECRET = StringUtils.isBlank(defaultSecret) ? "EggPwd" : defaultSecret ;
+    }
 }

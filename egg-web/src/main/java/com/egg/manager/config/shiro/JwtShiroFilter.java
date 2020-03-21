@@ -132,7 +132,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             )){
                 //Constant.isPass = true ;
                 if(StringUtils.isBlank(authorization)){ //如果前端没传递 authorization的话，按游客处理，添加游客信息
-                    httpServletRequest.setAttribute("currentUser", UserAccount.dealGetVisitor());
+                    httpServletRequest.setAttribute("currentLoginUser", UserAccount.dealGetVisitor());
                     return true ;
                 }   else {
                     super.preHandle(request,response);
@@ -145,7 +145,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                         if(checkIsSameUrl(urlSplit[0],httpServletRequest.getRequestURI())){
                             //Constant.isPass=true;
                             if(StringUtils.isBlank(authorization)){
-                                httpServletRequest.setAttribute("currentUser",new UserAccount());
+                                httpServletRequest.setAttribute("currentLoginUser",new UserAccount());
                                 return true ;
                             }   else {
                                 super.preHandle(request,response);
@@ -173,7 +173,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
          String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());
          UserAccount userAccount = userAccountService.selectById(userId);
          if(userAccount != null){
-             request.setAttribute("currentUser", UserAccountVo.transferEntityToVo(userAccount));
+             request.setAttribute("currentLoginUser", UserAccountVo.transferEntityToVo(userAccount));
          }
     }
 
@@ -183,7 +183,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             response.setCharacterEncoding("utf-8");
             out= response.getWriter() ;
             response.setContentType("application/json; charset=utf-8");
-            out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(PublicResultEnum.Unauthorized)));
+            out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser)));
         }   catch (Exception e){
             e.printStackTrace();
         }   finally {

@@ -1,25 +1,26 @@
 package com.egg.manager.controller.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineMenu;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineMenuMapper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineMenuService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineMenuVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -128,10 +128,11 @@ public class DefineMenuController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineMenuDtos")
-    public MyCommonResult<DefineMenuVo> doGetAllDefineMenuDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj, String sortObj) {
+    public MyCommonResult<DefineMenuVo> doGetAllDefineMenuDtos(HttpServletRequest request,
+                                                               String queryObj, String paginationObj, String sortObj,
+                                                               @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -151,10 +152,9 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "查询菜单定义信息", notes = "根据菜单定义id查询菜单定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineMenuController",action="查询菜单定义信息",description = "根据菜单定义id查询菜单定义信息")
     @PostMapping(value = "/getDefineMenuById")
-    public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request, HttpServletResponse response,String defineMenuId) {
+    public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request,String defineMenuId) {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefineMenu defineMenu = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuVo.transferEntityToVo(defineMenu));
             dealCommonSuccessCatch(result,"查询菜单定义信息:"+actionSuccessMsg);
@@ -168,11 +168,10 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "新增菜单定义", notes = "表单方式新增菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineMenuController",action="新增菜单定义",description = "表单方式新增菜单定义")
     @PostMapping(value = "/doAddDefineMenu")
-    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request, HttpServletResponse response, DefineMenuVo defineMenuVo){
+    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request,DefineMenuVo defineMenuVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             }   else {
@@ -190,11 +189,10 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "更新菜单定义", notes = "表单方式更新菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineMenuController",action="更新菜单定义",description = "表单方式更新菜单定义")
     @PostMapping(value = "/doUpdateDefineMenu")
-    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, HttpServletResponse response, DefineMenuVo defineMenuVo){
+    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request,DefineMenuVo defineMenuVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             }   else {
@@ -215,11 +213,10 @@ public class DefineMenuController extends BaseController{
             @ApiImplicitParam(name = "delIds",value = "要删除的菜单定义id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelDefineMenuByIds")
-    public MyCommonResult doBatchDeleteDefineMenuById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteDefineMenuById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = defineMenuService.dealDelDefineMenuByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除菜单定义:"+actionSuccessMsg);
@@ -238,10 +235,9 @@ public class DefineMenuController extends BaseController{
             @ApiImplicitParam(name = "delId",value = "要删除的菜单定义id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneDefineMenuById")
-    public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request, HttpServletResponse response, String delId){
+    public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(org.apache.commons.lang3.StringUtils.isNotBlank(delId)){
                 Integer delCount = defineMenuService.dealDelDefineMenu(delId,loginUser);
                 result.setCount(delCount);

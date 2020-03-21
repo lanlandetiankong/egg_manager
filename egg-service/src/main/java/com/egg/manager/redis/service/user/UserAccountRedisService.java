@@ -1,5 +1,6 @@
 package com.egg.manager.redis.service.user;
 
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.redis.service.common.MyRedisCommonReqService;
 
 import java.util.List;
@@ -14,6 +15,19 @@ import java.util.Set;
  * \
  */
 public interface UserAccountRedisService extends MyRedisCommonReqService {
+    /**
+     * 根据 jwt的authorization值 取得 当前用户 Entity
+     * @param authorization jwt值
+     * @return
+     */
+    UserAccount dealGetCurrentLoginUserByAuthorization(String authorization) ;
+
+    /**
+     * 取得 当前用户 Entity
+     * @param userAccountId
+     * @return
+     */
+    UserAccount dealGetCurrentUserEntity(String authorization, String userAccountId, boolean almostRefresh);
 
     /**
      *  取得 当前用户 的所有 角色-Set<String>

@@ -21,8 +21,6 @@ import java.util.List;
  */
 public interface UserTenantService extends IService<UserTenant> {
 
-    public List<UserTenant> selectByAccountId() ;
-
     List<UserTenant> dealGetAllUserTenantByAccount(UserAccount account);
 
     List<UserTenant> dealGetAllUserTenantByAccountFromDb(UserAccount userAccount);

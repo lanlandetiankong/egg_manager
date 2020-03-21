@@ -9,6 +9,7 @@ import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -68,12 +69,13 @@ public class BaseController {
     }
 
 
-    public void dealSetTokenToRedis(UserAccountToken userAccountToken) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
+    public void dealSetTokenToRedis(UserAccountToken userAccountToken,UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if(userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization()) ){
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId());
-            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization值，清理之前的缓存
+            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存
                 String userAuthorization = (String) oldAuthorization;
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserAccountKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserPermissionsKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserRolesKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontButtonsKey(),userAuthorization);
@@ -86,12 +88,13 @@ public class BaseController {
             redisHelper.hashTtlPut(redisPropsOfShiroCache.getAuthorizationKey(),authorization,userAccountToken,redisPropsOfShiroCache.getAuthorizationTtl());
 
             //设置到缓存,hashKey 都是 authorization
-            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountToken.getUserAccountId(),true);
-            Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountToken.getUserAccountId(),true);
-            Set<String> frontButtonSet = userAccountRedisService.dealGetCurrentUserFrontButtons(authorization,userAccountToken.getUserAccountId(),true);
-            Set<String> frontMenuSet = userAccountRedisService.dealGetCurrentUserFrontMenus(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserEntity(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserFrontButtons(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserFrontMenus(authorization,userAccountToken.getUserAccountId(),true);
         }   else {
-            //没有取得缓存必要值 TODO
+            baseLogger.error("未能成功缓存用户信息到Redis");
         }
     }
 

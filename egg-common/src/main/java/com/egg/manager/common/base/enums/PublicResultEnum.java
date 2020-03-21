@@ -17,16 +17,17 @@ public enum PublicResultEnum {
     DataError("DataError", "数据操作错误", "数据操作错误"),
     ErrorOfParam("ErrorOfParam", "参数错误", "参数错误"),
 
+    TemplacteException("ExceptionOfTemplate","thymeleaf模板错误！","thymeleaf模板错误！") ,
     //[用户相关]错误
     InvalidUserOrPassword("InvalidUserOrPassword", "用户名或密码错误", "用户名或密码错误"),
     InvalidRePassword("InvalidRePassword", "两次输入密码不一致", "两次输入密码不一致"),
     InvalidUserAccount("InvalidUserAccount", "用户不存在", "用户不存在"),
     InvalidUserAccountExist("InvalidUserAccountExist", "用户已存在", "用户已存在"),
     InvalidRole("InvalidRole", "角色不存在", "角色不存在"),
-    Unauthorized("Unauthorized", "获取登录用户信息失败", "获取登录用户信息失败"),
+    UnauthorizedLoginUser("Unauthorized", "获取登录用户信息失败", "获取登录用户信息失败"),
 
     //[缺少权限]
-    NoPermissionOfUser("NoPermissionOfUser", "当前用户无该接口权限", "当前用户无该接口权限"),
+    NoPermissionOfUser("NoPermissionOfUser", "操作失败！当前用户无该接口权限", "操作失败！当前用户无该接口权限"),
 
     //[被引用]
     BeUsingRole("BeUsingRole", "角色使用中,不可删除", "角色使用中,不可删除"),

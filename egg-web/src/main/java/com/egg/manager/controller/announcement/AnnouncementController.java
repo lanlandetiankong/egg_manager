@@ -1,11 +1,12 @@
 package com.egg.manager.controller.announcement;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.announcement.Announcement;
 import com.egg.manager.entity.announcement.AnnouncementTag;
@@ -14,11 +15,9 @@ import com.egg.manager.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -68,11 +66,11 @@ public class AnnouncementController extends BaseController {
     @OperLog(modelName="AnnouncementController",action="新增公告",description = "表单方式新增公告")
     @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/addAnnouncement")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, HttpServletResponse response,AnnouncementVo announcementVo){
+    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request,AnnouncementVo announcementVo,
+                                                            @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(announcementVo == null) {
                 throw new Exception("未接收到有效的公告！");
             }   else {
@@ -90,11 +88,11 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementController",action="公告草稿发布",description = "表单方式发布公告草稿")
     @PostMapping(value = "/addAnnouncementFromDraft")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, HttpServletResponse response,AnnouncementDraftVo announcementDraftVo){
+    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request,AnnouncementDraftVo announcementDraftVo,
+                                                                     @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(announcementDraftVo == null) {
                 throw new Exception("未接收到有效的公告草稿！");
             }   else {
@@ -116,10 +114,10 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllAnnouncementDtos")
-    public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj,Boolean onlySelf) {
+    public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
+                                                                   Boolean onlySelf,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -143,12 +141,12 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="AnnouncementController",action="查询公告信息部分列表",description = "查询公告信息部分列表")
     @PostMapping(value = "/getSomeAnnouncements")
-    public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, HttpServletResponse response,Integer limitSize, Boolean onlySelf) {
+    public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request,Integer limitSize,
+                                                                 Boolean onlySelf,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         try{
             //这些查询条件暂时用不到
             String queryObj = null,paginationObj = null,sortObj = null ;
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -173,10 +171,9 @@ public class AnnouncementController extends BaseController {
     @OperLog(modelName="AnnouncementController",action="查询公告信息",description = "根据id查询公告信息")
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
-    public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, HttpServletResponse response, String announcementId) {
+    public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request,String announcementId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
             Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
@@ -194,11 +191,10 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delIds",value = "要删除的公告id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelAnnouncementByIds")
-    public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = announcementService.dealDelAnnouncementByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除公告:"+actionSuccessMsg);
@@ -217,10 +213,9 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delId",value = "要删除的公告id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneAnnouncementByIds")
-    public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 Integer delCount = announcementService.dealDelAnnouncement(delId,loginUser);
                 result.setCount(delCount);

@@ -1,8 +1,8 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -12,7 +12,6 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineJobMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineJobService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -54,13 +52,6 @@ public class DefineJobController extends BaseController {
     @Autowired
     private CommonFuncService commonFuncService ;
 
-
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -74,10 +65,10 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineJobs")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
+                                                          @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -102,10 +93,10 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineJobDtos")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
+                                                             @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -125,10 +116,9 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="查询职务信息",description = "根据职务id查询职务信息")
     @PostMapping(value = "/getDefineJobById")
-    public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, HttpServletResponse response,String defineJobId) {
+    public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request,String defineJobId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobVo.transferEntityToVo(defineJob));
             dealCommonSuccessCatch(result,"查询职务信息:"+actionSuccessMsg);
@@ -143,11 +133,10 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="新增职务",description = "表单方式新增职务")
     @PostMapping(value = "/doAddDefineJob")
-    public MyCommonResult doAddDefineJob(HttpServletRequest request, HttpServletResponse response, DefineJobVo defineJobVo){
+    public MyCommonResult doAddDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             }   else {
@@ -165,11 +154,10 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineJobController",action="更新职务信息",description = "表单方式更新职务信息")
     @PostMapping(value = "/doUpdateDefineJob")
-    public MyCommonResult doUpdateDefineJob(HttpServletRequest request, HttpServletResponse response, DefineJobVo defineJobVo){
+    public MyCommonResult doUpdateDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             }   else {
@@ -190,11 +178,10 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "delIds",value = "要删除的职务定义id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelDefineJobByIds")
-    public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 //批量伪删除
                 delCount = defineJobService.dealDelDefineJobByArr(delIds,loginUser);
@@ -214,11 +201,10 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "delId",value = "要删除的职务定义id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneDefineJobById")
-    public MyCommonResult doDelOneDefineJobById(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneDefineJobById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 delCount = defineJobService.dealDelDefineJob(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除职务:"+actionSuccessMsg);
@@ -229,9 +215,5 @@ public class DefineJobController extends BaseController {
         }
         return  result;
     }
-
-
-
-
 
 }

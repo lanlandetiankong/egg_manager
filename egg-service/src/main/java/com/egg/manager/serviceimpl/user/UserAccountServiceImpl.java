@@ -76,16 +76,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         return selectOne(wrapper);
     }
 
-    /**
-     * TODO 取得 用户 的所有权限
-     * @param userAccount 用户账号
-     * @return
-     */
-    @Override
-    public List<DefinePermission> dealGetAllPermssionByAccount(UserAccount userAccount) {
 
-        return  null ;
-    }
 
 
 

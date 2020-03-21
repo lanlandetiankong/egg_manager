@@ -1,9 +1,9 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
@@ -12,7 +12,6 @@ import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
 import com.egg.manager.vo.user.UserRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -54,11 +52,6 @@ public class UserRoleController  extends BaseController{
     private UserRoleService userRoleService ;
     @Autowired
     private CommonFuncService commonFuncService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -75,10 +68,9 @@ public class UserRoleController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserRoles")
-    public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -98,10 +90,9 @@ public class UserRoleController  extends BaseController{
     @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserRoleController",action="查询用户角色信息",description = "根据用户角色id查询用户角色信息")
     @PostMapping(value = "/getUserRoleById")
-    public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, HttpServletResponse response,String roleId) {
+    public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request,String roleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleVo.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户角色信息:"+actionSuccessMsg);
@@ -116,11 +107,10 @@ public class UserRoleController  extends BaseController{
     @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserRoleController",action="新增用户角色",description = "表单方式新增用户角色")
     @PostMapping(value = "/doAddUserRole")
-    public MyCommonResult doAddUserRole(HttpServletRequest request, HttpServletResponse response, UserRoleVo userRoleVo){
+    public MyCommonResult doAddUserRole(HttpServletRequest request,UserRoleVo userRoleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userRoleVo == null) {
                 throw new Exception("未接收到有效的用户角色信息！");
             }   else {
@@ -143,11 +133,10 @@ public class UserRoleController  extends BaseController{
             @ApiImplicitParam(name = "delIds",value = "要删除的用户角色id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
-    public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = userRoleService.dealDelUserRoleByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除用户角色:"+actionSuccessMsg);
@@ -166,11 +155,10 @@ public class UserRoleController  extends BaseController{
             @ApiImplicitParam(name = "delId",value = "要删除的用户角色id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneUserRoleByIds")
-    public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneUserRoleById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 delCount = userRoleService.dealDelUserRole(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除用户角色:"+actionSuccessMsg);

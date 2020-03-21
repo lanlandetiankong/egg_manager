@@ -1,5 +1,6 @@
 package com.egg.manager.controller.user;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -12,8 +13,8 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserTenant;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserTenantMapper;
-import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.redis.service.RedisHelper;
+import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.user.UserTenantService;
 import com.egg.manager.vo.user.UserTenantVo;
 import io.swagger.annotations.Api;
@@ -29,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -73,10 +73,10 @@ public class UserTenantController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserTenants")
-    public MyCommonResult<UserTenantVo> doGetAllUserTenants(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<UserTenantVo> doGetAllUserTenants(HttpServletRequest request,
+                                                            String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
@@ -96,10 +96,9 @@ public class UserTenantController extends BaseController{
     @ApiOperation(value = "查询 [用户与租户关联] 信息", notes = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserTenantController",action="查询 [用户与租户关联] 信息",description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息")
     @PostMapping(value = "/getUserTenantById")
-    public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request, HttpServletResponse response,String tenantId) {
+    public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request,String tenantId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             UserTenant vo = userTenantMapper.selectById(tenantId);
             result.setBean(UserTenantVo.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询 [用户与租户关联] 信息:"+actionSuccessMsg);
@@ -114,11 +113,10 @@ public class UserTenantController extends BaseController{
     @ApiOperation(value = "新增 [用户与租户关联] ", notes = "表单方式新增 [用户与租户关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="UserTenantController",action="新增 [用户与租户关联] ",description = "表单方式新增 [用户与租户关联] ")
     @PostMapping(value = "/doAddUserTenant")
-    public MyCommonResult doAddUserTenant(HttpServletRequest request, HttpServletResponse response, UserTenantVo userTenantVo){
+    public MyCommonResult doAddUserTenant(HttpServletRequest request,UserTenantVo userTenantVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(userTenantVo == null) {
                 throw new Exception("未接收到有效的 [用户与租户关联] 信息！");
             }   else {
@@ -141,11 +139,10 @@ public class UserTenantController extends BaseController{
             @ApiImplicitParam(name = "delIds",value = "要删除的 [用户与租户关联] id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelUserTenantByIds")
-    public MyCommonResult doBatchDeleteUserTenantById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteUserTenantById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = userTenantService.dealDelUserTenantByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除 [用户与租户关联] :"+actionSuccessMsg);
@@ -164,11 +161,10 @@ public class UserTenantController extends BaseController{
             @ApiImplicitParam(name = "delId",value = "要删除的 [用户与租户关联] id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneUserTenantByIds")
-    public MyCommonResult doDelOneUserTenantById(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneUserTenantById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 delCount = userTenantService.dealDelUserTenant(delId,loginUser);
                 dealCommonSuccessCatch(result,"删除 [用户与租户关联] :"+actionSuccessMsg);
@@ -179,17 +175,6 @@ public class UserTenantController extends BaseController{
         }
         return  result;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

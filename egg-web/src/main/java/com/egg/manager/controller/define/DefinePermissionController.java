@@ -1,5 +1,6 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.web.helper.MyCommonResult;
@@ -11,7 +12,6 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefinePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefinePermissionService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -49,9 +48,6 @@ public class DefinePermissionController  extends BaseController{
     private DefinePermissionService definePermissionService;
     @Autowired
     private CommonFuncService commonFuncService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -64,10 +60,9 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissions")
-    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -91,10 +86,9 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissionDtos")
-    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -114,10 +108,9 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefinePermissionController",action="查询权限定义信息",description = "根据权限定义id查询权限定义信息")
     @PostMapping(value = "/getDefinePermissionById")
-    public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String definePermissionId) {
+    public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request,String definePermissionId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionVo.transferEntityToVo(definePermission));
             dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
@@ -131,11 +124,10 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefinePermissionController",action="新增权限定义",description = "表单方式新增权限定义")
     @PostMapping(value = "/doAddDefinePermission")
-    public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
+    public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request,DefinePermissionVo definePermissionVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             }   else {
@@ -153,11 +145,10 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefinePermissionController",action="更新权限定义",description = "表单方式更新权限定义")
     @PostMapping(value = "/doUpdateDefinePermission")
-    public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, HttpServletResponse response, DefinePermissionVo definePermissionVo){
+    public MyCommonResult doUpdateDefinePermission(HttpServletRequest request,DefinePermissionVo definePermissionVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             }   else {
@@ -178,11 +169,10 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "delIds",value = "要删除的权限定义id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelDefinePermissionByIds")
-    public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = definePermissionService.dealDelDefinePermissionByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除权限定义:"+actionSuccessMsg);
@@ -201,10 +191,9 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "delId",value = "要删除的权限定义id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneDefinePermissionByIds")
-    public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, HttpServletResponse response,String delId){
+    public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 Integer delCount = definePermissionService.dealDelDefinePermission(delId,loginUser);
                 result.setCount(delCount);

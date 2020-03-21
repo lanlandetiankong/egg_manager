@@ -1,12 +1,13 @@
 package com.egg.manager.controller.define;
 
+import com.egg.manager.annotation.log.CurrentLoginUser;
 import com.egg.manager.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefinePermission;
 import com.egg.manager.entity.define.DefineRole;
@@ -16,9 +17,7 @@ import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
-import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.define.DefineRoleVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -60,11 +58,6 @@ public class DefineRoleController extends BaseController {
     @Autowired
     private CommonFuncService commonFuncService ;
 
-    @Autowired
-    private RedisHelper redisHelper ;
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -76,10 +69,10 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoles")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
+                                                            @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -103,10 +96,10 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoleDtos")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request, HttpServletResponse response, String queryObj, String paginationObj,String sortObj) {
+    public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
+                                                               @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
@@ -126,10 +119,9 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息",description = "根据角色定义id查询角色定义信息")
     @PostMapping(value = "/getDefineRoleById")
-    public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
+    public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request,String defineRoleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
             result.setBean(DefineRoleVo.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
@@ -142,10 +134,9 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = MyCommonResult.class,httpMethod = "POST")
 
     @PostMapping(value = "/getAllPermissionByRoleId")
-    public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, HttpServletResponse response,String defineRoleId) {
+    public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request,String defineRoleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
             result.setResultList(definePermissionList);
             dealCommonSuccessCatch(result,"查询角色所拥有的权限:"+actionSuccessMsg);
@@ -160,11 +151,10 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
-    public MyCommonResult<DefineRoleVo> doAddDefineRole(HttpServletRequest request, HttpServletResponse response, DefineRoleVo defineRoleVo){
+    public MyCommonResult<DefineRoleVo> doAddDefineRole(HttpServletRequest request,DefineRoleVo defineRoleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         Integer addCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             }   else {
@@ -181,11 +171,10 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
-    public MyCommonResult doUpdateDefineRole(HttpServletRequest request, HttpServletResponse response, DefineRoleVo defineRoleVo){
+    public MyCommonResult doUpdateDefineRole(HttpServletRequest request,DefineRoleVo defineRoleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             }   else {
@@ -205,11 +194,10 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "delIds",value = "要删除的权限定义id数组", required = true,dataTypeClass=String[].class),
     })
     @PostMapping(value = "/batchDelDefineRoleByIds")
-    public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request, HttpServletResponse response,String[] delIds){
+    public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer delCount = 0;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(delIds != null && delIds.length > 0) {
                 delCount = defineRoleService.dealDelDefineRoleByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除角色定义:"+actionSuccessMsg);
@@ -227,10 +215,9 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "delId",value = "要删除的角色定义id", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/delOneDefineRoleByIds")
-    public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, HttpServletResponse response, String delId){
+    public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(delId)){
                 Integer delCount = defineRoleService.dealDelDefineRole(delId,loginUser);
                 result.setCount(delCount);
@@ -245,10 +232,9 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/grantPermissionToRole")
-    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, HttpServletResponse response, String roleId,String[] checkIds){
+    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request,String roleId,String[] checkIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         try{
-            UserAccount loginUser = commonFuncService.gainUserAccountByRequest(request,true);
             if(StringUtils.isNotBlank(roleId)){
                 Integer grantCount = defineRoleService.dealGrantPermissionToRole(roleId,checkIds,loginUser);
                 result.setCount(grantCount);

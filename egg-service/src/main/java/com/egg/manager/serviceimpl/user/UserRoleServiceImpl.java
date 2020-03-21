@@ -52,19 +52,6 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    /**
-     * TODO
-     * @return
-     */
-    @Override
-    public List<UserRole> selectByAccountId() {
-        EntityWrapper<UserRole> ew = new EntityWrapper<>() ;
-        ew.where("");
-
-        return null;
-    }
-
-
 
     /**
      * 取得当前用户关联的 UserRole

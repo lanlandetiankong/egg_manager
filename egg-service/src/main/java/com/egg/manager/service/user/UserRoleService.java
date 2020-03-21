@@ -21,8 +21,6 @@ import java.util.List;
  */
 public interface UserRoleService extends IService<UserRole> {
 
-    public List<UserRole> selectByAccountId() ;
-
     List<UserRole> dealGetAllUserRoleByAccount(UserAccount account);
 
     List<UserRole> dealGetAllUserRoleByAccountFromDb(UserAccount userAccount);

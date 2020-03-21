@@ -8,6 +8,8 @@ import com.egg.manager.common.web.helper.MyResponseHelper;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.spring.SpringContextBeanService;
 import com.egg.manager.service.user.UserAccountService;
+import com.egg.manager.vo.user.UserAccountVo;
+import org.apache.catalina.User;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import java.io.PrintWriter;
  * \* Date: 2019/9/14
  * \* Time: 23:11
  * \* Description:
+ *      代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
  * \
  */
 public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
@@ -33,7 +36,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 检验用户是否想要登录
-     * 检测header里面是否包含Authorization 字段
+     * 检测header里面是否包含 authorization 字段
      * @param request
      * @param response
      * @return
@@ -41,7 +44,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response){
         HttpServletRequest req = (HttpServletRequest) request ;
-        String authorization = req.getHeader("Authorization") ;
+        String authorization = req.getHeader("authorization") ;
         return StringUtils.isNotBlank(authorization);
     }
 
@@ -49,23 +52,22 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String authorization = httpServletRequest.getHeader("Authorization");
-        JwtShiroToken token = new JwtShiroToken(authorization);
-        // 提交给realm进行登入，如果错误他会抛出异常并被捕获
-        getSubject(request,response).login(token);
-        handleSetUserAccountBean(request,response,token);
+        String authorization = httpServletRequest.getHeader("authorization");
+        String userAccountId = JWTUtil.getUserAccountId(authorization);
+        JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
+        // 触发 Relam.doGetAuthenticationInfo
+        getSubject(request,response).login(jwtShiroToken);
+        //handleSetUserAccountBean(request,response,jwtShiroToken);
+        // 触发 Relam.doGetAuthorizationInfo
         return super.executeLogin(request, response);
     }
 
     /**
-     * doc by liugh
-     * 这里我们详细说明下为什么最终返回的都是true，即允许访问
-     * 例如我们提供一个地址 GET /article
-     * 登入用户和游客看到的内容是不同的
-     * 如果在这里返回了false，请求会被直接拦截，用户看不到任何东西
-     * 所以我们在这里返回true，Controller中可以通过 subject.isAuthenticated() 来判断用户是否登入
-     * 如果有些资源只有登入用户才能访问，我们只需要在方法上面加上 @RequiresAuthentication 注解即可
-     * 但是这样做有一个缺点，就是不能够对GET,POST等请求进行分别过滤鉴权(因为我们重写了官方的方法)，但实际上对应用影响不大
+     * 目前只需要 head 包含
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request,ServletResponse response,Object mappedValue) {
@@ -100,11 +102,12 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             httpServletResponse.setStatus(HttpStatus.OK.value());
             return false ;
         }
-        String authorization = httpServletRequest.getHeader("Authorization");
-        if(handleVerificationPassAnnotation(request,response,httpServletRequest,authorization)){
+        String token = httpServletRequest.getHeader("token");
+        //当前请求是否有@ShiroPass并且可直接放行，会注入一个 游客信息
+        if(handleVerificationPassAnnotation(request,response,httpServletRequest,token)){
             return  true;
         }
-        if(StringUtils.isBlank(authorization)){
+        if(StringUtils.isBlank(token)){
             responseError(request,response);
             return false ;
         }
@@ -112,7 +115,8 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     }
 
     /**
-     * 放行有@ShiroPass 的请求方法
+     * 放行有 @ShiroPass 的请求方法
+     * (项目启动时，加载所有带有 @ShiroPass 的RequestMapping 到 Constant.METHOD_URL_SET 中)
      * @param request
      * @param response
      * @param httpServletRequest
@@ -121,19 +125,14 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      * @throws Exception
      */
     private boolean handleVerificationPassAnnotation(ServletRequest request, ServletResponse response, HttpServletRequest httpServletRequest, String authorization) throws Exception {
-        if(Constant.METHOD_URL_SET.size() == 0) {
-            return true ;
-        }
         for (String urlMethod : Constant.METHOD_URL_SET) {
             String[] urlSplit = urlMethod.split(":--:");
             if(urlSplit[0].equals(httpServletRequest.getRequestURI())
                     && (urlSplit[1].equals(httpServletRequest.getMethod()) || urlSplit[1].equals("RequestMapping")
             )){
-                Constant.isPass = true ;
-                if(StringUtils.isNotBlank(authorization)){
-                    //TODO 需求：没有登录时生成一个 [唯一的游客账号]
-                    UserAccount visitorUser = new UserAccount() ;
-                    httpServletRequest.setAttribute("currentUser",visitorUser);
+                //Constant.isPass = true ;
+                if(StringUtils.isBlank(authorization)){ //如果前端没传递 authorization的话，按游客处理，添加游客信息
+                    httpServletRequest.setAttribute("currentUser", UserAccount.dealGetVisitor());
                     return true ;
                 }   else {
                     super.preHandle(request,response);
@@ -144,7 +143,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                     if(urlSplit[1].equals(httpServletRequest.getMethod()) || urlSplit[1].equals("RequestMapping")){
                         //路径url跟控制器的url一致时
                         if(checkIsSameUrl(urlSplit[0],httpServletRequest.getRequestURI())){
-                            Constant.isPass=true;
+                            //Constant.isPass=true;
                             if(StringUtils.isBlank(authorization)){
                                 httpServletRequest.setAttribute("currentUser",new UserAccount());
                                 return true ;
@@ -162,7 +161,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 设置用户信息到request
-     * TODO 目前是vo，改为bean
      * @param request
      * @param response
      * @param token
@@ -174,7 +172,9 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
          //取得用户id
          String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());
          UserAccount userAccount = userAccountService.selectById(userId);
-         request.setAttribute("currentUser",userAccount);
+         if(userAccount != null){
+             request.setAttribute("currentUser", UserAccountVo.transferEntityToVo(userAccount));
+         }
     }
 
     private void responseError(ServletRequest request,ServletResponse response) {

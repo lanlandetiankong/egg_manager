@@ -38,7 +38,7 @@ public class SwaggerConfig {
     public Docket api() {
         ParameterBuilder parameterBuilder = new ParameterBuilder() ;
         parameterBuilder.parameterType("header")
-                .name("Authorization")
+                .name("authorization")
                 .description("header中Authorization字段用于认证")
                 .modelRef(new ModelRef("string"))
                 .required(false).build() ;

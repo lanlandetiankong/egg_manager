@@ -11,6 +11,7 @@ import com.egg.manager.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -40,6 +41,9 @@ public class CommonFuncServiceImpl implements CommonFuncService {
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
+
+    @Autowired
+    private RedisHelper redisHelper ;
 
     @Override
     public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList){
@@ -202,6 +206,9 @@ public class CommonFuncServiceImpl implements CommonFuncService {
         }
         return pagination ;
     }
+
+
+
 
 
 }

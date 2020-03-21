@@ -12,7 +12,7 @@ import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
 import com.egg.manager.vo.user.UserRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;

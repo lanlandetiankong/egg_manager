@@ -65,11 +65,8 @@ public class MyShiroConfig {
         Map<String,Filter> filterMap = new HashMap<String,Filter>() ;
         filterMap.put("jwt",new JwtShiroFilter());
 
-
         //自定义url规则
         Map<String, String> filterRuleMap = new HashMap<>(2);
-        // 访问401和404页面不通过我们的Filter
-        //通过http://127.0.0.1:9527/druid/index.html 访问 egg_manager
         filterRuleMap.put("/druid/**", "anon");
         //放行webSocket
         filterRuleMap.put("/websocket/*", "anon");
@@ -79,7 +76,9 @@ public class MyShiroConfig {
         filterRuleMap.put("/v2/api-docs", "anon");
         filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
         // 所有请求通过我们自己的JWT Filter
-        filterRuleMap.put("/**", "anon");
+        filterRuleMap.put("/user/user_account/login/account", "anon");
+        //filterRuleMap.put("/**", "anon");
+        filterRuleMap.put("/**", "jwt");
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         filterFactoryBean.setFilters(filterMap);
 

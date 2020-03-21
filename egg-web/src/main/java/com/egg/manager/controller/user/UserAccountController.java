@@ -1,12 +1,15 @@
 package com.egg.manager.controller.user;
 
 import com.egg.manager.annotation.log.OperLog;
+import com.egg.manager.annotation.shiro.ShiroPass;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.config.shiro.JwtShiroToken;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.define.DefineJob;
 import com.egg.manager.entity.define.DefinePermission;
@@ -20,9 +23,8 @@ import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserTenantMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
-import com.egg.manager.service.user.UserTenantService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.define.DefineRoleVo;
@@ -35,6 +37,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +83,7 @@ public class UserAccountController extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的信息", required = true,dataTypeClass=LoginAccountVo.class),
     })
+    @ShiroPass
     @PostMapping(value = "/login/account")
     public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, HttpServletResponse response, LoginAccountVo loginAccountVo) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
@@ -85,6 +92,7 @@ public class UserAccountController extends BaseController {
             if(loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(),loginAccountVo.getPassword())) {
                 throw new LoginFormFieldDeficiencyException("账号名或密码");
             }
+
             UserAccount userAccount = userAccountService.dealGetAccountByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             if(userAccount == null) {
                 throw new Exception("账号未注册！");
@@ -93,12 +101,26 @@ public class UserAccountController extends BaseController {
                     UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount) ;
                      //账号密码验证通过
                     result.setAccountToken(userAccountToken);
+
+
+                    //用户登录信息验证成功，在shiro进行一些登录处理
+                    //添加用户认证信息
+                    Subject subject = SecurityUtils.getSubject();
+                    String authorization = JWTUtil.sign(userAccount.getFid());
+                    JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
+                    //进行验证，这里可以捕获异常，然后返回对应信息
+                    subject.login(jwtShiroToken);
+
+                    userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
                     this.dealSetTokenToRedis(userAccountToken) ;
+                    //返回给前端 jwt jwt值
+                    result.setAuthorization(authorization);
                 }   else {
                     throw new Exception("账号密码不匹配！");
                 }
             }
+
             dealCommonSuccessCatch(result,"用户登录:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(logger,result,e) ;
@@ -107,6 +129,7 @@ public class UserAccountController extends BaseController {
     }
 
 
+    @RequiresRoles(value = {"Root","newrole1"},logical= Logical.OR)
     @OperLog(modelName="UserAccountController",action="查询用户信息-Dto列表",description = "查询用户信息-Dto列表")
     @ApiOperation(value = "查询用户信息-Dto列表", notes = "查询用户信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({

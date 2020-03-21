@@ -12,15 +12,13 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.dto.define.DefineDepartmentDto;
 import com.egg.manager.dto.user.UserRoleDto;
 import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.entity.user.UserRole;
 import com.egg.manager.mapper.user.UserRoleMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
-import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.vo.user.UserRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
@@ -77,11 +75,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         if(checkUserAccountIsBlank(userAccount) == true) {
             return null ;
         }
-        List<UserRole> userDefineRoles = dealGetAllUserRoleByAccountFromRedis(userAccount);
-        if(userDefineRoles == null || userDefineRoles.isEmpty()) {
-            userDefineRoles = dealGetAllUserRoleByAccountFromDb(userAccount);
+        List<UserRole> userRoleList = dealGetAllUserRoleByAccountFromRedis(userAccount);
+        if(userRoleList == null || userRoleList.isEmpty()) {
+            userRoleList = dealGetAllUserRoleByAccountFromDb(userAccount);
         }
-        return userDefineRoles;
+        return userRoleList;
     }
     /**
      * 从数据库是中取得当前用户关联的 UserRole
@@ -96,8 +94,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         userRoleEm.where("state={0}", BaseStateEnum.ENABLED.getValue())
                 .and("user_account_id={0}",userAccount.getFid());
         userRoleEm.orderBy("update_time",false);
-        List<UserRole> userDefineRoles = selectList(userRoleEm);
-        return userDefineRoles;
+        List<UserRole> userRoleList = selectList(userRoleEm);
+        return userRoleList;
     }
 
     /**
@@ -109,10 +107,10 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         if(checkUserAccountIsBlank(userAccount) == true) {
             return null ;
         }
-        Object  userRoleListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserRoleKey(),userAccount.getFid()) ;
+        Object  userRoleListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserRolesKey(),userAccount.getFid()) ;
         String userRoleListJson = JSONObject.toJSONString(userRoleListObj);
-        List<UserRole> userDefineRoles  = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRole>>(){}) ;
-        return userDefineRoles;
+        List<UserRole> userRoleList  = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRole>>(){}) ;
+        return userRoleList;
     }
 
 

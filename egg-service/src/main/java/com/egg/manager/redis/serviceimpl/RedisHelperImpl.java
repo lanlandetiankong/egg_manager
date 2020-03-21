@@ -1,6 +1,6 @@
-package com.egg.manager.serviceimpl.redis;
+package com.egg.manager.redis.serviceimpl;
 
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

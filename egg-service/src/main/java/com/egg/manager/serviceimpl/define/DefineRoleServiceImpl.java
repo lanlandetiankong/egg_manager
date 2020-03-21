@@ -7,12 +7,12 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.dto.define.DefinePermissionDto;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.dto.define.DefineRoleDto;
 import com.egg.manager.entity.define.DefineRole;
 import com.egg.manager.entity.role.RolePermission;
@@ -23,11 +23,10 @@ import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.role.RolePermissionMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserRoleService;
-import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.vo.define.DefineRoleVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +65,41 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
 
 
 
-
+    /**
+     * 取得用户 所拥有的 角色定义-List集合
+     * @param userAccountId
+     * @return
+     */
     @Override
-    public List<DefineRole> dealGetRolesByAccount(UserAccount userAccount) {
-        if(userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
+    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId) {
+        if(StringUtils.isBlank(userAccountId)) {
             return null ;
+        }   else {
+            return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
         }
-
-        return null;
     }
+
+    /**
+     * 取得用户 所拥有的 角色code-Set集合
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId) {
+        Set<String> codeSet = Sets.newHashSet();
+        List<DefineRole> defineRoles = this.dealGetRolesByAccountFromDb(userAccountId);
+        if(defineRoles != null && defineRoles.isEmpty() == false){
+            for (DefineRole defineRole : defineRoles){
+                String roleCode = defineRole.getCode() ;
+                if(StringUtils.isNotBlank(roleCode)){
+                    codeSet.add(roleCode);
+                }
+            }
+        }
+        return codeSet ;
+    }
+
+
     @Override
     public List<DefineRole> dealGetAllDefineRoles() {
         List<DefineRole> allDefineRoles = dealGetAllDefineRolesFromRedis(false);
@@ -92,7 +117,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     }
 
     /**
-     * 从 redis 中取得所有 角色
+     * 从 redis 中取得  所有-角色
      * @param refreshRedis  是否先刷新redis缓存
      * @return
      */
@@ -119,7 +144,6 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         if(userRoles == null || userRoles.isEmpty()) {
             return defineRoles;
         }   else {
-            defineRoles = new ArrayList<DefineRole>() ;
             Set<String> roleIds = new HashSet<String>();
             for(UserRole userRole : userRoles){
                 if(StringUtils.isNotBlank(userRole.getDefineRoleId())){

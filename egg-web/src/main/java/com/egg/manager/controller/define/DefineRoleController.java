@@ -16,7 +16,7 @@ import com.egg.manager.mapper.define.DefineRoleMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineRoleService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;

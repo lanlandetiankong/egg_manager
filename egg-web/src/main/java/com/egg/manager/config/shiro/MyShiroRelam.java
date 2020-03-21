@@ -1,23 +1,21 @@
 package com.egg.manager.config.shiro;
 
+import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JWTUtil;
-import com.egg.manager.entity.user.UserAccount;
-import com.egg.manager.entity.user.UserRole;
+import com.egg.manager.redis.service.user.UserAccountRedisService;
 import com.egg.manager.spring.SpringContextBeanService;
-import com.egg.manager.service.module.DefineMenuService;
-import com.egg.manager.service.define.DefineRoleService;
-import com.egg.manager.service.user.UserAccountService;
-import com.egg.manager.service.user.UserRoleService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -30,18 +28,14 @@ import java.util.List;
 public class MyShiroRelam extends AuthorizingRealm {
 
     @Autowired
-    private UserAccountService userAccountService;
-    @Autowired
-    private DefineMenuService defineMenuService;
-    @Autowired
-    private DefineRoleService defineRoleService;
-    @Autowired
-    private UserRoleService userRoleService;
+    private UserAccountRedisService userAccountRedisService;
+
+
 
 
     /**
-     * 必须重写该方法，否则shiro会报错
-     *
+     * 判断此Realm是否支持此Token
+     * (配置shiro允许的 token 类型，修改为自定义的 TokenBean)
      * @param token
      * @return
      */
@@ -52,28 +46,41 @@ public class MyShiroRelam extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        if(userAccountService == null){
-            this.userAccountService  = SpringContextBeanService.getBean(UserAccountService.class) ;
-        }
-        if(defineMenuService == null){
-            this.defineMenuService  = SpringContextBeanService.getBean(DefineMenuService.class) ;
-        }
-        if(defineRoleService == null){
-            this.defineRoleService  = SpringContextBeanService.getBean(DefineRoleService.class) ;
-        }
-        if(userRoleService == null){
-            this.userRoleService  = SpringContextBeanService.getBean(UserRoleService.class) ;
-        }
-        String userAccountId = JWTUtil.getUserAccountId(principalCollection.toString()) ;
-        UserAccount userAccount = userAccountService.selectById(userAccountId);
-        List<UserRole> userRoles = userRoleService.selectByAccountId() ;
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-
+        //当前登录用户id
+        String authorization =  principalCollection.toString();
+        String userAccountId = JWTUtil.getUserAccountId(principalCollection.toString()) ;
+        if (userAccountRedisService == null) {
+            this.userAccountRedisService = SpringContextBeanService.getBean(UserAccountRedisService.class);
+        }
+        //取得 当前用户 有用的 角色、权限
+        Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountId,false);
+        Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountId,false);
+        simpleAuthorizationInfo.setRoles(roleSet);
+        simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
 
+    /**
+     * 根据 Token 获取认证信息
+     * @param auth
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return null;
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
+        String token = (String) auth.getCredentials();
+        if(Constant.isPass){    //暂不
+            //return new SimpleAuthenticationInfo(token, token, this.getName());
+        }
+        // 解密获得username，用于和数据库进行对比
+        String userAccountId = JWTUtil.getUserAccountId(token);
+        if (userAccountId == null) {
+            throw new UnauthorizedException("token invalid");
+        }
+        if (! JWTUtil.verify(token, userAccountId)) {
+            throw new UnauthorizedException("JWT:账号信息不匹配！");
+        }
+        return new SimpleAuthenticationInfo(token, token, this.getName());
     }
 }

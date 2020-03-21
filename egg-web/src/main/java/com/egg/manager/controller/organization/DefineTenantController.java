@@ -11,7 +11,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.organization.DefineTenantMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.organization.DefineTenantService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.organization.DefineTenantVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;

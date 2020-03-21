@@ -1,5 +1,6 @@
 package com.egg.manager.config.shiro;
 
+import lombok.*;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
@@ -10,13 +11,13 @@ import org.apache.shiro.authc.AuthenticationToken;
  * \* Description:
  * \
  */
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class JwtShiroToken implements AuthenticationToken{
     private String token ;
-
-    public JwtShiroToken(String token) {
-        this.token = token ;
-    }
-
 
     @Override
     public Object getPrincipal() {

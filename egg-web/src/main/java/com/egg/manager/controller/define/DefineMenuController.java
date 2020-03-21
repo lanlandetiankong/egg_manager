@@ -16,7 +16,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineMenuMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineMenuService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.define.DefineMenuVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;

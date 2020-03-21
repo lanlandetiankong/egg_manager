@@ -12,7 +12,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;

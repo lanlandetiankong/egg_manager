@@ -1,4 +1,4 @@
-package com.egg.manager.service.redis;
+package com.egg.manager.redis.service;
 
 import java.util.List;
 import java.util.Map;

@@ -21,7 +21,8 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodArgumentResolver{
 
     /**
-     * 判断1、方法参数列表是否有 [UserAccount]
+     * 判断:
+     * 1、方法参数列表是否有 [UserAccount]
      * 2、是否有 @CurrentUser 注解
      * @param parameter
      * @return
@@ -44,7 +45,9 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
         UserAccount userAccount = (UserAccount) nativeWebRequest.getAttribute("currentUser", RequestAttributes.SCOPE_REQUEST) ;
         if(userAccount == null){
-            throw new UnauthorizedException("获取用户信息失败");
+
+            //TODO
+            //throw new UnauthorizedException("获取用户信息失败");
         }
         return userAccount ;
     }

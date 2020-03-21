@@ -10,6 +10,7 @@ import com.egg.manager.vo.define.DefineRoleVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -20,8 +21,19 @@ import java.util.List;
  * \
  */
 public interface DefineRoleService extends IService<DefineRole> {
+    /**
+     * 取得用户 所拥有的 角色定义-List集合
+     * @param userAccountId
+     * @return
+     */
+    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId) ;
 
-    List<DefineRole> dealGetRolesByAccount(UserAccount userAccount) ;
+    /**
+     * 取得用户 所拥有的 角色code-Set集合
+     * @param userAccountId
+     * @return
+     */
+    Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId);
 
     List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
 

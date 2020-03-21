@@ -14,7 +14,7 @@ import com.egg.manager.entity.user.UserAccount;
 import com.egg.manager.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.define.DefineDepartmentService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.vo.define.DefineDepartmentVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import io.swagger.annotations.Api;

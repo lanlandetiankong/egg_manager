@@ -76,7 +76,7 @@ public class RecordOperationLogAspe extends AbstAspectManager {
         OperationLogService operationLogService = SpringContextBeanService.getBean(OperationLogService.class);
         ServletRequestAttributes sra = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest request = sra.getRequest();
-        String authorization = request.getHeader("Authorization");
+        String authorization = request.getHeader("authorization");
         OperationLog operationLog = new OperationLog();
         if (StringUtils.isNotBlank(authorization)) {
             String userAccountId = JWTUtil.getUserAccountId(authorization);

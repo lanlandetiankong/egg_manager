@@ -10,8 +10,9 @@ import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.redis.service.user.UserAccountRedisService;
 import com.egg.manager.webvo.session.UserAccountToken;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +40,9 @@ public class BaseController {
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
+    @Autowired
+    private UserAccountRedisService userAccountRedisService ;
+
     private Logger baseLogger = LoggerFactory.getLogger(this.getClass());
 
     public static boolean checkFieldStrBlank(String... strs) {
@@ -64,13 +68,30 @@ public class BaseController {
     }
 
 
-    public void dealSetTokenToRedis(UserAccountToken userAccountToken) throws InvocationTargetException, IllegalAccessException {   //将用户token分别存入到redis
-        if(userAccountToken != null){
-            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAccountKey(),userAccountToken.getAccount(),userAccountToken,redisPropsOfShiroCache.getUserAccountTtl());
-            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAccountIdKey(),userAccountToken.getUserAccountId(),userAccountToken,redisPropsOfShiroCache.getUserAccountIdTtl());
-            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserTokenKey(),userAccountToken.getToken(),userAccountToken,redisPropsOfShiroCache.getUserTokenTtl());
-        }   else {
+    public void dealSetTokenToRedis(UserAccountToken userAccountToken) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
+        if(userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization()) ){
+            //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
+            Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId());
+            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization值，清理之前的缓存
+                String userAuthorization = (String) oldAuthorization;
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserPermissionsKey(),userAuthorization);
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserRolesKey(),userAuthorization);
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontButtonsKey(),userAuthorization);
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontMenusKey(),userAuthorization);
+            }
+            String authorization = userAccountToken.getAuthorization() ;
+            //设置 用户id指向当前 的 authorization
+            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId(),authorization,redisPropsOfShiroCache.getUserAuthorizationTtl());
+            //设置 authorization 缓存 当前用户的token
+            redisHelper.hashTtlPut(redisPropsOfShiroCache.getAuthorizationKey(),authorization,userAccountToken,redisPropsOfShiroCache.getAuthorizationTtl());
 
+            //设置到缓存,hashKey 都是 authorization
+            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountToken.getUserAccountId(),true);
+            Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountToken.getUserAccountId(),true);
+            Set<String> frontButtonSet = userAccountRedisService.dealGetCurrentUserFrontButtons(authorization,userAccountToken.getUserAccountId(),true);
+            Set<String> frontMenuSet = userAccountRedisService.dealGetCurrentUserFrontMenus(authorization,userAccountToken.getUserAccountId(),true);
+        }   else {
+            //没有取得缓存必要值 TODO
         }
     }
 

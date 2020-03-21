@@ -20,6 +20,8 @@ import com.egg.manager.service.define.DefinePermissionService;
 import com.egg.manager.vo.define.DefineJobVo;
 import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -184,5 +187,41 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         }
         Integer delCount = definePermissionMapper.updateById(definePermission);
         return delCount ;
+    }
+
+
+
+    /**
+     * 取得用户 所拥有的 权限定义-List集合
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public List<DefinePermission> dealGetPermissionsByAccountFromDb(String userAccountId) {
+        if(StringUtils.isBlank(userAccountId)) {
+            return null ;
+        }   else {
+            return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
+        }
+    }
+
+    /**
+     * 取得用户 所拥有的 权限code-Set集合
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public Set<String> dealGetPermissionCodeSetByAccountFromDb(String userAccountId) {
+        Set<String> codeSet = Sets.newHashSet();
+        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(userAccountId);
+        if(definePermissions != null && definePermissions.isEmpty() == false){
+            for (DefinePermission definePermission : definePermissions){
+                String permissionCode = definePermission.getCode() ;
+                if(StringUtils.isNotBlank(permissionCode)){
+                    codeSet.add(permissionCode);
+                }
+            }
+        }
+        return codeSet ;
     }
 }

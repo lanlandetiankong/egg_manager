@@ -9,7 +9,7 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.controller.BaseController;
 import com.egg.manager.entity.user.UserJob;
 import com.egg.manager.mapper.user.UserJobMapper;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserJobService;
 import com.egg.manager.vo.user.UserJobVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;

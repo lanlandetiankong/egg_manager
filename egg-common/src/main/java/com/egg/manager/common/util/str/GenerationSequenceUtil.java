@@ -14,9 +14,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.LongAdder;
 
-/**
- * @author zhouchengjie
- */
 public class GenerationSequenceUtil {
 
 
@@ -102,11 +99,11 @@ public class GenerationSequenceUtil {
     /**
      * (机器码 + 进程号) + 随机数 + 时间 + 计数器 + 用户ID
      *
-     * @param userId : 用户ID
+     * @param userAccountId : 用户ID
      * @return 全局唯一ID
      */
-    public static String globalUniqueId ( final String userId ) {
-        return globalUniqueId() + userId;
+    public static String globalUniqueId ( final String userAccountId ) {
+        return globalUniqueId() + userAccountId;
     }
 
 

@@ -15,7 +15,7 @@ import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementDraftService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;

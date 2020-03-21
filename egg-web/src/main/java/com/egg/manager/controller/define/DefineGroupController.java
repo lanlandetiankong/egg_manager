@@ -1,18 +1,13 @@
 package com.egg.manager.controller.define;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.entity.define.DefineGroup;
-import com.egg.manager.mapper.define.DefineGroupMapper;
 import com.egg.manager.mapper.user.UserAccountMapper;
-import com.egg.manager.service.define.DefineGroupService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

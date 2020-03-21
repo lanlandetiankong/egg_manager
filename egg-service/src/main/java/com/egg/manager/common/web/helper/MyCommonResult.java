@@ -21,6 +21,7 @@ import java.util.Set;
 public class MyCommonResult<T> implements Serializable {
 
     private String token ;
+    private String authorization ;
     //提示信息、错误信息等，用于展示
     private String info ;
     //传递到前端的 信息，用于使用

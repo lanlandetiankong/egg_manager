@@ -11,6 +11,7 @@ import com.egg.manager.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -72,4 +73,19 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @throws Exception
      */
     Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception;
+
+
+
+    /**
+     * 取得用户 所拥有的 权限定义-List集合
+     * @param userAccountId
+     * @return
+     */
+    List<DefinePermission> dealGetPermissionsByAccountFromDb(String userAccountId) ;
+    /**
+     * 取得用户 所拥有的 权限code-Set集合
+     * @param userAccountId
+     * @return
+     */
+    Set<String> dealGetPermissionCodeSetByAccountFromDb(String userAccountId);
 }

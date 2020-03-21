@@ -14,7 +14,7 @@ import com.egg.manager.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.announcement.AnnouncementService;
 import com.egg.manager.service.announcement.AnnouncementTagService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserAccountService;
 import com.egg.manager.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.vo.announcement.AnnouncementVo;
@@ -60,11 +60,6 @@ public class AnnouncementController extends BaseController {
     private AnnouncementService announcementService ;
     @Autowired
     private AnnouncementTagService announcementTagService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

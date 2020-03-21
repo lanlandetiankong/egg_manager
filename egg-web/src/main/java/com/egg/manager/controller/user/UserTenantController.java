@@ -13,7 +13,7 @@ import com.egg.manager.entity.user.UserTenant;
 import com.egg.manager.mapper.user.UserAccountMapper;
 import com.egg.manager.mapper.user.UserTenantMapper;
 import com.egg.manager.service.CommonFuncService;
-import com.egg.manager.service.redis.RedisHelper;
+import com.egg.manager.redis.service.RedisHelper;
 import com.egg.manager.service.user.UserTenantService;
 import com.egg.manager.vo.user.UserTenantVo;
 import io.swagger.annotations.Api;

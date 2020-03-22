@@ -64,7 +64,6 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
                 userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(authorization);
             }
         }
-        userAccount = null ;
         CurrentLoginUser currentLoginUserAnno  = methodParameter.getParameterAnnotation(CurrentLoginUser.class);
         if(currentLoginUserAnno != null){
             boolean required = currentLoginUserAnno.required();

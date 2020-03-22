@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.mapper.define.DefineJobMapper">
+<mapper namespace="com.egg.manager.persistence.mapper.define.DefineJobMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.entity.define.DefineJob">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.define.DefineJob">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="description" property="description" />
@@ -18,7 +18,7 @@
 
 
     <!-- 通用Dto查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.dto.define.DefineJobDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.dto.define.DefineJobDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="description" property="description" />
@@ -29,8 +29,8 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user_id" property="createUserId" />
         <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -83,11 +83,11 @@
         </include>
         FROM em_define_job edj
         <where>
-            <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+            <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
                 <property name="table_name_alias" value="edj" />
             </include>
         </where>
-        <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+        <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
             <property name="table_name_alias" value="edj" />
         </include>
     </select>

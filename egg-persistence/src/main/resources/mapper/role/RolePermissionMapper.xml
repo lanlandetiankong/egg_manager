@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.mapper.role.RolePermissionMapper">
+<mapper namespace="com.egg.manager.persistence.mapper.role.RolePermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.entity.role.RolePermission">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.role.RolePermission">
         <id column="fid" property="fid" />
         <result column="define_role_id" property="defineRoleId" />
         <result column="define_permission_id" property="definePermissionId" />

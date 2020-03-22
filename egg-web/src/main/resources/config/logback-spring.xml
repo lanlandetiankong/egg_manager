@@ -6,7 +6,7 @@
 	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 	<!-- 开启后可以通过jmx动态控制日志级别(springboot Admin的功能) -->
 	<!--<jmxConfigurator/>-->
-	<conversionRule conversionWord="highlightex" converterClass="com.egg.manager.config.logback.HighlightingCompositeConverterEx" />
+	<conversionRule conversionWord="highlightex" converterClass="com.egg.manager.com.egg.manager.web.config.logback.HighlightingCompositeConverterEx" />
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${LOG_PATH}${LOG_FILE}</File>

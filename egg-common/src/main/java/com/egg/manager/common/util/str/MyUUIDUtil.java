@@ -1,7 +1,5 @@
 package com.egg.manager.common.util.str;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 import java.util.UUID;
 
 public class MyUUIDUtil {

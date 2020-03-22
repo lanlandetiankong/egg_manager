@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.mapper.log.OperationLogMapper">
+<mapper namespace="com.egg.manager.persistence.mapper.log.OperationLogMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.entity.log.OperationLog">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.log.OperationLog">
         <id column="fid" property="fid" />
         <result column="log_description" property="logDescription" />
         <result column="action_args" property="actionArgs" />

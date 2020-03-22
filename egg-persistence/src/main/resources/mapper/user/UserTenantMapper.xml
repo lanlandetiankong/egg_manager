@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.mapper.user.UserTenantMapper">
+<mapper namespace="com.egg.manager.persistence.mapper.user.UserTenantMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.entity.user.UserTenant">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.user.UserTenant">
         <id column="fid" property="fid" />
         <result column="user_account_id" property="userAccountId" />
         <result column="define_tenant_id" property="defineTenantId" />
@@ -18,7 +18,7 @@
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.dto.user.UserTenantDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.dto.user.UserTenantDto">
         <id column="fid" property="fid" />
         <result column="user_account_id" property="userAccountId" />
         <result column="define_tenant_id" property="defineTenantId" />
@@ -30,8 +30,8 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user_id" property="createUserId" />
         <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
 
@@ -102,18 +102,18 @@
         </include>
         FROM em_user_account eua
         <where>
-            <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+            <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
                 <property name="table_name_alias" value="eua" />
             </include>
         </where>
-        <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+        <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
             <property name="table_name_alias" value="eua" />
         </include>
     </select>
 
-    <select id="selectOneOfUserBelongTenant" resultType="com.egg.manager.entity.organization.DefineTenant">
+    <select id="selectOneOfUserBelongTenant" resultType="com.egg.manager.persistence.entity.organization.DefineTenant">
         SELECT
-            <include refid="com.egg.manager.mapper.organization.DefineTenantMapper.Base_Alias_Table_List">
+            <include refid="com.egg.manager.persistence.mapper.organization.DefineTenantMapper.Base_Alias_Table_List">
                 <property name="base_alias_name" value="edt" />
             </include>
           FROM em_define_tenant edt

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.mapper.define.DefineMenuMapper">
+<mapper namespace="com.egg.manager.persistence.mapper.define.DefineMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.entity.define.DefineMenu">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.define.DefineMenu">
         <id column="fid" property="fid"/>
         <result column="parent_id" property="parentId"/>
         <result column="menu_name" property="menuName"/>
@@ -23,7 +23,7 @@
         <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
-    <resultMap id="DtoResultMap" type="com.egg.manager.dto.define.DefineMenuDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.dto.define.DefineMenuDto">
         <id column="fid" property="fid"/>
         <result column="parent_id" property="parentId"/>
         <result column="menu_name" property="menuName"/>
@@ -42,7 +42,7 @@
         <result column="last_modifyer_id" property="lastModifyerId"/>
         <association column="parent_id"  property="parentMenuDto"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.dto.define.DefineMenuDto">
+                     javaType="com.egg.manager.persistence.dto.define.DefineMenuDto">
             <id column="fid" property="fid"/>
             <result column="parent_id" property="parentId"/>
             <result column="menu_name" property="menuName"/>
@@ -59,8 +59,8 @@
             <result column="create_user_id" property="createUserId"/>
             <result column="last_modifyer_id" property="lastModifyerId"/>
         </association>
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -162,11 +162,11 @@
         LEFT JOIN em_define_menu par_dm
         on dm.parent_id = par_dm.fid
         <where>
-            <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+            <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
                 <property name="table_name_alias" value="dm" />
             </include>
         </where>
-        <include refid="com.egg.manager.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+        <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
             <property name="table_name_alias" value="dm" />
         </include>
     </select>

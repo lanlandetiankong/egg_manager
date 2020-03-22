@@ -2,7 +2,6 @@ package com.egg.manager.common.base.beans.request;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-import sun.management.resources.agent;
 
 /**
  * \* note:

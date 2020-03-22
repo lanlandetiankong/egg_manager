@@ -1,7 +1,5 @@
 package com.egg.manager.common.base.enums.user.info;
 
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
-
 /**
  * 政治面貌 类型枚举类
  * \* note:

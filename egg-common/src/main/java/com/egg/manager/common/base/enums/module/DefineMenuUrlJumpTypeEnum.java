@@ -2,8 +2,8 @@ package com.egg.manager.common.base.enums.module;
 
 public enum DefineMenuUrlJumpTypeEnum {
     RouterUrlJump(1,"Router地址跳转","Router地址跳转"),
-    OutUrlJump(80,"外部链接跳转","外部链接跳转"),
-    OutUrlBlankJump(100,"打开新的外部链接","打开新的外部链接"),
+    OutUrlJump(2,"在当前页面打开外部链接","在当前页面打开外部链接"),
+    OutUrlBlankJump(3,"在新页面打开外部链接","在新页面打开外部链接"),
     ;
 
     DefineMenuUrlJumpTypeEnum(Integer value, String name, String label) {

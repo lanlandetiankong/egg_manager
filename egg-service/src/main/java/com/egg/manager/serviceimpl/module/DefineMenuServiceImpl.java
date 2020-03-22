@@ -5,10 +5,11 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.common.web.helper.MyCommonResult;
 import com.egg.manager.common.web.tree.CommonMenuTree;
 import com.egg.manager.common.web.tree.CommonTreeSelect;
 import com.egg.manager.common.web.tree.CommonTreeSelectTranslate;
@@ -19,7 +20,6 @@ import com.egg.manager.mapper.define.DefineMenuMapper;
 import com.egg.manager.service.CommonFuncService;
 import com.egg.manager.service.module.DefineMenuService;
 import com.egg.manager.vo.define.DefineMenuVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +93,9 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         tree.setIconName(menu.getIconName());
         tree.setLabel(menu.getLabel());
         tree.setKey(menu.getFid());
-        tree.setPath(menu.getRouterUrl());
+        tree.setUrlJumpType(menu.getUrlJumpType());
+        tree.setRouterUrl(menu.getRouterUrl());
+        tree.setHrefUrl(menu.getHrefUrl());
         return tree;
     }
 

@@ -24,11 +24,14 @@ public class CommonMenuTree {
     private String pid ;
     private String moduleId;
     private String name ;
-    private String path ;
+
+    private String routerUrl ;
+    private String hrefUrl ;
+    private Integer urlJumpType ;   //路由跳转方式,参考 DefineMenuUrlJumpTypeEnum
+
     private String label ;
     private String iconName ;
     private boolean  selected ;
-    private String componentsName ;
     private List<CommonMenuTree> children;
 
 

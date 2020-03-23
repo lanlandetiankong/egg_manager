@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>egg-persistent</artifactId>
+    <artifactId>egg-persistence</artifactId>
 
     <packaging>jar</packaging>
 

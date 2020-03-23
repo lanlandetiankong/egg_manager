@@ -30,6 +30,10 @@ egg-persistence/target/
 egg-service/target/
 egg-web/target/
 
+egg-common.iml
+egg-persistence.iml
+egg-service.iml
+egg-web.iml
 
 #logs
 logs/

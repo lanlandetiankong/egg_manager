@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.teaegg</groupId>
-            <artifactId>egg-persistent</artifactId>
+            <artifactId>egg-persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

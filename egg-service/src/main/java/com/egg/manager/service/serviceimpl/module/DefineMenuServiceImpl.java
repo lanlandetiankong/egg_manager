@@ -49,6 +49,22 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     private CommonFuncService commonFuncService ;
 
     /**
+     * 查询 所有[可用状态]的 [菜单定义]
+     * @param defineMenuEntityWrapper
+     * @return
+     */
+    @Override
+    public List<DefineMenu> getAllEnableDefineMenus(EntityWrapper<DefineMenu> defineMenuEntityWrapper){
+        defineMenuEntityWrapper = defineMenuEntityWrapper != null ? defineMenuEntityWrapper : new EntityWrapper<DefineMenu>();
+        //筛选与排序
+        defineMenuEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        defineMenuEntityWrapper.orderBy("level",true);
+        defineMenuEntityWrapper.orderBy("order_num",true);
+        defineMenuEntityWrapper.orderBy("create_time",false);
+        return this.selectList(defineMenuEntityWrapper);
+    }
+
+    /**
      * [菜单展示]的子节点 构建的树结构
      * @param rootId
      * @param allMenus

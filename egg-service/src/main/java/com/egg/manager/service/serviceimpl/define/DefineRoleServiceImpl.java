@@ -12,6 +12,8 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.entity.define.DefineMenu;
+import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineRole;
@@ -49,6 +51,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Autowired
     private DefineRoleMapper defineRoleMapper;
     @Autowired
+    private DefineMenuMapper defineMenuMapper;
+    @Autowired
     private DefinePermissionMapper definePermissionMapper;
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
@@ -71,11 +75,11 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @return
      */
     @Override
-    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId) {
+    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Integer stateVal) {
         if(StringUtils.isBlank(userAccountId)) {
             return null ;
         }   else {
-            return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
+            return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,stateVal);
         }
     }
 
@@ -87,7 +91,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Override
     public Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
-        List<DefineRole> defineRoles = this.dealGetRolesByAccountFromDb(userAccountId);
+        List<DefineRole> defineRoles = this.dealGetRolesByAccountFromDb(userAccountId,BaseStateEnum.ENABLED.getValue());
         if(defineRoles != null && defineRoles.isEmpty() == false){
             for (DefineRole defineRole : defineRoles){
                 String roleCode = defineRole.getCode() ;
@@ -97,6 +101,42 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
             }
         }
         return codeSet ;
+    }
+
+
+    /**
+     * 取得角色 所拥有的 菜单定义-List集合
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Integer stateVal) {
+        if(StringUtils.isBlank(roleId)) {
+            return null ;
+        }   else {
+            return defineMenuMapper.findAllMenuByRoleId(roleId,stateVal);
+        }
+    }
+
+
+    /**
+     * 取得角色 所拥有的 菜单定义id-Set集合
+     * @param roleId
+     * @return
+     */
+    @Override
+    public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Integer stateVal) {
+        Set<String> idSet = Sets.newHashSet();
+        List<DefineMenu> defineMenuList = this.dealGetMenusByRoleIdFromDb(roleId,stateVal);
+        if(defineMenuList != null && defineMenuList.isEmpty() == false){
+            for (DefineMenu defineMenu : defineMenuList){
+                String menuFid = defineMenu.getFid() ;
+                if(StringUtils.isNotBlank(menuFid)){
+                    idSet.add(menuFid);
+                }
+            }
+        }
+        return idSet ;
     }
 
 

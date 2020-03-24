@@ -1,6 +1,7 @@
 package com.egg.manager.service.service.define;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -26,7 +27,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param userAccountId
      * @return
      */
-    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId) ;
+    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Integer stateVal) ;
 
     /**
      * 取得用户 所拥有的 角色code-Set集合
@@ -34,6 +35,24 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @return
      */
     Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId);
+
+    /**
+     * 取得角色 所拥有的 菜单定义-List集合
+     * @param roleId
+     * @param stateVal 状态值
+     * @return
+     */
+    List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Integer stateVal);
+
+    /**
+     * 取得角色 所拥有的 菜单定义id-Set集合
+     * @param roleId
+     * @param stateVal 状态值
+     * @return
+     */
+    Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Integer stateVal) ;
+
+
 
     List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
 

@@ -116,23 +116,6 @@
     </sql>
 
 
-
-
-
-
-
-    <update id="batchFakeDelByIds">
-        UPDATE em_define_menu
-        SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id = #{loginUser.fid}
-        </if>
-        WHERE fid IN
-        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
-            #{item}
-        </foreach>
-    </update>
-
     <select id="getMenusFilterChildrens" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
@@ -155,9 +138,9 @@
             <property name="base_alias_name" value="dm" />
         </include>
         , <include refid="Base_Alias_TableColumn_List">
-            <property name="base_alias_name" value="par_dm" />
-            <property name="base_alias_col_prefix" value="parent_" />
-        </include>
+        <property name="base_alias_name" value="par_dm" />
+        <property name="base_alias_col_prefix" value="parent_" />
+    </include>
         FROM em_define_menu dm
         LEFT JOIN em_define_menu par_dm
         on dm.parent_id = par_dm.fid
@@ -170,6 +153,46 @@
             <property name="table_name_alias" value="dm" />
         </include>
     </select>
+
+    <select id="findAllMenuByRoleId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List" >
+            <property name="base_alias_name" value="edm" />
+        </include>
+        FROM em_define_menu edm
+        left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
+        WHERE erm.define_role_id = #{roleId}
+        <if test="stateVal != null">
+            and erm.state = #{stateVal}
+        </if>
+    </select>
+
+    <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List" >
+            <property name="base_alias_name" value="edm" />
+        </include>
+        FROM em_define_menu edm
+        left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
+        left JOIN em_define_menu edmp on edm.parent_id = edmp.fid
+        WHERE erm.define_role_id = #{roleId}
+        and edmp.parent_id is not NULL
+        <if test="stateVal != null">
+            and erm.state = #{stateVal}
+        </if>
+    </select>
+
+    <update id="batchFakeDelByIds">
+        UPDATE em_define_menu
+        SET state = -1
+        <if test="loginUser != null">
+            ,last_modifyer_id = #{loginUser.fid}
+        </if>
+        WHERE fid IN
+        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
 
 
 </mapper>

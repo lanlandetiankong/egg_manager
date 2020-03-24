@@ -1,5 +1,9 @@
 package com.egg.manager.web.controller.define;
 
+import com.egg.manager.persistence.entity.define.DefineMenu;
+import com.egg.manager.persistence.entity.role.RoleMenu;
+import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
+import com.egg.manager.persistence.mapper.role.RoleMenuMapper;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -8,6 +12,7 @@ import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.service.role.RoleMenuService;
 import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.define.DefineRole;
@@ -18,6 +23,9 @@ import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.persistence.vo.define.DefineRoleVo;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -26,12 +34,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -46,9 +57,12 @@ import java.util.List;
 @RequestMapping("/define/define_role")
 public class DefineRoleController extends BaseController {
 
-
     @Autowired
-    private UserAccountMapper userAccountMapper ;
+    private DefineMenuMapper defineMenuMapper ;
+    @Autowired
+    private RoleMenuMapper roleMenuMapper ;
+    @Autowired
+    private RoleMenuService roleMenuService ;
     @Autowired
     private DefinePermissionMapper definePermissionMapper;
     @Autowired
@@ -132,7 +146,6 @@ public class DefineRoleController extends BaseController {
     }
 
     @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = MyCommonResult.class,httpMethod = "POST")
-
     @PostMapping(value = "/getAllPermissionByRoleId")
     public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request,String defineRoleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
@@ -146,6 +159,26 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
+
+    @ApiOperation(value = "查询角色已获授权的菜单", notes = "根据角色定义id查询角色已获授权的菜单", response = MyCommonResult.class,httpMethod = "POST")
+    @PostMapping(value = "/getAllMenuByRoleId")
+    public MyCommonResult<DefinePermission> doGetAllMenuByRoleId(HttpServletRequest request,String defineRoleId,Boolean filterParentNode,
+                                                                 @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
+        try{
+            List<DefineMenu> defineMenuList = null ;
+            if(Boolean.TRUE.equals(filterParentNode)){  //是否过滤掉 有子节点的 [菜单节点]
+                defineMenuList = defineMenuMapper.findAllMenuByRoleIdFilterParentNode(defineRoleId,BaseStateEnum.ENABLED.getValue());
+            }   else {
+                defineMenuList = defineMenuMapper.findAllMenuByRoleId(defineRoleId,BaseStateEnum.ENABLED.getValue());
+            }
+            result.setResultList(defineMenuList);
+            dealCommonSuccessCatch(result,"查询角色已获授权的菜单:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 
 
 
@@ -239,6 +272,61 @@ public class DefineRoleController extends BaseController {
                 Integer grantCount = defineRoleService.dealGrantPermissionToRole(roleId,checkIds,loginUser);
                 result.setCount(grantCount);
                 dealCommonSuccessCatch(result,"角色授权:"+actionSuccessMsg);
+            }   else {
+                throw new BusinessException("未知要授权的角色id");
+            }
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+
+    @ApiOperation(value = "[菜单-角色]授权", notes = "为角色设置可访问菜单", response = MyCommonResult.class,httpMethod = "POST")
+    @PostMapping(value = "/grantMenusToRole")
+    @Transactional
+    public MyCommonResult doGrantMenusToRole(HttpServletRequest request,String roleId,String[] checkIds,String[] halfCheckIds,
+                                             @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            if(StringUtils.isNotBlank(roleId)){
+                //取得前端所有 勾选的值
+                checkIds = checkIds != null ? checkIds : new String[]{} ;
+                halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{} ;
+                Set<String> checkIdAll = Sets.newHashSet(checkIds) ;
+                checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
+
+                //在数据库中 关联分别为 enable、delete 状态
+                Set<String>  oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId,BaseStateEnum.ENABLED.getValue());
+                Set<String>  oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId,BaseStateEnum.DELETE.getValue());
+                //所有 已经在数据库 有的关联行
+                Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet,oldDelCheckIdSet);
+
+                //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
+                Sets.SetView  addSetView = Sets.difference(checkIdAll,oldEnableCheckIdSet);
+                Sets.SetView  updateEnableIdSet = Sets.difference(checkIdAll,oldDelCheckIdSet);
+                Sets.SetView  updateDelIdSet = Sets.difference(oldCheckIdAll,checkIdAll);
+
+                if(addSetView != null && addSetView.isEmpty() == false){
+                    List<RoleMenu> addRoleMenuList = Lists.newArrayList();
+                    Iterator<String> addIter = addSetView.iterator();
+                    while (addIter.hasNext()){
+                        String diffNext = addIter.next();
+                        addRoleMenuList.add(RoleMenu.generateSimpleInsertEntity(roleId,diffNext,BaseStateEnum.ENABLED.getValue(),loginUser));
+                    }
+                    boolean flag = roleMenuService.insertBatch(addRoleMenuList);
+                }
+                if(updateEnableIdSet != null && updateEnableIdSet.isEmpty() == false){
+                    Iterator<String> enableIter = updateEnableIdSet.iterator();
+                    List enableIdList = Lists.newArrayList(enableIter);
+                    int count = roleMenuMapper.batchUpdateStateByRole(roleId,enableIdList,BaseStateEnum.ENABLED.getValue(),loginUser);
+                }
+                if(updateDelIdSet != null && updateDelIdSet.isEmpty() == false){
+                    Iterator<String> delIter = updateDelIdSet.iterator();
+                    List delIdList = Lists.newArrayList(delIter);
+                    int count = roleMenuMapper.batchUpdateStateByRole(roleId,delIdList,BaseStateEnum.DELETE.getValue(),loginUser);
+                }
+                dealCommonSuccessCatch(result,"授权菜单:"+actionSuccessMsg);
             }   else {
                 throw new BusinessException("未知要授权的角色id");
             }

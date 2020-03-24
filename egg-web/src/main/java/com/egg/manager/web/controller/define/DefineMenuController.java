@@ -21,6 +21,7 @@ import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,16 +71,16 @@ public class DefineMenuController extends BaseController{
     @OperLog(modelName="DefineMenuController",action="查询所有路由菜单TreeSelect",description = "查询所有路由菜单TreeSelect")
     @ApiOperation(value = "查询所有路由菜单TreeSelect", notes = "查询所有路由菜单TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllMenuTreeSelect")
-    public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect() {
+    public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect(Boolean withRoot) {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
-        //筛选与排序
-        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
-        defineMenuEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
-        defineMenuEntityWrapper.orderBy("level",true);
-        defineMenuEntityWrapper.orderBy("order_num",true);
-        defineMenuEntityWrapper.orderBy("create_time",false);
-        List<DefineMenu> allMenus  = defineMenuService.selectList(defineMenuEntityWrapper);
-        List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
+        //查询 所有[可用状态]的 [菜单定义]
+        List<DefineMenu> allMenus  = defineMenuService.getAllEnableDefineMenus(new EntityWrapper<DefineMenu>());
+        List<CommonTreeSelect> treeList = null ;
+        if(Boolean.TRUE.equals(withRoot)){
+            treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID,allMenus);
+        }   else {
+            treeList = defineMenuService.getTreeSelectChildNodes(DefineMenuConstant.ROOT_ID,allMenus);
+        }
         result.setResultList(treeList);
         return result ;
     }

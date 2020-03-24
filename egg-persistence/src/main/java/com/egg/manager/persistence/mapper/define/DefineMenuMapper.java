@@ -6,6 +6,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,13 +32,18 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
     List<DefineMenuDto> selectQueryPage(Pagination page,@Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,@Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
+     * 取得角色拥有的所有[菜单]集合
+     * @param roleId
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+    List<DefineMenu> findAllMenuByRoleId(@Param("roleId")String roleId,@Param("stateVal")Integer state) ;
 
+    /**
+     * 取得角色拥有的所有[菜单]集合(忽略 有子节点的菜单节点)
+     * @param roleId
+     * @return
+     */
+    List<DefineMenu> findAllMenuByRoleIdFilterParentNode(@Param("roleId")String roleId,@Param("stateVal")Integer state) ;
 
     /**
      * 查询菜单(过滤指定节点下的所有节点
@@ -46,6 +52,14 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
      * @return
      */
     List<DefineMenu> getMenusFilterChildrens(@Param("filterId")String filterId,@Param("onlyEnable")boolean onlyEnable);
+
+    /**
+     * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
+     */
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
 
 
 

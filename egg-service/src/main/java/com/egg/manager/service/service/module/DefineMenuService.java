@@ -1,5 +1,6 @@
 package com.egg.manager.service.service.module;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -22,6 +23,12 @@ import java.util.List;
  * \
  */
 public interface DefineMenuService extends IService<DefineMenu> {
+    /**
+     * 查询 所有[可用状态]的 [菜单定义]
+     * @param defineMenuEntityWrapper
+     * @return
+     */
+    List<DefineMenu> getAllEnableDefineMenus(EntityWrapper<DefineMenu> defineMenuEntityWrapper);
     /**
      * [菜单展示]的子节点 构建的树结构
      * @param rootId

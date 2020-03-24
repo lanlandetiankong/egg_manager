@@ -55,7 +55,7 @@
         #{item.createTime},
         #{item.updateTime},
         #{item.createUserId},
-        #{item.lastModifyerId},
+        #{item.lastModifyerId}
     </sql>
 
     <!--

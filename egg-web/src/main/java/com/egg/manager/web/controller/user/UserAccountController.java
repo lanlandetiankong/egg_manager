@@ -124,7 +124,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @RequiresRoles(value = {"Root","newrole1"},logical= Logical.OR)
+    @RequiresRoles(value = {"Root","SuperRoot"},logical= Logical.OR)
     @OperLog(modelName="UserAccountController",action="查询用户信息-Dto列表",description = "查询用户信息-Dto列表")
     @ApiOperation(value = "查询用户信息-Dto列表", notes = "查询用户信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({

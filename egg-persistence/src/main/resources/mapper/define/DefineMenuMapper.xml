@@ -168,7 +168,7 @@
     </select>
 
     <select id="getUserGrantedMenusByAccountId" resultMap="BaseResultMap">
-        SELECT
+        SELECT DISTINCT
             <include refid="Base_Alias_Table_List">
                 <property name="base_alias_name" value="edm" />
             </include>
@@ -182,6 +182,7 @@
             AND erm.state = 1
             AND eur.state = 1
             AND eua.fid = #{userAccountId}
+            order by level,order_num,create_time
     </select>
 
     <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">

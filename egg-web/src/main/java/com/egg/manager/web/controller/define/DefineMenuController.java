@@ -96,11 +96,10 @@ public class DefineMenuController extends BaseController{
         return result ;
     }
 
-    //TODO 还没添加筛选
-    @ApiOperation(value = "查询用户可以访问的路由菜单", notes = "查询用户可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineMenuController",action="查询用户可以访问的路由菜单",description = "查询用户可以访问的路由菜单")
-    @PostMapping("/user/getGrantedMenuTree")
-    public MyCommonResult<DefineMenu> doGetAllMenu() {
+    @ApiOperation(value = "查询所有可以访问的路由菜单", notes = "查询所有可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="DefineMenuController",action="查询所有可以访问的路由菜单",description = "查询所有可以访问的路由菜单")
+    @PostMapping("/user/getAllMenuTree")
+    public MyCommonResult<DefineMenu> doGetAllMenuTree() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
         //筛选与排序
         EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
@@ -115,6 +114,16 @@ public class DefineMenuController extends BaseController{
     }
 
 
+    @ApiOperation(value = "查询用户可以访问的路由菜单", notes = "查询用户可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="DefineMenuController",action="查询用户可以访问的路由菜单",description = "查询用户可以访问的路由菜单")
+    @PostMapping("/user/getGrantedMenuTree")
+    public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
+        List<DefineMenu> allMenus  = defineMenuService.dealGetUserGrantedMenusByAccountId(loginUser.getFid());
+        List<CommonMenuTree> treeList = defineMenuService.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID,allMenus);
+        result.setResultList(treeList);
+        return result ;
+    }
 
 
 

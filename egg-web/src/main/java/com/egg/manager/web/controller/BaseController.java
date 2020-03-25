@@ -68,12 +68,18 @@ public class BaseController {
         dealCommonErrorCatch(logger,result,e,null,true,true) ;
     }
 
-
+    /**
+     * 设置/刷新 用户信息缓存到redis
+     * @param userAccountToken
+     * @param userAccount
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public void dealSetTokenToRedis(UserAccountToken userAccountToken,UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if(userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization()) ){
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId());
-            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存
+            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录]
                 String userAuthorization = (String) oldAuthorization;
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserAuthorizationKey(),userAuthorization);
                 //清除 authorization 缓存

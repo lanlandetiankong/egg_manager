@@ -85,6 +85,19 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     }
 
     /**
+     * 查询 用户 可访问的[菜单定义] Tree
+     *
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId) {
+        List<DefineMenu> allMenus  = this.dealGetUserGrantedMenusByAccountId(userAccountId);
+        List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID,allMenus);
+        return treeList != null ? treeList : new ArrayList<CommonMenuTree>() ;
+    }
+
+    /**
      * 查询 所有[可用状态]的 [菜单定义]
      * @param defineMenuEntityWrapper
      * @return

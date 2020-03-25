@@ -1,8 +1,10 @@
 package com.egg.manager.service.redis.service.user;
 
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.service.redis.service.common.MyRedisCommonReqService;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -47,9 +49,15 @@ public interface UserAccountRedisService extends MyRedisCommonReqService {
      *  取得 当前用户 的所有 菜单-List<String>
      * @return
      */
-    Set<String> dealGetCurrentUserFrontMenus(String authorization,String userAccountId,boolean almostRefresh);
+    Set<String> dealGetCurrentUserFrontRouterUrls(String authorization,String userAccountId,boolean almostRefresh);
 
-
+    /**
+     * 取得 当前用户 index界面展示的菜单列表-List<String>
+     * 如果取得为空的话会 自动刷新缓存
+     * @param userAccountId
+     * @return
+     */
+    List<CommonMenuTree> dealGetCurrentUserFrontMenuTrees(String authorization, String userAccountId, boolean almostRefresh);
     /**
      *  取得 当前用户 的所有 按钮-Set<String>
      * @return

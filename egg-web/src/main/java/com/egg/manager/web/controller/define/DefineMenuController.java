@@ -12,6 +12,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
+import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -30,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,10 +62,7 @@ public class DefineMenuController extends BaseController{
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+    private UserAccountRedisService userAccountRedisService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -117,10 +116,9 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "查询用户可以访问的路由菜单", notes = "查询用户可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineMenuController",action="查询用户可以访问的路由菜单",description = "查询用户可以访问的路由菜单")
     @PostMapping("/user/getGrantedMenuTree")
-    public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
-        List<DefineMenu> allMenus  = defineMenuService.dealGetUserGrantedMenusByAccountId(loginUser.getFid());
-        List<CommonMenuTree> treeList = defineMenuService.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID,allMenus);
+        List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(authorization,loginUser.getFid(),false);
         result.setResultList(treeList);
         return result ;
     }

@@ -89,7 +89,7 @@ public class BaseController {
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserPermissionsKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserRolesKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontButtonsKey(),userAuthorization);
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontMenusKey(),userAuthorization);
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontRouterUrlKey(),userAuthorization);
             }
             String authorization = userAccountToken.getAuthorization() ;
             //设置 用户id指向当前 的 authorization
@@ -102,7 +102,7 @@ public class BaseController {
             userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountToken.getUserAccountId(),true);
             userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountToken.getUserAccountId(),true);
             userAccountRedisService.dealGetCurrentUserFrontButtons(authorization,userAccountToken.getUserAccountId(),true);
-            userAccountRedisService.dealGetCurrentUserFrontMenus(authorization,userAccountToken.getUserAccountId(),true);
+            userAccountRedisService.dealGetCurrentUserFrontRouterUrls(authorization,userAccountToken.getUserAccountId(),true);
         }   else {
             baseLogger.error("未能成功缓存用户信息到Redis");
         }

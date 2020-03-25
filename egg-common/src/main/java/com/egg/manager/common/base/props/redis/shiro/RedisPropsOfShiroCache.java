@@ -48,6 +48,7 @@ public class RedisPropsOfShiroCache {
     private String userRolesKey ;
     private String userPermissionsKey ;
     private String userFrontMenusKey ;
+    private String userFrontRouterUrlKey ;
     private String userFrontButtonsKey ;
 
 
@@ -80,6 +81,7 @@ public class RedisPropsOfShiroCache {
     private long userRolesTtl ;
     private long userPermissionsTtl ;
     private long userFrontMenusTtl ;
+    private long userFrontRouterUrlTtl ;
     private long userFrontButtonsTtl ;
 
 

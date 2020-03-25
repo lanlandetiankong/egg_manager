@@ -3,6 +3,7 @@ package com.egg.manager.service.redis.serviceimpl.user;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.service.redis.service.RedisHelper;
 import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
@@ -11,6 +12,7 @@ import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.service.webvo.session.UserAccountToken;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,16 +114,30 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     }
 
     /**
-     * 取得 当前用户 的所有 菜单-List<String>
+     * 取得 当前用户 的所有 routerUrl-List<String>
      * 如果取得为空的话会 自动刷新缓存
      * @param userAccountId
      * @return
      */
     @Override
-    public Set<String> dealGetCurrentUserFrontMenus(String authorization,String userAccountId,boolean almostRefresh) {
-        List<String> menuCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserFrontMenusKey(),authorization,userAccountId,String.class,almostRefresh,redisPropsOfShiroCache.getUserFrontMenusTtl());
+    public Set<String> dealGetCurrentUserFrontRouterUrls(String authorization,String userAccountId,boolean almostRefresh) {
+        List<String> menuCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserFrontRouterUrlKey(),authorization,userAccountId,String.class,almostRefresh,redisPropsOfShiroCache.getUserFrontRouterUrlTtl());
         menuCodeList = menuCodeList != null ? menuCodeList : new ArrayList<String>();
         return Sets.newHashSet(menuCodeList);
+    }
+
+
+    /**
+     * 取得 当前用户 index界面展示的菜单列表-List<String>
+     * 如果取得为空的话会 自动刷新缓存
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public List<CommonMenuTree> dealGetCurrentUserFrontMenuTrees(String authorization,String userAccountId,boolean almostRefresh) {
+        List<CommonMenuTree> menuTreeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserFrontMenusKey(),authorization,userAccountId,CommonMenuTree.class,almostRefresh,redisPropsOfShiroCache.getUserFrontMenusTtl());
+        menuTreeList = menuTreeList != null ? menuTreeList : new ArrayList<CommonMenuTree>();
+        return Lists.newArrayList(menuTreeList);
     }
 
     /**
@@ -160,7 +176,7 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
             }
         }  else if(redisPropsOfShiroCache.getUserFrontButtonsKey().equals(key)){    //用户拥有的[前端按钮code-Set]
             //TODO
-        }  else if(redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)){  //用户拥有的[菜单按钮code-Set]
+        }  else if(redisPropsOfShiroCache.getUserFrontRouterUrlKey().equals(key)){  //用户拥有的[RouterUrl-Set]
             Set<String> visitAbleUrlSet =  defineMenuService.dealGetUserVisitAbleUrl(userAccountId);
             if(keyTtl == null){
                 redisHelper.hashPut(key,hashKey,visitAbleUrlSet);
@@ -173,6 +189,13 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
                 redisHelper.hashPut(key,hashKey,userAccount);
             }   else {
                 redisHelper.hashTtlPut(key,hashKey,userAccount,keyTtl);
+            }
+        }   else if(redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)){     //用户可访问 菜单树
+            List<CommonMenuTree> treeList = defineMenuService.dealGetUserGrantedMenuTrees(userAccountId);
+            if(keyTtl == null){
+                redisHelper.hashPut(key,hashKey,treeList);
+            }   else {
+                redisHelper.hashTtlPut(key,hashKey,treeList,keyTtl);
             }
         }
     }

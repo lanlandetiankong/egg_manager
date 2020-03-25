@@ -39,6 +39,14 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @return
      */
     Set<String> dealGetUserVisitAbleUrl(String userAccountId);
+
+    /**
+     * 查询 用户 可访问的[菜单定义] Tree
+     *
+     * @param userAccountId
+     * @return
+     */
+    List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId);
     /**
      * 查询 所有[可用状态]的 [菜单定义]
      * @param defineMenuEntityWrapper

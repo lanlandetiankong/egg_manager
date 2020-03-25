@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -26,10 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -47,6 +45,44 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     private DefineMenuMapper defineMenuMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
+
+    /**
+     * 查询 用户 可访问的[菜单定义]
+     *
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public List<DefineMenu> dealGetUserGrantedMenusByAccountId(String userAccountId) {
+        if(StringUtils.isBlank(userAccountId)){
+            return new ArrayList<DefineMenu>() ;
+        }
+        return defineMenuMapper.getUserGrantedMenusByAccountId(userAccountId);
+    }
+
+    /**
+     * 查询 用户 可访问的 菜单路径
+     *
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public Set<String> dealGetUserVisitAbleUrl(String userAccountId) {
+        Set<String> urlSets = new HashSet<>();
+        List<DefineMenu> defineMenuList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
+        if(defineMenuList != null && defineMenuList.isEmpty() == false){
+            for(DefineMenu defineMenu : defineMenuList){
+                if(defineMenu != null){
+                    if(DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenu.getUrlJumpType())){ //内部router跳转
+                        if(StringUtils.isNotBlank(defineMenu.getRouterUrl())){
+                            urlSets.add(defineMenu.getRouterUrl());
+                        }
+                    }
+                }
+            }
+        }
+        return urlSets;
+    }
 
     /**
      * 查询 所有[可用状态]的 [菜单定义]

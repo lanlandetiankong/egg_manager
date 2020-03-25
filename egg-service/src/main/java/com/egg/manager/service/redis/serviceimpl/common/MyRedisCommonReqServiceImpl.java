@@ -39,11 +39,11 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
     public DefineRoleService defineRoleService ;
 
 
-    protected  <T> T dealAutoGetRedisObjectCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh){
+    protected  <T> T dealAutoGetRedisObjectCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh,Long keyTtl){
         T t = null;
         boolean retryFlag = false ;
         if(almostRefresh == true){    //为true的话进来总是取数据库，并刷新到 redis
-            dealRedisListCacheRefresh(key,hashKey,userAccountId);
+            dealRedisListCacheRefresh(key,hashKey,userAccountId,keyTtl);
             retryFlag = true;
         }   else {
             Object obj = redisHelper.hashGet(key,hashKey);
@@ -52,7 +52,7 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
                 t = JSONObject.parseObject(objStr,tClass);
             }   else {
                 //从数据库中取得
-                dealRedisListCacheRefresh(key,hashKey,userAccountId);
+                dealRedisListCacheRefresh(key,hashKey,userAccountId,keyTtl);
                 retryFlag = true;
             }
         }
@@ -67,11 +67,11 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
     }
 
 
-    protected  <T> List<T> dealAutoGetRedisListCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh){
+    protected  <T> List<T> dealAutoGetRedisListCache(String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh,Long keyTtl){
         List<T> tList = new ArrayList<>();
         boolean retryFlag = false ;
         if(almostRefresh == true){    //为true的话进来总是取数据库，并刷新到 redis
-            dealRedisListCacheRefresh(key,hashKey,userAccountId);
+            dealRedisListCacheRefresh(key,hashKey,userAccountId,keyTtl);
             retryFlag = true;
         }   else {
             Object obj = redisHelper.hashGet(key,hashKey);
@@ -83,7 +83,7 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
                 }
             }   else {
                 //从数据库中取得
-                dealRedisListCacheRefresh(key,hashKey,userAccountId);
+                dealRedisListCacheRefresh(key,hashKey,userAccountId,keyTtl);
                 retryFlag = true;
             }
         }

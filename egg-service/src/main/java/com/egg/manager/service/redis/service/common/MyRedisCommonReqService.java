@@ -10,6 +10,6 @@ package com.egg.manager.service.redis.service.common;
  */
 public interface MyRedisCommonReqService {
 
-    void dealRedisListCacheRefresh(String key,String hashKey,String userAccountId);
+    void dealRedisListCacheRefresh(String key,String hashKey,String userAccountId,Long keyTtl);
 
 }

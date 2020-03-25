@@ -75,6 +75,10 @@ public class BaseController {
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId());
             if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存
                 String userAuthorization = (String) oldAuthorization;
+                redisHelper.hashRemove(redisPropsOfShiroCache.getUserAuthorizationKey(),userAuthorization);
+                //清除 authorization 缓存
+                redisHelper.hashRemove(redisPropsOfShiroCache.getAuthorizationKey(),userAuthorization);
+
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserAccountKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserPermissionsKey(),userAuthorization);
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserRolesKey(),userAuthorization);

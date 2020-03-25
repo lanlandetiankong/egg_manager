@@ -11,8 +11,10 @@ import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import org.apache.velocity.runtime.directive.Define;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -23,6 +25,20 @@ import java.util.List;
  * \
  */
 public interface DefineMenuService extends IService<DefineMenu> {
+
+    /**
+     * 查询 用户 可访问的[菜单定义]
+     * @param userAccountId
+     * @return
+     */
+    List<DefineMenu> dealGetUserGrantedMenusByAccountId(String userAccountId);
+
+    /**
+     * 查询 用户 可访问的 菜单路径
+     * @param userAccountId
+     * @return
+     */
+    Set<String> dealGetUserVisitAbleUrl(String userAccountId);
     /**
      * 查询 所有[可用状态]的 [菜单定义]
      * @param defineMenuEntityWrapper

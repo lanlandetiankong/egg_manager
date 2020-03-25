@@ -8,6 +8,7 @@ import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
 import com.egg.manager.service.service.define.DefinePermissionService;
 import com.egg.manager.service.service.define.DefineRoleService;
+import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.service.webvo.session.UserAccountToken;
 import com.google.common.collect.Sets;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -41,6 +43,8 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     public DefineRoleService defineRoleService ;
     @Autowired
     public DefinePermissionService definePermissionService ;
+    @Autowired
+    public DefineMenuService defineMenuService ;
 
     /**
      * 根据 jwt的authorization值 取得 当前用户 Entity
@@ -77,7 +81,8 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      */
     @Override
     public UserAccount dealGetCurrentUserEntity(String authorization,String userAccountId,boolean almostRefresh) {
-        return dealAutoGetRedisObjectCache(redisPropsOfShiroCache.getUserAccountKey(),authorization,userAccountId,UserAccount.class,almostRefresh);
+        return dealAutoGetRedisObjectCache(redisPropsOfShiroCache.getUserAccountKey(),authorization,userAccountId,UserAccount.class,
+                                almostRefresh,redisPropsOfShiroCache.getUserAccountTtl());
     }
 
     /**
@@ -88,10 +93,9 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      */
     @Override
     public Set<String> dealGetCurrentUserAllRoleSet(String authorization,String userAccountId,boolean almostRefresh) {
-        Set<String> roleSet = Sets.newHashSet();
-        List<String> roleCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserRolesKey(),authorization,userAccountId,String.class,almostRefresh);
-        roleSet.addAll(roleCodeList) ;
-        return roleSet;
+        List<String> roleCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserRolesKey(),authorization,userAccountId,String.class,almostRefresh,redisPropsOfShiroCache.getUserRolesTtl());
+        roleCodeList = roleCodeList != null ? roleCodeList : new ArrayList<String>();
+        return Sets.newHashSet(roleCodeList);
     }
 
     /**
@@ -102,10 +106,9 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      */
     @Override
     public Set<String> dealGetCurrentUserAllPermissionSet(String authorization,String userAccountId,boolean almostRefresh) {
-        Set<String> permissionSet = Sets.newHashSet();
-        List<String> permissionCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserPermissionsKey(),authorization,userAccountId,String.class,almostRefresh);
-        permissionSet.addAll(permissionCodeList) ;
-        return permissionSet;
+        List<String> permissionCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserPermissionsKey(),authorization,userAccountId,String.class,almostRefresh,redisPropsOfShiroCache.getUserPermissionsTtl());
+        permissionCodeList = permissionCodeList != null ? permissionCodeList : new ArrayList<String>();
+        return Sets.newHashSet(permissionCodeList);
     }
 
     /**
@@ -116,8 +119,9 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      */
     @Override
     public Set<String> dealGetCurrentUserFrontMenus(String authorization,String userAccountId,boolean almostRefresh) {
-        Set<String> buttonsSet = Sets.newHashSet();
-        return buttonsSet;
+        List<String> menuCodeList = dealAutoGetRedisListCache(redisPropsOfShiroCache.getUserFrontMenusKey(),authorization,userAccountId,String.class,almostRefresh,redisPropsOfShiroCache.getUserFrontMenusTtl());
+        menuCodeList = menuCodeList != null ? menuCodeList : new ArrayList<String>();
+        return Sets.newHashSet(menuCodeList);
     }
 
     /**
@@ -139,20 +143,37 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      * @param userAccountId
      */
     @Override
-    public void dealRedisListCacheRefresh(String key,String hashKey,String userAccountId){
+    public void dealRedisListCacheRefresh(String key,String hashKey,String userAccountId,Long keyTtl){
         if(redisPropsOfShiroCache.getUserRolesKey().equals(key)){    //用户拥有的[角色code-Set]
             Set<String> defineRoleCodeSet = defineRoleService.dealGetRoleCodeSetByAccountFromDb(userAccountId);
-            redisHelper.hashPut(key,hashKey,defineRoleCodeSet);
+            if(keyTtl == null){
+                redisHelper.hashPut(key,hashKey,defineRoleCodeSet);
+            }   else {
+                redisHelper.hashTtlPut(key,hashKey,defineRoleCodeSet,keyTtl);
+            }
         }   else if(redisPropsOfShiroCache.getUserPermissionsKey().equals(key)){ //用户拥有的[权限code-Set]
             Set<String> definePermissionCodeSet = definePermissionService.dealGetPermissionCodeSetByAccountFromDb(userAccountId);
-            redisHelper.hashPut(key,hashKey,definePermissionCodeSet);
+            if(keyTtl == null){
+                redisHelper.hashPut(key,hashKey,definePermissionCodeSet);
+            }   else {
+                redisHelper.hashTtlPut(key,hashKey,definePermissionCodeSet,keyTtl);
+            }
         }  else if(redisPropsOfShiroCache.getUserFrontButtonsKey().equals(key)){    //用户拥有的[前端按钮code-Set]
             //TODO
         }  else if(redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)){  //用户拥有的[菜单按钮code-Set]
-            //TODO
+            Set<String> visitAbleUrlSet =  defineMenuService.dealGetUserVisitAbleUrl(userAccountId);
+            if(keyTtl == null){
+                redisHelper.hashPut(key,hashKey,visitAbleUrlSet);
+            }   else {
+                redisHelper.hashTtlPut(key,hashKey,visitAbleUrlSet,keyTtl);
+            }
         }   else if(redisPropsOfShiroCache.getUserAccountKey().equals(key)){    //用户信息 缓存
             UserAccount userAccount = userAccountService.selectById(userAccountId);
-            redisHelper.hashPut(key,hashKey,userAccount);
+            if(keyTtl == null){
+                redisHelper.hashPut(key,hashKey,userAccount);
+            }   else {
+                redisHelper.hashTtlPut(key,hashKey,userAccount,keyTtl);
+            }
         }
     }
 

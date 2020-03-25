@@ -41,7 +41,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public void hashPut(String key, HK hashKey, T domain) {
-        if("class java.lang.String".equals(domain.getClass())) {
+        if(domain instanceof String) {
             hashOperations.put(key, hashKey, domain);
         }   else {
             ObjectMapper mapper = new ObjectMapper();

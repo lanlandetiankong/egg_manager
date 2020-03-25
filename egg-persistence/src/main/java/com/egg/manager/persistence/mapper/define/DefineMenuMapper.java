@@ -45,6 +45,14 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
      */
     List<DefineMenu> findAllMenuByRoleIdFilterParentNode(@Param("roleId")String roleId,@Param("stateVal")Integer state) ;
 
+
+    /**
+     * 查询 用户 可访问的[菜单定义]
+     * @param userAccountId
+     * @return
+     */
+    List<DefineMenu> getUserGrantedMenusByAccountId(@Param("userAccountId")String userAccountId) ;
+
     /**
      * 查询菜单(过滤指定节点下的所有节点
      * @param filterId

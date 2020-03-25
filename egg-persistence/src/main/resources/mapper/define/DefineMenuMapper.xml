@@ -167,6 +167,23 @@
         </if>
     </select>
 
+    <select id="getUserGrantedMenusByAccountId" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Alias_Table_List">
+                <property name="base_alias_name" value="edm" />
+            </include>
+            FROM
+                em_define_menu edm
+            LEFT JOIN em_role_menu erm ON edm.fid = erm.define_menu_id
+            LEFT JOIN em_user_role eur ON erm.define_role_id = eur.define_role_id
+            LEFT JOIN em_user_account eua ON eur.user_account_id = eua.fid
+            WHERE
+                edm.state = 1
+            AND erm.state = 1
+            AND eur.state = 1
+            AND eua.fid = #{userAccountId}
+    </select>
+
     <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List" >

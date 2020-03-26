@@ -39,6 +39,14 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
     int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
 
     /**
+     * 批量 启用
+     * @param ensureIds
+     * @param loginUser
+     * @return
+     */
+    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds,@Param("loginUser") UserAccount loginUser) ;
+
+    /**
      * 删除指定角色id下的所有权限
      * @param roleId
      * @return

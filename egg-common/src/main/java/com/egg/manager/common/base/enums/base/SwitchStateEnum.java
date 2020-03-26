@@ -67,4 +67,23 @@ public enum SwitchStateEnum {
         return flag ;
     }
 
+    /**
+     * 判断是否属于枚举的有效值
+     * @param value
+     * @return
+     */
+    public static String dealGetNameByVal(Integer value){
+        String name = "" ;
+        if(value != null){
+            SwitchStateEnum[] enums = SwitchStateEnum.values();
+            for(SwitchStateEnum enumObj : enums){
+                if(value.equals(enumObj.getValue())){
+                    name = enumObj.getName() ;
+                    break;
+                }
+            }
+        }
+        return name ;
+    }
+
 }

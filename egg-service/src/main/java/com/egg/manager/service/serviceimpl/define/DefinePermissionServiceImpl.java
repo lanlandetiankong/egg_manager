@@ -117,6 +117,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
+        definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
         definePermission.setCreateTime(now);
         definePermission.setUpdateTime(now);
@@ -160,12 +161,29 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) {
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
             //批量伪删除
             delCount = definePermissionMapper.batchFakeDelByIds(delIdList,loginUser);
+        }
+        return delCount ;
+    }
+
+    /**
+     * 权限定义-启用
+     * @param ensureIds 要启用的权限id 集合
+     * @throws Exception
+     */
+    @Transactional(rollbackFor=Exception.class)
+    @Override
+    public Integer dealEnsureDefinePermissionByArr(String[] ensureIds,UserAccount loginUser) {
+        Integer delCount = 0 ;
+        if(ensureIds != null && ensureIds.length > 0) {
+            List<String> delIdList = Arrays.asList(ensureIds) ;
+            //批量伪删除
+            delCount = definePermissionMapper.batchEnsureByIds(delIdList,loginUser);
         }
         return delCount ;
     }

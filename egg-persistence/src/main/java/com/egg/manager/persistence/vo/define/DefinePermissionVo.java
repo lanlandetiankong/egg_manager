@@ -1,5 +1,7 @@
 package com.egg.manager.persistence.vo.define;
 
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.entity.define.DefinePermission;
@@ -20,6 +22,8 @@ public class DefinePermissionVo {
     private String fid ;
     private String name ;
     private String code ;
+    private boolean ensure;
+    private String ensureStr;
     private Integer type;
     private String typeStr ;
 
@@ -48,6 +52,7 @@ public class DefinePermissionVo {
         definePermission.setFid(definePermissionVo.getFid());
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
+        definePermission.setEnsure(definePermissionVo.isEnsure() ? 1 : 0);
         definePermission.setType(definePermissionVo.getType());
         definePermission.setRemark(definePermissionVo.getRemark());
         definePermission.setState(definePermissionVo.getState());
@@ -67,6 +72,8 @@ public class DefinePermissionVo {
         definePermissionVo.setFid(definePermission.getFid());
         definePermissionVo.setName(definePermission.getName());
         definePermissionVo.setCode(definePermission.getCode());
+        definePermissionVo.setEnsure(SwitchStateEnum.Open.getValue().equals(definePermission.getEnsure()));
+        definePermissionVo.setEnsureStr(SwitchStateEnum.dealGetNameByVal(definePermission.getEnsure()));
         definePermissionVo.setType(definePermission.getType());
         if(definePermission.getType() != null){
             DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(definePermission.getType());
@@ -94,6 +101,8 @@ public class DefinePermissionVo {
         definePermissionVo.setFid(definePermissionDto.getFid());
         definePermissionVo.setName(definePermissionDto.getName());
         definePermissionVo.setCode(definePermissionDto.getCode());
+        definePermissionVo.setEnsure(SwitchStateEnum.Open.getValue().equals(definePermissionDto.getEnsure()));
+        definePermissionVo.setEnsureStr(SwitchStateEnum.dealGetNameByVal(definePermissionDto.getEnsure()));
         definePermissionVo.setType(definePermissionDto.getType());
         if(definePermissionDto.getType() != null){
             DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(definePermissionDto.getType());

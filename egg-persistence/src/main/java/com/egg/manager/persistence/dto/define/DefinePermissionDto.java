@@ -16,6 +16,7 @@ public class DefinePermissionDto{
 
     private String name ;
     private String code ;
+    private Integer ensure;
     private Integer type;
 
     private Integer state ;

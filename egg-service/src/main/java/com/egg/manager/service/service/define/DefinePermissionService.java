@@ -9,6 +9,7 @@ import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -75,6 +76,12 @@ public interface DefinePermissionService extends IService<DefinePermission> {
     Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception;
 
 
+    /**
+     * 权限定义-启用
+     * @param ensureIds 要启用的权限id 集合
+     * @throws Exception
+     */
+    Integer dealEnsureDefinePermissionByArr(String[] ensureIds,UserAccount loginUser);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合

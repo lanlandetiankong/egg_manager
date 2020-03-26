@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -66,6 +67,7 @@ public class DefinePermissionController  extends BaseController{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("ensure", SwitchStateEnum.Open.getValue())) ;
             //取得 分页配置
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
@@ -176,6 +178,27 @@ public class DefinePermissionController  extends BaseController{
             if(delIds != null && delIds.length > 0) {
                 delCount = definePermissionService.dealDelDefinePermissionByArr(delIds,loginUser);
                 dealCommonSuccessCatch(result,"批量删除权限定义:"+actionSuccessMsg);
+            }
+            result.setCount(delCount);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
+    @OperLog(modelName="DefinePermissionController",action="批量启用权限定义",description = "根据权限id批量启用权限定义")
+    @ApiOperation(value = "批量启用权限", notes = "根据权限id批量启用权限定义", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds",value = "要启用的权限定义id数组", required = true,dataTypeClass=String[].class),
+    })
+    @PostMapping(value = "/batchEnsureDefinePermissionByIds")
+    public MyCommonResult doBatchEnsureDefinePermissionById(HttpServletRequest request,String[] ensureIds,@CurrentLoginUser UserAccount loginUser){
+        MyCommonResult result = new MyCommonResult() ;
+        Integer delCount = 0;
+        try{
+            if(ensureIds != null && ensureIds.length > 0) {
+                delCount = definePermissionService.dealEnsureDefinePermissionByArr(ensureIds,loginUser);
+                dealCommonSuccessCatch(result,"批量启用权限定义:"+actionSuccessMsg);
             }
             result.setCount(delCount);
         }   catch (Exception e){

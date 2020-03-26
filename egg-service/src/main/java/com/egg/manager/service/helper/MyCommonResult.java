@@ -63,6 +63,8 @@ public class MyCommonResult<T> implements Serializable {
 
     private UploadProps uploadProps ;
 
+    private Set<String> routerUrlSet ;
+
 
     public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean,Integer total){
         if(paginationBean != null){

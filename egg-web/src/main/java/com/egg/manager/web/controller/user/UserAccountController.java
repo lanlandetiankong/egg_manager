@@ -108,7 +108,7 @@ public class UserAccountController extends BaseController {
 
                     userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
-                    this.dealSetTokenToRedis(userAccountToken,userAccount) ;
+                    this.dealSetTokenToRedis(userAccountToken,result) ;
                     //返回给前端 jwt jwt值
                     result.setAuthorization(authorization);
                 }   else {

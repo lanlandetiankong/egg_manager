@@ -19,6 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -34,6 +35,9 @@ import java.util.*;
  */
 public class BaseController {
     public String actionSuccessMsg = "操作成功" ;
+
+    @Value("${egg.conf.jwt.sso:true}")
+    private boolean jwtSsoFlag ;
 
     @Autowired
     private RedisHelper redisHelper ;
@@ -71,15 +75,15 @@ public class BaseController {
     /**
      * 设置/刷新 用户信息缓存到redis
      * @param userAccountToken
-     * @param userAccount
+     * @param result
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public void dealSetTokenToRedis(UserAccountToken userAccountToken,UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
+    public void dealSetTokenToRedis(UserAccountToken userAccountToken,MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if(userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization()) ){
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(),userAccountToken.getUserAccountId());
-            if(oldAuthorization != null){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录]
+            if(oldAuthorization != null && jwtSsoFlag){   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录] ,jwtSsoFlag由application.properties 配置取得
                 String userAuthorization = (String) oldAuthorization;
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserAuthorizationKey(),userAuthorization);
                 //清除 authorization 缓存
@@ -102,7 +106,10 @@ public class BaseController {
             userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountToken.getUserAccountId(),true);
             userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountToken.getUserAccountId(),true);
             userAccountRedisService.dealGetCurrentUserFrontButtons(authorization,userAccountToken.getUserAccountId(),true);
-            userAccountRedisService.dealGetCurrentUserFrontRouterUrls(authorization,userAccountToken.getUserAccountId(),true);
+            Set<String>  routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(authorization,userAccountToken.getUserAccountId(),true);
+            if(result != null){
+                result.setRouterUrlSet(routerUrlSet);
+            }
         }   else {
             baseLogger.error("未能成功缓存用户信息到Redis");
         }

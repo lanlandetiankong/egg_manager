@@ -44,11 +44,11 @@ public class DefinePermissionVo {
 
 
 
-    public static DefinePermission transferVoToEntity(DefinePermissionVo definePermissionVo) {
+    public static DefinePermission transferVoToEntity(DefinePermissionVo definePermissionVo,DefinePermission definePermission) {
         if(definePermissionVo == null){
             return null ;
         }
-        DefinePermission definePermission = new DefinePermission() ;
+        definePermission = definePermission != null ? definePermission : new DefinePermission() ;
         definePermission.setFid(definePermissionVo.getFid());
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
@@ -60,7 +60,6 @@ public class DefinePermissionVo {
         definePermission.setUpdateTime(definePermissionVo.getUpdateTime());
         definePermission.setCreateUserId(definePermissionVo.getCreateUserId());
         definePermission.setLastModifyerId(definePermissionVo.getLastModifyerId());
-
         return definePermission ;
     }
 
@@ -121,6 +120,15 @@ public class DefinePermissionVo {
         definePermissionVo.setCreateUser(UserAccountVo.transferEntityToVo(definePermissionDto.getCreateUser()));
         definePermissionVo.setLastModifyer(UserAccountVo.transferEntityToVo(definePermissionDto.getLastModifyer()));
         return definePermissionVo ;
+    }
+
+    //已启用entity 值回设
+    public static void handleSwitchOpenChangeFieldChange(DefinePermission updateEntity,DefinePermission oldEntity){
+        if(updateEntity != null && oldEntity != null){
+            //避免前端可能篡改了数据！
+            updateEntity.setEnsure(SwitchStateEnum.Open.getValue());
+            updateEntity.setCode(oldEntity.getCode());
+        }
     }
 
     public static List<DefinePermissionVo> transferEntityToVoList(List<DefinePermission> definePermissions){

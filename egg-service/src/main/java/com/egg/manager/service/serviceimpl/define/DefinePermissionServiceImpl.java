@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
@@ -115,7 +116,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Override
     public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
+        DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo,null);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
@@ -142,17 +143,23 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer changeCount = 0;
         Date now = new Date() ;
         definePermissionVo.setUpdateTime(now);
-        DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo);
+        DefinePermission updateEntity = DefinePermissionVo.transferVoToEntity(definePermissionVo,null);
         if(loginUser != null){
-            definePermission.setLastModifyerId(loginUser.getFid());
+            updateEntity.setLastModifyerId(loginUser.getFid());
+        }
+        DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
+        if(SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())){    //如果已经启用
+            DefinePermissionVo.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
         }
         if(updateAll){  //是否更新所有字段
-            changeCount = definePermissionMapper.updateAllColumnById(definePermission) ;
+            changeCount = definePermissionMapper.updateAllColumnById(updateEntity) ;
         }   else {
-            changeCount = definePermissionMapper.updateById(definePermission) ;
+            changeCount = definePermissionMapper.updateById(updateEntity) ;
         }
         return changeCount ;
     }
+
+
 
     /**
      * 权限定义-删除

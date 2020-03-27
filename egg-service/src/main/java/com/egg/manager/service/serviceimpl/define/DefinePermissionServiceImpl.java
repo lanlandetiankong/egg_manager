@@ -3,20 +3,20 @@ package com.egg.manager.service.serviceimpl.define;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
+import com.egg.manager.persistence.vo.define.DefinePermissionVo;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefinePermissionService;
-import com.egg.manager.persistence.vo.define.DefinePermissionVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -196,12 +196,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
-        DefinePermission definePermission = DefinePermission.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            definePermission.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = definePermissionMapper.updateById(definePermission);
-        return delCount ;
+        return this.dealDelDefinePermissionByArr(new String[]{delId},loginUser);
     }
 
 

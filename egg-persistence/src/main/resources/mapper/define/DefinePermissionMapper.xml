@@ -112,6 +112,7 @@
         <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
             #{item}
         </foreach>
+        and ensure != 1
     </update>
 
     <update id="batchEnsureByIds" >

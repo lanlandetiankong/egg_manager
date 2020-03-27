@@ -1,6 +1,8 @@
 package com.egg.manager.web.controller.define;
 
+import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -177,7 +179,11 @@ public class DefinePermissionController  extends BaseController{
         try{
             if(delIds != null && delIds.length > 0) {
                 delCount = definePermissionService.dealDelDefinePermissionByArr(delIds,loginUser);
-                dealCommonSuccessCatch(result,"批量删除权限定义:"+actionSuccessMsg);
+                StringBuffer respMsg = new StringBuffer("批量删除权限定义:"+actionSuccessMsg) ;
+                if(delIds.length > delCount){
+                    respMsg.append("由于部分权限已经确认启用后无法删除！预计删除"+delIds.length+"条数据，实际删除"+delCount+"条数据。");
+                }
+                dealCommonSuccessCatch(result,respMsg.toString());
             }
             result.setCount(delCount);
         }   catch (Exception e){
@@ -220,6 +226,9 @@ public class DefinePermissionController  extends BaseController{
             if(StringUtils.isNotBlank(delId)){
                 Integer delCount = definePermissionService.dealDelDefinePermission(delId,loginUser);
                 result.setCount(delCount);
+                if(new Integer(0).equals(delCount)){    //如果删除的是 [已启用的]，则抛出异常
+                    throw new BusinessException("删除权限定义:"+actionFailMsg+ PublicResultEnum.SwitchOpenChangeLimit.getLabel()) ;
+                }
                 dealCommonSuccessCatch(result,"删除权限定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){

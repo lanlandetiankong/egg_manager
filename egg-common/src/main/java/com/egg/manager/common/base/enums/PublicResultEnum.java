@@ -40,6 +40,9 @@ public enum PublicResultEnum {
     UpdateErrorOfRoleInfo("UpdateErrorOfRoleInfo", "更新角色信息失败", "更新角色信息失败"),
     UpdateErrorOfRoot("UpdateErrorOfRoleInfo", "不能修改管理员信息", "不能修改管理员信息"),
 
+    //删除[已启用]项 限制
+    SwitchOpenChangeLimit("SwitchOpenChangeLimit","已启用的项无法进行删除！","已启用的项无法进行删除！"),
+
     //[数据格式]错误
     FormatErrorOfMobile("FormatErrorOfMobile", "手机号格式错误", "手机号格式错误"),
     FormatErrorOfEmail("FormatErrorOfEmail", "邮箱格式错误", "邮箱格式错误")

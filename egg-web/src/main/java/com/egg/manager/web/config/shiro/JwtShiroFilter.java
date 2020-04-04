@@ -92,7 +92,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        System.out.println("Origin"+httpServletRequest.getHeader("Origin"));
+        System.out.println("Origin:"+httpServletRequest.getHeader("Origin"));
         //httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin"));
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletRequest.getHeader("Access-Control-Request-Headers"));
@@ -105,10 +105,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
         //当前请求是否有@ShiroPass并且可直接放行，会注入一个 游客信息
         if(handleVerificationPassAnnotation(request,response,httpServletRequest,token)){
             return  true;
-        }
-        if(StringUtils.isBlank(token)){
-            responseError(request,response);
-            return false ;
         }
         return super.preHandle(request,response);
     }

@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
  * \
  */
 @Component
-@ConfigurationProperties(prefix = "props.build.deploy")
-@PropertySource("classpath:config/build/deploy-conf.properties")
+@ConfigurationProperties(prefix = "egg.build.deploy")
 @Data
 public class DeployConfProps {
 

@@ -15,27 +15,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "props.upload")
-@PropertySource("classpath:props-upload.properties")
 public class UploadProps {
 
-
-    @Value("urlPrefix")
     private String urlPrefix ;
-    //define
-    @Value("locationPrefix")
     private String locationPrefix ;
-
-    @Value("locationOfImg")
     private String locationOfImg ;
-
-    @Value("locationOfExcel")
     private String locationOfExcel ;
-
-    @Value("projectName")
     private String projectName ;
-
-
-
 
 
 

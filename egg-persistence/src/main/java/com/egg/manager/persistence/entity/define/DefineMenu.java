@@ -36,6 +36,11 @@ public class DefineMenu extends Model<DefineMenu> {
     @TableField("order_num")
     private Integer orderNum ;
 
+    @TableField("excel_model_conf")
+    private String excelModelConf ;
+
+
+
     private String remark ;
     private Integer state ;
     @TableField("create_time")

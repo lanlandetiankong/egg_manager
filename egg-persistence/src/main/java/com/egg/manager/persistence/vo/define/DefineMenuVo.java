@@ -1,10 +1,15 @@
 package com.egg.manager.persistence.vo.define;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.common.base.props.upload.UploadStaticProps;
 import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +34,8 @@ public class DefineMenuVo {
     private String label ;
     private Integer level ;
     private Integer orderNum ;
+    private String excelModelConf ;
+
 
     private String remark ;
     private Integer state ;
@@ -41,6 +48,7 @@ public class DefineMenuVo {
 
 
 
+    private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();  //当前菜单已上传的Excel模板文件bean
 
 
 
@@ -60,7 +68,7 @@ public class DefineMenuVo {
         defineMenu.setLabel(defineMenuVo.getLabel());
         defineMenu.setLevel(defineMenuVo.getLevel());
         defineMenu.setOrderNum(defineMenuVo.getOrderNum());
-
+        defineMenu.setExcelModelConf(defineMenuVo.getExcelModelConf());
         defineMenu.setRemark(defineMenuVo.getRemark());
         defineMenu.setState(defineMenuVo.getState());
         defineMenu.setCreateTime(defineMenuVo.getCreateTime());
@@ -94,7 +102,9 @@ public class DefineMenuVo {
         defineMenuVo.setLabel(defineMenu.getLabel());
         defineMenuVo.setLevel(defineMenu.getLevel());
         defineMenuVo.setOrderNum(defineMenu.getOrderNum());
-
+        String excelModelConf = defineMenu.getExcelModelConf() ;
+        defineMenuVo.setExcelModelConf(excelModelConf);
+        defineMenuVo.uploadExcelBeanList.add(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         defineMenuVo.setRemark(defineMenu.getRemark());
         defineMenuVo.setState(defineMenu.getState());
         defineMenuVo.setCreateTime(defineMenu.getCreateTime());
@@ -129,7 +139,9 @@ public class DefineMenuVo {
         defineMenuVo.setLabel(defineMenuDto.getLabel());
         defineMenuVo.setLevel(defineMenuDto.getLevel());
         defineMenuVo.setOrderNum(defineMenuDto.getOrderNum());
-
+        String excelModelConf = defineMenuDto.getExcelModelConf() ;
+        defineMenuVo.setExcelModelConf(excelModelConf);
+        defineMenuVo.uploadExcelBeanList.add(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         defineMenuVo.setRemark(defineMenuDto.getRemark());
         defineMenuVo.setState(defineMenuDto.getState());
         defineMenuVo.setCreateTime(defineMenuDto.getCreateTime());

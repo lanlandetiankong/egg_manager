@@ -28,6 +28,9 @@ public class UploadProps {
     @Value("locationOfImg")
     private String locationOfImg ;
 
+    @Value("locationOfExcel")
+    private String locationOfExcel ;
+
     @Value("projectName")
     private String projectName ;
 
@@ -36,12 +39,15 @@ public class UploadProps {
 
 
 
+    //setter 、getter
 
+    public String getLocationOfExcel() {
+        return locationOfExcel;
+    }
 
-
-
-
-
+    public void setLocationOfExcel(String locationOfExcel) {
+        this.locationOfExcel = locationOfExcel;
+    }
 
     public String getUrlPrefix() {
         return urlPrefix;

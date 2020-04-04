@@ -1,6 +1,8 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
@@ -27,6 +29,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -215,6 +220,30 @@ public class DefineMenuController extends BaseController{
         return  result;
     }
 
+
+    @ApiOperation(value = "更新菜单对应的Excel模板", notes = "更新菜单对应的Excel模板", response = MyCommonResult.class,httpMethod = "POST")
+    @OperLog(modelName="DefineMenuController",action="更新菜单对应的Excel模板",description = "更新菜单对应的Excel模板")
+    @PostMapping(value = "/doUpdateExcelModel")
+    @RequiresRoles(value = {"Root","SuperRoot"},logical= Logical.OR)
+    public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean,@CurrentLoginUser UserAccount loginUser){
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            DefineMenu defineMenu = defineMenuMapper.selectById(menuId);
+            if(fileUploadBean != null){
+                defineMenu.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
+            }   else {
+                defineMenu.setExcelModelConf(null);
+            }
+            defineMenu.setLastModifyerId(loginUser.getFid());
+            defineMenu.setUpdateTime(new Date());
+            Integer changeCount = defineMenuMapper.updateAllColumnById(defineMenu);
+            result.setCount(changeCount);
+            dealCommonSuccessCatch(result,"更新菜单对应的Excel模板:"+actionSuccessMsg);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
 
     @ApiOperation(value = "批量删除菜单定义", notes = "根据菜单定义id批量删除菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(modelName="DefineMenuController",action="批量删除菜单定义",description = "根据菜单定义id批量删除菜单定义")

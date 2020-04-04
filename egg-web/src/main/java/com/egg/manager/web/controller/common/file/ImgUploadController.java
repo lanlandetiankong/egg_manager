@@ -39,19 +39,15 @@ import java.nio.file.Paths;
 @RequestMapping(value = "/commom_api/file/imgUpload")
 public class ImgUploadController extends BaseController{
 
-    private String defaultResDir = "M:\\static_dir\\egg_manager" ;
     @Autowired
     private UploadProps uploadProps ;
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/headImgUpload")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file") MultipartFile file){
+    public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file){
         MyCommonResult result = new MyCommonResult() ;
-
         try{
             if(file == null || file.isEmpty()){
                 throw new BusinessException("上传的文件为空！");

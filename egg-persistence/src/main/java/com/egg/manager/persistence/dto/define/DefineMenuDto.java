@@ -25,6 +25,7 @@ public class DefineMenuDto {
     private String label ;
     private Integer level ;
     private Integer orderNum ;
+    private String excelModelConf ;
 
     private Integer state ;
     private String remark ;

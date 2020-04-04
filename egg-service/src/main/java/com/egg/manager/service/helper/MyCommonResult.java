@@ -1,5 +1,6 @@
 package com.egg.manager.service.helper;
 
+import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -59,6 +60,7 @@ public class MyCommonResult<T> implements Serializable {
     private String errorMsg;
 
     private FileResBean fileResBean ;
+    private List<AntdFileUploadBean> fileUploaderBeanList ;
     private AntdvPaginationBean paginationBean ;    //分页bean
 
     private UploadProps uploadProps ;

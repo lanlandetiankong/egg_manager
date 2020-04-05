@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
@@ -14,6 +15,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
+import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineRole;
@@ -23,6 +25,7 @@ import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.mapper.role.RolePermissionMapper;
+import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.redis.service.RedisHelper;
@@ -56,6 +59,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     private DefinePermissionMapper definePermissionMapper;
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
+    @Autowired
+    private UserAccountMapper userAccountMapper;
 
     @Autowired
     private UserRoleService userRoleService ;
@@ -78,6 +83,10 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Integer stateVal) {
         if(StringUtils.isBlank(userAccountId)) {
             return null ;
+        }
+        UserAccount userAccount = userAccountMapper.selectById(userAccountId);
+        if(UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())){    //如果是[超级管理员]的话可以访问全部菜单
+            return getAllEnableDefineRoles(null);
         }   else {
             return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,stateVal);
         }
@@ -118,6 +127,20 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         }
     }
 
+    /**
+     * 查询 所有[可用状态]的 [角色定义]
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public List<DefineRole> getAllEnableDefineRoles(EntityWrapper<DefineRole> wrapper){
+        wrapper = wrapper != null ? wrapper : new EntityWrapper<DefineRole>();
+        //筛选与排序
+        wrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        wrapper.orderBy("create_time",false);
+        return this.selectList(wrapper);
+    }
+
 
     /**
      * 取得角色 所拥有的 菜单定义id-Set集合
@@ -140,37 +163,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     }
 
 
-    @Override
-    public List<DefineRole> dealGetAllDefineRoles() {
-        List<DefineRole> allDefineRoles = dealGetAllDefineRolesFromRedis(false);
-        if(allDefineRoles == null || allDefineRoles.isEmpty()) {
-            allDefineRoles = dealGetAllDefineRolesFromDb() ;
-        }
-        return allDefineRoles ;
-    }
 
-    @Override
-    public List<DefineRole> dealGetAllDefineRolesFromDb() {
-        EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>() ;
-        defineRoleEntityWrapper.where("state={0}",BaseStateEnum.ENABLED.getValue()) ;
-        return selectList(defineRoleEntityWrapper);
-    }
 
-    /**
-     * 从 redis 中取得  所有-角色
-     * @param refreshRedis  是否先刷新redis缓存
-     * @return
-     */
-    @Override
-    public List<DefineRole> dealGetAllDefineRolesFromRedis(boolean refreshRedis) {
-        if(refreshRedis == true) {
-            redisHelper.valuePut(redisPropsOfShiroCache.getDefineRoleAllKey(),dealGetAllDefineRolesFromDb()) ;
-        }
-        Object allDefineRoleObj = redisHelper.getValue(redisPropsOfShiroCache.getDefineRoleAllKey()) ;
-        String allDefineRoleJson = JSONObject.toJSONString(allDefineRoleObj);
-        List<DefineRole> allDefineRoles  = JSON.parseObject(allDefineRoleJson, new TypeReference<ArrayList<DefineRole>>(){}) ;
-        return allDefineRoles ;
-    }
 
     /**
      * 根据 用户账号 取得所有角色

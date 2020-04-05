@@ -1,15 +1,18 @@
 package com.egg.manager.service.serviceimpl.module;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
@@ -18,6 +21,7 @@ import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
+import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
@@ -44,6 +48,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     @Autowired
     private DefineMenuMapper defineMenuMapper ;
     @Autowired
+    private UserAccountMapper userAccountMapper;
+    @Autowired
     private CommonFuncService commonFuncService ;
 
     /**
@@ -57,7 +63,12 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         if(StringUtils.isBlank(userAccountId)){
             return new ArrayList<DefineMenu>() ;
         }
-        return defineMenuMapper.getUserGrantedMenusByAccountId(userAccountId);
+        UserAccount userAccount = userAccountMapper.selectById(userAccountId);
+        if(UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())){    //如果是[超级管理员]的话可以访问全部菜单
+            return getAllEnableDefineMenus(null);
+        }   else {
+            return defineMenuMapper.getUserGrantedMenusByAccountId(userAccountId);
+        }
     }
 
     /**

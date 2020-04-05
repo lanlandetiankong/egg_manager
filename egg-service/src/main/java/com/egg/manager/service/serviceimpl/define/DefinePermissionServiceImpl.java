@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -16,8 +17,10 @@ import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
+import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefinePermissionService;
 import com.google.common.collect.Sets;
@@ -47,19 +50,22 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Autowired
     private DefinePermissionMapper definePermissionMapper ;
     @Autowired
+    private UserAccountMapper userAccountMapper ;
+    @Autowired
     private CommonFuncService commonFuncService ;
 
     /**
-     * 根据 DefineRoleBean 取得 所有权限
-     * @param defineRoles
+     * 查询 所有[可用状态]的 [权限定义]
+     * @param wrapper
      * @return
      */
     @Override
-    public List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) {
-        EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>() ;
-        definePermissionEntityWrapper.where("state={0}", BaseStateEnum.ENABLED.getValue()) ;
-        DefineRole role = new DefineRole() ;
-        return null;
+    public List<DefinePermission> getAllEnableDefinePermissions(EntityWrapper<DefinePermission> wrapper){
+        wrapper = wrapper != null ? wrapper : new EntityWrapper<DefinePermission>();
+        //筛选与排序
+        wrapper.eq("state",BaseStateEnum.ENABLED.getValue());
+        wrapper.orderBy("create_time",false);
+        return this.selectList(wrapper);
     }
 
     /**
@@ -230,6 +236,10 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     public List<DefinePermission> dealGetPermissionsByAccountFromDb(String userAccountId) {
         if(StringUtils.isBlank(userAccountId)) {
             return null ;
+        }
+        UserAccount userAccount = userAccountMapper.selectById(userAccountId);
+        if(UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())){    //如果是[超级管理员]的话可以访问全部菜单
+            return getAllEnableDefinePermissions(null);
         }   else {
             return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
         }

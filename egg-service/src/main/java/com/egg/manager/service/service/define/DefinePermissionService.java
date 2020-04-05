@@ -1,5 +1,6 @@
 package com.egg.manager.service.service.define;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -25,8 +26,12 @@ import java.util.Set;
  */
 public interface DefinePermissionService extends IService<DefinePermission> {
 
-    List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) ;
-
+    /**
+     * 查询 所有[可用状态]的 [权限定义]
+     * @param wrapper
+     * @return
+     */
+    List<DefinePermission> getAllEnableDefinePermissions(EntityWrapper<DefinePermission> wrapper);
 
     /**
      * 分页查询 权限定义 列表

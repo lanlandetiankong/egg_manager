@@ -1,5 +1,6 @@
 package com.egg.manager.service.service.define;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -52,15 +53,16 @@ public interface DefineRoleService extends IService<DefineRole> {
      */
     Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Integer stateVal) ;
 
-
+    /**
+     * 查询 所有[可用状态]的 [角色定义]
+     * @param wrapper
+     * @return
+     */
+    List<DefineRole> getAllEnableDefineRoles(EntityWrapper<DefineRole> wrapper);
 
     List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
 
-    List<DefineRole> dealGetAllDefineRoles();
 
-    List<DefineRole> dealGetAllDefineRolesFromDb();
-
-    List<DefineRole> dealGetAllDefineRolesFromRedis(boolean refreshRedis);
 
 
 

@@ -1,5 +1,6 @@
 package com.egg.manager.service.service.define;
 
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -95,4 +96,13 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @return
      */
     Set<String> dealGetPermissionCodeSetByAccountFromDb(String userAccountId);
+
+
+    /**
+     * 验证 数据库 中的唯一冲突
+     * @param definePermissionVo
+     * @param definePermissionWrap
+     * @return
+     */
+    boolean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo,Wrapper<DefinePermission> definePermissionWrap);
 }

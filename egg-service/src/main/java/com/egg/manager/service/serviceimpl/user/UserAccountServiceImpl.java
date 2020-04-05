@@ -1,6 +1,7 @@
 package com.egg.manager.service.serviceimpl.user;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
@@ -9,10 +10,11 @@ import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.dto.user.UserAccountDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -23,10 +25,10 @@ import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
+import com.egg.manager.persistence.vo.user.UserAccountVo;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.user.UserAccountService;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,6 +149,9 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserAccount(UserAccountVo userAccountVo,UserAccount loginUser) throws Exception{
+        if(this.dealCheckDuplicateKey(userAccountVo,new EntityWrapper<>())){
+            throw new MyDbException("唯一键[账号]不允许重复！");
+        }
         Date now = new Date() ;
         UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -188,6 +193,11 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateUserAccount(UserAccountVo userAccountVo,UserAccount loginUser,boolean updateAll) throws Exception{
+        Wrapper<UserAccount> uniWrapper  = new EntityWrapper<UserAccount>()
+                .ne("fid",userAccountVo.getFid());
+        if(dealCheckDuplicateKey(userAccountVo,uniWrapper)){    //已有重复键值
+            throw new MyDbException("唯一键[账号]不允许重复！");
+        }
         Integer changeCount = 0;
         Date now = new Date() ;
         userAccountVo.setUpdateTime(now);
@@ -411,5 +421,19 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             }
         }
         return changeCount ;
+    }
+
+    /**
+     * 验证 数据库 中的唯一冲突
+     * @param userAccountVo
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper){
+        wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
+        wrapper.eq("account",userAccountVo.getAccount()) ;
+        wrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;
+        return userAccountMapper.selectCount(wrapper) > 0 ;
     }
 }

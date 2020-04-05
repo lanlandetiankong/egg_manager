@@ -8,6 +8,8 @@ import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,7 @@ import java.util.List;
 @RequestMapping("/common_api/permission")
 public class PermissionCommonController extends BaseController{
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
@@ -45,7 +48,7 @@ public class PermissionCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }
@@ -64,7 +67,7 @@ public class PermissionCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(result,e) ;
+            this.dealCommonErrorCatch(logger,result,e) ;
         }
         return  result;
     }

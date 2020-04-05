@@ -3,7 +3,6 @@ package com.egg.manager.common.base.enums.permission;
 public enum DefinePermissionTypeEnum {
     PageButton(0,"页面操作按钮","页面操作按钮",true),
     TableActionBtn(100,"表格内部按钮","表格内部按钮",true),
-    Menu(200,"菜单选项","菜单选项",true)
     ;
 
     DefinePermissionTypeEnum(Integer value, String name, String label,boolean isNeedFilter) {

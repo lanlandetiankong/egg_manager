@@ -1,6 +1,9 @@
 package com.egg.manager.service.service.user;
 
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.persistence.entity.define.DefinePermission;
+import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -118,4 +121,13 @@ public interface UserAccountService extends IService<UserAccount> {
      * @throws Exception
      */
     Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception;
+
+
+    /**
+     * 验证 数据库 中的唯一冲突
+     * @param definePermissionVo
+     * @param definePermissionWrap
+     * @return
+     */
+    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper);
 }

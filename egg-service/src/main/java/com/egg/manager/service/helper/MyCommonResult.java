@@ -49,6 +49,7 @@ public class MyCommonResult<T> implements Serializable {
     private Set resultSet ;
     //枚举 列表
     private List enumList;
+    private List enumDefaultCheckList;
 
     //前端接收到异常后的操作标识，需与前端一致(axios拦截器设置必须hasError为true才会处理到这个
     private String errorActionType ;
@@ -66,7 +67,7 @@ public class MyCommonResult<T> implements Serializable {
     private UploadProps uploadProps ;
 
     private Set<String> routerUrlSet ;
-    private Set<String> buttonShowSet ;
+    private Set<String> permissionSet ;
 
 
     public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean,Integer total){

@@ -1,11 +1,12 @@
 package com.egg.manager.web.controller.common;
 
 import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
+import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
-import com.egg.manager.persistence.entity.define.DefinePermission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class PermissionCommonController extends BaseController{
 
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
-    public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+    public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request) {
         MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
         try{
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
@@ -55,7 +55,7 @@ public class PermissionCommonController extends BaseController{
 
     @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
-    public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+    public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = new MyCommonResult() ;
         try{
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
@@ -71,4 +71,30 @@ public class PermissionCommonController extends BaseController{
         }
         return  result;
     }
+
+
+    @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class,httpMethod = "POST")
+    @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
+    public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
+        MyCommonResult result = new MyCommonResult() ;
+        try{
+            DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
+            List<FrontSelectBean> beanList = new ArrayList<>();
+            List<String> defaultCheckList = new ArrayList<>();
+            if(enums != null && enums.length > 0){
+                for (DefinePermissionCodePrefixEnum enumObj : enums){
+                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+                    if(enumObj.isDefaultCheck()){
+                        defaultCheckList.add(enumObj.getValue()) ;
+                    }
+                }
+            }
+            result.setEnumList(beanList);
+            result.setEnumDefaultCheckList(defaultCheckList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(logger,result,e) ;
+        }
+        return  result;
+    }
+
 }

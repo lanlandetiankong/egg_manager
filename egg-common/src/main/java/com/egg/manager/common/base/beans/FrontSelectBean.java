@@ -12,14 +12,17 @@ import lombok.Data;
  */
 @Data
 public class FrontSelectBean {
-    private Integer value ;
+    private Object value ;
     private String label ;
 
 
 
-    public FrontSelectBean(Integer value,String label){
+    public FrontSelectBean(Object value,String label){
         this.value = value ;
         this.label = label ;
     }
-
+    public FrontSelectBean(Object value,String label,boolean defaultCheck){
+        this.value = value ;
+        this.label = label ;
+    }
 }

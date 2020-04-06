@@ -100,12 +100,13 @@ public class BaseController {
 
             //设置到缓存,hashKey 都是 authorization
             userAccountRedisService.dealGetCurrentUserEntity(authorization, userAccountToken.getUserAccountId(), true);
-            userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization, userAccountToken.getUserAccountId(), true);
+            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization, userAccountToken.getUserAccountId(), true);
             userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization, userAccountToken.getUserAccountId(), true);
             userAccountRedisService.dealGetCurrentUserFrontButtons(authorization, userAccountToken.getUserAccountId(), true);
             Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
                 result.setRouterUrlSet(routerUrlSet);
+                result.setPermissionSet(permissionSet);
             }
         } else {
             baseLogger.error("未能成功缓存用户信息到Redis");

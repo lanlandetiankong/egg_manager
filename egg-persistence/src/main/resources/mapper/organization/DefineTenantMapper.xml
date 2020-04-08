@@ -98,6 +98,9 @@
         LEFT  JOIN  em_user_tenant eum
         ON edt.fid = eum.define_tenant_id
         WHERE eum.user_account_id = #{userAccountId}
+        <if test="tenantState != null" >
+            AND edt.state = #{tenantState}
+        </if>
     </select>
 
     <update id="batchFakeDelByIds" >

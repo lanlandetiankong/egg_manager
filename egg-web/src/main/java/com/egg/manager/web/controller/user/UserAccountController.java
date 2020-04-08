@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.user;
 
+import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.annotation.shiro.ShiroPass;
@@ -66,7 +67,7 @@ public class UserAccountController extends BaseController {
     @Autowired
     private UserAccountService userAccountService ;
     @Autowired
-    private UserTenantMapper userTenantMapper ;
+    private DefineTenantMapper defineTenantMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
 
@@ -162,7 +163,7 @@ public class UserAccountController extends BaseController {
             UserAccount account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountVo.transferEntityToVo(account);
             //取得 所属的 租户定义
-            DefineTenant belongTenant = userTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
+            DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
                 userAccountVo.setBelongTenantId(belongTenant.getFid());
             }

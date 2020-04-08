@@ -45,7 +45,7 @@
         <result column="last_modifyer_id" property="lastModifyerId" />
         <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="fid" property="belongTenant" fetchType="lazy" select="com.egg.manager.persistence.mapper.organization.DefineTenantMapper.selectOneOfUserBelongTenant" />
+        <association column="fid" property="belongTenant" fetchType="lazy"  select="com.egg.manager.persistence.mapper.organization.DefineTenantMapper.selectById" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

@@ -111,20 +111,6 @@
         </include>
     </select>
 
-    <select id="selectOneOfUserBelongTenant" resultType="com.egg.manager.persistence.entity.organization.DefineTenant">
-        SELECT
-            <include refid="com.egg.manager.persistence.mapper.organization.DefineTenantMapper.Base_Alias_Table_List">
-                <property name="base_alias_name" value="edt" />
-            </include>
-          FROM em_define_tenant edt
-          LEFT  JOIN  em_user_tenant eum
-          ON edt.fid = eum.define_tenant_id
-          WHERE eum.user_account_id = #{userAccountId}
-          <if test="tenantState != null" >
-              AND edt.state = #{tenantState}
-          </if>
-    </select>
-
 
     <select id="findAllTenantIdByUserAccountId"  resultType="java.lang.String">
         SELECT edt.fid FROM em_define_tenant edt

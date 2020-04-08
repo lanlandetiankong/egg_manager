@@ -39,14 +39,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
 
 
     /**
-     * 根据用户id 查询 所属的 租户定义
-     * @param userAccountId 用户id
-     * @param tenantState 租户状态,为null时不过滤
-     * @return
-     */
-    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId")String userAccountId,@Param("tenantState")Integer tenantState);
-
-    /**
      * 批量 伪删除
      * @param delIds
      * @param loginUser

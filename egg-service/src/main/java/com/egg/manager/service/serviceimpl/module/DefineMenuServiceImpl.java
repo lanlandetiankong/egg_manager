@@ -142,7 +142,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
                 if(rootId != null){
                     if(rootId.equals(menu.getParentId())){
                         tree = new CommonMenuTree() ;
-                        childList.add(setDefineMenuParamToTree(menu,tree)) ;
+                        childList.add(CommonMenuTree.dealDefineMenuToTree(menu,tree)) ;
                     }
                 }
             }
@@ -156,24 +156,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         return childList ;
     }
 
-    /**
-     * 菜单树->entity转CommonMenuTree
-     * @param menu
-     * @param tree
-     * @return
-     */
-    private CommonMenuTree setDefineMenuParamToTree(DefineMenu menu, CommonMenuTree tree) {
-        tree.setId(menu.getFid());
-        tree.setPid(menu.getParentId());
-        tree.setName(menu.getMenuName());
-        tree.setIconName(menu.getIconName());
-        tree.setLabel(menu.getLabel());
-        tree.setKey(menu.getFid());
-        tree.setUrlJumpType(menu.getUrlJumpType());
-        tree.setRouterUrl(menu.getRouterUrl());
-        tree.setHrefUrl(menu.getHrefUrl());
-        return tree;
-    }
+
 
 
 

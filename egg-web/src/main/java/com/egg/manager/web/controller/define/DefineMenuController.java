@@ -3,28 +3,26 @@ package com.egg.manager.web.controller.define;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.persistence.tree.CommonMenuTree;
-import com.egg.manager.persistence.tree.CommonTreeSelect;
-import com.egg.manager.service.redis.service.user.UserAccountRedisService;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
-import com.egg.manager.service.redis.service.RedisHelper;
+import com.egg.manager.persistence.tree.CommonMenuTree;
+import com.egg.manager.persistence.tree.CommonTreeSelect;
+import com.egg.manager.persistence.vo.define.DefineMenuVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.service.service.user.UserAccountService;
-import com.egg.manager.persistence.vo.define.DefineMenuVo;
-import com.google.common.collect.Lists;
+import com.egg.manager.web.controller.BaseController;
+import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,9 +38,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -125,6 +123,8 @@ public class DefineMenuController extends BaseController{
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
         List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(authorization,loginUser.getFid(),false);
         result.setResultList(treeList);
+        Map<String,CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList,Maps.newHashMap());
+        result.setResultMap(urlMap);
         return result ;
     }
 

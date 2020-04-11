@@ -3,6 +3,7 @@ package com.egg.manager.service.service.define;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -109,5 +110,5 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param definePermissionWrap
      * @return
      */
-    boolean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo,Wrapper<DefinePermission> definePermissionWrap);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap);
 }

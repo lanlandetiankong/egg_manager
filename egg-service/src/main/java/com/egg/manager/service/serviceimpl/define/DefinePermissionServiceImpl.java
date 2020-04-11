@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
@@ -14,13 +15,11 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefinePermissionService;
 import com.google.common.collect.Sets;
@@ -123,10 +122,11 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        if(dealCheckDuplicateKey(definePermissionVo,new EntityWrapper<DefinePermission>())){    //已有重复键值
-            throw new MyDbException("唯一键[编码]不允许重复！");
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,new EntityWrapper<DefinePermission>());
+        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+            throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
+        Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo,null);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
@@ -156,8 +156,9 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo,UserAccount loginUser,boolean updateAll) throws Exception{
         Wrapper<DefinePermission> uniWrapper  = new EntityWrapper<DefinePermission>()
                 .ne("fid",definePermissionVo.getFid());
-        if(dealCheckDuplicateKey(definePermissionVo,uniWrapper)){    //已有重复键值
-            throw new MyDbException("唯一键[编码]不允许重复！");
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,uniWrapper);
+        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+            throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
         Date now = new Date() ;
@@ -273,10 +274,18 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @return
      */
     @Override
-    public boolean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo,Wrapper<DefinePermission> definePermissionWrap){
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap){
+        MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         definePermissionWrap = definePermissionWrap != null ? definePermissionWrap : new EntityWrapper<>() ;
         definePermissionWrap.eq("code",definePermissionVo.getCode()) ;
         definePermissionWrap.eq("state",BaseStateEnum.ENABLED.getValue()) ;
-        return definePermissionMapper.selectCount(definePermissionWrap) > 0 ;
+        boolean successFlag = definePermissionMapper.selectCount(definePermissionWrap) == 0 ;
+        if(successFlag == false){
+            verifyBean.setErrorMsg("唯一键[编码]不允许重复！");
+            verifyBean.dealAddColumn("code");
+            verifyBean.dealAddFieldName("编码");
+        }
+        verifyBean.setSuccessFlag(successFlag);
+        return verifyBean;
     }
 }

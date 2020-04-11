@@ -1,7 +1,9 @@
 package com.egg.manager.service.service.module;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -125,4 +127,13 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @throws Exception
      */
     Integer dealDelDefineMenu(String delId,UserAccount loginUser) throws Exception;
+
+
+    /**
+     * 验证 数据库 中的唯一冲突
+     * @param defineMenuVo
+     * @param defineMenuWrapper
+     * @return
+     */
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
 }

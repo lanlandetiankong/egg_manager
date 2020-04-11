@@ -4,15 +4,19 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
@@ -268,6 +272,10 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineMenu(DefineMenuVo defineMenuVo,UserAccount loginUser) throws Exception{
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,new EntityWrapper<DefineMenu>());
+        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+            throw new MyDbException(verifyDuplicateBean.getErrorMsg());
+        }
         Date now = new Date() ;
         DefineMenu defineMenu = DefineMenuVo.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
@@ -301,6 +309,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
 
 
 
+
+
     /**
      * 模块定义-更新
      * @param defineMenuVo
@@ -310,6 +320,12 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateDefineMenu(DefineMenuVo defineMenuVo,UserAccount loginUser,boolean updateAll) throws Exception{
+        Wrapper<DefineMenu> uniWrapper  = new EntityWrapper<DefineMenu>()
+                .ne("fid",defineMenuVo.getFid());
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,uniWrapper);
+        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+            throw new MyDbException(verifyDuplicateBean.getErrorMsg());
+        }
         Integer changeCount = 0;
         Date now = new Date() ;
         defineMenuVo.setUpdateTime(now);
@@ -373,4 +389,29 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer delCount = defineMenuMapper.updateById(defineMenu);
         return delCount ;
     }
+
+
+    /**
+     * 验证 数据库 中的唯一冲突
+     * @param defineMenuVo
+     * @param defineMenuWrapper
+     * @return
+     */
+    @Override
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper){
+        MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
+        defineMenuWrapper = defineMenuWrapper != null ? defineMenuWrapper : new EntityWrapper<>() ;
+        defineMenuWrapper.eq("router_url",defineMenuVo.getRouterUrl()) ;
+        defineMenuWrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;
+        boolean successFlag = defineMenuMapper.selectCount(defineMenuWrapper) == 0  ;
+        if(successFlag == false){
+            verifyBean.setErrorMsg("唯一键[路由]不允许重复！");
+            verifyBean.dealAddColumn("router_url");
+            verifyBean.dealAddFieldName("路由Url");
+        }
+        verifyBean.setSuccessFlag(successFlag);
+        return verifyBean ;
+    }
+
+
 }

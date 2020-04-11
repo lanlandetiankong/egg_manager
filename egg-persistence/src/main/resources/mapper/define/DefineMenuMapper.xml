@@ -130,7 +130,8 @@
         from em_define_menu dm
         left join em_define_menu dmc
         on dm.parent_id = dmc.fid
-        where dm.parent_id != #{filterId}
+        where
+        (dm.parent_id != #{filterId} and dm.fid != #{filterId} )
         <if test="onlyEnable == true">
             and dm.state = 1
         </if>

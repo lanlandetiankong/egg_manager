@@ -3,25 +3,22 @@ package com.egg.manager.web.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.service.helper.ErrorActionEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.util.str.MyStringUtil;
-import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.service.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.service.redis.service.RedisHelper;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyStringUtil;
+import com.egg.manager.service.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.service.helper.ErrorActionEnum;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.redis.service.RedisHelper;
 import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.webvo.session.UserAccountToken;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DuplicateKeyException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -35,6 +32,7 @@ import java.util.*;
  * \* Description:
  * \
  */
+@Slf4j
 public class BaseController {
     public String actionSuccessMsg = "操作成功！";
     public String actionFailMsg = "操作失败！";
@@ -51,7 +49,6 @@ public class BaseController {
     @Autowired
     private UserAccountRedisService userAccountRedisService;
 
-    private Logger baseLogger = LoggerFactory.getLogger(this.getClass());
 
     public static boolean checkFieldStrBlank(String... strs) {
         boolean blankFlag = false;
@@ -109,7 +106,7 @@ public class BaseController {
                 result.setPermissionSet(permissionSet);
             }
         } else {
-            baseLogger.error("未能成功缓存用户信息到Redis");
+            log.error("未能成功缓存用户信息到Redis");
         }
     }
 

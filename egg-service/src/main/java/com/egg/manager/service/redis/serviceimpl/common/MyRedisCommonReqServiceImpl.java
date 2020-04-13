@@ -3,12 +3,11 @@ package com.egg.manager.service.redis.serviceimpl.common;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.redis.service.RedisHelper;
 import com.egg.manager.service.redis.service.common.MyRedisCommonReqService;
+import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.service.user.UserAccountService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -22,9 +21,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqService {
-
-    private Logger baseLogger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private RedisHelper redisHelper ;
@@ -34,7 +32,6 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
 
     @Autowired
     public UserAccountService userAccountService ;
-
     @Autowired
     public DefineRoleService defineRoleService ;
 

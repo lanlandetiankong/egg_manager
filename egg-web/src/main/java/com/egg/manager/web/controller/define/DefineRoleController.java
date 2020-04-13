@@ -1,38 +1,35 @@
 package com.egg.manager.web.controller.define;
 
-import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.egg.manager.persistence.entity.role.RoleMenu;
-import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
-import com.egg.manager.persistence.mapper.role.RoleMenuMapper;
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.service.service.role.RoleMenuService;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.define.DefineRole;
+import com.egg.manager.persistence.entity.role.RoleMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.define.DefineRoleMapper;
-import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.mapper.role.RoleMenuMapper;
+import com.egg.manager.persistence.vo.define.DefineRoleVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineRoleService;
-import com.egg.manager.persistence.vo.define.DefineRoleVo;
-import com.google.common.collect.Iterators;
+import com.egg.manager.service.service.role.RoleMenuService;
+import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +49,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefineRoleController ",description = "角色定义接口")
 @RestController
 @RequestMapping("/define/define_role")
@@ -71,8 +69,6 @@ public class DefineRoleController extends BaseController {
     private DefineRoleService defineRoleService;
     @Autowired
     private CommonFuncService commonFuncService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息列表",description = "查询角色定义信息列表")
@@ -97,7 +93,7 @@ public class DefineRoleController extends BaseController {
             defineRoleService.dealGetDefineRolePages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询角色定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -124,7 +120,7 @@ public class DefineRoleController extends BaseController {
             defineRoleService.dealGetDefineRoleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询角色定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -140,7 +136,7 @@ public class DefineRoleController extends BaseController {
             result.setBean(DefineRoleVo.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -154,7 +150,7 @@ public class DefineRoleController extends BaseController {
             result.setResultList(definePermissionList);
             dealCommonSuccessCatch(result,"查询角色所拥有的权限:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -175,7 +171,7 @@ public class DefineRoleController extends BaseController {
             result.setResultList(defineMenuList);
             dealCommonSuccessCatch(result,"查询角色已获授权的菜单:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -196,7 +192,7 @@ public class DefineRoleController extends BaseController {
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增角色定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -216,7 +212,7 @@ public class DefineRoleController extends BaseController {
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新角色定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -237,7 +233,7 @@ public class DefineRoleController extends BaseController {
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -257,7 +253,7 @@ public class DefineRoleController extends BaseController {
                 dealCommonSuccessCatch(result,"删除角色定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -276,7 +272,7 @@ public class DefineRoleController extends BaseController {
                 throw new BusinessException("未知要授权的角色id");
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -331,7 +327,7 @@ public class DefineRoleController extends BaseController {
                 throw new BusinessException("未知要授权的角色id");
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

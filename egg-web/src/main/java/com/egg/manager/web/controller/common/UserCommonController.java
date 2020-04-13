@@ -7,8 +7,7 @@ import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +25,11 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  UserCommonController ",description = "通用接口 - 用户")
 @RestController
 @RequestMapping("/common_api/user")
 public class UserCommonController extends BaseController{
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllUserTypeEnumList")
@@ -47,7 +45,7 @@ public class UserCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -62,7 +60,7 @@ public class UserCommonController extends BaseController{
             beanList.add(new FrontSelectBean(1,"已锁定"));
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -82,7 +80,7 @@ public class UserCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

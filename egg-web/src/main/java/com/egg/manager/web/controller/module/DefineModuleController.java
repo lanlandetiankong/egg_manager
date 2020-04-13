@@ -1,27 +1,24 @@
 package com.egg.manager.web.controller.module;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.module.DefineModule;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.module.DefineModuleMapper;
-import com.egg.manager.service.redis.service.RedisHelper;
-import com.egg.manager.service.service.CommonFuncService;
-import com.egg.manager.service.service.module.DefineModuleService;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.service.module.DefineModuleService;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +35,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefineModuleController ",description = "模块定义接口")
 @RestController
 @RequestMapping("/module/define_module")
@@ -47,13 +45,7 @@ public class DefineModuleController extends BaseController{
     private DefineModuleMapper defineModuleMapper ;
     @Autowired
     private DefineModuleService defineModuleService;
-    @Autowired
-    private CommonFuncService commonFuncService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+ 
 
 
 
@@ -79,7 +71,7 @@ public class DefineModuleController extends BaseController{
             defineModuleService.dealGetDefineModuleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -95,7 +87,7 @@ public class DefineModuleController extends BaseController{
             result.setBean(DefineModuleVo.transferEntityToVo(defineModule));
             dealCommonSuccessCatch(result,"查询模块定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -116,7 +108,7 @@ public class DefineModuleController extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增模块定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -137,7 +129,7 @@ public class DefineModuleController extends BaseController{
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新模块定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -159,7 +151,7 @@ public class DefineModuleController extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -180,7 +172,7 @@ public class DefineModuleController extends BaseController{
                 dealCommonSuccessCatch(result,"删除模块定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

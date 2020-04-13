@@ -20,17 +20,15 @@ import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;
-import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -51,6 +49,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefineMenuController ",description = "菜单定义接口")
 @RestController
 @RequestMapping("/define/define_menu")
@@ -63,11 +62,7 @@ public class DefineMenuController extends BaseController{
     @Autowired
     private DefineMenuMapper defineMenuMapper ;
     @Autowired
-    private UserAccountService userAccountService ;
-    @Autowired
     private UserAccountRedisService userAccountRedisService;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @OperLog(modelName="DefineMenuController",action="查询所有路由菜单TreeSelect",description = "查询所有路由菜单TreeSelect")
@@ -157,7 +152,7 @@ public class DefineMenuController extends BaseController{
             defineMenuService.dealGetDefineMenuDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询菜单定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -173,7 +168,7 @@ public class DefineMenuController extends BaseController{
             result.setBean(DefineMenuVo.transferEntityToVo(defineMenu));
             dealCommonSuccessCatch(result,"查询菜单定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -194,7 +189,7 @@ public class DefineMenuController extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增菜单定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -215,7 +210,7 @@ public class DefineMenuController extends BaseController{
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新菜单定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -240,7 +235,7 @@ public class DefineMenuController extends BaseController{
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新菜单对应的Excel模板:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -261,7 +256,7 @@ public class DefineMenuController extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -282,7 +277,7 @@ public class DefineMenuController extends BaseController{
                 dealCommonSuccessCatch(result,"删除菜单定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

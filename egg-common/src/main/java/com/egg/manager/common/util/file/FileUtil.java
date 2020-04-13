@@ -4,12 +4,11 @@ import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.date.DateTimeUtil;
 import com.egg.manager.common.util.str.ComUtil;
 import com.egg.manager.common.util.str.MyStringUtil;
+import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 import org.apache.tools.zip.ZipOutputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -23,16 +22,12 @@ import java.util.*;
 /**
  * @author zhouchengjie
  */
+@Slf4j
 public class FileUtil {
 
     //2M
     public static final int FILE_SIZE = 1000000;
-
-    private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
-
-
     private static ResourceBundle bundle = ResourceBundle.getBundle("config/constant");
-
     public static String fileUploadPath =bundle.getString("file-upload.dir");
 
     /**
@@ -957,10 +952,10 @@ public class FileUtil {
                 buf = new byte[1024];
             }
         } catch (FileNotFoundException e) {
-            logger.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error(e.getMessage() + ";" + file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            logger.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error(e.getMessage() + ";" + file.getPath(), e);
             throw e;
         } finally {
             try {
@@ -990,10 +985,10 @@ public class FileUtil {
 
             out.write(content.getBytes("utf-8"));
         } catch (FileNotFoundException e) {
-            logger.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error(e.getMessage() + ";" + file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            logger.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error(e.getMessage() + ";" + file.getPath(), e);
             throw e;
         } finally {
             try {

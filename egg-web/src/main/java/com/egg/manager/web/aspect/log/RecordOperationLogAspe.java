@@ -1,17 +1,16 @@
 package com.egg.manager.web.aspect.log;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.web.aspect.AbstAspectManager;
-import com.egg.manager.web.aspect.MyAspectApi;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.persistence.entity.log.OperationLog;
-import com.egg.manager.service.spring.SpringContextBeanService;
+import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.service.log.OperationLogService;
+import com.egg.manager.service.spring.SpringContextBeanService;
+import com.egg.manager.web.aspect.AbstAspectManager;
+import com.egg.manager.web.aspect.MyAspectApi;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,9 +24,8 @@ import java.util.Map;
 /**
  * 操作日志 记录 切面
  */
+@Slf4j
 public class RecordOperationLogAspe extends AbstAspectManager {
-
-    private Logger logger = LoggerFactory.getLogger(RecordOperationLogAspe.class);
 
     public RecordOperationLogAspe(MyAspectApi aspectApi) {
         super(aspectApi);
@@ -157,7 +155,7 @@ public class RecordOperationLogAspe extends AbstAspectManager {
             }
             operationLog.setActionArgs(argBuilder.deleteCharAt(argBuilder.length()-1).toString());
         }
-        logger.info("执行方法信息:"+JSONObject.toJSON(operationLog));
+        log.info("执行方法信息:"+JSONObject.toJSON(operationLog));
         operationLogService.insert(operationLog);
 
     }

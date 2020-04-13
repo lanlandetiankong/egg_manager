@@ -1,24 +1,21 @@
 package com.egg.manager.web.controller.user;
 
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.user.UserJob;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
-import com.egg.manager.service.redis.service.RedisHelper;
-import com.egg.manager.service.service.user.UserJobService;
 import com.egg.manager.persistence.vo.user.UserJobVo;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.service.user.UserJobService;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,27 +33,16 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  UserJobController ",description = "用户职务接口")
 @RestController
 @RequestMapping("/user/user_job")
 public class UserJobController extends BaseController{
 
-
     @Autowired
     private UserJobMapper userJobMapper ;
     @Autowired
     private UserJobService userJobService ;
-    @Autowired
-    private RedisHelper redisHelper ;
-
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-
-
 
 
     @OperLog(modelName="UserJobController",action="查询用户职务列表",description = "查询用户职务列表")
@@ -80,7 +66,7 @@ public class UserJobController extends BaseController{
             userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -96,7 +82,7 @@ public class UserJobController extends BaseController{
             result.setBean(UserJobVo.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

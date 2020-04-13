@@ -1,29 +1,28 @@
 package com.egg.manager.web.controller.define;
 
 import com.egg.manager.common.base.enums.PublicResultEnum;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
+import com.egg.manager.persistence.vo.define.DefinePermissionVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefinePermissionService;
-import com.egg.manager.persistence.vo.define.DefinePermissionVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +39,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefinePermissionController ",description = "权限定义接口")
 @RestController
 @RequestMapping("/define/define_permission")
@@ -51,8 +51,6 @@ public class DefinePermissionController  extends BaseController{
     private DefinePermissionService definePermissionService;
     @Autowired
     private CommonFuncService commonFuncService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @OperLog(modelName="DefinePermissionController",action="查询权限定义信息列表",description = "查询权限定义信息列表")
@@ -77,7 +75,7 @@ public class DefinePermissionController  extends BaseController{
             definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -103,7 +101,7 @@ public class DefinePermissionController  extends BaseController{
             definePermissionService.dealGetDefinePermissionDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询权限定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -119,7 +117,7 @@ public class DefinePermissionController  extends BaseController{
             result.setBean(DefinePermissionVo.transferEntityToVo(definePermission));
             dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -140,7 +138,7 @@ public class DefinePermissionController  extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增权限定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -161,7 +159,7 @@ public class DefinePermissionController  extends BaseController{
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新权限定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -187,7 +185,7 @@ public class DefinePermissionController  extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -208,7 +206,7 @@ public class DefinePermissionController  extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -232,7 +230,7 @@ public class DefinePermissionController  extends BaseController{
                 dealCommonSuccessCatch(result,"删除权限定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

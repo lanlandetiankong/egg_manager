@@ -1,26 +1,25 @@
 package com.egg.manager.web.controller.organization;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
+import com.egg.manager.persistence.vo.organization.DefineTenantVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.organization.DefineTenantService;
-import com.egg.manager.persistence.vo.organization.DefineTenantVo;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +37,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefineTenantController ",description = "租户定义接口")
 @RestController
 @RequestMapping("/organization/define_tenant")
@@ -49,8 +49,6 @@ public class DefineTenantController extends BaseController{
     private DefineTenantService defineTenantService;
     @Autowired
     private CommonFuncService commonFuncService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 
@@ -75,7 +73,7 @@ public class DefineTenantController extends BaseController{
             defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询租户定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -91,7 +89,7 @@ public class DefineTenantController extends BaseController{
             result.setBean(DefineTenantVo.transferEntityToVo(defineTenant));
             dealCommonSuccessCatch(result,"查询租户定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -117,7 +115,7 @@ public class DefineTenantController extends BaseController{
             defineTenantService.dealResultListSetToEntitySelect(result) ;
             dealCommonSuccessCatch(result,"查询公告标签信息Select列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -140,7 +138,7 @@ public class DefineTenantController extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增租户定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -161,7 +159,7 @@ public class DefineTenantController extends BaseController{
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新租户定义:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -183,7 +181,7 @@ public class DefineTenantController extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -204,7 +202,7 @@ public class DefineTenantController extends BaseController{
                 dealCommonSuccessCatch(result,"删除租户定义:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

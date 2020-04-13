@@ -36,6 +36,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
@@ -51,6 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Slf4j
 @Api(value = "API ==>>  UserAccountController ",description = "用户账号接口")
 @RestController
 @RequestMapping("/user/user_account")
@@ -70,8 +72,6 @@ public class UserAccountController extends BaseController {
     private DefineTenantMapper defineTenantMapper ;
     @Autowired
     private CommonFuncService commonFuncService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @OperLog(modelName="UserAccountController",action="用户登录接口",description = "账号密码方式登录接口")
@@ -119,7 +119,7 @@ public class UserAccountController extends BaseController {
 
             dealCommonSuccessCatch(result,"用户登录:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return result ;
     }
@@ -148,7 +148,7 @@ public class UserAccountController extends BaseController {
             userAccountService.dealGetUserAccountDtoPages(result,queryFormFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询用户信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -170,7 +170,7 @@ public class UserAccountController extends BaseController {
             result.setBean(userAccountVo);
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -185,7 +185,7 @@ public class UserAccountController extends BaseController {
             result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -201,7 +201,7 @@ public class UserAccountController extends BaseController {
             result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissionList));
             dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -217,7 +217,7 @@ public class UserAccountController extends BaseController {
             result.setResultList(DefineJobVo.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -239,7 +239,7 @@ public class UserAccountController extends BaseController {
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -261,7 +261,7 @@ public class UserAccountController extends BaseController {
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新用户:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -284,7 +284,7 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -306,7 +306,7 @@ public class UserAccountController extends BaseController {
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -329,7 +329,7 @@ public class UserAccountController extends BaseController {
                 dealCommonSuccessCatch(result,"批量"+lockMsg+"用户:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -351,7 +351,7 @@ public class UserAccountController extends BaseController {
             }
             result.setCount(lockCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -371,7 +371,7 @@ public class UserAccountController extends BaseController {
                 throw new BusinessException("未知要分配角色的用户id");
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -393,7 +393,7 @@ public class UserAccountController extends BaseController {
                 throw new BusinessException("未知要分配职务的用户id");
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

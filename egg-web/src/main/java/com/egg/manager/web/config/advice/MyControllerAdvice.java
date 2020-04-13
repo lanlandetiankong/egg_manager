@@ -1,16 +1,15 @@
 package com.egg.manager.web.config.advice;
 
-import org.springframework.ui.Model;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
+import com.egg.manager.service.exception.MyParamJsonException;
+import com.egg.manager.service.exception.MyUnauthorizedException;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.helper.MyResponseHelper;
-import com.egg.manager.service.exception.MyUnauthorizedException;
-import com.egg.manager.service.exception.MyParamJsonException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.exceptions.TemplateInputException;
@@ -23,10 +22,9 @@ import org.thymeleaf.exceptions.TemplateInputException;
  * \* Description:
  * \
  */
+@Slf4j
 @ControllerAdvice
 public class MyControllerAdvice {
-    private static Logger logger = LoggerFactory.getLogger(MyControllerAdvice.class);
-
     /**
      * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
      * @param binder
@@ -54,7 +52,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     public MyCommonResult errorHandle(Exception ex) {
         ex.printStackTrace();
-        logger.error("接口异常：{}",ex.getMessage());
+        log.error("接口异常：{}",ex.getMessage());
         return MyResponseHelper.handleRequestFailure(ex,"");
     }
 
@@ -83,7 +81,7 @@ public class MyControllerAdvice {
     @ResponseBody
     public MyCommonResult handleBusinessException(BusinessException e){
         if(e instanceof BusinessException) {
-            logger.error("数据操作失败："+e.getMessage());
+            log.error("数据操作失败："+e.getMessage());
             return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
         }
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.Error);
@@ -101,7 +99,7 @@ public class MyControllerAdvice {
     @ResponseBody
     public MyCommonResult handleParamJsonException(Exception e) {
         if(e instanceof MyParamJsonException) {
-            logger.info("参数错误："+e.getMessage());
+            log.info("参数错误："+e.getMessage());
             return MyResponseHelper.handleRequestFailure(e,"参数错误");
         }
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);

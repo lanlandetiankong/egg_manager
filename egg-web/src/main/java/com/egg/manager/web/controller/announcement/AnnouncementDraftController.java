@@ -1,30 +1,27 @@
 package com.egg.manager.web.controller.announcement;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.announcement.AnnouncementDraftMapper;
-import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.vo.announcement.AnnouncementDraftVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.announcement.AnnouncementDraftService;
 import com.egg.manager.service.service.announcement.AnnouncementTagService;
-import com.egg.manager.service.service.user.UserAccountService;
-import com.egg.manager.persistence.vo.announcement.AnnouncementDraftVo;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +39,12 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API -  AnnouncementDraftController ",description = "公告草稿接口")
 @RestController
 @RequestMapping("/announcement_draft")
 public class AnnouncementDraftController extends BaseController{
 
-    @Autowired
-    private UserAccountMapper userAccountMapper ;
     @Autowired
     private AnnouncementDraftMapper announcementDraftMapper ;
     @Autowired
@@ -57,10 +53,6 @@ public class AnnouncementDraftController extends BaseController{
     private AnnouncementDraftService announcementDraftService;
     @Autowired
     private AnnouncementTagService announcementTagService;
-    @Autowired
-    private UserAccountService userAccountService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @OperLog(modelName="AnnouncementDraftController",action="查询公告信息草稿-Dto列表",description = "查询公告信息草稿-Dto列表")
     @ApiOperation(value = "查询公告信息草稿-Dto列表", notes = "查询公告信息草稿-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
@@ -88,7 +80,7 @@ public class AnnouncementDraftController extends BaseController{
             announcementDraftService.dealGetAnnouncementDraftDtoPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询公告信息草稿-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -107,7 +99,7 @@ public class AnnouncementDraftController extends BaseController{
             result.setBean(AnnouncementDraftVo.transferEntityToVo(announcementDraft,announcementTagMap));
             dealCommonSuccessCatch(result,"查询公告草稿信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -129,7 +121,7 @@ public class AnnouncementDraftController extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增公告草稿:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -151,7 +143,7 @@ public class AnnouncementDraftController extends BaseController{
             result.setCount(updateCount);
             dealCommonSuccessCatch(result,"更新公告草稿:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -179,7 +171,7 @@ public class AnnouncementDraftController extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -200,7 +192,7 @@ public class AnnouncementDraftController extends BaseController{
                 dealCommonSuccessCatch(result,"删除公告草稿:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -220,7 +212,7 @@ public class AnnouncementDraftController extends BaseController{
             }
             result.setCount(publishCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -237,7 +229,7 @@ public class AnnouncementDraftController extends BaseController{
                 dealCommonSuccessCatch(result,"发布公告草稿:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

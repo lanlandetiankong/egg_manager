@@ -3,14 +3,13 @@ package com.egg.manager.web.controller.common;
 import com.egg.manager.common.base.beans.FrontSelectBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.service.helper.MyCommonResult;
-import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +27,12 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  ModuleCommonController ",description = "通用接口 - 模块")
 @RestController
 @RequestMapping("/common_api/module")
 public class ModuleCommonController extends BaseController{
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllModuleTypeEnumList")
@@ -49,7 +48,7 @@ public class ModuleCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -69,7 +68,7 @@ public class ModuleCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

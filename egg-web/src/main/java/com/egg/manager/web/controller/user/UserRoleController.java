@@ -1,27 +1,25 @@
 package com.egg.manager.web.controller.user;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserRole;
-import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
+import com.egg.manager.persistence.vo.user.UserRoleVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.user.UserRoleService;
-import com.egg.manager.persistence.vo.user.UserRoleVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,13 +37,13 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  UserRoleController ",description = "用户角色接口")
 @RestController
 @RequestMapping("/user/user_role")
 public class UserRoleController  extends BaseController{
 
-    @Autowired
-    private UserAccountMapper userAccountMapper ;
+
     @Autowired
     private UserRoleMapper userRoleMapper ;
     @Autowired
@@ -53,7 +51,6 @@ public class UserRoleController  extends BaseController{
     @Autowired
     private CommonFuncService commonFuncService ;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 
@@ -81,7 +78,7 @@ public class UserRoleController  extends BaseController{
             userRoleService.dealGetUserRolePages(result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户角色信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -97,7 +94,7 @@ public class UserRoleController  extends BaseController{
             result.setBean(UserRoleVo.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户角色信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -119,7 +116,7 @@ public class UserRoleController  extends BaseController{
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户角色:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -143,7 +140,7 @@ public class UserRoleController  extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -165,7 +162,7 @@ public class UserRoleController  extends BaseController{
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

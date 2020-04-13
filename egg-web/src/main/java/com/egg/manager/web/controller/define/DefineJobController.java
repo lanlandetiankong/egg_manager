@@ -1,27 +1,24 @@
 package com.egg.manager.web.controller.define;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefineJob;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefineJobMapper;
-import com.egg.manager.service.service.CommonFuncService;
-import com.egg.manager.service.service.define.DefineJobService;
-import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.persistence.vo.define.DefineJobVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.service.service.define.DefineJobService;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +35,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  DefineJobController ",description = "职务定义接口")
 @RestController
 @RequestMapping("/define/define_job")
@@ -46,13 +44,7 @@ public class DefineJobController extends BaseController {
     @Autowired
     private DefineJobMapper defineJobMapper ;
     @Autowired
-    private UserAccountService userAccountService ;
-    @Autowired
     private DefineJobService defineJobService ;
-    @Autowired
-    private CommonFuncService commonFuncService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 
@@ -79,7 +71,7 @@ public class DefineJobController extends BaseController {
             defineJobService.dealGetDefineJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -107,7 +99,7 @@ public class DefineJobController extends BaseController {
             defineJobService.dealGetDefineJobDtoPages(result,queryFormFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询职务信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -123,7 +115,7 @@ public class DefineJobController extends BaseController {
             result.setBean(DefineJobVo.transferEntityToVo(defineJob));
             dealCommonSuccessCatch(result,"查询职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -145,7 +137,7 @@ public class DefineJobController extends BaseController {
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增职务:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -166,7 +158,7 @@ public class DefineJobController extends BaseController {
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新职务:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -189,7 +181,7 @@ public class DefineJobController extends BaseController {
                 dealCommonSuccessCatch(result,"批量删除职务:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -211,7 +203,7 @@ public class DefineJobController extends BaseController {
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

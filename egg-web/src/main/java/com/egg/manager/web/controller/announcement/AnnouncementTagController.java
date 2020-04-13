@@ -1,28 +1,29 @@
 package com.egg.manager.web.controller.announcement;
 
-import com.egg.manager.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.announcement.AnnouncementTagMapper;
+import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
+import com.egg.manager.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.service.annotation.log.OperLog;
+import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.announcement.AnnouncementTagService;
-import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API -  AnnouncementTagController ",description = "公告标签接口")
 @RestController
 @RequestMapping("/announcement_tag")
@@ -48,12 +50,6 @@ public class AnnouncementTagController extends BaseController {
     private CommonFuncService commonFuncService ;
     @Autowired
     private AnnouncementTagService announcementTagService ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-
-
 
 
     @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息Select列表",description = "查询公告标签信息Select列表")
@@ -77,7 +73,7 @@ public class AnnouncementTagController extends BaseController {
             announcementTagService.dealResultListSetToEntitySelect(result) ;
             dealCommonSuccessCatch(result,"查询公告标签信息Select列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -99,7 +95,7 @@ public class AnnouncementTagController extends BaseController {
             announcementTagService.dealGetAnnouncementTagDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询公告标签信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -115,7 +111,7 @@ public class AnnouncementTagController extends BaseController {
             result.setBean(AnnouncementTagVo.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result,"查询公告标签信息:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -137,7 +133,7 @@ public class AnnouncementTagController extends BaseController {
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增公告标签:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -159,7 +155,7 @@ public class AnnouncementTagController extends BaseController {
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新公告标签:"+actionSuccessMsg);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -182,7 +178,7 @@ public class AnnouncementTagController extends BaseController {
             }
             result.setCount(delCount);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -204,7 +200,7 @@ public class AnnouncementTagController extends BaseController {
                 dealCommonSuccessCatch(result,"删除公告标签:"+actionSuccessMsg);
             }
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

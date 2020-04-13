@@ -9,8 +9,7 @@ import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +26,11 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  PermissionCommonController ",description = "通用接口 - 权限")
 @RestController
 @RequestMapping("/common_api/permission")
 public class PermissionCommonController extends BaseController{
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
@@ -48,7 +46,7 @@ public class PermissionCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -67,7 +65,7 @@ public class PermissionCommonController extends BaseController{
             }
             result.setEnumList(beanList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }
@@ -92,7 +90,7 @@ public class PermissionCommonController extends BaseController{
             result.setEnumList(beanList);
             result.setEnumDefaultCheckList(defaultCheckList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

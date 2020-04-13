@@ -18,6 +18,7 @@ import com.egg.manager.service.service.user.UserAccountService;
 import com.egg.manager.web.controller.BaseController;
 import com.github.crab2died.ExcelUtils;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,12 +42,11 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API ==>>  UserExcelController ", description = "用户Excel处理接口")
 @Controller
 @RequestMapping("/excel/user_account")
 public class UserExcelController extends BaseController {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UploadProps uploadProps ;
@@ -81,7 +81,7 @@ public class UserExcelController extends BaseController {
 
             MyEasyExcelUtils.export2Web(response, excelFileName, defineMenu.getMenuName(), UserAccount.class, userAccountList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(logger, result, e);
+            this.dealCommonErrorCatch(log, result, e);
         }
         //return result;
     }
@@ -93,7 +93,7 @@ public class UserExcelController extends BaseController {
             String path = "/excel/Test1.xlsx";
             dealCommonSuccessCatch(result, "上传excel:" + actionSuccessMsg);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(logger, result, e);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

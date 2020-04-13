@@ -1,28 +1,24 @@
 package com.egg.manager.web.controller.common.file;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,14 +33,13 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Api(value = "API -  ExcelUploadController ",description = "Excel上传接口")
 @RestController
 @RequestMapping(value = "/commom_api/file/excelUpload")
 public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps ;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ApiOperation(value = "上传Excel模板", notes = "上传Excel模板", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/excelModelUpload")
@@ -91,7 +86,7 @@ public class ExcelUploadController extends BaseController {
             }
             this.dealCommonSuccessCatch(result,"已成功上传Excel文件！");
         }   catch (Exception e){
-            this.dealCommonErrorCatch(logger,result,e) ;
+            this.dealCommonErrorCatch(log,result,e) ;
         }
         return  result;
     }

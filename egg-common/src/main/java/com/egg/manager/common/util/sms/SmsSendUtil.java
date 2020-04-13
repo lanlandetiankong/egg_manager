@@ -5,8 +5,7 @@ import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.sms.SmsSendRequest;
 import com.egg.manager.common.base.sms.SmsSendResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,9 +16,8 @@ import java.net.URL;
 /**
  * @author zhouchengjie
  */
+@Slf4j
 public class SmsSendUtil {
-
-    private static final Logger logger = LoggerFactory.getLogger(SmsSendUtil.class);
 
     private static final String CHARSET = "utf-8";
 
@@ -53,11 +51,11 @@ public class SmsSendUtil {
         String str = SIGNATURE + message;
         SmsSendRequest smsSingleRequest = new SmsSendRequest(ACCOUNT, PASSWORD, str, receiveUser,REPORT);
         String requestJson = JSON.toJSONString(smsSingleRequest);
-        logger.info("before request string is: " + requestJson);
+        log.info("before request string is: " + requestJson);
         String response = sendSmsByPost(URL, requestJson);
-        logger.info("response after request result is :" + response);
+        log.info("response after request result is :" + response);
         SmsSendResponse smsSingleResponse = JSON.parseObject(response, SmsSendResponse.class);
-        logger.info(smsSingleResponse.toString());
+        log.info(smsSingleResponse.toString());
         return smsSingleResponse;
     }
 

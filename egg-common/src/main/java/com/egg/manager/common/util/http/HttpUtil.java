@@ -1,5 +1,6 @@
 package com.egg.manager.common.util.http;
 
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,8 +9,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,9 +16,8 @@ import java.util.ArrayList;
 /**
  * @author zhouchengjie
  */
+@Slf4j
 public final class HttpUtil {
-
-    private static  Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     private static final MediaType CONTENT_TYPE_FORM = MediaType
             .parse("application/x-www-form-urlencoded;charset=UTF-8");
@@ -36,7 +34,7 @@ public final class HttpUtil {
             client.executeMethod(method);
             result = method.getResponseBodyAsString();
         } catch (Exception e) {
-            logger.error("", e);
+            log.error("", e);
         } finally {
             method.releaseConnection();
         }
@@ -56,7 +54,7 @@ public final class HttpUtil {
             client.executeMethod(method);
             result = method.getResponseBodyAsString();
         } catch (Exception e) {
-            logger.error("", e);
+            log.error("", e);
         } finally {
             method.releaseConnection();
         }

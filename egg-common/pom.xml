@@ -92,6 +92,11 @@
             <artifactId>okhttp</artifactId>
             <version>3.4.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

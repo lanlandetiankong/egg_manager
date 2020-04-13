@@ -8,7 +8,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * 跨域请求过滤器
@@ -27,10 +29,23 @@ public class OriginFilter {
         corsConfiguration.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
-        corsConfiguration.addExposedHeader("authorization");
+        this.dealAddExposedHeaders(corsConfiguration,"authorization","Content-Disposition");    //必要,设置可返回给前端取得的自定义header
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
+
+
+    public void dealAddExposedHeaders(CorsConfiguration corsConfiguration,String ... exposedHeaderArr){
+        List<String> exposedHeaderList = corsConfiguration.getExposedHeaders();
+        exposedHeaderList = exposedHeaderList != null ? exposedHeaderList :  new ArrayList<>() ;
+        if(exposedHeaderArr != null && exposedHeaderArr.length > 0){
+            for (String exposedItem : exposedHeaderArr){
+                exposedHeaderList.add(exposedItem);
+            }
+        }
+        corsConfiguration.setExposedHeaders(exposedHeaderList);
+    }
+
 }

@@ -5,15 +5,22 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.fastjson.JSON;
+import com.github.crab2died.ExcelUtils;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.formula.functions.T;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.IOUtils;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.egg.manager.common.util.file.FileUtil.FILE_SIZE;
 
 /**
  * \* note:
@@ -43,25 +50,33 @@ public class MyEasyExcelUtils {
      * 导出Excel(07版.xlsx)到web
      *
      * @param response  响应
-     * @param excelName Excel名称
+     * @param outFileName 导出的文件名
      * @param sheetName sheet页名称
      * @param clazz     Excel要转换的类型
      * @param data      要导出的数据
      * @throws Exception
      */
-    public static <T> void export2Web(HttpServletResponse response, String excelName, String sheetName, Class<T> clazz, List<T> data) throws Exception {
+    public static <T> void export2Web(HttpServletResponse response,String templatePath,String outFileName, String sheetName, Class<T> clazz, List data) throws Exception {
+        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(),"UTF-8") ;  //导出的完整 文件名
+        String outFileFullName2 = outFileName + ExcelTypeEnum.XLSX.getValue();  //导出的完整 文件名
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码
-        excelName = URLEncoder.encode(excelName, "UTF-8");
-        response.setHeader("Content-disposition", "attachment;filename=" + excelName + ExcelTypeEnum.XLSX.getValue());
-        // 这里 需要指定写用哪个class去写
-        ExcelWriter excelWriter = EasyExcel.write(excelName, clazz).build();
+        response.setHeader("Content-disposition", "attachment;filename=" + outFileFullName);
+       /* ExcelWriter excelWriter = EasyExcel.write(outFileFullName,clazz).withTemplate(templatePath).build();
         WriteSheet writeSheet = EasyExcel.writerSheet(sheetName).build();
         excelWriter.write(data, writeSheet);
-        // 千万别忘记finish 会帮忙关闭流
-        excelWriter.finish();
+        excelWriter.finish();*/
+
+        // 这里 会填充到第一个sheet， 然后文件流会自动关闭
+       EasyExcel.write(response.getOutputStream(),clazz).withTemplate(templatePath).sheet().doFill(data);
+
+
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        //EasyExcel.write(outFileFullName).withTemplate(templatePath).sheet().doFill(data);
+
     }
+
 
     /**
      * 将指定位置指定名称的Excel导出到web

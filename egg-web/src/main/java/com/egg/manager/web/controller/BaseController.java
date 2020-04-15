@@ -8,6 +8,7 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyStringUtil;
+import com.egg.manager.persistence.vo.user.UserJobVo;
 import com.egg.manager.service.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.service.helper.ErrorActionEnum;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -16,11 +17,16 @@ import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.webvo.session.UserAccountToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -127,7 +133,18 @@ public class BaseController {
     }
 
 
-
+    public <T> void  respResultJsonToFront(Logger logger,HttpServletResponse response,MyCommonResult<T> result){
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("application/json; charset=utf-8");
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        PrintWriter writer = null;
+        try {
+            writer = response.getWriter();
+            writer.write(JSONObject.toJSONString(result));
+        } catch (IOException e) {
+            logger.error(e.getCause().getMessage());
+        }
+    }
 
     public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e) {
         dealCommonErrorCatch(logger, result, e, null, true, true);

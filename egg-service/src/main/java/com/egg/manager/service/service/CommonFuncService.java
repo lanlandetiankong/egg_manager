@@ -51,21 +51,21 @@ public interface CommonFuncService {
      */
     RequestHeaderBean gainRequestHeaderBeanByRequest(HttpServletRequest request) ;
     /**
-     *  将取得请求的token转化为 UserAccount
+     *  将取得请求的token转化为 UserAccountXlsModel
      * @param request
      * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
      * @return UserAccountToken
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    //UserAccount gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
+    //UserAccountXlsModel gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
 
 
     /**
-     *  用userAccountToken 取得 UserAccount
+     *  用userAccountToken 取得 UserAccountXlsModel
      * @param userAccountToken
      * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
-     * @return UserAccount
+     * @return UserAccountXlsModel
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */

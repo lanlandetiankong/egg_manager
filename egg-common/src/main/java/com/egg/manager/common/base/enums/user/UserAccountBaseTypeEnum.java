@@ -62,5 +62,13 @@ public enum UserAccountBaseTypeEnum {
         return null ;
     }
 
+    public static String doGetEnumNameByValue(Integer value,String nullToVal){
+        UserAccountBaseTypeEnum baseTypeEnum = doGetEnumByValue(value);
+        if(baseTypeEnum != null){
+            return (baseTypeEnum.getName() != null) ? baseTypeEnum.getName() : nullToVal ;
+        }
+        return nullToVal ;
+    }
+
 
 }

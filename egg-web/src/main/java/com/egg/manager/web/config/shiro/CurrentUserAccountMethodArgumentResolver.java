@@ -35,7 +35,7 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
 
     /**
      * 判断:
-     * 1、方法参数列表是否有 [UserAccount]
+     * 1、方法参数列表是否有 [UserAccountXlsModel]
      * 2、是否有 @CurrentLoginUser 注解
      * @param parameter
      * @return

@@ -18,6 +18,19 @@ public enum UserAccountStateEnum {
     private String info ;
 
 
+    public static String doGetEnumInfoByValue(Integer value){
+        if(value == null){
+            return null ;
+        }
+        UserAccountStateEnum[] enums = UserAccountStateEnum.values();
+        for(UserAccountStateEnum enumObj : enums){
+            if(enumObj.value.equals(value)){
+                return enumObj.getInfo() ;
+            }
+        }
+        return "" ;
+    }
+
 
 
     public Integer getValue() {

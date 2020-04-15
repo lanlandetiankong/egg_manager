@@ -14,6 +14,7 @@ import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.dto.user.UserAccountDto;
@@ -21,6 +22,7 @@ import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserJob;
 import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.entity.user.UserTenant;
+import com.egg.manager.persistence.excel.user.UserAccountXlsModel;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
@@ -31,6 +33,7 @@ import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.user.UserAccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,7 +65,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     private CommonFuncService commonFuncService ;
 
     /**
-     * 根据 LoginAccountDTO 取得对应的 UserAccount
+     * 根据 LoginAccountDTO 取得对应的 UserAccountXlsModel
      * @param loginAccountDTO
      * @return
      */
@@ -435,5 +438,15 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         wrapper.eq("account",userAccountVo.getAccount()) ;
         wrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;
         return userAccountMapper.selectCount(wrapper) > 0 ;
+    }
+
+
+    @Override
+    public List<UserAccountXlsModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper){
+        wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
+        if(checkIds != null){
+            wrapper.in("fid",checkIds);
+        }
+        return UserAccountXlsModel.voListToXlsModels(userAccountMapper.selectList(wrapper));
     }
 }

@@ -3,6 +3,7 @@ package com.egg.manager.service.service.user;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.persistence.entity.define.DefinePermission;
+import com.egg.manager.persistence.excel.user.UserAccountXlsModel;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -125,9 +126,16 @@ public interface UserAccountService extends IService<UserAccount> {
 
     /**
      * 验证 数据库 中的唯一冲突
-     * @param definePermissionVo
-     * @param definePermissionWrap
      * @return
      */
     boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper);
+
+
+    /**
+     * 取得 要导出的列表
+     * @param checkIds
+     * @param wrapper
+     * @return
+     */
+    List<UserAccountXlsModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper);
 }

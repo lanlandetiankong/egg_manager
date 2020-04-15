@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * \* note: 在Controller方法参数上使用该注解将会在映射时注入当前登录的 UserAccount,同时表明该方法是需要
+ * \* note: 在Controller方法参数上使用该注解将会在映射时注入当前登录的 UserAccountXlsModel,同时表明该方法是需要
  * \* User: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 14:47

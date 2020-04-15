@@ -426,12 +426,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         return changeCount ;
     }
 
-    /**
-     * 验证 数据库 中的唯一冲突
-     * @param userAccountVo
-     * @param wrapper
-     * @return
-     */
+
     @Override
     public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
@@ -439,7 +434,6 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         wrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;
         return userAccountMapper.selectCount(wrapper) > 0 ;
     }
-
 
     @Override
     public List<UserAccountXlsModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper){

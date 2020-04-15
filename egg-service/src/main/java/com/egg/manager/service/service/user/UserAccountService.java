@@ -125,14 +125,16 @@ public interface UserAccountService extends IService<UserAccount> {
 
 
     /**
-     * 验证 数据库 中的唯一冲突
+     * 用于保存前验证 数据库 中的唯一冲突
+     * @param userAccountVo
+     * @param wrapper
      * @return
      */
     boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper);
 
 
     /**
-     * 取得 要导出的列表
+     * 查询要导出的[用户账号] xlsModel 集合
      * @param checkIds
      * @param wrapper
      * @return

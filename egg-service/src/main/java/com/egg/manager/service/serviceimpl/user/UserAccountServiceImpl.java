@@ -442,6 +442,6 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(checkIds != null){
             wrapper.in("fid",checkIds);
         }
-        return UserAccountXlsModel.voListToXlsModels(userAccountMapper.selectList(wrapper));
+        return UserAccountTransfer.voListToXlsModels(userAccountMapper.selectList(wrapper));
     }
 }

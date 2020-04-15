@@ -7,6 +7,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
+import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -86,7 +87,7 @@ public class DefineTenantController extends BaseController{
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
         try{
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
-            result.setBean(DefineTenantVo.transferEntityToVo(defineTenant));
+            result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
             dealCommonSuccessCatch(result,"查询租户定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

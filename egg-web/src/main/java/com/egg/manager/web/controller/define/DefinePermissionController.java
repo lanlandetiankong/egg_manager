@@ -10,6 +10,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
+import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -114,7 +115,7 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
-            result.setBean(DefinePermissionVo.transferEntityToVo(definePermission));
+            result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
             dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

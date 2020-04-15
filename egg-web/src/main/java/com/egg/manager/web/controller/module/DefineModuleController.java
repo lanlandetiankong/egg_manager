@@ -7,6 +7,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.module.DefineModule;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.module.DefineModuleMapper;
+import com.egg.manager.persistence.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -84,7 +85,7 @@ public class DefineModuleController extends BaseController{
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
         try{
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
-            result.setBean(DefineModuleVo.transferEntityToVo(defineModule));
+            result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
             dealCommonSuccessCatch(result,"查询模块定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

@@ -1,6 +1,10 @@
 package com.egg.manager.web.controller.user;
 
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
+import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
+import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
+import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
+import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.annotation.shiro.ShiroPass;
@@ -161,7 +165,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             UserAccount account = userAccountMapper.selectById(accountId);
-            UserAccountVo userAccountVo = UserAccountVo.transferEntityToVo(account);
+            UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
             DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
@@ -182,7 +186,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoleList));
+            result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -198,7 +202,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-            result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissionList));
+            result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
             dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -214,7 +218,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineJobVo.transferEntityToVoList(defineJobList));
+            result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

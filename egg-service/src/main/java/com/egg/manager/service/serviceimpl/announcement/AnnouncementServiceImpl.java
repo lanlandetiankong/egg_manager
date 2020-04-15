@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementDraftTransfer;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -82,7 +84,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementVo.transferEntityToVoList(announcements,announcementTagMap));
+        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements,announcementTagMap));
     }
 
     /**
@@ -101,7 +103,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementVo.transferDtoToVoList(announcementDtoList,announcementTagMap));
+        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
     }
 
     /**
@@ -113,7 +115,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     @Override
     public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        Announcement announcement = AnnouncementVo.transferVoToEntity(announcementVo);
+        Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
@@ -139,7 +141,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftVo.transferVoToEntity(announcementDraftVo),loginUser);
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo),loginUser);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);

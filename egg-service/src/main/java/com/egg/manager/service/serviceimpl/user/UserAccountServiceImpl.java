@@ -27,6 +27,7 @@ import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
+import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
@@ -109,7 +110,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
-        result.setResultList(UserAccountVo.transferEntityToVoList(userAccounts));
+        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccounts));
     }
 
     /**
@@ -139,7 +140,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserAccountVo.transferDtoToVoList(userAccountDtoList));
+        result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
     }
 
 
@@ -156,7 +157,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Date now = new Date() ;
-        UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
@@ -204,7 +205,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer changeCount = 0;
         Date now = new Date() ;
         userAccountVo.setUpdateTime(now);
-        UserAccount userAccount = UserAccountVo.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         if(loginUser != null){
             userAccount.setLastModifyerId(loginUser.getFid());
         }

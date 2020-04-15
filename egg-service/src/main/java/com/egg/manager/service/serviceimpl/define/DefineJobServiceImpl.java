@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -65,7 +66,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds,defineJobEntityWrapper) ;
-        result.setResultList(DefineJobVo.transferEntityToVoList(defineJobs));
+        result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobs));
     }
 
     /**
@@ -81,7 +82,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineJobVo.transferDtoToVoList(defineDepartmentDtoList));
+        result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
     }
 
 
@@ -94,7 +95,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     @Override
     public Integer dealAddDefineJob(DefineJobVo defineJobVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
         defineJob.setState(BaseStateEnum.ENABLED.getValue());
         defineJob.setCreateTime(now);
@@ -120,7 +121,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Integer changeCount = 0;
         Date now = new Date() ;
         defineJobVo.setUpdateTime(now);
-        DefineJob defineJob = DefineJobVo.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         if(loginUser != null){
             defineJob.setLastModifyerId(loginUser.getFid());
         }

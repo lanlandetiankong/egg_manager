@@ -12,6 +12,7 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.user.UserTenantDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -147,7 +148,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         Integer total = userTenantMapper.selectCount(userTenantEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds,userTenantEntityWrapper) ;
-        result.setResultList(UserTenantVo.transferEntityToVoList(userTenants));
+        result.setResultList(UserTenantTransfer.transferEntityToVoList(userTenants));
     }
 
 
@@ -164,7 +165,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserTenantVo.transferDtoToVoList(userTenantDtoList));
+        result.setResultList(UserTenantTransfer.transferDtoToVoList(userTenantDtoList));
     }
 
 
@@ -177,7 +178,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
     @Override
     public Integer dealAddUserTenant(UserTenantVo userTenantVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserTenant userTenant = UserTenantVo.transferVoToEntity(userTenantVo);
+        UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
         userTenant.setState(BaseStateEnum.ENABLED.getValue());
         userTenant.setCreateTime(now);
@@ -203,7 +204,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         Integer changeCount = 0;
         Date now = new Date() ;
         userTenantVo.setUpdateTime(now);
-        UserTenant userTenant = UserTenantVo.transferVoToEntity(userTenantVo);
+        UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         if(loginUser != null){
             userTenant.setLastModifyerId(loginUser.getFid());
         }

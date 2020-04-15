@@ -18,6 +18,7 @@ import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
@@ -92,7 +93,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
-        result.setResultList(DefinePermissionVo.transferEntityToVoList(definePermissions));
+        result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissions));
     }
 
     /**
@@ -108,7 +109,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefinePermissionVo.transferDtoToVoList(definePermissionDtos));
+        result.setResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
     }
 
 
@@ -127,7 +128,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefinePermission definePermission = DefinePermissionVo.transferVoToEntity(definePermissionVo,null);
+        DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
@@ -163,13 +164,13 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer changeCount = 0;
         Date now = new Date() ;
         definePermissionVo.setUpdateTime(now);
-        DefinePermission updateEntity = DefinePermissionVo.transferVoToEntity(definePermissionVo,null);
+        DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
         if(loginUser != null){
             updateEntity.setLastModifyerId(loginUser.getFid());
         }
         DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
         if(SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())){    //如果已经启用
-            DefinePermissionVo.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
+            DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
         }
         if(updateAll){  //是否更新所有字段
             changeCount = definePermissionMapper.updateAllColumnById(updateEntity) ;

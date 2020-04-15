@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.user.UserRoleTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -143,7 +144,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds,userRoleEntityWrapper) ;
-        result.setResultList(UserRoleVo.transferEntityToVoList(userRoles));
+        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoles));
     }
 
 
@@ -160,7 +161,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserRoleVo.transferDtoToVoList(userRoleDtoList));
+        result.setResultList(UserRoleTransfer.transferDtoToVoList(userRoleDtoList));
     }
 
 
@@ -173,7 +174,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Override
     public Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
@@ -199,7 +200,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Integer changeCount = 0;
         Date now = new Date() ;
         userRoleVo.setUpdateTime(now);
-        UserRole userRole = UserRoleVo.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         if(loginUser != null){
             userRole.setLastModifyerId(loginUser.getFid());
         }

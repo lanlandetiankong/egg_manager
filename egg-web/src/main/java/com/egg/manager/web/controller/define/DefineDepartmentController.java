@@ -9,6 +9,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefineDepartment;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefineDepartmentMapper;
+import com.egg.manager.persistence.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineDepartmentVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
@@ -86,7 +87,7 @@ public class DefineDepartmentController extends BaseController{
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
         try{
             DefineDepartment defineDepartment = defineDepartmentService.selectById(defineDepartmentId);
-            result.setBean(DefineDepartmentVo.transferEntityToVo(defineDepartment));
+            result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
             dealCommonSuccessCatch(result,"查询部门定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

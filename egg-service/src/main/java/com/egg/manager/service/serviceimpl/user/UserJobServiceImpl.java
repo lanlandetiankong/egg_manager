@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.user.UserJobTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -77,7 +78,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         Integer total = userJobMapper.selectCount(userJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserJob> userJobs = userJobMapper.selectPage(rowBounds,userJobEntityWrapper) ;
-        result.setResultList(UserJobVo.transferEntityToVoList(userJobs));
+        result.setResultList(UserJobTransfer.transferEntityToVoList(userJobs));
     }
 
     /**
@@ -93,7 +94,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserJobVo.transferDtoToVoList(userJobDtoList));
+        result.setResultList(UserJobTransfer.transferDtoToVoList(userJobDtoList));
     }
 
 
@@ -106,7 +107,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
     @Override
     public Integer dealAddUserJob(UserJobVo userJobVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
+        UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob.setFid(MyUUIDUtil.renderSimpleUUID());
         userJob.setState(BaseStateEnum.ENABLED.getValue());
         userJob.setCreateTime(now);
@@ -132,7 +133,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         Integer changeCount = 0;
         Date now = new Date() ;
         userJobVo.setUpdateTime(now);
-        UserJob userJob = UserJobVo.transferVoToEntity(userJobVo);
+        UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         if(loginUser != null){
             userJob.setLastModifyerId(loginUser.getFid());
         }

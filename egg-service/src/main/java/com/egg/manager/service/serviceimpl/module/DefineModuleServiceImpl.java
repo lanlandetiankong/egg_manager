@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.module.DefineModuleTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -71,7 +72,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineModule> defineModules = defineModuleMapper.selectPage(rowBounds,defineModuleEntityWrapper) ;
-        result.setResultList(DefineModuleVo.transferEntityToVoList(defineModules));
+        result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModules));
     }
 
 
@@ -88,7 +89,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineModuleVo.transferDtoToVoList(defineModuleDtoList));
+        result.setResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
     }
 
 
@@ -103,7 +104,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Override
     public Integer dealAddDefineModule(DefineModuleVo defineModuleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineModule defineModule = DefineModuleVo.transferVoToEntity(defineModuleVo);
+        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule.setFid(MyUUIDUtil.renderSimpleUUID());
         defineModule.setState(BaseStateEnum.ENABLED.getValue());
         defineModule.setCreateTime(now);
@@ -129,7 +130,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         Integer changeCount = 0;
         Date now = new Date() ;
         defineModuleVo.setUpdateTime(now);
-        DefineModule defineModule = DefineModuleVo.transferVoToEntity(defineModuleVo);
+        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         if(loginUser != null){
             defineModule.setLastModifyerId(loginUser.getFid());
         }

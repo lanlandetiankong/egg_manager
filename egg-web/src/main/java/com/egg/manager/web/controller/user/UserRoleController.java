@@ -7,6 +7,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
+import com.egg.manager.persistence.transfer.user.UserRoleTransfer;
 import com.egg.manager.persistence.vo.user.UserRoleVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -91,7 +92,7 @@ public class UserRoleController  extends BaseController{
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
             UserRole vo = userRoleMapper.selectById(roleId);
-            result.setBean(UserRoleVo.transferEntityToVo(vo));
+            result.setBean(UserRoleTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户角色信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

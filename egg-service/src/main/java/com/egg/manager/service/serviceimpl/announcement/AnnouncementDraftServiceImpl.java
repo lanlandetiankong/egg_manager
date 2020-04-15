@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -80,7 +81,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         List<AnnouncementDraft> announcementDrafts = announcementDraftMapper.selectPage(rowBounds,announcementDraftEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementDraftVo.transferEntityToVoList(announcementDrafts,announcementTagMap));
+        result.setResultList(AnnouncementDraftTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
     }
 
     /**
@@ -99,7 +100,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementDraftVo.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
+        result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
     }
 
     /**
@@ -111,7 +112,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Override
     public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementDraft announcementDraft = AnnouncementDraftVo.transferVoToEntity(announcementDraftVo);
+        AnnouncementDraft announcementDraft = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
         announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
         announcementDraft.setCreateTime(now);

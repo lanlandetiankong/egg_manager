@@ -16,6 +16,7 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineRole;
@@ -226,7 +227,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineRole> defineRoles = defineRoleMapper.selectPage(rowBounds,defineRoleEntityWrapper) ;
-        result.setResultList(DefineRoleVo.transferEntityToVoList(defineRoles));
+        result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoles));
     }
 
 
@@ -243,7 +244,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineRoleVo.transferDtoToVoList(defineRoleDtoList));
+        result.setResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
     }
 
 
@@ -258,7 +259,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Override
     public Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
+        DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole.setFid(MyUUIDUtil.renderSimpleUUID());
         defineRole.setState(BaseStateEnum.ENABLED.getValue());
         defineRole.setCreateTime(now);
@@ -284,7 +285,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         Integer changeCount = 0;
         Date now = new Date() ;
         defineRoleVo.setUpdateTime(now);
-        DefineRole defineRole = DefineRoleVo.transferVoToEntity(defineRoleVo);
+        DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         if(loginUser != null){
             defineRole.setLastModifyerId(loginUser.getFid());
         }

@@ -11,6 +11,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
+import com.egg.manager.persistence.transfer.define.DefineMenuTransfer;
 import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
@@ -165,7 +166,7 @@ public class DefineMenuController extends BaseController{
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         try{
             DefineMenu defineMenu = defineMenuMapper.selectById(defineMenuId);
-            result.setBean(DefineMenuVo.transferEntityToVo(defineMenu));
+            result.setBean(DefineMenuTransfer.transferEntityToVo(defineMenu));
             dealCommonSuccessCatch(result,"查询菜单定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

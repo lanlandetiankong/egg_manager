@@ -14,6 +14,7 @@ import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.mapper.role.RoleMenuMapper;
+import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.vo.define.DefineRoleVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -133,7 +134,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
-            result.setBean(DefineRoleVo.transferEntityToVo(defineRole));
+            result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

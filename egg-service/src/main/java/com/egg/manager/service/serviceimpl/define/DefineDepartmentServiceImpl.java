@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -72,7 +73,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         Integer total = defineDepartmentMapper.selectCount(defineDepartmentEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
-        result.setResultList(DefineDepartmentVo.transferEntityToVoList(defineDepartments));
+        result.setResultList(DefineDepartmentTransfer.transferEntityToVoList(defineDepartments));
     }
 
     /**
@@ -88,7 +89,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineDepartmentVo.transferDtoToVoList(defineDepartmentDtoList));
+        result.setResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
     }
 
 
@@ -153,7 +154,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Override
     public Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineDepartment defineDepartment = DefineDepartmentVo.transferVoToEntity(defineDepartmentVo);
+        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);
@@ -195,7 +196,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         Integer changeCount = 0;
         Date now = new Date() ;
         defineDepartmentVo.setUpdateTime(now);
-        DefineDepartment defineDepartment = DefineDepartmentVo.transferVoToEntity(defineDepartmentVo);
+        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);

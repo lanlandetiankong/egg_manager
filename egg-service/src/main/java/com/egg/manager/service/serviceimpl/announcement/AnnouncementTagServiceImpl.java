@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTagTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -69,7 +70,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
-        result.setResultList(AnnouncementTagVo.transferEntityToVoList(announcementTags));
+        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTags));
     }
 
     /**
@@ -85,7 +86,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementTagVo.transferDtoToVoList(announcementTagDtoList));
+        result.setResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
     }
 
     /***
@@ -116,7 +117,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Override
     public Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementTag announcementTag = AnnouncementTagVo.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         announcementTag.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementTag.setState(BaseStateEnum.ENABLED.getValue());
         announcementTag.setCreateTime(now);
@@ -142,7 +143,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Integer changeCount = 0;
         Date now = new Date() ;
         announcementTagVo.setUpdateTime(now);
-        AnnouncementTag announcementTag = AnnouncementTagVo.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         if(loginUser != null){
             announcementTag.setLastModifyerId(loginUser.getFid());
         }

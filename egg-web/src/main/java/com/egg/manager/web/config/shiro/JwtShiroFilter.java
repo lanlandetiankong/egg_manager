@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.service.helper.MyResponseHelper;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.service.spring.SpringContextBeanService;
@@ -164,7 +165,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
          String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());
          UserAccount userAccount = userAccountService.selectById(userId);
          if(userAccount != null){
-             request.setAttribute("currentLoginUser", UserAccountVo.transferEntityToVo(userAccount));
+             request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccount));
          }
     }
 

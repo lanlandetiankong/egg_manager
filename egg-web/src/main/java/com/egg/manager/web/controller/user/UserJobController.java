@@ -6,6 +6,7 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserJob;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
+import com.egg.manager.persistence.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.vo.user.UserJobVo;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -79,7 +80,7 @@ public class UserJobController extends BaseController{
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             UserJob vo = userJobMapper.selectById(jobId);
-            result.setBean(UserJobVo.transferEntityToVo(vo));
+            result.setBean(UserJobTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

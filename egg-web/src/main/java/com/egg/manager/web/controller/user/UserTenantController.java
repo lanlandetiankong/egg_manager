@@ -7,6 +7,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserTenant;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
+import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.vo.user.UserTenantVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -83,7 +84,7 @@ public class UserTenantController extends BaseController{
         MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
         try{
             UserTenant vo = userTenantMapper.selectById(tenantId);
-            result.setBean(UserTenantVo.transferEntityToVo(vo));
+            result.setBean(UserTenantTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询 [用户与租户关联] 信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

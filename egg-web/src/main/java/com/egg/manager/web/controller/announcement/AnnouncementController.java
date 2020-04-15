@@ -8,6 +8,7 @@ import com.egg.manager.persistence.entity.announcement.Announcement;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.announcement.AnnouncementMapper;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.vo.announcement.AnnouncementVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
@@ -167,7 +168,7 @@ public class AnnouncementController extends BaseController {
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
             Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-            result.setBean(AnnouncementVo.transferEntityToVo(announcement,announcementTagMap));
+            result.setBean(AnnouncementTransfer.transferEntityToVo(announcement,announcementTagMap));
             dealCommonSuccessCatch(result,"查询公告信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

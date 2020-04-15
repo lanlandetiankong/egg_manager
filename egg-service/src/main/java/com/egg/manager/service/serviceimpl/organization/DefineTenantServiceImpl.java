@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -71,7 +72,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         Integer total = defineTenantMapper.selectCount(defineTenantEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineTenant> defineTenants = defineTenantMapper.selectPage(rowBounds,defineTenantEntityWrapper) ;
-        result.setResultList(DefineTenantVo.transferEntityToVoList(defineTenants));
+        result.setResultList(DefineTenantTransfer.transferEntityToVoList(defineTenants));
     }
 
 
@@ -88,7 +89,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineTenantVo.transferDtoToVoList(defineTenantDtoList));
+        result.setResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
     }
 
 
@@ -103,7 +104,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     @Override
     public Integer dealAddDefineTenant(DefineTenantVo defineTenantVo,UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineTenant defineTenant = DefineTenantVo.transferVoToEntity(defineTenantVo);
+        DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant.setFid(MyUUIDUtil.renderSimpleUUID());
         defineTenant.setState(BaseStateEnum.ENABLED.getValue());
         defineTenant.setCreateTime(now);
@@ -129,7 +130,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         Integer changeCount = 0;
         Date now = new Date() ;
         defineTenantVo.setUpdateTime(now);
-        DefineTenant defineTenant = DefineTenantVo.transferVoToEntity(defineTenantVo);
+        DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         if(loginUser != null){
             defineTenant.setLastModifyerId(loginUser.getFid());
         }

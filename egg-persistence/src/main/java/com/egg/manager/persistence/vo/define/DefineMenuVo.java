@@ -46,136 +46,15 @@ public class DefineMenuVo {
     private UserAccountVo createUser ;
     private UserAccountVo lastModifyer;
 
-
-
     private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();  //当前菜单已上传的Excel模板文件bean
 
 
 
-
-    public static DefineMenu transferVoToEntity(DefineMenuVo defineMenuVo) {
-        if(defineMenuVo == null){
-            return null ;
-        }
-        DefineMenu defineMenu = new DefineMenu() ;
-        defineMenu.setFid(defineMenuVo.getFid());
-        defineMenu.setParentId(defineMenuVo.getParentId());
-        defineMenu.setMenuName(defineMenuVo.getMenuName());
-        defineMenu.setUrlJumpType(defineMenuVo.getUrlJumpType());
-        defineMenu.setIconName(defineMenuVo.getIconName());
-        defineMenu.setRouterUrl(defineMenuVo.getRouterUrl());
-        defineMenu.setHrefUrl(defineMenuVo.getHrefUrl());
-        defineMenu.setLabel(defineMenuVo.getLabel());
-        defineMenu.setLevel(defineMenuVo.getLevel());
-        defineMenu.setOrderNum(defineMenuVo.getOrderNum());
-        defineMenu.setExcelModelConf(defineMenuVo.getExcelModelConf());
-        defineMenu.setRemark(defineMenuVo.getRemark());
-        defineMenu.setState(defineMenuVo.getState());
-        defineMenu.setCreateTime(defineMenuVo.getCreateTime());
-        defineMenu.setUpdateTime(defineMenuVo.getUpdateTime());
-        defineMenu.setCreateUserId(defineMenuVo.getCreateUserId());
-        defineMenu.setLastModifyerId(defineMenuVo.getLastModifyerId());
-
-        return defineMenu ;
-    }
-
-    public static DefineMenuVo transferEntityToVo(DefineMenu defineMenu) {
-        if(defineMenu == null){
-            return null ;
-        }
-        DefineMenuVo defineMenuVo = new DefineMenuVo() ;
-        defineMenuVo.setFid(defineMenu.getFid());
-        defineMenuVo.setParentId(defineMenu.getParentId());
-        defineMenuVo.setMenuName(defineMenu.getMenuName());
-        defineMenuVo.setIconName(defineMenu.getIconName());
-        defineMenuVo.setRouterUrl(defineMenu.getRouterUrl());
-        defineMenuVo.setHrefUrl(defineMenu.getHrefUrl());
-        defineMenuVo.setUrlJumpType(defineMenu.getUrlJumpType());
-        if(defineMenu.getUrlJumpType() != null){
-            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(defineMenu.getUrlJumpType());
-            if(typeEnum != null){
-                defineMenuVo.setUrlJumpTypeStr(typeEnum.getLabel());
-            }   else {
-                defineMenuVo.setUrlJumpTypeStr("");
-            }
-        }
-        defineMenuVo.setLabel(defineMenu.getLabel());
-        defineMenuVo.setLevel(defineMenu.getLevel());
-        defineMenuVo.setOrderNum(defineMenu.getOrderNum());
-        String excelModelConf = defineMenu.getExcelModelConf() ;
-        defineMenuVo.setExcelModelConf(excelModelConf);
-        defineMenuVo.uploadExcelBeanList.add(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
-        defineMenuVo.setRemark(defineMenu.getRemark());
-        defineMenuVo.setState(defineMenu.getState());
-        defineMenuVo.setCreateTime(defineMenu.getCreateTime());
-        defineMenuVo.setUpdateTime(defineMenu.getUpdateTime());
-        defineMenuVo.setCreateUserId(defineMenu.getCreateUserId());
-        defineMenuVo.setLastModifyerId(defineMenu.getLastModifyerId());
-        return defineMenuVo ;
-    }
-
-
-    public static DefineMenuVo transferDtoToVo(DefineMenuDto defineMenuDto) {
-        if(defineMenuDto == null){
-            return null ;
-        }
-        DefineMenuVo defineMenuVo = new DefineMenuVo() ;
-        defineMenuVo.setFid(defineMenuDto.getFid());
-        defineMenuVo.setParentId(defineMenuDto.getParentId());
-        defineMenuVo.setParentMenu(DefineMenuVo.transferDtoToVo(defineMenuDto.getParentMenuDto()));
-        defineMenuVo.setMenuName(defineMenuDto.getMenuName());
-        defineMenuVo.setIconName(defineMenuDto.getIconName());
-        defineMenuVo.setRouterUrl(defineMenuDto.getRouterUrl());
-        defineMenuVo.setHrefUrl(defineMenuDto.getHrefUrl());
-        defineMenuVo.setUrlJumpType(defineMenuDto.getUrlJumpType());
-        if(defineMenuDto.getUrlJumpType() != null){
-            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(defineMenuDto.getUrlJumpType());
-            if(typeEnum != null){
-                defineMenuVo.setUrlJumpTypeStr(typeEnum.getLabel());
-            }   else {
-                defineMenuVo.setUrlJumpTypeStr("");
-            }
-        }
-        defineMenuVo.setLabel(defineMenuDto.getLabel());
-        defineMenuVo.setLevel(defineMenuDto.getLevel());
-        defineMenuVo.setOrderNum(defineMenuDto.getOrderNum());
-        String excelModelConf = defineMenuDto.getExcelModelConf() ;
-        defineMenuVo.setExcelModelConf(excelModelConf);
-        defineMenuVo.uploadExcelBeanList.add(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
-        defineMenuVo.setRemark(defineMenuDto.getRemark());
-        defineMenuVo.setState(defineMenuDto.getState());
-        defineMenuVo.setCreateTime(defineMenuDto.getCreateTime());
-        defineMenuVo.setUpdateTime(defineMenuDto.getUpdateTime());
-        defineMenuVo.setCreateUserId(defineMenuDto.getCreateUserId());
-        defineMenuVo.setLastModifyerId(defineMenuDto.getLastModifyerId());
-        defineMenuVo.setCreateUser(UserAccountVo.transferEntityToVo(defineMenuDto.getCreateUser()));
-        defineMenuVo.setLastModifyer(UserAccountVo.transferEntityToVo(defineMenuDto.getLastModifyer()));
-        return defineMenuVo ;
-    }
-
-    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenu> defineMenus){
-        if(defineMenus == null){
-            return null ;
-        }   else {
-            List<DefineMenuVo> list = new ArrayList<>() ;
-            for (DefineMenu defineMenu : defineMenus){
-                list.add(transferEntityToVo(defineMenu));
-            }
-            return list ;
-        }
+    public void dealAddAntdFileUploadBean(AntdFileUploadBean bean){
+        this.uploadExcelBeanList = (this.uploadExcelBeanList != null) ? this.uploadExcelBeanList : new ArrayList<>() ;
+        this.uploadExcelBeanList.add(bean);
     }
 
 
 
-    public static List<DefineMenuVo> transferDtoToVoList(List<DefineMenuDto> defineMenuDtos){
-        if(defineMenuDtos == null){
-            return null ;
-        }   else {
-            List<DefineMenuVo> list = new ArrayList<>() ;
-            for (DefineMenuDto defineMenuDto : defineMenuDtos){
-                list.add(transferDtoToVo(defineMenuDto));
-            }
-            return list ;
-        }
-    }
 }

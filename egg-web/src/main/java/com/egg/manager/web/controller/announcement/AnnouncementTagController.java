@@ -7,6 +7,7 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.announcement.AnnouncementTagMapper;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
@@ -108,7 +109,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
-            result.setBean(AnnouncementTagVo.transferEntityToVo(announcementTag));
+            result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result,"查询公告标签信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

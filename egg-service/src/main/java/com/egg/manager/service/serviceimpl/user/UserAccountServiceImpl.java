@@ -14,7 +14,6 @@ import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.dto.user.UserAccountDto;
@@ -22,7 +21,7 @@ import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserJob;
 import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.entity.user.UserTenant;
-import com.egg.manager.persistence.excel.user.UserAccountXlsModel;
+import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
@@ -34,7 +33,6 @@ import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.user.UserAccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -437,11 +435,28 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     }
 
     @Override
-    public List<UserAccountXlsModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper){
+    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         if(checkIds != null){
             wrapper.in("fid",checkIds);
         }
-        return UserAccountTransfer.voListToXlsModels(userAccountMapper.selectList(wrapper));
+        return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
+    }
+
+
+    @Override
+    public Set<String> dealGetExistAccountSet(Integer state,Wrapper<UserAccount> wrapper){
+        Set<String> accountSet = new HashSet<>() ;
+        wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
+        if(state != null){
+            wrapper.eq("state",state);
+        }
+        List<UserAccount> userAccountList = userAccountMapper.selectList(wrapper);
+        if(userAccountList != null && userAccountList.isEmpty() == false){
+            for (UserAccount user : userAccountList){
+                accountSet.add(user.getAccount()) ;
+            }
+        }
+        return accountSet ;
     }
 }

@@ -2,9 +2,7 @@ package com.egg.manager.service.service.user;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.persistence.excel.user.UserAccountXlsModel;
-import com.egg.manager.persistence.vo.define.DefinePermissionVo;
+import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -14,6 +12,7 @@ import com.egg.manager.persistence.vo.user.UserAccountVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * \* note:
@@ -139,5 +138,14 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper);
+
+
+    /**
+     * 查询所有已存在的 用户账号account
+     * @param state
+     * @param wrapper
+     * @return
+     */
+    Set<String> dealGetExistAccountSet(Integer state, Wrapper<UserAccount> wrapper);
 }

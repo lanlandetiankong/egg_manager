@@ -2,6 +2,7 @@ package com.egg.manager.common.base.enums.base;
 
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * \* note:
@@ -34,6 +35,18 @@ public enum  UserSexEnum {
             }
         }
         return "" ;
+    }
+
+    public static Integer dealGetValByName(String value){
+        UserSexEnum[] enums = UserSexEnum.values();
+        value = StringUtils.isBlank(value) ? "" : value ;
+        value = value.trim().replace(" ","");   //去除空格
+        for(UserSexEnum enumObj : enums){
+            if(enumObj.getName().equals(value)){
+                return enumObj.getValue() ;
+            }
+        }
+        return Unknow.getValue() ;
     }
 
 

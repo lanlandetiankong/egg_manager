@@ -1,18 +1,22 @@
 package com.egg.manager.persistence.transfer.user;
 
+import com.egg.manager.common.base.constant.define.UserAccountConstant;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.base.UserSexEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.user.UserAccountDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.excel.user.UserAccountXlsModel;
+import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
+import com.egg.manager.persistence.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class UserAccountTransfer {
@@ -137,35 +141,77 @@ public class UserAccountTransfer {
     }
 
 
-    public  static UserAccountXlsModel voToXlsModel(UserAccount vo,UserAccountXlsModel userAccountXlsModel){
-        userAccountXlsModel = userAccountXlsModel != null ? userAccountXlsModel : new UserAccountXlsModel() ;
-        userAccountXlsModel.setFid(vo.getFid());
-        userAccountXlsModel.setUserName(vo.getUserName());
-        userAccountXlsModel.setAccount(vo.getAccount());
-        userAccountXlsModel.setNickName(vo.getNickName());
-        userAccountXlsModel.setAvatarUrl(vo.getAvatarUrl());
-        userAccountXlsModel.setPassword(vo.getPassword());
-        userAccountXlsModel.setPhone(vo.getPhone());
-        userAccountXlsModel.setEmail(vo.getEmail());
+    public  static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity, UserAccountXlsOutModel userAccountXlsOutModel){
+        userAccountXlsOutModel = userAccountXlsOutModel != null ? userAccountXlsOutModel : new UserAccountXlsOutModel() ;
+        userAccountXlsOutModel.setFid(entity.getFid());
+        userAccountXlsOutModel.setUserName(entity.getUserName());
+        userAccountXlsOutModel.setAccount(entity.getAccount());
+        userAccountXlsOutModel.setNickName(entity.getNickName());
+        userAccountXlsOutModel.setAvatarUrl(entity.getAvatarUrl());
+        userAccountXlsOutModel.setPassword(entity.getPassword());
+        userAccountXlsOutModel.setPhone(entity.getPhone());
+        userAccountXlsOutModel.setEmail(entity.getEmail());
         //性别
-        userAccountXlsModel.setSexStr(UserSexEnum.dealGetNameByVal(vo.getSex()));
+        userAccountXlsOutModel.setSexStr(UserSexEnum.dealGetNameByVal(entity.getSex()));
         //用户类型
-        userAccountXlsModel.setUserTypeStr(UserAccountBaseTypeEnum.doGetEnumNameByValue(vo.getUserType(),""));
-        userAccountXlsModel.setRemark(vo.getRemark());
-        userAccountXlsModel.setState(vo.getState());
-        userAccountXlsModel.setLockedStr(UserAccountStateEnum.doGetEnumInfoByValue(vo.getLocked()));
-        userAccountXlsModel.setCreateTime(vo.getCreateTime());
-        userAccountXlsModel.setUpdateTime(vo.getUpdateTime());
-        userAccountXlsModel.setCreateUserId(vo.getCreateUserId());
-        userAccountXlsModel.setLastModifyerId(vo.getLastModifyerId());
-        //userAccountXlsModel.setCellStyleMap();
-        return userAccountXlsModel;
+        userAccountXlsOutModel.setUserTypeStr(UserAccountBaseTypeEnum.doGetEnumNameByValue(entity.getUserType(),""));
+        userAccountXlsOutModel.setRemark(entity.getRemark());
+        userAccountXlsOutModel.setState(entity.getState());
+        userAccountXlsOutModel.setLockedStr(UserAccountStateEnum.doGetEnumInfoByValue(entity.getLocked()));
+        userAccountXlsOutModel.setCreateTime(entity.getCreateTime());
+        userAccountXlsOutModel.setUpdateTime(entity.getUpdateTime());
+        userAccountXlsOutModel.setCreateUserId(entity.getCreateUserId());
+        userAccountXlsOutModel.setLastModifyerId(entity.getLastModifyerId());
+        //userAccountXlsOutModel.setCellStyleMap();
+        return userAccountXlsOutModel;
     }
 
-    public static List<UserAccountXlsModel> voListToXlsModels(List<UserAccount> voList){
-        List<UserAccountXlsModel> list = new ArrayList<>();
-        for (UserAccount vo : voList){
-            list.add(voToXlsModel(vo,null));
+    public static List<UserAccountXlsOutModel> entityListToXlsOutModels(List<UserAccount> entityList){
+        List<UserAccountXlsOutModel> list = new ArrayList<>();
+        for (UserAccount entity : entityList){
+            list.add(entityToXlsOutModel(entity,null));
+        }
+        return list ;
+    }
+
+
+    public  static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel,UserAccount entity,UserAccount loginUser){     //excel导入默认转化
+        entity = entity != null ? entity : new UserAccount() ;
+        Date now = new Date();
+        entity.setFid(MyUUIDUtil.renderSimpleUUID());
+        entity.setUserName(xlsInModel.getUserName());
+        entity.setAccount(xlsInModel.getAccount());
+        entity.setNickName(xlsInModel.getNickName());
+        //entity.setAvatarUrl(xlsInModel.getAvatarUrl());
+        entity.setPassword(UserAccountConstant.DEFAULT_PWD);    //使用默认密码
+        entity.setPhone(xlsInModel.getPhone());
+        entity.setEmail(xlsInModel.getEmail());
+        entity.setSex(UserSexEnum.dealGetValByName(xlsInModel.getSexStr()));
+        entity.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
+        entity.setUserTypeNum(UserAccountBaseTypeEnum.SimpleUser.getValue());
+        entity.setRemark(xlsInModel.getRemark());
+        entity.setState(BaseStateEnum.ENABLED.getValue());
+        entity.setLocked(SwitchStateEnum.Close.getValue());
+        entity.setCreateTime(now);
+        entity.setUpdateTime(now);
+        if(loginUser != null){
+            entity.setCreateUserId(loginUser.getFid());
+            entity.setLastModifyerId(loginUser.getFid());
+        }
+        return entity;
+    }
+
+    public static List<UserAccount> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccount loginUser, Set<String> accountSet){
+        List<UserAccount> list = new ArrayList<>();
+        if(xlsInModelList != null || xlsInModelList.isEmpty() == false){
+            accountSet = accountSet != null ? accountSet : new HashSet<>() ;
+            for (UserAccountXlsInModel xlsInModel : xlsInModelList){
+                if(accountSet.contains(xlsInModel.getAccount())){  //如果用户的[account]出现重复，对新增行的account后面加上 uuid
+                    xlsInModel.setAccount(xlsInModel.getAccount() + "_"+MyUUIDUtil.renderSimpleUUID());
+                }
+                accountSet.add(xlsInModel.getAccount());
+                list.add(xlsInModelToEntity(xlsInModel,null,loginUser));
+            }
         }
         return list ;
     }

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.excel.user;
+package com.egg.manager.persistence.excel.export.user;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class UserAccountXlsModel extends BaseRowModel implements Serializable{
+public class UserAccountXlsOutModel extends BaseRowModel implements Serializable{
     @ExcelIgnore
     private String fid ;
 

@@ -1,7 +1,9 @@
 package com.egg.manager.persistence.mapper.user;
 
+import com.egg.manager.persistence.entity.define.DefineGroup;
 import com.egg.manager.persistence.entity.user.UserGroup;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +15,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface UserGroupMapper extends BaseMapper<UserGroup> {
 
+
+    DefineGroup doQueryAbleGroupByUserId(@Param("userId")String userId);
 }

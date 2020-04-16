@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.dto.user;
 
+import com.egg.manager.persistence.entity.define.DefineGroup;
 import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import lombok.*;
@@ -40,4 +41,8 @@ public class UserAccountDto {
 
     private String belongTenantId ;
     private DefineTenant belongTenant ;
+
+    private String belongGroupId;
+    private DefineGroup belongGroup;
+
 }

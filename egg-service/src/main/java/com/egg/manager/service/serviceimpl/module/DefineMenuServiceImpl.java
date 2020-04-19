@@ -280,7 +280,14 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Date now = new Date() ;
         DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
-        if(StringUtils.isNotBlank(parentId)){
+        //
+        if(StringUtils.isBlank(parentId)){
+            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
+            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
+        }   else if(DefineMenuConstant.ROOT_ID.equals(parentId)){   //如果上级是 根级菜单
+            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
+            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
+        }   else{
             DefineMenu parentMenu =defineMenuMapper.selectById(parentId);
             Integer parentMenuLevel = null ;
             if(parentMenu != null){
@@ -291,9 +298,6 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             }   else {
                 defineMenu.setLevel(parentMenuLevel);
             }
-        }   else {
-            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
-            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
         defineMenu.setFid(MyUUIDUtil.renderSimpleUUID());
         defineMenu.setState(BaseStateEnum.ENABLED.getValue());

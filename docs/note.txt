@@ -5,4 +5,10 @@ https://github.com/JacksonTian/anywhere
 egg_rainy
 
 
+->打包
+打包正式jar包
+mvn package -Pprod
+mvn package -Pdev
 
+->启动后查看当前运行环境
+http://localhost:8083/egg_manager/index/hello/testEnv

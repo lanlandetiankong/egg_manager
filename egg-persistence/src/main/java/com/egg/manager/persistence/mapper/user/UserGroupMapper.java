@@ -16,5 +16,4 @@ import org.apache.ibatis.annotations.Param;
 public interface UserGroupMapper extends BaseMapper<UserGroup> {
 
 
-    DefineGroup doQueryAbleGroupByUserId(@Param("userId")String userId);
 }

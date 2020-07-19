@@ -1,7 +1,7 @@
 package com.egg.manager.service.service.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.entity.log.OperationLog;
+import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 
@@ -27,12 +27,12 @@ public interface ControllerAspectService {
 
 
     /**
-     * 设置一些值到OperationLog
-     * @param operationLog
+     * 设置一些值到OperationLogMO
+     * @param operationLogMO
      * @param joinPoint
-     * @return
+     * @param request
      */
-    void dealSetValToOperationLog(OperationLog operationLog, JoinPoint joinPoint,HttpServletRequest request) throws NoSuchMethodException;
+    void dealSetValToOperationLog(OperationLogMO operationLogMO, JoinPoint joinPoint, HttpServletRequest request);
 
     /**
      * 取得当前调用的方法

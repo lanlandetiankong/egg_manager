@@ -12,6 +12,7 @@
         <module>egg-common</module>
         <module>egg-persistence</module>
         <module>egg-service</module>
+        <module>egg-mongodb</module>
         <module>egg-web</module>
     </modules>
 
@@ -57,11 +58,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -226,23 +222,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <id>ali-snapshots</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
 
-        <repository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <pluginRepositories>
         <pluginRepository>
@@ -260,5 +240,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 </project>

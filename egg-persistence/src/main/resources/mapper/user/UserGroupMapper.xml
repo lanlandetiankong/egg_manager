@@ -22,16 +22,6 @@
     </sql>
 
 
-    <select id="doQueryAbleGroupByUserId" resultMap="BaseResultMap">
-        SELECT
-            <include refid="com.egg.manager.persistence.mapper.define.DefineGroupMapper.Base_Alias_Table_List">
-                <property name="base_alias_name" value="edg" />
-            </include>
-        FROM em_user_group eug
-        left join em_define_group edg
-        on eug.define_group_id = edg.fid
-        WHERE edg.state = 1 and eug.state = 1
-        and eug.user_account_id = #{userId}
-    </select>
+
 
 </mapper>

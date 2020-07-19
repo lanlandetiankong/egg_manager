@@ -1,11 +1,11 @@
 package com.egg.manager.service.serviceimpl.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.entity.log.OperationLog;
+import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
+import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.aspect.ControllerAspectService;
 import com.egg.manager.service.webvo.session.UserAccountToken;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Date;
 
 /**
  * \* note:
@@ -59,67 +59,68 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     }
 
 
+
     /**
      * 取得 请求的参数
      * @param joinPoint
      * @return JSONObject
      */
     @Override
-    public void dealSetValToOperationLog(OperationLog operationLog,JoinPoint joinPoint,HttpServletRequest request)  {
+    public void dealSetValToOperationLog(OperationLogMO operationLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
         try{
-            if(StringUtils.isBlank(operationLog.getFid())){
-                operationLog.setFid(MyUUIDUtil.renderSimpleUUID());
+            if(StringUtils.isBlank(operationLogMO.getFid())){
+                operationLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
             }
-            if(operationLog.getState() == null){
-                operationLog.setState(BaseStateEnum.ENABLED.getValue());
+            if(operationLogMO.getState() == null){
+                operationLogMO.setState(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
             JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
-            operationLog.setActionArgs(argJsonObj.toJSONString());
+            operationLogMO.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature() ;
             String methodName = signature.getName();
-            operationLog.setAspectKind(joinPoint.getKind());
-            operationLog.setClassName(signature.getDeclaringTypeName());
-            operationLog.setMethodName(methodName);
-            operationLog.setSignatureLong(signature.toLongString());
+            operationLogMO.setAspectKind(joinPoint.getKind());
+            operationLogMO.setClassName(signature.getDeclaringTypeName());
+            operationLogMO.setMethodName(methodName);
+            operationLogMO.setSignatureLong(signature.toLongString());
             Method method = this.gainReqMethod(signature);
             if(method != null){
-                operationLog.setReturnTypeName(method.getReturnType().getName());
-                operationLog.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
+                operationLogMO.setReturnTypeName(method.getReturnType().getName());
+                operationLogMO.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
                 OperLog operLog = method.getAnnotation(OperLog.class);
                 if(operLog != null){
-                    operationLog.setAction(operLog.action());
-                    operationLog.setModelName(operLog.modelName());
-                    operationLog.setLogDescription(operLog.description());
+                    operationLogMO.setAction(operLog.action());
+                    operationLogMO.setModelName(operLog.modelName());
+                    operationLogMO.setLogDescription(operLog.description());
                 }
             }
 
 
             if(request != null){
                 //请求路径
-                operationLog.setRequestUri(request.getRequestURI());
-                operationLog.setRequestUrl(request.getRequestURL().toString());
+                operationLogMO.setRequestUri(request.getRequestURI());
+                operationLogMO.setRequestUrl(request.getRequestURL().toString());
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = commonFuncService.gainUserAccountTokenBeanByRequest(request,false);
                 if(userAccountToken != null){
-                    operationLog.setTokenBean(JSONObject.toJSONString(userAccountToken));
+                    operationLogMO.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     String userAccountId = userAccountToken.getUserAccountId() ;
-                    operationLog.setUserAccountId(userAccountId);
-                    operationLog.setCreateUserId(userAccountId);
-                    operationLog.setLastModifyerId(userAccountId);
+                    operationLogMO.setUserAccountId(userAccountId);
+                    operationLogMO.setCreateUserId(userAccountId);
+                    operationLogMO.setLastModifyerId(userAccountId);
                 }
                 //取得 请求头bean
                 RequestHeaderBean requestHeaderBean = commonFuncService.gainRequestHeaderBeanByRequest(request);
                 if(requestHeaderBean != null){
-                    operationLog.setHeaders(JSONObject.toJSONString(requestHeaderBean));
-                    operationLog.setIpAddr(request.getRemoteAddr());
+                    operationLogMO.setHeaders(JSONObject.toJSONString(requestHeaderBean));
+                    operationLogMO.setIpAddr(request.getRemoteAddr());
                 }
             }
 
             Date now = new Date() ;
-            operationLog.setCreateTime(now);
-            operationLog.setUpdateTime(now);
+            operationLogMO.setCreateTime(now);
+            operationLogMO.setUpdateTime(now);
         }   catch (Exception e){
 
         }

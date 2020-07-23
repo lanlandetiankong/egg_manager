@@ -23,9 +23,6 @@ public class OperationLogMO extends BaseModelMO {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private String fid;
-
     private String userAccountId;       //登录的用户id
     private String className;   //类名称
     private String methodName;  //方法名称

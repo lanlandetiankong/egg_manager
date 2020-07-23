@@ -39,7 +39,13 @@
                 <directory>src/main/java</directory>
                 <filtering>false</filtering>
                 <includes>
-                    <include>**/xml/*.xml</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*Mapper.xml</include>
                 </includes>
             </resource>
         </resources>

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.mongo.mo.log;
 
+import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @Document(collection = "em_operation_log")
-public class OperationLogMO {
+public class OperationLogMO extends BaseModelMO {
 
     private static final long serialVersionUID = 1L;
 
@@ -64,13 +65,7 @@ public class OperationLogMO {
     private String returnTypeName;  //返回值类型
     private String declaredAnnotations;    //定义的注解->json
 
-
     private String remark;
-    private Integer state;
-    @CreatedDate
-    private Date createdDate;
-    @LastModifiedDate
-    private Date lastModifiedDate;
     private String createUserId;
     private String lastModifyerId;
 

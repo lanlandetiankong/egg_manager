@@ -71,8 +71,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             if(StringUtils.isBlank(operationLogMO.getFid())){
                 operationLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
             }
-            if(operationLogMO.getState() == null){
-                operationLogMO.setState(BaseStateEnum.ENABLED.getValue());
+            if(operationLogMO.getStatus() == null){
+                operationLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
             JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
@@ -119,8 +119,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             }
 
             Date now = new Date() ;
-            operationLogMO.setCreateTime(now);
-            operationLogMO.setUpdateTime(now);
+            operationLogMO.setCreatedDate(now);
+            operationLogMO.setLastModifiedDate(now);
         }   catch (Exception e){
 
         }

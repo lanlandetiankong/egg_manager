@@ -28,7 +28,7 @@ public class DefineDepartmentDto{
     private Integer orderNum ;
     private String description ;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

@@ -27,7 +27,7 @@ public class DefineModuleVo {
     private String typeStr;
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

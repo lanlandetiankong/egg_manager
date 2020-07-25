@@ -21,7 +21,7 @@ public class DefinePermissionTransfer {
         definePermission.setFid(definePermissionVo.getFid());
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
-        definePermission.setEnsure(definePermissionVo.isEnsure() ? 1 : 0);
+        definePermission.setEnsure(definePermissionVo.isEnsure() ? (short)1 : (short)0);
         definePermission.setType(definePermissionVo.getType());
         definePermission.setRemark(definePermissionVo.getRemark());
         definePermission.setState(definePermissionVo.getState());

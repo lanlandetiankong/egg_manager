@@ -34,7 +34,7 @@ public class UserAccount extends Model<UserAccount> {
     private String password ;
     private String phone ;
     private String email ;
-    private Integer sex ;
+    private Short sex ;
 
     @TableField("user_type")
     private Integer userType ;
@@ -42,8 +42,8 @@ public class UserAccount extends Model<UserAccount> {
     private Integer userTypeNum;
 
     private String remark ;
-    private Integer state ;
-    private Integer locked ;    //是否被锁定
+    private Short state ;
+    private Short locked ;    //是否被锁定
     @TableField(value="create_time",fill = FieldFill.INSERT)
     private Date createTime ;
     @TableField(value="update_time",fill = FieldFill.UPDATE)

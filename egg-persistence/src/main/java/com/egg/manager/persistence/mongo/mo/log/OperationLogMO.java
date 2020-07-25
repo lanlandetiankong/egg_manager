@@ -37,7 +37,7 @@ public class OperationLogMO extends BaseModelMO {
     private String actionArgs;  //方法参数->json
 
 
-    private Integer isSuccess;  //是否成功 1:成功 2异常
+    private Short isSuccess;  //是否成功 1:成功 2异常
     private String message; //异常堆栈信息
     private String ipAddr;
 

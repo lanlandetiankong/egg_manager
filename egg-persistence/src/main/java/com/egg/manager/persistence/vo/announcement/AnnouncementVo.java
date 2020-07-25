@@ -46,7 +46,7 @@ public class AnnouncementVo {
     private String accessory ;      //附件
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

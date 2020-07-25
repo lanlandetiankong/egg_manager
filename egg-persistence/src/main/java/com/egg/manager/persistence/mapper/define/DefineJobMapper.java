@@ -35,7 +35,7 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
      * @param stateVal 指定state的值
      * @return
      */
-    List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal")Integer stateVal) ;
+    List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal")Short stateVal) ;
 
 
 

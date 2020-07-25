@@ -18,7 +18,7 @@ public class UserGroupDto {
     private String userAccountId ;
 
     private String type;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

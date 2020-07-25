@@ -27,7 +27,7 @@ public class DefineTenant extends Model<DefineTenant> {
     private String dbCode ;
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

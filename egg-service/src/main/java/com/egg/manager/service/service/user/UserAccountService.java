@@ -147,5 +147,5 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param wrapper
      * @return
      */
-    Set<String> dealGetExistAccountSet(Integer state, Wrapper<UserAccount> wrapper);
+    Set<String> dealGetExistAccountSet(Short state, Wrapper<UserAccount> wrapper);
 }

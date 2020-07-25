@@ -27,16 +27,16 @@ public class UserAccountVo {
     private String password ;
     private String phone ;
     private String email ;
-    private Integer sex ;
+    private Short sex ;
     private Integer userType ;
     private Integer userTypeNum;
     private String userTypeStr;
     private FileResBean uploadImgBean ;
-    private Integer locked ;
+    private Short locked ;
 
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

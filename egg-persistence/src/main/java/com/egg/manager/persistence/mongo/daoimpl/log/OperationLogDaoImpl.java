@@ -1,10 +1,7 @@
 package com.egg.manager.persistence.mongo.daoimpl.log;
 
-import com.egg.manager.persistence.mongo.dao.log.OperationLogDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.config.MongoConfigurationSupport;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * <p>

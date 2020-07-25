@@ -36,7 +36,7 @@ public class UserAccountXlsOutModel extends BaseRowModel implements Serializable
     @ExcelIgnore
     private String remark ;
     @ExcelIgnore
-    private Integer state ;
+    private Short state ;
     @ExcelIgnore
     private String lockedStr ;
 

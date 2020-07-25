@@ -40,7 +40,7 @@ public class Announcement extends Model<Announcement> {
     private String accessory ;      //附件
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

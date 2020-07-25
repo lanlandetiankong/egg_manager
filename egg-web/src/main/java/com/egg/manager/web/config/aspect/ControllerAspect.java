@@ -4,7 +4,7 @@ package com.egg.manager.web.config.aspect;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.common.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.mongo.dao.log.OperationLogDao;
+import com.egg.manager.persistence.mongo.dao.log.OperationLogRepository;
 import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 @Configuration
 public class ControllerAspect {
     @Autowired
-    private OperationLogDao operationLogDao;
+    private OperationLogRepository operationLogRepository;
     @Autowired
     private ControllerAspectService controllerAspectService;
     @Autowired
@@ -52,7 +52,7 @@ public class ControllerAspect {
                 controllerAspectService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
                 //请求成功(至少在before
                 operationLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
-                operationLogDao.insert(operationLogMO);
+                operationLogRepository.insert(operationLogMO);
             }
         }
 
@@ -92,7 +92,7 @@ public class ControllerAspect {
                     operationLogMO.setResult(JSON.toJSONString(result));
                 }
                 operationLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
-                operationLogDao.insert(operationLogMO);
+                operationLogRepository.insert(operationLogMO);
             }
         }
         //System.out.println("返回。。。afterControllerReturn");
@@ -118,7 +118,7 @@ public class ControllerAspect {
                 if (exception != null) {
                     operationLogMO.setException(JSON.toJSONString(exception));
                 }
-                operationLogDao.insert(operationLogMO);
+                operationLogRepository.insert(operationLogMO);
             }
         }
         //System.out.println("异常。。。afterControllerThrowing");

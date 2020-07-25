@@ -61,6 +61,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId,@Param("roleIdList")List<String> roleIdList,@Param("stateVal")Integer stateVal
+    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId,@Param("roleIdList")List<String> roleIdList,@Param("stateVal")Short stateVal
                                             ,@Param("loginUser") UserAccount loginUser);
 }

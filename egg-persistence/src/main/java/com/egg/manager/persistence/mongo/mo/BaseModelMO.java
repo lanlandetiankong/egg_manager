@@ -32,13 +32,34 @@ public class BaseModelMO implements Serializable {
     /**
      * 状态
      */
-    private Integer status ;
+    private Short status ;
     @Version
     private Integer version ;
+
+    /**
+     * 创建人id
+     */
+    private String createdUserId ;
+    /**
+     * 创建人名称
+     */
+    private String createdUserName ;
+    /**
+     * 创建时间
+     */
     @CreatedDate
     private Date createdDate ;
-
+    /**
+     * 最后更新用户id
+     */
+    private String lastModifiedId ;
+    /**
+     * 最后更新用户名称
+     */
+    private String lastModifiedName ;
+    /**
+     * 最后更新时间
+     */
     @LastModifiedDate
     private Date lastModifiedDate ;
-
 }

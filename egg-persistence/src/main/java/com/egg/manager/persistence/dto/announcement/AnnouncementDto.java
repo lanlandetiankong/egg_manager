@@ -23,7 +23,7 @@ public class AnnouncementDto {
     private String tagIds ; //公告标签 集合
     private String accessory ;      //附件
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

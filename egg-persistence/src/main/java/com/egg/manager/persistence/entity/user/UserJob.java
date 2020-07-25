@@ -28,7 +28,7 @@ public class UserJob extends Model<UserJob> {
     private  String defineJobId ;
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

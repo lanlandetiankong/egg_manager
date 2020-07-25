@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * \* Date: 2019/9/14
  * \* Time: 14:47
  * \* To change this template use File | Settings | File Templates.
- * \* Description: 注解在方法参数上，运行时有效
+ * \* Description: 注解在方法参数上，运行时有效,required为true时会自动验证当前登录用户的有效性，默认true
  * \
  */
 @Target(ElementType.PARAMETER)

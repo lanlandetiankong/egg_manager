@@ -13,21 +13,21 @@ import org.apache.commons.lang3.StringUtils;
  * \
  */
 public enum  UserSexEnum {
-    Man(1,"男","男"),
-    Woman(0,"女","女"),
-    Unknow(-1,"未知","未知"),
+    Man((short)1,"男","男"),
+    Woman((short)0,"女","女"),
+    Unknow((short)-1,"未知","未知"),
     ;
-    private Integer value ;
+    private Short value ;
     private String  name ;
     private String  label ;
 
-    UserSexEnum(Integer value, String name, String label) {
+    UserSexEnum(Short value, String name, String label) {
         this.value = value;
         this.name = name;
         this.label = label;
     }
 
-    public static String dealGetNameByVal(Integer value){
+    public static String dealGetNameByVal(Short value){
         UserSexEnum[] enums = UserSexEnum.values();
         for(UserSexEnum enumObj : enums){
             if(enumObj.getValue().equals(value)){
@@ -37,7 +37,7 @@ public enum  UserSexEnum {
         return "" ;
     }
 
-    public static Integer dealGetValByName(String value){
+    public static Short dealGetValByName(String value){
         UserSexEnum[] enums = UserSexEnum.values();
         value = StringUtils.isBlank(value) ? "" : value ;
         value = value.trim().replace(" ","");   //去除空格
@@ -50,11 +50,11 @@ public enum  UserSexEnum {
     }
 
 
-    public Integer getValue() {
+    public Short getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Short value) {
         this.value = value;
     }
 

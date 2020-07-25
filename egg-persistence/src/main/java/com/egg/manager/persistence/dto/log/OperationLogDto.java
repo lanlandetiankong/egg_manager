@@ -62,7 +62,7 @@ public class OperationLogDto {
     private String declaredAnnotations ;    //定义的注解->json
 
 
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

@@ -34,7 +34,7 @@ public class AnnouncementTag extends Model<AnnouncementTag> {
     private Integer ordering ;
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

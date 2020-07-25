@@ -18,7 +18,7 @@ public class RoleMenuDto {
     private  String defineMenuId ;
     private Integer type;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

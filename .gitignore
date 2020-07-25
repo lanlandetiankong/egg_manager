@@ -41,3 +41,16 @@ logs/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF222%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E8%A1%A8.xlsx
+"docs/excel/templates/user/\347\224\250\346\210\267\344\277\241\346\201\257\345\257\274\345\205\245.xlsx"
+egg-common/src/main/java/com/egg/manager/common/base/beans/constant/
+egg-common/src/main/resources/
+egg-common/src/test/
+egg-persistence/src/main/java/com/egg/manager/persistence/excel/converter/
+egg-persistence/src/test/
+egg-service/src/main/java/com/egg/manager/service/service/redis/
+egg-service/src/main/java/com/egg/manager/service/serviceimpl/redis/
+egg-service/src/main/resources/
+egg-service/src/test/
+egg-web/src/test/
+"\345\221\230\345\267\245\344\277\241\346\201\257222\351\200\211\346\213\251\345\257\274\345\207\272\350\241\250.xlsx"

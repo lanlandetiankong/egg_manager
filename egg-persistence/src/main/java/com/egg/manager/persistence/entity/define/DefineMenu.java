@@ -42,7 +42,7 @@ public class DefineMenu extends Model<DefineMenu> {
 
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

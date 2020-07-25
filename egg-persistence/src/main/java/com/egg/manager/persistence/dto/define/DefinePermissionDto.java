@@ -16,10 +16,10 @@ public class DefinePermissionDto{
 
     private String name ;
     private String code ;
-    private Integer ensure;
+    private Short ensure;
     private Integer type;
 
-    private Integer state ;
+    private Short state ;
     private String remark ;
     private Date createTime ;
     private Date updateTime ;

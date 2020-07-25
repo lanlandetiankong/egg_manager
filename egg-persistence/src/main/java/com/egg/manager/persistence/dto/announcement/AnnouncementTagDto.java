@@ -27,7 +27,7 @@ public class AnnouncementTagDto {
     private String description ;
     private Integer ordering ;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

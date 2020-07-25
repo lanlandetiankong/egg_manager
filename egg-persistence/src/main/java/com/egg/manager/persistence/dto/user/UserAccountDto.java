@@ -23,13 +23,13 @@ public class UserAccountDto {
     private String password ;
     private String phone ;
     private String email ;
-    private Integer sex ;
+    private Short sex ;
 
     private Integer userType ;
     private Integer userTypeNum;
     private String remark ;
-    private Integer state ;
-    private Integer locked ;    //是否被锁定
+    private Short state ;
+    private Short locked ;    //是否被锁定
     private Date createTime ;
     private Date updateTime ;
 

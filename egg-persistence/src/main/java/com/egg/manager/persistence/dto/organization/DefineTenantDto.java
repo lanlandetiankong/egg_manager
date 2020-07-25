@@ -19,7 +19,7 @@ public class DefineTenantDto {
     private String code ;
     private String dbCode ;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

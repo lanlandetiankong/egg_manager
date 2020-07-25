@@ -28,7 +28,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param userAccountId
      * @return
      */
-    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Integer stateVal) ;
+    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Short stateVal) ;
 
     /**
      * 取得用户 所拥有的 角色code-Set集合
@@ -43,7 +43,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param stateVal 状态值
      * @return
      */
-    List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Integer stateVal);
+    List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal);
 
     /**
      * 取得角色 所拥有的 菜单定义id-Set集合
@@ -51,7 +51,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param stateVal 状态值
      * @return
      */
-    Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Integer stateVal) ;
+    Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Short stateVal) ;
 
     /**
      * 查询 所有[可用状态]的 [角色定义]

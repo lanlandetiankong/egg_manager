@@ -29,9 +29,9 @@ public class AnnouncementDraftDto {
     private String content ;
     private String tagIds ; //公告标签 集合
     private String accessory ;      //附件
-    private Integer isPublished ;      //是否已提交
+    private Short isPublished ;      //是否已提交
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

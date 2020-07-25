@@ -44,10 +44,10 @@ public class AnnouncementDraftVo {
     private List<String> tagNames ; //公告标签 集合
     private String tagNameOfStr ; //公告标签 集合转字符串
     private String accessory ;      //附件
-    private Integer isPublished ;      //是否已提交
+    private Short isPublished ;      //是否已提交
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

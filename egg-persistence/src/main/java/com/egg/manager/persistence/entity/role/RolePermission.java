@@ -28,7 +28,7 @@ public class RolePermission extends Model<RolePermission> {
     private String definePermissionId;
     private Integer type;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     @TableField("create_time")
     private Date createTime ;

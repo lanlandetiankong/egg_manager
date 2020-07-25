@@ -17,9 +17,9 @@ public class UserTenantDto {
     private String userAccountId ;
     private  String defineTenantId ;
     private Integer type;
-    private Integer isManager;
+    private Short isManager;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

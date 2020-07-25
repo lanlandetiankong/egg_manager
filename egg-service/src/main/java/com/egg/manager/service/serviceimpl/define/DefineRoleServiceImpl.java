@@ -81,7 +81,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @return
      */
     @Override
-    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Integer stateVal) {
+    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId,Short stateVal) {
         if(StringUtils.isBlank(userAccountId)) {
             return null ;
         }
@@ -120,7 +120,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @return
      */
     @Override
-    public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Integer stateVal) {
+    public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal) {
         if(StringUtils.isBlank(roleId)) {
             return null ;
         }   else {
@@ -149,7 +149,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @return
      */
     @Override
-    public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Integer stateVal) {
+    public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId,Short stateVal) {
         Set<String> idSet = Sets.newHashSet();
         List<DefineMenu> defineMenuList = this.dealGetMenusByRoleIdFromDb(roleId,stateVal);
         if(defineMenuList != null && defineMenuList.isEmpty() == false){

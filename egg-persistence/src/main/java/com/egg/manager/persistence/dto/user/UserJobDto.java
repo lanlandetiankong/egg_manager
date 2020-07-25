@@ -17,7 +17,7 @@ public class UserJobDto {
     private String userAccountId ;
     private  String defineJobId ;
 
-    private Integer state ;
+    private Short state ;
     private String remark;
     private Date createTime ;
     private Date updateTime ;

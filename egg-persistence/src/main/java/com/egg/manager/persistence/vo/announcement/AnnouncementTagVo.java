@@ -30,7 +30,7 @@ public class AnnouncementTagVo {
     private Integer ordering;
 
     private String remark;
-    private Integer state;
+    private Short state;
     private Date createTime;
     private Date updateTime;
     private String createUserId ;

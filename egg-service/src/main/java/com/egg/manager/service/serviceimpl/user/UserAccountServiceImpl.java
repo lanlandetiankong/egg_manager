@@ -292,7 +292,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception{
-        int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
+        Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
         if(loginUser != null){
             userAccount.setLastModifyerId(loginUser.getFid());
@@ -445,7 +445,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
 
 
     @Override
-    public Set<String> dealGetExistAccountSet(Integer state,Wrapper<UserAccount> wrapper){
+    public Set<String> dealGetExistAccountSet(Short state,Wrapper<UserAccount> wrapper){
         Set<String> accountSet = new HashSet<>() ;
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         if(state != null){

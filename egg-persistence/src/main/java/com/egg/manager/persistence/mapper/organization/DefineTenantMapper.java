@@ -37,7 +37,7 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
      * @param tenantState
      * @return
      */
-    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId")String userAccountId,@Param("tenantState")Integer tenantState);
+    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId")String userAccountId,@Param("tenantState")Short tenantState);
     /**
      * 批量 伪删除
      * @param delIds

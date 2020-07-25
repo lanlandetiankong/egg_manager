@@ -44,7 +44,7 @@ public class UserAccountXlsInModel {
     @ExcelProperty(index = 5)
     private String remark ;
     @ExcelIgnore
-    private Integer state ;
+    private Short state ;
     @ExcelIgnore
     private String lockedStr ;
 

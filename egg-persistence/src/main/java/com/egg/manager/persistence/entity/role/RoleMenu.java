@@ -31,7 +31,7 @@ public class RoleMenu extends Model<RoleMenu> {
     private Integer type;
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")
@@ -56,7 +56,6 @@ public class RoleMenu extends Model<RoleMenu> {
      * @return
      */
     public static RoleMenu generateSimpleInsertEntity( String defineRoleId,String defineMenuId, UserAccount loginUser){
-
         return RoleMenu.generateSimpleInsertEntity(defineRoleId,defineMenuId,BaseStateEnum.ENABLED.getValue(),loginUser) ;
     }
     /**
@@ -66,20 +65,20 @@ public class RoleMenu extends Model<RoleMenu> {
      * @param loginUser 当前登录用户
      * @return
      */
-    public static RoleMenu generateSimpleInsertEntity( String defineRoleId,String defineMenuId,Integer stateVal,UserAccount loginUser){
-        RoleMenu userRole = new RoleMenu() ;
+    public static RoleMenu generateSimpleInsertEntity( String defineRoleId,String defineMenuId,Short stateVal,UserAccount loginUser){
+        RoleMenu roleMenu = new RoleMenu() ;
         Date now = new Date() ;
-        userRole.setFid(MyUUIDUtil.renderSimpleUUID());
-        userRole.setDefineRoleId(defineRoleId);
-        userRole.setDefineMenuId(defineMenuId);
-        userRole.setType(1);
-        userRole.setState(stateVal);
-        userRole.setCreateTime(now);
-        userRole.setUpdateTime(now);
+        roleMenu.setFid(MyUUIDUtil.renderSimpleUUID());
+        roleMenu.setDefineRoleId(defineRoleId);
+        roleMenu.setDefineMenuId(defineMenuId);
+        roleMenu.setType(1);
+        roleMenu.setState(stateVal);
+        roleMenu.setCreateTime(now);
+        roleMenu.setUpdateTime(now);
         if(loginUser != null){
-            userRole.setCreateUserId(loginUser.getFid());
-            userRole.setLastModifyerId(loginUser.getFid());
+            roleMenu.setCreateUserId(loginUser.getFid());
+            roleMenu.setLastModifyerId(loginUser.getFid());
         }
-        return userRole ;
+        return roleMenu ;
     }
 }

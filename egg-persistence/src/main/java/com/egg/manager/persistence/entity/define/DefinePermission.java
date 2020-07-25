@@ -22,11 +22,11 @@ public class DefinePermission extends Model<DefinePermission> {
 
     private String name ;
     private String code ;
-    private Integer ensure; //是否确认发布，发布之后不可修改
+    private Short ensure; //是否确认发布，发布之后不可修改
     private Integer type;
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

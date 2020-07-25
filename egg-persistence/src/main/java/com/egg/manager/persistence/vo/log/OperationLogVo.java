@@ -35,7 +35,7 @@ public class OperationLogVo {
     private String message;
     private String ipAddr ;
     private String type;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUser ;

@@ -9,25 +9,25 @@ package com.egg.manager.common.base.enums.base;
  * \
  */
 public enum SwitchStateEnum {
-    Open(1,"启用","启用"),
-    Close(0,"禁用","禁用"),
+    Open((short)1,"启用","启用"),
+    Close((short)0,"禁用","禁用"),
     ;
 
-    SwitchStateEnum(Integer value, String name, String info) {
+    SwitchStateEnum(Short value, String name, String info) {
         this.value = value;
         this.name = name;
         this.info = info;
     }
 
-    private Integer value ;
+    private Short value ;
     private String name ;
     private String info ;
 
-    public Integer getValue() {
+    public Short getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Short value) {
         this.value = value;
     }
 
@@ -72,7 +72,7 @@ public enum SwitchStateEnum {
      * @param value
      * @return
      */
-    public static String dealGetNameByVal(Integer value){
+    public static String dealGetNameByVal(Short value){
         String name = "" ;
         if(value != null){
             SwitchStateEnum[] enums = SwitchStateEnum.values();

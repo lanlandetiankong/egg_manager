@@ -1,245 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="200304 部分mapper字段名错误bug修复;添加druid 监控页面的备注;swagger2 api的集成与注释添加、修改等">
-      <change beforePath="" afterPath="$PROJECT_DIR$/docs/errors/error.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenuDto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RoleMenu.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RoleMenuMapper.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RoleMenuVo.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/role/RoleMenuMapper.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/role/RoleMenuService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/role/RoleMenuServiceImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/role/RoleMenuController.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml" afterPath="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/module/DefineMenuService.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/module/DefineMenuService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/log/OperationLogServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/log/OperationLogServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/log/OperationLogController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/log/OperationLogController.java" />
-      <change beforePath="$PROJECT_DIR$/manager.iml" afterPath="" />
+    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="200326 权限定义 是否确认发布(确认发布后不可删除)">
+      <change afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/exception/MyMongoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/service/MyBaseMongoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/service/forms/smartForm/SmartFormDefinitionMService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/service/forms/smartForm/SmartFormTypeDefinitionMService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/MyBaseMongoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormDefinitionMServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormTypeDefinitionMServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/dao/forms/SmartFormDefinitionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/dao/forms/SmartFormTypeDefinitionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/CommonController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormTypeDefinitionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/verification/mongodb/MyBaseVerifyO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/verification/mongodb/VerifyGroupOfCreate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/verification/mongodb/VerifyGroupOfDefault.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/verification/mongodb/VerifyGroupOfUpdate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/verification/mongodb/forms/smartForm/SmartFormTypeDefinitionVerifyO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/BaseStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/BaseStateEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/SwitchStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/SwitchStateEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/UserSexEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/UserSexEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/user/UserAccountStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/user/UserAccountStateEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementDraftDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementDraftDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementTagDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/announcement/AnnouncementTagDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineDepartmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineDepartmentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineGroupDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineGroupDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineJobDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineJobDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineMenuDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineMenuDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefinePermissionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefinePermissionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineRoleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/define/DefineRoleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/log/OperationLogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/log/OperationLogDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/module/DefineModuleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/module/DefineModuleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/organization/DefineTenantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/organization/DefineTenantDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenuDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenuDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RolePermissionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RolePermissionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserAccountDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserAccountDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserGroupDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserGroupDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserJobDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserJobDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserRoleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserRoleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserTenantDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserTenantDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/Announcement.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/Announcement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/AnnouncementDraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/AnnouncementDraft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/AnnouncementTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/announcement/AnnouncementTag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefinePermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefinePermission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/define/DefineRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/module/DefineModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/module/DefineModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/organization/DefineTenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/organization/DefineTenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RoleMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RoleMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RolePermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RolePermission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserTenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserTenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/excel/export/user/UserAccountXlsOutModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/excel/export/user/UserAccountXlsOutModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/excel/introduce/user/UserAccountXlsInModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/excel/introduce/user/UserAccountXlsInModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineJobMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineJobMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineRoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/organization/DefineTenantMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/organization/DefineTenantMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RoleMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RoleMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RolePermissionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RolePermissionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserJobMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserJobMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserRoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserTenantMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserTenantMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/dao/log/OperationLogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/dao/log/OperationLogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/daoimpl/log/OperationLogDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/daoimpl/log/OperationLogDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/BaseModelMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/BaseModelMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormDefinitionMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormDefinitionMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormFieldDefinitionMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormFieldDefinitionMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormFieldTypeDefinitionMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormFieldTypeDefinitionMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormRecordFieldMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormRecordFieldMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormRecordMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormRecordMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/FormTypeDefinitionMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/forms/SmartFormTypeDefinitionMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/log/OperationLogMO.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/log/OperationLogMO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/transfer/define/DefinePermissionTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/transfer/define/DefinePermissionTransfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementDraftVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementDraftVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementTagVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementTagVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/announcement/AnnouncementVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineDepartmentVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineDepartmentVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineGroupVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineGroupVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineJobVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineJobVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineMenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineMenuVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefinePermissionVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefinePermissionVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineRoleVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/define/DefineRoleVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/log/OperationLogVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/log/OperationLogVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/module/DefineModuleVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/module/DefineModuleVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/organization/DefineTenantVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/organization/DefineTenantVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RoleMenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RoleMenuVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RolePermissionVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RolePermissionVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserAccountVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserAccountVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserGroupVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserGroupVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserJobVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserJobVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserRoleVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserRoleVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserTenantVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/user/UserTenantVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/annotation/log/CurrentLoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/annotation/log/CurrentLoginUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/user/UserAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/user/UserAccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserAccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserAccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/egg-web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/aspect/ControllerAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/aspect/ControllerAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/egg-common/target/" />
-    <ignored path="$PROJECT_DIR$/egg-persistent/target/" />
-    <ignored path="$PROJECT_DIR$/egg-service/target/" />
-    <ignored path="$PROJECT_DIR$/egg-web/target/" />
-    <ignored path="$PROJECT_DIR$/egg-persistence/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DefineRoleController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="169" column="76" lean-forward="false" selection-start-line="169" selection-start-column="76" selection-end-line="169" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefineMenuMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="169" column="51" lean-forward="false" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="51" />
-              <folding>
-                <marker date="1585061046501" expanded="true" signature="6306:6714" ph="SELECT from em_define_menu" />
-                <marker date="1585061046501" expanded="true" signature="6798:7234" ph="SELECT , FRO... " />
-                <marker date="1585061046501" expanded="true" signature="7780:8150" ph="SELECT FROM em_define_menu" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefineMenuMapper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="45" column="56" lean-forward="false" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
     <option name="SCHEME" value="Project" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>userRoleVo</find>
-      <find>userRoleDto</find>
-      <find>userAccountId</find>
-      <find>user_account_id</find>
-      <find>userRole</find>
-      <find>角色菜单</find>
-      <find>用户角色</find>
-      <find>filterId</find>
-      <find>user</find>
-      <find>getAllPermissionByRoleId</find>
-      <find>RolePermission</find>
-      <find>dp</find>
-      <find>findAllPermissionByRoleId</find>
-      <find>rp</find>
-      <find>em_role_menu</find>
-      <find>getAllMenuTreeSelect</find>
-      <find>getTreeSelectChildNodes</find>
-      <find>grantPermissionToRole</find>
-      <find>findAllMenuByRoleId</find>
-      <find>roleId</find>
-      <find>dealGetRolesByAccountFromDb</find>
-      <find>defineMenuMapper</find>
-      <find>role</find>
-      <find>insertBatch</find>
-      <find>add</find>
-      <find>updateBatchById</find>
-      <find>permission</find>
-      <find>oldCheckIdAll</find>
-      <find>findAllMenuByRoleIdFilterParentNode</find>
-      <find>getAllMenuByRoleId</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>${base_alias_col_prefix}</replace>
-      <replace>announcementDraftDto</replace>
-      <replace>announcement</replace>
-      <replace>defineJobDto</replace>
-      <replace>definePermissionDto</replace>
-      <replace>defineRoleDto</replace>
-      <replace>defineModuleDto</replace>
-      <replace>userJobDto</replace>
-      <replace>userRoleDto</replace>
-      <replace>userAccountDto</replace>
-      <replace>(查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)</replace>
-      <replace>defineTenantDto</replace>
-      <replace>Enum列表</replace>
-      <replace>defineTenantId</replace>
-      <replace>DefineTenantId</replace>
-      <replace>userTenantDto</replace>
-      <replace>UserTenantDto</replace>
-      <replace>租户</replace>
-      <replace>define_tenant_id</replace>
-      <replace>用户与租户关联</replace>
-      <replace>userTenant</replace>
-      <replace>UserTenantController</replace>
-      <replace>[用户与租户关联表]</replace>
-      <replace>userTenantVo</replace>
-      <replace>[用户与租户关联]</replace>
-      <replace>almostRefresh</replace>
-      <replace>roleMenuVo</replace>
-      <replace>roleMenuDto</replace>
-      <replace>roleMenu</replace>
-      <replace>[角色-菜单]</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>J:\projects\study\java\manager\egg-common</dir>
-      <dir>J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/module/DefineModuleController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/define/DefineDepartmentController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/define/DefineGroupController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/define/DefineJobController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/define/DefinePermissionController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/define/DefineRoleController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/announcement/AnnouncementDraftController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/announcement/AnnouncementController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/controller/announcement/AnnouncementTagController.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/annotation/log/CurrentUserAccount.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/annotation/log/CurrentLoginUser.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/redis/serviceimpl/user/UserAccountRedisServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/redis/service/user/UserAccountRedisService.java" />
-        <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/PublicResultEnum.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/config/shiro/JwtShiroFilter.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/common/web/helper/MyResponseHelper.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/config/advice/MyControllerAdvice.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/config/shiro/CurrentUserAccountMethodArgumentResolver.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/common/web/tree/CommonMenuTree.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/serviceimpl/module/DefineMenuServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/module/DefineMenuUrlJumpTypeEnum.java" />
-        <option value="$PROJECT_DIR$/egg-common/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/common/web/helper/MyCommonResult.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/helper/MyResponseHelper.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/application-dev.properties" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/application-prod.properties" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/db/MybatisPlusConfig.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerApplication.java" />
-        <option value="$PROJECT_DIR$/egg-service/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-persistence/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenusDto.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenuDto.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserRoleDto.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RoleMenuVo.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/role/RoleMenuService.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/role/RoleMenuServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/module/DefineMenuService.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/role/RoleMenuController.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefinePermissionMapper.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RoleMenu.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RoleMenuMapper.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/role/RoleMenuMapper.xml" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" />
-        <option value="$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -248,587 +162,57 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="egg-manager-root" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="egg-manager-root" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="322" />
-    <option name="y" value="44" />
-    <option name="width" value="1187" />
-    <option name="height" value="656" />
-  </component>
+  <component name="ProjectId" id="1eqpH0MClss0EhkxjuMIw2xRo6y" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages ProjectPane="false" />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages ProjectPane="false" />
-      <abbreviatePackageNames />
-      <autoscrollToSource ProjectPane="false" />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="vo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-              <item name="define" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="shiro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="define" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="egg-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../demos/test" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="MyBatisLogPluginindexNum" value="382" />
+    <property name="MyBatisLogPluginparameters" value="Parameters:" />
+    <property name="MyBatisLogPluginpreparing" value="Preparing:" />
+    <property name="MyBatisLogPluginrunning" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="CurrentUserAccountMethodArgumentResolver&#9;PSI&#9;JAVA://com.egg.manager.web.config.shiro.CurrentUserAccountMethodArgumentResolver&#10;props-redis.properties&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/resources/config/props-redis.properties&#10;mapper.xml.&#9;FILE&#9;jar://J:/maven/resp/com/baomidou/mybatis-plus-generate/2.1.8/mybatis-plus-generate-2.1.8.jar!/templates/mapper.xml.vm&#10;Gen&#9;PSI&#9;JAVA://com.egg.manager.common.util.str.GenerationSequenceUtil&#10;HighlightingCompositeConverterEx&#9;PSI&#9;JAVA://com.egg.manager.web.config.logback.HighlightingCompositeConverterEx&#10;SexEnum&#9;PSI&#9;JAVA://com.egg.manager.common.base.enums.base.UserSexEnum&#10;UserAccountXlsOutModel&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/persistence/excel/export/user/UserAccountXlsOutModel.java&#10;MyControllerAdvice&#9;PSI&#9;JAVA://com.egg.manager.web.config.advice.MyControllerAdvice&#10;userAccount&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserAccount.java&#10;urljump&#9;PSI&#9;JAVA://com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum&#10;UserAccount&#9;PSI&#9;JAVA://com.egg.manager.persistence.entity.user.UserAccount&#10;UserEnum&#9;PSI&#9;JAVA://com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum&#10;DefineMenu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml&#10;Constant&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/constant/Constant.java&#10;BaseS&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/enums/base/BaseStateEnum.java&#10;permission&#9;PSI&#9;JAVA://com.egg.manager.persistence.entity.define.DefinePermission&#10;basecontro&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/web/controller/BaseController.java&#10;announcementController&#9;PSI&#9;JAVA://com.egg.manager.controller.announcement.AnnouncementController&#10;RedisPropsOfShiroCache&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/props/redis/shiro/RedisPropsOfShiroCache.java&#10;MyCommandLineRunner&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/runner/MyCommandLineRunner.java&#10;ResponseHelper&#9;PSI&#9;JAVA://com.egg.manager.common.web.helper.MyResponseHelper&#10;UserTenant&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/dto/user/UserTenantDto.java&#10;mybatisplus&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/db/MybatisPlusConfig.java&#10;defineMenu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-service/src/main/java/com/egg/manager/serviceimpl/module/DefineMenuServiceImpl.java&#10;TreeSele&#9;PSI&#9;JAVA://com.egg.manager.common.web.tree.CommonTreeSelect&#10;ex&#9;FILE&#9;file://J:/projects/study/java/manager/.git/info/exclude&#10;gitignore&#9;FILE&#9;file://J:/projects/study/java/manager/.gitignore&#10;.ignore&#9;PSI&#9;JAVA://jdk.nashorn.internal.ir.annotations.Ignore&#10;ParameterDataTypeReader&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-spring-web/2.7.0/springfox-spring-web-2.7.0.jar!/springfox/documentation/spring/web/readers/parameter/ParameterDataTypeReader.class&#10;CachingModelPropertiesProvider&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-schema/2.7.0/springfox-schema-2.7.0.jar!/springfox/documentation/schema/property/CachingModelPropertiesProvider.class&#10;ServletRegistrationBean&#9;PSI&#9;JAVA://org.springframework.boot.web.servlet.ServletRegistrationBean&#10;MyCommonResult&#9;PSI&#9;JAVA://com.egg.manager.common.web.helper.MyCommonResult&#10;swagger-ui.&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-swagger-ui/2.2.2/springfox-swagger-ui-2.2.2.jar!/META-INF/resources/swagger-ui.html&#10;swag&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/swagger/SwaggerConfig.java&#10;shiro&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/shiro/JwtShiroFilter.java&#10;defineTe&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/organization/DefineTenantVo.java&#10;CommonTree&#9;PSI&#9;JAVA://com.egg.manager.common.web.tree.CommonTree&#10;definemenu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/entity/module/DefineMenu.java&#10;Menu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/enums/module/DefineMenuTypeEnum.java&#10;AnnouncementDraftVo&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/announcement/AnnouncementDraftVo.java&#10;AnnouncementDraft&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/announcement/AnnouncementDraftVo.java&#10;String&#9;PSI&#9;JAVA://com.egg.manager.common.util.str.MyStringUtil&#10;AnnouncementTagMapper&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/resources/mapper/announcement/AnnouncementTagMapper.xml&#10;AnnouncementTraftVo&#9;PSI&#9;JAVA://com.egg.manager.vo.announcement.AnnouncementTraftTraftVo&#10;UserAccountVo&#9;null&#9;null&#10;DefinePermissionC&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/controller/define/DefinePermissionController.java&#10;Enum&#9;PSI&#9;JAVA://com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum&#10;StateEnum&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/enums/user/UserAccountStateEnum.java&#10;StateEb&#9;null&#9;null&#10;RedisConfig&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/redis/RedisConfig.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth2" value="75" />
-    <property name="RequestMappingsPanelOrder2" value="2" />
-    <property name="SearchEverywhereHistoryKey" value="announcementController&#9;PSI&#9;JAVA://com.egg.manager.controller.announcement.AnnouncementController&#10;RedisPropsOfShiroCache&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/props/redis/shiro/RedisPropsOfShiroCache.java&#10;MyCommandLineRunner&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/runner/MyCommandLineRunner.java&#10;ResponseHelper&#9;PSI&#9;JAVA://com.egg.manager.common.web.helper.MyResponseHelper&#10;UserTenant&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/dto/user/UserTenantDto.java&#10;mybatisplus&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/db/MybatisPlusConfig.java&#10;defineMenu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-service/src/main/java/com/egg/manager/serviceimpl/module/DefineMenuServiceImpl.java&#10;TreeSele&#9;PSI&#9;JAVA://com.egg.manager.common.web.tree.CommonTreeSelect&#10;ex&#9;FILE&#9;file://J:/projects/study/java/manager/.git/info/exclude&#10;gitignore&#9;FILE&#9;file://J:/projects/study/java/manager/.gitignore&#10;.ignore&#9;PSI&#9;JAVA://jdk.nashorn.internal.ir.annotations.Ignore&#10;ParameterDataTypeReader&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-spring-web/2.7.0/springfox-spring-web-2.7.0.jar!/springfox/documentation/spring/web/readers/parameter/ParameterDataTypeReader.class&#10;CachingModelPropertiesProvider&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-schema/2.7.0/springfox-schema-2.7.0.jar!/springfox/documentation/schema/property/CachingModelPropertiesProvider.class&#10;ServletRegistrationBean&#9;PSI&#9;JAVA://org.springframework.boot.web.servlet.ServletRegistrationBean&#10;MyCommonResult&#9;PSI&#9;JAVA://com.egg.manager.common.web.helper.MyCommonResult&#10;swagger-ui.&#9;FILE&#9;jar://C:/Users/Administrator/.m2/repository/io/springfox/springfox-swagger-ui/2.2.2/springfox-swagger-ui-2.2.2.jar!/META-INF/resources/swagger-ui.html&#10;swag&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/swagger/SwaggerConfig.java&#10;shiro&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/shiro/JwtShiroFilter.java&#10;defineTe&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/organization/DefineTenantVo.java&#10;CommonTree&#9;PSI&#9;JAVA://com.egg.manager.common.web.tree.CommonTree&#10;definemenu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/entity/module/DefineMenu.java&#10;Menu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/enums/module/DefineMenuTypeEnum.java&#10;AnnouncementDraftVo&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/announcement/AnnouncementDraftVo.java&#10;AnnouncementDraft&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/vo/announcement/AnnouncementDraftVo.java&#10;String&#9;PSI&#9;JAVA://com.egg.manager.common.util.str.MyStringUtil&#10;AnnouncementTagMapper&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/resources/mapper/announcement/AnnouncementTagMapper.xml&#10;AnnouncementTraftVo&#9;PSI&#9;JAVA://com.egg.manager.vo.announcement.AnnouncementTraftTraftVo&#10;UserAccountVo&#9;null&#9;null&#10;DefinePermissionC&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/controller/define/DefinePermissionController.java&#10;UserAccount&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/entity/user/UserAccount.java&#10;Enum&#9;PSI&#9;JAVA://com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum&#10;userAccount&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/entity/user/UserAccount.java&#10;StateEnum&#9;FILE&#9;file://J:/projects/study/java/manager/egg-common/src/main/java/com/egg/manager/common/base/enums/user/UserAccountStateEnum.java&#10;StateEb&#9;null&#9;null&#10;RedisConfig&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/redis/RedisConfig.java&#10;Redis&#9;PSI&#9;JAVA://com.egg.manager.config.redis.RedisConfig&#10;druid&#9;FILE&#9;file://J:/projects/study/java/manager/egg-web/src/main/java/com/egg/manager/config/db/druid/DruidConfig.java&#10;definemeu&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/entity/define/DefineMenu.java&#10;commonresul&#9;PSI&#9;JAVA://com.egg.manager.common.web.helper.MyCommonResult&#10;MyControllerAdvice&#9;PSI&#9;JAVA://com.egg.manager.config.advice.MyControllerAdvice&#10;shirofil&#9;PSI&#9;JAVA://com.egg.manager.config.shiro.JwtShiroFilter&#10;CurrentUserAccountMethodArgumentResolver&#9;PSI&#9;JAVA://com.egg.manager.config.http.WebMvcConfigured#getCurrentUserAccountMethodArgumentResolver&#10;UserAccountMapper&#9;FILE&#9;file://J:/projects/study/java/manager/egg-persistence/src/main/java/com/egg/manager/mapper/user/UserAccountMapper.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/forms/smartForm" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="MyBatisLogPluginpreparing" value="Preparing:" />
-    <property name="MyBatisLogPluginparameters" value="Parameters:" />
-    <property name="MyBatisLogPluginrunning" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\role" />
-      <recent name="J:\projects\study\java\manager\docs\errors" />
-      <recent name="J:\projects\study\java\manager\egg-service\src\main\java\com\egg\manager\service\redis" />
-      <recent name="J:\projects\study\java\manager\docs\sql" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\user" />
+      <recent name="J:\projects\study\java\manager\egg-mongodb\src\main\java\com\egg\manager\mongodb\mservices\serviceimpl\forms\smartForm" />
+      <recent name="J:\projects\study\java\manager\egg-mongodb\src\main\java\com\egg\manager\mongodb\mservice" />
+      <recent name="J:\projects\study\java\manager\egg-mongodb\src\main\java\com\egg\manager\mongodb" />
+      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\java\com\egg\manager\persistence\mongo\dao" />
+      <recent name="J:\projects\study\java\manager" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.egg.manager.web.controller.role" />
-      <recent name="com.egg.manager.service.serviceimpl.role" />
-      <recent name="com.egg.manager.service.service.role" />
-      <recent name="com.egg.manager.persistence.mapper.role" />
-      <recent name="com.egg.manager.persistence.vo.role" />
+      <recent name="com.egg.manager.common.base.exception" />
+      <recent name="com.egg.manager.web.verification.mongodb" />
+      <recent name="com.egg.manager.mongodb.mservices.serviceimpl" />
+      <recent name="com.egg.manager.persistence.mongo.mo.forms" />
+      <recent name="com.egg.manager.web.controller.smartForm" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\config" />
       <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\common" />
       <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\add" />
       <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\define" />
       <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\module" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.EggManagerApplication">
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -839,122 +223,75 @@
       <module />
     </configuration>
     <configuration name="MpGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="com.egg.manager.web.generate.MpGenerator" />
+      <module name="egg-web" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.egg.manager.web.generate.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.egg.manager.web.generate.MpGenerator" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="egg-web" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
+      <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="EggManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <module name="egg-web" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.egg.manager.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.egg.manager.EggManagerApplication" />
-      <module name="egg-web" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
+    <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
+      <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Spring Boot.EggManagerApplication" />
-      <item index="1" class="java.lang.String" itemvalue="Application.MpGenerator" />
+    <list>
+      <item itemvalue="Application.MpGenerator" />
+      <item itemvalue="Spring Boot.EggManagerApplication" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Spring Boot.EggManagerApplication" />
-        <item index="1" class="java.lang.String" itemvalue="Application.MpGenerator" />
+      <list>
+        <item itemvalue="Spring Boot.EggManagerApplication" />
+        <item itemvalue="Application.MpGenerator" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
@@ -1076,245 +413,83 @@
       <workItem from="1584937892778" duration="378000" />
       <workItem from="1584939592757" duration="944000" />
       <workItem from="1584961662431" duration="9824000" />
-      <workItem from="1585048980232" duration="8872000" />
-    </task>
-    <task id="LOCAL-00001" summary="190918 添加一些常用枚举;druid、redis、文件上传;shiro临时url全部放行(前端开发">
-      <created>1568814968753</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1568814968753</updated>
-    </task>
-    <task id="LOCAL-00002" summary="190919 表添加[创建人、最后更新人]字段;添加模块表;修改跨域配置;添加基本的控制器文件(未实现方法">
-      <created>1568823677208</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1568823677209</updated>
-    </task>
-    <task id="LOCAL-00003" summary="191005 配合前端antd 菜单树修改(接下来开发登录、注册等">
-      <created>1570210063017</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1570210063017</updated>
-    </task>
-    <task id="LOCAL-00004" summary="200206 mapper bug修改及BaseController修改">
-      <created>1580970266542</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1580970266542</updated>
-    </task>
-    <task id="LOCAL-00005" summary="200206 用户列表 分页查询总数 bug修改">
-      <created>1580971278566</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1580971278566</updated>
-    </task>
-    <task id="LOCAL-00006" summary="200206 权限定义的增删改查 的功能实现;多模块布局pom调整">
-      <created>1580990380455</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1580990380456</updated>
-    </task>
-    <task id="LOCAL-00007" summary="200207 用户列表Controller拆分到Service中;用户角色接口实现">
-      <created>1581054577696</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1581054577696</updated>
-    </task>
-    <task id="LOCAL-00008" summary="200207 用户列表/权限定义列表 查询区分equals与like">
-      <created>1581081802772</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1581081802773</updated>
-    </task>
-    <task id="LOCAL-00009" summary="200208 角色定义的 增删改查 实现">
-      <created>1581152732671</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1581152732671</updated>
-    </task>
-    <task id="LOCAL-00010" summary="200208 角色定义的 增删改查 遗漏xml文件">
-      <created>1581152846400</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1581152846400</updated>
-    </task>
-    <task id="LOCAL-00011" summary="200208 用户锁定功能实现">
-      <created>1581173427053</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1581173427053</updated>
-    </task>
-    <task id="LOCAL-00012" summary="公告标签、公告新增、公告列表展示与搜索,sql更新">
-      <created>1582432895219</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1582432895220</updated>
-    </task>
-    <task id="LOCAL-00013" summary="200224 公告可存为草稿/草稿列表、发布、删除">
-      <created>1582547686372</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1582547686372</updated>
-    </task>
-    <task id="LOCAL-00014" summary="200225 公告 草稿的编辑更新以及更新发布">
-      <created>1582645071358</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1582645071358</updated>
-    </task>
-    <task id="LOCAL-00015" summary="200227 主页tab 展示 部分已发布的公告以及 公告查看">
-      <created>1582808498844</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1582808498844</updated>
-    </task>
-    <task id="LOCAL-00016" summary="200301 租户的增删改查">
-      <created>1583038031029</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1583038031029</updated>
-    </task>
-    <task id="LOCAL-00017" summary="200301 模块定义 增删改查">
-      <created>1583055327015</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1583055327015</updated>
-    </task>
-    <task id="LOCAL-00018" summary="200301 菜单定义  增删改查">
-      <created>1583074173221</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1583074173221</updated>
-    </task>
-    <task id="LOCAL-00019" summary="200302  菜单TreeSelect 添加顶层项筛选">
-      <created>1583149133733</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1583149133733</updated>
-    </task>
-    <task id="LOCAL-00020" summary="200302 菜单TreeSelect结构根节点返回多次的bug修复;去除所有version字段;表结构sql更新">
-      <created>1583154722100</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1583154722100</updated>
-    </task>
-    <task id="LOCAL-00021" summary="200303   logback控制台打印高亮;mapperscan重复warning去除;druid整和logback的filter的错误修复;maven打包配置修改;添加打包发布备注">
-      <created>1583243703589</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1583243703589</updated>
-    </task>
-    <task id="LOCAL-00022" summary="200304 部分mapper字段名错误bug修复;添加druid 监控页面的备注;swagger2 api的集成与注释添加、修改等">
-      <created>1583330443984</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1583330443984</updated>
-    </task>
-    <task id="LOCAL-00023" summary="200304 target、logs ignore;">
-      <created>1583332932187</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1583332932187</updated>
-    </task>
-    <task id="LOCAL-00024" summary="200304 菜单定义 mapping及目录位置 修改">
-      <created>1583335351772</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1583335351772</updated>
-    </task>
-    <task id="LOCAL-00025" summary="200305 部门定义的增删改查">
-      <created>1583419682071</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1583419682071</updated>
-    </task>
-    <task id="LOCAL-00026" summary="200305 菜单定义添加排序字段;菜单TreeSelect 排序">
-      <created>1583421271083</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1583421271083</updated>
-    </task>
-    <task id="LOCAL-00027" summary="200306 菜单定义 在更新时控制 菜单的父节点 不能更新为当前菜单的子节点">
-      <created>1583506678351</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1583506678351</updated>
-    </task>
-    <task id="LOCAL-00028" summary="200306 部门定义 在更新时控制 部门的父节点 不能更新为当前部门的子节点">
-      <created>1583508407263</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1583508407263</updated>
-    </task>
-    <task id="LOCAL-00029" summary="200309 生产环境配置文件修改;公告vo添加标签集合转字符串后可展示的字段">
-      <created>1583762248513</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1583762248513</updated>
-    </task>
-    <task id="LOCAL-00030" summary="200309 defineMenu 位置移动">
-      <created>1583763192170</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1583763192170</updated>
-    </task>
-    <task id="LOCAL-00031" summary="200311 菜单定义 自定义分页搜索">
-      <created>1583927151931</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1583927151932</updated>
-    </task>
-    <task id="LOCAL-00032" summary="200311 logback dev打印sql;针对每个表的create_user,last_modifyer 字段的entity、vo、xml等的修改">
-      <created>1583932269130</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1583932269130</updated>
-    </task>
-    <task id="LOCAL-00033" summary="200313 每个表dto与vo 添加 创建人、最后更新人对象;公告、公告草稿、公告标签、菜单 的分页搜索查询 由单表查询封装为 多表关联查询">
-      <created>1584102383061</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1584102383061</updated>
-    </task>
-    <task id="LOCAL-00034" summary="200313 各个表的dto添加;部门定义、职务定义、权限定义、角色定义 的分页查询优化">
-      <created>1584107053320</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1584107053320</updated>
+      <workItem from="1585048980232" duration="10501000" />
+      <workItem from="1585135777163" duration="9075000" />
+      <workItem from="1585220306568" duration="8734000" />
+      <workItem from="1585308386466" duration="6341000" />
+      <workItem from="1585317952722" duration="5542000" />
+      <workItem from="1585325224920" duration="1206000" />
+      <workItem from="1585397394526" duration="2199000" />
+      <workItem from="1585399660791" duration="252000" />
+      <workItem from="1585399996898" duration="599000" />
+      <workItem from="1585400658674" duration="1169000" />
+      <workItem from="1585401915543" duration="2396000" />
+      <workItem from="1585404822726" duration="865000" />
+      <workItem from="1585405832575" duration="3167000" />
+      <workItem from="1585567147188" duration="7116000" />
+      <workItem from="1585576343425" duration="556000" />
+      <workItem from="1585629142681" duration="79000" />
+      <workItem from="1585740114423" duration="830000" />
+      <workItem from="1585826382069" duration="5222000" />
+      <workItem from="1585910277170" duration="1566000" />
+      <workItem from="1585929971481" duration="30831000" />
+      <workItem from="1586063936400" duration="17826000" />
+      <workItem from="1586143950957" duration="2428000" />
+      <workItem from="1586178087606" duration="4752000" />
+      <workItem from="1586264897920" duration="4838000" />
+      <workItem from="1586343622994" duration="4240000" />
+      <workItem from="1586355914526" duration="775000" />
+      <workItem from="1586431823761" duration="5109000" />
+      <workItem from="1586516975185" duration="3991000" />
+      <workItem from="1586601504105" duration="8846000" />
+      <workItem from="1586669795420" duration="4252000" />
+      <workItem from="1586674624182" duration="7617000" />
+      <workItem from="1586694128544" duration="7844000" />
+      <workItem from="1586775656427" duration="13667000" />
+      <workItem from="1586862577111" duration="2504000" />
+      <workItem from="1586866195944" duration="93000" />
+      <workItem from="1586866527568" duration="9964000" />
+      <workItem from="1586947563700" duration="13642000" />
+      <workItem from="1587034502829" duration="9713000" />
+      <workItem from="1587047002371" duration="3613000" />
+      <workItem from="1587122797815" duration="6486000" />
+      <workItem from="1587218315578" duration="1241000" />
+      <workItem from="1587284909063" duration="685000" />
+      <workItem from="1587306997096" duration="999000" />
+      <workItem from="1587383749282" duration="4860000" />
+      <workItem from="1587444652704" duration="209000" />
+      <workItem from="1587555206985" duration="632000" />
+      <workItem from="1587879950784" duration="34000" />
+      <workItem from="1589110230790" duration="1717000" />
+      <workItem from="1589113104770" duration="46000" />
+      <workItem from="1589202315670" duration="55000" />
+      <workItem from="1592103040874" duration="2183000" />
+      <workItem from="1592229426941" duration="725000" />
+      <workItem from="1593158044991" duration="885000" />
+      <workItem from="1593159789066" duration="3457000" />
+      <workItem from="1593219783191" duration="4499000" />
+      <workItem from="1593311417348" duration="400000" />
+      <workItem from="1593312158566" duration="481000" />
+      <workItem from="1593531113367" duration="646000" />
+      <workItem from="1593615978123" duration="1548000" />
+      <workItem from="1593828528485" duration="19000" />
+      <workItem from="1595051199041" duration="4349000" />
+      <workItem from="1595058899715" duration="1571000" />
+      <workItem from="1595130097472" duration="16000" />
+      <workItem from="1595130173017" duration="7001000" />
+      <workItem from="1595145838713" duration="2380000" />
+      <workItem from="1595148277610" duration="4342000" />
+      <workItem from="1595153103023" duration="1011000" />
+      <workItem from="1595245952868" duration="75000" />
+      <workItem from="1595246154426" duration="399000" />
+      <workItem from="1595249524111" duration="976000" />
+      <workItem from="1595256500884" duration="4349000" />
+      <workItem from="1595335380218" duration="2381000" />
+      <workItem from="1595427803689" duration="4221000" />
+      <workItem from="1595433135198" duration="1141000" />
+      <workItem from="1595434607363" duration="289000" />
+      <workItem from="1595513916164" duration="5181000" />
+      <workItem from="1595600732028" duration="24152000" />
     </task>
     <task id="LOCAL-00035" summary="200314 remark 字段未查询、转化dto、vo的bug;模块定义、用户账号、用户角色、用户职务、用户角色 ;mybatis 各个表的 sql定义">
       <created>1584193913406</created>
@@ -1421,11 +596,246 @@
       <option name="project" value="LOCAL" />
       <updated>1584940438671</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="200324 角色授权菜单 的分配处理及返回给a-tree勾选">
+      <created>1585061504079</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1585061504080</updated>
+    </task>
+    <task id="LOCAL-00051" summary="200324 mapper insert sql语句无法 正确执行的bug">
+      <created>1585063040359</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1585063040360</updated>
+    </task>
+    <task id="LOCAL-00052" summary="200325 redis缓存用户可访问的router url;设置 redis 用户信息对应的key的ttl">
+      <created>1585142643196</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1585142643198</updated>
+    </task>
+    <task id="LOCAL-00053" summary="200325 取得用户可访问菜单重复的bug修改;前端用户根据用户id分配可访问的菜单到前端。">
+      <created>1585144093532</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1585144093532</updated>
+    </task>
+    <task id="LOCAL-00054" summary="200325 根据用户角色返回用户可访问菜单Tree;用户可访问菜单Tree缓存到Redis智能存取">
+      <created>1585146196693</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1585146196693</updated>
+    </task>
+    <task id="LOCAL-00055" summary="200326 用户登录后返回缓存可访问的路径到前端处理;sso 参数配置">
+      <created>1585230774060</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1585230774067</updated>
+    </task>
+    <task id="LOCAL-00056" summary="200326 权限定义 是否确认发布(确认发布后不可删除)">
+      <created>1585234993610</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1585234993610</updated>
+    </task>
+    <task id="LOCAL-00057" summary="200327 权限定义-已启用的项不允许删除限制">
+      <created>1585313348458</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1585313348459</updated>
+    </task>
+    <task id="LOCAL-00058" summary="200327 权限定义-已启用的项 不允许 修改编码">
+      <created>1585315263811</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1585315263811</updated>
+    </task>
+    <task id="LOCAL-00059" summary="200404 菜单定义 配置excel模板的上传更新等">
+      <created>1586005442631</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1586005442632</updated>
+    </task>
+    <task id="LOCAL-00060" summary="200404 自定义配置文件合并且可根据生产环境的修改加载不同的配置">
+      <created>1586007888261</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1586007888261</updated>
+    </task>
+    <task id="LOCAL-00061" summary="200404 shiro filter的bug修改;图片上传的配置参数修改;">
+      <created>1586013357074</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1586013357074</updated>
+    </task>
+    <task id="LOCAL-00062" summary="200405 添加热部署插件;通用异常处理修改; 用户、权限 新增或修改 时判断唯一拦截">
+      <created>1586076003560</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1586076003563</updated>
+    </task>
+    <task id="LOCAL-00063" summary="200405 允许超级管理员拥有所有的菜单、角色、权限">
+      <created>1586081229950</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1586081229950</updated>
+    </task>
+    <task id="LOCAL-00064" summary="200406 登录返回[可操作权限]集合给前端;结合mixins控制权限按钮的展示;权限定义前缀">
+      <created>1586187968947</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1586187968952</updated>
+    </task>
+    <task id="LOCAL-00065" summary="200408 properties参数值修改;打包后的jar无法执行的bug修复">
+      <created>1586346396984</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1586346396992</updated>
+    </task>
+    <task id="LOCAL-00066" summary="200410 查询可访问菜单时同时 返回 url映射tree">
+      <created>1586526902111</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1586526902112</updated>
+    </task>
+    <task id="LOCAL-00067" summary="200411 菜单定义的新增与更新时 RouterUrl唯一约束;编辑时不允许选择自个作为父级菜单">
+      <created>1586609333741</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1586609333742</updated>
+    </task>
+    <task id="LOCAL-00068" summary="200413 cors可返回自定义header添加;easyExcel 导出init">
+      <created>1586784155623</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1586784155623</updated>
+    </task>
+    <task id="LOCAL-00069" summary="200413 替换Slf4j log的取得方式为注解方式;去掉无引用的 @Autowired及 import">
+      <created>1586785457830</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1586785457830</updated>
+    </task>
+    <task id="LOCAL-00070" summary="200415 更新easyexcel版本;用户信息 勾选导出与全部导出api实现">
+      <created>1586960554523</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1586960554525</updated>
+    </task>
+    <task id="LOCAL-00071" summary="200415 [用户账号] 通用导出模板">
+      <created>1586960780414</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1586960780414</updated>
+    </task>
+    <task id="LOCAL-00072" summary="200415 各种数据类型之间的转化抽取到 一个专属的Transfer类中进行处理与调用">
+      <created>1586962997361</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1586962997361</updated>
+    </task>
+    <task id="LOCAL-00073" summary="200415 entity转XlsModel 调用">
+      <created>1586963182323</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1586963182323</updated>
+    </task>
+    <task id="LOCAL-00074" summary="200316">
+      <created>1587040014569</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1587040014570</updated>
+    </task>
+    <task id="LOCAL-00075" summary="200416 员工信息Excel导入">
+      <created>1587050604804</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1587050604805</updated>
+    </task>
+    <task id="LOCAL-00076" summary="200419 菜单定义层级值的bug">
+      <created>1587310315544</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1587310315545</updated>
+    </task>
+    <task id="LOCAL-00077" summary="20200718 maven多环境分开Package">
+      <created>1595053959231</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1595053959232</updated>
+    </task>
+    <task id="LOCAL-00078" summary="20200719 aop切面日志启用mysql，改用mongodb存储">
+      <created>1595153148080</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1595153148082</updated>
+    </task>
+    <task id="LOCAL-00079" summary="try pwd">
+      <created>1595262734005</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1595262734007</updated>
+    </task>
+    <task id="LOCAL-00080" summary="200723 自定义表单 mongodb 类定义">
+      <created>1595434728520</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1595434728521</updated>
+    </task>
+    <task id="LOCAL-00081" summary="200723 log MO修改">
+      <created>1595514267649</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1595514267651</updated>
+    </task>
+    <task id="LOCAL-00082" summary="20200723 Mapper Invalid bound statement (not found) bug修复">
+      <created>1595517903391</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1595517903391</updated>
+    </task>
+    <task id="LOCAL-00083" summary="20200723 operationLogMO id字段调整">
+      <created>1595517966141</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1595517966141</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="616770000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1436,82 +846,8 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6105442" sideWeight="0.5121029" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="MyBatis Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.48789713" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61734694" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32482994" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29500756" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" x="397" y="70" width="571" height="588" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5062893" order="4" side_tool="true" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6105442" sideWeight="0.5121029" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="MyBatis Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47619048" sideWeight="0.48789713" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61734694" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32482994" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5062893" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30484116" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" x="397" y="70" width="571" height="588" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -1529,648 +865,162 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
               </option>
             </State>
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="200305 菜单定义添加排序字段;菜单TreeSelect 排序" />
-    <MESSAGE value="200306 菜单定义 在更新时控制 菜单的父节点 不能更新为当前菜单的子节点" />
-    <MESSAGE value="200306 部门定义 在更新时控制 部门的父节点 不能更新为当前部门的子节点" />
-    <MESSAGE value="200309 生产环境配置文件修改;公告vo添加标签集合转字符串后可展示的字段" />
-    <MESSAGE value="200309 defineMenu 位置移动" />
-    <MESSAGE value="200311 菜单定义 自定义分页搜索" />
-    <MESSAGE value="200311 logback dev打印sql;针对每个表的create_user,last_modifyer 字段的entity、vo、xml等的修改" />
-    <MESSAGE value="200313 每个表dto与vo 添加 创建人、最后更新人对象;公告、公告草稿、公告标签、菜单 的分页搜索查询 由单表查询封装为 多表关联查询" />
-    <MESSAGE value="200313 各个表的dto添加;部门定义、职务定义、权限定义、角色定义 的分页查询优化" />
-    <MESSAGE value="200314 remark 字段未查询、转化dto、vo的bug;模块定义、用户账号、用户角色、用户职务、用户角色 ;mybatis 各个表的 sql定义" />
-    <MESSAGE value="200314 service提供 查询vo与dto 两种方式的分页查询" />
-    <MESSAGE value="200314 dto与vo接口区分 更新" />
-    <MESSAGE value="200316 service的增删改 添加基本的事务支持;服务器部署的 跨域允许ip映射 提取到 properties中设置" />
-    <MESSAGE value="200317 限制新增、更新 可选的用户类型" />
-    <MESSAGE value="200317 用户与租户关联及更新、展示" />
-    <MESSAGE value="200318 sql文件更新" />
-    <MESSAGE value="200321 重新整合 shiro" />
-    <MESSAGE value="200304 异常advice处理修改:通过annotation方式增加 登录用户信息注入到请求方法的参数中;解决部分TODO;" />
-    <MESSAGE value="200322 登录用户注解增加bug修改" />
-    <MESSAGE value="200322 根据菜单跳转方式不同进不同的链接跳转" />
-    <MESSAGE value="200322 让各层模块分别有自己独立的package" />
-    <MESSAGE value="200322" />
-    <MESSAGE value="200322 push error try" />
-    <MESSAGE value="200323 本地文件全部提交;persistence下java文件丢失bug" />
-    <MESSAGE value="200323 git丢失文件提交。" />
-    <option name="LAST_COMMIT_MESSAGE" value="200323 git丢失文件提交。" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="200404 菜单定义 配置excel模板的上传更新等" />
+    <MESSAGE value="200404 自定义配置文件合并且可根据生产环境的修改加载不同的配置" />
+    <MESSAGE value="200404 shiro filter的bug修改;图片上传的配置参数修改;" />
+    <MESSAGE value="200405 添加热部署插件;通用异常处理修改; 用户、权限 新增或修改 时判断唯一拦截" />
+    <MESSAGE value="200405 允许超级管理员拥有所有的菜单、角色、权限" />
+    <MESSAGE value="200406 登录返回[可操作权限]集合给前端;结合mixins控制权限按钮的展示;权限定义前缀" />
+    <MESSAGE value="200408 properties参数值修改;打包后的jar无法执行的bug修复" />
+    <MESSAGE value="200410 查询可访问菜单时同时 返回 url映射tree" />
+    <MESSAGE value="200411 菜单定义的新增与更新时 RouterUrl唯一约束;编辑时不允许选择自个作为父级菜单" />
+    <MESSAGE value="200413 cors可返回自定义header添加;easyExcel 导出init" />
+    <MESSAGE value="200413 替换Slf4j log的取得方式为注解方式;去掉无引用的 @Autowired及 import" />
+    <MESSAGE value="200415 更新easyexcel版本;用户信息 勾选导出与全部导出api实现" />
+    <MESSAGE value="200415 [用户账号] 通用导出模板" />
+    <MESSAGE value="200415 各种数据类型之间的转化抽取到 一个专属的Transfer类中进行处理与调用" />
+    <MESSAGE value="200415 entity转XlsModel 调用" />
+    <MESSAGE value="200316" />
+    <MESSAGE value="200416 员工信息Excel导入" />
+    <MESSAGE value="200419 菜单定义层级值的bug" />
+    <MESSAGE value="20200718 maven多环境分开Package" />
+    <MESSAGE value="20200719 aop切面日志启用mysql，改用mongodb存储" />
+    <MESSAGE value="try pwd" />
+    <MESSAGE value="200723 自定义表单 mongodb 类定义" />
+    <MESSAGE value="200723 log MO修改" />
+    <MESSAGE value="20200723 Mapper Invalid bound statement (not found) bug修复" />
+    <MESSAGE value="20200723 operationLogMO id字段调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200723 operationLogMO id字段调整" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="367" />
-    </breakpoint-manager>
-    <watches-manager />
+  <component name="WindowStateProjectService">
+    <state x="163" y="0" key="#Project_Structure" timestamp="1595643104705">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1595643104705" />
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595257962809">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1595257962809" />
+    <state x="488" y="68" width="622" height="591" key="#com.intellij.ide.util.MemberChooser" timestamp="1595651893239">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="68" width="622" height="591" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1595651893239" />
+    <state x="215" y="286" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1595607202291">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="215" y="286" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1595607202291" />
+    <state x="379" y="85" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1595607572798">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="85" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1595607572798" />
+    <state x="251" y="0" key="CommitChangelistDialog2" timestamp="1595651168364">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="251" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1595651168364" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1595646686473">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1595646686473" />
+    <state x="484" y="53" key="FileChooserDialogImpl" timestamp="1595135987955">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="484" y="53" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595135987955" />
+    <state width="1322" height="252" key="GridCell.Tab.0.bottom" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.0.center" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.0.left" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.0.right" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.1.bottom" timestamp="1595603163084">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595603163084" />
+    <state width="1322" height="252" key="GridCell.Tab.1.center" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.1.left" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state width="1322" height="252" key="GridCell.Tab.1.right" timestamp="1595603163083">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="252" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1595603163083" />
+    <state x="404" y="64" key="RollbackChangesDialog" timestamp="1595517734375">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="404" y="64" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1595517734375" />
+    <state x="184" y="0" key="SettingsEditor" timestamp="1595428046195">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595428046195" />
+    <state width="566" height="477" key="SwitcherDM" timestamp="1595672212415">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="566" height="477" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1595672212415" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1595517968372">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1595517968372" />
+    <state x="477" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595514193668">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="477" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1595514193668" />
+    <state x="227" y="84" width="912" height="644" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595601843554">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="227" y="84" width="912" height="644" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1595601843554" />
+    <state x="138" y="40" width="944" height="688" key="find.popup" timestamp="1595675797318">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="138" y="40" width="944" height="688" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1595675797318" />
+    <state x="80" y="47" key="new project wizard" timestamp="1595059456884">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="80" y="47" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1595059456884" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1595672216471">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1595672216471" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="breakpointCondition">
-      <expression>
-        <expression-string>&quot;menu1000022&quot;</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>&quot;menu1000022&quot;.equals(rootId)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>&quot;menu1000022&quot;.equals(itemParentId)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>itemParentId</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>resultEnum.getValue()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getClass().getName()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getClass()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getCause()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getCause().getCause()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getCause().getMessage()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>e.getLocalizedMessage()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>PublicResultEnum.Unauthorized.getValue()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>PublicResultEnum.Unauthorized.getValue().equals(resultEnum.getValue())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/resources/application-dev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="54" column="61" lean-forward="false" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="60" lean-forward="false" selection-start-line="5" selection-start-column="60" selection-end-line="5" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/resources/application-prod.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1045">
-          <caret line="55" column="50" lean-forward="false" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/resources/config/logback-spring.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/db/MybatisPlusConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/errors/error.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/role/RoleMenuDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/dto/user/UserRoleDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/vo/role/RoleMenuVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="69" column="45" lean-forward="false" selection-start-line="69" selection-start-column="45" selection-end-line="69" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/user/UserRoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-695">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/role/RolePermissionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/role/RoleMenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/role/RolePermissionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserRoleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="89" column="4" lean-forward="false" selection-start-line="89" selection-start-column="4" selection-end-line="102" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/tree/CommonMenuTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefinePermissionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1410">
-          <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/module/DefineMenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/shiro/JwtShiroFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-574">
-          <caret line="54" column="71" lean-forward="true" selection-start-line="54" selection-start-column="71" selection-end-line="54" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/redis/serviceimpl/common/MyRedisCommonReqServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="69" column="27" lean-forward="false" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="143" column="90" lean-forward="false" selection-start-line="143" selection-start-column="90" selection-end-line="143" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/shiro/MyShiroRelam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="56" column="67" lean-forward="true" selection-start-line="56" selection-start-column="67" selection-end-line="56" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineRoleMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="25" column="32" lean-forward="true" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/role/RoleMenuServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/role/RoleMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefinePermissionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="51" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefinePermissionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="125" column="36" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="36" />
-          <folding>
-            <marker date="1584886608701" expanded="true" signature="3878:4049" ph="SELECT FROM em_define_permission" />
-            <marker date="1584886608701" expanded="true" signature="4949:5139" ph="UPDATE em_role_permission... " />
-            <marker date="1584886608701" expanded="true" signature="5266:5585" ph="SELECT FROM em_define_permission" />
-            <marker date="1584886608701" expanded="true" signature="6083:6579" ph="SELECT DISTI... em_define_permission" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://H:/software/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="747" column="0" lean-forward="false" selection-start-line="747" selection-start-column="0" selection-end-line="747" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/tree/CommonTreeSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="72" column="39" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="39" />
-          <folding>
-            <element signature="e#3137#3149#0" expanded="false" />
-            <element signature="e#4186#4198#0" expanded="false" />
-            <element signature="e#4900#4912#0" expanded="false" />
-            <element signature="e#5010#5022#0" expanded="false" />
-            <element signature="e#6621#6635#0" expanded="false" />
-            <element signature="e#7873#7887#0" expanded="false" />
-            <element signature="e#8723#8737#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-779">
-          <caret line="129" column="25" lean-forward="true" selection-start-line="129" selection-start-column="25" selection-end-line="129" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineRoleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="103" column="18" lean-forward="true" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
-          <folding>
-            <marker date="1584886607188" expanded="true" signature="3753:3918" ph="SELECT FROM em_define_role" />
-            <marker date="1584886607188" expanded="true" signature="4839:5171" ph="SELECT FROM em_define_role" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/service/define/DefineRoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="49" column="26" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar!/com/google/common/collect/Sets.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="841" column="33" lean-forward="false" selection-start-line="841" selection-start-column="33" selection-end-line="841" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0.jar!/com/google/common/collect/Iterators.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="268" column="40" lean-forward="false" selection-start-line="268" selection-start-column="34" selection-end-line="268" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/user/UserRole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-809">
-          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/entity/role/RoleMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="68" column="27" lean-forward="false" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-support/2.1.8/mybatis-plus-support-2.1.8.jar!/com/baomidou/mybatisplus/service/impl/ServiceImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="305" column="19" lean-forward="false" selection-start-line="305" selection-start-column="19" selection-end-line="305" selection-end-column="19" />
-          <folding>
-            <element signature="e#10258#10259#0" expanded="true" />
-            <element signature="e#10317#10318#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RolePermissionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="35" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/role/RoleMenuMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="80" lean-forward="false" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/role/RolePermissionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="63" column="13" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="63" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/role/RoleMenuMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="89" column="38" lean-forward="false" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/base/BaseStateEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/resources/mapper/define/DefineMenuMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="169" column="51" lean-forward="false" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="51" />
-          <folding>
-            <marker date="1585061046501" expanded="true" signature="6306:6714" ph="SELECT from em_define_menu" />
-            <marker date="1585061046501" expanded="true" signature="6798:7234" ph="SELECT , FRO... " />
-            <marker date="1585061046501" expanded="true" signature="7780:8150" ph="SELECT FROM em_define_menu" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="45" column="56" lean-forward="false" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="169" column="76" lean-forward="false" selection-start-line="169" selection-start-column="76" selection-end-line="169" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Spring</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>egg-service</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/egg_manager$EggManagerApplication.ic" NAME="EggManagerApplication Coverage Results" MODIFIED="1595135088097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.egg.manager.*</FILTER>
+    </SUITE>
   </component>
 </project>

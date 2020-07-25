@@ -39,10 +39,10 @@ public class AnnouncementDraft extends Model<AnnouncementDraft> {
     private String tagIds ; //公告标签 集合
     private String accessory ;      //附件
     @TableField("is_published")
-    private Integer isPublished ;      //是否已提交
+    private short isPublished ;      //是否已提交
 
     private String remark;
-    private Integer state ;
+    private Short state ;
     @TableField("create_time")
     private Date createTime ;
     @TableField("update_time")

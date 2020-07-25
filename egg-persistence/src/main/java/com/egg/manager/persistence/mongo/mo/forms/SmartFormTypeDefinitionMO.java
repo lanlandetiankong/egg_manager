@@ -6,42 +6,30 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
- * \* note:
+ * \* note: 表单类型
  * \* User: zhouchengjie
  * \* Date: 2020/7/22
- * \* Time: 22:35
+ * \* Time: 23:06
  * \* Description:
  * \
  */
 @Data
 @Builder
-@Document(collection = "form_definition")
+@Document(collection = "form_type_definition")
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class FormDefinitionMO extends BaseModelMO {
-
+public class SmartFormTypeDefinitionMO extends BaseModelMO {
     /**
-     * 表单标题
+     * 类型名
      */
-    private String title ;
+    private String name ;
     /**
-     * 表单类型
-     */
-    @Field(value = "formType")
-    private FormTypeDefinitionMO formType ;
-    /**
-     * 表单描述
+     * 类型描述
      */
     private String description ;
-    /**
-     * 备注
-     */
     private String remark ;
-
-
 
 }

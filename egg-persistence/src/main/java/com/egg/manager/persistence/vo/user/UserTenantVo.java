@@ -19,10 +19,10 @@ public class UserTenantVo {
     private String userAccountId;
     private String defineTenantId;
     private Integer type;
-    private Integer isManager;
+    private Short isManager;
 
     private String remark;
-    private Integer state;
+    private Short state;
     private Date createTime;
     private Date updateTime;
     private String createUserId ;

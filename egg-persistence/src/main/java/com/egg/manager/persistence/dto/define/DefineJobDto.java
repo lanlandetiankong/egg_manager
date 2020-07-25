@@ -19,7 +19,7 @@ public class DefineJobDto {
     private Integer type;
 
     private String remark ;
-    private Integer state ;
+    private Short state ;
     private Date createTime ;
     private Date updateTime ;
     private String createUserId ;

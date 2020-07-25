@@ -62,6 +62,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("tenantIdList") List<String> tenantIdList, @Param("stateVal") Integer stateVal
+    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("tenantIdList") List<String> tenantIdList, @Param("stateVal") Short stateVal
             , @Param("loginUser") UserAccount loginUser);
 }

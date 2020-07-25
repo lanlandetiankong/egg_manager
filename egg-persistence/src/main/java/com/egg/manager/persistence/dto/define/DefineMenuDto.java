@@ -27,7 +27,7 @@ public class DefineMenuDto {
     private Integer orderNum ;
     private String excelModelConf ;
 
-    private Integer state ;
+    private Short state ;
     private String remark ;
     private Date createTime ;
     private Date updateTime ;

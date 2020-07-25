@@ -23,7 +23,7 @@ import java.util.List;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class FormFieldDefinitionMO extends BaseModelMO {
+public class SmartFormFieldDefinitionMO extends BaseModelMO {
 
     /**
      * 类型名
@@ -33,7 +33,7 @@ public class FormFieldDefinitionMO extends BaseModelMO {
     /**
      * 字段类型
      */
-    private FormFieldTypeDefinitionMO formFieldType ;
+    private SmartFormFieldTypeDefinitionMO formFieldType ;
 
     /**
      * 默认值

@@ -34,7 +34,7 @@ public interface DefineRoleMapper extends BaseMapper<DefineRole> {
      * @param stateVal 指定state的值
      * @return
      */
-    List<DefineRole> findAllRoleByUserAcccountId(@Param("userAccountId") String userAccountId,@Param("stateVal")Integer stateVal) ;
+    List<DefineRole> findAllRoleByUserAcccountId(@Param("userAccountId") String userAccountId,@Param("stateVal")Short stateVal) ;
 
     /**
      * 批量 伪删除

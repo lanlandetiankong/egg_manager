@@ -3,7 +3,7 @@ package com.egg.manager.common.base.exception;
 /**
  * @author zhouchengjie
  */
-public class MyMongoException extends Exception{
+public class MyMongoException extends RuntimeException{
     /**
      * Comment for &lt;code&gt;serialVersionUID&lt;/code&gt;
      */

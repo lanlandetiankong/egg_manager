@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Data
 @Builder
-@Document(collection = "form_field_definition")
+@Document(collection = "smart_form_field_definition")
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })

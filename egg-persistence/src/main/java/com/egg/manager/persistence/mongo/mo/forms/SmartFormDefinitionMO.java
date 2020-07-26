@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  */
 @Data
 @Builder
-@Document(collection = "form_definition")
+@Document(collection = "smart_form_definition")
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })

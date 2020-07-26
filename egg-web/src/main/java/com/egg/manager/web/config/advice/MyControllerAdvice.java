@@ -8,11 +8,27 @@ import com.egg.manager.service.helper.MyCommonResult;
 import com.egg.manager.service.helper.MyResponseHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
+import org.springframework.beans.ConversionNotSupportedException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
+import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.thymeleaf.exceptions.TemplateInputException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * \* note:
@@ -104,5 +120,86 @@ public class MyControllerAdvice {
         }
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
     }
+
+    /**
+     * 字段验证不通过处理
+     * @param ex
+     * @param request
+     * @param response
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(BindException.class)
+    @ResponseBody
+    public MyCommonResult handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        BindException c = (BindException) ex;
+        List<ObjectError> errors =c.getBindingResult().getAllErrors();
+        StringBuffer errorMsg=new StringBuffer("表单验证错误信息:");
+        errors.stream().forEach(x -> errorMsg.append(x.getDefaultMessage()));
+        log.error(errorMsg.toString());
+        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+    }
+
+    /**
+     * 请求参数绑定异常 处理
+     * @param ex
+     * @param request
+     * @param response
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(ServletRequestBindingException.class)
+    @ResponseBody
+    public MyCommonResult MethodArgumentNotValidException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        ServletRequestBindingException extException = (ServletRequestBindingException) ex;
+        StringBuffer errorMsg = new StringBuffer("参数异常信息：");
+        //参数值为空
+        if(extException instanceof MissingServletRequestParameterException){
+            MissingServletRequestParameterException exception = (MissingServletRequestParameterException) extException;
+            errorMsg.append("必填参数[" + exception.getParameterName() + "]不能为空");
+        }   else if(extException instanceof MissingMatrixVariableException){
+            MissingMatrixVariableException exception = (MissingMatrixVariableException) extException;
+            errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
+        }
+        log.error(errorMsg.toString());
+        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+    }
+
+
+    public Integer getStatusCodeByException(Exception ex){
+        Integer statusCode = null ;
+        if(ex == null){
+            return statusCode ;
+        }
+        if (ex instanceof HttpRequestMethodNotSupportedException) {
+            statusCode = HttpServletResponse.SC_METHOD_NOT_ALLOWED;
+        } else if (ex instanceof HttpMediaTypeNotSupportedException) {
+            statusCode = HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE;
+        } else if (ex instanceof HttpMediaTypeNotAcceptableException) {
+            statusCode = HttpServletResponse.SC_NOT_ACCEPTABLE;
+        } else if (ex instanceof MissingServletRequestParameterException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof ServletRequestBindingException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof ConversionNotSupportedException) {
+            statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+        } else if (ex instanceof TypeMismatchException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof HttpMessageNotReadableException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof HttpMessageNotWritableException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof MethodArgumentNotValidException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof MissingServletRequestPartException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof BindException) {
+            statusCode = HttpServletResponse.SC_BAD_REQUEST;
+        } else if (ex instanceof NoHandlerFoundException) {
+            statusCode = HttpServletResponse.SC_NOT_FOUND;
+        } else {
+            statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+        }
+        return statusCode ;
+    }
+
 
 }

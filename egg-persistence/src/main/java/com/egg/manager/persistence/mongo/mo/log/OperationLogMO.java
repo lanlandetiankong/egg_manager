@@ -63,7 +63,5 @@ public class OperationLogMO extends BaseModelMO {
     private String declaredAnnotations;    //定义的注解->json
 
     private String remark;
-    private String createUserId;
-    private String lastModifyerId;
 
 }

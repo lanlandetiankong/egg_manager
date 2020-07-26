@@ -211,8 +211,8 @@ public class MyBaseMongoServiceImpl<R extends MongoRepository<T, ID>,T extends B
     //private methods
     private void dealUpdateSetLoginUserToMO(T t,UserAccount loginUser){
         if(t != null && loginUser != null){
-            t.setLastModifiedId(loginUser.getFid());
-            t.setLastModifiedName(loginUser.getNickName());
+            t.setLastModifyerId(loginUser.getFid());
+            t.setLastModifyerNickName(loginUser.getNickName());
         }
     }
 
@@ -223,10 +223,10 @@ public class MyBaseMongoServiceImpl<R extends MongoRepository<T, ID>,T extends B
      */
     private void dealCreateSetLoginUserToMO(T t,UserAccount loginUser){
         if(t != null && loginUser != null){
-            t.setCreatedUserId(loginUser.getFid());
-            t.setCreatedUserName(loginUser.getNickName());
-            t.setLastModifiedId(loginUser.getFid());
-            t.setLastModifiedName(loginUser.getNickName());
+            t.setCreateUserId(loginUser.getFid());
+            t.setCreateUserNickName(loginUser.getNickName());
+            t.setLastModifyerId(loginUser.getFid());
+            t.setLastModifyerNickName(loginUser.getNickName());
         }
     }
 

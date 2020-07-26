@@ -12,13 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MyCommonResult<T> implements Serializable {
 
     private String token ;

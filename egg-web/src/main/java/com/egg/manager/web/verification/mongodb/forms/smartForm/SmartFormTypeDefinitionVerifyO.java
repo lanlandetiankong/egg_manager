@@ -2,11 +2,9 @@ package com.egg.manager.web.verification.mongodb.forms.smartForm;
 
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.web.verification.mongodb.MyBaseVerifyO;
-import com.egg.manager.web.verification.mongodb.VerifyGroupOfCreate;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfUpdate;
 import lombok.Data;
-import org.apache.poi.ss.formula.functions.T;
 
 import javax.validation.constraints.NotBlank;
 
@@ -21,8 +19,8 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class SmartFormTypeDefinitionVerifyO extends MyBaseVerifyO<SmartFormTypeDefinitionMO> {
-    @NotBlank(groups = {VerifyGroupOfUpdate.class, VerifyGroupOfDefault.class})
-    private String id ;
+    @NotBlank(groups = {VerifyGroupOfUpdate.class},message = "[fid]不能为空!")
+    private String fid ;
 
     /**
      * 顺序
@@ -31,12 +29,12 @@ public class SmartFormTypeDefinitionVerifyO extends MyBaseVerifyO<SmartFormTypeD
     /**
      * 类型名
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class})
+    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[类型名]不能为空!")
     private String name ;
     /**
      * 类型描述
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class})
+    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[描述]不能为空!")
     private String description ;
     private String remark ;
 

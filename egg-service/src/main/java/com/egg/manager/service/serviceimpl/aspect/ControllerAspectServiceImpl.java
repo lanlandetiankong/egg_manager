@@ -68,8 +68,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToOperationLog(OperationLogMO operationLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
         try{
-            if(StringUtils.isBlank(operationLogMO.getId())){
-                operationLogMO.setId(MyUUIDUtil.renderSimpleUUID());
+            if(StringUtils.isBlank(operationLogMO.getFid())){
+                //operationLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
             }
             if(operationLogMO.getStatus() == null){
                 operationLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
@@ -119,7 +119,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             }
 
             Date now = new Date() ;
-            operationLogMO.setCreatedDate(now);
+            operationLogMO.setCreateTime(now);
             operationLogMO.setLastModifiedDate(now);
         }   catch (Exception e){
 

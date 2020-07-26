@@ -22,7 +22,7 @@ import java.util.Date;
 public class BaseModelMO implements Serializable {
 
     @Id
-    private String id ;
+    private String fid ;
 
     /**
      * 顺序
@@ -32,6 +32,7 @@ public class BaseModelMO implements Serializable {
     /**
      * 状态
      */
+    @Field(value = "status")
     private Short status ;
     @Version
     private Integer version ;
@@ -39,24 +40,25 @@ public class BaseModelMO implements Serializable {
     /**
      * 创建人id
      */
-    private String createdUserId ;
+    @Field(value = "createUserId")
+    private String createUserId ;
     /**
      * 创建人名称
      */
-    private String createdUserName ;
+    private String createUserNickName ;
     /**
      * 创建时间
      */
     @CreatedDate
-    private Date createdDate ;
+    private Date createTime ;
     /**
      * 最后更新用户id
      */
-    private String lastModifiedId ;
+    private String lastModifyerId ;
     /**
      * 最后更新用户名称
      */
-    private String lastModifiedName ;
+    private String lastModifyerNickName ;
     /**
      * 最后更新时间
      */

@@ -1,25 +1,19 @@
 package com.egg.manager.mongodb.mservices.serviceimpl;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import org.apache.shiro.util.CollectionUtils;
-import org.ehcache.core.internal.util.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * \* note:
@@ -29,7 +23,7 @@ import java.util.function.Consumer;
  * \* Description:
  * \
  */
-public class MyBaseMongoServiceImpl<R extends MongoRepository<T, ID>,T extends BaseModelMO,ID> implements MyBaseMongoService<T,ID> {
+public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T extends BaseModelMO,ID> implements MyBaseMongoService<T,ID> {
     @Autowired
     protected R baseRepository;
 

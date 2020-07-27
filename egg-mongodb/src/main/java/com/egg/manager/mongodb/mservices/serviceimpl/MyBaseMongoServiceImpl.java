@@ -40,7 +40,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
                 dealCreateSetLoginUserToMO(t,loginUser);
             }
         }
-        return baseRepository.insert(iterables);
+        return baseRepository.batchInsert(iterables);
     }
 
     @Override
@@ -48,19 +48,9 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         dealUpdateSetLoginUserToMO(t,loginUser);
         return baseRepository.save(t);
     }
-    @Override
-    public List<T> doSaveAll(Iterable<T> iterables,UserAccount loginUser) {
-        if(iterables != null){
-            for (T t : iterables){
-                dealUpdateSetLoginUserToMO(t,loginUser);
-            }
-        }
-        return baseRepository.saveAll(iterables);
-    }
-
 
     @Override
-    public Integer doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException {
+    public Long doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException {
         Integer count = 0 ;
         if(id == null){
             throw new MyMongoException("请传入id!");
@@ -73,11 +63,11 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         dealUpdateSetLoginUserToMO(t,loginUser);
         t.setStatus(BaseStateEnum.DELETE.getValue());
         baseRepository.save(t);
-        return ++count ;
+        return new Long(++count) ;
     }
 
     @Override
-    public Integer doFakeDelete(T t,UserAccount loginUser) throws MyMongoException{
+    public Long doFakeDelete(T t,UserAccount loginUser) throws MyMongoException{
         Integer count = 0 ;
         if(t == null){
             throw new MyMongoException("不存在的数据!");
@@ -85,25 +75,15 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         dealUpdateSetLoginUserToMO(t,loginUser);
         t.setStatus(BaseStateEnum.DELETE.getValue());
         baseRepository.delete(t);
-        return ++count ;
+        return new Long(++count) ;
     }
 
     @Override
-    public Integer doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException {
+    public Long doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException {
         if(iterableList == null){
             throw new MyMongoException("集合为空!");
         }
-        Iterable<T> tList = baseRepository.findAllById(iterableList);
-        Integer count = 0 ;
-        if(tList != null){
-            for (T t : tList){
-                dealUpdateSetLoginUserToMO(t,loginUser);
-                t.setStatus(BaseStateEnum.DELETE.getValue());
-                count ++ ;
-            }
-        }
-        baseRepository.saveAll(tList);
-        return count;
+        return baseRepository.batchChangeStatusByIds(iterableList,BaseStateEnum.DELETE.getValue(),loginUser);
     }
 
     @Override
@@ -118,7 +98,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
     @Override
     public void doDeleteAll(Iterable<? extends T> iterableList, UserAccount loginUser) {
-        baseRepository.deleteAll(iterableList);
+        baseRepository.batchDelete(iterableList);
     }
 
     @Override

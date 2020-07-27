@@ -49,13 +49,6 @@ public interface MyBaseMongoService<T,ID> {
      */
     T doSave(T t, UserAccount loginUser);
 
-    /**
-     * 批量保存
-     * @param iterables
-     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
-     * @return
-     */
-    List<T> doSaveAll(Iterable<T> iterables, UserAccount loginUser);
 
     /**
      * 根据id-伪删除
@@ -64,7 +57,7 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      * @throws MyMongoException
      */
-    Integer doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException;
+    Long doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException;
 
     /**
      * 根据根据实体类-伪删除
@@ -73,7 +66,7 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      * @throws MyMongoException
      */
-    Integer doFakeDelete(T t,UserAccount loginUser) throws MyMongoException;
+    Long doFakeDelete(T t,UserAccount loginUser) throws MyMongoException;
 
     /**
      * 根据id集合伪删除
@@ -82,7 +75,7 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      * @throws MyMongoException
      */
-    Integer doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException;
+    Long doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException;
 
     /**
      * 根据id删除对应项

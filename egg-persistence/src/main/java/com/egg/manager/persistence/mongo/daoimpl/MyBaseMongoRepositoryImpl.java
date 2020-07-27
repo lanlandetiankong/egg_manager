@@ -2,6 +2,7 @@ package com.egg.manager.persistence.mongo.daoimpl;
 
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.util.reflex.MyReflexUtil;
+import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import com.google.common.collect.Lists;
@@ -10,7 +11,6 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.security.servlet.ApplicationContextRequestMatcher;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -22,7 +22,6 @@ import org.springframework.util.CollectionUtils;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
 
     private Class<T> tClass;
     //封装后统一的主键字段名
-    private String keyFieldName = "fid";
+    private final String FIELD_NAME_OF_FID = "fid";
+    private final String FIELD_NAME_OF_STATUS = "status";
 
     public Class<T> getTClass() {
         if (tClass != null) {
@@ -70,7 +70,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     }
 
     @Override
-    public <S extends T> List<S> insert(Iterable<S> iterable) {
+    public <S extends T> List<S> batchInsert(Iterable<S> iterable) {
         List<S> list = dealGetListFromIterable(iterable, true);
         if (CollectionUtils.isEmpty(list)) {
             throw new MyMongoException("待新增集合为空！");
@@ -91,14 +91,15 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         return s;
     }
 
-    public <S extends T> S updateAllColumnById(S s) {
+    @Override
+    public <S extends T> S updateById(S s,boolean isAllColumn) {
         //验证更新的[文档]不能为空
         dealVerifyTNotNull(s,true);
         //验证id不能为空
         dealGetQueryWithId(s.getFid(),true);
         Query query = dealGetQueryWithId(s.getFid(),true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s,false,keyFieldName);
+        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s,!isAllColumn,FIELD_NAME_OF_FID);
         UpdateResult result = mongoTemplate.updateFirst(query,update,getTClass());
         if(result.getModifiedCount() != 1){
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
@@ -108,12 +109,56 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         return s;
     }
 
-    public <S extends T> long updateByIds(Iterable<ID> ids,S s){
+    @Override
+    public <S extends T> long batchUpdateByIds(Iterable<ID> ids,S s,boolean isAllColumn){
         //id迭代器不能为空
         dealGetQueryWithIds(ids,true);
+        int size = Lists.newArrayList(ids).size();
+        Query query = dealGetQueryWithIds(ids,true);
+        //MO转化为更新对象(不忽略null字段,忽略fid)
+        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s,!isAllColumn,FIELD_NAME_OF_FID);
+        UpdateResult result = mongoTemplate.updateMulti(query,update,getTClass());
+        if(result.getModifiedCount() != size){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+            log.error(errmsg);
+            throw new MyMongoException(errmsg);
+        }
+        return result.getModifiedCount() ;
+    }
 
+    @Override
+    public <S extends T> S updateStatusById(S s,Short status) {
+        //验证更新的[文档]不能为空
+        dealVerifyTNotNull(s,true);
+        //验证id不能为空
+        dealGetQueryWithId(s.getFid(),true);
+        Query query = dealGetQueryWithId(s.getFid(),true);
+        //MO转化为更新对象(不忽略null字段,忽略fid)
+        Update update = new Update().addToSet(FIELD_NAME_OF_STATUS,status);
+        UpdateResult result = mongoTemplate.updateFirst(query,update,getTClass());
+        if(result.getModifiedCount() != 1){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+            log.error(errmsg);
+            throw new MyMongoException(errmsg);
+        }
+        return s;
+    }
 
-        return (long ) 0 ;
+    @Override
+    public <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short state,U user){
+        //id迭代器 不能为空
+        dealGetQueryWithIds(ids,true);
+        Query query = dealGetQueryWithIds(ids,true);
+        int size = Lists.newArrayList(ids).size();
+        //MO转化为更新对象(不忽略null字段,忽略fid)
+        Update update = new Update().addToSet(FIELD_NAME_OF_STATUS,state) ;
+        UpdateResult result = mongoTemplate.updateMulti(query,update,getTClass());
+        if(result.getModifiedCount() != size){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+            log.error(errmsg);
+            throw new MyMongoException(errmsg);
+        }
+        return result.getModifiedCount() ;
     }
 
 
@@ -126,32 +171,6 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         return s;
     }
 
-
-    @Override
-    public <S extends T> List<S> saveAll(Iterable<S> iterable) {
-        if (iterable == null) {
-            throw new RuntimeException("传入的集合不能为空!");
-        }
-        Iterator<S> iter = iterable.iterator();
-        List<S> addList = new ArrayList<>();
-        List<S> updateList = new ArrayList<>();
-        while (iter.hasNext()) {
-            S s = iter.next();
-            //判断ID对应的是否为空
-            if (dealVerifyIdBlank(s.getFid(),false)) {
-                addList.add(s);
-            }   else {
-                updateList.add(s);
-            }
-        }
-        if (CollectionUtils.isEmpty(addList) == false) {
-            this.insert(addList);
-        }
-        if (CollectionUtils.isEmpty(addList) == false) {
-            // TODO 更新方法
-        }
-        return Lists.newArrayList(iterable);
-    }
 
 
     @Override
@@ -168,7 +187,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     }
 
     @Override
-    public void deleteAll(Iterable<? extends T> iterable) {
+    public void batchDelete(Iterable<? extends T> iterable) {
         //List<? extends T> list = dealGetListFromIterable(iterable,false);
         Query query = dealGetQueryWithIdsFromT(iterable, true);
         mongoTemplate.remove(query, tClass);
@@ -318,7 +337,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     private Query dealGetQueryWithId(ID id, boolean exceptionAble) {
         dealVerifyIdBlank(id, exceptionAble);
         Criteria criteria = new Criteria();
-        criteria.where(keyFieldName).is(id);
+        criteria.where(FIELD_NAME_OF_FID).is(id);
         Query query = new Query();
         return new Query().addCriteria(criteria);
     }
@@ -333,7 +352,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     private Query dealGetQueryWithIds(Iterable<ID> idIters, boolean exceptionAble) {
         List<ID> ids = dealGetListFromIterable(idIters, exceptionAble);
         Criteria criteria = new Criteria();
-        criteria.where(keyFieldName).in(ids);
+        criteria.where(FIELD_NAME_OF_FID).in(ids);
         return new Query().addCriteria(criteria);
     }
 
@@ -358,7 +377,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
             }
         }
         Criteria criteria = new Criteria();
-        criteria.where(keyFieldName).in(idList);
+        criteria.where(FIELD_NAME_OF_FID).in(idList);
         return new Query().addCriteria(criteria);
     }
 }

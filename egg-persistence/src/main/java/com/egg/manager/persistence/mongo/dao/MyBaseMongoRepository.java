@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.mongo.dao;
 
+import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
      * @param <S>
      * @return
      */
-    <S extends T> List<S> insert(Iterable<S> iterable);
+    <S extends T> List<S> batchInsert(Iterable<S> iterable);
 
 
 
@@ -48,13 +49,42 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
     <S extends T> S save(S s);
 
     /**
-     * 批量保存[文档]
-     *
-     * @param iterable
+     * 根据id更新指定[文档]
+     * @param s
+     * @param isAllColumn 是否更新所有字段
      * @param <S>
      * @return
      */
-    <S extends T> List<S> saveAll(Iterable<S> iterable);
+    <S extends T> S updateById(S s,boolean isAllColumn);
+
+    /**
+     * 批量根据id更新指定[文档]
+     * @param ids
+     * @param s
+     * @param isAllColumn 是否更新所有字段
+     * @param <S>
+     * @return
+     */
+    <S extends T> long batchUpdateByIds(Iterable<ID> ids,S s,boolean isAllColumn);
+
+
+    /**
+     * 更新[文档]的Status
+     * @param s
+     * @param status 修改值
+     * @param <S>
+     * @return
+     */
+    <S extends T> S updateStatusById(S s,Short status);
+
+    /**
+     * 批量更新[文档]的Status
+     * @param ids 要更新的文档ids
+     * @param state 修改值
+     * @return
+     */
+    <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short state,U user);
+
 
     /**
      * 根据id删除[文档]
@@ -73,7 +103,7 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
      * 根据MO集合批量删除[文档]
      * @param iterable
      */
-    void deleteAll(Iterable<? extends T> iterable);
+    void batchDelete(Iterable<? extends T> iterable);
 
     /**
      * 删除所有[文档]

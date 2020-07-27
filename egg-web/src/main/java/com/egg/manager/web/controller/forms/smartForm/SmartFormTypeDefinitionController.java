@@ -146,7 +146,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Integer delCount = smartFormTypeDefinitionMService.doFakeDeleteById(delId, loginUser);
+            Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(delId, loginUser);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/batchDelByIds")
     public MyCommonResult<SmartFormTypeDefinitionMO> doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
-        Integer delCount = 0;
+        Long delCount = (long) 0;
         try {
             if (delIds != null && delIds.length > 0) {
                 delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(Lists.newArrayList(delIds), loginUser);

@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class SmartFormDefinitionMO extends BaseModelMO {
+public class SmartFormDefinitionMO extends BaseModelMO<String> {
 
     /**
      * 表单标题

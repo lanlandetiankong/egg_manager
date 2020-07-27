@@ -10,7 +10,7 @@ import com.egg.manager.persistence.mongo.mo.BaseModelMO;
  * \* Description:
  * \
  */
-public class SmartFormRecordFieldMO extends BaseModelMO {
+public class SmartFormRecordFieldMO extends BaseModelMO<String> {
     /**
      * 表单record
      */

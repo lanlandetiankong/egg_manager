@@ -18,45 +18,163 @@ import java.util.Optional;
  * \
  */
 public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
-    <S extends T> List<S> saveAll(Iterable<S> iterable);
-
-    List<T> findAll();
-
-    List<T> findAll(Sort sort);
-
+    /**
+     * 插入一个[文档]
+     *
+     * @param s
+     * @param <S>
+     * @return
+     */
     <S extends T> S insert(S s);
 
+    /**
+     * 批量插入[文档]
+     *
+     * @param iterable
+     * @param <S>
+     * @return
+     */
     <S extends T> List<S> insert(Iterable<S> iterable);
 
-    <S extends T> List<S> findAll(Example<S> example);
 
-    <S extends T> List<S> findAll(Example<S> example, Sort sort);
 
-    Page<T> findAll(Pageable pageable);
-
+    /**
+     * 保存[文档]
+     *
+     * @param s
+     * @param <S>
+     * @return
+     */
     <S extends T> S save(S s);
 
-    Optional<T> findById(ID id);
+    /**
+     * 批量保存[文档]
+     *
+     * @param iterable
+     * @param <S>
+     * @return
+     */
+    <S extends T> List<S> saveAll(Iterable<S> iterable);
 
-    boolean existsById(ID id);
-
-    Iterable<T> findAllById(Iterable<ID> iterable);
-
-    long count();
-
+    /**
+     * 根据id删除[文档]
+     *
+     * @param id
+     */
     void deleteById(ID id);
 
+    /**
+     * 根据MO删除[文档]
+     * @param T
+     */
     void delete(T T);
 
+    /**
+     * 根据MO集合批量删除[文档]
+     * @param iterable
+     */
     void deleteAll(Iterable<? extends T> iterable);
 
+    /**
+     * 删除所有[文档]
+     */
+    @Deprecated
     void deleteAll();
 
+    /**
+     * 根据Example查询一个[文档]
+     * @param example
+     * @param <S>
+     * @return
+     */
     <S extends T> Optional<S> findOne(Example<S> example);
 
-    <S extends T> Page<S> findAll(Example<S> example, Pageable pageable);
+    /**
+     * 根据id查询对应[文档]，返回Optional
+     * @param id
+     * @return
+     */
+    Optional<T> findById(ID id);
 
+    /**
+     * 根据id集合查询对应[文档]集合
+     * @param iterable
+     * @return
+     */
+    Iterable<T> findAllById(Iterable<ID> iterable);
+
+    /**
+     * 查询所有[文档]
+     * @return
+     */
+    List<T> findAll();
+
+    /**
+     * 查询所有[文档]并排序
+     * @param sort
+     * @return
+     */
+    List<T> findAll(Sort sort);
+
+    /**
+     * 根据条件查询[文档]集合
+     * @param example
+     * @param <S>
+     * @return
+     */
+    <S extends T> List<S> findAll(Example<S> example);
+
+    /**
+     * 根据条件查询[文档]集合并排序
+     * @param example
+     * @param sort
+     * @param <S>
+     * @return
+     */
+    <S extends T> List<S> findAll(Example<S> example, Sort sort);
+
+    /**
+     * 根据条件分页查询[文档]
+     * @param example
+     * @param pageable
+     * @param <S>
+     * @return
+     */
+    <S extends T> Page<S> findPage(Example<S> example, Pageable pageable);
+
+    /**
+     * 分页查询[文档]
+     * @param pageable
+     * @return
+     */
+    Page<T> findPage(Pageable pageable);
+
+    /**
+     * 统计该集合的[文档]总数
+     * @return
+     */
+    long count();
+
+    /**
+     * 统计筛选条件后的[文档]总数
+     * @param example
+     * @param <S>
+     * @return
+     */
     <S extends T> long count(Example<S> example);
 
+    /**
+     * 判断id是否存在
+     * @param id
+     * @return
+     */
+    boolean existsById(ID id);
+
+    /**
+     * 根据条件判断是否存在
+     * @param example
+     * @param <S>
+     * @return
+     */
     <S extends T> boolean exists(Example<S> example);
 }

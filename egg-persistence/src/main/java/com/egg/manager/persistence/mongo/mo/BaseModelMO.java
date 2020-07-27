@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.mongo.mo;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -19,49 +20,49 @@ import java.util.Date;
  * \
  */
 @Data
-public class BaseModelMO implements Serializable {
+public class BaseModelMO<K> implements Serializable {
 
     @Id
-    private String fid ;
+    private K fid;
 
     /**
      * 顺序
      */
     @Field(value = "orderNum")
-    private Integer orderNum ;
+    private Integer orderNum;
     /**
      * 状态
      */
     @Field(value = "status")
-    private Short status ;
+    private Short status;
     @Version
-    private Integer version ;
+    private Integer version;
 
     /**
      * 创建人id
      */
     @Field(value = "createUserId")
-    private String createUserId ;
+    private String createUserId;
     /**
      * 创建人名称
      */
-    private String createUserNickName ;
+    private String createUserNickName;
     /**
      * 创建时间
      */
     @CreatedDate
-    private Date createTime ;
+    private Date createTime;
     /**
      * 最后更新用户id
      */
-    private String lastModifyerId ;
+    private String lastModifyerId;
     /**
      * 最后更新用户名称
      */
-    private String lastModifyerNickName ;
+    private String lastModifyerNickName;
     /**
      * 最后更新时间
      */
     @LastModifiedDate
-    private Date lastModifiedDate ;
+    private Date lastModifiedDate;
 }

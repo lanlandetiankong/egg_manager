@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @Document(collection = "em_operation_log")
-public class OperationLogMO extends BaseModelMO {
+public class OperationLogMO extends BaseModelMO<String> {
 
     private static final long serialVersionUID = 1L;
 

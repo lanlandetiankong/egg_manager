@@ -142,7 +142,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
     @Override
     public Page<T> doFindAll(Pageable pageable) {
-        return baseRepository.findAll(pageable);
+        return baseRepository.findPage(pageable);
     }
 
     @Override
@@ -174,7 +174,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
     @Override
     public Page<T> doFindAll(Example<T> example, Pageable pageable) {
-        return baseRepository.findAll(example,pageable);
+        return baseRepository.findPage(example,pageable);
     }
 
     @Override

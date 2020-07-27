@@ -10,6 +10,7 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.security.servlet.ApplicationContextRequestMatcher;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -239,7 +240,6 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     public <S extends T> Page<S> findPage(Example<S> example, Pageable pageable) {
         return null;
     }
-
 
     @Override
     public long count() {

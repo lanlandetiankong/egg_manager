@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.forms.smartForm;
 
+import com.egg.manager.common.base.pagination.mongo.AntdvMongoPage;
 import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
@@ -19,6 +20,10 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,9 +68,9 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                                                    @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
-            List<SmartFormTypeDefinitionMO> list  =smartFormTypeDefinitionMService.doFindAll();
-            result.setResultList(list);
-            dealCommonSuccessCatch(result,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
+            PageRequest pageRequest = AntdvMongoPage.getPageFromRequest(request);
+            Page<SmartFormTypeDefinitionMO> page  =smartFormTypeDefinitionMService.doFindPage(pageRequest);
+            dealSetMongoPageResult(result,page,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

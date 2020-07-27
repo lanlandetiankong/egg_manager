@@ -22,6 +22,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -180,6 +181,12 @@ public class BaseController {
 
     public void dealCommonSuccessCatch(MyCommonResult result, String info) {
         result.setInfo(info);
+    }
+
+    public void dealSetMongoPageResult(MyCommonResult result,Page page,String info){
+        result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);
+        result.setResultList(page.getContent());
+        result.setCount(page.getTotalElements());
     }
 
 

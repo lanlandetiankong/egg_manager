@@ -13,13 +13,24 @@ import lombok.NoArgsConstructor;
  * \p
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AntdvPaginationBean {
     private Integer current ;
     private Integer pageSize ;
     private int total ;
 
+    public AntdvPaginationBean() {
+    }
+
+    public AntdvPaginationBean(Integer current, Integer pageSize) {
+        this.current = current;
+        this.pageSize = pageSize;
+    }
+
+    public AntdvPaginationBean(Integer current, Integer pageSize, int total) {
+        this.current = current;
+        this.pageSize = pageSize;
+        this.total = total;
+    }
 
     public static AntdvPaginationBean gainLimitPaginationBean(Integer pageSize){
         return new AntdvPaginationBean(1,pageSize,0);

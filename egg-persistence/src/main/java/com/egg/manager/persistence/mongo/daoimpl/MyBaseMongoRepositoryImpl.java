@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -190,7 +191,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     public void batchDelete(Iterable<? extends T> iterable) {
         //List<? extends T> list = dealGetListFromIterable(iterable,false);
         Query query = dealGetQueryWithIdsFromT(iterable, true);
-        mongoTemplate.remove(query, tClass);
+        mongoTemplate.remove(query, getTClass());
     }
 
     @Override
@@ -208,14 +209,14 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     @Override
     public Optional<T> findById(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
-        return Optional.of(mongoTemplate.findById(id, tClass));
+        return Optional.of(mongoTemplate.findById(id, getTClass()));
     }
 
     @Override
     public Iterable<T> findAllById(Iterable<ID> iterable) {
         List<ID> list = dealGetListFromIterable(iterable, true);
         Query query = dealGetQueryWithIds(list, true);
-        return mongoTemplate.find(query, tClass);
+        return mongoTemplate.find(query, getTClass());
     }
 
     /**
@@ -250,9 +251,10 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     @Override
     public Page<T> findPage(Pageable pageable) {
         Query query = (pageable == null) ? new Query() : new Query().with(pageable);
-        List<T> list = mongoTemplate.find(query, tClass);
-        long total = mongoTemplate.count(query, tClass);
-        return new PageImpl(list, pageable, total);
+        List<T> list = mongoTemplate.find(query, getTClass());
+        long total = mongoTemplate.count(query, getTClass());
+        return PageableExecutionUtils.getPage(list,pageable,() -> total) ;
+        //return new PageImpl(list, pageable, total);
     }
 
     @Override
@@ -262,7 +264,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
 
     @Override
     public long count() {
-        return mongoTemplate.count(new Query(), tClass);
+        return mongoTemplate.count(new Query(), getTClass());
     }
 
 
@@ -274,7 +276,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     @Override
     public boolean existsById(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
-        return mongoTemplate.findById(id, tClass) != null;
+        return mongoTemplate.findById(id, getTClass()) != null;
     }
 
     @Override

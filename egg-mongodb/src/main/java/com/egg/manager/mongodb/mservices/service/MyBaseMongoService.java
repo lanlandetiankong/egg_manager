@@ -154,7 +154,7 @@ public interface MyBaseMongoService<T,ID> {
      * @param pageable
      * @return
      */
-    Page<T> doFindAll(Pageable pageable);
+    Page<T> doFindPage(Pageable pageable);
     /**
      * 根据条件查询首个项
      * @param example
@@ -168,7 +168,7 @@ public interface MyBaseMongoService<T,ID> {
      * @param pageable
      * @return
      */
-    Page<T> doFindAll(Example<T> example, Pageable pageable);
+    Page<T> doFindPage(Example<T> example, Pageable pageable);
     /**
      * 统计个数
      * @return

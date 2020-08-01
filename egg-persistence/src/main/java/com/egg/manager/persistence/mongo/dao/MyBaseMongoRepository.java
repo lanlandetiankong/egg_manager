@@ -2,10 +2,10 @@ package com.egg.manager.persistence.mongo.dao;
 
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -112,12 +112,12 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
     void deleteAll();
 
     /**
-     * 根据Example查询一个[文档]
-     * @param example
+     * 根据Query查询一个[文档]
+     * @param query
      * @param <S>
      * @return
      */
-    <S extends T> Optional<S> findOne(Example<S> example);
+    <S extends T> Optional<S> findOne(Query query);
 
     /**
      * 根据id查询对应[文档]，返回Optional
@@ -148,29 +148,35 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
 
     /**
      * 根据条件查询[文档]集合
-     * @param example
-     * @param <S>
+     * @param query
      * @return
      */
-    <S extends T> List<S> findAll(Example<S> example);
+     List<T> findAll(Query query);
 
     /**
      * 根据条件查询[文档]集合并排序
-     * @param example
+     * @param query
      * @param sort
-     * @param <S>
      * @return
      */
-    <S extends T> List<S> findAll(Example<S> example, Sort sort);
+    List<T> findAll(Query query, Sort sort);
 
     /**
      * 根据条件分页查询[文档]
-     * @param example
+     * @param query
      * @param pageable
-     * @param <S>
      * @return
      */
-    <S extends T> Page<S> findPage(Example<S> example, Pageable pageable);
+    Page<T> findPage(Query query, Pageable pageable);
+
+    /**
+     * 根据查询条件、排序 进行分页查询
+     * @param query 查询配置
+     * @param sort 排序配置
+     * @param pageable 分页配置
+     * @return
+     */
+    Page<T> findPage(Query query,Sort sort, Pageable pageable);
 
     /**
      * 分页查询[文档]
@@ -187,11 +193,11 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
 
     /**
      * 统计筛选条件后的[文档]总数
-     * @param example
+     * @param query
      * @param <S>
      * @return
      */
-    <S extends T> long count(Example<S> example);
+    <S extends T> long count(Query query);
 
     /**
      * 判断id是否存在
@@ -202,9 +208,9 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
 
     /**
      * 根据条件判断是否存在
-     * @param example
+     * @param query
      * @param <S>
      * @return
      */
-    <S extends T> boolean exists(Example<S> example);
+    <S extends T> boolean exists(Query query);
 }

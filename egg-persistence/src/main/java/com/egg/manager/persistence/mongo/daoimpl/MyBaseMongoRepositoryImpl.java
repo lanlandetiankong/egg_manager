@@ -202,8 +202,9 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     }
 
     @Override
-    public <S extends T> Optional<S> findOne(Example<S> example) {
-        return Optional.empty();
+    public Optional<T> findOne(Query query) {
+        query = query != null ? query : new Query() ;
+        return Optional.of(mongoTemplate.findOne(query,getTClass()));
     }
 
     @Override
@@ -237,29 +238,57 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
 
 
     @Override
-    public <S extends T> List<S> findAll(Example<S> example) {
-        //TODO
-        return null;
+    public List<T> findAll(Query query) {
+        query = query != null ? query : new Query() ;
+        return mongoTemplate.find(query,getTClass());
     }
 
     @Override
-    public <S extends T> List<S> findAll(Example<S> example, Sort sort) {
-        //TODO
-        return null;
+    public List<T> findAll(Query query, Sort sort) {
+        query = query != null ? query : new Query() ;
+        if(sort != null){
+            query.with(sort);
+        }
+        return mongoTemplate.find(query,getTClass());
     }
 
     @Override
     public Page<T> findPage(Pageable pageable) {
+        if(pageable == null){
+            throw new MyMongoException("请先传入分页配置后再进行查询！");
+        }
         Query query = (pageable == null) ? new Query() : new Query().with(pageable);
-        List<T> list = mongoTemplate.find(query, getTClass());
         long total = mongoTemplate.count(query, getTClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTClass());
         return PageableExecutionUtils.getPage(list,pageable,() -> total) ;
         //return new PageImpl(list, pageable, total);
     }
 
     @Override
-    public <S extends T> Page<S> findPage(Example<S> example, Pageable pageable) {
-        return null;
+    public Page<T> findPage(Query query, Pageable pageable) {
+        if(pageable == null){
+            throw new MyMongoException("请先传入分页配置后再进行查询！");
+        }
+        query = query != null ? query : new Query() ;
+        query.with(pageable);
+        long total = mongoTemplate.count(query, getTClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query,getTClass());
+        return PageableExecutionUtils.getPage(list,pageable,() -> total) ;
+    }
+
+    @Override
+    public Page<T> findPage(Query query,Sort sort, Pageable pageable) {
+        if(pageable == null){
+            throw new MyMongoException("请先传入分页配置后再进行查询！");
+        }
+        query = query != null ? query : new Query() ;
+        if(sort != null){
+            query.with(sort);
+        }
+        query.with(pageable);
+        long total = mongoTemplate.count(query, getTClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query,getTClass());
+        return PageableExecutionUtils.getPage(list,pageable,() -> total) ;
     }
 
     @Override
@@ -269,8 +298,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
 
 
     @Override
-    public <S extends T> long count(Example<S> example) {
-        return 0;
+    public long count(Query query) {
+        return mongoTemplate.count(query,getTClass());
     }
 
     @Override
@@ -280,8 +309,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     }
 
     @Override
-    public <S extends T> boolean exists(Example<S> example) {
-        return false;
+    public boolean exists(Query query) {
+        return mongoTemplate.exists(query,getTClass());
     }
 
 

@@ -2,10 +2,10 @@ package com.egg.manager.mongodb.mservices.service;
 
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Query;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -136,18 +136,18 @@ public interface MyBaseMongoService<T,ID> {
 
     /**
      * 根据查询条件查询记录
-     * @param example
+     * @param query
      * @return
      */
-    List<T> doFindAll(Example<T> example);
+    List<T> doFindAll(Query query);
 
     /**
      * 根据查询条件查询记录并排序
-     * @param example
+     * @param query
      * @param sort
      * @return
      */
-    List<T> doFindAll(Example<T> example, Sort sort);
+    List<T> doFindAll(Query query, Sort sort);
 
     /**
      * 分页查询
@@ -157,18 +157,18 @@ public interface MyBaseMongoService<T,ID> {
     Page<T> doFindPage(Pageable pageable);
     /**
      * 根据条件查询首个项
-     * @param example
+     * @param query
      * @return
      */
-    Optional<T> doFindOne(Example<T> example);
+    Optional<T> doFindOne(Query query);
 
     /**
      * 根据条件查询对应项并分页
-     * @param example
+     * @param query
      * @param pageable
      * @return
      */
-    Page<T> doFindPage(Example<T> example, Pageable pageable);
+    Page<T> doFindPage(Query query, Pageable pageable);
     /**
      * 统计个数
      * @return
@@ -176,17 +176,17 @@ public interface MyBaseMongoService<T,ID> {
     long doCount();
     /**
      * 统计筛选条件后的数量
-     * @param example
+     * @param query
      * @return
      */
-    long doCount(Example<T> example);
+    long doCount(Query query);
 
     /**
      * 根据条件，判断是否有项存在
-     * @param example
+     * @param query
      * @return
      */
-    boolean doExists(Example<T> example);
+    boolean doExists(Query query);
     /**
      * 判断id是否有对应项
      * @param id

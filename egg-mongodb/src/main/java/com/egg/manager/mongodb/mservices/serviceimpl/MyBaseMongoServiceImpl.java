@@ -7,10 +7,10 @@ import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -111,13 +111,15 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
 
     @Override
-    public List<T> doFindAll(Example<T> example) {
-        return baseRepository.findAll(example);
+    public List<T> doFindAll(Query query) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.findAll(query);
     }
 
     @Override
-    public List<T> doFindAll(Example<T> example, Sort sort) {
-        return baseRepository.findAll(example,sort);
+    public List<T> doFindAll(Query query, Sort sort) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.findAll(query,sort);
     }
 
     @Override
@@ -148,13 +150,15 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
 
     @Override
-    public Optional<T> doFindOne(Example<T> example) {
-        return baseRepository.findOne(example);
+    public Optional<T> doFindOne(Query query) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.findOne(query);
     }
 
     @Override
-    public Page<T> doFindPage(Example<T> example, Pageable pageable) {
-        return baseRepository.findPage(example,pageable);
+    public Page<T> doFindPage(Query query, Pageable pageable) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.findPage(query,pageable);
     }
 
     @Override
@@ -162,12 +166,14 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         return baseRepository.count();
     }
     @Override
-    public long doCount(Example<T> example) {
-        return baseRepository.count(example);
+    public long doCount(Query query) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.count(query);
     }
     @Override
-    public boolean doExists(Example<T> example) {
-        return baseRepository.exists(example);
+    public boolean doExists(Query query) {
+        query = query != null ? query : new Query() ;
+        return baseRepository.exists(query);
     }
     @Override
     public boolean doExistsById(ID id) {

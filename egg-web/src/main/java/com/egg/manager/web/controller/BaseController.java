@@ -6,6 +6,7 @@ import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.vo.user.UserJobVo;
@@ -23,6 +24,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -183,7 +185,7 @@ public class BaseController {
         result.setInfo(info);
     }
 
-    public void dealSetMongoPageResult(MyCommonResult result,Page page,String info){
+    public void dealSetMongoPageResult(MyCommonResult result, Page page, String info){
         result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);
         result.setResultList(page.getContent());
         result.setCount(page.getTotalElements());

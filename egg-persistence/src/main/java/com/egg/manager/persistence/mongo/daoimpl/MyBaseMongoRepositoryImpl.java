@@ -369,7 +369,6 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         dealVerifyIdBlank(id, exceptionAble);
         Criteria criteria = new Criteria();
         criteria.where(FIELD_NAME_OF_FID).is(id);
-        Query query = new Query();
         return new Query().addCriteria(criteria);
     }
 

@@ -1,5 +1,6 @@
 package com.egg.manager.common.base.query;
 
+import com.egg.manager.common.base.enums.query.mysql.MyQueryMatchingEnum;
 import lombok.Data;
 
 /**
@@ -24,8 +25,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("equals");
-        bean.setSqlMatching("=");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
         return bean ;
     }
 
@@ -33,8 +34,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("notEquals");
-        bean.setSqlMatching("!=");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
         return bean ;
     }
 
@@ -42,8 +43,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("like");
-        bean.setSqlMatching("like");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
         return bean ;
     }
 
@@ -51,8 +52,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("equals");
-        bean.setSqlMatching("=");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean ;
     }
@@ -61,8 +62,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("notEquals");
-        bean.setSqlMatching("!=");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean ;
     }
@@ -71,8 +72,8 @@ public class QueryFormFieldBean {
         QueryFormFieldBean bean = new QueryFormFieldBean() ;
         bean.setFieldName(fieldName);
         bean.setValue(value);
-        bean.setMatching("like");
-        bean.setSqlMatching("like");
+        //枚举值参数设置到bean
+        MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean ;
     }

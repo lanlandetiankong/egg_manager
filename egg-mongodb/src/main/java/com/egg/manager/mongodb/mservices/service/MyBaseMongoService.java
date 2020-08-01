@@ -1,6 +1,7 @@
 package com.egg.manager.mongodb.mservices.service;
 
 import com.egg.manager.common.base.exception.MyMongoException;
+import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -169,6 +170,14 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      */
     Page<T> doFindPage(Query query, Pageable pageable);
+
+    /**
+     * 根据封装的MongoQueryBean进行分页查询
+     * @param queryBean
+     * @return
+     */
+    Page<T> doFindPage(MongoQueryBean queryBean);
+
     /**
      * 统计个数
      * @return

@@ -2,6 +2,7 @@ package com.egg.manager.mongodb.mservices.serviceimpl;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;
+import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
@@ -181,6 +182,11 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     }
 
 
+
+    @Override
+    public Page<T> doFindPage(MongoQueryBean queryBean){
+        return this.doFindPage(queryBean.getQuery(),queryBean.getPageable());
+    }
 
 
 

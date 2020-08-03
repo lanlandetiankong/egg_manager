@@ -202,6 +202,8 @@ public class MongoQueryBean<T> {
         }
         if(paginationBean.getCurrent() == null || paginationBean.getCurrent() < 0){
             paginationBean.setCurrent(DEFAULT_PAGE);
+        }   else if(paginationBean.getCurrent() > 0){
+            paginationBean.setCurrent(paginationBean.getCurrent() - 1);
         }
         if(paginationBean.getPageSize() == null || paginationBean.getPageSize() <= 0){
             paginationBean.setPageSize(DEFAULT_SIZE);

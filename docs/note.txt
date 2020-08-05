@@ -12,3 +12,5 @@ mvn package -Pdev
 
 ->启动后查看当前运行环境
 http://localhost:8083/egg_manager/index/hello/testEnv
+#打包，跳过测试
+mvn clean package -Dmaven.test.skip=true

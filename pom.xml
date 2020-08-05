@@ -59,7 +59,7 @@
         <screw.version>1.0.3</screw.version>
         <hikariCP.version>3.4.5</hikariCP.version>
         <spring-test.version>3.2.8.RELEASE</spring-test.version>
-        <junit.version>4.7</junit.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencyManagement>

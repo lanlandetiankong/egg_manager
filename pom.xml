@@ -56,6 +56,8 @@
         <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
         <guava.version>18.0</guava.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <screw.version>1.0.3</screw.version>
+        <hikariCP.version>3.4.5</hikariCP.version>
     </properties>
 
     <dependencyManagement>
@@ -242,6 +244,18 @@
                 <groupId>com.querydsl</groupId>
                 <artifactId>querydsl-apt</artifactId>
                 <version>${querydsl.version}</version>
+            </dependency>
+            <!--数据库文档核心依赖-->
+            <dependency>
+                <groupId>cn.smallbun.screw</groupId>
+                <artifactId>screw-core</artifactId>
+                <version>${screw.version}</version>
+            </dependency>
+            <!-- HikariCP -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikariCP.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

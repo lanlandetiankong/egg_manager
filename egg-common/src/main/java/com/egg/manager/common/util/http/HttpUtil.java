@@ -26,7 +26,7 @@ public final class HttpUtil {
     private HttpUtil() {
     }
 
-    public static final String get(String url) {
+    public static String get(String url) {
         String result = "";
         HttpClient client = new HttpClient();
         GetMethod method = new GetMethod(url);
@@ -41,7 +41,7 @@ public final class HttpUtil {
         return result;
     }
 
-    public static final String post(String url, ArrayList<NameValuePair> list) {
+    public static String post(String url, ArrayList<NameValuePair> list) {
         String result = "";
         HttpClient client = new HttpClient();
         PostMethod method = new PostMethod(url);

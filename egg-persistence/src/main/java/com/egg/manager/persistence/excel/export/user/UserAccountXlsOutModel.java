@@ -5,10 +5,12 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class UserAccountXlsOutModel extends BaseRowModel implements Serializable{
     @ExcelIgnore

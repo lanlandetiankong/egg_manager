@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Component
 @ConfigurationProperties(prefix = "props.redis.shiro.cache")
-@PropertySource("classpath:config/props-redis.properties")
+@PropertySource("classpath:common/config/props-redis.properties")
 public class RedisPropsOfShiroCache {
     //jwt
     private String authorizationKey;

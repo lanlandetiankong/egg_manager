@@ -20,7 +20,7 @@ import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineDepartmentService;
 import com.egg.manager.persistence.vo.define.DefineDepartmentVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

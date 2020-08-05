@@ -23,11 +23,9 @@ import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -103,12 +101,7 @@ public class MyControllerAdvice {
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.Error);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(TemplateInputException.class)
-    @ResponseBody
-    public MyCommonResult handleTemplateInputException(TemplateInputException e) {
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.TemplacteException);
-    }
+
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = MyParamJsonException.class)

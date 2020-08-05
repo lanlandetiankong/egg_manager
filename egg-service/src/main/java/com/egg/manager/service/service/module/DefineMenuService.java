@@ -13,7 +13,6 @@ import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import org.apache.velocity.runtime.directive.Define;
 
 import java.util.List;
 import java.util.Set;

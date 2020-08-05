@@ -58,6 +58,8 @@
         <commons-lang.version>2.6</commons-lang.version>
         <screw.version>1.0.3</screw.version>
         <hikariCP.version>3.4.5</hikariCP.version>
+        <spring-test.version>3.2.8.RELEASE</spring-test.version>
+        <junit.version>4.7</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -256,6 +258,25 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikariCP.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring-test.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>${springboot.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,5 +1,7 @@
 package com.egg.manager.common.util.encrypt;
 
+import com.ulisesbocchio.jasyptspringboot.encryptor.SimpleAsymmetricStringEncryptor;
+import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
@@ -12,7 +14,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 public class JasyptUtil {
 
     //必须与application.properties的值一致
-    private static String jasyptEncryptorPassword = "ADUMDFUOV7834*";
+    private static String jasyptEncryptorPassword = "EggJasypt";
 
     public static void main(String[] args) {
         encryptMySqlConfig();
@@ -28,7 +30,7 @@ public class JasyptUtil {
         textEncryptor.setPassword(jasyptEncryptorPassword);
         // 要加密的数据（如数据库的用户名或密码）
         String username = textEncryptor.encrypt("root");
-        String password = textEncryptor.encrypt("egg_root");
+        String password = textEncryptor.encrypt("root");
         System.out.println("username: " + username);
         System.out.println("password: " + password);
     }

@@ -49,6 +49,7 @@
         <thumbnailator.version>0.4.8</thumbnailator.version>
         <gson.version>2.7</gson.version>
         <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <jasypt-spring-boot-starter.version>3.0.3</jasypt-spring-boot-starter.version>
         <scala-bcrypt_2.10.version>2.3</scala-bcrypt_2.10.version>
         <rest-assured.version>2.9.0</rest-assured.version>
         <ant.version>1.9.7</ant.version>
@@ -193,6 +194,12 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <scope>runtime</scope>
                 <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <!--spring配置项加密 -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.t3hnar</groupId>

@@ -12,6 +12,10 @@ http://localhost:8083/egg_manager/index/hello/testEnv
 #打包，跳过测试
 mvn clean package -Dmaven.test.skip=true
 
+#需要的idea插件
+lombok
+mapstruct
+
 
 
 

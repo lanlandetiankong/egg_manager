@@ -15,4 +15,11 @@ public interface MyBaseEmailService {
      * @param emailBean
      */
     void sendAttachmentsMail(MyEmailDto emailBean);
+
+    /**
+     * 发送 freemarker 模板的邮件
+     * @param emailDto
+     * @throws Exception
+     */
+    void sendFreemarker(MyEmailDto emailDto) throws Exception;
 }

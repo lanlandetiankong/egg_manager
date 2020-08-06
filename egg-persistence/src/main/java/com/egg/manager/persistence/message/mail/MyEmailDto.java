@@ -32,6 +32,10 @@ public class MyEmailDto implements Serializable {
 	 */
 	private String fromUser;
 	/**
+	 * 发送者(可选，个性化)
+	 */
+	private String fromUserPersonal;
+	/**
 	 * 邮件内容
 	 */
 	private String content;

@@ -11,6 +11,7 @@
     <modules>
         <module>egg-common</module>
         <module>egg-persistence</module>
+        <module>egg-message</module>
         <module>egg-service</module>
         <module>egg-mongodb</module>
         <module>egg-web</module>

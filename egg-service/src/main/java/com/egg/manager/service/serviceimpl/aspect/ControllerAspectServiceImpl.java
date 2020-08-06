@@ -3,7 +3,6 @@ package com.egg.manager.service.serviceimpl.aspect;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.service.CommonFuncService;

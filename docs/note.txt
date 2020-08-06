@@ -14,3 +14,15 @@ mvn package -Pdev
 http://localhost:8083/egg_manager/index/hello/testEnv
 #打包，跳过测试
 mvn clean package -Dmaven.test.skip=true
+
+
+TODO LIST
+1、springboot webpack 推送消息到vue
+2、枚举返回接口封装
+
+
+
+
+
+
+

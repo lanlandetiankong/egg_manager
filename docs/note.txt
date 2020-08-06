@@ -1,13 +1,10 @@
 ->采用 anywhere 作为静态资源服务器
-https://github.com/JacksonTian/anywhere
-
-->开发一个 文件资源管理器(可以预览图片、office文件等)
-egg_rainy
-
+https://github.com/JacksonTian/anywhere ->ok
 
 ->打包
-打包正式jar包
+#打包正式jar包
 mvn package -Pprod
+#打包开发jar包
 mvn package -Pdev
 
 ->启动后查看当前运行环境
@@ -16,9 +13,6 @@ http://localhost:8083/egg_manager/index/hello/testEnv
 mvn clean package -Dmaven.test.skip=true
 
 
-TODO LIST
-1、springboot webpack 推送消息到vue
-2、枚举返回接口封装
 
 
 

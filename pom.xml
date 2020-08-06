@@ -60,6 +60,7 @@
         <hikariCP.version>3.4.5</hikariCP.version>
         <spring-test.version>3.2.8.RELEASE</spring-test.version>
         <junit.version>4.12</junit.version>
+        <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -277,6 +278,12 @@
                 <artifactId>spring-boot-test</artifactId>
                 <version>${springboot.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!--guide-> https://juejin.im/post/6856242557417226248#heading-1 -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

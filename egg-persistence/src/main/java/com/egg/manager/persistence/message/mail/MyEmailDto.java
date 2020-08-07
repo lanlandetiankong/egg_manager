@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyEmailDto implements Serializable {
+public class MyEmailMsgO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 接收方邮件(必填参数)

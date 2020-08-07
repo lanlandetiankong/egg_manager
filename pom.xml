@@ -62,6 +62,7 @@
         <spring-test.version>3.2.8.RELEASE</spring-test.version>
         <junit.version>4.12</junit.version>
         <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
+        <mapstruct-processor.version>1.3.1.Final</mapstruct-processor.version>
     </properties>
 
     <dependencyManagement>
@@ -283,8 +284,14 @@
             <!--guide-> https://juejin.im/post/6856242557417226248#heading-1 -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
+                <artifactId>mapstruct-jdk8</artifactId>
                 <version>${org.mapstruct.version}</version>
+            </dependency>
+            <!-- 引入 processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct-processor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

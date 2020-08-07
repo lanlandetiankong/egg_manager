@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.message.mail;
 
 import com.egg.manager.message.email.service.MyBaseEmailService;
-import com.egg.manager.persistence.message.mail.MyEmailDto;
+import com.egg.manager.persistence.message.mail.MyEmailMsgO;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.helper.MyCommonResult;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @RestController
-@RequestMapping("/message/mail")
+@RequestMapping("/message/mail/hello")
 public class HelloMailController extends BaseController{
     @Value("${spring.mail.username}")
     private String fromUser ;
@@ -40,7 +40,7 @@ public class HelloMailController extends BaseController{
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
         try{
             String[] receiveEmails = new String[]{"2773756340@qq.com"} ;
-            MyEmailDto emailDto = MyEmailDto.builder().subject("邮件标题123")
+            MyEmailMsgO emailDto = MyEmailMsgO.builder().subject("邮件标题123")
                     .content("邮件内容123")
                     .receiveEmails(receiveEmails).build();
             myBaseEmailService.sendSimpleEmail(emailDto);

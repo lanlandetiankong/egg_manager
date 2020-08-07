@@ -16,6 +16,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--邮件模块依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -122,8 +127,23 @@
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
+            <artifactId>mapstruct-jdk8</artifactId>
+        </dependency>
+
+        <!-- 引入 processor -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
         </dependency>
     </dependencies>
-
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

@@ -46,6 +46,9 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     private final String FIELD_NAME_OF_FID = "fid";
     private final String FIELD_NAME_OF_STATUS = "status";
 
+    //单个更新数量
+    private final long SingleUpdateMaxSize = 1L ;
+
     public Class<T> getTClass() {
         if (tClass != null) {
             return tClass;
@@ -102,8 +105,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s,!isAllColumn,FIELD_NAME_OF_FID);
         UpdateResult result = mongoTemplate.updateFirst(query,update,getTClass());
-        if(result.getModifiedCount() != 1){
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+        if(result.getModifiedCount() != SingleUpdateMaxSize){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",SingleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -114,13 +117,13 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     public <S extends T> long batchUpdateByIds(Iterable<ID> ids,S s,boolean isAllColumn){
         //id迭代器不能为空
         dealGetQueryWithIds(ids,true);
-        int size = Lists.newArrayList(ids).size();
+        int idSize = Lists.newArrayList(ids).size();
         Query query = dealGetQueryWithIds(ids,true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s,!isAllColumn,FIELD_NAME_OF_FID);
         UpdateResult result = mongoTemplate.updateMulti(query,update,getTClass());
-        if(result.getModifiedCount() != size){
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+        if(result.getModifiedCount() != idSize){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",idSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -137,8 +140,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = new Update().addToSet(FIELD_NAME_OF_STATUS,status);
         UpdateResult result = mongoTemplate.updateFirst(query,update,getTClass());
-        if(result.getModifiedCount() != 1){
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+        if(result.getModifiedCount() != SingleUpdateMaxSize){
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",SingleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -146,16 +149,15 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
     }
 
     @Override
-    public <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short state,U user){
+    public <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short status,U user){
         //id迭代器 不能为空
-        dealGetQueryWithIds(ids,true);
         Query query = dealGetQueryWithIds(ids,true);
         int size = Lists.newArrayList(ids).size();
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().addToSet(FIELD_NAME_OF_STATUS,state) ;
+        Update update = new Update().set(FIELD_NAME_OF_STATUS,status) ;
         UpdateResult result = mongoTemplate.updateMulti(query,update,getTClass());
         if(result.getModifiedCount() != size){
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",1,result.getModifiedCount());
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",size,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -367,8 +369,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
      */
     private Query dealGetQueryWithId(ID id, boolean exceptionAble) {
         dealVerifyIdBlank(id, exceptionAble);
-        Criteria criteria = new Criteria();
-        criteria.where(FIELD_NAME_OF_FID).is(id);
+        Criteria criteria = new Criteria(FIELD_NAME_OF_FID).is(id);
         return new Query().addCriteria(criteria);
     }
 
@@ -381,9 +382,8 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
      */
     private Query dealGetQueryWithIds(Iterable<ID> idIters, boolean exceptionAble) {
         List<ID> ids = dealGetListFromIterable(idIters, exceptionAble);
-        Criteria criteria = new Criteria();
-        criteria.where(FIELD_NAME_OF_FID).in(ids);
-        return new Query().addCriteria(criteria);
+        Criteria idInCriteria = new Criteria(FIELD_NAME_OF_FID).in(ids);
+        return new Query().addCriteria(idInCriteria);
     }
 
     /**
@@ -406,8 +406,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
                 }
             }
         }
-        Criteria criteria = new Criteria();
-        criteria.where(FIELD_NAME_OF_FID).in(idList);
+        Criteria criteria = new Criteria(FIELD_NAME_OF_FID).in(idList);
         return new Query().addCriteria(criteria);
     }
 }

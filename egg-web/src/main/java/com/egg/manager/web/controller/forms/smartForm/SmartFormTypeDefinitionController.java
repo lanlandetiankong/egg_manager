@@ -126,7 +126,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             if (formTypeDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单类型定义！");
             } else {
-                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doSave(formTypeDefinitionMO, loginUser);
+                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doUpdateById(formTypeDefinitionMO, loginUser);
                 addCount += (newMO != null) ? 1 : 0;
             }
             result.setCount(addCount);

@@ -43,12 +43,20 @@ public interface MyBaseMongoService<T,ID> {
 
 
     /**
-     * 保存项
+     * 更新项(非null字段)
      * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doSave(T t, UserAccount loginUser);
+    T doUpdateById(T t, UserAccount loginUser);
+
+    /**
+     * 更新项(所有字段)
+     * @param t
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @return
+     */
+    T doUpdateAllColById(T t, UserAccount loginUser);
 
 
     /**

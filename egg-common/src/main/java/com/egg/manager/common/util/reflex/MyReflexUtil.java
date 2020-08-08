@@ -6,7 +6,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description:
@@ -31,9 +33,10 @@ public class MyReflexUtil {
     public static Update getMOUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
         Update update = new Update();
         ignoreKeys = ignoreKeys != null ? ignoreKeys : new ArrayList<>() ;
-        String[] fileds = getFiledName(object);
-        for (int i = 0; i < fileds.length; i++) {
-            String filedName = fileds[i];
+        //是否取得继承的上一级baseMO的字段
+        boolean isWithSuper = true ;
+        Set<String> filedSet = getFiledName(object,isWithSuper);
+        for (String filedName :filedSet) {
             if (ignoreKeys.contains(filedName)){
                 //该字段将不会被设置到Update
                 continue;
@@ -50,13 +53,27 @@ public class MyReflexUtil {
     /***
      * 获取对象属性返回字符串数组
      * @param o
+     * @param isWithSuper 是否也要继承
      * @return
      */
-    private static String[] getFiledName(Object o) {
+    private static Set<String> getFiledName(Object o,boolean isWithSuper) {
+        //pojo定义的字段
         Field[] fields = o.getClass().getDeclaredFields();
-        String[] fieldNames = new String[fields.length];
+        Set<String> fieldNames = new HashSet<>() ;
         for (int i = 0; i < fields.length; ++i) {
-            fieldNames[i] = fields[i].getName();
+            fieldNames.add(fields[i].getName());
+        }
+        if(isWithSuper){
+            //pojo继承的实体类
+            Class superClazz = o.getClass().getSuperclass();
+            if(superClazz != null){
+                Field[] superFields = superClazz.getDeclaredFields();
+                if(superFields != null && superFields.length > 0){
+                    for (Field superFieldItem : superFields){
+                        fieldNames.add(superFieldItem.getName());
+                    }
+                }
+            }
         }
         return fieldNames;
     }

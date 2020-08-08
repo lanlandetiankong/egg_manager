@@ -1,26 +1,15 @@
 package com.egg.manager.service.helper.excel;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.alibaba.excel.write.metadata.WriteSheet;
-import com.alibaba.fastjson.JSON;
-import com.github.crab2died.ExcelUtils;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.IOUtils;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.egg.manager.common.util.file.FileUtil.FILE_SIZE;
 
 /**
  * \* note:

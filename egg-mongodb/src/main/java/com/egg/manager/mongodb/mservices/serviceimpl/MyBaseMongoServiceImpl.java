@@ -45,11 +45,16 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     }
 
     @Override
-    public T doSave(T t,UserAccount loginUser) {
+    public T doUpdateById(T t,UserAccount loginUser) {
         dealUpdateSetLoginUserToMO(t,loginUser);
-        return baseRepository.save(t);
+        return baseRepository.updateById(t,false);
     }
 
+    @Override
+    public T doUpdateAllColById(T t,UserAccount loginUser) {
+        dealUpdateSetLoginUserToMO(t,loginUser);
+        return baseRepository.updateById(t,true);
+    }
     @Override
     public Long doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException {
         Integer count = 0 ;
@@ -63,7 +68,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         }
         dealUpdateSetLoginUserToMO(t,loginUser);
         t.setStatus(BaseStateEnum.DELETE.getValue());
-        baseRepository.save(t);
+        baseRepository.updateStatusById(t,BaseStateEnum.DELETE.getValue());
         return new Long(++count) ;
     }
 

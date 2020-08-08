@@ -9,8 +9,10 @@ mvn package -Pdev
 
 ->启动后查看当前运行环境
 http://localhost:8083/egg_manager/index/hello/testEnv
-#打包，跳过测试
+#打包(正式版)，跳过测试
 mvn clean package -Pprod -Dmaven.test.skip=true
+#打包(开发版)，跳过测试
+mvn clean package -Pdev -Dmaven.test.skip=true
 
 #需要的idea插件
 lombok

@@ -1,2 +1,4 @@
 1、在控制台 执行    mvn package
 2、在 egg-web 项目下的target/ 下有一个 egg-web.jar ,在当前路径打开控制台，执行 java -jar egg-web.jar
+3、20200808 使用
+/docs/bins/20200808/

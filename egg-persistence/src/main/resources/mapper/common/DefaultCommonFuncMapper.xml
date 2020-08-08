@@ -40,10 +40,10 @@
             <foreach collection="sortFieldList" index="index" item="item" separator=",">
                 ${table_name_alias}.${item.field}
                 <choose>
-                    <when test="item.isAsc == true">
+                    <when test="item.ascFlag == true">
                         asc
                     </when>
-                    <when test="item.isAsc == false">
+                    <when test="item.ascFlag == false">
                         desc
                     </when>
                 </choose>

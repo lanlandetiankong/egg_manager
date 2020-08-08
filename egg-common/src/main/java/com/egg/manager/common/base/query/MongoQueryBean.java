@@ -69,21 +69,34 @@ public class MongoQueryBean<T> {
 
 
     public static MongoQueryBean getMongoQueryBeanFromRequest(HttpServletRequest request){
-        return getMongoQueryBeanFromRequest(request,false,null);
+        return getMongoQueryBeanFromRequest(request,new MyMongoQueryBuffer());
     }
 
-    public static MongoQueryBean getMongoQueryBeanFromRequest(HttpServletRequest request,boolean isWhiteList,Set<String> fieldList){
+    public static MongoQueryBean getMongoQueryBeanFromRequest(HttpServletRequest request,MyMongoQueryBuffer queryBuffer){
         //查询字段
-        Query query = getMQueryFilterFromRequest(request,isWhiteList,fieldList);
+        Query query = null ;
+        if(Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag())){
+            query = getMQueryFilterFromRequest(request,false,queryBuffer.getBlackQueryFieldSets());
+        }   else {
+            query = getMQueryFilterFromRequest(request,true,queryBuffer.getWhiteQueryFieldSets());
+        }
         //分页
         QPageRequest qPageRequest = getMPageFromRequest(request);
-        Sort sort = getMSortsFromRequest(request);
-
+        List<Sort.Order> sortOrderList = getMSortsFromRequest(request);
+        //前置排序
+        if(CollectionUtils.isNotEmpty(queryBuffer.getFrontSortList())){
+            sortOrderList.addAll(0,getMongoSortOrder(queryBuffer.getFrontSortList()));
+        }
+        //后置排序
+        if(CollectionUtils.isNotEmpty(queryBuffer.getFrontSortList())){
+            sortOrderList.addAll(getMongoSortOrder(queryBuffer.getBehindSortList()));
+        }
         query = query != null ? query : new Query() ;
         if(qPageRequest != null){
             query.with(qPageRequest);
         }
-        if(sort != null){
+        Sort sort  = new Sort(sortOrderList);
+        if(CollectionUtils.isNotEmpty(sortOrderList)){
             query.with(sort);
         }
         return new MongoQueryBean(query,qPageRequest,sort) ;
@@ -214,7 +227,7 @@ public class MongoQueryBean<T> {
      * @param request
      * @return
      */
-    public static Sort getMSortsFromRequest(HttpServletRequest request) {
+    public static List<Sort.Order> getMSortsFromRequest(HttpServletRequest request) {
         String sortObj = request.getParameter(PARAMETER_sortObj);
         List<AntdvSortBean> sortBeans = new ArrayList<>();
         if (StringUtils.isNotBlank(sortObj) && "{}".equals(sortObj) == false) {
@@ -225,21 +238,12 @@ public class MongoQueryBean<T> {
                 sortBeans.add(antdvSortBean);
             }
         }
-        List<Sort.Order> sortOrders = new ArrayList<>() ;
-        if(CollectionUtils.isNotEmpty(sortBeans)){
-            for(AntdvSortBean sortBean : sortBeans){
-                if(sortBean.getOrderIsAsc()){
-                    sortOrders.add(Sort.Order.asc(sortBean.getField()));
-                }   else {
-                    sortOrders.add(Sort.Order.desc(sortBean.getField()));
-                }
-            }
-        }
-        return CollectionUtils.isNotEmpty(sortBeans) ? new Sort(sortOrders) : null;
+        List<Sort.Order> sortOrders = getMongoSortOrder(sortBeans) ;
+        return CollectionUtils.isNotEmpty(sortOrders) ? sortOrders : new ArrayList<Sort.Order>();
     }
 
 
-    public void appendQueryFieldsToQuery(MyMongoQueryFieldBuffer queryFieldBuffer){
+    public void appendQueryFieldsToQuery(MyMongoQueryBuffer queryFieldBuffer){
         if(queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFormFieldBeanList())){
             return ;
         }
@@ -251,7 +255,19 @@ public class MongoQueryBean<T> {
     }
 
 
-
+    private static List<Sort.Order> getMongoSortOrder(List<AntdvSortBean> sortBeans){
+        List<Sort.Order> sortOrders = new ArrayList<>() ;
+        if(CollectionUtils.isNotEmpty(sortBeans)){
+            for(AntdvSortBean sortBean : sortBeans){
+                if(sortBean.getOrderIsAsc()){
+                    sortOrders.add(Sort.Order.asc(sortBean.getField()));
+                }   else {
+                    sortOrders.add(Sort.Order.desc(sortBean.getField()));
+                }
+            }
+        }
+        return sortOrders ;
+    }
 
 
 

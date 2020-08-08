@@ -194,11 +194,6 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     }
 
 
-
-
-
-
-
     //private methods
     private void dealUpdateSetLoginUserToMO(T t,UserAccount loginUser){
         if(t != null && loginUser != null){

@@ -1,6 +1,8 @@
 package com.egg.manager.web.controller.forms.smartForm;
 
+import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.query.MongoQueryBean;
+import com.egg.manager.common.base.query.MyMongoQueryFieldBuffer;
 import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
@@ -65,6 +67,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request);
+            MyMongoQueryFieldBuffer mongoQueryFieldBuffer = new MyMongoQueryFieldBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete);
+            queryBean.appendQueryFieldsToQuery(mongoQueryFieldBuffer);
             Page<SmartFormTypeDefinitionMO> page = smartFormTypeDefinitionMService.doFindPage(queryBean);
             dealSetMongoPageResult(result,page,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {

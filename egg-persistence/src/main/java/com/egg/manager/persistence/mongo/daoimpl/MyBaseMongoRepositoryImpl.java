@@ -138,7 +138,7 @@ public class MyBaseMongoRepositoryImpl<T extends BaseModelMO<ID>,ID> implements 
         dealGetQueryWithId(s.getFid(),true);
         Query query = dealGetQueryWithId(s.getFid(),true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().addToSet(FIELD_NAME_OF_STATUS,status);
+        Update update = new Update().set(FIELD_NAME_OF_STATUS,status);
         UpdateResult result = mongoTemplate.updateFirst(query,update,getTClass());
         if(result.getModifiedCount() != SingleUpdateMaxSize){
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d",SingleUpdateMaxSize,result.getModifiedCount());

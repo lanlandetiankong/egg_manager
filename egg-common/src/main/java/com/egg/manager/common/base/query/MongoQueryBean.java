@@ -7,9 +7,6 @@ import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.google.common.collect.Sets;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -74,6 +71,7 @@ public class MongoQueryBean<T> {
     public static MongoQueryBean getMongoQueryBeanFromRequest(HttpServletRequest request){
         return getMongoQueryBeanFromRequest(request,false,null);
     }
+
     public static MongoQueryBean getMongoQueryBeanFromRequest(HttpServletRequest request,boolean isWhiteList,Set<String> fieldList){
         //查询字段
         Query query = getMQueryFilterFromRequest(request,isWhiteList,fieldList);
@@ -239,6 +237,27 @@ public class MongoQueryBean<T> {
         }
         return CollectionUtils.isNotEmpty(sortBeans) ? new Sort(sortOrders) : null;
     }
+
+
+    public void appendQueryFieldsToQuery(MyMongoQueryFieldBuffer queryFieldBuffer){
+        if(queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFormFieldBeanList())){
+            return ;
+        }
+        this.query = this.query != null ? this.query : new Query() ;
+        List<QueryFormFieldBean> queryFormFieldBeanList = queryFieldBuffer.getQueryFormFieldBeanList();
+        for (QueryFormFieldBean fieldBean : queryFormFieldBeanList){
+            MongoQueryBean.dealQueryFormFieldBeanToQuery(this.query,fieldBean);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -216,8 +216,13 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())){
             UserTenant userTenantQuery = UserTenant.builder().userAccountId(userAccount.getFid()).state(BaseStateEnum.ENABLED.getValue()).build();
             UserTenant userTenant = userTenantMapper.selectOne(userTenantQuery);
-            userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
-            userTenantMapper.updateById(userTenant);
+            if(userTenant == null){
+                userTenant = UserTenant.generateSimpleInsertEntity(userAccount.getFid(),userAccountVo.getBelongTenantId(),loginUser);
+                userTenantMapper.insert(userTenant);
+            }   else {
+                userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
+                userTenantMapper.updateById(userTenant);
+            }
         }   else {
             throw new BusinessException("关联用户与租户失败！更新用户失败！") ;
         }

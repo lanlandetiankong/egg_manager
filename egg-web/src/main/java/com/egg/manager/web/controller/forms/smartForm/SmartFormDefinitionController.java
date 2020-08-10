@@ -84,7 +84,7 @@ public class SmartFormDefinitionController extends BaseController {
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getDataPage")
+    @PostMapping(value = "/getDataAll")
     public MyCommonResult<SmartFormDefinitionMO> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         try {

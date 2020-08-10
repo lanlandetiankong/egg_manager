@@ -28,6 +28,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class SmartFormDefinitionMO extends BaseModelMO<String> {
 
     /**
+     * 表单名称
+     */
+    private String name ;
+    /**
      * 表单标题
      */
     private String title ;

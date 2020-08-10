@@ -75,9 +75,9 @@ public class DefineRoleController extends BaseController {
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息列表",description = "查询角色定义信息列表")
     @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoles")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
@@ -102,9 +102,9 @@ public class DefineRoleController extends BaseController {
     @OperLog(modelName="DefineRoleController",action="查询角色定义信息-Dto列表",description = "查询角色定义信息-Dto列表")
     @ApiOperation(value = "查询角色定义信息-Dto列表", notes = "查询角色定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoleDtos")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,

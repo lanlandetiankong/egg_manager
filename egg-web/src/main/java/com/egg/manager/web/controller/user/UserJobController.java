@@ -49,9 +49,9 @@ public class UserJobController extends BaseController{
     @OperLog(modelName="UserJobController",action="查询用户职务列表",description = "查询用户职务列表")
     @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request,String queryObj, String paginationObj,String sortObj) {

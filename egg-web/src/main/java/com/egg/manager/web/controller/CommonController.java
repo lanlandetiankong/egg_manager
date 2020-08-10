@@ -38,7 +38,7 @@ public class CommonController extends BaseController {
     @OperLog(modelName="CommonController",action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉")
     @ApiOperation(value = "根据枚举key查询对应枚举下拉", notes = "根据枚举key查询对应枚举下拉", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = false,dataTypeClass=String.class)
+            @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)
     })
     @PostMapping(value = "/getEnumListByKey")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {

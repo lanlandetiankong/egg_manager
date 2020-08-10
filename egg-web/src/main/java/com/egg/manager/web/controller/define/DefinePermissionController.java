@@ -57,9 +57,9 @@ public class DefinePermissionController  extends BaseController{
     @OperLog(modelName="DefinePermissionController",action="查询权限定义信息列表",description = "查询权限定义信息列表")
     @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissions")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
@@ -84,9 +84,9 @@ public class DefinePermissionController  extends BaseController{
     @OperLog(modelName="DefinePermissionController",action="查询权限定义信息-Dto列表",description = "查询权限定义信息-Dto列表")
     @ApiOperation(value = "查询权限定义信息-Dto列表", notes = "查询权限定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissionDtos")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {

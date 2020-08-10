@@ -55,9 +55,9 @@ public class SmartFormDefinitionController extends BaseController {
     @OperLog(modelName = "SmartFormDefinitionController", action = "分页查询->表单定义", description = "")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = false, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = false, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = false, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<SmartFormDefinitionMO> doGetDataPage(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser) {
@@ -80,9 +80,9 @@ public class SmartFormDefinitionController extends BaseController {
     @OperLog(modelName = "SmartFormDefinitionController", action = "分页查询->表单定义", description = "")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = false, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = false, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = false, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<SmartFormDefinitionMO> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {

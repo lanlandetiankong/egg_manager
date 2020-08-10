@@ -61,9 +61,9 @@ public class UserRoleController  extends BaseController{
     @OperLog(modelName="UserRoleController",action="查询用户角色列表",description = "查询用户角色列表")
     @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = false,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = false,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {

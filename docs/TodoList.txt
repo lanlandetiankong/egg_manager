@@ -6,3 +6,4 @@ TODO LIST
 3、引入dubbo
 6、分布式事务
 7、动态配置nacos
+//8、mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须对user判空再处理(登录的必要性交给外部控制)

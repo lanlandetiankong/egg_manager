@@ -22,16 +22,13 @@ import java.util.Optional;
  */
 public interface MyBaseMongoService<T,ID> {
 
-
-
-
     /**
      * 查询一条记录
      * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doInsert(T t, UserAccount loginUser);
+    T doInsert(UserAccount loginUser,T t);
 
     /**
      * 批量插入
@@ -39,7 +36,7 @@ public interface MyBaseMongoService<T,ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    List<T> doInsert(Iterable<T> iterables, UserAccount loginUser);
+    List<T> doInsert(UserAccount loginUser,Iterable<T> iterables);
 
 
     /**
@@ -48,7 +45,7 @@ public interface MyBaseMongoService<T,ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doUpdateById(T t, UserAccount loginUser);
+    T doUpdateById(UserAccount loginUser,T t);
 
     /**
      * 更新项(所有字段)
@@ -56,7 +53,7 @@ public interface MyBaseMongoService<T,ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doUpdateAllColById(T t, UserAccount loginUser);
+    T doUpdateAllColById(UserAccount loginUser,T t);
 
 
     /**
@@ -66,7 +63,7 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException;
+    Long doFakeDeleteById(UserAccount loginUser,ID id) throws MyMongoException;
 
     /**
      * 根据根据实体类-伪删除
@@ -75,37 +72,37 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDelete(T t,UserAccount loginUser) throws MyMongoException;
+    Long doFakeDelete(UserAccount loginUser,T t) throws MyMongoException;
 
     /**
      * 根据id集合伪删除
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
-     * @param loginUser
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException;
+    Long doFakeDeleteByIds(UserAccount loginUser,Iterable<ID> iterableList) throws MyMongoException;
 
     /**
      * 根据id删除对应项
-     * @param id
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param id
      */
-    void doDeleteById(ID id, UserAccount loginUser);
+    void doDeleteById(UserAccount loginUser,ID id);
 
     /**
      * 根据项删除
-     * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param t
      */
-    void doDelete(T t, UserAccount loginUser);
+    void doDelete(UserAccount loginUser,T t);
 
     /**
      * 根据 项集合 删除
-     * @param iterableList
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param iterableList
      */
-    void doDeleteAll(Iterable<? extends T> iterableList, UserAccount loginUser);
+    void doDeleteAll(UserAccount loginUser,Iterable<? extends T> iterableList);
 
     /**
      * 删除所有(禁用)
@@ -116,99 +113,112 @@ public interface MyBaseMongoService<T,ID> {
 
     /**
      * 根据id查询对应的项(Optional)
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      * @return
      */
-    Optional<T> doFindById(ID id);
+    Optional<T> doFindById(UserAccount loginUser,ID id);
 
 
     /**
      * 查询所有记录
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    List<T> doFindAll();
+    List<T> doFindAll(UserAccount loginUser);
 
     /**
      * 查询所有记录
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param sort
      * @return
      */
-    List<T> doFindAll(Sort sort);
+    List<T> doFindAll(UserAccount loginUser,Sort sort);
 
     /**
      * 根据id集合查询所有相应的记录
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      * @return
      */
-    Iterable<T> doFindAllById(Iterable<ID> iterableList);
+    Iterable<T> doFindAllById(UserAccount loginUser,Iterable<ID> iterableList);
 
 
     /**
      * 根据查询条件查询记录
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @return
      */
-    List<T> doFindAll(Query query);
+    List<T> doFindAll(UserAccount loginUser,Query query);
 
     /**
      * 根据查询条件查询记录并排序
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @param sort
      * @return
      */
-    List<T> doFindAll(Query query, Sort sort);
+    List<T> doFindAll(UserAccount loginUser,Query query, Sort sort);
 
     /**
      * 分页查询
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param pageable
      * @return
      */
-    Page<T> doFindPage(Pageable pageable);
+    Page<T> doFindPage(UserAccount loginUser,Pageable pageable);
     /**
      * 根据条件查询首个项
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @return
      */
-    Optional<T> doFindOne(Query query);
+    Optional<T> doFindOne(UserAccount loginUser,Query query);
 
     /**
      * 根据条件查询对应项并分页
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @param pageable
      * @return
      */
-    Page<T> doFindPage(Query query, Pageable pageable);
+    Page<T> doFindPage(UserAccount loginUser,Query query, Pageable pageable);
 
     /**
      * 根据封装的MongoQueryBean进行分页查询
      * @param queryBean
      * @return
      */
-    Page<T> doFindPage(MongoQueryBean queryBean);
+    Page<T> doFindPage(UserAccount loginUser,MongoQueryBean queryBean);
 
     /**
      * 统计个数
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    long doCount();
+    long doCount(UserAccount loginUser);
     /**
      * 统计筛选条件后的数量
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @return
      */
-    long doCount(Query query);
+    long doCount(UserAccount loginUser,Query query);
 
     /**
      * 根据条件，判断是否有项存在
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param query
      * @return
      */
-    boolean doExists(Query query);
+    boolean doExists(UserAccount loginUser,Query query);
     /**
      * 判断id是否有对应项
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      * @return
      */
-    boolean doExistsById(ID id);
+    boolean doExistsById(UserAccount loginUser,ID id);
 
 }

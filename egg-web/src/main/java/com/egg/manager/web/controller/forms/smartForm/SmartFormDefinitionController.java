@@ -49,9 +49,6 @@ import java.util.Optional;
 public class SmartFormDefinitionController extends BaseController {
 
     @Autowired
-    private SmartFormDefinitionRepository smartFormDefinitionRepository;
-
-    @Autowired
     private SmartFormDefinitionMService smartFormDefinitionMService;
 
 
@@ -72,7 +69,7 @@ public class SmartFormDefinitionController extends BaseController {
                                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
             queryBean.appendQueryFieldsToQuery(mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(queryBean);
+            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,queryBean);
             dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -97,7 +94,7 @@ public class SmartFormDefinitionController extends BaseController {
                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
             queryBean.appendQueryFieldsToQuery(mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(queryBean);
+            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,queryBean);
             dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -112,7 +109,7 @@ public class SmartFormDefinitionController extends BaseController {
                             @RequestParam(value="fid",required = true) String fid) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         try {
-            Optional<SmartFormDefinitionMO> moOptional = smartFormDefinitionMService.doFindById(fid);
+            Optional<SmartFormDefinitionMO> moOptional = smartFormDefinitionMService.doFindById(loginUser,fid);
             result.setBean(moOptional.get());
             dealCommonSuccessCatch(result, "根据id查询->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -133,7 +130,7 @@ public class SmartFormDefinitionController extends BaseController {
             if (formDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单定义！");
             } else {
-                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(formDefinitionMO, loginUser);
+                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
             }
             result.setCount(addCount);
@@ -157,7 +154,7 @@ public class SmartFormDefinitionController extends BaseController {
             if (formDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单定义！");
             } else {
-                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(formDefinitionMO, loginUser);
+                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
             }
             result.setCount(addCount);
@@ -178,7 +175,7 @@ public class SmartFormDefinitionController extends BaseController {
     public MyCommonResult<SmartFormDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Long delCount = smartFormDefinitionMService.doFakeDeleteById(delId, loginUser);
+            Long delCount = smartFormDefinitionMService.doFakeDeleteById(loginUser,delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -199,7 +196,7 @@ public class SmartFormDefinitionController extends BaseController {
         Long delCount = (long) 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = smartFormDefinitionMService.doFakeDeleteByIds(Lists.newArrayList(delIds), loginUser);
+                delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser,Lists.newArrayList(delIds));
                 dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);

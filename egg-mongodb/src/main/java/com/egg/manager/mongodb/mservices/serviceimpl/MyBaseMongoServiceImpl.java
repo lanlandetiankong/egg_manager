@@ -29,34 +29,34 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     protected R baseRepository;
 
     @Override
-    public T doInsert(T t, UserAccount loginUser) {
-        dealCreateSetLoginUserToMO(t,loginUser);
+    public T doInsert(UserAccount loginUser,T t) {
+        dealCreateSetLoginUserToMO(loginUser,t);
         return baseRepository.insert(t);
     }
 
     @Override
-    public List<T> doInsert(Iterable<T> iterables,UserAccount loginUser) {
+    public List<T> doInsert(UserAccount loginUser,Iterable<T> iterables) {
         if(iterables != null){
             for (T t : iterables){
-                dealCreateSetLoginUserToMO(t,loginUser);
+                dealCreateSetLoginUserToMO(loginUser,t);
             }
         }
         return baseRepository.batchInsert(iterables);
     }
 
     @Override
-    public T doUpdateById(T t,UserAccount loginUser) {
-        dealUpdateSetLoginUserToMO(t,loginUser);
+    public T doUpdateById(UserAccount loginUser,T t) {
+        dealUpdateSetLoginUserToMO(loginUser,t);
         return baseRepository.updateById(t,false);
     }
 
     @Override
-    public T doUpdateAllColById(T t,UserAccount loginUser) {
-        dealUpdateSetLoginUserToMO(t,loginUser);
+    public T doUpdateAllColById(UserAccount loginUser,T t) {
+        dealUpdateSetLoginUserToMO(loginUser,t);
         return baseRepository.updateById(t,true);
     }
     @Override
-    public Long doFakeDeleteById(ID id,UserAccount loginUser) throws MyMongoException {
+    public Long doFakeDeleteById(UserAccount loginUser,ID id) throws MyMongoException {
         Integer count = 0 ;
         if(id == null){
             throw new MyMongoException("请传入id!");
@@ -66,26 +66,26 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         if(t == null){
             throw new MyMongoException("不存在的数据!");
         }
-        dealUpdateSetLoginUserToMO(t,loginUser);
+        dealUpdateSetLoginUserToMO(loginUser,t);
         t.setStatus(BaseStateEnum.DELETE.getValue());
         baseRepository.updateStatusById(t,BaseStateEnum.DELETE.getValue());
         return new Long(++count) ;
     }
 
     @Override
-    public Long doFakeDelete(T t,UserAccount loginUser) throws MyMongoException{
+    public Long doFakeDelete(UserAccount loginUser,T t) throws MyMongoException{
         Integer count = 0 ;
         if(t == null){
             throw new MyMongoException("不存在的数据!");
         }
-        dealUpdateSetLoginUserToMO(t,loginUser);
+        dealUpdateSetLoginUserToMO(loginUser,t);
         t.setStatus(BaseStateEnum.DELETE.getValue());
         baseRepository.delete(t);
         return new Long(++count) ;
     }
 
     @Override
-    public Long doFakeDeleteByIds(Iterable<ID> iterableList, UserAccount loginUser) throws MyMongoException {
+    public Long doFakeDeleteByIds(UserAccount loginUser,Iterable<ID> iterableList) throws MyMongoException {
         if(iterableList == null){
             throw new MyMongoException("集合为空!");
         }
@@ -93,17 +93,17 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     }
 
     @Override
-    public void doDeleteById(ID id,UserAccount loginUser) {
+    public void doDeleteById(UserAccount loginUser,ID id) {
         baseRepository.deleteById(id);
     }
 
     @Override
-    public void doDelete(T t,UserAccount loginUser){
+    public void doDelete(UserAccount loginUser,T t){
         baseRepository.delete(t);
     }
 
     @Override
-    public void doDeleteAll(Iterable<? extends T> iterableList, UserAccount loginUser) {
+    public void doDeleteAll(UserAccount loginUser,Iterable<? extends T> iterableList) {
         baseRepository.batchDelete(iterableList);
     }
 
@@ -117,85 +117,85 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
 
     @Override
-    public List<T> doFindAll(Query query) {
+    public List<T> doFindAll(UserAccount loginUser,Query query) {
         query = query != null ? query : new Query() ;
         return baseRepository.findAll(query);
     }
 
     @Override
-    public List<T> doFindAll(Query query, Sort sort) {
+    public List<T> doFindAll(UserAccount loginUser,Query query, Sort sort) {
         query = query != null ? query : new Query() ;
         return baseRepository.findAll(query,sort);
     }
 
     @Override
-    public Page<T> doFindPage(Pageable pageable) {
+    public Page<T> doFindPage(UserAccount loginUser,Pageable pageable) {
         return baseRepository.findPage(pageable);
     }
 
     @Override
-    public List<T> doFindAll() {
+    public List<T> doFindAll(UserAccount loginUser) {
         return baseRepository.findAll();
     }
 
     @Override
-    public List<T> doFindAll(Sort sort) {
+    public List<T> doFindAll(UserAccount loginUser,Sort sort) {
         return baseRepository.findAll(sort);
     }
 
     @Override
-    public Optional<T> doFindById(ID id) {
+    public Optional<T> doFindById(UserAccount loginUser,ID id) {
         return baseRepository.findById(id);
     }
 
 
     @Override
-    public Iterable<T> doFindAllById(Iterable<ID> iterableList) {
+    public Iterable<T> doFindAllById(UserAccount loginUser,Iterable<ID> iterableList) {
         return baseRepository.findAllById(iterableList);
     }
 
 
     @Override
-    public Optional<T> doFindOne(Query query) {
+    public Optional<T> doFindOne(UserAccount loginUser,Query query) {
         query = query != null ? query : new Query() ;
         return baseRepository.findOne(query);
     }
 
     @Override
-    public Page<T> doFindPage(Query query, Pageable pageable) {
+    public Page<T> doFindPage(UserAccount loginUser,Query query, Pageable pageable) {
         query = query != null ? query : new Query() ;
         return baseRepository.findPage(query,pageable);
     }
 
     @Override
-    public long doCount() {
+    public long doCount(UserAccount loginUser) {
         return baseRepository.count();
     }
     @Override
-    public long doCount(Query query) {
+    public long doCount(UserAccount loginUser,Query query) {
         query = query != null ? query : new Query() ;
         return baseRepository.count(query);
     }
     @Override
-    public boolean doExists(Query query) {
+    public boolean doExists(UserAccount loginUser,Query query) {
         query = query != null ? query : new Query() ;
         return baseRepository.exists(query);
     }
     @Override
-    public boolean doExistsById(ID id) {
+    public boolean doExistsById(UserAccount loginUser,ID id) {
         return baseRepository.existsById(id);
     }
 
 
 
     @Override
-    public Page<T> doFindPage(MongoQueryBean queryBean){
-        return this.doFindPage(queryBean.getQuery(),queryBean.getPageable());
+    public Page<T> doFindPage(UserAccount loginUser,MongoQueryBean queryBean){
+        return this.doFindPage(loginUser,queryBean.getQuery(),queryBean.getPageable());
     }
 
 
     //private methods
-    private void dealUpdateSetLoginUserToMO(T t,UserAccount loginUser){
+    private void dealUpdateSetLoginUserToMO(UserAccount loginUser,T t){
         if(t != null && loginUser != null){
             t.setLastModifyerId(loginUser.getFid());
             t.setLastModifyerNickName(loginUser.getNickName());
@@ -207,7 +207,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
      * @param t
      * @param loginUser
      */
-    private void dealCreateSetLoginUserToMO(T t,UserAccount loginUser){
+    private void dealCreateSetLoginUserToMO(UserAccount loginUser,T t){
         if(t != null && loginUser != null){
             t.setCreateUserId(loginUser.getFid());
             t.setCreateUserNickName(loginUser.getNickName());

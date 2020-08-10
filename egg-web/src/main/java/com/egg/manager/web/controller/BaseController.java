@@ -39,8 +39,8 @@ import java.util.*;
  */
 @Slf4j
 public class BaseController {
-    public String actionSuccessMsg = "操作成功！";
-    public String actionFailMsg = "操作失败！";
+    public final String actionSuccessMsg = "操作成功！";
+    public final String actionFailMsg = "操作失败！";
 
     @Value("${egg.conf.jwt.sso:true}")
     private boolean jwtSsoFlag;

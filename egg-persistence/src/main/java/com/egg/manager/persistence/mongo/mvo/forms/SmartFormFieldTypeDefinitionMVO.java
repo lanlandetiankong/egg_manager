@@ -1,7 +1,9 @@
 package com.egg.manager.persistence.mongo.mvo.forms;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note: 表单 字段类型
@@ -13,6 +15,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SmartFormFieldTypeDefinitionMVO {
     /**
      * 字段类型值

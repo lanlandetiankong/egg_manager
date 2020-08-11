@@ -1,8 +1,9 @@
 package com.egg.manager.persistence.mongo.mvo.forms;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Field;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note:
@@ -15,6 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SmartFormDefinitionMVO{
 
     /**

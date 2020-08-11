@@ -1,9 +1,7 @@
 package com.egg.manager.persistence.mongo.mo.forms;
 
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,6 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "smart_form_field_type_definition")
 @CompoundIndexes({

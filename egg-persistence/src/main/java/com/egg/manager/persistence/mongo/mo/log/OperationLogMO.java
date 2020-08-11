@@ -1,8 +1,10 @@
 package com.egg.manager.persistence.mongo.mo.log;
 
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -19,6 +21,8 @@ import java.util.Date;
  * @since 2020-07-19
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "em_operation_log")
 public class OperationLogMO extends BaseModelMO<String> {

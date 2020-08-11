@@ -1,9 +1,7 @@
 package com.egg.manager.persistence.mongo.mo.forms;
 
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * \* note:表单项
@@ -15,6 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SmartFormRecordFieldMO extends BaseModelMO<String> {
     /**

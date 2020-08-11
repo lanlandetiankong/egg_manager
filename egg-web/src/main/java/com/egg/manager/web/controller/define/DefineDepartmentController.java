@@ -14,7 +14,7 @@ import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineDepartmentVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.define.DefineDepartmentService;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;

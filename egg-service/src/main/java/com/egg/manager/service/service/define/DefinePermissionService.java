@@ -4,15 +4,13 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;

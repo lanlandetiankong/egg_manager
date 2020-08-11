@@ -17,7 +17,7 @@ import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;

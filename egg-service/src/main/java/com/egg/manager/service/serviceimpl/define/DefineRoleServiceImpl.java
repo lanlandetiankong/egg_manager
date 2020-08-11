@@ -1,8 +1,5 @@
 package com.egg.manager.service.serviceimpl.define;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -17,7 +14,7 @@ import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.role.RolePermission;
@@ -26,7 +23,6 @@ import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.mapper.role.RolePermissionMapper;
-import com.egg.manager.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.redis.service.RedisHelper;

@@ -3,7 +3,7 @@ package com.egg.manager.service.service.user;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;

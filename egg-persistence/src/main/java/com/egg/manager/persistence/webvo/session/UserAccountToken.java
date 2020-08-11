@@ -1,9 +1,9 @@
-package com.egg.manager.service.webvo.session;
+package com.egg.manager.persistence.webvo.session;
 
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.webvo.mapstruct.session.UserAccountTokenMapstruct;
 import lombok.*;
-import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -34,10 +34,7 @@ public class UserAccountToken {
 
 
     public static UserAccountToken gainByUserAccount(UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {
-        UserAccountToken accountToken = new UserAccountToken() ;
-        BeanUtils.copyProperties(accountToken,userAccount);
-
-        accountToken.setUserAccountId(userAccount.getFid());
+        UserAccountToken accountToken = UserAccountTokenMapstruct.INSTANCE.userAccount_CopyTo_UserAccountToken(userAccount);
         String token = MyUUIDUtil.renderSimpleUUID() ;
         accountToken.setToken(token);
         return accountToken ;

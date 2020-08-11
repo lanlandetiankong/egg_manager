@@ -12,7 +12,7 @@ import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.service.redis.service.RedisHelper;
-import com.egg.manager.service.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;

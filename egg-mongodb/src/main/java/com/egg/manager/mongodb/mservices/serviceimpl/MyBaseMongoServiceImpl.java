@@ -125,7 +125,11 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     @Override
     public List<T> doFindAll(UserAccount loginUser,Query query, Sort sort) {
         query = query != null ? query : new Query() ;
-        return baseRepository.findAll(query,sort);
+        if(sort == null){
+            return baseRepository.findAll(query);
+        }   else {
+            return baseRepository.findAll(query,sort);
+        }
     }
 
     @Override
@@ -136,6 +140,10 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     @Override
     public List<T> doFindAll(UserAccount loginUser) {
         return baseRepository.findAll();
+    }
+    @Override
+    public List<T> doFindAll(UserAccount loginUser,MongoQueryBean queryBean){
+        return this.doFindAll(loginUser,queryBean.getQuery(),queryBean.getSort());
     }
 
     @Override

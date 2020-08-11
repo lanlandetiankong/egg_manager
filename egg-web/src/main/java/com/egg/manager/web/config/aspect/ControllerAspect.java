@@ -7,7 +7,7 @@ import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.mongo.dao.log.OperationLogRepository;
 import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.aspect.ControllerAspectService;
 import org.aspectj.lang.JoinPoint;

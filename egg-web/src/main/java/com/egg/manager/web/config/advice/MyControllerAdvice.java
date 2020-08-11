@@ -4,7 +4,7 @@ import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.service.exception.MyParamJsonException;
 import com.egg.manager.service.exception.MyUnauthorizedException;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.helper.MyResponseHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;

@@ -7,7 +7,7 @@ import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.transfer.define.DefineDepartmentTransfer;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.persistence.tree.CommonTreeSelect;

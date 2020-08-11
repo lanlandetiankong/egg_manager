@@ -11,7 +11,7 @@ import com.egg.manager.service.service.define.DefinePermissionService;
 import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import com.egg.manager.service.service.user.UserAccountService;
-import com.egg.manager.service.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;

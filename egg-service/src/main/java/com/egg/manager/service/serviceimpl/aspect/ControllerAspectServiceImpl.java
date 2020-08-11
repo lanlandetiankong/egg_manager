@@ -7,7 +7,7 @@ import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.service.annotation.log.OperLog;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.aspect.ControllerAspectService;
-import com.egg.manager.service.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;

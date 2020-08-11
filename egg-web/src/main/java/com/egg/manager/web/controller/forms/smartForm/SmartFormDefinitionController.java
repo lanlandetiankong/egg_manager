@@ -2,15 +2,19 @@ package com.egg.manager.web.controller.forms.smartForm;
 
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.common.base.query.MyMongoQueryBuffer;
 import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.mongo.dao.forms.SmartFormDefinitionRepository;
+import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
+import com.egg.manager.persistence.mongo.mapstruct.forms.SmartFormDefinitionMapstruct;
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormDefinitionMO;
+import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
+import com.egg.manager.persistence.mongo.mvo.forms.SmartFormDefinitionMVO;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfCreate;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
@@ -22,6 +26,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -49,7 +54,11 @@ import java.util.Optional;
 public class SmartFormDefinitionController extends BaseController {
 
     @Autowired
+    private SmartFormTypeDefinitionRepository smartFormTypeDefinitionRepository;
+
+    @Autowired
     private SmartFormDefinitionMService smartFormDefinitionMService;
+
 
 
     @OperLog(modelName = "SmartFormDefinitionController", action = "分页查询->表单定义", description = "")
@@ -123,13 +132,19 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/addByForm")
     public MyCommonResult<SmartFormDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormDefinitionVerifyO formDefinitionVerifyO,
-                                                                 SmartFormDefinitionMO formDefinitionMO) {
+                                                                 SmartFormDefinitionMVO formDefinitionMVO) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            if (formDefinitionMO == null) {
+            if (formDefinitionMVO == null) {
                 throw new Exception("未接收到有效的表单定义！");
             } else {
+                Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
+                if(formTypeDefinitionMOOptional.isPresent() == false){
+                    throw new BusinessException("不是有效的表单类型！");
+                }
+                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.mvo_CopyTo_MO(formDefinitionMVO);
+                formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
                 SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
             }
@@ -147,13 +162,19 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/updateByForm")
     public MyCommonResult<SmartFormDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormDefinitionVerifyO formDefinitionVerifyO,
-                                                                    SmartFormDefinitionMO formDefinitionMO) {
+                                                                    SmartFormDefinitionMVO formDefinitionMVO) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            if (formDefinitionMO == null) {
+            if (formDefinitionMVO == null) {
                 throw new Exception("未接收到有效的表单定义！");
             } else {
+                Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
+                if(formTypeDefinitionMOOptional.isPresent() == false){
+                    throw new BusinessException("不是有效的表单类型！");
+                }
+                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.mvo_CopyTo_MO(formDefinitionMVO);
+                formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
                 SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
             }

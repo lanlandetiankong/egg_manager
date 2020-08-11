@@ -11,7 +11,7 @@ import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.organization.DefineTenantService;
 import com.egg.manager.web.controller.BaseController;
@@ -114,7 +114,7 @@ public class DefineTenantController extends BaseController{
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
             defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,null,sortBeans); ;
             defineTenantService.dealResultListSetToEntitySelect(result) ;
-            dealCommonSuccessCatch(result,"查询公告标签信息Select列表:"+actionSuccessMsg);
+            dealCommonSuccessCatch(result,"查询租户定义信息Select列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
         }

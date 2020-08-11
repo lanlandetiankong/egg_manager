@@ -29,7 +29,7 @@ public class SmartFormDefinitionVerifyO extends MyBaseVerifyO<SmartFormDefinitio
     /**
      * 表单标题
      */
-    @NotBlank(groups = {VerifyGroupOfUpdate.class},message = "[标题]不能为空!")
+    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[标题]不能为空!")
     private String title ;
     /**
      * 表单类型
@@ -48,6 +48,9 @@ public class SmartFormDefinitionVerifyO extends MyBaseVerifyO<SmartFormDefinitio
      */
     private Integer orderNum ;
     private String remark ;
+
+    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[表单类型]不能为空!")
+    private String formTypeId ;
 
 
 

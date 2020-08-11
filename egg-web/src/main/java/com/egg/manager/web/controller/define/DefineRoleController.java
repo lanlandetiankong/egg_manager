@@ -18,7 +18,7 @@ import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.vo.define.DefineRoleVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefineRoleService;
 import com.egg.manager.service.service.role.RoleMenuService;

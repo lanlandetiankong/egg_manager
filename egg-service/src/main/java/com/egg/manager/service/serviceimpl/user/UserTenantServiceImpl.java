@@ -13,7 +13,7 @@ import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.user.UserTenantDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserTenant;

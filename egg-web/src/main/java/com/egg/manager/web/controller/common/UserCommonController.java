@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.common;
 import com.egg.manager.common.base.beans.FrontSelectBean;
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

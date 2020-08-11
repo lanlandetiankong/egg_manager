@@ -151,7 +151,13 @@ public interface MyBaseMongoService<T,ID> {
      * @return
      */
     List<T> doFindAll(UserAccount loginUser,Query query);
-
+    /**
+     * 根据封装的bean进行查询
+     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param queryBean
+     * @return
+     */
+    List<T> doFindAll(UserAccount loginUser,MongoQueryBean queryBean);
     /**
      * 根据查询条件查询记录并排序
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)

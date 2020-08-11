@@ -9,7 +9,7 @@ import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.vo.user.UserJobVo;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.user.UserJobService;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;

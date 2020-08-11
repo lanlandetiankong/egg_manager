@@ -11,7 +11,7 @@ import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.vo.define.DefineJobVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.define.DefineJobService;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;

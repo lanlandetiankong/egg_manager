@@ -5,7 +5,7 @@ import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEn
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

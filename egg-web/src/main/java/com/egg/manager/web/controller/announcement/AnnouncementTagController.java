@@ -11,7 +11,7 @@ import com.egg.manager.persistence.transfer.announcement.AnnouncementTagTransfer
 import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.announcement.AnnouncementTagService;
 import com.egg.manager.web.controller.BaseController;

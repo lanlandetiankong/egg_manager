@@ -4,7 +4,7 @@ import com.egg.manager.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.message.mail.MyEmailMsgO;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

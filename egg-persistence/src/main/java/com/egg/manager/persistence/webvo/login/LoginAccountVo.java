@@ -1,8 +1,9 @@
-package com.egg.manager.service.webvo.login;
+package com.egg.manager.persistence.webvo.login;
 
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
+import com.egg.manager.persistence.webvo.mapstruct.login.UserAccountMapstruct;
 import lombok.*;
-import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -32,8 +33,7 @@ public class LoginAccountVo {
      * @throws IllegalAccessException
      */
     public static LoginAccountDTO transferToLoginAccountDTO(LoginAccountVo loginAccountVo) throws InvocationTargetException, IllegalAccessException {
-        LoginAccountDTO dto = new LoginAccountDTO() ;
-        BeanUtils.copyProperties(dto,loginAccountVo) ;
+        LoginAccountDTO dto = UserAccountMapstruct.INSTANCE.loginAccountVo_CopyTo_LoginAccountDTO(loginAccountVo);
         return dto ;
     }
 

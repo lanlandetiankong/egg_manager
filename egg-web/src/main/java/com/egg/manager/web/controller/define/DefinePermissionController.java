@@ -14,7 +14,7 @@ import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.define.DefinePermissionService;
 import com.egg.manager.web.controller.BaseController;

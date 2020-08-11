@@ -1,6 +1,7 @@
 package com.egg.manager.service.helper;
 
 import com.egg.manager.common.base.enums.PublicResultEnum;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 
@@ -17,7 +18,7 @@ public class MyResponseHelper {
     public MyResponseHelper() {
     }
 
-    public static <T> MyCommonResult<T> handleRequestFailure(Exception e,String msg) {
+    public static <T> MyCommonResult<T> handleRequestFailure(Exception e, String msg) {
         MyCommonResult<T> result = new MyCommonResult<T>() ;
         String errorMsg = e.getMessage();
         if(StringUtils.isNotBlank(msg)) {

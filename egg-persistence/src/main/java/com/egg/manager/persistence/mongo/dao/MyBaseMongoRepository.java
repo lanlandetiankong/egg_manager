@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.mongo.dao;
 
+import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import org.springframework.data.domain.Page;
@@ -152,7 +153,6 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
      * @return
      */
      List<T> findAll(Query query);
-
     /**
      * 根据条件查询[文档]集合并排序
      * @param query

@@ -1,10 +1,10 @@
-package com.egg.manager.service.helper;
+package com.egg.manager.persistence.helper;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.service.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import lombok.*;
 
 import java.io.Serializable;

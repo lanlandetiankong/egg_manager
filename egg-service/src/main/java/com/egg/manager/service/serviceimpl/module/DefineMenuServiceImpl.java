@@ -24,7 +24,7 @@ import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.tree.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.module.DefineMenuService;
 import org.apache.commons.lang3.StringUtils;

@@ -12,7 +12,7 @@ import com.egg.manager.persistence.transfer.announcement.AnnouncementDraftTransf
 import com.egg.manager.persistence.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.announcement.AnnouncementDraftService;
 import com.egg.manager.service.service.announcement.AnnouncementTagService;

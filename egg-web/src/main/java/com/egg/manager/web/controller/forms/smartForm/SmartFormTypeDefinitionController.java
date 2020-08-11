@@ -6,11 +6,10 @@ import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.common.base.query.MyMongoQueryBuffer;
 import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.service.annotation.log.OperLog;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfCreate;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
@@ -69,7 +68,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            queryBean.appendQueryFieldsToQuery(mongoQueryBuffer);
             Page<SmartFormTypeDefinitionMO> page = smartFormTypeDefinitionMService.doFindPage(loginUser,queryBean);
             dealSetMongoPageResult(result,page,"查询表单类型定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
@@ -89,8 +87,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataAll(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
-            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser);
-            result.setResultList(list);
+            //添加状态过滤,时间倒序排序
+            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
+                    .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
+                    .getRefreshedSelf();
+            MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
+            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser,queryBean);
+            smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result,list) ;
             dealCommonSuccessCatch(result,"查询表单类型信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

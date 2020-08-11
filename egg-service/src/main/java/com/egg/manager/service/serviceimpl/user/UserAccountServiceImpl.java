@@ -28,7 +28,7 @@ import com.egg.manager.persistence.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
-import com.egg.manager.service.helper.MyCommonResult;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.service.service.CommonFuncService;
 import com.egg.manager.service.service.user.UserAccountService;
 import org.apache.commons.lang3.StringUtils;

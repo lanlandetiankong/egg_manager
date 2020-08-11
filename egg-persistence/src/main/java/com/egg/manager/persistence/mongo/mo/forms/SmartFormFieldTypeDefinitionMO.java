@@ -18,12 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@Document(collection = "smart_form_field_type_definition")
-@CompoundIndexes({
-        @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
-})
-public class SmartFormFieldTypeDefinitionMO extends BaseModelMO<String> {
+public class SmartFormFieldTypeDefinitionMO {
     /**
      * 字段类型值
      */

@@ -15,8 +15,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class SmartFormRecordFieldMO extends BaseModelMO<String> {
+public class SmartFormRecordFieldMO {
     /**
      * 表单record
      */

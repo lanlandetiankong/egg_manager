@@ -71,10 +71,16 @@ public class MyShiroConfig {
         //放行webSocket
         filterRuleMap.put("/websocket/*", "anon");
         //放行swagger
-        filterRuleMap.put("/swagger-ui.html", "anon");
+       /* filterRuleMap.put("/swagger-ui.html", "anon");
         filterRuleMap.put("/swagger-resources", "anon");
         filterRuleMap.put("/v2/api-docs", "anon");
-        filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");
+        filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");*/
+        //放行swagger & swagger-bootstrap-ui
+        filterRuleMap.put("/swagger-resources", "anon");
+        filterRuleMap.put("/v2/api-docs", "anon");
+        filterRuleMap.put("/v2/api-docs-ext", "anon");
+        filterRuleMap.put("/doc.html", "anon");
+        filterRuleMap.put("/webjars/**", "anon");
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/user/user_account/login/account", "anon");
         //filterRuleMap.put("/**", "anon");

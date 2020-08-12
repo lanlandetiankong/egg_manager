@@ -2,8 +2,6 @@ package com.egg.manager.web.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -30,30 +28,29 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    /**
-     * 可以注入多个docket，即多个版本api，可以在看到有三个版本groupName不能是重复的，v1和v2是ant风格匹配，配置文件
-     * @return
-     */
     @Bean
-    public Docket api() {
-        ParameterBuilder parameterBuilder = new ParameterBuilder() ;
-        parameterBuilder.parameterType("header")
+    public Docket createRestApi() {
+        Parameter parameter = new ParameterBuilder().parameterType("header")
                 .name("authorization")
                 .description("header中Authorization字段用于认证")
                 .modelRef(new ModelRef("string"))
                 .required(false).build() ;
         List<Parameter> aParameters = new ArrayList<Parameter>();
-        aParameters.add(parameterBuilder.build());
-        return new Docket(DocumentationType.SWAGGER_2).groupName("v1").select()
+        aParameters.add(parameter);
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .globalOperationParameters(aParameters)
+                .select()
                 .apis(RequestHandlerSelectors.basePackage("com.egg.manager.web.controller"))
-                .paths(PathSelectors.any()).build().apiInfo(apiInfo1()).globalOperationParameters(aParameters);
+                .paths(PathSelectors.any())
+                .build();
     }
 
-
-    private ApiInfo apiInfo1() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("egg-manager后端APIs")
-                .version("v0.01")
+                .title("egg-manager APIs")
+                .description("egg-manager 后端APIs")
+                .version("v1.0")
                 .build();
     }
 

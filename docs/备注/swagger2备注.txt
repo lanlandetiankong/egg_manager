@@ -2,3 +2,7 @@ swagger2 生成的api路径为
     http://localhost:端口号/项目名/swagger-ui.html#/
 eg:
     http://localhost:8083/egg_manager/swagger-ui.html#/
+
+swagger-bootstrap-ui默认访问地址是：http://${host}:${port}/doc.html
+eg:
+    http://localhost:8083/egg_manager/doc.html

@@ -66,9 +66,10 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
                 "classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations(
                 "classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("doc.html").addResourceLocations(
+                "classpath:/META-INF/resources/");
         super.addResourceHandlers(registry);
     }
-
 
 }
 

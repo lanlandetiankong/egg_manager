@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -56,6 +57,15 @@ public interface MyBaseMongoService<T extends BaseModelMO,ID> {
      */
     T doUpdateAllColById(UserAccount loginUser,T t);
 
+    /**
+     * 批量更新
+     * (如果没在update设置 最后更新时间，那么会自动在update添加 最后更新人信息)
+     * @param loginUser  当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param query
+     * @param update
+     * @return
+     */
+    Long doBatchUpdate(UserAccount loginUser,Query query, Update update);
 
     /**
      * 根据id-伪删除

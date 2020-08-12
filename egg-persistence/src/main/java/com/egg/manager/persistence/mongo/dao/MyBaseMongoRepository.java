@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,6 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
     <S extends T> List<S> batchInsert(Iterable<S> iterable);
 
 
-
     /**
      * 保存[文档]
      *
@@ -68,6 +68,14 @@ public interface MyBaseMongoRepository<T extends BaseModelMO, ID> {
      */
     <S extends T> long batchUpdateByIds(Iterable<ID> ids,S s,boolean isAllColumn);
 
+    /**
+     * 批量更新指定[文档]
+     * @param query 过滤要筛选的
+     * @param update 更新后的值
+     * @param <S>
+     * @return
+     */
+    long batchUpdate(Query query, Update update);
 
     /**
      * 更新[文档]的Status

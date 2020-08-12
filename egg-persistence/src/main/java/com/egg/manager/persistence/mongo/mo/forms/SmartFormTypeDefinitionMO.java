@@ -34,4 +34,10 @@ public class SmartFormTypeDefinitionMO extends BaseModelMO<String> {
     private String description ;
     private String remark ;
 
+    /**
+     * 表单类型
+     */
+    private SmartFormTypeDefinitionMO formType ;
+
+
 }

@@ -4,6 +4,7 @@ import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.common.base.query.MyMongoQueryBuffer;
+import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
@@ -50,6 +51,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
     @Autowired
     private SmartFormTypeDefinitionMService smartFormTypeDefinitionMService;
+    @Autowired
+    private SmartFormDefinitionMService smartFormDefinitionMService;
 
 
     @OperLog(modelName = "SmartFormTypeDefinitionController", action = "分页查询->表单类型定义", description = "")
@@ -149,15 +152,20 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMO formTypeDefinitionMO) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
-        Integer addCount = 0;
+        Integer count = 0;
         try {
             if (formTypeDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单类型定义！");
             } else {
                 SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doUpdateById(loginUser,formTypeDefinitionMO);
-                addCount += (newMO != null) ? 1 : 0;
+                //更新了一条数据
+                if(newMO != null){
+                    count += 1;
+                    //触发formDefinetion 更新
+                    smartFormDefinitionMService.updateFormTypeByTypeId(loginUser,newMO);
+                }
             }
-            result.setCount(addCount);
+            result.setCount(count);
             dealCommonSuccessCatch(result, "更新->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

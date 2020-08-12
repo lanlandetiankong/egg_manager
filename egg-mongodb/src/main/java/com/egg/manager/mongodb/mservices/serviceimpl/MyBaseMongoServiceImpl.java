@@ -1,5 +1,6 @@
 package com.egg.manager.mongodb.mservices.serviceimpl;
 
+import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.MongoQueryBean;
@@ -7,12 +8,15 @@ import com.egg.manager.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +31,7 @@ import java.util.Optional;
 public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T extends BaseModelMO,ID> implements MyBaseMongoService<T,ID> {
     @Autowired
     protected R baseRepository;
+
 
     @Override
     public T doInsert(UserAccount loginUser,T t) {
@@ -55,6 +60,17 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         dealUpdateSetLoginUserToMO(loginUser,t);
         return baseRepository.updateById(t,true);
     }
+
+    @Override
+    public Long doBatchUpdate(UserAccount loginUser,Query query, Update update) {
+        Document document = update.getUpdateObject();
+        //如果已经在update指定了最后更新时间，则不再往update添加最后更新时间、最后更新人等信息
+        if(document.containsKey(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE) == false){
+            dealSetModifyInfoToUpdate(loginUser,update);
+        }
+        return baseRepository.batchUpdate(query,update);
+    }
+
     @Override
     public Long doFakeDeleteById(UserAccount loginUser,ID id) throws MyMongoException {
         Integer count = 0 ;
@@ -207,6 +223,15 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         if(t != null && loginUser != null){
             t.setLastModifyerId(loginUser.getFid());
             t.setLastModifyerNickName(loginUser.getNickName());
+        }
+    }
+
+    //private methods
+    private void dealSetModifyInfoToUpdate(UserAccount loginUser,Update update){
+        if(loginUser != null){
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID,loginUser.getFid());
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERNICKNAME,loginUser.getNickName());
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE,new Date());
         }
     }
 

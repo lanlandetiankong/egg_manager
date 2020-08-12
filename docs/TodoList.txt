@@ -1,11 +1,12 @@
 TODO LIST
-mongodb  mongoTemplate 复杂查询+分页+排序
-swagger2 接口的使用 => 转 knife4j https://doc.xiaominfo.com/guide/useful.html#java%E5%BC%80%E5%8F%91
+ok>swagger2 接口的使用 => 转 knife4j https://doc.xiaominfo.com/guide/useful.html#java%E5%BC%80%E5%8F%91
 1、springboot webpack 推送消息到vue
 2、枚举返回接口封装
 4、mail消息
 5、MQ
 3、引入dubbo
-6、分布式事务
+dubbo集群
+6、sql分布式事务
+mongodb分布式事务
 7、动态配置nacos
-//8、mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须对user判空再处理(登录的必要性交给外部控制)
+ok>8、mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须对user判空再处理(登录的必要性交给外部控制)

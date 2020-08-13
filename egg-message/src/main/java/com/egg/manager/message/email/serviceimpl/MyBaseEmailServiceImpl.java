@@ -1,7 +1,7 @@
 package com.egg.manager.message.email.serviceimpl;
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.message.email.service.MyBaseEmailService;
+import com.egg.manager.api.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.message.mail.MyEmailMsgO;
 import com.egg.manager.persistence.message.mapstruct.mail.MessageMailMapstruct;
 import freemarker.template.Configuration;

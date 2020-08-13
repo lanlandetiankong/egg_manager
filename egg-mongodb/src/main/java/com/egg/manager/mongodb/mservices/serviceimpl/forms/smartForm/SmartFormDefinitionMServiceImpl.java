@@ -1,7 +1,7 @@
 package com.egg.manager.mongodb.mservices.serviceimpl.forms.smartForm;
 
 import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
-import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
+import com.egg.manager.api.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormDefinitionRepository;

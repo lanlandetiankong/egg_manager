@@ -6,9 +6,9 @@ import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
-import com.egg.manager.service.excel.service.user.UserAccountXlsService;
+import com.egg.manager.api.service.excel.service.user.UserAccountXlsService;
 import com.egg.manager.service.excel.serviceimpl.common.MyXlsBaseServiceImpl;
-import com.egg.manager.service.service.user.UserAccountService;
+import com.egg.manager.api.service.service.user.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

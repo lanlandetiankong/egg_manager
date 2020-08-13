@@ -53,7 +53,7 @@
         <!-- dubbo dependency end -->
         <dependency>
             <groupId>com.teaegg</groupId>
-            <artifactId>egg-service</artifactId>
+            <artifactId>egg-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

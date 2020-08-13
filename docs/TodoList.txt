@@ -10,3 +10,5 @@ dubbo集群
 mongodb分布式事务
 7、动态配置nacos
 ok>8、mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须对user判空再处理(登录的必要性交给外部控制)
+版本号修改
+统一参数-版本号

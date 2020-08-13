@@ -2,8 +2,8 @@ package com.egg.manager.web.config.shiro;
 
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JWTUtil;
-import com.egg.manager.service.redis.service.user.UserAccountRedisService;
-import com.egg.manager.service.spring.SpringContextBeanService;
+import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
+import com.egg.manager.api.service.spring.SpringContextBeanService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

@@ -3,7 +3,7 @@ package com.egg.manager.service.serviceimpl.user;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.persistence.entity.user.UserGroup;
 import com.egg.manager.persistence.mapper.user.UserGroupMapper;
-import com.egg.manager.service.service.user.UserGroupService;
+import com.egg.manager.api.service.service.user.UserGroupService;
 import org.springframework.stereotype.Service;
 
 /**

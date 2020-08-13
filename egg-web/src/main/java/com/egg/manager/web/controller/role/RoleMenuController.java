@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.role;
 
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
-import com.egg.manager.service.service.module.DefineMenuService;
+import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

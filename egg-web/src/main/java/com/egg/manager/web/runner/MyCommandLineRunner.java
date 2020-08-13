@@ -1,6 +1,6 @@
 package com.egg.manager.web.runner;
 
-import com.egg.manager.service.annotation.shiro.ShiroPass;
+import com.egg.manager.api.service.annotation.shiro.ShiroPass;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.str.ComUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.egg.manager.mongodb.mservices.serviceimpl.forms.smartForm;
 
-import com.egg.manager.mongodb.mservices.service.forms.smartForm.SmartFormRecordFieldMService;
+import com.egg.manager.api.mongodb.mservices.service.forms.smartForm.SmartFormRecordFieldMService;
 import org.springframework.stereotype.Service;
 
 /**

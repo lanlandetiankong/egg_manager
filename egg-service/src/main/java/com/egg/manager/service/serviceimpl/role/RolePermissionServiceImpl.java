@@ -7,7 +7,7 @@ import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.role.RolePermission;
 import com.egg.manager.persistence.mapper.role.RolePermissionMapper;
-import com.egg.manager.service.service.role.RolePermissionService;
+import com.egg.manager.api.service.service.role.RolePermissionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

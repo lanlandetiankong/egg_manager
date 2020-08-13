@@ -5,9 +5,8 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.egg.manager.service.excel.service.common.MyXlsBaseService;
+import com.egg.manager.api.service.excel.service.common.MyXlsBaseService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;

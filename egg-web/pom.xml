@@ -5,7 +5,7 @@
     <parent>
         <artifactId>egg-manager-root</artifactId>
         <groupId>com.teaegg</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>2.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -54,17 +54,17 @@
         <dependency>
             <groupId>com.teaegg</groupId>
             <artifactId>egg-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>2.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.teaegg</groupId>
             <artifactId>egg-mongodb</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>2.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.teaegg</groupId>
             <artifactId>egg-message</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>2.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

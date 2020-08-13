@@ -15,15 +15,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.teaegg</groupId>
             <artifactId>egg-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
     <build>

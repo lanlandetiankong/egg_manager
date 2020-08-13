@@ -1,10 +1,10 @@
 TODO LIST
 ok>swagger2 接口的使用 => 转 knife4j https://doc.xiaominfo.com/guide/useful.html#java%E5%BC%80%E5%8F%91
 1、springboot webpack 推送消息到vue
-2、枚举返回接口封装
+not>2、枚举返回接口封装
 4、mail消息
 5、MQ
-3、引入dubbo
+ing>3、引入dubbo
 dubbo集群
 6、sql分布式事务
 mongodb分布式事务

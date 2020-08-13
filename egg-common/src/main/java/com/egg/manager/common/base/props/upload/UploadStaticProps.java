@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "props.upload")
+@PropertySource("classpath:common/config/application-devEgg.properties")
 public class UploadStaticProps {
 
     public static String urlPrefix ;

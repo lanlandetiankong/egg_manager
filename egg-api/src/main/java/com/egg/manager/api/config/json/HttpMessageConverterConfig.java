@@ -1,4 +1,4 @@
-package com.egg.manager.web.config.json;
+package com.egg.manager.api.config.json;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;

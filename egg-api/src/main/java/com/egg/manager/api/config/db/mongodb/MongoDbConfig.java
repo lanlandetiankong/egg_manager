@@ -1,4 +1,4 @@
-package com.egg.manager.web.config.db.mongodb;
+package com.egg.manager.api.config.db.mongodb;
 
 import com.mongodb.MongoClientOptions;
 import org.springframework.context.annotation.Bean;

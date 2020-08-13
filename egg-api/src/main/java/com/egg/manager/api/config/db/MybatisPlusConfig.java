@@ -1,4 +1,4 @@
-package com.egg.manager.web.config.db;
+package com.egg.manager.api.config.db;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;

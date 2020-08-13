@@ -1,4 +1,4 @@
-package com.egg.manager.web.config.db;
+package com.egg.manager.api.config.db;
 
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.context.annotation.Bean;

@@ -1,26 +1,27 @@
 package com.egg.manager.service.serviceimpl.announcement;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.announcement.AnnouncementTagService;
 import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.announcement.AnnouncementTagTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.announcement.AnnouncementTagService;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -33,7 +34,7 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = AnnouncementTagService.class)
 public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMapper,AnnouncementTag> implements AnnouncementTagService {
 
 
@@ -41,7 +42,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
 
     @Autowired
     private AnnouncementTagMapper announcementTagMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

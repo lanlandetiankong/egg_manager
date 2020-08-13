@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.message.mail;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.message.mail.MyEmailMsgO;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HelloMailController extends BaseController{
     @Value("${spring.mail.username}")
     private String fromUser ;
-    @Autowired
+    @Reference
     private MyBaseEmailService myBaseEmailService ;
 
     @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class,httpMethod = "POST")

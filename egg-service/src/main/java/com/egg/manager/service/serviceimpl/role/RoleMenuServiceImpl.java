@@ -1,10 +1,10 @@
 package com.egg.manager.service.serviceimpl.role;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.role.RoleMenuService;
 import com.egg.manager.persistence.entity.role.RoleMenu;
 import com.egg.manager.persistence.mapper.role.RoleMenuMapper;
-import com.egg.manager.api.service.service.role.RoleMenuService;
-import org.springframework.stereotype.Service;
 
 /**
  * \* note:
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = RoleMenuService.class)
 public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper,RoleMenu>  implements RoleMenuService {
 
 }

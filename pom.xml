@@ -16,6 +16,7 @@
         <module>egg-mongodb</module>
         <module>egg-web</module>
         <module>egg-api</module>
+        <module>egg-generate</module>
     </modules>
 
     <parent>

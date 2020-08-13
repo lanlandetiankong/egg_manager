@@ -1,4 +1,4 @@
-package com.egg.manager.web.generate;
+package com.egg.manager.generate.tool;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;

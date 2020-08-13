@@ -1,22 +1,23 @@
 package com.egg.manager.service.redis.serviceimpl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
-import com.egg.manager.service.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
 import com.egg.manager.api.service.service.define.DefinePermissionService;
 import com.egg.manager.api.service.service.define.DefineRoleService;
 import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.api.service.service.user.UserAccountService;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
+import com.egg.manager.service.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,24 +29,24 @@ import java.util.Set;
  * \* Description:
  * \
  */
-@Service("userAccountRedisService")
+@Service(interfaceClass = UserAccountRedisService.class)
 public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl implements UserAccountRedisService {
 
-    @Autowired
+    @Reference
     private RedisHelper redisHelper ;
 
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    @Autowired
+    @Reference
     public UserAccountService userAccountService ;
 
 
-    @Autowired
+    @Reference
     public DefineRoleService defineRoleService ;
-    @Autowired
+    @Reference
     public DefinePermissionService definePermissionService ;
-    @Autowired
+    @Reference
     public DefineMenuService defineMenuService ;
 
     /**

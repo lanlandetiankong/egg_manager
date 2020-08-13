@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -44,7 +45,7 @@ public class DefineJobController extends BaseController {
 
     @Autowired
     private DefineJobMapper defineJobMapper ;
-    @Autowired
+    @Reference
     private DefineJobService defineJobService ;
 
 

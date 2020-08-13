@@ -1,10 +1,10 @@
 package com.egg.manager.mongodb.mservices.serviceimpl;
 
+import com.egg.manager.api.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.MongoQueryBean;
-import com.egg.manager.api.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;

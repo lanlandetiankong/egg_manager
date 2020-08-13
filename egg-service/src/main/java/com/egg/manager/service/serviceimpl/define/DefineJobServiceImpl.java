@@ -1,28 +1,31 @@
 package com.egg.manager.service.serviceimpl.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.define.DefineJobService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefineJobDto;
 import com.egg.manager.persistence.entity.define.DefineJob;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.define.DefineJobMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.define.DefineJobService;
+import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.vo.define.DefineJobVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * \* note:
@@ -32,13 +35,13 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefineJobService.class)
 public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob> implements DefineJobService {
 
 
     @Autowired
     private DefineJobMapper defineJobMapper;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService;
 
     /**

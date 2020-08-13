@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.announcement;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -48,11 +49,11 @@ public class AnnouncementDraftController extends BaseController{
 
     @Autowired
     private AnnouncementDraftMapper announcementDraftMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
-    @Autowired
+    @Reference
     private AnnouncementDraftService announcementDraftService;
-    @Autowired
+    @Reference
     private AnnouncementTagService announcementTagService;
 
     @OperLog(modelName="AnnouncementDraftController",action="查询公告信息草稿-Dto列表",description = "查询公告信息草稿-Dto列表")

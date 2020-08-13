@@ -1,5 +1,6 @@
 package com.egg.manager.web.config.shiro;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -28,9 +29,9 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    @Autowired
+    @Reference
     private RedisHelper redisHelper ;
-    @Autowired
+    @Reference
     private UserAccountRedisService userAccountRedisService ;
 
     /**

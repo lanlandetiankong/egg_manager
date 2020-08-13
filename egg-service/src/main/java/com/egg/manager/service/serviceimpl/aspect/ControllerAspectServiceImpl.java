@@ -1,19 +1,20 @@
 package com.egg.manager.service.serviceimpl.aspect;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.common.base.beans.request.RequestHeaderBean;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.api.service.annotation.log.OperLog;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.aspect.ControllerAspectService;
+import com.egg.manager.common.base.beans.request.RequestHeaderBean;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,10 +29,10 @@ import java.util.Date;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = ControllerAspectService.class)
 public class ControllerAspectServiceImpl implements ControllerAspectService {
 
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
     /**

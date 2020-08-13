@@ -1,31 +1,32 @@
 package com.egg.manager.service.serviceimpl.announcement;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.transfer.announcement.AnnouncementTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.persistence.dto.announcement.AnnouncementDto;
-import com.egg.manager.persistence.entity.announcement.Announcement;
-import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.mapper.announcement.AnnouncementMapper;
-import com.egg.manager.persistence.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.announcement.AnnouncementDraftService;
 import com.egg.manager.api.service.service.announcement.AnnouncementService;
 import com.egg.manager.api.service.service.announcement.AnnouncementTagService;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.dto.announcement.AnnouncementDto;
+import com.egg.manager.persistence.entity.announcement.Announcement;
+import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
+import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.mapper.announcement.AnnouncementMapper;
+import com.egg.manager.persistence.mapper.announcement.AnnouncementTagMapper;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementDraftTransfer;
+import com.egg.manager.persistence.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.vo.announcement.AnnouncementVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -41,7 +42,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = AnnouncementService.class)
 public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Announcement> implements AnnouncementService {
 
 
@@ -49,11 +50,11 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     private AnnouncementMapper announcementMapper ;
     @Autowired
     private AnnouncementTagMapper announcementTagMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
-    @Autowired
+    @Reference
     private AnnouncementTagService announcementTagService ;
-    @Autowired
+    @Reference
     private AnnouncementDraftService announcementDraftService ;
 
 

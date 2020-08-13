@@ -1,9 +1,13 @@
 package com.egg.manager.service.serviceimpl.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.define.DefinePermissionService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -16,18 +20,15 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.define.DefinePermissionService;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -43,7 +44,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefinePermissionService.class)
 public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMapper,DefinePermission> implements DefinePermissionService {
 
 
@@ -51,7 +52,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     private DefinePermissionMapper definePermissionMapper ;
     @Autowired
     private UserAccountMapper userAccountMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
     /**

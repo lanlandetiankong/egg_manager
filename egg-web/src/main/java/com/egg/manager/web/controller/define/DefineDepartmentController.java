@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -47,7 +48,7 @@ public class DefineDepartmentController extends BaseController{
 
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
-    @Autowired
+    @Reference
     private DefineDepartmentService defineDepartmentService;
 
 

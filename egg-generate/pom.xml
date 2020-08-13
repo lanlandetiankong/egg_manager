@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>egg-manager-root</artifactId>
+        <groupId>com.teaegg</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+  <groupId>com.teaegg</groupId>
+  <artifactId>egg-generate</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>egg-generate</name>
+  <packaging>war</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+      <dependency>
+          <groupId>com.teaegg</groupId>
+          <artifactId>egg-api</artifactId>
+          <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <!--数据库文档核心依赖-->
+      <dependency>
+          <groupId>cn.smallbun.screw</groupId>
+          <artifactId>screw-core</artifactId>
+          <exclusions>
+              <exclusion>
+                  <artifactId>commons-logging</artifactId>
+                  <groupId>commons-logging</groupId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+  </dependencies>
+
+  <build>
+
+  </build>
+</project>

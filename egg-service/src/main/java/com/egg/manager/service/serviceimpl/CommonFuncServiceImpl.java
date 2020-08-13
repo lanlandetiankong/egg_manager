@@ -1,22 +1,23 @@
 package com.egg.manager.service.serviceimpl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.api.service.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.api.service.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.mapper.user.UserAccountMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
-import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -36,13 +37,13 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = CommonFuncService.class)
 public class CommonFuncServiceImpl implements CommonFuncService {
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
 
-    @Autowired
+    @Reference
     private RedisHelper redisHelper ;
 
     @Override

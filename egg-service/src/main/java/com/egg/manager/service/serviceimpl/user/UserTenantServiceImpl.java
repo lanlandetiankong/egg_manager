@@ -1,32 +1,33 @@
 package com.egg.manager.service.serviceimpl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.user.UserTenantService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.user.UserTenantDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserTenant;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.redis.service.RedisHelper;
-import com.egg.manager.api.service.service.user.UserTenantService;
+import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.vo.user.UserTenantVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -41,21 +42,22 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = UserTenantService.class)
 public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTenant> implements UserTenantService {
+
+    @Autowired
+    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
     @Autowired
     private UserTenantMapper userTenantMapper ;
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
-    @Autowired
+    @Reference
     private RedisHelper redisHelper ;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
 
     /**

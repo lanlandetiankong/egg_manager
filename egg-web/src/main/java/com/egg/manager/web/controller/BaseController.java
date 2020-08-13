@@ -14,8 +14,9 @@ import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,13 +46,13 @@ public class BaseController {
     @Value("${egg.conf.jwt.sso:true}")
     private boolean jwtSsoFlag;
 
-    @Autowired
+    @Reference
     private RedisHelper redisHelper;
 
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache;
 
-    @Autowired
+    @Reference
     private UserAccountRedisService userAccountRedisService;
 
 

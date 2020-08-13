@@ -1,27 +1,28 @@
 package com.egg.manager.service.serviceimpl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.user.UserJobService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.user.UserJobTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.user.UserJobDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserJob;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.redis.service.RedisHelper;
-import com.egg.manager.api.service.service.user.UserJobService;
+import com.egg.manager.persistence.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.vo.user.UserJobVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -37,19 +38,15 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = UserJobService.class)
 public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> implements UserJobService {
 
     @Autowired
     private UserJobMapper userJobMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
-    @Autowired
-    private RedisHelper redisHelper ;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
 
 

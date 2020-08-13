@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.organization;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -46,9 +47,9 @@ public class DefineTenantController extends BaseController{
 
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
-    @Autowired
+    @Reference
     private DefineTenantService defineTenantService;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

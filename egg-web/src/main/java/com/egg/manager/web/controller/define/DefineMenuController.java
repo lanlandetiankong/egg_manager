@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
@@ -55,14 +56,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/define/define_menu")
 public class DefineMenuController extends BaseController{
-    @Autowired
-    private DefineMenuService defineMenuService ;
-    @Autowired
-    private CommonFuncService commonFuncService ;
 
     @Autowired
     private DefineMenuMapper defineMenuMapper ;
-    @Autowired
+
+    @Reference
+    private DefineMenuService defineMenuService ;
+    @Reference
+    private CommonFuncService commonFuncService ;
+    @Reference
     private UserAccountRedisService userAccountRedisService;
 
 

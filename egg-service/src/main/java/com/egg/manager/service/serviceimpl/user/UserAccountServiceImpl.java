@@ -1,9 +1,13 @@
 package com.egg.manager.service.serviceimpl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.user.UserAccountService;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -22,19 +26,16 @@ import com.egg.manager.persistence.entity.user.UserJob;
 import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.entity.user.UserTenant;
 import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.user.UserAccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -47,10 +48,8 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = UserAccountService.class)
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
-
-
 
     @Autowired
     private UserAccountMapper userAccountMapper ;
@@ -60,7 +59,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     private UserJobMapper userJobMapper ;
     @Autowired
     private UserTenantMapper userTenantMapper ;
-    @Autowired
+
+    @Reference
     private CommonFuncService commonFuncService ;
 
     /**

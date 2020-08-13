@@ -1,11 +1,12 @@
 package com.egg.manager.service.excel.serviceimpl.common;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.egg.manager.api.service.excel.service.common.MyXlsBaseService;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.egg.manager.api.service.excel.service.common.MyXlsBaseService;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Service(interfaceClass = MyXlsBaseService.class)
 public class MyXlsBaseServiceImpl implements MyXlsBaseService {
 
 

@@ -1,8 +1,14 @@
 package com.egg.manager.service.serviceimpl.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.define.DefineRoleService;
+import com.egg.manager.api.service.service.user.UserRoleService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -10,29 +16,24 @@ import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
-import com.egg.manager.persistence.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
+import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.entity.role.RolePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserRole;
+import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.mapper.role.RolePermissionMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.define.DefineRoleService;
-import com.egg.manager.api.service.redis.service.RedisHelper;
-import com.egg.manager.api.service.service.user.UserRoleService;
+import com.egg.manager.persistence.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.vo.define.DefineRoleVo;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -45,8 +46,12 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefineRoleService.class)
 public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRole> implements DefineRoleService {
+    @Autowired
+    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+    @Reference
+    private RedisHelper redisHelper ;
 
     @Autowired
     private DefineRoleMapper defineRoleMapper;
@@ -59,15 +64,12 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Autowired
     private UserAccountMapper userAccountMapper;
 
-    @Autowired
+    @Reference
     private UserRoleService userRoleService ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-    @Autowired
-    private RedisHelper redisHelper ;
+
 
 
 

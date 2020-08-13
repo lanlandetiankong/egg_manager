@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.transfer.define.DefinePermissionTransfer;
@@ -68,10 +69,11 @@ public class UserAccountController extends BaseController {
     @Autowired
     private DefineJobMapper defineJobMapper ;
     @Autowired
-    private UserAccountService userAccountService ;
-    @Autowired
     private DefineTenantMapper defineTenantMapper ;
-    @Autowired
+
+    @Reference
+    private UserAccountService userAccountService ;
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

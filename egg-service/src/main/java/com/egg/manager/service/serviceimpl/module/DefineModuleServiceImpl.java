@@ -1,25 +1,26 @@
 package com.egg.manager.service.serviceimpl.module;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.module.DefineModuleService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.module.DefineModuleTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.entity.module.DefineModule;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.module.DefineModuleMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.module.DefineModuleService;
+import com.egg.manager.persistence.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -35,14 +36,14 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefineModuleService.class)
 public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,DefineModule> implements DefineModuleService {
 
 
 
     @Autowired
     private DefineModuleMapper defineModuleMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

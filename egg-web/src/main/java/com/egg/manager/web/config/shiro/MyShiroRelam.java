@@ -1,5 +1,6 @@
 package com.egg.manager.web.config.shiro;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
@@ -27,7 +28,7 @@ import java.util.Set;
  */
 public class MyShiroRelam extends AuthorizingRealm {
 
-    @Autowired
+    @Reference
     private UserAccountRedisService userAccountRedisService;
 
 

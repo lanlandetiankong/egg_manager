@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -48,9 +49,10 @@ public class DefinePermissionController  extends BaseController{
 
     @Autowired
     private DefinePermissionMapper definePermissionMapper ;
-    @Autowired
+
+    @Reference
     private DefinePermissionService definePermissionService;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
@@ -61,14 +62,16 @@ public class DefineRoleController extends BaseController {
     @Autowired
     private RoleMenuMapper roleMenuMapper ;
     @Autowired
-    private RoleMenuService roleMenuService ;
-    @Autowired
     private DefinePermissionMapper definePermissionMapper;
     @Autowired
     private DefineRoleMapper defineRoleMapper ;
-    @Autowired
+
+    @Reference
+    private RoleMenuService roleMenuService ;
+
+    @Reference
     private DefineRoleService defineRoleService;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

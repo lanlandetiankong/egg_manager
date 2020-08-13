@@ -9,7 +9,7 @@ import com.egg.manager.api.service.helper.MyResponseHelper;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.api.service.spring.SpringContextBeanService;
 import com.egg.manager.api.service.service.user.UserAccountService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -157,6 +157,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      * @param token
      */
     private void handleSetUserAccountBean(ServletRequest request,ServletResponse response,JwtShiroToken token) {
+        //TODO 改为dubbo取得
          if(this.userAccountService == null) {
              this.userAccountService = SpringContextBeanService.getBean(UserAccountService.class) ;
          }

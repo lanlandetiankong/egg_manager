@@ -1,26 +1,27 @@
 package com.egg.manager.service.serviceimpl.organization;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.organization.DefineTenantService;
 import com.egg.manager.common.base.beans.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.organization.DefineTenantMapper;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.organization.DefineTenantService;
+import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -36,13 +37,13 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefineTenantService.class)
 public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,DefineTenant> implements DefineTenantService {
 
 
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
 

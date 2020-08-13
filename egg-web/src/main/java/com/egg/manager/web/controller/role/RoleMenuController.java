@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.role;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.web.controller.BaseController;
@@ -25,7 +26,7 @@ public class RoleMenuController extends BaseController{
 
     @Autowired
     private DefineMenuMapper defineMenuMapper;
-    @Autowired
+    @Reference
     private DefineMenuService defineMenuService ;
 
 

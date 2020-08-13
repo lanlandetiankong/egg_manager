@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.forms.smartForm;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.query.MongoQueryBean;
@@ -49,9 +50,9 @@ import java.util.Optional;
 @RequestMapping("/forms/smartForm/formTypeDefinition")
 public class SmartFormTypeDefinitionController extends BaseController {
 
-    @Autowired
+    @Reference
     private SmartFormTypeDefinitionMService smartFormTypeDefinitionMService;
-    @Autowired
+    @Reference
     private SmartFormDefinitionMService smartFormDefinitionMService;
 
 

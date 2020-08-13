@@ -1,16 +1,17 @@
 package com.egg.manager.service.excel.serviceimpl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.api.service.excel.service.user.UserAccountXlsService;
+import com.egg.manager.api.service.service.user.UserAccountService;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
-import com.egg.manager.api.service.excel.service.user.UserAccountXlsService;
 import com.egg.manager.service.excel.serviceimpl.common.MyXlsBaseServiceImpl;
-import com.egg.manager.api.service.service.user.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -23,12 +24,12 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = UserAccountXlsService.class)
 public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements UserAccountXlsService {
     @Autowired
     private UploadProps uploadProps ;
 
-    @Autowired
+    @Reference
     private UserAccountService userAccountService ;
 
     @Override

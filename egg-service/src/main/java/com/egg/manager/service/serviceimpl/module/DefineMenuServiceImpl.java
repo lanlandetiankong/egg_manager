@@ -1,9 +1,13 @@
 package com.egg.manager.service.serviceimpl.module;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.service.service.CommonFuncService;
+import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -17,6 +21,7 @@ import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.transfer.define.DefineMenuTransfer;
@@ -24,13 +29,9 @@ import com.egg.manager.persistence.tree.CommonMenuTree;
 import com.egg.manager.persistence.tree.CommonTreeSelect;
 import com.egg.manager.persistence.tree.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.module.DefineMenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -44,14 +45,14 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service
+@Service(interfaceClass = DefineMenuService.class)
 public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMenu> implements DefineMenuService {
 
     @Autowired
     private DefineMenuMapper defineMenuMapper ;
     @Autowired
     private UserAccountMapper userAccountMapper;
-    @Autowired
+    @Reference
     private CommonFuncService commonFuncService ;
 
     /**

@@ -1,4 +1,4 @@
-package com.egg.manager.web.generate;
+package com.egg.manager.generate.tool;
 
 import cn.smallbun.screw.core.Configuration;
 import cn.smallbun.screw.core.engine.EngineConfig;

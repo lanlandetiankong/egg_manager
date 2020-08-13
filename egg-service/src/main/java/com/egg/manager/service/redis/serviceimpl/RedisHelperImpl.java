@@ -1,17 +1,17 @@
 package com.egg.manager.service.redis.serviceimpl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Service("RedisHelper")
+@Service(interfaceClass = RedisHelper.class)
 public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
     //在构造器中获取RedisTemplate实例，key(not hashKey) 默认使用String类型
     private RedisTemplate<String,T> redisTemplate ;

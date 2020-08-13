@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
@@ -42,7 +43,7 @@ public class UserJobController extends BaseController{
 
     @Autowired
     private UserJobMapper userJobMapper ;
-    @Autowired
+    @Reference
     private UserJobService userJobService ;
 
 

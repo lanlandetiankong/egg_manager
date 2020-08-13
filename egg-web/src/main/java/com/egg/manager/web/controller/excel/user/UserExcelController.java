@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.excel.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
@@ -49,11 +50,11 @@ public class UserExcelController extends BaseController {
 
 
 
-    @Autowired
+    @Reference
     private DefineMenuService defineMenuService ;
-    @Autowired
+    @Reference
     private UserAccountXlsService userAccountXlsService ;
-    @Autowired
+    @Reference
     private UserAccountService userAccountService ;
 
     @PostMapping(value = "/exportCheckList")

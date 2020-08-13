@@ -1,7 +1,8 @@
 package com.egg.manager.mongodb.mservices.serviceimpl.forms.smartForm;
 
-import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
+import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormDefinitionRepository;
@@ -11,12 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Service;
 
 /**
  * MongoDb-FormDefinitionMO 表单定义-MService
  */
-@Service
+@Service(interfaceClass = SmartFormDefinitionMService.class)
 public class SmartFormDefinitionMServiceImpl extends MyBaseMongoServiceImpl<SmartFormDefinitionRepository,SmartFormDefinitionMO,String>
         implements SmartFormDefinitionMService {
 

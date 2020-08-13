@@ -35,11 +35,11 @@ egg-persistence.iml
 egg-service.iml
 egg-web.iml
 
-#logs
-logs/
+#outlogs
+outlogs/
 
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash outlogs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 %E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF222%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E8%A1%A8.xlsx
 "docs/excel/templates/user/\347\224\250\346\210\267\344\277\241\346\201\257\345\257\274\345\205\245.xlsx"

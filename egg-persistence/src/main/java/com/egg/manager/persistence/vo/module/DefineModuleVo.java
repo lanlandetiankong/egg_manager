@@ -1,14 +1,9 @@
 package com.egg.manager.persistence.vo.module;
 
-import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.persistence.dto.module.DefineModuleDto;
-import com.egg.manager.persistence.entity.module.DefineModule;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

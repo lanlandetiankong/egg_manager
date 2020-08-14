@@ -2,14 +2,13 @@ package com.egg.manager.web.controller.message.mail;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.message.email.service.MyBaseEmailService;
-import com.egg.manager.persistence.message.mail.MyEmailMsgO;
-import com.egg.manager.persistence.vo.module.DefineModuleVo;
 import com.egg.manager.api.service.annotation.log.OperLog;
 import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.message.mail.MyEmailMsgO;
+import com.egg.manager.persistence.vo.module.DefineModuleVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,21 +1,10 @@
 package com.egg.manager.persistence.vo.announcement;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
-import com.egg.manager.common.util.str.MyStringUtil;
-import com.egg.manager.persistence.dto.announcement.AnnouncementDraftDto;
-import com.egg.manager.persistence.entity.announcement.AnnouncementDraft;
-import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
-import com.google.common.base.Joiner;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * \* note:

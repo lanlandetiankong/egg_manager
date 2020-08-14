@@ -1,16 +1,9 @@
 package com.egg.manager.persistence.vo.define;
 
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
-import com.egg.manager.persistence.dto.define.DefinePermissionDto;
-import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

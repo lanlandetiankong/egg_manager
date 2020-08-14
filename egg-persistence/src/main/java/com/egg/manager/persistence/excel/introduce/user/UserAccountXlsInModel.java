@@ -2,7 +2,6 @@ package com.egg.manager.persistence.excel.introduce.user;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.format.DateTimeFormat;
 import lombok.Data;
 
 import java.util.Date;

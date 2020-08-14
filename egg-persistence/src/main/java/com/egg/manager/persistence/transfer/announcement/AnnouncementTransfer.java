@@ -9,7 +9,6 @@ import com.egg.manager.persistence.entity.announcement.Announcement;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
 

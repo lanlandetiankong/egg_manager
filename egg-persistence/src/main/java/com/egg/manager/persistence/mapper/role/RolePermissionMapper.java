@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.mapper.role;
 
-import com.egg.manager.persistence.entity.role.RolePermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.persistence.entity.role.RolePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 

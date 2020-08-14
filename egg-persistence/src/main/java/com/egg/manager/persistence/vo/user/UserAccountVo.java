@@ -1,16 +1,10 @@
 package com.egg.manager.persistence.vo.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.dto.user.UserAccountDto;
-import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

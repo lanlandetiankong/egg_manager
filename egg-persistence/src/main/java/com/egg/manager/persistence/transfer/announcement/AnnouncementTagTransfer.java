@@ -4,7 +4,6 @@ import com.egg.manager.persistence.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 
 import java.util.ArrayList;
 import java.util.List;

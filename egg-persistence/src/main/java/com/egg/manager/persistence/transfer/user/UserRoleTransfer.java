@@ -3,10 +3,8 @@ package com.egg.manager.persistence.transfer.user;
 import com.egg.manager.persistence.dto.user.UserRoleDto;
 import com.egg.manager.persistence.entity.user.UserRole;
 import com.egg.manager.persistence.vo.user.UserRoleVo;
-import lombok.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserRoleTransfer {

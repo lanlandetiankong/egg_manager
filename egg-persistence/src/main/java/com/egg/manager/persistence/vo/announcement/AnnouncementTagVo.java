@@ -1,13 +1,9 @@
 package com.egg.manager.persistence.vo.announcement;
 
-import com.egg.manager.persistence.dto.announcement.AnnouncementTagDto;
-import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * \* note:

@@ -1,9 +1,7 @@
 package com.egg.manager.persistence.mapper.user;
 
-import com.egg.manager.persistence.entity.define.DefineGroup;
-import com.egg.manager.persistence.entity.user.UserGroup;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Param;
+import com.egg.manager.persistence.entity.user.UserGroup;
 
 /**
  * <p>

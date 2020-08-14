@@ -2,7 +2,6 @@ package com.egg.manager.persistence.mongo.dao.log;
 
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -1,12 +1,8 @@
 package com.egg.manager.persistence.vo.user;
 
-import com.egg.manager.persistence.dto.user.UserJobDto;
-import com.egg.manager.persistence.entity.user.UserJob;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

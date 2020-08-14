@@ -2,8 +2,6 @@ package com.egg.manager.web.verification.mongodb;
 
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 
-import java.util.List;
-
 /**
  * \* note:
  * \* User: zhouchengjie

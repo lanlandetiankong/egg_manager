@@ -6,7 +6,6 @@ import com.egg.manager.persistence.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefinePermissionVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 
 import java.util.ArrayList;
 import java.util.List;

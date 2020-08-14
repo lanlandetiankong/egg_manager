@@ -6,7 +6,6 @@ import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineRole;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefineRoleVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 
 import java.util.ArrayList;
 import java.util.List;

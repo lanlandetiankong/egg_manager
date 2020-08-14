@@ -3,7 +3,6 @@ package com.egg.manager.persistence.webvo.login;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.webvo.mapstruct.login.UserAccountMapstruct;
 import lombok.*;
-import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 

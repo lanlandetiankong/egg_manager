@@ -1,13 +1,9 @@
 package com.egg.manager.persistence.vo.organization;
 
-import com.egg.manager.persistence.dto.organization.DefineTenantDto;
-import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

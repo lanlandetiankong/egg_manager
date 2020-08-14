@@ -1,12 +1,11 @@
 package com.egg.manager.persistence.mapper.define;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.egg.manager.persistence.entity.define.DefinePermission;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
 

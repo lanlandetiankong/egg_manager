@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.mapper.define;
 
-import com.egg.manager.persistence.entity.define.DefineGroup;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.egg.manager.persistence.entity.define.DefineGroup;
 
 /**
  * <p>

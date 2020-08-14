@@ -1,12 +1,8 @@
 package com.egg.manager.persistence.vo.user;
 
-import com.egg.manager.persistence.dto.user.UserRoleDto;
-import com.egg.manager.persistence.entity.user.UserRole;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter

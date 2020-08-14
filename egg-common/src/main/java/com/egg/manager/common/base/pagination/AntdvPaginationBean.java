@@ -1,8 +1,6 @@
 package com.egg.manager.common.base.pagination;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * \* note:

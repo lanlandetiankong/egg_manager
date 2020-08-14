@@ -5,7 +5,6 @@ import com.egg.manager.persistence.dto.define.DefineJobDto;
 import com.egg.manager.persistence.entity.define.DefineJob;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefineJobVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 
 import java.util.ArrayList;
 import java.util.List;

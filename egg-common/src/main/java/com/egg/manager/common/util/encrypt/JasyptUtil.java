@@ -1,7 +1,5 @@
 package com.egg.manager.common.util.encrypt;
 
-import com.ulisesbocchio.jasyptspringboot.encryptor.SimpleAsymmetricStringEncryptor;
-import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 /**

@@ -1,10 +1,9 @@
 package com.egg.manager.persistence.mongo.mo.forms;
 
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import lombok.*;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note: 表单 字段类型

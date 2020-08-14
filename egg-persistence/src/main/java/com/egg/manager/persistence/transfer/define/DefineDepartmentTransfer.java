@@ -4,7 +4,6 @@ import com.egg.manager.persistence.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.entity.define.DefineDepartment;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefineDepartmentVo;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,19 +1,19 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.api.service.service.user.UserTenantService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserTenant;
+import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.vo.user.UserTenantVo;
-import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.api.service.annotation.log.OperLog;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.api.service.service.user.UserTenantService;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

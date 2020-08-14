@@ -1,7 +1,5 @@
 package com.egg.manager.common.base.enums.query.mongo;
 
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-
 /**
  * \* note:
  * \* User: zhouchengjie

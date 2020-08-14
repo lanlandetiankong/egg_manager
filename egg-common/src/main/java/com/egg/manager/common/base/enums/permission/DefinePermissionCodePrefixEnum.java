@@ -1,6 +1,6 @@
 package com.egg.manager.common.base.enums.permission;
 
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public enum DefinePermissionCodePrefixEnum {

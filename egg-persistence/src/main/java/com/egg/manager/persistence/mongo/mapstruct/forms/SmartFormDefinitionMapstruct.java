@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.mongo.mapstruct.forms;
 
-import com.egg.manager.persistence.message.mapstruct.mail.MessageMailMapstruct;
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.mongo.mvo.forms.SmartFormDefinitionMVO;
 import org.mapstruct.Mapper;

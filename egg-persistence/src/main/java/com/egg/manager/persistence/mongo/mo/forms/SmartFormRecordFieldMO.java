@@ -1,7 +1,9 @@
 package com.egg.manager.persistence.mongo.mo.forms;
 
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note:表单项

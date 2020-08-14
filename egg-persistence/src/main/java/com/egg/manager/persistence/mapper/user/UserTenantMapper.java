@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.AntdvSortBean;
 import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.dto.user.UserTenantDto;
-import com.egg.manager.persistence.entity.organization.DefineTenant;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.entity.user.UserTenant;
 import org.apache.ibatis.annotations.Param;

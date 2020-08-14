@@ -1,7 +1,5 @@
 package com.egg.manager.common.base.enums.base;
 
-import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 /**

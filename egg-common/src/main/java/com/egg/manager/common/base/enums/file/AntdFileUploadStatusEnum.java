@@ -1,7 +1,5 @@
 package com.egg.manager.common.base.enums.file;
 
-import lombok.Data;
-
 /**
  * \* note:
  * \* User: zhouchengjie

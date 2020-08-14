@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.mongo.dao;
 
-import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.BaseModelMO;
 import org.springframework.data.domain.Page;

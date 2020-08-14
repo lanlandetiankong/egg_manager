@@ -1,15 +1,8 @@
 package com.egg.manager.persistence.vo.define;
 
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.common.base.props.upload.UploadStaticProps;
-import com.egg.manager.persistence.dto.define.DefineMenuDto;
-import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;

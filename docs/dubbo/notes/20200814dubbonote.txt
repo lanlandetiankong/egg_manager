@@ -1,0 +1,6 @@
+-各个模块的dubbo.protocol.port都必须不一样
+-目前dubbo各个模块的端口规则为
+egg-message:30130-30139
+egg-message:30120-30129
+egg-message:30110-30119
+egg-message:30100-30109

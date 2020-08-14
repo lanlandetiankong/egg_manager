@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.service.aspect;
+package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  * \* Description:
  * \
  */
-public interface ControllerAspectService {
+public interface ControllerAspectWService {
 
     /**
      * 取得 请求的参数

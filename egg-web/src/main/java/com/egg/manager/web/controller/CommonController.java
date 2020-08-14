@@ -41,7 +41,8 @@ public class CommonController extends BaseController {
             @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)
     })
     @PostMapping(value = "/getEnumListByKey")
-    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                   @CurrentLoginUser(required = false) UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
         try{
             //解析 搜索条件

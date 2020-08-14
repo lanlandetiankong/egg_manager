@@ -5,7 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.service.annotation.log.OperLog;
 import com.egg.manager.api.service.service.CommonFuncService;
-import com.egg.manager.api.service.service.aspect.ControllerAspectService;
+import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
 import com.egg.manager.common.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.helper.MyCommonResult;
@@ -27,8 +27,8 @@ import java.lang.reflect.Method;
 public class ControllerAspect {
     @Autowired
     private OperationLogRepository operationLogRepository;
-    @Reference
-    private ControllerAspectService controllerAspectService;
+    @Autowired
+    private ControllerAspectWService controllerAspectWService;
     @Reference
     private CommonFuncService commonFuncService;
 
@@ -39,7 +39,7 @@ public class ControllerAspect {
 
     @Before(value = "aspect()")
     public void beforeController(JoinPoint joinPoint) throws Throwable {
-        Method method = controllerAspectService.gainReqMethod(joinPoint);
+        Method method = controllerAspectWService.gainReqMethod(joinPoint);
         //是否需要记录日志
         if (method.isAnnotationPresent(OperLog.class)) {
             OperLog operLog = method.getAnnotation(OperLog.class);
@@ -50,7 +50,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
+                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
                 //请求成功(至少在before
                 operationLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
                 operationLogRepository.insert(operationLogMO);
@@ -68,7 +68,7 @@ public class ControllerAspect {
 
     @AfterReturning(value = "aspect()", returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
-        Method method = controllerAspectService.gainReqMethod(joinPoint);
+        Method method = controllerAspectWService.gainReqMethod(joinPoint);
         //是否需要记录日志
         if (method.isAnnotationPresent(OperLog.class)) {
             OperLog operLog = method.getAnnotation(OperLog.class);
@@ -79,7 +79,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
+                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
 
                 boolean isSuccess = true;
                 if (result != null) {
@@ -102,7 +102,7 @@ public class ControllerAspect {
 
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
-        Method method = controllerAspectService.gainReqMethod(joinPoint);
+        Method method = controllerAspectWService.gainReqMethod(joinPoint);
         //是否需要记录日志
         if (method.isAnnotationPresent(OperLog.class)) {
             OperLog operLog = method.getAnnotation(OperLog.class);
@@ -113,7 +113,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
+                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
                 //请求失败
                 operationLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {

@@ -1,7 +1,11 @@
 package com.egg.manager.persistence.vo.announcement;
 
+import com.egg.manager.persistence.vo.MyBaseVo;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -13,13 +17,11 @@ import java.util.Date;
  * \* Description:
  * \
  */
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class AnnouncementTagVo {
+public class AnnouncementTagVo extends MyBaseVo {
     private String fid;
     private String name;
     private String description;
@@ -29,9 +31,9 @@ public class AnnouncementTagVo {
     private Short state;
     private Date createTime;
     private Date updateTime;
-    private String createUserId ;
+    private String createUserId;
     private String lastModifyerId;
-    private UserAccountVo createUser ;
+    private UserAccountVo createUser;
     private UserAccountVo lastModifyer;
 
 

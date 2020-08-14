@@ -12,18 +12,19 @@ import org.springframework.mail.SimpleMailMessage;
  * @Author: zhoucj
  * @Date: 2020/8/7 9:56
  */
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface MessageMailMapstruct {
     MessageMailMapstruct INSTANCE = Mappers.getMapper(MessageMailMapstruct.class);
 
     /**
      * 复制MyEmailMsgO 到 SimpleMailMessage
+     *
      * @param emailMsgO
      * @return
      */
-    @Mapping(source = "receiveEmails",target = "to")
-    @Mapping(source = "fromUser",target = "from")
-    @Mapping(source = "content",target = "text")
+    @Mapping(source = "receiveEmails", target = "to")
+    @Mapping(source = "fromUser", target = "from")
+    @Mapping(source = "content", target = "text")
     SimpleMailMessage myEmailMsgO_CopyTo_SimpleMailMessage(MyEmailMsgO emailMsgO);
 
 

@@ -7,38 +7,39 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @TableName("em_user_tenant")
 public class UserTenant extends Model<UserTenant> {
     @TableId
-    private String fid ;
+    private String fid;
 
     @TableField(value = "user_account_id")
-    private String userAccountId ;
+    private String userAccountId;
     @TableField(value = "define_tenant_id")
-    private  String defineTenantId ;
+    private String defineTenantId;
     private Integer type;
     @TableField(value = "is_manager")
     private Short isManager;
 
     private String remark;
-    private Short state ;
+    private Short state;
     @TableField("create_time")
-    private Date createTime ;
+    private Date createTime;
     @TableField("update_time")
-    private Date updateTime ;
+    private Date updateTime;
     @TableField(value = "create_user_id")
-    private String createUserId ;
+    private String createUserId;
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
 
@@ -51,14 +52,15 @@ public class UserTenant extends Model<UserTenant> {
 
     /**
      * 返回一个通用的 entity实例
+     *
      * @param userAccountId
      * @param defineTenantId
-     * @param loginUser 当前登录用户
+     * @param loginUser      当前登录用户
      * @return
      */
-    public static UserTenant generateSimpleInsertEntity(String userAccountId, String defineTenantId, UserAccount loginUser){
-        UserTenant userTenant = new UserTenant() ;
-        Date now = new Date() ;
+    public static UserTenant generateSimpleInsertEntity(String userAccountId, String defineTenantId, UserAccount loginUser) {
+        UserTenant userTenant = new UserTenant();
+        Date now = new Date();
         userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
         userTenant.setUserAccountId(userAccountId);
         userTenant.setDefineTenantId(defineTenantId);
@@ -67,10 +69,10 @@ public class UserTenant extends Model<UserTenant> {
         userTenant.setState(BaseStateEnum.ENABLED.getValue());
         userTenant.setCreateTime(now);
         userTenant.setUpdateTime(now);
-        if(loginUser != null){
+        if (loginUser != null) {
             userTenant.setCreateUserId(loginUser.getFid());
             userTenant.setLastModifyerId(loginUser.getFid());
         }
-        return userTenant ;
+        return userTenant;
     }
 }

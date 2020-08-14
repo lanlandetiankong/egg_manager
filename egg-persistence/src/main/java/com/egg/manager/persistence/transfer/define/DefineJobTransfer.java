@@ -3,6 +3,7 @@ package com.egg.manager.persistence.transfer.define;
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.persistence.dto.define.DefineJobDto;
 import com.egg.manager.persistence.entity.define.DefineJob;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefineJobVo;
 
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefineJobTransfer {
+public class DefineJobTransfer extends MyBaseTransfer {
     public static DefineJob transferVoToEntity(DefineJobVo defineJobVo) {
-        if(defineJobVo == null){
-            return null ;
+        if (defineJobVo == null) {
+            return null;
         }
-        DefineJob defineJob = new DefineJob() ;
+        DefineJob defineJob = new DefineJob();
         defineJob.setFid(defineJobVo.getFid());
         defineJob.setName(defineJobVo.getName());
         defineJob.setType(defineJobVo.getType());
@@ -27,19 +28,19 @@ public class DefineJobTransfer {
         defineJob.setUpdateTime(defineJobVo.getUpdateTime());
         defineJob.setCreateUserId(defineJobVo.getCreateUserId());
         defineJob.setLastModifyerId(defineJobVo.getLastModifyerId());
-        return defineJob ;
+        return defineJob;
     }
 
     public static DefineJobVo transferEntityToVo(DefineJob defineJob) {
-        if(defineJob == null){
-            return null ;
+        if (defineJob == null) {
+            return null;
         }
-        DefineJobVo defineJobVo = new DefineJobVo() ;
+        DefineJobVo defineJobVo = new DefineJobVo();
         defineJobVo.setFid(defineJob.getFid());
         defineJobVo.setName(defineJob.getName());
         defineJobVo.setType(defineJob.getType());
         DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(defineJob.getType());
-        if(defineJobTypeEnum != null){
+        if (defineJobTypeEnum != null) {
             defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
         }
         defineJobVo.setDescription(defineJob.getDescription());
@@ -50,19 +51,19 @@ public class DefineJobTransfer {
         defineJobVo.setUpdateTime(defineJob.getUpdateTime());
         defineJobVo.setCreateUserId(defineJob.getCreateUserId());
         defineJobVo.setLastModifyerId(defineJob.getLastModifyerId());
-        return defineJobVo ;
+        return defineJobVo;
     }
 
     public static DefineJobVo transferDtoToVo(DefineJobDto defineJobDto) {
-        if(defineJobDto == null){
-            return null ;
+        if (defineJobDto == null) {
+            return null;
         }
-        DefineJobVo defineJobVo = new DefineJobVo() ;
+        DefineJobVo defineJobVo = new DefineJobVo();
         defineJobVo.setFid(defineJobDto.getFid());
         defineJobVo.setName(defineJobDto.getName());
         defineJobVo.setType(defineJobDto.getType());
         DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(defineJobDto.getType());
-        if(defineJobTypeEnum != null){
+        if (defineJobTypeEnum != null) {
             defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
         }
         defineJobVo.setDescription(defineJobDto.getDescription());
@@ -75,30 +76,30 @@ public class DefineJobTransfer {
         defineJobVo.setLastModifyerId(defineJobDto.getLastModifyerId());
         defineJobVo.setCreateUser(UserAccountTransfer.transferEntityToVo(defineJobDto.getCreateUser()));
         defineJobVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(defineJobDto.getLastModifyer()));
-        return defineJobVo ;
+        return defineJobVo;
     }
 
-    public static List<DefineJobVo> transferEntityToVoList(List<DefineJob> defineJobs){
-        if(defineJobs == null){
-            return null ;
-        }   else {
-            List<DefineJobVo> list = new ArrayList<>() ;
-            for (DefineJob defineJob : defineJobs){
+    public static List<DefineJobVo> transferEntityToVoList(List<DefineJob> defineJobs) {
+        if (defineJobs == null) {
+            return null;
+        } else {
+            List<DefineJobVo> list = new ArrayList<>();
+            for (DefineJob defineJob : defineJobs) {
                 list.add(transferEntityToVo(defineJob));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<DefineJobVo> transferDtoToVoList(List<DefineJobDto> defineJobDtos){
-        if(defineJobDtos == null){
-            return null ;
-        }   else {
-            List<DefineJobVo> list = new ArrayList<>() ;
-            for (DefineJobDto defineJobDto : defineJobDtos){
+    public static List<DefineJobVo> transferDtoToVoList(List<DefineJobDto> defineJobDtos) {
+        if (defineJobDtos == null) {
+            return null;
+        } else {
+            List<DefineJobVo> list = new ArrayList<>();
+            for (DefineJobDto defineJobDto : defineJobDtos) {
                 list.add(transferDtoToVo(defineJobDto));
             }
-            return list ;
+            return list;
         }
     }
 

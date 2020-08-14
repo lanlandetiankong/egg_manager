@@ -18,41 +18,39 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyEmailMsgO implements Serializable {
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 接收方邮件(必填参数)
-	 */
-	private String[] receiveEmails;
-	/**
-	 * 主题
-	 */
-	private String subject;
-	/**
-	 * 发送者(可选，service里应该处理默认发送人)
-	 */
-	private String fromUser;
-	/**
-	 * 发送者(可选，个性化)
-	 */
-	private String fromUserPersonal;
-	/**
-	 * 邮件内容
-	 */
-	private String content;
-	/**
-	 * 模板(选填)
-	 */
-	private String template;
-	/**
-	 * 自定义参数
-	 */
-	private HashMap<String, String> kvMap;
-	/**
-	 * 携带文件附件(可选)
-	 */
-	private List<File> fileList;
+    private static final long serialVersionUID = 1L;
+    /**
+     * 接收方邮件(必填参数)
+     */
+    private String[] receiveEmails;
+    /**
+     * 主题
+     */
+    private String subject;
+    /**
+     * 发送者(可选，service里应该处理默认发送人)
+     */
+    private String fromUser;
+    /**
+     * 发送者(可选，个性化)
+     */
+    private String fromUserPersonal;
+    /**
+     * 邮件内容
+     */
+    private String content;
+    /**
+     * 模板(选填)
+     */
+    private String template;
+    /**
+     * 自定义参数
+     */
+    private HashMap<String, String> kvMap;
+    /**
+     * 携带文件附件(可选)
+     */
+    private List<File> fileList;
 
-
-	
 
 }

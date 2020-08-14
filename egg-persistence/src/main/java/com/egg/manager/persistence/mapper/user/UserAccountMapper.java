@@ -22,14 +22,15 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * [通用查询] 根据用户id查询用户entity
+     *
      * @return
      */
-    UserAccount commonSelectUserAccountById() ;
-
+    UserAccount commonSelectUserAccountById();
 
 
     /**
      * [分页搜索查询] - 用户
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -39,37 +40,41 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
     List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
                                          @Param("sortFieldList") List<AntdvSortBean> sortBeans,
                                          @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList
-                                );
+    );
 
 
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 批量 锁定用户
+     *
      * @param lockIds
      * @param lockState
      * @param loginUser
      * @return
      */
-    int batchLockUserByIds(@Param("lockIds")List<String> lockIds,@Param("lockState") int lockState,@Param("loginUser")UserAccount loginUser) ;
+    int batchLockUserByIds(@Param("lockIds") List<String> lockIds, @Param("lockState") int lockState, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 批量伪删除 指定用户的所有角色关联
+     *
      * @param userAccountId
      * @return
      */
-    int clearAllRoleByUserId(@Param("userAccountId") String userAccountId,@Param("loginUser") UserAccount loginUser) ;
+    int clearAllRoleByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 批量伪删除 指定用户的所有职务关联
+     *
      * @param userAccountId
      * @return
      */
-    int clearAllJobByUserId(@Param("userAccountId")String userAccountId,@Param("loginUser") UserAccount loginUser) ;
+    int clearAllJobByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);
 }

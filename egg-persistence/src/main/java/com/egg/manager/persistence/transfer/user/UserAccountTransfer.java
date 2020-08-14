@@ -11,6 +11,7 @@ import com.egg.manager.persistence.dto.user.UserAccountDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.excel.introduce.user.UserAccountXlsInModel;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 import com.egg.manager.persistence.vo.user.UserAccountVo;
@@ -19,13 +20,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 
 
-public class UserAccountTransfer {
+public class UserAccountTransfer extends MyBaseTransfer {
 
     public static UserAccount transferVoToEntity(UserAccountVo userAccountVo) {
-        if(userAccountVo == null){
-            return null ;
+        if (userAccountVo == null) {
+            return null;
         }
-        UserAccount userAccount = new UserAccount() ;
+        UserAccount userAccount = new UserAccount();
         userAccount.setFid(userAccountVo.getFid());
         userAccount.setUserName(userAccountVo.getUserName());
         userAccount.setAccount(userAccountVo.getAccount());
@@ -44,14 +45,14 @@ public class UserAccountTransfer {
         userAccount.setUpdateTime(userAccountVo.getUpdateTime());
         userAccount.setCreateUserId(userAccountVo.getCreateUserId());
         userAccount.setLastModifyerId(userAccountVo.getLastModifyerId());
-        return userAccount ;
+        return userAccount;
     }
 
     public static UserAccountVo transferEntityToVo(UserAccount userAccount) {
-        if(userAccount == null){
-            return null ;
+        if (userAccount == null) {
+            return null;
         }
-        UserAccountVo userAccountVo = new UserAccountVo() ;
+        UserAccountVo userAccountVo = new UserAccountVo();
         userAccountVo.setFid(userAccount.getFid());
         userAccountVo.setUserName(userAccount.getUserName());
         userAccountVo.setAccount(userAccount.getAccount());
@@ -64,7 +65,7 @@ public class UserAccountTransfer {
         userAccountVo.setUserType(userAccount.getUserType());
         userAccountVo.setUserTypeNum(userAccount.getUserTypeNum());
         UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(userAccount.getUserType());
-        if(userAccountBaseTypeEnums != null){
+        if (userAccountBaseTypeEnums != null) {
             userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
         }
         userAccountVo.setRemark(userAccount.getRemark());
@@ -74,14 +75,14 @@ public class UserAccountTransfer {
         userAccountVo.setUpdateTime(userAccount.getUpdateTime());
         userAccountVo.setCreateUserId(userAccount.getCreateUserId());
         userAccountVo.setLastModifyerId(userAccount.getLastModifyerId());
-        return userAccountVo ;
+        return userAccountVo;
     }
 
     public static UserAccountVo transferDtoToVo(UserAccountDto userAccountDto) {
-        if(userAccountDto == null){
-            return null ;
+        if (userAccountDto == null) {
+            return null;
         }
-        UserAccountVo userAccountVo = new UserAccountVo() ;
+        UserAccountVo userAccountVo = new UserAccountVo();
         userAccountVo.setFid(userAccountDto.getFid());
         userAccountVo.setUserName(userAccountDto.getUserName());
         userAccountVo.setAccount(userAccountDto.getAccount());
@@ -94,7 +95,7 @@ public class UserAccountTransfer {
         userAccountVo.setUserType(userAccountDto.getUserType());
         userAccountVo.setUserTypeNum(userAccountDto.getUserTypeNum());
         UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(userAccountDto.getUserType());
-        if(userAccountBaseTypeEnums != null){
+        if (userAccountBaseTypeEnums != null) {
             userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
         }
         userAccountVo.setRemark(userAccountDto.getRemark());
@@ -106,43 +107,43 @@ public class UserAccountTransfer {
         userAccountVo.setLastModifyerId(userAccountDto.getLastModifyerId());
 
         userAccountVo.setBelongTenantId(userAccountDto.getBelongTenantId());
-        DefineTenantVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(userAccountDto.getBelongTenant()) ;
-        if(belongTenantVo != null){
+        DefineTenantVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(userAccountDto.getBelongTenant());
+        if (belongTenantVo != null) {
             userAccountVo.setBelongTenant(belongTenantVo);
-            if(StringUtils.isBlank(userAccountVo.getBelongTenantId())){
+            if (StringUtils.isBlank(userAccountVo.getBelongTenantId())) {
                 userAccountVo.setBelongTenantId(belongTenantVo.getFid());
             }
         }
-        return userAccountVo ;
+        return userAccountVo;
     }
 
-    public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts){
-        if(userAccounts == null){
-            return null ;
-        }   else {
-            List<UserAccountVo> list = new ArrayList<>() ;
-            for (UserAccount account : userAccounts){
+    public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts) {
+        if (userAccounts == null) {
+            return null;
+        } else {
+            List<UserAccountVo> list = new ArrayList<>();
+            for (UserAccount account : userAccounts) {
                 list.add(transferEntityToVo(account));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<UserAccountVo> transferDtoToVoList(List<UserAccountDto> userAccountDtos){
-        if(userAccountDtos == null){
-            return null ;
-        }   else {
-            List<UserAccountVo> list = new ArrayList<>() ;
-            for (UserAccountDto userAccountDto : userAccountDtos){
+    public static List<UserAccountVo> transferDtoToVoList(List<UserAccountDto> userAccountDtos) {
+        if (userAccountDtos == null) {
+            return null;
+        } else {
+            List<UserAccountVo> list = new ArrayList<>();
+            for (UserAccountDto userAccountDto : userAccountDtos) {
                 list.add(transferDtoToVo(userAccountDto));
             }
-            return list ;
+            return list;
         }
     }
 
 
-    public  static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity, UserAccountXlsOutModel userAccountXlsOutModel){
-        userAccountXlsOutModel = userAccountXlsOutModel != null ? userAccountXlsOutModel : new UserAccountXlsOutModel() ;
+    public static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity, UserAccountXlsOutModel userAccountXlsOutModel) {
+        userAccountXlsOutModel = userAccountXlsOutModel != null ? userAccountXlsOutModel : new UserAccountXlsOutModel();
         userAccountXlsOutModel.setFid(entity.getFid());
         userAccountXlsOutModel.setUserName(entity.getUserName());
         userAccountXlsOutModel.setAccount(entity.getAccount());
@@ -154,7 +155,7 @@ public class UserAccountTransfer {
         //性别
         userAccountXlsOutModel.setSexStr(UserSexEnum.dealGetNameByVal(entity.getSex()));
         //用户类型
-        userAccountXlsOutModel.setUserTypeStr(UserAccountBaseTypeEnum.doGetEnumNameByValue(entity.getUserType(),""));
+        userAccountXlsOutModel.setUserTypeStr(UserAccountBaseTypeEnum.doGetEnumNameByValue(entity.getUserType(), ""));
         userAccountXlsOutModel.setRemark(entity.getRemark());
         userAccountXlsOutModel.setState(entity.getState());
         userAccountXlsOutModel.setLockedStr(UserAccountStateEnum.doGetEnumInfoByValue(entity.getLocked()));
@@ -166,17 +167,17 @@ public class UserAccountTransfer {
         return userAccountXlsOutModel;
     }
 
-    public static List<UserAccountXlsOutModel> entityListToXlsOutModels(List<UserAccount> entityList){
+    public static List<UserAccountXlsOutModel> entityListToXlsOutModels(List<UserAccount> entityList) {
         List<UserAccountXlsOutModel> list = new ArrayList<>();
-        for (UserAccount entity : entityList){
-            list.add(entityToXlsOutModel(entity,null));
+        for (UserAccount entity : entityList) {
+            list.add(entityToXlsOutModel(entity, null));
         }
-        return list ;
+        return list;
     }
 
 
-    public  static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel,UserAccount entity,UserAccount loginUser){     //excel导入默认转化
-        entity = entity != null ? entity : new UserAccount() ;
+    public static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, UserAccount entity, UserAccount loginUser) {     //excel导入默认转化
+        entity = entity != null ? entity : new UserAccount();
         Date now = new Date();
         entity.setFid(MyUUIDUtil.renderSimpleUUID());
         entity.setUserName(xlsInModel.getUserName());
@@ -194,25 +195,25 @@ public class UserAccountTransfer {
         entity.setLocked(SwitchStateEnum.Close.getValue());
         entity.setCreateTime(now);
         entity.setUpdateTime(now);
-        if(loginUser != null){
+        if (loginUser != null) {
             entity.setCreateUserId(loginUser.getFid());
             entity.setLastModifyerId(loginUser.getFid());
         }
         return entity;
     }
 
-    public static List<UserAccount> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccount loginUser, Set<String> accountSet){
+    public static List<UserAccount> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccount loginUser, Set<String> accountSet) {
         List<UserAccount> list = new ArrayList<>();
-        if(xlsInModelList != null || xlsInModelList.isEmpty() == false){
-            accountSet = accountSet != null ? accountSet : new HashSet<>() ;
-            for (UserAccountXlsInModel xlsInModel : xlsInModelList){
-                if(accountSet.contains(xlsInModel.getAccount())){  //如果用户的[account]出现重复，对新增行的account后面加上 uuid
-                    xlsInModel.setAccount(xlsInModel.getAccount() + "_"+MyUUIDUtil.renderSimpleUUID());
+        if (xlsInModelList != null || xlsInModelList.isEmpty() == false) {
+            accountSet = accountSet != null ? accountSet : new HashSet<>();
+            for (UserAccountXlsInModel xlsInModel : xlsInModelList) {
+                if (accountSet.contains(xlsInModel.getAccount())) {  //如果用户的[account]出现重复，对新增行的account后面加上 uuid
+                    xlsInModel.setAccount(xlsInModel.getAccount() + "_" + MyUUIDUtil.renderSimpleUUID());
                 }
                 accountSet.add(xlsInModel.getAccount());
-                list.add(xlsInModelToEntity(xlsInModel,null,loginUser));
+                list.add(xlsInModelToEntity(xlsInModel, null, loginUser));
             }
         }
-        return list ;
+        return list;
     }
 }

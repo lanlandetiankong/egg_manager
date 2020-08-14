@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.mongo.mo.forms;
 
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
 import lombok.*;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
@@ -23,21 +23,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class SmartFormTypeDefinitionMO extends BaseModelMO<String> {
+public class SmartFormTypeDefinitionMO extends MyBaseModelMO<String> {
     /**
      * 类型名
      */
-    private String name ;
+    private String name;
     /**
      * 类型描述
      */
-    private String description ;
-    private String remark ;
+    private String description;
+    private String remark;
 
     /**
      * 表单类型
      */
-    private SmartFormTypeDefinitionMO formType ;
+    private SmartFormTypeDefinitionMO formType;
 
 
 }

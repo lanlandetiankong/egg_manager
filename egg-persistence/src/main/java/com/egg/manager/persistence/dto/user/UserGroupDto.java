@@ -1,29 +1,31 @@
 package com.egg.manager.persistence.dto.user;
 
+import com.egg.manager.persistence.dto.MyBaseDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class UserGroupDto {
-    private String fid ;
+public class UserGroupDto extends MyBaseDto {
+    private String fid;
 
-    private String defineGroupId ;
-    private String userAccountId ;
+    private String defineGroupId;
+    private String userAccountId;
 
     private String type;
-    private Short state ;
-    private Date createTime ;
-    private Date updateTime ;
-    private String createUserId ;
+    private Short state;
+    private Date createTime;
+    private Date updateTime;
+    private String createUserId;
     private String lastModifyerId;
-    private UserAccount createUser ;
+    private UserAccount createUser;
     private UserAccount lastModifyer;
 
 

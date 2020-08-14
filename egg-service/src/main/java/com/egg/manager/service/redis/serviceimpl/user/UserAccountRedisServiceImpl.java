@@ -11,7 +11,7 @@ import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.api.service.service.user.UserAccountService;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.tree.CommonMenuTree;
+import com.egg.manager.persistence.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import com.egg.manager.service.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
 import com.google.common.collect.Lists;

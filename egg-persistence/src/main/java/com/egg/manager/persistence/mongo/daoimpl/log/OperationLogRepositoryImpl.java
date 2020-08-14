@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @since 2020-07-19
  */
 @Repository
-public class OperationLogRepositoryImpl extends MyBaseMongoRepositoryImpl<OperationLogMO,String> implements OperationLogRepository{
+public class OperationLogRepositoryImpl extends MyBaseMongoRepositoryImpl<OperationLogMO, String> implements OperationLogRepository {
 
 
 }

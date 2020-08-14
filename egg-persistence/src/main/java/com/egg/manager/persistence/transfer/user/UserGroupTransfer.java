@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.transfer.user;
 
-public class UserGroupTransfer {
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 
-
+public class UserGroupTransfer extends MyBaseTransfer {
 
 
 }

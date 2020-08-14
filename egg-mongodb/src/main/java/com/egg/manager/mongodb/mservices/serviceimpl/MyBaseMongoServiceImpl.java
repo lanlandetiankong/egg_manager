@@ -7,7 +7,7 @@ import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,7 +28,7 @@ import java.util.Optional;
  * \* Description:
  * \
  */
-public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T extends BaseModelMO,ID> implements MyBaseMongoService<T,ID> {
+public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T extends MyBaseModelMO,ID> implements MyBaseMongoService<T,ID> {
     @Autowired
     protected R baseRepository;
 

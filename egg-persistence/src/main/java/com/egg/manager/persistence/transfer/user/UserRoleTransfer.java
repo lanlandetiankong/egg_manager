@@ -2,20 +2,20 @@ package com.egg.manager.persistence.transfer.user;
 
 import com.egg.manager.persistence.dto.user.UserRoleDto;
 import com.egg.manager.persistence.entity.user.UserRole;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.vo.user.UserRoleVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRoleTransfer {
-
+public class UserRoleTransfer extends MyBaseTransfer {
 
 
     public static UserRole transferVoToEntity(UserRoleVo userRoleVo) {
-        if(userRoleVo == null){
-            return null ;
+        if (userRoleVo == null) {
+            return null;
         }
-        UserRole userRole = new UserRole() ;
+        UserRole userRole = new UserRole();
         userRole.setFid(userRoleVo.getFid());
         userRole.setUserAccountId(userRoleVo.getUserAccountId());
         userRole.setDefineRoleId(userRoleVo.getDefineRoleId());
@@ -26,15 +26,15 @@ public class UserRoleTransfer {
         userRole.setUpdateTime(userRoleVo.getUpdateTime());
         userRole.setCreateUserId(userRoleVo.getCreateUserId());
         userRole.setLastModifyerId(userRoleVo.getLastModifyerId());
-        return userRole ;
+        return userRole;
     }
 
 
     public static UserRoleVo transferEntityToVo(UserRole userRole) {
-        if(userRole == null){
-            return null ;
+        if (userRole == null) {
+            return null;
         }
-        UserRoleVo userRoleVo = new UserRoleVo() ;
+        UserRoleVo userRoleVo = new UserRoleVo();
         userRoleVo.setFid(userRole.getFid());
         userRoleVo.setUserAccountId(userRole.getUserAccountId());
         userRoleVo.setDefineRoleId(userRole.getDefineRoleId());
@@ -45,15 +45,15 @@ public class UserRoleTransfer {
         userRoleVo.setUpdateTime(userRole.getUpdateTime());
         userRoleVo.setCreateUserId(userRole.getCreateUserId());
         userRoleVo.setLastModifyerId(userRole.getLastModifyerId());
-        return userRoleVo ;
+        return userRoleVo;
     }
 
 
     public static UserRoleVo transferDtoToVo(UserRoleDto userRoleDto) {
-        if(userRoleDto == null){
-            return null ;
+        if (userRoleDto == null) {
+            return null;
         }
-        UserRoleVo userRoleVo = new UserRoleVo() ;
+        UserRoleVo userRoleVo = new UserRoleVo();
         userRoleVo.setFid(userRoleDto.getFid());
         userRoleVo.setUserAccountId(userRoleDto.getUserAccountId());
         userRoleVo.setDefineRoleId(userRoleDto.getDefineRoleId());
@@ -64,30 +64,30 @@ public class UserRoleTransfer {
         userRoleVo.setUpdateTime(userRoleDto.getUpdateTime());
         userRoleVo.setCreateUserId(userRoleDto.getCreateUserId());
         userRoleVo.setLastModifyerId(userRoleDto.getLastModifyerId());
-        return userRoleVo ;
+        return userRoleVo;
     }
 
-    public static List<UserRoleVo> transferEntityToVoList(List<UserRole> userRoles){
-        if(userRoles == null){
-            return null ;
-        }   else {
-            List<UserRoleVo> list = new ArrayList<>() ;
-            for (UserRole role : userRoles){
+    public static List<UserRoleVo> transferEntityToVoList(List<UserRole> userRoles) {
+        if (userRoles == null) {
+            return null;
+        } else {
+            List<UserRoleVo> list = new ArrayList<>();
+            for (UserRole role : userRoles) {
                 list.add(transferEntityToVo(role));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<UserRoleVo> transferDtoToVoList(List<UserRoleDto> userRoleDtos){
-        if(userRoleDtos == null){
-            return null ;
-        }   else {
-            List<UserRoleVo> list = new ArrayList<>() ;
-            for (UserRoleDto userRoleDto : userRoleDtos){
+    public static List<UserRoleVo> transferDtoToVoList(List<UserRoleDto> userRoleDtos) {
+        if (userRoleDtos == null) {
+            return null;
+        } else {
+            List<UserRoleVo> list = new ArrayList<>();
+            for (UserRoleDto userRoleDto : userRoleDtos) {
                 list.add(transferDtoToVo(userRoleDto));
             }
-            return list ;
+            return list;
         }
     }
 

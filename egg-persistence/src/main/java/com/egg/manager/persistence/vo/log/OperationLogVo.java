@@ -1,6 +1,10 @@
 package com.egg.manager.persistence.vo.log;
 
-import lombok.*;
+import com.egg.manager.persistence.vo.MyBaseVo;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -12,13 +16,11 @@ import java.util.Date;
  * @author zhouchengjie123
  * @since 2019-09-13
  */
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class OperationLogVo {
+public class OperationLogVo extends MyBaseVo {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,12 +35,12 @@ public class OperationLogVo {
     private String action;
     private Integer isSuccess;
     private String message;
-    private String ipAddr ;
+    private String ipAddr;
     private String type;
-    private Short state ;
-    private Date createTime ;
-    private Date updateTime ;
-    private String createUser ;
+    private Short state;
+    private Date createTime;
+    private Date updateTime;
+    private String createUser;
     private String lastModifyer;
 
 }

@@ -12,16 +12,17 @@ import org.mapstruct.factory.Mappers;
  * @Author: zhoucj
  * @Date: 2020/8/7 9:56
  */
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface UserAccountTokenMapstruct {
     UserAccountTokenMapstruct INSTANCE = Mappers.getMapper(UserAccountTokenMapstruct.class);
 
     /**
      * 复制MyEmailMsgO 到 SimpleMailMessage
+     *
      * @param userAccount
      * @return
      */
-    @Mapping(source = "fid",target = "userAccountId")
+    @Mapping(source = "fid", target = "userAccountId")
     UserAccountToken userAccount_CopyTo_UserAccountToken(UserAccount userAccount);
 
 

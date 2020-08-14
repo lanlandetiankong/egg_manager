@@ -21,14 +21,14 @@ public class SmartFormRecordFieldMO {
     /**
      * 表单record
      */
-    private SmartFormRecordMO formRecordMO ;
+    private SmartFormRecordMO formRecordMO;
     /**
      * 表单定义
      */
-    private SmartFormFieldDefinitionMO formFieldDefinition ;
+    private SmartFormFieldDefinitionMO formFieldDefinition;
     /**
      * 字段对应的值
      */
     private Object value;
-    
+
 }

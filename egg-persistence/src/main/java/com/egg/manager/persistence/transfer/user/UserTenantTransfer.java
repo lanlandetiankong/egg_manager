@@ -2,17 +2,18 @@ package com.egg.manager.persistence.transfer.user;
 
 import com.egg.manager.persistence.dto.user.UserTenantDto;
 import com.egg.manager.persistence.entity.user.UserTenant;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.vo.user.UserTenantVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserTenantTransfer {
+public class UserTenantTransfer extends MyBaseTransfer {
     public static UserTenant transferVoToEntity(UserTenantVo userTenantVo) {
-        if(userTenantVo == null){
-            return null ;
+        if (userTenantVo == null) {
+            return null;
         }
-        UserTenant userTenant = new UserTenant() ;
+        UserTenant userTenant = new UserTenant();
         userTenant.setFid(userTenantVo.getFid());
         userTenant.setUserAccountId(userTenantVo.getUserAccountId());
         userTenant.setDefineTenantId(userTenantVo.getDefineTenantId());
@@ -24,15 +25,15 @@ public class UserTenantTransfer {
         userTenant.setUpdateTime(userTenantVo.getUpdateTime());
         userTenant.setCreateUserId(userTenantVo.getCreateUserId());
         userTenant.setLastModifyerId(userTenantVo.getLastModifyerId());
-        return userTenant ;
+        return userTenant;
     }
 
 
     public static UserTenantVo transferEntityToVo(UserTenant userTenant) {
-        if(userTenant == null){
-            return null ;
+        if (userTenant == null) {
+            return null;
         }
-        UserTenantVo userTenantVo = new UserTenantVo() ;
+        UserTenantVo userTenantVo = new UserTenantVo();
         userTenantVo.setFid(userTenant.getFid());
         userTenantVo.setUserAccountId(userTenant.getUserAccountId());
         userTenantVo.setDefineTenantId(userTenant.getDefineTenantId());
@@ -44,15 +45,15 @@ public class UserTenantTransfer {
         userTenantVo.setUpdateTime(userTenant.getUpdateTime());
         userTenantVo.setCreateUserId(userTenant.getCreateUserId());
         userTenantVo.setLastModifyerId(userTenant.getLastModifyerId());
-        return userTenantVo ;
+        return userTenantVo;
     }
 
 
     public static UserTenantVo transferDtoToVo(UserTenantDto userTenantDto) {
-        if(userTenantDto == null){
-            return null ;
+        if (userTenantDto == null) {
+            return null;
         }
-        UserTenantVo userTenantVo = new UserTenantVo() ;
+        UserTenantVo userTenantVo = new UserTenantVo();
         userTenantVo.setFid(userTenantDto.getFid());
         userTenantVo.setUserAccountId(userTenantDto.getUserAccountId());
         userTenantVo.setDefineTenantId(userTenantDto.getDefineTenantId());
@@ -64,30 +65,30 @@ public class UserTenantTransfer {
         userTenantVo.setUpdateTime(userTenantDto.getUpdateTime());
         userTenantVo.setCreateUserId(userTenantDto.getCreateUserId());
         userTenantVo.setLastModifyerId(userTenantDto.getLastModifyerId());
-        return userTenantVo ;
+        return userTenantVo;
     }
 
-    public static List<UserTenantVo> transferEntityToVoList(List<UserTenant> userTenants){
-        if(userTenants == null){
-            return null ;
-        }   else {
-            List<UserTenantVo> list = new ArrayList<>() ;
-            for (UserTenant userTenant : userTenants){
+    public static List<UserTenantVo> transferEntityToVoList(List<UserTenant> userTenants) {
+        if (userTenants == null) {
+            return null;
+        } else {
+            List<UserTenantVo> list = new ArrayList<>();
+            for (UserTenant userTenant : userTenants) {
                 list.add(transferEntityToVo(userTenant));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<UserTenantVo> transferDtoToVoList(List<UserTenantDto> userTenantDtos){
-        if(userTenantDtos == null){
-            return null ;
-        }   else {
-            List<UserTenantVo> list = new ArrayList<>() ;
-            for (UserTenantDto userTenantDto : userTenantDtos){
+    public static List<UserTenantVo> transferDtoToVoList(List<UserTenantDto> userTenantDtos) {
+        if (userTenantDtos == null) {
+            return null;
+        } else {
+            List<UserTenantVo> list = new ArrayList<>();
+            for (UserTenantDto userTenantDto : userTenantDtos) {
                 list.add(transferDtoToVo(userTenantDto));
             }
-            return list ;
+            return list;
         }
     }
 

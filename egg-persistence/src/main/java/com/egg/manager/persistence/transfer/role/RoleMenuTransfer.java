@@ -2,18 +2,19 @@ package com.egg.manager.persistence.transfer.role;
 
 import com.egg.manager.persistence.dto.role.RoleMenuDto;
 import com.egg.manager.persistence.entity.role.RoleMenu;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.vo.role.RoleMenuVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class RoleMenuTransfer {
+public class RoleMenuTransfer extends MyBaseTransfer {
     public static RoleMenu transferVoToEntity(RoleMenuVo roleMenuVo) {
-        if(roleMenuVo == null){
-            return null ;
+        if (roleMenuVo == null) {
+            return null;
         }
-        RoleMenu roleMenu = new RoleMenu() ;
+        RoleMenu roleMenu = new RoleMenu();
         roleMenu.setFid(roleMenuVo.getFid());
         roleMenu.setDefineRoleId(roleMenuVo.getDefineRoleId());
         roleMenu.setDefineMenuId(roleMenuVo.getDefineMenuId());
@@ -24,15 +25,15 @@ public class RoleMenuTransfer {
         roleMenu.setUpdateTime(roleMenuVo.getUpdateTime());
         roleMenu.setCreateUserId(roleMenuVo.getCreateUserId());
         roleMenu.setLastModifyerId(roleMenuVo.getLastModifyerId());
-        return roleMenu ;
+        return roleMenu;
     }
 
 
     public static RoleMenuVo transferEntityToVo(RoleMenu roleMenu) {
-        if(roleMenu == null){
-            return null ;
+        if (roleMenu == null) {
+            return null;
         }
-        RoleMenuVo roleMenuVo = new RoleMenuVo() ;
+        RoleMenuVo roleMenuVo = new RoleMenuVo();
         roleMenuVo.setFid(roleMenu.getFid());
         roleMenuVo.setDefineRoleId(roleMenu.getDefineRoleId());
         roleMenuVo.setDefineMenuId(roleMenu.getDefineMenuId());
@@ -43,15 +44,15 @@ public class RoleMenuTransfer {
         roleMenuVo.setUpdateTime(roleMenu.getUpdateTime());
         roleMenuVo.setCreateUserId(roleMenu.getCreateUserId());
         roleMenuVo.setLastModifyerId(roleMenu.getLastModifyerId());
-        return roleMenuVo ;
+        return roleMenuVo;
     }
 
 
     public static RoleMenuVo transferDtoToVo(RoleMenuDto roleMenuDto) {
-        if(roleMenuDto == null){
-            return null ;
+        if (roleMenuDto == null) {
+            return null;
         }
-        RoleMenuVo roleMenuVo = new RoleMenuVo() ;
+        RoleMenuVo roleMenuVo = new RoleMenuVo();
         roleMenuVo.setFid(roleMenuDto.getFid());
         roleMenuVo.setDefineRoleId(roleMenuDto.getDefineRoleId());
         roleMenuVo.setDefineMenuId(roleMenuDto.getDefineMenuId());
@@ -62,30 +63,30 @@ public class RoleMenuTransfer {
         roleMenuVo.setUpdateTime(roleMenuDto.getUpdateTime());
         roleMenuVo.setCreateUserId(roleMenuDto.getCreateUserId());
         roleMenuVo.setLastModifyerId(roleMenuDto.getLastModifyerId());
-        return roleMenuVo ;
+        return roleMenuVo;
     }
 
-    public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenu> roleMenus){
-        if(roleMenus == null){
-            return null ;
-        }   else {
-            List<RoleMenuVo> list = new ArrayList<>() ;
-            for (RoleMenu role : roleMenus){
+    public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenu> roleMenus) {
+        if (roleMenus == null) {
+            return null;
+        } else {
+            List<RoleMenuVo> list = new ArrayList<>();
+            for (RoleMenu role : roleMenus) {
                 list.add(transferEntityToVo(role));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<RoleMenuVo> transferDtoToVoList(List<RoleMenuDto> roleMenuDtos){
-        if(roleMenuDtos == null){
-            return null ;
-        }   else {
-            List<RoleMenuVo> list = new ArrayList<>() ;
-            for (RoleMenuDto roleMenuDto : roleMenuDtos){
+    public static List<RoleMenuVo> transferDtoToVoList(List<RoleMenuDto> roleMenuDtos) {
+        if (roleMenuDtos == null) {
+            return null;
+        } else {
+            List<RoleMenuVo> list = new ArrayList<>();
+            for (RoleMenuDto roleMenuDto : roleMenuDtos) {
                 list.add(transferDtoToVo(roleMenuDto));
             }
-            return list ;
+            return list;
         }
     }
 }

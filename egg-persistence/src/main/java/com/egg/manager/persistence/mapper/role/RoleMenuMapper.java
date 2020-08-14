@@ -15,11 +15,12 @@ import java.util.List;
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
     /**
      * 根据角色id 修改指定权限 的可用状态
+     *
      * @param roleId
      * @param menuIdList
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByRole(@Param("roleId") String roleId,@Param("menuIdList")List<String> menuIdList,@Param("stateVal")Short stateVal
-            ,@Param("loginUser")UserAccount loginUser);
+    int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("menuIdList") List<String> menuIdList, @Param("stateVal") Short stateVal
+            , @Param("loginUser") UserAccount loginUser);
 }

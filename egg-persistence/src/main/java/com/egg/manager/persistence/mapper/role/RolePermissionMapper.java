@@ -20,6 +20,7 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
     /**
      * 批量新增 角色-权限 关联
+     *
      * @param permissionList
      * @return
      */
@@ -27,11 +28,12 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
     /**
      * 根据角色id 修改指定权限 的可用状态
+     *
      * @param roleId
      * @param permissionIdList
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByRole(@Param("roleId") String roleId,@Param("permissionIdList")List<String> permissionIdList,@Param("stateVal")Short stateVal
-                                    ,@Param("loginUser")UserAccount loginUser);
+    int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("permissionIdList") List<String> permissionIdList, @Param("stateVal") Short stateVal
+            , @Param("loginUser") UserAccount loginUser);
 }

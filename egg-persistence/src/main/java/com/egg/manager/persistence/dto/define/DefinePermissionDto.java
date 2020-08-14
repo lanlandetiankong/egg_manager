@@ -1,31 +1,33 @@
 package com.egg.manager.persistence.dto.define;
 
+import com.egg.manager.persistence.dto.MyBaseDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class DefinePermissionDto{
-    private String fid ;
+public class DefinePermissionDto extends MyBaseDto {
+    private String fid;
 
-    private String name ;
-    private String code ;
+    private String name;
+    private String code;
     private Short ensure;
     private Integer type;
 
-    private Short state ;
-    private String remark ;
-    private Date createTime ;
-    private Date updateTime ;
-    private String createUserId ;
+    private Short state;
+    private String remark;
+    private Date createTime;
+    private Date updateTime;
+    private String createUserId;
     private String lastModifyerId;
-    private UserAccount createUser ;
+    private UserAccount createUser;
     private UserAccount lastModifyer;
 
 }

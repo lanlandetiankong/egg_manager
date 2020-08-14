@@ -21,13 +21,13 @@ public class SmartFormFieldTypeDefinitionMO {
     /**
      * 字段类型值
      */
-    private Integer value ;
+    private Integer value;
     /**
      * 字段名
      */
-    private String name ;
+    private String name;
     /**
      * 正则验证
      */
-    private String regex ;
+    private String regex;
 }

@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.service.exception.login.MyAuthenticationExpiredException;
@@ -14,7 +15,6 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

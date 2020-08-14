@@ -3,7 +3,7 @@ package com.egg.manager.api.mongodb.mservices.service;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.MongoQueryBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,7 +22,7 @@ import java.util.Optional;
  * \* Description:
  * \
  */
-public interface MyBaseMongoService<T extends BaseModelMO,ID> {
+public interface MyBaseMongoService<T extends MyBaseModelMO,ID> {
 
     /**
      * 查询一条记录

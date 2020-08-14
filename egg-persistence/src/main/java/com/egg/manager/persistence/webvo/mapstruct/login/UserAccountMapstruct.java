@@ -11,12 +11,11 @@ import org.mapstruct.factory.Mappers;
  * @Author: zhoucj
  * @Date: 2020/8/7 9:56
  */
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface UserAccountMapstruct {
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
 
     /**
-     *
      * @param loginAccountVo
      * @return
      */

@@ -1,7 +1,8 @@
 package com.egg.manager.persistence.transfer.role;
 
-public class RolePermissionTransfer {
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 
+public class RolePermissionTransfer extends MyBaseTransfer {
 
 
 }

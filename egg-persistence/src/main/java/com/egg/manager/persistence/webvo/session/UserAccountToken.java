@@ -2,8 +2,12 @@ package com.egg.manager.persistence.webvo.session;
 
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.entity.user.UserAccount;
+import com.egg.manager.persistence.webvo.MyBaseWebVo;
 import com.egg.manager.persistence.webvo.mapstruct.session.UserAccountTokenMapstruct;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -15,29 +19,25 @@ import java.lang.reflect.InvocationTargetException;
  * \* Description:
  * \
  */
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Builder
-public class UserAccountToken {
+public class UserAccountToken extends MyBaseWebVo {
     private String account;
-    private String userAccountId ;
-    private String token ;
-    private String userName ;
-    private String nickName ;
-    private String avatarUrl ;
-    private String authorization ;
-
+    private String userAccountId;
+    private String token;
+    private String userName;
+    private String nickName;
+    private String avatarUrl;
+    private String authorization;
 
 
     public static UserAccountToken gainByUserAccount(UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {
         UserAccountToken accountToken = UserAccountTokenMapstruct.INSTANCE.userAccount_CopyTo_UserAccountToken(userAccount);
-        String token = MyUUIDUtil.renderSimpleUUID() ;
+        String token = MyUUIDUtil.renderSimpleUUID();
         accountToken.setToken(token);
-        return accountToken ;
+        return accountToken;
     }
 
 }

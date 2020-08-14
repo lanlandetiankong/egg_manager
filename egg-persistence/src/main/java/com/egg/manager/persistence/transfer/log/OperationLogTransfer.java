@@ -1,7 +1,8 @@
 package com.egg.manager.persistence.transfer.log;
 
-public class OperationLogTransfer {
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 
+public class OperationLogTransfer extends MyBaseTransfer {
 
 
 }

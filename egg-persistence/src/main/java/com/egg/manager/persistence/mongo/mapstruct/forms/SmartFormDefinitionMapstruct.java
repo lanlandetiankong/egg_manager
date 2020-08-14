@@ -13,7 +13,7 @@ import org.mapstruct.factory.Mappers;
  * \* Description:
  * \
  */
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface SmartFormDefinitionMapstruct {
     SmartFormDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormDefinitionMapstruct.class);
 

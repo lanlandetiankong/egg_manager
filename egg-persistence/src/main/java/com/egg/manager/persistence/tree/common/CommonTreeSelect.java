@@ -1,5 +1,6 @@
-package com.egg.manager.persistence.tree;
+package com.egg.manager.persistence.tree.common;
 
+import com.egg.manager.persistence.tree.MyBaseTree;
 import lombok.*;
 
 import java.util.List;
@@ -18,11 +19,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CommonTreeSelect {
-    private String title  ;
-    private String value  ;
-    private String key ;
-    private String parentId ;
+public class CommonTreeSelect extends MyBaseTree {
+    private String title;
+    private String value;
+    private String key;
+    private String parentId;
     private List<CommonTreeSelect> children;
 
 

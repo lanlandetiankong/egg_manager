@@ -23,6 +23,7 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
 
     /**
      * [分页搜索查询] - 租户定义
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -33,18 +34,21 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
 
     /**
      * 根据用户id查询 租户详情
+     *
      * @param userAccountId
      * @param tenantState
      * @return
      */
-    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId")String userAccountId,@Param("tenantState")Short tenantState);
+    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId") String userAccountId, @Param("tenantState") Short tenantState);
+
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
 
 }

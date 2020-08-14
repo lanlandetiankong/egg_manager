@@ -4,6 +4,7 @@ import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 
@@ -11,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefineMenuTransfer {
+public class DefineMenuTransfer extends MyBaseTransfer {
     public static DefineMenu transferVoToEntity(DefineMenuVo defineMenuVo) {
-        if(defineMenuVo == null){
-            return null ;
+        if (defineMenuVo == null) {
+            return null;
         }
-        DefineMenu defineMenu = new DefineMenu() ;
+        DefineMenu defineMenu = new DefineMenu();
         defineMenu.setFid(defineMenuVo.getFid());
         defineMenu.setParentId(defineMenuVo.getParentId());
         defineMenu.setMenuName(defineMenuVo.getMenuName());
@@ -35,14 +36,14 @@ public class DefineMenuTransfer {
         defineMenu.setCreateUserId(defineMenuVo.getCreateUserId());
         defineMenu.setLastModifyerId(defineMenuVo.getLastModifyerId());
 
-        return defineMenu ;
+        return defineMenu;
     }
 
     public static DefineMenuVo transferEntityToVo(DefineMenu defineMenu) {
-        if(defineMenu == null){
-            return null ;
+        if (defineMenu == null) {
+            return null;
         }
-        DefineMenuVo defineMenuVo = new DefineMenuVo() ;
+        DefineMenuVo defineMenuVo = new DefineMenuVo();
         defineMenuVo.setFid(defineMenu.getFid());
         defineMenuVo.setParentId(defineMenu.getParentId());
         defineMenuVo.setMenuName(defineMenu.getMenuName());
@@ -50,18 +51,18 @@ public class DefineMenuTransfer {
         defineMenuVo.setRouterUrl(defineMenu.getRouterUrl());
         defineMenuVo.setHrefUrl(defineMenu.getHrefUrl());
         defineMenuVo.setUrlJumpType(defineMenu.getUrlJumpType());
-        if(defineMenu.getUrlJumpType() != null){
+        if (defineMenu.getUrlJumpType() != null) {
             DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(defineMenu.getUrlJumpType());
-            if(typeEnum != null){
+            if (typeEnum != null) {
                 defineMenuVo.setUrlJumpTypeStr(typeEnum.getLabel());
-            }   else {
+            } else {
                 defineMenuVo.setUrlJumpTypeStr("");
             }
         }
         defineMenuVo.setLabel(defineMenu.getLabel());
         defineMenuVo.setLevel(defineMenu.getLevel());
         defineMenuVo.setOrderNum(defineMenu.getOrderNum());
-        String excelModelConf = defineMenu.getExcelModelConf() ;
+        String excelModelConf = defineMenu.getExcelModelConf();
         defineMenuVo.setExcelModelConf(excelModelConf);
         defineMenuVo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         defineMenuVo.setRemark(defineMenu.getRemark());
@@ -70,15 +71,15 @@ public class DefineMenuTransfer {
         defineMenuVo.setUpdateTime(defineMenu.getUpdateTime());
         defineMenuVo.setCreateUserId(defineMenu.getCreateUserId());
         defineMenuVo.setLastModifyerId(defineMenu.getLastModifyerId());
-        return defineMenuVo ;
+        return defineMenuVo;
     }
 
 
     public static DefineMenuVo transferDtoToVo(DefineMenuDto defineMenuDto) {
-        if(defineMenuDto == null){
-            return null ;
+        if (defineMenuDto == null) {
+            return null;
         }
-        DefineMenuVo defineMenuVo = new DefineMenuVo() ;
+        DefineMenuVo defineMenuVo = new DefineMenuVo();
         defineMenuVo.setFid(defineMenuDto.getFid());
         defineMenuVo.setParentId(defineMenuDto.getParentId());
         defineMenuVo.setParentMenu(DefineMenuTransfer.transferDtoToVo(defineMenuDto.getParentMenuDto()));
@@ -87,18 +88,18 @@ public class DefineMenuTransfer {
         defineMenuVo.setRouterUrl(defineMenuDto.getRouterUrl());
         defineMenuVo.setHrefUrl(defineMenuDto.getHrefUrl());
         defineMenuVo.setUrlJumpType(defineMenuDto.getUrlJumpType());
-        if(defineMenuDto.getUrlJumpType() != null){
+        if (defineMenuDto.getUrlJumpType() != null) {
             DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(defineMenuDto.getUrlJumpType());
-            if(typeEnum != null){
+            if (typeEnum != null) {
                 defineMenuVo.setUrlJumpTypeStr(typeEnum.getLabel());
-            }   else {
+            } else {
                 defineMenuVo.setUrlJumpTypeStr("");
             }
         }
         defineMenuVo.setLabel(defineMenuDto.getLabel());
         defineMenuVo.setLevel(defineMenuDto.getLevel());
         defineMenuVo.setOrderNum(defineMenuDto.getOrderNum());
-        String excelModelConf = defineMenuDto.getExcelModelConf() ;
+        String excelModelConf = defineMenuDto.getExcelModelConf();
         defineMenuVo.setExcelModelConf(excelModelConf);
         defineMenuVo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         defineMenuVo.setRemark(defineMenuDto.getRemark());
@@ -109,32 +110,31 @@ public class DefineMenuTransfer {
         defineMenuVo.setLastModifyerId(defineMenuDto.getLastModifyerId());
         defineMenuVo.setCreateUser(UserAccountTransfer.transferEntityToVo(defineMenuDto.getCreateUser()));
         defineMenuVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(defineMenuDto.getLastModifyer()));
-        return defineMenuVo ;
+        return defineMenuVo;
     }
 
-    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenu> defineMenus){
-        if(defineMenus == null){
-            return null ;
-        }   else {
-            List<DefineMenuVo> list = new ArrayList<>() ;
-            for (DefineMenu defineMenu : defineMenus){
+    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenu> defineMenus) {
+        if (defineMenus == null) {
+            return null;
+        } else {
+            List<DefineMenuVo> list = new ArrayList<>();
+            for (DefineMenu defineMenu : defineMenus) {
                 list.add(transferEntityToVo(defineMenu));
             }
-            return list ;
+            return list;
         }
     }
 
 
-
-    public static List<DefineMenuVo> transferDtoToVoList(List<DefineMenuDto> defineMenuDtos){
-        if(defineMenuDtos == null){
-            return null ;
-        }   else {
-            List<DefineMenuVo> list = new ArrayList<>() ;
-            for (DefineMenuDto defineMenuDto : defineMenuDtos){
+    public static List<DefineMenuVo> transferDtoToVoList(List<DefineMenuDto> defineMenuDtos) {
+        if (defineMenuDtos == null) {
+            return null;
+        } else {
+            List<DefineMenuVo> list = new ArrayList<>();
+            for (DefineMenuDto defineMenuDto : defineMenuDtos) {
                 list.add(transferDtoToVo(defineMenuDto));
             }
-            return list ;
+            return list;
         }
     }
 }

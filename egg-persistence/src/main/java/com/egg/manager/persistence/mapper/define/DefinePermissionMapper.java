@@ -23,6 +23,7 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * [分页搜索查询] - 权限定义
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -32,45 +33,53 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 批量 启用
+     *
      * @param ensureIds
      * @param loginUser
      * @return
      */
-    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds,@Param("loginUser") UserAccount loginUser) ;
+    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 删除指定角色id下的所有权限
+     *
      * @param roleId
      * @return
      */
-    int clearAllPermissionByRoleId(@Param("roleId")String roleId,@Param("loginUser") UserAccount loginUser) ;
+    int clearAllPermissionByRoleId(@Param("roleId") String roleId, @Param("loginUser") UserAccount loginUser);
+
     /**
      * 取得角色拥有的所有权限集合
+     *
      * @param roleId
      * @return
      */
-    List<DefinePermission> findAllPermissionByRoleId(String roleId) ;
+    List<DefinePermission> findAllPermissionByRoleId(String roleId);
+
     /**
      * 取得角色拥有的所有权限id集合
+     *
      * @param roleId
      * @param filterEnable 是否只查询状态为可用的
      * @return
      */
-    List<String> findAllPermissionIdByRoleId(@Param("roleId") String roleId,@Param("filterEnable")boolean filterEnable) ;
+    List<String> findAllPermissionIdByRoleId(@Param("roleId") String roleId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
      * 查询 用户拥有的所有权限
+     *
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> findAllPermissionByUserAcccountId(@Param("userAccountId")String userAccountId) ;
+    List<DefinePermission> findAllPermissionByUserAcccountId(@Param("userAccountId") String userAccountId);
 }

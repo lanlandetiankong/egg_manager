@@ -2,15 +2,14 @@ package com.egg.manager.persistence.transfer.announcement;
 
 import com.egg.manager.persistence.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.vo.announcement.AnnouncementTagVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnouncementTagTransfer {
-
-
+public class AnnouncementTagTransfer extends MyBaseTransfer {
 
 
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo announcementTagVo) {
@@ -84,15 +83,15 @@ public class AnnouncementTagTransfer {
         }
     }
 
-    public static List<AnnouncementTagVo> transferDtoToVoList(List<AnnouncementTagDto> announcementTagDtos){
-        if(announcementTagDtos == null){
-            return null ;
-        }   else {
-            List<AnnouncementTagVo> list = new ArrayList<>() ;
-            for (AnnouncementTagDto announcementTagDto : announcementTagDtos){
+    public static List<AnnouncementTagVo> transferDtoToVoList(List<AnnouncementTagDto> announcementTagDtos) {
+        if (announcementTagDtos == null) {
+            return null;
+        } else {
+            List<AnnouncementTagVo> list = new ArrayList<>();
+            for (AnnouncementTagDto announcementTagDto : announcementTagDtos) {
                 list.add(transferDtoToVo(announcementTagDto));
             }
-            return list ;
+            return list;
         }
     }
 

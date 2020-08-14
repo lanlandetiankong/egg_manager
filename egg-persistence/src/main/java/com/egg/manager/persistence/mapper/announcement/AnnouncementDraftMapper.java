@@ -22,31 +22,33 @@ import java.util.List;
 public interface AnnouncementDraftMapper extends BaseMapper<AnnouncementDraft> {
 
 
-
     /**
      * [分页搜索查询] - 公告草稿
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
      * @return
      */
-   List<AnnouncementDraftDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<AnnouncementDraftDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
 
     /**
      * 批量 发布 公告草稿
      * (只是修改 AnnouncementDraft 的值，具体发布到Announcement 需要自行另外操作)
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchPublishByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+    int batchPublishByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 }

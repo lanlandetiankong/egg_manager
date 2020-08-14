@@ -4,56 +4,57 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.metadata.BaseRowModel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserAccountXlsOutModel extends BaseRowModel implements Serializable{
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserAccountXlsOutModel extends BaseRowModel implements Serializable {
     @ExcelIgnore
-    private String fid ;
+    private String fid;
 
     @ExcelProperty("用户名")
-    private String userName ;
+    private String userName;
     @ExcelProperty("账号")
-    private String account ;
+    private String account;
     @ExcelIgnore
-    private String nickName ;
+    private String nickName;
     @ExcelIgnore
-    private String avatarUrl ;
+    private String avatarUrl;
     @ExcelIgnore
-    private String password ;
+    private String password;
     @ExcelProperty("手机号")
-    private String phone ;
+    private String phone;
     @ExcelProperty("邮箱")
-    private String email ;
+    private String email;
     @ExcelProperty("性别")
-    private String sexStr ;
+    private String sexStr;
     @ExcelIgnore
-    private String userTypeStr ;
+    private String userTypeStr;
 
     @ExcelIgnore
-    private String remark ;
+    private String remark;
     @ExcelIgnore
-    private Short state ;
+    private Short state;
     @ExcelIgnore
-    private String lockedStr ;
+    private String lockedStr;
 
     @DateTimeFormat("yyyy年MM月dd日HH时mm分")
     @ExcelProperty("创建时间")
-    private Date createTime ;
+    private Date createTime;
     @ExcelIgnore
-    private Date updateTime ;
+    private Date updateTime;
     @ExcelIgnore
-    private String createUserId ;
+    private String createUserId;
     @ExcelIgnore
     private String lastModifyerId;
-
-
-
 
 
 }

@@ -23,6 +23,7 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * [分页搜索查询] - 用户职务
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -32,23 +33,26 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser") UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
     /**
      * 取得用户拥有的所有职务id集合
+     *
      * @param userAccountId
-     * @param filterEnable 是否只查询状态为可用的
+     * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllJobIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable) ;
+    List<String> findAllJobIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
      * 批量新增 用户-职务 关联
+     *
      * @param jobList
      * @return
      */
@@ -56,6 +60,7 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 根据用户id 修改指定职务关联 的可用状态
+     *
      * @param userAccountId
      * @param jobIdList
      * @param stateVal

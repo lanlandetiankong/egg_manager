@@ -15,7 +15,7 @@ import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.persistence.transfer.define.DefineDepartmentTransfer;
-import com.egg.manager.persistence.tree.CommonTreeSelect;
+import com.egg.manager.persistence.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineDepartmentVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;

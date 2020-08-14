@@ -2,7 +2,7 @@ package com.egg.manager.api.service.redis.service.user;
 
 import com.egg.manager.api.service.redis.service.common.MyRedisCommonReqService;
 import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.tree.CommonMenuTree;
+import com.egg.manager.persistence.tree.common.CommonMenuTree;
 
 import java.util.List;
 import java.util.Set;

@@ -23,29 +23,28 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
 
     /**
      * [分页搜索查询] - 职务定义
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
      * @return
      */
     List<DefineJobDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+
     /**
      * 查询指定用户的 用户-职务 关联表
+     *
      * @param userAccountId
-     * @param stateVal 指定state的值
+     * @param stateVal      指定state的值
      * @return
      */
-    List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal")Short stateVal) ;
-
-
+    List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal") Short stateVal);
 
 
     /**
      * 批量 伪删除
      */
-    int batchFakeDelByIds(@Param("delIds")List<String> delIds,@Param("loginUser")UserAccount loginUser) ;
-
-
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
 
 }

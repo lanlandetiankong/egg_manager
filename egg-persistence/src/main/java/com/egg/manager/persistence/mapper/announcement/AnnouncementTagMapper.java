@@ -15,6 +15,7 @@ public interface AnnouncementTagMapper extends BaseMapper<AnnouncementTag> {
 
     /**
      * [分页搜索查询] - 公告标签
+     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -24,10 +25,11 @@ public interface AnnouncementTagMapper extends BaseMapper<AnnouncementTag> {
 
     /**
      * 批量 伪删除
+     *
      * @param delIds
      * @param loginUser
      * @return
      */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser) ;
+    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
 }

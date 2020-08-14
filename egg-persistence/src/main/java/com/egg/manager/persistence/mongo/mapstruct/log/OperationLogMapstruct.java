@@ -11,7 +11,7 @@ import org.mapstruct.Mapper;
  * @author zhouchengjie123
  * @since 2020-08-11
  */
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface OperationLogMapstruct {
 
     OperationLogMO mvo_CopyTo_MO(OperationLogMapstruct mvo);

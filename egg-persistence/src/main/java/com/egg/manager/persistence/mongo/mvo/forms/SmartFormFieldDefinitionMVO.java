@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.mongo.mvo.forms;
 
+import com.egg.manager.persistence.mongo.mvo.MyBaseModelMVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmartFormFieldDefinitionMVO {
+public class SmartFormFieldDefinitionMVO extends MyBaseModelMVO<String> {
 
     /**
      * 类型名

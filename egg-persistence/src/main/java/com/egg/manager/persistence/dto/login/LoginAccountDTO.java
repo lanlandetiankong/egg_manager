@@ -1,6 +1,10 @@
 package com.egg.manager.persistence.dto.login;
 
-import lombok.*;
+import com.egg.manager.persistence.dto.MyBaseDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note:
@@ -10,13 +14,12 @@ import lombok.*;
  * \* Description:
  * \
  */
-@Setter
-@Getter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-public class LoginAccountDTO {
+public class LoginAccountDTO extends MyBaseDto {
 
     private String account;
-    private String password ;
+    private String password;
 }

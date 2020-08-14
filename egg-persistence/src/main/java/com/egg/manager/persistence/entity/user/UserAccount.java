@@ -7,49 +7,50 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @TableName("em_user_account")
 public class UserAccount extends Model<UserAccount> {
     @TableId
-    private String fid ;
+    private String fid;
 
     @TableField("user_name")
-    private String userName ;
-    private String account ;
+    private String userName;
+    private String account;
     @TableField("nick_name")
-    private String nickName ;
+    private String nickName;
     @TableField("avatar_url")
-    private String avatarUrl ;
+    private String avatarUrl;
     @JsonIgnore
-    private String password ;
-    private String phone ;
-    private String email ;
-    private Short sex ;
+    private String password;
+    private String phone;
+    private String email;
+    private Short sex;
 
     @TableField("user_type")
-    private Integer userType ;
+    private Integer userType;
     @TableField("user_type_num")
     private Integer userTypeNum;
 
-    private String remark ;
-    private Short state ;
-    private Short locked ;    //是否被锁定
-    @TableField(value="create_time",fill = FieldFill.INSERT)
-    private Date createTime ;
-    @TableField(value="update_time",fill = FieldFill.UPDATE)
-    private Date updateTime ;
+    private String remark;
+    private Short state;
+    private Short locked;    //是否被锁定
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private Date createTime;
+    @TableField(value = "update_time", fill = FieldFill.UPDATE)
+    private Date updateTime;
     @TableField(value = "create_user_id")
-    private String createUserId ;
+    private String createUserId;
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
 
@@ -60,7 +61,7 @@ public class UserAccount extends Model<UserAccount> {
     }
 
 
-    public static UserAccount dealGetVisitor(){
+    public static UserAccount dealGetVisitor() {
         return UserAccount.builder().fid("Visitor").userType(UserAccountBaseTypeEnum.Visitor.getValue()).build();
     }
 }

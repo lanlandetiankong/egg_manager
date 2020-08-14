@@ -2,25 +2,20 @@ package com.egg.manager.persistence.transfer.organization;
 
 import com.egg.manager.persistence.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.entity.organization.DefineTenant;
+import com.egg.manager.persistence.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.vo.organization.DefineTenantVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefineTenantTransfer {
-
-
-
-
-
-
+public class DefineTenantTransfer extends MyBaseTransfer {
 
     public static DefineTenant transferVoToEntity(DefineTenantVo defineTenantVo) {
-        if(defineTenantVo == null){
-            return null ;
+        if (defineTenantVo == null) {
+            return null;
         }
-        DefineTenant defineTenant = new DefineTenant() ;
+        DefineTenant defineTenant = new DefineTenant();
         defineTenant.setFid(defineTenantVo.getFid());
         defineTenant.setName(defineTenantVo.getName());
         defineTenant.setCode(defineTenantVo.getCode());
@@ -31,14 +26,14 @@ public class DefineTenantTransfer {
         defineTenant.setUpdateTime(defineTenantVo.getUpdateTime());
         defineTenant.setCreateUserId(defineTenantVo.getCreateUserId());
         defineTenant.setLastModifyerId(defineTenantVo.getLastModifyerId());
-        return defineTenant ;
+        return defineTenant;
     }
 
     public static DefineTenantVo transferEntityToVo(DefineTenant defineTenant) {
-        if(defineTenant == null){
-            return null ;
+        if (defineTenant == null) {
+            return null;
         }
-        DefineTenantVo defineTenantVo = new DefineTenantVo() ;
+        DefineTenantVo defineTenantVo = new DefineTenantVo();
         defineTenantVo.setFid(defineTenant.getFid());
         defineTenantVo.setName(defineTenant.getName());
         defineTenantVo.setCode(defineTenant.getCode());
@@ -49,14 +44,14 @@ public class DefineTenantTransfer {
         defineTenantVo.setUpdateTime(defineTenant.getUpdateTime());
         defineTenantVo.setCreateUserId(defineTenant.getCreateUserId());
         defineTenantVo.setLastModifyerId(defineTenant.getLastModifyerId());
-        return defineTenantVo ;
+        return defineTenantVo;
     }
 
     public static DefineTenantVo transferDtoToVo(DefineTenantDto defineTenantDto) {
-        if(defineTenantDto == null){
-            return null ;
+        if (defineTenantDto == null) {
+            return null;
         }
-        DefineTenantVo defineTenantVo = new DefineTenantVo() ;
+        DefineTenantVo defineTenantVo = new DefineTenantVo();
         defineTenantVo.setFid(defineTenantDto.getFid());
         defineTenantVo.setName(defineTenantDto.getName());
         defineTenantVo.setCode(defineTenantDto.getCode());
@@ -67,30 +62,30 @@ public class DefineTenantTransfer {
         defineTenantVo.setUpdateTime(defineTenantDto.getUpdateTime());
         defineTenantVo.setCreateUserId(defineTenantDto.getCreateUserId());
         defineTenantVo.setLastModifyerId(defineTenantDto.getLastModifyerId());
-        return defineTenantVo ;
+        return defineTenantVo;
     }
 
-    public static List<DefineTenantVo> transferEntityToVoList(List<DefineTenant> defineTenants){
-        if(defineTenants == null){
-            return null ;
-        }   else {
-            List<DefineTenantVo> list = new ArrayList<>() ;
-            for (DefineTenant defineTenant : defineTenants){
+    public static List<DefineTenantVo> transferEntityToVoList(List<DefineTenant> defineTenants) {
+        if (defineTenants == null) {
+            return null;
+        } else {
+            List<DefineTenantVo> list = new ArrayList<>();
+            for (DefineTenant defineTenant : defineTenants) {
                 list.add(transferEntityToVo(defineTenant));
             }
-            return list ;
+            return list;
         }
     }
 
-    public static List<DefineTenantVo> transferDtoToVoList(List<DefineTenantDto> defineTenantDtoList){
-        if(defineTenantDtoList == null){
-            return null ;
-        }   else {
-            List<DefineTenantVo> list = new ArrayList<>() ;
-            for (DefineTenantDto defineTenantDto : defineTenantDtoList){
+    public static List<DefineTenantVo> transferDtoToVoList(List<DefineTenantDto> defineTenantDtoList) {
+        if (defineTenantDtoList == null) {
+            return null;
+        } else {
+            List<DefineTenantVo> list = new ArrayList<>();
+            for (DefineTenantDto defineTenantDto : defineTenantDtoList) {
                 list.add(transferDtoToVo(defineTenantDto));
             }
-            return list ;
+            return list;
         }
     }
 

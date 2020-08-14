@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,30 +20,28 @@ import java.util.Date;
  * \* Description:
  * \
  */
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @TableName("em_announcement_tag")
 public class AnnouncementTag extends Model<AnnouncementTag> {
 
 
     @TableId
-    private String fid ;
-    private String name ;
-    private String description ;
-    private Integer ordering ;
+    private String fid;
+    private String name;
+    private String description;
+    private Integer ordering;
 
     private String remark;
-    private Short state ;
+    private Short state;
     @TableField("create_time")
-    private Date createTime ;
+    private Date createTime;
     @TableField("update_time")
-    private Date updateTime ;
+    private Date updateTime;
     @TableField(value = "create_user_id")
-    private String createUserId ;
+    private String createUserId;
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
 

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * MongoDb-FormTypeDefinitionMO 表单类型定义-dao
  */
 @Repository
-public class SmartFormTypeDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormTypeDefinitionMO,String> implements SmartFormTypeDefinitionRepository {
+public class SmartFormTypeDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormTypeDefinitionMO, String> implements SmartFormTypeDefinitionRepository {
 
 }

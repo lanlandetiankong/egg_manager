@@ -57,16 +57,6 @@
             <version>2.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.teaegg</groupId>
-            <artifactId>egg-mongodb</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.teaegg</groupId>
-            <artifactId>egg-message</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <exclusions>

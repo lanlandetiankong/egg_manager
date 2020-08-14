@@ -10,8 +10,8 @@ import com.egg.manager.common.base.query.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.define.DefineMenu;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.persistence.tree.CommonMenuTree;
-import com.egg.manager.persistence.tree.CommonTreeSelect;
+import com.egg.manager.persistence.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.vo.define.DefineMenuVo;
 
 import java.util.List;

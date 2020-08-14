@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.mongo.mo.log;
 
-import com.egg.manager.persistence.mongo.mo.BaseModelMO;
+import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "em_operation_log")
-public class OperationLogMO extends BaseModelMO<String> {
+public class OperationLogMO extends MyBaseModelMO<String> {
 
     private static final long serialVersionUID = 1L;
 

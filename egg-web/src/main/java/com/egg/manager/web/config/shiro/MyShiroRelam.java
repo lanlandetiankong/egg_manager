@@ -2,7 +2,7 @@ package com.egg.manager.web.config.shiro;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
-import com.egg.manager.api.service.spring.SpringContextBeanService;
+import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
@@ -51,7 +51,7 @@ public class MyShiroRelam extends AuthorizingRealm {
         String authorization =  principalCollection.toString();
         String userAccountId = JWTUtil.getUserAccountId(principalCollection.toString()) ;
         if (userAccountRedisService == null) {
-            this.userAccountRedisService = SpringContextBeanService.getBean(UserAccountRedisService.class);
+            this.userAccountRedisService = SpringContextBeanUtil.getBean(UserAccountRedisService.class);
         }
         //取得 当前用户 有用的 角色、权限
         Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountId,false);

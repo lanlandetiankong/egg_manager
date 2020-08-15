@@ -3,7 +3,7 @@ package com.egg.manager.web.config.shiro;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.service.helper.MyResponseHelper;
 import com.egg.manager.api.service.service.user.UserAccountService;
-import com.egg.manager.api.service.spring.SpringContextBeanService;
+import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
@@ -159,7 +159,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     private void handleSetUserAccountBean(ServletRequest request,ServletResponse response,JwtShiroToken token) {
         //TODO 改为dubbo取得
          if(this.userAccountService == null) {
-             this.userAccountService = SpringContextBeanService.getBean(UserAccountService.class) ;
+             this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class) ;
          }
          //取得用户id
          String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());

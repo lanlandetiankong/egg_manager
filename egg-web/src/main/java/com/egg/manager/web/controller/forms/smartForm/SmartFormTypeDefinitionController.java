@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * \* note:
@@ -71,7 +70,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            Page<SmartFormTypeDefinitionMO> page = smartFormTypeDefinitionMService.doFindPage(loginUser,queryBean);
+            Page<SmartFormTypeDefinitionMO> page = smartFormTypeDefinitionMService.doFindPage(loginUser,mongoQueryBuffer,queryBean.getPageable());
             dealSetMongoPageResult(result,page,"查询表单类型定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -94,8 +93,9 @@ public class SmartFormTypeDefinitionController extends BaseController {
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
+            //
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser,queryBean);
+            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser,mongoQueryBuffer);
             smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result,list) ;
             dealCommonSuccessCatch(result,"查询表单类型信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
@@ -111,8 +111,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
                             @RequestParam(value="fid",required = true) String fid) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
-            Optional<SmartFormTypeDefinitionMO> moOptional = smartFormTypeDefinitionMService.doFindById(loginUser,fid);
-            result.setBean(moOptional.get());
+            SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser,fid);
+            result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

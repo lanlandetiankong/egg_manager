@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 
 /**
- * \* note: 数据库查询字段 追加(除Request取得外)
+ * \* note: 数据库查询字段 ，用作dubbo各个service之间的传输对象
  * \* User: zhouchengjie
  * \* Date: 2020/8/8
  * \* Time: 19:06
@@ -47,6 +47,9 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
 
     private Boolean whiteSetsFlag = false ;
 
+    public MyMongoQueryBuffer() {
+    }
+
     /**
      * 批量添加 MyMongoCommonQueryFieldEnum 定义的项
      * @param enums
@@ -71,7 +74,7 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
     public MyMongoQueryBuffer addFrontSortItem(MyMongoCommonSortFieldEnum ... commonSortFieldEnumArr){
         if(commonSortFieldEnumArr != null && commonSortFieldEnumArr.length > 0){
             for(MyMongoCommonSortFieldEnum sortFieldEnum : commonSortFieldEnumArr){
-                this.frontSortList.add(new AntdvSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
+                this.frontSortList.add(0,new AntdvSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
             }
         }
         return this ;

@@ -5,16 +5,19 @@ import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
+import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
+import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
+import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.RewriteMongoCriteria;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
+import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.Date;
 import java.util.List;
@@ -28,104 +31,106 @@ import java.util.Optional;
  * \* Description:
  * \
  */
-public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T extends MyBaseModelMO,ID> implements MyBaseMongoService<T,ID> {
+public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T extends MyBaseModelMO, ID> implements MyBaseMongoService<T, ID> {
     @Autowired
     protected R baseRepository;
 
 
     @Override
-    public T doInsert(UserAccount loginUser,T t) {
-        dealCreateSetLoginUserToMO(loginUser,t);
+    public T doInsert(UserAccount loginUser, T t) {
+        dealCreateSetLoginUserToMO(loginUser, t);
         return baseRepository.insert(t);
     }
 
     @Override
-    public List<T> doInsert(UserAccount loginUser,Iterable<T> iterables) {
-        if(iterables != null){
-            for (T t : iterables){
-                dealCreateSetLoginUserToMO(loginUser,t);
+    public List<T> doInsert(UserAccount loginUser, Iterable<T> iterables) {
+        if (iterables != null) {
+            for (T t : iterables) {
+                dealCreateSetLoginUserToMO(loginUser, t);
             }
         }
         return baseRepository.batchInsert(iterables);
     }
 
     @Override
-    public T doUpdateById(UserAccount loginUser,T t) {
-        dealUpdateSetLoginUserToMO(loginUser,t);
-        return baseRepository.updateById(t,false);
+    public T doUpdateById(UserAccount loginUser, T t) {
+        dealUpdateSetLoginUserToMO(loginUser, t);
+        return baseRepository.updateById(t, false);
     }
 
     @Override
-    public T doUpdateAllColById(UserAccount loginUser,T t) {
-        dealUpdateSetLoginUserToMO(loginUser,t);
-        return baseRepository.updateById(t,true);
+    public T doUpdateAllColById(UserAccount loginUser, T t) {
+        dealUpdateSetLoginUserToMO(loginUser, t);
+        return baseRepository.updateById(t, true);
     }
 
     @Override
-    public Long doBatchUpdate(UserAccount loginUser,Query query, Update update) {
+    public Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, InheritMongoUpdate update) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
         Document document = update.getUpdateObject();
         //如果已经在update指定了最后更新时间，则不再往update添加最后更新时间、最后更新人等信息
-        if(document.containsKey(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE) == false){
-            dealSetModifyInfoToUpdate(loginUser,update);
+        if (document.containsKey(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE) == false) {
+            dealSetModifyInfoToUpdate(loginUser, update);
         }
-        return baseRepository.batchUpdate(query,update);
+        return baseRepository.batchUpdate(query, update);
     }
 
     @Override
-    public Long doFakeDeleteById(UserAccount loginUser,ID id) throws MyMongoException {
-        Integer count = 0 ;
-        if(id == null){
+    public Long doFakeDeleteById(UserAccount loginUser, ID id) throws MyMongoException {
+        Integer count = 0;
+        if (id == null) {
             throw new MyMongoException("请传入id!");
         }
         Optional<T> optionalT = baseRepository.findById(id);
         T t = optionalT.get();
-        if(t == null){
+        if (t == null) {
             throw new MyMongoException("不存在的数据!");
         }
-        dealUpdateSetLoginUserToMO(loginUser,t);
+        dealUpdateSetLoginUserToMO(loginUser, t);
         t.setStatus(BaseStateEnum.DELETE.getValue());
-        baseRepository.updateStatusById(t,BaseStateEnum.DELETE.getValue());
-        return new Long(++count) ;
+        baseRepository.updateStatusById(t, BaseStateEnum.DELETE.getValue());
+        return new Long(++count);
     }
 
     @Override
-    public Long doFakeDelete(UserAccount loginUser,T t) throws MyMongoException{
-        Integer count = 0 ;
-        if(t == null){
+    public Long doFakeDelete(UserAccount loginUser, T t) throws MyMongoException {
+        Integer count = 0;
+        if (t == null) {
             throw new MyMongoException("不存在的数据!");
         }
-        dealUpdateSetLoginUserToMO(loginUser,t);
+        dealUpdateSetLoginUserToMO(loginUser, t);
         t.setStatus(BaseStateEnum.DELETE.getValue());
         baseRepository.delete(t);
-        return new Long(++count) ;
+        return new Long(++count);
     }
 
     @Override
-    public Long doFakeDeleteByIds(UserAccount loginUser,Iterable<ID> iterableList) throws MyMongoException {
-        if(iterableList == null){
+    public Long doFakeDeleteByIds(UserAccount loginUser, Iterable<ID> iterableList) throws MyMongoException {
+        if (iterableList == null) {
             throw new MyMongoException("集合为空!");
         }
-        return baseRepository.batchChangeStatusByIds(iterableList,BaseStateEnum.DELETE.getValue(),loginUser);
+        return baseRepository.batchChangeStatusByIds(iterableList, BaseStateEnum.DELETE.getValue(), loginUser);
     }
 
     @Override
-    public void doDeleteById(UserAccount loginUser,ID id) {
+    public void doDeleteById(UserAccount loginUser, ID id) {
         baseRepository.deleteById(id);
     }
 
     @Override
-    public void doDelete(UserAccount loginUser,T t){
+    public void doDelete(UserAccount loginUser, T t) {
         baseRepository.delete(t);
     }
 
     @Override
-    public void doDeleteAll(UserAccount loginUser,Iterable<? extends T> iterableList) {
+    public void doDeleteAll(UserAccount loginUser, Iterable<? extends T> iterableList) {
         baseRepository.batchDelete(iterableList);
     }
 
     @Override
-    public void doDeleteAll(UserAccount loginUser) throws MyMongoException{
-        if(1==1){
+    public void doDeleteAll(UserAccount loginUser) throws MyMongoException {
+        if (1 == 1) {
             throw new MyMongoException("不允许使用全部删除功能！");
         }
         baseRepository.deleteAll();
@@ -133,23 +138,23 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
 
 
     @Override
-    public List<T> doFindAll(UserAccount loginUser,Query query) {
-        query = query != null ? query : new Query() ;
-        return baseRepository.findAll(query);
+    public List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Sort sort) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        return doFindAll(loginUser,query,sort);
     }
 
-    @Override
-    public List<T> doFindAll(UserAccount loginUser,Query query, Sort sort) {
+    private List<T> doFindAll(UserAccount loginUser, Query query, Sort sort) {
         query = query != null ? query : new Query() ;
-        if(sort == null){
+        if (sort == null) {
             return baseRepository.findAll(query);
-        }   else {
-            return baseRepository.findAll(query,sort);
+        } else {
+            return baseRepository.findAll(query, sort);
         }
     }
 
     @Override
-    public Page<T> doFindPage(UserAccount loginUser,Pageable pageable) {
+    public Page<T> doFindPage(UserAccount loginUser, Pageable pageable) {
         return baseRepository.findPage(pageable);
     }
 
@@ -157,91 +162,104 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
     public List<T> doFindAll(UserAccount loginUser) {
         return baseRepository.findAll();
     }
+
     @Override
-    public List<T> doFindAll(UserAccount loginUser,MongoQueryBean queryBean){
-        return this.doFindAll(loginUser,queryBean.getQuery(),queryBean.getSort());
+    public List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+        return this.doFindAll(loginUser, queryBuffer,null);
     }
 
     @Override
-    public List<T> doFindAll(UserAccount loginUser,Sort sort) {
+    public List<T> doFindAll(UserAccount loginUser, Sort sort) {
         return baseRepository.findAll(sort);
     }
 
     @Override
-    public Optional<T> doFindById(UserAccount loginUser,ID id) {
-        return baseRepository.findById(id);
+    public T doFindById(UserAccount loginUser, ID id) {
+        return baseRepository.findById(id).get();
     }
 
 
     @Override
-    public Iterable<T> doFindAllById(UserAccount loginUser,Iterable<ID> iterableList) {
+    public Iterable<T> doFindAllById(UserAccount loginUser, Iterable<ID> iterableList) {
         return baseRepository.findAllById(iterableList);
     }
 
 
     @Override
-    public Optional<T> doFindOne(UserAccount loginUser,Query query) {
-        query = query != null ? query : new Query() ;
-        return baseRepository.findOne(query);
+    public T doFindOne(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        return baseRepository.findOne(query).get();
     }
 
     @Override
-    public Page<T> doFindPage(UserAccount loginUser,Query query, Pageable pageable) {
+    public Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Pageable pageable) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        return doFindPage(loginUser,query,pageable);
+    }
+    private Page<T> doFindPage(UserAccount loginUser, Query query, Pageable pageable) {
         query = query != null ? query : new Query() ;
-        return baseRepository.findPage(query,pageable);
+        return baseRepository.findPage(query, pageable);
     }
 
     @Override
     public long doCount(UserAccount loginUser) {
         return baseRepository.count();
     }
+
     @Override
-    public long doCount(UserAccount loginUser,Query query) {
-        query = query != null ? query : new Query() ;
+    public long doCount(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
         return baseRepository.count(query);
     }
+
     @Override
-    public boolean doExists(UserAccount loginUser,Query query) {
-        query = query != null ? query : new Query() ;
+    public boolean doExists(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
         return baseRepository.exists(query);
     }
+
     @Override
-    public boolean doExistsById(UserAccount loginUser,ID id) {
+    public boolean doExistsById(UserAccount loginUser, ID id) {
         return baseRepository.existsById(id);
     }
 
 
-
     @Override
-    public Page<T> doFindPage(UserAccount loginUser,MongoQueryBean queryBean){
-        return this.doFindPage(loginUser,queryBean.getQuery(),queryBean.getPageable());
+    public Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
+        return this.doFindPage(loginUser, queryBuffer, queryBean.getPageable());
     }
 
 
     //private methods
-    private void dealUpdateSetLoginUserToMO(UserAccount loginUser,T t){
-        if(t != null && loginUser != null){
+    private void dealUpdateSetLoginUserToMO(UserAccount loginUser, T t) {
+        if (t != null && loginUser != null) {
             t.setLastModifyerId(loginUser.getFid());
             t.setLastModifyerNickName(loginUser.getNickName());
         }
     }
 
     //private methods
-    private void dealSetModifyInfoToUpdate(UserAccount loginUser,Update update){
-        if(loginUser != null){
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID,loginUser.getFid());
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERNICKNAME,loginUser.getNickName());
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE,new Date());
+    private void dealSetModifyInfoToUpdate(UserAccount loginUser, InheritMongoUpdate update) {
+        if (loginUser != null) {
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERNICKNAME, loginUser.getNickName());
+            update.set(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE, new Date());
         }
     }
 
     /**
      * 更新时 设置登录用户字段
+     *
      * @param t
      * @param loginUser
      */
-    private void dealCreateSetLoginUserToMO(UserAccount loginUser,T t){
-        if(t != null && loginUser != null){
+    private void dealCreateSetLoginUserToMO(UserAccount loginUser, T t) {
+        if (t != null && loginUser != null) {
             t.setCreateUserId(loginUser.getFid());
             t.setCreateUserNickName(loginUser.getNickName());
             t.setLastModifyerId(loginUser.getFid());
@@ -249,4 +267,15 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>,T ext
         }
     }
 
+
+    private Query getQueryByCriteriaList(Query query,List<RewriteMongoCriteria> criteriaList){
+        query = (query != null) ? query : new Query() ;
+        if(CollectionUtils.isEmpty(criteriaList)){
+            return query ;
+        }
+        for (RewriteMongoCriteria criteria : criteriaList){
+            query.addCriteria(criteria);
+        }
+        return query ;
+    }
 }

@@ -77,8 +77,7 @@ public class SmartFormDefinitionController extends BaseController {
                                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            queryBean.appendQueryFieldsToQuery(mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,queryBean);
+            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
             dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -102,8 +101,7 @@ public class SmartFormDefinitionController extends BaseController {
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            queryBean.appendQueryFieldsToQuery(mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,queryBean);
+            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
             dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -118,8 +116,8 @@ public class SmartFormDefinitionController extends BaseController {
                             @RequestParam(value="fid",required = true) String fid) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         try {
-            Optional<SmartFormDefinitionMO> moOptional = smartFormDefinitionMService.doFindById(loginUser,fid);
-            result.setBean(moOptional.get());
+            SmartFormDefinitionMO mobj = smartFormDefinitionMService.doFindById(loginUser,fid);
+            result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

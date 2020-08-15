@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common;
 
-import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;

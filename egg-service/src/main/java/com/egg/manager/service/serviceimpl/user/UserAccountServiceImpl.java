@@ -1,13 +1,13 @@
 package com.egg.manager.service.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.user.UserAccountService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -15,9 +15,9 @@ import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.exception.MyDbException;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.dto.user.UserAccountDto;
@@ -36,6 +36,7 @@ import com.egg.manager.persistence.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -48,9 +49,11 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service(interfaceClass = UserAccountService.class)
+//@Service(interfaceClass = UserAccountService.class)
+@Component
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
-
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
     @Autowired
     private UserAccountMapper userAccountMapper ;
     @Autowired
@@ -94,7 +97,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
 
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到userAccountEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryFormFieldBeanList) ;
         //添加排序

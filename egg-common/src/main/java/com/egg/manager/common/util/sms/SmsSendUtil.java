@@ -3,8 +3,8 @@ package com.egg.manager.common.util.sms;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.common.base.sms.SmsSendRequest;
-import com.egg.manager.common.base.sms.SmsSendResponse;
+import com.egg.manager.common.base.sms.send.SmsSendRequest;
+import com.egg.manager.common.base.sms.send.SmsSendResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

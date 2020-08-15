@@ -1,10 +1,12 @@
-package com.egg.manager.common.base.query;
+package com.egg.manager.common.base.query.mongo;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoQueryMatchingEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.MyBaseQueryBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,7 @@ import java.util.regex.Pattern;
  * \
  */
 @Slf4j
-public class MongoQueryBean<T> {
+public class MongoQueryBean<T> extends MyBaseQueryBean {
 
     private Query query ;
     private Pageable pageable ;

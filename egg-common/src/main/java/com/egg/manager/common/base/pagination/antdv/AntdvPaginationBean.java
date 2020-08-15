@@ -1,5 +1,7 @@
-package com.egg.manager.common.base.pagination;
+package com.egg.manager.common.base.pagination.antdv;
 
+import com.egg.manager.common.base.pagination.MyBasePagination;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -11,7 +13,8 @@ import lombok.Data;
  * \p
  */
 @Data
-public class AntdvPaginationBean {
+@Builder
+public class AntdvPaginationBean extends MyBasePagination {
     private Integer current ;
     private Integer pageSize ;
     private int total ;

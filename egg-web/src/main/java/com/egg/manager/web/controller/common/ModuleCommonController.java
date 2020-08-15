@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common;
 
-import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.helper.MyCommonResult;

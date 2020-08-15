@@ -1,5 +1,7 @@
 package com.egg.manager.common.base.constant.redis;
 
+import java.io.Serializable;
+
 /**
  * \* note:
  * \* User: zhouchengjie
@@ -8,7 +10,7 @@ package com.egg.manager.common.base.constant.redis;
  * \* Description:
  * \
  */
-public interface RedisShiroKeyConstant {
+public interface RedisShiroKeyConstant  {
     String SHIRO_CACHE_PREFIX = "shiro:cache";
     String SHIRO_CACHE_TOKEN = SHIRO_CACHE_PREFIX + ":token";
     String SHIRO_CACHE_ACCOUNT = SHIRO_CACHE_PREFIX + ":account";

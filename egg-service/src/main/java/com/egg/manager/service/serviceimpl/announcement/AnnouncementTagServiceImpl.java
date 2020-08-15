@@ -7,11 +7,12 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.announcement.AnnouncementTagService;
-import com.egg.manager.common.base.beans.FrontEntitySelectBean;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.entity.announcement.AnnouncementTag;
@@ -37,7 +38,8 @@ import java.util.*;
 @Service(interfaceClass = AnnouncementTagService.class)
 public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMapper,AnnouncementTag> implements AnnouncementTagService {
 
-
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
 
     @Autowired
@@ -58,7 +60,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         //解析 搜索条件
         EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 announcementTagEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(announcementTagEntityWrapper,queryFieldBeanList) ;
         //添加排序

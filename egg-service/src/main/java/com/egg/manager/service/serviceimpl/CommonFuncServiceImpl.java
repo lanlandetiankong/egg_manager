@@ -10,8 +10,8 @@ import com.egg.manager.api.service.exception.login.MyAuthenticationExpiredExcept
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
@@ -68,24 +68,7 @@ public class CommonFuncServiceImpl implements CommonFuncService {
     }
 
 
-    /**
-     * 取得分页 配置 -> mybatis-plus
-     * @param paginationBean
-     * @return
-     */
-    @Override
-    public  RowBounds parsePaginationToRowBounds(AntdvPaginationBean paginationBean) {
-        if(paginationBean != null){
-            Integer current = paginationBean.getCurrent();
-            Integer pageSize = paginationBean.getPageSize();
-            current = current != null ? current : 1;
-            pageSize = pageSize != null ? pageSize : 0;
-            int offset = (current - 1) * pageSize ;
-            return new RowBounds(offset,pageSize) ;
-        }   else {
-            return new RowBounds() ;
-        }
-    }
+
 
 
     /**

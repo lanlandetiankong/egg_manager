@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * \* note: 静态方法可以调用 props-upload.properties配置的参数
  * \* User: zhouchengjie
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "props.upload")
 @PropertySource("classpath:common/config/application-devEgg.properties")
-public class UploadStaticProps {
+public class UploadStaticProps implements Serializable {
 
     public static String urlPrefix ;
     public static String locationPrefix ;

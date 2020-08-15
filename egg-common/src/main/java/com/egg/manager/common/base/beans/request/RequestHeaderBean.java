@@ -1,7 +1,12 @@
 package com.egg.manager.common.base.beans.request;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * \* note:
@@ -12,7 +17,10 @@ import lombok.Data;
  * \
  */
 @Data
-public class RequestHeaderBean {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class RequestHeaderBean  implements Serializable {
     private String host ;
     private String connection ;
     private String contentLength ;

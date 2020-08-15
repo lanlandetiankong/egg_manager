@@ -7,11 +7,12 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.define.DefineDepartmentService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.entity.define.DefineDepartment;
@@ -43,6 +44,8 @@ import java.util.List;
 @Service(interfaceClass = DefineDepartmentService.class)
 public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMapper,DefineDepartment> implements DefineDepartmentService {
     @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
+    @Autowired
     private DefineDepartmentMapper defineDepartmentMapper ;
     @Reference
     private CommonFuncService commonFuncService ;
@@ -61,7 +64,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         //解析 搜索条件
         EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 defineDepartmentEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(defineDepartmentEntityWrapper,queryFieldBeanList) ;
         //添加排序

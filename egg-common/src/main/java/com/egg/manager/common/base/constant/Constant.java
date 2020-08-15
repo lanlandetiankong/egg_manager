@@ -1,12 +1,13 @@
 package com.egg.manager.common.base.constant;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author zhouchengjie
  */
-public class Constant {
+public class Constant implements Serializable {
 
     public static final int BYTE_BUFFER = 1024;
 

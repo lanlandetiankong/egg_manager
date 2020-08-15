@@ -3,8 +3,8 @@ package com.egg.manager.api.service.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import org.apache.ibatis.session.RowBounds;
@@ -26,13 +26,6 @@ public interface CommonFuncService {
     Integer defaultVersion = 0 ;
 
     void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList);
-
-    /**
-     * 取得分页 配置 -> mybatis-plus
-     * @param paginationBean
-     * @return
-     */
-    RowBounds parsePaginationToRowBounds(AntdvPaginationBean paginationBean);
 
 
     /**

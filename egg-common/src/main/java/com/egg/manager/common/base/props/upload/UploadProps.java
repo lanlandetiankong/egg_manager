@@ -4,6 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * \* note:
  * \* User: zhouchengjie
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "props.upload")
 @PropertySource("classpath:common/config/application-devEgg.properties")
-public class UploadProps {
+public class UploadProps implements Serializable{
 
     private String urlPrefix ;
     private String locationPrefix ;

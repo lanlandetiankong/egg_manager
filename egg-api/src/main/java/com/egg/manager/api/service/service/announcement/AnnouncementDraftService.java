@@ -1,9 +1,9 @@
 package com.egg.manager.api.service.service.announcement;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.entity.announcement.Announcement;
 import com.egg.manager.persistence.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.entity.user.UserAccount;

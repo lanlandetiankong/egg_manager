@@ -1,6 +1,8 @@
 package com.egg.manager.common.base.constant.mongodb;
 
-public class MongoModelFieldConstant {
+import java.io.Serializable;
+
+public class MongoModelFieldConstant implements Serializable{
 
     public static final String FIELD_FID = "fid";
     public static final String FIELD_ORDERNUM = "orderNum";

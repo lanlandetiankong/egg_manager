@@ -11,11 +11,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.user.UserRoleService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.user.UserRoleDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -49,6 +50,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
     @Reference
     private RedisHelper redisHelper ;
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
     private UserRoleMapper userRoleMapper ;
@@ -135,7 +138,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         //解析 搜索条件
         EntityWrapper<UserRole> userRoleEntityWrapper = new EntityWrapper<UserRole>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到userRoleEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(userRoleEntityWrapper,queryFormFieldBeanList) ;
         //添加排序

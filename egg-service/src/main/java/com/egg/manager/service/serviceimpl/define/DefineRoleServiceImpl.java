@@ -9,12 +9,13 @@ import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.define.DefineRoleService;
 import com.egg.manager.api.service.service.user.UserRoleService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.entity.define.DefineMenu;
@@ -52,6 +53,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
     @Reference
     private RedisHelper redisHelper ;
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
     private DefineRoleMapper defineRoleMapper;
@@ -212,7 +215,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         //解析 搜索条件
         EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到defineRoleEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(defineRoleEntityWrapper,queryFieldBeanList) ;
         //添加排序

@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common;
 
-import com.egg.manager.common.base.beans.FrontSelectBean;
+import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.helper.MyCommonResult;

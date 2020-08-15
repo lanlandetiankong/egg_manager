@@ -9,10 +9,11 @@ import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.announcement.AnnouncementDraftService;
 import com.egg.manager.api.service.service.announcement.AnnouncementService;
 import com.egg.manager.api.service.service.announcement.AnnouncementTagService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.entity.announcement.Announcement;
@@ -44,7 +45,8 @@ import java.util.Map;
  */
 @Service(interfaceClass = AnnouncementService.class)
 public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Announcement> implements AnnouncementService {
-
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
     private AnnouncementMapper announcementMapper ;
@@ -70,7 +72,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         //解析 搜索条件
         EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 announcementEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(announcementEntityWrapper,queryFieldBeanList) ;
         //添加排序

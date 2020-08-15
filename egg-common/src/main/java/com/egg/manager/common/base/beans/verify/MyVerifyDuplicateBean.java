@@ -2,6 +2,7 @@ package com.egg.manager.common.base.beans.verify;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +14,11 @@ import java.util.List;
  * \* Description:
  * \
  */
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class MyVerifyDuplicateBean<T> {
+@AllArgsConstructor
+@Builder
+public class MyVerifyDuplicateBean<T> implements Serializable {
     private boolean successFlag = true;
     private String errorMsg ;
     private List<String> fidldNameList = new ArrayList<>();

@@ -6,6 +6,8 @@ import com.egg.manager.common.base.props.upload.UploadStaticProps;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
+
 /**
  * \* note:
  * \* User: zhouchengjie
@@ -14,14 +16,11 @@ import org.apache.commons.lang3.StringUtils;
  * \* Description:
  * \
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Builder
-public class AntdFileUploadBean {
+public class AntdFileUploadBean  implements Serializable {
 
     private String uid ;
     private String name ;

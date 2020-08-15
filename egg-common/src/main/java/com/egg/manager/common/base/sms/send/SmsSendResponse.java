@@ -1,10 +1,13 @@
-package com.egg.manager.common.base.sms;
+package com.egg.manager.common.base.sms.send;
+
+import com.egg.manager.common.base.sms.MyBaseSms;
+
 /**
  * 
  * @author tianyh 
  * @Description:普通短信发送响应实体类
  */
-public class SmsSendResponse {
+public class SmsSendResponse extends MyBaseSms {
 	/**
 	 * 响应时间
 	 */

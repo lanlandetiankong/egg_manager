@@ -1,7 +1,8 @@
-package com.egg.manager.common.base.query;
+package com.egg.manager.common.base.query.form;
 
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mysql.MyQueryMatchingEnum;
+import com.egg.manager.common.base.query.MyBaseQueryBean;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,10 +23,10 @@ import java.util.List;
  * \
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class QueryFormFieldBean {
+public class QueryFormFieldBean  extends MyBaseQueryBean {
     private String fieldName;
     private String matching ;
     private String foreignName ;

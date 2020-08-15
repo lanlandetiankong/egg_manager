@@ -1,11 +1,13 @@
-package com.egg.manager.common.base.sms;
+package com.egg.manager.common.base.sms.send;
+
+import com.egg.manager.common.base.sms.MyBaseSms;
 
 /**
  *
  * @author tianyh
  * @Description:普通短信发送实体类
  */
-public class SmsSendRequest {
+public class SmsSendRequest extends MyBaseSms {
     /**
      * 用户账号，必填
      */

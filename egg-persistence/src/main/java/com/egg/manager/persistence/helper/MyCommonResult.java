@@ -2,7 +2,7 @@ package com.egg.manager.persistence.helper;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.beans.file.FileResBean;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
 import lombok.AllArgsConstructor;

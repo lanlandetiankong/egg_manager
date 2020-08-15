@@ -2,6 +2,8 @@ package com.egg.manager.common.base.beans.file;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * \* note:
  * \* User: zhouchengjie
@@ -10,14 +12,11 @@ import lombok.*;
  * \* Description:
  * \
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Builder
-public class FileResBean {
+public class FileResBean  implements Serializable {
     private String fileName ;
     private String fileLocation ;
     private String filePrefix ;

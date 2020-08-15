@@ -1,6 +1,6 @@
 package com.egg.manager.common.base.enums.query.mongo;
 
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 
 /**
  * \* note:

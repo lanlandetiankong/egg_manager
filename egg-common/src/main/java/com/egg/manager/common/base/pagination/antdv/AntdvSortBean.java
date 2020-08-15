@@ -1,7 +1,9 @@
-package com.egg.manager.common.base.pagination;
+package com.egg.manager.common.base.pagination.antdv;
 
+import com.egg.manager.common.base.pagination.MyBasePagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * \* note:
@@ -12,13 +14,12 @@ import lombok.Data;
  * \p
  */
 @Data
-@AllArgsConstructor
-public class AntdvSortBean {
+public class AntdvSortBean extends MyBasePagination {
     private String field ;
     private Boolean ascFlag ;
     //正序：ascend,倒序:descend
     private String order ;
-
+    public AntdvSortBean(){}
     public AntdvSortBean(String field, boolean ascFlag) {
         this.field = field;
         this.ascFlag = ascFlag;

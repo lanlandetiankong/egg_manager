@@ -11,11 +11,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.user.UserTenantService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.user.UserTenantDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -47,6 +48,8 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
 
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
     private UserTenantMapper userTenantMapper ;
@@ -137,7 +140,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         //解析 搜索条件
         EntityWrapper<UserTenant> userTenantEntityWrapper = new EntityWrapper<UserTenant>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到userTenantEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(userTenantEntityWrapper,queryFormFieldBeanList) ;
         //添加排序

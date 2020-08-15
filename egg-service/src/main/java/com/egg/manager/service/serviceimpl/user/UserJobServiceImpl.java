@@ -7,10 +7,11 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.user.UserJobService;
+import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
-import com.egg.manager.common.base.query.QueryFormFieldBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.dto.user.UserJobDto;
 import com.egg.manager.persistence.entity.user.UserAccount;
@@ -38,11 +39,14 @@ import java.util.List;
  */
 @Service(interfaceClass = UserJobService.class)
 public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> implements UserJobService {
+    @Autowired
+    private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
     private UserJobMapper userJobMapper ;
     @Reference
     private CommonFuncService commonFuncService ;
+
 
 
 
@@ -60,7 +64,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         //解析 搜索条件
         EntityWrapper<UserJob> userJobEntityWrapper = new EntityWrapper<UserJob>();
         //取得 分页配置
-        RowBounds rowBounds = commonFuncService.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 userJobEntityWrapper
         commonFuncService.dealSetConditionsMapToEntityWrapper(userJobEntityWrapper,queryFormFieldBeanList) ;
         //添加排序

@@ -1,8 +1,10 @@
-package com.egg.manager.common.base.query;
+package com.egg.manager.common.base.query.mongo;
 
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
-import com.egg.manager.common.base.pagination.AntdvSortBean;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.MyBaseQueryBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.google.common.collect.Sets;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
@@ -19,7 +21,7 @@ import java.util.*;
  * \
  */
 @Data
-public class MyMongoQueryBuffer {
+public class MyMongoQueryBuffer extends MyBaseQueryBean {
 
     /**
      * (除HttpServletRequest取得外)添加的查询字段

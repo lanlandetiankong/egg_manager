@@ -9,6 +9,7 @@ import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
+import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
@@ -76,9 +77,9 @@ public class SmartFormDefinitionController extends BaseController {
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
                                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                                     .getRefreshedSelf();
-            MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
-            dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
+            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
+            MyMongoQueryPageBean<SmartFormDefinitionMO> pageBean = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
+            dealSetMongoPageResult(result,pageBean,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -100,9 +101,9 @@ public class SmartFormDefinitionController extends BaseController {
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
-            MongoQueryBean queryBean = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            Page<SmartFormDefinitionMO> page = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
-            dealSetMongoPageResult(result,page,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
+            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
+            MyMongoQueryPageBean<SmartFormDefinitionMO> pageBean = smartFormDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
+            dealSetMongoPageResult(result,pageBean,"查询表单定义信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

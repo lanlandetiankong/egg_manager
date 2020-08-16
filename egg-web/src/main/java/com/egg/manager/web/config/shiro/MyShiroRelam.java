@@ -1,5 +1,6 @@
 package com.egg.manager.web.config.shiro;
 
+import com.alibaba.boot.dubbo.util.DubboUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
@@ -14,6 +15,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
@@ -25,6 +27,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
+@Component
 public class MyShiroRelam extends AuthorizingRealm {
 
     @Reference

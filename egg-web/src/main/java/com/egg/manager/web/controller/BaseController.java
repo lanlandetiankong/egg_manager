@@ -12,6 +12,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.webvo.session.UserAccountToken;
@@ -179,10 +180,10 @@ public class BaseController {
         result.setInfo(info);
     }
 
-    public void dealSetMongoPageResult(MyCommonResult result, Page page, String info){
+    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean, String info){
         result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);
-        result.setResultList(page.getContent());
-        result.setCount(page.getTotalElements());
+        result.setResultList(pageBean.getContent());
+        result.setCount(pageBean.getTotal());
     }
 
 

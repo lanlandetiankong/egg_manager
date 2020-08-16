@@ -2,7 +2,6 @@ package com.egg.manager.common.base.query.mongo;
 
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
-import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.MyBaseQueryBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.google.common.collect.Sets;
@@ -30,11 +29,11 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
     /**
      * 添加到 HttpServletRequest取得的排序字段前
      */
-    private List<AntdvSortBean> frontSortList = new ArrayList<>();
+    private List<MyMongoSortBean> frontSortList = new ArrayList<>();
     /**
      * 追加到 HttpServletRequest取得的排序字段后
      */
-    private List<AntdvSortBean> behindSortList = new ArrayList<>();
+    private List<MyMongoSortBean> behindSortList = new ArrayList<>();
     /**
      * 可查询过滤字段白名单
      */
@@ -46,6 +45,7 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
 
 
     private Boolean whiteSetsFlag = false ;
+    private MyMongoQueryPageBean pageBean = null ;
 
     public MyMongoQueryBuffer() {
     }
@@ -74,7 +74,7 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
     public MyMongoQueryBuffer addFrontSortItem(MyMongoCommonSortFieldEnum ... commonSortFieldEnumArr){
         if(commonSortFieldEnumArr != null && commonSortFieldEnumArr.length > 0){
             for(MyMongoCommonSortFieldEnum sortFieldEnum : commonSortFieldEnumArr){
-                this.frontSortList.add(0,new AntdvSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
+                this.frontSortList.add(0,new MyMongoSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
             }
         }
         return this ;
@@ -83,21 +83,27 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
     public MyMongoQueryBuffer addBehindSortItem(MyMongoCommonSortFieldEnum ... commonSortFieldEnumArr){
         if(commonSortFieldEnumArr != null && commonSortFieldEnumArr.length > 0){
             for(MyMongoCommonSortFieldEnum sortFieldEnum : commonSortFieldEnumArr){
-                this.behindSortList.add(new AntdvSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
+                this.behindSortList.add(new MyMongoSortBean(sortFieldEnum.getFieldName(),sortFieldEnum.getAscFlag()));
             }
         }
         return this ;
     }
 
-    public MyMongoQueryBuffer addFrontSortItem(AntdvSortBean antdvSortBean){
-        if(antdvSortBean != null){
-            this.frontSortList.add(antdvSortBean) ;
+    public MyMongoQueryBuffer addFrontSortItem(MyMongoSortBean mongoSortBean){
+        if(mongoSortBean != null){
+            this.frontSortList.add(mongoSortBean) ;
         }
         return this ;
     }
-    public MyMongoQueryBuffer addBehindSortItem(AntdvSortBean antdvSortBean){
-        if(antdvSortBean != null){
-            this.behindSortList.add(antdvSortBean) ;
+    public MyMongoQueryBuffer addFrontSortItem(List<MyMongoSortBean> mongoSortBeans){
+        if(CollectionUtils.isNotEmpty(mongoSortBeans)){
+            this.frontSortList.addAll(mongoSortBeans) ;
+        }
+        return this ;
+    }
+    public MyMongoQueryBuffer addBehindSortItem(MyMongoSortBean mongoSortBean){
+        if(mongoSortBean != null){
+            this.behindSortList.add(mongoSortBean) ;
         }
         return this ;
     }

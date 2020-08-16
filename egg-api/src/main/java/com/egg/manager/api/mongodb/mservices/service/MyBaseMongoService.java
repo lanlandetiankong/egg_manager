@@ -2,11 +2,10 @@ package com.egg.manager.api.mongodb.mservices.service;
 
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
+import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import javax.validation.constraints.NotNull;
@@ -193,11 +192,16 @@ public interface MyBaseMongoService<T extends MyBaseModelMO, ID> {
      * 分页查询
      *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
-     * @param pageable
+     * @param pageBean
      * @return
      */
-    Page<T> doFindPage(UserAccount loginUser, Pageable pageable);
-
+    MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean);
+    /**
+     * 根据封装的MongoQueryBean进行分页查询
+     * @param queryBuffer
+     * @return
+     */
+    MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
     /**
      * 根据条件查询首个项
      *
@@ -207,22 +211,8 @@ public interface MyBaseMongoService<T extends MyBaseModelMO, ID> {
      */
     T doFindOne(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
 
-    /**
-     * 根据条件查询对应项并分页
-     *
-     * @param loginUser         当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
-     * @param queryBuffer
-     * @param pageable
-     * @return
-     */
-    Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Pageable pageable);
 
-    /**
-     * 根据封装的MongoQueryBean进行分页查询
-     * @param queryBuffer
-     * @return
-     */
-    Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+
 
     /**
      * 统计个数

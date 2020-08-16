@@ -6,8 +6,8 @@ import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
+import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
-import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.RewriteMongoCriteria;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.querydsl.QPageRequest;
 
 import java.util.Date;
 import java.util.List;
@@ -153,10 +155,6 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
         }
     }
 
-    @Override
-    public Page<T> doFindPage(UserAccount loginUser, Pageable pageable) {
-        return baseRepository.findPage(pageable);
-    }
 
     @Override
     public List<T> doFindAll(UserAccount loginUser) {
@@ -192,16 +190,6 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
         return baseRepository.findOne(query).get();
     }
 
-    @Override
-    public Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Pageable pageable) {
-        MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
-        return doFindPage(loginUser,query,pageable);
-    }
-    private Page<T> doFindPage(UserAccount loginUser, Query query, Pageable pageable) {
-        query = query != null ? query : new Query() ;
-        return baseRepository.findPage(query, pageable);
-    }
 
     @Override
     public long doCount(UserAccount loginUser) {
@@ -229,9 +217,16 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
 
 
     @Override
-    public Page<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
+    public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        return this.doFindPage(loginUser, queryBuffer, queryBean.getPageable());
+        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        QPageRequest mPageFromBean = MongoQueryBean.<T>getMPageFromBean(queryBuffer.getPageBean());
+        Page<T> page = baseRepository.findPage(query, mPageFromBean);
+        return  MongoQueryBean.getPageBeanFromPage(page) ;
+    }
+    @Override
+    public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean) {
+        return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMPageFromBean(pageBean)));
     }
 
 
@@ -268,12 +263,12 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
     }
 
 
-    private Query getQueryByCriteriaList(Query query,List<RewriteMongoCriteria> criteriaList){
+    private Query getQueryByCriteriaList(Query query,List<Criteria> criteriaList){
         query = (query != null) ? query : new Query() ;
         if(CollectionUtils.isEmpty(criteriaList)){
             return query ;
         }
-        for (RewriteMongoCriteria criteria : criteriaList){
+        for (Criteria criteria : criteriaList){
             query.addCriteria(criteria);
         }
         return query ;

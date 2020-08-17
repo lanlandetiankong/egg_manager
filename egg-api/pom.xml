@@ -17,6 +17,30 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>com.teaegg</groupId>
@@ -72,8 +96,16 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.*</include>
+                    <include>application.properties</include>
+                    <include>config/logs/*</include>
+                    <include>config/application-${profiles.active}.properties</include>
+                    <include>config/application-${profiles.active}-egg.properties</include>
+                    <include>config/application-${profiles.active}-message.properties</include>
+                    <include>config/application-${profiles.active}-mongodb.properties</include>
+                    <include>config/application-${profiles.active}-service.properties</include>
+                    <include>config/application-${profiles.active}-universal.properties</include>
                 </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
     </build>

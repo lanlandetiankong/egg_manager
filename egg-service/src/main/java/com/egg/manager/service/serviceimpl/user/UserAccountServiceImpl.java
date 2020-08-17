@@ -1,6 +1,7 @@
 package com.egg.manager.service.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
@@ -49,8 +50,8 @@ import java.util.*;
  * \* Description:
  * \
  */
-//@Service(interfaceClass = UserAccountService.class)
-@Component
+@Service(interfaceClass = UserAccountService.class)
+//@Component
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;

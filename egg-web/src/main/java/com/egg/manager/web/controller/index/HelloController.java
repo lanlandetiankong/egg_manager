@@ -1,6 +1,8 @@
 package com.egg.manager.web.controller.index;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.api.service.service.hello.HelloService;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -27,6 +29,8 @@ public class HelloController extends BaseController {
 
     @Value("${spring.profiles.active}")
     private String avtiveEnv ;
+    @Reference
+    private HelloService helloService ;
 
     @OperLog(modelName = "HelloController", action = "测试当前开发环境", description = "测试当前开发环境")
     @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
@@ -37,5 +41,11 @@ public class HelloController extends BaseController {
         } catch (Exception e) {
         }
         return "Error";
+    }
+
+
+    @GetMapping(value = "/sayHello")
+    public void sayHello(){
+        helloService.sayHello();
     }
 }

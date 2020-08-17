@@ -1,8 +1,8 @@
 package com.egg.manager.web.config.advice;
 
-import com.egg.manager.api.service.exception.MyParamJsonException;
-import com.egg.manager.api.service.exception.MyUnauthorizedException;
-import com.egg.manager.api.service.helper.MyResponseHelper;
+import com.egg.manager.common.exception.MyParamJsonException;
+import com.egg.manager.common.exception.MyUnauthorizedException;
+import com.egg.manager.api.trait.helper.MyResponseHelper;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.helper.MyCommonResult;

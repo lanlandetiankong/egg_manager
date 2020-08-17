@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller;
 
-import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;

@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.helper;
+package com.egg.manager.api.trait.helper;
 
 /**
  * \* note:

@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.exception;
+package com.egg.manager.common.exception;
 
 /**
  * 身份认证异常

@@ -13,7 +13,10 @@ ok>8、mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须�
 ok>版本号修改
 ok>统一参数-版本号
 
->com.egg.manager.api.service.exception 非api接口，迁移出来
->com.egg.manager.api.service.annotation
+ok>>>com.egg.manager.service非api接口，迁移出来
+com.egg.manager.api.service.exception  -->  com.egg.manager.common.exception
+com.egg.manager.api.service.annotation    -->     com.egg.manager.common.annotation
+com.egg.manager.api.service.helper -->    com.egg.manager.api.trait.helper
+<<<ok
 
 application.properties 可改为 applicatin-dev-type.properties

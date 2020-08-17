@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.annotation.log;
+package com.egg.manager.common.annotation.log;
 
 import java.lang.annotation.*;
 

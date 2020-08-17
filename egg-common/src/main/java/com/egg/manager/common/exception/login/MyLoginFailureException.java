@@ -1,10 +1,10 @@
-package com.egg.manager.api.service.exception;
+package com.egg.manager.common.exception.login;
 
 /**
- * 参数异常
+ * 登录失败
  * @author zhouchengjie
  */
-public class MyParamJsonException extends RuntimeException{
+public class MyLoginFailureException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
 
@@ -15,9 +15,9 @@ public class MyParamJsonException extends RuntimeException{
         return message;
     }
 
-    public MyParamJsonException() {}
+    public MyLoginFailureException() {}
 
-    public MyParamJsonException(String message) {
+    public MyLoginFailureException(String message) {
         super(message);
         this.message = message;
     }

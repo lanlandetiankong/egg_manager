@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.exception.form;
+package com.egg.manager.common.exception.form;
 
 /**
  * \* note: 登录表单字段缺失异常

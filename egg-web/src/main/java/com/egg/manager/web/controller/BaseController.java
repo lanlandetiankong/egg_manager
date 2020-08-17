@@ -3,8 +3,8 @@ package com.egg.manager.web.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.service.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.api.service.helper.ErrorActionEnum;
+import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.api.trait.helper.ErrorActionEnum;
 import com.egg.manager.api.service.redis.service.RedisHelper;
 import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.base.exception.BusinessException;
@@ -21,7 +21,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;

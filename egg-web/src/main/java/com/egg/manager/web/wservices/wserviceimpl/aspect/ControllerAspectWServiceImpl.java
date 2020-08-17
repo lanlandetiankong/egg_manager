@@ -2,7 +2,7 @@ package com.egg.manager.web.wservices.wserviceimpl.aspect;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;

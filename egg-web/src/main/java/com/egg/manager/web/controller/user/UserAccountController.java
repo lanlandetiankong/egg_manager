@@ -1,10 +1,10 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
-import com.egg.manager.api.service.annotation.log.OperLog;
-import com.egg.manager.api.service.annotation.shiro.ShiroPass;
-import com.egg.manager.api.service.exception.form.LoginFormFieldDeficiencyException;
+import com.egg.manager.common.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.shiro.ShiroPass;
+import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.api.service.service.CommonFuncService;
 import com.egg.manager.api.service.service.user.UserAccountService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;

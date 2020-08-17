@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.helper;
+package com.egg.manager.api.trait.helper;
 
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.helper.MyCommonResult;

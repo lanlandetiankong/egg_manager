@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.message.mail;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.message.email.service.MyBaseEmailService;
-import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.message.mail.MyEmailMsgO;
 import com.egg.manager.persistence.vo.module.DefineModuleVo;

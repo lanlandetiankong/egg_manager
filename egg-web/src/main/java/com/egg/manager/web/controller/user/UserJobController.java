@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.service.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.api.service.service.user.UserJobService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;

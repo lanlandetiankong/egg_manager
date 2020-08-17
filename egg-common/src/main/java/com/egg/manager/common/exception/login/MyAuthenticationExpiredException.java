@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.exception.login;
+package com.egg.manager.common.exception.login;
 
 /**
  * 用户信息过期 异常

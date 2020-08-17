@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.excel.user;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.egg.manager.api.service.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.log.CurrentLoginUser;
 import com.egg.manager.api.service.excel.service.user.UserAccountXlsService;
 import com.egg.manager.api.service.service.module.DefineMenuService;
 import com.egg.manager.api.service.service.user.UserAccountService;

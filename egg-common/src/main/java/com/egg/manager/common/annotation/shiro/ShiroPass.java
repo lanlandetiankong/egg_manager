@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.annotation.shiro;
+package com.egg.manager.common.annotation.shiro;
 
 import java.lang.annotation.*;
 

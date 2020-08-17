@@ -1,4 +1,4 @@
-package com.egg.manager.api.service.helper.excel;
+package com.egg.manager.api.trait.helper.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;

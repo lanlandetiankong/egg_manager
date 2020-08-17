@@ -31,7 +31,6 @@ git commit -m 'delete iml file'         //提交到本地仓库
 git push                                        //提交到远程仓库
 
 
-
 20200813
 一、版本号管理
 1、引入versions-maven-plugin插件
@@ -42,7 +41,10 @@ mvn -N versions:update-child-modules
 4、提交版本更新
 mvn versions:commit
 
-
+20200817
+一、未合并文件
+处理后，执行
+git restore --staged  .idea/workspace.xml
 
 
 

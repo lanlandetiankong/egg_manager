@@ -1,7 +1,7 @@
 package com.egg.manager.web.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.service.helper.MyResponseHelper;
+import com.egg.manager.api.trait.helper.MyResponseHelper;
 import com.egg.manager.api.service.service.user.UserAccountService;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.common.base.constant.Constant;

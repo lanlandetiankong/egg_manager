@@ -17,7 +17,6 @@ import java.io.Serializable;
  */
 @Component
 @ConfigurationProperties(prefix = "props.upload")
-@PropertySource("classpath:common/config/application-devEgg.properties")
 public class UploadStaticProps implements Serializable {
 
     public static String urlPrefix ;

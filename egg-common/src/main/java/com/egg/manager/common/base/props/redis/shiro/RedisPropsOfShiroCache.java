@@ -1,8 +1,6 @@
 package com.egg.manager.common.base.props.redis.shiro;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Component
 @ConfigurationProperties(prefix = "props.redis.shiro.cache")
-@PropertySource("classpath:common/config/props-redis.properties")
+@PropertySource("classpath:config/props/props-${egg.application.build.env}-redis.properties")
 public class RedisPropsOfShiroCache  implements Serializable {
     //jwt
     private String authorizationKey;

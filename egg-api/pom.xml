@@ -96,16 +96,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>application.properties</include>
-                    <include>config/logs/*</include>
-                    <include>config/application-${profiles.active}.properties</include>
-                    <include>config/application-${profiles.active}-egg.properties</include>
-                    <include>config/application-${profiles.active}-message.properties</include>
-                    <include>config/application-${profiles.active}-mongodb.properties</include>
-                    <include>config/application-${profiles.active}-service.properties</include>
-                    <include>config/application-${profiles.active}-universal.properties</include>
+                    <include>config/logs/**.*</include>
+                    <include>config/application-${profiles.active}-*.properties</include>
                 </includes>
-                <filtering>true</filtering>
             </resource>
         </resources>
     </build>

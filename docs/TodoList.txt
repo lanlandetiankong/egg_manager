@@ -20,3 +20,7 @@ com.egg.manager.api.service.helper -->    com.egg.manager.api.trait.helper
 <<<ok
 
 ok>application.properties 可改为 applicatin-dev-type.properties
+
+20200818
+mail发送后保存到数据库
+注释-requestmapping全路径

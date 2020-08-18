@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.index;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.message.hello.MessageHelloService;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.api.service.service.hello.HelloService;
 import com.egg.manager.persistence.helper.MyCommonResult;
@@ -32,6 +33,9 @@ public class HelloController extends BaseController {
     @Reference
     private HelloService helloService ;
 
+    @Reference
+    private MessageHelloService messageHelloService ;
+
     @OperLog(modelName = "HelloController", action = "测试当前开发环境", description = "测试当前开发环境")
     @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
     @GetMapping(value = "/testEnv")
@@ -47,5 +51,17 @@ public class HelloController extends BaseController {
     @GetMapping(value = "/sayHello")
     public void sayHello(){
         helloService.sayHello();
+    }
+
+    @GetMapping(value = "/loadBalanceTest")
+    public void loadBalanceTest(){
+        String port = helloService.loadBalanceTest();
+        System.out.println("for debug..."+port);
+    }
+
+    @GetMapping(value = "/loadMessageBalanceTest")
+    public void loadMessageBalanceTest(){
+        String port = messageHelloService.loadServiceBalancePort();
+        System.out.println("for message  debug..."+port);
     }
 }

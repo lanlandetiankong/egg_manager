@@ -3,7 +3,7 @@ package com.egg.manager.api.mongodb.mservices.service;
 import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
-import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
+import com.egg.manager.common.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
 import org.springframework.data.domain.Sort;
@@ -64,10 +64,10 @@ public interface MyBaseMongoService<T extends MyBaseModelMO, ID> {
      *
      * @param loginUser          当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
-     * @param inheritMongoUpdate
+     * @param updateBean
      * @return
      */
-    Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, InheritMongoUpdate inheritMongoUpdate);
+    Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean);
 
     /**
      * 根据id-伪删除

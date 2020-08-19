@@ -1,5 +1,6 @@
 package com.egg.manager.mongodb.mservices.serviceimpl;
 
+import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -7,7 +8,7 @@ import com.egg.manager.common.base.exception.MyMongoException;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
-import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
+import com.egg.manager.common.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.entity.user.UserAccount;
 import com.egg.manager.persistence.mongo.dao.MyBaseMongoRepository;
 import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
@@ -15,10 +16,10 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.querydsl.QPageRequest;
 
 import java.util.Date;
@@ -67,10 +68,13 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
     }
 
     @Override
-    public Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, InheritMongoUpdate update) {
+    public Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean) {
+        Assert.notNull(updateBean,"updateBean不能为空！");
+        Assert.notNull(updateBean.getDocument(),"document不能为空！");
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
-        Document document = update.getUpdateObject();
+        Document document = updateBean.getDocument();
+        Update update = Update.fromDocument(document);
         //如果已经在update指定了最后更新时间，则不再往update添加最后更新时间、最后更新人等信息
         if (document.containsKey(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE) == false) {
             dealSetModifyInfoToUpdate(loginUser, update);
@@ -239,7 +243,7 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
     }
 
     //private methods
-    private void dealSetModifyInfoToUpdate(UserAccount loginUser, InheritMongoUpdate update) {
+    private void dealSetModifyInfoToUpdate(UserAccount loginUser, Update update) {
         if (loginUser != null) {
             update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
             update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERNICKNAME, loginUser.getNickName());

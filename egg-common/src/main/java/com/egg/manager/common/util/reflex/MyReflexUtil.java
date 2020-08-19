@@ -1,7 +1,7 @@
 package com.egg.manager.common.util.reflex;
 
-import com.egg.manager.common.override.org.springframework.data.mongodb.core.query.InheritMongoUpdate;
 import com.google.common.collect.Lists;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class MyReflexUtil {
 
 
-    public static InheritMongoUpdate getMOUpdateByObjectWithIgnores(Object object, boolean skipNull, String ... args){
+    public static Update getMOUpdateByObjectWithIgnores(Object object, boolean skipNull, String ... args){
         List list = (args == null) ? new ArrayList() : Lists.newArrayList(args);
         return getMOUpdateByObject(object,skipNull,list);
     }
@@ -30,8 +30,8 @@ public class MyReflexUtil {
      * @return
      * @author Jason
      */
-    public static InheritMongoUpdate getMOUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
-        InheritMongoUpdate update = new InheritMongoUpdate();
+    public static Update getMOUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
+        Update update = new Update();
         ignoreKeys = ignoreKeys != null ? ignoreKeys : new ArrayList<>() ;
         //是否取得继承的上一级baseMO的字段
         boolean isWithSuper = true ;

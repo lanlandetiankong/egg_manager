@@ -11,7 +11,7 @@
 
     <artifactId>egg-message</artifactId>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <profiles>
         <profile>
             <id>dev</id>
@@ -78,6 +78,26 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <!--拷贝依赖到jar外面的lib目录-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!--指定的依赖路径-->
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -86,6 +106,13 @@
                     <!-- 工程主入口-->
                     <mainClass>com.egg.manager.EggManagerMessageApplication</mainClass>
                     <!--<classifier>exec</classifier>-->
+                    <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
                 </configuration>
                 <executions>
                     <execution>

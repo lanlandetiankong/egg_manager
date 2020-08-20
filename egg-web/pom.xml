@@ -110,7 +110,7 @@
 
 
     <build>
-        <finalName>EggManager</finalName>
+        <finalName>EggManager-Web</finalName>
         <defaultGoal>compile</defaultGoal>
         <resources>
             <resource>
@@ -170,9 +170,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.5.1.RELEASE</version>
                 <configuration>
-                    <layout>ZIP</layout>
                     <!-- 工程主入口-->
                     <mainClass>com.egg.manager.EggManagerApplication</mainClass>
+                    <layout>ZIP</layout>
                     <includes>
                         <include>
                             <groupId>nothing</groupId>

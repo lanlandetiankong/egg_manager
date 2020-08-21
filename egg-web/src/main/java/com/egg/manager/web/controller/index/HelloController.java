@@ -36,7 +36,7 @@ public class HelloController extends BaseController {
     @Reference
     private MessageHelloService messageHelloService ;
 
-    @OperLog( action = "测试当前开发环境", description = "测试当前开发环境")
+    @OperLog( action = "测试当前开发环境", description = "测试当前开发环境",fullPath = "/index/hello/testEnv",flag = false)
     @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
@@ -47,18 +47,20 @@ public class HelloController extends BaseController {
         return "Error";
     }
 
-
+    @OperLog( action = "测试dubbo调用service", description = "",fullPath = "/index/hello/sayHello",flag = false)
     @GetMapping(value = "/sayHello")
     public void sayHello(){
         helloService.sayHello();
     }
 
+    @OperLog( action = "测试dubbo负载均衡", description = "",fullPath = "/index/hello/loadBalanceTest",flag = false)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest(){
         String port = helloService.loadBalanceTest();
         System.out.println("for debug..."+port);
     }
 
+    @OperLog( action = "测试dubbo负载均衡-相互调用", description = "",fullPath = "/index/hello/loadMessageBalanceTest",flag = false)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest(){
         String port = messageHelloService.loadServiceBalancePort();

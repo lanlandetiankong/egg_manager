@@ -59,7 +59,7 @@ public class UserRoleController  extends BaseController{
 
 
 
-    @OperLog(action="查询用户角色列表",description = "查询用户角色列表")
+    @OperLog(action="查询用户角色列表",description = "查询用户角色列表",fullPath = "/user/user_role/getAllUserRoles")
     @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -87,7 +87,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户角色信息",description = "根据用户角色id查询用户角色信息")
+    @OperLog(action="查询用户角色信息",description = "根据用户角色id查询用户角色信息",fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request,String roleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
@@ -104,7 +104,7 @@ public class UserRoleController  extends BaseController{
 
 
     @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增用户角色",description = "表单方式新增用户角色")
+    @OperLog(action="新增用户角色",description = "表单方式新增用户角色",fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request,UserRoleVo userRoleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -126,7 +126,7 @@ public class UserRoleController  extends BaseController{
 
     
 
-    @OperLog(action="批量删除用户角色",description = "根据用户角色id批量删除用户角色")
+    @OperLog(action="批量删除用户角色",description = "根据用户角色id批量删除用户角色",fullPath = "/user/user_role/batchDelUserRoleByIds")
     @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的用户角色id数组", required = true,dataTypeClass=String[].class),
@@ -148,7 +148,7 @@ public class UserRoleController  extends BaseController{
     }
 
 
-    @OperLog(action="删除用户角色",description = "根据用户角色id删除用户角色")
+    @OperLog(action="删除用户角色",description = "根据用户角色id删除用户角色",fullPath = "/user/user_role/delOneUserRoleByIds")
     @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的用户角色id", required = true,dataTypeClass=String.class),

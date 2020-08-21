@@ -56,7 +56,7 @@ public class AnnouncementDraftController extends BaseController{
     @Reference
     private AnnouncementTagService announcementTagService;
 
-    @OperLog(action="查询公告信息草稿-Dto列表",description = "查询公告信息草稿-Dto列表")
+    @OperLog(action="查询公告信息草稿-Dto列表",description = "查询公告信息草稿-Dto列表",fullPath = "/announcement_draft/getAllAnnouncementDraftDtos")
     @ApiOperation(value = "查询公告信息草稿-Dto列表", notes = "查询公告信息草稿-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -89,7 +89,7 @@ public class AnnouncementDraftController extends BaseController{
 
 
     @ApiOperation(value = "查询公告草稿信息", notes = "根据id查询公告草稿信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询公告草稿信息",description = "根据id查询公告草稿信息")
+    @OperLog(action="查询公告草稿信息",description = "根据id查询公告草稿信息",fullPath = "/announcement_draft/getAnnouncementDraftById")
     @PostMapping(value = "/getAnnouncementDraftById")
     public MyCommonResult<AnnouncementDraftVo> doGetAnnouncementDraftById(HttpServletRequest request,String draftId,
                                                                           @CurrentLoginUser UserAccount loginUser) {
@@ -107,7 +107,7 @@ public class AnnouncementDraftController extends BaseController{
     }
 
     @ApiOperation(value = "新增公告草稿", notes = "表单方式新增公告草稿", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增公告草稿",description = "表单方式新增公告草稿")
+    @OperLog(action="新增公告草稿",description = "表单方式新增公告草稿",fullPath = "/announcement_draft/addAnnouncementDraft")
     @PostMapping(value = "/addAnnouncementDraft")
     public MyCommonResult<AnnouncementDraftVo> doAddAnnouncementDraft(HttpServletRequest request,AnnouncementDraftVo announcementDraftVo,
                                                                       @CurrentLoginUser UserAccount loginUser){
@@ -129,7 +129,7 @@ public class AnnouncementDraftController extends BaseController{
     }
 
     @ApiOperation(value = "更新公告草稿", notes = "表单方式更新公告草稿", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新公告草稿",description = "表单方式更新公告草稿")
+    @OperLog(action="更新公告草稿",description = "表单方式更新公告草稿",fullPath = "/announcement_draft/updateAnnouncementDraft")
     @PostMapping(value = "/updateAnnouncementDraft")
     public MyCommonResult<AnnouncementDraftVo> doUpdateAnnouncementDraft(HttpServletRequest request,AnnouncementDraftVo announcementDraftVo,
                                                                          @CurrentLoginUser UserAccount loginUser){
@@ -157,7 +157,7 @@ public class AnnouncementDraftController extends BaseController{
 
 
 
-    @OperLog(action="批量删除公告草稿",description = "根据公告id批量删除公告草稿")
+    @OperLog(action="批量删除公告草稿",description = "根据公告id批量删除公告草稿",fullPath = "/announcement_draft/batchDelAnnouncementDraftByIds")
     @ApiOperation(value = "批量删除公告草稿", notes = "根据公告id批量删除公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的公告草稿id数组", required = true,dataTypeClass=String[].class),
@@ -179,7 +179,7 @@ public class AnnouncementDraftController extends BaseController{
     }
 
 
-    @OperLog(action="删除公告草稿",description = "根据公告id删除公告草稿")
+    @OperLog(action="删除公告草稿",description = "根据公告id删除公告草稿",fullPath = "/announcement_draft/delOneAnnouncementDraftByIds")
     @ApiOperation(value = "删除公告草稿", notes = "根据公告id删除公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的公告草稿id", required = true,dataTypeClass=String.class),
@@ -202,7 +202,7 @@ public class AnnouncementDraftController extends BaseController{
 
 
     @ApiOperation(value = "公告草稿批量转发布", notes = "根据公告草稿id批量发布", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="公告草稿批量转发布",description = "根据公告草稿id批量发布")
+    @OperLog(action="公告草稿批量转发布",description = "根据公告草稿id批量发布",fullPath = "/announcement_draft/batchPublishAnnouncementDraftByIds")
     @PostMapping(value = "/batchPublishAnnouncementDraftByIds")
     public MyCommonResult doBatchPublishAnnouncementById(HttpServletRequest request,String[] draftIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -220,7 +220,7 @@ public class AnnouncementDraftController extends BaseController{
     }
 
     @ApiOperation(value = "公告草稿转发布", notes = "根据公告草稿id批量转发布", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="公告草稿转发布",description = "根据公告草稿id批量转发布")
+    @OperLog(action="公告草稿转发布",description = "根据公告草稿id批量转发布",fullPath = "/announcement_draft/publishOneAnnouncementDraftById")
     @PostMapping(value = "/publishOneAnnouncementDraftById")
     public MyCommonResult doPublishOneAnnouncementDraftById(HttpServletRequest request,String draftId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;

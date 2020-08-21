@@ -54,7 +54,7 @@ public class DefineTenantController extends BaseController{
 
 
 
-    @OperLog(action="查询租户定义信息-Dto列表",description = "查询租户定义信息-Dto列表")
+    @OperLog(action="查询租户定义信息-Dto列表",description = "查询租户定义信息-Dto列表",fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
     @ApiOperation(value = "查询租户定义信息-Dto列表", notes = "查询租户定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -82,7 +82,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息")
+    @OperLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息",fullPath = "/organization/define_tenant/getDefineTenantById")
     @PostMapping(value = "/getDefineTenantById")
     public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request,String defineTenantId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
@@ -97,7 +97,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表")
+    @OperLog(action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表",fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
     @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -126,7 +126,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增租户定义",description = "表单方式新增租户定义")
+    @OperLog(action="新增租户定义",description = "表单方式新增租户定义",fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
     public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request,DefineTenantVo defineTenantVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
@@ -147,7 +147,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新租户定义",description = "表单方式更新租户定义")
+    @OperLog(action="更新租户定义",description = "表单方式更新租户定义",fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
     public MyCommonResult doUpdateDefineTenant(HttpServletRequest request,DefineTenantVo defineTenantVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -167,7 +167,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="批量删除租户定义",description = "根据租户定义id批量删除租户定义")
+    @OperLog(action="批量删除租户定义",description = "根据租户定义id批量删除租户定义",fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
     @ApiOperation(value = "批量删除租户定义", notes = "根据租户定义id批量删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的租户定义id数组", required = true,dataTypeClass=String[].class),
@@ -189,7 +189,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="删除租户定义",description = "根据租户id删除租户定义")
+    @OperLog(action="删除租户定义",description = "根据租户id删除租户定义",fullPath = "/organization/define_tenant/delOneDefineTenantById")
     @ApiOperation(value = "删除租户定义", notes = "根据租户id删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的租户定义id", required = true,dataTypeClass=String.class),

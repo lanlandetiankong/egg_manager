@@ -47,7 +47,7 @@ public class UserJobController extends BaseController{
     private UserJobService userJobService ;
 
 
-    @OperLog(action="查询用户职务列表",description = "查询用户职务列表")
+    @OperLog(action="查询用户职务列表",description = "查询用户职务列表",fullPath = "/user/user_job/getAllUserJobs")
     @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -75,7 +75,7 @@ public class UserJobController extends BaseController{
 
 
     @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息")
+    @OperLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息",fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request,String jobId) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;

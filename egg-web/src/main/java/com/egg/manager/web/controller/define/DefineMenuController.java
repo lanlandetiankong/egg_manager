@@ -68,7 +68,7 @@ public class DefineMenuController extends BaseController{
     private UserAccountRedisService userAccountRedisService;
 
 
-    @OperLog(action="查询所有路由菜单TreeSelect",description = "查询所有路由菜单TreeSelect")
+    @OperLog(action="查询所有路由菜单TreeSelect",description = "查询所有路由菜单TreeSelect",fullPath = "/define/define_menu/getAllMenuTreeSelect")
     @ApiOperation(value = "查询所有路由菜单TreeSelect", notes = "查询所有路由菜单TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllMenuTreeSelect")
     public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect(Boolean withRoot) {
@@ -85,7 +85,7 @@ public class DefineMenuController extends BaseController{
         return result ;
     }
 
-    @OperLog(action="查询被过滤的路由菜单TreeSelect",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)")
+    @OperLog(action="查询被过滤的路由菜单TreeSelect",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)",fullPath = "/define/define_menu/getMenuTreeSelectFilterChildrens")
     @ApiOperation(value = "查询被过滤的路由菜单TreeSelect", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getMenuTreeSelectFilterChildrens")
     public MyCommonResult<DefineMenu> doGetMenuTreeSelectFilterChildrens(String filterId) {
@@ -97,7 +97,7 @@ public class DefineMenuController extends BaseController{
     }
 
     @ApiOperation(value = "查询所有可以访问的路由菜单", notes = "查询所有可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询所有可以访问的路由菜单",description = "查询所有可以访问的路由菜单")
+    @OperLog(action="查询所有可以访问的路由菜单",description = "查询所有可以访问的路由菜单",fullPath = "/define/define_menu/user/getAllMenuTree")
     @PostMapping("/user/getAllMenuTree")
     public MyCommonResult<DefineMenu> doGetAllMenuTree() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
@@ -115,7 +115,7 @@ public class DefineMenuController extends BaseController{
 
 
     @ApiOperation(value = "查询用户可以访问的路由菜单", notes = "查询用户可以访问的路由菜单", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户可以访问的路由菜单",description = "查询用户可以访问的路由菜单")
+    @OperLog(action="查询用户可以访问的路由菜单",description = "查询用户可以访问的路由菜单",fullPath = "/define/define_menu/user/getGrantedMenuTree")
     @PostMapping("/user/getGrantedMenuTree")
     public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
@@ -132,7 +132,7 @@ public class DefineMenuController extends BaseController{
 
 
 
-    @OperLog(action="查询菜单定义信息-Dto列表",description = "查询菜单定义信息-Dto列表")
+    @OperLog(action="查询菜单定义信息-Dto列表",description = "查询菜单定义信息-Dto列表",fullPath = "/define/define_menu/getAllDefineMenuDtos")
     @ApiOperation(value = "查询菜单定义信息-Dto列表", notes = "查询菜单定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -162,7 +162,7 @@ public class DefineMenuController extends BaseController{
 
 
     @ApiOperation(value = "查询菜单定义信息", notes = "根据菜单定义id查询菜单定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询菜单定义信息",description = "根据菜单定义id查询菜单定义信息")
+    @OperLog(action="查询菜单定义信息",description = "根据菜单定义id查询菜单定义信息",fullPath = "/define/define_menu/getDefineMenuById")
     @PostMapping(value = "/getDefineMenuById")
     public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request,String defineMenuId) {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
@@ -178,7 +178,7 @@ public class DefineMenuController extends BaseController{
 
 
     @ApiOperation(value = "新增菜单定义", notes = "表单方式新增菜单定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增菜单定义",description = "表单方式新增菜单定义")
+    @OperLog(action="新增菜单定义",description = "表单方式新增菜单定义",fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
     public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request,DefineMenuVo defineMenuVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
@@ -199,7 +199,7 @@ public class DefineMenuController extends BaseController{
 
 
     @ApiOperation(value = "更新菜单定义", notes = "表单方式更新菜单定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新菜单定义",description = "表单方式更新菜单定义")
+    @OperLog(action="更新菜单定义",description = "表单方式更新菜单定义",fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
     public MyCommonResult doUpdateDefineMenu(HttpServletRequest request,DefineMenuVo defineMenuVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -220,7 +220,7 @@ public class DefineMenuController extends BaseController{
 
 
     @ApiOperation(value = "更新菜单对应的Excel模板", notes = "更新菜单对应的Excel模板", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新菜单对应的Excel模板",description = "更新菜单对应的Excel模板")
+    @OperLog(action="更新菜单对应的Excel模板",description = "更新菜单对应的Excel模板",fullPath = "/define/define_menu/doUpdateExcelModel")
     @PostMapping(value = "/doUpdateExcelModel")
     @RequiresRoles(value = {"Root","SuperRoot"},logical= Logical.OR)
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean,@CurrentLoginUser UserAccount loginUser){
@@ -244,7 +244,7 @@ public class DefineMenuController extends BaseController{
     }
 
     @ApiOperation(value = "批量删除菜单定义", notes = "根据菜单定义id批量删除菜单定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="批量删除菜单定义",description = "根据菜单定义id批量删除菜单定义")
+    @OperLog(action="批量删除菜单定义",description = "根据菜单定义id批量删除菜单定义",fullPath = "/define/define_menu/batchDelDefineMenuByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的菜单定义id数组", required = true,dataTypeClass=String[].class),
     })
@@ -265,7 +265,7 @@ public class DefineMenuController extends BaseController{
     }
 
 
-    @OperLog(action="删除菜单定义",description = "根据菜单id删除菜单定义")
+    @OperLog(action="删除菜单定义",description = "根据菜单id删除菜单定义",fullPath = "/define/define_menu/delOneDefineMenuById")
     @ApiOperation(value = "删除菜单定义", notes = "根据菜单id删除菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的菜单定义id", required = true,dataTypeClass=String.class),

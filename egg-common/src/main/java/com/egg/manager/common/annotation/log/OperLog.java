@@ -18,6 +18,12 @@ public @interface OperLog {
      */
     String action() default "" ;
 
+    /**
+     * 相对于项目的 全路径
+     * @return
+     */
+    String fullPath() ;
+
     String description() default "" ;
 
     boolean flag()  default true ;

@@ -75,7 +75,7 @@ public class DefineRoleController extends BaseController {
     private CommonFuncService commonFuncService ;
 
 
-    @OperLog(action="查询角色定义信息列表",description = "查询角色定义信息列表")
+    @OperLog(action="查询角色定义信息列表",description = "查询角色定义信息列表",fullPath = "/define/define_role/getAllDefineRoles")
     @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -102,7 +102,7 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-    @OperLog(action="查询角色定义信息-Dto列表",description = "查询角色定义信息-Dto列表")
+    @OperLog(action="查询角色定义信息-Dto列表",description = "查询角色定义信息-Dto列表",fullPath = "/define/define_role/getAllDefineRoleDtos")
     @ApiOperation(value = "查询角色定义信息-Dto列表", notes = "查询角色定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -131,7 +131,7 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询角色定义信息",description = "根据角色定义id查询角色定义信息")
+    @OperLog(action="查询角色定义信息",description = "根据角色定义id查询角色定义信息",fullPath = "/define/define_role/getDefineRoleById")
     @PostMapping(value = "/getDefineRoleById")
     public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request,String defineRoleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -221,7 +221,7 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-    @OperLog(action="批量删除角色定义",description = "根据角色id批量删除角色定义")
+    @OperLog(action="批量删除角色定义",description = "根据角色id批量删除角色定义",fullPath = "/define/define_role/batchDelDefineRoleByIds")
     @ApiOperation(value = "批量删除角色定义", notes = "根据角色id批量删除角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的权限定义id数组", required = true,dataTypeClass=String[].class),
@@ -242,7 +242,7 @@ public class DefineRoleController extends BaseController {
         return  result;
     }
 
-    @OperLog(action="删除角色定义",description = "根据角色id删除角色定义")
+    @OperLog(action="删除角色定义",description = "根据角色id删除角色定义",fullPath = "/define/define_role/delOneDefineRoleByIds")
     @ApiOperation(value = "删除角色定义", notes = "根据角色id删除角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的角色定义id", required = true,dataTypeClass=String.class),

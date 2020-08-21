@@ -56,7 +56,7 @@ public class DefinePermissionController  extends BaseController{
     private CommonFuncService commonFuncService ;
 
 
-    @OperLog(action="查询权限定义信息列表",description = "查询权限定义信息列表")
+    @OperLog(action="查询权限定义信息列表",description = "查询权限定义信息列表",fullPath = "/define/define_permission/getAllDefinePermissions")
     @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -83,7 +83,7 @@ public class DefinePermissionController  extends BaseController{
         return  result;
     }
 
-    @OperLog(action="查询权限定义信息-Dto列表",description = "查询权限定义信息-Dto列表")
+    @OperLog(action="查询权限定义信息-Dto列表",description = "查询权限定义信息-Dto列表",fullPath = "/define/define_permission/getAllDefinePermissionDtos")
     @ApiOperation(value = "查询权限定义信息-Dto列表", notes = "查询权限定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -111,7 +111,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询权限定义信息",description = "根据权限定义id查询权限定义信息")
+    @OperLog(action="查询权限定义信息",description = "根据权限定义id查询权限定义信息",fullPath = "/define/define_permission/getDefinePermissionById")
     @PostMapping(value = "/getDefinePermissionById")
     public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request,String definePermissionId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
@@ -127,7 +127,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增权限定义",description = "表单方式新增权限定义")
+    @OperLog(action="新增权限定义",description = "表单方式新增权限定义",fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
     public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request,DefinePermissionVo definePermissionVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
@@ -148,7 +148,7 @@ public class DefinePermissionController  extends BaseController{
 
 
     @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新权限定义",description = "表单方式更新权限定义")
+    @OperLog(action="更新权限定义",description = "表单方式更新权限定义",fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request,DefinePermissionVo definePermissionVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -168,7 +168,7 @@ public class DefinePermissionController  extends BaseController{
     }
 
 
-    @OperLog(action="批量删除权限定义",description = "根据权限id批量删除权限定义")
+    @OperLog(action="批量删除权限定义",description = "根据权限id批量删除权限定义",fullPath = "/define/define_permission/batchDelDefinePermissionByIds")
     @ApiOperation(value = "批量删除权限定义", notes = "根据权限id批量删除权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的权限定义id数组", required = true,dataTypeClass=String[].class),
@@ -193,7 +193,7 @@ public class DefinePermissionController  extends BaseController{
         return  result;
     }
 
-    @OperLog(action="批量启用权限定义",description = "根据权限id批量启用权限定义")
+    @OperLog(action="批量启用权限定义",description = "根据权限id批量启用权限定义",fullPath = "/define/define_permission/batchEnsureDefinePermissionByIds")
     @ApiOperation(value = "批量启用权限", notes = "根据权限id批量启用权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要启用的权限定义id数组", required = true,dataTypeClass=String[].class),
@@ -215,7 +215,7 @@ public class DefinePermissionController  extends BaseController{
     }
 
 
-    @OperLog(action="删除权限定义",description = "根据权限id删除权限定义")
+    @OperLog(action="删除权限定义",description = "根据权限id删除权限定义",fullPath = "/define/define_permission/delOneDefinePermissionByIds")
     @ApiOperation(value = "删除权限定义", notes = "根据权限id删除权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的权限定义id", required = true,dataTypeClass=String.class),

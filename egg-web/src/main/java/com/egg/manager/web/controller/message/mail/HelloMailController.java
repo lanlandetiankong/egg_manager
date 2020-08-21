@@ -34,7 +34,7 @@ public class HelloMailController extends BaseController{
     private MyBaseEmailService myBaseEmailService ;
 
     @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="测试发送消息",description = "测试发送消息")
+    @OperLog(action="测试发送消息",description = "测试发送消息",fullPath = "/message/mail/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request) {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;

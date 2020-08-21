@@ -23,44 +23,91 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class OperationLogMO extends MyBaseModelMO<String> {
 
     private static final long serialVersionUID = 1L;
-
-    private String userAccountId;       //登录的用户id
-    private String className;   //类名称
-    private String methodName;  //方法名称
+    /**
+     * 登录的用户id
+     */
+    private String userAccountId;
+    /**
+     * 类名称
+     */
+    private String className;
+    /**
+     * 方法名称
+     */
+    private String methodName;
 
     /**
-     * @OperLog
+     * 操作
      */
-    private String action;  //操作
-    private String logDescription;  //日志描述
+    private String action;
+    /**
+     * 请求的全路径(相对于项目路径)
+     */
+    private String fullPath;
+    /**
+     * 日志描述
+     */
+    private String logDescription;
+    /**
+     * 方法参数->json
+     */
+    private String actionArgs;
 
-    private String actionArgs;  //方法参数->json
-
-
-    private Short isSuccess;  //是否成功 1:成功 2异常
-    private String message; //异常堆栈信息
+    /**
+     * 是否成功 1:成功 2异常
+     */
+    private Short isSuccess;
+    /**
+     * 异常堆栈信息
+     */
+    private String message;
+    /**
+     * 发起请求的ip地址
+     */
     private String ipAddr;
+    /**
+     * 返回结果-json
+     */
+    private String result;
+    /**
+     *
+     */
+    private String exception;
 
-    private String result;     //返回结果-json
-    private String exception;     //返回结果-json
-
-
-    private String signatureLong;   //请求的方法完整内容
+    /**
+     * 请求的方法完整内容
+     */
+    private String signatureLong;
     private String aspectKind;
-    private String aspectNotifyType;   //aop通知方式
     /**
-     * request
+     * aop通知方式
      */
-    private String tokenBean;   //发起请求的token ->json
-    private String headers;    //发起请求的header ->json
-    private String requestUri;     //发起请求的uri
-    private String requestUrl;     //发起请求的路径
+    private String aspectNotifyType;
+    /**
+     * 发起请求的token ->json(从request取得)
+     */
+    private String tokenBean;
+    /**
+     * 发起请求的header ->json(从request取得)
+     */
+    private String headers;
+    /**
+     * 发起请求的uri(从request取得)
+     */
+    private String requestUri;
+    /**
+     * 发起请求的路径(从request取得)
+     */
+    private String requestUrl;
 
     /**
-     * method
+     * method 返回值类型
      */
-    private String returnTypeName;  //返回值类型
-    private String declaredAnnotations;    //定义的注解->json
+    private String returnTypeName;
+    /**
+     * 定义的注解->json
+     */
+    private String declaredAnnotations;
 
     private String remark;
 

@@ -91,9 +91,10 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
                 if(operLog != null){
                     operationLogMO.setAction(operLog.action());
                     operationLogMO.setLogDescription(operLog.description());
+                    //请求的全路径(代码中取得)
+                    operationLogMO.setFullPath(operLog.fullPath());
                 }
             }
-
 
             if(request != null){
                 //请求路径

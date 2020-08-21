@@ -32,7 +32,6 @@ public class OperationLogMO extends MyBaseModelMO<String> {
      * @OperLog
      */
     private String action;  //操作
-    private String modelName;   //模块名称
     private String logDescription;  //日志描述
 
     private String actionArgs;  //方法参数->json

@@ -11,11 +11,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface OperLog {
 
-    /**
-     * 模块名称
-     * @return
-     */
-    String modelName() default  "" ;
 
     /**
      * 操作

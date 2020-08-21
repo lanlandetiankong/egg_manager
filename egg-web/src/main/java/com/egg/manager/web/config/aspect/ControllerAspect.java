@@ -16,6 +16,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -45,6 +47,7 @@ public class ControllerAspect {
             OperLog operLog = method.getAnnotation(OperLog.class);
             if (operLog.flag() == true) {
                 OperationLogMO operationLogMO = new OperationLogMO();
+
                 //当前log的通知方式是 Before
                 operationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
 

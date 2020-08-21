@@ -50,7 +50,7 @@ public class UserTenantController extends BaseController{
 
 
 
-    @OperLog(modelName="UserTenantController",action="查询 [用户与租户关联] 列表",description = "查询 [用户与租户关联] 列表")
+    @OperLog(action="查询 [用户与租户关联] 列表",description = "查询 [用户与租户关联] 列表")
     @ApiOperation(value = "查询 [用户与租户关联] 列表", notes = "查询 [用户与租户关联] 列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -79,7 +79,7 @@ public class UserTenantController extends BaseController{
 
 
     @ApiOperation(value = "查询 [用户与租户关联] 信息", notes = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="UserTenantController",action="查询 [用户与租户关联] 信息",description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息")
+    @OperLog(action="查询 [用户与租户关联] 信息",description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息")
     @PostMapping(value = "/getUserTenantById")
     public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request,String tenantId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
@@ -96,7 +96,7 @@ public class UserTenantController extends BaseController{
 
 
     @ApiOperation(value = "新增 [用户与租户关联] ", notes = "表单方式新增 [用户与租户关联] ", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="UserTenantController",action="新增 [用户与租户关联] ",description = "表单方式新增 [用户与租户关联] ")
+    @OperLog(action="新增 [用户与租户关联] ",description = "表单方式新增 [用户与租户关联] ")
     @PostMapping(value = "/doAddUserTenant")
     public MyCommonResult doAddUserTenant(HttpServletRequest request,UserTenantVo userTenantVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -118,7 +118,7 @@ public class UserTenantController extends BaseController{
 
     
 
-    @OperLog(modelName="UserTenantController",action="批量删除 [用户与租户关联] ",description = "根据 [用户与租户关联] id批量删除 [用户与租户关联] ")
+    @OperLog(action="批量删除 [用户与租户关联] ",description = "根据 [用户与租户关联] id批量删除 [用户与租户关联] ")
     @ApiOperation(value = "批量删除 [用户与租户关联] ", notes = "根据 [用户与租户关联] id批量删除 [用户与租户关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的 [用户与租户关联] id数组", required = true,dataTypeClass=String[].class),
@@ -140,7 +140,7 @@ public class UserTenantController extends BaseController{
     }
 
 
-    @OperLog(modelName="UserTenantController",action="删除 [用户与租户关联] ",description = "根据 [用户与租户关联] id删除 [用户与租户关联] ")
+    @OperLog(action="删除 [用户与租户关联] ",description = "根据 [用户与租户关联] id删除 [用户与租户关联] ")
     @ApiOperation(value = "删除 [用户与租户关联] ", notes = "根据 [用户与租户关联] id删除 [用户与租户关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的 [用户与租户关联] id", required = true,dataTypeClass=String.class),

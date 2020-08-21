@@ -36,7 +36,7 @@ public class HelloController extends BaseController {
     @Reference
     private MessageHelloService messageHelloService ;
 
-    @OperLog(modelName = "HelloController", action = "测试当前开发环境", description = "测试当前开发环境")
+    @OperLog( action = "测试当前开发环境", description = "测试当前开发环境")
     @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {

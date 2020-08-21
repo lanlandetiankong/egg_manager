@@ -53,7 +53,7 @@ public class DefineDepartmentController extends BaseController{
 
 
 
-    @OperLog(modelName="DefineDepartmentController",action="查询部门定义信息-Dto列表",description = "查询部门定义信息-Dto列表")
+    @OperLog(action="查询部门定义信息-Dto列表",description = "查询部门定义信息-Dto列表")
     @ApiOperation(value = "查询部门定义信息-Dto列表", notes = "查询部门定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -82,7 +82,7 @@ public class DefineDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineDepartmentController",action="查询部门定义信息",description = "根据部门定义id查询部门定义信息")
+    @OperLog(action="查询部门定义信息",description = "根据部门定义id查询部门定义信息")
     @PostMapping(value = "/getDefineDepartmentById")
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request,String defineDepartmentId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
@@ -96,7 +96,7 @@ public class DefineDepartmentController extends BaseController{
         return  result;
     }
 
-    @OperLog(modelName="DefineDepartmentController",action="查询部门TreeSelect",description = "查询部门TreeSelect")
+    @OperLog(action="查询部门TreeSelect",description = "查询部门TreeSelect")
     @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
     public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect() {
@@ -113,7 +113,7 @@ public class DefineDepartmentController extends BaseController{
         return result ;
     }
 
-    @OperLog(modelName="DefineDepartmentController",action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)")
+    @OperLog(action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)")
     @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
     public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId) {
@@ -125,7 +125,7 @@ public class DefineDepartmentController extends BaseController{
     }
     
     @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineDepartmentController",action="新增部门定义",description = "表单方式新增部门定义")
+    @OperLog(action="新增部门定义",description = "表单方式新增部门定义")
     @PostMapping(value = "/doAddDefineDepartment")
     public MyCommonResult<DefineDepartmentVo> doAddDefineDepartment(HttpServletRequest request,DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser){
@@ -147,7 +147,7 @@ public class DefineDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineDepartmentController",action="更新部门定义",description = "表单方式更新部门定义")
+    @OperLog(action="更新部门定义",description = "表单方式更新部门定义")
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request,DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser){
@@ -168,7 +168,7 @@ public class DefineDepartmentController extends BaseController{
     }
 
 
-    @OperLog(modelName="DefineDepartmentController",action="批量删除部门定义",description = "根据部门id批量删除部门定义")
+    @OperLog(action="批量删除部门定义",description = "根据部门id批量删除部门定义")
     @ApiOperation(value = "批量删除部门定义", notes = "根据部门id批量删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的部门定义id数组", required = true,dataTypeClass=String[].class),
@@ -190,7 +190,7 @@ public class DefineDepartmentController extends BaseController{
     }
 
 
-    @OperLog(modelName="DefineDepartmentController",action="删除部门定义",description = "根据部门id删除部门定义")
+    @OperLog(action="删除部门定义",description = "根据部门id删除部门定义")
     @ApiOperation(value = "删除部门定义", notes = "根据部门id删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的部门定义id", required = true,dataTypeClass=String.class),

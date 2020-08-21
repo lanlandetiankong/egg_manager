@@ -36,10 +36,7 @@ public class OperationLogMVO extends MyBaseModelMVO<String> {
      * @OperLog 操作
      */
     private String action;
-    /**
-     * 模块名称
-     */
-    private String modelName;
+
     /**
      * 日志描述
      */

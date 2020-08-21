@@ -51,7 +51,7 @@ public class DefineJobController extends BaseController {
 
 
 
-    @OperLog(modelName="DefineJobController",action="查询职务信息列表",description = "查询职务信息列表")
+    @OperLog(action="查询职务信息列表",description = "查询职务信息列表")
     @ApiOperation(value = "查询职务信息列表", notes = "查询职务信息列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -79,7 +79,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @OperLog(modelName="DefineJobController",action="查询职务信息-Dto列表",description = "查询职务信息-Dto列表")
+    @OperLog(action="查询职务信息-Dto列表",description = "查询职务信息-Dto列表")
     @ApiOperation(value = "查询职务信息-Dto列表", notes = "查询职务信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -108,7 +108,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineJobController",action="查询职务信息",description = "根据职务id查询职务信息")
+    @OperLog(action="查询职务信息",description = "根据职务id查询职务信息")
     @PostMapping(value = "/getDefineJobById")
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request,String defineJobId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
@@ -125,7 +125,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineJobController",action="新增职务",description = "表单方式新增职务")
+    @OperLog(action="新增职务",description = "表单方式新增职务")
     @PostMapping(value = "/doAddDefineJob")
     public MyCommonResult doAddDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -146,7 +146,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineJobController",action="更新职务信息",description = "表单方式更新职务信息")
+    @OperLog(action="更新职务信息",description = "表单方式更新职务信息")
     @PostMapping(value = "/doUpdateDefineJob")
     public MyCommonResult doUpdateDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -166,7 +166,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @OperLog(modelName="DefineJobController",action="批量删除职务",description = "根据职务id批量删除职务")
+    @OperLog(action="批量删除职务",description = "根据职务id批量删除职务")
     @ApiOperation(value = "批量删除职务", notes = "根据职务id批量删除职务", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的职务定义id数组", required = true,dataTypeClass=String[].class),
@@ -189,7 +189,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @OperLog(modelName="DefineJobController",action="删除职务",description = "根据职务id删除职务")
+    @OperLog(action="删除职务",description = "根据职务id删除职务")
     @ApiOperation(value = "删除职务", notes = "根据职务id删除职务", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的职务定义id", required = true,dataTypeClass=String.class),

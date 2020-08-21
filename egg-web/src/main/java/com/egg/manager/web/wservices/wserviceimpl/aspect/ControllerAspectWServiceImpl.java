@@ -90,7 +90,6 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
                 OperLog operLog = method.getAnnotation(OperLog.class);
                 if(operLog != null){
                     operationLogMO.setAction(operLog.action());
-                    operationLogMO.setModelName(operLog.modelName());
                     operationLogMO.setLogDescription(operLog.description());
                 }
             }

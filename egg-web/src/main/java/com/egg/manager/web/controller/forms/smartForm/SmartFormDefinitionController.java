@@ -61,7 +61,7 @@ public class SmartFormDefinitionController extends BaseController {
 
 
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "分页查询->表单定义", description = "")
+    @OperLog( action = "分页查询->表单定义", description = "")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -85,7 +85,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "分页查询->表单定义", description = "")
+    @OperLog( action = "分页查询->表单定义", description = "")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -109,7 +109,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "根据id查询->表单定义", description = "")
+    @OperLog( action = "根据id查询->表单定义", description = "")
     @ApiOperation(value = "根据id查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormDefinitionMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -125,7 +125,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "新增->表单定义", description = "")
+    @OperLog( action = "新增->表单定义", description = "")
     @ApiOperation(value = "新增->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<SmartFormDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -155,7 +155,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "更新->表单定义", description = "")
+    @OperLog( action = "更新->表单定义", description = "")
     @ApiOperation(value = "更新->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult<SmartFormDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -185,7 +185,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "删除->表单定义", description = "")
+    @OperLog( action = "删除->表单定义", description = "")
     @ApiOperation(value = "删除->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
@@ -204,7 +204,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog(modelName = "SmartFormDefinitionController", action = "批量删除->表单定义", description = "")
+    @OperLog( action = "批量删除->表单定义", description = "")
     @ApiOperation(value = "批量删除->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),

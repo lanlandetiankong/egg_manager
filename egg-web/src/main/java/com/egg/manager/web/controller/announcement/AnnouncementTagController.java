@@ -54,7 +54,7 @@ public class AnnouncementTagController extends BaseController {
     private AnnouncementTagService announcementTagService ;
 
 
-    @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息Select列表",description = "查询公告标签信息Select列表")
+    @OperLog(action="查询公告标签信息Select列表",description = "查询公告标签信息Select列表")
     @ApiOperation(value = "查询公告标签信息Select列表", notes = "查询公告标签信息Select列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -81,7 +81,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息-Dto列表",description = "查询公告标签信息-Dto列表")
+    @OperLog(action="查询公告标签信息-Dto列表",description = "查询公告标签信息-Dto列表")
     @PostMapping(value = "/getAllAnnouncementTagDtos")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
@@ -103,7 +103,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="AnnouncementTagController",action="查询公告标签信息",description = "根据公告标签id查询公告标签信息")
+    @OperLog(action="查询公告标签信息",description = "根据公告标签id查询公告标签信息")
     @PostMapping(value = "/getAnnouncementTagById")
     public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request,String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
@@ -120,7 +120,7 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="AnnouncementTagController",action="新增公告标签",description = "表单方式新增公告标签")
+    @OperLog(action="新增公告标签",description = "表单方式新增公告标签")
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request,AnnouncementTagVo AnnouncementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser){
@@ -142,7 +142,7 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="AnnouncementTagController",action="更新公告标签",description = "表单方式更新公告标签")
+    @OperLog(action="更新公告标签",description = "表单方式更新公告标签")
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request,AnnouncementTagVo AnnouncementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser){
@@ -163,7 +163,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @OperLog(modelName="AnnouncementTagController",action="批量删除公告标签",description = "根据公告标签id批量删除公告标签")
+    @OperLog(action="批量删除公告标签",description = "根据公告标签id批量删除公告标签")
     @ApiOperation(value = "批量删除公告标签", notes = "根据公告标签id批量删除公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的公告标签id数组", required = true,dataTypeClass=String[].class),
@@ -186,7 +186,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @OperLog(modelName="AnnouncementTagController",action="删除公告标签",description = "根据id删除公告标签")
+    @OperLog(action="删除公告标签",description = "根据id删除公告标签")
     @ApiOperation(value = "删除公告标签", notes = "根据id删除公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的公告标签id", required = true,dataTypeClass=String.class),

@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/role/role_menus")
 public class CommonController extends BaseController {
 
-    @OperLog(modelName="CommonController",action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉")
+    @OperLog(action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉")
     @ApiOperation(value = "根据枚举key查询对应枚举下拉", notes = "根据枚举key查询对应枚举下拉", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)

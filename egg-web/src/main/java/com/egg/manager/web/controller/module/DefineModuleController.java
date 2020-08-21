@@ -51,7 +51,7 @@ public class DefineModuleController extends BaseController{
 
 
 
-    @OperLog(modelName="DefineModuleController",action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表")
+    @OperLog(action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表")
     @ApiOperation(value = "查询模块定义信息-Dto列表", notes = "查询模块定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -80,7 +80,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "查询模块定义信息", notes = "根据模块定义id查询模块定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineModuleController",action="查询模块定义信息",description = "根据模块定义id查询模块定义信息")
+    @OperLog(action="查询模块定义信息",description = "根据模块定义id查询模块定义信息")
     @PostMapping(value = "/getDefineModuleById")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request,String defineModuleId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
@@ -96,7 +96,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineModuleController",action="新增模块定义",description = "表单方式新增模块定义")
+    @OperLog(action="新增模块定义",description = "表单方式新增模块定义")
     @PostMapping(value = "/doAddDefineModule")
     public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request,DefineModuleVo defineModuleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
@@ -117,7 +117,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "更新模块定义", notes = "表单方式更新模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(modelName="DefineModuleController",action="更新模块定义",description = "表单方式更新模块定义")
+    @OperLog(action="更新模块定义",description = "表单方式更新模块定义")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request,DefineModuleVo defineModuleVo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -137,7 +137,7 @@ public class DefineModuleController extends BaseController{
     }
 
 
-    @OperLog(modelName="DefineModuleController",action="批量删除模块定义",description = "根据菜单定义id批量删除模块定义")
+    @OperLog(action="批量删除模块定义",description = "根据菜单定义id批量删除模块定义")
     @ApiOperation(value = "批量删除模块定义", notes = "根据菜单定义id批量删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的模块定义id数组", required = true,dataTypeClass=String[].class),
@@ -159,7 +159,7 @@ public class DefineModuleController extends BaseController{
     }
 
 
-    @OperLog(modelName="DefineModuleController",action="删除模块定义",description = "根据模块id删除模块定义")
+    @OperLog(action="删除模块定义",description = "根据模块id删除模块定义")
     @ApiOperation(value = "删除模块定义", notes = "根据模块id删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的模块定义id", required = true,dataTypeClass=String.class),

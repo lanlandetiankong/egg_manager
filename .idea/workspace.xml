@@ -26,113 +26,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="20200725">
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/trait/routine/RoutineCommonFunc.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/MyBasePagination.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/antdv/AntdvSortBean.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/MyBaseQueryBean.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/sms/MyBaseSms.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/org/springframework/data/mongodb/core/query/MyQuery.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/package-info.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-service/src/main/resources/dubbo/egg-service-dubbo-config.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-service/src/main/resources/dubbo/egg-service-dubbo-consumer.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-service/src/main/resources/dubbo/egg-service-dubbo-provider.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/docs/notes/扩展访问地址.txt" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/mongodb/mservices/service/MyBaseMongoService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/mongodb/mservices/service/MyBaseMongoService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/CommonFuncService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/CommonFuncService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementDraftService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementDraftService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementTagService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/announcement/AnnouncementTagService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineDepartmentService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineDepartmentService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineJobService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineJobService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefinePermissionService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefinePermissionService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineRoleService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/define/DefineRoleService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/module/DefineMenuService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/module/DefineMenuService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/module/DefineModuleService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/module/DefineModuleService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/organization/DefineTenantService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/organization/DefineTenantService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserAccountService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserAccountService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserJobService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserJobService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserRoleService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserRoleService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserTenantService.java" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/service/service/user/UserTenantService.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/FrontEntitySelectBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/front/FrontEntitySelectBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/FrontSelectBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/front/FrontSelectBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/file/AntdFileUploadBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/file/AntdFileUploadBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/file/FileResBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/file/FileResBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/request/RequestHeaderBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/request/RequestHeaderBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/verify/MyVerifyDuplicateBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/verify/MyVerifyDuplicateBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/Constant.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/Constant.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/mongodb/MongoModelFieldConstant.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/mongodb/MongoModelFieldConstant.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/redis/RedisShiroKeyConstant.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/redis/RedisShiroKeyConstant.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/query/mongo/MyMongoQueryMatchingEnum.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/query/mongo/MyMongoQueryMatchingEnum.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/query/mysql/MyQueryMatchingEnum.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/query/mysql/MyQueryMatchingEnum.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/AntdvPaginationBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/antdv/AntdvPaginationBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/AntdvSortBean.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/build/deploy/DeployConfProps.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/build/deploy/DeployConfProps.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/redis/shiro/RedisPropsOfShiroCache.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/redis/shiro/RedisPropsOfShiroCache.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/upload/UploadProps.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/upload/UploadProps.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/upload/UploadStaticProps.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/upload/UploadStaticProps.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/MongoQueryBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/mongo/MongoQueryBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/MyMongoQueryBuffer.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/mongo/MyMongoQueryBuffer.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/QueryFormFieldBean.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/form/QueryFormFieldBean.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/sms/SmsSendRequest.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/sms/send/SmsSendRequest.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/sms/SmsSendResponse.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/sms/send/SmsSendResponse.java" />
-      <change beforePath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/sms/SmsSendUtil.java" afterPath="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/sms/SmsSendUtil.java" />
-      <change beforePath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/MyBaseMongoServiceImpl.java" afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/MyBaseMongoServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormTypeDefinitionMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-mongodb/src/main/java/com/egg/manager/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormTypeDefinitionMServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/helper/MyCommonResult.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/helper/MyCommonResult.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementDraftMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementDraftMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementTagMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/announcement/AnnouncementTagMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineDepartmentMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineDepartmentMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineJobMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineJobMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineMenuMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefinePermissionMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefinePermissionMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineRoleMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/define/DefineRoleMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/module/DefineModuleMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/module/DefineModuleMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/organization/DefineTenantMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/organization/DefineTenantMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserAccountMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserAccountMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserJobMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserJobMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserRoleMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserRoleMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserTenantMapper.java" afterPath="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mapper/user/UserTenantMapper.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/pom.xml" afterPath="$PROJECT_DIR$/egg-service/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/EggManagerServiceApplication.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/EggManagerServiceApplication.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/CommonFuncServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/CommonFuncServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementTagServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/announcement/AnnouncementTagServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineDepartmentServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineDepartmentServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineJobServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineJobServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefinePermissionServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefinePermissionServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/define/DefineRoleServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineMenuServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineModuleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/module/DefineModuleServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/organization/DefineTenantServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/organization/DefineTenantServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserAccountServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserAccountServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserJobServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserJobServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserRoleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserRoleServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserTenantServiceImpl.java" afterPath="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/serviceimpl/user/UserTenantServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-service/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/egg-service/src/main/resources/application.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/BaseController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/BaseController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/CommonController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/CommonController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementTagController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementTagController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/CommonBindingController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/CommonBindingController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/ModuleCommonController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/ModuleCommonController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/PermissionCommonController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/PermissionCommonController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/UserCommonController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/common/UserCommonController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineDepartmentController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineDepartmentController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineJobController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineJobController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefinePermissionController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefinePermissionController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormDefinitionController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormDefinitionController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormTypeDefinitionController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormTypeDefinitionController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/module/DefineModuleController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/module/DefineModuleController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/organization/DefineTenantController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/organization/DefineTenantController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserJobController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserJobController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserRoleController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserRoleController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserTenantController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserTenantController.java" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/190913.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/190913.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/190913.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/190918.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/190918.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/190918.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/200221.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/200221.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/200221.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200302.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200302.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/egg_manager_20200302.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200318.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200318.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/egg_manager_20200318.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200725.sql" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/ChangeSqlFiles/egg_manager_20200725.sql" afterPath="$PROJECT_DIR$/docs/aboutSql/ChangeSqlFiles/egg_manager_20200725.sql" />
+      <change beforePath="$PROJECT_DIR$/docs/EggManager打包部署流程.txt" afterPath="$PROJECT_DIR$/docs/notes/EggManager打包部署流程.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/MysqlDocs/EggManager/egg_manager_数据库设计文档生成_1.0.0.html" afterPath="$PROJECT_DIR$/docs/aboutSql/MySqlDocs/EggManager/egg_manager_数据库设计文档生成_1.0.0.html" />
+      <change beforePath="$PROJECT_DIR$/docs/dayNote.txt" afterPath="$PROJECT_DIR$/docs/notes/20200810/dayNote.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/mongodb/aboutConf/mongod.cfg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/mongodb/aboutConf/mongod.cfg" afterPath="$PROJECT_DIR$/docs/aboutSql/mongodb/aboutConf/mongod.cfg" />
+      <change beforePath="$PROJECT_DIR$/docs/mongodb/mongodbNote.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/mongodb/mongodbNote.txt" afterPath="$PROJECT_DIR$/docs/aboutSql/mongodb/mongodbNote.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/mysql/notes/202008/20200816note.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/docs/mysql/notes/202008/20200816note.txt" afterPath="$PROJECT_DIR$/docs/aboutSql/mysql/notes/202008/20200816note.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/note.txt" afterPath="$PROJECT_DIR$/docs/note.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/备注/druid备注.txt" afterPath="$PROJECT_DIR$/docs/notes/druid备注.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/备注/easyExcel备注.txt" afterPath="$PROJECT_DIR$/docs/notes/easyExcel备注.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/备注/mybatis/mybatis-base.txt" afterPath="$PROJECT_DIR$/docs/notes/mybatis/mybatis-base.txt" />
+      <change beforePath="$PROJECT_DIR$/docs/备注/swagger2备注.txt" afterPath="$PROJECT_DIR$/docs/notes/swagger2备注.txt" />
     </list>
     <ignored path="J:\projects\study\java\manager\.idea\shelf/" />
     <ignored path="$PROJECT_DIR$/egg-common/target/" />
@@ -151,6 +72,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="manager" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
@@ -222,8 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/egg-service/src/main/resources/dubbo/egg-service-dubbo-provider.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/BaseController.java" />
         <option value="$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java" />
         <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/MongoQueryBean.java" />
         <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/MyMongoQueryBuffer.java" />
@@ -273,6 +195,8 @@
         <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/package-info.java" />
         <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/org/springframework/data/mongodb/core/query/Query.java" />
         <option value="$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/org/springframework/data/mongodb/core/query/MyQuery.java" />
+        <option value="$PROJECT_DIR$/docs/note.txt" />
+        <option value="$PROJECT_DIR$/docs/others/扩展访问地址.txt" />
       </list>
     </option>
   </component>
@@ -287,6 +211,16 @@
       <MavenGeneralSettings>
         <option name="mavenHome" value="H:/software/apache-maven-3.6.1" />
       </MavenGeneralSettings>
+    </option>
+    <option name="enabledProfiles">
+      <list>
+        <option value="dev" />
+      </list>
+    </option>
+    <option name="disabledProfiles">
+      <list>
+        <option value="jdk18" />
+      </list>
     </option>
   </component>
   <component name="MavenProjectNavigator">
@@ -328,8 +262,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -340,658 +276,61 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="dubbo-2.6.2.jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="dubbo-2.6.2.jar" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="dubbo-2.6.2.jar" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
+              <item name="alibaba" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="dubbo-2.6.2.jar" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="trait" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="trait" type="462c0819:PsiDirectoryNode" />
-              <item name="routine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="springframework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="springframework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="springframework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="springframework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="override" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="springframework" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="mongodb" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="query" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="redis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="redis" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="redis" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-              <item name="announcement" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="alibaba" type="462c0819:PsiDirectoryNode" />
               <item name="dubbo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.alibaba:dubbo:2.6.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="dubbo-2.6.2.jar" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="announcement" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="alibaba" type="462c0819:PsiDirectoryNode" />
+              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -1023,12 +362,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="J:\projects\study\java\manager\egg-service\src\main\resources\dubbo" />
-      <recent name="J:\projects\study\java\manager\egg-message\src\main\java\com\egg\manager\message\email\service" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\java\com\egg\manager\persistence\message\mail" />
-      <recent name="J:\projects\study\java\manager\egg-message\src\main\java\com\egg\manager\message\email" />
-      <recent name="J:\projects\study\java\manager\egg-message\src\main" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="J:\projects\study\java\manager\docs\notes\20200810" />
+      <recent name="J:\projects\study\java\manager\docs\notes" />
+      <recent name="J:\projects\study\java\manager\docs\aboutSql" />
+      <recent name="J:\projects\study\java\manager\docs\aboutSql\MySqlDocs" />
+      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.egg.manager.common.base.pagination.mongo" />
@@ -1037,13 +376,150 @@
       <recent name="com.egg.manager.persistence.mongo.daoimpl" />
       <recent name="com.egg.manager.persistence.mongo.daoimpl.forms" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\config" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\common" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\add" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\define" />
-      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\resources\mapper\module" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="J:\projects\study\java\manager\egg-service\src\main\resources\dubbo" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main\java\com\egg\manager\message\email\service" />
+      <recent name="J:\projects\study\java\manager\egg-persistence\src\main\java\com\egg\manager\persistence\message\mail" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main\java\com\egg\manager\message\email" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/annotation/log/OperLog.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mo/log/OperationLogMO.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/mvo/log/OperationLogMVO.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/aspect/ControllerAspect.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/CommonController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementTagController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineDepartmentController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineJobController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefinePermissionController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineRoleController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormDefinitionController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormTypeDefinitionController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/index/HelloController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/message/mail/HelloMailController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/module/DefineModuleController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/organization/DefineTenantController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserJobController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserRoleController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserTenantController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/wservices/wserviceimpl/aspect/ControllerAspectWServiceImpl.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/bins/20200821/RunDev-2.0.1-SNAPSHOT/RunEggManager-2_0_1.bat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/bins/20200821/RunDev-2.0.1-SNAPSHOT/RunEggMessage-2_0_1.bat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/bins/20200821/RunDev-2.0.1-SNAPSHOT/RunEggMongodb-2_0_1.bat</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/bins/20200821/RunDev-2.0.1-SNAPSHOT/RunEggService2_0_1.bat</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -1241,9 +717,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Spring Boot.EggManagerApplication" />
-        <item index="1" class="java.lang.String" itemvalue="Spring Boot.EggManagerServiceApplication" />
-        <item index="2" class="java.lang.String" itemvalue="Spring Boot.EggManagerMessageApplication" />
-        <item index="3" class="java.lang.String" itemvalue="Spring Boot.EggManagerMongoDbApplication" />
+        <item index="1" class="java.lang.String" itemvalue="Spring Boot.EggManagerMessageApplication" />
+        <item index="2" class="java.lang.String" itemvalue="Spring Boot.EggManagerMongoDbApplication" />
+        <item index="3" class="java.lang.String" itemvalue="Spring Boot.EggManagerServiceApplication" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.MySqlDocUtilTest.generatorMySqlDocToSave" />
       </list>
     </recent_temporary>
@@ -1463,6 +939,8 @@
       <workItem from="1597324022867" duration="3533000" />
       <workItem from="1597413018549" duration="14747000" />
       <workItem from="1597463740441" duration="128000" />
+      <workItem from="1597941040021" duration="250000" />
+      <workItem from="1598195458168" duration="965000" />
     </task>
     <task id="LOCAL-00052" summary="200325 redis缓存用户可访问的router url;设置 redis 用户信息对应的key的ttl">
       <created>1585142643196</created>
@@ -1816,7 +1294,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26619000" />
+    <option name="totallyTimeSpent" value="27863000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1843,28 +1321,28 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44482175" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44387755" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7619048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.49546143" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3524962" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36308622" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5062893" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2050,7 +1528,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/aspect/ControllerAspect.java</url>
-          <line>104</line>
+          <line>107</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -2088,100 +1566,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/file/FileUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/encrypt/JasyptUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/http/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="19" column="19" lean-forward="false" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/date/DateTimeUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/build/deploy/DeployConfProps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/pagination/MyBasePagination.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/exception/BusinessException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/exception/MyDbException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/exception/MyMongoException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/PublicResultEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/enums/aspect/AspectNotifyTypeEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/define/DefineDepartmentConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/mongodb/MongoModelFieldConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/constant/redis/RedisShiroKeyConstant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -2382,7 +1766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2390,7 +1773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="107" column="5" lean-forward="true" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2409,219 +1791,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="152" column="44" lean-forward="false" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/package-info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/package-info.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-mongodb/2.0.11.RELEASE/spring-data-mongodb-2.0.11.RELEASE.jar!/org/springframework/data/mongodb/core/query/Query.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="30" column="52" lean-forward="false" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="52" />
-          <folding>
-            <marker date="1595057621926" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1595057621926" expanded="false" signature="167:943" ph="..." />
-            <marker date="1595057621926" expanded="false" signature="1533:1544" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="1581:1587" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="1608:1615" ph="{}" />
-            <marker date="1595057621926" expanded="false" signature="1672:1683" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="1720:1726" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="1796:2368" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2396:2525" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2560:2614" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2650:2706" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2747:2866" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2909:3149" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3184:3705" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3401:3617" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="3752:3763" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="3791:3797" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="3866:4136" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4175:4625" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4665:4763" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4801:5134" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4991:5087" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="5161:5172" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5189:5195" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="5222:5233" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5251:5257" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="5300:5311" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5328:5334" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="5383:5458" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5518:5595" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5636:5703" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5746:5813" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5846:5911" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5948:6028" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="6057:6134" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="6163:6241" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="6277:6354" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="6381:6392" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6409:6415" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="6452:6566" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="6626:6711" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="6758:6769" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6791:6797" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="6851:6862" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6907:6913" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="6944:7211" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="7251:7458" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="7514:8264" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8292:8850" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8856:8874" ph="/**...*/" />
-            <marker date="1595057621926" expanded="false" signature="8948:8959" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="8999:9005" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/org/springframework/data/mongodb/core/query/MyQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="88" lean-forward="false" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/override/org/springframework/data/mongodb/core/query/MyQuery.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-mongodb/2.0.11.RELEASE/spring-data-mongodb-2.0.11.RELEASE.jar!/org/springframework/data/mongodb/core/query/Update.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-          <folding>
-            <marker date="1595057621926" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1595057621926" expanded="false" signature="167:837" ph="..." />
-            <marker date="1595057621926" expanded="true" signature="1137:1144" ph="{}" />
-            <marker date="1595057621926" expanded="false" signature="1203:1214" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="1252:1258" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="1334:2153" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2203:2288" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2346:2439" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2477:2560" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2608:2691" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2742:2828" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="2885:3123" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3180:3285" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="3341:3352" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="3391:3397" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="3452:3542" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3599:3716" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3767:3853" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="3910:4015" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4074:4168" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4212:4304" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4353:4475" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4535:4707" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4757:4918" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="4968:5129" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="5191:5202" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5254:5260" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="5291:5349" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="5382:5393" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5414:5420" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="5459:5470" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="5508:5514" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="5520:5538" ph="/**...*/" />
-            <marker date="1595057621926" expanded="true" signature="5635:5823" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="5910:6595" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="6636:6647" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6686:6692" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="6742:6753" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6803:6809" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="6836:6847" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="6920:6926" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="6966:7312" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="7343:7543" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="7592:9054" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="7799:8006" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8046:8186" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8225:8364" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8404:8544" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8655:8777" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8823:9048" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="8914:8929" ph="{}" />
-            <marker date="1595057621926" expanded="false" signature="8967:8986" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="9024:9038" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="9089:9461" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="9168:9183" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="9198:9208" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="9254:9269" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="9332:9342" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="9385:9400" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="9445:9455" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="9500:12282" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="9627:9719" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="9766:9905" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="9966:10067" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="10137:10319" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="10379:10546" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="10615:10730" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="10821:11079" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="11123:11447" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="11478:11493" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="11574:11584" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="11628:12193" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="12232:12247" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="12266:12276" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="12354:13383" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="12434:12598" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="12632:13229" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="13261:13276" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="13291:13301" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="13335:13350" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="13367:13377" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="13448:13727" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="13503:13571" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="13603:13618" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="13634:13644" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="13678:13693" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="13711:13721" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="13803:14117" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="13881:13955" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="13987:14002" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="14021:14031" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="14065:14080" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="14101:14111" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="14181:14838" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="14248:14338" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="14396:14682" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="14714:14729" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="14744:14754" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="14788:14803" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="14822:14832" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="14918:15643" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="14955:14966" ph="{}" />
-            <marker date="1595057621926" expanded="true" signature="14998:15121" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="15166:15551" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="15585:15600" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="15627:15637" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="15675:15905" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="15769:15899" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="15941:17049" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="16050:16061" ph="{}" />
-            <marker date="1595057621926" expanded="true" signature="16121:16212" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="16271:16286" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="16334:16344" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="16378:16393" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="16425:16435" ph=" }" />
-            <marker date="1595057621926" expanded="false" signature="16466:16481" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="16521:16531" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="16575:16920" ph="{...}" />
-            <marker date="1595057621926" expanded="false" signature="16954:16969" ph=" { " />
-            <marker date="1595057621926" expanded="false" signature="17033:17043" ph=" }" />
-            <marker date="1595057621926" expanded="true" signature="17083:17159" ph="{...}" />
-            <marker date="1595057621926" expanded="true" signature="17142:17153" ph="{}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2629,6 +1811,117 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-mongodb/src/main/resources/application-dev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-message/src/main/resources/application-dev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="43" lean-forward="false" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-message/src/main/resources/application-prod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-web/src/main/resources/application-prod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="44" column="2" lean-forward="true" selection-start-line="44" selection-start-column="2" selection-end-line="44" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/swagger/swagger-annotations/1.5.13/swagger-annotations-1.5.13.jar!/io/swagger/annotations/Api.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/notes/easyExcel备注.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/notes/druid备注.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="56" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/notes/扩展访问地址.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/notes/swagger2备注.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="55" lean-forward="true" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/errors/error.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/note.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/TodoList.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/notes/20200810/dayNote.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

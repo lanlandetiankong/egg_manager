@@ -34,14 +34,14 @@ egg-persistence/target/
 egg-service/target/
 egg-web/target/
 
-egg-api.iml
-egg-common.iml
-egg-generate.iml
-egg-message.iml
-egg-mongodb.iml
-egg-persistence.iml
-egg-service.iml
-egg-web.iml
+#egg-api.iml
+#egg-common.iml
+#egg-generate.iml
+#egg-message.iml
+#egg-mongodb.iml
+#egg-persistence.iml
+#egg-service.iml
+#egg-web.iml
 
 #outlogs
 outlogs/

@@ -3,7 +3,7 @@ ok>swagger2 接口的使用 => 转 knife4j https://doc.xiaominfo.com/guide/usefu
 1、springboot webpack 推送消息到vue
 not>2、枚举返回接口封装
 ing>4、mail消息
-5、MQ
+ing>5、MQ
 ok>3、引入dubbo
 ok>dubbo负载均衡
 dubbo集群
@@ -23,5 +23,5 @@ com.egg.manager.api.service.helper -->    com.egg.manager.api.trait.helper
 ok>application.properties 可改为 applicatin-dev-type.properties
 
 20200818
-mail发送后保存到数据库
-注释-requestmapping全路径
+mail发送后保存到数据库？附件处理
+ok>注释-requestmapping全路径

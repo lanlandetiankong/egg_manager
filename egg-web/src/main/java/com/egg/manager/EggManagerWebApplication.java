@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @EnableDubbo
 @EnableMongoAuditing
 @EnableEncryptableProperties
-public class EggManagerApplication {
+public class EggManagerWebApplication {
 	public static void main(String[] args) {
-        SpringApplication.run(EggManagerApplication.class, args);
+        SpringApplication.run(EggManagerWebApplication.class, args);
     }
 }

@@ -1,4 +1,4 @@
-package com.egg.manager.web.controller.index;
+package com.egg.manager.web.controller.index.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.message.hello.MessageHelloService;

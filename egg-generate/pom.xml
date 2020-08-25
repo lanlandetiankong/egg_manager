@@ -37,6 +37,11 @@
               </exclusion>
           </exclusions>
       </dependency>
+      <!-- HikariCP -->
+      <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+      </dependency>
   </dependencies>
 
   <build>

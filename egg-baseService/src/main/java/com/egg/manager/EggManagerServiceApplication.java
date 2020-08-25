@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
-//@ImportResource(locations = {"classpath:dubbo/egg-service-dubbo-*.xml"})
+//@ImportResource(locations = {"classpath:dubbo/egg-baseService-dubbo-*.xml"})
 @EnableCaching
 @EnableDubbo
 @EnableMongoAuditing

@@ -4,7 +4,7 @@ chcp 65001
 ::变量声明
 SET district=D:
 SET baseDir=D:\zcj\studys\projects\egg_manager
-SET moduleName=egg-service
+SET moduleName=egg-baseService
 SET targetName=\target
 SET jarName=EggManager-Service.jar
 

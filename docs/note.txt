@@ -47,7 +47,25 @@ mvn versions:commit
 git restore --staged  .idea/workspace.xml
 
 
+20200824
+一、git删除tag
+1. 删除本地tag
+git tag -d tag-name
+2. 删除远程tag
+git push origin :refs/tags/tag-name
 
+
+
+
+
+依赖插件：
+MapStruct support
+Maven helper
+Rainbow Brackets
+MybatisX
+QAPlug
+translation
+Lombok
 
 
 

@@ -177,6 +177,18 @@
             <artifactId>easyexcel</artifactId>
         </dependency>
         <!-- tools end -->
+        <!-- activeMQ start -->
+        <!--ActiveMq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+        <!--消息队列连接池-->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+        </dependency>
+        <!-- activeMQ end -->
     </dependencies>
     <build>
         <resources>

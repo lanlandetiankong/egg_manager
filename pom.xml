@@ -73,6 +73,8 @@
         <commons-httpclient.version>3.1</commons-httpclient.version>
         <httpclient.version>4.5</httpclient.version>
         <okhttp.version>3.4.1</okhttp.version>
+        <spring-boot-starter-activemq.version>1.5.0.RELEASE</spring-boot-starter-activemq.version>
+        <activemq-pool.version>5.15.0</activemq-pool.version>
 
         <!-- dubbo dependency end -->
     </properties>
@@ -129,6 +131,22 @@
                 <version>${zookeeper.version}</version>
             </dependency>
             <!-- dubbo dependency end -->
+
+            <!-- activeMQ start -->
+            <!--ActiveMq-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-activemq</artifactId>
+                <version>${spring-boot-starter-activemq.version}</version>
+            </dependency>
+            <!--消息队列连接池-->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>${activemq-pool.version}</version>
+            </dependency>
+            <!-- activeMQ end -->
+
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>

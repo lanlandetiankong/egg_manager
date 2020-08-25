@@ -103,7 +103,7 @@
                 <version>1.5.1.RELEASE</version>
                 <configuration>
                     <!-- 工程主入口-->
-                    <mainClass>com.egg.manager.EggManagerServiceApplication</mainClass>
+                    <mainClass>com.egg.manager.EggManagerBaseServiceApplication</mainClass>
                     <!--<classifier>exec</classifier>-->
                     <layout>ZIP</layout>
                     <includes>

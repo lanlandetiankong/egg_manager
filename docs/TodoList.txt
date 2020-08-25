@@ -25,3 +25,7 @@ ok>application.properties 可改为 applicatin-dev-type.properties
 20200818
 mail发送后保存到数据库？附件处理
 ok>注释-requestmapping全路径
+
+docs txt改md
+docs 文件整理
+docs 区分出 assets

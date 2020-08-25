@@ -29,7 +29,7 @@ egg-api/target/
 egg-common/target/
 egg-generate/target/
 egg-message/target/
-egg-mongodb/target/
+#egg-mongodb/target/
 egg-persistence/target/
 egg-service/target/
 egg-web/target/
@@ -38,7 +38,7 @@ egg-api.iml
 egg-common.iml
 egg-generate.iml
 egg-message.iml
-egg-mongodb.iml
+#egg-mongodb.iml
 egg-persistence.iml
 egg-service.iml
 egg-web.iml
@@ -55,7 +55,7 @@ egg-api/src/test/
 egg-common/src/test/
 egg-generate/src/test/
 egg-message/src/test/
-egg-mongodb/src/test/
+#egg-mongodb/src/test/
 egg-persistence/src/test/
 egg-service/src/test/
 egg-web/src/test/

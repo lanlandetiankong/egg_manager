@@ -1,4 +1,4 @@
-package com.egg.manager.mongodb.mservices.serviceimpl;
+package com.egg.manager.service.mongodb.mservices.serviceimpl;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.mongodb.mservices.service.MyBaseMongoService;

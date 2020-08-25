@@ -1,4 +1,4 @@
-package com.egg.manager.mongodb.mservices.serviceimpl.forms.smartForm;
+package com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.mongodb.mservices.service.forms.smartForm.SmartFormFieldTypeDefinitionMService;

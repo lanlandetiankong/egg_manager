@@ -13,7 +13,6 @@
         <module>egg-persistence</module>
         <module>egg-api</module>
         <module>egg-generate</module>
-        <module>egg-mongodb</module>
         <module>egg-message</module>
         <module>egg-service</module>
         <module>egg-web</module>

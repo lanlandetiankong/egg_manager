@@ -1,9 +1,9 @@
-package com.egg.manager.mongodb.mservices.serviceimpl.forms.smartForm;
+package com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
-import com.egg.manager.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
+import com.egg.manager.service.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
 import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.persistence.mongo.dao.forms.SmartFormTypeDefinitionRepository;
 import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;

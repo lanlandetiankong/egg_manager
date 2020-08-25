@@ -179,15 +179,15 @@
         <!-- tools end -->
         <!-- activeMQ start -->
         <!--ActiveMq-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
-        <!--消息队列连接池-->
+        &lt;!&ndash;消息队列连接池&ndash;&gt;
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-pool</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- activeMQ end -->
     </dependencies>
     <build>

@@ -1,7 +1,0 @@
-1、druid
-http://127.0.0.1:10110/egg_manager/druid/sql.html
-2、swagger2
-http://localhost:10110/egg_manager/doc.html
-
-
-

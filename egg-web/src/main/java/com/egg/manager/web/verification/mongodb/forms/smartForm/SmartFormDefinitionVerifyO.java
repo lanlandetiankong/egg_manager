@@ -1,7 +1,7 @@
 package com.egg.manager.web.verification.mongodb.forms.smartForm;
 
-import com.egg.manager.persistence.mongo.mo.forms.SmartFormDefinitionMO;
-import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.web.verification.mongodb.MyBaseVerifyO;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfUpdate;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
  * \* Date: 2020/7/25
  * \* Time: 11:06
  * \* Description:
- * @see com.egg.manager.persistence.mongo.mo.forms.SmartFormDefinitionMO
+ * @see com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO
  * \
  */
 @Data

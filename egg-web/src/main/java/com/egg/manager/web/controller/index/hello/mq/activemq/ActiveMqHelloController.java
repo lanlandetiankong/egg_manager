@@ -1,16 +1,11 @@
 package com.egg.manager.web.controller.index.hello.mq.activemq;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.message.hello.MessageHelloService;
-import com.egg.manager.api.service.service.hello.HelloService;
 import com.egg.manager.common.annotation.log.OperLog;
-import com.egg.manager.persistence.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 

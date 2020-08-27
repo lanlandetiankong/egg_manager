@@ -1,7 +1,7 @@
 package com.egg.manager.api.service.service.user;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.persistence.entity.user.UserGroup;
+import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 
 /**
  * \* note:

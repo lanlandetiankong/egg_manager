@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.mapper.define.DefineDepartmentMapper">
+<mapper namespace="com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.define.DefineDepartment">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />
@@ -21,7 +21,7 @@
     </resultMap>
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.dto.define.DefineDepartmentDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.define.DefineDepartmentDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />
@@ -38,7 +38,7 @@
         <result column="last_modifyer_id" property="lastModifyerId" />
         <association column="parent_id"  property="parentDepartment"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.persistence.dto.define.DefineDepartmentDto">
+                     javaType="com.egg.manager.persistence.pojo.dto.define.DefineDepartmentDto">
             <id column="fid" property="fid"/>
             <result column="name" property="name" />
             <result column="code" property="code" />
@@ -52,8 +52,8 @@
             <result column="create_user_id" property="createUserId" />
             <result column="last_modifyer_id" property="lastModifyerId" />
         </association>
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
 
@@ -119,11 +119,11 @@
         LEFT JOIN em_define_department par_edd
         on edd.parent_id = par_edd.fid
         <where>
-            <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
                 <property name="table_name_alias" value="edd" />
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
             <property name="table_name_alias" value="edd" />
         </include>
     </select>

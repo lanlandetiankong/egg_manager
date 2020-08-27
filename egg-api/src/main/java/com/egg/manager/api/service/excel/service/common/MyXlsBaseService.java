@@ -1,7 +1,7 @@
 package com.egg.manager.api.service.excel.service.common;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.entity.define.DefineMenu;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;

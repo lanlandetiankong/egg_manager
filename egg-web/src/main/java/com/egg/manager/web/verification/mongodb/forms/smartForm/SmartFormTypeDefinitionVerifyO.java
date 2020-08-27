@@ -1,6 +1,6 @@
 package com.egg.manager.web.verification.mongodb.forms.smartForm;
 
-import com.egg.manager.persistence.mongo.mo.forms.SmartFormTypeDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.web.verification.mongodb.MyBaseVerifyO;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
 import com.egg.manager.web.verification.mongodb.VerifyGroupOfUpdate;

@@ -1,6 +1,6 @@
 package com.egg.manager.web.verification.mongodb;
 
-import com.egg.manager.persistence.mongo.mo.MyBaseModelMO;
+import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 
 /**
  * \* note:

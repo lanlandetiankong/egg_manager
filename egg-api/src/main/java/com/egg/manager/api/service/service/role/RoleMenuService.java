@@ -1,7 +1,7 @@
 package com.egg.manager.api.service.service.role;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.persistence.entity.role.RoleMenu;
+import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 
 /**
  *  [角色-菜单] Service

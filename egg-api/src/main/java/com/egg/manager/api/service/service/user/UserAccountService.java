@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.dto.login.LoginAccountDTO;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.excel.export.user.UserAccountXlsOutModel;
-import com.egg.manager.persistence.helper.MyCommonResult;
-import com.egg.manager.persistence.vo.user.UserAccountVo;
+import com.egg.manager.persistence.pojo.dto.login.LoginAccountDTO;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.pojo.vo.user.UserAccountVo;
 
 import java.util.List;
 import java.util.Set;

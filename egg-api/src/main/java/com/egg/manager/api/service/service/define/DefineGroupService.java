@@ -1,7 +1,7 @@
 package com.egg.manager.api.service.service.define;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.persistence.entity.define.DefineGroup;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 
 /**
  * \* note:

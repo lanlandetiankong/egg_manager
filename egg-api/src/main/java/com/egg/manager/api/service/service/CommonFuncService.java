@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.webvo.session.UserAccountToken;
-import org.apache.ibatis.session.RowBounds;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;

@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.service.service.role.RolePermissionService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.persistence.entity.define.DefineRole;
-import com.egg.manager.persistence.entity.role.RolePermission;
-import com.egg.manager.persistence.mapper.role.RolePermissionMapper;
+import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
+import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
+import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;

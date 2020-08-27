@@ -5,7 +5,7 @@ import com.egg.manager.common.exception.MyUnauthorizedException;
 import com.egg.manager.api.trait.helper.MyResponseHelper;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.beans.ConversionNotSupportedException;

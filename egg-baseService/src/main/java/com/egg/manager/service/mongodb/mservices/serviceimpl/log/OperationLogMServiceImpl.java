@@ -3,8 +3,8 @@ package com.egg.manager.service.mongodb.mservices.serviceimpl.log;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.mongodb.mservices.service.log.OperationLogMService;
 import com.egg.manager.service.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
-import com.egg.manager.persistence.mongo.dao.log.OperationLogRepository;
-import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.dao.log.OperationLogRepository;
+import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
 
 /**
  * MongoDb-OperationLogMO 操作日志-MService

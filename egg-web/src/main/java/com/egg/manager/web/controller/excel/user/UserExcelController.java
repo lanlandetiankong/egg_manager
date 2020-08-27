@@ -11,10 +11,10 @@ import com.egg.manager.api.trait.excel.listeners.introduce.user.UserAccountXlsIn
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.persistence.entity.define.DefineMenu;
-import com.egg.manager.persistence.entity.user.UserAccount;
-import com.egg.manager.persistence.excel.introduce.user.UserAccountXlsInModel;
-import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,9 +1,9 @@
 package com.egg.manager.api.service.service.role;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.egg.manager.persistence.entity.define.DefinePermission;
-import com.egg.manager.persistence.entity.define.DefineRole;
-import com.egg.manager.persistence.entity.role.RolePermission;
+import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
+import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 
 import java.util.List;
 

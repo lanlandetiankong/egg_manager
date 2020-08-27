@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.egg.manager.persistence.mapper")
+@MapperScan("com.egg.manager.persistence.db.mysql.mapper")
 public class MybatisPlusConfig {
 
     /**

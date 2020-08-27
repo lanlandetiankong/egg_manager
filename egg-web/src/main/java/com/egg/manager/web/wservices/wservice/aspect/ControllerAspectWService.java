@@ -1,7 +1,7 @@
 package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 

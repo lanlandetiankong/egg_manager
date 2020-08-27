@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.message.hello.MessageHelloService;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.api.service.service.hello.HelloService;
-import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

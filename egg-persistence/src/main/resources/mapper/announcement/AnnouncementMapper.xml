@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.mapper.announcement.AnnouncementMapper">
+<mapper namespace="com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.entity.announcement.Announcement">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.announcement.Announcement">
         <id column="fid" property="fid" />
         <result column="title" property="title" />
         <result column="key_word" property="keyWord" />
@@ -22,7 +22,7 @@
     </resultMap>
 
 
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.dto.announcement.AnnouncementDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.announcement.AnnouncementDto">
         <id column="fid" property="fid" />
         <result column="title" property="title" />
         <result column="key_word" property="keyWord" />
@@ -37,8 +37,8 @@
         <result column="update_time" property="updateTime" />
         <result column="create_user_id" property="createUserId" />
         <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -96,11 +96,11 @@
         </include>
         FROM em_announcement ea
         <where>
-            <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
+            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
                 <property name="table_name_alias" value="ea" />
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
+        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
             <property name="table_name_alias" value="ea" />
         </include>
     </select>

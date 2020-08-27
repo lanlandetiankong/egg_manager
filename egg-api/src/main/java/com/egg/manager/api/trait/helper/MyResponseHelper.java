@@ -1,7 +1,7 @@
 package com.egg.manager.api.trait.helper;
 
 import com.egg.manager.common.base.enums.PublicResultEnum;
-import com.egg.manager.persistence.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 

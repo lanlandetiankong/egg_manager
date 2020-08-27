@@ -25,6 +25,7 @@
 #idea conf
 *.iml
 .idea/
+AssetsInclude/
 egg-api/target/
 egg-common/target/
 egg-generate/target/

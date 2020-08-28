@@ -10,8 +10,8 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 @ImportResource(locations = {
         "classpath:dubbo/${egg.application.build.env}/egg-baseService-dubbo-config.xml",
-        "classpath:dubbo/${egg.application.build.env}/consumer/egg-baseService-dubbo-*.xml",
-        "classpath:dubbo/${egg.application.build.env}/provider/egg-baseService-dubbo-*.xml"
+        "classpath*:dubbo/${egg.application.build.env}/provider/egg-baseService-dubbo-*.xml",
+        "classpath:dubbo/${egg.application.build.env}/consumer/egg-universal-dubbo-*.xml"
 })
 @EnableCaching
 @EnableDubbo

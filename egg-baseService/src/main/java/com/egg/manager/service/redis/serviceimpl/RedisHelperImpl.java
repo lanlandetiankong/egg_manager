@@ -1,7 +1,7 @@
 package com.egg.manager.service.redis.serviceimpl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.service.redis.service.RedisHelper;
+import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

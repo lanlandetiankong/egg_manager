@@ -3,7 +3,7 @@ package com.egg.manager.service.basic.serviceimpl.role;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.service.service.role.RolePermissionService;
+import com.egg.manager.api.services.basic.role.RolePermissionService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;

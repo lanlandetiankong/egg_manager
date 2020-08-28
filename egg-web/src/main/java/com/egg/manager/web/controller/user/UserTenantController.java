@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.user;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.annotation.log.CurrentLoginUser;
 import com.egg.manager.common.annotation.log.OperLog;
-import com.egg.manager.api.service.service.user.UserTenantService;
+import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;

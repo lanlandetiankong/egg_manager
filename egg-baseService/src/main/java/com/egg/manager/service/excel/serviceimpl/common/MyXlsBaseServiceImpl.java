@@ -3,7 +3,7 @@ package com.egg.manager.service.excel.serviceimpl.common;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.egg.manager.api.service.excel.service.common.MyXlsBaseService;
+import com.egg.manager.api.services.excel.service.common.MyXlsBaseService;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;

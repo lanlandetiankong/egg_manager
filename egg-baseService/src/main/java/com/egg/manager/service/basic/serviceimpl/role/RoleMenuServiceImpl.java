@@ -2,7 +2,7 @@ package com.egg.manager.service.basic.serviceimpl.role;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.service.service.role.RoleMenuService;
+import com.egg.manager.api.services.basic.role.RoleMenuService;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
 

@@ -1,13 +1,12 @@
 package com.egg.manager.service.redis.serviceimpl.common;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.service.redis.service.RedisHelper;
-import com.egg.manager.api.service.redis.service.common.MyRedisCommonReqService;
-import com.egg.manager.api.service.service.define.DefineRoleService;
-import com.egg.manager.api.service.service.user.UserAccountService;
+import com.egg.manager.api.services.redis.service.RedisHelper;
+import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
+import com.egg.manager.api.services.basic.define.DefineRoleService;
+import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Service(interfaceClass = MyRedisCommonReqService.class)
 public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqService {
 
     @Reference

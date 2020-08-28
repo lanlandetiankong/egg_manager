@@ -1,8 +1,7 @@
 package com.egg.manager.web.config.shiro;
 
-import com.alibaba.boot.dubbo.util.DubboUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.service.redis.service.user.UserAccountRedisService;
+import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JWTUtil;

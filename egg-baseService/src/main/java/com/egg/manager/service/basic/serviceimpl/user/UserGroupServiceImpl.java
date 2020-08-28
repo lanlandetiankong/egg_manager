@@ -2,7 +2,7 @@ package com.egg.manager.service.basic.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.service.service.user.UserGroupService;
+import com.egg.manager.api.services.basic.user.UserGroupService;
 import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
 

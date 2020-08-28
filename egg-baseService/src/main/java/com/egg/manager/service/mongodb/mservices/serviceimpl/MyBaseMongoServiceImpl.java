@@ -1,7 +1,7 @@
 package com.egg.manager.service.mongodb.mservices.serviceimpl;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.mongodb.mservices.service.MyBaseMongoService;
+import com.egg.manager.api.services.mongodb.mservices.service.MyBaseMongoService;
 import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.MyMongoException;

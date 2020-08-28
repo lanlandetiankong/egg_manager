@@ -2,7 +2,7 @@ package com.egg.manager.service.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.service.service.define.DefineGroupService;
+import com.egg.manager.api.services.basic.define.DefineGroupService;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineGroupMapper;
 

@@ -23,9 +23,9 @@
 - [x] com.egg.manager.service非api接口，迁移出来
 
 - [x] ```
-  com.egg.manager.api.service.exception  -->  com.egg.manager.common.exception
-  com.egg.manager.api.service.annotation    -->     com.egg.manager.common.annotation
-  com.egg.manager.api.service.helper -->    com.egg.manager.api.trait.helper
+  com.egg.manager.api.services.exception  -->  com.egg.manager.common.exception
+  com.egg.manager.api.services.annotation    -->     com.egg.manager.common.annotation
+  com.egg.manager.api.services.helper -->    com.egg.manager.api.trait.helper
   ```
 
 - [x] application.properties 可改为 applicatin-dev-type.properties

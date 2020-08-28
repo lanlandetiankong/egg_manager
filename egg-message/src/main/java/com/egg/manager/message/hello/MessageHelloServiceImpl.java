@@ -2,10 +2,9 @@ package com.egg.manager.message.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.message.hello.MessageHelloService;
-import com.egg.manager.api.service.service.hello.HelloService;
+import com.egg.manager.api.services.message.hello.MessageHelloService;
+import com.egg.manager.api.services.basic.hello.HelloService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j

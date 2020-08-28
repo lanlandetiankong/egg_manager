@@ -5,9 +5,16 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.jms.annotation.EnableJms;
 
+
+@ImportResource(locations = {
+        "classpath:dubbo/${egg.application.build.env}/egg-baseService-dubbo-config.xml",
+        "classpath:dubbo/${egg.application.build.env}/consumer/egg-baseService-dubbo-*.xml",
+        "classpath:dubbo/${egg.application.build.env}/provider/egg-baseService-dubbo-*.xml"
+})
 @SpringBootApplication
 @EnableJms
 @EnableCaching

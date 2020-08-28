@@ -47,10 +47,16 @@
         <defaultGoal>compile</defaultGoal>
         <resources>
             <resource>
+                <directory>src/main/resources/dubbo/${profiles.active}</directory>
+                <filtering>true</filtering>
+                <targetPath>dubbo/${profiles.active}</targetPath>
+            </resource>
+            <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>application.properties</include>
                     <include>application-${profiles.active}.properties</include>
+                    <include>dubbo/${profiles.active}</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>

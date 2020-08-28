@@ -29,7 +29,7 @@ public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements U
     @Autowired
     private UploadProps uploadProps ;
 
-    @Reference
+    @Autowired
     private UserAccountService userAccountService ;
 
     @Override

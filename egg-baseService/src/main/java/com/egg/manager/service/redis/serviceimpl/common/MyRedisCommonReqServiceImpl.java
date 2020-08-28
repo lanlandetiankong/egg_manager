@@ -33,7 +33,7 @@ public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqSer
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    @Reference
+    @Autowired
     public UserAccountService userAccountService ;
     @Reference
     public DefineRoleService defineRoleService ;

@@ -19,6 +19,7 @@ import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +54,7 @@ public class UserExcelController extends BaseController {
     private DefineMenuService defineMenuService ;
     @Reference
     private UserAccountXlsService userAccountXlsService ;
-    @Reference
+    @Autowired
     private UserAccountService userAccountService ;
 
     @PostMapping(value = "/exportCheckList")

@@ -38,7 +38,7 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
 
-    @Reference
+    @Autowired
     public UserAccountService userAccountService ;
 
 

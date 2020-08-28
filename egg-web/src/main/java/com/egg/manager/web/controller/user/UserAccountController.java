@@ -71,7 +71,7 @@ public class UserAccountController extends BaseController {
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
 
-    @Reference
+    @Autowired
     private UserAccountService userAccountService ;
     @Reference
     private CommonFuncService commonFuncService ;

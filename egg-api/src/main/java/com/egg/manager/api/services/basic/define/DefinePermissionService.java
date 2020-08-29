@@ -38,7 +38,7 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans);
 
     /**

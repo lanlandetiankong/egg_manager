@@ -135,7 +135,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      * @param paginationBean
      */
     @Override
-    public void dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                      List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserTenant> userTenantEntityWrapper = new EntityWrapper<UserTenant>();
@@ -154,6 +154,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds,userTenantEntityWrapper) ;
         result.setResultList(UserTenantTransfer.transferEntityToVoList(userTenants));
+        return result;
     }
 
 
@@ -165,12 +166,13 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      * @param paginationBean
      */
     @Override
-    public void dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                      List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(UserTenantTransfer.transferDtoToVoList(userTenantDtoList));
+        return result;
     }
 
 

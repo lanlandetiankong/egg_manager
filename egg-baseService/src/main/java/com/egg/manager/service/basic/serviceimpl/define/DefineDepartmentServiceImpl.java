@@ -59,7 +59,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
@@ -78,6 +78,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
         result.setResultList(DefineDepartmentTransfer.transferEntityToVoList(defineDepartments));
+        return result ;
     }
 
     /**
@@ -88,12 +89,13 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        return result ;
     }
 
 

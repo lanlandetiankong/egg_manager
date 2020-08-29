@@ -72,7 +72,7 @@ public class DefineTenantController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询租户定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -113,8 +113,8 @@ public class DefineTenantController extends BaseController{
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,null,sortBeans); ;
-            defineTenantService.dealResultListSetToEntitySelect(result) ;
+            result = defineTenantService.dealGetDefineTenantDtoPages(result,queryFieldBeanList,null,sortBeans); ;
+            result = defineTenantService.dealResultListSetToEntitySelect(result) ;
             dealCommonSuccessCatch(result,"查询租户定义信息Select列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

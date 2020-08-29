@@ -28,7 +28,7 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                List<AntdvSortBean> sortBeans);
 
     /**
@@ -38,7 +38,7 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                List<AntdvSortBean> sortBeans);
 
     /**

@@ -34,7 +34,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                 List<AntdvSortBean> sortBeans);
 
     /**
@@ -44,7 +44,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                         List<AntdvSortBean> sortBeans);
 
 

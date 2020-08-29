@@ -30,11 +30,11 @@ public class HelloServiceImpl implements HelloService {
 
 
     @Override
-    public void sayHello() {
+    public String sayHello() {
         //userAccountService.selectPage(null);
 
         myBaseEmailService.sendSimpleEmail(MyEmailMsgO.builder().content("测试").build());
-
+        return "ok";
     }
 
     @Override

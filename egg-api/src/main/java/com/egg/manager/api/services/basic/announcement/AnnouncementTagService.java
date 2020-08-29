@@ -29,7 +29,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                             List<AntdvSortBean> sortBeans);
     /**
      * 分页查询 公告标签 dto列表
@@ -38,7 +38,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                      List<AntdvSortBean> sortBeans);
 
     /***
@@ -84,5 +84,5 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * 取得的结果 转为 枚举类型
      * @param result
      */
-    void dealResultListSetToEntitySelect(MyCommonResult result);
+    MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result);
 }

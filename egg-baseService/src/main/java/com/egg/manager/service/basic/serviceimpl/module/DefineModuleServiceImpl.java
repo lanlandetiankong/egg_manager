@@ -57,7 +57,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineModule> defineModuleEntityWrapper = new EntityWrapper<DefineModule>();
@@ -76,6 +76,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineModule> defineModules = defineModuleMapper.selectPage(rowBounds,defineModuleEntityWrapper) ;
         result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModules));
+        return result ;
     }
 
 
@@ -87,12 +88,13 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
+        return result ;
     }
 
 

@@ -72,7 +72,7 @@ public class DefineDepartmentController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineDepartmentService.dealGetDefineDepartmentDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询部门定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

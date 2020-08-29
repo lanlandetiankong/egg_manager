@@ -1,5 +1,6 @@
 package com.egg.manager.service.basic.serviceimpl.announcement;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -55,7 +56,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                             List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
@@ -74,6 +75,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
         result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTags));
+        return result ;
     }
 
     /**
@@ -84,12 +86,13 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
+        return result ;
     }
 
     /***
@@ -196,14 +199,15 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param result
      */
     @Override
-    public void dealResultListSetToEntitySelect(MyCommonResult result){
+    public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<AnnouncementTagVo> resultList = result.getResultList() ;
-        if(resultList != null && resultList.isEmpty() == false){
+        if(CollectionUtil.isNotEmpty(resultList)){
             for(AnnouncementTagVo announcementTagVo : resultList){
                 enumList.add(new FrontEntitySelectBean(announcementTagVo.getFid(),announcementTagVo.getName())) ;
             }
         }
         result.setEnumList(enumList);
+        return result ;
     }
 }

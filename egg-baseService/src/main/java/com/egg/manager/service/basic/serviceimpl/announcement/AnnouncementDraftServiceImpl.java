@@ -43,7 +43,8 @@ import java.util.Map;
  * \
  */
 @Service(interfaceClass = AnnouncementDraftService.class)
-public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftMapper,AnnouncementDraft> implements AnnouncementDraftService {
+public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftMapper,AnnouncementDraft>
+        implements AnnouncementDraftService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -65,7 +66,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                               List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<AnnouncementDraft> announcementDraftEntityWrapper = new EntityWrapper<AnnouncementDraft>();
@@ -86,6 +87,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
         result.setResultList(AnnouncementDraftTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
+        return result ;
     }
 
     /**
@@ -96,7 +98,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                  List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
@@ -105,6 +107,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
+        return result ;
     }
 
     /**

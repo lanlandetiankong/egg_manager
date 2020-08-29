@@ -29,7 +29,7 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                   List<AntdvSortBean> sortBeans);
 
     /**
@@ -39,7 +39,7 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                   List<AntdvSortBean> sortBeans);
 
     /**
@@ -76,5 +76,5 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * 取得的结果 转为 枚举类型
      * @param result
      */
-    void dealResultListSetToEntitySelect(MyCommonResult result);
+    MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result);
 }

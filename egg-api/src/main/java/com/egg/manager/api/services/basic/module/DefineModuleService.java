@@ -28,7 +28,7 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans);
 
     /**
@@ -38,7 +38,7 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                             List<AntdvSortBean> sortBeans);
     /**
      * 模块定义-新增

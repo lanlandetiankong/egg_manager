@@ -42,7 +42,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                               List<AntdvSortBean> sortBeans);
 
     /**
@@ -52,7 +52,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                        List<AntdvSortBean> sortBeans);
 
     /**

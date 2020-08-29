@@ -75,7 +75,7 @@ public class DefinePermissionController  extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = definePermissionService.dealGetDefinePermissionPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询权限定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

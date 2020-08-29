@@ -91,7 +91,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public void dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                         List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
@@ -112,6 +112,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
         result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccounts));
+        return result ;
     }
 
     /**
@@ -122,7 +123,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public void dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                         List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
@@ -142,6 +143,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
+        return result ;
     }
 
 

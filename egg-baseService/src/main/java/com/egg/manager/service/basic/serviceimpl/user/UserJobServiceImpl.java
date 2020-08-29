@@ -59,7 +59,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                     List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserJob> userJobEntityWrapper = new EntityWrapper<UserJob>();
@@ -78,6 +78,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserJob> userJobs = userJobMapper.selectPage(rowBounds,userJobEntityWrapper) ;
         result.setResultList(UserJobTransfer.transferEntityToVoList(userJobs));
+        return result ;
     }
 
     /**
@@ -88,12 +89,13 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public void dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                     List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(UserJobTransfer.transferDtoToVoList(userJobDtoList));
+        return result ;
     }
 
 

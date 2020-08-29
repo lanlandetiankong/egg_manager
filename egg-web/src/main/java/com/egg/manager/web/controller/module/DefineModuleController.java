@@ -70,7 +70,7 @@ public class DefineModuleController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineModuleService.dealGetDefineModuleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineModuleService.dealGetDefineModuleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

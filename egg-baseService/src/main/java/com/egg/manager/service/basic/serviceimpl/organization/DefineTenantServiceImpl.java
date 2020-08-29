@@ -57,7 +57,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineTenant> defineTenantEntityWrapper = new EntityWrapper<DefineTenant>();
@@ -76,6 +76,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineTenant> defineTenants = defineTenantMapper.selectPage(rowBounds,defineTenantEntityWrapper) ;
         result.setResultList(DefineTenantTransfer.transferEntityToVoList(defineTenants));
+        return result ;
     }
 
 
@@ -87,12 +88,13 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
+        return result ;
     }
 
 
@@ -185,7 +187,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param result
      */
     @Override
-    public void dealResultListSetToEntitySelect(MyCommonResult result){
+    public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList() ;
         if(resultList != null && resultList.isEmpty() == false){
@@ -194,5 +196,6 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
             }
         }
         result.setEnumList(enumList);
+        return result;
     }
 }

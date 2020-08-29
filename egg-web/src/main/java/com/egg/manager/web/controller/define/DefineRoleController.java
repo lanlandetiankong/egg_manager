@@ -94,7 +94,7 @@ public class DefineRoleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineRoleService.dealGetDefineRolePages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineRoleService.dealGetDefineRolePages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询角色定义信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -121,7 +121,7 @@ public class DefineRoleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineRoleService.dealGetDefineRoleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineRoleService.dealGetDefineRoleDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询角色定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

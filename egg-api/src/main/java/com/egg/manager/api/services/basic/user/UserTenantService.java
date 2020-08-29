@@ -34,7 +34,7 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                               List<AntdvSortBean> sortBeans);
 
     /**
@@ -44,7 +44,7 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                  List<AntdvSortBean> sortBeans);
 
 

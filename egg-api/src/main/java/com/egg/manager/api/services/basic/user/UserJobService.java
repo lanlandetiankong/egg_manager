@@ -27,7 +27,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                 List<AntdvSortBean> sortBeans);
 
     /**
@@ -37,7 +37,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    void dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserJobVo> dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                              List<AntdvSortBean> sortBeans);
 
 

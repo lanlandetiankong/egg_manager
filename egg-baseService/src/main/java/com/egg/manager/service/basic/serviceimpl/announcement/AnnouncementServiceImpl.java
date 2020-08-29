@@ -67,7 +67,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
@@ -88,6 +88,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
         result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements,announcementTagMap));
+        return result ;
     }
 
     /**
@@ -98,7 +99,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public void dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                             List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
@@ -107,6 +108,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
+        return result ;
     }
 
     /**

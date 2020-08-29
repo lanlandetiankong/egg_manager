@@ -78,7 +78,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param paginationBean
      */
     @Override
-    public void dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                              List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
@@ -97,6 +97,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
         result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissions));
+        return result ;
     }
 
     /**

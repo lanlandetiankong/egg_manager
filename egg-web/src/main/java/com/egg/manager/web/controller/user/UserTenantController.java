@@ -69,7 +69,7 @@ public class UserTenantController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            userTenantService.dealGetUserTenantPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
+            result = userTenantService.dealGetUserTenantPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询 [用户与租户关联] 信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

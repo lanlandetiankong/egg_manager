@@ -53,7 +53,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<DefineJob> defineJobEntityWrapper = new EntityWrapper<DefineJob>();
@@ -72,6 +72,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds,defineJobEntityWrapper) ;
         result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobs));
+        return result ;
     }
 
     /**
@@ -82,12 +83,13 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public void dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                       List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        return result ;
     }
 
 

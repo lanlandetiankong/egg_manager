@@ -95,7 +95,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
             List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser,mongoQueryBuffer);
-            smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result,list) ;
+            result = smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result,list) ;
             dealCommonSuccessCatch(result,"查询表单类型信息-Dto列表:"+actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

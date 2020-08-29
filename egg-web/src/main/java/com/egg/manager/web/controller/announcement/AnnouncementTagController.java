@@ -71,8 +71,8 @@ public class AnnouncementTagController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            announcementTagService.dealGetAnnouncementTagPages(result,queryFieldBeanList,null,sortBeans) ;
-            announcementTagService.dealResultListSetToEntitySelect(result) ;
+            result = announcementTagService.dealGetAnnouncementTagPages(result,queryFieldBeanList,null,sortBeans) ;
+            result = announcementTagService.dealResultListSetToEntitySelect(result) ;
             dealCommonSuccessCatch(result,"查询公告标签信息Select列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

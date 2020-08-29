@@ -65,7 +65,7 @@ public class UserJobController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
+            result = userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

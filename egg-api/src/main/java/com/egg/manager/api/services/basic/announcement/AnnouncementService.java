@@ -44,7 +44,7 @@ public interface AnnouncementService extends IService<Announcement> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                          List<AntdvSortBean> sortBeans);
 
     /**
@@ -54,7 +54,7 @@ public interface AnnouncementService extends IService<Announcement> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                   List<AntdvSortBean> sortBeans);
 
     /**

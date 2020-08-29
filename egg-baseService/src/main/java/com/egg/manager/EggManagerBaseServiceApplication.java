@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 @ImportResource(locations = {
-        "classpath:dubbo/${egg.application.build.env}/egg-baseService-dubbo-config.xml",
-        "classpath*:dubbo/${egg.application.build.env}/provider/egg-baseService-dubbo-*.xml",
-        "classpath:dubbo/${egg.application.build.env}/consumer/egg-universal-dubbo-*.xml"
+        "classpath:${egg.application.build.env}/dubbo/egg-baseService-dubboConfig.xml",
+        "classpath*:${egg.application.build.env}/dubbo/provider/egg-baseService-dubboProvider-*.xml",
+        "classpath:universal/${egg.application.build.env}/dubbo/consumer/egg-universal-dubboConsumer-*.xml"
 })
 @EnableCaching
 @EnableDubbo

@@ -96,11 +96,15 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>dubbo/**.*</include>
                     <include>config/logs/**.*</include>
                     <include>config/props/props-${profiles.active}-*.*</include>
                     <include>config/application-${profiles.active}-*.properties</include>
                 </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/universal/${profiles.active}</directory>
+                <filtering>true</filtering>
+                <targetPath>universal/${profiles.active}</targetPath>
             </resource>
         </resources>
     </build>

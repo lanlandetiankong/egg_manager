@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.forms                                                                -->
+    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <bean id="smartFormDefinitionMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormDefinitionMServiceImpl"/>
+
+    <bean id="smartFormFieldDefinitionMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormFieldDefinitionMServiceImpl"/>
+
+    <bean id="smartFormFieldTypeDefinitionMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormFieldTypeDefinitionMServiceImpl"/>
+
+    <bean id="smartFormRecordFieldMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormRecordFieldMServiceImpl"/>
+
+    <bean id="smartFormRecordMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormRecordMServiceImpl"/>
+
+    <bean id="smartFormTypeDefinitionMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm.SmartFormTypeDefinitionMServiceImpl"/>
+
+
+
+    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.forms                                                                -->
+
+    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.log                                                              -->
+
+
+    <bean id="operationLogMService" class="com.egg.manager.service.mongodb.mservices.serviceimpl.log.OperationLogMServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.log                                                              -->
+
+
+</beans>

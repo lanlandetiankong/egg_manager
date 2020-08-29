@@ -62,4 +62,8 @@
     <dubbo:reference id="userTenantService" check="false"
                      interface="com.egg.manager.api.services.basic.user.UserTenantService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.user                                                              -->
+
+
+    <dubbo:reference id="commonFuncService" check="false"
+                     interface="com.egg.manager.api.services.basic.CommonFuncService"/>
 </beans>

@@ -9,6 +9,7 @@ public class MyRpcReferConfig {
     @Configuration
     @ImportResource(locations = {
             "classpath:${egg.application.build.env}/dubbo/egg-web-dubboConfig.xml",
+            //"classpath*:${egg.application.build.env}/dubbo/beans/*/egg-web-dubboBean-*.xml",
             "classpath*:universal/${egg.application.build.env}/dubbo/consumer/*/egg-universal-dubboConsumer-*.xml"
     })
     static class DubboReferConfig {

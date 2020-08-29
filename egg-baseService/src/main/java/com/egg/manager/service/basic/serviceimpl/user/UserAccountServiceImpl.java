@@ -50,8 +50,7 @@ import java.util.*;
  * \* Description:
  * \
  */
-//@Service(interfaceClass = UserAccountService.class)
-@Component
+@Service(interfaceClass = UserAccountService.class)
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;

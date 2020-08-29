@@ -71,9 +71,9 @@ public class UserAccountController extends BaseController {
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
 
-    @Reference
+    @Autowired
     private UserAccountService userAccountService ;
-    @Reference
+    @Autowired
     private CommonFuncService commonFuncService ;
 
 
@@ -91,7 +91,7 @@ public class UserAccountController extends BaseController {
             if(loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(),loginAccountVo.getPassword())) {
                 throw new LoginFormFieldDeficiencyException("账号名或密码");
             }
-
+            UserAccount s = userAccountService.selectById("s");
             UserAccount userAccount = userAccountService.dealGetAccountByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             if(userAccount == null) {
                 throw new Exception("账号未注册！");

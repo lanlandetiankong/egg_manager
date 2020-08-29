@@ -51,7 +51,7 @@ public class AnnouncementDraftController extends BaseController{
     private AnnouncementDraftMapper announcementDraftMapper ;
     @Reference
     private CommonFuncService commonFuncService ;
-    @Autowired
+    @Reference
     private AnnouncementDraftService announcementDraftService;
     @Reference
     private AnnouncementTagService announcementTagService;

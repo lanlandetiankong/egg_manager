@@ -14,7 +14,6 @@ public class MessageHelloServiceImpl implements MessageHelloService {
     private String serverPort ;
     @Value("${egg.dubbo.application.name}")
     private String dubboApplicationName ;
-
     @Reference
     private HelloService helloService ;
     @Override

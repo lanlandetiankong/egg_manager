@@ -42,7 +42,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
-//@Service(interfaceClass = AnnouncementDraftService.class)
+@Service(interfaceClass = AnnouncementDraftService.class)
 public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftMapper,AnnouncementDraft> implements AnnouncementDraftService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;

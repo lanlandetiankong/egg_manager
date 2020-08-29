@@ -54,7 +54,7 @@ public class UserExcelController extends BaseController {
     private DefineMenuService defineMenuService ;
     @Reference
     private UserAccountXlsService userAccountXlsService ;
-    @Autowired
+    @Reference
     private UserAccountService userAccountService ;
 
     @PostMapping(value = "/exportCheckList")

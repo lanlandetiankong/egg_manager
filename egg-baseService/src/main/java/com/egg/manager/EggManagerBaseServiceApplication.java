@@ -5,14 +5,10 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
-@ImportResource(locations = {
-        "classpath:${egg.application.build.env}/dubbo/egg-baseService-dubboConfig.xml",
-        "classpath*:${egg.application.build.env}/dubbo/provider/egg-baseService-dubboProvider-*.xml",
-        "classpath:universal/${egg.application.build.env}/dubbo/consumer/*/egg-universal-dubboConsumer-*.xml"
-})
+
 @EnableCaching
 @EnableDubbo
 @EnableMongoAuditing
@@ -20,6 +16,6 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @SpringBootApplication
 public class EggManagerBaseServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EggManagerBaseServiceApplication.class, args);
+        ConfigurableApplicationContext appCtx = SpringApplication.run(EggManagerBaseServiceApplication.class, args);
     }
 }

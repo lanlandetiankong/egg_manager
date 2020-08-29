@@ -10,10 +10,6 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.jms.annotation.EnableJms;
 
 
-@ImportResource(locations = {
-        "classpath:${egg.application.build.env}/dubbo/egg-web-dubboConfig.xml",
-        "classpath:universal/${egg.application.build.env}/dubbo/consumer/*/egg-universal-dubboConsumer-*.xml"
-})
 @SpringBootApplication
 @EnableJms
 @EnableCaching

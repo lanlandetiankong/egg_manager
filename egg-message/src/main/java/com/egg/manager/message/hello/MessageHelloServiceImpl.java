@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class MessageHelloServiceImpl implements MessageHelloService {
     @Value("${server.port}")
     private String serverPort ;
-    @Value("${dubbo.application.name}")
+    @Value("${egg.dubbo.application.name}")
     private String dubboApplicationName ;
 
     @Reference

@@ -1,6 +1,5 @@
 package com.egg.manager.message.email.serviceimpl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.mail.internet.MimeMessage;
@@ -25,7 +25,8 @@ import java.util.Map;
 
 
 @Slf4j
-@Service(interfaceClass = MyBaseEmailService.class)
+//@Service(interfaceClass = MyBaseEmailService.class)
+@Service
 public class MyBaseEmailServiceImpl implements MyBaseEmailService {
     @Autowired
     private JavaMailSender javaMailSender;

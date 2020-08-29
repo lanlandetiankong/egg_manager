@@ -30,7 +30,7 @@
                      interface="com.egg.manager.api.services.basic.define.DefineRoleService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.define                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.hello                                                              -->
-    <dubbo:reference id="HelloService" check="false"
+    <dubbo:reference id="helloService" check="false"
                      interface="com.egg.manager.api.services.basic.hello.HelloService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.hello                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.module                                                              -->

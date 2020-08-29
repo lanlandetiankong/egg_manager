@@ -10,7 +10,6 @@
 
     <!--                                    dir-start:com.egg.manager.service.redis.serviceimpl.user                                                              -->
     <dubbo:service protocol="dubbo" ref="userAccountRedisService" interface="com.egg.manager.api.services.redis.service.user.UserAccountRedisService"/>
-    <bean id="userAccountRedisService" class="com.egg.manager.service.redis.serviceimpl.user.UserAccountRedisServiceImpl"/>
     <!--                                    dir-end:com.egg.manager.service.redis.serviceimpl.user                                                              -->
 
 

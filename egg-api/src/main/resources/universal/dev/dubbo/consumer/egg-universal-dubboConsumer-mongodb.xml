@@ -30,4 +30,8 @@
     <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.forms                                                              -->
 
 
+    <!--                                    dir-start:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
+    <dubbo:reference id="operationLogMService" check="false"
+                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMService"/>
+    <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
 </beans>

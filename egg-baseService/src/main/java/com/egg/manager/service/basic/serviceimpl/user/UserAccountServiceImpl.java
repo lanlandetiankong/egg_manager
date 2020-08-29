@@ -37,6 +37,7 @@ import com.egg.manager.persistence.pojo.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -49,8 +50,8 @@ import java.util.*;
  * \* Description:
  * \
  */
-@Service(interfaceClass = UserAccountService.class)
-//@Component
+//@Service(interfaceClass = UserAccountService.class)
+@Component
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;

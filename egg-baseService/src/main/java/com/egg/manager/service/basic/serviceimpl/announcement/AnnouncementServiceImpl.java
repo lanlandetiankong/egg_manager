@@ -56,7 +56,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     private CommonFuncService commonFuncService ;
     @Reference
     private AnnouncementTagService announcementTagService ;
-    @Reference
+    @Autowired
     private AnnouncementDraftService announcementDraftService ;
 
 

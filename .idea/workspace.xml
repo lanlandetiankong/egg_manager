@@ -25,49 +25,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="2020823 notes 位置调整">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-hello.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/configResource/application-dev.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/configResource/application-prod.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-hello.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/egg-web/src/main/resources/envResources/dev/dubbo/egg-web-dubboConfig.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/dev/consumer/egg-universal-dubboConsumer-basic.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-basic.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/dev/consumer/egg-universal-dubboConsumer-excel.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-excel.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/dev/consumer/egg-universal-dubboConsumer-mongodb.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-mongodb.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/dev/consumer/egg-universal-dubboConsumer-redis.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-message.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/pom.xml" afterPath="$PROJECT_DIR$/egg-baseService/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/log/OperationLogMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/log/OperationLogMServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/application-dev.properties" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/configResource/application-dev.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/application-prod.properties" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/configResource/application-prod.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/configResource/application.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/egg-baseService-dubbo-config.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/egg-baseService-dubboConfig.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/provider/egg-baseService-dubboProvider-basic.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/provider/egg-baseService-dubboProvider-excel.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-excel.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/provider/egg-baseService-dubboProvider-mongodb.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-mongodb.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/provider/egg-baseService-dubboProvider-redis.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-redis.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-message/pom.xml" afterPath="$PROJECT_DIR$/egg-message/pom.xml" />
+    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="20200829 dubbo-xml配置-init05">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-basic.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-excel.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-excel.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-hello.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-hello.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-message.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-message.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-mongodb.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-mongodb.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-redis.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-redis.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java" />
       <change beforePath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java" afterPath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java" />
-      <change beforePath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java" afterPath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/hello/MessageHelloServiceImpl.java" afterPath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/hello/MessageHelloServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/egg-message/src/main/resources/application-dev.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-message/src/main/resources/application-prod.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-message/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/configResource/application.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-web/pom.xml" afterPath="$PROJECT_DIR$/egg-web/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/application-dev.properties" afterPath="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-dev.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/application-prod.properties" afterPath="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-prod.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application.properties" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/config/others/banner.txt" afterPath="$PROJECT_DIR$/egg-web/src/main/resources/configResources/config/others/banner.txt" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/dubbo/consumer/egg-baseService-dubboConsumer-basic.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/dubbo/consumer/egg-baseService-dubboConsumer-excel.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/dubbo/consumer/egg-baseService-dubboConsumer-mongodb.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/dubbo/consumer/egg-baseService-dubboConsumer-redis.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-redis.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/resources/dubbo/egg-baseService-dubbo-config.xml" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/egg-message-dubboConfig.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java" />
     </list>
     <ignored path="J:\projects\study\java\manager\.idea\shelf/" />
     <ignored path="$PROJECT_DIR$/egg-common/target/" />
@@ -92,7 +60,38 @@
     <favorites_list name="manager" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="EggManagerMessageApplication.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EggManagerWebApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="14" column="75" lean-forward="false" selection-start-line="14" selection-start-column="75" selection-end-line="14" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EggManagerBaseServiceApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="13" column="75" lean-forward="false" selection-start-line="13" selection-start-column="75" selection-end-line="13" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -201,10 +200,8 @@
         <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/egg-baseService-dubboConfig.xml" />
         <option value="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/universal/dev/consumer/egg-universal-dubboConsumer-mongodb.xml" />
         <option value="$PROJECT_DIR$/egg-api/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java" />
         <option value="$PROJECT_DIR$/egg-web/pom.xml" />
         <option value="$PROJECT_DIR$/egg-baseService/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java" />
         <option value="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-dev.properties" />
         <option value="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-prod.properties" />
         <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/configResource/application-prod.properties" />
@@ -212,12 +209,14 @@
         <option value="$PROJECT_DIR$/egg-message/src/main/resources/application-prod.properties" />
         <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-hello.xml" />
         <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/egg-message-dubboConfig.xml" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java" />
         <option value="$PROJECT_DIR$/egg-message/pom.xml" />
         <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java" />
         <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml" />
         <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-message.xml" />
         <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-hello.xml" />
+        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java" />
+        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java" />
+        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java" />
       </list>
     </option>
   </component>
@@ -288,185 +287,25 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-              <item name="hello" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="universal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="universal" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="universal" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="universal" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -474,7 +313,7 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -483,7 +322,7 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -493,115 +332,13 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-baseService" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="egg" type="462c0819:PsiDirectoryNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-              <item name="email" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-              <item name="email" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceimpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="egg" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
-              <item name="hello" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResource" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResource" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="egg-message" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResource" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-              <item name="provider" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -642,12 +379,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="J:\projects\study\java\manager\egg-api\src\main\resources\universal\dev\dubbo\consumer" />
-      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\envResource\dev\dubbo" />
-      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\envResource" />
-      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\envResources\dev\dubbo" />
-      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\envResources\test" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="J:\projects\study\java\manager\egg-api\src\main\resources\universal\dev\dubbo\consumer\message" />
+      <recent name="J:\projects\study\java\manager\egg-api\src\main\resources\universal\dev\dubbo\consumer\baseService" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\configResource" />
+      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\configResources" />
+      <recent name="J:\projects\study\java\manager\egg-baseService\src\main\resources\envResources\dev\dubbo" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.egg.manager.common.base.pagination.mongo" />
@@ -656,12 +393,12 @@
       <recent name="com.egg.manager.persistence.mongo.daoimpl" />
       <recent name="com.egg.manager.persistence.mongo.daoimpl.forms" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\configResource" />
-      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\configResources" />
-      <recent name="J:\projects\study\java\manager\egg-baseService\src\main\resources\envResources\dev\dubbo" />
-      <recent name="J:\projects\study\java\manager\egg-baseService\src\main\resources\configResource" />
-      <recent name="J:\projects\study\java\manager\egg-baseService\src\main\resources\envResources\dev" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="J:\projects\study\java\manager\egg-api\src\main\resources\universal\dev\dubbo\consumer" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\envResource\dev\dubbo" />
+      <recent name="J:\projects\study\java\manager\egg-message\src\main\resources\envResource" />
+      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\envResources\dev\dubbo" />
+      <recent name="J:\projects\study\java\manager\egg-web\src\main\resources\envResources\test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1068,14 +805,7 @@
       <workItem from="1598540028517" duration="570000" />
       <workItem from="1598618063703" duration="9013000" />
       <workItem from="1598662012131" duration="5262000" />
-      <workItem from="1598667323563" duration="42000" />
-    </task>
-    <task id="LOCAL-00056" summary="200326 权限定义 是否确认发布(确认发布后不可删除)">
-      <created>1585234993610</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1585234993610</updated>
+      <workItem from="1598667323563" duration="542000" />
     </task>
     <task id="LOCAL-00057" summary="200327 权限定义-已启用的项不允许删除限制">
       <created>1585313348458</created>
@@ -1413,7 +1143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598667144172</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="20200829 dubbo-xml配置-init05">
+      <created>1598667393312</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1598667393313</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1422,7 +1159,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55213000" />
+    <option name="totallyTimeSpent" value="55713000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1435,6 +1172,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.51059" order="0" side_tool="true" content_ui="tabs" />
@@ -1449,16 +1187,17 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44387755" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44387755" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7619048" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.48940998" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31543118" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37140697" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1467,7 +1206,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5062893" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1814,7 +1552,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-basic.xml">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="32" column="37" lean-forward="false" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="37" />
@@ -1844,7 +1582,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-mongodb.xml">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-mongodb.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="34" column="111" lean-forward="false" selection-start-line="34" selection-start-column="111" selection-end-line="34" selection-end-column="111" />
@@ -1880,13 +1618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1895,6 +1626,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1930,6 +1662,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="13" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1937,6 +1670,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1971,26 +1705,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="14" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/egg-baseService/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
           <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2020,7 +1739,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-message.xml">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-message.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="12" column="101" lean-forward="false" selection-start-line="12" selection-start-column="101" selection-end-line="12" selection-end-column="101" />
@@ -2044,10 +1763,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-hello.xml">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-hello.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
           <caret line="12" column="94" lean-forward="false" selection-start-line="12" selection-start-column="94" selection-end-line="12" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="14" column="75" lean-forward="false" selection-start-line="14" selection-start-column="75" selection-end-line="14" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="13" column="75" lean-forward="false" selection-start-line="13" selection-start-column="75" selection-end-line="13" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding />
         </state>
       </provider>

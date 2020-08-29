@@ -12,7 +12,7 @@ import org.springframework.jms.annotation.EnableJms;
 @ImportResource(locations = {
         "classpath:${egg.application.build.env}/dubbo/egg-message-dubboConfig.xml",
         "classpath*:${egg.application.build.env}/dubbo/provider/egg-message-dubboProvider-*.xml",
-        "classpath:universal/${egg.application.build.env}/dubbo/consumer/egg-universal-dubboConsumer-*.xml"
+        "classpath:universal/${egg.application.build.env}/dubbo/consumer/*/egg-universal-dubboConsumer-*.xml"
 })
 @SpringBootApplication
 @EnableJms

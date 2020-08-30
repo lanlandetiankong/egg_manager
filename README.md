@@ -40,7 +40,7 @@ http://localhost:8083/egg_manager/index/hello/testEnv
 一、版本号管理
 1、已引入versions-maven-plugin插件
 2、更新版本号!!!(只需要这个步骤即可)
-mvn versions:set -DnewVersion=1.1-SNAPSHOT
+mvn versions:set -DnewVersion=2.0.2-SNAPSHOT
 3、更新子模块和父模块一样的版本号
 mvn -N versions:update-child-modules
 4、提交版本更新

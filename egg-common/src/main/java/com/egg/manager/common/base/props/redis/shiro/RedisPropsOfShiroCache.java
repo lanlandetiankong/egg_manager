@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Component
 @ConfigurationProperties(prefix = "props.redis.shiro.cache")
-@PropertySource("classpath:config/props/props-${egg.application.build.env}-redis.properties")
+@PropertySource("classpath:universal/${egg.application.build.env}/props/props-redis.properties")
 public class RedisPropsOfShiroCache  implements Serializable {
     //jwt
     private String authorizationKey;
@@ -46,6 +46,7 @@ public class RedisPropsOfShiroCache  implements Serializable {
     private String userTokenKey ;
     private String userGroupKey ;
     private String userTenantKey ;
+    private String UserDepartmentKey ;
     private String userRolesKey ;
     private String userPermissionsKey ;
     private String userFrontMenusKey ;
@@ -79,6 +80,7 @@ public class RedisPropsOfShiroCache  implements Serializable {
     private long userTokenTtl ;
     private long userGroupTtl ;
     private long userTenantTtl ;
+    private long userDepartmentTtl ;
     private long userRolesTtl ;
     private long userPermissionsTtl ;
     private long userFrontMenusTtl ;

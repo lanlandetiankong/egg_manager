@@ -85,7 +85,7 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                   List<AntdvSortBean> sortBeans);
 
     /**
@@ -95,7 +95,7 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    void dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                 List<AntdvSortBean> sortBeans);
 
     /**

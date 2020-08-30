@@ -152,7 +152,7 @@ public class DefineMenuController extends BaseController{
             AntdvPaginationBean paginationBean = this.parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            defineMenuService.dealGetDefineMenuDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineMenuService.dealGetDefineMenuDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询菜单定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

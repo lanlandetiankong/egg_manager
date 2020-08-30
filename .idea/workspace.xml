@@ -25,34 +25,64 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="20200829 dubbo-xml配置-init07">
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-basic.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-excel.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-mongodb.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-redis.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/message/egg-universal-dubboConsumer-hello.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/message/egg-universal-dubboConsumer-message.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/20200816/jar/Run_DubboAdmin0-1-1-SNAPSHOT.bat" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/DubboAdmin_Note.txt" />
+    <list default="true" id="2242b66f-5a26-483b-b2eb-6f4872cfcea8" name="Default" comment="20200830 services">
+      <change beforePath="" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/package-info.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/trait/package-info.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml" afterPath="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-basic.xml" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-basic.xml" />
+      <change beforePath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-excel.xml" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-excel.xml" />
+      <change beforePath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-mongodb.xml" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-mongodb.xml" />
+      <change beforePath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-redis.xml" afterPath="$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-redis.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/CommonFuncServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/CommonFuncServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/announcement/AnnouncementServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementTagServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/announcement/AnnouncementTagServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/define/DefineDepartmentServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/define/DefineDepartmentServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/define/DefineGroupServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/define/DefineGroupServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/define/DefineJobServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/define/DefineJobServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/define/DefinePermissionServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/define/DefinePermissionServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/define/DefineRoleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/define/DefineRoleServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/hello/HelloServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/hello/HelloServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/module/DefineMenuServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/module/DefineMenuServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/module/DefineModuleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/module/DefineModuleServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/organization/DefineTenantServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/organization/DefineTenantServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/role/RoleMenuServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/role/RoleMenuServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/role/RolePermissionServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/role/RolePermissionServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/user/UserAccountServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserGroupServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/user/UserGroupServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserJobServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/user/UserJobServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserRoleServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/user/UserRoleServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserTenantServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/user/UserTenantServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/config/rpc/MyRpcReferConfig.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/config/rpc/MyRpcReferConfig.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/excel/serviceimpl/common/MyXlsBaseServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/excel/serviceimpl/common/MyXlsBaseServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/excel/serviceimpl/user/UserAccountXlsServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/excel/serviceimpl/user/UserAccountXlsServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/MyBaseMongoServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/MyBaseMongoServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormDefinitionMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormDefinitionMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormFieldDefinitionMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormFieldDefinitionMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormFieldTypeDefinitionMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormFieldTypeDefinitionMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormRecordFieldMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormRecordFieldMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormRecordMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormRecordMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormTypeDefinitionMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/forms/smartForm/SmartFormTypeDefinitionMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/log/OperationLogMServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/mongodb/mservices/serviceimpl/log/OperationLogMServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/redis/serviceimpl/RedisHelperImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/redis/serviceimpl/RedisHelperImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/redis/serviceimpl/common/MyRedisCommonReqServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/redis/serviceimpl/common/MyRedisCommonReqServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java" afterPath="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/redis/serviceimpl/user/UserAccountRedisServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/MyRpcReferConfig.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/MyRpcReferConfig.java" />
-      <change beforePath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java" afterPath="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-excel.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-excel.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-mongodb.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-mongodb.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-redis.xml" afterPath="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-redis.xml" />
+      <change beforePath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java" afterPath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/services/email/serviceimpl/MyBaseEmailServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/hello/MessageHelloServiceImpl.java" afterPath="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/services/hello/MessageHelloServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml" afterPath="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml" />
     </list>
-    <ignored path="J:\projects\study\java\manager\.idea\shelf/" />
-    <ignored path="$PROJECT_DIR$/egg-common/target/" />
-    <ignored path="$PROJECT_DIR$/egg-mongodb/target/" />
-    <ignored path="$PROJECT_DIR$/egg-message/target/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/egg-web/target/" />
-    <ignored path="$PROJECT_DIR$/egg-service/target/" />
-    <ignored path="$PROJECT_DIR$/egg-persistence/target/" />
-    <ignored path="$PROJECT_DIR$/egg-persistent/target/" />
-    <ignored path="$PROJECT_DIR$/egg-generate/target/" />
     <ignored path="$PROJECT_DIR$/egg-api/target/" />
     <ignored path="$PROJECT_DIR$/egg-baseService/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/egg-generate/target/" />
+    <ignored path="$PROJECT_DIR$/egg-message/target/" />
+    <ignored path="$PROJECT_DIR$/egg-persistence/target/" />
+    <ignored path="$PROJECT_DIR$/egg-common/target/" />
+    <ignored path="$PROJECT_DIR$/egg-web/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,72 +94,7 @@
     <favorites_list name="manager" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AnnouncementDraftServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-475">
-              <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserAccountRedisServiceImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="189" column="43" lean-forward="true" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommonFuncServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/CommonFuncServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="39" column="53" lean-forward="false" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="egg-baseService-dubboProvider-basic.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="50" column="123" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="123" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="egg-universal-dubboConsumer-basic.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="66" column="57" lean-forward="false" selection-start-line="66" selection-start-column="57" selection-end-line="66" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserAccountServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-              <folding>
-                <element signature="e#3475#3488#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -137,44 +102,44 @@
         <option value="FxmlFile" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="package-info" />
         <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
     <option name="SCHEME" value="Project" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>com.egg.manager.api.services</find>
-      <find>&lt;bean id</find>
-      <find>hello</find>
-      <find>OperationLogMService</find>
-      <find>operationLogMService</find>
-      <find>resource</find>
-      <find>myBaseEmailService</find>
-      <find>dubbo.application.name</find>
-      <find>Motan</find>
-      <find>var</find>
-      <find>DubboConfig</find>
-      <find>@Autowired</find>
-      <find>private UserAccountService</find>
-      <find>AnnouncementDraftService</find>
-      <find>MyRpcReferConfig</find>
-      <find>HelloServiceImpl</find>
-      <find>egg.dubbo.application.name</find>
-      <find>egg-message</find>
-      <find>PropertiesUtil</find>
-      <find>MyRpcConfig.EnableDubbo.class</find>
-      <find>MyRpcConfig</find>
-      <find>UploadStaticProps</find>
-      <find>egg.conf.rpc.type</find>
-      <find>MyDubboRpcConfig</find>
-      <find>DataUtil.isEmpty</find>
-      <find>dealGetAccountByDTO</find>
-      <find>&lt;dubbo:</find>
-      <find>announcementDraftService</find>
-      <find>UserAccountService</find>
-      <find>commonFuncService</find>
+      <find>result</find>
+      <find>dealGetAnnouncementDraftDtoPages</find>
+      <find>dealGetAnnouncementDraftPages</find>
+      <find>return result ;</find>
+      <find>dealGetAnnouncementPages</find>
+      <find>dealGetAnnouncementDtoPages</find>
+      <find>dealGetDefineDepartmentDtoPages</find>
+      <find>dealGetDefineDepartmentPages</find>
+      <find>dealGetDefineJobDtoPages</find>
+      <find>dealGetDefineJobPages</find>
+      <find>dealGetDefinePermissionPages</find>
+      <find>dealGetDefineRolePages</find>
+      <find>dealGetDefineRoleDtoPages</find>
+      <find>dealGetDefineModuleDtoPages</find>
+      <find>dealGetDefineModulePages</find>
+      <find>dealGetDefineTenantDtoPages</find>
+      <find>dealGetUserAccountPages</find>
+      <find>dealGetUserAccountDtoPages</find>
+      <find>dealGetUserJobPages</find>
+      <find>dealGetUserJobDtoPages</find>
+      <find>MyCommonResult&lt;UserJobVo&gt;</find>
+      <find>dealGetUserRolePages</find>
+      <find>dealGetUserRoleDtoPages</find>
+      <find>dealGetUserTenantDtoPages</find>
+      <find>dealGetUserTenantPages</find>
+      <find>dealSingleFillToExport2Web</find>
+      <find>dealGetDefineMenuDtoPages</find>
+      <find>getAllDefineMenuDtos</find>
+      <find>dealGetDefineMenuPages</find>
+      <find>void</find>
     </findStrings>
     <replaceStrings>
       <replace>MyEmailBean</replace>
@@ -191,6 +156,12 @@
       <dir>J:\projects\study\java\manager\egg-web</dir>
       <dir>J:\projects\study\java\manager\egg-web\src\main\java\com\egg\manager\web\controller</dir>
       <dir>J:\projects\study\java\manager\egg-message\src\main\resources</dir>
+      <dir>J:\projects\study\java\manager\egg-api\src\main\java\com\egg\manager\api\services\basic</dir>
+      <dir>J:\projects\study\java\manager\egg-baseService\src\main\java\com\egg\manager\service\basic\serviceimpl\announcement</dir>
+      <dir>J:\projects\study\java\manager\egg-baseService\src\main\java\com\egg\manager\service\basic\serviceimpl\define</dir>
+      <dir>J:\projects\study\java\manager\egg-api\src\main\java\com\egg\manager\api\services\basic\module</dir>
+      <dir>J:\projects\study\java\manager\egg-baseService\src\main\java\com\egg\manager\service</dir>
+      <dir>J:\projects\study\java\manager\egg-baseService\src\main\java\com\egg\manager\service\basic</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -207,57 +178,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/universal/dev/consumer/egg-universal-dubboConsumer-basic.xml" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/provider/egg-baseService-dubboProvider-mongodb.xml" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/mongodb/mservices/serviceimpl/log/OperationLogMServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/dubbo/dev/egg-baseService-dubboConfig.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/dubbo/universal/dev/consumer/egg-universal-dubboConsumer-mongodb.xml" />
-        <option value="$PROJECT_DIR$/egg-api/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-web/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-baseService/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-dev.properties" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/configResources/application-prod.properties" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/configResource/application-prod.properties" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/resources/application-dev.properties" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/resources/application-prod.properties" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-hello.xml" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/egg-message-dubboConfig.xml" />
-        <option value="$PROJECT_DIR$/egg-message/pom.xml" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-message.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/egg-universal-dubboConsumer-hello.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/config/application-dev-egg.properties" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/dubbo/DubboReferConfig.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/DubboReferConfig.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/excel/user/UserExcelController.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/properties/MyPropertiesUtil.java" />
-        <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/config/properties/PropertiesConfig.java" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/config/rpc/MyRpcConfig.java" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/config/rpc/dubbo/MyRpcConfig.java" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/hello/MessageHelloServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/config/properties/MyPropertiesUtil.java" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/config/rpc/dubbo/MyDubboRpcConfig.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/config/rpc/MyRpcReferConfig.java" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/config/rpc/MyRpcReferConfig.java" />
-        <option value="$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java" />
-        <option value="$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/20200816/jar/Run_DubboAdmin0-1-1-SNAPSHOT.bat" />
-        <option value="$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/DubboAdmin_Note.txt" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-basic.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-redis.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/envResources/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-redis.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/envResources/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-basic.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/envResources/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-excel.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/resources/envResources/dev/dubbo/beans/baseService/egg-universal-dubboConsumer-mongodb.xml" />
-        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/MyRpcReferConfig.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java" />
-        <option value="$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml" />
-        <option value="$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml" />
+        <option value="$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java" />
+        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/basic/module/DefineMenuService.java" />
+        <option value="$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/module/DefineMenuServiceImpl.java" />
+        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/trait/package-info.java" />
+        <option value="$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/package-info.java" />
       </list>
     </option>
   </component>
@@ -284,17 +209,6 @@
       </list>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="egg-persistence" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="503" />
     <option name="y" value="86" />
@@ -318,7 +232,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -331,32 +244,6 @@
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="DeprecatedFolder" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="DeprecatedFolder" type="462c0819:PsiDirectoryNode" />
-              <item name="20200829" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="DeprecatedFolder" type="462c0819:PsiDirectoryNode" />
-              <item name="20200829" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-              <item name="DeprecatedFolder" type="462c0819:PsiDirectoryNode" />
-              <item name="20200829" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
-              <item name="beans" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
               <item name="egg-web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -378,7 +265,7 @@
               <item name="egg-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
@@ -386,8 +273,8 @@
               <item name="egg-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
@@ -395,9 +282,9 @@
               <item name="egg-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResources" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="egg" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="manager" type="b2602c69:ProjectViewProjectNode" />
@@ -405,26 +292,37 @@
               <item name="egg-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="envResources" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="egg" type="462c0819:PsiDirectoryNode" />
+              <item name="manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="manager" type="462c0819:PsiDirectoryNode" />
+              <item name="egg-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="egg" type="462c0819:PsiDirectoryNode" />
+              <item name="manager" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="418" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
-    <property name="MyBatisLogPluginrunning" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelOrder2" value="2" />
@@ -444,6 +342,8 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="MyBatisLogPluginrunning" value="true" />
+    <property name="MyBatisLogPluginindexNum" value="6" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -484,7 +384,6 @@
         </RuleState>
       </list>
     </option>
-    <option name="contentProportion" value="0.25096524" />
   </component>
   <component name="RunManager" selected="Spring Boot.EggManagerMessageApplication">
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -570,6 +469,9 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="egg-mongodb" />
       <envs />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="EggManagerBaseServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -578,7 +480,7 @@
       <envs />
     </configuration>
     <configuration name="EggManagerMessageApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.egg.manager.*" />
           <option name="ENABLED" value="true" />
@@ -873,28 +775,10 @@
       <workItem from="1598618063703" duration="9013000" />
       <workItem from="1598662012131" duration="5262000" />
       <workItem from="1598667323563" duration="12376000" />
-      <workItem from="1598687646881" duration="4251000" />
-    </task>
-    <task id="LOCAL-00059" summary="200404 菜单定义 配置excel模板的上传更新等">
-      <created>1586005442631</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1586005442632</updated>
-    </task>
-    <task id="LOCAL-00060" summary="200404 自定义配置文件合并且可根据生产环境的修改加载不同的配置">
-      <created>1586007888261</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1586007888261</updated>
-    </task>
-    <task id="LOCAL-00061" summary="200404 shiro filter的bug修改;图片上传的配置参数修改;">
-      <created>1586013357074</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1586013357074</updated>
+      <workItem from="1598687646881" duration="10660000" />
+      <workItem from="1598759203376" duration="6000" />
+      <workItem from="1598759300474" duration="107000" />
+      <workItem from="1598759448809" duration="2412000" />
     </task>
     <task id="LOCAL-00062" summary="200405 添加热部署插件;通用异常处理修改; 用户、权限 新增或修改 时判断唯一拦截">
       <created>1586076003560</created>
@@ -1218,7 +1102,28 @@
       <option name="project" value="LOCAL" />
       <updated>1598681601240</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="20200829 dubbo-xml配置-init08">
+      <created>1598691946394</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1598691946395</updated>
+    </task>
+    <task id="LOCAL-00109" summary="20200829 dubbo-xml配置-&gt;dubbo坑:service方法void导致 对object的处理没有返回的bug ！！！！">
+      <created>1598704503496</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1598704503496</updated>
+    </task>
+    <task id="LOCAL-00110" summary="20200823 dubbo-xml配置-&gt;dubbo坑:service方法void导致 对object的处理没有返回的bug ！！！！">
+      <created>1598760643980</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1598760643981</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1227,7 +1132,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71798000" />
+    <option name="totallyTimeSpent" value="2412000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1240,32 +1145,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5098336" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="MyBatis Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Word Book" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8600629" sideWeight="0.50292826" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="MyBatis Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Word Book" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5015723" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.4969743" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4489796" sideWeight="0.49167928" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54931974" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.49016643" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3774584" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30635402" sideWeight="0.4937107" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1315,14 +1219,6 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
             </State>
           </value>
         </entry>
@@ -1334,9 +1230,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="20200723 Mapper Invalid bound statement (not found) bug修复" />
-    <MESSAGE value="20200723 operationLogMO id字段调整" />
-    <MESSAGE value="20200725 1、手动封装mongo泛型service 2、表单定义/表单类型 MO定义 3、数据库int 转tinyint" />
     <MESSAGE value="20200725 mysql表的最新数据库结构" />
     <MESSAGE value="20200726 1、字段验证 抛异常全局处理 2、表单类型定义GetMapping-&gt;PostMapping 3、表名加 smart_ 前缀 4、mongodb 开发环境输出nosql 5、baseModelMO 字段调整" />
     <MESSAGE value="20200726 1、启用spring提供的MongoRepository 2、封装自用的mongoRepo" />
@@ -1359,7 +1252,10 @@
     <MESSAGE value="20200829 dubbo-xml配置-init05" />
     <MESSAGE value="20200829 dubbo-xml配置-init06" />
     <MESSAGE value="20200829 dubbo-xml配置-init07" />
-    <option name="LAST_COMMIT_MESSAGE" value="20200829 dubbo-xml配置-init07" />
+    <MESSAGE value="20200829 dubbo-xml配置-init08" />
+    <MESSAGE value="20200829 dubbo-xml配置-&gt;dubbo坑:service方法void导致 对object的处理没有返回的bug ！！！！" />
+    <MESSAGE value="20200823 dubbo-xml配置-&gt;dubbo坑:service方法void导致 对object的处理没有返回的bug ！！！！" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200823 dubbo-xml配置-&gt;dubbo坑:service方法void导致 对object的处理没有返回的bug ！！！！" />
   </component>
   <component name="WindowStateProjectService">
     <state x="163" y="0" key="#Project_Structure" />
@@ -1424,75 +1320,7 @@
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/handler/BadRequestExceptionHandler.java</url>
-          <line>27</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/forms/smartForm/SmartFormTypeDefinitionController.java</url>
-          <line>63</line>
-          <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/mongo/MongoQueryBean.java</url>
-          <line>125</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/query/mongo/MongoQueryBean.java</url>
-          <line>184</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-persistence/src/main/java/com/egg/manager/persistence/mongo/daoimpl/MyBaseMongoRepositoryImpl.java</url>
-          <line>301</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/message/mail/HelloMailController.java</url>
-          <line>39</line>
-          <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/aspect/ControllerAspect.java</url>
-          <line>105</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java</url>
-          <line>58</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-service/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java</url>
-          <line>163</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/index/hello/mq/activemq/ActiveMqHelloController.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/config/rpc/dubbo/MyDubboRpcConfig.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="27" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((ParameterizedType) getClass().getGenericSuperclass())" language="JAVA" />
@@ -1531,386 +1359,50 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/message/email/service/MyBaseEmailService.java">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/basic/module/DefineMenuService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="62" />
+        <state relative-caret-position="197">
+          <caret line="97" column="32" lean-forward="false" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/pom.xml">
+    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/define/DefineMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+        <state relative-caret-position="141">
+          <caret line="154" column="58" lean-forward="false" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/email/serviceimpl/MyBaseEmailServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/baseService/services/basic/serviceimpl/module/DefineMenuServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/provider/egg-message-dubboProvider-email.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="99" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-message.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="12" column="101" lean-forward="false" selection-start-line="12" selection-start-column="101" selection-end-line="12" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/message/hello/MessageHelloService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/message/egg-universal-dubboConsumer-hello.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="12" column="94" lean-forward="false" selection-start-line="12" selection-start-column="94" selection-end-line="12" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar!/org/apache/logging/log4j/util/PropertiesUtil.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/config/application-dev-universal.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="54" column="4" lean-forward="false" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/excel/user/UserExcelController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="57" column="45" lean-forward="true" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/announcement/AnnouncementDraftController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/resources/configResource/application-dev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/resources/envResource/dev/dubbo/egg-message-dubboConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/hello/HelloServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/util/properties/MyPropertiesUtil.java" />
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/beans/file/AntdFileUploadBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/config/application-dev-egg.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/base/props/upload/UploadStaticProps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="30" />
-          <folding>
-            <element signature="e#903#904#0" expanded="false" />
-            <element signature="e#958#959#0" expanded="false" />
-            <element signature="e#1062#1063#0" expanded="false" />
-            <element signature="e#1127#1128#0" expanded="false" />
-            <element signature="e#1228#1229#0" expanded="false" />
-            <element signature="e#1291#1292#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.1.8.RELEASE/spring-core-5.1.8.RELEASE.jar!/org/springframework/core/annotation/Order.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.6.RELEASE/spring-boot-autoconfigure-2.0.6.RELEASE.jar!/org/springframework/boot/autoconfigure/AutoConfigureOrder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.6.RELEASE/spring-boot-autoconfigure-2.0.6.RELEASE.jar!/org/springframework/boot/autoconfigure/AutoConfigureAfter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/2.0.6.RELEASE/spring-boot-2.0.6.RELEASE.jar!/org/springframework/boot/SpringApplication.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="750" column="49" lean-forward="false" selection-start-line="750" selection-start-column="49" selection-end-line="750" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/config/properties/PropertiesConfig.java" />
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/hello/MessageHelloServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/config/rpc/dubbo/MyDubboRpcConfig.java" />
-    <entry file="file://$PROJECT_DIR$/egg-common/src/main/java/com/egg/manager/common/config/properties/MyPropertiesUtil.java" />
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/config/rpc/MyRpcReferConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/EggManagerMessageApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/EggManagerBaseServiceApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="64">
+          <caret line="225" column="7" lean-forward="false" selection-start-line="225" selection-start-column="7" selection-end-line="225" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/egg-message/src/main/java/com/egg/manager/message/config/rpc/MyRpcReferConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2375">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/20200816/jar/Run_DubboAdmin0-1-1-SNAPSHOT.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="40" lean-forward="false" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/notes/dubbo/notes/20200814dubbonote.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/dubbo/dubboAdmin/assets/DubboAdmin_Note.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-redis.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-basic.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-excel.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/EggManagerWebApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/config/rpc/MyRpcReferConfig.java">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/trait/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="11" column="94" lean-forward="true" selection-start-line="11" selection-start-column="94" selection-end-line="11" selection-end-column="94" />
+        <state relative-caret-position="38">
+          <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DeprecatedFolder/20200829/dubbo/beans/baseService/egg-web-dubboBean-mongodb.xml">
+    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/basic/user/UserAccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-web/src/main/java/com/egg/manager/web/controller/user/UserAccountController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="74" column="23" lean-forward="false" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/java/com/egg/manager/api/services/basic/CommonFuncService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/CommonFuncServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="39" column="53" lean-forward="false" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/resources/envResource/dev/dubbo/provider/egg-baseService-dubboProvider-basic.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="50" column="123" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-api/src/main/resources/universal/dev/dubbo/consumer/baseService/egg-universal-dubboConsumer-basic.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="66" column="57" lean-forward="false" selection-start-line="66" selection-start-column="57" selection-end-line="66" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/user/UserAccountServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="e#3475#3488#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/basic/serviceimpl/announcement/AnnouncementDraftServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-475">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egg-baseService/src/main/java/com/egg/manager/service/redis/serviceimpl/user/UserAccountRedisServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="189" column="43" lean-forward="true" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
+        <state relative-caret-position="38">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
           <folding />
         </state>
       </provider>

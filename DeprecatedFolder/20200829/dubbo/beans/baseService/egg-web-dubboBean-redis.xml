@@ -8,9 +8,9 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!--                                    dir-start:com.egg.manager.service.redis.serviceimpl.user                                                              -->
-    <bean id="userAccountRedisService" class="com.egg.manager.service.redis.serviceimpl.user.UserAccountRedisServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.service.redis.serviceimpl.user                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.redis.serviceimpl.user                                                              -->
+    <bean id="userAccountRedisService" class="com.egg.manager.baseService.services.redis.serviceimpl.user.UserAccountRedisServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseService.services.redis.serviceimpl.user                                                              -->
 
 
 </beans>

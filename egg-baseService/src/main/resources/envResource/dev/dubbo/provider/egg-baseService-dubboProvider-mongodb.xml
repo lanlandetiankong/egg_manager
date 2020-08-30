@@ -6,8 +6,8 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.forms                                                                -->
-    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms                                                                -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
     <dubbo:service protocol="dubbo" ref="smartFormDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormFieldDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormFieldDefinitionMService"/>
@@ -22,14 +22,14 @@
 
 
 
-    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
-    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.forms                                                                -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms                                                                -->
 
-    <!--                                    dir-start:com.egg.manager.service.mongodb.mservices.serviceimpl.log                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.log                                                              -->
 
 
     <dubbo:service protocol="dubbo" ref="operationLogMService" interface="com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMService"/>
-    <!--                                    dir-end:com.egg.manager.service.mongodb.mservices.serviceimpl.log                                                              -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.log                                                              -->
 
 
 </beans>

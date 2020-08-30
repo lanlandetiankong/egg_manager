@@ -6,16 +6,16 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <!--                                    dir-start:com.egg.manager.service.excel.serviceimpl.common                                                                -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.excel.serviceimpl.common                                                                -->
     <dubbo:service protocol="dubbo" ref="myXlsBaseService" interface="com.egg.manager.api.services.excel.service.common.MyXlsBaseService"/>
 
-    <!--                                    dir-end:com.egg.manager.service.excel.serviceimpl.common                                                                -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.excel.serviceimpl.common                                                                -->
 
 
-    <!--                                    dir-start:com.egg.manager.service.excel.serviceimpl.user                                                                -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.excel.serviceimpl.user                                                                -->
     <dubbo:service protocol="dubbo" ref="userAccountXlsService" interface="com.egg.manager.api.services.excel.service.user.UserAccountXlsService"/>
 
-    <!--                                    dir-end:com.egg.manager.service.excel.serviceimpl.user                                                                -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.excel.serviceimpl.user                                                                -->
 
 
 </beans>

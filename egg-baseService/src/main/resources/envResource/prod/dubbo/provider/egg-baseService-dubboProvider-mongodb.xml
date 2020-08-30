@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms                                                                -->
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <dubbo:service protocol="dubbo" ref="smartFormDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService"/>
+
+    <dubbo:service protocol="dubbo" ref="smartFormFieldDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormFieldDefinitionMService"/>
+
+    <dubbo:service protocol="dubbo" ref="smartFormFieldTypeDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormFieldTypeDefinitionMService"/>
+
+    <dubbo:service protocol="dubbo" ref="smartFormRecordFieldMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormRecordFieldMService"/>
+
+    <dubbo:service protocol="dubbo" ref="smartFormRecordMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormRecordMService"/>
+
+    <dubbo:service protocol="dubbo" ref="smartFormTypeDefinitionMService" interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService"/>
+
+
+
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms.smartForm                                                               -->
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.forms                                                                -->
+
+    <!--                                    dir-start:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.log                                                              -->
+
+
+    <dubbo:service protocol="dubbo" ref="operationLogMService" interface="com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMService"/>
+    <!--                                    dir-end:com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.log                                                              -->
+
+
+</beans>

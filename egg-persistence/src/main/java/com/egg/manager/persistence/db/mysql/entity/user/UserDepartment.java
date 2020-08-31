@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户-部门 关联表
+ * 用户&部门 关联-entity
  */
 @Data
 @Builder
@@ -45,6 +45,10 @@ public class UserDepartment extends Model<UserDepartment> {
      */
     @TableField(value = "is_manager")
     private Short isManager;
+
+
+
+
     /**
      * 备注
      */

@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 公告草稿-entity
  * \* note:
  * \* User: zhouchengjie
  * \* Date: 2020/2/21
@@ -30,26 +31,66 @@ public class AnnouncementDraft extends Model<AnnouncementDraft> {
     @TableId
     private String fid;
 
+    /**
+     * 标题
+     */
     private String title;
+    /**
+     * 关键字
+     */
     @TableField("key_word")
-    private String keyWord;    //关键字
+    private String keyWord;
+    /**
+     * 发布部门
+     */
     @TableField("publish_department")
-    private String publishDepartment;  //发布部门
+    private String publishDepartment;
+    /**
+     * 内容
+     */
     private String content;
+    /**
+     * 公告标签 集合
+     */
     @TableField("tag_ids")
-    private String tagIds; //公告标签 集合
-    private String accessory;      //附件
+    private String tagIds;
+    /**
+     * 附件
+     */
+    private String accessory;
+    /**
+     * 是否已提交
+     */
     @TableField("is_published")
-    private short isPublished;      //是否已提交
+    private short isPublished;
 
+
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 状态
+     */
     private Short state;
+    /**
+     * 创建时间
+     */
     @TableField("create_time")
     private Date createTime;
+    /**
+     * 修改时间
+     */
     @TableField("update_time")
     private Date updateTime;
+    /**
+     * 创建用户id
+     */
     @TableField(value = "create_user_id")
     private String createUserId;
+    /**
+     * 最后修改用户id
+     */
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
 

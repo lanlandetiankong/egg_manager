@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.FieldFill;
+import com.egg.manager.common.base.enums.base.UserSexEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 用户账号-entity
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,34 +26,83 @@ import java.util.Date;
 public class UserAccount extends Model<UserAccount> {
     @TableId
     private String fid;
-
+    /**
+     * 用户名
+     */
     @TableField("user_name")
     private String userName;
+    /**
+     * 账号
+     */
     private String account;
+    /**
+     * 昵称
+     */
     @TableField("nick_name")
     private String nickName;
+    /**
+     * 头像地址
+     */
     @TableField("avatar_url")
     private String avatarUrl;
+    /**
+     * 密码
+     */
     @JsonIgnore
     private String password;
+    /**
+     * 手机号码
+     */
     private String phone;
+    /**
+     * 邮箱地址
+     */
     private String email;
+    /**
+     * 性别
+     * @see UserSexEnum
+     */
     private Short sex;
-
+    /**
+     * 用户类型
+     * @see UserAccountBaseTypeEnum
+     */
     @TableField("user_type")
     private Integer userType;
+    /**
+     * 用户类型 数值
+     */
     @TableField("user_type_num")
     private Integer userTypeNum;
 
+
+
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 状态
+     */
     private Short state;
-    private Short locked;    //是否被锁定
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
     private Date createTime;
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
+    /**
+     * 修改时间
+     */
+    @TableField("update_time")
     private Date updateTime;
+    /**
+     * 创建用户id
+     */
     @TableField(value = "create_user_id")
     private String createUserId;
+    /**
+     * 最后修改用户id
+     */
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
 

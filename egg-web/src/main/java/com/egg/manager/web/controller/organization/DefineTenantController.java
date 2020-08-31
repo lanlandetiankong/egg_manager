@@ -13,8 +13,8 @@ import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.organization.DefineTenantTransfer;
-import com.egg.manager.persistence.pojo.vo.organization.DefineTenantVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.organization.DefineTenantMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -62,8 +62,8 @@ public class DefineTenantController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineTenantDtos")
-    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
+    public MyCommonResult<DefineTenantMysqlVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineTenantMysqlVo> result = new MyCommonResult<DefineTenantMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -84,11 +84,11 @@ public class DefineTenantController extends BaseController{
     @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息",fullPath = "/organization/define_tenant/getDefineTenantById")
     @PostMapping(value = "/getDefineTenantById")
-    public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request,String defineTenantId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
+    public MyCommonResult<DefineTenantMysqlVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineTenantMysqlVo> result = new MyCommonResult<DefineTenantMysqlVo>() ;
         try{
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
-            result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
+            result.setBean(DefineTenantMysqlTransfer.transferEntityToVo(defineTenant));
             dealCommonSuccessCatch(result,"查询租户定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -105,8 +105,8 @@ public class DefineTenantController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineTenantEnums")
-    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
+    public MyCommonResult<DefineTenantMysqlVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineTenantMysqlVo> result = new MyCommonResult<DefineTenantMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>() ;
@@ -128,8 +128,8 @@ public class DefineTenantController extends BaseController{
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增租户定义",description = "表单方式新增租户定义",fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
-    public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request,DefineTenantVo defineTenantVo,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
+    public MyCommonResult<DefineTenantMysqlVo> doAddDefineTenant(HttpServletRequest request, DefineTenantMysqlVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefineTenantMysqlVo> result = new MyCommonResult<DefineTenantMysqlVo>() ;
         Integer addCount = 0 ;
         try{
             if(defineTenantVo == null) {
@@ -149,7 +149,7 @@ public class DefineTenantController extends BaseController{
     @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新租户定义",description = "表单方式更新租户定义",fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
-    public MyCommonResult doUpdateDefineTenant(HttpServletRequest request,DefineTenantVo defineTenantVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantMysqlVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

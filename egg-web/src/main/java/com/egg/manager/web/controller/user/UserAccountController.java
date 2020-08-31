@@ -1,6 +1,5 @@
 package com.egg.manager.web.controller.user;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.common.annotation.log.CurrentLoginUser;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
@@ -24,14 +23,14 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineJobTransfer;
-import com.egg.manager.persistence.pojo.transfer.define.DefinePermissionTransfer;
-import com.egg.manager.persistence.pojo.transfer.define.DefineRoleTransfer;
-import com.egg.manager.persistence.pojo.transfer.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.define.DefineJobVo;
-import com.egg.manager.persistence.pojo.vo.define.DefinePermissionVo;
-import com.egg.manager.persistence.pojo.vo.define.DefineRoleVo;
-import com.egg.manager.persistence.pojo.vo.user.UserAccountVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.web.config.shiro.JwtShiroToken;
@@ -137,9 +136,9 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserAccountDtos")
-    public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
-                                                                 @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
+    public MyCommonResult<UserAccountMysqlVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                      @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserAccountMysqlVo> result = new MyCommonResult<UserAccountMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -160,11 +159,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户信息",description = "根据用户id查询用户信息",fullPath = "/user/user_account/getUserAccountById")
     @PostMapping(value = "/getUserAccountById")
-    public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
+    public MyCommonResult<UserAccountMysqlVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserAccountMysqlVo> result = new MyCommonResult<UserAccountMysqlVo>() ;
         try{
             UserAccount account = userAccountMapper.selectById(accountId);
-            UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
+            UserAccountMysqlVo userAccountVo = UserAccountMysqlTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
             DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
@@ -181,11 +180,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色",fullPath = "/user/user_account/getAllRoleByUserAccountId")
     @PostMapping(value = "/getAllRoleByUserAccountId")
-    public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request,String userAccountId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+    public MyCommonResult<DefineRoleMysqlVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
+            result.setResultList(DefineRoleMysqlTransfer.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -196,12 +195,12 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限",fullPath = "/user/user_account/getAllPermissionByUserAccountId")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
-    public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request,String userAccountId,
-                                                                                @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
+    public MyCommonResult<DefinePermissionMysqlVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
+                                                                                     @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
         try{
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-            result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
+            result.setResultList(DefinePermissionMysqlTransfer.transferEntityToVoList(definePermissionList));
             dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -213,11 +212,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务",fullPath = "/user/user_account/getAllJobByUserAccountId")
     @PostMapping(value = "/getAllJobByUserAccountId")
-    public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request,  String userAccountId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+    public MyCommonResult<DefineJobMysqlVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
+            result.setResultList(DefineJobMysqlTransfer.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -233,7 +232,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
+            UserAccountMysqlVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountMysqlVo.class,true) ;
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
@@ -255,7 +254,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountVo.class,true) ;
+            UserAccountMysqlVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountMysqlVo.class,true) ;
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {

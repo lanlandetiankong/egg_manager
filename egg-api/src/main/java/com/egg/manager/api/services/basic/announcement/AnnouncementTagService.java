@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementTagVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +29,8 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                            List<AntdvSortBean> sortBeans);
+    MyCommonResult<AnnouncementTagMysqlVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans);
     /**
      * 分页查询 公告标签 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
@@ -38,8 +38,8 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                     List<AntdvSortBean> sortBeans);
+    MyCommonResult<AnnouncementTagMysqlVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                          List<AntdvSortBean> sortBeans);
 
     /***
      * 查询可用的 公告标签 并转为map
@@ -51,7 +51,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param announcementTagVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser) throws Exception ;
+    Integer dealAddAnnouncementTag(AnnouncementTagMysqlVo announcementTagVo, UserAccount loginUser) throws Exception ;
 
 
     /**
@@ -60,7 +60,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser,boolean updateAll) throws Exception ;
+    Integer dealUpdateAnnouncementTag(AnnouncementTagMysqlVo announcementTagVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
 
 

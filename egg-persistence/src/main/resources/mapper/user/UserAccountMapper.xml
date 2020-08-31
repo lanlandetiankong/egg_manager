@@ -25,7 +25,7 @@
 
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.user.UserAccountDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountMysqlDto">
         <id column="fid" property="fid" />
         <result column="user_name" property="userName" />
         <result column="account" property="account" />

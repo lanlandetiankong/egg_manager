@@ -17,7 +17,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.define.DefineRoleDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineRoleMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
@@ -29,8 +29,8 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineRoleTransfer;
-import com.egg.manager.persistence.pojo.vo.define.DefineRoleVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -210,8 +210,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineRoleVo> dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                       List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineRoleMysqlVo> dealGetDefineRolePages(MyCommonResult<DefineRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
         //取得 分页配置
@@ -228,7 +228,7 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineRole> defineRoles = defineRoleMapper.selectPage(rowBounds,defineRoleEntityWrapper) ;
-        result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoles));
+        result.setResultList(DefineRoleMysqlTransfer.transferEntityToVoList(defineRoles));
         return result ;
     }
 
@@ -241,12 +241,12 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                       List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineRoleMysqlVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineRoleMysqlDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
+        result.setResultList(DefineRoleMysqlTransfer.transferDtoToVoList(defineRoleDtoList));
         return result ;
     }
 
@@ -260,9 +260,9 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineRole(DefineRoleMysqlVo defineRoleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
+        DefineRole defineRole = DefineRoleMysqlTransfer.transferVoToEntity(defineRoleVo);
         defineRole.setFid(MyUUIDUtil.renderSimpleUUID());
         defineRole.setState(BaseStateEnum.ENABLED.getValue());
         defineRole.setCreateTime(now);
@@ -284,11 +284,11 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineRole(DefineRoleMysqlVo defineRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineRoleVo.setUpdateTime(now);
-        DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
+        DefineRole defineRole = DefineRoleMysqlTransfer.transferVoToEntity(defineRoleVo);
         if(loginUser != null){
             defineRole.setLastModifyerId(loginUser.getFid());
         }

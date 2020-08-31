@@ -18,13 +18,13 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.user.UserRoleDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserRoleMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
-import com.egg.manager.persistence.pojo.transfer.user.UserRoleTransfer;
-import com.egg.manager.persistence.pojo.vo.user.UserRoleVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +133,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                     List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserRoleMysqlVo> dealGetUserRolePages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserRole> userRoleEntityWrapper = new EntityWrapper<UserRole>();
         //取得 分页配置
@@ -151,7 +151,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds,userRoleEntityWrapper) ;
-        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoles));
+        result.setResultList(UserRoleMysqlTransfer.transferEntityToVoList(userRoles));
         return result ;
     }
 
@@ -164,12 +164,12 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                     List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserRoleMysqlVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                   List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<UserRoleMysqlDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserRoleTransfer.transferDtoToVoList(userRoleDtoList));
+        result.setResultList(UserRoleMysqlTransfer.transferDtoToVoList(userRoleDtoList));
         return result ;
     }
 
@@ -181,9 +181,9 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleMysqlTransfer.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
@@ -205,11 +205,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserRole(UserRoleVo userRoleVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userRoleVo.setUpdateTime(now);
-        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleMysqlTransfer.transferVoToEntity(userRoleVo);
         if(loginUser != null){
             userRole.setLastModifyerId(loginUser.getFid());
         }

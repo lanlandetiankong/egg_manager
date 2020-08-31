@@ -15,17 +15,17 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.announcement.AnnouncementDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.pojo.transfer.announcement.AnnouncementTransfer;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementDraftVo;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,8 +67,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementMysqlVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                        List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
         //取得 分页配置
@@ -87,7 +87,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements,announcementTagMap));
+        result.setResultList(AnnouncementMysqlTransfer.transferEntityToVoList(announcements,announcementTagMap));
         return result ;
     }
 
@@ -99,15 +99,15 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementMysqlVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                           List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementMysqlDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
+        result.setResultList(AnnouncementMysqlTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
         return result ;
     }
 
@@ -118,9 +118,9 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncement(AnnouncementMysqlVo announcementVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
+        Announcement announcement = AnnouncementMysqlTransfer.transferVoToEntity(announcementVo);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
@@ -141,12 +141,12 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo),loginUser);
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftMysqlTransfer.transferVoToEntity(announcementDraftVo),loginUser);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);

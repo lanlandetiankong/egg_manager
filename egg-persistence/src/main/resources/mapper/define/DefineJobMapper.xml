@@ -18,7 +18,7 @@
 
 
     <!-- 通用Dto查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.define.DefineJobDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobMysqlDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="description" property="description" />

@@ -17,7 +17,7 @@
     </resultMap>
 
     <!-- 通用Dto查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.define.DefineRoleDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.define.DefineRoleMysqlDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.pojo.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +30,7 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
      * @param sortBeans
      * @return
      */
-    List<DefineDepartmentDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineDepartmentMysqlDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 批量 伪删除

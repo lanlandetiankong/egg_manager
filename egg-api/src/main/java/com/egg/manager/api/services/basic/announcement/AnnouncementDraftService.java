@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementDraftVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
 
 import java.util.List;
 
@@ -28,22 +28,22 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      * @param announcementDraftVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 更新公告草稿
      * @param announcementDraftVo
      * @throws Exception
      */
-    Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
+    Integer dealUpdateAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception ;
     /**
      * 分页查询 公告草稿 列表
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                              List<AntdvSortBean> sortBeans);
+    MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                           List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 公告草稿 dto列表
@@ -52,8 +52,8 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                       List<AntdvSortBean> sortBeans);
+    MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                              List<AntdvSortBean> sortBeans);
 
     /**
      * 公告草稿-删除

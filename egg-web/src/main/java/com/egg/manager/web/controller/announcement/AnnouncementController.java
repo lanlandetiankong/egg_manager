@@ -14,9 +14,9 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
-import com.egg.manager.persistence.pojo.transfer.announcement.AnnouncementTransfer;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementDraftVo;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -58,9 +58,9 @@ public class AnnouncementController extends BaseController {
     @OperLog(action="新增公告",description = "表单方式新增公告",fullPath = "/announcement/addAnnouncement")
     @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/addAnnouncement")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request,AnnouncementVo announcementVo,
-                                                            @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+    public MyCommonResult<AnnouncementMysqlVo> doAddAnnouncement(HttpServletRequest request, AnnouncementMysqlVo announcementVo,
+                                                                 @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<AnnouncementMysqlVo> result = new MyCommonResult<AnnouncementMysqlVo>() ;
         Integer addCount = 0 ;
         try{
             if(announcementVo == null) {
@@ -80,9 +80,9 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="公告草稿发布",description = "表单方式发布公告草稿",fullPath = "/announcement/addAnnouncementFromDraft")
     @PostMapping(value = "/addAnnouncementFromDraft")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request,AnnouncementDraftVo announcementDraftVo,
-                                                                     @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+    public MyCommonResult<AnnouncementMysqlVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftMysqlVo announcementDraftVo,
+                                                                          @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<AnnouncementMysqlVo> result = new MyCommonResult<AnnouncementMysqlVo>() ;
         Integer addCount = 0 ;
         try{
             if(announcementDraftVo == null) {
@@ -106,9 +106,9 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllAnnouncementDtos")
-    public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
-                                                                   Boolean onlySelf,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+    public MyCommonResult<AnnouncementMysqlVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                        Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementMysqlVo> result = new MyCommonResult<AnnouncementMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -133,9 +133,9 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询公告信息部分列表",description = "查询公告信息部分列表",fullPath = "/announcement/getSomeAnnouncements")
     @PostMapping(value = "/getSomeAnnouncements")
-    public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request,Integer limitSize,
-                                                                 Boolean onlySelf,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+    public MyCommonResult<AnnouncementMysqlVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
+                                                                      Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementMysqlVo> result = new MyCommonResult<AnnouncementMysqlVo>() ;
         try{
             //这些查询条件暂时用不到
             String queryObj = null,paginationObj = null,sortObj = null ;
@@ -163,13 +163,13 @@ public class AnnouncementController extends BaseController {
     @OperLog(action="查询公告信息",description = "根据id查询公告信息",fullPath = "/announcement/getAnnouncementById")
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
-    public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request,String announcementId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
+    public MyCommonResult<AnnouncementMysqlVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementMysqlVo> result = new MyCommonResult<AnnouncementMysqlVo>() ;
         try{
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
             Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-            result.setBean(AnnouncementTransfer.transferEntityToVo(announcement,announcementTagMap));
+            result.setBean(AnnouncementMysqlTransfer.transferEntityToVo(announcement,announcementTagMap));
             dealCommonSuccessCatch(result,"查询公告信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

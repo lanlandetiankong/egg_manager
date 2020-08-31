@@ -15,7 +15,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.announcement.AnnouncementDraftDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
@@ -23,8 +23,8 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
-import com.egg.manager.persistence.pojo.transfer.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementDraftVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,8 +66,8 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                              List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                                  List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<AnnouncementDraft> announcementDraftEntityWrapper = new EntityWrapper<AnnouncementDraft>();
         //取得 分页配置
@@ -86,7 +86,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         List<AnnouncementDraft> announcementDrafts = announcementDraftMapper.selectPage(rowBounds,announcementDraftEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementDraftTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
+        result.setResultList(AnnouncementDraftMysqlTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
         return result ;
     }
 
@@ -98,15 +98,15 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                 List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                                     List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementDraftMysqlDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
+        result.setResultList(AnnouncementDraftMysqlTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
         return result ;
     }
 
@@ -117,9 +117,9 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementDraft announcementDraft = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
+        AnnouncementDraft announcementDraft = AnnouncementDraftMysqlTransfer.transferVoToEntity(announcementDraftVo);
         announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
         announcementDraft.setCreateTime(now);
@@ -139,7 +139,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
         announcementDraft.setTitle(announcementDraftVo.getTitle());

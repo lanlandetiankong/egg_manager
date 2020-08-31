@@ -19,7 +19,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.announcement.AnnouncementTagDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagMysqlDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="description" property="description" />

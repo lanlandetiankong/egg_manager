@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.define.DefineJobVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                               List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineJobMysqlVo> dealGetDefineJobPages(MyCommonResult<DefineJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                           List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 职务定义 dto列表
@@ -38,15 +38,15 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                               List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineJobMysqlVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                              List<AntdvSortBean> sortBeans);
 
     /**
      * 职务账号-新增
      * @param defineJobVo
      * @throws Exception
      */
-    Integer dealAddDefineJob(DefineJobVo defineJobVo,UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineJob(DefineJobMysqlVo defineJobVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 职务账号-更新
@@ -54,7 +54,7 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineJob(DefineJobVo defineJobVo,UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineJob(DefineJobMysqlVo defineJobVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 职务账号-删除

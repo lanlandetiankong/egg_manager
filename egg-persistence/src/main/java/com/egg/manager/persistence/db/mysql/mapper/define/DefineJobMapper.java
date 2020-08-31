@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.pojo.dto.define.DefineJobDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +29,7 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
      * @param sortBeans
      * @return
      */
-    List<DefineJobDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineJobMysqlDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 查询指定用户的 用户-职务 关联表

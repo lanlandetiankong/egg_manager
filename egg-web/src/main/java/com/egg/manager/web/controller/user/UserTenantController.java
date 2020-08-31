@@ -12,8 +12,8 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.user.UserTenantTransfer;
-import com.egg.manager.persistence.pojo.vo.user.UserTenantVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserTenantMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -58,9 +58,9 @@ public class UserTenantController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserTenants")
-    public MyCommonResult<UserTenantVo> doGetAllUserTenants(HttpServletRequest request,
-                                                            String queryObj, String paginationObj,String sortObj,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
+    public MyCommonResult<UserTenantMysqlVo> doGetAllUserTenants(HttpServletRequest request,
+                                                                 String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserTenantMysqlVo> result = new MyCommonResult<UserTenantMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -81,11 +81,11 @@ public class UserTenantController extends BaseController{
     @ApiOperation(value = "查询 [用户与租户关联] 信息", notes = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询 [用户与租户关联] 信息",description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息",fullPath = "/user/user_tenant/getUserTenantById")
     @PostMapping(value = "/getUserTenantById")
-    public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request,String tenantId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = new MyCommonResult<UserTenantVo>() ;
+    public MyCommonResult<UserTenantMysqlVo> doGetUserTenantById(HttpServletRequest request, String tenantId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserTenantMysqlVo> result = new MyCommonResult<UserTenantMysqlVo>() ;
         try{
             UserTenant vo = userTenantMapper.selectById(tenantId);
-            result.setBean(UserTenantTransfer.transferEntityToVo(vo));
+            result.setBean(UserTenantMysqlTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询 [用户与租户关联] 信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -98,7 +98,7 @@ public class UserTenantController extends BaseController{
     @ApiOperation(value = "新增 [用户与租户关联] ", notes = "表单方式新增 [用户与租户关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增 [用户与租户关联] ",description = "表单方式新增 [用户与租户关联] ",fullPath = "/user/user_tenant/doAddUserTenant")
     @PostMapping(value = "/doAddUserTenant")
-    public MyCommonResult doAddUserTenant(HttpServletRequest request,UserTenantVo userTenantVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doAddUserTenant(HttpServletRequest request, UserTenantMysqlVo userTenantVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{

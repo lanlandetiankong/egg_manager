@@ -1,10 +1,11 @@
 package com.egg.manager.persistence.pojo.dto.login;
 
-import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * \* note:
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginAccountDTO extends MyBaseDto {
+public class LoginAccountDTO implements Serializable {
     /**
      * 账号
      */

@@ -18,14 +18,14 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.user.UserTenantDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserTenantMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.user.UserTenantTransfer;
-import com.egg.manager.persistence.pojo.vo.user.UserTenantVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserTenantMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,8 +135,8 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                     List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserTenantMysqlVo> dealGetUserTenantPages(MyCommonResult<UserTenantMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserTenant> userTenantEntityWrapper = new EntityWrapper<UserTenant>();
         //取得 分页配置
@@ -153,7 +153,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
         Integer total = userTenantMapper.selectCount(userTenantEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds,userTenantEntityWrapper) ;
-        result.setResultList(UserTenantTransfer.transferEntityToVoList(userTenants));
+        result.setResultList(UserTenantMysqlTransfer.transferEntityToVoList(userTenants));
         return result;
     }
 
@@ -166,12 +166,12 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                     List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserTenantMysqlVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<UserTenantMysqlDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserTenantTransfer.transferDtoToVoList(userTenantDtoList));
+        result.setResultList(UserTenantMysqlTransfer.transferDtoToVoList(userTenantDtoList));
         return result;
     }
 
@@ -183,9 +183,9 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserTenant(UserTenantVo userTenantVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddUserTenant(UserTenantMysqlVo userTenantVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
+        UserTenant userTenant = UserTenantMysqlTransfer.transferVoToEntity(userTenantVo);
         userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
         userTenant.setState(BaseStateEnum.ENABLED.getValue());
         userTenant.setCreateTime(now);
@@ -207,11 +207,11 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserTenant(UserTenantVo userTenantVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserTenant(UserTenantMysqlVo userTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userTenantVo.setUpdateTime(now);
-        UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
+        UserTenant userTenant = UserTenantMysqlTransfer.transferVoToEntity(userTenantVo);
         if(loginUser != null){
             userTenant.setLastModifyerId(loginUser.getFid());
         }

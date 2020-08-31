@@ -12,8 +12,8 @@ import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
-import com.egg.manager.persistence.pojo.transfer.module.DefineModuleTransfer;
-import com.egg.manager.persistence.pojo.vo.module.DefineModuleVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.module.DefineModuleMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -59,9 +59,9 @@ public class DefineModuleController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineModuleDtos")
-    public MyCommonResult<DefineModuleVo> doGetAllDefineModuleDtos(HttpServletRequest request,String queryObj, String paginationObj, String sortObj,
-                                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
+    public MyCommonResult<DefineModuleMysqlVo> doGetAllDefineModuleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                        @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -82,11 +82,11 @@ public class DefineModuleController extends BaseController{
     @ApiOperation(value = "查询模块定义信息", notes = "根据模块定义id查询模块定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询模块定义信息",description = "根据模块定义id查询模块定义信息",fullPath = "/module/define_module/getDefineModuleById")
     @PostMapping(value = "/getDefineModuleById")
-    public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request,String defineModuleId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
+    public MyCommonResult<DefineModuleMysqlVo> doGetDefineModuleById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         try{
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
-            result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
+            result.setBean(DefineModuleMysqlTransfer.transferEntityToVo(defineModule));
             dealCommonSuccessCatch(result,"查询模块定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -98,8 +98,8 @@ public class DefineModuleController extends BaseController{
     @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增模块定义",description = "表单方式新增模块定义",fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
-    public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request,DefineModuleVo defineModuleVo,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
+    public MyCommonResult<DefineModuleMysqlVo> doAddDefineModule(HttpServletRequest request, DefineModuleMysqlVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         Integer addCount = 0 ;
         try{
             if(defineModuleVo == null) {
@@ -119,7 +119,7 @@ public class DefineModuleController extends BaseController{
     @ApiOperation(value = "更新模块定义", notes = "表单方式更新模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新模块定义",description = "表单方式更新模块定义",fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
-    public MyCommonResult doUpdateDefineModule(HttpServletRequest request,DefineModuleVo defineModuleVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleMysqlVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.user.UserRoleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleMysqlVo;
 
 import java.util.List;
 
@@ -34,8 +34,8 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserRoleMysqlVo> dealGetUserRolePages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户角色 Dto列表
@@ -44,8 +44,8 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                        List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserRoleMysqlVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                            List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -53,7 +53,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param userRoleVo
      * @throws Exception
      */
-    Integer dealAddUserRole(UserRoleVo userRoleVo,UserAccount loginUser) throws Exception;
+    Integer dealAddUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser) throws Exception;
 
     /**
      * 用户角色-更新
@@ -61,7 +61,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserRole(UserRoleVo userRoleVo,UserAccount loginUser,boolean updateAll) throws Exception;
+    Integer dealUpdateUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception;
 
     /**
      * 用户角色-删除

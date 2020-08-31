@@ -4,8 +4,8 @@ import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.define.DefineMenuVo;
-import com.egg.manager.persistence.pojo.vo.module.DefineModuleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,8 +36,8 @@ public class ModuleCommonController extends BaseController{
 
     @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllModuleTypeEnumList")
-    public MyCommonResult<DefineModuleVo> doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
+    public MyCommonResult<DefineModuleMysqlVo> doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         try{
             DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -56,8 +56,8 @@ public class ModuleCommonController extends BaseController{
 
     @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
-    public MyCommonResult<DefineMenuVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
+    public MyCommonResult<DefineMenuMysqlVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult<DefineMenuMysqlVo> result = new MyCommonResult<DefineMenuMysqlVo>() ;
         try{
             DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

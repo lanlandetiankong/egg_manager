@@ -9,7 +9,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.define.DefineRoleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
 
 import java.util.List;
 import java.util.Set;
@@ -74,8 +74,8 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineRoleMysqlVo> dealGetDefineRolePages(MyCommonResult<DefineRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                             List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 角色定义 列表
@@ -84,15 +84,15 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineRoleMysqlVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                List<AntdvSortBean> sortBeans);
 
     /**
      * 角色定义-新增
      * @param defineRoleVo
      * @throws Exception
      */
-    Integer dealAddDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineRole(DefineRoleMysqlVo defineRoleVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 角色定义-更新
@@ -100,7 +100,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo,UserAccount loginUser,boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineRole(DefineRoleMysqlVo defineRoleVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 角色定义-批量删除

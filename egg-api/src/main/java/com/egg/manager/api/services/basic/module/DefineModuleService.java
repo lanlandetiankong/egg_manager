@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.module.DefineModuleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                      List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineModuleMysqlVo> dealGetDefineModulePages(MyCommonResult<DefineModuleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                 List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 模块 dto列表
@@ -38,14 +38,14 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                            List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineModuleMysqlVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans);
     /**
      * 模块定义-新增
      * @param defineModuleVo
      * @throws Exception
      */
-    Integer dealAddDefineModule(DefineModuleVo defineModuleVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineModule(DefineModuleMysqlVo defineModuleVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 模块定义-更新
@@ -53,7 +53,7 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineModule(DefineModuleVo defineModuleVo,UserAccount loginUser,boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineModule(DefineModuleMysqlVo defineModuleVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 模块定义-批量删除

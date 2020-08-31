@@ -21,7 +21,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.pojo.dto.login.LoginAccountDTO;
-import com.egg.manager.persistence.pojo.dto.user.UserAccountDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
@@ -32,12 +32,11 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.user.UserAccountVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -91,8 +90,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                        List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserAccountMysqlVo> dealGetUserAccountPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                      List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
 
@@ -111,7 +110,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
-        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccounts));
+        result.setResultList(UserAccountMysqlTransfer.transferEntityToVoList(userAccounts));
         return result ;
     }
 
@@ -123,8 +122,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                        List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserAccountMysqlVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                         List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
         //用户与租户关联 的外表-搜索条件
@@ -140,9 +139,9 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
                 }
             }
         }
-        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
+        List<UserAccountMysqlDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
+        result.setResultList(UserAccountMysqlTransfer.transferDtoToVoList(userAccountDtoList));
         return result ;
     }
 
@@ -155,12 +154,12 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserAccount(UserAccountVo userAccountVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser) throws Exception{
         if(this.dealCheckDuplicateKey(userAccountVo,new EntityWrapper<>())){
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Date now = new Date() ;
-        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountMysqlTransfer.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
@@ -199,7 +198,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserAccount(UserAccountVo userAccountVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Wrapper<UserAccount> uniWrapper  = new EntityWrapper<UserAccount>()
                 .ne("fid",userAccountVo.getFid());
         if(dealCheckDuplicateKey(userAccountVo,uniWrapper)){    //已有重复键值
@@ -208,7 +207,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer changeCount = 0;
         Date now = new Date() ;
         userAccountVo.setUpdateTime(now);
-        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountMysqlTransfer.transferVoToEntity(userAccountVo);
         if(loginUser != null){
             userAccount.setLastModifyerId(loginUser.getFid());
         }
@@ -437,7 +436,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
 
 
     @Override
-    public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper){
+    public boolean dealCheckDuplicateKey(UserAccountMysqlVo userAccountVo, Wrapper<UserAccount> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         wrapper.eq("account",userAccountVo.getAccount()) ;
         wrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;
@@ -450,7 +449,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(checkIds != null){
             wrapper.in("fid",checkIds);
         }
-        return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
+        return UserAccountMysqlTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
     }
 
 

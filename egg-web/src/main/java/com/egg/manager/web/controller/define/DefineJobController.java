@@ -12,8 +12,8 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineJobTransfer;
-import com.egg.manager.persistence.pojo.vo.define.DefineJobVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -59,9 +59,9 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineJobs")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
-                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+    public MyCommonResult<DefineJobMysqlVo> doGetAllDefineJobs(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                               @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -87,9 +87,9 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineJobDtos")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
-                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+    public MyCommonResult<DefineJobMysqlVo> doGetAllDefineJobDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                  @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -110,11 +110,11 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询职务信息",description = "根据职务id查询职务信息",fullPath = "/define/define_job/getDefineJobById")
     @PostMapping(value = "/getDefineJobById")
-    public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request,String defineJobId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
+    public MyCommonResult<DefineJobMysqlVo> doGetDefineJobById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
-            result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
+            result.setBean(DefineJobMysqlTransfer.transferEntityToVo(defineJob));
             dealCommonSuccessCatch(result,"查询职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -127,7 +127,7 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增职务",description = "表单方式新增职务",fullPath = "/define/define_job/doAddDefineJob")
     @PostMapping(value = "/doAddDefineJob")
-    public MyCommonResult doAddDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doAddDefineJob(HttpServletRequest request, DefineJobMysqlVo defineJobVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
@@ -148,7 +148,7 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新职务信息",description = "表单方式更新职务信息",fullPath = "/define/define_job/doUpdateDefineJob")
     @PostMapping(value = "/doUpdateDefineJob")
-    public MyCommonResult doUpdateDefineJob(HttpServletRequest request,DefineJobVo defineJobVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefineJob(HttpServletRequest request, DefineJobMysqlVo defineJobVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

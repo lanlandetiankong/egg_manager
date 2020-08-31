@@ -5,7 +5,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
-import com.egg.manager.persistence.pojo.transfer.user.UserAccountTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountMysqlTransfer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
         if(list != null && list.isEmpty() == false){
-            userAccountService.insertBatch(UserAccountTransfer.xlsModelListToEntitys(list,loginUser,accountExistSet));
+            userAccountService.insertBatch(UserAccountMysqlTransfer.xlsModelListToEntitys(list,loginUser,accountExistSet));
             log.info("存储数据库成功！");
         }
     }

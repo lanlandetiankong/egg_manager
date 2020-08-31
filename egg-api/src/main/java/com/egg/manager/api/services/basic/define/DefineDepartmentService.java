@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.pojo.vo.define.DefineDepartmentVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public interface DefineDepartmentService extends IService<DefineDepartment> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                      List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineDepartmentMysqlVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 部门 dto列表
@@ -38,8 +38,8 @@ public interface DefineDepartmentService extends IService<DefineDepartment> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                      List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineDepartmentMysqlVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                            List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -65,7 +65,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment> {
      * @param defineDepartmentVo
      * @throws Exception
      */
-    Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo,UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineDepartment(DefineDepartmentMysqlVo defineDepartmentVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 部门定义-更新
@@ -73,7 +73,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo,UserAccount loginUser,boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineDepartment(DefineDepartmentMysqlVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 部门定义-批量删除

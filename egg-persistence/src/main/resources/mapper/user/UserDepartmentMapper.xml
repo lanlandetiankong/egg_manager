@@ -18,7 +18,7 @@
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.user.UserDepartmentDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentMysqlDto">
         <id column="fid" property="fid" />
         <result column="user_account_id" property="userAccountId" />
         <result column="define_department_id" property="defineDepartmentId" />

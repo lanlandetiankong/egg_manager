@@ -21,8 +21,8 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineRoleTransfer;
-import com.egg.manager.persistence.pojo.vo.define.DefineRoleVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -83,9 +83,9 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoles")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
-                                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+    public MyCommonResult<DefineRoleMysqlVo> doGetAllDefineRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                 @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -110,9 +110,9 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineRoleDtos")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request,String queryObj, String paginationObj,String sortObj,
-                                                               @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+    public MyCommonResult<DefineRoleMysqlVo> doGetAllDefineRoleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                    @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -133,11 +133,11 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询角色定义信息",description = "根据角色定义id查询角色定义信息",fullPath = "/define/define_role/getDefineRoleById")
     @PostMapping(value = "/getDefineRoleById")
-    public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request,String defineRoleId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+    public MyCommonResult<DefineRoleMysqlVo> doGetDefineRoleById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
-            result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
+            result.setBean(DefineRoleMysqlTransfer.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -184,8 +184,8 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
-    public MyCommonResult<DefineRoleVo> doAddDefineRole(HttpServletRequest request,DefineRoleVo defineRoleVo,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
+    public MyCommonResult<DefineRoleMysqlVo> doAddDefineRole(HttpServletRequest request, DefineRoleMysqlVo defineRoleVo, @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         Integer addCount = 0 ;
         try{
             if(defineRoleVo == null) {
@@ -204,7 +204,7 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
-    public MyCommonResult doUpdateDefineRole(HttpServletRequest request,DefineRoleVo defineRoleVo,@CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefineRole(HttpServletRequest request, DefineRoleMysqlVo defineRoleVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

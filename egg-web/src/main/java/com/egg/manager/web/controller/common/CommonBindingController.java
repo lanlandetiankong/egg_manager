@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.common;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.module.DefineModuleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,8 +33,8 @@ public class CommonBindingController extends BaseController{
 
     @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping(value = "/getSwitchEnumList")
-    public MyCommonResult<DefineModuleVo> doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
+    public MyCommonResult<DefineModuleMysqlVo> doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
+        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         try{
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

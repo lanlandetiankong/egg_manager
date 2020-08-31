@@ -15,13 +15,13 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.announcement.AnnouncementTagDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.announcement.AnnouncementTagTransfer;
-import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementTagVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,8 +56,8 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementTagMysqlVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                              List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
         //取得 分页配置
@@ -74,7 +74,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
-        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTags));
+        result.setResultList(AnnouncementTagMysqlTransfer.transferEntityToVoList(announcementTags));
         return result ;
     }
 
@@ -86,12 +86,12 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                             List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementTagMysqlVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                                 List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementTagMysqlDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
+        result.setResultList(AnnouncementTagMysqlTransfer.transferDtoToVoList(announcementTagDtoList));
         return result ;
     }
 
@@ -121,9 +121,9 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementTag(AnnouncementTagMysqlVo announcementTagVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagMysqlTransfer.transferVoToEntity(announcementTagVo);
         announcementTag.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementTag.setState(BaseStateEnum.ENABLED.getValue());
         announcementTag.setCreateTime(now);
@@ -145,11 +145,11 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateAnnouncementTag(AnnouncementTagMysqlVo announcementTagVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         announcementTagVo.setUpdateTime(now);
-        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagMysqlTransfer.transferVoToEntity(announcementTagVo);
         if(loginUser != null){
             announcementTag.setLastModifyerId(loginUser.getFid());
         }
@@ -201,9 +201,9 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Override
     public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        List<AnnouncementTagVo> resultList = result.getResultList() ;
+        List<AnnouncementTagMysqlVo> resultList = result.getResultList() ;
         if(CollectionUtil.isNotEmpty(resultList)){
-            for(AnnouncementTagVo announcementTagVo : resultList){
+            for(AnnouncementTagMysqlVo announcementTagVo : resultList){
                 enumList.add(new FrontEntitySelectBean(announcementTagVo.getFid(),announcementTagVo.getName())) ;
             }
         }

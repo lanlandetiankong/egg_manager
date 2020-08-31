@@ -19,17 +19,17 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.define.DefineMenuDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineMenuTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuMysqlTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelectTranslate;
-import com.egg.manager.persistence.pojo.vo.define.DefineMenuVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,8 +225,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                       List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineMenuMysqlVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
         //取得 分页配置
@@ -243,7 +243,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds,defineMenuEntityWrapper) ;
-        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenus));
+        result.setResultList(DefineMenuMysqlTransfer.transferEntityToVoList(defineMenus));
         return result ;
     }
 
@@ -256,12 +256,12 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                       List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineMenuMysqlVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineMenuMysqlDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.setResultList(DefineMenuMysqlTransfer.transferDtoToVoList(defineMenuDtoList));
         return result ;
     }
 
@@ -275,13 +275,13 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineMenu(DefineMenuVo defineMenuVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineMenu(DefineMenuMysqlVo defineMenuVo, UserAccount loginUser) throws Exception{
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,new EntityWrapper<DefineMenu>());
         if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuMysqlTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         //
         if(StringUtils.isBlank(parentId)){
@@ -327,7 +327,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineMenu(DefineMenuVo defineMenuVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineMenu(DefineMenuMysqlVo defineMenuVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Wrapper<DefineMenu> uniWrapper  = new EntityWrapper<DefineMenu>()
                 .ne("fid",defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,uniWrapper);
@@ -337,7 +337,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer changeCount = 0;
         Date now = new Date() ;
         defineMenuVo.setUpdateTime(now);
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuMysqlTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineMenu parentMenu =defineMenuMapper.selectById(parentId);
@@ -406,7 +406,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @return
      */
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper){
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuMysqlVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper){
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         defineMenuWrapper = defineMenuWrapper != null ? defineMenuWrapper : new EntityWrapper<>() ;
         defineMenuWrapper.eq("router_url",defineMenuVo.getRouterUrl()) ;

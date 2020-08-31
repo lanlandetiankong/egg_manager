@@ -13,13 +13,13 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.define.DefineJobDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobMysqlDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
-import com.egg.manager.persistence.pojo.transfer.define.DefineJobTransfer;
-import com.egg.manager.persistence.pojo.vo.define.DefineJobVo;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +53,8 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                      List<AntdvSortBean> sortBeans){
+    public MyCommonResult<DefineJobMysqlVo> dealGetDefineJobPages(MyCommonResult<DefineJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                  List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<DefineJob> defineJobEntityWrapper = new EntityWrapper<DefineJob>();
         //取得 分页配置
@@ -71,7 +71,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds,defineJobEntityWrapper) ;
-        result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobs));
+        result.setResultList(DefineJobMysqlTransfer.transferEntityToVoList(defineJobs));
         return result ;
     }
 
@@ -83,12 +83,12 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                      List<AntdvSortBean> sortBeans){
+    public MyCommonResult<DefineJobMysqlVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                     List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineJobMysqlDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.setResultList(DefineJobMysqlTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result ;
     }
 
@@ -100,9 +100,9 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineJob(DefineJobVo defineJobVo,UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineJob(DefineJobMysqlVo defineJobVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobMysqlTransfer.transferVoToEntity(defineJobVo);
         defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
         defineJob.setState(BaseStateEnum.ENABLED.getValue());
         defineJob.setCreateTime(now);
@@ -124,11 +124,11 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineJob(DefineJobVo defineJobVo,UserAccount loginUser,boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineJob(DefineJobMysqlVo defineJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineJobVo.setUpdateTime(now);
-        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobMysqlTransfer.transferVoToEntity(defineJobVo);
         if(loginUser != null){
             defineJob.setLastModifyerId(loginUser.getFid());
         }

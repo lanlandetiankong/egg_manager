@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.pojo.vo.user;
 
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.vo.MyBaseVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,14 +54,15 @@ public class UserDepartmentVo extends MyBaseVo {
      * 最后修改人id
      */
     private String lastModifyerId;
+
     /**
-     * 创建人
+     * 创建人-vo
      */
-    private UserAccount createUser;
+    private UserAccountVo createUser;
     /**
-     * 最后修改人
+     * 最后更新人-vo
      */
-    private UserAccount lastModifyer;
+    private UserAccountVo lastModifyer;
 
 
 }

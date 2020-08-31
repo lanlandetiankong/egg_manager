@@ -16,19 +16,59 @@ import java.util.Date;
 @AllArgsConstructor
 public class DefineRoleVo extends MyBaseVo {
     private String fid;
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 编码
+     */
     private String code;
+    /**
+     * 类型
+     */
     private Integer type;
+
+
+
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 状态
+     */
+    private Short state;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     * 创建用户id
+     */
+    private String createUserId;
+    /**
+     * 最后修改用户id
+     */
+    private String lastModifyerId;
+    /**
+     * 类型名称
+     */
     private String typeStr;
 
-    private String remark;
-    private Short state;
-    private Date createTime;
-    private Date updateTime;
-    private String createUserId;
-    private String lastModifyerId;
-    private UserAccountVo createUser;
-    private UserAccountVo lastModifyer;
 
+
+    /**
+     * 创建人-vo
+     */
+    private UserAccountVo createUser;
+    /**
+     * 最后更新人-vo
+     */
+    private UserAccountVo lastModifyer;
 
 }

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.vo.organization;
 
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.vo.MyBaseVo;
+import com.egg.manager.persistence.pojo.vo.user.UserAccountVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,19 +15,56 @@ import java.util.Date;
 @AllArgsConstructor
 public class DefineTenantVo extends MyBaseVo {
     private String fid;
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 编码
+     */
     private String code;
+    /**
+     * 数据库类型 code
+     */
     private String dbCode;
+
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 状态
+     */
+    private Short state;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     * 创建用户id
+     */
+    private String createUserId;
+    /**
+     * 最后修改用户id
+     */
+    private String lastModifyerId;
+    /**
+     * 类型_名称
+     */
     private String typeStr;
 
-    private String remark;
-    private Short state;
-    private Date createTime;
-    private Date updateTime;
-    private String createUserId;
-    private String lastModifyerId;
-    private UserAccount createUser;
-    private UserAccount lastModifyer;
+    /**
+     * 创建人-vo
+     */
+    private UserAccountVo createUser;
+    /**
+     * 最后更新人-vo
+     */
+    private UserAccountVo lastModifyer;
 
 
 }

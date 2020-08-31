@@ -6,7 +6,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
-import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public interface UserDepartmentMapper extends BaseMapper<UserDepartment> {
      * @param sortBeans
      * @return
      */
-    List<UserDepartmentMysqlDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserDepartmentDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 取得用户拥有的所有部门id集合

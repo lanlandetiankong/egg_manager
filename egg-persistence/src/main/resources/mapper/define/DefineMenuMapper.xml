@@ -24,7 +24,7 @@
         <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuMysqlDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto">
         <id column="fid" property="fid"/>
         <result column="parent_id" property="parentId"/>
         <result column="menu_name" property="menuName"/>
@@ -45,7 +45,7 @@
         <result column="last_modifyer_id" property="lastModifyerId"/>
         <association column="parent_id"  property="parentMenuDto"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuMysqlDto">
+                     javaType="com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto">
             <id column="fid" property="fid"/>
             <result column="parent_id" property="parentId"/>
             <result column="menu_name" property="menuName"/>

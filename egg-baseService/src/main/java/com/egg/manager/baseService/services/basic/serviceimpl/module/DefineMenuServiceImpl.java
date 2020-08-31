@@ -19,13 +19,13 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelectTranslate;
@@ -243,7 +243,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds,defineMenuEntityWrapper) ;
-        result.setResultList(DefineMenuMysqlTransfer.transferEntityToVoList(defineMenus));
+        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenus));
         return result ;
     }
 
@@ -259,9 +259,9 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     public MyCommonResult<DefineMenuMysqlVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineMenuMysqlDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineMenuMysqlTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result ;
     }
 
@@ -281,7 +281,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefineMenu defineMenu = DefineMenuMysqlTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         //
         if(StringUtils.isBlank(parentId)){
@@ -337,7 +337,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer changeCount = 0;
         Date now = new Date() ;
         defineMenuVo.setUpdateTime(now);
-        DefineMenu defineMenu = DefineMenuMysqlTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineMenu parentMenu =defineMenuMapper.selectById(parentId);

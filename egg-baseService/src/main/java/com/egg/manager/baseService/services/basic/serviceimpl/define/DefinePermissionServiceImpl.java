@@ -18,13 +18,13 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -96,7 +96,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
-        result.setResultList(DefinePermissionMysqlTransfer.transferEntityToVoList(definePermissions));
+        result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissions));
         return result ;
     }
 
@@ -111,9 +111,9 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     public MyCommonResult<DefinePermissionMysqlVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                    List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefinePermissionMysqlDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefinePermissionMysqlTransfer.transferDtoToVoList(definePermissionDtos));
+        result.setResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result ;
     }
 
@@ -133,7 +133,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefinePermission definePermission = DefinePermissionMysqlTransfer.transferVoToEntity(definePermissionVo,null);
+        DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
@@ -169,13 +169,13 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer changeCount = 0;
         Date now = new Date() ;
         definePermissionVo.setUpdateTime(now);
-        DefinePermission updateEntity = DefinePermissionMysqlTransfer.transferVoToEntity(definePermissionVo,null);
+        DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
         if(loginUser != null){
             updateEntity.setLastModifyerId(loginUser.getFid());
         }
         DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
         if(SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())){    //如果已经启用
-            DefinePermissionMysqlTransfer.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
+            DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
         }
         if(updateAll){  //是否更新所有字段
             changeCount = definePermissionMapper.updateAllColumnById(updateEntity) ;

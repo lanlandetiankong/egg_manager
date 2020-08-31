@@ -15,12 +15,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +74,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectPage(rowBounds,announcementTagEntityWrapper) ;
-        result.setResultList(AnnouncementTagMysqlTransfer.transferEntityToVoList(announcementTags));
+        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTags));
         return result ;
     }
 
@@ -89,9 +89,9 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     public MyCommonResult<AnnouncementTagMysqlVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                  List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementTagMysqlDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementTagMysqlTransfer.transferDtoToVoList(announcementTagDtoList));
+        result.setResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
         return result ;
     }
 
@@ -123,7 +123,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Override
     public Integer dealAddAnnouncementTag(AnnouncementTagMysqlVo announcementTagVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementTag announcementTag = AnnouncementTagMysqlTransfer.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         announcementTag.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementTag.setState(BaseStateEnum.ENABLED.getValue());
         announcementTag.setCreateTime(now);
@@ -149,7 +149,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
         Integer changeCount = 0;
         Date now = new Date() ;
         announcementTagVo.setUpdateTime(now);
-        AnnouncementTag announcementTag = AnnouncementTagMysqlTransfer.transferVoToEntity(announcementTagVo);
+        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         if(loginUser != null){
             announcementTag.setLastModifyerId(loginUser.getFid());
         }

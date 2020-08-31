@@ -18,7 +18,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
@@ -168,7 +168,7 @@ public class DefineMenuController extends BaseController{
         MyCommonResult<DefineMenuMysqlVo> result = new MyCommonResult<DefineMenuMysqlVo>() ;
         try{
             DefineMenu defineMenu = defineMenuMapper.selectById(defineMenuId);
-            result.setBean(DefineMenuMysqlTransfer.transferEntityToVo(defineMenu));
+            result.setBean(DefineMenuTransfer.transferEntityToVo(defineMenu));
             dealCommonSuccessCatch(result,"查询菜单定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

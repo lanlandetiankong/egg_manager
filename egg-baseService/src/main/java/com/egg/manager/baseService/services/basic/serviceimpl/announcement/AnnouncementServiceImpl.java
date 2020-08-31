@@ -15,15 +15,15 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementMysqlVo;
 import org.apache.ibatis.session.RowBounds;
@@ -87,7 +87,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementMysqlTransfer.transferEntityToVoList(announcements,announcementTagMap));
+        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements,announcementTagMap));
         return result ;
     }
 
@@ -105,9 +105,9 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementMysqlDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementMysqlTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
+        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
         return result ;
     }
 
@@ -120,7 +120,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     @Override
     public Integer dealAddAnnouncement(AnnouncementMysqlVo announcementVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        Announcement announcement = AnnouncementMysqlTransfer.transferVoToEntity(announcementVo);
+        Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
@@ -146,7 +146,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftMysqlTransfer.transferVoToEntity(announcementDraftVo),loginUser);
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo),loginUser);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);

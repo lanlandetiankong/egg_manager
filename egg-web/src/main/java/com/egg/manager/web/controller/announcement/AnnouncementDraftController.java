@@ -15,7 +15,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -98,7 +98,7 @@ public class AnnouncementDraftController extends BaseController{
             AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
             //取得 公告标签 map
             Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-            result.setBean(AnnouncementDraftMysqlTransfer.transferEntityToVo(announcementDraft,announcementTagMap));
+            result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraft,announcementTagMap));
             dealCommonSuccessCatch(result,"查询公告草稿信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

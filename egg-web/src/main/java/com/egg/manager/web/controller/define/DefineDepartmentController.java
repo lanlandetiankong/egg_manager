@@ -14,7 +14,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
 import com.egg.manager.web.controller.BaseController;
@@ -88,7 +88,7 @@ public class DefineDepartmentController extends BaseController{
         MyCommonResult<DefineDepartmentMysqlVo> result = new MyCommonResult<DefineDepartmentMysqlVo>() ;
         try{
             DefineDepartment defineDepartment = defineDepartmentService.selectById(defineDepartmentId);
-            result.setBean(DefineDepartmentMysqlTransfer.transferEntityToVo(defineDepartment));
+            result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
             dealCommonSuccessCatch(result,"查询部门定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

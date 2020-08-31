@@ -13,12 +13,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +71,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds,defineJobEntityWrapper) ;
-        result.setResultList(DefineJobMysqlTransfer.transferEntityToVoList(defineJobs));
+        result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobs));
         return result ;
     }
 
@@ -86,9 +86,9 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     public MyCommonResult<DefineJobMysqlVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                      List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineJobMysqlDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineJobMysqlTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result ;
     }
 
@@ -102,7 +102,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     @Override
     public Integer dealAddDefineJob(DefineJobMysqlVo defineJobVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineJob defineJob = DefineJobMysqlTransfer.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
         defineJob.setState(BaseStateEnum.ENABLED.getValue());
         defineJob.setCreateTime(now);
@@ -128,7 +128,7 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
         Integer changeCount = 0;
         Date now = new Date() ;
         defineJobVo.setUpdateTime(now);
-        DefineJob defineJob = DefineJobMysqlTransfer.transferVoToEntity(defineJobVo);
+        DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         if(loginUser != null){
             defineJob.setLastModifyerId(loginUser.getFid());
         }

@@ -23,7 +23,7 @@
     </resultMap>
 
 
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftMysqlDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto">
         <id column="fid" property="fid" />
         <result column="title" property="title" />
         <result column="key_word" property="keyWord" />

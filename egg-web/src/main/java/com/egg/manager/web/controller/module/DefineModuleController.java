@@ -12,7 +12,7 @@ import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.module.DefineModuleMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -86,7 +86,7 @@ public class DefineModuleController extends BaseController{
         MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
         try{
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
-            result.setBean(DefineModuleMysqlTransfer.transferEntityToVo(defineModule));
+            result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
             dealCommonSuccessCatch(result,"查询模块定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

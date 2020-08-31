@@ -22,8 +22,8 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
-import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentMysqlDto;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentMysqlTransfer;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -149,7 +149,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
         Integer total = userDepartmentMapper.selectCount(userDepartmentEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserDepartment> userDepartments = userDepartmentMapper.selectPage(rowBounds,userDepartmentEntityWrapper) ;
-        result.setResultList(UserDepartmentMysqlTransfer.transferEntityToVoList(userDepartments));
+        result.setResultList(UserDepartmentTransfer.transferEntityToVoList(userDepartments));
         return result;
     }
 
@@ -165,9 +165,9 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
     public MyCommonResult<UserDepartmentMysqlVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserDepartmentMysqlDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserDepartmentMysqlTransfer.transferDtoToVoList(userDepartmentDtoList));
+        result.setResultList(UserDepartmentTransfer.transferDtoToVoList(userDepartmentDtoList));
         return result;
     }
 
@@ -181,7 +181,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
     @Override
     public Integer dealAddUserDepartment(UserDepartmentMysqlVo userDepartmentVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserDepartment userDepartment = UserDepartmentMysqlTransfer.transferVoToEntity(userDepartmentVo);
+        UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
         userDepartment.setState(BaseStateEnum.ENABLED.getValue());
         userDepartment.setCreateTime(now);
@@ -207,7 +207,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
         Integer changeCount = 0;
         Date now = new Date() ;
         userDepartmentVo.setUpdateTime(now);
-        UserDepartment userDepartment = UserDepartmentMysqlTransfer.transferVoToEntity(userDepartmentVo);
+        UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         if(loginUser != null){
             userDepartment.setLastModifyerId(loginUser.getFid());
         }

@@ -13,12 +13,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleDto;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.module.DefineModuleMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +75,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineModule> defineModules = defineModuleMapper.selectPage(rowBounds,defineModuleEntityWrapper) ;
-        result.setResultList(DefineModuleMysqlTransfer.transferEntityToVoList(defineModules));
+        result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModules));
         return result ;
     }
 
@@ -91,9 +91,9 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     public MyCommonResult<DefineModuleMysqlVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                            List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineModuleMysqlDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineModuleMysqlTransfer.transferDtoToVoList(defineModuleDtoList));
+        result.setResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
         return result ;
     }
 
@@ -109,7 +109,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Override
     public Integer dealAddDefineModule(DefineModuleMysqlVo defineModuleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineModule defineModule = DefineModuleMysqlTransfer.transferVoToEntity(defineModuleVo);
+        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule.setFid(MyUUIDUtil.renderSimpleUUID());
         defineModule.setState(BaseStateEnum.ENABLED.getValue());
         defineModule.setCreateTime(now);
@@ -135,7 +135,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
         Integer changeCount = 0;
         Date now = new Date() ;
         defineModuleVo.setUpdateTime(now);
-        DefineModule defineModule = DefineModuleMysqlTransfer.transferVoToEntity(defineModuleVo);
+        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         if(loginUser != null){
             defineModule.setLastModifyerId(loginUser.getFid());
         }

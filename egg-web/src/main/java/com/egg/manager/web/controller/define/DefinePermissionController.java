@@ -16,7 +16,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -117,7 +117,7 @@ public class DefinePermissionController  extends BaseController{
         MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
         try{
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
-            result.setBean(DefinePermissionMysqlTransfer.transferEntityToVo(definePermission));
+            result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
             dealCommonSuccessCatch(result,"查询权限定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

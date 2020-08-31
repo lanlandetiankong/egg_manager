@@ -21,7 +21,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
@@ -137,7 +137,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
-            result.setBean(DefineRoleMysqlTransfer.transferEntityToVo(defineRole));
+            result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
             dealCommonSuccessCatch(result,"查询角色定义信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

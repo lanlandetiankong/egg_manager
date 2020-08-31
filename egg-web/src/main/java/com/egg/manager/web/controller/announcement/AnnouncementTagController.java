@@ -13,7 +13,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -110,7 +110,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult<AnnouncementTagMysqlVo> result = new MyCommonResult<AnnouncementTagMysqlVo>() ;
         try{
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
-            result.setBean(AnnouncementTagMysqlTransfer.transferEntityToVo(announcementTag));
+            result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result,"查询公告标签信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

@@ -18,12 +18,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.user.UserRoleMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserRoleDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserRoleMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserRoleTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -151,7 +151,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds,userRoleEntityWrapper) ;
-        result.setResultList(UserRoleMysqlTransfer.transferEntityToVoList(userRoles));
+        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoles));
         return result ;
     }
 
@@ -167,9 +167,9 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     public MyCommonResult<UserRoleMysqlVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserRoleMysqlDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserRoleMysqlTransfer.transferDtoToVoList(userRoleDtoList));
+        result.setResultList(UserRoleTransfer.transferDtoToVoList(userRoleDtoList));
         return result ;
     }
 
@@ -183,7 +183,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Override
     public Integer dealAddUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        UserRole userRole = UserRoleMysqlTransfer.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
         userRole.setState(BaseStateEnum.ENABLED.getValue());
         userRole.setCreateTime(now);
@@ -209,7 +209,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         Integer changeCount = 0;
         Date now = new Date() ;
         userRoleVo.setUpdateTime(now);
-        UserRole userRole = UserRoleMysqlTransfer.transferVoToEntity(userRoleVo);
+        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         if(loginUser != null){
             userRole.setLastModifyerId(loginUser.getFid());
         }

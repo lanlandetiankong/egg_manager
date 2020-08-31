@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.pojo.dto.mysql;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 /**
  * Dto 继承类(后续可在此处添加通用功能)
  */
+@Data
 public class MyBaseMysqlDto implements Serializable {
 
     private String fid;

@@ -12,7 +12,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserTenantMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserTenantTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -85,7 +85,7 @@ public class UserTenantController extends BaseController{
         MyCommonResult<UserTenantMysqlVo> result = new MyCommonResult<UserTenantMysqlVo>() ;
         try{
             UserTenant vo = userTenantMapper.selectById(tenantId);
-            result.setBean(UserTenantMysqlTransfer.transferEntityToVo(vo));
+            result.setBean(UserTenantTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询 [用户与租户关联] 信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

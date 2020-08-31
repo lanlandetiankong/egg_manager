@@ -12,7 +12,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -85,7 +85,7 @@ public class UserDepartmentController extends BaseController{
         MyCommonResult<UserDepartmentMysqlVo> result = new MyCommonResult<UserDepartmentMysqlVo>() ;
         try{
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
-            result.setBean(UserDepartmentMysqlTransfer.transferEntityToVo(vo));
+            result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询 [用户与部门关联] 信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

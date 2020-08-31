@@ -21,7 +21,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.pojo.dto.login.LoginAccountDTO;
-import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
@@ -32,7 +32,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -110,7 +110,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<UserAccount> userAccounts = userAccountMapper.selectPage(rowBounds,userAccountEntityWrapper) ;
-        result.setResultList(UserAccountMysqlTransfer.transferEntityToVoList(userAccounts));
+        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccounts));
         return result ;
     }
 
@@ -139,9 +139,9 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
                 }
             }
         }
-        List<UserAccountMysqlDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(UserAccountMysqlTransfer.transferDtoToVoList(userAccountDtoList));
+        result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result ;
     }
 
@@ -159,7 +159,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Date now = new Date() ;
-        UserAccount userAccount = UserAccountMysqlTransfer.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
@@ -207,7 +207,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         Integer changeCount = 0;
         Date now = new Date() ;
         userAccountVo.setUpdateTime(now);
-        UserAccount userAccount = UserAccountMysqlTransfer.transferVoToEntity(userAccountVo);
+        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         if(loginUser != null){
             userAccount.setLastModifyerId(loginUser.getFid());
         }
@@ -449,7 +449,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(checkIds != null){
             wrapper.in("fid",checkIds);
         }
-        return UserAccountMysqlTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
+        return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
     }
 
 

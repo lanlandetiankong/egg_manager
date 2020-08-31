@@ -23,10 +23,10 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
@@ -163,7 +163,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<UserAccountMysqlVo> result = new MyCommonResult<UserAccountMysqlVo>() ;
         try{
             UserAccount account = userAccountMapper.selectById(accountId);
-            UserAccountMysqlVo userAccountVo = UserAccountMysqlTransfer.transferEntityToVo(account);
+            UserAccountMysqlVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
             DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
@@ -184,7 +184,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
         try{
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineRoleMysqlTransfer.transferEntityToVoList(defineRoleList));
+            result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
             dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -200,7 +200,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
         try{
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-            result.setResultList(DefinePermissionMysqlTransfer.transferEntityToVoList(definePermissionList));
+            result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
             dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -216,7 +216,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineJobMysqlTransfer.transferEntityToVoList(defineJobList));
+            result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
             dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

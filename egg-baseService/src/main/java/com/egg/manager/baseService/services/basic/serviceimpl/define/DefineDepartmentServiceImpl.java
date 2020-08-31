@@ -14,12 +14,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
@@ -77,7 +77,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         Integer total = defineDepartmentMapper.selectCount(defineDepartmentEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
-        result.setResultList(DefineDepartmentMysqlTransfer.transferEntityToVoList(defineDepartments));
+        result.setResultList(DefineDepartmentTransfer.transferEntityToVoList(defineDepartments));
         return result ;
     }
 
@@ -92,9 +92,9 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     public MyCommonResult<DefineDepartmentMysqlVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                    List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefineDepartmentMysqlDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineDepartmentMysqlTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.setResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result ;
     }
 
@@ -160,7 +160,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Override
     public Integer dealAddDefineDepartment(DefineDepartmentMysqlVo defineDepartmentVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        DefineDepartment defineDepartment = DefineDepartmentMysqlTransfer.transferVoToEntity(defineDepartmentVo);
+        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);
@@ -202,7 +202,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         Integer changeCount = 0;
         Date now = new Date() ;
         defineDepartmentVo.setUpdateTime(now);
-        DefineDepartment defineDepartment = DefineDepartmentMysqlTransfer.transferVoToEntity(defineDepartmentVo);
+        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);

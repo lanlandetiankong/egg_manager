@@ -12,7 +12,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -114,7 +114,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
         try{
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
-            result.setBean(DefineJobMysqlTransfer.transferEntityToVo(defineJob));
+            result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
             dealCommonSuccessCatch(result,"查询职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

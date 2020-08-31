@@ -15,7 +15,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftMysqlDto;
+import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
@@ -23,7 +23,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +86,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         List<AnnouncementDraft> announcementDrafts = announcementDraftMapper.selectPage(rowBounds,announcementDraftEntityWrapper) ;
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementDraftMysqlTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
+        result.setResultList(AnnouncementDraftTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
         return result ;
     }
 
@@ -104,9 +104,9 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementDraftMysqlDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
+        List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementDraftMysqlTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
+        result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList,announcementTagMap));
         return result ;
     }
 
@@ -119,7 +119,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Override
     public Integer dealAddAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
-        AnnouncementDraft announcementDraft = AnnouncementDraftMysqlTransfer.transferVoToEntity(announcementDraftVo);
+        AnnouncementDraft announcementDraft = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
         announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
         announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
         announcementDraft.setCreateTime(now);

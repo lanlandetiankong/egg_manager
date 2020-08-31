@@ -10,7 +10,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserJobMysqlTransfer;
+import com.egg.manager.persistence.pojo.transfer.mysql.user.UserJobTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobMysqlVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -81,7 +81,7 @@ public class UserJobController extends BaseController{
         MyCommonResult<UserJobMysqlVo> result = new MyCommonResult<UserJobMysqlVo>() ;
         try{
             UserJob vo = userJobMapper.selectById(jobId);
-            result.setBean(UserJobMysqlTransfer.transferEntityToVo(vo));
+            result.setBean(UserJobTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result,"查询用户职务信息:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

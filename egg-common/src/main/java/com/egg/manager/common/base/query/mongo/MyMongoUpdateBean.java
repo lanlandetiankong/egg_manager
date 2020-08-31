@@ -19,8 +19,13 @@ import org.springframework.data.mongodb.core.query.Update;
 @NoArgsConstructor
 @Builder
 public class MyMongoUpdateBean<T> {
-
+    /**
+     * 更新的文档对象
+     */
     private Document document ;
+    /**
+     * class
+     */
     private Class clazz ;
 
 

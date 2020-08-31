@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.transfer.announcement;
 
-import com.egg.manager.persistence.pojo.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
+import com.egg.manager.persistence.pojo.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.announcement.AnnouncementTagVo;

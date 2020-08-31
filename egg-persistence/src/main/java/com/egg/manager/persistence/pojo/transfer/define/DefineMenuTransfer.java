@@ -2,8 +2,8 @@ package com.egg.manager.persistence.pojo.transfer.define;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.persistence.pojo.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
+import com.egg.manager.persistence.pojo.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.define.DefineMenuVo;

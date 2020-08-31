@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * \* note:
- * \* User: zhouchengjie
- * \* Date: 2020/2/19
- * \* Time: 20:26
- * \* Description:
- * \
+ * 请求头 bean
  */
 @Data
 @NoArgsConstructor

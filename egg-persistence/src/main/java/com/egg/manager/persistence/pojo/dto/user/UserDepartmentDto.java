@@ -1,7 +1,5 @@
 package com.egg.manager.persistence.pojo.dto.user;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import lombok.AllArgsConstructor;

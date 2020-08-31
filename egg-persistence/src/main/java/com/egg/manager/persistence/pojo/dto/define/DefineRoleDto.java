@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.pojo.dto.define;
 
 
-import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,17 +16,59 @@ import java.util.Date;
 @AllArgsConstructor
 public class DefineRoleDto extends MyBaseDto {
     private String fid;
-
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 编码
+     */
     private String code;
+    /**
+     * 类型
+     */
     private Integer type;
 
-    private Short state;
+
+
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 状态
+     */
+    private Short state;
+    /**
+     * 创建时间
+     */
     private Date createTime;
+    /**
+     * 修改时间
+     */
     private Date updateTime;
+    /**
+     * 创建用户id
+     */
     private String createUserId;
+    /**
+     * 最后修改用户id
+     */
     private String lastModifyerId;
+    /**
+     * 类型名称
+     */
+    private String typeStr;
+
+
+
+    /**
+     * 创建人-vo
+     */
     private UserAccount createUser;
+    /**
+     * 最后更新人-vo
+     */
     private UserAccount lastModifyer;
+
 }

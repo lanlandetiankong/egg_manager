@@ -32,11 +32,25 @@ import java.util.regex.Pattern;
  */
 @Slf4j
 public class MongoQueryBean<T> extends MyBaseQueryBean {
-
+    /**
+     * 条件集合
+     */
     private List<Criteria> criteriaList = new ArrayList<>() ;
+    /**
+     * 分页请求
+     */
     private QPageRequest pageRequest ;
+    /**
+     * 分页查询bean
+     */
     private MyMongoQueryPageBean  pageBean ;
+    /**
+     * 排序Sort
+     */
     private Sort sort ;
+    /**
+     * 数据
+     */
     private List<T> data ;
 
 

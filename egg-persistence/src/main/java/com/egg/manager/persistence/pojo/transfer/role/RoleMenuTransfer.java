@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.transfer.role;
 
-import com.egg.manager.persistence.pojo.dto.role.RoleMenuDto;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
+import com.egg.manager.persistence.pojo.dto.role.RoleMenuDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.vo.role.RoleMenuVo;
 

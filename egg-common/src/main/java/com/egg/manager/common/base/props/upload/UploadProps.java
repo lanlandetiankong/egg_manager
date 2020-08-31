@@ -17,11 +17,25 @@ import java.io.Serializable;
 @Component
 @ConfigurationProperties(prefix = "props.upload")
 public class UploadProps implements Serializable{
-
+    /**
+     * 访问路径前缀
+     */
     private String urlPrefix ;
+    /**
+     * 路径位置前缀
+     */
     private String locationPrefix ;
+    /**
+     * 图片存放路径
+     */
     private String locationOfImg ;
+    /**
+     * excel存放路径
+     */
     private String locationOfExcel ;
+    /**
+     * 项目名
+     */
     private String projectName ;
 
 

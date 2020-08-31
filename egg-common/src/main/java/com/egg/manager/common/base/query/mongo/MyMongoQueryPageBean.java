@@ -8,9 +8,21 @@ import java.util.List;
 
 @Data
 public class MyMongoQueryPageBean<T> extends MyBaseQueryBean{
+    /**
+     * 当前页
+     */
     private Integer current ;
+    /**
+     * 单页数量
+     */
     private Integer pageSize ;
+    /**
+     * 总数
+     */
     private long total ;
+    /**
+     * 内容
+     */
     private List<T> content;
 
     public MyMongoQueryPageBean() {

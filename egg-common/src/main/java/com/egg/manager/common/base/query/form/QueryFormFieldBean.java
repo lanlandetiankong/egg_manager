@@ -27,10 +27,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QueryFormFieldBean  extends MyBaseQueryBean {
+    /**
+     * 字段名
+     */
     private String fieldName;
+    /**
+     * 匹配方式
+     */
     private String matching ;
+    /**
+     * 外键名
+     */
     private String foreignName ;
+    /**
+     * 数据库匹配方式
+     */
     private String sqlMatching ;
+    /**
+     * 匹配的值
+     */
     private Object value ;
 
 

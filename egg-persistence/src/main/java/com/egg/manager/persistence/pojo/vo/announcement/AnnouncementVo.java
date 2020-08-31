@@ -45,7 +45,7 @@ public class AnnouncementVo extends MyBaseVo {
     /**
      * 公告标签 集合
      */
-    private String tagIds;
+    private List<String> tagIds;
     /**
      * 附件
      */

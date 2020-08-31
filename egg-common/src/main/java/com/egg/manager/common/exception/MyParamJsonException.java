@@ -8,6 +8,9 @@ public class MyParamJsonException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 信息
+     */
     private String message;
 
     @Override

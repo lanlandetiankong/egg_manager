@@ -19,7 +19,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginAccountDTO extends MyBaseDto {
-
+    /**
+     * 账号
+     */
     private String account;
+    /**
+     * 密码
+     */
     private String password;
 }

@@ -20,7 +20,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class FrontEntitySelectBean  implements Serializable {
+    /**
+     * Select的值
+     */
     private String value ;
+    /**
+     * Select展示的名称
+     */
     private String label ;
 
 }

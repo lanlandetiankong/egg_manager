@@ -17,5 +17,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CurrentLoginUser {
+    /**
+     * 是否必须要登录
+     * @return
+     */
     boolean required() default true;
 }

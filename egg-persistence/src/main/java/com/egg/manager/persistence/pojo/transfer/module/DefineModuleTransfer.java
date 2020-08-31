@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.pojo.transfer.module;
 
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.persistence.pojo.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
+import com.egg.manager.persistence.pojo.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.vo.module.DefineModuleVo;
 

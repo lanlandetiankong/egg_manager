@@ -24,7 +24,15 @@ public @interface OperLog {
      */
     String fullPath() ;
 
+    /**
+     * 描述
+     * @return
+     */
     String description() default "" ;
 
+    /**
+     * 是否记录到 mongodb
+     * @return
+     */
     boolean flag()  default true ;
 }

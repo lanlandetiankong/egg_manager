@@ -3,12 +3,7 @@ package com.egg.manager.common.annotation.shiro;
 import java.lang.annotation.*;
 
 /**
- * \* note:
- * \* User: zhouchengjie
- * \* Date: 2019/9/15
- * \* Time: 0:28
- * \* Description:
- * \
+ * shiro 跳过 注解
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

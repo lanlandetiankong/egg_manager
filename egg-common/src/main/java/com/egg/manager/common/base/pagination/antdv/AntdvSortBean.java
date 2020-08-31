@@ -15,9 +15,17 @@ import lombok.NoArgsConstructor;
  */
 @Data
 public class AntdvSortBean extends MyBasePagination {
+    /**
+     * 字段名
+     */
     private String field ;
+    /**
+     * 正序：ascend,倒序:descend
+     */
     private Boolean ascFlag ;
-    //正序：ascend,倒序:descend
+    /**
+     *  序号
+     */
     private String order ;
     public AntdvSortBean(){}
     public AntdvSortBean(String field, boolean ascFlag) {

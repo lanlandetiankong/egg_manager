@@ -43,8 +43,13 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
      */
     private Set<String> whiteQueryFieldSets = new HashSet<>();
 
-
+    /**
+     * 是否使用 白名单
+     */
     private Boolean whiteSetsFlag = false ;
+    /**
+     * 分页bean
+     */
     private MyMongoQueryPageBean pageBean = null ;
 
     public MyMongoQueryBuffer() {

@@ -1,6 +1,5 @@
 package com.egg.manager.common.base.constant.redis;
 
-import java.io.Serializable;
 
 /**
  * \* note:

@@ -74,6 +74,11 @@ public class UserAccount extends Model<UserAccount> {
      */
     @TableField("user_type_num")
     private Integer userTypeNum;
+    /**
+     * 是否锁定账号
+     */
+    @TableField("locked")
+    private short locked;
 
 
 

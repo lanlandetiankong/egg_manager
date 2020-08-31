@@ -18,14 +18,26 @@ import java.io.Serializable;
 @Component
 @ConfigurationProperties(prefix = "props.upload")
 public class UploadStaticProps implements Serializable {
-
-    public static String urlPrefix ;
-    public static String locationPrefix ;
-    public static String locationOfImg ;
-    public static String locationOfExcel ;
-    public static String projectName ;
-
-
+    /**
+     * 访问路径前缀
+     */
+    private static String urlPrefix ;
+    /**
+     * 路径位置前缀
+     */
+    private static String locationPrefix ;
+    /**
+     * 图片存放路径
+     */
+    private static String locationOfImg ;
+    /**
+     * excel存放路径
+     */
+    private static String locationOfExcel ;
+    /**
+     * 项目名
+     */
+    private static String projectName ;
 
 
 

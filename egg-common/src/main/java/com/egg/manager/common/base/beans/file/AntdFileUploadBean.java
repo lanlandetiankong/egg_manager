@@ -21,19 +21,34 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class AntdFileUploadBean  implements Serializable {
-
+    /**
+     * uid
+     */
     private String uid ;
+    /**
+     * 文件名
+     */
     private String name ;
+    /**
+     * 文件地址
+     */
     @JSONField(serialize = false)
     private String url ;
-
+    /**
+     * 状态
+     */
     private String status ;
     private String response ;
     private Object linkProps ;
     private String xhr ;
 
-
+    /**
+     * uri
+     */
     private String uri ;
+    /**
+     * uri路径
+     */
     private String urlLocation ;
 
 

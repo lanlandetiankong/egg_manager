@@ -23,7 +23,13 @@ import java.lang.reflect.InvocationTargetException;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginAccountVo extends MyBaseWebVo {
+    /**
+     * 账号
+     */
     private String account;
+    /**
+     * 密码
+     */
     private String password;
 
 

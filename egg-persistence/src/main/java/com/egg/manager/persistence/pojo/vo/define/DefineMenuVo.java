@@ -107,9 +107,9 @@ public class DefineMenuVo extends MyBaseVo {
      */
     private UserAccountVo lastModifyer;
     /**
-     * 上传的excel模板
+     * 当前菜单已上传的Excel模板文件bean
      */
-    private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();  //当前菜单已上传的Excel模板文件bean
+    private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();
 
 
     public void dealAddAntdFileUploadBean(AntdFileUploadBean bean) {

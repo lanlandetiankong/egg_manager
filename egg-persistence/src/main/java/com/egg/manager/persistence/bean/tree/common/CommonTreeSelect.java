@@ -20,10 +20,25 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class CommonTreeSelect extends MyBaseTree {
+    /**
+     * 标题
+     */
     private String title;
+    /**
+     * 值
+     */
     private String value;
+    /**
+     * vue-key
+     */
     private String key;
+    /**
+     * 上级id
+     */
     private String parentId;
+    /**
+     * 子项
+     */
     private List<CommonTreeSelect> children;
 
 

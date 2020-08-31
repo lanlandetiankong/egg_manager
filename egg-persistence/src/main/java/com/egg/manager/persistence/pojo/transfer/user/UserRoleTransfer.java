@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.transfer.user;
 
-import com.egg.manager.persistence.pojo.dto.user.UserRoleDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
+import com.egg.manager.persistence.pojo.dto.user.UserRoleDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.vo.user.UserRoleVo;
 

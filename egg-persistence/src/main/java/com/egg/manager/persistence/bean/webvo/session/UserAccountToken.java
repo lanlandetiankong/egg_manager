@@ -24,12 +24,33 @@ import java.lang.reflect.InvocationTargetException;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccountToken extends MyBaseWebVo {
+    /**
+     * 账号
+     */
     private String account;
+    /**
+     * 账号_id
+     */
     private String userAccountId;
+    /**
+     * token
+     */
     private String token;
+    /**
+     * 用户名
+     */
     private String userName;
+    /**
+     * 昵称
+     */
     private String nickName;
+    /**
+     * 头像地址
+     */
     private String avatarUrl;
+    /**
+     * 认真信息
+     */
     private String authorization;
 
 

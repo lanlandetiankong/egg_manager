@@ -15,8 +15,17 @@ import lombok.Data;
 @Data
 @Builder
 public class AntdvPaginationBean extends MyBasePagination {
+    /**
+     * 当前页数
+     */
     private Integer current ;
+    /**
+     * 单页数据量
+     */
     private Integer pageSize ;
+    /**
+     * 总数据量
+     */
     private int total ;
 
     public AntdvPaginationBean() {

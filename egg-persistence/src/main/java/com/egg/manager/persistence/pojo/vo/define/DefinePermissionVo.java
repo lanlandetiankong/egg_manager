@@ -26,7 +26,7 @@ public class DefinePermissionVo extends MyBaseVo {
     /**
      * 是否确认发布，发布之后不可修改
      */
-    private Short ensure;
+    private boolean ensure;
     /**
      * 类型
      */

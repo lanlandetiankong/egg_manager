@@ -17,7 +17,9 @@ import java.io.Serializable;
 @Component
 @ConfigurationProperties(prefix = "egg.build.deploy")
 public class DeployConfProps  implements Serializable {
-
+    /**
+     * 跨域放行的源
+     */
     @Value("allowedOrigins")
     private String[] allowedOrigins ;
 

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.dto.user;
 
-import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.dto.MyBaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,20 +15,58 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserTenantDto extends MyBaseDto {
     private String fid;
-
+    /**
+     * 账号id
+     */
     private String userAccountId;
+    /**
+     * 租户id
+     */
     private String defineTenantId;
+    /**
+     * 类型
+     */
     private Integer type;
+    /**
+     * 是否管理员
+     */
     private Short isManager;
 
-    private Short state;
-    private String remark;
-    private Date createTime;
-    private Date updateTime;
-    private String createUserId;
-    private String lastModifyerId;
-    private UserAccount createUser;
-    private UserAccount lastModifyer;
 
+
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 状态
+     */
+    private Short state;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     * 创建用户id
+     */
+    private String createUserId;
+    /**
+     * 最后修改用户id
+     */
+    private String lastModifyerId;
+
+
+    /**
+     * 创建人-vo
+     */
+    private UserAccount createUser;
+    /**
+     * 最后更新人-vo
+     */
+    private UserAccount lastModifyer;
 
 }

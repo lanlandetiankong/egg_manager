@@ -9,7 +9,9 @@ public class MyAuthenticationExpiredException extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
     private String defaultMsg = "用户信息已过期，请重新登录！" ;
-
+    /**
+     * 信息
+     */
     private String message;
 
     @Override

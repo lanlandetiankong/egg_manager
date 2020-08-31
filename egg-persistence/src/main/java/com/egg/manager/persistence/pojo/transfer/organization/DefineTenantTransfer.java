@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.transfer.organization;
 
-import com.egg.manager.persistence.pojo.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
+import com.egg.manager.persistence.pojo.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.transfer.MyBaseTransfer;
 import com.egg.manager.persistence.pojo.vo.organization.DefineTenantVo;
 

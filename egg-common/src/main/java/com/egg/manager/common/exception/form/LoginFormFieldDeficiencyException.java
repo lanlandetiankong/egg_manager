@@ -11,7 +11,9 @@ package com.egg.manager.common.exception.form;
 public class LoginFormFieldDeficiencyException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * 信息
+     */
     private String message;
 
     @Override

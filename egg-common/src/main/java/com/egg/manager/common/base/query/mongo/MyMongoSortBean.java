@@ -13,10 +13,20 @@ import lombok.Data;
  */
 @Data
 public class MyMongoSortBean extends MyBasePagination {
+    /**
+     * 字段名
+     */
     private String field ;
+    /**
+     * 正序：ascend,倒序:descend
+     */
     private Boolean ascFlag ;
-    //正序：ascend,倒序:descend
+    /**
+     * 排序值
+     */
     private String order ;
+
+
     public MyMongoSortBean(){}
     public MyMongoSortBean(String field, boolean ascFlag) {
         this.field = field;

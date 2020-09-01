@@ -27,10 +27,10 @@ import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineRoleTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.web.config.shiro.JwtShiroToken;
@@ -136,9 +136,9 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserAccountDtos")
-    public MyCommonResult<UserAccountMysqlVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                      @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountMysqlVo> result = new MyCommonResult<UserAccountMysqlVo>() ;
+    public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                 @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -159,11 +159,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户信息",description = "根据用户id查询用户信息",fullPath = "/user/user_account/getUserAccountById")
     @PostMapping(value = "/getUserAccountById")
-    public MyCommonResult<UserAccountMysqlVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountMysqlVo> result = new MyCommonResult<UserAccountMysqlVo>() ;
+    public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
         try{
             UserAccount account = userAccountMapper.selectById(accountId);
-            UserAccountMysqlVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
+            UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
             DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
@@ -180,8 +180,8 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色",fullPath = "/user/user_account/getAllRoleByUserAccountId")
     @PostMapping(value = "/getAllRoleByUserAccountId")
-    public MyCommonResult<DefineRoleMysqlVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleMysqlVo> result = new MyCommonResult<DefineRoleMysqlVo>() ;
+    public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
         try{
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
@@ -195,9 +195,9 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限",fullPath = "/user/user_account/getAllPermissionByUserAccountId")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
-    public MyCommonResult<DefinePermissionMysqlVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
-                                                                                     @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
+    public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
+                                                                                @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
@@ -212,8 +212,8 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务",fullPath = "/user/user_account/getAllJobByUserAccountId")
     @PostMapping(value = "/getAllJobByUserAccountId")
-    public MyCommonResult<DefineJobMysqlVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobMysqlVo> result = new MyCommonResult<DefineJobMysqlVo>() ;
+    public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
         try{
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
@@ -232,7 +232,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{
-            UserAccountMysqlVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountMysqlVo.class,true) ;
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj", UserAccountVo.class,true) ;
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {
@@ -254,7 +254,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            UserAccountMysqlVo userAccountVo = this.getBeanFromRequest(request,"formObj",UserAccountMysqlVo.class,true) ;
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj", UserAccountVo.class,true) ;
             if(userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
             }   else {

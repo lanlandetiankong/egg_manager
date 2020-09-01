@@ -24,7 +24,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,8 +66,8 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                  List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                             List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<AnnouncementDraft> announcementDraftEntityWrapper = new EntityWrapper<AnnouncementDraft>();
         //取得 分页配置
@@ -98,8 +98,8 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftMysqlVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                     List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                                List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
@@ -117,7 +117,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         AnnouncementDraft announcementDraft = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
         announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -139,7 +139,7 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
         announcementDraft.setTitle(announcementDraftVo.getTitle());

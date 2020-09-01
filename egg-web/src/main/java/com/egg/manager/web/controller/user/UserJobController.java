@@ -11,7 +11,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserJobTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -55,8 +55,8 @@ public class UserJobController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserJobs")
-    public MyCommonResult<UserJobMysqlVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj) {
-        MyCommonResult<UserJobMysqlVo> result = new MyCommonResult<UserJobMysqlVo>() ;
+    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj) {
+        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -77,8 +77,8 @@ public class UserJobController extends BaseController{
     @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息",fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
-    public MyCommonResult<UserJobMysqlVo> doGetUserJobById(HttpServletRequest request, String jobId) {
-        MyCommonResult<UserJobMysqlVo> result = new MyCommonResult<UserJobMysqlVo>() ;
+    public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
+        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));

@@ -4,15 +4,20 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Named("AnnouncementTagTransfer")
 public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
 
 
-    public static AnnouncementTag transferVoToEntity(AnnouncementTagMysqlVo announcementTagVo) {
+    @Deprecated
+    public static AnnouncementTag transferVoToEntity(AnnouncementTagVo announcementTagVo) {
         if (announcementTagVo == null) {
             return null;
         }
@@ -30,12 +35,12 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         announcementTag.setLastModifyerId(announcementTagVo.getLastModifyerId());
         return announcementTag;
     }
-
-    public static AnnouncementTagMysqlVo transferEntityToVo(AnnouncementTag announcementTag) {
+    @Deprecated
+    public static AnnouncementTagVo transferEntityToVo(AnnouncementTag announcementTag) {
         if (announcementTag == null) {
             return null;
         }
-        AnnouncementTagMysqlVo announcementTagVo = new AnnouncementTagMysqlVo();
+        AnnouncementTagVo announcementTagVo = new AnnouncementTagVo();
         announcementTagVo.setFid(announcementTag.getFid());
         announcementTagVo.setName(announcementTag.getName());
         announcementTagVo.setDescription(announcementTag.getDescription());
@@ -50,11 +55,11 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         return announcementTagVo;
     }
 
-    public static AnnouncementTagMysqlVo transferDtoToVo(AnnouncementTagDto announcementTagDto) {
+    public static AnnouncementTagVo transferDtoToVo(AnnouncementTagDto announcementTagDto) {
         if (announcementTagDto == null) {
             return null;
         }
-        AnnouncementTagMysqlVo announcementTagVo = new AnnouncementTagMysqlVo();
+        AnnouncementTagVo announcementTagVo = new AnnouncementTagVo();
         announcementTagVo.setFid(announcementTagDto.getFid());
         announcementTagVo.setName(announcementTagDto.getName());
         announcementTagVo.setDescription(announcementTagDto.getDescription());
@@ -66,16 +71,19 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         announcementTagVo.setUpdateTime(announcementTagDto.getUpdateTime());
         announcementTagVo.setCreateUserId(announcementTagDto.getCreateUserId());
         announcementTagVo.setLastModifyerId(announcementTagDto.getLastModifyerId());
+        /**
+         * TODO
+         */
         announcementTagVo.setCreateUser(UserAccountTransfer.transferEntityToVo(announcementTagDto.getCreateUser()));
         announcementTagVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(announcementTagDto.getLastModifyer()));
         return announcementTagVo;
     }
 
-    public static List<AnnouncementTagMysqlVo> transferEntityToVoList(List<AnnouncementTag> announcementTags) {
+    public static List<AnnouncementTagVo> transferEntityToVoList(List<AnnouncementTag> announcementTags) {
         if (announcementTags == null) {
             return null;
         } else {
-            List<AnnouncementTagMysqlVo> list = new ArrayList<>();
+            List<AnnouncementTagVo> list = new ArrayList<>();
             for (AnnouncementTag announcementTag : announcementTags) {
                 list.add(transferEntityToVo(announcementTag));
             }
@@ -83,11 +91,11 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<AnnouncementTagMysqlVo> transferDtoToVoList(List<AnnouncementTagDto> announcementTagDtos) {
+    public static List<AnnouncementTagVo> transferDtoToVoList(List<AnnouncementTagDto> announcementTagDtos) {
         if (announcementTagDtos == null) {
             return null;
         } else {
-            List<AnnouncementTagMysqlVo> list = new ArrayList<>();
+            List<AnnouncementTagVo> list = new ArrayList<>();
             for (AnnouncementTagDto announcementTagDto : announcementTagDtos) {
                 list.add(transferDtoToVo(announcementTagDto));
             }

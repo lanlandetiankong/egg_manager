@@ -9,7 +9,7 @@ import com.egg.manager.persistence.pojo.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 
 import java.util.List;
 import java.util.Set;
@@ -37,8 +37,8 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountMysqlVo> dealGetUserAccountPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                               List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                          List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户 Dto列表
@@ -47,8 +47,8 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountMysqlVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                  List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                             List<AntdvSortBean> sortBeans);
 
     /**
      * 用户账号-新增
@@ -56,7 +56,7 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealAddUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddUserAccount(UserAccountVo userAccountVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 用户账号-更新
@@ -66,7 +66,7 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealUpdateUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateUserAccount(UserAccountVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 用户账号-删除
@@ -129,7 +129,7 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param wrapper
      * @return
      */
-    boolean dealCheckDuplicateKey(UserAccountMysqlVo userAccountVo, Wrapper<UserAccount> wrapper);
+    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper);
 
 
     /**

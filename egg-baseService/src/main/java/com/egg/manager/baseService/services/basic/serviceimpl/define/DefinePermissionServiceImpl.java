@@ -25,7 +25,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -78,8 +78,8 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionMysqlVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                           List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
         //取得 分页配置
@@ -108,8 +108,8 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionMysqlVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                   List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -127,7 +127,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefinePermission(DefinePermissionMysqlVo definePermissionVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser) throws Exception{
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,new EntityWrapper<DefinePermission>());
         if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
@@ -159,7 +159,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefinePermission(DefinePermissionMysqlVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Wrapper<DefinePermission> uniWrapper  = new EntityWrapper<DefinePermission>()
                 .ne("fid",definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,uniWrapper);
@@ -280,7 +280,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @return
      */
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionMysqlVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap){
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap){
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         definePermissionWrap = definePermissionWrap != null ? definePermissionWrap : new EntityWrapper<>() ;
         definePermissionWrap.eq("code",definePermissionVo.getCode()) ;

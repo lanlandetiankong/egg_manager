@@ -13,16 +13,19 @@ import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel
 import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.organization.DefineTenantTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-
+@Component
+@Named("UserAccountTransfer")
 public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
-    public static UserAccount transferVoToEntity(UserAccountMysqlVo userAccountVo) {
+    public static UserAccount transferVoToEntity(UserAccountVo userAccountVo) {
         if (userAccountVo == null) {
             return null;
         }
@@ -48,11 +51,11 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         return userAccount;
     }
 
-    public static UserAccountMysqlVo transferEntityToVo(UserAccount userAccount) {
+    public static UserAccountVo transferEntityToVo(UserAccount userAccount) {
         if (userAccount == null) {
             return null;
         }
-        UserAccountMysqlVo userAccountVo = new UserAccountMysqlVo();
+        UserAccountVo userAccountVo = new UserAccountVo();
         userAccountVo.setFid(userAccount.getFid());
         userAccountVo.setUserName(userAccount.getUserName());
         userAccountVo.setAccount(userAccount.getAccount());
@@ -78,11 +81,11 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         return userAccountVo;
     }
 
-    public static UserAccountMysqlVo transferDtoToVo(UserAccountDto userAccountDto) {
+    public static UserAccountVo transferDtoToVo(UserAccountDto userAccountDto) {
         if (userAccountDto == null) {
             return null;
         }
-        UserAccountMysqlVo userAccountVo = new UserAccountMysqlVo();
+        UserAccountVo userAccountVo = new UserAccountVo();
         userAccountVo.setFid(userAccountDto.getFid());
         userAccountVo.setUserName(userAccountDto.getUserName());
         userAccountVo.setAccount(userAccountDto.getAccount());
@@ -107,7 +110,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         userAccountVo.setLastModifyerId(userAccountDto.getLastModifyerId());
 
         userAccountVo.setBelongTenantId(userAccountDto.getBelongTenantId());
-        DefineTenantMysqlVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(userAccountDto.getBelongTenant());
+        DefineTenantVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(userAccountDto.getBelongTenant());
         if (belongTenantVo != null) {
             userAccountVo.setBelongTenant(belongTenantVo);
             if (StringUtils.isBlank(userAccountVo.getBelongTenantId())) {
@@ -117,11 +120,11 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         return userAccountVo;
     }
 
-    public static List<UserAccountMysqlVo> transferEntityToVoList(List<UserAccount> userAccounts) {
+    public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts) {
         if (userAccounts == null) {
             return null;
         } else {
-            List<UserAccountMysqlVo> list = new ArrayList<>();
+            List<UserAccountVo> list = new ArrayList<>();
             for (UserAccount account : userAccounts) {
                 list.add(transferEntityToVo(account));
             }
@@ -129,11 +132,11 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<UserAccountMysqlVo> transferDtoToVoList(List<UserAccountDto> userAccountDtos) {
+    public static List<UserAccountVo> transferDtoToVoList(List<UserAccountDto> userAccountDtos) {
         if (userAccountDtos == null) {
             return null;
         } else {
-            List<UserAccountMysqlVo> list = new ArrayList<>();
+            List<UserAccountVo> list = new ArrayList<>();
             for (UserAccountDto userAccountDto : userAccountDtos) {
                 list.add(transferDtoToVo(userAccountDto));
             }

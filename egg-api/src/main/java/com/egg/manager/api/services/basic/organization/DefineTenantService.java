@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineTenantMysqlVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                 List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                            List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 租户
@@ -39,15 +39,15 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineTenantMysqlVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                    List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                               List<AntdvSortBean> sortBeans);
 
     /**
      * 租户定义-新增
      * @param defineTenantVo
      * @throws Exception
      */
-    Integer dealAddDefineTenant(DefineTenantMysqlVo defineTenantVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 租户定义-更新
@@ -55,7 +55,7 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineTenant(DefineTenantMysqlVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 租户定义-批量删除

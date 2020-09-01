@@ -8,7 +8,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -41,9 +41,9 @@ public class CommonController extends BaseController {
             @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)
     })
     @PostMapping(value = "/getEnumListByKey")
-    public MyCommonResult<DefineTenantMysqlVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                        @CurrentLoginUser(required = false) UserAccount loginUser) {
-        MyCommonResult<DefineTenantMysqlVo> result = new MyCommonResult<DefineTenantMysqlVo>() ;
+    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                   @CurrentLoginUser(required = false) UserAccount loginUser) {
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;

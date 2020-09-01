@@ -9,18 +9,21 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@Component
+@Named("AnnouncementTransfer")
 public class AnnouncementTransfer extends MyBaseMysqlTransfer {
 
-    public static Announcement transferVoToEntity(AnnouncementMysqlVo announcementVo) {
+    public static Announcement transferVoToEntity(AnnouncementVo announcementVo) {
         if (announcementVo == null) {
             return null;
         }
@@ -45,11 +48,17 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         return announcement;
     }
 
-    public static AnnouncementMysqlVo transferEntityToVo(Announcement announcement, Map<String, AnnouncementTag> announcementTagMap) {
+    /**
+     * TODO
+     * @param announcement
+     * @param announcementTagMap
+     * @return
+     */
+    public static AnnouncementVo transferEntityToVo(Announcement announcement, Map<String, AnnouncementTag> announcementTagMap) {
         if (announcement == null) {
             return null;
         }
-        AnnouncementMysqlVo announcementVo = new AnnouncementMysqlVo();
+        AnnouncementVo announcementVo = new AnnouncementVo();
         announcementVo.setFid(announcement.getFid());
         announcementVo.setTitle(announcement.getTitle());
         announcementVo.setKeyWord(announcement.getKeyWord());
@@ -94,11 +103,11 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         return announcementVo;
     }
 
-    public static List<AnnouncementMysqlVo> transferEntityToVoList(List<Announcement> announcements, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferEntityToVoList(List<Announcement> announcements, Map<String, AnnouncementTag> announcementTagMap) {
         if (announcements == null) {
             return null;
         } else {
-            List<AnnouncementMysqlVo> list = new ArrayList<>();
+            List<AnnouncementVo> list = new ArrayList<>();
             for (Announcement announcement : announcements) {
                 list.add(transferEntityToVo(announcement, announcementTagMap));
             }
@@ -107,11 +116,11 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static AnnouncementMysqlVo transferDtoToVo(AnnouncementDto announcementDto, Map<String, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementVo transferDtoToVo(AnnouncementDto announcementDto, Map<String, AnnouncementTag> announcementTagMap) {
         if (announcementDto == null) {
             return null;
         }
-        AnnouncementMysqlVo announcementVo = new AnnouncementMysqlVo();
+        AnnouncementVo announcementVo = new AnnouncementVo();
         announcementVo.setFid(announcementDto.getFid());
         announcementVo.setTitle(announcementDto.getTitle());
         announcementVo.setKeyWord(announcementDto.getKeyWord());
@@ -159,11 +168,11 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         return announcementVo;
     }
 
-    public static List<AnnouncementMysqlVo> transferDtoToVoList(List<AnnouncementDto> announcementDtos, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> announcementDtos, Map<String, AnnouncementTag> announcementTagMap) {
         if (announcementDtos == null) {
             return null;
         } else {
-            List<AnnouncementMysqlVo> list = new ArrayList<>();
+            List<AnnouncementVo> list = new ArrayList<>();
             for (AnnouncementDto announcementDto : announcementDtos) {
                 list.add(transferDtoToVo(announcementDto, announcementTagMap));
             }

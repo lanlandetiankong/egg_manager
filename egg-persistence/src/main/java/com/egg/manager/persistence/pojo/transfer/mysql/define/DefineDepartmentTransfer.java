@@ -4,13 +4,17 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Named("DefineDepartmentTransfer")
 public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
-    public static DefineDepartment transferVoToEntity(DefineDepartmentMysqlVo defineDepartmentVo) {
+    public static DefineDepartment transferVoToEntity(DefineDepartmentVo defineDepartmentVo) {
         if (defineDepartmentVo == null) {
             return null;
         }
@@ -32,11 +36,11 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
         return defineDepartment;
     }
 
-    public static DefineDepartmentMysqlVo transferEntityToVo(DefineDepartment defineDepartment) {
+    public static DefineDepartmentVo transferEntityToVo(DefineDepartment defineDepartment) {
         if (defineDepartment == null) {
             return null;
         }
-        DefineDepartmentMysqlVo defineDepartmentVo = new DefineDepartmentMysqlVo();
+        DefineDepartmentVo defineDepartmentVo = new DefineDepartmentVo();
         defineDepartmentVo.setFid(defineDepartment.getFid());
         defineDepartmentVo.setName(defineDepartment.getName());
         defineDepartmentVo.setParentId(defineDepartment.getParentId());
@@ -55,11 +59,11 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static DefineDepartmentMysqlVo transferDtoToVo(DefineDepartmentDto defineDepartmentDto) {
+    public static DefineDepartmentVo transferDtoToVo(DefineDepartmentDto defineDepartmentDto) {
         if (defineDepartmentDto == null) {
             return null;
         }
-        DefineDepartmentMysqlVo defineDepartmentVo = new DefineDepartmentMysqlVo();
+        DefineDepartmentVo defineDepartmentVo = new DefineDepartmentVo();
         defineDepartmentVo.setFid(defineDepartmentDto.getFid());
         defineDepartmentVo.setName(defineDepartmentDto.getName());
         defineDepartmentVo.setParentId(defineDepartmentDto.getParentId());
@@ -80,11 +84,11 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
         return defineDepartmentVo;
     }
 
-    public static List<DefineDepartmentMysqlVo> transferEntityToVoList(List<DefineDepartment> defineDepartments) {
+    public static List<DefineDepartmentVo> transferEntityToVoList(List<DefineDepartment> defineDepartments) {
         if (defineDepartments == null) {
             return null;
         } else {
-            List<DefineDepartmentMysqlVo> list = new ArrayList<>();
+            List<DefineDepartmentVo> list = new ArrayList<>();
             for (DefineDepartment defineDepartment : defineDepartments) {
                 list.add(transferEntityToVo(defineDepartment));
             }
@@ -92,11 +96,11 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefineDepartmentMysqlVo> transferDtoToVoList(List<DefineDepartmentDto> defineDepartmentDtos) {
+    public static List<DefineDepartmentVo> transferDtoToVoList(List<DefineDepartmentDto> defineDepartmentDtos) {
         if (defineDepartmentDtos == null) {
             return null;
         } else {
-            List<DefineDepartmentMysqlVo> list = new ArrayList<>();
+            List<DefineDepartmentVo> list = new ArrayList<>();
             for (DefineDepartmentDto defineDepartmentDto : defineDepartmentDtos) {
                 list.add(transferDtoToVo(defineDepartmentDto));
             }

@@ -16,7 +16,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -64,9 +64,9 @@ public class AnnouncementDraftController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllAnnouncementDraftDtos")
-    public MyCommonResult<AnnouncementDraftMysqlVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                             Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftMysqlVo> result = new MyCommonResult<AnnouncementDraftMysqlVo>() ;
+    public MyCommonResult<AnnouncementDraftVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                        Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -91,9 +91,9 @@ public class AnnouncementDraftController extends BaseController{
     @ApiOperation(value = "查询公告草稿信息", notes = "根据id查询公告草稿信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询公告草稿信息",description = "根据id查询公告草稿信息",fullPath = "/announcement_draft/getAnnouncementDraftById")
     @PostMapping(value = "/getAnnouncementDraftById")
-    public MyCommonResult<AnnouncementDraftMysqlVo> doGetAnnouncementDraftById(HttpServletRequest request, String draftId,
-                                                                               @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftMysqlVo> result = new MyCommonResult<AnnouncementDraftMysqlVo>() ;
+    public MyCommonResult<AnnouncementDraftVo> doGetAnnouncementDraftById(HttpServletRequest request, String draftId,
+                                                                          @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
         try{
             AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
             //取得 公告标签 map
@@ -109,9 +109,9 @@ public class AnnouncementDraftController extends BaseController{
     @ApiOperation(value = "新增公告草稿", notes = "表单方式新增公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增公告草稿",description = "表单方式新增公告草稿",fullPath = "/announcement_draft/addAnnouncementDraft")
     @PostMapping(value = "/addAnnouncementDraft")
-    public MyCommonResult<AnnouncementDraftMysqlVo> doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftMysqlVo announcementDraftVo,
-                                                                           @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementDraftMysqlVo> result = new MyCommonResult<AnnouncementDraftMysqlVo>() ;
+    public MyCommonResult<AnnouncementDraftVo> doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+                                                                      @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
         Integer addCount = 0 ;
         try{
             if(announcementDraftVo == null) {
@@ -131,9 +131,9 @@ public class AnnouncementDraftController extends BaseController{
     @ApiOperation(value = "更新公告草稿", notes = "表单方式更新公告草稿", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新公告草稿",description = "表单方式更新公告草稿",fullPath = "/announcement_draft/updateAnnouncementDraft")
     @PostMapping(value = "/updateAnnouncementDraft")
-    public MyCommonResult<AnnouncementDraftMysqlVo> doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftMysqlVo announcementDraftVo,
-                                                                              @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementDraftMysqlVo> result = new MyCommonResult<AnnouncementDraftMysqlVo>() ;
+    public MyCommonResult<AnnouncementDraftVo> doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+                                                                         @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>() ;
         Integer updateCount = 0 ;
         try{
             if(announcementDraftVo == null) {

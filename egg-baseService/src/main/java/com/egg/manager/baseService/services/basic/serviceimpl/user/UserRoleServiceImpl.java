@@ -24,7 +24,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserRoleTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +133,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleMysqlVo> dealGetUserRolePages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                           List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserRole> userRoleEntityWrapper = new EntityWrapper<UserRole>();
         //取得 分页配置
@@ -164,8 +164,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleMysqlVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                   List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                              List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -181,7 +181,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserRole(UserRoleVo userRoleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -205,7 +205,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserRole(UserRoleMysqlVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserRole(UserRoleVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userRoleVo.setUpdateTime(now);

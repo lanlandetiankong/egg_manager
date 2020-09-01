@@ -12,7 +12,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
 
 import java.util.List;
 import java.util.Set;
@@ -85,8 +85,8 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineMenuMysqlVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                             List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                        List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 菜单定义 dto列表
@@ -95,15 +95,15 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineMenuMysqlVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                           List<AntdvSortBean> sortBeans);
 
     /**
      * 菜单定义-新增
      * @param defineMenuVo
      * @throws Exception
      */
-    Integer dealAddDefineMenu(DefineMenuMysqlVo defineMenuVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 菜单定义-更新
@@ -111,7 +111,7 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineMenu(DefineMenuMysqlVo defineMenuVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 菜单定义-批量删除
@@ -134,5 +134,5 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param defineMenuWrapper
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuMysqlVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
 }

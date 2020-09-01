@@ -20,7 +20,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.organization.DefineTenantTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,8 +57,8 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineTenantMysqlVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                        List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                   List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineTenant> defineTenantEntityWrapper = new EntityWrapper<DefineTenant>();
         //取得 分页配置
@@ -88,8 +88,8 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineTenantMysqlVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                           List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                      List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -107,7 +107,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineTenant(DefineTenantMysqlVo defineTenantVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -131,7 +131,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineTenant(DefineTenantMysqlVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineTenantVo.setUpdateTime(now);
@@ -189,9 +189,9 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     @Override
     public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        List<DefineTenantMysqlVo> resultList = result.getResultList() ;
+        List<DefineTenantVo> resultList = result.getResultList() ;
         if(resultList != null && resultList.isEmpty() == false){
-            for(DefineTenantMysqlVo defineTenantVo : resultList){
+            for(DefineTenantVo defineTenantVo : resultList){
                 enumList.add(new FrontEntitySelectBean(defineTenantVo.getFid(),defineTenantVo.getName())) ;
             }
         }

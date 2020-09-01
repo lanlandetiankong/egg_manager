@@ -10,7 +10,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 
 import java.util.List;
 import java.util.Set;
@@ -38,8 +38,8 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionMysqlVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                         List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 权限定义 dto列表
@@ -48,15 +48,15 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionMysqlVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                            List<AntdvSortBean> sortBeans);
+    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans);
 
     /**
      * 权限定义-新增
      * @param definePermissionVo
      * @throws Exception
      */
-    Integer dealAddDefinePermission(DefinePermissionMysqlVo definePermissionVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser) throws Exception ;
 
     /**
      * 权限定义-更新
@@ -64,7 +64,7 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefinePermission(DefinePermissionMysqlVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception ;
 
     /**
      * 权限定义-批量删除
@@ -108,5 +108,5 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param definePermissionWrap
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionMysqlVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap);
 }

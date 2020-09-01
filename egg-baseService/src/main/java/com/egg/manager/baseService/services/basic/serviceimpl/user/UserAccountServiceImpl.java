@@ -33,7 +33,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,8 +90,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountMysqlVo> dealGetUserAccountPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                      List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                 List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
 
@@ -122,8 +122,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountMysqlVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                         List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                    List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
         //用户与租户关联 的外表-搜索条件
@@ -154,7 +154,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserAccount(UserAccountVo userAccountVo, UserAccount loginUser) throws Exception{
         if(this.dealCheckDuplicateKey(userAccountVo,new EntityWrapper<>())){
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
@@ -198,7 +198,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserAccount(UserAccountMysqlVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserAccount(UserAccountVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Wrapper<UserAccount> uniWrapper  = new EntityWrapper<UserAccount>()
                 .ne("fid",userAccountVo.getFid());
         if(dealCheckDuplicateKey(userAccountVo,uniWrapper)){    //已有重复键值
@@ -436,7 +436,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
 
 
     @Override
-    public boolean dealCheckDuplicateKey(UserAccountMysqlVo userAccountVo, Wrapper<UserAccount> wrapper){
+    public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         wrapper.eq("account",userAccountVo.getAccount()) ;
         wrapper.eq("state",BaseStateEnum.ENABLED.getValue()) ;

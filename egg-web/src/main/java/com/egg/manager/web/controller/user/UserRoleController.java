@@ -14,7 +14,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserRoleTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -67,8 +67,8 @@ public class UserRoleController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserRoles")
-    public MyCommonResult<UserRoleMysqlVo> doGetAllUserRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleMysqlVo> result = new MyCommonResult<UserRoleMysqlVo>() ;
+    public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -89,8 +89,8 @@ public class UserRoleController  extends BaseController{
     @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询用户角色信息",description = "根据用户角色id查询用户角色信息",fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
-    public MyCommonResult<UserRoleMysqlVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleMysqlVo> result = new MyCommonResult<UserRoleMysqlVo>() ;
+    public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
         try{
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
@@ -106,7 +106,7 @@ public class UserRoleController  extends BaseController{
     @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增用户角色",description = "表单方式新增用户角色",fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
-    public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleMysqlVo userRoleVo, @CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{

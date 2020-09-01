@@ -4,14 +4,17 @@ import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("DefineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
-    public static DefineModule transferVoToEntity(DefineModuleMysqlVo defineModuleVo) {
+    public static DefineModule transferVoToEntity(DefineModuleVo defineModuleVo) {
         if (defineModuleVo == null) {
             return null;
         }
@@ -31,11 +34,11 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         return defineModule;
     }
 
-    public static DefineModuleMysqlVo transferEntityToVo(DefineModule defineModule) {
+    public static DefineModuleVo transferEntityToVo(DefineModule defineModule) {
         if (defineModule == null) {
             return null;
         }
-        DefineModuleMysqlVo defineModuleVo = new DefineModuleMysqlVo();
+        DefineModuleVo defineModuleVo = new DefineModuleVo();
         defineModuleVo.setFid(defineModule.getFid());
         defineModuleVo.setName(defineModule.getName());
         defineModuleVo.setCode(defineModule.getCode());
@@ -59,11 +62,11 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         return defineModuleVo;
     }
 
-    public static DefineModuleMysqlVo transferDtoToVo(DefineModuleDto defineModuleDto) {
+    public static DefineModuleVo transferDtoToVo(DefineModuleDto defineModuleDto) {
         if (defineModuleDto == null) {
             return null;
         }
-        DefineModuleMysqlVo defineModuleVo = new DefineModuleMysqlVo();
+        DefineModuleVo defineModuleVo = new DefineModuleVo();
         defineModuleVo.setFid(defineModuleDto.getFid());
         defineModuleVo.setName(defineModuleDto.getName());
         defineModuleVo.setCode(defineModuleDto.getCode());
@@ -87,11 +90,11 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         return defineModuleVo;
     }
 
-    public static List<DefineModuleMysqlVo> transferEntityToVoList(List<DefineModule> defineModules) {
+    public static List<DefineModuleVo> transferEntityToVoList(List<DefineModule> defineModules) {
         if (defineModules == null) {
             return null;
         } else {
-            List<DefineModuleMysqlVo> list = new ArrayList<>();
+            List<DefineModuleVo> list = new ArrayList<>();
             for (DefineModule defineModule : defineModules) {
                 list.add(transferEntityToVo(defineModule));
             }
@@ -99,11 +102,11 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefineModuleMysqlVo> transferDtoToVoList(List<DefineModuleDto> defineModuleDtos) {
+    public static List<DefineModuleVo> transferDtoToVoList(List<DefineModuleDto> defineModuleDtos) {
         if (defineModuleDtos == null) {
             return null;
         } else {
-            List<DefineModuleMysqlVo> list = new ArrayList<>();
+            List<DefineModuleVo> list = new ArrayList<>();
             for (DefineModuleDto defineModuleDto : defineModuleDtos) {
                 list.add(transferDtoToVo(defineModuleDto));
             }

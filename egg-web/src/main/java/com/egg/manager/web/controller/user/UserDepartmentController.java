@@ -13,7 +13,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -58,9 +58,9 @@ public class UserDepartmentController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserDepartments")
-    public MyCommonResult<UserDepartmentMysqlVo> doGetAllUserDepartments(HttpServletRequest request,
-                                                                         String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentMysqlVo> result = new MyCommonResult<UserDepartmentMysqlVo>() ;
+    public MyCommonResult<UserDepartmentVo> doGetAllUserDepartments(HttpServletRequest request,
+                                                                    String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -81,8 +81,8 @@ public class UserDepartmentController extends BaseController{
     @ApiOperation(value = "查询 [用户与部门关联] 信息", notes = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询 [用户与部门关联] 信息",description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息",fullPath = "/user/user_department/getUserDepartmentById")
     @PostMapping(value = "/getUserDepartmentById")
-    public MyCommonResult<UserDepartmentMysqlVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentMysqlVo> result = new MyCommonResult<UserDepartmentMysqlVo>() ;
+    public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>() ;
         try{
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
@@ -98,7 +98,7 @@ public class UserDepartmentController extends BaseController{
     @ApiOperation(value = "新增 [用户与部门关联] ", notes = "表单方式新增 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增 [用户与部门关联] ",description = "表单方式新增 [用户与部门关联] ",fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
-    public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentMysqlVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer addCount = 0 ;
         try{

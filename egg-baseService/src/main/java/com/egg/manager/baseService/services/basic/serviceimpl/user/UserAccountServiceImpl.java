@@ -75,7 +75,7 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         EntityWrapper<UserAccount> wrapper = new EntityWrapper<UserAccount>() ;
         wrapper.setEntity(new UserAccount());
         wrapper.where("account={0}",loginAccountDTO.getAccount())
-                .and("state>{0}", UserAccountStateEnum.DELETE) ;
+                .and("state>{0}", UserAccountStateEnum.DELETE.getValue()) ;
         return selectOne(wrapper);
     }
 

@@ -40,12 +40,6 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
     public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft announcementDraft, Map<String, AnnouncementTag> announcementTagMap) {
         AnnouncementDraftVo announcementDraftVo = announcementDraftVoMapstruct.transferEntityToVo(announcementDraft);
-        String content = announcementDraft.getContent();
-        if (StringUtils.isNotBlank(content)) {
-            announcementDraftVo.setShortContent(MyStringUtil.htmlDomToText(content, null));
-        } else {
-            announcementDraftVo.setShortContent(content);
-        }
         String tagIds = announcementDraft.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {
@@ -77,12 +71,6 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         AnnouncementDraftVo announcementDraftVo = announcementDraftVoMapstruct.transferDtoToVo(announcementDraftDto);
-        String content = announcementDraftDto.getContent();
-        if (StringUtils.isNotBlank(content)) {
-            announcementDraftVo.setShortContent(MyStringUtil.htmlDomToText(content, null));
-        } else {
-            announcementDraftVo.setShortContent(content);
-        }
         String tagIds = announcementDraftDto.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {
@@ -109,6 +97,9 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
         announcementDraftVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(announcementDraftDto.getLastModifyer()));
         return announcementDraftVo;
     }
+
+
+
 
     public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts, Map<String, AnnouncementTag> announcementTagMap) {
         if (announcementDrafts == null) {

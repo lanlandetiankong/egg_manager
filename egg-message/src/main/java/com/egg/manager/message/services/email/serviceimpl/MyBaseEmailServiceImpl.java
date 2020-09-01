@@ -3,7 +3,7 @@ package com.egg.manager.message.services.email.serviceimpl;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
-import com.egg.manager.persistence.pojo.message.mapstruct.mail.MessageMailMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.message.mail.MessageMailMapstruct;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;

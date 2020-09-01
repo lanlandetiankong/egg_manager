@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.message.mapstruct.mail;
+package com.egg.manager.persistence.pojo.mapstruct.mysql.message.mail;
 
 import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
 import org.mapstruct.Mapper;

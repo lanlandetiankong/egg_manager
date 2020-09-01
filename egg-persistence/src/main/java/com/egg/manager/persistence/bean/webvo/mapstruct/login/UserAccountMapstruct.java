@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @Description:
- * @ClassName: UserAccountMapstruct
+ * @ClassName: UserAccountDtoMapstruct
  * @Author: zhoucj
  * @Date: 2020/8/7 9:56
  */

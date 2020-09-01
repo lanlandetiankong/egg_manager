@@ -16,7 +16,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -61,9 +61,9 @@ public class DefineDepartmentController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineDepartmentDtos")
-    public MyCommonResult<DefineDepartmentMysqlVo> doGetAllDefineDepartmentDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
+    public MyCommonResult<DefineDepartmentVo> doGetAllDefineDepartmentDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
                                                     , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentMysqlVo> result = new MyCommonResult<DefineDepartmentMysqlVo>() ;
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -84,8 +84,8 @@ public class DefineDepartmentController extends BaseController{
     @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询部门定义信息",description = "根据部门定义id查询部门定义信息",fullPath = "/define/define_department/getDefineDepartmentById")
     @PostMapping(value = "/getDefineDepartmentById")
-    public MyCommonResult<DefineDepartmentMysqlVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentMysqlVo> result = new MyCommonResult<DefineDepartmentMysqlVo>() ;
+    public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
         try{
             DefineDepartment defineDepartment = defineDepartmentService.selectById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
@@ -127,9 +127,9 @@ public class DefineDepartmentController extends BaseController{
     @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增部门定义",description = "表单方式新增部门定义",fullPath = "/define/define_department/doAddDefineDepartment")
     @PostMapping(value = "/doAddDefineDepartment")
-    public MyCommonResult<DefineDepartmentMysqlVo> doAddDefineDepartment(HttpServletRequest request, DefineDepartmentMysqlVo defineDepartmentVo,
-                                                                         @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineDepartmentMysqlVo> result = new MyCommonResult<DefineDepartmentMysqlVo>() ;
+    public MyCommonResult<DefineDepartmentVo> doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
+                                                                    @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
         Integer addCount = 0 ;
         try{
             if(defineDepartmentVo == null) {
@@ -149,7 +149,7 @@ public class DefineDepartmentController extends BaseController{
     @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新部门定义",description = "表单方式更新部门定义",fullPath = "/define/define_department/doUpdateDefineDepartment")
     @PostMapping(value = "/doUpdateDefineDepartment")
-    public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request,DefineDepartmentMysqlVo defineDepartmentVo,
+    public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;

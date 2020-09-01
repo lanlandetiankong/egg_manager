@@ -10,37 +10,23 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefineDepartmentMysqlVo extends MyBaseMysqlVo {
+public class DefineGroupVo extends MyBaseMysqlVo {
     /**
      * 名称
      */
     private String name;
     /**
-     * 编码
-     */
-    private String code;
-    /**
      * 上级id
      */
-    private String parentId;
+    private String pid;
     /**
-     * 层级
+     * 是否成员可继承组权限
      */
-    private Integer level;
+    private Integer isInherit;
     /**
-     * 排序值
+     * 类型
      */
-    private Integer orderNum;
-    /**
-     * 描述
-     */
-    private String description;
-
-    /**
-     * 上级部门-vo
-     */
-    private DefineDepartmentMysqlVo parentDepartment;
-
+    private String type;
 
 
 }

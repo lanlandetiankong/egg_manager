@@ -3,13 +3,17 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Named("UserDepartmentTransfer")
 public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
-    public static UserDepartment transferVoToEntity(UserDepartmentMysqlVo userTenantVo) {
+    public static UserDepartment transferVoToEntity(UserDepartmentVo userTenantVo) {
         if (userTenantVo == null) {
             return null;
         }
@@ -29,11 +33,11 @@ public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static UserDepartmentMysqlVo transferEntityToVo(UserDepartment UserDepartment) {
+    public static UserDepartmentVo transferEntityToVo(UserDepartment UserDepartment) {
         if (UserDepartment == null) {
             return null;
         }
-        UserDepartmentMysqlVo userTenantVo = new UserDepartmentMysqlVo();
+        UserDepartmentVo userTenantVo = new UserDepartmentVo();
         userTenantVo.setFid(UserDepartment.getFid());
         userTenantVo.setUserAccountId(UserDepartment.getUserAccountId());
         userTenantVo.setDefineDepartmentId(UserDepartment.getDefineDepartmentId());
@@ -49,11 +53,11 @@ public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static UserDepartmentMysqlVo transferDtoToVo(UserDepartmentDto userTenantDto) {
+    public static UserDepartmentVo transferDtoToVo(UserDepartmentDto userTenantDto) {
         if (userTenantDto == null) {
             return null;
         }
-        UserDepartmentMysqlVo userTenantVo = new UserDepartmentMysqlVo();
+        UserDepartmentVo userTenantVo = new UserDepartmentVo();
         userTenantVo.setFid(userTenantDto.getFid());
         userTenantVo.setUserAccountId(userTenantDto.getUserAccountId());
         userTenantVo.setDefineDepartmentId(userTenantDto.getDefineDepartmentId());
@@ -68,11 +72,11 @@ public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
         return userTenantVo;
     }
 
-    public static List<UserDepartmentMysqlVo> transferEntityToVoList(List<UserDepartment> userTenants) {
+    public static List<UserDepartmentVo> transferEntityToVoList(List<UserDepartment> userTenants) {
         if (userTenants == null) {
             return null;
         } else {
-            List<UserDepartmentMysqlVo> list = new ArrayList<>();
+            List<UserDepartmentVo> list = new ArrayList<>();
             for (UserDepartment UserDepartment : userTenants) {
                 list.add(transferEntityToVo(UserDepartment));
             }
@@ -80,11 +84,11 @@ public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<UserDepartmentMysqlVo> transferDtoToVoList(List<UserDepartmentDto> userTenantDtos) {
+    public static List<UserDepartmentVo> transferDtoToVoList(List<UserDepartmentDto> userTenantDtos) {
         if (userTenantDtos == null) {
             return null;
         } else {
-            List<UserDepartmentMysqlVo> list = new ArrayList<>();
+            List<UserDepartmentVo> list = new ArrayList<>();
             for (UserDepartmentDto userTenantDto : userTenantDtos) {
                 list.add(transferDtoToVo(userTenantDto));
             }

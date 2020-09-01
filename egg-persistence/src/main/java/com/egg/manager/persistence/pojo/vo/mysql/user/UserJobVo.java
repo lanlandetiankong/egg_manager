@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.vo.mysql.role;
+package com.egg.manager.persistence.pojo.vo.mysql.user;
 
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
@@ -10,19 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleMenuMysqlVo extends MyBaseMysqlVo {
-
+public class UserJobVo extends MyBaseMysqlVo {
     /**
-     * 角色id
+     * 账号id
      */
-    private String defineRoleId;
+    private String userAccountId;
     /**
-     * 菜单id
+     * 职务id
      */
-    private String defineMenuId;
-    /**
-     * 类型
-     */
-    private Integer type;
+    private String defineJobId;
 
 }

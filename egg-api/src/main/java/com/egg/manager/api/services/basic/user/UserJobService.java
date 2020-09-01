@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserJobMysqlVo> dealGetUserJobPages(MyCommonResult<UserJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                       List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户职务 Dto列表
@@ -37,8 +37,8 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserJobMysqlVo> dealGetUserJobDtoPages(MyCommonResult<UserJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                          List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserJobVo> dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                     List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -46,7 +46,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param UserJobVo
      * @throws Exception
      */
-    Integer dealAddUserJob(UserJobMysqlVo UserJobVo, UserAccount loginUser) throws Exception;
+    Integer dealAddUserJob(UserJobVo UserJobVo, UserAccount loginUser) throws Exception;
 
     /**
      * 用户职务-更新
@@ -54,7 +54,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserJob(UserJobMysqlVo UserJobVo, UserAccount loginUser, boolean updateAll) throws Exception;
+    Integer dealUpdateUserJob(UserJobVo UserJobVo, UserAccount loginUser, boolean updateAll) throws Exception;
 
     /**
      * 用户职务-删除

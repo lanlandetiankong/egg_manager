@@ -10,22 +10,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserTenantMysqlVo extends MyBaseMysqlVo {
+public class UserRoleVo extends MyBaseMysqlVo {
     /**
      * 账号id
      */
     private String userAccountId;
     /**
-     * 租户id
+     * 角色id
      */
-    private String defineTenantId;
+    private String defineRoleId;
     /**
      * 类型
      */
     private Integer type;
-    /**
-     * 是否管理员
-     */
-    private Short isManager;
 
 }

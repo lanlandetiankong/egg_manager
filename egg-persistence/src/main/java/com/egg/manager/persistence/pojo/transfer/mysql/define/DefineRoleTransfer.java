@@ -6,13 +6,17 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Named("DefineRoleTransfer")
 public class DefineRoleTransfer extends MyBaseMysqlTransfer {
-    public static DefineRole transferVoToEntity(DefineRoleMysqlVo defineRoleVo) {
+    public static DefineRole transferVoToEntity(DefineRoleVo defineRoleVo) {
         if (defineRoleVo == null) {
             return null;
         }
@@ -31,11 +35,11 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         return defineRole;
     }
 
-    public static DefineRoleMysqlVo transferEntityToVo(DefineRole defineRole) {
+    public static DefineRoleVo transferEntityToVo(DefineRole defineRole) {
         if (defineRole == null) {
             return null;
         }
-        DefineRoleMysqlVo defineRoleVo = new DefineRoleMysqlVo();
+        DefineRoleVo defineRoleVo = new DefineRoleVo();
         defineRoleVo.setFid(defineRole.getFid());
         defineRoleVo.setName(defineRole.getName());
         defineRoleVo.setCode(defineRole.getCode());
@@ -58,11 +62,11 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         return defineRoleVo;
     }
 
-    public static DefineRoleMysqlVo transferDtoToVo(DefineRoleDto defineRoleDto) {
+    public static DefineRoleVo transferDtoToVo(DefineRoleDto defineRoleDto) {
         if (defineRoleDto == null) {
             return null;
         }
-        DefineRoleMysqlVo defineRoleVo = new DefineRoleMysqlVo();
+        DefineRoleVo defineRoleVo = new DefineRoleVo();
         defineRoleVo.setFid(defineRoleDto.getFid());
         defineRoleVo.setName(defineRoleDto.getName());
         defineRoleVo.setCode(defineRoleDto.getCode());
@@ -86,11 +90,11 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         return defineRoleVo;
     }
 
-    public static List<DefineRoleMysqlVo> transferEntityToVoList(List<DefineRole> definePermissions) {
+    public static List<DefineRoleVo> transferEntityToVoList(List<DefineRole> definePermissions) {
         if (definePermissions == null) {
             return null;
         } else {
-            List<DefineRoleMysqlVo> list = new ArrayList<>();
+            List<DefineRoleVo> list = new ArrayList<>();
             for (DefineRole definePermission : definePermissions) {
                 list.add(transferEntityToVo(definePermission));
             }
@@ -98,11 +102,11 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefineRoleMysqlVo> transferDtoToVoList(List<DefineRoleDto> defineRoleDtos) {
+    public static List<DefineRoleVo> transferDtoToVoList(List<DefineRoleDto> defineRoleDtos) {
         if (defineRoleDtos == null) {
             return null;
         } else {
-            List<DefineRoleMysqlVo> list = new ArrayList<>();
+            List<DefineRoleVo> list = new ArrayList<>();
             for (DefineRoleDto defineRoleDto : defineRoleDtos) {
                 list.add(transferDtoToVo(defineRoleDto));
             }

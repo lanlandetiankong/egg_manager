@@ -19,7 +19,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserJobTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,8 +59,8 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobMysqlVo> dealGetUserJobPages(MyCommonResult<UserJobMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                              List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                         List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserJob> userJobEntityWrapper = new EntityWrapper<UserJob>();
         //取得 分页配置
@@ -89,8 +89,8 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobMysqlVo> dealGetUserJobDtoPages(MyCommonResult<UserJobMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                 List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                            List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -106,7 +106,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserJob(UserJobMysqlVo userJobVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserJob(UserJobVo userJobVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -130,7 +130,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserJob(UserJobMysqlVo userJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserJob(UserJobVo userJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userJobVo.setUpdateTime(now);

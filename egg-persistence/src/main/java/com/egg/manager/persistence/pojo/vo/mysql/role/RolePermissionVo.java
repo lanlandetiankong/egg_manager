@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RolePermissionMysqlVo extends MyBaseMysqlVo {
+public class RolePermissionVo extends MyBaseMysqlVo {
     /**
      * 角色id
      */

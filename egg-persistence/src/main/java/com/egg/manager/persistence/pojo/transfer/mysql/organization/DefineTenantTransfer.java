@@ -3,15 +3,18 @@ package com.egg.manager.persistence.pojo.transfer.mysql.organization;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.dto.mysql.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("DefineTenantTransfer")
 public class DefineTenantTransfer extends MyBaseMysqlTransfer {
 
-    public static DefineTenant transferVoToEntity(DefineTenantMysqlVo defineTenantVo) {
+    public static DefineTenant transferVoToEntity(DefineTenantVo defineTenantVo) {
         if (defineTenantVo == null) {
             return null;
         }
@@ -29,11 +32,11 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         return defineTenant;
     }
 
-    public static DefineTenantMysqlVo transferEntityToVo(DefineTenant defineTenant) {
+    public static DefineTenantVo transferEntityToVo(DefineTenant defineTenant) {
         if (defineTenant == null) {
             return null;
         }
-        DefineTenantMysqlVo defineTenantVo = new DefineTenantMysqlVo();
+        DefineTenantVo defineTenantVo = new DefineTenantVo();
         defineTenantVo.setFid(defineTenant.getFid());
         defineTenantVo.setName(defineTenant.getName());
         defineTenantVo.setCode(defineTenant.getCode());
@@ -47,11 +50,11 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         return defineTenantVo;
     }
 
-    public static DefineTenantMysqlVo transferDtoToVo(DefineTenantDto defineTenantDto) {
+    public static DefineTenantVo transferDtoToVo(DefineTenantDto defineTenantDto) {
         if (defineTenantDto == null) {
             return null;
         }
-        DefineTenantMysqlVo defineTenantVo = new DefineTenantMysqlVo();
+        DefineTenantVo defineTenantVo = new DefineTenantVo();
         defineTenantVo.setFid(defineTenantDto.getFid());
         defineTenantVo.setName(defineTenantDto.getName());
         defineTenantVo.setCode(defineTenantDto.getCode());
@@ -65,11 +68,11 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         return defineTenantVo;
     }
 
-    public static List<DefineTenantMysqlVo> transferEntityToVoList(List<DefineTenant> defineTenants) {
+    public static List<DefineTenantVo> transferEntityToVoList(List<DefineTenant> defineTenants) {
         if (defineTenants == null) {
             return null;
         } else {
-            List<DefineTenantMysqlVo> list = new ArrayList<>();
+            List<DefineTenantVo> list = new ArrayList<>();
             for (DefineTenant defineTenant : defineTenants) {
                 list.add(transferEntityToVo(defineTenant));
             }
@@ -77,11 +80,11 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefineTenantMysqlVo> transferDtoToVoList(List<DefineTenantDto> defineTenantDtoList) {
+    public static List<DefineTenantVo> transferDtoToVoList(List<DefineTenantDto> defineTenantDtoList) {
         if (defineTenantDtoList == null) {
             return null;
         } else {
-            List<DefineTenantMysqlVo> list = new ArrayList<>();
+            List<DefineTenantVo> list = new ArrayList<>();
             for (DefineTenantDto defineTenantDto : defineTenantDtoList) {
                 list.add(transferDtoToVo(defineTenantDto));
             }

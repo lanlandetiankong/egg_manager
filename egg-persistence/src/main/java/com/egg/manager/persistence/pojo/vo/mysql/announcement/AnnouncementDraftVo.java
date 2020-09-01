@@ -20,7 +20,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnnouncementMysqlVo extends MyBaseMysqlVo {
+public class AnnouncementDraftVo extends MyBaseMysqlVo {
 
     /**
      * 标题
@@ -47,6 +47,11 @@ public class AnnouncementMysqlVo extends MyBaseMysqlVo {
      */
     private String accessory;
     /**
+     * 是否已提交
+     */
+    private short isPublished;
+
+    /**
      * 概要的 公告内容
      */
     private String shortContent;   
@@ -58,7 +63,6 @@ public class AnnouncementMysqlVo extends MyBaseMysqlVo {
      * 公告标签 集合转字符串
      */
     private String tagNameOfStr;
-
 
 
 }

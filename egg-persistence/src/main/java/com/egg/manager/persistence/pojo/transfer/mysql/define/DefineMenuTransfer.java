@@ -6,14 +6,17 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("DefineMenuTransfer")
 public class DefineMenuTransfer extends MyBaseMysqlTransfer {
-    public static DefineMenu transferVoToEntity(DefineMenuMysqlVo defineMenuVo) {
+    public static DefineMenu transferVoToEntity(DefineMenuVo defineMenuVo) {
         if (defineMenuVo == null) {
             return null;
         }
@@ -39,11 +42,11 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         return defineMenu;
     }
 
-    public static DefineMenuMysqlVo transferEntityToVo(DefineMenu defineMenu) {
+    public static DefineMenuVo transferEntityToVo(DefineMenu defineMenu) {
         if (defineMenu == null) {
             return null;
         }
-        DefineMenuMysqlVo defineMenuVo = new DefineMenuMysqlVo();
+        DefineMenuVo defineMenuVo = new DefineMenuVo();
         defineMenuVo.setFid(defineMenu.getFid());
         defineMenuVo.setParentId(defineMenu.getParentId());
         defineMenuVo.setMenuName(defineMenu.getMenuName());
@@ -75,11 +78,11 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static DefineMenuMysqlVo transferDtoToVo(DefineMenuDto defineMenuDto) {
+    public static DefineMenuVo transferDtoToVo(DefineMenuDto defineMenuDto) {
         if (defineMenuDto == null) {
             return null;
         }
-        DefineMenuMysqlVo defineMenuVo = new DefineMenuMysqlVo();
+        DefineMenuVo defineMenuVo = new DefineMenuVo();
         defineMenuVo.setFid(defineMenuDto.getFid());
         defineMenuVo.setParentId(defineMenuDto.getParentId());
         defineMenuVo.setParentMenu(DefineMenuTransfer.transferDtoToVo(defineMenuDto.getParentMenuDto()));
@@ -113,11 +116,11 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         return defineMenuVo;
     }
 
-    public static List<DefineMenuMysqlVo> transferEntityToVoList(List<DefineMenu> defineMenus) {
+    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenu> defineMenus) {
         if (defineMenus == null) {
             return null;
         } else {
-            List<DefineMenuMysqlVo> list = new ArrayList<>();
+            List<DefineMenuVo> list = new ArrayList<>();
             for (DefineMenu defineMenu : defineMenus) {
                 list.add(transferEntityToVo(defineMenu));
             }
@@ -126,11 +129,11 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static List<DefineMenuMysqlVo> transferDtoToVoList(List<DefineMenuDto> defineMenuDtos) {
+    public static List<DefineMenuVo> transferDtoToVoList(List<DefineMenuDto> defineMenuDtos) {
         if (defineMenuDtos == null) {
             return null;
         } else {
-            List<DefineMenuMysqlVo> list = new ArrayList<>();
+            List<DefineMenuVo> list = new ArrayList<>();
             for (DefineMenuDto defineMenuDto : defineMenuDtos) {
                 list.add(transferDtoToVo(defineMenuDto));
             }

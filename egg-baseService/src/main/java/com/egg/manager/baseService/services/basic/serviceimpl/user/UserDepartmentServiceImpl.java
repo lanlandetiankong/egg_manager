@@ -24,7 +24,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserDepartmentTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,8 +131,8 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentMysqlVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                            List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                       List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<UserDepartment> userDepartmentEntityWrapper = new EntityWrapper<UserDepartment>();
         //取得 分页配置
@@ -162,8 +162,8 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentMysqlVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                               List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                          List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -179,7 +179,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserDepartment(UserDepartmentMysqlVo userDepartmentVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -203,7 +203,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserDepartment(UserDepartmentMysqlVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         userDepartmentVo.setUpdateTime(now);

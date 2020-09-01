@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantVo;
 
 import java.util.List;
 
@@ -34,8 +34,8 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserTenantMysqlVo> dealGetUserTenantPages(MyCommonResult<UserTenantMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                             List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                        List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户与租户关联 Dto列表
@@ -44,8 +44,8 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserTenantMysqlVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                           List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -53,7 +53,7 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param userTenantVo
      * @throws Exception
      */
-    Integer dealAddUserTenant(UserTenantMysqlVo userTenantVo, UserAccount loginUser) throws Exception;
+    Integer dealAddUserTenant(UserTenantVo userTenantVo, UserAccount loginUser) throws Exception;
 
     /**
      * 用户与租户关联-更新
@@ -61,7 +61,7 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserTenant(UserTenantMysqlVo userTenantVo, UserAccount loginUser, boolean updateAll) throws Exception;
+    Integer dealUpdateUserTenant(UserTenantVo userTenantVo, UserAccount loginUser, boolean updateAll) throws Exception;
 
     /**
      * 用户与租户关联-删除

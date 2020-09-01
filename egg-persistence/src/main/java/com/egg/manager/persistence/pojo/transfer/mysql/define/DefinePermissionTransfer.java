@@ -6,14 +6,17 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("DefinePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
-    public static DefinePermission transferVoToEntity(DefinePermissionMysqlVo definePermissionVo, DefinePermission definePermission) {
+    public static DefinePermission transferVoToEntity(DefinePermissionVo definePermissionVo, DefinePermission definePermission) {
         if (definePermissionVo == null) {
             return null;
         }
@@ -32,11 +35,11 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         return definePermission;
     }
 
-    public static DefinePermissionMysqlVo transferEntityToVo(DefinePermission definePermission) {
+    public static DefinePermissionVo transferEntityToVo(DefinePermission definePermission) {
         if (definePermission == null) {
             return null;
         }
-        DefinePermissionMysqlVo definePermissionVo = new DefinePermissionMysqlVo();
+        DefinePermissionVo definePermissionVo = new DefinePermissionVo();
         definePermissionVo.setFid(definePermission.getFid());
         definePermissionVo.setName(definePermission.getName());
         definePermissionVo.setCode(definePermission.getCode());
@@ -61,11 +64,11 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         return definePermissionVo;
     }
 
-    public static DefinePermissionMysqlVo transferEntityToVo(DefinePermissionDto definePermissionDto) {
+    public static DefinePermissionVo transferEntityToVo(DefinePermissionDto definePermissionDto) {
         if (definePermissionDto == null) {
             return null;
         }
-        DefinePermissionMysqlVo definePermissionVo = new DefinePermissionMysqlVo();
+        DefinePermissionVo definePermissionVo = new DefinePermissionVo();
         definePermissionVo.setFid(definePermissionDto.getFid());
         definePermissionVo.setName(definePermissionDto.getName());
         definePermissionVo.setCode(definePermissionDto.getCode());
@@ -100,11 +103,11 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefinePermissionMysqlVo> transferEntityToVoList(List<DefinePermission> definePermissions) {
+    public static List<DefinePermissionVo> transferEntityToVoList(List<DefinePermission> definePermissions) {
         if (definePermissions == null) {
             return null;
         } else {
-            List<DefinePermissionMysqlVo> list = new ArrayList<>();
+            List<DefinePermissionVo> list = new ArrayList<>();
             for (DefinePermission definePermission : definePermissions) {
                 list.add(transferEntityToVo(definePermission));
             }
@@ -112,11 +115,11 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefinePermissionMysqlVo> transferDtoToVoList(List<DefinePermissionDto> definePermissionDtos) {
+    public static List<DefinePermissionVo> transferDtoToVoList(List<DefinePermissionDto> definePermissionDtos) {
         if (definePermissionDtos == null) {
             return null;
         } else {
-            List<DefinePermissionMysqlVo> list = new ArrayList<>();
+            List<DefinePermissionVo> list = new ArrayList<>();
             for (DefinePermissionDto definePermissionDto : definePermissionDtos) {
                 list.add(transferEntityToVo(definePermissionDto));
             }

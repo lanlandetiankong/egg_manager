@@ -22,7 +22,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelectTranslate;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +59,8 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineDepartmentMysqlVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                           List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
         //取得 分页配置
@@ -89,8 +89,8 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineDepartmentMysqlVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                                   List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                              List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -158,7 +158,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineDepartment(DefineDepartmentMysqlVo defineDepartmentVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         String parentId = defineDepartment.getParentId() ;
@@ -198,7 +198,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineDepartment(DefineDepartmentMysqlVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         defineDepartmentVo.setUpdateTime(now);

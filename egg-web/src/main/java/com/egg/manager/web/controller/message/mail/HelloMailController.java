@@ -5,7 +5,7 @@ import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
-import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +36,8 @@ public class HelloMailController extends BaseController{
     @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="测试发送消息",description = "测试发送消息",fullPath = "/message/mail/hello/sendMail")
     @PostMapping(value = "/sendMail")
-    public MyCommonResult<DefineModuleMysqlVo> doGetDefineModuleById(HttpServletRequest request) {
-        MyCommonResult<DefineModuleMysqlVo> result = new MyCommonResult<DefineModuleMysqlVo>() ;
+    public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request) {
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
         try{
             String[] receiveEmails = new String[]{"2773756340@qq.com"} ;
             MyEmailMsgO emailDto = MyEmailMsgO.builder().subject("邮件标题123")

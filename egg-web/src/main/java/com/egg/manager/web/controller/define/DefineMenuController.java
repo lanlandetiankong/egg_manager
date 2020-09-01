@@ -21,7 +21,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefineMenuTransfer;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
@@ -140,10 +140,10 @@ public class DefineMenuController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefineMenuDtos")
-    public MyCommonResult<DefineMenuMysqlVo> doGetAllDefineMenuDtos(HttpServletRequest request,
-                                                                    String queryObj, String paginationObj, String sortObj,
-                                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenuMysqlVo> result = new MyCommonResult<DefineMenuMysqlVo>() ;
+    public MyCommonResult<DefineMenuVo> doGetAllDefineMenuDtos(HttpServletRequest request,
+                                                               String queryObj, String paginationObj, String sortObj,
+                                                               @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -164,8 +164,8 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "查询菜单定义信息", notes = "根据菜单定义id查询菜单定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询菜单定义信息",description = "根据菜单定义id查询菜单定义信息",fullPath = "/define/define_menu/getDefineMenuById")
     @PostMapping(value = "/getDefineMenuById")
-    public MyCommonResult<DefineMenuMysqlVo> doGetDefineMenuById(HttpServletRequest request, String defineMenuId) {
-        MyCommonResult<DefineMenuMysqlVo> result = new MyCommonResult<DefineMenuMysqlVo>() ;
+    public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request, String defineMenuId) {
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         try{
             DefineMenu defineMenu = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(defineMenu));
@@ -180,8 +180,8 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "新增菜单定义", notes = "表单方式新增菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增菜单定义",description = "表单方式新增菜单定义",fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
-    public MyCommonResult<DefineMenuMysqlVo> doAddDefineMenu(HttpServletRequest request, DefineMenuMysqlVo defineMenuVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineMenuMysqlVo> result = new MyCommonResult<DefineMenuMysqlVo>() ;
+    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request, DefineMenuVo defineMenuVo, @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
         Integer addCount = 0 ;
         try{
             if(defineMenuVo == null) {
@@ -201,7 +201,7 @@ public class DefineMenuController extends BaseController{
     @ApiOperation(value = "更新菜单定义", notes = "表单方式更新菜单定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新菜单定义",description = "表单方式更新菜单定义",fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
-    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuMysqlVo defineMenuVo, @CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo defineMenuVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

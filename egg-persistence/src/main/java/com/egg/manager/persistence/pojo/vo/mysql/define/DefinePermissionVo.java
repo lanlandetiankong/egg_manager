@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.vo.mysql.module;
+package com.egg.manager.persistence.pojo.vo.mysql.define;
 
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefineModuleMysqlVo extends MyBaseMysqlVo {
+public class DefinePermissionVo extends MyBaseMysqlVo {
     /**
      * 名称
      */
@@ -20,33 +20,22 @@ public class DefineModuleMysqlVo extends MyBaseMysqlVo {
      */
     private String code;
     /**
-     * 图标名
+     * 是否确认发布，发布之后不可修改
      */
-    private String icon;
-    /**
-     * 样式json
-     */
-    private String style;
+    private boolean ensure;
     /**
      * 类型
      */
     private Integer type;
+
+    /**
+     * 是否确认发布_名称
+     */
+    private String ensureStr;
     /**
      * 类型_名称
      */
     private String typeStr;
 
-    /**
-     * 图标值
-     */
-    private String iconVal;
-    /**
-     * 样式值
-     */
-    private String styleVal;
-    /**
-     * 类型值
-     */
-    private Integer typeVal;
 
 }

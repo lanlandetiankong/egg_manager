@@ -3,14 +3,17 @@ package com.egg.manager.persistence.pojo.transfer.mysql.role;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.role.RoleMenuDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.role.RoleMenuMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.role.RoleMenuVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("RoleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
-    public static RoleMenu transferVoToEntity(RoleMenuMysqlVo roleMenuVo) {
+    public static RoleMenu transferVoToEntity(RoleMenuVo roleMenuVo) {
         if (roleMenuVo == null) {
             return null;
         }
@@ -29,11 +32,11 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static RoleMenuMysqlVo transferEntityToVo(RoleMenu roleMenu) {
+    public static RoleMenuVo transferEntityToVo(RoleMenu roleMenu) {
         if (roleMenu == null) {
             return null;
         }
-        RoleMenuMysqlVo roleMenuVo = new RoleMenuMysqlVo();
+        RoleMenuVo roleMenuVo = new RoleMenuVo();
         roleMenuVo.setFid(roleMenu.getFid());
         roleMenuVo.setDefineRoleId(roleMenu.getDefineRoleId());
         roleMenuVo.setDefineMenuId(roleMenu.getDefineMenuId());
@@ -48,11 +51,11 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static RoleMenuMysqlVo transferDtoToVo(RoleMenuDto roleMenuDto) {
+    public static RoleMenuVo transferDtoToVo(RoleMenuDto roleMenuDto) {
         if (roleMenuDto == null) {
             return null;
         }
-        RoleMenuMysqlVo roleMenuVo = new RoleMenuMysqlVo();
+        RoleMenuVo roleMenuVo = new RoleMenuVo();
         roleMenuVo.setFid(roleMenuDto.getFid());
         roleMenuVo.setDefineRoleId(roleMenuDto.getDefineRoleId());
         roleMenuVo.setDefineMenuId(roleMenuDto.getDefineMenuId());
@@ -66,11 +69,11 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
         return roleMenuVo;
     }
 
-    public static List<RoleMenuMysqlVo> transferEntityToVoList(List<RoleMenu> roleMenus) {
+    public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenu> roleMenus) {
         if (roleMenus == null) {
             return null;
         } else {
-            List<RoleMenuMysqlVo> list = new ArrayList<>();
+            List<RoleMenuVo> list = new ArrayList<>();
             for (RoleMenu role : roleMenus) {
                 list.add(transferEntityToVo(role));
             }
@@ -78,11 +81,11 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<RoleMenuMysqlVo> transferDtoToVoList(List<RoleMenuDto> roleMenuDtos) {
+    public static List<RoleMenuVo> transferDtoToVoList(List<RoleMenuDto> roleMenuDtos) {
         if (roleMenuDtos == null) {
             return null;
         } else {
-            List<RoleMenuMysqlVo> list = new ArrayList<>();
+            List<RoleMenuVo> list = new ArrayList<>();
             for (RoleMenuDto roleMenuDto : roleMenuDtos) {
                 list.add(transferDtoToVo(roleMenuDto));
             }

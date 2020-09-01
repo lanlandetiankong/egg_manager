@@ -17,7 +17,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.define.DefinePermissionTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -64,8 +64,8 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissions")
-    public MyCommonResult<DefinePermissionMysqlVo> doGetAllDefinePermissions(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -91,8 +91,8 @@ public class DefinePermissionController  extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllDefinePermissionDtos")
-    public MyCommonResult<DefinePermissionMysqlVo> doGetAllDefinePermissionDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
+    public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -113,8 +113,8 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询权限定义信息",description = "根据权限定义id查询权限定义信息",fullPath = "/define/define_permission/getDefinePermissionById")
     @PostMapping(value = "/getDefinePermissionById")
-    public MyCommonResult<DefinePermissionMysqlVo> doGetDefinePermissionById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
+    public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         try{
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
@@ -129,8 +129,8 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增权限定义",description = "表单方式新增权限定义",fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
-    public MyCommonResult<DefinePermissionMysqlVo> doAddDefinePermission(HttpServletRequest request, DefinePermissionMysqlVo definePermissionVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefinePermissionMysqlVo> result = new MyCommonResult<DefinePermissionMysqlVo>() ;
+    public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
         Integer addCount = 0 ;
         try{
             if(definePermissionVo == null) {
@@ -150,7 +150,7 @@ public class DefinePermissionController  extends BaseController{
     @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新权限定义",description = "表单方式更新权限定义",fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
-    public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionMysqlVo definePermissionVo, @CurrentLoginUser UserAccount loginUser){
+    public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{

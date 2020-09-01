@@ -24,8 +24,8 @@ import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapp
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,8 +67,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementMysqlVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                        List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                   List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
         //取得 分页配置
@@ -99,8 +99,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementMysqlVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                           List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                      List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
@@ -118,7 +118,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncement(AnnouncementMysqlVo announcementVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
@@ -141,7 +141,7 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftMysqlVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         //公告草稿id
         String draftId = announcementDraftVo.getFid();

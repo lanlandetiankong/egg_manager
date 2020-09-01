@@ -10,23 +10,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDepartmentMysqlVo extends MyBaseMysqlVo {
+public class UserGroupVo extends MyBaseMysqlVo {
+
     /**
-     * 用户账号id
+     * 组织id
+     */
+    private String defineGroupId;
+    /**
+     * 账号id
      */
     private String userAccountId;
     /**
-     * 部门id
-     */
-    private String defineDepartmentId;
-    /**
      * 类型
      */
-    private Integer type;
-    /**
-     * 是否部门管理员
-     */
-    private Short isManager;
-
+    private String type;
 
 }

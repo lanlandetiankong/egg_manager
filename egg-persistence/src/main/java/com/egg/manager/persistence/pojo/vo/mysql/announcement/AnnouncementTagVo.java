@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.vo.mysql.organization;
+package com.egg.manager.persistence.pojo.vo.mysql.announcement;
 
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
@@ -6,29 +6,31 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * \* note:
+ * \* User: zhouchengjie
+ * \* Date: 2020/2/21
+ * \* Time: 13:42
+ * \* Description:
+ * \
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefineTenantMysqlVo extends MyBaseMysqlVo {
+public class AnnouncementTagVo extends MyBaseMysqlVo {
     /**
      * 名称
      */
     private String name;
     /**
-     * 编码
+     * 描述
      */
-    private String code;
+    private String description;
     /**
-     * 数据库类型 code
+     * 排序值
      */
-    private String dbCode;
-
-    /**
-     * 类型_名称
-     */
-    private String typeStr;
-
+    private Integer ordering;
 
 
 }

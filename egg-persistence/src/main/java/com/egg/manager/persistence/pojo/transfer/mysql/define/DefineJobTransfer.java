@@ -5,14 +5,17 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Named("DefineJobTransfer")
 public class DefineJobTransfer extends MyBaseMysqlTransfer {
-    public static DefineJob transferVoToEntity(DefineJobMysqlVo defineJobVo) {
+    public static DefineJob transferVoToEntity(DefineJobVo defineJobVo) {
         if (defineJobVo == null) {
             return null;
         }
@@ -31,11 +34,11 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         return defineJob;
     }
 
-    public static DefineJobMysqlVo transferEntityToVo(DefineJob defineJob) {
+    public static DefineJobVo transferEntityToVo(DefineJob defineJob) {
         if (defineJob == null) {
             return null;
         }
-        DefineJobMysqlVo defineJobVo = new DefineJobMysqlVo();
+        DefineJobVo defineJobVo = new DefineJobVo();
         defineJobVo.setFid(defineJob.getFid());
         defineJobVo.setName(defineJob.getName());
         defineJobVo.setType(defineJob.getType());
@@ -54,11 +57,11 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         return defineJobVo;
     }
 
-    public static DefineJobMysqlVo transferDtoToVo(DefineJobDto defineJobDto) {
+    public static DefineJobVo transferDtoToVo(DefineJobDto defineJobDto) {
         if (defineJobDto == null) {
             return null;
         }
-        DefineJobMysqlVo defineJobVo = new DefineJobMysqlVo();
+        DefineJobVo defineJobVo = new DefineJobVo();
         defineJobVo.setFid(defineJobDto.getFid());
         defineJobVo.setName(defineJobDto.getName());
         defineJobVo.setType(defineJobDto.getType());
@@ -79,11 +82,11 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         return defineJobVo;
     }
 
-    public static List<DefineJobMysqlVo> transferEntityToVoList(List<DefineJob> defineJobs) {
+    public static List<DefineJobVo> transferEntityToVoList(List<DefineJob> defineJobs) {
         if (defineJobs == null) {
             return null;
         } else {
-            List<DefineJobMysqlVo> list = new ArrayList<>();
+            List<DefineJobVo> list = new ArrayList<>();
             for (DefineJob defineJob : defineJobs) {
                 list.add(transferEntityToVo(defineJob));
             }
@@ -91,11 +94,11 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<DefineJobMysqlVo> transferDtoToVoList(List<DefineJobDto> defineJobDtos) {
+    public static List<DefineJobVo> transferDtoToVoList(List<DefineJobDto> defineJobDtos) {
         if (defineJobDtos == null) {
             return null;
         } else {
-            List<DefineJobMysqlVo> list = new ArrayList<>();
+            List<DefineJobVo> list = new ArrayList<>();
             for (DefineJobDto defineJobDto : defineJobDtos) {
                 list.add(transferDtoToVo(defineJobDto));
             }

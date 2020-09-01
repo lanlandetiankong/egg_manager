@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefineMenuMysqlVo extends MyBaseMysqlVo {
+public class DefineMenuVo extends MyBaseMysqlVo {
     /**
      * 上级id
      */
@@ -60,7 +60,7 @@ public class DefineMenuMysqlVo extends MyBaseMysqlVo {
     /**
      * 上级菜单-vo
      */
-    private DefineMenuMysqlVo parentMenu;
+    private DefineMenuVo parentMenu;
     /**
      * url跳转类型_名称
      */

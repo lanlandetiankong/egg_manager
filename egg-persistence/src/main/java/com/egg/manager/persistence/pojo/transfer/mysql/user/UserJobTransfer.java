@@ -3,15 +3,19 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserJobDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Named("UserJobTransfer")
 public class UserJobTransfer extends MyBaseMysqlTransfer {
 
 
-    public static UserJob transferVoToEntity(UserJobMysqlVo userJobVo) {
+    public static UserJob transferVoToEntity(UserJobVo userJobVo) {
         if (userJobVo == null) {
             return null;
         }
@@ -29,11 +33,11 @@ public class UserJobTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static UserJobMysqlVo transferEntityToVo(UserJob userJob) {
+    public static UserJobVo transferEntityToVo(UserJob userJob) {
         if (userJob == null) {
             return null;
         }
-        UserJobMysqlVo userJobVo = new UserJobMysqlVo();
+        UserJobVo userJobVo = new UserJobVo();
         userJobVo.setFid(userJob.getFid());
         userJobVo.setUserAccountId(userJob.getUserAccountId());
         userJobVo.setDefineJobId(userJob.getDefineJobId());
@@ -47,11 +51,11 @@ public class UserJobTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static UserJobMysqlVo transferDtoToVo(UserJobDto userJobDto) {
+    public static UserJobVo transferDtoToVo(UserJobDto userJobDto) {
         if (userJobDto == null) {
             return null;
         }
-        UserJobMysqlVo userJobVo = new UserJobMysqlVo();
+        UserJobVo userJobVo = new UserJobVo();
         userJobVo.setFid(userJobDto.getFid());
         userJobVo.setUserAccountId(userJobDto.getUserAccountId());
         userJobVo.setDefineJobId(userJobDto.getDefineJobId());
@@ -64,11 +68,11 @@ public class UserJobTransfer extends MyBaseMysqlTransfer {
         return userJobVo;
     }
 
-    public static List<UserJobMysqlVo> transferEntityToVoList(List<UserJob> userJobs) {
+    public static List<UserJobVo> transferEntityToVoList(List<UserJob> userJobs) {
         if (userJobs == null) {
             return null;
         } else {
-            List<UserJobMysqlVo> list = new ArrayList<>();
+            List<UserJobVo> list = new ArrayList<>();
             for (UserJob job : userJobs) {
                 list.add(transferEntityToVo(job));
             }
@@ -76,11 +80,11 @@ public class UserJobTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-    public static List<UserJobMysqlVo> transferDtoToVoList(List<UserJobDto> userJobDtos) {
+    public static List<UserJobVo> transferDtoToVoList(List<UserJobDto> userJobDtos) {
         if (userJobDtos == null) {
             return null;
         } else {
-            List<UserJobMysqlVo> list = new ArrayList<>();
+            List<UserJobVo> list = new ArrayList<>();
             for (UserJobDto userJobDto : userJobDtos) {
                 list.add(transferDtoToVo(userJobDto));
             }

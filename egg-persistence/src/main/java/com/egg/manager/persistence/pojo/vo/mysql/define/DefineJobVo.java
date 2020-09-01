@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.pojo.vo.mysql.define;
 
-
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,24 +10,23 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefineRoleMysqlVo extends MyBaseMysqlVo {
+public class DefineJobVo extends MyBaseMysqlVo {
     /**
      * 名称
      */
     private String name;
     /**
-     * 编码
+     * 描述
      */
-    private String code;
+    private String description;
     /**
      * 类型
      */
     private Integer type;
     /**
-     * 类型名称
+     * 类型_名称
      */
     private String typeStr;
-
 
 
 

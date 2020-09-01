@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.vo.mysql.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
-import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAccountMysqlVo extends MyBaseMysqlVo {
+public class UserAccountVo extends MyBaseMysqlVo {
     /**
      * 用户名
      */
@@ -77,7 +77,7 @@ public class UserAccountMysqlVo extends MyBaseMysqlVo {
     /**
      * 所属租户-vo
      */
-    private DefineTenantMysqlVo belongTenant;
+    private DefineTenantVo belongTenant;
 
 
 

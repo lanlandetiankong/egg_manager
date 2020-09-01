@@ -14,7 +14,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -62,9 +62,9 @@ public class AnnouncementTagController extends BaseController {
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllAnnouncementTagEnums")
-    public MyCommonResult<AnnouncementTagMysqlVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                               @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagMysqlVo> result = new MyCommonResult<AnnouncementTagMysqlVo>() ;
+    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                          @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>() ;
@@ -83,9 +83,9 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询公告标签信息-Dto列表",description = "查询公告标签信息-Dto列表",fullPath = "/announcement_tag/getAllAnnouncementTagDtos")
     @PostMapping(value = "/getAllAnnouncementTagDtos")
-    public MyCommonResult<AnnouncementTagMysqlVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagMysqlVo> result = new MyCommonResult<AnnouncementTagMysqlVo>() ;
+    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                                                         @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
@@ -105,9 +105,9 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="查询公告标签信息",description = "根据公告标签id查询公告标签信息",fullPath = "/announcement_tag/getAnnouncementTagById")
     @PostMapping(value = "/getAnnouncementTagById")
-    public MyCommonResult<AnnouncementTagMysqlVo> doGetAnnouncementTagById(HttpServletRequest request, String announcementTagId,
-                                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagMysqlVo> result = new MyCommonResult<AnnouncementTagMysqlVo>() ;
+    public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, String announcementTagId,
+                                                                      @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>() ;
         try{
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
@@ -122,9 +122,9 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="新增公告标签",description = "表单方式新增公告标签",fullPath = "/announcement_tag/doAddAnnouncementTag")
     @PostMapping(value = "/doAddAnnouncementTag")
-    public MyCommonResult<AnnouncementTagMysqlVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagMysqlVo AnnouncementTagVo,
-                                                                       @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementTagMysqlVo> result = new MyCommonResult<AnnouncementTagMysqlVo>() ;
+    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo AnnouncementTagVo,
+                                                                  @CurrentLoginUser UserAccount loginUser){
+        MyCommonResult<com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo>() ;
         Integer addCount = 0 ;
         try{
             if(AnnouncementTagVo == null) {
@@ -144,7 +144,7 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @OperLog(action="更新公告标签",description = "表单方式更新公告标签",fullPath = "/announcement_tag/doUpdateAnnouncementTag")
     @PostMapping(value = "/doUpdateAnnouncementTag")
-    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request,AnnouncementTagMysqlVo AnnouncementTagVo,
+    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo AnnouncementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;

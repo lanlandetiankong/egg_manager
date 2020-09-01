@@ -3,6 +3,7 @@ package com.egg.manager.persistence.pojo.mapstruct.mysql.message.mail;
 import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -22,9 +23,11 @@ public interface MessageMailMapstruct {
      * @param emailMsgO
      * @return
      */
-    @Mapping(source = "receiveEmails", target = "to")
-    @Mapping(source = "fromUser", target = "from")
-    @Mapping(source = "content", target = "text")
+    @Mappings({
+            @Mapping(source = "receiveEmails", target = "to"),
+            @Mapping(source = "fromUser", target = "from"),
+            @Mapping(source = "content", target = "text")
+    })
     SimpleMailMessage myEmailMsgO_CopyTo_SimpleMailMessage(MyEmailMsgO emailMsgO);
 
 

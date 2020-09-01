@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
-import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentMysqlVo;
+import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
 
 import java.util.List;
 
@@ -38,8 +38,8 @@ public interface UserDepartmentService extends IService<UserDepartment> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserDepartmentMysqlVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                     List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户与部门关联 Dto列表
@@ -48,8 +48,8 @@ public interface UserDepartmentService extends IService<UserDepartment> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserDepartmentMysqlVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentMysqlVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                        List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                   List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -57,7 +57,7 @@ public interface UserDepartmentService extends IService<UserDepartment> {
      * @param userDepartmentVo
      * @throws Exception
      */
-    Integer dealAddUserDepartment(UserDepartmentMysqlVo userDepartmentVo, UserAccount loginUser) throws Exception;
+    Integer dealAddUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser) throws Exception;
 
     /**
      * 用户与部门关联-更新
@@ -65,7 +65,7 @@ public interface UserDepartmentService extends IService<UserDepartment> {
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserDepartment(UserDepartmentMysqlVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception;
+    Integer dealUpdateUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception;
 
     /**
      * 用户与部门关联-删除

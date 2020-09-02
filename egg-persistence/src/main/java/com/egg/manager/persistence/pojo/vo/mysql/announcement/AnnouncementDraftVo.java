@@ -17,7 +17,6 @@ import java.util.List;
  * \
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnnouncementDraftVo extends MyBaseMysqlVo {

@@ -3,18 +3,36 @@ package com.egg.manager.persistence.pojo.mapstruct.mysql.vo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
+import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.pojo.dto.mysql.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
+import org.mapstruct.MapperConfig;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 /**
  * 可在该接口写公用的转化方法,定义的方法请勿修改方法名！
  */
+@MapperConfig(disableSubMappingMethodsGeneration=true)
 public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBaseMysqlDto> {
 
+
+
+
+
+    default boolean handleSwitchStateGetBoolean(Short value){
+        return SwitchStateEnum.Open.getValue() == value ;
+    }
+
+    default Short handleSwitchStateGetShort(Boolean value){
+        return (value == true) ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
+    }
 
 
 
@@ -23,11 +41,11 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
      * @param tagIds
      * @return
      */
-    default String tagIdListToJsonString(List<String> tagIds){
+    default String handleTagIdListToJsonString(List<String> tagIds){
         return JSON.toJSONString(tagIds);
     }
 
-    default List<String>  tagIdJsonStringToList(String tagIds){
+    default List<String>  handleTagIdJsonStringToList(String tagIds){
         List<String> tagList = null ;
         if (StringUtils.isNotBlank(tagIds)) {
             try {
@@ -43,11 +61,34 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
     }
 
 
-    default String htmlDomToText(String content,String defaultValue){
+    default String handleHtmlDomToText(String content,String defaultValue){
         return (StringUtils.isBlank(content)) ? defaultValue : MyStringUtil.htmlDomToText(content, null);
     }
 
     default UserAccountVo getNullUserAccountVo(){
         return null ;
     }
+
+
+   /* @Mappings({
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "lastModifyer",ignore = true)
+    })
+    V defaultConfigEntityToVo(E e);
+
+
+    @Mappings({})
+    V defaultConfigDtoToVo(D d);
+
+
+    @Mappings({})
+    D defaultConfigVoToDto(V v);
+
+
+    @Mappings({
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "lastModifyer",   ignore = true)
+    })
+    D defaultConfigVoToEntity(V v);*/
+
 }

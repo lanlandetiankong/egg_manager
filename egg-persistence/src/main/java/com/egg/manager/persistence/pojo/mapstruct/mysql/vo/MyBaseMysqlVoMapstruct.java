@@ -18,6 +18,10 @@ import org.mapstruct.Mappings;
 import java.util.List;
 /**
  * 可在该接口写公用的转化方法,定义的方法请勿修改方法名！
+ *
+ *
+ * Notes:
+ * @Context : 该注解用于添加额外参数，不会对其进行判断null等操作
  */
 @MapperConfig(disableSubMappingMethodsGeneration=true)
 public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBaseMysqlDto> {

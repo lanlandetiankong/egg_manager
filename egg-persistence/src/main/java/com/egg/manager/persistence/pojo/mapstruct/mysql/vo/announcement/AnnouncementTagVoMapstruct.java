@@ -19,8 +19,6 @@ public interface AnnouncementTagVoMapstruct extends MyBaseMysqlVoMapstruct<Annou
 
 
 
-
-
     AnnouncementTag transferVoToEntity(AnnouncementTagVo vo);
 
     AnnouncementTagVo transferEntityToVo(AnnouncementTag entity);

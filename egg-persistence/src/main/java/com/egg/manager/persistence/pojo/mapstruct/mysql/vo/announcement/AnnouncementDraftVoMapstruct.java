@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement;
 
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
+import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.MyBaseMysqlVoMapstruct;
@@ -11,6 +12,7 @@ import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -22,12 +24,17 @@ public interface AnnouncementDraftVoMapstruct extends MyBaseMysqlVoMapstruct<Ann
 
     AnnouncementDraftVoMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftVoMapstruct.class);
 
-
+    /**
+     *
+     * @param entity
+     * @param announcementTagMap
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer",ignore = true)
     })
-    AnnouncementDraftVo defaultConfigEntityToVo(AnnouncementDraft entity);
+    AnnouncementDraftVo defaultConfigEntityToVo(AnnouncementDraft entity,@Context Map<String, AnnouncementTag> announcementTagMap);
 
 
     @Mappings({})

@@ -1,5 +1,7 @@
 package com.egg.manager.persistence.pojo.transfer.mysql.define;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
@@ -7,6 +9,7 @@ import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
+import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +27,7 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         definePermission.setFid(definePermissionVo.getFid());
         definePermission.setName(definePermissionVo.getName());
         definePermission.setCode(definePermissionVo.getCode());
-        definePermission.setEnsure(definePermissionVo.isEnsure() ? (short) 1 : (short) 0);
+        definePermission.setEnsure(definePermissionVo.getEnsure() ? (short) 1 : (short) 0);
         definePermission.setType(definePermissionVo.getType());
         definePermission.setRemark(definePermissionVo.getRemark());
         definePermission.setState(definePermissionVo.getState());
@@ -126,4 +129,34 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
             return list;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 类型label
+     * @param value
+     * @return
+     */
+    @Named("doGetLabelOfDefinePermissionTypeEnum")
+    public String doGetLabelOfDefinePermissionTypeEnum(Integer value){
+        if(value == null){
+            return "";
+        }
+        DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(value);
+        return typeEnum == null ? "" : typeEnum.getLabel() ;
+    }
+
+
+
 }

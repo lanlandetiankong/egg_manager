@@ -22,7 +22,7 @@ public class DefinePermissionVo extends MyBaseMysqlVo {
     /**
      * 是否确认发布，发布之后不可修改
      */
-    private boolean ensure;
+    private Boolean ensure;
     /**
      * 类型
      */

@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement;
 
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
+import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.MyBaseMysqlVoMapstruct;
@@ -11,6 +12,7 @@ import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -22,32 +24,42 @@ public interface AnnouncementDraftVoMapstruct extends MyBaseMysqlVoMapstruct<Ann
 
     AnnouncementDraftVoMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftVoMapstruct.class);
 
-
+    /**
+     *
+     * @param entity
+     * @param announcementTagMap
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
-            @Mapping(target = "lastModifyer",   ignore = true)
+            @Mapping(target = "lastModifyer",ignore = true)
     })
-    MyBaseMysqlVo ignoreFileConfig(MyBaseMysqlDto myBaseMysqlDto);
+    AnnouncementDraftVo defaultConfigEntityToVo(AnnouncementDraft entity,@Context Map<String, AnnouncementTag> announcementTagMap);
+
+
+    @Mappings({})
+    AnnouncementDraftVo defaultConfigDtoToVo(AnnouncementDraftDto dto);
+
+
+
 
     @Mappings({
-        @Mapping(target = "tagIds", expression = "java(tagIdListToJsonString(vo.getTagIds()))")
-        //@Mapping(target = "id",expression = "java(getUUID())") 调用父接口的方法
+        @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
     AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo);
 
     @Mappings({
-            @Mapping(target = "tagIds", expression = "java(tagIdJsonStringToList(entity.getTagIds()))"),
-            @Mapping(target = "shortContent", expression = "java(htmlDomToText(entity.getContent(),\"\"))"),
-
+            @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
+            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))"),
     })
-    @InheritConfiguration(name="ignoreFileConfig")
+    @InheritConfiguration(name="defaultConfigEntityToVo")
     AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity);
 
     @Mappings({
-            @Mapping(target = "tagIds", expression = "java(tagIdJsonStringToList(dto.getTagIds()))"),
-            @Mapping(target = "shortContent", expression = "java(htmlDomToText(dto.getContent(),\"\"))"),
+            @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
+            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))")
     })
-    @InheritConfiguration(name="ignoreFileConfig")
+    @InheritConfiguration(name="defaultConfigDtoToVo")
     AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto);
 
 }

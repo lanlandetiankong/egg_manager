@@ -11,9 +11,13 @@ import com.egg.manager.persistence.pojo.transfer.mysql.role.RolePermissionTransf
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
 import com.egg.manager.persistence.pojo.vo.mysql.role.RolePermissionVo;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {RolePermissionTransfer.class}
 )
 public interface RolePermissionVoMapstruct extends MyBaseMysqlVoMapstruct<RolePermission, RolePermissionVo, RolePermissionDto> {
@@ -21,9 +25,18 @@ public interface RolePermissionVoMapstruct extends MyBaseMysqlVoMapstruct<RolePe
     RolePermissionVoMapstruct INSTANCE = Mappers.getMapper(RolePermissionVoMapstruct.class);
 
 
+    @Mappings({})
     RolePermission transferVoToEntity(RolePermissionVo vo);
 
+    @Mappings({
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "lastModifyer", ignore = true)
+    })
     RolePermissionVo transferEntityToVo(RolePermission entity);
 
+    @Mappings({
+            @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
+            @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
+    })
     RolePermissionVo transferDtoToVo(RolePermissionDto dto);
 }

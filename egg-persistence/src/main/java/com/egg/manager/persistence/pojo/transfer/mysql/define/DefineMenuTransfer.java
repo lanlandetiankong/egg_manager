@@ -32,15 +32,6 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineMenuVo vo = defineMenuVoMapstruct.transferEntityToVo(entity);
-        //TODO
-        if (entity.getUrlJumpType() != null) {
-            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(entity.getUrlJumpType());
-            if (typeEnum != null) {
-                vo.setUrlJumpTypeStr(typeEnum.getLabel());
-            } else {
-                vo.setUrlJumpTypeStr("");
-            }
-        }
         String excelModelConf = entity.getExcelModelConf();
         vo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         return vo;
@@ -53,14 +44,7 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         }
         DefineMenuVo vo = defineMenuVoMapstruct.transferDtoToVo(dto);
         //TODO
-        if (dto.getUrlJumpType() != null) {
-            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(dto.getUrlJumpType());
-            if (typeEnum != null) {
-                vo.setUrlJumpTypeStr(typeEnum.getLabel());
-            } else {
-                vo.setUrlJumpTypeStr("");
-            }
-        }
+
         String excelModelConf = dto.getExcelModelConf();
         vo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         vo.setParentMenu(DefineMenuTransfer.transferDtoToVo(dto.getParentMenuDto()));
@@ -92,5 +76,17 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
             }
             return list;
         }
+    }
+
+
+    @Named("handleDefineMenuUrlJumpTypeGetLabel")
+    public String handleDefineMenuUrlJumpTypeGetLabel(Integer type){
+        if (type != null) {
+            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(type);
+            if (typeEnum != null) {
+                return typeEnum.getLabel();
+            }
+        }
+        return "" ;
     }
 }

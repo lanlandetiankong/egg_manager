@@ -31,11 +31,6 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineJobVo vo = defineJobVoMapstruct.transferEntityToVo(entity);
-       //TODO
-        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(entity.getType());
-        if (defineJobTypeEnum != null) {
-            vo.setTypeStr(defineJobTypeEnum.getLabel());
-        }
         return vo;
     }
 
@@ -45,12 +40,7 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         }
         DefineJobVo vo = defineJobVoMapstruct.transferDtoToVo(dto);
         //TODO
-        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(dto.getType());
-        if (defineJobTypeEnum != null) {
-            vo.setTypeStr(defineJobTypeEnum.getLabel());
-        }
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
+
         return vo;
     }
 
@@ -76,6 +66,16 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
             }
             return list;
         }
+    }
+
+
+    @Named("handleDefineJobTypeGetGetLabel")
+    public String handleDefineJobTypeGetGetLabel(Integer type){
+        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(type);
+        if (defineJobTypeEnum != null) {
+            return defineJobTypeEnum.getLabel();
+        }
+        return "" ;
     }
 
 }

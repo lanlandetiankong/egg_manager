@@ -41,11 +41,6 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         UserAccountVo vo = userAccountVoMapstruct.transferEntityToVo(entity);
-        //TODO
-        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(entity.getUserType());
-        if (userAccountBaseTypeEnums != null) {
-            vo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
-        }
         return vo;
     }
 

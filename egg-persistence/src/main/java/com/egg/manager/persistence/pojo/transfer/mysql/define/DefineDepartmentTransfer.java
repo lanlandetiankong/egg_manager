@@ -40,10 +40,6 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineDepartmentVo vo = defineDepartmentVoMapstruct.transferDtoToVo(dto);
-        //TODO
-        vo.setParentDepartment(DefineDepartmentTransfer.transferDtoToVo(dto.getParentDepartment()));
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 

@@ -18,28 +18,12 @@ import java.util.Map;
  * TODO
  */
 @Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementDraftTransfer.class}
 )
 public interface AnnouncementDraftVoMapstruct extends MyBaseMysqlVoMapstruct<AnnouncementDraft, AnnouncementDraftVo,AnnouncementDraftDto> {
 
     AnnouncementDraftVoMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftVoMapstruct.class);
-
-    /**
-     *
-     * @param entity
-     * @param announcementTagMap
-     * @return
-     */
-    @Mappings({
-            @Mapping(target = "createUser", ignore = true),
-            @Mapping(target = "lastModifyer",ignore = true)
-    })
-    AnnouncementDraftVo defaultConfigEntityToVo(AnnouncementDraft entity,@Context Map<String, AnnouncementTag> announcementTagMap);
-
-
-    @Mappings({})
-    AnnouncementDraftVo defaultConfigDtoToVo(AnnouncementDraftDto dto);
-
 
 
 
@@ -51,15 +35,23 @@ public interface AnnouncementDraftVoMapstruct extends MyBaseMysqlVoMapstruct<Ann
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))"),
+            @Mapping(target = "tagNames", ignore = true),
+            @Mapping(target = "tagNameOfStr", ignore = true),
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "lastModifyer", ignore = true)
     })
-    @InheritConfiguration(name="defaultConfigEntityToVo")
+    @InheritConfiguration(name="defaultConfigVoToDto")
     AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity);
 
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
-            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))")
+            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))"),
+            @Mapping(target = "tagNames", ignore = true),
+            @Mapping(target = "tagNameOfStr", ignore = true),
+            @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
+            @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    @InheritConfiguration(name="defaultConfigDtoToVo")
+    @InheritConfiguration(name="defaultConfigVoToDto")
     AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto);
 
 }

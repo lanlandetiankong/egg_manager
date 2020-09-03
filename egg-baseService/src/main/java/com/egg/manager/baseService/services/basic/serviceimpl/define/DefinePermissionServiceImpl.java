@@ -133,7 +133,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
+        DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
         definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
         definePermission.setState(BaseStateEnum.ENABLED.getValue());
@@ -169,7 +169,7 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         Integer changeCount = 0;
         Date now = new Date() ;
         definePermissionVo.setUpdateTime(now);
-        DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo,null);
+        DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
         if(loginUser != null){
             updateEntity.setLastModifyerId(loginUser.getFid());
         }

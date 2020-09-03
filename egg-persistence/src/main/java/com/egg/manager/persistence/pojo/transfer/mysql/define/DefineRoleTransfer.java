@@ -40,18 +40,6 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineRoleVo vo = defineRoleVoMapstruct.transferDtoToVo(dto);
-        //TODO
-        vo.setType(dto.getType());
-        if (dto.getType() != null) {
-            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(dto.getType());
-            if (typeEnum != null) {
-                vo.setTypeStr(typeEnum.getLabel());
-            } else {
-                vo.setTypeStr("");
-            }
-        }
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 
@@ -77,5 +65,17 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
             }
             return list;
         }
+    }
+
+
+    @Named("handleDefineRoleTypeGetLabel")
+    public String handleDefineRoleTypeGetLabel(Integer type){
+        if (type != null) {
+            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(type);
+            if (typeEnum != null) {
+                return typeEnum.getLabel();
+            }
+        }
+        return "";
     }
 }

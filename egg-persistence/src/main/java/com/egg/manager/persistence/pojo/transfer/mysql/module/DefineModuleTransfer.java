@@ -31,15 +31,6 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineModuleVo vo = defineModuleVoMapstruct.transferEntityToVo(entity);
-        //TODO
-        if (entity.getType() != null) {
-            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(entity.getType());
-            if (typeEnum != null) {
-                vo.setTypeStr(typeEnum.getLabel());
-            } else {
-                vo.setTypeStr("");
-            }
-        }
         return vo;
     }
 
@@ -48,15 +39,6 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineModuleVo vo = defineModuleVoMapstruct.transferDtoToVo(dto);
-        //TODO
-        if (dto.getType() != null) {
-            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(dto.getType());
-            if (typeEnum != null) {
-                vo.setTypeStr(typeEnum.getLabel());
-            } else {
-                vo.setTypeStr("");
-            }
-        }
         return vo;
     }
 
@@ -84,5 +66,16 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         }
     }
 
+
+    @Named("handleDefineModuleTypeGetLabel")
+    public String handleDefineModuleTypeGetLabel(Integer type){
+        if (type != null) {
+            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(type);
+            if (typeEnum != null) {
+                return typeEnum.getLabel();
+            }
+        }
+        return "" ;
+    }
 
 }

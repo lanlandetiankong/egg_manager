@@ -13,9 +13,11 @@ import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefinePermissionTransfer.class}
 )
 public interface DefinePermissionVoMapstruct extends MyBaseMysqlVoMapstruct<DefinePermission, DefinePermissionVo, DefinePermissionDto> {
@@ -26,10 +28,16 @@ public interface DefinePermissionVoMapstruct extends MyBaseMysqlVoMapstruct<Defi
     })
     DefinePermission transferVoToEntity(DefinePermissionVo vo);
     @Mappings({
-            @Mapping(target = "ensure",expression = "java(handleSwitchStateGetBoolean(entity.getEnsure()))"),
+            @Mapping(target = "ensureStr",expression = "java(handleSwitchStateGetName(entity.getEnsure()))"),
             @Mapping(target = "typeStr",source = "type",qualifiedByName = "doGetLabelOfDefinePermissionTypeEnum"),
+            @Mapping(target = "createUser", ignore = true),
+            @Mapping(target = "lastModifyer", ignore = true)
     })
     DefinePermissionVo transferEntityToVo(DefinePermission entity);
 
+    @Mappings({
+            @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
+            @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
+    })
     DefinePermissionVo transferDtoToVo(DefinePermissionDto dto);
 }

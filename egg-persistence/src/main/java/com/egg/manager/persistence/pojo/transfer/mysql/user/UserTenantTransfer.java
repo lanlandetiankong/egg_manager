@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserTenantDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserTenantVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserTenantVo;
 import org.mapstruct.Named;
@@ -13,63 +14,33 @@ import java.util.List;
 @Component
 @Named("UserTenantTransfer")
 public class UserTenantTransfer extends MyBaseMysqlTransfer {
-    public static UserTenant transferVoToEntity(UserTenantVo userTenantVo) {
-        if (userTenantVo == null) {
+
+    static UserTenantVoMapstruct userTenantVoMapstruct = UserTenantVoMapstruct.INSTANCE ;
+
+    public static UserTenant transferVoToEntity(UserTenantVo vo) {
+        if (vo == null) {
             return null;
         }
-        UserTenant userTenant = new UserTenant();
-        userTenant.setFid(userTenantVo.getFid());
-        userTenant.setUserAccountId(userTenantVo.getUserAccountId());
-        userTenant.setDefineTenantId(userTenantVo.getDefineTenantId());
-        userTenant.setType(userTenantVo.getType());
-        userTenant.setIsManager(userTenantVo.getIsManager());
-        userTenant.setState(userTenantVo.getState());
-        userTenant.setRemark(userTenantVo.getRemark());
-        userTenant.setCreateTime(userTenantVo.getCreateTime());
-        userTenant.setUpdateTime(userTenantVo.getUpdateTime());
-        userTenant.setCreateUserId(userTenantVo.getCreateUserId());
-        userTenant.setLastModifyerId(userTenantVo.getLastModifyerId());
-        return userTenant;
+        UserTenant entity = userTenantVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
 
-    public static UserTenantVo transferEntityToVo(UserTenant userTenant) {
-        if (userTenant == null) {
+    public static UserTenantVo transferEntityToVo(UserTenant entity) {
+        if (entity == null) {
             return null;
         }
-        UserTenantVo userTenantVo = new UserTenantVo();
-        userTenantVo.setFid(userTenant.getFid());
-        userTenantVo.setUserAccountId(userTenant.getUserAccountId());
-        userTenantVo.setDefineTenantId(userTenant.getDefineTenantId());
-        userTenantVo.setType(userTenant.getType());
-        userTenantVo.setIsManager(userTenant.getIsManager());
-        userTenantVo.setRemark(userTenant.getRemark());
-        userTenantVo.setState(userTenant.getState());
-        userTenantVo.setCreateTime(userTenant.getCreateTime());
-        userTenantVo.setUpdateTime(userTenant.getUpdateTime());
-        userTenantVo.setCreateUserId(userTenant.getCreateUserId());
-        userTenantVo.setLastModifyerId(userTenant.getLastModifyerId());
-        return userTenantVo;
+        UserTenantVo vo = userTenantVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
 
-    public static UserTenantVo transferDtoToVo(UserTenantDto userTenantDto) {
-        if (userTenantDto == null) {
+    public static UserTenantVo transferDtoToVo(UserTenantDto dto) {
+        if (dto == null) {
             return null;
         }
-        UserTenantVo userTenantVo = new UserTenantVo();
-        userTenantVo.setFid(userTenantDto.getFid());
-        userTenantVo.setUserAccountId(userTenantDto.getUserAccountId());
-        userTenantVo.setDefineTenantId(userTenantDto.getDefineTenantId());
-        userTenantVo.setType(userTenantDto.getType());
-        userTenantVo.setIsManager(userTenantDto.getIsManager());
-        userTenantVo.setRemark(userTenantDto.getRemark());
-        userTenantVo.setState(userTenantDto.getState());
-        userTenantVo.setCreateTime(userTenantDto.getCreateTime());
-        userTenantVo.setUpdateTime(userTenantDto.getUpdateTime());
-        userTenantVo.setCreateUserId(userTenantDto.getCreateUserId());
-        userTenantVo.setLastModifyerId(userTenantDto.getLastModifyerId());
-        return userTenantVo;
+        UserTenantVo vo = userTenantVoMapstruct.transferDtoToVo(dto);
+        return vo;
     }
 
     public static List<UserTenantVo> transferEntityToVoList(List<UserTenant> userTenants) {

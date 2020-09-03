@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
-import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
@@ -27,38 +26,34 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
     static AnnouncementDraftVoMapstruct announcementDraftVoMapstruct = AnnouncementDraftVoMapstruct.INSTANCE;
 
-    public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo announcementDraftVo) {
-        AnnouncementDraft announcementDraft = announcementDraftVoMapstruct.transferVoToEntity(announcementDraftVo);
-        if(announcementDraft == null){
-            return announcementDraft ;
+    public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo) {
+        if(vo == null){
+            return null ;
         }
-        List<String> tagIds = announcementDraftVo.getTagIds();
-        if (tagIds != null && tagIds.size() > 0) {
-            announcementDraft.setTagIds(JSON.toJSONString(tagIds));
-        }
-        return announcementDraft;
+        AnnouncementDraft entity = announcementDraftVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft announcementDraft, Map<String, AnnouncementTag> announcementTagMap) {
-        if (announcementDraft == null) {
+    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity, Map<String, AnnouncementTag> announcementTagMap) {
+        if (entity == null) {
             return null;
         }
-        AnnouncementDraftVo announcementDraftVo = announcementDraftVoMapstruct.transferEntityToVo(announcementDraft);
-        AnnouncementDraftTransfer.doSetTagInfoToVo(announcementDraft.getTagIds(),announcementDraftVo,announcementTagMap);
-        return announcementDraftVo;
+        AnnouncementDraftVo vo = announcementDraftVoMapstruct.transferEntityToVo(entity);
+        AnnouncementDraftTransfer.doSetTagInfoToVo(entity.getTagIds(),vo,announcementTagMap);
+        return vo;
     }
 
 
-    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto announcementDraftDto, Map<String, AnnouncementTag> announcementTagMap) {
-        if (announcementDraftDto == null) {
+    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<String, AnnouncementTag> announcementTagMap) {
+        if (dto == null) {
             return null;
         }
-        AnnouncementDraftVo announcementDraftVo = announcementDraftVoMapstruct.transferDtoToVo(announcementDraftDto);
+        AnnouncementDraftVo vo = announcementDraftVoMapstruct.transferDtoToVo(dto);
         //设置 tag相关信息
-        AnnouncementDraftTransfer.doSetTagInfoToVo(announcementDraftDto.getTagIds(),announcementDraftVo,announcementTagMap);
-        announcementDraftVo.setCreateUser(UserAccountTransfer.transferEntityToVo(announcementDraftDto.getCreateUser()));
-        announcementDraftVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(announcementDraftDto.getLastModifyer()));
-        return announcementDraftVo;
+        AnnouncementDraftTransfer.doSetTagInfoToVo(dto.getTagIds(),vo,announcementTagMap);
+        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
+        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
+        return vo;
     }
 
 
@@ -69,8 +64,8 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
             return null;
         } else {
             List<AnnouncementDraftVo> list = new ArrayList<>();
-            for (AnnouncementDraft announcementDraft : announcementDrafts) {
-                list.add(transferEntityToVo(announcementDraft, announcementTagMap));
+            for (AnnouncementDraft entity : announcementDrafts) {
+                list.add(transferEntityToVo(entity, announcementTagMap));
             }
             return list;
         }
@@ -82,8 +77,8 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
             return null;
         } else {
             List<AnnouncementDraftVo> list = new ArrayList<>();
-            for (AnnouncementDraftDto announcementDraftDto : announcementDraftDtos) {
-                list.add(transferDtoToVo(announcementDraftDto, announcementTagMap));
+            for (AnnouncementDraftDto dto : announcementDraftDtos) {
+                list.add(transferDtoToVo(dto, announcementTagMap));
             }
             return list;
         }
@@ -129,15 +124,15 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
     /**
      * 设置tag的相关信息
      * @param tagIds
-     * @param announcementDraftVo
+     * @param vo
      * @param announcementTagMap
      */
-    private static void doSetTagInfoToVo(String tagIds,AnnouncementDraftVo announcementDraftVo,Map<String, AnnouncementTag> announcementTagMap){
+    private static void doSetTagInfoToVo(String tagIds,AnnouncementDraftVo vo,Map<String, AnnouncementTag> announcementTagMap){
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);
                 if (CollectionUtil.isNotEmpty(tagList)) {
-                    announcementDraftVo.setTagIds(tagList);
+                    vo.setTagIds(tagList);
                     List<String> tagNameList = new ArrayList<>();
                     if (CollectionUtil.isNotEmpty(announcementTagMap)) {
                         for (String tagId : tagList) {
@@ -147,8 +142,8 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
                             }
                         }
                     }
-                    announcementDraftVo.setTagNames(tagNameList);
-                    announcementDraftVo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
+                    vo.setTagNames(tagNameList);
+                    vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

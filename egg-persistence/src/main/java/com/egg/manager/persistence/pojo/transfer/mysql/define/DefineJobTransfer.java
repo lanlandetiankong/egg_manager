@@ -3,6 +3,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.define;
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineJobVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobVo;
@@ -15,71 +16,42 @@ import java.util.List;
 @Component
 @Named("DefineJobTransfer")
 public class DefineJobTransfer extends MyBaseMysqlTransfer {
-    public static DefineJob transferVoToEntity(DefineJobVo defineJobVo) {
-        if (defineJobVo == null) {
+    static DefineJobVoMapstruct defineJobVoMapstruct = DefineJobVoMapstruct.INSTANCE ;
+
+    public static DefineJob transferVoToEntity(DefineJobVo vo) {
+        if (vo == null) {
             return null;
         }
-        DefineJob defineJob = new DefineJob();
-        defineJob.setFid(defineJobVo.getFid());
-        defineJob.setName(defineJobVo.getName());
-        defineJob.setType(defineJobVo.getType());
-        defineJob.setDescription(defineJobVo.getDescription());
-
-        defineJob.setRemark(defineJobVo.getRemark());
-        defineJob.setState(defineJobVo.getState());
-        defineJob.setCreateTime(defineJobVo.getCreateTime());
-        defineJob.setUpdateTime(defineJobVo.getUpdateTime());
-        defineJob.setCreateUserId(defineJobVo.getCreateUserId());
-        defineJob.setLastModifyerId(defineJobVo.getLastModifyerId());
-        return defineJob;
+        DefineJob entity = defineJobVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static DefineJobVo transferEntityToVo(DefineJob defineJob) {
-        if (defineJob == null) {
+    public static DefineJobVo transferEntityToVo(DefineJob entity) {
+        if (entity == null) {
             return null;
         }
-        DefineJobVo defineJobVo = new DefineJobVo();
-        defineJobVo.setFid(defineJob.getFid());
-        defineJobVo.setName(defineJob.getName());
-        defineJobVo.setType(defineJob.getType());
-        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(defineJob.getType());
+        DefineJobVo vo = defineJobVoMapstruct.transferEntityToVo(entity);
+       //TODO
+        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(entity.getType());
         if (defineJobTypeEnum != null) {
-            defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
+            vo.setTypeStr(defineJobTypeEnum.getLabel());
         }
-        defineJobVo.setDescription(defineJob.getDescription());
-
-        defineJobVo.setRemark(defineJob.getRemark());
-        defineJobVo.setState(defineJob.getState());
-        defineJobVo.setCreateTime(defineJob.getCreateTime());
-        defineJobVo.setUpdateTime(defineJob.getUpdateTime());
-        defineJobVo.setCreateUserId(defineJob.getCreateUserId());
-        defineJobVo.setLastModifyerId(defineJob.getLastModifyerId());
-        return defineJobVo;
+        return vo;
     }
 
-    public static DefineJobVo transferDtoToVo(DefineJobDto defineJobDto) {
-        if (defineJobDto == null) {
+    public static DefineJobVo transferDtoToVo(DefineJobDto dto) {
+        if (dto == null) {
             return null;
         }
-        DefineJobVo defineJobVo = new DefineJobVo();
-        defineJobVo.setFid(defineJobDto.getFid());
-        defineJobVo.setName(defineJobDto.getName());
-        defineJobVo.setType(defineJobDto.getType());
-        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(defineJobDto.getType());
+        DefineJobVo vo = defineJobVoMapstruct.transferDtoToVo(dto);
+        //TODO
+        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(dto.getType());
         if (defineJobTypeEnum != null) {
-            defineJobVo.setTypeStr(defineJobTypeEnum.getLabel());
+            vo.setTypeStr(defineJobTypeEnum.getLabel());
         }
-        defineJobVo.setDescription(defineJobDto.getDescription());
-
-        defineJobVo.setRemark(defineJobDto.getRemark());
-        defineJobVo.setState(defineJobDto.getState());
-        defineJobVo.setCreateTime(defineJobDto.getCreateTime());
-        defineJobVo.setUpdateTime(defineJobDto.getUpdateTime());
-        defineJobVo.setCreateUserId(defineJobDto.getCreateUserId());
-        defineJobVo.setLastModifyerId(defineJobDto.getLastModifyerId());
-        defineJobVo.setCreateUser(UserAccountTransfer.transferEntityToVo(defineJobDto.getCreateUser()));
-        defineJobVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(defineJobDto.getLastModifyer()));
-        return defineJobVo;
+        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
+        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
+        return vo;
     }
 
     public static List<DefineJobVo> transferEntityToVoList(List<DefineJob> defineJobs) {

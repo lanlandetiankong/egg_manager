@@ -1,15 +1,13 @@
 package com.egg.manager.persistence.pojo.transfer.mysql.define;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefinePermissionVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
-import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
@@ -19,82 +17,33 @@ import java.util.List;
 @Component
 @Named("DefinePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
-    public static DefinePermission transferVoToEntity(DefinePermissionVo definePermissionVo, DefinePermission definePermission) {
-        if (definePermissionVo == null) {
+
+    static DefinePermissionVoMapstruct definePermissionVoMapstruct = DefinePermissionVoMapstruct.INSTANCE ;
+
+    public static DefinePermission transferVoToEntity(DefinePermissionVo vo) {
+        if (vo == null) {
             return null;
         }
-        definePermission = definePermission != null ? definePermission : new DefinePermission();
-        definePermission.setFid(definePermissionVo.getFid());
-        definePermission.setName(definePermissionVo.getName());
-        definePermission.setCode(definePermissionVo.getCode());
-        definePermission.setEnsure(definePermissionVo.getEnsure() ? (short) 1 : (short) 0);
-        definePermission.setType(definePermissionVo.getType());
-        definePermission.setRemark(definePermissionVo.getRemark());
-        definePermission.setState(definePermissionVo.getState());
-        definePermission.setCreateTime(definePermissionVo.getCreateTime());
-        definePermission.setUpdateTime(definePermissionVo.getUpdateTime());
-        definePermission.setCreateUserId(definePermissionVo.getCreateUserId());
-        definePermission.setLastModifyerId(definePermissionVo.getLastModifyerId());
-        return definePermission;
+        DefinePermission entity = definePermissionVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static DefinePermissionVo transferEntityToVo(DefinePermission definePermission) {
-        if (definePermission == null) {
+    public static DefinePermissionVo transferEntityToVo(DefinePermission entity) {
+        if (entity == null) {
             return null;
         }
-        DefinePermissionVo definePermissionVo = new DefinePermissionVo();
-        definePermissionVo.setFid(definePermission.getFid());
-        definePermissionVo.setName(definePermission.getName());
-        definePermissionVo.setCode(definePermission.getCode());
-        definePermissionVo.setEnsure(SwitchStateEnum.Open.getValue().equals(definePermission.getEnsure()));
-        definePermissionVo.setEnsureStr(SwitchStateEnum.dealGetNameByVal(definePermission.getEnsure()));
-        definePermissionVo.setType(definePermission.getType());
-        if (definePermission.getType() != null) {
-            DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(definePermission.getType());
-            if (typeEnum != null) {
-                definePermissionVo.setTypeStr(typeEnum.getLabel());
-            } else {
-                definePermissionVo.setTypeStr("");
-            }
-        }
-        definePermissionVo.setRemark(definePermission.getRemark());
-        definePermissionVo.setState(definePermission.getState());
-        definePermissionVo.setCreateTime(definePermission.getCreateTime());
-        definePermissionVo.setUpdateTime(definePermission.getUpdateTime());
-        definePermissionVo.setCreateUserId(definePermission.getCreateUserId());
-        definePermissionVo.setLastModifyerId(definePermission.getLastModifyerId());
-
-        return definePermissionVo;
+        DefinePermissionVo vo = definePermissionVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
-    public static DefinePermissionVo transferEntityToVo(DefinePermissionDto definePermissionDto) {
-        if (definePermissionDto == null) {
+    public static DefinePermissionVo transferEntityToVo(DefinePermissionDto dto) {
+        if (dto == null) {
             return null;
         }
-        DefinePermissionVo definePermissionVo = new DefinePermissionVo();
-        definePermissionVo.setFid(definePermissionDto.getFid());
-        definePermissionVo.setName(definePermissionDto.getName());
-        definePermissionVo.setCode(definePermissionDto.getCode());
-        definePermissionVo.setEnsure(SwitchStateEnum.Open.getValue().equals(definePermissionDto.getEnsure()));
-        definePermissionVo.setEnsureStr(SwitchStateEnum.dealGetNameByVal(definePermissionDto.getEnsure()));
-        definePermissionVo.setType(definePermissionDto.getType());
-        if (definePermissionDto.getType() != null) {
-            DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(definePermissionDto.getType());
-            if (typeEnum != null) {
-                definePermissionVo.setTypeStr(typeEnum.getLabel());
-            } else {
-                definePermissionVo.setTypeStr("");
-            }
-        }
-        definePermissionVo.setRemark(definePermissionDto.getRemark());
-        definePermissionVo.setState(definePermissionDto.getState());
-        definePermissionVo.setCreateTime(definePermissionDto.getCreateTime());
-        definePermissionVo.setUpdateTime(definePermissionDto.getUpdateTime());
-        definePermissionVo.setCreateUserId(definePermissionDto.getCreateUserId());
-        definePermissionVo.setLastModifyerId(definePermissionDto.getLastModifyerId());
-        definePermissionVo.setCreateUser(UserAccountTransfer.transferEntityToVo(definePermissionDto.getCreateUser()));
-        definePermissionVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(definePermissionDto.getLastModifyer()));
-        return definePermissionVo;
+        DefinePermissionVo vo = definePermissionVoMapstruct.transferDtoToVo(dto);
+        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
+        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
+        return vo;
     }
 
     //已启用entity 值回设

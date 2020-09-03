@@ -3,6 +3,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.module;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.module.DefineModuleVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleVo;
 import org.mapstruct.Named;
@@ -14,80 +15,49 @@ import java.util.List;
 @Component
 @Named("DefineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
-    public static DefineModule transferVoToEntity(DefineModuleVo defineModuleVo) {
-        if (defineModuleVo == null) {
+
+    static DefineModuleVoMapstruct defineModuleVoMapstruct = DefineModuleVoMapstruct.INSTANCE ;
+
+    public static DefineModule transferVoToEntity(DefineModuleVo vo) {
+        if (vo == null) {
             return null;
         }
-        DefineModule defineModule = new DefineModule();
-        defineModule.setFid(defineModuleVo.getFid());
-        defineModule.setName(defineModuleVo.getName());
-        defineModule.setCode(defineModuleVo.getCode());
-        defineModule.setIcon(defineModuleVo.getIconVal());
-        defineModule.setStyle(defineModuleVo.getStyleVal());
-        defineModule.setType(defineModuleVo.getTypeVal());
-        defineModule.setState(defineModuleVo.getState());
-        defineModule.setCreateTime(defineModuleVo.getCreateTime());
-        defineModule.setUpdateTime(defineModuleVo.getUpdateTime());
-        defineModule.setCreateUserId(defineModuleVo.getCreateUserId());
-        defineModule.setLastModifyerId(defineModuleVo.getLastModifyerId());
-        defineModule.setRemark(defineModuleVo.getRemark());
-        return defineModule;
+        DefineModule entity = defineModuleVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static DefineModuleVo transferEntityToVo(DefineModule defineModule) {
-        if (defineModule == null) {
+    public static DefineModuleVo transferEntityToVo(DefineModule entity) {
+        if (entity == null) {
             return null;
         }
-        DefineModuleVo defineModuleVo = new DefineModuleVo();
-        defineModuleVo.setFid(defineModule.getFid());
-        defineModuleVo.setName(defineModule.getName());
-        defineModuleVo.setCode(defineModule.getCode());
-        defineModuleVo.setIconVal(defineModule.getIcon());
-        defineModuleVo.setStyleVal(defineModule.getStyle());
-        defineModuleVo.setTypeVal(defineModule.getType());
-        if (defineModule.getType() != null) {
-            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(defineModule.getType());
+        DefineModuleVo vo = defineModuleVoMapstruct.transferEntityToVo(entity);
+        //TODO
+        if (entity.getType() != null) {
+            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(entity.getType());
             if (typeEnum != null) {
-                defineModuleVo.setTypeStr(typeEnum.getLabel());
+                vo.setTypeStr(typeEnum.getLabel());
             } else {
-                defineModuleVo.setTypeStr("");
+                vo.setTypeStr("");
             }
         }
-        defineModuleVo.setState(defineModule.getState());
-        defineModuleVo.setCreateTime(defineModule.getCreateTime());
-        defineModuleVo.setUpdateTime(defineModule.getUpdateTime());
-        defineModuleVo.setCreateUserId(defineModule.getCreateUserId());
-        defineModuleVo.setLastModifyerId(defineModule.getLastModifyerId());
-        defineModuleVo.setRemark(defineModule.getRemark());
-        return defineModuleVo;
+        return vo;
     }
 
-    public static DefineModuleVo transferDtoToVo(DefineModuleDto defineModuleDto) {
-        if (defineModuleDto == null) {
+    public static DefineModuleVo transferDtoToVo(DefineModuleDto dto) {
+        if (dto == null) {
             return null;
         }
-        DefineModuleVo defineModuleVo = new DefineModuleVo();
-        defineModuleVo.setFid(defineModuleDto.getFid());
-        defineModuleVo.setName(defineModuleDto.getName());
-        defineModuleVo.setCode(defineModuleDto.getCode());
-        defineModuleVo.setIconVal(defineModuleDto.getIcon());
-        defineModuleVo.setStyleVal(defineModuleDto.getStyle());
-        defineModuleVo.setTypeVal(defineModuleDto.getType());
-        if (defineModuleDto.getType() != null) {
-            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(defineModuleDto.getType());
+        DefineModuleVo vo = defineModuleVoMapstruct.transferDtoToVo(dto);
+        //TODO
+        if (dto.getType() != null) {
+            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(dto.getType());
             if (typeEnum != null) {
-                defineModuleVo.setTypeStr(typeEnum.getLabel());
+                vo.setTypeStr(typeEnum.getLabel());
             } else {
-                defineModuleVo.setTypeStr("");
+                vo.setTypeStr("");
             }
         }
-        defineModuleVo.setState(defineModuleDto.getState());
-        defineModuleVo.setCreateTime(defineModuleDto.getCreateTime());
-        defineModuleVo.setUpdateTime(defineModuleDto.getUpdateTime());
-        defineModuleVo.setCreateUserId(defineModuleDto.getCreateUserId());
-        defineModuleVo.setLastModifyerId(defineModuleDto.getLastModifyerId());
-        defineModuleVo.setRemark(defineModuleDto.getRemark());
-        return defineModuleVo;
+        return vo;
     }
 
     public static List<DefineModuleVo> transferEntityToVoList(List<DefineModule> defineModules) {

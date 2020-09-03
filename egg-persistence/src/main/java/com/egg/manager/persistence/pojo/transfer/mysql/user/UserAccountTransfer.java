@@ -11,6 +11,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserAccountVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
@@ -25,99 +26,46 @@ import java.util.*;
 @Named("UserAccountTransfer")
 public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
-    public static UserAccount transferVoToEntity(UserAccountVo userAccountVo) {
-        if (userAccountVo == null) {
+    static UserAccountVoMapstruct userAccountVoMapstruct = UserAccountVoMapstruct.INSTANCE;
+
+    public static UserAccount transferVoToEntity(UserAccountVo vo) {
+        if (vo == null) {
             return null;
         }
-        UserAccount userAccount = new UserAccount();
-        userAccount.setFid(userAccountVo.getFid());
-        userAccount.setUserName(userAccountVo.getUserName());
-        userAccount.setAccount(userAccountVo.getAccount());
-        userAccount.setNickName(userAccountVo.getNickName());
-        userAccount.setAvatarUrl(userAccountVo.getAvatarUrl());
-        userAccount.setPassword(userAccountVo.getPassword());
-        userAccount.setPhone(userAccountVo.getPhone());
-        userAccount.setEmail(userAccountVo.getEmail());
-        userAccount.setSex(userAccountVo.getSex());
-        userAccount.setUserType(userAccountVo.getUserType());
-        userAccount.setUserTypeNum(userAccountVo.getUserTypeNum());
-        userAccount.setRemark(userAccountVo.getRemark());
-        userAccount.setState(userAccountVo.getState());
-        userAccount.setLocked(userAccountVo.getLocked());
-        userAccount.setCreateTime(userAccountVo.getCreateTime());
-        userAccount.setUpdateTime(userAccountVo.getUpdateTime());
-        userAccount.setCreateUserId(userAccountVo.getCreateUserId());
-        userAccount.setLastModifyerId(userAccountVo.getLastModifyerId());
-        return userAccount;
+        UserAccount entity = userAccountVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static UserAccountVo transferEntityToVo(UserAccount userAccount) {
-        if (userAccount == null) {
+    public static UserAccountVo transferEntityToVo(UserAccount entity) {
+        if (entity == null) {
             return null;
         }
-        UserAccountVo userAccountVo = new UserAccountVo();
-        userAccountVo.setFid(userAccount.getFid());
-        userAccountVo.setUserName(userAccount.getUserName());
-        userAccountVo.setAccount(userAccount.getAccount());
-        userAccountVo.setNickName(userAccount.getNickName());
-        userAccountVo.setAvatarUrl(userAccount.getAvatarUrl());
-        userAccountVo.setPassword(userAccount.getPassword());
-        userAccountVo.setPhone(userAccount.getPhone());
-        userAccountVo.setEmail(userAccount.getEmail());
-        userAccountVo.setSex(userAccount.getSex());
-        userAccountVo.setUserType(userAccount.getUserType());
-        userAccountVo.setUserTypeNum(userAccount.getUserTypeNum());
-        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(userAccount.getUserType());
+        UserAccountVo vo = userAccountVoMapstruct.transferEntityToVo(entity);
+        //TODO
+        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(entity.getUserType());
         if (userAccountBaseTypeEnums != null) {
-            userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
+            vo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
         }
-        userAccountVo.setRemark(userAccount.getRemark());
-        userAccountVo.setState(userAccount.getState());
-        userAccountVo.setLocked(userAccount.getLocked());
-        userAccountVo.setCreateTime(userAccount.getCreateTime());
-        userAccountVo.setUpdateTime(userAccount.getUpdateTime());
-        userAccountVo.setCreateUserId(userAccount.getCreateUserId());
-        userAccountVo.setLastModifyerId(userAccount.getLastModifyerId());
-        return userAccountVo;
+        return vo;
     }
 
-    public static UserAccountVo transferDtoToVo(UserAccountDto userAccountDto) {
-        if (userAccountDto == null) {
+    public static UserAccountVo transferDtoToVo(UserAccountDto dto) {
+        if (dto == null) {
             return null;
         }
-        UserAccountVo userAccountVo = new UserAccountVo();
-        userAccountVo.setFid(userAccountDto.getFid());
-        userAccountVo.setUserName(userAccountDto.getUserName());
-        userAccountVo.setAccount(userAccountDto.getAccount());
-        userAccountVo.setNickName(userAccountDto.getNickName());
-        userAccountVo.setAvatarUrl(userAccountDto.getAvatarUrl());
-        userAccountVo.setPassword(userAccountDto.getPassword());
-        userAccountVo.setPhone(userAccountDto.getPhone());
-        userAccountVo.setEmail(userAccountDto.getEmail());
-        userAccountVo.setSex(userAccountDto.getSex());
-        userAccountVo.setUserType(userAccountDto.getUserType());
-        userAccountVo.setUserTypeNum(userAccountDto.getUserTypeNum());
-        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(userAccountDto.getUserType());
+        UserAccountVo vo = userAccountVoMapstruct.transferDtoToVo(dto);
+        UserAccountBaseTypeEnum userAccountBaseTypeEnums = UserAccountBaseTypeEnum.doGetEnumByValue(dto.getUserType());
         if (userAccountBaseTypeEnums != null) {
-            userAccountVo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
+            vo.setUserTypeStr(userAccountBaseTypeEnums.getLabel());
         }
-        userAccountVo.setRemark(userAccountDto.getRemark());
-        userAccountVo.setState(userAccountDto.getState());
-        userAccountVo.setLocked(userAccountDto.getLocked());
-        userAccountVo.setCreateTime(userAccountDto.getCreateTime());
-        userAccountVo.setUpdateTime(userAccountDto.getUpdateTime());
-        userAccountVo.setCreateUserId(userAccountDto.getCreateUserId());
-        userAccountVo.setLastModifyerId(userAccountDto.getLastModifyerId());
-
-        userAccountVo.setBelongTenantId(userAccountDto.getBelongTenantId());
-        DefineTenantVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(userAccountDto.getBelongTenant());
+        DefineTenantVo belongTenantVo = DefineTenantTransfer.transferEntityToVo(dto.getBelongTenant());
         if (belongTenantVo != null) {
-            userAccountVo.setBelongTenant(belongTenantVo);
-            if (StringUtils.isBlank(userAccountVo.getBelongTenantId())) {
-                userAccountVo.setBelongTenantId(belongTenantVo.getFid());
+            vo.setBelongTenant(belongTenantVo);
+            if (StringUtils.isBlank(vo.getBelongTenantId())) {
+                vo.setBelongTenantId(belongTenantVo.getFid());
             }
         }
-        return userAccountVo;
+        return vo;
     }
 
     public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts) {
@@ -144,7 +92,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-
+    //TODO
     public static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity, UserAccountXlsOutModel userAccountXlsOutModel) {
         userAccountXlsOutModel = userAccountXlsOutModel != null ? userAccountXlsOutModel : new UserAccountXlsOutModel();
         userAccountXlsOutModel.setFid(entity.getFid());

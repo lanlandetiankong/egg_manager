@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserJobDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserJobVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
 import org.mapstruct.Named;
@@ -14,58 +15,32 @@ import java.util.List;
 @Named("UserJobTransfer")
 public class UserJobTransfer extends MyBaseMysqlTransfer {
 
+    static UserJobVoMapstruct userJobVoMapstruct = UserJobVoMapstruct.INSTANCE ;
 
-    public static UserJob transferVoToEntity(UserJobVo userJobVo) {
-        if (userJobVo == null) {
+    public static UserJob transferVoToEntity(UserJobVo vo) {
+        if (vo == null) {
             return null;
         }
-        UserJob userJob = new UserJob();
-        userJob.setFid(userJobVo.getFid());
-        userJob.setUserAccountId(userJobVo.getUserAccountId());
-        userJob.setDefineJobId(userJobVo.getDefineJobId());
-        userJob.setRemark(userJobVo.getRemark());
-        userJob.setState(userJobVo.getState());
-        userJob.setCreateTime(userJobVo.getCreateTime());
-        userJob.setUpdateTime(userJobVo.getUpdateTime());
-        userJob.setCreateUserId(userJobVo.getCreateUserId());
-        userJob.setLastModifyerId(userJobVo.getLastModifyerId());
-        return userJob;
+        UserJob entity = userJobVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
 
-    public static UserJobVo transferEntityToVo(UserJob userJob) {
-        if (userJob == null) {
+    public static UserJobVo transferEntityToVo(UserJob entity) {
+        if (entity == null) {
             return null;
         }
-        UserJobVo userJobVo = new UserJobVo();
-        userJobVo.setFid(userJob.getFid());
-        userJobVo.setUserAccountId(userJob.getUserAccountId());
-        userJobVo.setDefineJobId(userJob.getDefineJobId());
-        userJobVo.setRemark(userJob.getRemark());
-        userJobVo.setState(userJob.getState());
-        userJobVo.setCreateTime(userJob.getCreateTime());
-        userJobVo.setUpdateTime(userJob.getUpdateTime());
-        userJobVo.setCreateUserId(userJob.getCreateUserId());
-        userJobVo.setLastModifyerId(userJob.getLastModifyerId());
-        return userJobVo;
+        UserJobVo vo = userJobVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
 
-    public static UserJobVo transferDtoToVo(UserJobDto userJobDto) {
-        if (userJobDto == null) {
+    public static UserJobVo transferDtoToVo(UserJobDto dto) {
+        if (dto == null) {
             return null;
         }
-        UserJobVo userJobVo = new UserJobVo();
-        userJobVo.setFid(userJobDto.getFid());
-        userJobVo.setUserAccountId(userJobDto.getUserAccountId());
-        userJobVo.setDefineJobId(userJobDto.getDefineJobId());
-        userJobVo.setRemark(userJobDto.getRemark());
-        userJobVo.setState(userJobDto.getState());
-        userJobVo.setCreateTime(userJobDto.getCreateTime());
-        userJobVo.setUpdateTime(userJobDto.getUpdateTime());
-        userJobVo.setCreateUserId(userJobDto.getCreateUserId());
-        userJobVo.setLastModifyerId(userJobDto.getLastModifyerId());
-        return userJobVo;
+        UserJobVo entity = userJobVoMapstruct.transferDtoToVo(dto);
+        return entity;
     }
 
     public static List<UserJobVo> transferEntityToVoList(List<UserJob> userJobs) {

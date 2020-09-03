@@ -4,6 +4,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.define;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineRoleDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineRoleVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleVo;
@@ -16,78 +17,42 @@ import java.util.List;
 @Component
 @Named("DefineRoleTransfer")
 public class DefineRoleTransfer extends MyBaseMysqlTransfer {
-    public static DefineRole transferVoToEntity(DefineRoleVo defineRoleVo) {
-        if (defineRoleVo == null) {
+    static DefineRoleVoMapstruct defineRoleVoMapstruct = DefineRoleVoMapstruct.INSTANCE ;
+
+    public static DefineRole transferVoToEntity(DefineRoleVo vo) {
+        if (vo == null) {
             return null;
         }
-        DefineRole defineRole = new DefineRole();
-        defineRole.setFid(defineRoleVo.getFid());
-        defineRole.setName(defineRoleVo.getName());
-        defineRole.setCode(defineRoleVo.getCode());
-        defineRole.setType(defineRoleVo.getType());
-        defineRole.setRemark(defineRoleVo.getRemark());
-        defineRole.setState(defineRoleVo.getState());
-        defineRole.setCreateTime(defineRoleVo.getCreateTime());
-        defineRole.setUpdateTime(defineRoleVo.getUpdateTime());
-        defineRole.setCreateUserId(defineRoleVo.getCreateUserId());
-        defineRole.setLastModifyerId(defineRoleVo.getLastModifyerId());
-
-        return defineRole;
+        DefineRole entity = defineRoleVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
-    public static DefineRoleVo transferEntityToVo(DefineRole defineRole) {
-        if (defineRole == null) {
+    public static DefineRoleVo transferEntityToVo(DefineRole entity) {
+        if (entity == null) {
             return null;
         }
-        DefineRoleVo defineRoleVo = new DefineRoleVo();
-        defineRoleVo.setFid(defineRole.getFid());
-        defineRoleVo.setName(defineRole.getName());
-        defineRoleVo.setCode(defineRole.getCode());
-        defineRoleVo.setType(defineRole.getType());
-        if (defineRole.getType() != null) {
-            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(defineRole.getType());
-            if (typeEnum != null) {
-                defineRoleVo.setTypeStr(typeEnum.getLabel());
-            } else {
-                defineRoleVo.setTypeStr("");
-            }
-        }
-        defineRoleVo.setRemark(defineRole.getRemark());
-        defineRoleVo.setState(defineRole.getState());
-        defineRoleVo.setCreateTime(defineRole.getCreateTime());
-        defineRoleVo.setUpdateTime(defineRole.getUpdateTime());
-        defineRoleVo.setCreateUserId(defineRole.getCreateUserId());
-        defineRoleVo.setLastModifyerId(defineRole.getLastModifyerId());
-
-        return defineRoleVo;
+        DefineRoleVo vo = defineRoleVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
-    public static DefineRoleVo transferDtoToVo(DefineRoleDto defineRoleDto) {
-        if (defineRoleDto == null) {
+    public static DefineRoleVo transferDtoToVo(DefineRoleDto dto) {
+        if (dto == null) {
             return null;
         }
-        DefineRoleVo defineRoleVo = new DefineRoleVo();
-        defineRoleVo.setFid(defineRoleDto.getFid());
-        defineRoleVo.setName(defineRoleDto.getName());
-        defineRoleVo.setCode(defineRoleDto.getCode());
-        defineRoleVo.setType(defineRoleDto.getType());
-        if (defineRoleDto.getType() != null) {
-            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(defineRoleDto.getType());
+        DefineRoleVo vo = defineRoleVoMapstruct.transferDtoToVo(dto);
+        //TODO
+        vo.setType(dto.getType());
+        if (dto.getType() != null) {
+            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(dto.getType());
             if (typeEnum != null) {
-                defineRoleVo.setTypeStr(typeEnum.getLabel());
+                vo.setTypeStr(typeEnum.getLabel());
             } else {
-                defineRoleVo.setTypeStr("");
+                vo.setTypeStr("");
             }
         }
-        defineRoleVo.setState(defineRoleDto.getState());
-        defineRoleVo.setRemark(defineRoleDto.getRemark());
-        defineRoleVo.setCreateTime(defineRoleDto.getCreateTime());
-        defineRoleVo.setUpdateTime(defineRoleDto.getUpdateTime());
-        defineRoleVo.setCreateUserId(defineRoleDto.getCreateUserId());
-        defineRoleVo.setLastModifyerId(defineRoleDto.getLastModifyerId());
-        defineRoleVo.setCreateUser(UserAccountTransfer.transferEntityToVo(defineRoleDto.getCreateUser()));
-        defineRoleVo.setLastModifyer(UserAccountTransfer.transferEntityToVo(defineRoleDto.getLastModifyer()));
-        return defineRoleVo;
+        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
+        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
+        return vo;
     }
 
     public static List<DefineRoleVo> transferEntityToVoList(List<DefineRole> definePermissions) {

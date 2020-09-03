@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserRoleDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserRoleVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleVo;
 import org.mapstruct.Named;
@@ -14,61 +15,32 @@ import java.util.List;
 @Named("UserRoleTransfer")
 public class UserRoleTransfer extends MyBaseMysqlTransfer {
 
+    static UserRoleVoMapstruct userRoleVoMapstruct = UserRoleVoMapstruct.INSTANCE ;
 
-    public static UserRole transferVoToEntity(UserRoleVo userRoleVo) {
-        if (userRoleVo == null) {
+    public static UserRole transferVoToEntity(UserRoleVo vo) {
+        if (vo == null) {
             return null;
         }
-        UserRole userRole = new UserRole();
-        userRole.setFid(userRoleVo.getFid());
-        userRole.setUserAccountId(userRoleVo.getUserAccountId());
-        userRole.setDefineRoleId(userRoleVo.getDefineRoleId());
-        userRole.setType(userRoleVo.getType());
-        userRole.setState(userRoleVo.getState());
-        userRole.setRemark(userRoleVo.getRemark());
-        userRole.setCreateTime(userRoleVo.getCreateTime());
-        userRole.setUpdateTime(userRoleVo.getUpdateTime());
-        userRole.setCreateUserId(userRoleVo.getCreateUserId());
-        userRole.setLastModifyerId(userRoleVo.getLastModifyerId());
-        return userRole;
+        UserRole entity = userRoleVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
 
-    public static UserRoleVo transferEntityToVo(UserRole userRole) {
-        if (userRole == null) {
+    public static UserRoleVo transferEntityToVo(UserRole entity) {
+        if (entity == null) {
             return null;
         }
-        UserRoleVo userRoleVo = new UserRoleVo();
-        userRoleVo.setFid(userRole.getFid());
-        userRoleVo.setUserAccountId(userRole.getUserAccountId());
-        userRoleVo.setDefineRoleId(userRole.getDefineRoleId());
-        userRoleVo.setType(userRole.getType());
-        userRoleVo.setRemark(userRole.getRemark());
-        userRoleVo.setState(userRole.getState());
-        userRoleVo.setCreateTime(userRole.getCreateTime());
-        userRoleVo.setUpdateTime(userRole.getUpdateTime());
-        userRoleVo.setCreateUserId(userRole.getCreateUserId());
-        userRoleVo.setLastModifyerId(userRole.getLastModifyerId());
-        return userRoleVo;
+        UserRoleVo vo = userRoleVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
 
-    public static UserRoleVo transferDtoToVo(UserRoleDto userRoleDto) {
-        if (userRoleDto == null) {
+    public static UserRoleVo transferDtoToVo(UserRoleDto dto) {
+        if (dto == null) {
             return null;
         }
-        UserRoleVo userRoleVo = new UserRoleVo();
-        userRoleVo.setFid(userRoleDto.getFid());
-        userRoleVo.setUserAccountId(userRoleDto.getUserAccountId());
-        userRoleVo.setDefineRoleId(userRoleDto.getDefineRoleId());
-        userRoleVo.setType(userRoleDto.getType());
-        userRoleVo.setRemark(userRoleDto.getRemark());
-        userRoleVo.setState(userRoleDto.getState());
-        userRoleVo.setCreateTime(userRoleDto.getCreateTime());
-        userRoleVo.setUpdateTime(userRoleDto.getUpdateTime());
-        userRoleVo.setCreateUserId(userRoleDto.getCreateUserId());
-        userRoleVo.setLastModifyerId(userRoleDto.getLastModifyerId());
-        return userRoleVo;
+        UserRoleVo vo = userRoleVoMapstruct.transferDtoToVo(dto);
+        return vo;
     }
 
     public static List<UserRoleVo> transferEntityToVoList(List<UserRole> userRoles) {

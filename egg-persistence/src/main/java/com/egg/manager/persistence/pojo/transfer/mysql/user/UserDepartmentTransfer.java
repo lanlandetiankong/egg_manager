@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserDepartmentVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
 import org.mapstruct.Named;
@@ -13,63 +14,33 @@ import java.util.List;
 @Component
 @Named("UserDepartmentTransfer")
 public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
-    public static UserDepartment transferVoToEntity(UserDepartmentVo userTenantVo) {
-        if (userTenantVo == null) {
+
+    static UserDepartmentVoMapstruct userDepartmentVoMapstruct = UserDepartmentVoMapstruct.INSTANCE ;
+
+    public static UserDepartment transferVoToEntity(UserDepartmentVo vo) {
+        if (vo == null) {
             return null;
         }
-        UserDepartment UserDepartment = new UserDepartment();
-        UserDepartment.setFid(userTenantVo.getFid());
-        UserDepartment.setUserAccountId(userTenantVo.getUserAccountId());
-        UserDepartment.setDefineDepartmentId(userTenantVo.getDefineDepartmentId());
-        UserDepartment.setType(userTenantVo.getType());
-        UserDepartment.setIsManager(userTenantVo.getIsManager());
-        UserDepartment.setState(userTenantVo.getState());
-        UserDepartment.setRemark(userTenantVo.getRemark());
-        UserDepartment.setCreateTime(userTenantVo.getCreateTime());
-        UserDepartment.setUpdateTime(userTenantVo.getUpdateTime());
-        UserDepartment.setCreateUserId(userTenantVo.getCreateUserId());
-        UserDepartment.setLastModifyerId(userTenantVo.getLastModifyerId());
-        return UserDepartment;
+        UserDepartment entity = userDepartmentVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
 
-    public static UserDepartmentVo transferEntityToVo(UserDepartment UserDepartment) {
-        if (UserDepartment == null) {
+    public static UserDepartmentVo transferEntityToVo(UserDepartment entity) {
+        if (entity == null) {
             return null;
         }
-        UserDepartmentVo userTenantVo = new UserDepartmentVo();
-        userTenantVo.setFid(UserDepartment.getFid());
-        userTenantVo.setUserAccountId(UserDepartment.getUserAccountId());
-        userTenantVo.setDefineDepartmentId(UserDepartment.getDefineDepartmentId());
-        userTenantVo.setType(UserDepartment.getType());
-        userTenantVo.setIsManager(UserDepartment.getIsManager());
-        userTenantVo.setRemark(UserDepartment.getRemark());
-        userTenantVo.setState(UserDepartment.getState());
-        userTenantVo.setCreateTime(UserDepartment.getCreateTime());
-        userTenantVo.setUpdateTime(UserDepartment.getUpdateTime());
-        userTenantVo.setCreateUserId(UserDepartment.getCreateUserId());
-        userTenantVo.setLastModifyerId(UserDepartment.getLastModifyerId());
+        UserDepartmentVo userTenantVo = userDepartmentVoMapstruct.transferEntityToVo(entity);
         return userTenantVo;
     }
 
 
-    public static UserDepartmentVo transferDtoToVo(UserDepartmentDto userTenantDto) {
-        if (userTenantDto == null) {
+    public static UserDepartmentVo transferDtoToVo(UserDepartmentDto dto) {
+        if (dto == null) {
             return null;
         }
-        UserDepartmentVo userTenantVo = new UserDepartmentVo();
-        userTenantVo.setFid(userTenantDto.getFid());
-        userTenantVo.setUserAccountId(userTenantDto.getUserAccountId());
-        userTenantVo.setDefineDepartmentId(userTenantDto.getDefineDepartmentId());
-        userTenantVo.setType(userTenantDto.getType());
-        userTenantVo.setIsManager(userTenantDto.getIsManager());
-        userTenantVo.setRemark(userTenantDto.getRemark());
-        userTenantVo.setState(userTenantDto.getState());
-        userTenantVo.setCreateTime(userTenantDto.getCreateTime());
-        userTenantVo.setUpdateTime(userTenantDto.getUpdateTime());
-        userTenantVo.setCreateUserId(userTenantDto.getCreateUserId());
-        userTenantVo.setLastModifyerId(userTenantDto.getLastModifyerId());
-        return userTenantVo;
+        UserDepartmentVo vo = userDepartmentVoMapstruct.transferDtoToVo(dto);
+        return vo;
     }
 
     public static List<UserDepartmentVo> transferEntityToVoList(List<UserDepartment> userTenants) {

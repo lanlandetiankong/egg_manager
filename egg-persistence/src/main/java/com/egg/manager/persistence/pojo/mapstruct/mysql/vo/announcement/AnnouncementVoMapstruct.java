@@ -14,6 +14,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.Map;
+
 /**
  * TODO
  */
@@ -23,11 +25,20 @@ import org.mapstruct.factory.Mappers;
 public interface AnnouncementVoMapstruct extends MyBaseMysqlVoMapstruct<Announcement,AnnouncementVo, AnnouncementDto> {
     AnnouncementVoMapstruct INSTANCE = Mappers.getMapper(AnnouncementVoMapstruct.class);
 
-
-
+    @Mappings({
+            @Mapping(target = "tagIds",expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
+    })
     Announcement transferVoToEntity(AnnouncementVo vo);
 
-    AnnouncementVo transferEntityToVo(Announcement entity);
+    @Mappings({
+            @Mapping(target = "tagIds",expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
+            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))")
+    })
+    AnnouncementVo transferEntityToVo(Announcement entity,@Context Map<String, AnnouncementTag> announcementTagMap);
 
-    AnnouncementVo transferDtoToVo(AnnouncementDto dto);
+    @Mappings({
+            @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
+            @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))")
+    })
+    AnnouncementVo transferDtoToVo(AnnouncementDto dto,@Context Map<String, AnnouncementTag> announcementTagMap);
 }

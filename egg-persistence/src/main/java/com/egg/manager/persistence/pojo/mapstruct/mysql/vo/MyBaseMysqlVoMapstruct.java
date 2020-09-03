@@ -15,6 +15,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * 可在该接口写公用的转化方法,定义的方法请勿修改方法名！
@@ -46,6 +47,7 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
      * @return
      */
     default String handleTagIdListToJsonString(List<String> tagIds){
+        tagIds = tagIds != null ? tagIds : new ArrayList<>() ;
         return JSON.toJSONString(tagIds);
     }
 

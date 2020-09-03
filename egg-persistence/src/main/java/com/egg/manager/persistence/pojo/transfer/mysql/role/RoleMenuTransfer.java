@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.role;
 
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.role.RoleMenuDto;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.role.RoleMenuVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.role.RoleMenuVo;
 import org.mapstruct.Named;
@@ -13,60 +14,33 @@ import java.util.List;
 @Component
 @Named("RoleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
-    public static RoleMenu transferVoToEntity(RoleMenuVo roleMenuVo) {
-        if (roleMenuVo == null) {
+
+    static RoleMenuVoMapstruct roleMenuVoMapstruct = RoleMenuVoMapstruct.INSTANCE ;
+
+    public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
+        if (vo == null) {
             return null;
         }
-        RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setFid(roleMenuVo.getFid());
-        roleMenu.setDefineRoleId(roleMenuVo.getDefineRoleId());
-        roleMenu.setDefineMenuId(roleMenuVo.getDefineMenuId());
-        roleMenu.setType(roleMenuVo.getType());
-        roleMenu.setState(roleMenuVo.getState());
-        roleMenu.setRemark(roleMenuVo.getRemark());
-        roleMenu.setCreateTime(roleMenuVo.getCreateTime());
-        roleMenu.setUpdateTime(roleMenuVo.getUpdateTime());
-        roleMenu.setCreateUserId(roleMenuVo.getCreateUserId());
-        roleMenu.setLastModifyerId(roleMenuVo.getLastModifyerId());
-        return roleMenu;
+        RoleMenu entity = roleMenuVoMapstruct.transferVoToEntity(vo);
+        return entity;
     }
 
 
-    public static RoleMenuVo transferEntityToVo(RoleMenu roleMenu) {
-        if (roleMenu == null) {
+    public static RoleMenuVo transferEntityToVo(RoleMenu entity) {
+        if (entity == null) {
             return null;
         }
-        RoleMenuVo roleMenuVo = new RoleMenuVo();
-        roleMenuVo.setFid(roleMenu.getFid());
-        roleMenuVo.setDefineRoleId(roleMenu.getDefineRoleId());
-        roleMenuVo.setDefineMenuId(roleMenu.getDefineMenuId());
-        roleMenuVo.setType(roleMenu.getType());
-        roleMenuVo.setRemark(roleMenu.getRemark());
-        roleMenuVo.setState(roleMenu.getState());
-        roleMenuVo.setCreateTime(roleMenu.getCreateTime());
-        roleMenuVo.setUpdateTime(roleMenu.getUpdateTime());
-        roleMenuVo.setCreateUserId(roleMenu.getCreateUserId());
-        roleMenuVo.setLastModifyerId(roleMenu.getLastModifyerId());
-        return roleMenuVo;
+        RoleMenuVo vo = roleMenuVoMapstruct.transferEntityToVo(entity);
+        return vo;
     }
 
 
-    public static RoleMenuVo transferDtoToVo(RoleMenuDto roleMenuDto) {
-        if (roleMenuDto == null) {
+    public static RoleMenuVo transferDtoToVo(RoleMenuDto dto) {
+        if (dto == null) {
             return null;
         }
-        RoleMenuVo roleMenuVo = new RoleMenuVo();
-        roleMenuVo.setFid(roleMenuDto.getFid());
-        roleMenuVo.setDefineRoleId(roleMenuDto.getDefineRoleId());
-        roleMenuVo.setDefineMenuId(roleMenuDto.getDefineMenuId());
-        roleMenuVo.setType(roleMenuDto.getType());
-        roleMenuVo.setRemark(roleMenuDto.getRemark());
-        roleMenuVo.setState(roleMenuDto.getState());
-        roleMenuVo.setCreateTime(roleMenuDto.getCreateTime());
-        roleMenuVo.setUpdateTime(roleMenuDto.getUpdateTime());
-        roleMenuVo.setCreateUserId(roleMenuDto.getCreateUserId());
-        roleMenuVo.setLastModifyerId(roleMenuDto.getLastModifyerId());
-        return roleMenuVo;
+        RoleMenuVo vo = roleMenuVoMapstruct.transferDtoToVo(dto);
+        return vo;
     }
 
     public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenu> roleMenus) {

@@ -1,7 +1,7 @@
-package com.egg.manager.persistence.db.mongo.daoimpl.log;
+package com.egg.manager.persistence.db.mongo.repositoryImpl.log;
 
-import com.egg.manager.persistence.db.mongo.dao.log.OperationLogRepository;
-import com.egg.manager.persistence.db.mongo.daoimpl.MyBaseMongoRepositoryImpl;
+import com.egg.manager.persistence.db.mongo.repository.log.OperationLogRepository;
+import com.egg.manager.persistence.db.mongo.repositoryImpl.MyBaseMongoRepositoryImpl;
 import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
 import org.springframework.stereotype.Repository;
 

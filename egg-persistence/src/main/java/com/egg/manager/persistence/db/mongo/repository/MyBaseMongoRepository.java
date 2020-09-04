@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.db.mongo.dao;
+package com.egg.manager.persistence.db.mongo.repository;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;

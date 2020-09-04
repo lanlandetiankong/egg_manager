@@ -12,7 +12,7 @@ import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mongo.dao.forms.SmartFormTypeDefinitionRepository;
+import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormTypeDefinitionRepository;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.forms.SmartFormDefinitionMapstruct;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;

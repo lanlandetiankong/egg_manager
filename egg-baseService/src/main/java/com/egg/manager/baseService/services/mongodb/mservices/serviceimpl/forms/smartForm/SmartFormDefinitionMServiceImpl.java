@@ -5,7 +5,7 @@ import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.Sm
 import com.egg.manager.common.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mongo.dao.forms.SmartFormDefinitionRepository;
+import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormDefinitionRepository;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import org.springframework.beans.factory.annotation.Autowired;

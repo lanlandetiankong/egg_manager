@@ -6,7 +6,7 @@ import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.Sm
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mongo.dao.forms.SmartFormTypeDefinitionRepository;
+import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormTypeDefinitionRepository;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 
 import java.util.ArrayList;

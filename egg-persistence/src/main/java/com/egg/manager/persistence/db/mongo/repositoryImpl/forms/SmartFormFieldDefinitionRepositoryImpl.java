@@ -1,7 +1,7 @@
-package com.egg.manager.persistence.db.mongo.daoimpl.forms;
+package com.egg.manager.persistence.db.mongo.repositoryImpl.forms;
 
-import com.egg.manager.persistence.db.mongo.dao.forms.SmartFormFieldDefinitionRepository;
-import com.egg.manager.persistence.db.mongo.daoimpl.MyBaseMongoRepositoryImpl;
+import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormFieldDefinitionRepository;
+import com.egg.manager.persistence.db.mongo.repositoryImpl.MyBaseMongoRepositoryImpl;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldDefinitionMO;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;

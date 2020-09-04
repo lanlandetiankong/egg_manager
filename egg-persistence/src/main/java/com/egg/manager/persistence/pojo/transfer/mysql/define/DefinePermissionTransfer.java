@@ -4,7 +4,7 @@ import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefinePermissionVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.define.DefinePermissionMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 import org.mapstruct.Named;
@@ -17,7 +17,7 @@ import java.util.List;
 @Named("DefinePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
 
-    static DefinePermissionVoMapstruct definePermissionVoMapstruct = DefinePermissionVoMapstruct.INSTANCE ;
+    static DefinePermissionMapstruct definePermissionVoMapstruct = DefinePermissionMapstruct.INSTANCE ;
 
     public static DefinePermission transferVoToEntity(DefinePermissionVo vo) {
         if (vo == null) {

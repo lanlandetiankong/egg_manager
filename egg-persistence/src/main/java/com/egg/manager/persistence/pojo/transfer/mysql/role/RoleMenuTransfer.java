@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.role;
 
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.role.RoleMenuDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.role.RoleMenuVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.role.RoleMenuMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.role.RoleMenuVo;
 import org.mapstruct.Named;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named("RoleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
 
-    static RoleMenuVoMapstruct roleMenuVoMapstruct = RoleMenuVoMapstruct.INSTANCE ;
+    static RoleMenuMapstruct roleMenuVoMapstruct = RoleMenuMapstruct.INSTANCE ;
 
     public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
         if (vo == null) {

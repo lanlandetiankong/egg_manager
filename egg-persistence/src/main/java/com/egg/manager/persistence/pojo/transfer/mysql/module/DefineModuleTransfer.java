@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.module;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.module.DefineModuleVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.module.DefineModuleMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleVo;
 import org.mapstruct.Named;
@@ -16,7 +16,7 @@ import java.util.List;
 @Named("DefineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
 
-    static DefineModuleVoMapstruct defineModuleVoMapstruct = DefineModuleVoMapstruct.INSTANCE ;
+    static DefineModuleMapstruct defineModuleVoMapstruct = DefineModuleMapstruct.INSTANCE ;
 
     public static DefineModule transferVoToEntity(DefineModuleVo vo) {
         if (vo == null) {

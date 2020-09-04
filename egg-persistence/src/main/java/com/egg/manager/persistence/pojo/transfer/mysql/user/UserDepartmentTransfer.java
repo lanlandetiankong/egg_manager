@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserDepartmentVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.user.UserDepartmentMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserDepartmentVo;
 import org.mapstruct.Named;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named("UserDepartmentTransfer")
 public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
 
-    static UserDepartmentVoMapstruct userDepartmentVoMapstruct = UserDepartmentVoMapstruct.INSTANCE ;
+    static UserDepartmentMapstruct userDepartmentVoMapstruct = UserDepartmentMapstruct.INSTANCE ;
 
     public static UserDepartment transferVoToEntity(UserDepartmentVo vo) {
         if (vo == null) {

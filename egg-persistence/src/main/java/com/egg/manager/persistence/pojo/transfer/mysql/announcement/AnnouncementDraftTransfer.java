@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement.AnnouncementDraftVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.announcement.AnnouncementDraftMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
 import com.google.common.base.Joiner;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Named("AnnouncementDraftTransfer")
 public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
-    static AnnouncementDraftVoMapstruct announcementDraftVoMapstruct = AnnouncementDraftVoMapstruct.INSTANCE;
+    static AnnouncementDraftMapstruct announcementDraftVoMapstruct = AnnouncementDraftMapstruct.INSTANCE;
 
     public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo) {
         if(vo == null){

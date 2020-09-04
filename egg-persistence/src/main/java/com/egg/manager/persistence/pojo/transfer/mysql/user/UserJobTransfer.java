@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserJobDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserJobVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.user.UserJobMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserJobVo;
 import org.mapstruct.Named;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named("UserJobTransfer")
 public class UserJobTransfer extends MyBaseMysqlTransfer {
 
-    static UserJobVoMapstruct userJobVoMapstruct = UserJobVoMapstruct.INSTANCE ;
+    static UserJobMapstruct userJobVoMapstruct = UserJobMapstruct.INSTANCE ;
 
     public static UserJob transferVoToEntity(UserJobVo vo) {
         if (vo == null) {

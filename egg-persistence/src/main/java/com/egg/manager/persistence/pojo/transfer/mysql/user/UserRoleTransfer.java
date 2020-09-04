@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserRoleDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserRoleVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.user.UserRoleMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserRoleVo;
 import org.mapstruct.Named;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named("UserRoleTransfer")
 public class UserRoleTransfer extends MyBaseMysqlTransfer {
 
-    static UserRoleVoMapstruct userRoleVoMapstruct = UserRoleVoMapstruct.INSTANCE ;
+    static UserRoleMapstruct userRoleVoMapstruct = UserRoleMapstruct.INSTANCE ;
 
     public static UserRole transferVoToEntity(UserRoleVo vo) {
         if (vo == null) {

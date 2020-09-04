@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.organization;
 
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.dto.mysql.organization.DefineTenantDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.organization.DefineTenantVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.organization.DefineTenantMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 import org.mapstruct.Named;
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @Named("DefineTenantTransfer")
 public class DefineTenantTransfer extends MyBaseMysqlTransfer {
-    static DefineTenantVoMapstruct defineTenantVoMapstruct = DefineTenantVoMapstruct.INSTANCE ;
+    static DefineTenantMapstruct defineTenantVoMapstruct = DefineTenantMapstruct.INSTANCE ;
 
     public static DefineTenant transferVoToEntity(DefineTenantVo vo) {
         if (vo == null) {

@@ -5,7 +5,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user.UserAccountVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.user.UserAccountMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import org.mapstruct.Named;
@@ -20,7 +20,7 @@ import java.util.Set;
 @Named("UserAccountTransfer")
 public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
-    static UserAccountVoMapstruct userAccountVoMapstruct = UserAccountVoMapstruct.INSTANCE;
+    static UserAccountMapstruct userAccountVoMapstruct = UserAccountMapstruct.INSTANCE;
 
     public static UserAccount transferVoToEntity(UserAccountVo vo) {
         if (vo == null) {

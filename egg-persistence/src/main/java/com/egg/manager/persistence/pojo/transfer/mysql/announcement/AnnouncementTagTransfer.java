@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.transfer.mysql.announcement;
 
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement.AnnouncementTagVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.announcement.AnnouncementTagMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
 import org.mapstruct.Named;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named("AnnouncementTagTransfer")
 public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
 
-    static AnnouncementTagVoMapstruct announcementTagVoMapstruct = AnnouncementTagVoMapstruct.INSTANCE ;
+    static AnnouncementTagMapstruct announcementTagVoMapstruct = AnnouncementTagMapstruct.INSTANCE ;
 
     @Deprecated
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo vo) {

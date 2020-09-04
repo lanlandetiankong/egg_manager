@@ -4,7 +4,7 @@ import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto;
-import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineMenuVoMapstruct;
+import com.egg.manager.persistence.pojo.mapstruct.mysql.define.DefineMenuMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
 import org.mapstruct.Named;
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 @Named("DefineMenuTransfer")
 public class DefineMenuTransfer extends MyBaseMysqlTransfer {
-    static DefineMenuVoMapstruct defineMenuVoMapstruct = DefineMenuVoMapstruct.INSTANCE ;
+    static DefineMenuMapstruct defineMenuVoMapstruct = DefineMenuMapstruct.INSTANCE ;
 
     public static DefineMenu transferVoToEntity(DefineMenuVo vo) {
         if (vo == null) {

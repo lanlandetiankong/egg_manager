@@ -12,14 +12,14 @@ import org.mapstruct.factory.Mappers;
  * @Date: 2020/8/7 9:56
  */
 @Mapper(componentModel = "spring")
-public interface UserAccountMapstruct {
-    UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
+public interface LoginAccountMapstruct {
+    LoginAccountMapstruct INSTANCE = Mappers.getMapper(LoginAccountMapstruct.class);
 
     /**
      * @param loginAccountVo
      * @return
      */
-    LoginAccountDTO loginAccountVo_CopyTo_LoginAccountDTO(LoginAccountVo loginAccountVo);
+    LoginAccountDTO translateLoginAccountVoToDto(LoginAccountVo loginAccountVo);
 
 
 }

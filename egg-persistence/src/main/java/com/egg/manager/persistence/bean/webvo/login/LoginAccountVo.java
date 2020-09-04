@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.bean.webvo.login;
 
+import com.egg.manager.persistence.bean.webvo.mapstruct.login.LoginAccountMapstruct;
 import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.bean.webvo.MyBaseWebVo;
-import com.egg.manager.persistence.bean.webvo.mapstruct.login.UserAccountMapstruct;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,7 +42,7 @@ public class LoginAccountVo extends MyBaseWebVo {
      * @throws IllegalAccessException
      */
     public static LoginAccountDTO transferToLoginAccountDTO(LoginAccountVo loginAccountVo) throws InvocationTargetException, IllegalAccessException {
-        LoginAccountDTO dto = UserAccountMapstruct.INSTANCE.loginAccountVo_CopyTo_LoginAccountDTO(loginAccountVo);
+        LoginAccountDTO dto = LoginAccountMapstruct.INSTANCE.translateLoginAccountVoToDto(loginAccountVo);
         return dto;
     }
 

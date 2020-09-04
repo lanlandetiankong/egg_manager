@@ -1,18 +1,12 @@
 package com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement;
 
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
-import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
-import com.egg.manager.persistence.pojo.dto.mysql.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.MyBaseMysqlVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementDraftTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * TODO

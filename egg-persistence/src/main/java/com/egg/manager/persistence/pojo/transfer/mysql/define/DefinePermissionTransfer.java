@@ -6,7 +6,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefinePermissionVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefinePermissionVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -41,8 +40,6 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefinePermissionVo vo = definePermissionVoMapstruct.transferDtoToVo(dto);
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 

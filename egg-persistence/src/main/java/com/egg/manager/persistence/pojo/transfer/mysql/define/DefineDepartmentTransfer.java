@@ -4,7 +4,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineDepartmentVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineDepartmentVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

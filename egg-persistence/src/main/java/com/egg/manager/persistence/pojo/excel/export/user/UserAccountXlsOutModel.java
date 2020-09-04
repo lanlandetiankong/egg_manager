@@ -3,20 +3,19 @@ package com.egg.manager.persistence.pojo.excel.export.user;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
-import com.alibaba.excel.metadata.BaseRowModel;
+import com.egg.manager.persistence.pojo.excel.MyBaseXls;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAccountXlsOutModel extends BaseRowModel implements Serializable {
+public class UserAccountXlsOutModel extends MyBaseXls {
     @ExcelIgnore
     private String fid;
     /**

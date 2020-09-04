@@ -9,7 +9,6 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement.AnnouncementDraftVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
@@ -51,8 +50,6 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
         AnnouncementDraftVo vo = announcementDraftVoMapstruct.transferDtoToVo(dto);
         //设置 tag相关信息
         AnnouncementDraftTransfer.doSetTagInfoToVo(dto.getTagIds(),vo,announcementTagMap);
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 

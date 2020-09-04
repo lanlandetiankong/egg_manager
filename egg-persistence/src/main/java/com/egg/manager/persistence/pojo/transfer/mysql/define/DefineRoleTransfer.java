@@ -6,7 +6,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineRoleVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineRoleVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

@@ -1,19 +1,14 @@
 package com.egg.manager.persistence.pojo.mapstruct.mysql.vo.user;
 
 
-import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.dto.mysql.user.UserAccountDto;
+import com.egg.manager.persistence.pojo.excel.export.user.UserAccountXlsOutModel;
+import com.egg.manager.persistence.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.MyBaseMysqlVoMapstruct;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring",
@@ -42,4 +37,24 @@ public interface UserAccountVoMapstruct extends MyBaseMysqlVoMapstruct<UserAccou
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
     UserAccountVo transferDtoToVo(UserAccountDto dto);
+
+    @Mappings({
+            @Mapping(target = "userTypeStr",expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
+            @Mapping(target = "sexStr",expression = "java(handleUserSexGetName(entity.getSex()))"),
+            @Mapping(target = "lockedStr",expression = "java(handleUserAccountStateGetInfo(entity.getLocked()))"),
+    })
+    UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity);
+
+    @Mappings({
+            @Mapping(target = "sex",expression = "java(handleUserSexGetValue(xlsInModel.getSexStr()))"),
+            @Mapping(target = "userType",expression = "java(handleGetUserAccountDefaultUserType())"),
+            @Mapping(target = "userTypeNum",expression = "java(handleGetUserAccountDefaultUserTypeNum())"),
+            @Mapping(target = "state",expression = "java(handleGetUserAccountDefaultState())"),
+            @Mapping(target = "locked",expression = "java(handleGetUserAccountDefaultLocked())"),
+            @Mapping(target = "createTime",expression = "java(handleGetNowDate())"),
+            @Mapping(target = "updateTime",expression = "java(handleGetNowDate())"),
+            @Mapping(target = "createUserId",expression = "java(handleGetLoginUserId(loginUser,false))"),
+            @Mapping(target = "lastModifyerId",expression = "java(handleGetLoginUserId(loginUser,false))"),
+    })
+    UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccount loginUser);
 }

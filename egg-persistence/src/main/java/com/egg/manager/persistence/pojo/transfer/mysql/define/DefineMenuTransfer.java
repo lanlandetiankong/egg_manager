@@ -6,7 +6,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineMenuVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -43,13 +42,8 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineMenuVo vo = defineMenuVoMapstruct.transferDtoToVo(dto);
-        //TODO
-
         String excelModelConf = dto.getExcelModelConf();
         vo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
-        vo.setParentMenu(DefineMenuTransfer.transferDtoToVo(dto.getParentMenuDto()));
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 

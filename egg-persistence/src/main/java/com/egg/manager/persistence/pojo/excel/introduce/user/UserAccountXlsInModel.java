@@ -2,8 +2,8 @@ package com.egg.manager.persistence.pojo.excel.introduce.user;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.egg.manager.persistence.pojo.excel.MyBaseXls;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,10 +18,9 @@ import java.util.Date;
  * \
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAccountXlsInModel {
+public class UserAccountXlsInModel extends MyBaseXls {
     @ExcelIgnore
     private String fid;
 

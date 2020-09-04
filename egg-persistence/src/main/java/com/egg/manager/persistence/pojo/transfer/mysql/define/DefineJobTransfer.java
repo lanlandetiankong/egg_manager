@@ -5,7 +5,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.dto.mysql.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.define.DefineJobVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.define.DefineJobVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -39,8 +38,6 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         DefineJobVo vo = defineJobVoMapstruct.transferDtoToVo(dto);
-        //TODO
-
         return vo;
     }
 

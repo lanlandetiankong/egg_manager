@@ -3,8 +3,12 @@ package com.egg.manager.persistence.pojo.mapstruct.mysql.vo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
+import com.egg.manager.common.base.enums.base.UserSexEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.common.base.enums.user.UserAccountStateEnum;
+import com.egg.manager.common.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -15,13 +19,10 @@ import com.egg.manager.persistence.pojo.vo.mysql.MyBaseMysqlVo;
 import com.egg.manager.persistence.pojo.vo.mysql.organization.DefineTenantVo;
 import com.egg.manager.persistence.pojo.vo.mysql.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.T;
 import org.mapstruct.MapperConfig;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Mappings;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 /**
  * 可在该接口写公用的转化方法,定义的方法请勿修改方法名、参数、返回值等！
@@ -53,11 +54,41 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
     default Short handleSwitchStateGetShort(Boolean value){
         return (value == true) ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
     }
-
+    /**
+     * 开关式枚举 取得名称
+     * @param value
+     * @return
+     */
     default String handleSwitchStateGetName(Short value){
         return SwitchStateEnum.dealGetNameByVal(value);
     }
 
+    /**
+     * 性别 枚举 取得名称
+     * @param value
+     * @return
+     */
+    default String handleUserSexGetName(Short value){
+        return UserSexEnum.dealGetNameByVal(value);
+    }
+
+    /**
+     * 性别 枚举 取得值
+     * @param value
+     * @return
+     */
+    default Short handleUserSexGetValue(String value){
+        return UserSexEnum.dealGetValByName(value);
+    }
+
+    /**
+     * 用户状态 枚举 取得名称
+     * @param value
+     * @return
+     */
+    default String handleUserAccountStateGetInfo(Short value){
+        return UserAccountStateEnum.doGetEnumInfoByValue(value);
+    }
     /**
      * 取得[用户类型]名称
      * @param value
@@ -101,6 +132,49 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
         return tagList ;
     }
 
+    default String handleGetLoginUserId(UserAccount userAccount,boolean required){
+        if(userAccount == null){
+            if(required){
+                throw new MyRuntimeBusinessException("无法取得当前用户信息！");
+            }
+            return null ;
+        }   else {
+            return userAccount.getFid() ;
+        }
+    }
+
+    /**
+     * 用户账号 默认 用户类型
+     * @return
+     */
+    default Integer handleGetUserAccountDefaultUserType(){
+        return UserAccountBaseTypeEnum.SimpleUser.getValue();
+    }
+
+    /**
+     * 用户账号 默认 用户类型num
+     * @return
+     */
+    default Integer handleGetUserAccountDefaultUserTypeNum(){
+        return UserAccountBaseTypeEnum.SimpleUser.getValue();
+    }
+
+    /**
+     * 用户账号 默认 状态值
+     * @return
+     */
+    default Short handleGetUserAccountDefaultState(){
+        return BaseStateEnum.ENABLED.getValue();
+    }
+
+    /**
+     * 用户账号 默认是否锁定 值
+     * @return
+     */
+    default Short handleGetUserAccountDefaultLocked(){
+        return SwitchStateEnum.Close.getValue();
+    }
+
     /**
      * html转简要文本
      * @param content
@@ -109,6 +183,10 @@ public interface MyBaseMysqlVoMapstruct<E,V extends MyBaseMysqlVo,D extends MyBa
      */
     default String handleHtmlDomToText(String content,String defaultValue){
         return (StringUtils.isBlank(content)) ? defaultValue : MyStringUtil.htmlDomToText(content, null);
+    }
+
+    default Date handleGetNowDate(){
+        return new Date();
     }
 
     /**

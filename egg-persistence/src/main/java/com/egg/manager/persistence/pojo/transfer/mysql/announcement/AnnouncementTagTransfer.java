@@ -4,7 +4,6 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.dto.mysql.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.mapstruct.mysql.vo.announcement.AnnouncementTagVoMapstruct;
 import com.egg.manager.persistence.pojo.transfer.mysql.MyBaseMysqlTransfer;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -40,11 +39,6 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         AnnouncementTagVo vo = announcementTagVoMapstruct.transferDtoToVo(dto);
-        /**
-         * TODO
-         */
-        vo.setCreateUser(UserAccountTransfer.transferEntityToVo(dto.getCreateUser()));
-        vo.setLastModifyer(UserAccountTransfer.transferEntityToVo(dto.getLastModifyer()));
         return vo;
     }
 

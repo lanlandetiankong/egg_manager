@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.message.email.service;
 
-import com.egg.manager.persistence.pojo.message.mail.MyEmailMsgO;
+import com.egg.manager.persistence.pojo.common.message.mail.MyEmailMsgO;
 
 public interface MyBaseEmailService {
 

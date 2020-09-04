@@ -21,7 +21,7 @@
     </resultMap>
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />
@@ -38,7 +38,7 @@
         <result column="last_modifyer_id" property="lastModifyerId" />
         <association column="parent_id"  property="parentDepartment"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto">
+                     javaType="com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto">
             <id column="fid" property="fid"/>
             <result column="name" property="name" />
             <result column="code" property="code" />

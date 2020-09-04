@@ -12,7 +12,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.pojo.vo.mysql.define.DefineMenuVo;
+import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
 
 import java.util.List;
 import java.util.Set;

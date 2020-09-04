@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementDraftVo;
+import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 
 import java.util.List;
 

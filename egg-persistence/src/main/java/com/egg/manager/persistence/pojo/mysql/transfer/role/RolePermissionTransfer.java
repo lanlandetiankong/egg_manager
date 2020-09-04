@@ -1,0 +1,16 @@
+package com.egg.manager.persistence.pojo.mysql.transfer.role;
+
+import com.egg.manager.persistence.pojo.mysql.mapstruct.role.RolePermissionMapstruct;
+import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
+
+@Component
+@Named("RolePermissionTransfer")
+public class RolePermissionTransfer extends MyBaseMysqlTransfer {
+
+    static RolePermissionMapstruct rolePermissionVoMapstruct = RolePermissionMapstruct.INSTANCE;
+
+
+
+}

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.pojo.dto.mysql.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;

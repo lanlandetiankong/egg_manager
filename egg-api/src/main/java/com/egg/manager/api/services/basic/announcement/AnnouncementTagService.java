@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
+import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
 
 import java.util.List;
 import java.util.Map;

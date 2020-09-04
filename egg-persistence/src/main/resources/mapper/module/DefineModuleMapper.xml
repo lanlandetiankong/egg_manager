@@ -20,7 +20,7 @@
 
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.dto.mysql.module.DefineModuleDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto">
         <id column="fid" property="fid" />
         <result column="name" property="name" />
         <result column="code" property="code" />

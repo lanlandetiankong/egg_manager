@@ -7,7 +7,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.vo.mysql.module.DefineModuleVo;
+import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 
 import java.util.List;
 

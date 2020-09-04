@@ -8,7 +8,7 @@ import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.transfer.mysql.user.UserAccountTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;

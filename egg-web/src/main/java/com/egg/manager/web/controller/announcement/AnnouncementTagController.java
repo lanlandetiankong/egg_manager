@@ -13,8 +13,8 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.transfer.mysql.announcement.AnnouncementTagTransfer;
-import com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo;
+import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTagTransfer;
+import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -124,7 +124,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo AnnouncementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.vo.mysql.announcement.AnnouncementTagVo>() ;
+        MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo>() ;
         Integer addCount = 0 ;
         try{
             if(AnnouncementTagVo == null) {

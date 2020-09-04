@@ -6,7 +6,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
-import com.egg.manager.persistence.pojo.dto.mysql.user.UserDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

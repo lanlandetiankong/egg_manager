@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.mysql.mapstruct;
+package com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -121,6 +121,11 @@ public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D exte
         return vo;
     }
 
+    /**
+     * 租户 entity转为vo
+     * @param entity
+     * @return
+     */
     default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenant entity){
         return defineTenantVoMapstruct.transferEntityToVo(entity);
     }

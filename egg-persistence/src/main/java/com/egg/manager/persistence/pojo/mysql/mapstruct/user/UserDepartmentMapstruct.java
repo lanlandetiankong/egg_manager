@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
 import org.mapstruct.Mapper;

@@ -141,7 +141,7 @@ public class SmartFormDefinitionController extends BaseController {
                 if(formTypeDefinitionMOOptional.isPresent() == false){
                     throw new BusinessException("不是有效的表单类型！");
                 }
-                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.mvo_CopyTo_MO(formDefinitionMVO);
+                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
                 formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
                 SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
@@ -171,7 +171,7 @@ public class SmartFormDefinitionController extends BaseController {
                 if(formTypeDefinitionMOOptional.isPresent() == false){
                     throw new BusinessException("不是有效的表单类型！");
                 }
-                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.mvo_CopyTo_MO(formDefinitionMVO);
+                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
                 formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
                 SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser,formDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;

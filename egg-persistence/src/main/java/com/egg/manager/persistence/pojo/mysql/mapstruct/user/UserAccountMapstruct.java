@@ -5,7 +5,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.common.excel.introduce.user.UserAccountXlsInModel;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.mapstruct.*;
@@ -16,6 +16,7 @@ import org.mapstruct.factory.Mappers;
         uses = {UserAccountTransfer.class}
 )
 public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,UserAccountVo, UserAccountDto> {
+
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
 
     @Mappings({})

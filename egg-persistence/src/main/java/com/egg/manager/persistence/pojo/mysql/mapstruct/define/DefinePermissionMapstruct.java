@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.define;
 
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
 import org.mapstruct.Mapper;

@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.define;
 
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineGroupDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineGroupTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
 import org.mapstruct.Mapper;

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mongo.mo.forms;
 
+import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmartFormRecordFieldMO {
+public class SmartFormRecordFieldMO extends MyBaseModelMO<String> {
     /**
      * 表单record
      */

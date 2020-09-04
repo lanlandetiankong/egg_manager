@@ -36,7 +36,10 @@ public class OperationLogMVO extends MyBaseModelMVO<String> {
      * @OperLog 操作
      */
     private String action;
-
+    /**
+     * 请求的全路径(相对于项目路径)
+     */
+    private String fullPath;
     /**
      * 日志描述
      */

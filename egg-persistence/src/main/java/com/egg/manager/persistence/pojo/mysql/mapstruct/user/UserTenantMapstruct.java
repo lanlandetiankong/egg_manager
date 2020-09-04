@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
 import org.mapstruct.Mapper;

@@ -1,8 +1,12 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.forms;
 
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldDefinitionMO;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.baseExtend.MyBaseMongoMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormFieldDefinitionMVO;
+import com.egg.manager.persistence.pojo.mongo.transfer.forms.SmartFormFieldDefinitionTransfer;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -13,10 +17,13 @@ import org.mapstruct.factory.Mappers;
  * \* Description:
  * \
  */
-@Mapper(componentModel = "spring")
-public interface SmartFormFieldDefinitionMapstruct {
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        uses = {SmartFormFieldDefinitionTransfer.class})
+public interface SmartFormFieldDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormFieldDefinitionMO,SmartFormFieldDefinitionMVO> {
     SmartFormFieldDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormFieldDefinitionMapstruct.class);
 
 
-    SmartFormFieldDefinitionMO mvo_CopyTo_MO(SmartFormFieldDefinitionMVO mvo);
+    @Mappings({})
+    SmartFormFieldDefinitionMO translateMvoToMo(SmartFormFieldDefinitionMVO mvo);
 }

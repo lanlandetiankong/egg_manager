@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.mysql.mapstruct;
+package com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend;
 
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;

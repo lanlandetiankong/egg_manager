@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.mysql.mapstruct;
+package com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;

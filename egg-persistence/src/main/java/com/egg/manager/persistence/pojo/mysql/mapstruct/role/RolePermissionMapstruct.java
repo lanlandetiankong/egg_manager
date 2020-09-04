@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.role;
 
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 import com.egg.manager.persistence.pojo.mysql.dto.role.RolePermissionDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.role.RolePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RolePermissionVo;
 import org.mapstruct.Mapper;

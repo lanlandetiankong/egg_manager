@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.define;
 
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 import org.mapstruct.Mapper;

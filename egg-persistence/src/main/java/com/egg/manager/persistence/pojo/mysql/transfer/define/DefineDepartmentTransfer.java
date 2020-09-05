@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("DefineDepartmentTransfer")
+@Named("defineDepartmentTransfer")
 public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
     static DefineDepartmentMapstruct defineDepartmentVoMapstruct = DefineDepartmentMapstruct.INSTANCE ;
 

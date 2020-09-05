@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("RoleMenuTransfer")
+@Named("roleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
 
     static RoleMenuMapstruct roleMenuVoMapstruct = RoleMenuMapstruct.INSTANCE ;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("DefineModuleTransfer")
+@Named("defineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
 
     static DefineModuleMapstruct defineModuleVoMapstruct = DefineModuleMapstruct.INSTANCE ;

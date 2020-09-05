@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("DefinePermissionTransfer")
+@Named("definePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
 
     static DefinePermissionMapstruct definePermissionVoMapstruct = DefinePermissionMapstruct.INSTANCE ;

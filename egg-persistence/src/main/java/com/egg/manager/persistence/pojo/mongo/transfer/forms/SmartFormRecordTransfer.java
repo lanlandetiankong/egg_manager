@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * \
  */
 @Component
-@Named("SmartFormRecordTransfer")
+@Named("smartFormRecordTransfer")
 public class SmartFormRecordTransfer {
 
     static SmartFormRecordMapstruct smartFormRecordMapstruct = SmartFormRecordMapstruct.INSTANCE ;

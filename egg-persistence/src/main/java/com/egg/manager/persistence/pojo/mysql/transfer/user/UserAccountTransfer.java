@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-@Named("UserAccountTransfer")
+@Named("userAccountTransfer")
 public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
     static UserAccountMapstruct userAccountVoMapstruct = UserAccountMapstruct.INSTANCE;

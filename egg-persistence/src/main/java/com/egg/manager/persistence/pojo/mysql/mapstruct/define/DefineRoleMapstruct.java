@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",
+@Mapper(
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineRoleTransfer.class}
 )

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@Named("AnnouncementTransfer")
+@Named("announcementTransfer")
 public class AnnouncementTransfer extends MyBaseMysqlTransfer {
     static AnnouncementMapstruct announcementVoMapstruct = AnnouncementMapstruct.INSTANCE;
 

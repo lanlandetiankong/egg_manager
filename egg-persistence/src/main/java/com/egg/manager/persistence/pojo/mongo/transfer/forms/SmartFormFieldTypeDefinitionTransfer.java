@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * \
  */
 @Component
-@Named("SmartFormFieldTypeDefinitionTransfer")
+@Named("smartFormFieldTypeDefinitionTransfer")
 public class SmartFormFieldTypeDefinitionTransfer {
 
     static SmartFormFieldTypeDefinitionMapstruct smartFormFieldTypeDefinitionMapstruct = SmartFormFieldTypeDefinitionMapstruct.INSTANCE ;

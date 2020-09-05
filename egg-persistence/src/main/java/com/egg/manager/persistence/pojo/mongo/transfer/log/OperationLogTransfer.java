@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @since 2020-08-11
  */
 @Component
-@Named("OperationLogTransfer")
+@Named("operationLogTransfer")
 public class OperationLogTransfer {
 
     static OperationLogMapstruct operationLogMapstruct = OperationLogMapstruct.INSTANCE ;

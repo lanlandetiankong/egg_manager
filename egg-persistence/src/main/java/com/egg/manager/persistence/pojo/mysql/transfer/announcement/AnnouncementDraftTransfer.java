@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@Named("AnnouncementDraftTransfer")
+@Named("announcementDraftTransfer")
 public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
     static AnnouncementDraftMapstruct announcementDraftVoMapstruct = AnnouncementDraftMapstruct.INSTANCE;

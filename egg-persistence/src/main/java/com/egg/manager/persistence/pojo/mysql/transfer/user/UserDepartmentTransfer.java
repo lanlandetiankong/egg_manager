@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("UserDepartmentTransfer")
+@Named("userDepartmentTransfer")
 public class UserDepartmentTransfer extends MyBaseMysqlTransfer {
 
     static UserDepartmentMapstruct userDepartmentVoMapstruct = UserDepartmentMapstruct.INSTANCE ;

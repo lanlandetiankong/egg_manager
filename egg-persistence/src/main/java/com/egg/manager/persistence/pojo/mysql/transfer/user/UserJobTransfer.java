@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("UserJobTransfer")
+@Named("userJobTransfer")
 public class UserJobTransfer extends MyBaseMysqlTransfer {
 
     static UserJobMapstruct userJobVoMapstruct = UserJobMapstruct.INSTANCE ;

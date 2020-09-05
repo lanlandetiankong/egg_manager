@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("AnnouncementTagTransfer")
+@Named("announcementTagTransfer")
 public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
 
     static AnnouncementTagMapstruct announcementTagVoMapstruct = AnnouncementTagMapstruct.INSTANCE ;

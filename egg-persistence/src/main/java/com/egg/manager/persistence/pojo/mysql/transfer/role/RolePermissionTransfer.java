@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
-@Named("RolePermissionTransfer")
+@Named("rolePermissionTransfer")
 public class RolePermissionTransfer extends MyBaseMysqlTransfer {
 
     static RolePermissionMapstruct rolePermissionVoMapstruct = RolePermissionMapstruct.INSTANCE;

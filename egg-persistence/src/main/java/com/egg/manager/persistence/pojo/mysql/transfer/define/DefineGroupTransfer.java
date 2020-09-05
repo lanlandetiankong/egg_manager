@@ -9,7 +9,7 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
-@Named("DefineGroupTransfer")
+@Named("defineGroupTransfer")
 public class DefineGroupTransfer extends MyBaseMysqlTransfer {
 
     static DefineGroupMapstruct defineGroupVoMapstruct = DefineGroupMapstruct.INSTANCE ;

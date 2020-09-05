@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("DefineMenuTransfer")
+@Named("defineMenuTransfer")
 public class DefineMenuTransfer extends MyBaseMysqlTransfer {
     static DefineMenuMapstruct defineMenuVoMapstruct = DefineMenuMapstruct.INSTANCE ;
 

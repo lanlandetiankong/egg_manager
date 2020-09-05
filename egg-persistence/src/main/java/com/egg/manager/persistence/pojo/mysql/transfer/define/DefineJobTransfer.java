@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Named("DefineJobTransfer")
+@Named("defineJobTransfer")
 public class DefineJobTransfer extends MyBaseMysqlTransfer {
     static DefineJobMapstruct defineJobVoMapstruct = DefineJobMapstruct.INSTANCE ;
 

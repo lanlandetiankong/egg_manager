@@ -32,7 +32,7 @@ public class MpGenerator {
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
         // .setKotlin(true) 是否生成 kotlin 代码
-        gc.setAuthor("zhouchengjie");
+        gc.setAuthor("zhoucj");
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         // gc.setMapperName("%sDao");
@@ -91,6 +91,11 @@ public class MpGenerator {
         // 【实体】是否为构建者模型（默认 false）
         // public User setName(String name) {this.name = name; return this;}
         // strategy.setEntityBuilderModel(true);
+        //lombok方式
+        strategy.setEntityLombokModel(true);
+        //rest风格
+        strategy.setRestControllerStyle(true);
+        strategy.setSuperControllerClass("com.egg.manager.web.controller.BaseController");
         mpg.setStrategy(strategy);
 
         // 包配置

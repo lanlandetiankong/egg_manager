@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -50,4 +51,13 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
      * @return
      */
     List<DefineDepartment> getDepartmentFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
+
+    /**
+     * 根据用户id查询 所属的部门详情
+     *
+     * @param userAccountId
+     * @param tenantState
+     * @return
+     */
+    DefineDepartment selectOneOfUserBelongDepartment(@Param("userAccountId") String userAccountId, @Param("departmentState") Short departmentState);
 }

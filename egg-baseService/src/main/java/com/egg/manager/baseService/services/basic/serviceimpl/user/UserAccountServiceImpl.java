@@ -20,18 +20,12 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.db.mysql.entity.user.*;
+import com.egg.manager.persistence.db.mysql.mapper.user.*;
 import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
-import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
-import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
@@ -61,6 +55,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     private UserJobMapper userJobMapper ;
     @Autowired
     private UserTenantMapper userTenantMapper ;
+    @Autowired
+    private UserDepartmentMapper userDepartmentMapper ;
 
     @Reference
     private CommonFuncService commonFuncService ;
@@ -185,6 +181,14 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         }   else {
             throw new BusinessException("关联用户与租户失败！创建用户失败！") ;
         }
+
+        //关联 部门
+        if(StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())){
+            UserDepartment userDepartment = UserDepartment.generateSimpleInsertEntity(userAccount.getFid(),userAccountVo.getBelongDepartmentId(),loginUser);
+            userDepartmentMapper.insert(userDepartment);
+        }   else {
+            throw new BusinessException("关联用户与部门失败！创建用户失败！") ;
+        }
         return addCount ;
     }
 
@@ -226,6 +230,20 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             }   else {
                 userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
                 userTenantMapper.updateById(userTenant);
+            }
+        }   else {
+            throw new BusinessException("关联用户与租户失败！更新用户失败！") ;
+        }
+        //关联 部门
+        if(StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())){
+            UserDepartment userDepartmentQuery = UserDepartment.builder().userAccountId(userAccount.getFid()).state(BaseStateEnum.ENABLED.getValue()).build();
+            UserDepartment userDepartment = userDepartmentMapper.selectOne(userDepartmentQuery);
+            if(userDepartment == null){
+                userDepartment = UserDepartment.generateSimpleInsertEntity(userAccount.getFid(),userAccountVo.getBelongDepartmentId(),loginUser);
+                userDepartmentMapper.insert(userDepartment);
+            }   else {
+                userDepartment.setDefineDepartmentId(userAccountVo.getBelongDepartmentId());
+                userDepartmentMapper.updateById(userDepartment);
             }
         }   else {
             throw new BusinessException("关联用户与租户失败！更新用户失败！") ;

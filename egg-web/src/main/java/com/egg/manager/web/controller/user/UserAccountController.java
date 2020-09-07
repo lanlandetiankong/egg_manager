@@ -12,20 +12,24 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
+import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineRoleTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
@@ -69,6 +73,8 @@ public class UserAccountController extends BaseController {
     private DefineJobMapper defineJobMapper ;
     @Autowired
     private DefineTenantMapper defineTenantMapper ;
+    @Autowired
+    private DefineDepartmentMapper defineDepartmentMapper ;
 
     @Autowired
     private UserAccountService userAccountService ;
@@ -168,6 +174,13 @@ public class UserAccountController extends BaseController {
             DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongTenant != null){
                 userAccountVo.setBelongTenantId(belongTenant.getFid());
+                userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
+            }
+            //取得 所属的 租户定义
+            DefineDepartment belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(),BaseStateEnum.ENABLED.getValue());
+            if(belongDepartment != null){
+                userAccountVo.setBelongDepartmentId(belongDepartment.getFid());
+                userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
             }
             result.setBean(userAccountVo);
             dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);

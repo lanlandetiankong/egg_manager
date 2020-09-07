@@ -1,7 +1,9 @@
 package com.egg.manager.persistence.pojo.mysql.vo.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -77,7 +79,14 @@ public class UserAccountVo extends MyBaseMysqlVo {
      */
     private DefineTenantVo belongTenant;
 
-
+    /**
+     * 所属部门-id
+     */
+    private String belongDepartmentId ;
+    /**
+     * 所属部门-vo
+     */
+    private DefineDepartmentVo belongDepartment ;
 
 
 

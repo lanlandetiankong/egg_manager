@@ -33,7 +33,7 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
 
 
     /**
-     * 根据用户id查询 租户详情
+     * 根据用户id查询 所属的租户详情
      *
      * @param userAccountId
      * @param tenantState

@@ -144,6 +144,20 @@
     </select>
 
 
+    <select id="selectOneOfUserBelongDepartment" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edd" />
+        </include>
+        FROM em_define_department edd
+        LEFT  JOIN  em_user_department eud
+        ON edd.fid = eud.define_department_id
+        WHERE eud.user_account_id = #{userAccountId}
+        <if test="departmentState != null" >
+            AND edd.state = #{departmentState}
+        </if>
+    </select>
+
     <update id="batchFakeDelByIds" >
         UPDATE em_define_department
         SET state = -1

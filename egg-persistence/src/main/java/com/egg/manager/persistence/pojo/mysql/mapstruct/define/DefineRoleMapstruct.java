@@ -23,7 +23,7 @@ public interface DefineRoleMapstruct extends MyBaseMysqlMapstruct<DefineRole, De
     DefineRole transferVoToEntity(DefineRoleVo vo);
 
     @Mappings({
-            @Mapping(target = "typeStr", source = "type",qualifiedByName = "handleDefineRoleTypeGetLabel"),
+            @Mapping(target = "typeStr", expression = "java(handleDefineRoleTypeGetLabel(entity.getType()))"),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })

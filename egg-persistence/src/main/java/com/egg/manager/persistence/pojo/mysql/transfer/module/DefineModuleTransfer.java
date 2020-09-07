@@ -66,16 +66,4 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-
-    @Named("handleDefineModuleTypeGetLabel")
-    public String handleDefineModuleTypeGetLabel(Integer type){
-        if (type != null) {
-            DefineModuleTypeEnum typeEnum = DefineModuleTypeEnum.doGetEnumByValue(type);
-            if (typeEnum != null) {
-                return typeEnum.getLabel();
-            }
-        }
-        return "" ;
-    }
-
 }

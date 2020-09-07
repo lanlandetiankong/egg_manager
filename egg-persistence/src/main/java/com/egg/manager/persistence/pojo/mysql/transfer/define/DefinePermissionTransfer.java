@@ -77,32 +77,4 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * 类型label
-     * @param value
-     * @return
-     */
-    @Named("doGetLabelOfDefinePermissionTypeEnum")
-    public String doGetLabelOfDefinePermissionTypeEnum(Integer value){
-        if(value == null){
-            return "";
-        }
-        DefinePermissionTypeEnum typeEnum = DefinePermissionTypeEnum.doGetEnumByValue(value);
-        return typeEnum == null ? "" : typeEnum.getLabel() ;
-    }
-
-
-
 }

@@ -72,15 +72,4 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-
-    @Named("handleDefineMenuUrlJumpTypeGetLabel")
-    public String handleDefineMenuUrlJumpTypeGetLabel(Integer type){
-        if (type != null) {
-            DefineMenuUrlJumpTypeEnum typeEnum = DefineMenuUrlJumpTypeEnum.doGetEnumByValue(type);
-            if (typeEnum != null) {
-                return typeEnum.getLabel();
-            }
-        }
-        return "" ;
-    }
 }

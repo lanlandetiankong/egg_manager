@@ -65,14 +65,4 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-
-    @Named("handleDefineJobTypeGetGetLabel")
-    public String handleDefineJobTypeGetGetLabel(Integer type){
-        DefineJobTypeEnum defineJobTypeEnum = DefineJobTypeEnum.doGetEnumByValue(type);
-        if (defineJobTypeEnum != null) {
-            return defineJobTypeEnum.getLabel();
-        }
-        return "" ;
-    }
-
 }

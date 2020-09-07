@@ -66,15 +66,4 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         }
     }
 
-
-    @Named("handleDefineRoleTypeGetLabel")
-    public String handleDefineRoleTypeGetLabel(Integer type){
-        if (type != null) {
-            DefineRoleTypeEnum typeEnum = DefineRoleTypeEnum.doGetEnumByValue(type);
-            if (typeEnum != null) {
-                return typeEnum.getLabel();
-            }
-        }
-        return "";
-    }
 }

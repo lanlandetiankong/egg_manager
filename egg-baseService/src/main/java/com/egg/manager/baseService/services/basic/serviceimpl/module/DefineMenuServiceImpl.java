@@ -49,6 +49,9 @@ import java.util.*;
 @Service(interfaceClass = DefineMenuService.class)
 public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMenu> implements DefineMenuService {
     @Autowired
+    private DefineMenuTransfer defineMenuTransfer ;
+
+    @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
     @Autowired
@@ -243,7 +246,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds,defineMenuEntityWrapper) ;
-        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenus));
+        result.setResultList(defineMenuTransfer.transferEntityToVoList(defineMenus));
         return result ;
     }
 
@@ -261,7 +264,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.setResultList(defineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result ;
     }
 
@@ -281,7 +284,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date() ;
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         //
         if(StringUtils.isBlank(parentId)){
@@ -337,7 +340,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         Integer changeCount = 0;
         Date now = new Date() ;
         defineMenuVo.setUpdateTime(now);
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
         String parentId = defineMenu.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineMenu parentMenu =defineMenuMapper.selectById(parentId);

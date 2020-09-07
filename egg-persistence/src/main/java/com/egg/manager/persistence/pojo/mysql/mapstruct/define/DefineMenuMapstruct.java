@@ -24,7 +24,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu,Def
     DefineMenu transferVoToEntity(DefineMenuVo vo);
 
     @Mappings({
-            @Mapping(target = "urlJumpTypeStr",source = "urlJumpType",qualifiedByName = "handleDefineMenuUrlJumpTypeGetLabel"),
+            @Mapping(target = "urlJumpTypeStr",expression = "java(handleDefineMenuUrlJumpTypeGetLabel(entity.getUrlJumpType()))"),
             @Mapping(target = "parentMenu",ignore = true),
             @Mapping(target = "uploadExcelBeanList",ignore = true),
             @Mapping(target = "createUser", ignore = true),
@@ -33,7 +33,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu,Def
     DefineMenuVo transferEntityToVo(DefineMenu entity);
 
     @Mappings({
-            @Mapping(target = "urlJumpTypeStr",source = "urlJumpType",qualifiedByName = "handleDefineMenuUrlJumpTypeGetLabel"),
+            @Mapping(target = "urlJumpTypeStr",expression = "java(handleDefineMenuUrlJumpTypeGetLabel(dto.getUrlJumpType()))"),
             @Mapping(target = "parentMenu",expression = "java(transferDtoToVo(dto.getParentMenuDto()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

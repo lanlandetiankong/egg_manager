@@ -23,7 +23,7 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
     DefineModule transferVoToEntity(DefineModuleVo vo);
 
     @Mappings({
-            @Mapping(target = "typeStr",source = "type",qualifiedByName = "handleDefineModuleTypeGetLabel"),
+            @Mapping(target = "typeStr",expression = "java(handleDefineModuleTypeGetLabel(entity.getType()))"),
             @Mapping(target = "iconVal",source = "icon"),
             @Mapping(target = "styleVal",source = "style"),
             @Mapping(target = "typeVal",source = "type"),
@@ -33,7 +33,7 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
     DefineModuleVo transferEntityToVo(DefineModule entity);
 
     @Mappings({
-            @Mapping(target = "typeStr",source = "type",qualifiedByName = "handleDefineModuleTypeGetLabel"),
+            @Mapping(target = "typeStr",expression = "java(handleDefineModuleTypeGetLabel(dto.getType()))"),
             @Mapping(target = "iconVal",source = "icon"),
             @Mapping(target = "styleVal",source = "style"),
             @Mapping(target = "typeVal",source = "type"),

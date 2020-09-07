@@ -82,42 +82,6 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
     }
 
 
-
-
-
-
-    /**
-     * tagIds 转 json字符串
-     * @param tagIds
-     * @return
-     */
-    @Named("tagIdListToJsonString")
-    public String tagIdListToJsonString(List<String> tagIds){
-        return JSON.toJSONString(tagIds);
-    }
-
-
-    /**
-     * tagIds 转 json字符串
-     * @param tagIds
-     * @return
-     */
-    @Named("tagIdJsonStringToList")
-    public List<String>  tagIdJsonStringToList(String tagIds){
-        List<String> tagList = null ;
-        if (StringUtils.isNotBlank(tagIds)) {
-            try {
-                tagList = JSONArray.parseArray(tagIds, String.class);
-                if (tagList != null && tagList.isEmpty() == false) {
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return tagList ;
-    }
-
     /**
      * 设置tag的相关信息
      * @param tagIds

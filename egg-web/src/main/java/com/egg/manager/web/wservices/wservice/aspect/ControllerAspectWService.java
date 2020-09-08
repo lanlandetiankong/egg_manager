@@ -1,6 +1,7 @@
 package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMO;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
 import org.aspectj.lang.JoinPoint;
@@ -40,6 +41,15 @@ public interface ControllerAspectWService {
      * @param request
      */
     void dealSetValToOperationLog(PcWebOperationLogMO pcWebOperationLogMO, JoinPoint joinPoint, HttpServletRequest request);
+
+
+    /**
+     * 设置一些值到 PcWebLoginLogMO
+     * @param pcWebLoginLogMO
+     * @param joinPoint
+     * @param request
+     */
+    void dealSetValToLoginLog(PcWebLoginLogMO pcWebLoginLogMO, JoinPoint joinPoint, HttpServletRequest request);
 
 
     /**

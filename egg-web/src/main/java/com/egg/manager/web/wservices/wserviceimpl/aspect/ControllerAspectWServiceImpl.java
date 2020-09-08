@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMO;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
@@ -193,7 +194,69 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
 
         }
     }
+    /**
+     * 取得 请求的参数
+     * @param joinPoint
+     * @return JSONObject
+     */
+    @Override
+    public void dealSetValToLoginLog(PcWebLoginLogMO pcWebLoginLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
+        try{
+            if(StringUtils.isBlank(pcWebLoginLogMO.getFid())){
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+            }
+            if(pcWebLoginLogMO.getStatus() == null){
+                pcWebLoginLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
+            }
+            //请求方法的参数
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
+            pcWebLoginLogMO.setActionArgs(argJsonObj.toJSONString());
+            Signature signature = joinPoint.getSignature() ;
+            String methodName = signature.getName();
+            pcWebLoginLogMO.setAspectKind(joinPoint.getKind());
+            pcWebLoginLogMO.setClassName(signature.getDeclaringTypeName());
+            pcWebLoginLogMO.setMethodName(methodName);
+            pcWebLoginLogMO.setSignatureLong(signature.toLongString());
+            Method method = this.gainReqMethod(signature);
+            if(method != null){
+                pcWebLoginLogMO.setReturnTypeName(method.getReturnType().getName());
+                pcWebLoginLogMO.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
+                PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+                if(pcWebQueryLog != null){
+                    pcWebLoginLogMO.setAction(pcWebQueryLog.action());
+                    pcWebLoginLogMO.setLogDescription(pcWebQueryLog.description());
+                    //请求的全路径(代码中取得)
+                    pcWebLoginLogMO.setFullPath(pcWebQueryLog.fullPath());
+                }
+            }
+            if(request != null){
+                //请求路径
+                pcWebLoginLogMO.setRequestUri(request.getRequestURI());
+                pcWebLoginLogMO.setRequestUrl(request.getRequestURL().toString());
+                //取得 请求头的token信息
+                UserAccountToken userAccountToken = commonFuncService.gainUserAccountTokenBeanByRequest(request,false);
+                if(userAccountToken != null){
+                    pcWebLoginLogMO.setTokenBean(JSONObject.toJSONString(userAccountToken));
+                    String userAccountId = userAccountToken.getUserAccountId() ;
+                    pcWebLoginLogMO.setUserAccountId(userAccountId);
+                    pcWebLoginLogMO.setCreateUserId(userAccountId);
+                    pcWebLoginLogMO.setLastModifyerId(userAccountId);
+                }
+                //取得 请求头bean
+                RequestHeaderBean requestHeaderBean = commonFuncService.gainRequestHeaderBeanByRequest(request);
+                if(requestHeaderBean != null){
+                    pcWebLoginLogMO.setHeaders(JSONObject.toJSONString(requestHeaderBean));
+                    pcWebLoginLogMO.setIpAddr(request.getRemoteAddr());
+                }
+            }
 
+            Date now = new Date() ;
+            pcWebLoginLogMO.setCreateTime(now);
+            pcWebLoginLogMO.setLastModifiedDate(now);
+        }   catch (Exception e){
+
+        }
+    }
 
 
 

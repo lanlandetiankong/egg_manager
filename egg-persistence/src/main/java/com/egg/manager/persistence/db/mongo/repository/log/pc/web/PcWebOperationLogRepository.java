@@ -5,7 +5,7 @@ import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * MongoDb-PcWebQueryLogMO 表单定义-dao
+ * MongoDb-PcWebOperationLogMO 表单定义-dao
  */
 @Repository
 public interface PcWebOperationLogRepository extends MyBaseMongoRepository<PcWebOperationLogMO, String> {

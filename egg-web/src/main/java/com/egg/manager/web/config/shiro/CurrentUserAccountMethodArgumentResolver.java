@@ -1,7 +1,7 @@
 package com.egg.manager.web.config.shiro;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.exception.MyUnauthorizedException;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;

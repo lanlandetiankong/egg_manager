@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.forms.smartForm;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
-import com.egg.manager.common.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;

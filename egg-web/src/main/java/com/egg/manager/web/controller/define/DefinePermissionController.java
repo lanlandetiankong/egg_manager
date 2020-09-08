@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.CurrentLoginUser;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.annotation.log.OperLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;

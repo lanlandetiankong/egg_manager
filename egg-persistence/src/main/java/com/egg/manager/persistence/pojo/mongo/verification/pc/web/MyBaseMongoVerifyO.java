@@ -1,4 +1,4 @@
-package com.egg.manager.web.verification.mongodb;
+package com.egg.manager.persistence.pojo.mongo.verification.pc.web;
 
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 
@@ -10,7 +10,6 @@ import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
  * \* Description:
  * \
  */
-public abstract class MyBaseVerifyO<T extends MyBaseModelMO> {
+public abstract class MyBaseMongoVerifyO<T extends MyBaseModelMO> {
 
-    //public abstract T doTransToMO() ;
 }

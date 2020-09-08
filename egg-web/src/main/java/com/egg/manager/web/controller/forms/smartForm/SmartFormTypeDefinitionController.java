@@ -15,10 +15,10 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.web.controller.BaseController;
-import com.egg.manager.web.verification.mongodb.VerifyGroupOfCreate;
-import com.egg.manager.web.verification.mongodb.VerifyGroupOfDefault;
-import com.egg.manager.web.verification.mongodb.VerifyGroupOfUpdate;
-import com.egg.manager.web.verification.mongodb.forms.smartForm.SmartFormTypeDefinitionVerifyO;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfCreate;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfUpdate;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartForm.SmartFormTypeDefinitionMongoVerifyO;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -125,7 +125,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @ApiOperation(value = "新增->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<SmartFormTypeDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                                 @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionVerifyO formTypeDefinitionVerifyO,
+                                                                 @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                  SmartFormTypeDefinitionMO formTypeDefinitionMO) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
@@ -149,7 +149,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @ApiOperation(value = "更新->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult<SmartFormTypeDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                                    @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionVerifyO formTypeDefinitionVerifyO,
+                                                                    @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMO formTypeDefinitionMO) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         Integer count = 0;

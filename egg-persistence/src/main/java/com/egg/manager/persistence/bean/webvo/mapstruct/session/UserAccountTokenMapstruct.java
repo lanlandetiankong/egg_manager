@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.bean.webvo.mapstruct.session;
 
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

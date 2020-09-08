@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.announcement;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;

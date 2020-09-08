@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.db.mongo.repository.forms;
 
-import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
+import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.define;
 
-import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefineJobMapstruct;

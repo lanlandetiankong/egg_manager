@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.bean.tree.common;
 
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.bean.tree.MyBaseTree;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import lombok.*;
 
 import java.util.HashMap;

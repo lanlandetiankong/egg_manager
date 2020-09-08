@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.define;
 
 
-import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefineRoleMapstruct;

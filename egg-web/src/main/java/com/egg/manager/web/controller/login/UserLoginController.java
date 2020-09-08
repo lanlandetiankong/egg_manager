@@ -2,7 +2,6 @@ package com.egg.manager.web.controller.login;
 
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
-import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.common.util.jwt.JWTUtil;

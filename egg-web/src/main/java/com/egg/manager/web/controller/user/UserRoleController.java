@@ -1,18 +1,18 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserRoleService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;

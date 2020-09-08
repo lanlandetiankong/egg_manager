@@ -1,11 +1,11 @@
 package com.egg.manager.web.controller.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -13,9 +13,9 @@ import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;

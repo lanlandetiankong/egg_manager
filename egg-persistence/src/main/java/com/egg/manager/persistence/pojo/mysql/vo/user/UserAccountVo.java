@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.vo.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;

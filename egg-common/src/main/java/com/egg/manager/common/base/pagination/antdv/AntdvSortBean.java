@@ -1,9 +1,7 @@
 package com.egg.manager.common.base.pagination.antdv;
 
 import com.egg.manager.common.base.pagination.MyBasePagination;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * \* note:

@@ -1,14 +1,14 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.user.UserJobService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;

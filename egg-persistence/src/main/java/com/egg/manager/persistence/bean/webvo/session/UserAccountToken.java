@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.bean.webvo.session;
 
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.webvo.MyBaseWebVo;
 import com.egg.manager.persistence.bean.webvo.mapstruct.session.UserAccountTokenMapstruct;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

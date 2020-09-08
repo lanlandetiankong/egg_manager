@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.define;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefineMenuMapstruct;

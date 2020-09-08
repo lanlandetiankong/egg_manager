@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.bean.webvo.login;
 
+import com.egg.manager.persistence.bean.webvo.MyBaseWebVo;
 import com.egg.manager.persistence.bean.webvo.mapstruct.login.LoginAccountMapstruct;
 import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
-import com.egg.manager.persistence.bean.webvo.MyBaseWebVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

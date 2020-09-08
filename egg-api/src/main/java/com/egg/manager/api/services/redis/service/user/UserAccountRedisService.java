@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.redis.service.user;
 
 import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 
 import java.util.List;
 import java.util.Set;

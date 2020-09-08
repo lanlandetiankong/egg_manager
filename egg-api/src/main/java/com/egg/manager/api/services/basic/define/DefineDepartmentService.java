@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.define;
 
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefinePermissionMapstruct;

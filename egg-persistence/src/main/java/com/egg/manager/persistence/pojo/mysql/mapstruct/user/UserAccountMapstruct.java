@@ -2,9 +2,9 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.user;
 
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.common.excel.introduce.user.UserAccountXlsInModel;
+import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.baseExtend.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;

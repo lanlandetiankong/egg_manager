@@ -1,17 +1,17 @@
 package com.egg.manager.web.controller.module;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;

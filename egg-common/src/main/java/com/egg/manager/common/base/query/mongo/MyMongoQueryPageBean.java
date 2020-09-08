@@ -1,7 +1,6 @@
 package com.egg.manager.common.base.query.mongo;
 
 import com.egg.manager.common.base.query.MyBaseQueryBean;
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;

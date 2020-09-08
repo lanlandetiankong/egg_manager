@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.bean.webvo.mapstruct.login;
 
-import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
+import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

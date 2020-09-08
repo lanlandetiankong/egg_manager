@@ -46,7 +46,7 @@ public class UserLoginController extends BaseController {
             @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的相关信息", required = true,dataTypeClass= LoginAccountVo.class),
     })
     @ShiroPass
-    @PostMapping(value = "/account")
+    @PostMapping(value = "/byAccountForm")
     public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{

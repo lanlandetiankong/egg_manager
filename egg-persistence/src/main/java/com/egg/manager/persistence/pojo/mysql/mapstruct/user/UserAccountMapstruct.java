@@ -27,6 +27,8 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,U
             @Mapping(target = "uploadImgBean", ignore = true),
             @Mapping(target = "belongTenantId", ignore = true),
             @Mapping(target = "belongTenant", ignore = true),
+            @Mapping(target = "belongDepartmentId", ignore = true),
+            @Mapping(target = "belongDepartment", ignore = true),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })

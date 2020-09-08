@@ -2,16 +2,16 @@ package com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.log;
 
 import com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMService;
 import com.egg.manager.baseService.services.mongodb.mservices.serviceimpl.MyBaseMongoServiceImpl;
-import com.egg.manager.persistence.db.mongo.repository.log.OperationLogRepository;
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
+import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * MongoDb-OperationLogMO 操作日志-MService
+ * MongoDb-PcWebQueryLogMO 操作日志-MService
  */
 //@Service(interfaceClass = OperationLogMService.class)
     @Service
-public class OperationLogMServiceImpl extends MyBaseMongoServiceImpl<OperationLogRepository, OperationLogMO,String>
+public class OperationLogMServiceImpl extends MyBaseMongoServiceImpl<PcWebQueryLogRepository, PcWebQueryLogMO,String>
         implements OperationLogMService {
 
 

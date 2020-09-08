@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.db.mongo.repositoryImpl.log;
 
-import com.egg.manager.persistence.db.mongo.repository.log.OperationLogRepository;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
+import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
 import com.egg.manager.persistence.db.mongo.repositoryImpl.MyBaseMongoRepositoryImpl;
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @since 2020-07-19
  */
 @Repository
-public class OperationLogRepositoryImpl extends MyBaseMongoRepositoryImpl<OperationLogMO, String> implements OperationLogRepository {
+public class PcWebQueryLogRepositoryImpl extends MyBaseMongoRepositoryImpl<PcWebQueryLogMO, String> implements PcWebQueryLogRepository {
 
 
 }

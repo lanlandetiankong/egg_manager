@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller;
 
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/role/role_menus")
 public class CommonController extends BaseController {
 
-    @OperLog(action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉",fullPath = "/role/role_menus/getEnumListByKey")
+    @PcWebQueryLog(action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉",fullPath = "/role/role_menus/getEnumListByKey")
     @ApiOperation(value = "根据枚举key查询对应枚举下拉", notes = "根据枚举key查询对应枚举下拉", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)

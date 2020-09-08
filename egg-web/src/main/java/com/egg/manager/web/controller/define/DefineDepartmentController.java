@@ -2,8 +2,9 @@ package com.egg.manager.web.controller.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -53,7 +54,7 @@ public class DefineDepartmentController extends BaseController{
 
 
 
-    @OperLog(action="查询部门定义信息-Dto列表",description = "查询部门定义信息-Dto列表",fullPath = "/define/define_department/getAllDefineDepartmentDtos")
+    @PcWebQueryLog(action="查询部门定义信息-Dto列表",description = "查询部门定义信息-Dto列表",fullPath = "/define/define_department/getAllDefineDepartmentDtos")
     @ApiOperation(value = "查询部门定义信息-Dto列表", notes = "查询部门定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -82,7 +83,7 @@ public class DefineDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询部门定义信息",description = "根据部门定义id查询部门定义信息",fullPath = "/define/define_department/getDefineDepartmentById")
+    @PcWebQueryLog(action="查询部门定义信息",description = "根据部门定义id查询部门定义信息",fullPath = "/define/define_department/getDefineDepartmentById")
     @PostMapping(value = "/getDefineDepartmentById")
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
@@ -96,7 +97,7 @@ public class DefineDepartmentController extends BaseController{
         return  result;
     }
 
-    @OperLog(action="查询部门TreeSelect",description = "查询部门TreeSelect",fullPath = "/define/define_department/getAllDepartmentTreeSelect")
+    @PcWebQueryLog(action="查询部门TreeSelect",description = "查询部门TreeSelect",fullPath = "/define/define_department/getAllDepartmentTreeSelect")
     @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
     public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect() {
@@ -113,7 +114,7 @@ public class DefineDepartmentController extends BaseController{
         return result ;
     }
 
-    @OperLog(action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)",fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
+    @PcWebQueryLog(action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)",fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
     @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
     public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId) {
@@ -125,7 +126,7 @@ public class DefineDepartmentController extends BaseController{
     }
     
     @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增部门定义",description = "表单方式新增部门定义",fullPath = "/define/define_department/doAddDefineDepartment")
+    @PcWebOperationLog(action="新增部门定义",description = "表单方式新增部门定义",fullPath = "/define/define_department/doAddDefineDepartment")
     @PostMapping(value = "/doAddDefineDepartment")
     public MyCommonResult<DefineDepartmentVo> doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser){
@@ -147,7 +148,7 @@ public class DefineDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新部门定义",description = "表单方式更新部门定义",fullPath = "/define/define_department/doUpdateDefineDepartment")
+    @PcWebOperationLog(action="更新部门定义",description = "表单方式更新部门定义",fullPath = "/define/define_department/doUpdateDefineDepartment")
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser){
@@ -168,7 +169,7 @@ public class DefineDepartmentController extends BaseController{
     }
 
 
-    @OperLog(action="批量删除部门定义",description = "根据部门id批量删除部门定义",fullPath = "/define/define_department/batchDelDefineDepartmentByIds")
+    @PcWebOperationLog(action="批量删除部门定义",description = "根据部门id批量删除部门定义",fullPath = "/define/define_department/batchDelDefineDepartmentByIds")
     @ApiOperation(value = "批量删除部门定义", notes = "根据部门id批量删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的部门定义id数组", required = true,dataTypeClass=String[].class),
@@ -190,7 +191,7 @@ public class DefineDepartmentController extends BaseController{
     }
 
 
-    @OperLog(action="删除部门定义",description = "根据部门id删除部门定义",fullPath = "/define/define_department/delOneDefineDepartmentById")
+    @PcWebOperationLog(action="删除部门定义",description = "根据部门id删除部门定义",fullPath = "/define/define_department/delOneDefineDepartmentById")
     @ApiOperation(value = "删除部门定义", notes = "根据部门id删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的部门定义id", required = true,dataTypeClass=String.class),

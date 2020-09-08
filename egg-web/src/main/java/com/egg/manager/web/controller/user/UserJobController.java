@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -47,7 +47,7 @@ public class UserJobController extends BaseController{
     private UserJobService userJobService ;
 
 
-    @OperLog(action="查询用户职务列表",description = "查询用户职务列表",fullPath = "/user/user_job/getAllUserJobs")
+    @PcWebQueryLog(action="查询用户职务列表",description = "查询用户职务列表",fullPath = "/user/user_job/getAllUserJobs")
     @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -75,7 +75,7 @@ public class UserJobController extends BaseController{
 
 
     @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息",fullPath = "/user/user_job/getUserJobById")
+    @PcWebQueryLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息",fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;

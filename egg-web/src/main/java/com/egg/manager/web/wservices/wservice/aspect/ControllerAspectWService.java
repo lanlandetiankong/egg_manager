@@ -1,7 +1,8 @@
 package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 
@@ -25,14 +26,21 @@ public interface ControllerAspectWService {
      */
     JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint);
 
-
     /**
-     * 设置一些值到OperationLogMO
-     * @param operationLogMO
+     * 设置一些值到 PcWebQueryLogMO
+     * @param pcWebQueryLogMO
      * @param joinPoint
      * @param request
      */
-    void dealSetValToOperationLog(OperationLogMO operationLogMO, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToQueryLog(PcWebQueryLogMO pcWebQueryLogMO, JoinPoint joinPoint, HttpServletRequest request);
+    /**
+     * 设置一些值到 PcWebOperationLogMO
+     * @param pcWebOperationLogMO
+     * @param joinPoint
+     * @param request
+     */
+    void dealSetValToOperationLog(PcWebOperationLogMO pcWebOperationLogMO, JoinPoint joinPoint, HttpServletRequest request);
+
 
     /**
      * 取得当前调用的方法

@@ -1,7 +1,8 @@
 package com.egg.manager.web.controller.user;
 
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.api.services.basic.CommonFuncService;
@@ -82,7 +83,7 @@ public class UserAccountController extends BaseController {
     private CommonFuncService commonFuncService ;
 
 
-    @OperLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/user_account/login/account")
+    @PcWebOperationLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/user_account/login/account")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的信息", required = true,dataTypeClass=LoginAccountVo.class),
@@ -134,7 +135,7 @@ public class UserAccountController extends BaseController {
 
 
     @RequiresRoles(value = {"Root","SuperRoot"},logical= Logical.OR)
-    @OperLog(action="查询用户信息-Dto列表",description = "查询用户信息-Dto列表",fullPath = "/user/user_account/getAllUserAccountDtos")
+    @PcWebOperationLog(action="查询用户信息-Dto列表",description = "查询用户信息-Dto列表",fullPath = "/user/user_account/getAllUserAccountDtos")
     @ApiOperation(value = "查询用户信息-Dto列表", notes = "查询用户信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -163,7 +164,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户信息",description = "根据用户id查询用户信息",fullPath = "/user/user_account/getUserAccountById")
+    @PcWebQueryLog(action="查询用户信息",description = "根据用户id查询用户信息",fullPath = "/user/user_account/getUserAccountById")
     @PostMapping(value = "/getUserAccountById")
     public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
@@ -191,7 +192,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色",fullPath = "/user/user_account/getAllRoleByUserAccountId")
+    @PcWebQueryLog(action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色",fullPath = "/user/user_account/getAllRoleByUserAccountId")
     @PostMapping(value = "/getAllRoleByUserAccountId")
     public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
@@ -206,7 +207,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限",fullPath = "/user/user_account/getAllPermissionByUserAccountId")
+    @PcWebQueryLog(action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限",fullPath = "/user/user_account/getAllPermissionByUserAccountId")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
     public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
                                                                                 @CurrentLoginUser UserAccount loginUser) {
@@ -223,7 +224,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务",fullPath = "/user/user_account/getAllJobByUserAccountId")
+    @PcWebQueryLog(action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务",fullPath = "/user/user_account/getAllJobByUserAccountId")
     @PostMapping(value = "/getAllJobByUserAccountId")
     public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
@@ -239,7 +240,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增用户",description = "表单方式新增用户",fullPath = "/user/user_account/doAddUserAccount")
+    @PcWebOperationLog(action="新增用户",description = "表单方式新增用户",fullPath = "/user/user_account/doAddUserAccount")
     @PostMapping(value = "/doAddUserAccount")
     public MyCommonResult doAddUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -261,7 +262,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新用户信息",description = "表单方式更新用户信息",fullPath = "/user/user_account/doUpdateUserAccount")
+    @PcWebOperationLog(action="更新用户信息",description = "表单方式更新用户信息",fullPath = "/user/user_account/doUpdateUserAccount")
     @PostMapping(value = "/doUpdateUserAccount")
     public MyCommonResult doUpdateUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -282,7 +283,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @OperLog(action="批量删除用户",description = "根据用户id批量删除用户",fullPath = "/user/user_account/batchDelUserAccountByIds")
+    @PcWebOperationLog(action="批量删除用户",description = "根据用户id批量删除用户",fullPath = "/user/user_account/batchDelUserAccountByIds")
     @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的用户id数组", required = true,dataTypeClass=String[].class),
@@ -305,7 +306,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @OperLog(action="删除用户",description = "根据用户id删除用户",fullPath = "/user/user_account/delOneUserAccountById")
+    @PcWebOperationLog(action="删除用户",description = "根据用户id删除用户",fullPath = "/user/user_account/delOneUserAccountById")
     @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的用户id", required = true,dataTypeClass=String.class),
@@ -328,7 +329,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="修改用户锁定状态",description = "根据用户id批量锁定或解锁用户",fullPath = "/user/user_account/batchLockUserAccountByIds")
+    @PcWebOperationLog(action="修改用户锁定状态",description = "根据用户id批量锁定或解锁用户",fullPath = "/user/user_account/batchLockUserAccountByIds")
     @PostMapping(value = "/batchLockUserAccountByIds")
     public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request,String[] lockIds,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -351,7 +352,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="修改用户锁定状态",description = "根据用户id锁定或解锁用户",fullPath = "/user/user_account/lockOneUserAccountById")
+    @PcWebOperationLog(action="修改用户锁定状态",description = "根据用户id锁定或解锁用户",fullPath = "/user/user_account/lockOneUserAccountById")
     @PostMapping(value = "/lockOneUserAccountById")
     public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, String lockId,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -373,7 +374,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="用户分配角色",description = "为用户分配角色",fullPath = "/user/user_account/grantRoleToUser")
+    @PcWebOperationLog(action="用户分配角色",description = "为用户分配角色",fullPath = "/user/user_account/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request,String userAccountId,String[] checkIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -394,7 +395,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="用户分配职务",description = "为用户分配职务",fullPath = "/user/user_account/grantJobToUser")
+    @PcWebOperationLog(action="用户分配职务",description = "为用户分配职务",fullPath = "/user/user_account/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request,String userAccountId,String[] checkIds,
                                            @CurrentLoginUser UserAccount loginUser){

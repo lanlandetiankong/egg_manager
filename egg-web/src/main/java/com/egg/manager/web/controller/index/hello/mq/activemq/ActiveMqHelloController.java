@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.index.hello.mq.activemq;
 
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,14 +35,14 @@ public class ActiveMqHelloController extends BaseController {
     @Autowired
     private Topic topic;
 
-    @OperLog( action = "测试ActiveMq-Queue",fullPath = "/index/hello/mq/activemq/queue/test",flag = false)
+    @PcWebOperationLog( action = "测试ActiveMq-Queue",fullPath = "/index/hello/mq/activemq/queue/test",flag = false)
     @ApiOperation(value = "测试ActiveMq-Queue",response = String.class, httpMethod = "POST")
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
         this.sendMessage(this.queue, str);
         return "success";
     }
-    @OperLog( action = "测试ActiveMq-Topic",fullPath = "/index/hello/mq/activemq/topic/test",flag = false)
+    @PcWebOperationLog( action = "测试ActiveMq-Topic",fullPath = "/index/hello/mq/activemq/topic/test",flag = false)
     @ApiOperation(value = "测试ActiveMq-Topic",response = String.class, httpMethod = "POST")
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {

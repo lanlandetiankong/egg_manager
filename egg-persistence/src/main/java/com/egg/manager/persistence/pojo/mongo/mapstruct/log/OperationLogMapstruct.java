@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.log;
 
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.baseExtend.MyBaseMongoMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.log.OperationLogMVO;
 import com.egg.manager.persistence.pojo.mongo.transfer.log.OperationLogTransfer;
@@ -20,10 +20,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {OperationLogTransfer.class})
-public interface OperationLogMapstruct extends MyBaseMongoMapstruct<OperationLogMO, OperationLogMVO> {
+public interface OperationLogMapstruct extends MyBaseMongoMapstruct<PcWebQueryLogMO, OperationLogMVO> {
 
     OperationLogMapstruct INSTANCE = Mappers.getMapper(OperationLogMapstruct.class);
 
     @Mappings({})
-    OperationLogMO translateMvoToMo(OperationLogMVO mvo);
+    PcWebQueryLogMO translateMvoToMo(OperationLogMVO mvo);
 }

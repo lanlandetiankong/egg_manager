@@ -3,14 +3,17 @@ package com.egg.manager.web.config.aspect;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
+import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
 import com.egg.manager.common.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mongo.repository.log.OperationLogRepository;
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -26,7 +29,10 @@ import java.lang.reflect.Method;
 @Configuration
 public class ControllerAspect {
     @Autowired
-    private OperationLogRepository operationLogRepository;
+    private PcWebQueryLogRepository pcWebQueryLogRepository;
+
+    @Autowired
+    private PcWebOperationLogRepository pcWebOperationLogRepository;
     @Autowired
     private ControllerAspectWService controllerAspectWService;
     @Reference
@@ -40,21 +46,39 @@ public class ControllerAspect {
     @Before(value = "aspect()")
     public void beforeController(JoinPoint joinPoint) throws Throwable {
         Method method = controllerAspectWService.gainReqMethod(joinPoint);
-        //是否需要记录日志
-        if (method.isAnnotationPresent(OperLog.class)) {
-            OperLog operLog = method.getAnnotation(OperLog.class);
-            if (operLog.flag() == true) {
-                OperationLogMO operationLogMO = new OperationLogMO();
+        //是否需要记录查询日志
+        if (method.isAnnotationPresent(PcWebQueryLog.class)) {
+            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+            if (pcWebQueryLog.flag() == true) {
+                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
 
                 //当前log的通知方式是 Before
-                operationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
+                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
+                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 //请求成功(至少在before
-                operationLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
-                operationLogRepository.insert(operationLogMO);
+                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
+                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+            }
+        }
+
+        //是否需要记录[操作]日志
+        if (method.isAnnotationPresent(PcWebOperationLog.class)) {
+            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
+            if (pcWebOperationLog.flag() == true) {
+                PcWebOperationLogMO pcWebQueryLogMO = new PcWebOperationLogMO();
+
+                //当前log的通知方式是 Before
+                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
+
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                //设置一些必要值到log
+                controllerAspectWService.dealSetValToOperationLog(pcWebQueryLogMO, joinPoint, request);
+                //请求成功(至少在before
+                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
+                pcWebOperationLogRepository.insert(pcWebQueryLogMO);
             }
         }
 
@@ -70,31 +94,55 @@ public class ControllerAspect {
     @AfterReturning(value = "aspect()", returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
         Method method = controllerAspectWService.gainReqMethod(joinPoint);
-        //是否需要记录日志
-        if (method.isAnnotationPresent(OperLog.class)) {
-            OperLog operLog = method.getAnnotation(OperLog.class);
-            if (operLog.flag() == true) {
-                OperationLogMO operationLogMO = new OperationLogMO();
+        //是否需要记录[查询]日志
+        if (method.isAnnotationPresent(PcWebQueryLog.class)) {
+            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+            if (pcWebQueryLog.flag() == true) {
+                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
                 //当前log的通知方式是 Before
-                operationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-
+                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
-
+                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {   //如果是封装的结果
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            operationLogMO.setException(commonResult.getErrorMsg());
+                            pcWebQueryLogMO.setException(commonResult.getErrorMsg());
                         }
                     }
-                    operationLogMO.setResult(JSON.toJSONString(result));
+                    pcWebQueryLogMO.setResult(JSON.toJSONString(result));
                 }
-                operationLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
-                operationLogRepository.insert(operationLogMO);
+                pcWebQueryLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
+                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+            }
+        }
+
+        //是否需要记录[操作]日志
+        if (method.isAnnotationPresent(PcWebOperationLog.class)) {
+            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
+            if (pcWebOperationLog.flag() == true) {
+                PcWebOperationLogMO pcWebOperationLogMO = new PcWebOperationLogMO();
+                //当前log的通知方式是 Before
+                pcWebOperationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                //设置一些必要值到log
+                controllerAspectWService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                boolean isSuccess = true;
+                if (result != null) {
+                    if (result instanceof MyCommonResult) {   //如果是封装的结果
+                        MyCommonResult commonResult = (MyCommonResult) result;
+                        if (commonResult.isHasError() == true) {
+                            isSuccess = false;
+                            pcWebOperationLogMO.setException(commonResult.getErrorMsg());
+                        }
+                    }
+                    pcWebOperationLogMO.setResult(JSON.toJSONString(result));
+                }
+                pcWebOperationLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
+                pcWebOperationLogRepository.insert(pcWebOperationLogMO);
             }
         }
         //System.out.println("返回。。。afterControllerReturn");
@@ -104,23 +152,43 @@ public class ControllerAspect {
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
         Method method = controllerAspectWService.gainReqMethod(joinPoint);
-        //是否需要记录日志
-        if (method.isAnnotationPresent(OperLog.class)) {
-            OperLog operLog = method.getAnnotation(OperLog.class);
-            if (operLog.flag() == true) {
-                OperationLogMO operationLogMO = new OperationLogMO();
+        //是否需要记录[查询]日志
+        if (method.isAnnotationPresent(PcWebQueryLog.class)) {
+            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+            if (pcWebQueryLog.flag() == true) {
+                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
                 //当前log的通知方式是 Before
-                operationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(operationLogMO, joinPoint, request);
+                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 //请求失败
-                operationLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
+                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
-                    operationLogMO.setException(JSON.toJSONString(exception));
+                    pcWebQueryLogMO.setException(JSON.toJSONString(exception));
                 }
-                operationLogRepository.insert(operationLogMO);
+                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+            }
+        }
+
+        //是否需要记录[操作]日志
+        if (method.isAnnotationPresent(PcWebOperationLog.class)) {
+            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
+            if (pcWebOperationLog.flag() == true) {
+                PcWebOperationLogMO pcWebOperationLogMO = new PcWebOperationLogMO();
+                //当前log的通知方式是 Before
+                pcWebOperationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                //设置一些必要值到log
+                controllerAspectWService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                //请求失败
+                pcWebOperationLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
+                if (exception != null) {
+                    pcWebOperationLogMO.setException(JSON.toJSONString(exception));
+                }
+                pcWebOperationLogRepository.insert(pcWebOperationLogMO);
             }
         }
         //System.out.println("异常。。。afterControllerThrowing");

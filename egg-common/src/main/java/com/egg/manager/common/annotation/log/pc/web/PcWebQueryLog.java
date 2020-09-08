@@ -1,4 +1,4 @@
-package com.egg.manager.common.annotation.log;
+package com.egg.manager.common.annotation.log.pc.web;
 
 import java.lang.annotation.*;
 
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface OperLog {
+public @interface PcWebQueryLog {
 
 
     /**

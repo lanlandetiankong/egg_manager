@@ -1,8 +1,9 @@
 package com.egg.manager.web.controller.organization;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -54,7 +55,7 @@ public class DefineTenantController extends BaseController{
 
 
 
-    @OperLog(action="查询租户定义信息-Dto列表",description = "查询租户定义信息-Dto列表",fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
+    @PcWebQueryLog(action="查询租户定义信息-Dto列表",description = "查询租户定义信息-Dto列表",fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
     @ApiOperation(value = "查询租户定义信息-Dto列表", notes = "查询租户定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -82,7 +83,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息",fullPath = "/organization/define_tenant/getDefineTenantById")
+    @PcWebQueryLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息",fullPath = "/organization/define_tenant/getDefineTenantById")
     @PostMapping(value = "/getDefineTenantById")
     public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
@@ -97,7 +98,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表",fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
+    @PcWebQueryLog(action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表",fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
     @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -126,7 +127,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增租户定义",description = "表单方式新增租户定义",fullPath = "/organization/define_tenant/doAddDefineTenant")
+    @PcWebOperationLog(action="新增租户定义",description = "表单方式新增租户定义",fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
     public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
@@ -147,7 +148,7 @@ public class DefineTenantController extends BaseController{
 
 
     @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新租户定义",description = "表单方式更新租户定义",fullPath = "/organization/define_tenant/doUpdateDefineTenant")
+    @PcWebOperationLog(action="更新租户定义",description = "表单方式更新租户定义",fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
     public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -167,7 +168,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="批量删除租户定义",description = "根据租户定义id批量删除租户定义",fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
+    @PcWebOperationLog(action="批量删除租户定义",description = "根据租户定义id批量删除租户定义",fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
     @ApiOperation(value = "批量删除租户定义", notes = "根据租户定义id批量删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的租户定义id数组", required = true,dataTypeClass=String[].class),
@@ -189,7 +190,7 @@ public class DefineTenantController extends BaseController{
     }
 
 
-    @OperLog(action="删除租户定义",description = "根据租户id删除租户定义",fullPath = "/organization/define_tenant/delOneDefineTenantById")
+    @PcWebOperationLog(action="删除租户定义",description = "根据租户id删除租户定义",fullPath = "/organization/define_tenant/delOneDefineTenantById")
     @ApiOperation(value = "删除租户定义", notes = "根据租户id删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的租户定义id", required = true,dataTypeClass=String.class),

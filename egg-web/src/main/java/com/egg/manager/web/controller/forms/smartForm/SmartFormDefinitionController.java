@@ -2,8 +2,9 @@ package com.egg.manager.web.controller.forms.smartForm;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.exception.BusinessException;
@@ -61,7 +62,7 @@ public class SmartFormDefinitionController extends BaseController {
 
 
 
-    @OperLog( action = "分页查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getDataPage")
+    @PcWebQueryLog( action = "分页查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -85,7 +86,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog( action = "分页查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getDataAll")
+    @PcWebQueryLog( action = "分页查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -109,7 +110,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog( action = "根据id查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getOneItemById")
+    @PcWebQueryLog( action = "根据id查询->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormDefinitionMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -125,7 +126,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @OperLog( action = "新增->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/addByForm")
+    @PcWebOperationLog( action = "新增->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/addByForm")
     @ApiOperation(value = "新增->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<SmartFormDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -155,7 +156,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog( action = "更新->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/updateByForm")
+    @PcWebOperationLog( action = "更新->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/updateByForm")
     @ApiOperation(value = "更新->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult<SmartFormDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -185,7 +186,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog( action = "删除->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/delOneById")
+    @PcWebOperationLog( action = "删除->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/delOneById")
     @ApiOperation(value = "删除->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
@@ -204,7 +205,7 @@ public class SmartFormDefinitionController extends BaseController {
     }
 
 
-    @OperLog( action = "批量删除->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/batchDelByIds")
+    @PcWebOperationLog( action = "批量删除->表单定义", description = "",fullPath = "/forms/smartForm/formDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),

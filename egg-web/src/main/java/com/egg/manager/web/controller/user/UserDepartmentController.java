@@ -2,8 +2,9 @@ package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -50,7 +51,7 @@ public class UserDepartmentController extends BaseController{
 
 
 
-    @OperLog(action="查询 [用户与部门关联] 列表",description = "查询 [用户与部门关联] 列表",fullPath = "/user/user_department/getAllUserDepartments")
+    @PcWebQueryLog(action="查询 [用户与部门关联] 列表",description = "查询 [用户与部门关联] 列表",fullPath = "/user/user_department/getAllUserDepartments")
     @ApiOperation(value = "查询 [用户与部门关联] 列表", notes = "查询 [用户与部门关联] 列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -79,7 +80,7 @@ public class UserDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "查询 [用户与部门关联] 信息", notes = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询 [用户与部门关联] 信息",description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息",fullPath = "/user/user_department/getUserDepartmentById")
+    @PcWebQueryLog(action="查询 [用户与部门关联] 信息",description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息",fullPath = "/user/user_department/getUserDepartmentById")
     @PostMapping(value = "/getUserDepartmentById")
     public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>() ;
@@ -96,7 +97,7 @@ public class UserDepartmentController extends BaseController{
 
 
     @ApiOperation(value = "新增 [用户与部门关联] ", notes = "表单方式新增 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增 [用户与部门关联] ",description = "表单方式新增 [用户与部门关联] ",fullPath = "/user/user_department/doAddUserDepartment")
+    @PcWebOperationLog(action="新增 [用户与部门关联] ",description = "表单方式新增 [用户与部门关联] ",fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
     public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -118,7 +119,7 @@ public class UserDepartmentController extends BaseController{
 
     
 
-    @OperLog(action="批量删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ",fullPath = "/user/user_department/batchDelUserDepartmentByIds")
+    @PcWebOperationLog(action="批量删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ",fullPath = "/user/user_department/batchDelUserDepartmentByIds")
     @ApiOperation(value = "批量删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的 [用户与部门关联] id数组", required = true,dataTypeClass=String[].class),
@@ -140,7 +141,7 @@ public class UserDepartmentController extends BaseController{
     }
 
 
-    @OperLog(action="删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id删除 [用户与部门关联] ",fullPath = "/user/user_department/delOneUserDepartmentByIds")
+    @PcWebOperationLog(action="删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id删除 [用户与部门关联] ",fullPath = "/user/user_department/delOneUserDepartmentByIds")
     @ApiOperation(value = "删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id删除 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的 [用户与部门关联] id", required = true,dataTypeClass=String.class),

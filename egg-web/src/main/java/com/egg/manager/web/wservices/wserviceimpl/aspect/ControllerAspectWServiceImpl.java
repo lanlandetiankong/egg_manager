@@ -2,12 +2,14 @@ package com.egg.manager.web.wservices.wserviceimpl.aspect;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.CommonFuncService;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.db.mongo.mo.log.OperationLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -65,61 +67,128 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
      * @return JSONObject
      */
     @Override
-    public void dealSetValToOperationLog(OperationLogMO operationLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
+    public void dealSetValToQueryLog(PcWebQueryLogMO pcWebQueryLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
         try{
-            if(StringUtils.isBlank(operationLogMO.getFid())){
-                //operationLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+            if(StringUtils.isBlank(pcWebQueryLogMO.getFid())){
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
             }
-            if(operationLogMO.getStatus() == null){
-                operationLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
+            if(pcWebQueryLogMO.getStatus() == null){
+                pcWebQueryLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
             JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
-            operationLogMO.setActionArgs(argJsonObj.toJSONString());
+            pcWebQueryLogMO.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature() ;
             String methodName = signature.getName();
-            operationLogMO.setAspectKind(joinPoint.getKind());
-            operationLogMO.setClassName(signature.getDeclaringTypeName());
-            operationLogMO.setMethodName(methodName);
-            operationLogMO.setSignatureLong(signature.toLongString());
+            pcWebQueryLogMO.setAspectKind(joinPoint.getKind());
+            pcWebQueryLogMO.setClassName(signature.getDeclaringTypeName());
+            pcWebQueryLogMO.setMethodName(methodName);
+            pcWebQueryLogMO.setSignatureLong(signature.toLongString());
             Method method = this.gainReqMethod(signature);
             if(method != null){
-                operationLogMO.setReturnTypeName(method.getReturnType().getName());
-                operationLogMO.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
-                OperLog operLog = method.getAnnotation(OperLog.class);
-                if(operLog != null){
-                    operationLogMO.setAction(operLog.action());
-                    operationLogMO.setLogDescription(operLog.description());
+                pcWebQueryLogMO.setReturnTypeName(method.getReturnType().getName());
+                pcWebQueryLogMO.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
+                PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+                if(pcWebQueryLog != null){
+                    pcWebQueryLogMO.setAction(pcWebQueryLog.action());
+                    pcWebQueryLogMO.setLogDescription(pcWebQueryLog.description());
                     //请求的全路径(代码中取得)
-                    operationLogMO.setFullPath(operLog.fullPath());
+                    pcWebQueryLogMO.setFullPath(pcWebQueryLog.fullPath());
                 }
             }
 
             if(request != null){
                 //请求路径
-                operationLogMO.setRequestUri(request.getRequestURI());
-                operationLogMO.setRequestUrl(request.getRequestURL().toString());
+                pcWebQueryLogMO.setRequestUri(request.getRequestURI());
+                pcWebQueryLogMO.setRequestUrl(request.getRequestURL().toString());
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = commonFuncService.gainUserAccountTokenBeanByRequest(request,false);
                 if(userAccountToken != null){
-                    operationLogMO.setTokenBean(JSONObject.toJSONString(userAccountToken));
+                    pcWebQueryLogMO.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     String userAccountId = userAccountToken.getUserAccountId() ;
-                    operationLogMO.setUserAccountId(userAccountId);
-                    operationLogMO.setCreateUserId(userAccountId);
-                    operationLogMO.setLastModifyerId(userAccountId);
+                    pcWebQueryLogMO.setUserAccountId(userAccountId);
+                    pcWebQueryLogMO.setCreateUserId(userAccountId);
+                    pcWebQueryLogMO.setLastModifyerId(userAccountId);
                 }
                 //取得 请求头bean
                 RequestHeaderBean requestHeaderBean = commonFuncService.gainRequestHeaderBeanByRequest(request);
                 if(requestHeaderBean != null){
-                    operationLogMO.setHeaders(JSONObject.toJSONString(requestHeaderBean));
-                    operationLogMO.setIpAddr(request.getRemoteAddr());
+                    pcWebQueryLogMO.setHeaders(JSONObject.toJSONString(requestHeaderBean));
+                    pcWebQueryLogMO.setIpAddr(request.getRemoteAddr());
                 }
             }
 
             Date now = new Date() ;
-            operationLogMO.setCreateTime(now);
-            operationLogMO.setLastModifiedDate(now);
+            pcWebQueryLogMO.setCreateTime(now);
+            pcWebQueryLogMO.setLastModifiedDate(now);
+        }   catch (Exception e){
+
+        }
+    }
+
+
+    /**
+     * 取得 请求的参数
+     * @param joinPoint
+     * @return JSONObject
+     */
+    @Override
+    public void dealSetValToOperationLog(PcWebOperationLogMO pcWebOperationLogMO, JoinPoint joinPoint, HttpServletRequest request)  {
+        try{
+            if(StringUtils.isBlank(pcWebOperationLogMO.getFid())){
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+            }
+            if(pcWebOperationLogMO.getStatus() == null){
+                pcWebOperationLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
+            }
+            //请求方法的参数
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
+            pcWebOperationLogMO.setActionArgs(argJsonObj.toJSONString());
+
+            Signature signature = joinPoint.getSignature() ;
+            String methodName = signature.getName();
+            pcWebOperationLogMO.setAspectKind(joinPoint.getKind());
+            pcWebOperationLogMO.setClassName(signature.getDeclaringTypeName());
+            pcWebOperationLogMO.setMethodName(methodName);
+            pcWebOperationLogMO.setSignatureLong(signature.toLongString());
+            Method method = this.gainReqMethod(signature);
+            if(method != null){
+                pcWebOperationLogMO.setReturnTypeName(method.getReturnType().getName());
+                pcWebOperationLogMO.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
+                PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
+                if(pcWebQueryLog != null){
+                    pcWebOperationLogMO.setAction(pcWebQueryLog.action());
+                    pcWebOperationLogMO.setLogDescription(pcWebQueryLog.description());
+                    //请求的全路径(代码中取得)
+                    pcWebOperationLogMO.setFullPath(pcWebQueryLog.fullPath());
+                }
+            }
+
+            if(request != null){
+                //请求路径
+                pcWebOperationLogMO.setRequestUri(request.getRequestURI());
+                pcWebOperationLogMO.setRequestUrl(request.getRequestURL().toString());
+                //取得 请求头的token信息
+                UserAccountToken userAccountToken = commonFuncService.gainUserAccountTokenBeanByRequest(request,false);
+                if(userAccountToken != null){
+                    pcWebOperationLogMO.setTokenBean(JSONObject.toJSONString(userAccountToken));
+                    String userAccountId = userAccountToken.getUserAccountId() ;
+                    pcWebOperationLogMO.setUserAccountId(userAccountId);
+                    pcWebOperationLogMO.setCreateUserId(userAccountId);
+                    pcWebOperationLogMO.setLastModifyerId(userAccountId);
+                }
+                //取得 请求头bean
+                RequestHeaderBean requestHeaderBean = commonFuncService.gainRequestHeaderBeanByRequest(request);
+                if(requestHeaderBean != null){
+                    pcWebOperationLogMO.setHeaders(JSONObject.toJSONString(requestHeaderBean));
+                    pcWebOperationLogMO.setIpAddr(request.getRemoteAddr());
+                }
+            }
+
+            Date now = new Date() ;
+            pcWebOperationLogMO.setCreateTime(now);
+            pcWebOperationLogMO.setLastModifiedDate(now);
         }   catch (Exception e){
 
         }

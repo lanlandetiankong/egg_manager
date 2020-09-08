@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.db.mongo.mo.log;
+package com.egg.manager.persistence.db.mongo.mo.log.pc.web;
 
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * <p>
- * 操作日志表 - MongoDB
+ * 查询日志表 - MongoDB
  * </p>
  *
  * @author zhouchengjie123
@@ -19,8 +19,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Document(collection = "em_operation_log")
-public class OperationLogMO extends MyBaseModelMO<String> {
+@Document(collection = "em_pc_web_query_log")
+public class PcWebQueryLogMO extends MyBaseModelMO<String> {
 
     private static final long serialVersionUID = 1L;
     /**

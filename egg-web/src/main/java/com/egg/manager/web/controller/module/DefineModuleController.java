@@ -1,8 +1,9 @@
 package com.egg.manager.web.controller.module;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.annotation.log.OperLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -51,7 +52,7 @@ public class DefineModuleController extends BaseController{
 
 
 
-    @OperLog(action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表",fullPath = "/module/define_module/getAllDefineModuleDtos")
+    @PcWebQueryLog(action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表",fullPath = "/module/define_module/getAllDefineModuleDtos")
     @ApiOperation(value = "查询模块定义信息-Dto列表", notes = "查询模块定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
@@ -80,7 +81,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "查询模块定义信息", notes = "根据模块定义id查询模块定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="查询模块定义信息",description = "根据模块定义id查询模块定义信息",fullPath = "/module/define_module/getDefineModuleById")
+    @PcWebQueryLog(action="查询模块定义信息",description = "根据模块定义id查询模块定义信息",fullPath = "/module/define_module/getDefineModuleById")
     @PostMapping(value = "/getDefineModuleById")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
@@ -96,7 +97,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="新增模块定义",description = "表单方式新增模块定义",fullPath = "/module/define_module/doAddDefineModule")
+    @PcWebOperationLog(action="新增模块定义",description = "表单方式新增模块定义",fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
     public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
@@ -117,7 +118,7 @@ public class DefineModuleController extends BaseController{
 
 
     @ApiOperation(value = "更新模块定义", notes = "表单方式更新模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @OperLog(action="更新模块定义",description = "表单方式更新模块定义",fullPath = "/module/define_module/doUpdateDefineModule")
+    @PcWebOperationLog(action="更新模块定义",description = "表单方式更新模块定义",fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
@@ -137,7 +138,7 @@ public class DefineModuleController extends BaseController{
     }
 
 
-    @OperLog(action="批量删除模块定义",description = "根据菜单定义id批量删除模块定义",fullPath = "/module/define_module/batchDelDefineModuleByIds")
+    @PcWebOperationLog(action="批量删除模块定义",description = "根据菜单定义id批量删除模块定义",fullPath = "/module/define_module/batchDelDefineModuleByIds")
     @ApiOperation(value = "批量删除模块定义", notes = "根据菜单定义id批量删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",value = "要删除的模块定义id数组", required = true,dataTypeClass=String[].class),
@@ -159,7 +160,7 @@ public class DefineModuleController extends BaseController{
     }
 
 
-    @OperLog(action="删除模块定义",description = "根据模块id删除模块定义",fullPath = "/module/define_module/delOneDefineModuleById")
+    @PcWebOperationLog(action="删除模块定义",description = "根据模块id删除模块定义",fullPath = "/module/define_module/delOneDefineModuleById")
     @ApiOperation(value = "删除模块定义", notes = "根据模块id删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId",value = "要删除的模块定义id", required = true,dataTypeClass=String.class),

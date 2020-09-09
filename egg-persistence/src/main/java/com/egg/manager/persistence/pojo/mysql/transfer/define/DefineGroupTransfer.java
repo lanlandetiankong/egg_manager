@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @Named("defineGroupTransfer")
 public class DefineGroupTransfer extends MyBaseMysqlTransfer {
 
-    static DefineGroupMapstruct defineGroupVoMapstruct = DefineGroupMapstruct.INSTANCE ;
+    static DefineGroupMapstruct defineGroupMapstruct = DefineGroupMapstruct.INSTANCE ;
 
     public static DefineGroupVo transferEntityToVo(DefineGroup entity) {
         if (entity == null) {
             return null;
         }
-        DefineGroupVo vo = defineGroupVoMapstruct.transferEntityToVo(entity);
+        DefineGroupVo vo = defineGroupMapstruct.transferEntityToVo(entity);
         return vo;
     }
 

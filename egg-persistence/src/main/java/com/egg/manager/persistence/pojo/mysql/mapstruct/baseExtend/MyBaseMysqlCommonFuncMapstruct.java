@@ -8,9 +8,12 @@ import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefineDepartmentMapstruct;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.organization.DefineTenantMapstruct;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.user.UserAccountMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +33,9 @@ import java.util.List;
 @MapperConfig(disableSubMappingMethodsGeneration=true)
 public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D extends MyBaseMysqlDto> {
 
-     UserAccountMapstruct userAccountVoMapstruct = UserAccountMapstruct.INSTANCE ;
-     DefineTenantMapstruct defineTenantVoMapstruct = DefineTenantMapstruct.INSTANCE ;
+     UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE ;
+     DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE ;
+     DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE ;
 
 
 
@@ -104,7 +108,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D exte
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = userAccountVoMapstruct.transferEntityToVo(entity);
+        UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -117,7 +121,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D exte
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = userAccountVoMapstruct.transferEntityToVo(entity);
+        UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -127,7 +131,15 @@ public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D exte
      * @return
      */
     default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenant entity){
-        return defineTenantVoMapstruct.transferEntityToVo(entity);
+        return defineTenantMapstruct.transferEntityToVo(entity);
     }
 
+    /**
+     * 部门 dto转为vo
+     * @param dto
+     * @return
+     */
+    default DefineDepartmentVo commonTranslateDefineTenantDtoToVo(DefineDepartmentDto dto){
+        return defineDepartmentMapstruct.transferDtoToVo(dto);
+    }
 }

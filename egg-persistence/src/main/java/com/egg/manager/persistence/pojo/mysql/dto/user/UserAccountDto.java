@@ -4,6 +4,8 @@ import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -88,4 +90,12 @@ public class UserAccountDto extends MyBaseMysqlDto {
      */
     private DefineGroup belongGroup;
 
+    /**
+     * 所属部门-id
+     */
+    private String belongDepartmentId ;
+    /**
+     * 所属部门-vo
+     */
+    private DefineDepartmentDto belongDepartment ;
 }

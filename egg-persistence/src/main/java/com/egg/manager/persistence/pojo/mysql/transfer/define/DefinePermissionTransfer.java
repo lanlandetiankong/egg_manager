@@ -16,13 +16,13 @@ import java.util.List;
 @Named("definePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
 
-    static DefinePermissionMapstruct definePermissionVoMapstruct = DefinePermissionMapstruct.INSTANCE ;
+    static DefinePermissionMapstruct definePermissionMapstruct = DefinePermissionMapstruct.INSTANCE ;
 
     public static DefinePermission transferVoToEntity(DefinePermissionVo vo) {
         if (vo == null) {
             return null;
         }
-        DefinePermission entity = definePermissionVoMapstruct.transferVoToEntity(vo);
+        DefinePermission entity = definePermissionMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -30,7 +30,7 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefinePermissionVo vo = definePermissionVoMapstruct.transferEntityToVo(entity);
+        DefinePermissionVo vo = definePermissionMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -38,7 +38,7 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefinePermissionVo vo = definePermissionVoMapstruct.transferDtoToVo(dto);
+        DefinePermissionVo vo = definePermissionMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

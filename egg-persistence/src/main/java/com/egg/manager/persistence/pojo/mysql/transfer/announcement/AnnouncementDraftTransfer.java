@@ -22,13 +22,13 @@ import java.util.Map;
 @Named("announcementDraftTransfer")
 public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
-    static AnnouncementDraftMapstruct announcementDraftVoMapstruct = AnnouncementDraftMapstruct.INSTANCE;
+    static AnnouncementDraftMapstruct announcementDraftMapstruct = AnnouncementDraftMapstruct.INSTANCE;
 
     public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo) {
         if(vo == null){
             return null ;
         }
-        AnnouncementDraft entity = announcementDraftVoMapstruct.transferVoToEntity(vo);
+        AnnouncementDraft entity = announcementDraftMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -36,7 +36,7 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        AnnouncementDraftVo vo = announcementDraftVoMapstruct.transferEntityToVo(entity);
+        AnnouncementDraftVo vo = announcementDraftMapstruct.transferEntityToVo(entity);
         AnnouncementDraftTransfer.doSetTagInfoToVo(entity.getTagIds(),vo,announcementTagMap);
         return vo;
     }
@@ -46,7 +46,7 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        AnnouncementDraftVo vo = announcementDraftVoMapstruct.transferDtoToVo(dto);
+        AnnouncementDraftVo vo = announcementDraftMapstruct.transferDtoToVo(dto);
         //设置 tag相关信息
         AnnouncementDraftTransfer.doSetTagInfoToVo(dto.getTagIds(),vo,announcementTagMap);
         return vo;

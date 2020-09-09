@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Named("rolePermissionTransfer")
 public class RolePermissionTransfer extends MyBaseMysqlTransfer {
 
-    static RolePermissionMapstruct rolePermissionVoMapstruct = RolePermissionMapstruct.INSTANCE;
+    static RolePermissionMapstruct rolePermissionMapstruct = RolePermissionMapstruct.INSTANCE;
 
 
 

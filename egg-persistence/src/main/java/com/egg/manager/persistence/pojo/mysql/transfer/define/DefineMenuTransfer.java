@@ -15,13 +15,13 @@ import java.util.List;
 @Component
 @Named("defineMenuTransfer")
 public class DefineMenuTransfer extends MyBaseMysqlTransfer {
-    static DefineMenuMapstruct defineMenuVoMapstruct = DefineMenuMapstruct.INSTANCE ;
+    static DefineMenuMapstruct defineMenuMapstruct = DefineMenuMapstruct.INSTANCE ;
 
     public static DefineMenu transferVoToEntity(DefineMenuVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineMenu entity = defineMenuVoMapstruct.transferVoToEntity(vo);
+        DefineMenu entity = defineMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -29,7 +29,7 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineMenuVo vo = defineMenuVoMapstruct.transferEntityToVo(entity);
+        DefineMenuVo vo = defineMenuMapstruct.transferEntityToVo(entity);
         String excelModelConf = entity.getExcelModelConf();
         vo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         return vo;
@@ -40,7 +40,7 @@ public class DefineMenuTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineMenuVo vo = defineMenuVoMapstruct.transferDtoToVo(dto);
+        DefineMenuVo vo = defineMenuMapstruct.transferDtoToVo(dto);
         String excelModelConf = dto.getExcelModelConf();
         vo.dealAddAntdFileUploadBean(AntdFileUploadBean.dealJsonStrToBean(excelModelConf));
         return vo;

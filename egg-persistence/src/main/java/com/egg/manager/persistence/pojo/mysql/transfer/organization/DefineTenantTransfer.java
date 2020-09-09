@@ -14,13 +14,13 @@ import java.util.List;
 @Component
 @Named("defineTenantTransfer")
 public class DefineTenantTransfer extends MyBaseMysqlTransfer {
-    static DefineTenantMapstruct defineTenantVoMapstruct = DefineTenantMapstruct.INSTANCE ;
+    static DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE ;
 
     public static DefineTenant transferVoToEntity(DefineTenantVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineTenant entity = defineTenantVoMapstruct.transferVoToEntity(vo);
+        DefineTenant entity = defineTenantMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -28,7 +28,7 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineTenantVo vo = defineTenantVoMapstruct.transferEntityToVo(entity);
+        DefineTenantVo vo = defineTenantMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -36,7 +36,7 @@ public class DefineTenantTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineTenantVo vo = defineTenantVoMapstruct.transferDtoToVo(dto);
+        DefineTenantVo vo = defineTenantMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

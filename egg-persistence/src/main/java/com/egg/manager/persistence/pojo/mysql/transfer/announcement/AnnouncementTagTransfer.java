@@ -15,14 +15,14 @@ import java.util.List;
 @Named("announcementTagTransfer")
 public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
 
-    static AnnouncementTagMapstruct announcementTagVoMapstruct = AnnouncementTagMapstruct.INSTANCE ;
+    static AnnouncementTagMapstruct announcementTagMapstruct = AnnouncementTagMapstruct.INSTANCE ;
 
     @Deprecated
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo vo) {
         if (vo == null) {
             return null;
         }
-        AnnouncementTag entity = announcementTagVoMapstruct.transferVoToEntity(vo);
+        AnnouncementTag entity = announcementTagMapstruct.transferVoToEntity(vo);
         return entity;
     }
     @Deprecated
@@ -30,7 +30,7 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        AnnouncementTagVo vo = announcementTagVoMapstruct.transferEntityToVo(entity);
+        AnnouncementTagVo vo = announcementTagMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -38,7 +38,7 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        AnnouncementTagVo vo = announcementTagVoMapstruct.transferDtoToVo(dto);
+        AnnouncementTagVo vo = announcementTagMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

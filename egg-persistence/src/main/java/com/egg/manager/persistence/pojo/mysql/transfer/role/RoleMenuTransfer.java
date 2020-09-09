@@ -15,13 +15,13 @@ import java.util.List;
 @Named("roleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
 
-    static RoleMenuMapstruct roleMenuVoMapstruct = RoleMenuMapstruct.INSTANCE ;
+    static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE ;
 
     public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
         if (vo == null) {
             return null;
         }
-        RoleMenu entity = roleMenuVoMapstruct.transferVoToEntity(vo);
+        RoleMenu entity = roleMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -30,7 +30,7 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        RoleMenuVo vo = roleMenuVoMapstruct.transferEntityToVo(entity);
+        RoleMenuVo vo = roleMenuMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -39,7 +39,7 @@ public class RoleMenuTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        RoleMenuVo vo = roleMenuVoMapstruct.transferDtoToVo(dto);
+        RoleMenuVo vo = roleMenuMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

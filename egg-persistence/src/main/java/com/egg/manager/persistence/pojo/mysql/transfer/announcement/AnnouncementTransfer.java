@@ -20,13 +20,13 @@ import java.util.Map;
 @Component
 @Named("announcementTransfer")
 public class AnnouncementTransfer extends MyBaseMysqlTransfer {
-    static AnnouncementMapstruct announcementVoMapstruct = AnnouncementMapstruct.INSTANCE;
+    static AnnouncementMapstruct announcementMapstruct = AnnouncementMapstruct.INSTANCE;
 
     public static Announcement transferVoToEntity(AnnouncementVo vo) {
         if (vo == null) {
             return null;
         }
-        Announcement entity = announcementVoMapstruct.transferVoToEntity(vo);
+        Announcement entity = announcementMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        AnnouncementVo vo = announcementVoMapstruct.transferEntityToVo(entity,announcementTagMap);
+        AnnouncementVo vo = announcementMapstruct.transferEntityToVo(entity,announcementTagMap);
         String tagIds = entity.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {
@@ -83,7 +83,7 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        AnnouncementVo vo = announcementVoMapstruct.transferDtoToVo(dto,announcementTagMap);
+        AnnouncementVo vo = announcementMapstruct.transferDtoToVo(dto,announcementTagMap);
         String tagIds = dto.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {

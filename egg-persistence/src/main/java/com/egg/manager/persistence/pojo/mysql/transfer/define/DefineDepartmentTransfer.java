@@ -14,14 +14,14 @@ import java.util.List;
 @Component
 @Named("defineDepartmentTransfer")
 public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
-    static DefineDepartmentMapstruct defineDepartmentVoMapstruct = DefineDepartmentMapstruct.INSTANCE ;
+    static DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE ;
 
 
     public static DefineDepartment transferVoToEntity(DefineDepartmentVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineDepartment entity = defineDepartmentVoMapstruct.transferVoToEntity(vo);
+        DefineDepartment entity = defineDepartmentMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -29,7 +29,7 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineDepartmentVo vo = defineDepartmentVoMapstruct.transferEntityToVo(entity);
+        DefineDepartmentVo vo = defineDepartmentMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -38,7 +38,7 @@ public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineDepartmentVo vo = defineDepartmentVoMapstruct.transferDtoToVo(dto);
+        DefineDepartmentVo vo = defineDepartmentMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

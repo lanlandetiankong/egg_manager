@@ -15,13 +15,13 @@ import java.util.List;
 @Component
 @Named("defineRoleTransfer")
 public class DefineRoleTransfer extends MyBaseMysqlTransfer {
-    static DefineRoleMapstruct defineRoleVoMapstruct = DefineRoleMapstruct.INSTANCE ;
+    static DefineRoleMapstruct defineRoleMapstruct = DefineRoleMapstruct.INSTANCE ;
 
     public static DefineRole transferVoToEntity(DefineRoleVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineRole entity = defineRoleVoMapstruct.transferVoToEntity(vo);
+        DefineRole entity = defineRoleMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -29,7 +29,7 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineRoleVo vo = defineRoleVoMapstruct.transferEntityToVo(entity);
+        DefineRoleVo vo = defineRoleMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -37,7 +37,7 @@ public class DefineRoleTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineRoleVo vo = defineRoleVoMapstruct.transferDtoToVo(dto);
+        DefineRoleVo vo = defineRoleMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

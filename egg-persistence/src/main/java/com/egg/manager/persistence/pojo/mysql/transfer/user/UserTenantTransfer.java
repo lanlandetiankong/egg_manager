@@ -15,13 +15,13 @@ import java.util.List;
 @Named("userTenantTransfer")
 public class UserTenantTransfer extends MyBaseMysqlTransfer {
 
-    static UserTenantMapstruct userTenantVoMapstruct = UserTenantMapstruct.INSTANCE ;
+    static UserTenantMapstruct userTenantMapstruct = UserTenantMapstruct.INSTANCE ;
 
     public static UserTenant transferVoToEntity(UserTenantVo vo) {
         if (vo == null) {
             return null;
         }
-        UserTenant entity = userTenantVoMapstruct.transferVoToEntity(vo);
+        UserTenant entity = userTenantMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -30,7 +30,7 @@ public class UserTenantTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        UserTenantVo vo = userTenantVoMapstruct.transferEntityToVo(entity);
+        UserTenantVo vo = userTenantMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -39,7 +39,7 @@ public class UserTenantTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        UserTenantVo vo = userTenantVoMapstruct.transferDtoToVo(dto);
+        UserTenantVo vo = userTenantMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

@@ -14,13 +14,13 @@ import java.util.List;
 @Component
 @Named("defineJobTransfer")
 public class DefineJobTransfer extends MyBaseMysqlTransfer {
-    static DefineJobMapstruct defineJobVoMapstruct = DefineJobMapstruct.INSTANCE ;
+    static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE ;
 
     public static DefineJob transferVoToEntity(DefineJobVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineJob entity = defineJobVoMapstruct.transferVoToEntity(vo);
+        DefineJob entity = defineJobMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -28,7 +28,7 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineJobVo vo = defineJobVoMapstruct.transferEntityToVo(entity);
+        DefineJobVo vo = defineJobMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -36,7 +36,7 @@ public class DefineJobTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineJobVo vo = defineJobVoMapstruct.transferDtoToVo(dto);
+        DefineJobVo vo = defineJobMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

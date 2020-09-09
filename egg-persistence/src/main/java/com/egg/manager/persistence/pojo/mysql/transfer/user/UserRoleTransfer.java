@@ -15,13 +15,13 @@ import java.util.List;
 @Named("userRoleTransfer")
 public class UserRoleTransfer extends MyBaseMysqlTransfer {
 
-    static UserRoleMapstruct userRoleVoMapstruct = UserRoleMapstruct.INSTANCE ;
+    static UserRoleMapstruct userRoleMapstruct = UserRoleMapstruct.INSTANCE ;
 
     public static UserRole transferVoToEntity(UserRoleVo vo) {
         if (vo == null) {
             return null;
         }
-        UserRole entity = userRoleVoMapstruct.transferVoToEntity(vo);
+        UserRole entity = userRoleMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -30,7 +30,7 @@ public class UserRoleTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        UserRoleVo vo = userRoleVoMapstruct.transferEntityToVo(entity);
+        UserRoleVo vo = userRoleMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -39,7 +39,7 @@ public class UserRoleTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        UserRoleVo vo = userRoleVoMapstruct.transferDtoToVo(dto);
+        UserRoleVo vo = userRoleMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

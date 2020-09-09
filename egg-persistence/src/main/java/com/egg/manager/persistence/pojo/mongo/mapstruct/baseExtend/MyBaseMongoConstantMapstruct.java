@@ -16,8 +16,8 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration=true)
 public interface MyBaseMongoConstantMapstruct<E extends MyBaseModelMO,V extends MyBaseModelMVO> {
 
-     UserAccountMapstruct userAccountVoMapstruct = UserAccountMapstruct.INSTANCE ;
-     DefineTenantMapstruct defineTenantVoMapstruct = DefineTenantMapstruct.INSTANCE ;
+     UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE ;
+     DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE ;
 
 
 

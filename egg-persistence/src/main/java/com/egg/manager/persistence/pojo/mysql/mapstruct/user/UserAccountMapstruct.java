@@ -36,6 +36,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,U
     @Mappings({
             @Mapping(target = "userTypeStr",expression = "java(handleUserTypeGetStr(dto.getUserType()))"),
             @Mapping(target = "belongTenant",expression = "java(commonTranslateDefineTenantEntityToVo(dto.getBelongTenant()))"),
+            @Mapping(target = "belongDepartment",expression = "java(commonTranslateDefineTenantDtoToVo(dto.getBelongDepartment()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })

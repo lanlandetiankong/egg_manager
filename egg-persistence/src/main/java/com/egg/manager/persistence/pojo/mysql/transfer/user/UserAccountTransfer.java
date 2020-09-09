@@ -20,13 +20,13 @@ import java.util.Set;
 @Named("userAccountTransfer")
 public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
-    static UserAccountMapstruct userAccountVoMapstruct = UserAccountMapstruct.INSTANCE;
+    static UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
 
     public static UserAccount transferVoToEntity(UserAccountVo vo) {
         if (vo == null) {
             return null;
         }
-        UserAccount entity = userAccountVoMapstruct.transferVoToEntity(vo);
+        UserAccount entity = userAccountMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -34,7 +34,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = userAccountVoMapstruct.transferEntityToVo(entity);
+        UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -42,7 +42,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        UserAccountVo vo = userAccountVoMapstruct.transferDtoToVo(dto);
+        UserAccountVo vo = userAccountMapstruct.transferDtoToVo(dto);
         return vo;
     }
 
@@ -71,7 +71,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
     }
 
     public static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity) {
-        UserAccountXlsOutModel userAccountXlsOutModel = userAccountVoMapstruct.entityToXlsOutModel(entity);
+        UserAccountXlsOutModel userAccountXlsOutModel = userAccountMapstruct.entityToXlsOutModel(entity);
         return userAccountXlsOutModel;
     }
 
@@ -85,7 +85,7 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
 
 
     public static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel,UserAccount loginUser) {     //excel导入默认转化
-        UserAccount entity = userAccountVoMapstruct.xlsInModelToEntity(xlsInModel,loginUser);
+        UserAccount entity = userAccountMapstruct.xlsInModelToEntity(xlsInModel,loginUser);
         return entity;
     }
 

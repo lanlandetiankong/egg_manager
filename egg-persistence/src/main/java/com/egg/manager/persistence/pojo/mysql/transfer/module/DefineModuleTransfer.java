@@ -15,13 +15,13 @@ import java.util.List;
 @Named("defineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
 
-    static DefineModuleMapstruct defineModuleVoMapstruct = DefineModuleMapstruct.INSTANCE ;
+    static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE ;
 
     public static DefineModule transferVoToEntity(DefineModuleVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineModule entity = defineModuleVoMapstruct.transferVoToEntity(vo);
+        DefineModule entity = defineModuleMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -29,7 +29,7 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        DefineModuleVo vo = defineModuleVoMapstruct.transferEntityToVo(entity);
+        DefineModuleVo vo = defineModuleMapstruct.transferEntityToVo(entity);
         return vo;
     }
 
@@ -37,7 +37,7 @@ public class DefineModuleTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        DefineModuleVo vo = defineModuleVoMapstruct.transferDtoToVo(dto);
+        DefineModuleVo vo = defineModuleMapstruct.transferDtoToVo(dto);
         return vo;
     }
 

@@ -1,6 +1,10 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email;
 
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.message.email.EmailSendRecordMO;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.conversion.message.email.EmailSendRecordConversion;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.baseExtend.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormDefinitionMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,13 +23,12 @@ import org.springframework.mail.SimpleMailMessage;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = EmailSendRecordConversion.class
 )
-public interface EmailSendRecordMapstruct {
+public interface EmailSendRecordMapstruct extends MyBaseMongoMapstruct<EmailSendRecordMO,EmailSendRecordMVO> {
     EmailSendRecordMapstruct INSTANCE = Mappers.getMapper(EmailSendRecordMapstruct.class);
 
 
-
-
-
+    @Mappings({})
+    EmailSendRecordMO translateMvoToMo(EmailSendRecordMVO mvo);
 
 
 

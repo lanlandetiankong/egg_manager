@@ -1,4 +1,4 @@
-package com.egg.manager.api.services.message.hello;
+package com.egg.manager.api.services.message.services.hello;
 
 public interface MessageHelloService {
 

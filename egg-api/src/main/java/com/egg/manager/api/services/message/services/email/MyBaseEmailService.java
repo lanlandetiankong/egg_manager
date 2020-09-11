@@ -1,4 +1,4 @@
-package com.egg.manager.api.services.message.email.service;
+package com.egg.manager.api.services.message.services.email;
 
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 

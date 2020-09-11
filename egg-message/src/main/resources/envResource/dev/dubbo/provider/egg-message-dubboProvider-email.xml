@@ -9,10 +9,11 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.message.email.service                                                              -->
     <dubbo:service protocol="dubbo" ref="myBaseEmailService"
-                   interface="com.egg.manager.api.services.message.email.service.MyBaseEmailService"/>
+                   interface="com.egg.manager.api.services.message.services.email.MyBaseEmailService"/>
     <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.announcement                                                              -->
 
-
+    <dubbo:service protocol="dubbo" ref="emailSendRecordMService"
+                   interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMService"/>
 
 
 

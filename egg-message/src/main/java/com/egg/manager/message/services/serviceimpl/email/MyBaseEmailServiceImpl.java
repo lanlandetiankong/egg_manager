@@ -1,7 +1,7 @@
-package com.egg.manager.message.services.email.serviceimpl;
+package com.egg.manager.message.services.serviceimpl.email;
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
+import com.egg.manager.api.services.message.services.email.MyBaseEmailService;
 import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRecordRepository;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;

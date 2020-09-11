@@ -1,13 +1,16 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.message.email;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.db.DaoTemplate;
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
+import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseModelMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
 import com.google.common.collect.Lists;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +25,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailSendRecordMVO extends MyBaseModelMO<String> {
+public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
 
     /**
      * 发送者-相关信息

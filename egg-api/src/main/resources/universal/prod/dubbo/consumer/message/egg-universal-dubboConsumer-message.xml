@@ -10,7 +10,7 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.redis.service.user                                                              -->
     <dubbo:reference id="myBaseEmailService" check="false"
-                     interface="com.egg.manager.api.services.message.email.service.MyBaseEmailService" />
+                     interface="com.egg.manager.api.services.message.services.email.MyBaseEmailService" />
     <!--                                    dir-end:com.egg.manager.api.services.redis.service.user                                                              -->
 
 

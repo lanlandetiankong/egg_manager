@@ -8,10 +8,10 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!--                                    dir-start:com.egg.manager.api.services.message.hello                                                               -->
-    <dubbo:service protocol="dubbo" ref="messageHelloService" interface="com.egg.manager.api.services.message.hello.MessageHelloService"/>
+    <!--                                    dir-start:com.egg.manager.api.services.message.services.hello                                                               -->
+    <dubbo:service protocol="dubbo" ref="messageHelloService" interface="com.egg.manager.api.services.message.services.hello.MessageHelloService"/>
 
-    <!--                                    dir-end:com.egg.manager.api.services.message.hello                                                                -->
+    <!--                                    dir-end:com.egg.manager.api.services.message.services.hello                                                                -->
 
 
 </beans>

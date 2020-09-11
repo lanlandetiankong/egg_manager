@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.define;
 
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.define.DefineJobMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define.DefineJobMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 import org.mapstruct.Named;

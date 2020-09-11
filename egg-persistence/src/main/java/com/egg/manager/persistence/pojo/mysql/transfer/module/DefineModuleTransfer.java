@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.module;
 
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.module.DefineModuleMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.module.DefineModuleMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 import org.mapstruct.Named;

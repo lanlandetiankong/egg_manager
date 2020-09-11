@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.role;
 
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.mysql.dto.role.RoleMenuDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.role.RoleMenuMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.role.RoleMenuMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
 import org.mapstruct.Named;

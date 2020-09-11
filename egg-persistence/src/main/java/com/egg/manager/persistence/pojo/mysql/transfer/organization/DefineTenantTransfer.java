@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.organization;
 
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.organization.DefineTenantMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.organization.DefineTenantMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 import org.mapstruct.Named;

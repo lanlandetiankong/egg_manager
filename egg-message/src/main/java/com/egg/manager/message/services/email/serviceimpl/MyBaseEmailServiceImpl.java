@@ -3,7 +3,7 @@ package com.egg.manager.message.services.email.serviceimpl;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
 import com.egg.manager.persistence.pojo.common.message.mail.MyEmailMsgO;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.message.mail.MessageMailMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.message.mail.MessageMailMapstruct;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +29,10 @@ import java.util.Map;
 @Service
 public class MyBaseEmailServiceImpl implements MyBaseEmailService {
     @Autowired
+    private MessageMailMapstruct messageMailMapstruct;
+
+
+    @Autowired
     private JavaMailSender javaMailSender;
     @Autowired
     public Configuration configuration;
@@ -37,8 +41,7 @@ public class MyBaseEmailServiceImpl implements MyBaseEmailService {
     @Value("${spring.application.name}")
     private String DEFAULT_SEND_PERSONAL_USER_NAME;
 
-    @Autowired
-    private MessageMailMapstruct messageMailMapstruct;
+
 
 
     @Override

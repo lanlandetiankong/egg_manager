@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.transfer.forms;
 
-import com.egg.manager.persistence.pojo.mongo.mapstruct.forms.SmartFormDefinitionMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.forms.SmartFormDefinitionMapstruct;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

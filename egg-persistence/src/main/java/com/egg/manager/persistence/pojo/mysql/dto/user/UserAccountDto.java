@@ -5,7 +5,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
-import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

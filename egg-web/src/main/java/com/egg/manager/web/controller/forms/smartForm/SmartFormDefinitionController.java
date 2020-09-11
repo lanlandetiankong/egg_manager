@@ -16,7 +16,7 @@ import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormTypeDefinitionRepository;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.mongo.mapstruct.forms.SmartFormDefinitionMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.forms.SmartFormDefinitionMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormDefinitionMVO;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartForm.SmartFormDefinitionMongoVerifyO;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfCreate;

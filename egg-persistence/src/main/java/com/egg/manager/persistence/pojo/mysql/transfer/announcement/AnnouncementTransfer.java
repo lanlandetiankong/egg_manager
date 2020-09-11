@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.announcement.AnnouncementMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.announcement.AnnouncementMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
 import com.google.common.base.Joiner;

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.user;
 
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.user.UserDepartmentMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.user.UserDepartmentMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
 import org.mapstruct.Named;

@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class EmailSendRecordMongoVerifyO extends MyBaseMongoVerifyO<EmailSendRecordMVO> {
+public class EmailSendRecordMongoVerifyO extends MyBaseMongoVerifyO {
 
 
     @NotBlank(groups = {VerifyGroupOfUpdate.class},message = "[fid]不能为空!")

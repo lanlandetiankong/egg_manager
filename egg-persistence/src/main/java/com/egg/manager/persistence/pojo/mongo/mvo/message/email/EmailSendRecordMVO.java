@@ -1,7 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.message.email;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseModelMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;

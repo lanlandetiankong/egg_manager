@@ -2,6 +2,7 @@ package com.egg.manager.persistence.db.mongo.mo.message.email;
 
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
 import lombok.*;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -40,7 +41,7 @@ public class EmailSendRecordMO extends MyBaseModelMO<String> {
     /**
      * 接收方邮件(必填参数)
      */
-    private List<EmailFromUserInfoMVO> receiveUserInfoList ;
+    private List<EmailReceiveUserInfoMVO> receiveUserInfoList ;
     /**
      * 邮件内容
      */

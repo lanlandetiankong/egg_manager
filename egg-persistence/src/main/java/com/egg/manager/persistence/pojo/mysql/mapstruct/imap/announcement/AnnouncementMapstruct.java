@@ -11,9 +11,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Map;
 
-/**
- * TODO
- */
+
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementConversion.class}

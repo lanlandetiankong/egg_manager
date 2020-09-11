@@ -31,7 +31,6 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
     }
 
     /**
-     * TODO
      * @param entity
      * @param announcementTagMap
      * @return

@@ -8,9 +8,7 @@ import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftV
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-/**
- * TODO
- */
+
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementDraftConversion.class}

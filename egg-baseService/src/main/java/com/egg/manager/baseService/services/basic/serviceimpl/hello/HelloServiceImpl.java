@@ -6,7 +6,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.basic.hello.HelloService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
-import com.egg.manager.persistence.pojo.common.message.mail.MyEmailMsgO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +33,7 @@ public class HelloServiceImpl implements HelloService {
     public String sayHello() {
         //userAccountService.selectPage(null);
 
-        myBaseEmailService.sendSimpleEmail(MyEmailMsgO.builder().content("测试").build());
+        myBaseEmailService.sendSimpleEmail(EmailSendRecordMVO.builder().content("测试").build());
         return "ok";
     }
 

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.db.mongo.repositoryImpl.log;
+package com.egg.manager.persistence.db.mongo.repositoryImpl.log.pc.web;
 
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;

@@ -157,7 +157,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      * @param token
      */
     private void handleSetUserAccountBean(ServletRequest request,ServletResponse response,JwtShiroToken token) {
-        //TODO 改为dubbo取得
          if(this.userAccountService == null) {
              this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class) ;
          }

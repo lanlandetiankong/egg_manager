@@ -17,7 +17,7 @@ public interface UserAccountTokenMapstruct {
     UserAccountTokenMapstruct INSTANCE = Mappers.getMapper(UserAccountTokenMapstruct.class);
 
     /**
-     * 复制MyEmailMsgO 到 SimpleMailMessage
+     * 复制-UserAccount->UserAccountToken
      *
      * @param userAccount
      * @return

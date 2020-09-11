@@ -4,9 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.message.email.service.MyBaseEmailService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.common.message.mail.MyEmailMsgO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 import com.egg.manager.web.controller.BaseController;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,9 +42,10 @@ public class HelloMailController extends BaseController{
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
         try{
             String[] receiveEmails = new String[]{"2773756340@qq.com"} ;
-            MyEmailMsgO emailDto = MyEmailMsgO.builder().subject("邮件标题123")
+            EmailSendRecordMVO emailDto = EmailSendRecordMVO.builder().subject("邮件标题123")
                     .content("邮件内容123")
-                    .receiveEmails(receiveEmails).build();
+                    .receiveUserInfoList(Lists.newArrayList(EmailReceiveUserInfoMVO.builder().emailAddress("2773756340@qq.com").build()))
+                    .build();
             myBaseEmailService.sendSimpleEmail(emailDto);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

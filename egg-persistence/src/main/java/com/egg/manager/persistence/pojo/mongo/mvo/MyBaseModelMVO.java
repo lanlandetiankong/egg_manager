@@ -2,11 +2,10 @@ package com.egg.manager.persistence.pojo.mongo.mvo;
 
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class MyBaseModelMVO<K> implements Serializable {
+public class MyBaseModelMVO<K> extends MyBaseMVO {
     private K fid;
     /**
      * 顺序

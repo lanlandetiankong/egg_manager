@@ -3,8 +3,8 @@ package com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartFo
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.MyBaseMongoVerifyO;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfDefault;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfUpdate;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfUpdate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

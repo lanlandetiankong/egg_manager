@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup;
+package com.egg.manager.persistence.pojo.common.verification.igroup;
 
 /**
  * \* note: 更新form 验证分组

@@ -16,8 +16,8 @@ import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRe
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfCreate;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfCreate;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.message.email.EmailSendRecordMongoVerifyO;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;

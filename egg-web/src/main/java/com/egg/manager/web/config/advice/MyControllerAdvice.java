@@ -5,6 +5,7 @@ import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.exception.MyParamJsonException;
 import com.egg.manager.common.exception.MyUnauthorizedException;
+import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
@@ -156,6 +157,22 @@ public class MyControllerAdvice {
         return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
     }
 
+
+    /**
+     * 登录表单字段缺失异常-处理
+     * @param ex
+     * @param request
+     * @param response
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(LoginFormFieldDeficiencyException.class)
+    @ResponseBody
+    public MyCommonResult handleLoginFormFieldDeficiencyException(LoginFormFieldDeficiencyException ex, HttpServletRequest request, HttpServletResponse response) {
+        LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
+        StringBuffer errorMsg=new StringBuffer("表单验证错误信息:"+c.getMessage());
+        log.error(errorMsg.toString());
+        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+    }
 
     public Integer getStatusCodeByException(Exception ex){
         Integer statusCode = null ;

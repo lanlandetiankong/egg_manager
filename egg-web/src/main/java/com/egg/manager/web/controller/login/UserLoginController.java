@@ -8,7 +8,10 @@ import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.bean.webvo.verification.login.LoginAccountVerifyO;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfCreate;
+import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.web.config.shiro.JwtShiroToken;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.ApiImplicitParam;
@@ -18,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,14 +44,16 @@ public class UserLoginController extends BaseController {
     @Autowired
     private UserAccountService userAccountService ;
 
-    @PcWebLoginLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/user_account/login/account")
+    @PcWebLoginLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/user_account/login/byAccountForm")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的相关信息", required = true,dataTypeClass= LoginAccountVo.class),
     })
     @ShiroPass
     @PostMapping(value = "/byAccountForm")
-    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo) {
+    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request,LoginAccountVo loginAccountVo,
+                                                             @Validated({VerifyGroupOfDefault.class})LoginAccountVerifyO loginAccountVerifyO
+                                                             ) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{
             //判断前端传递的

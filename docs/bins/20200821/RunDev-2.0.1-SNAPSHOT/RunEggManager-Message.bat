@@ -1,4 +1,5 @@
 @echo off
+title EggManager-Message
 ::使用utf8编码
 chcp 65001
 ::变量声明

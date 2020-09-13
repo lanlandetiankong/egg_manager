@@ -44,7 +44,7 @@ public class UserLoginController extends BaseController {
     @Autowired
     private UserAccountService userAccountService ;
 
-    @PcWebLoginLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/user_account/login/byAccountForm")
+    @PcWebLoginLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/login/byAccountForm")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class,httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的相关信息", required = true,dataTypeClass= LoginAccountVo.class),
@@ -60,7 +60,6 @@ public class UserLoginController extends BaseController {
             if(loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(),loginAccountVo.getPassword())) {
                 throw new LoginFormFieldDeficiencyException("账号名或密码");
             }
-            UserAccount s = userAccountService.selectById("s");
             UserAccount userAccount = userAccountService.dealGetAccountByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             if(userAccount == null) {
                 throw new Exception("账号未注册！");

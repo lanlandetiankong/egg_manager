@@ -27,7 +27,7 @@ public class FileUtil {
 
     //2M
     public static final int FILE_SIZE = 1000000;
-    private static ResourceBundle bundle = ResourceBundle.getBundle("config/constant");
+    private static ResourceBundle bundle = ResourceBundle.getBundle("configResources.config/constant");
     public static String fileUploadPath =bundle.getString("file-upload.dir");
 
     /**

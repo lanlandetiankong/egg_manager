@@ -94,7 +94,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/configResources</directory>
                 <includes>
                     <include>config/logs/**.*</include>
                     <include>config/props/props-${profiles.active}-*.*</include>
@@ -102,9 +102,12 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources/universal/${profiles.active}</directory>
+                <directory>src/main/resources/envResources/universal/</directory>
+                <includes>
+                    <include>${profiles.active}/**/*</include>
+                </includes>
                 <filtering>true</filtering>
-                <targetPath>universal/${profiles.active}</targetPath>
+                <targetPath>universal</targetPath>
             </resource>
         </resources>
     </build>

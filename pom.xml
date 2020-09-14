@@ -53,7 +53,7 @@
         <jasypt-spring-boot-starter.version>3.0.3</jasypt-spring-boot-starter.version>
         <scala-bcrypt_2.10.version>2.3</scala-bcrypt_2.10.version>
         <rest-assured.version>2.9.0</rest-assured.version>
-        <ant.version>1.9.7</ant.version>
+        <ant.version>1.9.15</ant.version>
         <velocity.version>1.7</velocity.version>
         <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
         <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>

@@ -55,8 +55,15 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
      * 根据用户id查询 所属的部门详情
      *
      * @param userAccountId
-     * @param tenantState
+     * @param departmentState
      * @return
      */
     DefineDepartment selectOneOfUserBelongDepartment(@Param("userAccountId") String userAccountId, @Param("departmentState") Short departmentState);
+
+    /**
+     * 根据用户id查询 所属的部门详情-dto
+     * @param userAccountId
+     * @return
+     */
+    DefineDepartment selectOneDtoOfUserBelongDepartment(@Param("userAccountId") String userAccountId);
 }

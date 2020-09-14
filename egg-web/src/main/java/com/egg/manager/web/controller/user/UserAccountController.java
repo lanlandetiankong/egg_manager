@@ -119,7 +119,7 @@ public class UserAccountController extends BaseController {
                 userAccountVo.setBelongTenantId(belongTenant.getFid());
                 userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
             }
-            //取得 所属的 租户定义
+            //取得 所属的 部门定义
             DefineDepartment belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(),BaseStateEnum.ENABLED.getValue());
             if(belongDepartment != null){
                 userAccountVo.setBelongDepartmentId(belongDepartment.getFid());

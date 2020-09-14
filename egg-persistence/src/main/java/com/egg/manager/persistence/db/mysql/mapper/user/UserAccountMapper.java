@@ -39,7 +39,8 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      */
     List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
                                          @Param("sortFieldList") List<AntdvSortBean> sortBeans,
-                                         @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList
+                                         @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList,
+                                         @Param("queryDepartmentFieldBeanList") List<QueryFormFieldBean> queryDepartmentFieldBeanList
     );
 
 

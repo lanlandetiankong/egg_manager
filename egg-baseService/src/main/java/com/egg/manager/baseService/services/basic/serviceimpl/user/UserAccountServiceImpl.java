@@ -124,18 +124,25 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
         //用户与租户关联 的外表-搜索条件
         List<QueryFormFieldBean> queryTenantFieldBeanList = new ArrayList<QueryFormFieldBean>();
+        //用户与部门关联 的外表-搜索条件
+        List<QueryFormFieldBean> queryDepartmentFieldBeanList = new ArrayList<QueryFormFieldBean>();
         for(QueryFormFieldBean queryFormFieldBean : queryFieldBeanList){
             //外部关联名，条件需单独识别
             String foreignName = queryFormFieldBean.getForeignName() ;
             if(StringUtils.isBlank(foreignName)){
                 queryFieldBeanListTemp.add(queryFormFieldBean);
             }   else {
-                if(FOREIGN_NAME_OF_USER_TENANT.equals(foreignName)){   //foreignName匹配一致的会被认定为 指定表的 搜索条件
+                //foreignName匹配一致的会被认定为 指定表的 搜索条件
+                if(FOREIGN_NAME_OF_USER_TENANT.equals(foreignName)){
+                    //筛选-所属租户
                     queryTenantFieldBeanList.add(queryFormFieldBean);
+                }   else if(FOREIGN_NAME_OF_USER_DEPARTMENT.equals(foreignName)){
+                    //筛选-所属部门
+                    queryDepartmentFieldBeanList.add(queryFormFieldBean);
                 }
             }
         }
-        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList);
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp,sortBeans,queryTenantFieldBeanList,queryDepartmentFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result ;

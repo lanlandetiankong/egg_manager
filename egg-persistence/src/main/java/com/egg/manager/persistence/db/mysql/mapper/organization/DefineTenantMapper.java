@@ -42,6 +42,13 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
     DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId") String userAccountId, @Param("tenantState") Short tenantState);
 
     /**
+     * 根据用户id查询 所属的租户详情-dto
+     * @param userAccountId
+     * @return
+     */
+    DefineTenantDto selectOneDtoOfUserBelongTenant(@Param("userAccountId") String userAccountId);
+
+    /**
      * 批量 伪删除
      *
      * @param delIds

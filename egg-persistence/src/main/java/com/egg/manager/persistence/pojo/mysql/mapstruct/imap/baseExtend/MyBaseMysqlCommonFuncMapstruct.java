@@ -9,6 +9,7 @@ import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define.DefineDepartmentMapstruct;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.organization.DefineTenantMapstruct;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.user.UserAccountMapstruct;
@@ -135,11 +136,20 @@ public interface MyBaseMysqlCommonFuncMapstruct<E,V extends MyBaseMysqlVo,D exte
     }
 
     /**
+     * 租户 dto转为vo
+     * @param dto
+     * @return
+     */
+    default DefineTenantVo commonTranslateDefineTenantDtoToVo(DefineTenantDto dto){
+        return defineTenantMapstruct.transferDtoToVo(dto);
+    }
+
+    /**
      * 部门 dto转为vo
      * @param dto
      * @return
      */
-    default DefineDepartmentVo commonTranslateDefineTenantDtoToVo(DefineDepartmentDto dto){
+    default DefineDepartmentVo commonTranslateDefineDepartmentDtoToVo(DefineDepartmentDto dto){
         return defineDepartmentMapstruct.transferDtoToVo(dto);
     }
 }

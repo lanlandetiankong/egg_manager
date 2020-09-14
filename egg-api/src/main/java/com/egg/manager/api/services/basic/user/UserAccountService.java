@@ -25,6 +25,7 @@ import java.util.Set;
 public interface UserAccountService extends IService<UserAccount> {
 
     String FOREIGN_NAME_OF_USER_TENANT = "userTenant" ;
+    String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment" ;
 
 
 

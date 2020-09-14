@@ -45,7 +45,8 @@
         <result column="last_modifyer_id" property="lastModifyerId" />
         <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="fid" property="belongTenant" fetchType="lazy"  select="com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper.selectById" />
+        <association column="fid" property="belongTenant" fetchType="lazy"  select="com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper.selectOneDtoOfUserBelongTenant" />
+        <association column="fid" property="belongDepartment" fetchType="lazy"  select="com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper.selectOneDtoOfUserBelongDepartment" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -117,11 +118,20 @@
         FROM em_user_account eua
         left join em_user_tenant eut
         on eua.fid = eut.user_account_id
+        left join em_user_department eud
+        on eua.fid = eud.user_account_id
         <where>
             <if test="queryTenantFieldBeanList != null and queryTenantFieldBeanList.size()>0">
                 <foreach collection="queryTenantFieldBeanList" index="index" item="item" separator="">
                     <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql" >
                         <property name="table_name_alias" value="eut" />
+                    </include>
+                </foreach>
+            </if>
+            <if test="queryDepartmentFieldBeanList != null and queryDepartmentFieldBeanList.size()>0">
+                <foreach collection="queryDepartmentFieldBeanList" index="index" item="item" separator="">
+                    <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql" >
+                        <property name="table_name_alias" value="eud" />
                     </include>
                 </foreach>
             </if>

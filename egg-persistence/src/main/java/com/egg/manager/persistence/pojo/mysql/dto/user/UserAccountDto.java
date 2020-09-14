@@ -5,6 +5,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -78,7 +79,7 @@ public class UserAccountDto extends MyBaseMysqlDto {
     /**
      * 所属租户-vo
      */
-    private DefineTenant belongTenant;
+    private DefineTenantDto belongTenant;
 
     /**
      * 所属用户组_id

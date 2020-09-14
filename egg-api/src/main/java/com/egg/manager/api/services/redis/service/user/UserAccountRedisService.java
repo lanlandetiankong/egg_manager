@@ -2,6 +2,7 @@ package com.egg.manager.api.services.redis.service.user;
 
 import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 
 import java.util.List;
@@ -29,6 +30,19 @@ public interface UserAccountRedisService extends MyRedisCommonReqService {
      * @return
      */
     UserAccount dealGetCurrentUserEntity(String authorization, String userAccountId, boolean almostRefresh);
+
+    /**
+     * 根据 jwt的authorization值 取得 当前租户 Entity
+     * @param authorization jwt值
+     * @return
+     */
+    DefineTenant dealGetCurrentLoginerBelongTenantByAuthorization(String authorization) ;
+    /**
+     * 根据 jwt的authorization值 取得 当前用户所属租户 Entity
+     * @param authorization jwt值
+     * @return
+     */
+    DefineTenant dealGetCurrentUserBelongTenantEntity(String authorization,String defineTenantId,boolean almostRefresh);
 
     /**
      *  取得 当前用户 的所有 角色-Set<String>

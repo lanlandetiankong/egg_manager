@@ -1,14 +1,11 @@
-package com.egg.manager.web.config.shiro;
+package com.egg.manager.web.config.resolver;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -26,11 +23,6 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  */
 public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodArgumentResolver{
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
-
-    @Reference
-    private RedisHelper redisHelper ;
     @Reference
     private UserAccountRedisService userAccountRedisService ;
 

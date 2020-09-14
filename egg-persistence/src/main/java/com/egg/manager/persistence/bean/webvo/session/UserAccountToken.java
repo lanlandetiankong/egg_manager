@@ -33,6 +33,10 @@ public class UserAccountToken extends MyBaseWebVo {
      */
     private String userAccountId;
     /**
+     * 所属租户_id
+     */
+    private String userBelongTenantId;
+    /**
      * token
      */
     private String token;

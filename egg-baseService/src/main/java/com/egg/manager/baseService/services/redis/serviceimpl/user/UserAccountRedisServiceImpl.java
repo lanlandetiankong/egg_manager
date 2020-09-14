@@ -13,6 +13,7 @@ import com.egg.manager.baseService.services.redis.serviceimpl.common.MyRedisComm
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -86,6 +87,39 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     public UserAccount dealGetCurrentUserEntity(String authorization,String userAccountId,boolean almostRefresh) {
         return dealAutoGetRedisObjectCache(redisPropsOfShiroCache.getUserAccountKey(),authorization,userAccountId,UserAccount.class,
                                 almostRefresh,redisPropsOfShiroCache.getUserAccountTtl());
+    }
+
+    @Override
+    public DefineTenant dealGetCurrentLoginerBelongTenantByAuthorization(String authorization){
+        if(StringUtils.isNotBlank(authorization)){
+            Object obj = redisHelper.hashGet(redisPropsOfShiroCache.getAuthorizationKey(),authorization);
+            if(obj != null){
+                String objStr = "" ;
+                if(obj instanceof String){
+                    objStr = (String) obj ;
+                }   else {
+                    objStr = JSONObject.toJSONString(obj);
+                }
+                UserAccountToken accountToken = JSONObject.parseObject(objStr,UserAccountToken.class) ;
+                if(accountToken != null){
+                    String tenantId = accountToken.getUserBelongTenantId();
+                    return dealGetCurrentUserBelongTenantEntity(authorization,tenantId,false);
+                }
+            }
+        }
+        return null ;
+    }
+
+    /**
+     * 取得 当前用户所属租户 Entity
+     *
+     * @param defineTenantId
+     * @return
+     */
+    @Override
+    public DefineTenant dealGetCurrentUserBelongTenantEntity(String authorization,String defineTenantId,boolean almostRefresh) {
+        return dealAutoGetRedisObjectCache(redisPropsOfShiroCache.getUserTenantKey(),authorization,defineTenantId,DefineTenant.class,
+                almostRefresh,redisPropsOfShiroCache.getUserTenantTtl());
     }
 
     /**

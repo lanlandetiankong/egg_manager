@@ -49,7 +49,7 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        DefineTenant defineTenant = (DefineTenant) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST) ;
+        DefineTenant defineTenant = (DefineTenant) nativeWebRequest.getAttribute("currentLoginerBelongTenant", RequestAttributes.SCOPE_REQUEST) ;
         if(defineTenant == null){
             String authorization = nativeWebRequest.getHeader("authorization");
             if(StringUtils.isNotBlank(authorization)){

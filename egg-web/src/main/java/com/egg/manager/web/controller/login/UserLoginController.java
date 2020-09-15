@@ -10,8 +10,11 @@ import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.bean.webvo.verification.login.LoginAccountVerifyO;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfCreate;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
+import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
+import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.web.config.shiro.JwtShiroToken;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.ApiImplicitParam;
@@ -41,6 +44,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("user/login")
 public class UserLoginController extends BaseController {
 
+    @Autowired
+    private DefineTenantMapper defineTenantMapper ;
+    @Autowired
+    private DefineDepartmentMapper defineDepartmentMapper ;
     @Autowired
     private UserAccountService userAccountService ;
 
@@ -75,7 +82,16 @@ public class UserLoginController extends BaseController {
                     JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
                     //进行验证，这里可以捕获异常，然后返回对应信息
                     subject.login(jwtShiroToken);
-
+                    //所属租户
+                    DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccount.getFid());
+                    if(defineTenantDto != null){
+                        userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
+                    }
+                    //所属部门
+                    DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccount.getFid());
+                    if(defineDepartmentDto != null){
+                        userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
+                    }
                     userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
                     this.dealSetTokenToRedis(userAccountToken,result) ;

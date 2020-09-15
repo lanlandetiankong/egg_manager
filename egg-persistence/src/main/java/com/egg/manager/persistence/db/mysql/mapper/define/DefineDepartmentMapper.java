@@ -65,5 +65,5 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
      * @param userAccountId
      * @return
      */
-    DefineDepartment selectOneDtoOfUserBelongDepartment(@Param("userAccountId") String userAccountId);
+    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param("userAccountId") String userAccountId);
 }

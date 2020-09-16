@@ -111,7 +111,15 @@ public class MpGenerator {
             @Override
             public void initMap() {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("abc", this.getConfig().getGlobalConfig().getAuthor() + "-mp");
+                map.put("abc", this.getConfig().getGlobalConfig().getAuthor());
+                //模块名-中文
+                map.put("moduleName_Cn","模块定义");
+                map.put("baseReqUrl","/define/define_module");
+                map.put("baseEntityName","DefineModule");
+                map.put("baseEntityName_firstLow","defineModule");
+
+
+
                 this.setMap(map);
             }
         };

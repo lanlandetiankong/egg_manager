@@ -118,6 +118,8 @@ public class MpGenerator {
                 map.put("baseEntityName","DefineModule");
                 map.put("baseEntityName_firstLow","defineModule");
 
+                //swagger注解
+                map.put("swagger2",true);
 
 
                 this.setMap(map);

@@ -2,7 +2,12 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 /**
  * <p>
  * $!{table.comment} Mapper 接口

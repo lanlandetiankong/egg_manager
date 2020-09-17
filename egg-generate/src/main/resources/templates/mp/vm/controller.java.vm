@@ -75,8 +75,8 @@ public class ${table.controllerName} {
     @PostMapping(value = "/getAllDtos")
     public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos(HttpServletRequest request,String queryObj,String paginationObj,String sortObj,
     @CurrentLoginUser UserAccount loginUser){
-            MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
-            try{
+        MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
+        try{
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList=this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state",BaseStateEnum.ENABLED.getValue()));
@@ -86,69 +86,69 @@ public class ${table.controllerName} {
             List<AntdvSortBean> sortBeans=parseSortJsonToBean(sortObj,true);
             result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询${cfg.moduleName_Cn}-Dto列表:"+actionSuccessMsg);
-            }catch(Exception e){
+        }catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        }
+        return result;
+    }
 
 
     @ApiOperation(value = "查询${cfg.moduleName_Cn}", notes = "根据${cfg.moduleName_Cn}id查询${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebQueryLog(action = "查询${cfg.moduleName_Cn}", description = "根据${cfg.moduleName_Cn}id查询${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/getOneItemById")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser UserAccount loginUser){
-            MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
-            try{
+        MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
+        try{
             ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow}=${cfg.baseEntityName_firstLow}Mapper.selectById(${cfg.baseEntityName_firstLow}Id);
             result.setBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
             dealCommonSuccessCatch(result,"查询${cfg.moduleName_Cn}:"+actionSuccessMsg);
-            }catch(Exception e){
+        }catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        }
+        return result;
+    }
 
 
     @ApiOperation(value = "新增${cfg.moduleName_Cn}", notes = "表单方式新增${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增${cfg.moduleName_Cn}", description = "表单方式新增${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/addByForm")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
-            MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
-            Integer addCount=0;
-            try{
+        MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
+        Integer addCount=0;
+        try{
             if(${cfg.baseEntityName_firstLow}Vo==null){
-            throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
-            }else{
-            addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
+                throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
+            }   else{
+                addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增${cfg.moduleName_Cn}:"+actionSuccessMsg);
-            }catch(Exception e){
+        }   catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        }
+        return result;
+    }
 
 
     @ApiOperation(value = "更新${cfg.moduleName_Cn}", notes = "表单方式更新${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "更新${cfg.moduleName_Cn}", description = "表单方式更新${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
-            MyCommonResult result=new MyCommonResult();
-            Integer changeCount=0;
-            try{
-            if(${cfg.baseEntityName_firstLow}Vo==null){
-            throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
-            }else{
-            changeCount=${cfg.baseEntityName_firstLow}Service.dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser,false);
-            }
-            result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"更新${cfg.moduleName_Cn}:"+actionSuccessMsg);
-            }catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        MyCommonResult result=new MyCommonResult();
+        Integer changeCount=0;
+        try{
+        if(${cfg.baseEntityName_firstLow}Vo==null){
+        throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
+        }else{
+        changeCount=${cfg.baseEntityName_firstLow}Service.dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser,false);
+        }
+        result.setCount(changeCount);
+        dealCommonSuccessCatch(result,"更新${cfg.moduleName_Cn}:"+actionSuccessMsg);
+        }catch(Exception e){
+        this.dealCommonErrorCatch(log,result,e);
+        }
+        return result;
+    }
 
 
     @PcWebOperationLog(action = "批量删除${cfg.moduleName_Cn}", description = "批量删除${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/batchDelByIds")
@@ -158,19 +158,19 @@ public class ${table.controllerName} {
     })
     @PostMapping(value = "/batchDelByIds")
     public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,@CurrentLoginUser UserAccount loginUser){
-            MyCommonResult result=new MyCommonResult();
-            Integer delCount=0;
-            try{
-            if(delIds!=null&&delIds.length>0){
-            delCount=${cfg.baseEntityName_firstLow}Service.dealDel${cfg.baseEntityName}ByArr(delIds,loginUser);
-            dealCommonSuccessCatch(result,"批量删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
-            }
-            result.setCount(delCount);
-            }catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        MyCommonResult result=new MyCommonResult();
+        Integer delCount=0;
+        try{
+        if(delIds!=null&&delIds.length>0){
+        delCount=${cfg.baseEntityName_firstLow}Service.dealDel${cfg.baseEntityName}ByArr(delIds,loginUser);
+        dealCommonSuccessCatch(result,"批量删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
+        }
+        result.setCount(delCount);
+        }catch(Exception e){
+        this.dealCommonErrorCatch(log,result,e);
+        }
+        return result;
+    }
 
 
     @PcWebOperationLog(action = "删除${cfg.moduleName_Cn}", description = "根据id删除${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/delOneById")
@@ -180,18 +180,18 @@ public class ${table.controllerName} {
     })
     @PostMapping(value = "/delOneById")
     public MyCommonResult doDelOneById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-            MyCommonResult result=new MyCommonResult();
-            try{
-            if(StringUtils.isNotBlank(delId)){
-            Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
-            result.setCount(delCount);
-            dealCommonSuccessCatch(result,"删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
-            }
-            }catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
-            }
-            return result;
-            }
+        MyCommonResult result=new MyCommonResult();
+        try{
+        if(StringUtils.isNotBlank(delId)){
+        Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
+        result.setCount(delCount);
+        dealCommonSuccessCatch(result,"删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
+        }
+        }catch(Exception e){
+        this.dealCommonErrorCatch(log,result,e);
+        }
+        return result;
+    }
 
 
 

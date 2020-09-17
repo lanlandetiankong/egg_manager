@@ -16,5 +16,53 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}>
 #else
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
+
+        /**
+         * 分页查询 ${cfg.moduleName_Cn}列表
+         * @param result
+         * @param queryFormFieldBeanList
+         * @param paginationBean
+         */
+        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                            List<AntdvSortBean> sortBeans);
+
+        /**
+         * 分页查询 ${cfg.moduleName_Cn} Dto列表
+         * @param result
+         * @param queryFormFieldBeanList
+         * @param paginationBean
+         */
+        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                            List<AntdvSortBean> sortBeans);
+
+
+        /**
+         * ${cfg.moduleName_Cn}-新增
+         * @param ${cfg.baseEntityName}Vo
+         * @throws Exception
+         */
+        Integer dealAdd${cfg.baseEntityName}(UserAccount loginUser,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo) throws Exception;
+
+        /**
+         * ${cfg.moduleName_Cn}-更新
+         * @param ${cfg.baseEntityName}Vo
+         * @param updateAll 是否更新所有字段
+         * @throws Exception
+         */
+        Integer dealUpdate${cfg.baseEntityName}(UserAccount loginUser,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo, boolean updateAll) throws Exception;
+
+        /**
+         * ${cfg.moduleName_Cn}-删除
+         * @param delIds 要删除的${cfg.moduleName_Cn}id 集合
+         * @throws Exception
+         */
+        Integer dealDel${cfg.baseEntityName}ByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+
+        /**
+         * ${cfg.moduleName_Cn}-删除
+         * @param delId 要删除的${cfg.moduleName_Cn}id
+         * @throws Exception
+         */
+        Integer dealDel${cfg.baseEntityName}(UserAccount loginUser,String delId) throws Exception ;
 }
 #end

@@ -35,5 +35,30 @@
         ${table.fieldNames}
     </sql>
 
+
+
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+#foreach($field in ${table.commonFields})
+        ${base_alias_name}.${field.columnName},
+#end
+        ${table.fieldNames}
+    </sql>
+
+
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+#foreach($field in ${table.commonFields})
+        ${base_alias_name}.${field.columnName} AS ${base_alias_col_prefix}${field.columnName},
+#end
+        ${table.fieldNames}
+    </sql>
 #end
 </mapper>

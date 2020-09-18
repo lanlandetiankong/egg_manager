@@ -29,4 +29,7 @@ public class FrontEntitySelectBean  implements Serializable {
      */
     private String label ;
 
+
+
+
 }

@@ -4,6 +4,7 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
@@ -179,5 +180,18 @@ public class MyStringUtil {
             str += "......";
         }
         return str;
+    }
+
+    /**
+     * 首字母大写
+     * @param value
+     * @return
+     */
+    public static String captureFirstWord(String value) {
+        if(StringUtils.isBlank(value)){
+            return value ;
+        }
+        value = value.substring(0, 1).toUpperCase() + value.substring(1);
+        return  value;
     }
 }

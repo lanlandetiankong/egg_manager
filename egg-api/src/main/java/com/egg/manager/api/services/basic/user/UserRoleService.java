@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.user;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserRoleService extends IService<UserRole> {
+public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<UserRoleMapper,UserRole,UserRoleVo> {
 
     List<UserRole> dealGetAllUserRoleByAccount(UserAccount account);
 
@@ -34,7 +36,7 @@ public interface UserRoleService extends IService<UserRole> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserRoleVo> dealGetUserRolePages(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                     List<AntdvSortBean> sortBeans);
 
     /**

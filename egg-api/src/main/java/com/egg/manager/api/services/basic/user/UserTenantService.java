@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.user;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserTenantService extends IService<UserTenant> {
+public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlService<UserTenantMapper,UserTenant,UserTenantVo> {
 
     List<UserTenant> dealGetAllUserTenantByAccount(UserAccount account);
 
@@ -34,7 +36,7 @@ public interface UserTenantService extends IService<UserTenant> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserTenantVo> dealGetUserTenantPages(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**

@@ -70,7 +70,7 @@ public class UserDepartmentController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userDepartmentService.dealGetUserDepartmentPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
+            result = userDepartmentService.dealGetUserDepartmentPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询 [用户与部门关联] 信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

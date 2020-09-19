@@ -1,6 +1,7 @@
 package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -8,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 
 import java.util.List;
@@ -20,16 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineDepartmentService extends IService<DefineDepartment> {
-
-    /**
-     * 分页查询 部门 列表
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
-    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                    List<AntdvSortBean> sortBeans);
+public interface DefineDepartmentService extends IService<DefineDepartment>,MyBaseMysqlService<DefineDepartmentMapper,DefineDepartment,DefineDepartmentVo> {
 
     /**
      * 分页查询 部门 dto列表

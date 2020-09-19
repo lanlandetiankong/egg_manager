@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.module;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineModuleService extends IService<DefineModule> {
+public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlService<DefineModuleMapper,DefineModule,DefineModuleVo> {
 
 
     /**
@@ -28,7 +30,7 @@ public interface DefineModuleService extends IService<DefineModule> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealGetDefineModulePages(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**

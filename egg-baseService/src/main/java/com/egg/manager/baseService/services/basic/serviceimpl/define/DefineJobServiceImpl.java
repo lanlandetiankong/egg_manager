@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -37,7 +38,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = DefineJobService.class)
-public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob> implements DefineJobService {
+public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper,DefineJob,DefineJobVo> implements DefineJobService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -53,20 +54,12 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineJobVo> dealGetDefineJobPages(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                              List<AntdvSortBean> sortBeans){
-        //解析 搜索条件
-        EntityWrapper<DefineJob> defineJobEntityWrapper = new EntityWrapper<DefineJob>();
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineJobEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineJobEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineJobEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
+        //解析 搜索条件
+        EntityWrapper<DefineJob> defineJobEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
         //取得 总数
         Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -101,18 +94,9 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineJob(DefineJobVo defineJobVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
-        defineJob.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineJob.setState(BaseStateEnum.ENABLED.getValue());
-        defineJob.setCreateTime(now);
-        defineJob.setUpdateTime(now);
-        if(loginUser != null){
-            defineJob.setCreateUserId(loginUser.getFid());
-            defineJob.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = defineJobMapper.insert(defineJob) ;
-        return addCount ;
+        defineJob = super.doBeforeCreate(loginUser,defineJob,true);
+        return defineJobMapper.insert(defineJob) ;
     }
 
 
@@ -126,12 +110,8 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     @Override
     public Integer dealUpdateDefineJob(DefineJobVo defineJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineJobVo.setUpdateTime(now);
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
-        if(loginUser != null){
-            defineJob.setLastModifyerId(loginUser.getFid());
-        }
+        defineJob = super.doBeforeUpdate(loginUser,defineJob);
         if(updateAll){  //是否更新所有字段
             changeCount = defineJobMapper.updateAllColumnById(defineJob) ;
         }   else {
@@ -167,12 +147,8 @@ public class DefineJobServiceImpl extends ServiceImpl<DefineJobMapper,DefineJob>
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineJob(String delId,UserAccount loginUser) throws Exception{
-        DefineJob defineJob = DefineJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineJob.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineJobMapper.updateById(defineJob);
-        return delCount ;
+        DefineJob defineJob = super.doBeforeDeleteOneById(loginUser,DefineJob.class,delId);
+        return defineJobMapper.updateById(defineJob);
     }
 
 

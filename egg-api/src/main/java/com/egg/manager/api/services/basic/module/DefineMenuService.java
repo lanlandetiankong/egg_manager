@@ -3,6 +3,7 @@ package com.egg.manager.api.services.basic.module;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -12,6 +13,7 @@ import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
 
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefineMenuService extends IService<DefineMenu> {
+public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlService<DefineMenuMapper,DefineMenu,DefineMenuVo> {
 
     /**
      * 查询 用户 可访问的[菜单定义]
@@ -85,7 +87,7 @@ public interface DefineMenuService extends IService<DefineMenu> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**

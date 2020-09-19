@@ -4,12 +4,12 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -44,7 +44,8 @@ import java.util.Map;
  * \
  */
 @Service(interfaceClass = AnnouncementService.class)
-public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Announcement> implements AnnouncementService {
+public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper,Announcement,AnnouncementVo>
+        implements AnnouncementService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -67,20 +68,12 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<Announcement> announcementEntityWrapper = new EntityWrapper<Announcement>();
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
+        //解析 搜索条件
+        EntityWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -121,16 +114,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
-        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcement.setState(BaseStateEnum.ENABLED.getValue());
-        announcement.setCreateTime(now);
-        announcement.setUpdateTime(now);
-        if(loginUser != null){
-            announcement.setCreateUserId(loginUser.getFid());
-            announcement.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementMapper.insert(announcement) ;
-        return addCount ;
+        announcement = super.doBeforeCreate(loginUser,announcement,true);
+        return announcementMapper.insert(announcement) ;
     }
 
 
@@ -190,12 +175,8 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper,Anno
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncement(String delId,UserAccount loginUser) throws Exception{
-        Announcement announcement = Announcement.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            announcement.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = announcementMapper.updateById(announcement);
-        return delCount ;
+        Announcement announcement = super.doBeforeDeleteOneById(loginUser,Announcement.class,delId) ;
+        return announcementMapper.updateById(announcement);
     }
 
 }

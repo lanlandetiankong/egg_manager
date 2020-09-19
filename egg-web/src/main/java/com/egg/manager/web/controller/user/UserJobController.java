@@ -3,11 +3,13 @@ package com.egg.manager.web.controller.user;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
@@ -55,7 +57,8 @@ public class UserJobController extends BaseController{
             @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
     })
     @PostMapping(value = "/getAllUserJobs")
-    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj) {
+    public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
+                    ,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
         try{
             //解析 搜索条件
@@ -65,7 +68,7 @@ public class UserJobController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userJobService.dealGetUserJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans);
+            result = userJobService.dealGetUserJobPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -42,7 +43,8 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = DefineDepartmentService.class)
-public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMapper,DefineDepartment> implements DefineDepartmentService {
+public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDepartmentMapper,DefineDepartment,DefineDepartmentVo>
+        implements DefineDepartmentService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
     @Autowired
@@ -50,36 +52,6 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Reference
     private CommonFuncService commonFuncService ;
 
-
-
-    /**
-     * 分页查询 部门定义 列表
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
-    @Override
-    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                           List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
-        //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineDepartmentEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineDepartmentEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineDepartmentEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineDepartmentMapper.selectCount(defineDepartmentEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineDepartment> defineDepartments = defineDepartmentMapper.selectPage(rowBounds,defineDepartmentEntityWrapper) ;
-        result.setResultList(DefineDepartmentTransfer.transferEntityToVoList(defineDepartments));
-        return result ;
-    }
 
     /**
      * 分页查询 部门定义 dto列表
@@ -159,8 +131,8 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
+        defineDepartment = super.doBeforeCreate(loginUser,defineDepartment,true);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);
@@ -177,16 +149,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
             defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
-        defineDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineDepartment.setState(BaseStateEnum.ENABLED.getValue());
-        defineDepartment.setCreateTime(now);
-        defineDepartment.setUpdateTime(now);
-        if(loginUser != null){
-            defineDepartment.setCreateUserId(loginUser.getFid());
-            defineDepartment.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = defineDepartmentMapper.insert(defineDepartment) ;
-        return addCount ;
+        return defineDepartmentMapper.insert(defineDepartment) ;
     }
 
 
@@ -200,9 +163,8 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Override
     public Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineDepartmentVo.setUpdateTime(now);
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
+        defineDepartment = super.doBeforeUpdate(loginUser,defineDepartment);
         String parentId = defineDepartment.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineDepartment parentDepartment =defineDepartmentMapper.selectById(parentId);
@@ -218,9 +180,6 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
         }   else {
             defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
-        }
-        if(loginUser != null){
-            defineDepartment.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineDepartmentMapper.updateAllColumnById(defineDepartment) ;
@@ -255,11 +214,7 @@ public class DefineDepartmentServiceImpl extends ServiceImpl<DefineDepartmentMap
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineDepartment(String delId,UserAccount loginUser) throws Exception{
-        DefineDepartment defineDepartment = DefineDepartment.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineDepartment.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineDepartmentMapper.updateById(defineDepartment);
-        return delCount ;
+        DefineDepartment defineDepartment = super.doBeforeDeleteOneById(loginUser,DefineDepartment.class,delId);
+        return defineDepartmentMapper.updateById(defineDepartment);
     }
 }

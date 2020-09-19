@@ -78,7 +78,7 @@ public class UserRoleController  extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userRoleService.dealGetUserRolePages(result,queryFormFieldBeanList,paginationBean,sortBeans);
+            result = userRoleService.dealGetUserRolePages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
             dealCommonSuccessCatch(result,"查询用户角色信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

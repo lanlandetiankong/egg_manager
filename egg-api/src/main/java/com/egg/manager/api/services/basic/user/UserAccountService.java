@@ -2,11 +2,13 @@ package com.egg.manager.api.services.basic.user;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
@@ -22,7 +24,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface UserAccountService extends IService<UserAccount> {
+public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlService<UserAccountMapper,UserAccount,UserAccountVo> {
 
     String FOREIGN_NAME_OF_USER_TENANT = "userTenant" ;
     String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment" ;
@@ -38,7 +40,7 @@ public interface UserAccountService extends IService<UserAccount> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserAccountVo> dealGetUserAccountPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                           List<AntdvSortBean> sortBeans);
 
     /**

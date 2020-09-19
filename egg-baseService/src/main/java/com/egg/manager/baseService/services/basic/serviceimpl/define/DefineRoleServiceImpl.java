@@ -10,6 +10,7 @@ import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -48,7 +49,7 @@ import java.util.*;
  * \
  */
 @Service(interfaceClass = DefineRoleService.class)
-public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRole> implements DefineRoleService {
+public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapper,DefineRole,DefineRoleVo> implements DefineRoleService {
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
     @Reference
@@ -210,20 +211,12 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineRoleVo> dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineRoleVo> dealGetDefineRolePages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
+        EntityWrapper<DefineRole> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到defineRoleEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineRoleEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineRoleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -263,16 +256,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     public Integer dealAddDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
-        defineRole.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineRole.setState(BaseStateEnum.ENABLED.getValue());
-        defineRole.setCreateTime(now);
-        defineRole.setUpdateTime(now);
-        if(loginUser != null){
-            defineRole.setCreateUserId(loginUser.getFid());
-            defineRole.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = defineRoleMapper.insert(defineRole) ;
-        return addCount ;
+        defineRole = super.doBeforeCreate(loginUser,defineRole,true);
+        return  defineRoleMapper.insert(defineRole) ;
     }
 
 
@@ -286,12 +271,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Override
     public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineRoleVo.setUpdateTime(now);
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
-        if(loginUser != null){
-            defineRole.setLastModifyerId(loginUser.getFid());
-        }
+        defineRole = super.doBeforeUpdate(loginUser,defineRole);
         if(updateAll){  //是否更新所有字段
             changeCount = defineRoleMapper.updateAllColumnById(defineRole) ;
         }   else {
@@ -325,12 +306,8 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception{
-        DefineRole defineRole = DefineRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineRole.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineRoleMapper.updateById(defineRole);
-        return delCount ;
+        DefineRole defineRole = super.doBeforeDeleteOneById(loginUser,DefineRole.class,delId);
+        return defineRoleMapper.updateById(defineRole);
     }
 
 
@@ -389,7 +366,6 @@ public class DefineRoleServiceImpl extends ServiceImpl<DefineRoleMapper,DefineRo
                 }
             }
         }
-
         return changeCount ;
     }
 }

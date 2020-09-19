@@ -1,7 +1,10 @@
 package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineGroupMapper;
+import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
 
 /**
  * \* note:
@@ -11,7 +14,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
  * \* Description:
  * \
  */
-public interface DefineGroupService extends IService<DefineGroup> {
+public interface DefineGroupService extends IService<DefineGroup>,MyBaseMysqlService<DefineGroupMapper,DefineGroup,DefineGroupVo> {
 
 
 }

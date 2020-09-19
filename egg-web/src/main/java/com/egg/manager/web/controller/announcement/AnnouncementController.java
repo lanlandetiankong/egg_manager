@@ -151,7 +151,7 @@ public class AnnouncementController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
-            result = announcementService.dealGetAnnouncementPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
+            result = announcementService.dealGetAnnouncementPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询公告信息部分列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

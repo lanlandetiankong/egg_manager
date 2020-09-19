@@ -3,6 +3,7 @@ package com.egg.manager.api.services.basic.define;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -10,6 +11,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
 
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefinePermissionService extends IService<DefinePermission> {
+public interface DefinePermissionService extends IService<DefinePermission>,MyBaseMysqlService<DefinePermissionMapper,DefinePermission,DefinePermissionVo> {
 
     /**
      * 查询 所有[可用状态]的 [权限定义]
@@ -38,7 +40,7 @@ public interface DefinePermissionService extends IService<DefinePermission> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                     List<AntdvSortBean> sortBeans);
 
     /**

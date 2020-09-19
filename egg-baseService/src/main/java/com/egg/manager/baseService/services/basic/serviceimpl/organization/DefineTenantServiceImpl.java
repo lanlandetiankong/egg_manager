@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -21,6 +23,7 @@ import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapp
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
+import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +42,8 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = DefineTenantService.class)
-public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,DefineTenant> implements DefineTenantService {
+public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenantMapper,DefineTenant,DefineTenantVo>
+        implements DefineTenantService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -50,35 +54,6 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
 
 
 
-    /**
-     * 分页查询 租户
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
-    @Override
-    public MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                   List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefineTenant> defineTenantEntityWrapper = new EntityWrapper<DefineTenant>();
-        //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineTenantEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineTenantEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineTenantEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = defineTenantMapper.selectCount(defineTenantEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefineTenant> defineTenants = defineTenantMapper.selectPage(rowBounds,defineTenantEntityWrapper) ;
-        result.setResultList(DefineTenantTransfer.transferEntityToVoList(defineTenants));
-        return result ;
-    }
-
 
     /**
      * 分页查询 租户
@@ -88,7 +63,7 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -108,16 +83,8 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
-        defineTenant.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineTenant.setState(BaseStateEnum.ENABLED.getValue());
-        defineTenant.setCreateTime(now);
-        defineTenant.setUpdateTime(now);
-        if(loginUser != null){
-            defineTenant.setCreateUserId(loginUser.getFid());
-            defineTenant.setLastModifyerId(loginUser.getFid());
-        }
+        defineTenant = super.doBeforeCreate(loginUser,defineTenant,true);
         Integer addCount = defineTenantMapper.insert(defineTenant) ;
         return addCount ;
     }
@@ -133,12 +100,8 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     @Override
     public Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineTenantVo.setUpdateTime(now);
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
-        if(loginUser != null){
-            defineTenant.setLastModifyerId(loginUser.getFid());
-        }
+        defineTenant = super.doBeforeUpdate(loginUser,defineTenant);
         if(updateAll){  //是否更新所有字段
             changeCount = defineTenantMapper.updateAllColumnById(defineTenant) ;
         }   else {
@@ -172,12 +135,9 @@ public class DefineTenantServiceImpl extends ServiceImpl<DefineTenantMapper,Defi
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineTenant(String delId,UserAccount loginUser) throws Exception{
-        DefineTenant defineTenant = DefineTenant.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineTenant.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineTenantMapper.updateById(defineTenant);
-        return delCount ;
+        DefineTenant updateWrapper = super.doBeforeDeleteOneById(loginUser,DefineTenant.class,delId);
+        Integer count = defineTenantMapper.updateById(updateWrapper);
+        return count ;
     }
 
 

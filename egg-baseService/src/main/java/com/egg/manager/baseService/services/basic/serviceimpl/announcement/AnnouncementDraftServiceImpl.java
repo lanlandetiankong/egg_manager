@@ -3,18 +3,16 @@ package com.egg.manager.baseService.services.basic.serviceimpl.announcement;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
@@ -25,7 +23,6 @@ import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapp
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +40,7 @@ import java.util.Map;
  * \
  */
 @Service(interfaceClass = AnnouncementDraftService.class)
-public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftMapper,AnnouncementDraft>
+public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementDraftMapper,AnnouncementDraft,AnnouncementDraftVo>
         implements AnnouncementDraftService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
@@ -59,36 +56,6 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     private AnnouncementTagService announcementTagService ;
 
 
-    /**
-     * 分页查询 公告草稿
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
-    @Override
-    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                             List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<AnnouncementDraft> announcementDraftEntityWrapper = new EntityWrapper<AnnouncementDraft>();
-        //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementDraftEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementDraftEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementDraftEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-        //取得 总数
-        Integer total = announcementDraftMapper.selectCount(announcementDraftEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<AnnouncementDraft> announcementDrafts = announcementDraftMapper.selectPage(rowBounds,announcementDraftEntityWrapper) ;
-        //取得 公告标签 map
-        Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementDraftTransfer.transferEntityToVoList(announcementDrafts,announcementTagMap));
-        return result ;
-    }
 
     /**
      * 分页查询 公告草稿 dto列表
@@ -102,7 +69,6 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
                                                                                 List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
@@ -118,17 +84,9 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        AnnouncementDraft announcementDraft = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
-        announcementDraft.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcementDraft.setState(BaseStateEnum.ENABLED.getValue());
-        announcementDraft.setCreateTime(now);
-        announcementDraft.setUpdateTime(now);
-        if(loginUser != null){
-            announcementDraft.setCreateUserId(loginUser.getFid());
-            announcementDraft.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementDraftMapper.insert(announcementDraft) ;
+        AnnouncementDraft entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
+        entity = super.doBeforeCreate(loginUser,entity,true);
+        Integer addCount = announcementDraftMapper.insert(entity) ;
         return addCount ;
     }
 
@@ -140,26 +98,20 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
-        AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(announcementDraftVo.getFid());
-        announcementDraft.setTitle(announcementDraftVo.getTitle());
-        announcementDraft.setKeyWord(announcementDraftVo.getKeyWord());
-        announcementDraft.setPublishDepartment(announcementDraftVo.getPublishDepartment());
-        announcementDraft.setContent(announcementDraftVo.getContent());
+        AnnouncementDraft entity = announcementDraftMapper.selectById(announcementDraftVo.getFid());
+        entity = super.doBeforeUpdate(loginUser,entity);
+        entity.setTitle(announcementDraftVo.getTitle());
+        entity.setKeyWord(announcementDraftVo.getKeyWord());
+        entity.setPublishDepartment(announcementDraftVo.getPublishDepartment());
+        entity.setContent(announcementDraftVo.getContent());
         List<String> tagIds = announcementDraftVo.getTagIds();
         if(tagIds != null && tagIds.size() > 0){
-            announcementDraft.setTagIds(JSON.toJSONString(tagIds));
+            entity.setTagIds(JSON.toJSONString(tagIds));
         }   else {
-            announcementDraft.setTagIds("");
+            entity.setTagIds("");
         }
-        announcementDraft.setAccessory(announcementDraftVo.getAccessory());
-
-        announcementDraft.setUpdateTime(now);
-        if(loginUser != null){
-            announcementDraft.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementDraftMapper.updateById(announcementDraft) ;
-        return addCount ;
+        entity.setAccessory(announcementDraftVo.getAccessory());
+        return announcementDraftMapper.updateById(entity) ;
     }
 
 
@@ -192,12 +144,8 @@ public class AnnouncementDraftServiceImpl extends ServiceImpl<AnnouncementDraftM
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementDraft(String delId,UserAccount loginUser) throws Exception{
-        AnnouncementDraft announcementDraft = AnnouncementDraft.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            announcementDraft.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = announcementDraftMapper.updateById(announcementDraft);
-        return delCount ;
+        AnnouncementDraft announcementDraft = super.doBeforeDeleteOneById(loginUser,AnnouncementDraft.class,delId) ;
+        return announcementDraftMapper.updateById(announcementDraft);
     }
 
 

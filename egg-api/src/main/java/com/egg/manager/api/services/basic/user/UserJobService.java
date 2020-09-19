@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.user;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserJobService extends IService<UserJob> {
+public interface UserJobService extends IService<UserJob>,MyBaseMysqlService<UserJobMapper,UserJob,UserJobVo> {
 
     /**
      * 分页查询 用户职务列表
@@ -27,7 +29,7 @@ public interface UserJobService extends IService<UserJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserJobVo> dealGetUserJobPages(UserAccount loginUser,MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                   List<AntdvSortBean> sortBeans);
 
     /**

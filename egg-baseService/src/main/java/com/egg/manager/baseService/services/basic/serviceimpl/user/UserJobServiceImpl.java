@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -38,7 +39,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = UserJobService.class)
-public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> implements UserJobService {
+public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,UserJob,UserJobVo> implements UserJobService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -59,20 +60,12 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobVo> dealGetUserJobPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealGetUserJobPages(UserAccount loginUser,MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                          List<AntdvSortBean> sortBeans){
         //解析 搜索条件
-        EntityWrapper<UserJob> userJobEntityWrapper = new EntityWrapper<UserJob>();
+        EntityWrapper<UserJob> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 userJobEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userJobEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                userJobEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = userJobMapper.selectCount(userJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -107,16 +100,8 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserJob(UserJobVo userJobVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
-        userJob.setFid(MyUUIDUtil.renderSimpleUUID());
-        userJob.setState(BaseStateEnum.ENABLED.getValue());
-        userJob.setCreateTime(now);
-        userJob.setUpdateTime(now);
-        if(loginUser != null){
-            userJob.setCreateUserId(loginUser.getFid());
-            userJob.setLastModifyerId(loginUser.getFid());
-        }
+        userJob = super.doBeforeCreate(loginUser,userJob,true);
         Integer addCount = userJobMapper.insert(userJob) ;
         return addCount ;
     }
@@ -132,12 +117,8 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
     @Override
     public Integer dealUpdateUserJob(UserJobVo userJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        userJobVo.setUpdateTime(now);
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
-        if(loginUser != null){
-            userJob.setLastModifyerId(loginUser.getFid());
-        }
+        userJob = super.doBeforeUpdate(loginUser,userJob);
         if(updateAll){  //是否更新所有字段
             changeCount = userJobMapper.updateAllColumnById(userJob) ;
         }   else {
@@ -173,10 +154,7 @@ public class UserJobServiceImpl extends ServiceImpl<UserJobMapper,UserJob> imple
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception{
-        UserJob userJob = UserJob.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            userJob.setLastModifyerId(loginUser.getFid());
-        }
+        UserJob userJob = super.doBeforeDeleteOneById(loginUser,UserJob.class,delId);
         Integer delCount = userJobMapper.updateById(userJob);
         return delCount ;
     }

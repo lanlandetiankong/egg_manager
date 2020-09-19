@@ -1,0 +1,14 @@
+super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
+
+super.doBeforeCreate(loginUser,,true);
+
+super.doBeforeUpdate(loginUser,);
+
+super.doBeforeDeleteOneById(loginUser);
+
+
+UserAccount loginUser
+
+
+
+MyBaseMysqlServiceImpl

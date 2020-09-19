@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.organization;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 
 import java.util.List;
@@ -19,18 +21,10 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineTenantService extends IService<DefineTenant> {
+public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlService<DefineTenantMapper,DefineTenant,DefineTenantVo> {
 
 
 
-    /**
-     * 分页查询 租户
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
-    MyCommonResult<DefineTenantVo> dealGetDefineTenantPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                            List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 租户
@@ -39,7 +33,7 @@ public interface DefineTenantService extends IService<DefineTenant> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**

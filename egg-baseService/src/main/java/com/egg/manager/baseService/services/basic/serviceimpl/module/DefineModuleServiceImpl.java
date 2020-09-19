@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -38,7 +39,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = DefineModuleService.class)
-public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,DefineModule> implements DefineModuleService {
+public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModuleMapper,DefineModule,DefineModuleVo> implements DefineModuleService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -57,20 +58,12 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineModuleVo> dealGetDefineModulePages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealGetDefineModulePages(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineModule> defineModuleEntityWrapper = new EntityWrapper<DefineModule>();
+        EntityWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);;
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineModuleEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineModuleEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineModuleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -108,18 +101,9 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddDefineModule(DefineModuleVo defineModuleVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
-        defineModule.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineModule.setState(BaseStateEnum.ENABLED.getValue());
-        defineModule.setCreateTime(now);
-        defineModule.setUpdateTime(now);
-        if(loginUser != null){
-            defineModule.setCreateUserId(loginUser.getFid());
-            defineModule.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = defineModuleMapper.insert(defineModule) ;
-        return addCount ;
+        defineModule = super.doBeforeCreate(loginUser,defineModule,true);
+        return defineModuleMapper.insert(defineModule) ;
     }
 
 
@@ -133,12 +117,8 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Override
     public Integer dealUpdateDefineModule(DefineModuleVo defineModuleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineModuleVo.setUpdateTime(now);
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
-        if(loginUser != null){
-            defineModule.setLastModifyerId(loginUser.getFid());
-        }
+        defineModule = super.doBeforeUpdate(loginUser,defineModule);
         if(updateAll){  //是否更新所有字段
             changeCount = defineModuleMapper.updateAllColumnById(defineModule) ;
         }   else {
@@ -172,11 +152,7 @@ public class DefineModuleServiceImpl extends ServiceImpl<DefineModuleMapper,Defi
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineModule(String delId,UserAccount loginUser) throws Exception{
-        DefineModule defineModule = DefineModule.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineModule.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineModuleMapper.updateById(defineModule);
-        return delCount ;
+        DefineModule defineModule = super.doBeforeDeleteOneById(loginUser,DefineModule.class,delId);
+        return defineModuleMapper.updateById(defineModule);
     }
 }

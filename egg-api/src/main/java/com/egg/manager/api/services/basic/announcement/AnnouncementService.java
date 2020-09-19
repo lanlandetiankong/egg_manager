@@ -1,12 +1,16 @@
 package com.egg.manager.api.services.basic.announcement;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
+import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
+import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
 
@@ -21,7 +25,7 @@ import java.util.List;
  * \
  */
 
-public interface AnnouncementService extends IService<Announcement> {
+public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlService<AnnouncementMapper,Announcement,AnnouncementVo> {
 
 
     /**
@@ -44,7 +48,7 @@ public interface AnnouncementService extends IService<Announcement> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**

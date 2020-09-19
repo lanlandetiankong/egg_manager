@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -37,7 +38,8 @@ import java.util.*;
  * \
  */
 @Service(interfaceClass = AnnouncementTagService.class)
-public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMapper,AnnouncementTag> implements AnnouncementTagService {
+public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementTagMapper,AnnouncementTag,AnnouncementTagVo>
+        implements AnnouncementTagService {
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
@@ -56,20 +58,12 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                          List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = new EntityWrapper<AnnouncementTag>();
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 announcementTagEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(announcementTagEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                announcementTagEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
+        //解析 搜索条件
+        EntityWrapper<AnnouncementTag> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
         //取得 总数
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -122,18 +116,9 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
-        announcementTag.setFid(MyUUIDUtil.renderSimpleUUID());
-        announcementTag.setState(BaseStateEnum.ENABLED.getValue());
-        announcementTag.setCreateTime(now);
-        announcementTag.setUpdateTime(now);
-        if(loginUser != null){
-            announcementTag.setCreateUserId(loginUser.getFid());
-            announcementTag.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = announcementTagMapper.insert(announcementTag) ;
-        return addCount ;
+        super.doBeforeCreate(loginUser,announcementTag,true);
+        return announcementTagMapper.insert(announcementTag) ;
     }
 
 
@@ -147,12 +132,8 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Override
     public Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        announcementTagVo.setUpdateTime(now);
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
-        if(loginUser != null){
-            announcementTag.setLastModifyerId(loginUser.getFid());
-        }
+        announcementTag = super.doBeforeUpdate(loginUser,announcementTag);
         if(updateAll){  //是否更新所有字段
             changeCount = announcementTagMapper.updateAllColumnById(announcementTag) ;
         }   else {
@@ -186,10 +167,7 @@ public class AnnouncementTagServiceImpl extends ServiceImpl<AnnouncementTagMappe
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelAnnouncementTag(String delId,UserAccount loginUser) throws Exception{
-        AnnouncementTag announcementTag = AnnouncementTag.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            announcementTag.setLastModifyerId(loginUser.getFid());
-        }
+        AnnouncementTag announcementTag = super.doBeforeDeleteOneById(loginUser,AnnouncementTag.class,delId);
         Integer delCount = announcementTagMapper.updateById(announcementTag);
         return delCount ;
     }

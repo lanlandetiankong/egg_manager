@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineJobService extends IService<DefineJob> {
+public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService<DefineJobMapper,DefineJob,DefineJobVo> {
 
 
     /**
@@ -28,7 +30,7 @@ public interface DefineJobService extends IService<DefineJob> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealGetDefineJobPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealGetDefineJobPages(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                       List<AntdvSortBean> sortBeans);
 
     /**

@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.constant.define.UserAccountConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -44,7 +45,7 @@ import java.util.*;
  * \
  */
 @Service(interfaceClass = UserAccountService.class)
-public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAccount> implements UserAccountService{
+public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMapper,UserAccount,UserAccountVo> implements UserAccountService{
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
     @Autowired
@@ -86,22 +87,13 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                  List<AntdvSortBean> sortBeans){
         //解析 搜索条件
-        EntityWrapper<UserAccount> userAccountEntityWrapper = new EntityWrapper<UserAccount>();
+        EntityWrapper<UserAccount> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);;
 
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到userAccountEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userAccountEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                userAccountEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
-
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -161,24 +153,16 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
         if(this.dealCheckDuplicateKey(userAccountVo,new EntityWrapper<>())){
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
-        Date now = new Date() ;
         UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccount.setFid(MyUUIDUtil.renderSimpleUUID());
+        userAccount = super.doBeforeCreate(loginUser,userAccount,true);
         if(null == userAccountVo.getLocked()){  //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
         }
         userAccount.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
-        userAccount.setState(BaseStateEnum.ENABLED.getValue());
-        userAccount.setCreateTime(now);
-        userAccount.setUpdateTime(now);
         if(StringUtils.isBlank(userAccountVo.getPassword())){
             String pwd = UserAccountConstant.DEFAULT_PWD ;
             userAccountVo.setPassword(pwd);
             userAccount.setPassword(pwd);
-        }
-        if(loginUser != null){
-            userAccount.setCreateUserId(loginUser.getFid());
-            userAccount.setLastModifyerId(loginUser.getFid());
         }
         Integer addCount = userAccountMapper.insert(userAccount) ;
         //关联 租户
@@ -216,12 +200,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Integer changeCount = 0;
-        Date now = new Date() ;
-        userAccountVo.setUpdateTime(now);
         UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        if(loginUser != null){
-            userAccount.setLastModifyerId(loginUser.getFid());
-        }
+        userAccount = super.doBeforeUpdate(loginUser,userAccount);
         if(updateAll){  //是否更新所有字段
             changeCount = userAccountMapper.updateAllColumnById(userAccount) ;
         }   else {
@@ -287,12 +267,8 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper,UserAc
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception{
-        UserAccount userAccount = UserAccount.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            userAccount.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = userAccountMapper.updateById(userAccount);
-        return delCount ;
+        UserAccount userAccount = super.doBeforeDeleteOneById(loginUser,UserAccount.class,delId); ;
+        return userAccountMapper.updateById(userAccount);
     }
 
 

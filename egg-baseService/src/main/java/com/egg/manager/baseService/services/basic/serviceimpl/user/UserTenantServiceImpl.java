@@ -12,6 +12,7 @@ import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -44,7 +45,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = UserTenantService.class)
-public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTenant> implements UserTenantService {
+public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper,UserTenant,UserTenantVo> implements UserTenantService {
 
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
@@ -135,20 +136,12 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans){
         //解析 搜索条件
-        EntityWrapper<UserTenant> userTenantEntityWrapper = new EntityWrapper<UserTenant>();
+        EntityWrapper<UserTenant> userTenantEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);;
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到userTenantEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userTenantEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                userTenantEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = userTenantMapper.selectCount(userTenantEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -186,14 +179,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
     public Integer dealAddUserTenant(UserTenantVo userTenantVo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
-        userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
-        userTenant.setState(BaseStateEnum.ENABLED.getValue());
-        userTenant.setCreateTime(now);
-        userTenant.setUpdateTime(now);
-        if(loginUser != null){
-            userTenant.setCreateUserId(loginUser.getFid());
-            userTenant.setLastModifyerId(loginUser.getFid());
-        }
+        userTenant = super.doBeforeCreate(loginUser,userTenant,true);
         Integer addCount = userTenantMapper.insert(userTenant) ;
         return addCount ;
     }
@@ -209,12 +195,8 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
     @Override
     public Integer dealUpdateUserTenant(UserTenantVo userTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        userTenantVo.setUpdateTime(now);
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
-        if(loginUser != null){
-            userTenant.setLastModifyerId(loginUser.getFid());
-        }
+        userTenant = super.doBeforeUpdate(loginUser,userTenant);
         if(updateAll){  //是否更新所有字段
             changeCount = userTenantMapper.updateAllColumnById(userTenant) ;
         }   else {
@@ -250,10 +232,7 @@ public class UserTenantServiceImpl extends ServiceImpl<UserTenantMapper,UserTena
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserTenant(String delId,UserAccount loginUser) throws Exception{
-        UserTenant userTenant = UserTenant.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            userTenant.setLastModifyerId(loginUser.getFid());
-        }
+        UserTenant userTenant = super.doBeforeDeleteOneById(loginUser,UserTenant.class,delId); ;
         Integer delCount = userTenantMapper.updateById(userTenant);
         return delCount ;
     }

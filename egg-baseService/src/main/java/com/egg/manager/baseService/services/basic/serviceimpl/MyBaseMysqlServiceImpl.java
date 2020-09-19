@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -31,25 +32,16 @@ import java.util.List;
  * @Author: zhoucj
  * @Date: 2020/9/18 9:21
  */
-public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V extends MyBaseMysqlVo,Trs extends MyBaseMysqlTransfer> extends ServiceImpl<M,T> {
+public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V extends MyBaseMysqlVo> extends ServiceImpl<M,T>
+            implements MyBaseMysqlService<M,T,V> {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
-    /**
-     * 取得前端传递的分页配置
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     * @param sortBeans
-     * @return
-     */
+    @Override
     public EntityWrapper<T> doGetPageQueryWrapper(UserAccount loginUser,MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                   List<AntdvSortBean> sortBeans){
         //解析 搜索条件
         EntityWrapper<T> entityWrapper = new EntityWrapper<T>();
-
-        //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到userAccountEntityWrapper
         this.dealSetConditionsMapToEntityWrapper(entityWrapper,queryFormFieldBeanList) ;
         //添加排序
@@ -62,7 +54,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V
     }
 
 
-
+    @Override
     public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList){
         if(queryFieldBeanList != null && queryFieldBeanList.isEmpty() == false){
             for(QueryFormFieldBean queryFormFieldBean : queryFieldBeanList){
@@ -84,13 +76,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V
     }
 
 
-    /**
-     * 更新Entity之前调用
-     * @param loginUser
-     * @param t
-     * @param uuidFlag
-     * @return
-     */
+    @Override
     public T doBeforeCreate(UserAccount loginUser,T t,boolean uuidFlag){
         Date now = new Date() ;
         if(uuidFlag){
@@ -106,12 +92,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V
         return t ;
     }
 
-    /**
-     * 更新Entity之前调用
-     * @param loginUser
-     * @param t
-     * @return
-     */
+    @Override
     public T doBeforeUpdate(UserAccount loginUser,T t){
         Date now = new Date() ;
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.STATE,BaseStateEnum.ENABLED.getValue());
@@ -123,16 +104,12 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V
     }
 
 
-    /**
-     * 根据id删除(删除前调用)
-     * @param loginUser
-     * @param tClass
-     * @param idVal
-     * @return
-     */
+
+    @Override
     public T doBeforeDeleteOneById(UserAccount loginUser,Class<T> tClass,String idVal){
         T t = EggReflexUtil.handlePojoGetInstance(tClass);
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.FID,idVal);
+        EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.STATE,BaseStateEnum.DELETE.getValue());
         if(loginUser != null){
             EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.LAST_MODIFYER_ID,loginUser.getFid());
         }
@@ -140,11 +117,9 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>,T extends Model<T>,V
     }
 
 
-    /**
-     * 取得的结果 转为 枚举类型
-     * @param result
-     */
-    public  <T,KV,KL> MyCommonResult  dealResultListSetToEntitySelect(MyCommonResult<T> result, EggPojoReflexFieldConfig<KV> valueConf,EggPojoReflexFieldConfig<KL> labelConf){
+    @Override
+    @Deprecated
+    public  <T,KV,KL> MyCommonResult  doGetResultListSetToEntitySelect(MyCommonResult<T> result, EggPojoReflexFieldConfig<KV> valueConf,EggPojoReflexFieldConfig<KL> labelConf){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<T> resultList = result.getResultList() ;
         if(resultList != null && resultList.isEmpty() == false){

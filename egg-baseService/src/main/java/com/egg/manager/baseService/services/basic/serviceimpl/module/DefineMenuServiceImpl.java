@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -47,7 +48,7 @@ import java.util.*;
  * \
  */
 @Service(interfaceClass = DefineMenuService.class)
-public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMenu> implements DefineMenuService {
+public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapper,DefineMenu,DefineMenuVo> implements DefineMenuService {
     @Autowired
     private DefineMenuTransfer defineMenuTransfer ;
 
@@ -228,20 +229,12 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
+        EntityWrapper<DefineMenu> defineMenuEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);;
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到 defineMenuEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(defineMenuEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                defineMenuEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -285,12 +278,14 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         }
         Date now = new Date() ;
         DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
+        defineMenu = super.doBeforeCreate(loginUser,defineMenu,true);
         String parentId = defineMenu.getParentId() ;
         //
         if(StringUtils.isBlank(parentId)){
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
-        }   else if(DefineMenuConstant.ROOT_ID.equals(parentId)){   //如果上级是 根级菜单
+        }   else if(DefineMenuConstant.ROOT_ID.equals(parentId)){
+            //如果上级是 根级菜单
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }   else{
@@ -305,16 +300,7 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
                 defineMenu.setLevel(parentMenuLevel);
             }
         }
-        defineMenu.setFid(MyUUIDUtil.renderSimpleUUID());
-        defineMenu.setState(BaseStateEnum.ENABLED.getValue());
-        defineMenu.setCreateTime(now);
-        defineMenu.setUpdateTime(now);
-        if(loginUser != null){
-            defineMenu.setCreateUserId(loginUser.getFid());
-            defineMenu.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = defineMenuMapper.insert(defineMenu) ;
-        return addCount ;
+        return  defineMenuMapper.insert(defineMenu) ;
     }
 
 
@@ -338,9 +324,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
-        Date now = new Date() ;
-        defineMenuVo.setUpdateTime(now);
         DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
+        defineMenu = super.doBeforeUpdate(loginUser,defineMenu);
         String parentId = defineMenu.getParentId() ;
         if(StringUtils.isNotBlank(parentId)){
             DefineMenu parentMenu =defineMenuMapper.selectById(parentId);
@@ -356,9 +341,6 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
         }   else {
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
-        }
-        if(loginUser != null){
-            defineMenu.setLastModifyerId(loginUser.getFid());
         }
         if(updateAll){  //是否更新所有字段
             changeCount = defineMenuMapper.updateAllColumnById(defineMenu) ;
@@ -393,12 +375,8 @@ public class DefineMenuServiceImpl extends ServiceImpl<DefineMenuMapper,DefineMe
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefineMenu(String delId,UserAccount loginUser) throws Exception{
-        DefineMenu defineMenu = DefineMenu.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            defineMenu.setLastModifyerId(loginUser.getFid());
-        }
-        Integer delCount = defineMenuMapper.updateById(defineMenu);
-        return delCount ;
+        DefineMenu defineMenu = super.doBeforeDeleteOneById(loginUser,DefineMenu.class,delId);;
+        return defineMenuMapper.updateById(defineMenu);
     }
 
 

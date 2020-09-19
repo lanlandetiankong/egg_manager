@@ -3,8 +3,10 @@ package com.egg.manager.baseService.services.basic.serviceimpl.user;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.user.UserGroupService;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
+import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
 
 /**
  * \* note:
@@ -15,7 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
  * \
  */
 @Service(interfaceClass = UserGroupService.class)
-public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper,UserGroup> implements UserGroupService {
+public class UserGroupServiceImpl extends MyBaseMysqlServiceImpl<UserGroupMapper,UserGroup,UserGroupVo> implements UserGroupService {
 
     
 }

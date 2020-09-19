@@ -2,6 +2,7 @@ package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -9,6 +10,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
 
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefineRoleService extends IService<DefineRole> {
+public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlService<DefineRoleMapper,DefineRole,DefineRoleVo> {
     /**
      * 取得用户 所拥有的 角色定义-List集合
      * @param userAccountId
@@ -74,7 +76,7 @@ public interface DefineRoleService extends IService<DefineRole> {
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRolePages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineRoleVo> dealGetDefineRolePages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**

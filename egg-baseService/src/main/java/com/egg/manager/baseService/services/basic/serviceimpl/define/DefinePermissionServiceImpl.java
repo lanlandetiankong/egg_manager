@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -46,7 +47,7 @@ import java.util.Set;
  * \
  */
 @Service(interfaceClass = DefinePermissionService.class)
-public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMapper,DefinePermission> implements DefinePermissionService {
+public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper,DefinePermission,DefinePermissionVo> implements DefinePermissionService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc ;
 
@@ -78,20 +79,12 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                            List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        EntityWrapper<DefinePermission> definePermissionEntityWrapper = new EntityWrapper<DefinePermission>();
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到definePermissionEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(definePermissionEntityWrapper,queryFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                definePermissionEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
+        //解析 搜索条件
+        EntityWrapper<DefinePermission> definePermissionEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -134,17 +127,9 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
         }
         Date now = new Date() ;
         DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        definePermission.setFid(MyUUIDUtil.renderSimpleUUID());
+        definePermission = super.doBeforeCreate(loginUser,definePermission,true);
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
-        definePermission.setState(BaseStateEnum.ENABLED.getValue());
-        definePermission.setCreateTime(now);
-        definePermission.setUpdateTime(now);
-        if(loginUser != null){
-            definePermission.setCreateUserId(loginUser.getFid());
-            definePermission.setLastModifyerId(loginUser.getFid());
-        }
-        Integer addCount = definePermissionMapper.insert(definePermission) ;
-        return addCount ;
+        return definePermissionMapper.insert(definePermission) ;
     }
 
 
@@ -167,12 +152,8 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
-        Date now = new Date() ;
-        definePermissionVo.setUpdateTime(now);
         DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        if(loginUser != null){
-            updateEntity.setLastModifyerId(loginUser.getFid());
-        }
+        updateEntity = super.doBeforeUpdate(loginUser,updateEntity);
         DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
         if(SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())){    //如果已经启用
             DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
@@ -229,7 +210,8 @@ public class DefinePermissionServiceImpl extends ServiceImpl<DefinePermissionMap
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
-        return this.dealDelDefinePermissionByArr(new String[]{delId},loginUser);
+        DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);
+        return definePermissionMapper.updateById(updateEntity);
     }
 
 

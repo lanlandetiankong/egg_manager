@@ -1,12 +1,14 @@
 package com.egg.manager.api.services.basic.user;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserDepartmentService extends IService<UserDepartment> {
+public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMysqlService<UserDepartmentMapper,UserDepartment,UserDepartmentVo> {
 
     /**
      * 查询账号下的所有[用户-部门关联]
@@ -38,7 +40,7 @@ public interface UserDepartmentService extends IService<UserDepartment> {
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                 List<AntdvSortBean> sortBeans);
 
     /**

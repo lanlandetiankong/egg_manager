@@ -17,7 +17,6 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
 
     static AnnouncementTagMapstruct announcementTagMapstruct = AnnouncementTagMapstruct.INSTANCE ;
 
-    @Deprecated
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo vo) {
         if (vo == null) {
             return null;
@@ -25,7 +24,6 @@ public class AnnouncementTagTransfer extends MyBaseMysqlTransfer {
         AnnouncementTag entity = announcementTagMapstruct.transferVoToEntity(vo);
         return entity;
     }
-    @Deprecated
     public static AnnouncementTagVo transferEntityToVo(AnnouncementTag entity) {
         if (entity == null) {
             return null;

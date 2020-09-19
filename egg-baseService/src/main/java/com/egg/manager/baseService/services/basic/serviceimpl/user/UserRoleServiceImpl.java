@@ -12,6 +12,7 @@ import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -45,7 +46,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = UserRoleService.class)
-public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> implements UserRoleService {
+public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,UserRole,UserRoleVo> implements UserRoleService {
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
     @Reference
@@ -133,20 +134,12 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRolePages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserRoleVo> dealGetUserRolePages(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans){
         //解析 搜索条件
-        EntityWrapper<UserRole> userRoleEntityWrapper = new EntityWrapper<UserRole>();
+        EntityWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到userRoleEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userRoleEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                userRoleEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -182,16 +175,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserRole(UserRoleVo userRoleVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        userRole.setFid(MyUUIDUtil.renderSimpleUUID());
-        userRole.setState(BaseStateEnum.ENABLED.getValue());
-        userRole.setCreateTime(now);
-        userRole.setUpdateTime(now);
-        if(loginUser != null){
-            userRole.setCreateUserId(loginUser.getFid());
-            userRole.setLastModifyerId(loginUser.getFid());
-        }
+        userRole = super.doBeforeCreate(loginUser,userRole,true);
         Integer addCount = userRoleMapper.insert(userRole) ;
         return addCount ;
     }
@@ -207,12 +192,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Override
     public Integer dealUpdateUserRole(UserRoleVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        userRoleVo.setUpdateTime(now);
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        if(loginUser != null){
-            userRole.setLastModifyerId(loginUser.getFid());
-        }
+        userRole = super.doBeforeUpdate(loginUser,userRole);
         if(updateAll){  //是否更新所有字段
             changeCount = userRoleMapper.updateAllColumnById(userRole) ;
         }   else {
@@ -248,10 +229,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception{
-        UserRole userRole = UserRole.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            userRole.setLastModifyerId(loginUser.getFid());
-        }
+        UserRole userRole = super.doBeforeDeleteOneById(loginUser,UserRole.class,delId);
         Integer delCount = userRoleMapper.updateById(userRole);
         return delCount ;
     }

@@ -71,7 +71,7 @@ public class DefineJobController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineJobService.dealGetDefineJobPages(result,queryFormFieldBeanList,paginationBean,sortBeans); ;
+            result = defineJobService.dealGetDefineJobPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询职务信息列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;

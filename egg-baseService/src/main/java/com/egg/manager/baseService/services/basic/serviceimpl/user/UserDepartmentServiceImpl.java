@@ -12,6 +12,7 @@ import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -43,7 +44,7 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = UserDepartmentService.class)
-public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,UserDepartment> implements UserDepartmentService {
+public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper,UserDepartment,UserDepartmentVo> implements UserDepartmentService {
 
     @Autowired
     private RedisPropsOfShiroCache redisPropsOfShiroCache ;
@@ -131,20 +132,12 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans){
         //解析 搜索条件
-        EntityWrapper<UserDepartment> userDepartmentEntityWrapper = new EntityWrapper<UserDepartment>();
+        EntityWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
-        //调用方法将查询条件设置到userDepartmentEntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(userDepartmentEntityWrapper,queryFormFieldBeanList) ;
-        //添加排序
-        if(sortBeans != null && sortBeans.isEmpty() == false){
-            for(AntdvSortBean sortBean : sortBeans){
-                userDepartmentEntityWrapper.orderBy(sortBean.getField(),sortBean.getOrderIsAsc());
-            }
-        }
         //取得 总数
         Integer total = userDepartmentMapper.selectCount(userDepartmentEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
@@ -180,16 +173,8 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealAddUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser) throws Exception{
-        Date now = new Date() ;
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        userDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
-        userDepartment.setState(BaseStateEnum.ENABLED.getValue());
-        userDepartment.setCreateTime(now);
-        userDepartment.setUpdateTime(now);
-        if(loginUser != null){
-            userDepartment.setCreateUserId(loginUser.getFid());
-            userDepartment.setLastModifyerId(loginUser.getFid());
-        }
+        userDepartment = super.doBeforeCreate(loginUser,userDepartment,true);
         Integer addCount = userDepartmentMapper.insert(userDepartment) ;
         return addCount ;
     }
@@ -205,12 +190,8 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
     @Override
     public Integer dealUpdateUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
         Integer changeCount = 0;
-        Date now = new Date() ;
-        userDepartmentVo.setUpdateTime(now);
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        if(loginUser != null){
-            userDepartment.setLastModifyerId(loginUser.getFid());
-        }
+        userDepartment = super.doBeforeUpdate(loginUser,userDepartment);
         if(updateAll){  //是否更新所有字段
             changeCount = userDepartmentMapper.updateAllColumnById(userDepartment) ;
         }   else {
@@ -246,10 +227,7 @@ public class UserDepartmentServiceImpl extends ServiceImpl<UserDepartmentMapper,
     @Transactional(rollbackFor=Exception.class)
     @Override
     public Integer dealDelUserDepartment(String delId,UserAccount loginUser) throws Exception{
-        UserDepartment userDepartment = UserDepartment.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build() ;
-        if(loginUser != null){
-            userDepartment.setLastModifyerId(loginUser.getFid());
-        }
+        UserDepartment userDepartment = super.doBeforeDeleteOneById(loginUser,UserDepartment.class,delId);
         Integer delCount = userDepartmentMapper.updateById(userDepartment);
         return delCount ;
     }

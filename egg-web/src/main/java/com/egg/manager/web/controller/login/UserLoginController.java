@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.login;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
+import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -59,7 +60,8 @@ public class UserLoginController extends BaseController {
     @ShiroPass
     @PostMapping(value = "/byAccountForm")
     public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request,LoginAccountVo loginAccountVo,
-                                                             @Validated({VerifyGroupOfDefault.class})LoginAccountVerifyO loginAccountVerifyO
+                                             @Validated({VerifyGroupOfDefault.class})LoginAccountVerifyO loginAccountVerifyO
+                                            ,@CurrentLoginUser(required = false) UserAccount loginUser
                                                              ) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
         try{
@@ -94,7 +96,7 @@ public class UserLoginController extends BaseController {
                     }
                     userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
-                    this.dealSetTokenToRedis(userAccountToken,result) ;
+                    this.dealSetTokenToRedis(loginUser,userAccountToken,result) ;
                     //返回给前端 jwt jwt值
                     result.setAuthorization(authorization);
                 }   else {

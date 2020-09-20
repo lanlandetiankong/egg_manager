@@ -64,7 +64,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @return
      */
     @Override
-    public List<DefinePermission> getAllEnableDefinePermissions(EntityWrapper<DefinePermission> wrapper){
+    public List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser,EntityWrapper<DefinePermission> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<DefinePermission>();
         //筛选与排序
         wrapper.eq("state",BaseStateEnum.ENABLED.getValue());
@@ -101,7 +101,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -120,7 +120,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception{
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,new EntityWrapper<DefinePermission>());
         if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
@@ -144,7 +144,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception{
         Wrapper<DefinePermission> uniWrapper  = new EntityWrapper<DefinePermission>()
                 .ne("fid",definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,uniWrapper);
@@ -175,7 +175,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) {
+    public Integer dealDelDefinePermissionByArr(UserAccount loginUser,String[] delIds) {
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -192,7 +192,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealEnsureDefinePermissionByArr(String[] ensureIds,UserAccount loginUser) {
+    public Integer dealEnsureDefinePermissionByArr(UserAccount loginUser,String[] ensureIds) {
         Integer delCount = 0 ;
         if(ensureIds != null && ensureIds.length > 0) {
             List<String> delIdList = Arrays.asList(ensureIds) ;
@@ -209,7 +209,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefinePermission(UserAccount loginUser,String delId) throws Exception{
         DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);
         return definePermissionMapper.updateById(updateEntity);
     }
@@ -222,13 +222,13 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @return
      */
     @Override
-    public List<DefinePermission> dealGetPermissionsByAccountFromDb(String userAccountId) {
+    public List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser,String userAccountId) {
         if(StringUtils.isBlank(userAccountId)) {
             return null ;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
         if(UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())){    //如果是[超级管理员]的话可以访问全部菜单
-            return getAllEnableDefinePermissions(null);
+            return getAllEnableDefinePermissions(loginUser,null);
         }   else {
             return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
         }
@@ -240,9 +240,9 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @return
      */
     @Override
-    public Set<String> dealGetPermissionCodeSetByAccountFromDb(String userAccountId) {
+    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser,String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
-        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(userAccountId);
+        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(loginUser,userAccountId);
         if(definePermissions != null && definePermissions.isEmpty() == false){
             for (DefinePermission definePermission : definePermissions){
                 String permissionCode = definePermission.getCode() ;

@@ -32,7 +32,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param wrapper
      * @return
      */
-    List<DefinePermission> getAllEnableDefinePermissions(EntityWrapper<DefinePermission> wrapper);
+    List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser,EntityWrapper<DefinePermission> wrapper);
 
     /**
      * 分页查询 权限定义 列表
@@ -50,7 +50,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans);
 
     /**
@@ -58,7 +58,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param definePermissionVo
      * @throws Exception
      */
-    Integer dealAddDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception ;
 
     /**
      * 权限定义-更新
@@ -66,21 +66,21 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefinePermission(DefinePermissionVo definePermissionVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception ;
 
     /**
      * 权限定义-批量删除
      * @param delIds 要删除的权限id 集合
      * @throws Exception
      */
-    Integer dealDelDefinePermissionByArr(String[] delIds,UserAccount loginUser) throws Exception;
+    Integer dealDelDefinePermissionByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 权限定义-删除
      * @param delId 要删除的权限id
      * @throws Exception
      */
-    Integer dealDelDefinePermission(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelDefinePermission(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
@@ -88,20 +88,20 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param ensureIds 要启用的权限id 集合
      * @throws Exception
      */
-    Integer dealEnsureDefinePermissionByArr(String[] ensureIds,UserAccount loginUser);
+    Integer dealEnsureDefinePermissionByArr(UserAccount loginUser,String[] ensureIds);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> dealGetPermissionsByAccountFromDb(String userAccountId) ;
+    List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser,String userAccountId) ;
     /**
      * 取得用户 所拥有的 权限code-Set集合
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetPermissionCodeSetByAccountFromDb(String userAccountId);
+    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser,String userAccountId);
 
 
     /**

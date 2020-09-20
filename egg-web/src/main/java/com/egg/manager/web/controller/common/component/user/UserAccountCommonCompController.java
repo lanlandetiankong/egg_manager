@@ -55,7 +55,7 @@ public class UserAccountCommonCompController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealGetUserAccountDtoPages(result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = userAccountService.dealGetUserAccountDtoPages(loginUser,result, queryFormFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询用户信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

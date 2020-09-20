@@ -120,7 +120,7 @@ public class DefineMenuController extends BaseController{
     @PostMapping("/user/getGrantedMenuTree")
     public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>() ;
-        List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(authorization,loginUser.getFid(),false);
+        List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser,authorization,loginUser.getFid(),false);
         result.setResultList(treeList);
         Map<String,CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList,Maps.newHashMap());
         result.setResultMap(urlMap);
@@ -153,7 +153,7 @@ public class DefineMenuController extends BaseController{
             AntdvPaginationBean paginationBean = this.parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineMenuService.dealGetDefineMenuDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineMenuService.dealGetDefineMenuDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询菜单定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -188,7 +188,7 @@ public class DefineMenuController extends BaseController{
             if(defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             }   else {
-                addCount = defineMenuService.dealAddDefineMenu(defineMenuVo,loginUser) ;
+                addCount = defineMenuService.dealAddDefineMenu(loginUser,defineMenuVo) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增菜单定义:"+actionSuccessMsg);
@@ -209,7 +209,7 @@ public class DefineMenuController extends BaseController{
             if(defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             }   else {
-                changeCount = defineMenuService.dealUpdateDefineMenu(defineMenuVo,loginUser,false);
+                changeCount = defineMenuService.dealUpdateDefineMenu(loginUser,defineMenuVo,false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新菜单定义:"+actionSuccessMsg);
@@ -255,7 +255,7 @@ public class DefineMenuController extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = defineMenuService.dealDelDefineMenuByArr(delIds,loginUser);
+                delCount = defineMenuService.dealDelDefineMenuByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除菜单定义:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -276,7 +276,7 @@ public class DefineMenuController extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(org.apache.commons.lang3.StringUtils.isNotBlank(delId)){
-                Integer delCount = defineMenuService.dealDelDefineMenu(delId,loginUser);
+                Integer delCount = defineMenuService.dealDelDefineMenu(loginUser,delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除菜单定义:"+actionSuccessMsg);
             }

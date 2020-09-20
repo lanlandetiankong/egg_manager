@@ -252,7 +252,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -271,8 +271,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser) throws Exception{
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,new EntityWrapper<DefineMenu>());
+    public Integer dealAddDefineMenu(UserAccount loginUser,DefineMenuVo defineMenuVo) throws Exception{
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser,defineMenuVo,new EntityWrapper<DefineMenu>());
         if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
@@ -316,10 +316,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineMenu(UserAccount loginUser,DefineMenuVo defineMenuVo,boolean updateAll) throws Exception{
         Wrapper<DefineMenu> uniWrapper  = new EntityWrapper<DefineMenu>()
                 .ne("fid",defineMenuVo.getFid());
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(defineMenuVo,uniWrapper);
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser,defineMenuVo,uniWrapper);
         if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
@@ -357,7 +357,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineMenuByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineMenuByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -374,7 +374,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineMenu(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineMenu(UserAccount loginUser,String delId) throws Exception{
         DefineMenu defineMenu = super.doBeforeDeleteOneById(loginUser,DefineMenu.class,delId);;
         return defineMenuMapper.updateById(defineMenu);
     }
@@ -387,7 +387,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * @return
      */
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper){
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser,DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper){
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         defineMenuWrapper = defineMenuWrapper != null ? defineMenuWrapper : new EntityWrapper<>() ;
         defineMenuWrapper.eq("router_url",defineMenuVo.getRouterUrl()) ;

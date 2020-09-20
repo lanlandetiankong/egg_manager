@@ -114,7 +114,7 @@ public class UserRoleController  extends BaseController{
             if(userRoleVo == null) {
                 throw new Exception("未接收到有效的用户角色信息！");
             }   else {
-                addCount = userRoleService.dealAddUserRole(userRoleVo,loginUser);
+                addCount = userRoleService.dealAddUserRole(loginUser,userRoleVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增用户角色:"+actionSuccessMsg);
@@ -138,7 +138,7 @@ public class UserRoleController  extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = userRoleService.dealDelUserRoleByArr(delIds,loginUser);
+                delCount = userRoleService.dealDelUserRoleByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除用户角色:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -160,7 +160,7 @@ public class UserRoleController  extends BaseController{
         Integer delCount = 0;
         try{
             if(StringUtils.isNotBlank(delId)){
-                delCount = userRoleService.dealDelUserRole(delId,loginUser);
+                delCount = userRoleService.dealDelUserRole(loginUser,delId);
                 dealCommonSuccessCatch(result,"删除用户角色:"+actionSuccessMsg);
             }
             result.setCount(delCount);

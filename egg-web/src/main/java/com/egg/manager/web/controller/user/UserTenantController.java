@@ -106,7 +106,7 @@ public class UserTenantController extends BaseController{
             if(userTenantVo == null) {
                 throw new Exception("未接收到有效的 [用户与租户关联] 信息！");
             }   else {
-                addCount = userTenantService.dealAddUserTenant(userTenantVo,loginUser);
+                addCount = userTenantService.dealAddUserTenant(loginUser,userTenantVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增 [用户与租户关联] :"+actionSuccessMsg);
@@ -130,7 +130,7 @@ public class UserTenantController extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = userTenantService.dealDelUserTenantByArr(delIds,loginUser);
+                delCount = userTenantService.dealDelUserTenantByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除 [用户与租户关联] :"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -152,7 +152,7 @@ public class UserTenantController extends BaseController{
         Integer delCount = 0;
         try{
             if(StringUtils.isNotBlank(delId)){
-                delCount = userTenantService.dealDelUserTenant(delId,loginUser);
+                delCount = userTenantService.dealDelUserTenant(loginUser,delId);
                 dealCommonSuccessCatch(result,"删除 [用户与租户关联] :"+actionSuccessMsg);
             }
             result.setCount(delCount);

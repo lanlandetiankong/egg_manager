@@ -33,14 +33,14 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
      * @param announcementVo
      * @throws Exception
      */
-    Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception;
+    Integer dealAddAnnouncement(UserAccount loginUser,AnnouncementVo announcementVo) throws Exception;
 
     /**
      * 公告草稿发布
      * @param announcementDraftVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddAnnouncementFromDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 分页查询 公告 列表
@@ -58,7 +58,7 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**
@@ -66,11 +66,11 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
      * @param delIds 要删除的公告id 集合
      * @throws Exception
      */
-    Integer dealDelAnnouncementByArr(String[] delIds,UserAccount loginUser) throws Exception ;
+    Integer dealDelAnnouncementByArr(UserAccount loginUser,String[] delIds) throws Exception ;
     /**
      * 公告-删除
      * @param delId 要删除的公告id
      * @throws Exception
      */
-    Integer dealDelAnnouncement(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelAnnouncement(UserAccount loginUser,String delId) throws Exception;
 }

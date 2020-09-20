@@ -56,8 +56,8 @@ public class MyShiroRelam extends AuthorizingRealm {
             this.userAccountRedisService = SpringContextBeanUtil.getBean(UserAccountRedisService.class);
         }
         //取得 当前用户 有用的 角色、权限
-        Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization,userAccountId,false);
-        Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization,userAccountId,false);
+        Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(null,authorization,userAccountId,false);
+        Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(null,authorization,userAccountId,false);
         simpleAuthorizationInfo.setRoles(roleSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;

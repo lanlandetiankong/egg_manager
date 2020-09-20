@@ -31,7 +31,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans);
 
 
@@ -42,7 +42,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param allDepartments
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,List<DefineDepartment> allDepartments);
+    List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser,String rootId,List<DefineDepartment> allDepartments);
 
     /**
      * [部门展示]的子节点 构建的 TreeSelect 结构(包含最顶层)
@@ -51,14 +51,14 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param allDefineDepartments
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId, List<DefineDepartment> allDefineDepartments);
+    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser,String rootId, List<DefineDepartment> allDefineDepartments);
 
     /**
      * 部门定义-新增
      * @param defineDepartmentVo
      * @throws Exception
      */
-    Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo) throws Exception ;
 
     /**
      * 部门定义-更新
@@ -66,19 +66,19 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception ;
 
     /**
      * 部门定义-批量删除
      * @param delIds 要删除的部门id 集合
      * @throws Exception
      */
-    Integer dealDelDefineDepartmentByArr(String[] delIds,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineDepartmentByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 部门定义-删除
      * @param delId 要删除的部门id
      * @throws Exception
      */
-    Integer dealDelDefineDepartment(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineDepartment(UserAccount loginUser,String delId) throws Exception;
 }

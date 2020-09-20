@@ -110,7 +110,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                     List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
@@ -149,7 +149,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserAccount(UserAccountVo userAccountVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserAccount(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception{
         if(this.dealCheckDuplicateKey(userAccountVo,new EntityWrapper<>())){
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
@@ -193,7 +193,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserAccount(UserAccountVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserAccount(UserAccount loginUser,UserAccountVo userAccountVo, boolean updateAll) throws Exception{
         Wrapper<UserAccount> uniWrapper  = new EntityWrapper<UserAccount>()
                 .ne("fid",userAccountVo.getFid());
         if(dealCheckDuplicateKey(userAccountVo,uniWrapper)){    //已有重复键值
@@ -248,7 +248,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserAccountByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserAccountByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -266,7 +266,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserAccount(UserAccount loginUser,String delId) throws Exception{
         UserAccount userAccount = super.doBeforeDeleteOneById(loginUser,UserAccount.class,delId); ;
         return userAccountMapper.updateById(userAccount);
     }
@@ -281,7 +281,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealLockUserAccountByArr(String[] lockIds,UserAccount loginUser,boolean isLock) throws Exception{
+    public Integer dealLockUserAccountByArr(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception{
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         Integer lockCount = 0 ;
         if(lockIds != null && lockIds.length > 0) {
@@ -301,7 +301,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception{
+    public Integer dealLockUserAccount(UserAccount loginUser,String lockId,boolean isLock) throws Exception{
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue() ;
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build() ;
         if(loginUser != null){
@@ -322,7 +322,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
+    public Integer dealGrantRoleToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception{
         Integer changeCount = 0 ;
         String loginUserId = loginUser != null ? loginUser.getFid() : null ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
@@ -384,7 +384,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception{
+    public Integer dealGrantJobToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception{
         Integer changeCount = 0 ;
         String loginUserId = loginUser != null ? loginUser.getFid() : null ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
@@ -445,7 +445,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper){
+    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser,String[] checkIds, Wrapper<UserAccount> wrapper){
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         if(checkIds != null){
             wrapper.in("fid",checkIds);
@@ -455,7 +455,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Set<String> dealGetExistAccountSet(Short state,Wrapper<UserAccount> wrapper){
+    public Set<String> dealGetExistAccountSet(UserAccount loginUser,Short state,Wrapper<UserAccount> wrapper){
         Set<String> accountSet = new HashSet<>() ;
         wrapper = wrapper != null ? wrapper : new EntityWrapper<>() ;
         if(state != null){

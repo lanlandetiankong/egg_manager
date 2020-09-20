@@ -73,7 +73,7 @@ public class DefineDepartmentController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询部门定义信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -100,7 +100,7 @@ public class DefineDepartmentController extends BaseController{
     @PcWebQueryLog(action="查询部门TreeSelect",description = "查询部门TreeSelect",fullPath = "/define/define_department/getAllDepartmentTreeSelect")
     @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
-    public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect() {
+    public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
         //筛选与排序
         EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
@@ -109,7 +109,7 @@ public class DefineDepartmentController extends BaseController{
         defineDepartmentEntityWrapper.orderBy("order_num",true);
         defineDepartmentEntityWrapper.orderBy("create_time",false);
         List<DefineDepartment> allDepartments  = defineDepartmentService.selectList(defineDepartmentEntityWrapper);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartments);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser,DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartments);
         result.setResultList(treeList);
         return result ;
     }
@@ -117,10 +117,10 @@ public class DefineDepartmentController extends BaseController{
     @PcWebQueryLog(action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)",fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
     @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
-    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId) {
+    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId,@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
         List<DefineDepartment> allDepartment  =  defineDepartmentMapper.getDepartmentFilterChildrens(filterId,true);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartment);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser,DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartment);
         result.setResultList(treeList);
         return result ;
     }
@@ -136,7 +136,7 @@ public class DefineDepartmentController extends BaseController{
             if(defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
             }   else {
-                addCount = defineDepartmentService.dealAddDefineDepartment(defineDepartmentVo,loginUser) ;
+                addCount = defineDepartmentService.dealAddDefineDepartment(loginUser,defineDepartmentVo) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增部门定义:"+actionSuccessMsg);
@@ -158,7 +158,7 @@ public class DefineDepartmentController extends BaseController{
             if(defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
             }   else {
-                changeCount = defineDepartmentService.dealUpdateDefineDepartment(defineDepartmentVo,loginUser,false);
+                changeCount = defineDepartmentService.dealUpdateDefineDepartment(loginUser,defineDepartmentVo,false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新部门定义:"+actionSuccessMsg);
@@ -180,7 +180,7 @@ public class DefineDepartmentController extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = defineDepartmentService.dealDelDefineDepartmentByArr(delIds,loginUser);
+                delCount = defineDepartmentService.dealDelDefineDepartmentByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除部门定义:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -201,7 +201,7 @@ public class DefineDepartmentController extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(StringUtils.isNotBlank(delId)){
-                Integer delCount = defineDepartmentService.dealDelDefineDepartment(delId,loginUser);
+                Integer delCount = defineDepartmentService.dealDelDefineDepartment(loginUser,delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除部门定义:"+actionSuccessMsg);
             }

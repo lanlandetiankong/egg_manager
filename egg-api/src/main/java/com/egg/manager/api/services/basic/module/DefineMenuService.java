@@ -97,7 +97,7 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
     /**
@@ -105,7 +105,7 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param defineMenuVo
      * @throws Exception
      */
-    Integer dealAddDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineMenu(UserAccount loginUser,DefineMenuVo defineMenuVo) throws Exception ;
 
     /**
      * 菜单定义-更新
@@ -113,21 +113,21 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineMenu(DefineMenuVo defineMenuVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineMenu(UserAccount loginUser,DefineMenuVo defineMenuVo, boolean updateAll) throws Exception ;
 
     /**
      * 菜单定义-批量删除
      * @param delIds 要删除的菜单id 集合
      * @throws Exception
      */
-    Integer dealDelDefineMenuByArr(String[] delIds,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineMenuByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 菜单定义-删除
      * @param delId 要删除的菜单id
      * @throws Exception
      */
-    Integer dealDelDefineMenu(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineMenu(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
@@ -136,5 +136,5 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param defineMenuWrapper
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser,DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
 }

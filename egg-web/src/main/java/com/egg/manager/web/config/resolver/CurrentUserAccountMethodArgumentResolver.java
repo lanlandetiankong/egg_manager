@@ -53,7 +53,7 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
         if(userAccount == null){
             String authorization = nativeWebRequest.getHeader("authorization");
             if(StringUtils.isNotBlank(authorization)){
-                userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(authorization);
+                userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null,authorization);
             }
         }
         CurrentLoginUser currentLoginUserAnno  = methodParameter.getParameterAnnotation(CurrentLoginUser.class);

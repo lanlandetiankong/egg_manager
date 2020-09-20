@@ -159,7 +159,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -176,7 +176,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserTenant(UserTenantVo userTenantVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserTenant(UserAccount loginUser,UserTenantVo userTenantVo) throws Exception{
         Date now = new Date() ;
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         userTenant = super.doBeforeCreate(loginUser,userTenant,true);
@@ -193,7 +193,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserTenant(UserTenantVo userTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserTenant(UserAccount loginUser,UserTenantVo userTenantVo, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         userTenant = super.doBeforeUpdate(loginUser,userTenant);
@@ -214,7 +214,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserTenantByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserTenantByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -231,7 +231,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserTenant(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserTenant(UserAccount loginUser,String delId) throws Exception{
         UserTenant userTenant = super.doBeforeDeleteOneById(loginUser,UserTenant.class,delId); ;
         Integer delCount = userTenantMapper.updateById(userTenant);
         return delCount ;

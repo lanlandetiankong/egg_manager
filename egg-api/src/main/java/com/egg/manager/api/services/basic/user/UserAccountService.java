@@ -50,7 +50,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                              List<AntdvSortBean> sortBeans);
 
     /**
@@ -59,7 +59,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealAddUserAccount(UserAccountVo userAccountVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddUserAccount(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
 
     /**
      * 用户账号-更新
@@ -69,7 +69,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealUpdateUserAccount(UserAccountVo userAccountVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateUserAccount(UserAccount loginUser,UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
 
     /**
      * 用户账号-删除
@@ -77,7 +77,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccountByArr(String[] delIds,UserAccount loginUser) throws Exception ;
+    Integer dealDelUserAccountByArr(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 用户账号-删除
@@ -85,7 +85,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccount(String delId,UserAccount loginUser) throws Exception ;
+    Integer dealDelUserAccount(UserAccount loginUser,String delId) throws Exception ;
 
 
 
@@ -96,7 +96,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccountByArr(String[] lockIds,UserAccount loginUser,boolean isLock) throws Exception ;
+    Integer dealLockUserAccountByArr(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception ;
     /**
      * 用户账号-锁定
      * @param lockId 要锁定的用户账号id
@@ -104,7 +104,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccount(String lockId,UserAccount loginUser,boolean isLock) throws Exception ;
+    Integer dealLockUserAccount(UserAccount loginUser,String lockId,boolean isLock) throws Exception ;
 
 
     /**
@@ -114,7 +114,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantRoleToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception;
+    Integer dealGrantRoleToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
@@ -123,7 +123,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantJobToUser(String userAccountId,String[] checkIds,UserAccount loginUser) throws Exception;
+    Integer dealGrantJobToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
 
 
     /**
@@ -141,7 +141,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(String[] checkIds, Wrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser,String[] checkIds, Wrapper<UserAccount> wrapper);
 
 
     /**
@@ -150,5 +150,5 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    Set<String> dealGetExistAccountSet(Short state, Wrapper<UserAccount> wrapper);
+    Set<String> dealGetExistAccountSet(UserAccount loginUser,Short state, Wrapper<UserAccount> wrapper);
 }

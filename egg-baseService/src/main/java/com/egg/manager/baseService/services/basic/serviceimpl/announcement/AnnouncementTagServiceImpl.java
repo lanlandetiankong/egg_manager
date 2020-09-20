@@ -80,7 +80,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                             List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -115,7 +115,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo) throws Exception{
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         super.doBeforeCreate(loginUser,announcementTag,true);
         return announcementTagMapper.insert(announcementTag) ;
@@ -130,7 +130,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         announcementTag = super.doBeforeUpdate(loginUser,announcementTag);
@@ -149,7 +149,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncementTagByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncementTagByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -166,7 +166,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncementTag(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncementTag(UserAccount loginUser,String delId) throws Exception{
         AnnouncementTag announcementTag = super.doBeforeDeleteOneById(loginUser,AnnouncementTag.class,delId);
         Integer delCount = announcementTagMapper.updateById(announcementTag);
         return delCount ;

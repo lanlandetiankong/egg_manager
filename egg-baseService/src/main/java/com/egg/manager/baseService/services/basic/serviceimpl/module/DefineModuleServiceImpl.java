@@ -81,7 +81,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -100,7 +100,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineModule(DefineModuleVo defineModuleVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineModule(UserAccount loginUser,DefineModuleVo defineModuleVo) throws Exception{
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeCreate(loginUser,defineModule,true);
         return defineModuleMapper.insert(defineModule) ;
@@ -115,7 +115,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineModule(DefineModuleVo defineModuleVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineModule(UserAccount loginUser,DefineModuleVo defineModuleVo, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeUpdate(loginUser,defineModule);
@@ -134,7 +134,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineModuleByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineModuleByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -151,7 +151,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineModule(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineModule(UserAccount loginUser,String delId) throws Exception{
         DefineModule defineModule = super.doBeforeDeleteOneById(loginUser,DefineModule.class,delId);
         return defineModuleMapper.updateById(defineModule);
     }

@@ -76,7 +76,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                 List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -93,7 +93,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineJob(DefineJobVo defineJobVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineJob(UserAccount loginUser,DefineJobVo defineJobVo) throws Exception{
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob = super.doBeforeCreate(loginUser,defineJob,true);
         return defineJobMapper.insert(defineJob) ;
@@ -108,7 +108,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineJob(DefineJobVo defineJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineJob(UserAccount loginUser,DefineJobVo defineJobVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob = super.doBeforeUpdate(loginUser,defineJob);
@@ -129,7 +129,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineJobByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineJobByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -146,7 +146,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineJob(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineJob(UserAccount loginUser,String delId) throws Exception{
         DefineJob defineJob = super.doBeforeDeleteOneById(loginUser,DefineJob.class,delId);
         return defineJobMapper.updateById(defineJob);
     }

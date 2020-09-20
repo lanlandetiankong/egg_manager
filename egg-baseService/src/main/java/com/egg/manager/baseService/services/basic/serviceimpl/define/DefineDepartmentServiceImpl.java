@@ -61,7 +61,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -79,7 +79,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      * @return
      */
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId,List<DefineDepartment> allDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser,String rootId,List<DefineDepartment> allDepartments) {
         if(allDepartments == null || allDepartments.size() == 0){
             return null ;
         }
@@ -100,7 +100,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
             return null ;
         }
         for (CommonTreeSelect treeItem : childList) {
-            treeItem.setChildren(this.getTreeSelectChildNodes(treeItem.getKey(),allDepartments));
+            treeItem.setChildren(this.getTreeSelectChildNodes(loginUser,treeItem.getKey(),allDepartments));
         }
         return childList ;
     }
@@ -112,8 +112,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      * @return
      */
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId,List<DefineDepartment> allDefineDepartments) {
-        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(rootId,allDefineDepartments);
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser,String rootId,List<DefineDepartment> allDefineDepartments) {
+        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser,rootId,allDefineDepartments);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).title("部门首层项").value(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>() ;
         treeSelectListWithRoot.add(rootItem);
@@ -130,7 +130,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo) throws Exception{
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeCreate(loginUser,defineDepartment,true);
         String parentId = defineDepartment.getParentId() ;
@@ -161,7 +161,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineDepartment(DefineDepartmentVo defineDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeUpdate(loginUser,defineDepartment);
@@ -196,7 +196,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineDepartmentByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineDepartmentByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -213,7 +213,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineDepartment(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineDepartment(UserAccount loginUser,String delId) throws Exception{
         DefineDepartment defineDepartment = super.doBeforeDeleteOneById(loginUser,DefineDepartment.class,delId);
         return defineDepartmentMapper.updateById(defineDepartment);
     }

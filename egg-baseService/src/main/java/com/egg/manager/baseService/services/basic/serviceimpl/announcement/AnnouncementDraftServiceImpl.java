@@ -65,7 +65,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                 List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
@@ -83,7 +83,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception{
         AnnouncementDraft entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
         entity = super.doBeforeCreate(loginUser,entity,true);
         Integer addCount = announcementDraftMapper.insert(entity) ;
@@ -97,7 +97,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealUpdateAnnouncementDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception{
         AnnouncementDraft entity = announcementDraftMapper.selectById(announcementDraftVo.getFid());
         entity = super.doBeforeUpdate(loginUser,entity);
         entity.setTitle(announcementDraftVo.getTitle());
@@ -126,7 +126,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncementDraftByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncementDraftByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -143,7 +143,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncementDraft(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncementDraft(UserAccount loginUser,String delId) throws Exception{
         AnnouncementDraft announcementDraft = super.doBeforeDeleteOneById(loginUser,AnnouncementDraft.class,delId) ;
         return announcementDraftMapper.updateById(announcementDraft);
     }
@@ -156,13 +156,13 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealPublishAnnouncementDraftByArr(String[] draftIds,UserAccount loginUser) throws Exception{
+    public Integer dealPublishAnnouncementDraftByArr(UserAccount loginUser,String[] draftIds) throws Exception{
         Integer delCount = 0 ;
         if(draftIds != null && draftIds.length > 0) {
             List<String> delIdList = Arrays.asList(draftIds) ;
             //批量伪删除
             for(String draftId : draftIds){
-                Integer addCount = this.dealPublishAnnouncementDraft(draftId,loginUser,true) ;
+                Integer addCount = this.dealPublishAnnouncementDraft(loginUser,draftId,true) ;
                 if(addCount != null){
                     delCount += addCount ;
                 }
@@ -179,9 +179,9 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser,boolean insertFlag) throws Exception{
+    public Integer dealPublishAnnouncementDraft(UserAccount loginUser,String draftId,boolean insertFlag) throws Exception{
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
-        Announcement announcement = this.draftTranslateToAnnouncement(announcementDraft,loginUser);
+        Announcement announcement = this.draftTranslateToAnnouncement(loginUser,announcementDraft);
         if(announcement != null && insertFlag == true){       //发布
             announcementMapper.insert(announcement);
         }
@@ -197,7 +197,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public Announcement draftTranslateToAnnouncement(AnnouncementDraft announcementDraft,UserAccount loginUser){
+    public Announcement draftTranslateToAnnouncement(UserAccount loginUser,AnnouncementDraft announcementDraft){
         Announcement announcement = null;
         if(announcementDraft != null){
             Date now = new Date() ;

@@ -234,7 +234,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -253,7 +253,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo) throws Exception{
         Date now = new Date() ;
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole = super.doBeforeCreate(loginUser,defineRole,true);
@@ -269,7 +269,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo, boolean updateAll) throws Exception{
         Integer changeCount = 0;
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole = super.doBeforeUpdate(loginUser,defineRole);
@@ -288,7 +288,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineRoleByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -305,7 +305,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineRole(UserAccount loginUser,String delId) throws Exception{
         DefineRole defineRole = super.doBeforeDeleteOneById(loginUser,DefineRole.class,delId);
         return defineRoleMapper.updateById(defineRole);
     }
@@ -319,7 +319,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealGrantPermissionToRole(String roleId,String[] checkIds,UserAccount loginUser) throws Exception{
+    public Integer dealGrantPermissionToRole(UserAccount loginUser,String roleId,String[] checkIds) throws Exception{
         Integer changeCount = 0 ;
         if(checkIds == null || checkIds.length == 0){   //清空所有权限
             changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId,loginUser);

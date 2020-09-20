@@ -95,7 +95,7 @@ public class AnnouncementTagController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            announcementTagService.dealGetAnnouncementTagDtoPages(result,queryFieldBeanList,paginationBean,sortBeans) ;
+            announcementTagService.dealGetAnnouncementTagDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
             dealCommonSuccessCatch(result,"查询公告标签信息-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -123,15 +123,15 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @PcWebOperationLog(action="新增公告标签",description = "表单方式新增公告标签",fullPath = "/announcement_tag/doAddAnnouncementTag")
     @PostMapping(value = "/doAddAnnouncementTag")
-    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo AnnouncementTagVo,
+    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser){
         MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo>() ;
         Integer addCount = 0 ;
         try{
-            if(AnnouncementTagVo == null) {
+            if(announcementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             }   else {
-                addCount = announcementTagService.dealAddAnnouncementTag(AnnouncementTagVo,loginUser) ;
+                addCount = announcementTagService.dealAddAnnouncementTag(loginUser,announcementTagVo) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增公告标签:"+actionSuccessMsg);
@@ -145,15 +145,15 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class,httpMethod = "POST")
     @PcWebOperationLog(action="更新公告标签",description = "表单方式更新公告标签",fullPath = "/announcement_tag/doUpdateAnnouncementTag")
     @PostMapping(value = "/doUpdateAnnouncementTag")
-    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo AnnouncementTagVo,
+    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser){
         MyCommonResult result = new MyCommonResult() ;
         Integer changeCount = 0 ;
         try{
-            if(AnnouncementTagVo == null) {
+            if(announcementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             }   else {
-                changeCount = announcementTagService.dealUpdateAnnouncementTag(AnnouncementTagVo,loginUser,false);
+                changeCount = announcementTagService.dealUpdateAnnouncementTag(loginUser,announcementTagVo,false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result,"更新公告标签:"+actionSuccessMsg);
@@ -176,7 +176,7 @@ public class AnnouncementTagController extends BaseController {
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = announcementTagService.dealDelAnnouncementTagByArr(delIds,loginUser);
+                delCount = announcementTagService.dealDelAnnouncementTagByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除公告标签:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -198,7 +198,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(StringUtils.isNotBlank(delId)){
-                Integer delCount = announcementTagService.dealDelAnnouncementTag(delId,loginUser);
+                Integer delCount = announcementTagService.dealDelAnnouncementTag(loginUser,delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除公告标签:"+actionSuccessMsg);
             }

@@ -92,7 +92,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
@@ -111,7 +111,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncement(AnnouncementVo announcementVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncement(UserAccount loginUser,AnnouncementVo announcementVo) throws Exception{
         Date now = new Date() ;
         Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
         announcement = super.doBeforeCreate(loginUser,announcement,true);
@@ -126,12 +126,12 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddAnnouncementFromDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddAnnouncementFromDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception{
         Date now = new Date() ;
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo),loginUser);
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(loginUser,AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
@@ -141,7 +141,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
             announcement.setLastModifyerId(loginUser.getFid());
         }
         //修改 公告草稿 状态
-        announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,false);
+        announcementDraftService.dealPublishAnnouncementDraft(loginUser,draftId,false);
         Integer addCount = announcementMapper.insert(announcement) ;
         return addCount ;
     }
@@ -157,7 +157,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncementByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncementByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -174,7 +174,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelAnnouncement(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelAnnouncement(UserAccount loginUser,String delId) throws Exception{
         Announcement announcement = super.doBeforeDeleteOneById(loginUser,Announcement.class,delId) ;
         return announcementMapper.updateById(announcement);
     }

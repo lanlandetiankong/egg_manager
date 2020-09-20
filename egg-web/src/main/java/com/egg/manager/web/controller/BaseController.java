@@ -16,6 +16,7 @@ import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -79,7 +80,7 @@ public class BaseController {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public void dealSetTokenToRedis(UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
+    public void dealSetTokenToRedis(UserAccount loginUser,UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if (userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(), userAccountToken.getUserAccountId());
@@ -102,11 +103,11 @@ public class BaseController {
             redisHelper.hashTtlPut(redisPropsOfShiroCache.getAuthorizationKey(), authorization, userAccountToken, redisPropsOfShiroCache.getAuthorizationTtl());
 
             //设置到缓存,hashKey 都是 authorization
-            userAccountRedisService.dealGetCurrentUserEntity(authorization, userAccountToken.getUserAccountId(), true);
-            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(authorization, userAccountToken.getUserAccountId(), true);
-            userAccountRedisService.dealGetCurrentUserAllRoleSet(authorization, userAccountToken.getUserAccountId(), true);
-            userAccountRedisService.dealGetCurrentUserFrontButtons(authorization, userAccountToken.getUserAccountId(), true);
-            Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserEntity(loginUser,authorization, userAccountToken.getUserAccountId(), true);
+            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(loginUser,authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserAllRoleSet(loginUser,authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser,authorization, userAccountToken.getUserAccountId(), true);
+            Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser,authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
                 result.setRouterUrlSet(routerUrlSet);
                 result.setPermissionSet(permissionSet);

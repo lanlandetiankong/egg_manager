@@ -157,7 +157,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,U
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                               List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -174,7 +174,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,U
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserRole(UserRoleVo userRoleVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserRole(UserAccount loginUser,UserRoleVo userRoleVo) throws Exception{
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeCreate(loginUser,userRole,true);
         Integer addCount = userRoleMapper.insert(userRole) ;
@@ -190,7 +190,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,U
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserRole(UserRoleVo userRoleVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserRole(UserAccount loginUser,UserRoleVo userRoleVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeUpdate(loginUser,userRole);
@@ -211,7 +211,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,U
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserRoleByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserRoleByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -228,7 +228,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper,U
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserRole(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserRole(UserAccount loginUser,String delId) throws Exception{
         UserRole userRole = super.doBeforeDeleteOneById(loginUser,UserRole.class,delId);
         Integer delCount = userRoleMapper.updateById(userRole);
         return delCount ;

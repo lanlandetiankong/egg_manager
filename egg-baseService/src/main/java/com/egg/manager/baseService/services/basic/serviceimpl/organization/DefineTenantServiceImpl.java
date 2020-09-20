@@ -82,7 +82,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception{
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeCreate(loginUser,defineTenant,true);
         Integer addCount = defineTenantMapper.insert(defineTenant) ;
@@ -98,7 +98,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeUpdate(loginUser,defineTenant);
@@ -117,7 +117,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineTenantByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineTenantByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -134,7 +134,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelDefineTenant(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelDefineTenant(UserAccount loginUser,String delId) throws Exception{
         DefineTenant updateWrapper = super.doBeforeDeleteOneById(loginUser,DefineTenant.class,delId);
         Integer count = defineTenantMapper.updateById(updateWrapper);
         return count ;
@@ -147,7 +147,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      * @param result
      */
     @Override
-    public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result){
+    public MyCommonResult dealResultListSetToEntitySelect(UserAccount loginUser,MyCommonResult result){
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList() ;
         if(resultList != null && resultList.isEmpty() == false){

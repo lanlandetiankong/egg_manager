@@ -40,7 +40,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                      List<AntdvSortBean> sortBeans);
 
     /***
@@ -53,7 +53,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param announcementTagVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo) throws Exception ;
 
 
     /**
@@ -62,7 +62,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateAnnouncementTag(AnnouncementTagVo announcementTagVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo,boolean updateAll) throws Exception ;
 
 
 
@@ -71,7 +71,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param delIds 要删除的公告标签id 集合
      * @throws Exception
      */
-    Integer dealDelAnnouncementTagByArr(String[] delIds,UserAccount loginUser) throws Exception ;
+    Integer dealDelAnnouncementTagByArr(UserAccount loginUser,String[] delIds) throws Exception ;
 
 
     /**
@@ -79,7 +79,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param delId 要删除的公告标签id
      * @throws Exception
      */
-    Integer dealDelAnnouncementTag(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelAnnouncementTag(UserAccount loginUser,String delId) throws Exception;
 
 
     /**

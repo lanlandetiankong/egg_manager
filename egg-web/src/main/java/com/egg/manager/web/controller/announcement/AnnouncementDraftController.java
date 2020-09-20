@@ -80,7 +80,7 @@ public class AnnouncementDraftController extends BaseController{
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = announcementDraftService.dealGetAnnouncementDraftDtoPages(result,queryFieldBeanList,paginationBean,sortBeans); ;
+            result = announcementDraftService.dealGetAnnouncementDraftDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans); ;
             dealCommonSuccessCatch(result,"查询公告信息草稿-Dto列表:"+actionSuccessMsg);
         }   catch (Exception e){
             this.dealCommonErrorCatch(log,result,e) ;
@@ -119,7 +119,7 @@ public class AnnouncementDraftController extends BaseController{
                 throw new Exception("未接收到有效的公告草稿！");
             }   else {
                 announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
-                addCount = announcementDraftService.dealAddAnnouncementDraft(announcementDraftVo,loginUser) ;
+                addCount = announcementDraftService.dealAddAnnouncementDraft(loginUser,announcementDraftVo) ;
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增公告草稿:"+actionSuccessMsg);
@@ -141,7 +141,7 @@ public class AnnouncementDraftController extends BaseController{
                 throw new Exception("未接收到有效的公告草稿！");
             }   else {
                 announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
-                updateCount = announcementDraftService.dealUpdateAnnouncementDraft(announcementDraftVo,loginUser) ;
+                updateCount = announcementDraftService.dealUpdateAnnouncementDraft(loginUser,announcementDraftVo) ;
             }
             result.setCount(updateCount);
             dealCommonSuccessCatch(result,"更新公告草稿:"+actionSuccessMsg);
@@ -169,7 +169,7 @@ public class AnnouncementDraftController extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = announcementDraftService.dealDelAnnouncementDraftByArr(delIds,loginUser);
+                delCount = announcementDraftService.dealDelAnnouncementDraftByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除公告草稿:"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -190,7 +190,7 @@ public class AnnouncementDraftController extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(StringUtils.isNotBlank(delId)){
-                Integer delCount = announcementDraftService.dealDelAnnouncementDraft(delId,loginUser);
+                Integer delCount = announcementDraftService.dealDelAnnouncementDraft(loginUser,delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result,"删除公告草稿:"+actionSuccessMsg);
             }
@@ -210,7 +210,7 @@ public class AnnouncementDraftController extends BaseController{
         Integer publishCount = 0;
         try{
             if(draftIds != null && draftIds.length > 0) {
-                publishCount = announcementDraftService.dealPublishAnnouncementDraftByArr(draftIds,loginUser);
+                publishCount = announcementDraftService.dealPublishAnnouncementDraftByArr(loginUser,draftIds);
                 dealCommonSuccessCatch(result,"公告草稿批量转发布:"+actionSuccessMsg);
             }
             result.setCount(publishCount);
@@ -227,7 +227,7 @@ public class AnnouncementDraftController extends BaseController{
         MyCommonResult result = new MyCommonResult() ;
         try{
             if(StringUtils.isNotBlank(draftId)){
-                Integer publishCount = announcementDraftService.dealPublishAnnouncementDraft(draftId,loginUser,true);
+                Integer publishCount = announcementDraftService.dealPublishAnnouncementDraft(loginUser,draftId,true);
                 result.setCount(publishCount);
                 dealCommonSuccessCatch(result,"发布公告草稿:"+actionSuccessMsg);
             }

@@ -41,7 +41,7 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param defineTenantVo
      * @throws Exception
      */
-    Integer dealAddDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception ;
 
     /**
      * 租户定义-更新
@@ -49,26 +49,26 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineTenant(DefineTenantVo defineTenantVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception ;
 
     /**
      * 租户定义-批量删除
      * @param delIds 要删除的租户id 集合
      * @throws Exception
      */
-    Integer dealDelDefineTenantByArr(String[] delIds, UserAccount loginUser) throws Exception;
+    Integer dealDelDefineTenantByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 租户定义-删除
      * @param delId 要删除的租户id
      * @throws Exception
      */
-    Integer dealDelDefineTenant(String delId, UserAccount loginUser) throws Exception;
+    Integer dealDelDefineTenant(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
      * 取得的结果 转为 枚举类型
      * @param result
      */
-    MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result);
+    MyCommonResult dealResultListSetToEntitySelect(UserAccount loginUser,MyCommonResult result);
 }

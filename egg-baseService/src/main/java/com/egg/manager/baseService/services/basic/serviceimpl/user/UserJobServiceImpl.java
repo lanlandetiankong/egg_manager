@@ -82,7 +82,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,Use
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(UserAccount loginUser,MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -99,7 +99,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,Use
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserJob(UserJobVo userJobVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserJob(UserAccount loginUser,UserJobVo userJobVo) throws Exception{
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeCreate(loginUser,userJob,true);
         Integer addCount = userJobMapper.insert(userJob) ;
@@ -115,7 +115,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,Use
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserJob(UserJobVo userJobVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserJob(UserAccount loginUser,UserJobVo userJobVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeUpdate(loginUser,userJob);
@@ -136,7 +136,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,Use
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserJobByArr(String[] delIds, UserAccount loginUser) throws Exception{
+    public Integer dealDelUserJobByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -153,7 +153,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper,Use
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserJob(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserJob(UserAccount loginUser,String delId) throws Exception{
         UserJob userJob = super.doBeforeDeleteOneById(loginUser,UserJob.class,delId);
         Integer delCount = userJobMapper.updateById(userJob);
         return delCount ;

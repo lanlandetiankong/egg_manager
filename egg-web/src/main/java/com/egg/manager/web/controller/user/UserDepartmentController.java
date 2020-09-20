@@ -106,7 +106,7 @@ public class UserDepartmentController extends BaseController{
             if(userDepartmentVo == null) {
                 throw new Exception("未接收到有效的 [用户与部门关联] 信息！");
             }   else {
-                addCount = userDepartmentService.dealAddUserDepartment(userDepartmentVo,loginUser);
+                addCount = userDepartmentService.dealAddUserDepartment(loginUser,userDepartmentVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result,"新增 [用户与部门关联] :"+actionSuccessMsg);
@@ -130,7 +130,7 @@ public class UserDepartmentController extends BaseController{
         Integer delCount = 0;
         try{
             if(delIds != null && delIds.length > 0) {
-                delCount = userDepartmentService.dealDelUserDepartmentByArr(delIds,loginUser);
+                delCount = userDepartmentService.dealDelUserDepartmentByArr(loginUser,delIds);
                 dealCommonSuccessCatch(result,"批量删除 [用户与部门关联] :"+actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -152,7 +152,7 @@ public class UserDepartmentController extends BaseController{
         Integer delCount = 0;
         try{
             if(StringUtils.isNotBlank(delId)){
-                delCount = userDepartmentService.dealDelUserDepartment(delId,loginUser);
+                delCount = userDepartmentService.dealDelUserDepartment(loginUser,delId);
                 dealCommonSuccessCatch(result,"删除 [用户与部门关联] :"+actionSuccessMsg);
             }
             result.setCount(delCount);

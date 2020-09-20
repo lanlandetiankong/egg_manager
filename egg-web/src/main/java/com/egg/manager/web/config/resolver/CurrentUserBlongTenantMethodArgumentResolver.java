@@ -53,7 +53,7 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
         if(defineTenant == null){
             String authorization = nativeWebRequest.getHeader("authorization");
             if(StringUtils.isNotBlank(authorization)){
-                defineTenant = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(authorization);
+                defineTenant = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(null,authorization);
             }
         }
         CurrentLoginerBelongTenant currentLoginerBelongTenantAnno  = methodParameter.getParameterAnnotation(CurrentLoginerBelongTenant.class);

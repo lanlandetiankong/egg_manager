@@ -30,14 +30,14 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param announcementDraftVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddAnnouncementDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 更新公告草稿
      * @param announcementDraftVo
      * @throws Exception
      */
-    Integer dealUpdateAnnouncementDraft(AnnouncementDraftVo announcementDraftVo, UserAccount loginUser) throws Exception ;
+    Integer dealUpdateAnnouncementDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 分页查询 公告草稿 dto列表
@@ -46,7 +46,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                          List<AntdvSortBean> sortBeans);
 
     /**
@@ -54,7 +54,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param delIds 要删除的公告草稿id 集合
      * @throws Exception
      */
-    Integer dealDelAnnouncementDraftByArr(String[] delIds,UserAccount loginUser) throws Exception;
+    Integer dealDelAnnouncementDraftByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
 
     /**
@@ -62,7 +62,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param delId 要删除的公告草稿id
      * @throws Exception
      */
-    Integer dealDelAnnouncementDraft(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelAnnouncementDraft(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
@@ -70,15 +70,15 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param draftIds 要发布的公告草稿id 集合
      * @throws Exception
      */
-    Integer dealPublishAnnouncementDraftByArr(String[] draftIds,UserAccount loginUser) throws Exception;
+    Integer dealPublishAnnouncementDraftByArr(UserAccount loginUser,String[] draftIds) throws Exception;
 
     /**
      * 公告草稿-发布
      * @param draftId 要发布的公告草稿id
      * @throws Exception
      */
-    Integer dealPublishAnnouncementDraft(String draftId,UserAccount loginUser,boolean insertFlag) throws Exception ;
+    Integer dealPublishAnnouncementDraft(UserAccount loginUser,String draftId,boolean insertFlag) throws Exception ;
 
 
-    Announcement draftTranslateToAnnouncement(AnnouncementDraft announcementDraft, UserAccount loginUser);
+    Announcement draftTranslateToAnnouncement(UserAccount loginUser,AnnouncementDraft announcementDraft);
 }

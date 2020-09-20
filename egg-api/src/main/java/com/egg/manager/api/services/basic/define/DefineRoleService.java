@@ -86,7 +86,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
     /**
@@ -94,7 +94,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param defineRoleVo
      * @throws Exception
      */
-    Integer dealAddDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser) throws Exception ;
+    Integer dealAddDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo) throws Exception ;
 
     /**
      * 角色定义-更新
@@ -102,21 +102,21 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineRole(DefineRoleVo defineRoleVo, UserAccount loginUser, boolean updateAll) throws Exception ;
+    Integer dealUpdateDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
 
     /**
      * 角色定义-批量删除
      * @param delIds 要删除的角色id 集合
      * @throws Exception
      */
-    Integer dealDelDefineRoleByArr(String[] delIds,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineRoleByArr(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 角色定义-删除
      * @param delId 要删除的角色id
      * @throws Exception
      */
-    Integer dealDelDefineRole(String delId,UserAccount loginUser) throws Exception;
+    Integer dealDelDefineRole(UserAccount loginUser,String delId) throws Exception;
 
     /**
      * 角色授权
@@ -125,6 +125,6 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(String roleId,String[] checkIds,UserAccount loginUser) throws Exception;
+    Integer dealGrantPermissionToRole(UserAccount loginUser,String roleId,String[] checkIds) throws Exception;
 
 }

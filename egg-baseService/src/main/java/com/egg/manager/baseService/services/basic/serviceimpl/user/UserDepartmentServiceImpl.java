@@ -155,7 +155,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                           List<AntdvSortBean> sortBeans){
         Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
@@ -172,7 +172,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealAddUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser) throws Exception{
+    public Integer dealAddUserDepartment(UserAccount loginUser,UserDepartmentVo userDepartmentVo) throws Exception{
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeCreate(loginUser,userDepartment,true);
         Integer addCount = userDepartmentMapper.insert(userDepartment) ;
@@ -188,7 +188,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdateUserDepartment(UserDepartmentVo userDepartmentVo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserDepartment(UserAccount loginUser,UserDepartmentVo userDepartmentVo,boolean updateAll) throws Exception{
         Integer changeCount = 0;
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeUpdate(loginUser,userDepartment);
@@ -209,7 +209,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserDepartmentByArr(String[] delIds,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserDepartmentByArr(UserAccount loginUser,String[] delIds) throws Exception{
         Integer delCount = 0 ;
         if(delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds) ;
@@ -226,7 +226,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealDelUserDepartment(String delId,UserAccount loginUser) throws Exception{
+    public Integer dealDelUserDepartment(UserAccount loginUser,String delId) throws Exception{
         UserDepartment userDepartment = super.doBeforeDeleteOneById(loginUser,UserDepartment.class,delId);
         Integer delCount = userDepartmentMapper.updateById(userDepartment);
         return delCount ;

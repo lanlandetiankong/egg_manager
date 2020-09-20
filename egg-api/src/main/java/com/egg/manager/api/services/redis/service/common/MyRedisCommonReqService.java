@@ -1,5 +1,7 @@
 package com.egg.manager.api.services.redis.service.common;
 
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+
 /**
  * \* note:
  * \* User: zhouchengjie
@@ -10,6 +12,6 @@ package com.egg.manager.api.services.redis.service.common;
  */
 public interface MyRedisCommonReqService {
 
-    void dealRedisListCacheRefresh(String key,String hashKey,String userAccountId,Long keyTtl);
+    void dealRedisListCacheRefresh(UserAccount loginUser,String key, String hashKey, String userAccountId, Long keyTtl);
 
 }

@@ -48,7 +48,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         //取得 分页配置
         RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
         //调用方法将查询条件设置到 ${cfg.baseEntityName_firstLow}EntityWrapper
-        commonFuncService.dealSetConditionsMapToEntityWrapper(${cfg.baseEntityName_firstLow}EntityWrapper,queryFormFieldBeanList) ;
+        super.dealSetConditionsMapToEntityWrapper(${cfg.baseEntityName_firstLow}EntityWrapper,queryFormFieldBeanList) ;
         //添加排序
         if(sortBeans != null && sortBeans.isEmpty() == false){
             for(AntdvSortBean sortBean : sortBeans){
@@ -67,7 +67,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                         List<AntdvSortBean> sortBeans){
-        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
+        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<${cfg.baseEntityName}Dto> ${cfg.baseEntityName_firstLow}DtoList = ${cfg.baseEntityName_firstLow}Mapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
         result.setResultList(${cfg.baseEntityName}Transfer.transferDtoToVoList(${cfg.baseEntityName_firstLow}DtoList));

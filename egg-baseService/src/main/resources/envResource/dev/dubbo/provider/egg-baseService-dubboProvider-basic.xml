@@ -48,8 +48,4 @@
     <!--                                    dir-end:com.com.egg.manager.baseService.services.basic.serviceimpl.user                                                              -->
 
 
-    <dubbo:service protocol="dubbo" ref="commonFuncService" interface="com.egg.manager.api.services.basic.CommonFuncService"/>
-
-
-
 </beans>

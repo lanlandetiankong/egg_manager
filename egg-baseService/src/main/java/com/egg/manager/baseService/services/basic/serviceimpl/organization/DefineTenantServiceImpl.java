@@ -6,13 +6,16 @@ import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
+import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
@@ -21,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,6 +43,8 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Autowired
     private DefineTenantMapper defineTenantMapper;
+    @Autowired
+    private UserTenantMapper userTenantMapper;
 
 
     /**
@@ -146,5 +152,57 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         }
         result.setEnumList(enumList);
         return result;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception {
+        Integer changeCount = 0;
+        if (checkIds == null || checkIds.length == 0) {   //清空所有权限
+            changeCount = defineTenantMapper.clearAllManagerByTenantId(tenantId, loginUser);
+        } else {
+            changeCount = checkIds.length;
+            //取得曾勾选的用户id 集合
+            List<String> oldCheckIds = defineTenantMapper.findAllManagerUserIdByTenantId(tenantId, false);
+            if (oldCheckIds == null || oldCheckIds.isEmpty()) {
+                List<UserTenant> addEntitys = new ArrayList<>();
+                for (String checkId : checkIds) {
+                    addEntitys.add(UserTenant.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
+                }
+                //批量新增行
+                userTenantMapper.customBatchInsert(addEntitys);
+            } else {
+                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> enableIds = new ArrayList<>();
+                List<String> disabledIds = new ArrayList<>();
+                Iterator<String> oldCheckIter = oldCheckIds.iterator();
+                while (oldCheckIter.hasNext()) {
+                    String oldCheckId = oldCheckIter.next();
+                    boolean isOldRow = checkIdList.contains(oldCheckId);
+                    if (isOldRow) {   //原本有的数据行
+                        enableIds.add(oldCheckId);
+                        checkIdList.remove(oldCheckId);
+                    } else {
+                        disabledIds.add(oldCheckId);
+                    }
+                }
+                if (enableIds.isEmpty() == false) {   //批量启用
+                    userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
+                }
+                if (disabledIds.isEmpty() == false) {   //批量禁用
+                    userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
+                }
+                if (checkIdList.isEmpty() == false) {     //有新勾选的权限，需要新增行
+                    //批量新增行
+                    List<UserTenant> addEntitys = new ArrayList<>();
+                    for (String checkId : checkIdList) {
+                        addEntitys.add(UserTenant.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
+                    }
+                    //批量新增行
+                    userTenantMapper.customBatchInsert(addEntitys);
+                }
+            }
+        }
+        return changeCount;
     }
 }

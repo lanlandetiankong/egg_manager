@@ -147,15 +147,16 @@
         </foreach>
     </update>
 
-    <update id="batchUpdateStateByUserAccountId">
+    <update id="batchUpdateManagerUserStateByTenantId">
         UPDATE em_user_tenant
-        SET  state = #{stateVal}
+        SET  state = 1,
+            is_manager = #{stateVal}
             <if test="loginUser != null">
                 ,last_modifyer_id=#{loginUser.fid}
             </if>
-        where user_account_id = #{userAccountId}
-        and define_tenant_id IN
-        <foreach collection="tenantIdList" item="item" index="index" separator="," open="(" close=")">
+        where define_tenant_id = #{tenantId}
+        and user_account_id IN
+        <foreach collection="userAccountIdList" item="item" index="index" separator="," open="(" close=")">
             #{item}
         </foreach>
     </update>

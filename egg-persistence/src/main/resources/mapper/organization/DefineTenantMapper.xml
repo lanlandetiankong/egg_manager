@@ -115,6 +115,19 @@
         WHERE eum.user_account_id = #{userAccountId}
     </select>
 
+    <select id="findAllManagerUserIdByTenantId"  resultType="java.lang.String">
+        SELECT eua.fid FROM em_user_account eua
+        left JOIN em_user_tenant eut on eua.fid = eut.user_account_id
+        <where>
+            and eut.define_tenant_id = #{tenantId}
+            and eut.is_manager = 1
+            <if test="filterEnable == true">
+                and eut.state = 1
+            </if>
+        </where>
+
+    </select>
+
     <update id="batchFakeDelByIds" >
         UPDATE em_define_tenant
         SET state = -1
@@ -127,6 +140,13 @@
         </foreach>
     </update>
 
-
+    <update id="clearAllManagerByTenantId" >
+        UPDATE em_user_tenant
+        SET is_manager = -1
+        <if test="loginUser != null">
+            ,last_modifyer_id = #{loginUser.fid}
+        </if>
+        WHERE define_tenant_id = #{tenantId}
+    </update>
 
 </mapper>

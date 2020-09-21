@@ -6,12 +6,14 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
@@ -199,6 +201,34 @@ public class DefineTenantController extends BaseController {
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除租户定义:" + actionSuccessMsg);
             }
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
+        }
+        return result;
+    }
+
+
+    @PcWebOperationLog(action = "租户-设置管理员",fullPath = "/organization/define_tenant/setupTenantManager")
+    @ApiOperation(value = "租户-设置管理员", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "tenantId", value = "要配置的租户定义id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "userAccountIdArr", value = "要设置为管理员的用户id-数组", required = true, dataTypeClass = String.class,allowMultiple=true),
+    })
+    @PostMapping(value = "/setupTenantManager")
+    public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId,String[] userAccountIdArr,
+                                               @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isBlank(tenantId)) {
+                throw new BusinessException("未接收到要设置的租户信息");
+            }
+            DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);
+            if(defineTenant == null){
+                throw new BusinessException("要设置的租户不存在！");
+            }
+            int count = defineTenantService.dealTenantSetupManager(loginUser,tenantId,userAccountIdArr);
+            result.setCount(count);
+            dealCommonSuccessCatch(result, "租户-设置管理员:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

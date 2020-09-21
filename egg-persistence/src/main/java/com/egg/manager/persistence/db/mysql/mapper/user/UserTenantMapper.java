@@ -58,13 +58,13 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
     int customBatchInsert(List<UserTenant> tenantList);
 
     /**
-     * 根据用户id 修改指定租户关联 的可用状态
+     * 根据用户id 修改指定租户关联 是否管理员 的状态
      *
-     * @param userAccountId
-     * @param tenantIdList
+     * @param tenantId
+     * @param userAccountIdList
      * @param stateVal
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("tenantIdList") List<String> tenantIdList, @Param("stateVal") Short stateVal
+    int batchUpdateManagerUserStateByTenantId(@Param("tenantId") String tenantId, @Param("userAccountIdList") List<String> userAccountIdList, @Param("stateVal") Short stateVal
             , @Param("loginUser") UserAccount loginUser);
 }

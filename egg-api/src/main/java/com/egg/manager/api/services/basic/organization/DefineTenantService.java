@@ -71,4 +71,12 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param result
      */
     MyCommonResult dealResultListSetToEntitySelect(UserAccount loginUser,MyCommonResult result);
+
+    /**
+     * 租户设置管理员
+     * @param tenantId   租户id
+     * @param checkIds 要设置的管理员id
+     * @throws Exception
+     */
+    Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception;
 }

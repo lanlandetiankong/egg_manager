@@ -50,6 +50,14 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
     DefineTenantDto selectOneDtoOfUserBelongTenant(@Param("userAccountId") String userAccountId);
 
     /**
+     * 取得租户设置的所有管理员的用户id集合
+     *
+     * @param tenantId 租户id
+     * @param filterEnable 是否只查询状态为可用的
+     * @return
+     */
+    List<String> findAllManagerUserIdByTenantId(@Param("tenantId") String tenantId, @Param("filterEnable") boolean filterEnable);
+    /**
      * 批量 伪删除
      *
      * @param delIds
@@ -58,5 +66,10 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
      */
     int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 
-
+    /**
+     * 删除指定租户id下的所有管理员
+     * @param tenantId
+     * @return
+     */
+    int clearAllManagerByTenantId(@Param("tenantId") String tenantId, @Param("loginUser") UserAccount loginUser);
 }

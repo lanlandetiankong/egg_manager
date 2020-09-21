@@ -16,7 +16,7 @@ import java.util.List;
 @Named("definePermissionTransfer")
 public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
 
-    static DefinePermissionMapstruct definePermissionMapstruct = DefinePermissionMapstruct.INSTANCE ;
+    static DefinePermissionMapstruct definePermissionMapstruct = DefinePermissionMapstruct.INSTANCE;
 
     public static DefinePermission transferVoToEntity(DefinePermissionVo vo) {
         if (vo == null) {

@@ -27,5 +27,4 @@ public class DefineJobVo extends MyBaseMysqlVo {
     private String typeStr;
 
 
-
 }

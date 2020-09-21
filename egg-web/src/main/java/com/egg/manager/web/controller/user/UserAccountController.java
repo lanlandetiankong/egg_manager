@@ -1,6 +1,5 @@
 package com.egg.manager.web.controller.user;
 
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -51,308 +50,304 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
-@Api(value = "API ==>>  UserAccountController ",description = "用户账号接口")
+@Api(value = "API ==>>  UserAccountController ", description = "用户账号接口")
 @RestController
 @RequestMapping("/user/user_account")
 public class UserAccountController extends BaseController {
 
     @Autowired
-    private UserAccountMapper userAccountMapper ;
+    private UserAccountMapper userAccountMapper;
     @Autowired
-    private DefineRoleMapper defineRoleMapper ;
+    private DefineRoleMapper defineRoleMapper;
     @Autowired
-    private DefinePermissionMapper definePermissionMapper ;
+    private DefinePermissionMapper definePermissionMapper;
     @Autowired
-    private DefineJobMapper defineJobMapper ;
+    private DefineJobMapper defineJobMapper;
     @Autowired
-    private DefineTenantMapper defineTenantMapper ;
+    private DefineTenantMapper defineTenantMapper;
     @Autowired
-    private DefineDepartmentMapper defineDepartmentMapper ;
+    private DefineDepartmentMapper defineDepartmentMapper;
 
     @Autowired
-    private UserAccountService userAccountService ;
-    @Autowired
-    private CommonFuncService commonFuncService ;
+    private UserAccountService userAccountService;
 
 
-
-    @RequiresRoles(value = {"Root","SuperRoot"},logical= Logical.OR)
-    @PcWebOperationLog(action="查询用户信息-Dto列表",description = "查询用户信息-Dto列表",fullPath = "/user/user_account/getAllUserAccountDtos")
-    @ApiOperation(value = "查询用户信息-Dto列表", notes = "查询用户信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
+    @PcWebOperationLog(action = "查询用户信息-Dto列表", description = "查询用户信息-Dto列表", fullPath = "/user/user_account/getAllUserAccountDtos")
+    @ApiOperation(value = "查询用户信息-Dto列表", notes = "查询用户信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllUserAccountDtos")
     public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
-        try{
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userAccountService.dealGetUserAccountDtoPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询用户信息-Dto列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = userAccountService.dealGetUserAccountDtoPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询用户信息-Dto列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户信息",description = "根据用户id查询用户信息",fullPath = "/user/user_account/getUserAccountById")
+    @ApiOperation(value = "查询用户信息", notes = "根据用户id查询用户信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户信息", description = "根据用户id查询用户信息", fullPath = "/user/user_account/getUserAccountById")
     @PostMapping(value = "/getUserAccountById")
     public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>() ;
-        try{
+        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>();
+        try {
             UserAccount account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
-            DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(),BaseStateEnum.ENABLED.getValue());
-            if(belongTenant != null){
+            DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
+            if (belongTenant != null) {
                 userAccountVo.setBelongTenantId(belongTenant.getFid());
                 userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
             }
             //取得 所属的 部门定义
-            DefineDepartment belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(),BaseStateEnum.ENABLED.getValue());
-            if(belongDepartment != null){
+            DefineDepartment belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
+            if (belongDepartment != null) {
                 userAccountVo.setBelongDepartmentId(belongDepartment.getFid());
                 userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
             }
             result.setBean(userAccountVo);
-            dealCommonSuccessCatch(result,"查询用户信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户所拥有的角色",description = "根据用户id查询用户已有的角色",fullPath = "/user/user_account/getAllRoleByUserAccountId")
+    @ApiOperation(value = "查询用户所拥有的角色", notes = "根据用户id查询用户已有的角色", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户所拥有的角色", description = "根据用户id查询用户已有的角色", fullPath = "/user/user_account/getAllRoleByUserAccountId")
     @PostMapping(value = "/getAllRoleByUserAccountId")
     public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>() ;
-        try{
-            List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
+        MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>();
+        try {
+            List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
-            dealCommonSuccessCatch(result,"查询用户所拥有的角色:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户所拥有的角色:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户所拥有的权限",description = "根据用户id查询用户已有的权限",fullPath = "/user/user_account/getAllPermissionByUserAccountId")
+    @ApiOperation(value = "查询用户所拥有的权限", notes = "根据用户id查询用户已有的权限", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户所拥有的权限", description = "根据用户id查询用户已有的权限", fullPath = "/user/user_account/getAllPermissionByUserAccountId")
     @PostMapping(value = "/getAllPermissionByUserAccountId")
     public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
                                                                                 @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>() ;
-        try{
+        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
+        try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
-            dealCommonSuccessCatch(result,"查询用户所拥有的权限:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户所拥有的权限:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户所拥有的职务",description = "根据用户id查询用户已有的职务",fullPath = "/user/user_account/getAllJobByUserAccountId")
+    @ApiOperation(value = "查询用户所拥有的职务", notes = "根据用户id查询用户已有的职务", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户所拥有的职务", description = "根据用户id查询用户已有的职务", fullPath = "/user/user_account/getAllJobByUserAccountId")
     @PostMapping(value = "/getAllJobByUserAccountId")
     public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>() ;
-        try{
-            List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId,BaseStateEnum.ENABLED.getValue());
+        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>();
+        try {
+            List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
-            dealCommonSuccessCatch(result,"查询用户所拥有的职务:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户所拥有的职务:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增用户",description = "表单方式新增用户",fullPath = "/user/user_account/doAddUserAccount")
+    @ApiOperation(value = "新增用户", notes = "表单方式新增用户", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增用户", description = "表单方式新增用户", fullPath = "/user/user_account/doAddUserAccount")
     @PostMapping(value = "/doAddUserAccount")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer addCount = 0 ;
-        try{
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj", UserAccountVo.class,true) ;
-            if(userAccountVo == null) {
+    public MyCommonResult doAddUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer addCount = 0;
+        try {
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+            if (userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
-            }   else {
-                addCount = userAccountService.dealAddUserAccount(loginUser,userAccountVo) ;
+            } else {
+                addCount = userAccountService.dealAddUserAccount(loginUser, userAccountVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增用户:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增用户:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="更新用户信息",description = "表单方式更新用户信息",fullPath = "/user/user_account/doUpdateUserAccount")
+    @ApiOperation(value = "更新用户信息", notes = "表单方式更新用户信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "更新用户信息", description = "表单方式更新用户信息", fullPath = "/user/user_account/doUpdateUserAccount")
     @PostMapping(value = "/doUpdateUserAccount")
-    public MyCommonResult doUpdateUserAccount(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer changeCount = 0 ;
-        try{
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request,"formObj", UserAccountVo.class,true) ;
-            if(userAccountVo == null) {
+    public MyCommonResult doUpdateUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer changeCount = 0;
+        try {
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+            if (userAccountVo == null) {
                 throw new Exception("未接收到有效的用户信息！");
-            }   else {
-                changeCount = userAccountService.dealUpdateUserAccount(loginUser,userAccountVo,false) ;
+            } else {
+                changeCount = userAccountService.dealUpdateUserAccount(loginUser, userAccountVo, false);
             }
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"更新用户:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "更新用户:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="批量删除用户",description = "根据用户id批量删除用户",fullPath = "/user/user_account/batchDelUserAccountByIds")
-    @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除用户", description = "根据用户id批量删除用户", fullPath = "/user/user_account/batchDelUserAccountByIds")
+    @ApiOperation(value = "批量删除用户", notes = "根据用户id批量删除用户", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的用户id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的用户id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelUserAccountByIds")
-    public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
+        try {
+            if (delIds != null && delIds.length > 0) {
                 //批量伪删除
-                delCount = userAccountService.dealDelUserAccountByArr(loginUser,delIds);
+                delCount = userAccountService.dealDelUserAccountByArr(loginUser, delIds);
                 result.setCount(delCount);
-                dealCommonSuccessCatch(result,"批量删除用户:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "批量删除用户:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除用户",description = "根据用户id删除用户",fullPath = "/user/user_account/delOneUserAccountById")
-    @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除用户", description = "根据用户id删除用户", fullPath = "/user/user_account/delOneUserAccountById")
+    @ApiOperation(value = "删除用户", notes = "根据用户id删除用户", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的用户id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的用户id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneUserAccountById")
-    public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                delCount = userAccountService.dealDelUserAccount(loginUser,delId);
-                dealCommonSuccessCatch(result,"删除用户:"+actionSuccessMsg);
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                delCount = userAccountService.dealDelUserAccount(loginUser, delId);
+                dealCommonSuccessCatch(result, "删除用户:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="修改用户锁定状态",description = "根据用户id批量锁定或解锁用户",fullPath = "/user/user_account/batchLockUserAccountByIds")
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id批量锁定或解锁用户", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "修改用户锁定状态", description = "根据用户id批量锁定或解锁用户", fullPath = "/user/user_account/batchLockUserAccountByIds")
     @PostMapping(value = "/batchLockUserAccountByIds")
-    public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request,String[] lockIds,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
-        try{
+        try {
             //操作类型为锁定？如果没传递值默认锁定
-            lockFlag = lockFlag != null ? lockFlag : true ;
-            String lockMsg = lockFlag ? "锁定" : "解锁" ;
-            if(lockIds != null && lockIds.length > 0) {
+            lockFlag = lockFlag != null ? lockFlag : true;
+            String lockMsg = lockFlag ? "锁定" : "解锁";
+            if (lockIds != null && lockIds.length > 0) {
                 //批量伪删除
-                lockCount = userAccountService.dealLockUserAccountByArr(loginUser,lockIds,lockFlag);
+                lockCount = userAccountService.dealLockUserAccountByArr(loginUser, lockIds, lockFlag);
                 result.setCount(lockCount);
-                dealCommonSuccessCatch(result,"批量"+lockMsg+"用户:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "批量" + lockMsg + "用户:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="修改用户锁定状态",description = "根据用户id锁定或解锁用户",fullPath = "/user/user_account/lockOneUserAccountById")
+    @ApiOperation(value = "修改用户锁定状态", notes = "根据用户id锁定或解锁用户", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "修改用户锁定状态", description = "根据用户id锁定或解锁用户", fullPath = "/user/user_account/lockOneUserAccountById")
     @PostMapping(value = "/lockOneUserAccountById")
-    public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, String lockId,Boolean lockFlag,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
-        try{
+        try {
             //操作类型为锁定？如果没传递值默认锁定
-            lockFlag = lockFlag != null ? lockFlag : true ;
-            String lockMsg = lockFlag ? "锁定" : "解锁" ;
-            if(StringUtils.isNotBlank(lockId)){
-                lockCount = userAccountService.dealLockUserAccount(loginUser,lockId,lockFlag);
-                dealCommonSuccessCatch(result,lockMsg+"用户:"+actionSuccessMsg);
+            lockFlag = lockFlag != null ? lockFlag : true;
+            String lockMsg = lockFlag ? "锁定" : "解锁";
+            if (StringUtils.isNotBlank(lockId)) {
+                lockCount = userAccountService.dealLockUserAccount(loginUser, lockId, lockFlag);
+                dealCommonSuccessCatch(result, lockMsg + "用户:" + actionSuccessMsg);
             }
             result.setCount(lockCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="用户分配角色",description = "为用户分配角色",fullPath = "/user/user_account/grantRoleToUser")
+    @ApiOperation(value = "用户分配角色", notes = "为用户分配角色", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "用户分配角色", description = "为用户分配角色", fullPath = "/user/user_account/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
-    public MyCommonResult doGrantRoleToUser(HttpServletRequest request,String userAccountId,String[] checkIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(userAccountId)){
-                Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser,userAccountId,checkIds);
+    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(userAccountId)) {
+                Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
                 result.setCount(grantCount);
-                dealCommonSuccessCatch(result,"用户分配角色:"+actionSuccessMsg);
-            }   else {
+                dealCommonSuccessCatch(result, "用户分配角色:" + actionSuccessMsg);
+            } else {
                 throw new BusinessException("未知要分配角色的用户id");
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-    @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="用户分配职务",description = "为用户分配职务",fullPath = "/user/user_account/grantJobToUser")
+    @ApiOperation(value = "用户分配职务", notes = "为用户分配职务", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "用户分配职务", description = "为用户分配职务", fullPath = "/user/user_account/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
-    public MyCommonResult doGrantJobToUser(HttpServletRequest request,String userAccountId,String[] checkIds,
-                                           @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(userAccountId)){
-                Integer grantCount = userAccountService.dealGrantJobToUser(loginUser,userAccountId,checkIds);
+    public MyCommonResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
+                                           @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(userAccountId)) {
+                Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
                 result.setCount(grantCount);
-                dealCommonSuccessCatch(result,"用户分配职务:"+actionSuccessMsg);
-            }   else {
+                dealCommonSuccessCatch(result, "用户分配职务:" + actionSuccessMsg);
+            } else {
                 throw new BusinessException("未知要分配职务的用户id");
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 }

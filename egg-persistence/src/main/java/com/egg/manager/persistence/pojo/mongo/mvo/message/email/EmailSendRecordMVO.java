@@ -29,7 +29,7 @@ public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
     /**
      * 发送者-相关信息
      */
-    private EmailFromUserInfoMVO fromUserInfo ;
+    private EmailFromUserInfoMVO fromUserInfo;
     /**
      * 主题
      */
@@ -37,7 +37,7 @@ public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
     /**
      * 接收方邮件(必填参数)
      */
-    private List<EmailReceiveUserInfoMVO> receiveUserInfoList ;
+    private List<EmailReceiveUserInfoMVO> receiveUserInfoList;
     /**
      * 邮件内容
      */
@@ -54,32 +54,33 @@ public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
     /**
      * 附件-信息-列表(可选)
      */
-    private List<EmailSendFileInfoMVO> accessoryInfoList ;
+    private List<EmailSendFileInfoMVO> accessoryInfoList;
     /**
      * 是否发送成功？
      */
-    private Boolean successFlag = true ;
+    private Boolean successFlag = true;
     /**
      * 发送日期
      */
-    private Date sentDate ;
+    private Date sentDate;
 
     /**
      * 取得-接收人-姓名-集合
+     *
      * @return
      */
-    public List<String> doGainReceiveUserNameList(){
-        List<String> list = Lists.newArrayList() ;
-        if(CollectionUtil.isEmpty(this.receiveUserInfoList)){
-            return list ;
+    public List<String> doGainReceiveUserNameList() {
+        List<String> list = Lists.newArrayList();
+        if (CollectionUtil.isEmpty(this.receiveUserInfoList)) {
+            return list;
         }
-        for (EmailReceiveUserInfoMVO receiveUserInfoMVO : this.receiveUserInfoList){
-            if(receiveUserInfoMVO != null){
-                if(receiveUserInfoMVO.getUserName() != null){
-                    list.add(receiveUserInfoMVO.getUserName()) ;
+        for (EmailReceiveUserInfoMVO receiveUserInfoMVO : this.receiveUserInfoList) {
+            if (receiveUserInfoMVO != null) {
+                if (receiveUserInfoMVO.getUserName() != null) {
+                    list.add(receiveUserInfoMVO.getUserName());
                 }
             }
         }
-        return list ;
+        return list;
     }
 }

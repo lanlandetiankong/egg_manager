@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @Named("defineRoleTransfer")
 public class DefineRoleTransfer extends MyBaseMysqlTransfer {
-    static DefineRoleMapstruct defineRoleMapstruct = DefineRoleMapstruct.INSTANCE ;
+    static DefineRoleMapstruct defineRoleMapstruct = DefineRoleMapstruct.INSTANCE;
 
     public static DefineRole transferVoToEntity(DefineRoleVo vo) {
         if (vo == null) {

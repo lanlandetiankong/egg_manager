@@ -62,6 +62,7 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
     /**
      * 根据用户id查询 所属的部门详情-dto
+     *
      * @param userAccountId
      * @return
      */

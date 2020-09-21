@@ -1,12 +1,9 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -18,7 +15,6 @@ import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -47,228 +43,230 @@ import java.util.Set;
  * \
  */
 @Service(interfaceClass = DefinePermissionService.class)
-public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper,DefinePermission,DefinePermissionVo> implements DefinePermissionService {
+public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper, DefinePermission, DefinePermissionVo> implements DefinePermissionService {
     @Autowired
-    private RoutineCommonFunc routineCommonFunc ;
+    private RoutineCommonFunc routineCommonFunc;
 
     @Autowired
-    private DefinePermissionMapper definePermissionMapper ;
+    private DefinePermissionMapper definePermissionMapper;
     @Autowired
-    private UserAccountMapper userAccountMapper ;
-    @Reference
-    private CommonFuncService commonFuncService ;
+    private UserAccountMapper userAccountMapper;
 
     /**
      * 查询 所有[可用状态]的 [权限定义]
+     *
      * @param wrapper
      * @return
      */
     @Override
-    public List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser,EntityWrapper<DefinePermission> wrapper){
+    public List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser, EntityWrapper<DefinePermission> wrapper) {
         wrapper = wrapper != null ? wrapper : new EntityWrapper<DefinePermission>();
         //筛选与排序
-        wrapper.eq("state",BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy("create_time",false);
+        wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        wrapper.orderBy("create_time", false);
         return this.selectList(wrapper);
     }
 
     /**
      * 分页查询 权限定义 列表
+     *
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        EntityWrapper<DefinePermission> definePermissionEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
+        EntityWrapper<DefinePermission> definePermissionEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(definePermissionEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds,definePermissionEntityWrapper) ;
+        result.myAntdvPaginationBeanSet(paginationBean, total);
+        List<DefinePermission> definePermissions = definePermissionMapper.selectPage(rowBounds, definePermissionEntityWrapper);
         result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissions));
-        return result ;
+        return result;
     }
 
     /**
      * 分页查询 权限定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     *
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
-        return result ;
+        return result;
     }
-
-
 
 
     /**
      * 权限定义-新增
+     *
      * @param definePermissionVo
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception{
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,new EntityWrapper<DefinePermission>());
-        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+    public Integer dealAddDefinePermission(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, new EntityWrapper<DefinePermission>());
+        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
-        Date now = new Date() ;
+        Date now = new Date();
         DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        definePermission = super.doBeforeCreate(loginUser,definePermission,true);
+        definePermission = super.doBeforeCreate(loginUser, definePermission, true);
         definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
-        return definePermissionMapper.insert(definePermission) ;
+        return definePermissionMapper.insert(definePermission);
     }
-
-
-
 
 
     /**
      * 权限定义-更新
+     *
      * @param definePermissionVo
-     * @param updateAll 是否更新所有字段
+     * @param updateAll          是否更新所有字段
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception{
-        Wrapper<DefinePermission> uniWrapper  = new EntityWrapper<DefinePermission>()
-                .ne("fid",definePermissionVo.getFid());
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo,uniWrapper);
-        if(verifyDuplicateBean.isSuccessFlag() == false){    //已有重复键值
+    public Integer dealUpdateDefinePermission(UserAccount loginUser, DefinePermissionVo definePermissionVo, boolean updateAll) throws Exception {
+        Wrapper<DefinePermission> uniWrapper = new EntityWrapper<DefinePermission>()
+                .ne("fid", definePermissionVo.getFid());
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
+        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
         DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        updateEntity = super.doBeforeUpdate(loginUser,updateEntity);
+        updateEntity = super.doBeforeUpdate(loginUser, updateEntity);
         DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
-        if(SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())){    //如果已经启用
-            DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity,oldEntity);
+        if (SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())) {    //如果已经启用
+            DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity, oldEntity);
         }
-        if(updateAll){  //是否更新所有字段
-            changeCount = definePermissionMapper.updateAllColumnById(updateEntity) ;
-        }   else {
-            changeCount = definePermissionMapper.updateById(updateEntity) ;
+        if (updateAll) {  //是否更新所有字段
+            changeCount = definePermissionMapper.updateAllColumnById(updateEntity);
+        } else {
+            changeCount = definePermissionMapper.updateById(updateEntity);
         }
-        return changeCount ;
+        return changeCount;
     }
-
 
 
     /**
      * 权限定义-删除
+     *
      * @param delIds 要删除的权限id 集合
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefinePermissionByArr(UserAccount loginUser,String[] delIds) {
-        Integer delCount = 0 ;
-        if(delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds) ;
+    public Integer dealDelDefinePermissionByArr(UserAccount loginUser, String[] delIds) {
+        Integer delCount = 0;
+        if (delIds != null && delIds.length > 0) {
+            List<String> delIdList = Arrays.asList(delIds);
             //批量伪删除
-            delCount = definePermissionMapper.batchFakeDelByIds(delIdList,loginUser);
+            delCount = definePermissionMapper.batchFakeDelByIds(delIdList, loginUser);
         }
-        return delCount ;
+        return delCount;
     }
 
     /**
      * 权限定义-启用
+     *
      * @param ensureIds 要启用的权限id 集合
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealEnsureDefinePermissionByArr(UserAccount loginUser,String[] ensureIds) {
-        Integer delCount = 0 ;
-        if(ensureIds != null && ensureIds.length > 0) {
-            List<String> delIdList = Arrays.asList(ensureIds) ;
+    public Integer dealEnsureDefinePermissionByArr(UserAccount loginUser, String[] ensureIds) {
+        Integer delCount = 0;
+        if (ensureIds != null && ensureIds.length > 0) {
+            List<String> delIdList = Arrays.asList(ensureIds);
             //批量伪删除
-            delCount = definePermissionMapper.batchEnsureByIds(delIdList,loginUser);
+            delCount = definePermissionMapper.batchEnsureByIds(delIdList, loginUser);
         }
-        return delCount ;
+        return delCount;
     }
 
     /**
      * 权限定义-删除
+     *
      * @param delId 要删除的权限id
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefinePermission(UserAccount loginUser,String delId) throws Exception{
+    public Integer dealDelDefinePermission(UserAccount loginUser, String delId) throws Exception {
         DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);
         return definePermissionMapper.updateById(updateEntity);
     }
 
 
-
     /**
      * 取得用户 所拥有的 权限定义-List集合
+     *
      * @param userAccountId
      * @return
      */
     @Override
-    public List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser,String userAccountId) {
-        if(StringUtils.isBlank(userAccountId)) {
-            return null ;
+    public List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser, String userAccountId) {
+        if (StringUtils.isBlank(userAccountId)) {
+            return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if(UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())){    //如果是[超级管理员]的话可以访问全部菜单
-            return getAllEnableDefinePermissions(loginUser,null);
-        }   else {
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
+            return getAllEnableDefinePermissions(loginUser, null);
+        } else {
             return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
         }
     }
 
     /**
      * 取得用户 所拥有的 权限code-Set集合
+     *
      * @param userAccountId
      * @return
      */
     @Override
-    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser,String userAccountId) {
+    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
-        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(loginUser,userAccountId);
-        if(definePermissions != null && definePermissions.isEmpty() == false){
-            for (DefinePermission definePermission : definePermissions){
-                String permissionCode = definePermission.getCode() ;
-                if(StringUtils.isNotBlank(permissionCode)){
+        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(loginUser, userAccountId);
+        if (definePermissions != null && definePermissions.isEmpty() == false) {
+            for (DefinePermission definePermission : definePermissions) {
+                String permissionCode = definePermission.getCode();
+                if (StringUtils.isNotBlank(permissionCode)) {
                     codeSet.add(permissionCode);
                 }
             }
         }
-        return codeSet ;
+        return codeSet;
     }
 
 
     /**
      * 验证 数据库 中的唯一冲突
+     *
      * @param definePermissionVo
      * @param definePermissionWrap
      * @return
      */
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap){
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
-        definePermissionWrap = definePermissionWrap != null ? definePermissionWrap : new EntityWrapper<>() ;
-        definePermissionWrap.eq("code",definePermissionVo.getCode()) ;
-        definePermissionWrap.eq("state",BaseStateEnum.ENABLED.getValue()) ;
-        boolean successFlag = definePermissionMapper.selectCount(definePermissionWrap) == 0 ;
-        if(successFlag == false){
+        definePermissionWrap = definePermissionWrap != null ? definePermissionWrap : new EntityWrapper<>();
+        definePermissionWrap.eq("code", definePermissionVo.getCode());
+        definePermissionWrap.eq("state", BaseStateEnum.ENABLED.getValue());
+        boolean successFlag = definePermissionMapper.selectCount(definePermissionWrap) == 0;
+        if (successFlag == false) {
             verifyBean.setErrorMsg("唯一键[编码]不允许重复！");
             verifyBean.dealAddColumn("code");
             verifyBean.dealAddFieldName("编码");

@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartForm;
 
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.MyBaseMongoVerifyO;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfUpdate;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.MyBaseMongoVerifyO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,32 +15,31 @@ import javax.validation.constraints.NotBlank;
  * \* Date: 2020/7/25
  * \* Time: 11:06
  * \* Description:
+ *
  * @see SmartFormTypeDefinitionMO
  * \
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SmartFormTypeDefinitionMongoVerifyO extends MyBaseMongoVerifyO<SmartFormTypeDefinitionMO> {
-    @NotBlank(groups = {VerifyGroupOfUpdate.class},message = "[fid]不能为空!")
-    private String fid ;
+    @NotBlank(groups = {VerifyGroupOfUpdate.class}, message = "[fid]不能为空!")
+    private String fid;
 
     /**
      * 顺序
      */
-    private Integer orderNum ;
+    private Integer orderNum;
     /**
      * 类型名
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[类型名]不能为空!")
-    private String name ;
+    @NotBlank(groups = {VerifyGroupOfDefault.class}, message = "[类型名]不能为空!")
+    private String name;
     /**
      * 类型描述
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[描述]不能为空!")
-    private String description ;
-    private String remark ;
-
-
+    @NotBlank(groups = {VerifyGroupOfDefault.class}, message = "[描述]不能为空!")
+    private String description;
+    private String remark;
 
 
 }

@@ -47,75 +47,73 @@ import java.util.Set;
 public class UserExcelController extends BaseController {
 
 
-
-
     @Reference
-    private DefineMenuService defineMenuService ;
+    private DefineMenuService defineMenuService;
     @Reference
-    private UserAccountXlsService userAccountXlsService ;
+    private UserAccountXlsService userAccountXlsService;
     @Reference
-    private UserAccountService userAccountService ;
+    private UserAccountService userAccountService;
 
     @PostMapping(value = "/exportCheckList")
-    public void dealExportCheckLists(HttpServletRequest request,HttpServletResponse response,
-                                                          @NotBlank(message = "未知菜单id") String menuId,String[] checkIds
-                                ,@CurrentLoginUser UserAccount loginUser) {
+    public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
+                                     @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
+            , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
             DefineMenu defineMenu = defineMenuService.selectById(menuId);
-            if(defineMenu == null){
+            if (defineMenu == null) {
                 throw new BusinessException("指定的无效的菜单！");
             }
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
-            userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser,response,defineMenu,fileUploadBean,checkIds);
+            userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean, checkIds);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log,result,e);
-            this.respResultJsonToFront(log, response,result);
+            this.dealCommonErrorCatch(log, result, e);
+            this.respResultJsonToFront(log, response, result);
         }
     }
 
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
-            ,@CurrentLoginUser UserAccount loginUser) {
+            , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
             DefineMenu defineMenu = defineMenuService.selectById(menuId);
-            if(defineMenu == null){
+            if (defineMenu == null) {
                 throw new BusinessException("指定的无效的菜单！");
             }
             //菜单模板配置
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
-            userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser,response,defineMenu,fileUploadBean);
+            userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
-            this.respResultJsonToFront(log, response,result);
+            this.respResultJsonToFront(log, response, result);
         }
     }
 
 
-    @ApiOperation(value = "导入数据", notes = "导入数据", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "导入数据", notes = "导入数据", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/dealImportData")
     @ResponseBody
     public MyCommonResult dealImportData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
-                                         @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(fileArr == null || fileArr.length == 0){
+                                         @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (fileArr == null || fileArr.length == 0) {
                 throw new BusinessException("上传的文件为空！");
-            }   else {
-                Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser,BaseStateEnum.ENABLED.getValue(),new EntityWrapper<UserAccount>());
-                for(MultipartFile file : fileArr){
-                    EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService,loginUser,accountExistSet))
+            } else {
+                Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new EntityWrapper<UserAccount>());
+                for (MultipartFile file : fileArr) {
+                    EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))
                             .sheet()
                             .headRowNumber(1)   //前几行是头部，将不读取
                             .doRead();
                 }
                 this.dealCommonSuccessCatch(result, "成功导入数据！");
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 

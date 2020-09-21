@@ -15,18 +15,17 @@ import org.springframework.beans.factory.annotation.Value;
 @Slf4j
 public class HelloServiceImpl implements HelloService {
     @Autowired
-    private UserAccountService userAccountService ;
+    private UserAccountService userAccountService;
     @Reference
-    private MyBaseEmailService myBaseEmailService ;
+    private MyBaseEmailService myBaseEmailService;
 
     @Value("${server.port}")
-    private String serverPort ;
+    private String serverPort;
     @Value("${egg.dubbo.application.name}")
-    private String dubboApplicationName ;
+    private String dubboApplicationName;
 
     @Autowired
     private RegistryConfig registryConfig;
-
 
 
     @Override
@@ -39,10 +38,9 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public String loadBalanceTest() {
-        System.out.println("for service ->"+serverPort);
+        System.out.println("for service ->" + serverPort);
         return serverPort;
     }
-
 
 
 }

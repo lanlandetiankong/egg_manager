@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineGroupController ",description = "组别定义接口")
+@Api(value = "API ==>>  DefineGroupController ", description = "组别定义接口")
 @RestController
 @RequestMapping("/define/define_group")
 public class DefineGroupController {
-
-
 
 
 }

@@ -38,9 +38,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Autowired
     private ${cfg.baseEntityName}Mapper ${cfg.baseEntityName_firstLow}Mapper ;
-    @Reference
-    private CommonFuncService commonFuncService ;
-    
+
     
     @Override
     public MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,

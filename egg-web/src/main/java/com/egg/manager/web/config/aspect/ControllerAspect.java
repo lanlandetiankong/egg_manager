@@ -1,9 +1,7 @@
 package com.egg.manager.web.config.aspect;
 
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -41,8 +39,7 @@ public class ControllerAspect {
 
     @Autowired
     private ControllerAspectWService controllerAspectWService;
-    @Reference
-    private CommonFuncService commonFuncService;
+
 
     @Pointcut("execution(* com.egg.manager.web.controller..*(..)) ")
     public void aspect() {

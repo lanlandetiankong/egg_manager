@@ -13,14 +13,13 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementDraftConversion.class}
 )
-public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<AnnouncementDraft, AnnouncementDraftVo,AnnouncementDraftDto> {
+public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<AnnouncementDraft, AnnouncementDraftVo, AnnouncementDraftDto> {
 
     AnnouncementDraftMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftMapstruct.class);
 
 
-
     @Mappings({
-        @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
+            @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
     AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo);
 
@@ -32,7 +31,7 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    @InheritConfiguration(name="defaultConfigVoToDto")
+    @InheritConfiguration(name = "defaultConfigVoToDto")
     AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity);
 
     @Mappings({
@@ -43,7 +42,7 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    @InheritConfiguration(name="defaultConfigVoToDto")
+    @InheritConfiguration(name = "defaultConfigVoToDto")
     AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto);
 
 }

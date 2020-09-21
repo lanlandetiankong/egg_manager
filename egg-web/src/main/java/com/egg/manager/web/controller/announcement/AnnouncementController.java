@@ -43,183 +43,182 @@ import java.util.Map;
  * \
  */
 @Slf4j
-@Api(value = "API -  AnnouncementController ",description = "发布公告接口")
+@Api(value = "API -  AnnouncementController ", description = "发布公告接口")
 @RestController
 @RequestMapping("/announcement")
 public class AnnouncementController extends BaseController {
 
 
     @Autowired
-    private AnnouncementMapper announcementMapper ;
+    private AnnouncementMapper announcementMapper;
     @Reference
-    private AnnouncementService announcementService ;
+    private AnnouncementService announcementService;
     @Reference
-    private AnnouncementTagService announcementTagService ;
+    private AnnouncementTagService announcementTagService;
 
-    @PcWebOperationLog(action="新增公告",description = "表单方式新增公告",fullPath = "/announcement/addAnnouncement")
-    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/addAnnouncement")
+    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addAnnouncement")
     public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
-                                                            @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
-        Integer addCount = 0 ;
-        try{
-            if(announcementVo == null) {
+                                                            @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
+        Integer addCount = 0;
+        try {
+            if (announcementVo == null) {
                 throw new Exception("未接收到有效的公告！");
-            }   else {
-                addCount = announcementService.dealAddAnnouncement(loginUser,announcementVo) ;
+            } else {
+                addCount = announcementService.dealAddAnnouncement(loginUser, announcementVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增公告:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增公告:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="公告草稿发布",description = "表单方式发布公告草稿",fullPath = "/announcement/addAnnouncementFromDraft")
+    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/addAnnouncementFromDraft")
     @PostMapping(value = "/addAnnouncementFromDraft")
     public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                                                     @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
-        Integer addCount = 0 ;
-        try{
-            if(announcementDraftVo == null) {
+                                                                     @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
+        Integer addCount = 0;
+        try {
+            if (announcementDraftVo == null) {
                 throw new Exception("未接收到有效的公告草稿！");
-            }   else {
-                addCount = announcementService.dealAddAnnouncementFromDraft(loginUser,announcementDraftVo) ;
+            } else {
+                addCount = announcementService.dealAddAnnouncementFromDraft(loginUser, announcementDraftVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"公告草稿发布:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "公告草稿发布:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @PcWebQueryLog(action="查询公告信息-Dto列表",description = "查询公告信息-Dto列表",fullPath = "/announcement/getAllAnnouncementDtos")
-    @ApiOperation(value = "查询公告信息-Dto列表", notes = "查询公告信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询公告信息-Dto列表", description = "查询公告信息-Dto列表", fullPath = "/announcement/getAllAnnouncementDtos")
+    @ApiOperation(value = "查询公告信息-Dto列表", notes = "查询公告信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllAnnouncementDtos")
     public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
-        try{
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
-            if(Boolean.TRUE.equals(onlySelf)){  //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id",loginUser.getFid() )) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            if (Boolean.TRUE.equals(onlySelf)) {  //只查询自己发布的公告
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = announcementService.dealGetAnnouncementDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans); ;
-            dealCommonSuccessCatch(result,"查询公告信息-Dto列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = announcementService.dealGetAnnouncementDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            ;
+            dealCommonSuccessCatch(result, "查询公告信息-Dto列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-    @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询公告信息部分列表",description = "查询公告信息部分列表",fullPath = "/announcement/getSomeAnnouncements")
+    @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询公告信息部分列表", description = "查询公告信息部分列表", fullPath = "/announcement/getSomeAnnouncements")
     @PostMapping(value = "/getSomeAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
                                                                  Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
-        try{
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
+        try {
             //这些查询条件暂时用不到
-            String queryObj = null,paginationObj = null,sortObj = null ;
+            String queryObj = null, paginationObj = null, sortObj = null;
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
-            if(Boolean.TRUE.equals(onlySelf)){  //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id",loginUser.getFid() )) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            if (Boolean.TRUE.equals(onlySelf)) {  //只查询自己发布的公告
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置
             AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
-            result = announcementService.dealGetAnnouncementPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans); ;
-            dealCommonSuccessCatch(result,"查询公告信息部分列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            result = announcementService.dealGetAnnouncementPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            ;
+            dealCommonSuccessCatch(result, "查询公告信息部分列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-    @PcWebQueryLog(action="查询公告信息",description = "根据id查询公告信息",fullPath = "/announcement/getAnnouncementById")
-    @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询公告信息", description = "根据id查询公告信息", fullPath = "/announcement/getAnnouncementById")
+    @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>() ;
-        try{
+        MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
+        try {
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
-            Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-            result.setBean(AnnouncementTransfer.transferEntityToVo(announcement,announcementTagMap));
-            dealCommonSuccessCatch(result,"查询公告信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+            result.setBean(AnnouncementTransfer.transferEntityToVo(announcement, announcementTagMap));
+            dealCommonSuccessCatch(result, "查询公告信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @PcWebOperationLog(action="批量删除公告",description = "根据公告id批量删除公告",fullPath = "/announcement/batchDelAnnouncementByIds")
-    @ApiOperation(value = "批量删除公告", notes = "根据公告id批量删除公告", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除公告", description = "根据公告id批量删除公告", fullPath = "/announcement/batchDelAnnouncementByIds")
+    @ApiOperation(value = "批量删除公告", notes = "根据公告id批量删除公告", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的公告id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的公告id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelAnnouncementByIds")
-    public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = announcementService.dealDelAnnouncementByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除公告:"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = announcementService.dealDelAnnouncementByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除公告:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "删除公告", notes = "根据公告id删除公告", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="删除公告",description = "根据公告id删除公告",fullPath = "/announcement/delOneAnnouncementByIds")
+    @ApiOperation(value = "删除公告", notes = "根据公告id删除公告", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "删除公告", description = "根据公告id删除公告", fullPath = "/announcement/delOneAnnouncementByIds")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的公告id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的公告id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneAnnouncementByIds")
-    public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                Integer delCount = announcementService.dealDelAnnouncement(loginUser,delId);
+    public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                Integer delCount = announcementService.dealDelAnnouncement(loginUser, delId);
                 result.setCount(delCount);
-                dealCommonSuccessCatch(result,"删除公告:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "删除公告:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
-
 
 
 }

@@ -13,15 +13,15 @@ public class EggPojoReflexFieldConfig<K> {
     /**
      * pojo中的字段名
      */
-    private String fieldName ;
+    private String fieldName;
     /**
      * 字段class
      */
-    private Class<K> clazz ;
+    private Class<K> clazz;
     /**
      * pojo对应的数据库字段名
      */
-    private String columnName ;
+    private String columnName;
 
     public EggPojoReflexFieldConfig(String fieldName, Class<K> clazz) {
         this.fieldName = fieldName;

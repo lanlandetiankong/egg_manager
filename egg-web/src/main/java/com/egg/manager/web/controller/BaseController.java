@@ -71,7 +71,6 @@ public class BaseController {
     }
 
 
-
     /**
      * 设置/刷新 用户信息缓存到redis
      *
@@ -80,7 +79,7 @@ public class BaseController {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public void dealSetTokenToRedis(UserAccount loginUser,UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
+    public void dealSetTokenToRedis(UserAccount loginUser, UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if (userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(), userAccountToken.getUserAccountId());
@@ -103,11 +102,11 @@ public class BaseController {
             redisHelper.hashTtlPut(redisPropsOfShiroCache.getAuthorizationKey(), authorization, userAccountToken, redisPropsOfShiroCache.getAuthorizationTtl());
 
             //设置到缓存,hashKey 都是 authorization
-            userAccountRedisService.dealGetCurrentUserEntity(loginUser,authorization, userAccountToken.getUserAccountId(), true);
-            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(loginUser,authorization, userAccountToken.getUserAccountId(), true);
-            userAccountRedisService.dealGetCurrentUserAllRoleSet(loginUser,authorization, userAccountToken.getUserAccountId(), true);
-            userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser,authorization, userAccountToken.getUserAccountId(), true);
-            Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser,authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserEntity(loginUser, authorization, userAccountToken.getUserAccountId(), true);
+            Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(loginUser, authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserAllRoleSet(loginUser, authorization, userAccountToken.getUserAccountId(), true);
+            userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser, authorization, userAccountToken.getUserAccountId(), true);
+            Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
                 result.setRouterUrlSet(routerUrlSet);
                 result.setPermissionSet(permissionSet);
@@ -134,7 +133,7 @@ public class BaseController {
     }
 
 
-    public <T> void  respResultJsonToFront(Logger logger,HttpServletResponse response,MyCommonResult<T> result){
+    public <T> void respResultJsonToFront(Logger logger, HttpServletResponse response, MyCommonResult<T> result) {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -152,26 +151,25 @@ public class BaseController {
     }
 
     /**
-     *
      * @param result
      * @param e
      * @param appendMsg 异常信息
      * @param isAppend  appendMsg是否追加到 errorMsg 后面
      */
-    public  void dealCommonErrorCatch(Logger logger,MyCommonResult result,Exception e,String appendMsg,boolean isAppend,boolean isPrintStackTrace) {
+    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String appendMsg, boolean isAppend, boolean isPrintStackTrace) {
         result.setHasError(true);
-        String errmsg = null ;
-        if(isAppend){
-            errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg) ;
-        }   else {
-            errmsg = appendMsg ;
+        String errmsg = null;
+        if (isAppend) {
+            errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg);
+        } else {
+            errmsg = appendMsg;
         }
-        if(isPrintStackTrace){
+        if (isPrintStackTrace) {
             logger.error(e.getMessage());
             e.printStackTrace();
         }
         result.setErrorMsg(errmsg);
-        if(e instanceof MyAuthenticationExpiredException) {
+        if (e instanceof MyAuthenticationExpiredException) {
             result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }
     }
@@ -180,7 +178,7 @@ public class BaseController {
         result.setInfo(info);
     }
 
-    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean, String info){
+    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean, String info) {
         result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);
         result.setResultList(pageBean.getContent());
         result.setCount(pageBean.getTotal());

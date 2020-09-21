@@ -15,7 +15,7 @@ import java.util.List;
 @Named("userRoleTransfer")
 public class UserRoleTransfer extends MyBaseMysqlTransfer {
 
-    static UserRoleMapstruct userRoleMapstruct = UserRoleMapstruct.INSTANCE ;
+    static UserRoleMapstruct userRoleMapstruct = UserRoleMapstruct.INSTANCE;
 
     public static UserRole transferVoToEntity(UserRoleVo vo) {
         if (vo == null) {

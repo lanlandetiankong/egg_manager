@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Component
 public class SmartFormFieldDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormFieldDefinitionMO, String>
-        implements SmartFormFieldDefinitionRepository{
+        implements SmartFormFieldDefinitionRepository {
 
 
 }

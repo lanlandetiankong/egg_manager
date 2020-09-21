@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component;
 @Named("operationLogTransfer")
 public class PcWebOperationLogTransfer {
 
-    static PcWebOperationLogMapstruct pcWebOperationLogMapstruct = PcWebOperationLogMapstruct.INSTANCE ;
+    static PcWebOperationLogMapstruct pcWebOperationLogMapstruct = PcWebOperationLogMapstruct.INSTANCE;
 
 }

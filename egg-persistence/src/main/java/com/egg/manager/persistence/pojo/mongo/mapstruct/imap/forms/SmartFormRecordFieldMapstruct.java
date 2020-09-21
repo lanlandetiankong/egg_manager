@@ -21,11 +21,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {SmartFormRecordFieldConversion.class})
-public interface SmartFormRecordFieldMapstruct  extends MyBaseMongoMapstruct<SmartFormRecordFieldMO,SmartFormRecordFieldMVO> {
+public interface SmartFormRecordFieldMapstruct extends MyBaseMongoMapstruct<SmartFormRecordFieldMO, SmartFormRecordFieldMVO> {
     SmartFormRecordFieldMapstruct INSTANCE = Mappers.getMapper(SmartFormRecordFieldMapstruct.class);
 
     @Mappings({
-            @Mapping(target = "formRecordMO",expression = "java(commonTranslateSmartFormRecordMVOToMO(mvo.getFormRecord()))")
+            @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMVOToMO(mvo.getFormRecord()))")
     })
     SmartFormRecordFieldMO translateMvoToMo(SmartFormRecordFieldMVO mvo);
 }

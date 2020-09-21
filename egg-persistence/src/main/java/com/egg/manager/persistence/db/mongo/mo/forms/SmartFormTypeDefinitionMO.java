@@ -35,5 +35,4 @@ public class SmartFormTypeDefinitionMO extends MyBaseModelMO<String> {
     private String remark;
 
 
-
 }

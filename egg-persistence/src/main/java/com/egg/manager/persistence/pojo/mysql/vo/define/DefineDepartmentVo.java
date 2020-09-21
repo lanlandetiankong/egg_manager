@@ -40,5 +40,4 @@ public class DefineDepartmentVo extends MyBaseMysqlVo {
     private DefineDepartmentVo parentDepartment;
 
 
-
 }

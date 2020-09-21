@@ -24,7 +24,7 @@ public class UserAccountXlsOutModel extends MyBaseXls {
     @ExcelProperty("用户名")
     private String userName;
     /**
-     *  账号
+     * 账号
      */
     @ExcelProperty("账号")
     private String account;

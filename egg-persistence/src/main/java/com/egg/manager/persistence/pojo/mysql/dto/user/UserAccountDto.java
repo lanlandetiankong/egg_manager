@@ -2,7 +2,6 @@ package com.egg.manager.persistence.pojo.mysql.dto.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
-import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
@@ -48,11 +47,13 @@ public class UserAccountDto extends MyBaseMysqlDto {
     private String email;
     /**
      * 性别
+     *
      * @see UserSexEnum
      */
     private Short sex;
     /**
      * 用户类型
+     *
      * @see UserAccountBaseTypeEnum
      */
     private Integer userType;
@@ -93,9 +94,9 @@ public class UserAccountDto extends MyBaseMysqlDto {
     /**
      * 所属部门-id
      */
-    private String belongDepartmentId ;
+    private String belongDepartmentId;
     /**
      * 所属部门-vo
      */
-    private DefineDepartmentDto belongDepartment ;
+    private DefineDepartmentDto belongDepartment;
 }

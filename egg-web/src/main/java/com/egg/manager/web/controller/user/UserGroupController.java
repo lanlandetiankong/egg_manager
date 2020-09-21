@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserGroupController ",description = "用户组别接口")
+@Api(value = "API ==>>  UserGroupController ", description = "用户组别接口")
 @RestController
 @RequestMapping("/user/user_group")
-public class UserGroupController  {
-
+public class UserGroupController {
 
 
 }

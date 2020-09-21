@@ -21,7 +21,7 @@ import java.util.List;
  * \
  */
 @Configuration
-public class WebMvcConfigured extends WebMvcConfigurationSupport{
+public class WebMvcConfigured extends WebMvcConfigurationSupport {
 
     @Autowired
     private DeployConfProps deployConfProps;
@@ -29,19 +29,20 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         //方法注入增强 Resolver
-        argumentResolvers.add(getCurrentUserAccountMethodArgumentResolver()) ;
+        argumentResolvers.add(getCurrentUserAccountMethodArgumentResolver());
         super.addArgumentResolvers(argumentResolvers);
     }
 
     @Bean
-    public CurrentUserAccountMethodArgumentResolver getCurrentUserAccountMethodArgumentResolver(){
-        return new CurrentUserAccountMethodArgumentResolver() ;
+    public CurrentUserAccountMethodArgumentResolver getCurrentUserAccountMethodArgumentResolver() {
+        return new CurrentUserAccountMethodArgumentResolver();
     }
 
 
     /**
      * 添加跨域请求
      * allowCredentials 是否携带jsessionid
+     *
      * @param registry
      */
     @Override
@@ -51,11 +52,12 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport{
                 .allowedMethods("*")
                 .maxAge(1800)
                 .allowCredentials(true)
-                .allowedOrigins(deployConfProps.getAllowedOrigins()) ;
+                .allowedOrigins(deployConfProps.getAllowedOrigins());
     }
 
     /**
      * 添加 swagger-ui 等的文件路径映射
+     *
      * @param registry
      */
     @Override

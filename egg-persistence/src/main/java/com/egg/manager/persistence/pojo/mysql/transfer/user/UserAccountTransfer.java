@@ -84,8 +84,8 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
     }
 
 
-    public static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel,UserAccount loginUser) {     //excel导入默认转化
-        UserAccount entity = userAccountMapstruct.xlsInModelToEntity(xlsInModel,loginUser);
+    public static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, UserAccount loginUser) {     //excel导入默认转化
+        UserAccount entity = userAccountMapstruct.xlsInModelToEntity(xlsInModel, loginUser);
         return entity;
     }
 

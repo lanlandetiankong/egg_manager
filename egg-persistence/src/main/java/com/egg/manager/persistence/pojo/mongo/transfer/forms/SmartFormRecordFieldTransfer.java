@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component;
 @Named("smartFormRecordFieldTransfer")
 public class SmartFormRecordFieldTransfer {
 
-    static SmartFormRecordFieldMapstruct smartFormRecordFieldMapstruct = SmartFormRecordFieldMapstruct.INSTANCE ;
+    static SmartFormRecordFieldMapstruct smartFormRecordFieldMapstruct = SmartFormRecordFieldMapstruct.INSTANCE;
 
 }

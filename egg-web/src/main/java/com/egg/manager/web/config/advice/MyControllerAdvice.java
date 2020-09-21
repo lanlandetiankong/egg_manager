@@ -42,6 +42,7 @@ import java.util.List;
 public class MyControllerAdvice {
     /**
      * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
+     *
      * @param binder
      */
     @InitBinder
@@ -51,15 +52,17 @@ public class MyControllerAdvice {
 
     /**
      * 把值绑定到model中，那么全局@RequestMapping可以获取到该值
+     *
      * @param model
      */
     @ModelAttribute
-    public void addAttributes(Model model){
+    public void addAttributes(Model model) {
         //nothing
     }
 
     /**
      * 全局异常
+     *
      * @param ex
      * @return
      */
@@ -67,13 +70,14 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     public MyCommonResult errorHandle(Exception ex) {
         ex.printStackTrace();
-        log.error("接口异常：{}",ex.getMessage());
-        return MyResponseHelper.handleRequestFailure(ex,"");
+        log.error("接口异常：{}", ex.getMessage());
+        return MyResponseHelper.handleRequestFailure(ex, "");
     }
 
     /**
      * 拦截UnauthorizedException处理
      * 用户没有权限的异常
+     *
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
@@ -94,29 +98,29 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
-    public MyCommonResult handleBusinessException(BusinessException e){
-        if(e instanceof BusinessException) {
-            log.error("数据操作失败："+e.getMessage());
+    public MyCommonResult handleBusinessException(BusinessException e) {
+        if (e instanceof BusinessException) {
+            log.error("数据操作失败：" + e.getMessage());
             return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
         }
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.Error);
     }
 
 
-
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
     public MyCommonResult handleParamJsonException(Exception e) {
-        if(e instanceof MyParamJsonException) {
-            log.info("参数错误："+e.getMessage());
-            return MyResponseHelper.handleRequestFailure(e,"参数错误");
+        if (e instanceof MyParamJsonException) {
+            log.info("参数错误：" + e.getMessage());
+            return MyResponseHelper.handleRequestFailure(e, "参数错误");
         }
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
     }
 
     /**
      * 字段验证不通过处理
+     *
      * @param ex
      * @param request
      * @param response
@@ -126,8 +130,8 @@ public class MyControllerAdvice {
     @ResponseBody
     public MyCommonResult handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         BindException c = (BindException) ex;
-        List<ObjectError> errors =c.getBindingResult().getAllErrors();
-        StringBuffer errorMsg=new StringBuffer("表单验证错误信息:");
+        List<ObjectError> errors = c.getBindingResult().getAllErrors();
+        StringBuffer errorMsg = new StringBuffer("表单验证错误信息:");
         errors.stream().forEach(x -> errorMsg.append(x.getDefaultMessage()));
         log.error(errorMsg.toString());
         return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
@@ -135,6 +139,7 @@ public class MyControllerAdvice {
 
     /**
      * 请求参数绑定异常 处理
+     *
      * @param ex
      * @param request
      * @param response
@@ -146,10 +151,10 @@ public class MyControllerAdvice {
         ServletRequestBindingException extException = (ServletRequestBindingException) ex;
         StringBuffer errorMsg = new StringBuffer("参数异常信息：");
         //参数值为空
-        if(extException instanceof MissingServletRequestParameterException){
+        if (extException instanceof MissingServletRequestParameterException) {
             MissingServletRequestParameterException exception = (MissingServletRequestParameterException) extException;
             errorMsg.append("必填参数[" + exception.getParameterName() + "]不能为空");
-        }   else if(extException instanceof MissingMatrixVariableException){
+        } else if (extException instanceof MissingMatrixVariableException) {
             MissingMatrixVariableException exception = (MissingMatrixVariableException) extException;
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
@@ -160,6 +165,7 @@ public class MyControllerAdvice {
 
     /**
      * 登录表单字段缺失异常-处理
+     *
      * @param ex
      * @param request
      * @param response
@@ -169,15 +175,15 @@ public class MyControllerAdvice {
     @ResponseBody
     public MyCommonResult handleLoginFormFieldDeficiencyException(LoginFormFieldDeficiencyException ex, HttpServletRequest request, HttpServletResponse response) {
         LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
-        StringBuffer errorMsg=new StringBuffer("表单验证错误信息:"+c.getMessage());
+        StringBuffer errorMsg = new StringBuffer("表单验证错误信息:" + c.getMessage());
         log.error(errorMsg.toString());
         return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
     }
 
-    public Integer getStatusCodeByException(Exception ex){
-        Integer statusCode = null ;
-        if(ex == null){
-            return statusCode ;
+    public Integer getStatusCodeByException(Exception ex) {
+        Integer statusCode = null;
+        if (ex == null) {
+            return statusCode;
         }
         if (ex instanceof HttpRequestMethodNotSupportedException) {
             statusCode = HttpServletResponse.SC_METHOD_NOT_ALLOWED;
@@ -208,7 +214,7 @@ public class MyControllerAdvice {
         } else {
             statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
         }
-        return statusCode ;
+        return statusCode;
     }
 
 

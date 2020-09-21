@@ -8,6 +8,6 @@ package com.egg.manager.persistence.pojo.mysql.verification.pc.web;
  * \* Description:
  * \
  */
-public abstract class MyBaseMysqlVerifyO{
+public abstract class MyBaseMysqlVerifyO {
 
 }

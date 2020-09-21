@@ -65,7 +65,7 @@ public class MyCommonResult<T> implements Serializable {
      */
     private String backUrl;
     /**
-     *  表格数据
+     * 表格数据
      */
     private List rows;
     /**

@@ -42,7 +42,6 @@ public class RolePermission extends Model<RolePermission> {
     private Integer type;
 
 
-
     /**
      * 备注
      */

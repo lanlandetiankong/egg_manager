@@ -23,6 +23,7 @@ public class DefineMenuVo extends MyBaseMysqlVo {
     private String menuName;
     /**
      * 路径跳转方式
+     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     private Integer urlJumpType;

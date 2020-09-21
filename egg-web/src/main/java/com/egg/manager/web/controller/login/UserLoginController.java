@@ -46,35 +46,35 @@ import javax.servlet.http.HttpServletRequest;
 public class UserLoginController extends BaseController {
 
     @Autowired
-    private DefineTenantMapper defineTenantMapper ;
+    private DefineTenantMapper defineTenantMapper;
     @Autowired
-    private DefineDepartmentMapper defineDepartmentMapper ;
+    private DefineDepartmentMapper defineDepartmentMapper;
     @Autowired
-    private UserAccountService userAccountService ;
+    private UserAccountService userAccountService;
 
-    @PcWebLoginLog(action="用户登录接口",description = "账号密码方式登录接口",fullPath = "/user/login/byAccountForm")
-    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebLoginLog(action = "用户登录接口", description = "账号密码方式登录接口", fullPath = "/user/login/byAccountForm")
+    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginAccountVo",value = "要登录用户的相关信息", required = true,dataTypeClass= LoginAccountVo.class),
+            @ApiImplicitParam(name = "loginAccountVo", value = "要登录用户的相关信息", required = true, dataTypeClass = LoginAccountVo.class),
     })
     @ShiroPass
     @PostMapping(value = "/byAccountForm")
-    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request,LoginAccountVo loginAccountVo,
-                                             @Validated({VerifyGroupOfDefault.class})LoginAccountVerifyO loginAccountVerifyO
-                                            ,@CurrentLoginUser(required = false) UserAccount loginUser
-                                                             ) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>() ;
-        try{
+    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
+                                                             @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
+            , @CurrentLoginUser(required = false) UserAccount loginUser
+    ) {
+        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>();
+        try {
             //判断前端传递的
-            if(loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(),loginAccountVo.getPassword())) {
+            if (loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(), loginAccountVo.getPassword())) {
                 throw new LoginFormFieldDeficiencyException("账号名或密码");
             }
             UserAccount userAccount = userAccountService.dealGetAccountByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
-            if(userAccount == null) {
+            if (userAccount == null) {
                 throw new Exception("账号未注册！");
-            }   else {
-                if(userAccount.getPassword().equals(loginAccountVo.getPassword())) {
-                    UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount) ;
+            } else {
+                if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
+                    UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
                     //账号密码验证通过
                     result.setAccountToken(userAccountToken);
                     //用户登录信息验证成功，在shiro进行一些登录处理
@@ -86,28 +86,28 @@ public class UserLoginController extends BaseController {
                     subject.login(jwtShiroToken);
                     //所属租户
                     DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccount.getFid());
-                    if(defineTenantDto != null){
+                    if (defineTenantDto != null) {
                         userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
                     }
                     //所属部门
                     DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccount.getFid());
-                    if(defineDepartmentDto != null){
+                    if (defineDepartmentDto != null) {
                         userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
                     }
                     userAccountToken.setAuthorization(authorization);
                     //redis30分钟过期
-                    this.dealSetTokenToRedis(loginUser,userAccountToken,result) ;
+                    this.dealSetTokenToRedis(loginUser, userAccountToken, result);
                     //返回给前端 jwt jwt值
                     result.setAuthorization(authorization);
-                }   else {
+                } else {
                     throw new Exception("账号密码不匹配！");
                 }
             }
 
-            dealCommonSuccessCatch(result,"用户登录:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "用户登录:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return result ;
+        return result;
     }
 }

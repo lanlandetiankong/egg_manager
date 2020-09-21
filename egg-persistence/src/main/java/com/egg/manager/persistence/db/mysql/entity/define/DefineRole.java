@@ -38,7 +38,6 @@ public class DefineRole extends Model<DefineRole> {
     private Integer type;
 
 
-
     /**
      * 备注
      */

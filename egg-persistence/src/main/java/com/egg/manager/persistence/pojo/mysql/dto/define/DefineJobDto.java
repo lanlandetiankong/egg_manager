@@ -29,5 +29,4 @@ public class DefineJobDto extends MyBaseMysqlDto {
     private String typeStr;
 
 
-
 }

@@ -30,33 +30,33 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  CommonController ",description = "通用功能接口")
+@Api(value = "API ==>>  CommonController ", description = "通用功能接口")
 @RestController
 @RequestMapping("/role/role_menus")
 public class CommonController extends BaseController {
 
-    @PcWebQueryLog(action="根据枚举key查询对应枚举下拉",description = "根据枚举key查询对应枚举下拉",fullPath = "/role/role_menus/getEnumListByKey")
-    @ApiOperation(value = "根据枚举key查询对应枚举下拉", notes = "根据枚举key查询对应枚举下拉", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "根据枚举key查询对应枚举下拉", description = "根据枚举key查询对应枚举下拉", fullPath = "/role/role_menus/getEnumListByKey")
+    @ApiOperation(value = "根据枚举key查询对应枚举下拉", notes = "根据枚举key查询对应枚举下拉", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "enumKey",value = "枚举的key值 -> json格式", required = true,dataTypeClass=String.class)
+            @ApiImplicitParam(name = "enumKey", value = "枚举的key值 -> json格式", required = true, dataTypeClass = String.class)
     })
     @PostMapping(value = "/getEnumListByKey")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    @CurrentLoginUser(required = false) UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
-        try{
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            dealCommonSuccessCatch(result,"根据枚举key查询对应枚举下拉:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            dealCommonSuccessCatch(result, "根据枚举key查询对应枚举下拉:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 

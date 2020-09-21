@@ -39,7 +39,7 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         if (entity == null) {
             return null;
         }
-        AnnouncementVo vo = announcementMapstruct.transferEntityToVo(entity,announcementTagMap);
+        AnnouncementVo vo = announcementMapstruct.transferEntityToVo(entity, announcementTagMap);
         String tagIds = entity.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {
@@ -82,7 +82,7 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         if (dto == null) {
             return null;
         }
-        AnnouncementVo vo = announcementMapstruct.transferDtoToVo(dto,announcementTagMap);
+        AnnouncementVo vo = announcementMapstruct.transferDtoToVo(dto, announcementTagMap);
         String tagIds = dto.getTagIds();
         if (StringUtils.isNotBlank(tagIds)) {
             try {

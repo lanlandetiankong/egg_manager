@@ -12,5 +12,4 @@ public class RolePermissionTransfer extends MyBaseMysqlTransfer {
     static RolePermissionMapstruct rolePermissionMapstruct = RolePermissionMapstruct.INSTANCE;
 
 
-
 }

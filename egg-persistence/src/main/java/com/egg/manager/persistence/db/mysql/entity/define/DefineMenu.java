@@ -36,6 +36,7 @@ public class DefineMenu extends Model<DefineMenu> {
     private String menuName;
     /**
      * 路径跳转方式
+     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     @TableField(value = "url_jump_type")
@@ -75,7 +76,6 @@ public class DefineMenu extends Model<DefineMenu> {
     private String excelModelConf;
 
 
-
     /**
      * 备注
      */
@@ -104,6 +104,7 @@ public class DefineMenu extends Model<DefineMenu> {
      */
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
+
     @Override
     protected Serializable pkVal() {
         return this.fid;

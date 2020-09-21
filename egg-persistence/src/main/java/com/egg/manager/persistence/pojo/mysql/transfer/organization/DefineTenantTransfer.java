@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @Named("defineTenantTransfer")
 public class DefineTenantTransfer extends MyBaseMysqlTransfer {
-    static DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE ;
+    static DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
 
     public static DefineTenant transferVoToEntity(DefineTenantVo vo) {
         if (vo == null) {

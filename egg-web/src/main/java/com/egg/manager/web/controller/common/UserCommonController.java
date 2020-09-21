@@ -26,62 +26,62 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserCommonController ",description = "通用接口 - 用户")
+@Api(value = "API ==>>  UserCommonController ", description = "通用接口 - 用户")
 @RestController
 @RequestMapping("/common_api/user")
-public class UserCommonController extends BaseController{
+public class UserCommonController extends BaseController {
 
-    @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllUserTypeEnumList")
     public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = new MyCommonResult() ;
-        try{
+        MyCommonResult result = new MyCommonResult();
+        try {
             UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (UserAccountBaseTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (UserAccountBaseTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = new MyCommonResult() ;
-        try{
+        MyCommonResult result = new MyCommonResult();
+        try {
             List<FrontSelectBean> beanList = new ArrayList<>();
-            beanList.add(new FrontSelectBean(0,"未锁定"));
-            beanList.add(new FrontSelectBean(1,"已锁定"));
+            beanList.add(new FrontSelectBean(0, "未锁定"));
+            beanList.add(new FrontSelectBean(1, "已锁定"));
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = new MyCommonResult() ;
-        try{
+        MyCommonResult result = new MyCommonResult();
+        try {
             DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefineJobTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (DefineJobTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 }

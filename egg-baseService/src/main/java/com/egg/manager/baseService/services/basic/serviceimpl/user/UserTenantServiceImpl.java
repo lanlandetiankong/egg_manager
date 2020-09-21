@@ -7,8 +7,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
@@ -18,7 +16,6 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
@@ -45,107 +42,102 @@ import java.util.List;
  * \
  */
 @Service(interfaceClass = UserTenantService.class)
-public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper,UserTenant,UserTenantVo> implements UserTenantService {
+public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper, UserTenant, UserTenantVo> implements UserTenantService {
 
     @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+    private RedisPropsOfShiroCache redisPropsOfShiroCache;
     @Autowired
-    private RoutineCommonFunc routineCommonFunc ;
+    private RoutineCommonFunc routineCommonFunc;
 
     @Autowired
-    private UserTenantMapper userTenantMapper ;
+    private UserTenantMapper userTenantMapper;
     @Autowired
-    private DefineTenantMapper defineTenantMapper ;
-    @Reference
-    private CommonFuncService commonFuncService ;
+    private DefineTenantMapper defineTenantMapper;
 
     @Reference
-    private RedisHelper redisHelper ;
-
+    private RedisHelper redisHelper;
 
 
     /**
      * 取得当前用户关联的 UserTenant
+     *
      * @return
      */
     @Override
     public List<UserTenant> dealGetAllUserTenantByAccount(UserAccount userAccount) {
-        if(checkUserAccountIsBlank(userAccount) == true) {
-            return null ;
+        if (checkUserAccountIsBlank(userAccount) == true) {
+            return null;
         }
         List<UserTenant> userTenant = dealGetAllUserTenantByAccountFromRedis(userAccount);
-        if(userTenant == null || userTenant.isEmpty()) {
+        if (userTenant == null || userTenant.isEmpty()) {
             userTenant = dealGetAllUserTenantByAccountFromDb(userAccount);
         }
         return userTenant;
     }
+
     /**
      * 从数据库是中取得当前用户关联的 UserTenant
+     *
      * @return
      */
     @Override
     public List<UserTenant> dealGetAllUserTenantByAccountFromDb(UserAccount userAccount) {
-        if(checkUserAccountIsBlank(userAccount) == true) {
-            return null ;
+        if (checkUserAccountIsBlank(userAccount) == true) {
+            return null;
         }
-        EntityWrapper<UserTenant> userTenantEm = new EntityWrapper<UserTenant>() ;
+        EntityWrapper<UserTenant> userTenantEm = new EntityWrapper<UserTenant>();
         userTenantEm.where("state={0}", BaseStateEnum.ENABLED.getValue())
-                .and("user_account_id={0}",userAccount.getFid());
-        userTenantEm.orderBy("update_time",false);
+                .and("user_account_id={0}", userAccount.getFid());
+        userTenantEm.orderBy("update_time", false);
         List<UserTenant> userTenant = selectList(userTenantEm);
         return userTenant;
     }
 
     /**
      * 从Redis中取得当前用户关联的 UserTenant
+     *
      * @return
      */
     @Override
     public List<UserTenant> dealGetAllUserTenantByAccountFromRedis(UserAccount userAccount) {
-        if(checkUserAccountIsBlank(userAccount) == true) {
-            return null ;
+        if (checkUserAccountIsBlank(userAccount) == true) {
+            return null;
         }
-        Object  userTenantListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserTenantKey(),userAccount.getFid()) ;
+        Object userTenantListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserTenantKey(), userAccount.getFid());
         String userTenantListJson = JSONObject.toJSONString(userTenantListObj);
-        List<UserTenant> userTenant  = JSON.parseObject(userTenantListJson, new TypeReference<ArrayList<UserTenant>>(){}) ;
+        List<UserTenant> userTenant = JSON.parseObject(userTenantListJson, new TypeReference<ArrayList<UserTenant>>() {
+        });
         return userTenant;
     }
 
 
-
-
-
-
     private boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if(userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
-            return true ;
+        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
+            return true;
         }
         return false;
     }
 
 
-
-
-
-
-
     /**
      * 分页查询 用户与租户关联 列表
+     *
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                               List<AntdvSortBean> sortBeans){
+    public MyCommonResult<UserTenantVo> dealGetUserTenantPages(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                               List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<UserTenant> userTenantEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);;
+        EntityWrapper<UserTenant> userTenantEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        ;
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userTenantMapper.selectCount(userTenantEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds,userTenantEntityWrapper) ;
+        result.myAntdvPaginationBeanSet(paginationBean, total);
+        List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds, userTenantEntityWrapper);
         result.setResultList(UserTenantTransfer.transferEntityToVoList(userTenants));
         return result;
     }
@@ -154,16 +146,17 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     /**
      * 分页查询 用户与租户关联  Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     *
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
-                                                                  List<AntdvSortBean> sortBeans){
-        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+    public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+                                                                  List<AntdvSortBean> sortBeans) {
+        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(UserTenantTransfer.transferDtoToVoList(userTenantDtoList));
         return result;
     }
@@ -171,70 +164,74 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     /**
      * 用户与租户关联 -新增
+     *
      * @param userTenantVo
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddUserTenant(UserAccount loginUser,UserTenantVo userTenantVo) throws Exception{
-        Date now = new Date() ;
+    public Integer dealAddUserTenant(UserAccount loginUser, UserTenantVo userTenantVo) throws Exception {
+        Date now = new Date();
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
-        userTenant = super.doBeforeCreate(loginUser,userTenant,true);
-        Integer addCount = userTenantMapper.insert(userTenant) ;
-        return addCount ;
+        userTenant = super.doBeforeCreate(loginUser, userTenant, true);
+        Integer addCount = userTenantMapper.insert(userTenant);
+        return addCount;
     }
 
 
     /**
      * 用户与租户关联 -更新
+     *
      * @param userTenantVo
-     * @param updateAll 是否更新所有字段
+     * @param updateAll    是否更新所有字段
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateUserTenant(UserAccount loginUser,UserTenantVo userTenantVo, boolean updateAll) throws Exception{
+    public Integer dealUpdateUserTenant(UserAccount loginUser, UserTenantVo userTenantVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
-        userTenant = super.doBeforeUpdate(loginUser,userTenant);
-        if(updateAll){  //是否更新所有字段
-            changeCount = userTenantMapper.updateAllColumnById(userTenant) ;
-        }   else {
-            changeCount = userTenantMapper.updateById(userTenant) ;
+        userTenant = super.doBeforeUpdate(loginUser, userTenant);
+        if (updateAll) {  //是否更新所有字段
+            changeCount = userTenantMapper.updateAllColumnById(userTenant);
+        } else {
+            changeCount = userTenantMapper.updateById(userTenant);
         }
-        return changeCount ;
+        return changeCount;
     }
-
 
 
     /**
      * 用户与租户关联 -删除
+     *
      * @param delIds 要删除的用户与租户关联 id 集合
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserTenantByArr(UserAccount loginUser,String[] delIds) throws Exception{
-        Integer delCount = 0 ;
-        if(delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds) ;
+    public Integer dealDelUserTenantByArr(UserAccount loginUser, String[] delIds) throws Exception {
+        Integer delCount = 0;
+        if (delIds != null && delIds.length > 0) {
+            List<String> delIdList = Arrays.asList(delIds);
             //批量伪删除
-            delCount = userTenantMapper.batchFakeDelByIds(delIdList,loginUser);
+            delCount = userTenantMapper.batchFakeDelByIds(delIdList, loginUser);
         }
-        return delCount ;
+        return delCount;
     }
 
     /**
      * 用户与租户关联 -删除
+     *
      * @param delId 要删除的用户与租户关联 id
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserTenant(UserAccount loginUser,String delId) throws Exception{
-        UserTenant userTenant = super.doBeforeDeleteOneById(loginUser,UserTenant.class,delId); ;
+    public Integer dealDelUserTenant(UserAccount loginUser, String delId) throws Exception {
+        UserTenant userTenant = super.doBeforeDeleteOneById(loginUser, UserTenant.class, delId);
+        ;
         Integer delCount = userTenantMapper.updateById(userTenant);
-        return delCount ;
+        return delCount;
     }
 
 

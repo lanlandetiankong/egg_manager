@@ -15,7 +15,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserAccountConversion.class}
 )
-public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,UserAccountVo, UserAccountDto> {
+public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, UserAccountVo, UserAccountDto> {
 
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
 
@@ -23,7 +23,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,U
     UserAccount transferVoToEntity(UserAccountVo vo);
 
     @Mappings({
-            @Mapping(target = "userTypeStr",expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
+            @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
             @Mapping(target = "uploadImgBean", ignore = true),
             @Mapping(target = "belongTenantId", ignore = true),
             @Mapping(target = "belongTenant", ignore = true),
@@ -33,32 +33,33 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount,U
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserAccountVo transferEntityToVo(UserAccount entity);
+
     @Mappings({
-            @Mapping(target = "userTypeStr",expression = "java(handleUserTypeGetStr(dto.getUserType()))"),
-            @Mapping(target = "belongTenant",expression = "java(commonTranslateDefineTenantDtoToVo(dto.getBelongTenant()))"),
-            @Mapping(target = "belongDepartment",expression = "java(commonTranslateDefineDepartmentDtoToVo(dto.getBelongDepartment()))"),
+            @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(dto.getUserType()))"),
+            @Mapping(target = "belongTenant", expression = "java(commonTranslateDefineTenantDtoToVo(dto.getBelongTenant()))"),
+            @Mapping(target = "belongDepartment", expression = "java(commonTranslateDefineDepartmentDtoToVo(dto.getBelongDepartment()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
     UserAccountVo transferDtoToVo(UserAccountDto dto);
 
     @Mappings({
-            @Mapping(target = "userTypeStr",expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
-            @Mapping(target = "sexStr",expression = "java(handleUserSexGetName(entity.getSex()))"),
-            @Mapping(target = "lockedStr",expression = "java(handleUserAccountStateGetInfo(entity.getLocked()))"),
+            @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
+            @Mapping(target = "sexStr", expression = "java(handleUserSexGetName(entity.getSex()))"),
+            @Mapping(target = "lockedStr", expression = "java(handleUserAccountStateGetInfo(entity.getLocked()))"),
     })
     UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity);
 
     @Mappings({
-            @Mapping(target = "sex",expression = "java(handleUserSexGetValue(xlsInModel.getSexStr()))"),
-            @Mapping(target = "userType",expression = "java(handleGetUserAccountDefaultUserType())"),
-            @Mapping(target = "userTypeNum",expression = "java(handleGetUserAccountDefaultUserTypeNum())"),
-            @Mapping(target = "state",expression = "java(handleGetUserAccountDefaultState())"),
-            @Mapping(target = "locked",expression = "java(handleGetUserAccountDefaultLocked())"),
-            @Mapping(target = "createTime",expression = "java(handleGetNowDate())"),
-            @Mapping(target = "updateTime",expression = "java(handleGetNowDate())"),
-            @Mapping(target = "createUserId",expression = "java(handleGetLoginUserId(loginUser,false))"),
-            @Mapping(target = "lastModifyerId",expression = "java(handleGetLoginUserId(loginUser,false))"),
+            @Mapping(target = "sex", expression = "java(handleUserSexGetValue(xlsInModel.getSexStr()))"),
+            @Mapping(target = "userType", expression = "java(handleGetUserAccountDefaultUserType())"),
+            @Mapping(target = "userTypeNum", expression = "java(handleGetUserAccountDefaultUserTypeNum())"),
+            @Mapping(target = "state", expression = "java(handleGetUserAccountDefaultState())"),
+            @Mapping(target = "locked", expression = "java(handleGetUserAccountDefaultLocked())"),
+            @Mapping(target = "createTime", expression = "java(handleGetNowDate())"),
+            @Mapping(target = "updateTime", expression = "java(handleGetNowDate())"),
+            @Mapping(target = "createUserId", expression = "java(handleGetLoginUserId(loginUser,false))"),
+            @Mapping(target = "lastModifyerId", expression = "java(handleGetLoginUserId(loginUser,false))"),
     })
     UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccount loginUser);
 }

@@ -2,7 +2,6 @@ package com.egg.manager.baseService.services.basic.serviceimpl.role;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.role.RolePermissionService;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -26,26 +25,26 @@ import java.util.Set;
  * \
  */
 @Service(interfaceClass = RolePermissionService.class)
-public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermissionMapper,RolePermission,RolePermissionVo> implements RolePermissionService {
+public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermissionMapper, RolePermission, RolePermissionVo> implements RolePermissionService {
 
 
     @Override
     public List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) {
-        if(defineRoles == null || defineRoles.isEmpty()) {
-            return null ;
+        if (defineRoles == null || defineRoles.isEmpty()) {
+            return null;
         }
         //所有的角色id
         Set<String> defineRoleIds = new HashSet<String>();
-        for (DefineRole role : defineRoles){
-            if(role != null && StringUtils.isNotBlank(role.getFid())){
+        for (DefineRole role : defineRoles) {
+            if (role != null && StringUtils.isNotBlank(role.getFid())) {
                 defineRoleIds.add(role.getFid());
             }
         }
         //取得所有的 RolePermission
-        EntityWrapper<RolePermission> rolePermissionEw = new EntityWrapper<RolePermission>() ;
+        EntityWrapper<RolePermission> rolePermissionEw = new EntityWrapper<RolePermission>();
         rolePermissionEw.where("state={0}", BaseStateEnum.ENABLED.getValue())
-                .in(true,"define_role_id",defineRoleIds);
-        selectList(rolePermissionEw) ;
+                .in(true, "define_role_id", defineRoleIds);
+        selectList(rolePermissionEw);
         return null;
     }
 }

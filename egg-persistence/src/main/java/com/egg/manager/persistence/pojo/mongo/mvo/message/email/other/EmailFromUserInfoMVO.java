@@ -21,21 +21,19 @@ public class EmailFromUserInfoMVO extends MyBaseMVO {
     /**
      * 发送者-账号id
      */
-    private String userAccountId ;
+    private String userAccountId;
     /**
      * 发送者-用户名
      */
-    private String userName ;
+    private String userName;
     /**
      * 发送者-邮箱地址
      */
-    private String emailAddress ;
+    private String emailAddress;
     /**
      * 发送者-个性化(可选)
      */
     private String personal;
-
-
 
 
 }

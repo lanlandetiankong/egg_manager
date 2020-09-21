@@ -16,7 +16,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserGroupConversion.class}
 )
-public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup,UserGroupVo, UserGroupDto> {
+public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup, UserGroupVo, UserGroupDto> {
     UserGroupMapstruct INSTANCE = Mappers.getMapper(UserGroupMapstruct.class);
 
     @Mappings({})

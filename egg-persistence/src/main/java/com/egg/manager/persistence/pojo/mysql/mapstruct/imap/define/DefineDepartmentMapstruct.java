@@ -30,12 +30,11 @@ public interface DefineDepartmentMapstruct extends MyBaseMysqlMapstruct<DefineDe
     DefineDepartmentVo transferEntityToVo(DefineDepartment entity);
 
     @Mappings({
-            @Mapping(target = "parentDepartment",expression = "java(transferDtoToVo(dto.getParentDepartment()))"),
+            @Mapping(target = "parentDepartment", expression = "java(transferDtoToVo(dto.getParentDepartment()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
     DefineDepartmentVo transferDtoToVo(DefineDepartmentDto dto);
-
 
 
 }

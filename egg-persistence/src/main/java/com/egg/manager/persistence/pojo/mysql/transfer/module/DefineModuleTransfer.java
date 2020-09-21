@@ -15,7 +15,7 @@ import java.util.List;
 @Named("defineModuleTransfer")
 public class DefineModuleTransfer extends MyBaseMysqlTransfer {
 
-    static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE ;
+    static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE;
 
     public static DefineModule transferVoToEntity(DefineModuleVo vo) {
         if (vo == null) {

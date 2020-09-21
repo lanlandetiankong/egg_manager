@@ -23,20 +23,20 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
     DefineModule transferVoToEntity(DefineModuleVo vo);
 
     @Mappings({
-            @Mapping(target = "typeStr",expression = "java(handleDefineModuleTypeGetLabel(entity.getType()))"),
-            @Mapping(target = "iconVal",source = "icon"),
-            @Mapping(target = "styleVal",source = "style"),
-            @Mapping(target = "typeVal",source = "type"),
+            @Mapping(target = "typeStr", expression = "java(handleDefineModuleTypeGetLabel(entity.getType()))"),
+            @Mapping(target = "iconVal", source = "icon"),
+            @Mapping(target = "styleVal", source = "style"),
+            @Mapping(target = "typeVal", source = "type"),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineModuleVo transferEntityToVo(DefineModule entity);
 
     @Mappings({
-            @Mapping(target = "typeStr",expression = "java(handleDefineModuleTypeGetLabel(dto.getType()))"),
-            @Mapping(target = "iconVal",source = "icon"),
-            @Mapping(target = "styleVal",source = "style"),
-            @Mapping(target = "typeVal",source = "type"),
+            @Mapping(target = "typeStr", expression = "java(handleDefineModuleTypeGetLabel(dto.getType()))"),
+            @Mapping(target = "iconVal", source = "icon"),
+            @Mapping(target = "styleVal", source = "style"),
+            @Mapping(target = "typeVal", source = "type"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })

@@ -32,58 +32,58 @@ import java.nio.file.Paths;
  * \
  */
 @Slf4j
-@Api(value = "API -  ImgUploadController ",description = "图片上传接口")
+@Api(value = "API -  ImgUploadController ", description = "图片上传接口")
 @RestController
 @RequestMapping(value = "/commom_api/file/imgUpload")
-public class ImgUploadController extends BaseController{
+public class ImgUploadController extends BaseController {
 
     @Autowired
-    private UploadProps uploadProps ;
+    private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/headImgUpload")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(file == null || file.isEmpty()){
+    public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (file == null || file.isEmpty()) {
                 throw new BusinessException("上传的文件为空！");
-            }   else {
-                try{
-                    byte[] fileBytes = file.getBytes() ;
-                    String oldFileName = file.getOriginalFilename() ;
+            } else {
+                try {
+                    byte[] fileBytes = file.getBytes();
+                    String oldFileName = file.getOriginalFilename();
                     int lastDotIndex = oldFileName.lastIndexOf(".");
-                    String fileType = "" ;
-                    if(lastDotIndex > -1){
+                    String fileType = "";
+                    if (lastDotIndex > -1) {
                         fileType = oldFileName.substring(lastDotIndex);
                     }
                     String uuidName = MyUUIDUtil.renderSimpleUUID() + fileType;
-                    String baseDir = uploadProps.getLocationPrefix()+uploadProps.getProjectName()+uploadProps.getLocationOfImg() ;
-                    String fileUri = File.separator+uploadProps.getProjectName()+uploadProps.getLocationOfImg()+File.separator+uuidName;
+                    String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
+                    String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
                     File folder = new File(baseDir);
-                    if(folder.exists() == false){
+                    if (folder.exists() == false) {
                         folder.mkdirs();
                     }
                     //最终的存储路径
-                    String fileLocation = baseDir +File.separator+uuidName ;
-                    Path path = Paths.get(fileLocation) ;
-                    Files.write(path,fileBytes);
+                    String fileLocation = baseDir + File.separator + uuidName;
+                    Path path = Paths.get(fileLocation);
+                    Files.write(path, fileBytes);
 
                     FileResBean fileResBean = FileResBean.builder()
                             .fileName(uuidName)
                             .fileLocation(fileLocation)
                             .fileOldName(oldFileName)
-                            .filePrefix(uploadProps.getUrlPrefix()+File.separator)
+                            .filePrefix(uploadProps.getUrlPrefix() + File.separator)
                             .fileUri(fileUri)
                             .build();
                     result.setFileResBean(fileResBean);
-                }   catch (IOException e){
-                    throw e ;
+                } catch (IOException e) {
+                    throw e;
                 }
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 

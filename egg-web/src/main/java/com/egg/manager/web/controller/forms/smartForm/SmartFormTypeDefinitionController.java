@@ -14,10 +14,10 @@ import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartForm.SmartFormTypeDefinitionMongoVerifyO;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfUpdate;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.forms.smartForm.SmartFormTypeDefinitionMongoVerifyO;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
@@ -55,7 +55,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     private SmartFormDefinitionMService smartFormDefinitionMService;
 
 
-    @PcWebQueryLog( action = "分页查询->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
+    @PcWebQueryLog(action = "分页查询->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -63,23 +63,23 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataPage(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
-                                    .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
-                                    .getRefreshedSelf();
-            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            MyMongoQueryPageBean<SmartFormTypeDefinitionMO> pageBean = smartFormTypeDefinitionMService.doFindPage(loginUser,mongoQueryBuffer);
-            dealSetMongoPageResult(result,pageBean,"查询表单类型定义信息-Dto列表:"+actionSuccessMsg);
+                    .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
+                    .getRefreshedSelf();
+            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
+            MyMongoQueryPageBean<SmartFormTypeDefinitionMO> pageBean = smartFormTypeDefinitionMService.doFindPage(loginUser, mongoQueryBuffer);
+            dealSetMongoPageResult(result, pageBean, "查询表单类型定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @PcWebQueryLog( action = "分页查询->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
+    @PcWebQueryLog(action = "分页查询->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -87,31 +87,31 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataAll")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataAll(HttpServletRequest request,@CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
-            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser,mongoQueryBuffer);
-            result = smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result,list) ;
-            dealCommonSuccessCatch(result,"查询表单类型信息-Dto列表:"+actionSuccessMsg);
+            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
+            List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser, mongoQueryBuffer);
+            result = smartFormTypeDefinitionMService.dealResultListSetToEntitySelect(result, list);
+            dealCommonSuccessCatch(result, "查询表单类型信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @PcWebQueryLog( action = "根据id查询->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
+    @PcWebQueryLog(action = "根据id查询->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormTypeDefinitionMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                            @RequestParam(value="fid",required = true) String fid) {
+                                                                      @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
-            SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser,fid);
+            SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
     }
 
-    @PcWebOperationLog( action = "新增->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
+    @PcWebOperationLog(action = "新增->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
     @ApiOperation(value = "新增->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<SmartFormTypeDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -133,7 +133,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             if (formTypeDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单类型定义！");
             } else {
-                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doInsert(loginUser,formTypeDefinitionMO);
+                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doInsert(loginUser, formTypeDefinitionMO);
                 addCount += (newMO != null) ? 1 : 0;
             }
             result.setCount(addCount);
@@ -145,7 +145,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog( action = "更新->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
+    @PcWebOperationLog(action = "更新->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult<SmartFormTypeDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -157,12 +157,12 @@ public class SmartFormTypeDefinitionController extends BaseController {
             if (formTypeDefinitionMO == null) {
                 throw new Exception("未接收到有效的表单类型定义！");
             } else {
-                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doUpdateById(loginUser,formTypeDefinitionMO);
+                SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doUpdateById(loginUser, formTypeDefinitionMO);
                 //更新了一条数据
-                if(newMO != null){
+                if (newMO != null) {
                     count += 1;
                     //触发formDefinetion 更新
-                    smartFormDefinitionMService.updateFormTypeByTypeId(loginUser,newMO);
+                    smartFormDefinitionMService.updateFormTypeByTypeId(loginUser, newMO);
                 }
             }
             result.setCount(count);
@@ -174,7 +174,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog( action = "删除->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
+    @PcWebOperationLog(action = "删除->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
     @ApiOperation(value = "删除->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
@@ -183,7 +183,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser,delId);
+            Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -193,7 +193,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog( action = "批量删除->表单类型定义", description = "",fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
+    @PcWebOperationLog(action = "批量删除->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
@@ -204,7 +204,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         Long delCount = (long) 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(loginUser,Lists.newArrayList(delIds));
+                delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
                 dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);

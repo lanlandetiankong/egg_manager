@@ -38,128 +38,124 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserDepartmentController ",description = "用户与部门关联表的接口")
+@Api(value = "API ==>>  UserDepartmentController ", description = "用户与部门关联表的接口")
 @RestController
 @RequestMapping("/user/user_department")
-public class UserDepartmentController extends BaseController{
+public class UserDepartmentController extends BaseController {
 
 
     @Autowired
-    private UserDepartmentMapper userDepartmentMapper ;
+    private UserDepartmentMapper userDepartmentMapper;
     @Reference
-    private UserDepartmentService userDepartmentService ;
+    private UserDepartmentService userDepartmentService;
 
 
-
-    @PcWebQueryLog(action="查询 [用户与部门关联] 列表",description = "查询 [用户与部门关联] 列表",fullPath = "/user/user_department/getAllUserDepartments")
-    @ApiOperation(value = "查询 [用户与部门关联] 列表", notes = "查询 [用户与部门关联] 列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询 [用户与部门关联] 列表", description = "查询 [用户与部门关联] 列表", fullPath = "/user/user_department/getAllUserDepartments")
+    @ApiOperation(value = "查询 [用户与部门关联] 列表", notes = "查询 [用户与部门关联] 列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllUserDepartments")
     public MyCommonResult<UserDepartmentVo> doGetAllUserDepartments(HttpServletRequest request,
                                                                     String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>() ;
-        try{
+        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userDepartmentService.dealGetUserDepartmentPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
-            dealCommonSuccessCatch(result,"查询 [用户与部门关联] 信息列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = userDepartmentService.dealGetUserDepartmentPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询 [用户与部门关联] 信息列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询 [用户与部门关联] 信息", notes = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询 [用户与部门关联] 信息",description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息",fullPath = "/user/user_department/getUserDepartmentById")
+    @ApiOperation(value = "查询 [用户与部门关联] 信息", notes = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询 [用户与部门关联] 信息", description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", fullPath = "/user/user_department/getUserDepartmentById")
     @PostMapping(value = "/getUserDepartmentById")
     public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>() ;
-        try{
+        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>();
+        try {
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result,"查询 [用户与部门关联] 信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询 [用户与部门关联] 信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-    @ApiOperation(value = "新增 [用户与部门关联] ", notes = "表单方式新增 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增 [用户与部门关联] ",description = "表单方式新增 [用户与部门关联] ",fullPath = "/user/user_department/doAddUserDepartment")
+    @ApiOperation(value = "新增 [用户与部门关联] ", notes = "表单方式新增 [用户与部门关联] ", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增 [用户与部门关联] ", description = "表单方式新增 [用户与部门关联] ", fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
-    public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer addCount = 0 ;
-        try{
-            if(userDepartmentVo == null) {
+    public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer addCount = 0;
+        try {
+            if (userDepartmentVo == null) {
                 throw new Exception("未接收到有效的 [用户与部门关联] 信息！");
-            }   else {
-                addCount = userDepartmentService.dealAddUserDepartment(loginUser,userDepartmentVo);
+            } else {
+                addCount = userDepartmentService.dealAddUserDepartment(loginUser, userDepartmentVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增 [用户与部门关联] :"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增 [用户与部门关联] :" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    
-
-    @PcWebOperationLog(action="批量删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ",fullPath = "/user/user_department/batchDelUserDepartmentByIds")
-    @ApiOperation(value = "批量删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除 [用户与部门关联] ", description = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ", fullPath = "/user/user_department/batchDelUserDepartmentByIds")
+    @ApiOperation(value = "批量删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id批量删除 [用户与部门关联] ", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的 [用户与部门关联] id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的 [用户与部门关联] id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelUserDepartmentByIds")
-    public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = userDepartmentService.dealDelUserDepartmentByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除 [用户与部门关联] :"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = userDepartmentService.dealDelUserDepartmentByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除 [用户与部门关联] :" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除 [用户与部门关联] ",description = "根据 [用户与部门关联] id删除 [用户与部门关联] ",fullPath = "/user/user_department/delOneUserDepartmentByIds")
-    @ApiOperation(value = "删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id删除 [用户与部门关联] ", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除 [用户与部门关联] ", description = "根据 [用户与部门关联] id删除 [用户与部门关联] ", fullPath = "/user/user_department/delOneUserDepartmentByIds")
+    @ApiOperation(value = "删除 [用户与部门关联] ", notes = "根据 [用户与部门关联] id删除 [用户与部门关联] ", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的 [用户与部门关联] id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的 [用户与部门关联] id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneUserDepartmentByIds")
-    public MyCommonResult doDelOneUserDepartmentById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doDelOneUserDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                delCount = userDepartmentService.dealDelUserDepartment(loginUser,delId);
-                dealCommonSuccessCatch(result,"删除 [用户与部门关联] :"+actionSuccessMsg);
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                delCount = userDepartmentService.dealDelUserDepartment(loginUser, delId);
+                dealCommonSuccessCatch(result, "删除 [用户与部门关联] :" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 

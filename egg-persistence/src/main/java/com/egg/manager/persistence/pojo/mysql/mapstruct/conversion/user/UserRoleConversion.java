@@ -9,5 +9,4 @@ import org.springframework.stereotype.Component;
 public class UserRoleConversion extends MyBaseMysqlConversion {
 
 
-
 }

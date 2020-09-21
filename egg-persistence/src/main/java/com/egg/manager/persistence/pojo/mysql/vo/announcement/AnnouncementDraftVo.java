@@ -52,11 +52,11 @@ public class AnnouncementDraftVo extends MyBaseMysqlVo {
     /**
      * 概要的 公告内容
      */
-    private String shortContent;   
+    private String shortContent;
     /**
      * 公告标签 集合
      */
-    private List<String> tagNames; 
+    private List<String> tagNames;
     /**
      * 公告标签 集合转字符串
      */

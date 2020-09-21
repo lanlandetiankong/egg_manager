@@ -27,40 +27,40 @@ public class MyShiroConfig {
 
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor() ;
+        return new LifecycleBeanPostProcessor();
     }
 
     @Bean
     public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator() ;
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         defaultAdvisorAutoProxyCreator.setUsePrefix(true);
         return defaultAdvisorAutoProxyCreator;
     }
 
     @Bean(value = "securityManager")
     public DefaultWebSecurityManager getManager() {
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager() ;
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         //使用自定义relam
         manager.setRealm(new MyShiroRelam());
         /*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
          */
-        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO() ;
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator() ;
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
         manager.setSubjectDAO(subjectDAO);
-        return manager ;
+        return manager;
     }
 
     @Bean(value = "shiroFilter")
     public ShiroFilterFactoryBean factoryFilter(DefaultWebSecurityManager securityManager) {
-        ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean() ;
+        ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
 
         //添加自定义过滤器,命名为jwt
-        Map<String,Filter> filterMap = new HashMap<String,Filter>() ;
-        filterMap.put("jwt",new JwtShiroFilter());
+        Map<String, Filter> filterMap = new HashMap<String, Filter>();
+        filterMap.put("jwt", new JwtShiroFilter());
 
         //自定义url规则
         Map<String, String> filterRuleMap = new HashMap<>(2);
@@ -87,7 +87,7 @@ public class MyShiroConfig {
 
         //设置securityManager (必要，不设置会启动失败！
         filterFactoryBean.setSecurityManager(securityManager);
-        return filterFactoryBean ;
+        return filterFactoryBean;
     }
 
     @Bean
@@ -96,7 +96,6 @@ public class MyShiroConfig {
         advisor.setSecurityManager(securityManager);
         return advisor;
     }
-
 
 
 }

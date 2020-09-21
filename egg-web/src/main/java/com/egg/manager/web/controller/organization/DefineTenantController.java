@@ -1,7 +1,6 @@
 package com.egg.manager.web.controller.organization;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -41,173 +40,169 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineTenantController ",description = "租户定义接口")
+@Api(value = "API ==>>  DefineTenantController ", description = "租户定义接口")
 @RestController
 @RequestMapping("/organization/define_tenant")
-public class DefineTenantController extends BaseController{
+public class DefineTenantController extends BaseController {
 
     @Autowired
-    private DefineTenantMapper defineTenantMapper ;
+    private DefineTenantMapper defineTenantMapper;
     @Reference
     private DefineTenantService defineTenantService;
-    @Reference
-    private CommonFuncService commonFuncService ;
 
 
-
-    @PcWebQueryLog(action="查询租户定义信息-Dto列表",description = "查询租户定义信息-Dto列表",fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
-    @ApiOperation(value = "查询租户定义信息-Dto列表", notes = "查询租户定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询租户定义信息-Dto列表", description = "查询租户定义信息-Dto列表", fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
+    @ApiOperation(value = "查询租户定义信息-Dto列表", notes = "查询租户定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllDefineTenantDtos")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
-        try{
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询租户定义信息-Dto列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询租户定义信息-Dto列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询租户定义信息",description = "根据租户定义id查询租户定义信息",fullPath = "/organization/define_tenant/getDefineTenantById")
+    @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询租户定义信息", description = "根据租户定义id查询租户定义信息", fullPath = "/organization/define_tenant/getDefineTenantById")
     @PostMapping(value = "/getDefineTenantById")
     public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
-        try{
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
+        try {
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
             result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
-            dealCommonSuccessCatch(result,"查询租户定义信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询租户定义信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebQueryLog(action="查询租户定义信息-Enum列表",description = "查询租户定义信息-Enum列表",fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
-    @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询租户定义信息-Enum列表", description = "查询租户定义信息-Enum列表", fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
+    @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllDefineTenantEnums")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
-        try{
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>() ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser,result,queryFieldBeanList,null,sortBeans); ;
-            result = defineTenantService.dealResultListSetToEntitySelect(loginUser,result) ;
-            dealCommonSuccessCatch(result,"查询租户定义信息Select列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser, result, queryFieldBeanList, null, sortBeans);
+            ;
+            result = defineTenantService.dealResultListSetToEntitySelect(loginUser, result);
+            dealCommonSuccessCatch(result, "查询租户定义信息Select列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-
-    @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增租户定义",description = "表单方式新增租户定义",fullPath = "/organization/define_tenant/doAddDefineTenant")
+    @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
-    public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>() ;
-        Integer addCount = 0 ;
-        try{
-            if(defineTenantVo == null) {
+    public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
+        Integer addCount = 0;
+        try {
+            if (defineTenantVo == null) {
                 throw new Exception("未接收到有效的租户定义！");
-            }   else {
-                addCount = defineTenantService.dealAddDefineTenant(loginUser,defineTenantVo) ;
+            } else {
+                addCount = defineTenantService.dealAddDefineTenant(loginUser, defineTenantVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增租户定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增租户定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="更新租户定义",description = "表单方式更新租户定义",fullPath = "/organization/define_tenant/doUpdateDefineTenant")
+    @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
-    public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer changeCount = 0 ;
-        try{
-            if(defineTenantVo == null) {
+    public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer changeCount = 0;
+        try {
+            if (defineTenantVo == null) {
                 throw new Exception("未接收到有效的租户定义！");
-            }   else {
-                changeCount = defineTenantService.dealUpdateDefineTenant(loginUser,defineTenantVo,false);
+            } else {
+                changeCount = defineTenantService.dealUpdateDefineTenant(loginUser, defineTenantVo, false);
             }
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"更新租户定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "更新租户定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="批量删除租户定义",description = "根据租户定义id批量删除租户定义",fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
-    @ApiOperation(value = "批量删除租户定义", notes = "根据租户定义id批量删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除租户定义", description = "根据租户定义id批量删除租户定义", fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
+    @ApiOperation(value = "批量删除租户定义", notes = "根据租户定义id批量删除租户定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的租户定义id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的租户定义id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelDefineTenantByIds")
-    public MyCommonResult doBatchDeleteDefineTenantByIds(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteDefineTenantByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = defineTenantService.dealDelDefineTenantByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除租户定义:"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = defineTenantService.dealDelDefineTenantByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除租户定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除租户定义",description = "根据租户id删除租户定义",fullPath = "/organization/define_tenant/delOneDefineTenantById")
-    @ApiOperation(value = "删除租户定义", notes = "根据租户id删除租户定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除租户定义", description = "根据租户id删除租户定义", fullPath = "/organization/define_tenant/delOneDefineTenantById")
+    @ApiOperation(value = "删除租户定义", notes = "根据租户id删除租户定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的租户定义id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的租户定义id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneDefineTenantById")
-    public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                Integer delCount = defineTenantService.dealDelDefineTenant(loginUser,delId);
+    public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                Integer delCount = defineTenantService.dealDelDefineTenant(loginUser, delId);
                 result.setCount(delCount);
-                dealCommonSuccessCatch(result,"删除租户定义:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "删除租户定义:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 }

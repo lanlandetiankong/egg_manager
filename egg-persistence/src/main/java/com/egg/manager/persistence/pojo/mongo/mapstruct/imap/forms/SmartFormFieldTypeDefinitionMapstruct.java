@@ -20,7 +20,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {SmartFormFieldTypeDefinitionConversion.class})
-public interface SmartFormFieldTypeDefinitionMapstruct  extends MyBaseMongoMapstruct<SmartFormFieldTypeDefinitionMO,SmartFormFieldTypeDefinitionMVO> {
+public interface SmartFormFieldTypeDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormFieldTypeDefinitionMO, SmartFormFieldTypeDefinitionMVO> {
     SmartFormFieldTypeDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormFieldTypeDefinitionMapstruct.class);
 
 

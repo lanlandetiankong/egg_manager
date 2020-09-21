@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * @Description: email-接收者-相关信息
  * @ClassName: EmailFromUserInfoMVO
@@ -18,19 +16,19 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailReceiveUserInfoMVO  extends MyBaseMVO {
+public class EmailReceiveUserInfoMVO extends MyBaseMVO {
     /**
      * 发送者-账号id
      */
-    private String userAccountId ;
+    private String userAccountId;
     /**
      * 发送者-用户名
      */
-    private String userName ;
+    private String userName;
     /**
      * 发送者-邮箱地址
      */
-    private String emailAddress ;
+    private String emailAddress;
 
 
 }

@@ -14,10 +14,10 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mongo.mo.message.email.EmailSendRecordMO;
 import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRecordRepository;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.message.email.EmailSendRecordMongoVerifyO;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
@@ -54,7 +54,7 @@ public class EmailSendRecordController extends BaseController {
     private EmailSendRecordMService emailSendRecordMService;
 
 
-    @PcWebQueryLog( action = "分页查询->邮件记录", description = "",fullPath = "/message/email/emailSendRecord/getDataPage")
+    @PcWebQueryLog(action = "分页查询->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/getDataPage")
     @ApiOperation(value = "分页查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -69,23 +69,23 @@ public class EmailSendRecordController extends BaseController {
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
-            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer);
-            MyMongoQueryPageBean<EmailSendRecordMO> pageBean = emailSendRecordMService.doFindPage(loginUser,mongoQueryBuffer);
-            dealSetMongoPageResult(result,pageBean,"查询-邮件记录-Dto列表:"+actionSuccessMsg);
+            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
+            MyMongoQueryPageBean<EmailSendRecordMO> pageBean = emailSendRecordMService.doFindPage(loginUser, mongoQueryBuffer);
+            dealSetMongoPageResult(result, pageBean, "查询-邮件记录-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @PcWebQueryLog( action = "根据id查询->邮件记录", description = "",fullPath = "/message/email/emailSendRecord/getOneItemById")
+    @PcWebQueryLog(action = "根据id查询->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                                  @RequestParam(value="fid",required = true) String fid) {
+                                                              @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<EmailSendRecordMO> result = new MyCommonResult();
         try {
-            EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser,fid);
+            EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->邮件记录:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -94,11 +94,11 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog( action = "新增->邮件记录", description = "",fullPath = "/message/email/emailSendRecord/addByForm")
+    @PcWebOperationLog(action = "新增->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<EmailSendRecordMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                             @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
+                                                         @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                                          EmailSendRecordMVO emailSendRecordMVO) {
         MyCommonResult<EmailSendRecordMO> result = new MyCommonResult();
         Integer addCount = 0;
@@ -107,7 +107,7 @@ public class EmailSendRecordController extends BaseController {
                 throw new Exception("未接收到有效的邮件信息！");
             } else {
                 EmailSendRecordMO emailSendRecordMO = EmailSendRecordMapstruct.INSTANCE.translateMvoToMo(emailSendRecordMVO);
-                EmailSendRecordMO newMO = emailSendRecordMService.doInsert(loginUser,emailSendRecordMO);
+                EmailSendRecordMO newMO = emailSendRecordMService.doInsert(loginUser, emailSendRecordMO);
                 addCount += (newMO != null) ? 1 : 0;
             }
             result.setCount(addCount);
@@ -119,8 +119,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-
-    @PcWebOperationLog( action = "伪删除->邮件记录", description = "",fullPath = "/message/email/emailSendRecord/delOneById")
+    @PcWebOperationLog(action = "伪删除->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/delOneById")
     @ApiOperation(value = "伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
@@ -129,7 +128,7 @@ public class EmailSendRecordController extends BaseController {
     public MyCommonResult<EmailSendRecordMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser,delId);
+            Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->邮件记录:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -139,7 +138,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-    @PcWebOperationLog( action = "批量伪删除->邮件记录", description = "",fullPath = "/message/email/emailSendRecord/batchDelByIds")
+    @PcWebOperationLog(action = "批量伪删除->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),
@@ -159,6 +158,6 @@ public class EmailSendRecordController extends BaseController {
         }
         return result;
     }
-    
+
 
 }

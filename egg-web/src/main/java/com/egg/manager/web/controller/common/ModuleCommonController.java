@@ -28,49 +28,49 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  ModuleCommonController ",description = "通用接口 - 模块")
+@Api(value = "API ==>>  ModuleCommonController ", description = "通用接口 - 模块")
 @RestController
 @RequestMapping("/common_api/module")
-public class ModuleCommonController extends BaseController{
+public class ModuleCommonController extends BaseController {
 
 
-    @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult<DefineModuleVo> doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        try{
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        try {
             DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefineModuleTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (DefineModuleTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult<DefineMenuVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>() ;
-        try{
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>();
+        try {
             DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefineMenuUrlJumpTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (DefineMenuUrlJumpTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 }

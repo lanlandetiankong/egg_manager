@@ -26,27 +26,27 @@ public class MyXlsBaseServiceImpl implements MyXlsBaseService {
 
 
     @Override
-    public AntdFileUploadBean dealVerifyMenuExportAble(DefineMenu defineMenu) throws Exception{
-        AntdFileUploadBean fileUploadBean = AntdFileUploadBean.dealJsonStrToBean(defineMenu.getExcelModelConf()) ;
-        if(fileUploadBean == null){
+    public AntdFileUploadBean dealVerifyMenuExportAble(DefineMenu defineMenu) throws Exception {
+        AntdFileUploadBean fileUploadBean = AntdFileUploadBean.dealJsonStrToBean(defineMenu.getExcelModelConf());
+        if (fileUploadBean == null) {
             throw new BusinessException("当前菜单定义未上传Excel模板，请先上传后再使用导出Excel功能！");
         }
-        String relaPath = fileUploadBean.getUrlLocation() ;
-        if(StringUtils.isBlank(relaPath)){
+        String relaPath = fileUploadBean.getUrlLocation();
+        if (StringUtils.isBlank(relaPath)) {
             throw new BusinessException("当前菜单定义上传Excel模板信息有误！");
         }
-        return fileUploadBean ;
+        return fileUploadBean;
     }
 
     @Override
-    public <T> void dealSingleFillToExport2Web(HttpServletResponse response, String templatePath, String outFileName,Class<T> clazz, List<T> data) throws Exception {
-        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(),"UTF-8") ;  //导出的完整 文件名
+    public <T> void dealSingleFillToExport2Web(HttpServletResponse response, String templatePath, String outFileName, Class<T> clazz, List<T> data) throws Exception {
+        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(), "UTF-8");  //导出的完整 文件名
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码
         response.setHeader("Content-disposition", "attachment;filename=" + outFileFullName);
         // 这里 会填充到第一个sheet， 然后文件流会自动关闭
-        EasyExcel.write(response.getOutputStream(),clazz).withTemplate(templatePath).sheet().doFill(data);
+        EasyExcel.write(response.getOutputStream(), clazz).withTemplate(templatePath).sheet().doFill(data);
     }
 
 }

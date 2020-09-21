@@ -21,15 +21,16 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * \* Description:
  * \
  */
-public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMethodArgumentResolver{
+public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Reference
-    private UserAccountRedisService userAccountRedisService ;
+    private UserAccountRedisService userAccountRedisService;
 
     /**
      * 判断:
      * 1、方法参数列表是否有 [DefineTenant]参数
      * 2、是否有 @CurrentLoginerBelongTenant 注解
+     *
      * @param parameter
      * @return
      */
@@ -40,6 +41,7 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
 
     /**
      * 取得用户并返回注入，取得租户信息失败将会抛出UnauthorizedException异常
+     *
      * @param methodParameter
      * @param modelAndViewContainer
      * @param nativeWebRequest
@@ -49,20 +51,20 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        DefineTenant defineTenant = (DefineTenant) nativeWebRequest.getAttribute("currentLoginerBelongTenant", RequestAttributes.SCOPE_REQUEST) ;
-        if(defineTenant == null){
+        DefineTenant defineTenant = (DefineTenant) nativeWebRequest.getAttribute("currentLoginerBelongTenant", RequestAttributes.SCOPE_REQUEST);
+        if (defineTenant == null) {
             String authorization = nativeWebRequest.getHeader("authorization");
-            if(StringUtils.isNotBlank(authorization)){
-                defineTenant = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(null,authorization);
+            if (StringUtils.isNotBlank(authorization)) {
+                defineTenant = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(null, authorization);
             }
         }
-        CurrentLoginerBelongTenant currentLoginerBelongTenantAnno  = methodParameter.getParameterAnnotation(CurrentLoginerBelongTenant.class);
-        if(currentLoginerBelongTenantAnno != null){
+        CurrentLoginerBelongTenant currentLoginerBelongTenantAnno = methodParameter.getParameterAnnotation(CurrentLoginerBelongTenant.class);
+        if (currentLoginerBelongTenantAnno != null) {
             boolean required = currentLoginerBelongTenantAnno.required();
-            if(defineTenant == null && required){
+            if (defineTenant == null && required) {
                 throw new MyUnauthorizedException("获取所属租户信息失败");
             }
         }
-        return defineTenant ;
+        return defineTenant;
     }
 }

@@ -16,8 +16,8 @@ import org.apache.shiro.authc.AuthenticationToken;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class JwtShiroToken implements AuthenticationToken{
-    private String token ;
+public class JwtShiroToken implements AuthenticationToken {
+    private String token;
 
     @Override
     public Object getPrincipal() {

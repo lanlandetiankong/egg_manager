@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
@@ -44,138 +43,139 @@ import java.util.Map;
  * \
  */
 @Service(interfaceClass = AnnouncementService.class)
-public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper,Announcement,AnnouncementVo>
+public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper, Announcement, AnnouncementVo>
         implements AnnouncementService {
     @Autowired
-    private RoutineCommonFunc routineCommonFunc ;
+    private RoutineCommonFunc routineCommonFunc;
 
     @Autowired
-    private AnnouncementMapper announcementMapper ;
+    private AnnouncementMapper announcementMapper;
     @Autowired
-    private AnnouncementTagMapper announcementTagMapper ;
+    private AnnouncementTagMapper announcementTagMapper;
     @Reference
-    private CommonFuncService commonFuncService ;
-    @Reference
-    private AnnouncementTagService announcementTagService ;
+    private AnnouncementTagService announcementTagService;
     @Autowired
-    private AnnouncementDraftService announcementDraftService ;
+    private AnnouncementDraftService announcementDraftService;
 
 
     /**
      * 分页查询 公告
+     *
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean) ;
+        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        EntityWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser,result,queryFieldBeanList,paginationBean,sortBeans);
+        EntityWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
-        List<Announcement> announcements = announcementMapper.selectPage(rowBounds,announcementEntityWrapper) ;
+        result.myAntdvPaginationBeanSet(paginationBean, total);
+        List<Announcement> announcements = announcementMapper.selectPage(rowBounds, announcementEntityWrapper);
         //取得 公告标签 map
-        Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements,announcementTagMap));
-        return result ;
+        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements, announcementTagMap));
+        return result;
     }
 
     /**
      * 分页查询 公告 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     *
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementVo> dealGetAnnouncementDtoPages(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<String,AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
-        Pagination mpPagination = this.commonFuncService.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList,sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList,announcementTagMap));
-        return result ;
+        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
+        return result;
     }
 
     /**
      * 新增公告
+     *
      * @param announcementVo
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddAnnouncement(UserAccount loginUser,AnnouncementVo announcementVo) throws Exception{
-        Date now = new Date() ;
+    public Integer dealAddAnnouncement(UserAccount loginUser, AnnouncementVo announcementVo) throws Exception {
+        Date now = new Date();
         Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
-        announcement = super.doBeforeCreate(loginUser,announcement,true);
-        return announcementMapper.insert(announcement) ;
+        announcement = super.doBeforeCreate(loginUser, announcement, true);
+        return announcementMapper.insert(announcement);
     }
 
 
     /**
      * 公告草稿发布
+     *
      * @param announcementDraftVo
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddAnnouncementFromDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception{
-        Date now = new Date() ;
+    public Integer dealAddAnnouncementFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+        Date now = new Date();
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(loginUser,AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
+        Announcement announcement = announcementDraftService.draftTranslateToAnnouncement(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
         announcement.setFid(MyUUIDUtil.renderSimpleUUID());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
         announcement.setUpdateTime(now);
-        if(loginUser != null){
+        if (loginUser != null) {
             announcement.setCreateUserId(loginUser.getFid());
             announcement.setLastModifyerId(loginUser.getFid());
         }
         //修改 公告草稿 状态
-        announcementDraftService.dealPublishAnnouncementDraft(loginUser,draftId,false);
-        Integer addCount = announcementMapper.insert(announcement) ;
-        return addCount ;
+        announcementDraftService.dealPublishAnnouncementDraft(loginUser, draftId, false);
+        Integer addCount = announcementMapper.insert(announcement);
+        return addCount;
     }
-
-
-
 
 
     /**
      * 公告-删除
+     *
      * @param delIds 要删除的公告id 集合
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelAnnouncementByArr(UserAccount loginUser,String[] delIds) throws Exception{
-        Integer delCount = 0 ;
-        if(delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds) ;
+    public Integer dealDelAnnouncementByArr(UserAccount loginUser, String[] delIds) throws Exception {
+        Integer delCount = 0;
+        if (delIds != null && delIds.length > 0) {
+            List<String> delIdList = Arrays.asList(delIds);
             //批量伪删除
-            delCount = announcementMapper.batchFakeDelByIds(delIdList,loginUser);
+            delCount = announcementMapper.batchFakeDelByIds(delIdList, loginUser);
         }
-        return delCount ;
+        return delCount;
     }
 
     /**
      * 公告-删除
+     *
      * @param delId 要删除的公告id
      * @throws Exception
      */
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelAnnouncement(UserAccount loginUser,String delId) throws Exception{
-        Announcement announcement = super.doBeforeDeleteOneById(loginUser,Announcement.class,delId) ;
+    public Integer dealDelAnnouncement(UserAccount loginUser, String delId) throws Exception {
+        Announcement announcement = super.doBeforeDeleteOneById(loginUser, Announcement.class, delId);
         return announcementMapper.updateById(announcement);
     }
 

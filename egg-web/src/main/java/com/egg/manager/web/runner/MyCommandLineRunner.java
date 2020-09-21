@@ -31,7 +31,7 @@ import java.util.jar.JarFile;
  */
 @Component
 @Slf4j
-public class MyCommandLineRunner implements CommandLineRunner{
+public class MyCommandLineRunner implements CommandLineRunner {
 
     @Value("${egg.conf.controller.scanPackage}")
     private String scanPackagePath;
@@ -39,7 +39,7 @@ public class MyCommandLineRunner implements CommandLineRunner{
     private String projectName;
 
     //@ShiroPass url 与 method  之间的分隔符
-    private String urlDelimiter = ":--:" ;
+    private String urlDelimiter = ":--:";
 
 
     @Override
@@ -51,84 +51,82 @@ public class MyCommandLineRunner implements CommandLineRunner{
     public void handleInitMethodUrlSet(String... args) throws Exception {
         //先扫描Controller包并添加到 Constant.METHOD_URL_SET 中
         this.doPackageScanner(scanPackagePath);
-        Set<String> urlAndMethodSet  =new HashSet<>();
+        Set<String> urlAndMethodSet = new HashSet<>();
 
-        for (String aClassName:Constant.METHOD_URL_SET) {
+        for (String aClassName : Constant.METHOD_URL_SET) {
             Class<?> clazz = Class.forName(aClassName);
             String baseUrl = "";
-            String[] classUrl ={};
-            if(!ComUtil.isEmpty(clazz.getAnnotation(RequestMapping.class))){
-                classUrl=clazz.getAnnotation(RequestMapping.class).value();
+            String[] classUrl = {};
+            if (!ComUtil.isEmpty(clazz.getAnnotation(RequestMapping.class))) {
+                classUrl = clazz.getAnnotation(RequestMapping.class).value();
             }
             Method[] methods = clazz.getMethods();
-            for (Method method:methods) {
-                if(method.isAnnotationPresent(ShiroPass.class)){
-                    String [] methodUrl = null;
-                    StringBuilder sb  =new StringBuilder();
-                    if(!ComUtil.isEmpty(method.getAnnotation(PostMapping.class))){
-                        methodUrl=method.getAnnotation(PostMapping.class).value();
-                        if(ComUtil.isEmpty(methodUrl)){
-                            methodUrl=method.getAnnotation(PostMapping.class).path();
+            for (Method method : methods) {
+                if (method.isAnnotationPresent(ShiroPass.class)) {
+                    String[] methodUrl = null;
+                    StringBuilder sb = new StringBuilder();
+                    if (!ComUtil.isEmpty(method.getAnnotation(PostMapping.class))) {
+                        methodUrl = method.getAnnotation(PostMapping.class).value();
+                        if (ComUtil.isEmpty(methodUrl)) {
+                            methodUrl = method.getAnnotation(PostMapping.class).path();
                         }
-                        baseUrl=this.dealGetRequestUrl(classUrl, methodUrl, sb,"POST");
-                    }else if(!ComUtil.isEmpty(method.getAnnotation(GetMapping.class))){
-                        methodUrl=method.getAnnotation(GetMapping.class).value();
-                        if(ComUtil.isEmpty(methodUrl)){
-                            methodUrl=method.getAnnotation(GetMapping.class).path();
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "POST");
+                    } else if (!ComUtil.isEmpty(method.getAnnotation(GetMapping.class))) {
+                        methodUrl = method.getAnnotation(GetMapping.class).value();
+                        if (ComUtil.isEmpty(methodUrl)) {
+                            methodUrl = method.getAnnotation(GetMapping.class).path();
                         }
-                        baseUrl=this.dealGetRequestUrl(classUrl, methodUrl, sb,"GET");
-                    }else if(!ComUtil.isEmpty(method.getAnnotation(DeleteMapping.class))){
-                        methodUrl=method.getAnnotation(DeleteMapping.class).value();
-                        if(ComUtil.isEmpty(methodUrl)){
-                            methodUrl=method.getAnnotation(DeleteMapping.class).path();
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "GET");
+                    } else if (!ComUtil.isEmpty(method.getAnnotation(DeleteMapping.class))) {
+                        methodUrl = method.getAnnotation(DeleteMapping.class).value();
+                        if (ComUtil.isEmpty(methodUrl)) {
+                            methodUrl = method.getAnnotation(DeleteMapping.class).path();
                         }
-                        baseUrl=this.dealGetRequestUrl(classUrl, methodUrl, sb,"DELETE");
-                    }else if(!ComUtil.isEmpty(method.getAnnotation(PutMapping.class))){
-                        methodUrl=method.getAnnotation(PutMapping.class).value();
-                        if(ComUtil.isEmpty(methodUrl)){
-                            methodUrl=method.getAnnotation(PutMapping.class).path();
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "DELETE");
+                    } else if (!ComUtil.isEmpty(method.getAnnotation(PutMapping.class))) {
+                        methodUrl = method.getAnnotation(PutMapping.class).value();
+                        if (ComUtil.isEmpty(methodUrl)) {
+                            methodUrl = method.getAnnotation(PutMapping.class).path();
                         }
-                        baseUrl=this.dealGetRequestUrl(classUrl, methodUrl, sb,"PUT");
-                    }else {
-                        methodUrl=method.getAnnotation(RequestMapping.class).value();
-                        baseUrl=this.dealGetRequestUrl(classUrl, methodUrl, sb,RequestMapping.class.getSimpleName());
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "PUT");
+                    } else {
+                        methodUrl = method.getAnnotation(RequestMapping.class).value();
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, RequestMapping.class.getSimpleName());
                     }
-                    if(!ComUtil.isEmpty(baseUrl)){
+                    if (!ComUtil.isEmpty(baseUrl)) {
                         urlAndMethodSet.add(baseUrl);
                     }
                 }
             }
         }
-        Constant.METHOD_URL_SET=urlAndMethodSet;
-        log.info("@Pass ==> "+urlAndMethodSet);
+        Constant.METHOD_URL_SET = urlAndMethodSet;
+        log.info("@Pass ==> " + urlAndMethodSet);
     }
 
 
-    private String  dealGetRequestUrl(String[] classUrl, String[] methodUrl, StringBuilder sb,String requestName) {
+    private String dealGetRequestUrl(String[] classUrl, String[] methodUrl, StringBuilder sb, String requestName) {
         sb.append(this.projectName);
-        if(!ComUtil.isEmpty(classUrl)){
-            for (String url:classUrl) {
-                sb.append(url+"/");
+        if (!ComUtil.isEmpty(classUrl)) {
+            for (String url : classUrl) {
+                sb.append(url + "/");
             }
         }
-        for (String url:methodUrl) {
+        for (String url : methodUrl) {
             sb.append(url);
         }
-        if(sb.toString().endsWith("/")){
-            sb.deleteCharAt(sb.length()-1);
+        if (sb.toString().endsWith("/")) {
+            sb.deleteCharAt(sb.length() - 1);
         }
-        return sb.toString().replaceAll("/+", "/")+this.urlDelimiter+requestName;
+        return sb.toString().replaceAll("/+", "/") + this.urlDelimiter + requestName;
     }
-
-
 
 
     private void doPackageScanner(String packageName) {
         //把所有的.替换成/
-        URL url  =this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", "/"));
+        URL url = this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", "/"));
         // 是否循环迭代
-        if(StringUtils.countMatches(url.getFile(), ".jar")>0){
-            boolean recursive=true;
+        if (StringUtils.countMatches(url.getFile(), ".jar") > 0) {
+            boolean recursive = true;
             JarFile jar;
             // 获取jar
             try {
@@ -146,7 +144,7 @@ public class MyCommandLineRunner implements CommandLineRunner{
                         name = name.substring(1);
                     }
                     // 如果前半部分和定义的包名相同
-                    if (name.startsWith(packageName.replaceAll("\\.","/"))) {
+                    if (name.startsWith(packageName.replaceAll("\\.", "/"))) {
                         int idx = name.lastIndexOf('/');
                         // 如果以"/"结尾 是一个包
                         if (idx != -1) {
@@ -182,11 +180,11 @@ public class MyCommandLineRunner implements CommandLineRunner{
         }
         File dir = new File(url.getFile());
         for (File file : dir.listFiles()) {
-            if(file.isDirectory()){
+            if (file.isDirectory()) {
                 //递归读取包
-                doPackageScanner(packageName+"."+file.getName());
-            }else{
-                String className =packageName +"." +file.getName().replace(".class", "");
+                doPackageScanner(packageName + "." + file.getName());
+            } else {
+                String className = packageName + "." + file.getName().replace(".class", "");
                 Constant.METHOD_URL_SET.add(className);
             }
         }

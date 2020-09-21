@@ -16,7 +16,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineMenuConversion.class}
 )
-public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu,DefineMenuVo, DefineMenuDto> {
+public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, DefineMenuVo, DefineMenuDto> {
     DefineMenuMapstruct INSTANCE = Mappers.getMapper(DefineMenuMapstruct.class);
 
 
@@ -24,17 +24,17 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu,Def
     DefineMenu transferVoToEntity(DefineMenuVo vo);
 
     @Mappings({
-            @Mapping(target = "urlJumpTypeStr",expression = "java(handleDefineMenuUrlJumpTypeGetLabel(entity.getUrlJumpType()))"),
-            @Mapping(target = "parentMenu",ignore = true),
-            @Mapping(target = "uploadExcelBeanList",ignore = true),
+            @Mapping(target = "urlJumpTypeStr", expression = "java(handleDefineMenuUrlJumpTypeGetLabel(entity.getUrlJumpType()))"),
+            @Mapping(target = "parentMenu", ignore = true),
+            @Mapping(target = "uploadExcelBeanList", ignore = true),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineMenuVo transferEntityToVo(DefineMenu entity);
 
     @Mappings({
-            @Mapping(target = "urlJumpTypeStr",expression = "java(handleDefineMenuUrlJumpTypeGetLabel(dto.getUrlJumpType()))"),
-            @Mapping(target = "parentMenu",expression = "java(transferDtoToVo(dto.getParentMenuDto()))"),
+            @Mapping(target = "urlJumpTypeStr", expression = "java(handleDefineMenuUrlJumpTypeGetLabel(dto.getUrlJumpType()))"),
+            @Mapping(target = "parentMenu", expression = "java(transferDtoToVo(dto.getParentMenuDto()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })

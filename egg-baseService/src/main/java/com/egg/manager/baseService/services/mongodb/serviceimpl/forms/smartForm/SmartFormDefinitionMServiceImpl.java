@@ -17,18 +17,18 @@ import org.springframework.data.mongodb.core.query.Update;
  * MongoDb-FormDefinitionMO 表单定义-MService
  */
 @Service(interfaceClass = SmartFormDefinitionMService.class)
-public class SmartFormDefinitionMServiceImpl extends MyBaseMongoServiceImpl<SmartFormDefinitionRepository,SmartFormDefinitionMO,String>
+public class SmartFormDefinitionMServiceImpl extends MyBaseMongoServiceImpl<SmartFormDefinitionRepository, SmartFormDefinitionMO, String>
         implements SmartFormDefinitionMService {
 
     @Autowired
-    private SmartFormDefinitionRepository smartFormDefinitionRepository ;
+    private SmartFormDefinitionRepository smartFormDefinitionRepository;
 
     @Override
-    public Long updateFormTypeByTypeId(UserAccount userAccount,SmartFormTypeDefinitionMO formTypeDefinitionMO) {
+    public Long updateFormTypeByTypeId(UserAccount userAccount, SmartFormTypeDefinitionMO formTypeDefinitionMO) {
         //表单类型id匹配的
-        Query query = new Query().addCriteria(Criteria.where("formType."+ MongoModelFieldConstant.FIELD_FID).is(formTypeDefinitionMO.getFid()));
-        Update update = new Update() ;
-        update.set("formType",formTypeDefinitionMO);
-        return smartFormDefinitionRepository.batchUpdate(query,update);
+        Query query = new Query().addCriteria(Criteria.where("formType." + MongoModelFieldConstant.FIELD_FID).is(formTypeDefinitionMO.getFid()));
+        Update update = new Update();
+        update.set("formType", formTypeDefinitionMO);
+        return smartFormDefinitionRepository.batchUpdate(query, update);
     }
 }

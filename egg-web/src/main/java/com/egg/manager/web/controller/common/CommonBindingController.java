@@ -26,30 +26,29 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  CommonBindingController ",description = "通用接口 - 参数绑定")
+@Api(value = "API ==>>  CommonBindingController ", description = "通用接口 - 参数绑定")
 @RestController
 @RequestMapping("/common_api/binding")
-public class CommonBindingController extends BaseController{
+public class CommonBindingController extends BaseController {
 
-    @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getSwitchEnumList")
     public MyCommonResult<DefineModuleVo> doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        try{
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        try {
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (SwitchStateEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getName()));
+            if (enums != null && enums.length > 0) {
+                for (SwitchStateEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getName()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
-
 
 
 }

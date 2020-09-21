@@ -29,27 +29,27 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("/message/email/hello")
-public class HelloMailController extends BaseController{
+public class HelloMailController extends BaseController {
     @Value("${spring.mail.username}")
-    private String fromUser ;
+    private String fromUser;
     @Reference
-    private MyBaseEmailService myBaseEmailService ;
+    private MyBaseEmailService myBaseEmailService;
 
-    @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="测试发送消息",description = "测试发送消息",fullPath = "/message/email/hello/sendMail")
+    @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "测试发送消息", description = "测试发送消息", fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        try{
-            String[] receiveEmails = new String[]{"2773756340@qq.com"} ;
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        try {
+            String[] receiveEmails = new String[]{"2773756340@qq.com"};
             EmailSendRecordMVO emailDto = EmailSendRecordMVO.builder().subject("邮件标题123")
                     .content("邮件内容123")
                     .receiveUserInfoList(Lists.newArrayList(EmailReceiveUserInfoMVO.builder().emailAddress("2773756340@qq.com").build()))
                     .build();
             myBaseEmailService.sendSimpleEmail(emailDto);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 }

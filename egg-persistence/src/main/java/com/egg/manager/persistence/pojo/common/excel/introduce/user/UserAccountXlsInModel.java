@@ -30,7 +30,7 @@ public class UserAccountXlsInModel extends MyBaseXls {
     @ExcelIgnore
     private String userName;
     /**
-     *  账号
+     * 账号
      */
     @ExcelProperty(index = 0)
     private String account;

@@ -37,5 +37,4 @@ public class DefinePermissionDto extends MyBaseMysqlDto {
     private String typeStr;
 
 
-
 }

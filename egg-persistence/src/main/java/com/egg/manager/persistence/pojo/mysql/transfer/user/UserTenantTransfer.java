@@ -15,7 +15,7 @@ import java.util.List;
 @Named("userTenantTransfer")
 public class UserTenantTransfer extends MyBaseMysqlTransfer {
 
-    static UserTenantMapstruct userTenantMapstruct = UserTenantMapstruct.INSTANCE ;
+    static UserTenantMapstruct userTenantMapstruct = UserTenantMapstruct.INSTANCE;
 
     public static UserTenant transferVoToEntity(UserTenantVo vo) {
         if (vo == null) {

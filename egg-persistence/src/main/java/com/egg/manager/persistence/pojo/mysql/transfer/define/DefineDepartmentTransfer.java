@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @Named("defineDepartmentTransfer")
 public class DefineDepartmentTransfer extends MyBaseMysqlTransfer {
-    static DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE ;
+    static DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE;
 
 
     public static DefineDepartment transferVoToEntity(DefineDepartmentVo vo) {

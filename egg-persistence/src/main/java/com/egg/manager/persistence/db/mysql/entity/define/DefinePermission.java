@@ -41,7 +41,6 @@ public class DefinePermission extends Model<DefinePermission> {
     private Integer type;
 
 
-
     /**
      * 备注
      */

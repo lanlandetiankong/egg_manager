@@ -24,7 +24,7 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
     DefineJob transferVoToEntity(DefineJobVo vo);
 
     @Mappings({
-            @Mapping(target = "typeStr",expression = "java(handleDefineJobTypeGetGetLabel(entity.getType()))"),
+            @Mapping(target = "typeStr", expression = "java(handleDefineJobTypeGetGetLabel(entity.getType()))"),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
@@ -35,12 +35,6 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
     DefineJobVo transferDtoToVo(DefineJobDto dto);
-
-
-
-
-
-
 
 
 }

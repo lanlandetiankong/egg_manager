@@ -11,5 +11,4 @@ import java.io.Serializable;
 public class MyBaseXls implements Serializable {
 
 
-
 }

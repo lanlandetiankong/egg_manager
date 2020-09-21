@@ -1,7 +1,6 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.basic.CommonFuncService;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -41,145 +40,124 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserRoleController ",description = "用户角色接口")
+@Api(value = "API ==>>  UserRoleController ", description = "用户角色接口")
 @RestController
 @RequestMapping("/user/user_role")
-public class UserRoleController  extends BaseController{
+public class UserRoleController extends BaseController {
 
 
     @Autowired
-    private UserRoleMapper userRoleMapper ;
+    private UserRoleMapper userRoleMapper;
     @Reference
-    private UserRoleService userRoleService ;
-    @Reference
-    private CommonFuncService commonFuncService ;
+    private UserRoleService userRoleService;
 
 
-
-
-
-
-
-    @PcWebQueryLog(action="查询用户角色列表",description = "查询用户角色列表",fullPath = "/user/user_role/getAllUserRoles")
-    @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户角色列表", description = "查询用户角色列表", fullPath = "/user/user_role/getAllUserRoles")
+    @ApiOperation(value = "查询用户角色列表", notes = "查询用户角色列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
-        try{
+        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userRoleService.dealGetUserRolePages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
-            dealCommonSuccessCatch(result,"查询用户角色信息列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = userRoleService.dealGetUserRolePages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询用户角色信息列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户角色信息",description = "根据用户角色id查询用户角色信息",fullPath = "/user/user_role/getUserRoleById")
+    @ApiOperation(value = "查询用户角色信息", notes = "根据用户角色id查询用户角色信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户角色信息", description = "根据用户角色id查询用户角色信息", fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>() ;
-        try{
+        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>();
+        try {
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result,"查询用户角色信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户角色信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-
-    @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增用户角色",description = "表单方式新增用户角色",fullPath = "/user/user_role/doAddUserRole")
+    @ApiOperation(value = "新增用户角色", notes = "表单方式新增用户角色", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增用户角色", description = "表单方式新增用户角色", fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
-    public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer addCount = 0 ;
-        try{
-            if(userRoleVo == null) {
+    public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer addCount = 0;
+        try {
+            if (userRoleVo == null) {
                 throw new Exception("未接收到有效的用户角色信息！");
-            }   else {
-                addCount = userRoleService.dealAddUserRole(loginUser,userRoleVo);
+            } else {
+                addCount = userRoleService.dealAddUserRole(loginUser, userRoleVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增用户角色:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增用户角色:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    
-
-    @PcWebOperationLog(action="批量删除用户角色",description = "根据用户角色id批量删除用户角色",fullPath = "/user/user_role/batchDelUserRoleByIds")
-    @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除用户角色", description = "根据用户角色id批量删除用户角色", fullPath = "/user/user_role/batchDelUserRoleByIds")
+    @ApiOperation(value = "批量删除用户角色", notes = "根据用户角色id批量删除用户角色", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的用户角色id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的用户角色id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
-    public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = userRoleService.dealDelUserRoleByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除用户角色:"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = userRoleService.dealDelUserRoleByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除用户角色:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除用户角色",description = "根据用户角色id删除用户角色",fullPath = "/user/user_role/delOneUserRoleByIds")
-    @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除用户角色", description = "根据用户角色id删除用户角色", fullPath = "/user/user_role/delOneUserRoleByIds")
+    @ApiOperation(value = "删除用户角色", notes = "根据用户角色id删除用户角色", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的用户角色id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的用户角色id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneUserRoleByIds")
-    public MyCommonResult doDelOneUserRoleById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                delCount = userRoleService.dealDelUserRole(loginUser,delId);
-                dealCommonSuccessCatch(result,"删除用户角色:"+actionSuccessMsg);
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                delCount = userRoleService.dealDelUserRole(loginUser, delId);
+                dealCommonSuccessCatch(result, "删除用户角色:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

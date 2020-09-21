@@ -27,72 +27,72 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  PermissionCommonController ",description = "通用接口 - 权限")
+@Api(value = "API ==>>  PermissionCommonController ", description = "通用接口 - 权限")
 @RestController
 @RequestMapping("/common_api/permission")
-public class PermissionCommonController extends BaseController{
+public class PermissionCommonController extends BaseController {
 
-    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>() ;
-        try{
+        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>();
+        try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefinePermissionTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (DefinePermissionTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        MyCommonResult result = new MyCommonResult() ;
-        try{
+        MyCommonResult result = new MyCommonResult();
+        try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefineRoleTypeEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
+            if (enums != null && enums.length > 0) {
+                for (DefineRoleTypeEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
             result.setEnumList(beanList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class,httpMethod = "POST")
+    @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        MyCommonResult result = new MyCommonResult() ;
-        try{
+        MyCommonResult result = new MyCommonResult();
+        try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
             List<String> defaultCheckList = new ArrayList<>();
-            if(enums != null && enums.length > 0){
-                for (DefinePermissionCodePrefixEnum enumObj : enums){
-                    beanList.add(new FrontSelectBean(enumObj.getValue(),enumObj.getLabel()));
-                    if(enumObj.isDefaultCheck()){
-                        defaultCheckList.add(enumObj.getValue()) ;
+            if (enums != null && enums.length > 0) {
+                for (DefinePermissionCodePrefixEnum enumObj : enums) {
+                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
+                    if (enumObj.isDefaultCheck()) {
+                        defaultCheckList.add(enumObj.getValue());
                     }
                 }
             }
             result.setEnumList(beanList);
             result.setEnumDefaultCheckList(defaultCheckList);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 }

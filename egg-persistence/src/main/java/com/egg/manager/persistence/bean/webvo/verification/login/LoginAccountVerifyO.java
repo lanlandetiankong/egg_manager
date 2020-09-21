@@ -20,12 +20,12 @@ public class LoginAccountVerifyO extends WebVoBaseVerifyO<LoginAccountVo> {
     /**
      * 账号
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[账号]不能为空!")
+    @NotBlank(groups = {VerifyGroupOfDefault.class}, message = "[账号]不能为空!")
     private String account;
     /**
      * 密码
      */
-    @NotBlank(groups = {VerifyGroupOfDefault.class},message = "[密码]不能为空!")
+    @NotBlank(groups = {VerifyGroupOfDefault.class}, message = "[密码]不能为空!")
     private String password;
 
 }

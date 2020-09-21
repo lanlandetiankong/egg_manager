@@ -28,6 +28,4 @@ public class DefineRoleVo extends MyBaseMysqlVo {
     private String typeStr;
 
 
-
-
 }

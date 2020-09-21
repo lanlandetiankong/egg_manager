@@ -42,10 +42,10 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineDepartmentController ",description = "部门定义接口")
+@Api(value = "API ==>>  DefineDepartmentController ", description = "部门定义接口")
 @RestController
 @RequestMapping("/define/define_department")
-public class DefineDepartmentController extends BaseController{
+public class DefineDepartmentController extends BaseController {
 
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
@@ -53,162 +53,161 @@ public class DefineDepartmentController extends BaseController{
     private DefineDepartmentService defineDepartmentService;
 
 
-
-    @PcWebQueryLog(action="查询部门定义信息-Dto列表",description = "查询部门定义信息-Dto列表",fullPath = "/define/define_department/getAllDefineDepartmentDtos")
-    @ApiOperation(value = "查询部门定义信息-Dto列表", notes = "查询部门定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询部门定义信息-Dto列表", description = "查询部门定义信息-Dto列表", fullPath = "/define/define_department/getAllDefineDepartmentDtos")
+    @ApiOperation(value = "查询部门定义信息-Dto列表", notes = "查询部门定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllDefineDepartmentDtos")
     public MyCommonResult<DefineDepartmentVo> doGetAllDefineDepartmentDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
-                                                    , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
-        try{
+            , @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询部门定义信息-Dto列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询部门定义信息-Dto列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询部门定义信息",description = "根据部门定义id查询部门定义信息",fullPath = "/define/define_department/getDefineDepartmentById")
+    @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询部门定义信息", description = "根据部门定义id查询部门定义信息", fullPath = "/define/define_department/getDefineDepartmentById")
     @PostMapping(value = "/getDefineDepartmentById")
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
-        try{
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
+        try {
             DefineDepartment defineDepartment = defineDepartmentService.selectById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
-            dealCommonSuccessCatch(result,"查询部门定义信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询部门定义信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
-    @PcWebQueryLog(action="查询部门TreeSelect",description = "查询部门TreeSelect",fullPath = "/define/define_department/getAllDepartmentTreeSelect")
-    @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询部门TreeSelect", description = "查询部门TreeSelect", fullPath = "/define/define_department/getAllDepartmentTreeSelect")
+    @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
     public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
+        MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>();
         //筛选与排序
         EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
-        defineDepartmentEntityWrapper.eq("state",BaseStateEnum.ENABLED.getValue());
-        defineDepartmentEntityWrapper.orderBy("level",true);
-        defineDepartmentEntityWrapper.orderBy("order_num",true);
-        defineDepartmentEntityWrapper.orderBy("create_time",false);
-        List<DefineDepartment> allDepartments  = defineDepartmentService.selectList(defineDepartmentEntityWrapper);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser,DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartments);
+        defineDepartmentEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        defineDepartmentEntityWrapper.orderBy("level", true);
+        defineDepartmentEntityWrapper.orderBy("order_num", true);
+        defineDepartmentEntityWrapper.orderBy("create_time", false);
+        List<DefineDepartment> allDepartments = defineDepartmentService.selectList(defineDepartmentEntityWrapper);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
         result.setResultList(treeList);
-        return result ;
+        return result;
     }
 
-    @PcWebQueryLog(action="查询被过滤的部门定义TreeSelect",description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)",fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
-    @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询被过滤的部门定义TreeSelect", description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
+    @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
-    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>() ;
-        List<DefineDepartment> allDepartment  =  defineDepartmentMapper.getDepartmentFilterChildrens(filterId,true);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser,DefineDepartmentConstant.ROOT_DEPARTMENT_ID,allDepartment);
+    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>();
+        List<DefineDepartment> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
         result.setResultList(treeList);
-        return result ;
+        return result;
     }
-    
-    @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增部门定义",description = "表单方式新增部门定义",fullPath = "/define/define_department/doAddDefineDepartment")
+
+    @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增部门定义", description = "表单方式新增部门定义", fullPath = "/define/define_department/doAddDefineDepartment")
     @PostMapping(value = "/doAddDefineDepartment")
     public MyCommonResult<DefineDepartmentVo> doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                                                    @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>() ;
-        Integer addCount = 0 ;
-        try{
-            if(defineDepartmentVo == null) {
+                                                                    @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
+        Integer addCount = 0;
+        try {
+            if (defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
-            }   else {
-                addCount = defineDepartmentService.dealAddDefineDepartment(loginUser,defineDepartmentVo) ;
+            } else {
+                addCount = defineDepartmentService.dealAddDefineDepartment(loginUser, defineDepartmentVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增部门定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增部门定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="更新部门定义",description = "表单方式更新部门定义",fullPath = "/define/define_department/doUpdateDefineDepartment")
+    @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "更新部门定义", description = "表单方式更新部门定义", fullPath = "/define/define_department/doUpdateDefineDepartment")
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                                   @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer changeCount = 0 ;
-        try{
-            if(defineDepartmentVo == null) {
+                                                   @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer changeCount = 0;
+        try {
+            if (defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
-            }   else {
-                changeCount = defineDepartmentService.dealUpdateDefineDepartment(loginUser,defineDepartmentVo,false);
+            } else {
+                changeCount = defineDepartmentService.dealUpdateDefineDepartment(loginUser, defineDepartmentVo, false);
             }
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"更新部门定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "更新部门定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="批量删除部门定义",description = "根据部门id批量删除部门定义",fullPath = "/define/define_department/batchDelDefineDepartmentByIds")
-    @ApiOperation(value = "批量删除部门定义", notes = "根据部门id批量删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除部门定义", description = "根据部门id批量删除部门定义", fullPath = "/define/define_department/batchDelDefineDepartmentByIds")
+    @ApiOperation(value = "批量删除部门定义", notes = "根据部门id批量删除部门定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的部门定义id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的部门定义id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelDefineDepartmentByIds")
-    public MyCommonResult doBatchDeleteDefineDepartmentById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteDefineDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = defineDepartmentService.dealDelDefineDepartmentByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除部门定义:"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = defineDepartmentService.dealDelDefineDepartmentByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除部门定义",description = "根据部门id删除部门定义",fullPath = "/define/define_department/delOneDefineDepartmentById")
-    @ApiOperation(value = "删除部门定义", notes = "根据部门id删除部门定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除部门定义", description = "根据部门id删除部门定义", fullPath = "/define/define_department/delOneDefineDepartmentById")
+    @ApiOperation(value = "删除部门定义", notes = "根据部门id删除部门定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的部门定义id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的部门定义id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneDefineDepartmentById")
-    public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                Integer delCount = defineDepartmentService.dealDelDefineDepartment(loginUser,delId);
+    public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                Integer delCount = defineDepartmentService.dealDelDefineDepartment(loginUser, delId);
                 result.setCount(delCount);
-                dealCommonSuccessCatch(result,"删除部门定义:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 }

@@ -16,23 +16,23 @@ import java.util.Map;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementConversion.class}
 )
-public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement,AnnouncementVo, AnnouncementDto> {
+public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement, AnnouncementVo, AnnouncementDto> {
     AnnouncementMapstruct INSTANCE = Mappers.getMapper(AnnouncementMapstruct.class);
 
     @Mappings({
-            @Mapping(target = "tagIds",expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
+            @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
     Announcement transferVoToEntity(AnnouncementVo vo);
 
     @Mappings({
-            @Mapping(target = "tagIds",expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
+            @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))"),
             @Mapping(target = "tagNames", ignore = true),
             @Mapping(target = "tagNameOfStr", ignore = true),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    AnnouncementVo transferEntityToVo(Announcement entity,@Context Map<String, AnnouncementTag> announcementTagMap);
+    AnnouncementVo transferEntityToVo(Announcement entity, @Context Map<String, AnnouncementTag> announcementTagMap);
 
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
@@ -40,5 +40,5 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    AnnouncementVo transferDtoToVo(AnnouncementDto dto,@Context Map<String, AnnouncementTag> announcementTagMap);
+    AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<String, AnnouncementTag> announcementTagMap);
 }

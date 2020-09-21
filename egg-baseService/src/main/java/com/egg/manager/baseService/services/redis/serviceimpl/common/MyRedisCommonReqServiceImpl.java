@@ -27,88 +27,79 @@ import java.util.List;
 public abstract class MyRedisCommonReqServiceImpl implements MyRedisCommonReqService {
 
     @Reference
-    private RedisHelper redisHelper ;
+    private RedisHelper redisHelper;
 
     @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache ;
+    private RedisPropsOfShiroCache redisPropsOfShiroCache;
 
     @Autowired
-    public UserAccountService userAccountService ;
+    public UserAccountService userAccountService;
     @Reference
-    public DefineRoleService defineRoleService ;
+    public DefineRoleService defineRoleService;
 
 
-    protected  <T> T dealAutoGetRedisObjectCache(UserAccount loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl){
+    protected <T> T dealAutoGetRedisObjectCache(UserAccount loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
         T t = null;
-        boolean retryFlag = false ;
-        if(almostRefresh == true){    //为true的话进来总是取数据库，并刷新到 redis
-            dealRedisListCacheRefresh(loginUser,key,hashKey,userAccountId,keyTtl);
+        boolean retryFlag = false;
+        if (almostRefresh == true) {    //为true的话进来总是取数据库，并刷新到 redis
+            dealRedisListCacheRefresh(loginUser, key, hashKey, userAccountId, keyTtl);
             retryFlag = true;
-        }   else {
-            Object obj = redisHelper.hashGet(key,hashKey);
-            if(obj != null){
-                String objStr = (String) obj ;
-                t = JSONObject.parseObject(objStr,tClass);
-            }   else {
+        } else {
+            Object obj = redisHelper.hashGet(key, hashKey);
+            if (obj != null) {
+                String objStr = (String) obj;
+                t = JSONObject.parseObject(objStr, tClass);
+            } else {
                 //从数据库中取得
-                dealRedisListCacheRefresh(loginUser,key,hashKey,userAccountId,keyTtl);
+                dealRedisListCacheRefresh(loginUser, key, hashKey, userAccountId, keyTtl);
                 retryFlag = true;
             }
         }
-        if(retryFlag){
-            Object obj =  redisHelper.hashGet(key,hashKey);
-            if(obj != null){
-                String objStr = (String) obj ;
-                t = JSONObject.parseObject(objStr,tClass);
+        if (retryFlag) {
+            Object obj = redisHelper.hashGet(key, hashKey);
+            if (obj != null) {
+                String objStr = (String) obj;
+                t = JSONObject.parseObject(objStr, tClass);
             }
         }
-        return t ;
+        return t;
     }
 
 
-    protected  <T> List<T> dealAutoGetRedisListCache(UserAccount loginUser,String key,String hashKey,String userAccountId,Class<T> tClass,boolean almostRefresh,Long keyTtl){
+    protected <T> List<T> dealAutoGetRedisListCache(UserAccount loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
         List<T> tList = new ArrayList<>();
-        boolean retryFlag = false ;
-        if(almostRefresh == true){    //为true的话进来总是取数据库，并刷新到 redis
-            dealRedisListCacheRefresh(loginUser,key,hashKey,userAccountId,keyTtl);
+        boolean retryFlag = false;
+        if (almostRefresh == true) {    //为true的话进来总是取数据库，并刷新到 redis
+            dealRedisListCacheRefresh(loginUser, key, hashKey, userAccountId, keyTtl);
             retryFlag = true;
-        }   else {
-            Object obj = redisHelper.hashGet(key,hashKey);
-            if(obj != null){
+        } else {
+            Object obj = redisHelper.hashGet(key, hashKey);
+            if (obj != null) {
                 //String jsonStr = JSONArray.toJSONString(obj) ;
-                String objStr = (String) obj ;
-                if("\"[]\"".equals(objStr) ==false){
-                    tList = JSONArray.parseArray(objStr,tClass);
+                String objStr = (String) obj;
+                if ("\"[]\"".equals(objStr) == false) {
+                    tList = JSONArray.parseArray(objStr, tClass);
                 }
-            }   else {
+            } else {
                 //从数据库中取得
-                dealRedisListCacheRefresh(loginUser,key,hashKey,userAccountId,keyTtl);
+                dealRedisListCacheRefresh(loginUser, key, hashKey, userAccountId, keyTtl);
                 retryFlag = true;
             }
         }
-        if(retryFlag){
-            Object obj =  redisHelper.hashGet(key,hashKey);
-            if(obj != null){
+        if (retryFlag) {
+            Object obj = redisHelper.hashGet(key, hashKey);
+            if (obj != null) {
                 //String jsonStr = JSONArray.toJSONString(obj) ;
-                String objStr = (String) obj ;
-                if("\"[]\"".equals(objStr) ==false){
-                    tList = JSONArray.parseArray(objStr,tClass);
+                String objStr = (String) obj;
+                if ("\"[]\"".equals(objStr) == false) {
+                    tList = JSONArray.parseArray(objStr, tClass);
                 }
             }
         }
 
-        tList = tList != null ? tList : new ArrayList<T>() ;
-        return tList ;
+        tList = tList != null ? tList : new ArrayList<T>();
+        return tList;
     }
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -47,8 +47,6 @@ public class UserDepartment extends Model<UserDepartment> {
     private Short isManager;
 
 
-
-
     /**
      * 备注
      */
@@ -90,7 +88,7 @@ public class UserDepartment extends Model<UserDepartment> {
      *
      * @param userAccountId
      * @param defineDepartmentId
-     * @param loginUser      当前登录用户
+     * @param loginUser          当前登录用户
      * @return
      */
     public static UserDepartment generateSimpleInsertEntity(String userAccountId, String defineDepartmentId, UserAccount loginUser) {

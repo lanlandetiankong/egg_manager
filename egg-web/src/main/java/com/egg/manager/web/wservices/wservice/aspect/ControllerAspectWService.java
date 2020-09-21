@@ -22,6 +22,7 @@ public interface ControllerAspectWService {
 
     /**
      * 取得 请求的参数
+     *
      * @param joinPoint
      * @return JSONObject
      */
@@ -29,13 +30,16 @@ public interface ControllerAspectWService {
 
     /**
      * 设置一些值到 PcWebQueryLogMO
+     *
      * @param pcWebQueryLogMO
      * @param joinPoint
      * @param request
      */
     void dealSetValToQueryLog(PcWebQueryLogMO pcWebQueryLogMO, JoinPoint joinPoint, HttpServletRequest request);
+
     /**
      * 设置一些值到 PcWebOperationLogMO
+     *
      * @param pcWebOperationLogMO
      * @param joinPoint
      * @param request
@@ -45,6 +49,7 @@ public interface ControllerAspectWService {
 
     /**
      * 设置一些值到 PcWebLoginLogMO
+     *
      * @param pcWebLoginLogMO
      * @param joinPoint
      * @param request
@@ -54,16 +59,16 @@ public interface ControllerAspectWService {
 
     /**
      * 取得当前调用的方法
+     *
      * @param signature
      * @return
      */
     Method gainReqMethod(Signature signature);
 
 
-
-
     /**
      * 取得当前调用的方法
+     *
      * @param joinPoint
      * @return
      */

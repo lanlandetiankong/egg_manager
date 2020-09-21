@@ -29,7 +29,7 @@ public class OriginFilter {
         corsConfiguration.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
-        this.dealAddExposedHeaders(corsConfiguration,"authorization","Content-Disposition");    //必要,设置可返回给前端取得的自定义header
+        this.dealAddExposedHeaders(corsConfiguration, "authorization", "Content-Disposition");    //必要,设置可返回给前端取得的自定义header
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
@@ -37,11 +37,11 @@ public class OriginFilter {
     }
 
 
-    public void dealAddExposedHeaders(CorsConfiguration corsConfiguration,String ... exposedHeaderArr){
+    public void dealAddExposedHeaders(CorsConfiguration corsConfiguration, String... exposedHeaderArr) {
         List<String> exposedHeaderList = corsConfiguration.getExposedHeaders();
-        exposedHeaderList = exposedHeaderList != null ? exposedHeaderList :  new ArrayList<>() ;
-        if(exposedHeaderArr != null && exposedHeaderArr.length > 0){
-            for (String exposedItem : exposedHeaderArr){
+        exposedHeaderList = exposedHeaderList != null ? exposedHeaderList : new ArrayList<>();
+        if (exposedHeaderArr != null && exposedHeaderArr.length > 0) {
+            for (String exposedItem : exposedHeaderArr) {
                 exposedHeaderList.add(exposedItem);
             }
         }

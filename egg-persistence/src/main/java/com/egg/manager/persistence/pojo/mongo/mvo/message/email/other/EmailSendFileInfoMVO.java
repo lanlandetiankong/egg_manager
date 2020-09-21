@@ -17,28 +17,28 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailSendFileInfoMVO  extends MyBaseMVO {
+public class EmailSendFileInfoMVO extends MyBaseMVO {
 
     /**
      * 文件-原名
      */
-    private String originalName ;
+    private String originalName;
     /**
      * 文件名
      */
-    private String fileName ;
+    private String fileName;
     /**
      * 文件-相对路径
      */
-    private String relativePath ;
+    private String relativePath;
     /**
      * 文件名-后缀
      */
-    private String fileExtension ;
+    private String fileExtension;
     /**
      * 文件-大小
      */
-    private Long fileSize ;
+    private Long fileSize;
 
 
 }

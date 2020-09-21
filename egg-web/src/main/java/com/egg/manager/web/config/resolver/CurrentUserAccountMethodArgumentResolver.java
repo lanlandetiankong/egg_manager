@@ -21,15 +21,16 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * \* Description:
  * \
  */
-public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodArgumentResolver{
+public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Reference
-    private UserAccountRedisService userAccountRedisService ;
+    private UserAccountRedisService userAccountRedisService;
 
     /**
      * 判断:
      * 1、方法参数列表是否有 [UserAccountXlsModel]
      * 2、是否有 @CurrentLoginUser 注解
+     *
      * @param parameter
      * @return
      */
@@ -40,6 +41,7 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
 
     /**
      * 取得用户并返回注入，取得用户失败将会抛出UnauthorizedException异常
+     *
      * @param methodParameter
      * @param modelAndViewContainer
      * @param nativeWebRequest
@@ -49,20 +51,20 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        UserAccount userAccount = (UserAccount) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST) ;
-        if(userAccount == null){
+        UserAccount userAccount = (UserAccount) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST);
+        if (userAccount == null) {
             String authorization = nativeWebRequest.getHeader("authorization");
-            if(StringUtils.isNotBlank(authorization)){
-                userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null,authorization);
+            if (StringUtils.isNotBlank(authorization)) {
+                userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, authorization);
             }
         }
-        CurrentLoginUser currentLoginUserAnno  = methodParameter.getParameterAnnotation(CurrentLoginUser.class);
-        if(currentLoginUserAnno != null){
+        CurrentLoginUser currentLoginUserAnno = methodParameter.getParameterAnnotation(CurrentLoginUser.class);
+        if (currentLoginUserAnno != null) {
             boolean required = currentLoginUserAnno.required();
-            if(userAccount == null && required){
+            if (userAccount == null && required) {
                 throw new MyUnauthorizedException("获取用户信息失败");
             }
         }
-        return userAccount ;
+        return userAccount;
     }
 }

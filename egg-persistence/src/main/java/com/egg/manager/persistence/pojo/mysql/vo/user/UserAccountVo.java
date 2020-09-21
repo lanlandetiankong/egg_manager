@@ -44,11 +44,13 @@ public class UserAccountVo extends MyBaseMysqlVo {
     private String email;
     /**
      * 性别
+     *
      * @see UserSexEnum
      */
     private Short sex;
     /**
      * 用户类型
+     *
      * @see UserAccountBaseTypeEnum
      */
     private Integer userType;
@@ -81,12 +83,11 @@ public class UserAccountVo extends MyBaseMysqlVo {
     /**
      * 所属部门-id
      */
-    private String belongDepartmentId ;
+    private String belongDepartmentId;
     /**
      * 所属部门-vo
      */
-    private DefineDepartmentVo belongDepartment ;
-
+    private DefineDepartmentVo belongDepartment;
 
 
 }

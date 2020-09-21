@@ -16,15 +16,15 @@ import java.util.List;
  * MongoDb-FormTypeDefinitionMO 表单类型定义-MService
  */
 @Service(interfaceClass = SmartFormTypeDefinitionMService.class)
-public class SmartFormTypeDefinitionMServiceImpl  extends MyBaseMongoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMO,String>
+public class SmartFormTypeDefinitionMServiceImpl extends MyBaseMongoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMO, String>
         implements SmartFormTypeDefinitionMService {
 
     @Override
-    public MyCommonResult<SmartFormTypeDefinitionMO> dealResultListSetToEntitySelect(MyCommonResult<SmartFormTypeDefinitionMO> result,List<SmartFormTypeDefinitionMO> list){
+    public MyCommonResult<SmartFormTypeDefinitionMO> dealResultListSetToEntitySelect(MyCommonResult<SmartFormTypeDefinitionMO> result, List<SmartFormTypeDefinitionMO> list) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        if(CollectionUtil.isNotEmpty(list)){
-            for(SmartFormTypeDefinitionMO typeDefinitionMO : list){
-                enumList.add(new FrontEntitySelectBean(typeDefinitionMO.getFid(),typeDefinitionMO.getName())) ;
+        if (CollectionUtil.isNotEmpty(list)) {
+            for (SmartFormTypeDefinitionMO typeDefinitionMO : list) {
+                enumList.add(new FrontEntitySelectBean(typeDefinitionMO.getFid(), typeDefinitionMO.getName()));
             }
         }
         result.setEnumList(enumList);

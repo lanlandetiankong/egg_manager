@@ -16,8 +16,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +34,7 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/user/user_account/getAllUserAccountDtos",flag = false)
+    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/user/user_account/getAllUserAccountDtos", flag = false)
     @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表", notes = "[通用组件]-查询用户信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -55,7 +53,7 @@ public class UserAccountCommonCompController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealGetUserAccountDtoPages(loginUser,result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = userAccountService.dealGetUserAccountDtoPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询用户信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

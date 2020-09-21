@@ -16,7 +16,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {RoleMenuConversion.class}
 )
-public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu,RoleMenuVo, RoleMenuDto> {
+public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMenuVo, RoleMenuDto> {
     RoleMenuMapstruct INSTANCE = Mappers.getMapper(RoleMenuMapstruct.class);
 
 

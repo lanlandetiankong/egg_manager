@@ -15,7 +15,7 @@ import java.util.List;
 @Named("userJobTransfer")
 public class UserJobTransfer extends MyBaseMysqlTransfer {
 
-    static UserJobMapstruct userJobMapstruct = UserJobMapstruct.INSTANCE ;
+    static UserJobMapstruct userJobMapstruct = UserJobMapstruct.INSTANCE;
 
     public static UserJob transferVoToEntity(UserJobVo vo) {
         if (vo == null) {

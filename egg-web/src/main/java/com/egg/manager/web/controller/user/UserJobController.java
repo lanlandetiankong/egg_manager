@@ -38,63 +38,59 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserJobController ",description = "用户职务接口")
+@Api(value = "API ==>>  UserJobController ", description = "用户职务接口")
 @RestController
 @RequestMapping("/user/user_job")
-public class UserJobController extends BaseController{
+public class UserJobController extends BaseController {
 
     @Autowired
-    private UserJobMapper userJobMapper ;
+    private UserJobMapper userJobMapper;
     @Reference
-    private UserJobService userJobService ;
+    private UserJobService userJobService;
 
 
-    @PcWebQueryLog(action="查询用户职务列表",description = "查询用户职务列表",fullPath = "/user/user_job/getAllUserJobs")
-    @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户职务列表", description = "查询用户职务列表", fullPath = "/user/user_job/getAllUserJobs")
+    @ApiOperation(value = "查询用户职务列表", notes = "查询用户职务列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
-                    ,@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
-        try{
+            , @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
+            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = userJobService.dealGetUserJobPages(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
-            dealCommonSuccessCatch(result,"查询用户职务信息列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = userJobService.dealGetUserJobPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询用户职务信息列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询用户职务信息",description = "根据用户职务id查询用户职务信息",fullPath = "/user/user_job/getUserJobById")
+    @ApiOperation(value = "查询用户职务信息", notes = "根据用户职务id查询用户职务信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询用户职务信息", description = "根据用户职务id查询用户职务信息", fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
-        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>() ;
-        try{
+        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>();
+        try {
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result,"查询用户职务信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询用户职务信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
-
-
-
-
 
 
 }

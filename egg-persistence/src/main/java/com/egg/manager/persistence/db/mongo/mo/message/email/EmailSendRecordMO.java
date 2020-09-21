@@ -33,7 +33,7 @@ public class EmailSendRecordMO extends MyBaseModelMO<String> {
     /**
      * 发送者-相关信息
      */
-    private EmailFromUserInfoMVO fromUserInfo ;
+    private EmailFromUserInfoMVO fromUserInfo;
     /**
      * 主题
      */
@@ -41,7 +41,7 @@ public class EmailSendRecordMO extends MyBaseModelMO<String> {
     /**
      * 接收方邮件(必填参数)
      */
-    private List<EmailReceiveUserInfoMVO> receiveUserInfoList ;
+    private List<EmailReceiveUserInfoMVO> receiveUserInfoList;
     /**
      * 邮件内容
      */
@@ -57,15 +57,15 @@ public class EmailSendRecordMO extends MyBaseModelMO<String> {
     /**
      * 附件信息-列表
      */
-    private List<EmailSendFileInfoMVO> accessoryInfoList ;
+    private List<EmailSendFileInfoMVO> accessoryInfoList;
     /**
      * 是否发送成功？
      */
-    private Boolean successFlag = true ;
+    private Boolean successFlag = true;
 
 
     /**
      * 发送日期
      */
-    private Date sentDate ;
+    private Date sentDate;
 }

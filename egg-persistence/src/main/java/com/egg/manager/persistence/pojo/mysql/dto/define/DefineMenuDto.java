@@ -25,6 +25,7 @@ public class DefineMenuDto extends MyBaseMysqlDto {
     private String menuName;
     /**
      * 路径跳转方式
+     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     private Integer urlJumpType;
@@ -71,8 +72,6 @@ public class DefineMenuDto extends MyBaseMysqlDto {
      * 上级菜单-dto
      */
     private DefineMenuDto parentMenuDto;
-
-
 
 
 }

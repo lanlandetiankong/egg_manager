@@ -60,11 +60,13 @@ public class UserAccount extends Model<UserAccount> {
     private String email;
     /**
      * 性别
+     *
      * @see UserSexEnum
      */
     private Short sex;
     /**
      * 用户类型
+     *
      * @see UserAccountBaseTypeEnum
      */
     @TableField("user_type")
@@ -79,7 +81,6 @@ public class UserAccount extends Model<UserAccount> {
      */
     @TableField("locked")
     private short locked;
-
 
 
     /**

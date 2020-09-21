@@ -22,11 +22,11 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {SmartFormDefinitionConversion.class}
 )
-public interface SmartFormDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormDefinitionMO,SmartFormDefinitionMVO> {
+public interface SmartFormDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormDefinitionMO, SmartFormDefinitionMVO> {
     SmartFormDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormDefinitionMapstruct.class);
 
     @Mappings({
-            @Mapping(target = "formType",expression = "java(commonTranslateSmartFormTypeDefinitionMVOToMO(mvo.getFormType()))")
+            @Mapping(target = "formType", expression = "java(commonTranslateSmartFormTypeDefinitionMVOToMO(mvo.getFormType()))")
     })
     SmartFormDefinitionMO translateMvoToMo(SmartFormDefinitionMVO mvo);
 }

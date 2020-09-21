@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .name("authorization")
                 .description("header中Authorization字段用于认证")
                 .modelRef(new ModelRef("string"))
-                .required(false).build() ;
+                .required(false).build();
         List<Parameter> aParameters = new ArrayList<Parameter>();
         aParameters.add(parameter);
         return new Docket(DocumentationType.SWAGGER_2)

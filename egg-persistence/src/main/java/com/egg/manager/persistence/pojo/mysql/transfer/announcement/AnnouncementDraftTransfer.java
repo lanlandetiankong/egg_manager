@@ -25,8 +25,8 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
     static AnnouncementDraftMapstruct announcementDraftMapstruct = AnnouncementDraftMapstruct.INSTANCE;
 
     public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo) {
-        if(vo == null){
-            return null ;
+        if (vo == null) {
+            return null;
         }
         AnnouncementDraft entity = announcementDraftMapstruct.transferVoToEntity(vo);
         return entity;
@@ -37,7 +37,7 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
             return null;
         }
         AnnouncementDraftVo vo = announcementDraftMapstruct.transferEntityToVo(entity);
-        AnnouncementDraftTransfer.doSetTagInfoToVo(entity.getTagIds(),vo,announcementTagMap);
+        AnnouncementDraftTransfer.doSetTagInfoToVo(entity.getTagIds(), vo, announcementTagMap);
         return vo;
     }
 
@@ -48,11 +48,9 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
         }
         AnnouncementDraftVo vo = announcementDraftMapstruct.transferDtoToVo(dto);
         //设置 tag相关信息
-        AnnouncementDraftTransfer.doSetTagInfoToVo(dto.getTagIds(),vo,announcementTagMap);
+        AnnouncementDraftTransfer.doSetTagInfoToVo(dto.getTagIds(), vo, announcementTagMap);
         return vo;
     }
-
-
 
 
     public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts, Map<String, AnnouncementTag> announcementTagMap) {
@@ -83,11 +81,12 @@ public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
 
     /**
      * 设置tag的相关信息
+     *
      * @param tagIds
      * @param vo
      * @param announcementTagMap
      */
-    private static void doSetTagInfoToVo(String tagIds,AnnouncementDraftVo vo,Map<String, AnnouncementTag> announcementTagMap){
+    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<String, AnnouncementTag> announcementTagMap) {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);

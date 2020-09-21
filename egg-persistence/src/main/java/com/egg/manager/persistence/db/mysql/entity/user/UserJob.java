@@ -37,7 +37,6 @@ public class UserJob extends Model<UserJob> {
     private String defineJobId;
 
 
-
     /**
      * 备注
      */

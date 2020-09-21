@@ -28,5 +28,4 @@ public class DefineTenantVo extends MyBaseMysqlVo {
     private String typeStr;
 
 
-
 }

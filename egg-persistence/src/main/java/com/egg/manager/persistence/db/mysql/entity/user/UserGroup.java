@@ -40,7 +40,6 @@ public class UserGroup extends Model<UserGroup> {
     private String type;
 
 
-
     /**
      * 备注
      */

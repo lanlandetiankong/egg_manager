@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Named("userGroupTransfer")
 public class UserGroupTransfer extends MyBaseMysqlTransfer {
 
-    static UserGroupMapstruct userGroupMapstruct = UserGroupMapstruct.INSTANCE ;
+    static UserGroupMapstruct userGroupMapstruct = UserGroupMapstruct.INSTANCE;
 
 }

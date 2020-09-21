@@ -57,7 +57,6 @@ public class DefineDepartment extends Model<DefineDepartment> {
     private String description;
 
 
-
     /**
      * 备注
      */

@@ -20,12 +20,13 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
     DefinePermissionMapstruct INSTANCE = Mappers.getMapper(DefinePermissionMapstruct.class);
 
     @Mappings({
-            @Mapping(target = "ensure",expression = "java(handleSwitchStateGetShort(vo.getEnsure()))")
+            @Mapping(target = "ensure", expression = "java(handleSwitchStateGetShort(vo.getEnsure()))")
     })
     DefinePermission transferVoToEntity(DefinePermissionVo vo);
+
     @Mappings({
-            @Mapping(target = "ensureStr",expression = "java(handleSwitchStateGetName(entity.getEnsure()))"),
-            @Mapping(target = "typeStr",expression = "java(handleDefinePermissionTypeGetLabel(entity.getType()))"),
+            @Mapping(target = "ensureStr", expression = "java(handleSwitchStateGetName(entity.getEnsure()))"),
+            @Mapping(target = "typeStr", expression = "java(handleDefinePermissionTypeGetLabel(entity.getType()))"),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })

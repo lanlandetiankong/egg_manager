@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @Named("defineMenuTransfer")
 public class DefineMenuTransfer extends MyBaseMysqlTransfer {
-    static DefineMenuMapstruct defineMenuMapstruct = DefineMenuMapstruct.INSTANCE ;
+    static DefineMenuMapstruct defineMenuMapstruct = DefineMenuMapstruct.INSTANCE;
 
     public static DefineMenu transferVoToEntity(DefineMenuVo vo) {
         if (vo == null) {

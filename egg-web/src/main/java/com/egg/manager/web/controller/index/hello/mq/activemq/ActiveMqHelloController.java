@@ -37,15 +37,16 @@ public class ActiveMqHelloController extends BaseController {
     @Autowired
     private Topic topic;
 
-    @PcWebOperationLog( action = "测试ActiveMq-Queue",fullPath = "/index/hello/mq/activemq/queue/test",flag = false)
-    @ApiOperation(value = "测试ActiveMq-Queue",response = String.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "测试ActiveMq-Queue", fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
+    @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = "POST")
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
         this.sendMessage(this.queue, str);
         return "success";
     }
-    @PcWebOperationLog( action = "测试ActiveMq-Topic",fullPath = "/index/hello/mq/activemq/topic/test",flag = false)
-    @ApiOperation(value = "测试ActiveMq-Topic",response = String.class, httpMethod = "POST")
+
+    @PcWebOperationLog(action = "测试ActiveMq-Topic", fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
+    @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = "POST")
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {
         this.sendMessage(this.topic, str);
@@ -53,7 +54,7 @@ public class ActiveMqHelloController extends BaseController {
     }
 
     // 发送消息，destination是发送到的队列，message是待发送的消息
-    private void sendMessage(Destination destination, final String message){
+    private void sendMessage(Destination destination, final String message) {
         jmsMessagingTemplate.convertAndSend(destination, message);
     }
 

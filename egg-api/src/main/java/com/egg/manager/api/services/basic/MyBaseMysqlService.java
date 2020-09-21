@@ -3,15 +3,19 @@ package com.egg.manager.api.services.basic;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.IService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
 
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -77,4 +81,35 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     @Deprecated
     <T, KV, KL> MyCommonResult doGetResultListSetToEntitySelect(MyCommonResult<T> result, EggPojoReflexFieldConfig<KV> valueConf, EggPojoReflexFieldConfig<KL> labelConf);
 
+
+
+
+    /**
+     *  用userAccountToken 取得 UserAccountXlsModel
+     * @param userAccountToken
+     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @return UserAccountXlsModel
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
+
+
+    /**
+     * 取得 mybatisplus-分页查询Pagination
+     * @param paginationBean 分页bean
+     * @return
+     */
+    Pagination dealAntvPageToPagination(AntdvPaginationBean paginationBean);
+
+
+    /**
+     *  将取得请求的token转化为 UserAccountXlsModel
+     * @param request
+     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @return UserAccountToken
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    //UserAccountXlsModel gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
 }

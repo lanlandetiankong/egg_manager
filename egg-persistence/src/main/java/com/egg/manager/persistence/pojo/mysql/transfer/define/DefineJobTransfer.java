@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @Named("defineJobTransfer")
 public class DefineJobTransfer extends MyBaseMysqlTransfer {
-    static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE ;
+    static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE;
 
     public static DefineJob transferVoToEntity(DefineJobVo vo) {
         if (vo == null) {

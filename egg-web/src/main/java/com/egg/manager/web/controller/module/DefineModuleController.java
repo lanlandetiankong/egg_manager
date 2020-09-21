@@ -39,145 +39,143 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineModuleController ",description = "模块定义接口")
+@Api(value = "API ==>>  DefineModuleController ", description = "模块定义接口")
 @RestController
 @RequestMapping("/module/define_module")
-public class DefineModuleController extends BaseController{
+public class DefineModuleController extends BaseController {
 
     @Autowired
-    private DefineModuleMapper defineModuleMapper ;
+    private DefineModuleMapper defineModuleMapper;
     @Reference
     private DefineModuleService defineModuleService;
- 
 
 
-
-    @PcWebQueryLog(action="查询模块定义信息-Dto列表",description = "查询模块定义信息-Dto列表",fullPath = "/module/define_module/getAllDefineModuleDtos")
-    @ApiOperation(value = "查询模块定义信息-Dto列表", notes = "查询模块定义信息-Dto列表", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebQueryLog(action = "查询模块定义信息-Dto列表", description = "查询模块定义信息-Dto列表", fullPath = "/module/define_module/getAllDefineModuleDtos")
+    @ApiOperation(value = "查询模块定义信息-Dto列表", notes = "查询模块定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj",value = "字段查询配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "paginationObj",value = "分页配置 -> json格式", required = true,dataTypeClass=String.class),
-            @ApiImplicitParam(name = "sortObj",value = "排序对象 -> json格式", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getAllDefineModuleDtos")
     public MyCommonResult<DefineModuleVo> doGetAllDefineModuleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        try{
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj) ;
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue())) ;
+            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj) ;
+            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj,true) ;
-            result = defineModuleService.dealGetDefineModuleDtoPages(loginUser,result,queryFieldBeanList,paginationBean,sortBeans) ;
-            dealCommonSuccessCatch(result,"查询模块定义信息-Dto列表:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+            result = defineModuleService.dealGetDefineModuleDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            dealCommonSuccessCatch(result, "查询模块定义信息-Dto列表:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "查询模块定义信息", notes = "根据模块定义id查询模块定义信息", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebQueryLog(action="查询模块定义信息",description = "根据模块定义id查询模块定义信息",fullPath = "/module/define_module/getDefineModuleById")
+    @ApiOperation(value = "查询模块定义信息", notes = "根据模块定义id查询模块定义信息", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询模块定义信息", description = "根据模块定义id查询模块定义信息", fullPath = "/module/define_module/getDefineModuleById")
     @PostMapping(value = "/getDefineModuleById")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        try{
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        try {
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
             result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
-            dealCommonSuccessCatch(result,"查询模块定义信息:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "查询模块定义信息:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="新增模块定义",description = "表单方式新增模块定义",fullPath = "/module/define_module/doAddDefineModule")
+    @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "新增模块定义", description = "表单方式新增模块定义", fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
-    public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>() ;
-        Integer addCount = 0 ;
-        try{
-            if(defineModuleVo == null) {
+    public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        Integer addCount = 0;
+        try {
+            if (defineModuleVo == null) {
                 throw new Exception("未接收到有效的模块定义！");
-            }   else {
-                addCount = defineModuleService.dealAddDefineModule(loginUser,defineModuleVo) ;
+            } else {
+                addCount = defineModuleService.dealAddDefineModule(loginUser, defineModuleVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增模块定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "新增模块定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @ApiOperation(value = "更新模块定义", notes = "表单方式更新模块定义", response = MyCommonResult.class,httpMethod = "POST")
-    @PcWebOperationLog(action="更新模块定义",description = "表单方式更新模块定义",fullPath = "/module/define_module/doUpdateDefineModule")
+    @ApiOperation(value = "更新模块定义", notes = "表单方式更新模块定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "更新模块定义", description = "表单方式更新模块定义", fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
-    public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        Integer changeCount = 0 ;
-        try{
-            if(defineModuleVo == null) {
+    public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer changeCount = 0;
+        try {
+            if (defineModuleVo == null) {
                 throw new Exception("未接收到有效的模块定义！");
-            }   else {
-                changeCount = defineModuleService.dealUpdateDefineModule(loginUser,defineModuleVo,false);
+            } else {
+                changeCount = defineModuleService.dealUpdateDefineModule(loginUser, defineModuleVo, false);
             }
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result,"更新模块定义:"+actionSuccessMsg);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+            dealCommonSuccessCatch(result, "更新模块定义:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="批量删除模块定义",description = "根据菜单定义id批量删除模块定义",fullPath = "/module/define_module/batchDelDefineModuleByIds")
-    @ApiOperation(value = "批量删除模块定义", notes = "根据菜单定义id批量删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除模块定义", description = "根据菜单定义id批量删除模块定义", fullPath = "/module/define_module/batchDelDefineModuleByIds")
+    @ApiOperation(value = "批量删除模块定义", notes = "根据菜单定义id批量删除模块定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds",value = "要删除的模块定义id数组", required = true,dataTypeClass=String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的模块定义id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelDefineModuleByIds")
-    public MyCommonResult doBatchDeleteDefineModuleById(HttpServletRequest request,String[] delIds,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
+    public MyCommonResult doBatchDeleteDefineModuleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
-        try{
-            if(delIds != null && delIds.length > 0) {
-                delCount = defineModuleService.dealDelDefineModuleByArr(loginUser,delIds);
-                dealCommonSuccessCatch(result,"批量删除模块定义:"+actionSuccessMsg);
+        try {
+            if (delIds != null && delIds.length > 0) {
+                delCount = defineModuleService.dealDelDefineModuleByArr(loginUser, delIds);
+                dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 
-    @PcWebOperationLog(action="删除模块定义",description = "根据模块id删除模块定义",fullPath = "/module/define_module/delOneDefineModuleById")
-    @ApiOperation(value = "删除模块定义", notes = "根据模块id删除模块定义", response = MyCommonResult.class,httpMethod = "POST")
+    @PcWebOperationLog(action = "删除模块定义", description = "根据模块id删除模块定义", fullPath = "/module/define_module/delOneDefineModuleById")
+    @ApiOperation(value = "删除模块定义", notes = "根据模块id删除模块定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId",value = "要删除的模块定义id", required = true,dataTypeClass=String.class),
+            @ApiImplicitParam(name = "delId", value = "要删除的模块定义id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneDefineModuleById")
-    public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
-        MyCommonResult result = new MyCommonResult() ;
-        try{
-            if(StringUtils.isNotBlank(delId)){
-                Integer delCount = defineModuleService.dealDelDefineModule(loginUser,delId);
+    public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        try {
+            if (StringUtils.isNotBlank(delId)) {
+                Integer delCount = defineModuleService.dealDelDefineModule(loginUser, delId);
                 result.setCount(delCount);
-                dealCommonSuccessCatch(result,"删除模块定义:"+actionSuccessMsg);
+                dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);
             }
-        }   catch (Exception e){
-            this.dealCommonErrorCatch(log,result,e) ;
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
         }
-        return  result;
+        return result;
     }
 
 }

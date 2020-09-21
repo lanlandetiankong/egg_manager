@@ -1,7 +1,6 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.define.DefineGroupService;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
@@ -17,7 +16,7 @@ import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
  * \
  */
 @Service(interfaceClass = DefineGroupService.class)
-public class DefineGroupServiceImpl extends MyBaseMysqlServiceImpl<DefineGroupMapper,DefineGroup,DefineGroupVo> implements DefineGroupService {
+public class DefineGroupServiceImpl extends MyBaseMysqlServiceImpl<DefineGroupMapper, DefineGroup, DefineGroupVo> implements DefineGroupService {
 
 
 }

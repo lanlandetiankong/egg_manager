@@ -41,7 +41,6 @@ public class UserRole extends Model<UserRole> {
     private Integer type;
 
 
-
     /**
      * 备注
      */

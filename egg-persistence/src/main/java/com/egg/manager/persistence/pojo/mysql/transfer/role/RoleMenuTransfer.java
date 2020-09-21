@@ -15,7 +15,7 @@ import java.util.List;
 @Named("roleMenuTransfer")
 public class RoleMenuTransfer extends MyBaseMysqlTransfer {
 
-    static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE ;
+    static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE;
 
     public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
         if (vo == null) {

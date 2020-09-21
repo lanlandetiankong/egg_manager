@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *  公告-entity
+ * 公告-entity
  * \* note:
  * \* User: zhouchengjie
  * \* Date: 2020/2/21

@@ -47,7 +47,6 @@ public class UserTenant extends Model<UserTenant> {
     private Short isManager;
 
 
-
     /**
      * 备注
      */

@@ -10,7 +10,7 @@ import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormRecordRepo
  * MongoDb-FormDefinitionMO 表单定义-MService
  */
 @Service(interfaceClass = SmartFormRecordMService.class)
-public class SmartFormRecordMServiceImpl extends MyBaseMongoServiceImpl<SmartFormRecordRepository, SmartFormRecordMO,String>
+public class SmartFormRecordMServiceImpl extends MyBaseMongoServiceImpl<SmartFormRecordRepository, SmartFormRecordMO, String>
         implements SmartFormRecordMService {
 
 

@@ -66,6 +66,4 @@ public class AnnouncementDraftDto extends MyBaseMysqlDto {
     private String tagNameOfStr;
 
 
-
-
 }

@@ -12,21 +12,21 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service(interfaceClass = RedisHelper.class)
-public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
+public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
     //在构造器中获取RedisTemplate实例，key(not hashKey) 默认使用String类型
-    private RedisTemplate<String,T> redisTemplate ;
+    private RedisTemplate<String, T> redisTemplate;
     //在构造器中通过RedisTemplate的工厂方法
-    private HashOperations<String,HK,T> hashOperations ;
-    private ListOperations<String,T> listOperations ;
-    private ZSetOperations<String,T> zSetOperations ;
-    private SetOperations<String,T> setOperations ;
-    private ValueOperations<String,T> valueOperations ;
+    private HashOperations<String, HK, T> hashOperations;
+    private ListOperations<String, T> listOperations;
+    private ZSetOperations<String, T> zSetOperations;
+    private SetOperations<String, T> setOperations;
+    private ValueOperations<String, T> valueOperations;
 
     @Autowired
-    public RedisHelperImpl(RedisTemplate<String,T> redisTemplate) {
-        this.redisTemplate = redisTemplate ;
-        this.hashOperations = redisTemplate.opsForHash() ;
-        this.listOperations = redisTemplate.opsForList() ;
+    public RedisHelperImpl(RedisTemplate<String, T> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+        this.hashOperations = redisTemplate.opsForHash();
+        this.listOperations = redisTemplate.opsForList();
         this.zSetOperations = redisTemplate.opsForZSet();
         this.setOperations = redisTemplate.opsForSet();
         this.valueOperations = redisTemplate.opsForValue();
@@ -41,12 +41,12 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public void hashPut(String key, HK hashKey, T domain) {
-        if(domain instanceof String) {
+        if (domain instanceof String) {
             hashOperations.put(key, hashKey, domain);
-        }   else {
+        } else {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                T domainJson = (T) mapper.writeValueAsString(domain) ;
+                T domainJson = (T) mapper.writeValueAsString(domain);
                 hashOperations.put(key, hashKey, domainJson);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -54,6 +54,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
         }
 
     }
+
     /**
      * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
      *
@@ -62,9 +63,9 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      * @param domain
      */
     @Override
-    public boolean hashTtlPut(String key, HK hashKey,T domain,Long timeout) {
-        hashPut(key,hashKey,domain);
-        return redisTemplate.expire(key,timeout,TimeUnit.SECONDS) ;
+    public boolean hashTtlPut(String key, HK hashKey, T domain, Long timeout) {
+        hashPut(key, hashKey, domain);
+        return redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     }
 
     /**
@@ -73,8 +74,8 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      * @param key
      */
     @Override
-    public Map<HK,T> hashFindAll(String key) {
-       return hashOperations.entries(key) ;
+    public Map<HK, T> hashFindAll(String key) {
+        return hashOperations.entries(key);
     }
 
     /**
@@ -85,12 +86,12 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public T hashGet(String key, Object hashKey) {
-        return hashOperations.get(key,hashKey) ;
+        return hashOperations.get(key, hashKey);
     }
 
     @Override
     public void hashRemove(String key, Object hashKey) {
-        hashOperations.delete(key,hashKey) ;
+        hashOperations.delete(key, hashKey);
     }
 
     /**
@@ -101,7 +102,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public Long listPush(String key, T domain) {
-        return listOperations.rightPush(key,domain) ;
+        return listOperations.rightPush(key, domain);
     }
 
     /**
@@ -112,7 +113,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public Long listUnshift(String key, T domain) {
-        return listOperations.leftPush(key,domain);
+        return listOperations.leftPush(key, domain);
     }
 
     /**
@@ -122,10 +123,10 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public List<T> listFindAll(String key) {
-        if(!redisTemplate.hasKey(key)) {
-            return null ;
+        if (!redisTemplate.hasKey(key)) {
+            return null;
         }
-        return listOperations.range(key,0,listOperations.size(key)) ;
+        return listOperations.range(key, 0, listOperations.size(key));
     }
 
     /**
@@ -135,7 +136,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public T listLPop(String key) {
-        return listOperations.leftPop(key) ;
+        return listOperations.leftPop(key);
     }
 
     /**
@@ -147,11 +148,12 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public void valuePut(String key, T domain) {
-        valueOperations.set(key,domain);
+        valueOperations.set(key, domain);
     }
 
     /**
      * 有时限的 对象的实体类
+     *
      * @param key
      * @param domain
      * @param timeout
@@ -159,9 +161,9 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      * @return
      */
     @Override
-    public boolean valuePut(String key,T domain,long timeout, TimeUnit timeUnit) {
-        this.valuePut(key,domain);
-        return redisTemplate.expire(key,timeout,timeUnit) ;
+    public boolean valuePut(String key, T domain, long timeout, TimeUnit timeUnit) {
+        this.valuePut(key, domain);
+        return redisTemplate.expire(key, timeout, timeUnit);
     }
 
     /**
@@ -172,12 +174,12 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public T getValue(String key) {
-        return valueOperations.get(key) ;
+        return valueOperations.get(key);
     }
 
     @Override
     public void remove(String key) {
-        redisTemplate.delete(key) ;
+        redisTemplate.delete(key);
     }
 
     /**
@@ -189,7 +191,7 @@ public class RedisHelperImpl<HK,T> implements RedisHelper<HK,T> {
      */
     @Override
     public boolean expirse(String key, long timeout, TimeUnit timeUnit) {
-        return redisTemplate.expire(key,timeout,timeUnit) ;
+        return redisTemplate.expire(key, timeout, timeUnit);
     }
 
 

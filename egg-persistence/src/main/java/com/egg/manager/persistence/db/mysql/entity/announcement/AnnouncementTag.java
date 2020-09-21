@@ -45,7 +45,6 @@ public class AnnouncementTag extends Model<AnnouncementTag> {
     private Integer ordering;
 
 
-
     /**
      * 备注
      */

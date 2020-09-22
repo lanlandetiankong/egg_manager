@@ -8,6 +8,7 @@ import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserAccountPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -127,7 +128,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             )) {
                 //Constant.isPass = true ;
                 if (StringUtils.isBlank(authorization)) { //如果前端没传递 authorization的话，按游客处理，添加游客信息
-                    httpServletRequest.setAttribute("currentLoginUser", UserAccount.dealGetVisitor());
+                    httpServletRequest.setAttribute("currentLoginUser", UserAccountPojoInitialize.dealGetVisitor());
                     return true;
                 } else {
                     super.preHandle(request, response);

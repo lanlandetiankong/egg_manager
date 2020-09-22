@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -86,55 +83,4 @@ public class UserTenant extends Model<UserTenant> {
     }
 
 
-    /**
-     * 返回一个通用的 entity实例
-     *
-     * @param userAccountId
-     * @param defineTenantId
-     * @param loginUser      当前登录用户
-     * @return
-     */
-    public static UserTenant generateSimpleInsertEntity(String userAccountId, String defineTenantId, UserAccount loginUser) {
-        UserTenant userTenant = new UserTenant();
-        Date now = new Date();
-        userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
-        userTenant.setUserAccountId(userAccountId);
-        userTenant.setDefineTenantId(defineTenantId);
-        userTenant.setIsManager(SwitchStateEnum.Close.getValue());
-        userTenant.setType(1);
-        userTenant.setState(BaseStateEnum.ENABLED.getValue());
-        userTenant.setCreateTime(now);
-        userTenant.setUpdateTime(now);
-        if (loginUser != null) {
-            userTenant.setCreateUserId(loginUser.getFid());
-            userTenant.setLastModifyerId(loginUser.getFid());
-        }
-        return userTenant;
-    }
-
-    /**
-     * 返回一个通用的 entity实例
-     *
-     * @param userAccountId
-     * @param defineTenantId
-     * @param loginUser      当前登录用户
-     * @return
-     */
-    public static UserTenant generateInsertIsManagerEntity(String userAccountId, String defineTenantId, UserAccount loginUser) {
-        UserTenant userTenant = new UserTenant();
-        Date now = new Date();
-        userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
-        userTenant.setUserAccountId(userAccountId);
-        userTenant.setDefineTenantId(defineTenantId);
-        userTenant.setIsManager(SwitchStateEnum.Open.getValue());
-        userTenant.setType(1);
-        userTenant.setState(BaseStateEnum.ENABLED.getValue());
-        userTenant.setCreateTime(now);
-        userTenant.setUpdateTime(now);
-        if (loginUser != null) {
-            userTenant.setCreateUserId(loginUser.getFid());
-            userTenant.setLastModifyerId(loginUser.getFid());
-        }
-        return userTenant;
-    }
 }

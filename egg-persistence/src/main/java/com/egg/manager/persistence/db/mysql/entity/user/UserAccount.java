@@ -125,7 +125,4 @@ public class UserAccount extends Model<UserAccount> {
     }
 
 
-    public static UserAccount dealGetVisitor() {
-        return UserAccount.builder().fid("Visitor").userType(UserAccountBaseTypeEnum.Visitor.getValue()).build();
-    }
 }

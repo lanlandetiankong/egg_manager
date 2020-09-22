@@ -20,6 +20,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefinePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
+import com.egg.manager.persistence.pojo.mysql.initialize.role.RoleMenuPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
 import com.egg.manager.web.controller.BaseController;
@@ -308,7 +309,7 @@ public class DefineRoleController extends BaseController {
                     Iterator<String> addIter = addSetView.iterator();
                     while (addIter.hasNext()) {
                         String diffNext = addIter.next();
-                        addRoleMenuList.add(RoleMenu.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
+                        addRoleMenuList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
                     }
                     boolean flag = roleMenuService.insertBatch(addRoleMenuList);
                 }

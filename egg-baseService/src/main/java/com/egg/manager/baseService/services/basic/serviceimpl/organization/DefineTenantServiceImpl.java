@@ -17,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,7 +168,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
             if (oldCheckIds == null || oldCheckIds.isEmpty()) {
                 List<UserTenant> addEntitys = new ArrayList<>();
                 for (String checkId : checkIds) {
-                    addEntitys.add(UserTenant.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
+                    addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                 }
                 //批量新增行
                 userTenantMapper.customBatchInsert(addEntitys);
@@ -196,7 +197,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                     //批量新增行
                     List<UserTenant> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
-                        addEntitys.add(UserTenant.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
+                        addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                     }
                     //批量新增行
                     userTenantMapper.customBatchInsert(addEntitys);

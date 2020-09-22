@@ -23,6 +23,10 @@ import com.egg.manager.persistence.db.mysql.mapper.user.*;
 import com.egg.manager.persistence.pojo.common.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserDepartmentPojoInitialize;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserJobPojoInitialize;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserRolePojoInitialize;
+import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.apache.commons.lang3.StringUtils;
@@ -162,7 +166,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         Integer addCount = userAccountMapper.insert(userAccount);
         //关联 租户
         if (StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
-            UserTenant userTenant = UserTenant.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+            UserTenant userTenant = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
             userTenantMapper.insert(userTenant);
         } else {
             throw new BusinessException("关联用户与租户失败！创建用户失败！");
@@ -170,7 +174,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
         //关联 部门
         if (StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
-            UserDepartment userDepartment = UserDepartment.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+            UserDepartment userDepartment = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
             userDepartmentMapper.insert(userDepartment);
         } else {
             throw new BusinessException("关联用户与部门失败！创建用户失败！");
@@ -208,7 +212,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             UserTenant userTenantQuery = UserTenant.builder().userAccountId(userAccount.getFid()).state(BaseStateEnum.ENABLED.getValue()).build();
             UserTenant userTenant = userTenantMapper.selectOne(userTenantQuery);
             if (userTenant == null) {
-                userTenant = UserTenant.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+                userTenant = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
                 userTenantMapper.insert(userTenant);
             } else {
                 userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
@@ -222,7 +226,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             UserDepartment userDepartmentQuery = UserDepartment.builder().userAccountId(userAccount.getFid()).state(BaseStateEnum.ENABLED.getValue()).build();
             UserDepartment userDepartment = userDepartmentMapper.selectOne(userDepartmentQuery);
             if (userDepartment == null) {
-                userDepartment = UserDepartment.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+                userDepartment = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
                 userDepartmentMapper.insert(userDepartment);
             } else {
                 userDepartment.setDefineDepartmentId(userAccountVo.getBelongDepartmentId());
@@ -334,7 +338,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             if (oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()) {
                 List<UserRole> addEntitys = new ArrayList<>();
                 for (String checkId : checkIds) {
-                    addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                    addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                 }
                 //批量新增行
                 userRoleMapper.customBatchInsert(addEntitys);
@@ -363,7 +367,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     //批量新增行
                     List<UserRole> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
-                        addEntitys.add(UserRole.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                        addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                     }
                     //批量新增行
                     userRoleMapper.customBatchInsert(addEntitys);
@@ -397,7 +401,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             if (oldCheckJobIds == null || oldCheckJobIds.isEmpty()) {
                 List<UserJob> addEntitys = new ArrayList<>();
                 for (String checkId : checkIds) {
-                    addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                    addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                 }
                 //批量新增行
                 userJobMapper.customBatchInsert(addEntitys);
@@ -426,7 +430,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     //批量新增行
                     List<UserJob> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
-                        addEntitys.add(UserJob.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                        addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                     }
                     //批量新增行
                     userJobMapper.customBatchInsert(addEntitys);

@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -75,27 +73,4 @@ public class UserJob extends Model<UserJob> {
     }
 
 
-    /**
-     * 返回一个通用的 entity实例
-     *
-     * @param userAccountId
-     * @param defineJobId
-     * @param loginUser     当前登录用户
-     * @return
-     */
-    public static UserJob generateSimpleInsertEntity(String userAccountId, String defineJobId, UserAccount loginUser) {
-        UserJob userJob = new UserJob();
-        Date now = new Date();
-        userJob.setFid(MyUUIDUtil.renderSimpleUUID());
-        userJob.setUserAccountId(userAccountId);
-        userJob.setDefineJobId(defineJobId);
-        userJob.setState(BaseStateEnum.ENABLED.getValue());
-        userJob.setCreateTime(now);
-        userJob.setUpdateTime(now);
-        if (loginUser != null) {
-            userJob.setCreateUserId(loginUser.getFid());
-            userJob.setLastModifyerId(loginUser.getFid());
-        }
-        return userJob;
-    }
 }

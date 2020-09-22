@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -81,29 +78,4 @@ public class RolePermission extends Model<RolePermission> {
     }
 
 
-    /**
-     * 返回一个通用的 entity实例
-     *
-     * @param defineRoleId
-     * @param definePermissionId
-     * @param loginUser
-     * @return
-     */
-    public static RolePermission generateSimpleInsertEntity(String defineRoleId, String definePermissionId, UserAccount loginUser) {
-        RolePermission rolePermission = new RolePermission();
-        Date now = new Date();
-        rolePermission.setFid(MyUUIDUtil.renderSimpleUUID());
-        rolePermission.setDefineRoleId(defineRoleId);
-        rolePermission.setDefinePermissionId(definePermissionId);
-        rolePermission.setType(1);
-        rolePermission.setState(BaseStateEnum.ENABLED.getValue());
-        rolePermission.setCreateTime(now);
-        rolePermission.setUpdateTime(now);
-        if (loginUser != null) {
-            rolePermission.setCreateUserId(loginUser.getFid());
-            rolePermission.setLastModifyerId(loginUser.getFid());
-        }
-        rolePermission.setRemark(null);
-        return rolePermission;
-    }
 }

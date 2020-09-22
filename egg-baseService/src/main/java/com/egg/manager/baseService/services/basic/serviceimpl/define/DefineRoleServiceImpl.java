@@ -27,6 +27,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineRoleMapper;
 import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineRoleDto;
+import com.egg.manager.persistence.pojo.mysql.initialize.role.RolePermissionPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
 import com.google.common.collect.Sets;
@@ -322,7 +323,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
             if (oldCheckPermIds == null || oldCheckPermIds.isEmpty()) {
                 List<RolePermission> addEntitys = new ArrayList<>();
                 for (String checkId : checkIds) {
-                    addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId, checkId, loginUser));
+                    addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
                 }
                 //批量新增行
                 rolePermissionMapper.customBatchInsert(addEntitys);
@@ -351,7 +352,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                     //批量新增行
                     List<RolePermission> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
-                        addEntitys.add(RolePermission.generateSimpleInsertEntity(roleId, checkId, loginUser));
+                        addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
                     }
                     //批量新增行
                     rolePermissionMapper.customBatchInsert(addEntitys);

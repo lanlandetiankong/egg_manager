@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.common.util.str.MyUUIDUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -86,29 +83,4 @@ public class UserDepartment extends Model<UserDepartment> {
     }
 
 
-    /**
-     * 返回一个通用的 entity实例
-     *
-     * @param userAccountId
-     * @param defineDepartmentId
-     * @param loginUser          当前登录用户
-     * @return
-     */
-    public static UserDepartment generateSimpleInsertEntity(String userAccountId, String defineDepartmentId, UserAccount loginUser) {
-        UserDepartment userDepartment = new UserDepartment();
-        Date now = new Date();
-        userDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
-        userDepartment.setUserAccountId(userAccountId);
-        userDepartment.setDefineDepartmentId(defineDepartmentId);
-        userDepartment.setIsManager(SwitchStateEnum.Close.getValue());
-        userDepartment.setType(1);
-        userDepartment.setState(BaseStateEnum.ENABLED.getValue());
-        userDepartment.setCreateTime(now);
-        userDepartment.setUpdateTime(now);
-        if (loginUser != null) {
-            userDepartment.setCreateUserId(loginUser.getFid());
-            userDepartment.setLastModifyerId(loginUser.getFid());
-        }
-        return userDepartment;
-    }
 }

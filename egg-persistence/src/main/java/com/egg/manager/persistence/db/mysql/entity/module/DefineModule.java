@@ -27,31 +27,38 @@ public class DefineModule extends Model<DefineModule> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 编码
      */
+    @TableField("code")
     private String code;
     /**
      * 图标名
      */
+    @TableField("icon")
     private String icon;
     /**
      * 样式json
      */
+    @TableField("style")
     private String style;
     /**
      * 类型
      */
+    @TableField("type")
     private Integer type;
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

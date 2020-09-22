@@ -38,16 +38,19 @@ public class UserRole extends Model<UserRole> {
     /**
      * 类型
      */
+    @TableField("type")
     private Integer type;
 
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

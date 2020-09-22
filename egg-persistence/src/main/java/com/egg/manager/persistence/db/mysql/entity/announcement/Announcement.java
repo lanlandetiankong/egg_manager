@@ -34,6 +34,7 @@ public class Announcement extends Model<Announcement> {
     /**
      * 标题
      */
+    @TableField("title")
     private String title;
     /**
      * 关键字
@@ -48,6 +49,7 @@ public class Announcement extends Model<Announcement> {
     /**
      * 内容
      */
+    @TableField("content")
     private String content;
     /**
      * 公告标签 集合
@@ -57,14 +59,17 @@ public class Announcement extends Model<Announcement> {
     /**
      * 附件
      */
+    @TableField("accessory")
     private String accessory;
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

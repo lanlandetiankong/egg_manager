@@ -27,10 +27,12 @@ public class DefineTenant extends Model<DefineTenant> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 编码
      */
+    @TableField("code")
     private String code;
     /**
      * 数据库类型 code
@@ -41,10 +43,12 @@ public class DefineTenant extends Model<DefineTenant> {
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

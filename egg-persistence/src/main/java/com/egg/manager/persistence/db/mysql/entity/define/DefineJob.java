@@ -27,23 +27,28 @@ public class DefineJob extends Model<DefineJob> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 描述
      */
+    @TableField("description")
     private String description;
     /**
      * 类型
      */
+    @TableField("type")
     private Integer type;
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

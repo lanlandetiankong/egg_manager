@@ -26,28 +26,34 @@ public class DefinePermission extends Model<DefinePermission> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 编码
      */
+    @TableField("code")
     private String code;
     /**
      * 是否确认发布，发布之后不可修改
      */
+    @TableField("ensure")
     private Short ensure;
     /**
      * 类型
      */
+    @TableField("type")
     private Integer type;
 
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

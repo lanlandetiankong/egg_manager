@@ -59,10 +59,12 @@ public class DefineMenu extends Model<DefineMenu> {
     /**
      * 标签名
      */
+    @TableField("label")
     private String label;
     /**
      * 层级
      */
+    @TableField("level")
     private Integer level;
     /**
      * 排序值
@@ -79,10 +81,12 @@ public class DefineMenu extends Model<DefineMenu> {
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

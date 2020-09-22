@@ -27,10 +27,12 @@ public class DefineGroup extends Model<DefineGroup> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 上级id
      */
+    @TableField("pid")
     private String pid;
     /**
      * 是否成员可继承组权限
@@ -40,15 +42,18 @@ public class DefineGroup extends Model<DefineGroup> {
     /**
      * 类型
      */
+    @TableField("type")
     private String type;
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

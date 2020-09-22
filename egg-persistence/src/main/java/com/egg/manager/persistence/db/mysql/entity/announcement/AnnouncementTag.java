@@ -34,24 +34,29 @@ public class AnnouncementTag extends Model<AnnouncementTag> {
     /**
      * 名称
      */
+    @TableField("name")
     private String name;
     /**
      * 描述
      */
+    @TableField("description")
     private String description;
     /**
      * 排序值
      */
+    @TableField("ordering")
     private Integer ordering;
 
 
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

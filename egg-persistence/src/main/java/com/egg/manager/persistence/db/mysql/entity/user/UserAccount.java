@@ -34,6 +34,7 @@ public class UserAccount extends Model<UserAccount> {
     /**
      * 账号
      */
+    @TableField("account")
     private String account;
     /**
      * 昵称
@@ -53,16 +54,19 @@ public class UserAccount extends Model<UserAccount> {
     /**
      * 手机号码
      */
+    @TableField("phone")
     private String phone;
     /**
      * 邮箱地址
      */
+    @TableField("email")
     private String email;
     /**
      * 性别
      *
      * @see UserSexEnum
      */
+    @TableField("sex")
     private Short sex;
     /**
      * 用户类型
@@ -86,10 +90,12 @@ public class UserAccount extends Model<UserAccount> {
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

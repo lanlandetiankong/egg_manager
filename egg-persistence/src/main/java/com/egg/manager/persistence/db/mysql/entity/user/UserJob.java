@@ -40,10 +40,12 @@ public class UserJob extends Model<UserJob> {
     /**
      * 备注
      */
+    @TableField("remark")
     private String remark;
     /**
      * 状态
      */
+    @TableField("state")
     private Short state;
     /**
      * 创建时间

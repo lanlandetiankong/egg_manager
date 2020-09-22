@@ -1,8 +1,9 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -16,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserJobDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
+import javafx.scene.control.Pagination;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,13 +54,14 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     public MyCommonResult<UserJobVo> dealGetUserJobPages(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                          List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<UserJob> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserJob> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userJobMapper.selectCount(userJobEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<UserJob> userJobs = userJobMapper.selectPage(rowBounds, userJobEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = userJobMapper.selectPage(page, userJobEntityWrapper);
+        List<UserJob> userJobs = iPage.getRecords();
         result.setResultList(UserJobTransfer.transferEntityToVoList(userJobs));
         return result;
     }
@@ -74,7 +77,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     @Override
     public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<UserJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(UserJobTransfer.transferDtoToVoList(userJobDtoList));
@@ -112,7 +115,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeUpdate(loginUser, userJob);
         if (updateAll) {  //是否更新所有字段
-            changeCount = userJobMapper.updateAllColumnById(userJob);
+            changeCount = userJobMapper.updateById(userJob);
         } else {
             changeCount = userJobMapper.updateById(userJob);
         }

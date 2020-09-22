@@ -1,9 +1,10 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.module;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -27,6 +28,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineMenuTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,18 +117,18 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     /**
      * 查询 所有[可用状态]的 [菜单定义]
      *
-     * @param defineMenuEntityWrapper
+     * @param queryWrapper
      * @return
      */
     @Override
-    public List<DefineMenu> getAllEnableDefineMenus(EntityWrapper<DefineMenu> defineMenuEntityWrapper) {
-        defineMenuEntityWrapper = defineMenuEntityWrapper != null ? defineMenuEntityWrapper : new EntityWrapper<DefineMenu>();
+    public List<DefineMenu> getAllEnableDefineMenus(QueryWrapper<DefineMenu> queryWrapper) {
+        queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<DefineMenu>();
         //筛选与排序
-        defineMenuEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        defineMenuEntityWrapper.orderBy("level", true);
-        defineMenuEntityWrapper.orderBy("order_num", true);
-        defineMenuEntityWrapper.orderBy("create_time", false);
-        return this.selectList(defineMenuEntityWrapper);
+        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.orderBy(true,true,"level");
+        queryWrapper.orderBy(true,true,"order_num");
+        queryWrapper.orderBy(true,true,"create_time");
+        return defineMenuMapper.selectList(queryWrapper);
     }
 
     /**
@@ -227,14 +229,15 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     public MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineMenu> defineMenuEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineMenu> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         ;
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
-        Integer total = defineMenuMapper.selectCount(defineMenuEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<DefineMenu> defineMenus = defineMenuMapper.selectPage(rowBounds, defineMenuEntityWrapper);
+        Integer total = defineMenuMapper.selectCount(queryWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
+        List<DefineMenu> defineMenus = iPage.getRecords();
         result.setResultList(defineMenuTransfer.transferEntityToVoList(defineMenus));
         return result;
     }
@@ -251,7 +254,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Override
     public MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(defineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
@@ -268,7 +271,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealAddDefineMenu(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new EntityWrapper<DefineMenu>());
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenu>());
         if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
@@ -310,7 +313,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdateDefineMenu(UserAccount loginUser, DefineMenuVo defineMenuVo, boolean updateAll) throws Exception {
-        Wrapper<DefineMenu> uniWrapper = new EntityWrapper<DefineMenu>()
+        QueryWrapper<DefineMenu> uniWrapper = new QueryWrapper<DefineMenu>()
                 .ne("fid", defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
@@ -336,7 +339,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineMenuMapper.updateAllColumnById(defineMenu);
+            changeCount = defineMenuMapper.updateById(defineMenu);
         } else {
             changeCount = defineMenuMapper.updateById(defineMenu);
         }
@@ -380,16 +383,16 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * 验证 数据库 中的唯一冲突
      *
      * @param defineMenuVo
-     * @param defineMenuWrapper
+     * @param queryWrapper
      * @return
      */
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper) {
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> queryWrapper) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
-        defineMenuWrapper = defineMenuWrapper != null ? defineMenuWrapper : new EntityWrapper<>();
-        defineMenuWrapper.eq("router_url", defineMenuVo.getRouterUrl());
-        defineMenuWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        boolean successFlag = defineMenuMapper.selectCount(defineMenuWrapper) == 0;
+        queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<>();
+        queryWrapper.eq("router_url", defineMenuVo.getRouterUrl());
+        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        boolean successFlag = defineMenuMapper.selectCount(queryWrapper) == 0;
         if (successFlag == false) {
             verifyBean.setErrorMsg("唯一键[路由]不允许重复！");
             verifyBean.dealAddColumn("router_url");

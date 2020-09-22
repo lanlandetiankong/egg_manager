@@ -311,7 +311,7 @@ public class DefineRoleController extends BaseController {
                         String diffNext = addIter.next();
                         addRoleMenuList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
                     }
-                    boolean flag = roleMenuService.insertBatch(addRoleMenuList);
+                    boolean flag = roleMenuService.saveBatch(addRoleMenuList);
                 }
                 if (updateEnableIdSet != null && updateEnableIdSet.isEmpty() == false) {
                     Iterator<String> enableIter = updateEnableIdSet.iterator();

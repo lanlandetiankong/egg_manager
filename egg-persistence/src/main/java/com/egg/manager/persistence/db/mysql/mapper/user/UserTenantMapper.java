@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -27,7 +27,7 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
      * @param sortBeans
      * @return
      */
-    List<UserTenantDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserTenantDto> selectQueryPage(Page<UserTenantDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 取得用户拥有的所有租户id集合

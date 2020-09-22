@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.basic.module;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -52,10 +52,10 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
     List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId);
     /**
      * 查询 所有[可用状态]的 [菜单定义]
-     * @param defineMenuEntityWrapper
+     * @param queryWrapper
      * @return
      */
-    List<DefineMenu> getAllEnableDefineMenus(EntityWrapper<DefineMenu> defineMenuEntityWrapper);
+    List<DefineMenu> getAllEnableDefineMenus(QueryWrapper<DefineMenu> queryWrapper);
     /**
      * [菜单展示]的子节点 构建的树结构
      * @param rootId
@@ -136,5 +136,5 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param defineMenuWrapper
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser,DefineMenuVo defineMenuVo, Wrapper<DefineMenu> defineMenuWrapper);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser,DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> defineMenuWrapper);
 }

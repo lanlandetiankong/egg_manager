@@ -15,6 +15,7 @@ import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +41,9 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     private RedisPropsOfShiroCache redisPropsOfShiroCache;
 
     @Autowired
+    public UserAccountMapper userAccountMapper;
+
+    @Autowired
     public UserAccountService userAccountService;
 
 
@@ -49,6 +53,7 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
     public DefinePermissionService definePermissionService;
     @Reference
     public DefineMenuService defineMenuService;
+
 
     /**
      * 根据 jwt的authorization值 取得 当前用户 Entity
@@ -225,7 +230,7 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
                 redisHelper.hashTtlPut(key, hashKey, visitAbleUrlSet, keyTtl);
             }
         } else if (redisPropsOfShiroCache.getUserAccountKey().equals(key)) {    //用户信息 缓存
-            UserAccount userAccount = userAccountService.selectById(userAccountId);
+            UserAccount userAccount = userAccountMapper.selectById(userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, userAccount);
             } else {

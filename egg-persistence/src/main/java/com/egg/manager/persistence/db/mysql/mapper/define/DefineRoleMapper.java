@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.db.mysql.mapper.define;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
@@ -28,7 +28,7 @@ public interface DefineRoleMapper extends BaseMapper<DefineRole> {
      * @param sortBeans
      * @return
      */
-    List<DefineRoleDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineRoleDto> selectQueryPage(Page<DefineRoleDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 查询指定用户的 用户-角色 关联表

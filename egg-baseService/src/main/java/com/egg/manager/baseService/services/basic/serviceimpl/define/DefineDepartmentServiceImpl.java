@@ -1,7 +1,7 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -18,6 +18,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +55,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     @Override
     public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(UserAccount loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
@@ -176,7 +177,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineDepartmentMapper.updateAllColumnById(defineDepartment);
+            changeCount = defineDepartmentMapper.updateById(defineDepartment);
         } else {
             changeCount = defineDepartmentMapper.updateById(defineDepartment);
         }

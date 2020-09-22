@@ -2,12 +2,14 @@ package com.egg.manager.api.trait.routine;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
@@ -29,16 +31,16 @@ public class RoutineCommonFunc {
      * @param paginationBean
      * @return
      */
-    public RowBounds parsePaginationToRowBounds(AntdvPaginationBean paginationBean) {
+    public <T> Page<T> parsePaginationToRowBounds(AntdvPaginationBean<T> paginationBean) {
         if(paginationBean != null){
             Integer current = paginationBean.getCurrent();
             Integer pageSize = paginationBean.getPageSize();
             current = current != null ? current : 1;
             pageSize = pageSize != null ? pageSize : 0;
             int offset = (current - 1) * pageSize ;
-            return new RowBounds(offset,pageSize) ;
+            return new Page<>(offset,pageSize);
         }   else {
-            return new RowBounds() ;
+            return new Page<T>() ;
         }
     }
 

@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.basic.define;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -32,7 +32,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param wrapper
      * @return
      */
-    List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser,EntityWrapper<DefinePermission> wrapper);
+    List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper);
 
     /**
      * 分页查询 权限定义 列表
@@ -110,5 +110,5 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param definePermissionWrap
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, Wrapper<DefinePermission> definePermissionWrap);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, QueryWrapper<DefinePermission> definePermissionWrap);
 }

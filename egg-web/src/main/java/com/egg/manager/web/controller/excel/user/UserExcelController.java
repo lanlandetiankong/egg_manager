@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.excel.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.excel.service.user.UserAccountXlsService;
@@ -60,7 +60,7 @@ public class UserExcelController extends BaseController {
             , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            DefineMenu defineMenu = defineMenuService.selectById(menuId);
+            DefineMenu defineMenu = defineMenuService.getById(menuId);
             if (defineMenu == null) {
                 throw new BusinessException("指定的无效的菜单！");
             }
@@ -77,7 +77,7 @@ public class UserExcelController extends BaseController {
             , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            DefineMenu defineMenu = defineMenuService.selectById(menuId);
+            DefineMenu defineMenu = defineMenuService.getById(menuId);
             if (defineMenu == null) {
                 throw new BusinessException("指定的无效的菜单！");
             }
@@ -101,7 +101,7 @@ public class UserExcelController extends BaseController {
             if (fileArr == null || fileArr.length == 0) {
                 throw new BusinessException("上传的文件为空！");
             } else {
-                Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new EntityWrapper<UserAccount>());
+                Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
                 for (MultipartFile file : fileArr) {
                     EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))
                             .sheet()

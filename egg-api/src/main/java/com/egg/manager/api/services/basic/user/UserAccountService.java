@@ -1,7 +1,8 @@
 package com.egg.manager.api.services.basic.user;
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -132,7 +133,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, Wrapper<UserAccount> wrapper);
+    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccount> wrapper);
 
 
     /**
@@ -141,7 +142,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser,String[] checkIds, Wrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser,String[] checkIds, QueryWrapper<UserAccount> wrapper);
 
 
     /**
@@ -150,5 +151,5 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    Set<String> dealGetExistAccountSet(UserAccount loginUser,Short state, Wrapper<UserAccount> wrapper);
+    Set<String> dealGetExistAccountSet(UserAccount loginUser,Short state, QueryWrapper<UserAccount> wrapper);
 }

@@ -1,8 +1,9 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.module;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -16,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
+import javafx.scene.control.Pagination;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,14 +55,15 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     public MyCommonResult<DefineModuleVo> dealGetDefineModulePages(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         ;
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<DefineModule> defineModules = defineModuleMapper.selectPage(rowBounds, defineModuleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = defineModuleMapper.selectPage(page, defineModuleEntityWrapper);
+        List<DefineModule> defineModules = iPage.getRecords();
         result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModules));
         return result;
     }
@@ -77,7 +80,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     @Override
     public MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
@@ -114,7 +117,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeUpdate(loginUser, defineModule);
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineModuleMapper.updateAllColumnById(defineModule);
+            changeCount = defineModuleMapper.updateById(defineModule);
         } else {
             changeCount = defineModuleMapper.updateById(defineModule);
         }

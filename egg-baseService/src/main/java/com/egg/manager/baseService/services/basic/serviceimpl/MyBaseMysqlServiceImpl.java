@@ -1,10 +1,10 @@
 package com.egg.manager.baseService.services.basic.serviceimpl;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
@@ -47,16 +47,16 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
 
 
     @Override
-    public EntityWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                  List<AntdvSortBean> sortBeans) {
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                                 List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<T> entityWrapper = new EntityWrapper<T>();
+        QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
         //调用方法将查询条件设置到userAccountEntityWrapper
         this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFormFieldBeanList);
         //添加排序
         if (sortBeans != null && sortBeans.isEmpty() == false) {
             for (AntdvSortBean sortBean : sortBeans) {
-                entityWrapper.orderBy(sortBean.getField(), sortBean.getOrderIsAsc());
+                entityWrapper.orderBy(true, sortBean.getOrderIsAsc(),sortBean.getField());
             }
         }
         return entityWrapper;
@@ -64,7 +64,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
 
 
     @Override
-    public void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList) {
+    public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList) {
         if (queryFieldBeanList != null && queryFieldBeanList.isEmpty() == false) {
             for (QueryFormFieldBean queryFormFieldBean : queryFieldBeanList) {
                 Object fieldValue = queryFormFieldBean.getValue();
@@ -72,12 +72,12 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
                     continue;
                 } else {
                     if ("equals".equals(queryFormFieldBean.getMatching())) {
-                        entityWrapper.eq(queryFormFieldBean.getFieldName(), fieldValue);
+                        queryWrapper.eq(queryFormFieldBean.getFieldName(), fieldValue);
                     } else if ("like".equals(queryFormFieldBean.getMatching())) {
                         String fieldValueStr = String.valueOf(fieldValue);
-                        entityWrapper.like(queryFormFieldBean.getFieldName(), fieldValueStr);
+                        queryWrapper.like(queryFormFieldBean.getFieldName(), fieldValueStr);
                     } else if ("notEquals".equals(queryFormFieldBean.getMatching())) {
-                        entityWrapper.ne(queryFormFieldBean.getFieldName(), fieldValue);
+                        queryWrapper.ne(queryFormFieldBean.getFieldName(), fieldValue);
                     }
                 }
             }
@@ -192,8 +192,8 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
     }
 
     @Override
-    public Pagination dealAntvPageToPagination(AntdvPaginationBean paginationBean) {
-        Pagination pagination = new Pagination();
+    public Page dealAntvPageToPagination(AntdvPaginationBean paginationBean) {
+        Page pagination = new Page();
         if (paginationBean != null) {
             pagination.setCurrent(paginationBean.getCurrent());
             pagination.setSize(paginationBean.getPageSize());

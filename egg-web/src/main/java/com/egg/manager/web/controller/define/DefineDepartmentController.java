@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -87,7 +87,7 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
         try {
-            DefineDepartment defineDepartment = defineDepartmentService.selectById(defineDepartmentId);
+            DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
             dealCommonSuccessCatch(result, "查询部门定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -102,12 +102,12 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartment> result = new MyCommonResult<DefineDepartment>();
         //筛选与排序
-        EntityWrapper<DefineDepartment> defineDepartmentEntityWrapper = new EntityWrapper<DefineDepartment>();
-        defineDepartmentEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        defineDepartmentEntityWrapper.orderBy("level", true);
-        defineDepartmentEntityWrapper.orderBy("order_num", true);
-        defineDepartmentEntityWrapper.orderBy("create_time", false);
-        List<DefineDepartment> allDepartments = defineDepartmentService.selectList(defineDepartmentEntityWrapper);
+        QueryWrapper<DefineDepartment> queryWrapper = new QueryWrapper<DefineDepartment>();
+        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.orderBy(true,true,"level");
+        queryWrapper.orderBy(true,true,"order_num");
+        queryWrapper.orderBy(true,true,"create_time");
+        List<DefineDepartment> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
         result.setResultList(treeList);
         return result;

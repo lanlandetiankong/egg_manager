@@ -3,7 +3,7 @@ package com.egg.manager.baseService.services.basic.serviceimpl.announcement;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
@@ -22,6 +22,7 @@ import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapp
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
+import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,7 +66,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
                                                                                 List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList, announcementTagMap));

@@ -1,7 +1,7 @@
 package com.egg.manager.baseService.services.excel.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.excel.service.user.UserAccountXlsService;
 import com.egg.manager.baseService.services.excel.serviceimpl.common.MyXlsBaseServiceImpl;
@@ -39,7 +39,7 @@ public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements U
         }
         String excelFileName = defineMenu.getMenuName() + "选择导出表";  //导出文件名
         String excelPath = uploadProps.getLocationPrefix() + fileUploadBean.getUrlLocation();
-        List<UserAccountXlsOutModel> userAccountList = userAccountService.dealGetExportXlsModelList(loginUser, checkIds, new EntityWrapper<>());
+        List<UserAccountXlsOutModel> userAccountList = userAccountService.dealGetExportXlsModelList(loginUser, checkIds, new QueryWrapper<>());
         this.dealSingleFillToExport2Web(response, excelPath, excelFileName, UserAccountXlsOutModel.class, userAccountList);
     }
 
@@ -48,7 +48,7 @@ public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements U
     public void dealAllExportSingleWithTemplate2Web(UserAccount loginUser, HttpServletResponse response, DefineMenu defineMenu, AntdFileUploadBean fileUploadBean) throws Exception {
         String excelFileName = defineMenu.getMenuName() + "选择导出表";  //导出文件名
         String excelPath = uploadProps.getLocationPrefix() + fileUploadBean.getUrlLocation();
-        List<UserAccountXlsOutModel> userAccountList = userAccountService.dealGetExportXlsModelList(loginUser, null, new EntityWrapper<>());
+        List<UserAccountXlsOutModel> userAccountList = userAccountService.dealGetExportXlsModelList(loginUser, null, new QueryWrapper<>());
         this.dealSingleFillToExport2Web(response, excelPath, excelFileName, UserAccountXlsOutModel.class, userAccountList);
     }
 }

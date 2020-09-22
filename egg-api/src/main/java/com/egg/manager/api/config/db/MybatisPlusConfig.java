@@ -1,6 +1,6 @@
 package com.egg.manager.api.config.db;
 
-import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class MybatisPlusConfig {
      * 分页插件
      */
     @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
+    public Page paginationInterceptor() {
+        return new Page();
     }
 }

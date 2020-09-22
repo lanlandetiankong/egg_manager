@@ -1,7 +1,7 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.organization;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -20,6 +20,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
+import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,7 +60,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     @Override
     public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
@@ -97,7 +98,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeUpdate(loginUser, defineTenant);
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineTenantMapper.updateAllColumnById(defineTenant);
+            changeCount = defineTenantMapper.updateById(defineTenant);
         } else {
             changeCount = defineTenantMapper.updateById(defineTenant);
         }

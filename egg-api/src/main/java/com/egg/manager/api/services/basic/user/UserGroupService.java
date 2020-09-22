@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.basic.user;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;

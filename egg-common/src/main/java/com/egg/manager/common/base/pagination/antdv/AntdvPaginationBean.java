@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class AntdvPaginationBean extends MyBasePagination {
+public class AntdvPaginationBean<T> extends MyBasePagination {
     /**
      * 当前页数
      */
@@ -26,7 +26,7 @@ public class AntdvPaginationBean extends MyBasePagination {
     /**
      * 总数据量
      */
-    private int total ;
+    private Long total ;
 
     public AntdvPaginationBean() {
     }
@@ -36,14 +36,14 @@ public class AntdvPaginationBean extends MyBasePagination {
         this.pageSize = pageSize;
     }
 
-    public AntdvPaginationBean(Integer current, Integer pageSize, int total) {
+    public AntdvPaginationBean(Integer current, Integer pageSize, Long total) {
         this.current = current;
         this.pageSize = pageSize;
         this.total = total;
     }
 
     public static AntdvPaginationBean gainLimitPaginationBean(Integer pageSize){
-        return new AntdvPaginationBean(1,pageSize,0);
+        return new AntdvPaginationBean(1,pageSize,0L);
     }
 
     /**
@@ -51,6 +51,6 @@ public class AntdvPaginationBean extends MyBasePagination {
      * @return
      */
     public static AntdvPaginationBean gainDefaultPaginationBean(){
-        return new AntdvPaginationBean(1,10,0);
+        return new AntdvPaginationBean(1,10,0L);
     }
 }

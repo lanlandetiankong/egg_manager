@@ -1,10 +1,10 @@
 package com.egg.manager.api.services.basic;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -13,6 +13,7 @@ import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
+import javafx.scene.control.Pagination;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -35,11 +36,11 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
      * @param sortBeans
      * @return
      */
-    EntityWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                           List<AntdvSortBean> sortBeans);
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+                                          List<AntdvSortBean> sortBeans);
 
 
-    void dealSetConditionsMapToEntityWrapper(EntityWrapper entityWrapper, List<QueryFormFieldBean> queryFieldBeanList);
+    void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList);
 
 
     /**
@@ -100,7 +101,7 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
      * @param paginationBean 分页bean
      * @return
      */
-    Pagination dealAntvPageToPagination(AntdvPaginationBean paginationBean);
+    Page dealAntvPageToPagination(AntdvPaginationBean paginationBean);
 
 
     /**

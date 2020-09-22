@@ -1,12 +1,13 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserRoleDto;
+import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
      * @param sortBeans
      * @return
      */
-    List<UserRoleDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserRoleDto> selectQueryPage(Page<UserRoleDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
      * 取得用户拥有的所有角色id集合

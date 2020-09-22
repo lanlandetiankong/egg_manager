@@ -5,8 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
@@ -24,6 +25,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +87,11 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        EntityWrapper<UserTenant> userTenantEm = new EntityWrapper<UserTenant>();
-        userTenantEm.where("state={0}", BaseStateEnum.ENABLED.getValue())
-                .and("user_account_id={0}", userAccount.getFid());
-        userTenantEm.orderBy("update_time", false);
-        List<UserTenant> userTenant = selectList(userTenantEm);
+        QueryWrapper<UserTenant> userTenantEm = new QueryWrapper<UserTenant>();
+        userTenantEm.eq("state", BaseStateEnum.ENABLED.getValue())
+                .eq("user_account_id", userAccount.getFid());
+        userTenantEm.orderBy(true,false,"update_time");
+        List<UserTenant> userTenant = userTenantMapper.selectList(userTenantEm);
         return userTenant;
     }
 
@@ -130,14 +132,14 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     public MyCommonResult<UserTenantVo> dealGetUserTenantPages(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<UserTenant> userTenantEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-        ;
+        QueryWrapper<UserTenant> userTenantEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userTenantMapper.selectCount(userTenantEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<UserTenant> userTenants = userTenantMapper.selectPage(rowBounds, userTenantEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = userTenantMapper.selectPage(page, userTenantEntityWrapper);
+        List<UserTenant> userTenants = iPage.getRecords();
         result.setResultList(UserTenantTransfer.transferEntityToVoList(userTenants));
         return result;
     }
@@ -154,7 +156,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     @Override
     public MyCommonResult<UserTenantVo> dealGetUserTenantDtoPages(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<UserTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(UserTenantTransfer.transferDtoToVoList(userTenantDtoList));
@@ -193,7 +195,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         userTenant = super.doBeforeUpdate(loginUser, userTenant);
         if (updateAll) {  //是否更新所有字段
-            changeCount = userTenantMapper.updateAllColumnById(userTenant);
+            changeCount = userTenantMapper.updateById(userTenant);
         } else {
             changeCount = userTenantMapper.updateById(userTenant);
         }

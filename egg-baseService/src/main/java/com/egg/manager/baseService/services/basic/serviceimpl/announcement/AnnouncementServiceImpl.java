@@ -2,8 +2,9 @@ package com.egg.manager.baseService.services.basic.serviceimpl.announcement;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
@@ -25,6 +26,7 @@ import com.egg.manager.persistence.pojo.mysql.transfer.announcement.Announcement
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
+import javafx.scene.control.Pagination;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,13 +71,14 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     public MyCommonResult<AnnouncementVo> dealGetAnnouncementPages(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        EntityWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<Announcement> announcements = announcementMapper.selectPage(rowBounds, announcementEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = announcementMapper.selectPage(page, announcementEntityWrapper);
+        List<Announcement> announcements = iPage.getRecords();
         //取得 公告标签 map
         Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
         result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements, announcementTagMap));
@@ -96,7 +99,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         //取得 公告标签 map
         Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
 
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));

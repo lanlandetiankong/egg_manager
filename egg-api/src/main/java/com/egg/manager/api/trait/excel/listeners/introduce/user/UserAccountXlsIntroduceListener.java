@@ -82,7 +82,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
         if(list != null && list.isEmpty() == false){
-            userAccountService.insertBatch(UserAccountTransfer.xlsModelListToEntitys(list,loginUser,accountExistSet));
+            userAccountService.saveBatch(UserAccountTransfer.xlsModelListToEntitys(list,loginUser,accountExistSet));
             log.info("存储数据库成功！");
         }
     }

@@ -1,7 +1,7 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.role;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.role.RolePermissionService;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
@@ -11,6 +11,7 @@ import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RolePermissionVo;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,10 @@ import java.util.Set;
 @Service(interfaceClass = RolePermissionService.class)
 public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermissionMapper, RolePermission, RolePermissionVo> implements RolePermissionService {
 
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
+
+
 
     @Override
     public List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) {
@@ -41,10 +46,10 @@ public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermis
             }
         }
         //取得所有的 RolePermission
-        EntityWrapper<RolePermission> rolePermissionEw = new EntityWrapper<RolePermission>();
-        rolePermissionEw.where("state={0}", BaseStateEnum.ENABLED.getValue())
+        QueryWrapper<RolePermission> rolePermissionEw = new QueryWrapper<RolePermission>();
+        rolePermissionEw.eq("state", BaseStateEnum.ENABLED.getValue())
                 .in(true, "define_role_id", defineRoleIds);
-        selectList(rolePermissionEw);
+        rolePermissionMapper.selectList(rolePermissionEw);
         return null;
     }
 }

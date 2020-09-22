@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -72,7 +72,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect(Boolean withRoot) {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>();
         //查询 所有[可用状态]的 [菜单定义]
-        List<DefineMenu> allMenus = defineMenuService.getAllEnableDefineMenus(new EntityWrapper<DefineMenu>());
+        List<DefineMenu> allMenus = defineMenuService.getAllEnableDefineMenus(new QueryWrapper<DefineMenu>());
         List<CommonTreeSelect> treeList = null;
         if (Boolean.TRUE.equals(withRoot)) {
             treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
@@ -100,12 +100,12 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<DefineMenu> doGetAllMenuTree() {
         MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>();
         //筛选与排序
-        EntityWrapper<DefineMenu> defineMenuEntityWrapper = new EntityWrapper<DefineMenu>();
-        defineMenuEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        defineMenuEntityWrapper.orderBy("level", true);
-        defineMenuEntityWrapper.orderBy("order_num", true);
-        defineMenuEntityWrapper.orderBy("create_time", false);
-        List<DefineMenu> allMenus = defineMenuService.selectList(defineMenuEntityWrapper);
+        QueryWrapper<DefineMenu> queryWrapper = new QueryWrapper<DefineMenu>();
+        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.orderBy(true,true,"level");
+        queryWrapper.orderBy(true,true,"order_num");
+        queryWrapper.orderBy(true,true,"create_time");
+        List<DefineMenu> allMenus = defineMenuMapper.selectList(queryWrapper);
         List<CommonMenuTree> treeList = defineMenuService.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         result.setResultList(treeList);
         return result;
@@ -227,7 +227,7 @@ public class DefineMenuController extends BaseController {
             }
             defineMenu.setLastModifyerId(loginUser.getFid());
             defineMenu.setUpdateTime(new Date());
-            Integer changeCount = defineMenuMapper.updateAllColumnById(defineMenu);
+            Integer changeCount = defineMenuMapper.updateById(defineMenu);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新菜单对应的Excel模板:" + actionSuccessMsg);
         } catch (Exception e) {

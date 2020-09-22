@@ -5,8 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
@@ -23,6 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,11 +83,11 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        EntityWrapper<UserDepartment> userDepartmentEm = new EntityWrapper<UserDepartment>();
-        userDepartmentEm.where("state={0}", BaseStateEnum.ENABLED.getValue())
-                .and("user_account_id={0}", userAccount.getFid());
-        userDepartmentEm.orderBy("update_time", false);
-        List<UserDepartment> userDepartment = selectList(userDepartmentEm);
+        QueryWrapper<UserDepartment> userDepartmentEm = new QueryWrapper<UserDepartment>();
+        userDepartmentEm.eq("state", BaseStateEnum.ENABLED.getValue())
+                .eq("user_account_id", userAccount.getFid());
+        userDepartmentEm.orderBy(true,false,"update_time");
+        List<UserDepartment> userDepartment = userDepartmentMapper.selectList(userDepartmentEm);
         return userDepartment;
     }
 
@@ -126,13 +128,14 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userDepartmentMapper.selectCount(userDepartmentEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<UserDepartment> userDepartments = userDepartmentMapper.selectPage(rowBounds, userDepartmentEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = userDepartmentMapper.selectPage(page, userDepartmentEntityWrapper);
+        List<UserDepartment> userDepartments = iPage.getRecords();
         result.setResultList(UserDepartmentTransfer.transferEntityToVoList(userDepartments));
         return result;
     }
@@ -149,7 +152,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     @Override
     public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                           List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<UserDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(UserDepartmentTransfer.transferDtoToVoList(userDepartmentDtoList));
@@ -187,7 +190,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeUpdate(loginUser, userDepartment);
         if (updateAll) {  //是否更新所有字段
-            changeCount = userDepartmentMapper.updateAllColumnById(userDepartment);
+            changeCount = userDepartmentMapper.updateById(userDepartment);
         } else {
             changeCount = userDepartmentMapper.updateById(userDepartment);
         }

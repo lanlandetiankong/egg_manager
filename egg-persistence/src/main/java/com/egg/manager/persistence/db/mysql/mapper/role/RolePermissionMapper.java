@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.role;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;

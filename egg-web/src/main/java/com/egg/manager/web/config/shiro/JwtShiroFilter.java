@@ -168,7 +168,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
         }
         //取得用户id
         String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());
-        UserAccount userAccount = userAccountService.selectById(userId);
+        UserAccount userAccount = userAccountService.getById(userId);
         if (userAccount != null) {
             request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccount));
         }

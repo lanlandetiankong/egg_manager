@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.basic.define;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -60,7 +60,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param wrapper
      * @return
      */
-    List<DefineRole> getAllEnableDefineRoles(EntityWrapper<DefineRole> wrapper);
+    List<DefineRole> getAllEnableDefineRoles(QueryWrapper<DefineRole> wrapper);
 
     List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
 

@@ -2,8 +2,9 @@ package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
@@ -133,12 +134,12 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      * @return
      */
     @Override
-    public List<DefineRole> getAllEnableDefineRoles(EntityWrapper<DefineRole> wrapper) {
-        wrapper = wrapper != null ? wrapper : new EntityWrapper<DefineRole>();
+    public List<DefineRole> getAllEnableDefineRoles(QueryWrapper<DefineRole> wrapper) {
+        wrapper = wrapper != null ? wrapper : new QueryWrapper<DefineRole>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy("create_time", false);
-        return this.selectList(wrapper);
+        wrapper.orderBy( true,false,"create_time");
+        return defineRoleMapper.selectList(wrapper);
     }
 
 
@@ -183,10 +184,10 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                     roleIds.add(userRole.getDefineRoleId());
                 }
             }
-            EntityWrapper<DefineRole> defineRoleEntityWrapper = new EntityWrapper<DefineRole>();
-            defineRoleEntityWrapper.where("state={0}", BaseStateEnum.ENABLED.getValue())
+            QueryWrapper<DefineRole> defineRoleEntityWrapper = new QueryWrapper<DefineRole>();
+            defineRoleEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue())
                     .in(true, "define_role_id", roleIds);
-            defineRoles = selectList(defineRoleEntityWrapper);
+            defineRoles = defineRoleMapper.selectList(defineRoleEntityWrapper);
         }
         return defineRoles;
     }
@@ -203,13 +204,14 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public MyCommonResult<DefineRoleVo> dealGetDefineRolePages(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<DefineRole> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineRole> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<DefineRole> defineRoles = defineRoleMapper.selectPage(rowBounds, defineRoleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, new Long(total));
+        IPage iPage = defineRoleMapper.selectPage(page, defineRoleEntityWrapper);
+        List<DefineRole> defineRoles = iPage.getRecords();
         result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoles));
         return result;
     }
@@ -226,7 +228,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     @Override
     public MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
@@ -264,7 +266,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole = super.doBeforeUpdate(loginUser, defineRole);
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineRoleMapper.updateAllColumnById(defineRole);
+            changeCount = defineRoleMapper.updateById(defineRole);
         } else {
             changeCount = defineRoleMapper.updateById(defineRole);
         }

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.mysql.transfer;
 
 
-import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -37,7 +37,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param sortBeans
      * @return
      */
-    List<UserAccountDto> selectQueryPage(Pagination page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
+    List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
                                          @Param("sortFieldList") List<AntdvSortBean> sortBeans,
                                          @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList,
                                          @Param("queryDepartmentFieldBeanList") List<QueryFormFieldBean> queryDepartmentFieldBeanList

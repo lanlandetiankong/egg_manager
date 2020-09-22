@@ -1,8 +1,9 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
@@ -16,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
+import javafx.scene.control.Pagination;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,13 +53,14 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
     public MyCommonResult<DefineJobVo> dealGetDefineJobPages(UserAccount loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                              List<AntdvSortBean> sortBeans) {
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        EntityWrapper<DefineJob> defineJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineJob> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 总数
-        Integer total = defineJobMapper.selectCount(defineJobEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<DefineJob> defineJobs = defineJobMapper.selectPage(rowBounds, defineJobEntityWrapper);
+        Integer total = defineJobMapper.selectCount(queryWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = defineJobMapper.selectPage(page, queryWrapper);
+        List<DefineJob> defineJobs =  iPage.getRecords();
         result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobs));
         return result;
     }
@@ -73,7 +76,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
     @Override
     public MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(UserAccount loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                 List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
@@ -110,7 +113,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob = super.doBeforeUpdate(loginUser, defineJob);
         if (updateAll) {  //是否更新所有字段
-            changeCount = defineJobMapper.updateAllColumnById(defineJob);
+            changeCount = defineJobMapper.updateById(defineJob);
         } else {
             changeCount = defineJobMapper.updateById(defineJob);
         }

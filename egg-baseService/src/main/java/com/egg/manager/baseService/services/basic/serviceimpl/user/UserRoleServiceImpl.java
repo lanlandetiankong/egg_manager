@@ -5,8 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
@@ -23,6 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserRoleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
+import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,11 +82,11 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        EntityWrapper<UserRole> userRoleEm = new EntityWrapper<UserRole>();
-        userRoleEm.where("state={0}", BaseStateEnum.ENABLED.getValue())
-                .and("user_account_id={0}", userAccount.getFid());
-        userRoleEm.orderBy("update_time", false);
-        List<UserRole> userRoleList = selectList(userRoleEm);
+        QueryWrapper<UserRole> userRoleEm = new QueryWrapper<UserRole>();
+        userRoleEm.eq("state", BaseStateEnum.ENABLED.getValue())
+                .eq("user_account_id", userAccount.getFid());
+        userRoleEm.orderBy(true,false,"update_time");
+        List<UserRole> userRoleList = userRoleMapper.selectList(userRoleEm);
         return userRoleList;
     }
 
@@ -125,13 +127,14 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     public MyCommonResult<UserRoleVo> dealGetUserRolePages(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        EntityWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
-        RowBounds rowBounds = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, total);
-        List<UserRole> userRoles = userRoleMapper.selectPage(rowBounds, userRoleEntityWrapper);
+        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        IPage iPage = userRoleMapper.selectPage(page, userRoleEntityWrapper);
+        List<UserRole> userRoles = iPage.getRecords();
         result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoles));
         return result;
     }
@@ -148,7 +151,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     @Override
     public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
-        Pagination mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<UserRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(UserRoleTransfer.transferDtoToVoList(userRoleDtoList));
@@ -186,7 +189,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeUpdate(loginUser, userRole);
         if (updateAll) {  //是否更新所有字段
-            changeCount = userRoleMapper.updateAllColumnById(userRole);
+            changeCount = userRoleMapper.updateById(userRole);
         } else {
             changeCount = userRoleMapper.updateById(userRole);
         }

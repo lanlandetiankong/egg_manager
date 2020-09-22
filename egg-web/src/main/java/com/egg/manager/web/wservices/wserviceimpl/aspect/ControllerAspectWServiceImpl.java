@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ import java.util.Date;
 @Service
 public class ControllerAspectWServiceImpl implements ControllerAspectWService {
 
-    @Reference
+    @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
     /**

@@ -18,11 +18,9 @@ import java.util.Map;
  * \
  */
 @Builder
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class CommonMenuTree extends MyBaseTree {
     /**
      * 菜单id

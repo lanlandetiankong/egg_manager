@@ -1,10 +1,10 @@
-package com.egg.manager.common.annotation.test;
+package com.egg.manager.common.annotation.teaegg;
 
 import java.lang.annotation.*;
 
 /**
  * @Description:
- * @ClassName: XBean
+ * @ClassName: EggBean
  * @Author: zhoucj
  * @Date: 2020/9/21 17:00
  */
@@ -12,5 +12,5 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
-public @interface XBean {
+public @interface EggBean {
 }

@@ -5,10 +5,12 @@ import com.egg.manager.api.services.basic.hello.HelloService;
 import com.egg.manager.api.services.message.services.hello.MessageHelloService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,8 @@ public class HelloController extends BaseController {
 
     @Reference
     private MessageHelloService messageHelloService;
+    @Autowired
+    private CommonMenuTree commonMenuTree ;
 
     @PcWebQueryLog(action = "测试当前开发环境", description = "测试当前开发环境", fullPath = "/index/hello/testEnv", flag = false)
     @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
@@ -65,5 +69,12 @@ public class HelloController extends BaseController {
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();
         System.out.println("for message  debug..." + port);
+    }
+
+
+    @PcWebQueryLog(action = "", description = "", fullPath = "/index/hello/testRegistrar", flag = false)
+    @GetMapping(value = "/testRegistrar")
+    public void testRegistrar() {
+        System.out.println("for message  debug..." );
     }
 }

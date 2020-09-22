@@ -1,6 +1,6 @@
 package com.egg.manager.common.scanner;
 
-import com.egg.manager.common.annotation.test.XBeanScan;
+import com.egg.manager.common.annotation.teaegg.EnableEggBeanScan;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -12,20 +12,20 @@ import org.springframework.util.ClassUtils;
 
 /**
  * @Description: 注解->注册
- * @ClassName: XBeanDefinitionRegistrar
+ * @ClassName: EggBeanDefinitionRegistrar
  * @Author: zhoucj
  * @Date: 2020/9/21 17:02
  */
-public class XBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
+public class EggBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
     private ResourceLoader resourceLoader;
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         // 不使用默认过滤器
-        XBeanDefinitionScanner xBeanDefinitionScanner = new XBeanDefinitionScanner(registry, false);
-        xBeanDefinitionScanner.setResourceLoader(resourceLoader);
+        EggBeanDefinitionScanner eggBeanDefinitionScanner = new EggBeanDefinitionScanner(registry, false);
+        eggBeanDefinitionScanner.setResourceLoader(resourceLoader);
         // 扫描XBeanScan注解指定的包
-        xBeanDefinitionScanner.scan(getBasePackagesToScan(importingClassMetadata));
+        eggBeanDefinitionScanner.scan(getBasePackagesToScan(importingClassMetadata));
     }
 
     @Override
@@ -34,12 +34,12 @@ public class XBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, 
     }
 
     /**
-     * 获取{@link XBeanScan}中声明的扫描包路径
+     * 获取{@link EnableEggBeanScan}中声明的扫描包路径
      * @param metadata the meta
      * @return  包路径数组
      */
     private String[] getBasePackagesToScan(AnnotationMetadata metadata) {
-        String name = XBeanScan.class.getName();
+        String name = EnableEggBeanScan.class.getName();
         AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(name, true));
         Assert.notNull(attributes, () -> "No auto-configuration attributes found. Is " + metadata.getClassName()
                 + " annotated with " + ClassUtils.getShortName(name) + "?");

@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_role")
 public class UserRole extends Model<UserRole> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 账号id

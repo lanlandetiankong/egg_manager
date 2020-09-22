@@ -22,7 +22,7 @@ import java.util.Date;
 @TableName("em_define_group")
 public class DefineGroup extends Model<DefineGroup> {
 
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

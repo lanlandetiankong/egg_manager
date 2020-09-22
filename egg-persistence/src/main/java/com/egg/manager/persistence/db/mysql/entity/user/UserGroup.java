@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_group")
 public class UserGroup extends Model<UserGroup> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
 
     /**

@@ -29,7 +29,7 @@ import java.util.Date;
 public class AnnouncementTag extends Model<AnnouncementTag> {
 
 
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_role_menu")
 public class RoleMenu extends Model<RoleMenu> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
 
     /**

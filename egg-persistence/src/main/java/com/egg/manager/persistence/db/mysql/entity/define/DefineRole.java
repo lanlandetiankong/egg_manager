@@ -22,7 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_role")
 public class DefineRole extends Model<DefineRole> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

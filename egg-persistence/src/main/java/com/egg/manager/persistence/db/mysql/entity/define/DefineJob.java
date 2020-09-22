@@ -22,7 +22,7 @@ import java.util.Date;
 @TableName("em_define_job")
 public class DefineJob extends Model<DefineJob> {
 
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

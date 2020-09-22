@@ -28,7 +28,7 @@ import java.util.Date;
 @TableName("em_announcement")
 public class Announcement extends Model<Announcement> {
 
-    @TableId
+    @TableId(value = "fid")
     private String fid;
 
     /**

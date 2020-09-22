@@ -27,7 +27,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_department")
 public class DefineDepartment extends Model<DefineDepartment> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

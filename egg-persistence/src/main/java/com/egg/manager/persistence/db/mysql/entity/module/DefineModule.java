@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_module")
 public class DefineModule extends Model<DefineModule> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
 
     /**

@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_permission")
 public class DefinePermission extends Model<DefinePermission> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

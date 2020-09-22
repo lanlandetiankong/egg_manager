@@ -22,7 +22,7 @@ import java.util.Date;
 @TableName("em_define_tenant")
 public class DefineTenant extends Model<DefineTenant> {
 
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 名称

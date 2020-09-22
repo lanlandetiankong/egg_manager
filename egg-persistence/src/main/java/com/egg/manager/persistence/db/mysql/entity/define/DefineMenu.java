@@ -22,7 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_menu")
 public class DefineMenu extends Model<DefineMenu> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 上级id

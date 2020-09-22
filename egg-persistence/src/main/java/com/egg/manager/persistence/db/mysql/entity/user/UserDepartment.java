@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_department")
 public class UserDepartment extends Model<UserDepartment> {
-    @TableId
+    @TableId(value = "fid")
     private String fid;
     /**
      * 用户账号id

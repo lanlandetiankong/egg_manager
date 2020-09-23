@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +125,7 @@ public class QueryFormFieldBean  extends MyBaseQueryBean {
                 .build();
     }
 
-    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(@NotNull MyMongoCommonQueryFieldEnum ... fieldEnum){
+    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum ... fieldEnum){
         List list = new ArrayList<QueryFormFieldBean>();
         if(fieldEnum == null || fieldEnum.length == 0){
             return list;

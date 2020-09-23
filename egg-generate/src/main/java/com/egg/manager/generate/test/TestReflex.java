@@ -20,7 +20,7 @@ import java.util.List;
 public class TestReflex {
     public static void main(String[] args) {
         UserAccount userAccount = new UserAccount() ;
-        Method methodOfObj = ReflectUtil.getMethod(userAccount.getClass(), "setFid", String.class);
+        Method methodOfObj = ReflectUtil.getMethod(UserAccount.class, "setFid", String.class);
         ReflectUtil.invoke(userAccount,methodOfObj, MyUUIDUtil.renderSimpleUUID());
 
 

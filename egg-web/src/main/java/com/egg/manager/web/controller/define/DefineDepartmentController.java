@@ -72,7 +72,7 @@ public class DefineDepartmentController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineDepartmentService.dealGetDefineDepartmentDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineDepartmentService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询部门定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -135,7 +135,7 @@ public class DefineDepartmentController extends BaseController {
             if (defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
             } else {
-                addCount = defineDepartmentService.dealAddDefineDepartment(loginUser, defineDepartmentVo);
+                addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增部门定义:" + actionSuccessMsg);
@@ -157,7 +157,7 @@ public class DefineDepartmentController extends BaseController {
             if (defineDepartmentVo == null) {
                 throw new Exception("未接收到有效的部门定义！");
             } else {
-                changeCount = defineDepartmentService.dealUpdateDefineDepartment(loginUser, defineDepartmentVo, false);
+                changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新部门定义:" + actionSuccessMsg);
@@ -179,7 +179,7 @@ public class DefineDepartmentController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = defineDepartmentService.dealDelDefineDepartmentByArr(loginUser, delIds);
+                delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -200,7 +200,7 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineDepartmentService.dealDelDefineDepartment(loginUser, delId);
+                Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);
             }

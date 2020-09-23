@@ -71,7 +71,7 @@ public class DefineTenantController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询租户定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -112,8 +112,7 @@ public class DefineTenantController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineTenantService.dealGetDefineTenantDtoPages(loginUser, result, queryFieldBeanList, null, sortBeans);
-            ;
+            result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = defineTenantService.dealResultListSetToEntitySelect(loginUser, result);
             dealCommonSuccessCatch(result, "查询租户定义信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -133,7 +132,7 @@ public class DefineTenantController extends BaseController {
             if (defineTenantVo == null) {
                 throw new Exception("未接收到有效的租户定义！");
             } else {
-                addCount = defineTenantService.dealAddDefineTenant(loginUser, defineTenantVo);
+                addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增租户定义:" + actionSuccessMsg);
@@ -154,7 +153,7 @@ public class DefineTenantController extends BaseController {
             if (defineTenantVo == null) {
                 throw new Exception("未接收到有效的租户定义！");
             } else {
-                changeCount = defineTenantService.dealUpdateDefineTenant(loginUser, defineTenantVo, false);
+                changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新租户定义:" + actionSuccessMsg);
@@ -176,7 +175,7 @@ public class DefineTenantController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = defineTenantService.dealDelDefineTenantByArr(loginUser, delIds);
+                delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除租户定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -197,7 +196,7 @@ public class DefineTenantController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineTenantService.dealDelDefineTenant(loginUser, delId);
+                Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除租户定义:" + actionSuccessMsg);
             }

@@ -21,5 +21,5 @@ import java.util.List;
 public interface RolePermissionService extends IService<RolePermission>,MyBaseMysqlService<RolePermissionMapper,RolePermission,RolePermissionVo> {
 
 
-    List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) ;
+    List<DefinePermission> dealQueryPageByEntitys(List<DefineRole> defineRoles) ;
 }

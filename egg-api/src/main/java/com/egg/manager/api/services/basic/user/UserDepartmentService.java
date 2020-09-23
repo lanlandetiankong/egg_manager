@@ -27,7 +27,7 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @param account
      * @return
      */
-    List<UserDepartment> dealGetAllUserDepartmentByAccount(UserAccount account);
+    List<UserDepartment> dealQueryListByAccount(UserAccount account);
 
     List<UserDepartment> dealGetAllUserDepartmentByAccountFromDb(UserAccount userAccount);
 
@@ -40,7 +40,7 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                 List<AntdvSortBean> sortBeans);
 
     /**
@@ -50,7 +50,7 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans);
 
 
@@ -59,7 +59,7 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @param userDepartmentVo
      * @throws Exception
      */
-    Integer dealAddUserDepartment(UserAccount loginUser,UserDepartmentVo userDepartmentVo) throws Exception;
+    Integer dealCreate(UserAccount loginUser,UserDepartmentVo userDepartmentVo) throws Exception;
 
     /**
      * 用户与部门关联-更新
@@ -67,19 +67,19 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserDepartment(UserAccount loginUser,UserDepartmentVo userDepartmentVo,boolean updateAll) throws Exception;
+    Integer dealUpdate(UserAccount loginUser,UserDepartmentVo userDepartmentVo,boolean updateAll) throws Exception;
 
     /**
      * 用户与部门关联-删除
      * @param delIds 要删除的用户与部门关联id 集合
      * @throws Exception
      */
-    Integer dealDelUserDepartmentByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 用户与部门关联-删除
      * @param delId 要删除的用户与部门关联id
      * @throws Exception
      */
-    Integer dealDelUserDepartment(UserAccount loginUser,String delId) throws Exception ;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
 }

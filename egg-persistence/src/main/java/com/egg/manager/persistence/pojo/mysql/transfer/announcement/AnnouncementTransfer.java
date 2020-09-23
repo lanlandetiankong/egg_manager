@@ -3,7 +3,9 @@ package com.egg.manager.persistence.pojo.mysql.transfer.announcement;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
+import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.announcement.AnnouncementMapstruct;
 import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
@@ -14,6 +16,7 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -120,4 +123,21 @@ public class AnnouncementTransfer extends MyBaseMysqlTransfer {
         }
     }
 
+    /**
+     * 公告草稿 转 公告 entity
+     * @param loginUser
+     * @param announcementDraft
+     * @return
+     */
+    public static Announcement transferFromDraft(UserAccount loginUser, AnnouncementDraft announcementDraft) {
+        Announcement announcement = announcementMapstruct.transferFromDraftEntity(announcementDraft);
+        if (loginUser != null) {
+            announcement.setCreateUserId(loginUser.getFid());
+            announcement.setLastModifyerId(loginUser.getFid());
+        } else {
+            announcement.setCreateUserId(announcementDraft.getCreateUserId());
+            announcement.setLastModifyerId(announcementDraft.getLastModifyerId());
+        }
+        return announcement;
+    }
 }

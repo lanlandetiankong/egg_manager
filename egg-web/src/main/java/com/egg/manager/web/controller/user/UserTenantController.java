@@ -69,7 +69,7 @@ public class UserTenantController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userTenantService.dealGetUserTenantPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = userTenantService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询 [用户与租户关联] 信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -104,7 +104,7 @@ public class UserTenantController extends BaseController {
             if (userTenantVo == null) {
                 throw new Exception("未接收到有效的 [用户与租户关联] 信息！");
             } else {
-                addCount = userTenantService.dealAddUserTenant(loginUser, userTenantVo);
+                addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增 [用户与租户关联] :" + actionSuccessMsg);
@@ -126,7 +126,7 @@ public class UserTenantController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = userTenantService.dealDelUserTenantByArr(loginUser, delIds);
+                delCount = userTenantService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除 [用户与租户关联] :" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -148,7 +148,7 @@ public class UserTenantController extends BaseController {
         Integer delCount = 0;
         try {
             if (StringUtils.isNotBlank(delId)) {
-                delCount = userTenantService.dealDelUserTenant(loginUser, delId);
+                delCount = userTenantService.dealDeleteById(loginUser, delId);
                 dealCommonSuccessCatch(result, "删除 [用户与租户关联] :" + actionSuccessMsg);
             }
             result.setCount(delCount);

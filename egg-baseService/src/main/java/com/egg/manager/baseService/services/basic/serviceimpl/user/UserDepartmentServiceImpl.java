@@ -24,9 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,7 +60,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @return
      */
     @Override
-    public List<UserDepartment> dealGetAllUserDepartmentByAccount(UserAccount userAccount) {
+    public List<UserDepartment> dealQueryListByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
@@ -125,7 +123,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentPages(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
@@ -150,7 +148,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserDepartmentVo> dealGetUserDepartmentDtoPages(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                           List<AntdvSortBean> sortBeans) {
         Page<UserDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -168,7 +166,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddUserDepartment(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeCreate(loginUser, userDepartment, true);
         Integer addCount = userDepartmentMapper.insert(userDepartment);
@@ -185,7 +183,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateUserDepartment(UserAccount loginUser, UserDepartmentVo userDepartmentVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeUpdate(loginUser, userDepartment);
@@ -206,7 +204,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserDepartmentByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -224,7 +222,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserDepartment(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserDepartment userDepartment = super.doBeforeDeleteOneById(loginUser, UserDepartment.class, delId);
         Integer delCount = userDepartmentMapper.updateById(userDepartment);
         return delCount;

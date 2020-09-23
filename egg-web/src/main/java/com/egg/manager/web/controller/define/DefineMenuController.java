@@ -145,7 +145,7 @@ public class DefineMenuController extends BaseController {
             AntdvPaginationBean paginationBean = this.parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineMenuService.dealGetDefineMenuDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineMenuService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询菜单定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -180,7 +180,7 @@ public class DefineMenuController extends BaseController {
             if (defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             } else {
-                addCount = defineMenuService.dealAddDefineMenu(loginUser, defineMenuVo);
+                addCount = defineMenuService.dealCreate(loginUser, defineMenuVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增菜单定义:" + actionSuccessMsg);
@@ -201,7 +201,7 @@ public class DefineMenuController extends BaseController {
             if (defineMenuVo == null) {
                 throw new Exception("未接收到有效的菜单定义！");
             } else {
-                changeCount = defineMenuService.dealUpdateDefineMenu(loginUser, defineMenuVo, false);
+                changeCount = defineMenuService.dealUpdate(loginUser, defineMenuVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新菜单定义:" + actionSuccessMsg);
@@ -247,7 +247,7 @@ public class DefineMenuController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = defineMenuService.dealDelDefineMenuByArr(loginUser, delIds);
+                delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除菜单定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -268,7 +268,7 @@ public class DefineMenuController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (org.apache.commons.lang3.StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineMenuService.dealDelDefineMenu(loginUser, delId);
+                Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除菜单定义:" + actionSuccessMsg);
             }

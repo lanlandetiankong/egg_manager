@@ -34,7 +34,7 @@ public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermis
 
 
     @Override
-    public List<DefinePermission> dealGetAllPermissionByRoles(List<DefineRole> defineRoles) {
+    public List<DefinePermission> dealQueryPageByEntitys(List<DefineRole> defineRoles) {
         if (defineRoles == null || defineRoles.isEmpty()) {
             return null;
         }

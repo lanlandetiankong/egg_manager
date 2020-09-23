@@ -1,7 +1,6 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,9 +29,7 @@ import com.egg.manager.persistence.pojo.mysql.initialize.user.UserRolePojoInitia
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +65,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      * @return
      */
     @Override
-    public UserAccount dealGetAccountByDTO(LoginAccountDTO loginAccountDTO) {
+    public UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
         QueryWrapper<UserAccount> wrapper = new QueryWrapper<UserAccount>();
         wrapper.setEntity(new UserAccount());
         wrapper.eq("account", loginAccountDTO.getAccount())
@@ -85,7 +82,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountPages(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                  List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserAccount> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
@@ -109,7 +106,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                     List<AntdvSortBean> sortBeans) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
@@ -149,7 +146,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddUserAccount(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
         if (this.dealCheckDuplicateKey(userAccountVo, new QueryWrapper<>())) {
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
@@ -194,7 +191,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateUserAccount(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
         QueryWrapper<UserAccount> uniWrapper = new QueryWrapper<UserAccount>()
                 .ne("fid", userAccountVo.getFid());
         if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {    //已有重复键值
@@ -254,7 +251,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserAccountByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -273,7 +270,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserAccount(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserAccount userAccount = super.doBeforeDeleteOneById(loginUser, UserAccount.class, delId);
         ;
         return userAccountMapper.updateById(userAccount);

@@ -31,7 +31,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans);
 
 
@@ -58,7 +58,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param defineDepartmentVo
      * @throws Exception
      */
-    Integer dealAddDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo) throws Exception ;
 
     /**
      * 部门定义-更新
@@ -66,19 +66,19 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineDepartment(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception ;
 
     /**
      * 部门定义-批量删除
      * @param delIds 要删除的部门id 集合
      * @throws Exception
      */
-    Integer dealDelDefineDepartmentByArr(UserAccount loginUser,String[] delIds) throws Exception;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 部门定义-删除
      * @param delId 要删除的部门id
      * @throws Exception
      */
-    Integer dealDelDefineDepartment(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 }

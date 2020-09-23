@@ -40,7 +40,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                     List<AntdvSortBean> sortBeans);
 
     /**
@@ -50,7 +50,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans);
 
     /**
@@ -58,7 +58,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param definePermissionVo
      * @throws Exception
      */
-    Integer dealAddDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception ;
 
     /**
      * 权限定义-更新
@@ -66,21 +66,21 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefinePermission(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception ;
 
     /**
      * 权限定义-批量删除
      * @param delIds 要删除的权限id 集合
      * @throws Exception
      */
-    Integer dealDelDefinePermissionByArr(UserAccount loginUser,String[] delIds) throws Exception;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 权限定义-删除
      * @param delId 要删除的权限id
      * @throws Exception
      */
-    Integer dealDelDefinePermission(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**

@@ -36,7 +36,7 @@ public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<U
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserRoleVo> dealGetUserRolePages(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                     List<AntdvSortBean> sortBeans);
 
     /**
@@ -46,7 +46,7 @@ public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<U
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
 
@@ -55,7 +55,7 @@ public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<U
      * @param userRoleVo
      * @throws Exception
      */
-    Integer dealAddUserRole(UserAccount loginUser,UserRoleVo userRoleVo) throws Exception;
+    Integer dealCreate(UserAccount loginUser,UserRoleVo userRoleVo) throws Exception;
 
     /**
      * 用户角色-更新
@@ -63,19 +63,19 @@ public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<U
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateUserRole(UserAccount loginUser,UserRoleVo userRoleVo, boolean updateAll) throws Exception;
+    Integer dealUpdate(UserAccount loginUser,UserRoleVo userRoleVo, boolean updateAll) throws Exception;
 
     /**
      * 用户角色-删除
      * @param delIds 要删除的用户角色id 集合
      * @throws Exception
      */
-    Integer dealDelUserRoleByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 用户角色-删除
      * @param delId 要删除的用户角色id
      * @throws Exception
      */
-    Integer dealDelUserRole(UserAccount loginUser,String delId) throws Exception ;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
 }

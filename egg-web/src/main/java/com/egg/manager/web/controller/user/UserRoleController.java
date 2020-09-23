@@ -70,7 +70,7 @@ public class UserRoleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userRoleService.dealGetUserRolePages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = userRoleService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询用户角色信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -105,7 +105,7 @@ public class UserRoleController extends BaseController {
             if (userRoleVo == null) {
                 throw new Exception("未接收到有效的用户角色信息！");
             } else {
-                addCount = userRoleService.dealAddUserRole(loginUser, userRoleVo);
+                addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增用户角色:" + actionSuccessMsg);
@@ -127,7 +127,7 @@ public class UserRoleController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = userRoleService.dealDelUserRoleByArr(loginUser, delIds);
+                delCount = userRoleService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除用户角色:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -149,7 +149,7 @@ public class UserRoleController extends BaseController {
         Integer delCount = 0;
         try {
             if (StringUtils.isNotBlank(delId)) {
-                delCount = userRoleService.dealDelUserRole(loginUser, delId);
+                delCount = userRoleService.dealDeleteById(loginUser, delId);
                 dealCommonSuccessCatch(result, "删除用户角色:" + actionSuccessMsg);
             }
             result.setCount(delCount);

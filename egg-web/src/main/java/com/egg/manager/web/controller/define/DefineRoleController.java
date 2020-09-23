@@ -92,7 +92,7 @@ public class DefineRoleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineRoleService.dealGetDefineRolePages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineRoleService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询角色定义信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -119,7 +119,7 @@ public class DefineRoleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineRoleService.dealGetDefineRoleDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineRoleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询角色定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -188,7 +188,7 @@ public class DefineRoleController extends BaseController {
             if (defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             } else {
-                addCount = defineRoleService.dealAddDefineRole(loginUser, defineRoleVo);
+                addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增角色定义:" + actionSuccessMsg);
@@ -208,7 +208,7 @@ public class DefineRoleController extends BaseController {
             if (defineRoleVo == null) {
                 throw new Exception("未接收到有效的角色定义！");
             } else {
-                changeCount = defineRoleService.dealUpdateDefineRole(loginUser, defineRoleVo, false);
+                changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新角色定义:" + actionSuccessMsg);
@@ -229,7 +229,7 @@ public class DefineRoleController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = defineRoleService.dealDelDefineRoleByArr(loginUser, delIds);
+                delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除角色定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -249,7 +249,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineRoleService.dealDelDefineRole(loginUser, delId);
+                Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除角色定义:" + actionSuccessMsg);
             }

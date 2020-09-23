@@ -17,8 +17,6 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserJobDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
-import javafx.scene.control.Pagination;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +49,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobVo> dealGetUserJobPages(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                          List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserJob> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
@@ -75,7 +73,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserJobVo> dealGetUserJobDtoPages(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
         Page<UserJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -93,7 +91,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddUserJob(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeCreate(loginUser, userJob, true);
         Integer addCount = userJobMapper.insert(userJob);
@@ -110,7 +108,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateUserJob(UserAccount loginUser, UserJobVo userJobVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeUpdate(loginUser, userJob);
@@ -131,7 +129,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserJobByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -149,7 +147,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserJob(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserJob userJob = super.doBeforeDeleteOneById(loginUser, UserJob.class, delId);
         Integer delCount = userJobMapper.updateById(userJob);
         return delCount;

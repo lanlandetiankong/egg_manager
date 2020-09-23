@@ -69,7 +69,7 @@ public class DefineJobController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealGetDefineJobPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
             ;
             dealCommonSuccessCatch(result, "查询职务信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public class DefineJobController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealGetDefineJobDtoPages(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
             ;
             dealCommonSuccessCatch(result, "查询职务信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -134,7 +134,7 @@ public class DefineJobController extends BaseController {
             if (defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             } else {
-                addCount = defineJobService.dealAddDefineJob(loginUser, defineJobVo);
+                addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增职务:" + actionSuccessMsg);
@@ -155,7 +155,7 @@ public class DefineJobController extends BaseController {
             if (defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             } else {
-                changeCount = defineJobService.dealUpdateDefineJob(loginUser, defineJobVo, false);
+                changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新职务:" + actionSuccessMsg);
@@ -178,7 +178,7 @@ public class DefineJobController extends BaseController {
         try {
             if (delIds != null && delIds.length > 0) {
                 //批量伪删除
-                delCount = defineJobService.dealDelDefineJobByArr(loginUser, delIds);
+                delCount = defineJobService.dealBatchDelete(loginUser, delIds);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "批量删除职务:" + actionSuccessMsg);
             }
@@ -200,7 +200,7 @@ public class DefineJobController extends BaseController {
         Integer delCount = 0;
         try {
             if (StringUtils.isNotBlank(delId)) {
-                delCount = defineJobService.dealDelDefineJob(loginUser, delId);
+                delCount = defineJobService.dealDeleteById(loginUser, delId);
                 dealCommonSuccessCatch(result, "删除职务:" + actionSuccessMsg);
             }
             result.setCount(delCount);

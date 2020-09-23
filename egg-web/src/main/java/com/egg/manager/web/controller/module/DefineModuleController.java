@@ -69,7 +69,7 @@ public class DefineModuleController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineModuleService.dealGetDefineModuleDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineModuleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询模块定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -104,7 +104,7 @@ public class DefineModuleController extends BaseController {
             if (defineModuleVo == null) {
                 throw new Exception("未接收到有效的模块定义！");
             } else {
-                addCount = defineModuleService.dealAddDefineModule(loginUser, defineModuleVo);
+                addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增模块定义:" + actionSuccessMsg);
@@ -125,7 +125,7 @@ public class DefineModuleController extends BaseController {
             if (defineModuleVo == null) {
                 throw new Exception("未接收到有效的模块定义！");
             } else {
-                changeCount = defineModuleService.dealUpdateDefineModule(loginUser, defineModuleVo, false);
+                changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新模块定义:" + actionSuccessMsg);
@@ -147,7 +147,7 @@ public class DefineModuleController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = defineModuleService.dealDelDefineModuleByArr(loginUser, delIds);
+                delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -168,7 +168,7 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineModuleService.dealDelDefineModule(loginUser, delId);
+                Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);
             }

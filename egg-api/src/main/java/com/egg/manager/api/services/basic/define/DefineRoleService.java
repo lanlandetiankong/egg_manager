@@ -76,7 +76,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRolePages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
@@ -86,7 +86,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineRoleVo> dealGetDefineRoleDtoPages(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
     /**
@@ -94,7 +94,7 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param defineRoleVo
      * @throws Exception
      */
-    Integer dealAddDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefineRoleVo defineRoleVo) throws Exception ;
 
     /**
      * 角色定义-更新
@@ -102,21 +102,21 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineRole(UserAccount loginUser,DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
 
     /**
      * 角色定义-批量删除
      * @param delIds 要删除的角色id 集合
      * @throws Exception
      */
-    Integer dealDelDefineRoleByArr(UserAccount loginUser,String[] delIds) throws Exception;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 角色定义-删除
      * @param delId 要删除的角色id
      * @throws Exception
      */
-    Integer dealDelDefineRole(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
     /**
      * 角色授权

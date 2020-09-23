@@ -30,7 +30,7 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealGetDefineModulePages(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**
@@ -40,14 +40,14 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans);
     /**
      * 模块定义-新增
      * @param defineModuleVo
      * @throws Exception
      */
-    Integer dealAddDefineModule(UserAccount loginUser,DefineModuleVo defineModuleVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefineModuleVo defineModuleVo) throws Exception ;
 
     /**
      * 模块定义-更新
@@ -55,19 +55,19 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineModule(UserAccount loginUser,DefineModuleVo defineModuleVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineModuleVo defineModuleVo,boolean updateAll) throws Exception ;
 
     /**
      * 模块定义-批量删除
      * @param delIds 要删除的模块id 集合
      * @throws Exception
      */
-    Integer dealDelDefineModuleByArr(UserAccount loginUser,String[] delIds) throws Exception;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 模块定义-删除
      * @param delId 要删除的模块id
      * @throws Exception
      */
-    Integer dealDelDefineModule(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 }

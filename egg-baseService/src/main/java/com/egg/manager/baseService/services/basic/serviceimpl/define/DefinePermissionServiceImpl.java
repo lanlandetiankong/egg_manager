@@ -2,7 +2,6 @@ package com.egg.manager.baseService.services.basic.serviceimpl.define;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
@@ -25,9 +24,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
 import com.google.common.collect.Sets;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +74,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionPages(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
@@ -101,7 +98,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefinePermissionVo> dealGetDefinePermissionDtoPages(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -119,7 +116,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefinePermission(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, new QueryWrapper());
         if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
@@ -141,7 +138,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefinePermission(UserAccount loginUser, DefinePermissionVo definePermissionVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo, boolean updateAll) throws Exception {
         QueryWrapper<DefinePermission> uniWrapper = new QueryWrapper<DefinePermission>()
                 .ne("fid", definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
@@ -172,7 +169,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefinePermissionByArr(UserAccount loginUser, String[] delIds) {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -208,7 +205,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefinePermission(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);
         return definePermissionMapper.updateById(updateEntity);
     }

@@ -33,7 +33,7 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**
@@ -41,7 +41,7 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param defineTenantVo
      * @throws Exception
      */
-    Integer dealAddDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception ;
 
     /**
      * 租户定义-更新
@@ -49,21 +49,21 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineTenant(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception ;
 
     /**
      * 租户定义-批量删除
      * @param delIds 要删除的租户id 集合
      * @throws Exception
      */
-    Integer dealDelDefineTenantByArr(UserAccount loginUser,String[] delIds) throws Exception;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 租户定义-删除
      * @param delId 要删除的租户id
      * @throws Exception
      */
-    Integer dealDelDefineTenant(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**

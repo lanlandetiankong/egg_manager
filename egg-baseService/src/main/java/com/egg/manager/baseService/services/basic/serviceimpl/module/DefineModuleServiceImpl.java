@@ -17,8 +17,6 @@ import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
-import javafx.scene.control.Pagination;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,7 +50,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineModuleVo> dealGetDefineModulePages(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
@@ -78,7 +76,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineModuleVo> dealGetDefineModuleDtoPages(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -96,7 +94,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefineModule(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeCreate(loginUser, defineModule, true);
         return defineModuleMapper.insert(defineModule);
@@ -112,7 +110,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefineModule(UserAccount loginUser, DefineModuleVo defineModuleVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeUpdate(loginUser, defineModule);
@@ -132,7 +130,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineModuleByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -150,7 +148,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineModule(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineModule defineModule = super.doBeforeDeleteOneById(loginUser, DefineModule.class, delId);
         return defineModuleMapper.updateById(defineModule);
     }

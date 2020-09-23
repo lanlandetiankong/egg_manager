@@ -32,7 +32,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
 
 
 
-    UserAccount dealGetAccountByDTO(LoginAccountDTO loginAccountDTO) ;
+    UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) ;
 
 
     /**
@@ -41,7 +41,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountVo> dealGetUserAccountPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                           List<AntdvSortBean> sortBeans);
 
     /**
@@ -51,7 +51,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserAccountVo> dealGetUserAccountDtoPages(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                              List<AntdvSortBean> sortBeans);
 
     /**
@@ -60,7 +60,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealAddUserAccount(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
 
     /**
      * 用户账号-更新
@@ -70,7 +70,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealUpdateUserAccount(UserAccount loginUser,UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
 
     /**
      * 用户账号-删除
@@ -78,7 +78,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccountByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 用户账号-删除
@@ -86,7 +86,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealDelUserAccount(UserAccount loginUser,String delId) throws Exception ;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
 
 
 

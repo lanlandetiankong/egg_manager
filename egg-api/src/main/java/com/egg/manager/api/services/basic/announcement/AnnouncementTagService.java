@@ -31,7 +31,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagPages(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans);
     /**
      * 分页查询 公告标签 dto列表
@@ -40,20 +40,20 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealGetAnnouncementTagDtoPages(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                      List<AntdvSortBean> sortBeans);
 
     /***
      * 查询可用的 公告标签 并转为map
      * @return
      */
-    Map<String,AnnouncementTag> dealGetAllAnnouncementTagToMap();
+    Map<String,AnnouncementTag> dealGetAllToMap();
     /**
      * 公告标签-新增
      * @param announcementTagVo
      * @throws Exception
      */
-    Integer dealAddAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,AnnouncementTagVo announcementTagVo) throws Exception ;
 
 
     /**
@@ -62,7 +62,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateAnnouncementTag(UserAccount loginUser,AnnouncementTagVo announcementTagVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,AnnouncementTagVo announcementTagVo,boolean updateAll) throws Exception ;
 
 
 
@@ -71,7 +71,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param delIds 要删除的公告标签id 集合
      * @throws Exception
      */
-    Integer dealDelAnnouncementTagByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
 
     /**
@@ -79,7 +79,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param delId 要删除的公告标签id
      * @throws Exception
      */
-    Integer dealDelAnnouncementTag(UserAccount loginUser,String delId) throws Exception;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**

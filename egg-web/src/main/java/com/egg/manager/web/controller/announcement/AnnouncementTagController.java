@@ -69,7 +69,7 @@ public class AnnouncementTagController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = announcementTagService.dealGetAnnouncementTagPages(loginUser, result, queryFieldBeanList, null, sortBeans);
+            result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = announcementTagService.dealResultListSetToEntitySelect(result);
             dealCommonSuccessCatch(result, "查询公告标签信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class AnnouncementTagController extends BaseController {
             AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            announcementTagService.dealGetAnnouncementTagDtoPages(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
             dealCommonSuccessCatch(result, "查询公告标签信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -128,7 +128,7 @@ public class AnnouncementTagController extends BaseController {
             if (announcementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             } else {
-                addCount = announcementTagService.dealAddAnnouncementTag(loginUser, announcementTagVo);
+                addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             }
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增公告标签:" + actionSuccessMsg);
@@ -150,7 +150,7 @@ public class AnnouncementTagController extends BaseController {
             if (announcementTagVo == null) {
                 throw new Exception("未接收到有效的公告标签！");
             } else {
-                changeCount = announcementTagService.dealUpdateAnnouncementTag(loginUser, announcementTagVo, false);
+                changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             }
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新公告标签:" + actionSuccessMsg);
@@ -173,7 +173,7 @@ public class AnnouncementTagController extends BaseController {
         Integer delCount = 0;
         try {
             if (delIds != null && delIds.length > 0) {
-                delCount = announcementTagService.dealDelAnnouncementTagByArr(loginUser, delIds);
+                delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
                 dealCommonSuccessCatch(result, "批量删除公告标签:" + actionSuccessMsg);
             }
             result.setCount(delCount);
@@ -195,7 +195,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         try {
             if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = announcementTagService.dealDelAnnouncementTag(loginUser, delId);
+                Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
                 result.setCount(delCount);
                 dealCommonSuccessCatch(result, "删除公告标签:" + actionSuccessMsg);
             }

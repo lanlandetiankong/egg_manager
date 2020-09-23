@@ -69,7 +69,7 @@ public class UserLoginController extends BaseController {
             if (loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(), loginAccountVo.getPassword())) {
                 throw new LoginFormFieldDeficiencyException("账号名或密码");
             }
-            UserAccount userAccount = userAccountService.dealGetAccountByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
+            UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             if (userAccount == null) {
                 throw new Exception("账号未注册！");
             } else {

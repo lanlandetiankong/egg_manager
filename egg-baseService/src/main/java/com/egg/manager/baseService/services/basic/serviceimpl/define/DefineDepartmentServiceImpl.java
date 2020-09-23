@@ -18,7 +18,6 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +52,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineDepartmentVo> dealGetDefineDepartmentDtoPages(UserAccount loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -124,7 +123,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefineDepartment(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeCreate(loginUser, defineDepartment, true);
         String parentId = defineDepartment.getParentId();
@@ -156,7 +155,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefineDepartment(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeUpdate(loginUser, defineDepartment);
@@ -192,7 +191,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineDepartmentByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -210,7 +209,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineDepartment(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineDepartment defineDepartment = super.doBeforeDeleteOneById(loginUser, DefineDepartment.class, delId);
         return defineDepartmentMapper.updateById(defineDepartment);
     }

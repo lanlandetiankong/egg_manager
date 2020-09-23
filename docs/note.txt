@@ -1,14 +1,13 @@
-super.doGetPageQueryWrapper(loginUser,result,queryFormFieldBeanList,paginationBean,sortBeans);
 
-super.doBeforeCreate(loginUser,,true);
+dealCreate
+dealUpdate
 
-super.doBeforeUpdate(loginUser,);
-
-super.doBeforeDeleteOneById(loginUser);
-
-
-UserAccount loginUser
+dealBatchDelete
+dealDeleteById
 
 
+dealGetEntityByDTO
+dealQueryPageByDtos
+dealQueryPageByEntitys
 
-MyBaseMysqlServiceImpl
+dealPublishByDraft

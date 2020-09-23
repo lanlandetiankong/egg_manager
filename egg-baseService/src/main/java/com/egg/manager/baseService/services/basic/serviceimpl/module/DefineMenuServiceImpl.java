@@ -1,7 +1,6 @@
 package com.egg.manager.baseService.services.basic.serviceimpl.module;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -28,9 +27,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineMenuTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -226,7 +223,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuPages(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineMenu> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
@@ -252,7 +249,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineMenuVo> dealGetDefineMenuDtoPages(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -270,7 +267,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefineMenu(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenu>());
         if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
@@ -312,7 +309,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefineMenu(UserAccount loginUser, DefineMenuVo defineMenuVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo, boolean updateAll) throws Exception {
         QueryWrapper<DefineMenu> uniWrapper = new QueryWrapper<DefineMenu>()
                 .ne("fid", defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
@@ -354,7 +351,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineMenuByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -372,7 +369,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineMenu(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineMenu defineMenu = super.doBeforeDeleteOneById(loginUser, DefineMenu.class, delId);
         ;
         return defineMenuMapper.updateById(defineMenu);

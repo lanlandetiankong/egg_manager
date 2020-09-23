@@ -21,13 +21,12 @@ import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraf
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
-import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +41,9 @@ import java.util.Map;
 @Service(interfaceClass = AnnouncementDraftService.class)
 public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementDraftMapper, AnnouncementDraft, AnnouncementDraftVo>
         implements AnnouncementDraftService {
+    @Autowired
+    private AnnouncementTransfer announcementTransfer ;
+
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -62,10 +64,10 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealGetAnnouncementDraftDtoPages(UserAccount loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                                 List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllAnnouncementTagToMap();
+        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
         Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
@@ -81,7 +83,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddAnnouncementDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraft entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
         entity = super.doBeforeCreate(loginUser, entity, true);
         Integer addCount = announcementDraftMapper.insert(entity);
@@ -96,7 +98,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateAnnouncementDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraft entity = announcementDraftMapper.selectById(announcementDraftVo.getFid());
         entity = super.doBeforeUpdate(loginUser, entity);
         entity.setTitle(announcementDraftVo.getTitle());
@@ -122,7 +124,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelAnnouncementDraftByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -140,7 +142,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelAnnouncementDraft(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         AnnouncementDraft announcementDraft = super.doBeforeDeleteOneById(loginUser, AnnouncementDraft.class, delId);
         return announcementDraftMapper.updateById(announcementDraft);
     }
@@ -154,13 +156,13 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealPublishAnnouncementDraftByArr(UserAccount loginUser, String[] draftIds) throws Exception {
+    public Integer dealBatchPublishByDraft(UserAccount loginUser, String[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {
             List<String> delIdList = Arrays.asList(draftIds);
             //批量伪删除
             for (String draftId : draftIds) {
-                Integer addCount = this.dealPublishAnnouncementDraft(loginUser, draftId, true);
+                Integer addCount = this.dealPublishByDraft(loginUser, draftId, true);
                 if (addCount != null) {
                     delCount += addCount;
                 }
@@ -178,9 +180,9 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealPublishAnnouncementDraft(UserAccount loginUser, String draftId, boolean insertFlag) throws Exception {
+    public Integer dealPublishByDraft(UserAccount loginUser, String draftId, boolean insertFlag) throws Exception {
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
-        Announcement announcement = this.draftTranslateToAnnouncement(loginUser, announcementDraft);
+        Announcement announcement = announcementTransfer.transferFromDraft(loginUser, announcementDraft);
         if (announcement != null && insertFlag == true) {       //发布
             announcementMapper.insert(announcement);
         }
@@ -195,31 +197,4 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
 
-    @Override
-    public Announcement draftTranslateToAnnouncement(UserAccount loginUser, AnnouncementDraft announcementDraft) {
-        Announcement announcement = null;
-        if (announcementDraft != null) {
-            Date now = new Date();
-            announcement = new Announcement();
-            announcement.setFid(announcementDraft.getFid());
-            announcement.setTitle(announcementDraft.getTitle());
-            announcement.setKeyWord(announcementDraft.getKeyWord());
-            announcement.setPublishDepartment(announcementDraft.getPublishDepartment());
-            announcement.setContent(announcementDraft.getContent());
-            announcement.setTagIds(announcementDraft.getTagIds());
-            announcement.setAccessory(announcementDraft.getAccessory());
-            announcement.setState(announcementDraft.getState());
-            announcement.setRemark(announcementDraft.getRemark());
-            announcement.setCreateTime(now);
-            announcement.setUpdateTime(now);
-            if (loginUser != null) {
-                announcement.setCreateUserId(loginUser.getFid());
-                announcement.setLastModifyerId(loginUser.getFid());
-            } else {
-                announcement.setCreateUserId(announcementDraft.getCreateUserId());
-                announcement.setLastModifyerId(announcementDraft.getLastModifyerId());
-            }
-        }
-        return announcement;
-    }
 }

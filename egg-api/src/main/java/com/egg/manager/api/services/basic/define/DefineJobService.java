@@ -30,7 +30,7 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealGetDefineJobPages(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                       List<AntdvSortBean> sortBeans);
 
     /**
@@ -40,7 +40,7 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealGetDefineJobDtoPages(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                          List<AntdvSortBean> sortBeans);
 
     /**
@@ -48,7 +48,7 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param defineJobVo
      * @throws Exception
      */
-    Integer dealAddDefineJob(UserAccount loginUser,DefineJobVo defineJobVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser,DefineJobVo defineJobVo) throws Exception ;
 
     /**
      * 职务账号-更新
@@ -56,21 +56,21 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param updateAll 是否更新所有字段
      * @throws Exception
      */
-    Integer dealUpdateDefineJob(UserAccount loginUser,DefineJobVo defineJobVo, boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineJobVo defineJobVo, boolean updateAll) throws Exception ;
 
     /**
      * 职务账号-删除
      * @param delIds 要删除的职务id 集合
      * @throws Exception
      */
-    Integer dealDelDefineJobByArr(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 职务账号-删除
      * @param delId 要删除的职务id
      * @throws Exception
      */
-    Integer dealDelDefineJob(UserAccount loginUser,String delId) throws Exception ;
+    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
 
 
 

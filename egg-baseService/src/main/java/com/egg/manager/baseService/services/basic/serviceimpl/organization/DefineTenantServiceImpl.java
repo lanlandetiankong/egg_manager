@@ -20,7 +20,6 @@ import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
-import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,7 +57,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<DefineTenantVo> dealGetDefineTenantDtoPages(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
         Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -76,7 +75,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddDefineTenant(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeCreate(loginUser, defineTenant, true);
         Integer addCount = defineTenantMapper.insert(defineTenant);
@@ -93,7 +92,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateDefineTenant(UserAccount loginUser, DefineTenantVo defineTenantVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeUpdate(loginUser, defineTenant);
@@ -113,7 +112,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineTenantByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -131,7 +130,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelDefineTenant(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineTenant updateWrapper = super.doBeforeDeleteOneById(loginUser, DefineTenant.class, delId);
         Integer count = defineTenantMapper.updateById(updateWrapper);
         return count;

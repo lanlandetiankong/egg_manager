@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.pojo.mysql.mapstruct.imap.announcement;
 
 import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
+import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.announcement.AnnouncementConversion;
@@ -41,4 +42,10 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
     AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<String, AnnouncementTag> announcementTagMap);
+
+
+    @Mappings({
+
+    })
+    Announcement transferFromDraftEntity(AnnouncementDraft draft);
 }

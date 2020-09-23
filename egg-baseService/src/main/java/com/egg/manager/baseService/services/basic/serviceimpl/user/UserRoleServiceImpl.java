@@ -24,9 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserRoleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
-import javafx.scene.control.Pagination;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -124,7 +122,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRolePages(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
@@ -149,7 +147,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      * @param paginationBean
      */
     @Override
-    public MyCommonResult<UserRoleVo> dealGetUserRoleDtoPages(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    public MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
         Page<UserRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -167,7 +165,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealAddUserRole(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
+    public Integer dealCreate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeCreate(loginUser, userRole, true);
         Integer addCount = userRoleMapper.insert(userRole);
@@ -184,7 +182,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealUpdateUserRole(UserAccount loginUser, UserRoleVo userRoleVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeUpdate(loginUser, userRole);
@@ -205,7 +203,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserRoleByArr(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Arrays.asList(delIds);
@@ -223,7 +221,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealDelUserRole(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserRole userRole = super.doBeforeDeleteOneById(loginUser, UserRole.class, delId);
         Integer delCount = userRoleMapper.updateById(userRole);
         return delCount;

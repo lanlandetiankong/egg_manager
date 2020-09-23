@@ -43,14 +43,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     private DefineDepartmentMapper defineDepartmentMapper;
 
 
-    /**
-     * 分页查询 部门定义 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                               List<AntdvSortBean> sortBeans) {
@@ -62,14 +54,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
 
-    /**
-     * [部门展示]的子节点 构建的 TreeSelect 结构
-     * 用于 a-tree-select
-     *
-     * @param rootId
-     * @param allDepartments
-     * @return
-     */
     @Override
     public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, String rootId, List<DefineDepartment> allDepartments) {
         if (allDepartments == null || allDepartments.size() == 0) {
@@ -97,14 +81,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         return childList;
     }
 
-    /**
-     * [部门展示]的子节点 构建的 TreeSelect 结构(包含最顶层)
-     * 用于 a-tree-select
-     *
-     * @param rootId
-     * @param allDefineDepartments
-     * @return
-     */
     @Override
     public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, String rootId, List<DefineDepartment> allDefineDepartments) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser, rootId, allDefineDepartments);
@@ -115,12 +91,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
 
-    /**
-     * 部门定义-新增
-     *
-     * @param defineDepartmentVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
@@ -146,13 +116,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
 
-    /**
-     * 部门定义-更新
-     *
-     * @param defineDepartmentVo
-     * @param updateAll          是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception {
@@ -183,12 +146,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         return changeCount;
     }
 
-    /**
-     * 部门定义-删除
-     *
-     * @param delIds 要删除的部门id 集合
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -201,12 +159,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         return delCount;
     }
 
-    /**
-     * 部门定义-删除
-     *
-     * @param delId 要删除的部门id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

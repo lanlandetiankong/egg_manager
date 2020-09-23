@@ -70,12 +70,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     private UserRoleService userRoleService;
 
 
-    /**
-     * 取得用户 所拥有的 角色定义-List集合
-     *
-     * @param userAccountId
-     * @return
-     */
     @Override
     public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId, Short stateVal) {
         if (StringUtils.isBlank(userAccountId)) {
@@ -89,12 +83,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         }
     }
 
-    /**
-     * 取得用户 所拥有的 角色code-Set集合
-     *
-     * @param userAccountId
-     * @return
-     */
     @Override
     public Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
@@ -111,12 +99,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 取得角色 所拥有的 菜单定义-List集合
-     *
-     * @param roleId
-     * @return
-     */
+
     @Override
     public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal) {
         if (StringUtils.isBlank(roleId)) {
@@ -126,12 +109,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         }
     }
 
-    /**
-     * 查询 所有[可用状态]的 [角色定义]
-     *
-     * @param wrapper
-     * @return
-     */
+
     @Override
     public List<DefineRole> queryAllEnableList(QueryWrapper<DefineRole> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefineRole>();
@@ -142,12 +120,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 取得角色 所拥有的 菜单定义id-Set集合
-     *
-     * @param roleId
-     * @return
-     */
     @Override
     public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId, Short stateVal) {
         Set<String> idSet = Sets.newHashSet();
@@ -187,13 +159,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 分页查询 角色定义 列表
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
@@ -211,14 +176,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 分页查询 角色定义 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
@@ -230,12 +187,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 角色定义-新增
-     *
-     * @param defineRoleVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineRoleVo defineRoleVo) throws Exception {
@@ -246,13 +197,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 角色定义-更新
-     *
-     * @param defineRoleVo
-     * @param updateAll    是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineRoleVo defineRoleVo, boolean updateAll) throws Exception {
@@ -267,12 +211,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         return changeCount;
     }
 
-    /**
-     * 角色定义-删除
-     *
-     * @param delIds 要删除的角色id 集合
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -285,12 +224,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         return delCount;
     }
 
-    /**
-     * 角色定义-删除
-     *
-     * @param delId 要删除的角色id
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
@@ -299,13 +233,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 角色授权
-     *
-     * @param roleId   要授权的角色id
-     * @param checkIds 权限id集合
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealGrantPermissionToRole(UserAccount loginUser, String roleId, String[] checkIds) throws Exception {

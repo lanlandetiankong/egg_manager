@@ -53,11 +53,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     @Autowired
     private UserRoleMapper userRoleMapper;
 
-    /**
-     * 取得当前用户关联的 UserRole
-     *
-     * @return
-     */
+
     @Override
     public List<UserRole> dealGetAllByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -70,11 +66,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return userRoleList;
     }
 
-    /**
-     * 从数据库是中取得当前用户关联的 UserRole
-     *
-     * @return
-     */
+
     @Override
     public List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -88,11 +80,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return userRoleList;
     }
 
-    /**
-     * 从Redis中取得当前用户关联的 UserRole
-     *
-     * @return
-     */
+
     @Override
     public List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -114,13 +102,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    /**
-     * 分页查询 用户角色列表
-     *
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                            List<AntdvSortBean> sortBeans) {
@@ -138,14 +119,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    /**
-     * 分页查询 用户角色 Dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
@@ -157,12 +130,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    /**
-     * 用户角色-新增
-     *
-     * @param userRoleVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
@@ -173,13 +140,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    /**
-     * 用户角色-更新
-     *
-     * @param userRoleVo
-     * @param updateAll  是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo, boolean updateAll) throws Exception {
@@ -195,12 +155,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    /**
-     * 用户角色-删除
-     *
-     * @param delIds 要删除的用户角色id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -213,12 +167,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return delCount;
     }
 
-    /**
-     * 用户角色-删除
-     *
-     * @param delId 要删除的用户角色id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

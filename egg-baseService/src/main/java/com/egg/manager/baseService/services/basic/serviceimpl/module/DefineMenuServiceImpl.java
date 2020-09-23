@@ -55,12 +55,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Autowired
     private UserAccountMapper userAccountMapper;
 
-    /**
-     * 查询 用户 可访问的[菜单定义]
-     *
-     * @param userAccountId
-     * @return
-     */
     @Override
     public List<DefineMenu> dealGetUserGrantedMenusByAccountId(String userAccountId) {
         if (StringUtils.isBlank(userAccountId)) {
@@ -74,12 +68,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         }
     }
 
-    /**
-     * 查询 用户 可访问的 菜单路径
-     *
-     * @param userAccountId
-     * @return
-     */
+
     @Override
     public Set<String> dealGetUserVisitAbleUrl(String userAccountId) {
         Set<String> urlSets = new HashSet<>();
@@ -98,12 +87,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return urlSets;
     }
 
-    /**
-     * 查询 用户 可访问的[菜单定义] Tree
-     *
-     * @param userAccountId
-     * @return
-     */
     @Override
     public List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId) {
         List<DefineMenu> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
@@ -111,12 +94,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return treeList != null ? treeList : new ArrayList<CommonMenuTree>();
     }
 
-    /**
-     * 查询 所有[可用状态]的 [菜单定义]
-     *
-     * @param queryWrapper
-     * @return
-     */
     @Override
     public List<DefineMenu> getAllEnableList(QueryWrapper<DefineMenu> queryWrapper) {
         queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<DefineMenu>();
@@ -128,13 +105,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return defineMenuMapper.selectList(queryWrapper);
     }
 
-    /**
-     * [菜单展示]的子节点 构建的树结构
-     *
-     * @param rootId
-     * @param allMenus
-     * @return
-     */
+
     @Override
     public List<CommonMenuTree> getMenuTreeChildNodes(String rootId, List<DefineMenu> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
@@ -162,14 +133,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * [菜单展示]的子节点 构建的 TreeSelect 结构
-     * 用于 a-tree-select
-     *
-     * @param rootId
-     * @param allMenus
-     * @return
-     */
+
     @Override
     public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId, List<DefineMenu> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
@@ -197,14 +161,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return childList;
     }
 
-    /**
-     * [菜单展示]的子节点 构建的 TreeSelect 结构(包含最顶层)
-     * 用于 a-tree-select
-     *
-     * @param rootId
-     * @param allMenus
-     * @return
-     */
+
     @Override
     public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId, List<DefineMenu> allMenus) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(rootId, allMenus);
@@ -215,13 +172,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * 分页查询 模块
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
+
     @Override
     public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
@@ -240,14 +191,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * 分页查询 菜单定义
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
@@ -259,12 +202,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * 模块定义-新增
-     *
-     * @param defineMenuVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
@@ -300,13 +237,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * 模块定义-更新
-     *
-     * @param defineMenuVo
-     * @param updateAll    是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo, boolean updateAll) throws Exception {
@@ -343,12 +273,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return changeCount;
     }
 
-    /**
-     * 模块定义-删除
-     *
-     * @param delIds 要删除的模块id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -361,12 +285,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return delCount;
     }
 
-    /**
-     * 模块定义-删除
-     *
-     * @param delId 要删除的模块id
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
@@ -376,13 +295,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-    /**
-     * 验证 数据库 中的唯一冲突
-     *
-     * @param defineMenuVo
-     * @param queryWrapper
-     * @return
-     */
+
     @Override
     public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> queryWrapper) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();

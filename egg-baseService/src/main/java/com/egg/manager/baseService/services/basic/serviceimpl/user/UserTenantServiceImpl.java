@@ -58,11 +58,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     private RedisHelper redisHelper;
 
 
-    /**
-     * 取得当前用户关联的 UserTenant
-     *
-     * @return
-     */
+
     @Override
     public List<UserTenant> dealGetAllByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -75,11 +71,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         return userTenant;
     }
 
-    /**
-     * 从数据库是中取得当前用户关联的 UserTenant
-     *
-     * @return
-     */
+
     @Override
     public List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -93,11 +85,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         return userTenant;
     }
 
-    /**
-     * 从Redis中取得当前用户关联的 UserTenant
-     *
-     * @return
-     */
+
     @Override
     public List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -119,13 +107,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    /**
-     * 分页查询 用户与租户关联 列表
-     *
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
@@ -143,14 +124,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    /**
-     * 分页查询 用户与租户关联  Dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
@@ -162,12 +135,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    /**
-     * 用户与租户关联 -新增
-     *
-     * @param userTenantVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserTenantVo userTenantVo) throws Exception {
@@ -179,13 +146,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    /**
-     * 用户与租户关联 -更新
-     *
-     * @param userTenantVo
-     * @param updateAll    是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserTenantVo userTenantVo, boolean updateAll) throws Exception {
@@ -201,12 +161,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    /**
-     * 用户与租户关联 -删除
-     *
-     * @param delIds 要删除的用户与租户关联 id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -219,12 +173,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         return delCount;
     }
 
-    /**
-     * 用户与租户关联 -删除
-     *
-     * @param delId 要删除的用户与租户关联 id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

@@ -22,11 +22,23 @@ import java.util.List;
  * \
  */
 public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<UserRoleMapper,UserRole,UserRoleVo> {
-
+    /**
+     * 取得当前用户关联的 UserRole
+     *
+     * @return
+     */
     List<UserRole> dealGetAllByAccount(UserAccount account);
-
+    /**
+     * 从数据库是中取得当前用户关联的 UserRole
+     *
+     * @return
+     */
     List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount);
-
+    /**
+     * 从Redis中取得当前用户关联的 UserRole
+     *
+     * @return
+     */
     List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 

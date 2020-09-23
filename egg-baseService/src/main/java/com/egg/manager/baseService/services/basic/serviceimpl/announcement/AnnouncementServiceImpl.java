@@ -61,13 +61,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     private AnnouncementDraftService announcementDraftService;
 
 
-    /**
-     * 分页查询 公告
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
@@ -86,14 +79,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return result;
     }
 
-    /**
-     * 分页查询 公告 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
@@ -107,12 +92,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return result;
     }
 
-    /**
-     * 新增公告
-     *
-     * @param announcementVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, AnnouncementVo announcementVo) throws Exception {
@@ -122,12 +101,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
 
-    /**
-     * 公告草稿发布
-     *
-     * @param announcementDraftVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreateFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
@@ -151,12 +124,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
 
-    /**
-     * 公告-删除
-     *
-     * @param delIds 要删除的公告id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -169,12 +136,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return delCount;
     }
 
-    /**
-     * 公告-删除
-     *
-     * @param delId 要删除的公告id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

@@ -22,11 +22,23 @@ import java.util.List;
  * \
  */
 public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlService<UserTenantMapper,UserTenant,UserTenantVo> {
-
+    /**
+     * 取得当前用户关联的 UserTenant
+     *
+     * @return
+     */
     List<UserTenant> dealGetAllByAccount(UserAccount account);
-
+    /**
+     * 从数据库是中取得当前用户关联的 UserTenant
+     *
+     * @return
+     */
     List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount);
-
+    /**
+     * 从Redis中取得当前用户关联的 UserTenant
+     *
+     * @return
+     */
     List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 

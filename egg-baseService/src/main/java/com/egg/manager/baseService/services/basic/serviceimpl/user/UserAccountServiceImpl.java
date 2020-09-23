@@ -58,12 +58,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     @Autowired
     private UserDepartmentMapper userDepartmentMapper;
 
-    /**
-     * 根据 LoginAccountDTO 取得对应的 UserAccountXlsModel
-     *
-     * @param loginAccountDTO
-     * @return
-     */
     @Override
     public UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
         QueryWrapper<UserAccount> wrapper = new QueryWrapper<UserAccount>();
@@ -74,13 +68,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 分页查询 用户列表
-     *
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                  List<AntdvSortBean> sortBeans) {
@@ -97,14 +84,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return result;
     }
 
-    /**
-     * 分页查询 用户 Dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                     List<AntdvSortBean> sortBeans) {
@@ -137,13 +116,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户账号-新增
-     *
-     * @param userAccountVo
-     * @param loginUser     当前登录用户
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
@@ -181,14 +153,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户账号-更新
-     *
-     * @param userAccountVo
-     * @param loginUser     当前登录用户
-     * @param updateAll     是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
@@ -226,7 +190,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             QueryWrapper<UserDepartment> departmentQueryWrapper = new QueryWrapper<UserDepartment>();
             departmentQueryWrapper.eq("user_account_id", userAccount.getFid())
                     .eq("state", BaseStateEnum.ENABLED.getValue());
-            QueryWrapper<UserAccount> userAccountQueryWrapper = dealGetFilterEnable(userAccount.getFid());
             UserDepartment userDepartment = userDepartmentMapper.selectOne(departmentQueryWrapper);
             if (userDepartment == null) {
                 userDepartment = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
@@ -242,13 +205,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户账号-删除
-     *
-     * @param delIds    要删除的用户账号id 集合
-     * @param loginUser 当前登录用户
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -261,13 +217,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return delCount;
     }
 
-    /**
-     * 用户账号-删除
-     *
-     * @param delId     要删除的用户账号id
-     * @param loginUser 当前登录用户
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
@@ -277,14 +226,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户账号-锁定
-     *
-     * @param lockIds   要锁定的用户账号id 集合
-     * @param loginUser 当前登录用户
-     * @param isLock    是否锁定
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
@@ -298,14 +239,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return lockCount;
     }
 
-    /**
-     * 用户账号-锁定
-     *
-     * @param lockId    要锁定的用户账号id
-     * @param loginUser 当前登录用户
-     * @param isLock    是否锁定
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealRenewLock(UserAccount loginUser, String lockId, boolean isLock) throws Exception {
@@ -319,14 +253,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户分配角色
-     *
-     * @param userAccountId 用户id
-     * @param checkIds      角色id集合
-     * @param loginUser     当前登录用户
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealGrantRoleToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
@@ -382,14 +308,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    /**
-     * 用户分配职务
-     *
-     * @param userAccountId 用户id
-     * @param checkIds      职务id集合
-     * @param loginUser     当前登录用户
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealGrantJobToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
@@ -478,11 +396,4 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return accountSet;
     }
 
-    public QueryWrapper<UserAccount> dealGetFilterEnable(String fid){
-        QueryWrapper<UserAccount> wrapper = new QueryWrapper<UserAccount>();
-        wrapper.setEntity(new UserAccount());
-        wrapper.eq("fid", fid)
-                .eq("state", BaseStateEnum.ENABLED.getValue());
-        return wrapper;
-    }
 }

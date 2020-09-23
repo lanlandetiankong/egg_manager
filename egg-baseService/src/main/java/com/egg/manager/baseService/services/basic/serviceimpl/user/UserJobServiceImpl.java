@@ -41,13 +41,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     private UserJobMapper userJobMapper;
 
 
-    /**
-     * 分页查询 用户职务列表
-     *
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                          List<AntdvSortBean> sortBeans) {
@@ -64,14 +57,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return result;
     }
 
-    /**
-     * 分页查询 用户职务 Dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
+
     @Override
     public MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
@@ -83,12 +69,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     }
 
 
-    /**
-     * 用户职务-新增
-     *
-     * @param userJobVo
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
@@ -99,13 +80,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     }
 
 
-    /**
-     * 用户职务-更新
-     *
-     * @param userJobVo
-     * @param updateAll 是否更新所有字段
-     * @throws Exception
-     */
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo, boolean updateAll) throws Exception {
@@ -121,12 +96,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     }
 
 
-    /**
-     * 用户职务-删除
-     *
-     * @param delIds 要删除的用户职务id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -139,12 +108,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return delCount;
     }
 
-    /**
-     * 用户职务-删除
-     *
-     * @param delId 要删除的用户职务id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

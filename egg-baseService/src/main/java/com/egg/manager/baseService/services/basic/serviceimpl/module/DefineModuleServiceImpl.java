@@ -42,13 +42,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     private DefineModuleMapper defineModuleMapper;
 
 
-    /**
-     * 分页查询 模块 列表
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
@@ -67,14 +60,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     }
 
 
-    /**
-     * 分页查询 模块 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
@@ -86,12 +71,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     }
 
 
-    /**
-     * 模块定义-新增
-     *
-     * @param defineModuleVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
@@ -101,13 +80,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     }
 
 
-    /**
-     * 模块定义-更新
-     *
-     * @param defineModuleVo
-     * @param updateAll      是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo, boolean updateAll) throws Exception {
@@ -122,12 +94,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         return changeCount;
     }
 
-    /**
-     * 模块定义-删除
-     *
-     * @param delIds 要删除的模块id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -140,12 +106,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         return delCount;
     }
 
-    /**
-     * 模块定义-删除
-     *
-     * @param delId 要删除的模块id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

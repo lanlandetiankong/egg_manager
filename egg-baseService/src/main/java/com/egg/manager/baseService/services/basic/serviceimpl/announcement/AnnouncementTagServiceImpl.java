@@ -44,13 +44,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     @Autowired
     private AnnouncementTagMapper announcementTagMapper;
 
-    /**
-     * 分页查询 公告标签 列表
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                          List<AntdvSortBean> sortBeans) {
@@ -67,14 +60,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return result;
     }
 
-    /**
-     * 分页查询 公告标签 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                             List<AntdvSortBean> sortBeans) {
@@ -85,10 +70,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return result;
     }
 
-    /***
-     * 查询可用的 公告标签 并转为map
-     * @return
-     */
     @Override
     public Map<String, AnnouncementTag> dealGetAllToMap() {
         Map<String, AnnouncementTag> map = new HashMap<String, AnnouncementTag>();
@@ -104,12 +85,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
 
-    /**
-     * 公告标签-新增
-     *
-     * @param announcementTagVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
@@ -119,13 +94,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
 
-    /**
-     * 公告标签-更新
-     *
-     * @param announcementTagVo
-     * @param updateAll         是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, AnnouncementTagVo announcementTagVo, boolean updateAll) throws Exception {
@@ -140,12 +108,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return changeCount;
     }
 
-    /**
-     * 公告标签-删除
-     *
-     * @param delIds 要删除的公告标签id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -158,12 +120,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return delCount;
     }
 
-    /**
-     * 公告标签-删除
-     *
-     * @param delId 要删除的公告标签id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
@@ -172,11 +128,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return delCount;
     }
 
-    /**
-     * 取得的结果 转为 枚举类型
-     *
-     * @param result
-     */
     @Override
     public MyCommonResult dealResultListToEnums(MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();

@@ -20,6 +20,10 @@ import java.util.List;
  */
 public interface RolePermissionService extends IService<RolePermission>,MyBaseMysqlService<RolePermissionMapper,RolePermission,RolePermissionVo> {
 
-
+    /**
+     * 查询 角色列表 拥有的所有权限
+     * @param defineRoles
+     * @return
+     */
     List<DefinePermission> dealQueryPageByEntitys(List<DefineRole> defineRoles) ;
 }

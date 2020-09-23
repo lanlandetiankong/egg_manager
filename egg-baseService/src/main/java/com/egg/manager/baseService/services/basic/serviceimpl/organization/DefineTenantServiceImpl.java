@@ -48,14 +48,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     private UserTenantMapper userTenantMapper;
 
 
-    /**
-     * 分页查询 租户
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                       List<AntdvSortBean> sortBeans) {
@@ -67,12 +59,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
 
-    /**
-     * 租户定义-新增
-     *
-     * @param defineTenantVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
@@ -83,13 +69,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
 
-    /**
-     * 租户定义-更新
-     *
-     * @param defineTenantVo
-     * @param updateAll      是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo, boolean updateAll) throws Exception {
@@ -104,12 +83,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return changeCount;
     }
 
-    /**
-     * 租户定义-删除
-     *
-     * @param delIds 要删除的租户id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -122,12 +95,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return delCount;
     }
 
-    /**
-     * 租户定义-删除
-     *
-     * @param delId 要删除的租户id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
@@ -137,11 +104,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
 
-    /**
-     * 取得的结果 转为 枚举类型
-     *
-     * @param result
-     */
     @Override
     public MyCommonResult dealResultListToEnums(UserAccount loginUser, MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();

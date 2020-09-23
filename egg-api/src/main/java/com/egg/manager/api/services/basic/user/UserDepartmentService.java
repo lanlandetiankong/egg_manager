@@ -28,9 +28,17 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      * @return
      */
     List<UserDepartment> dealQueryListByAccount(UserAccount account);
-
+    /**
+     * 从数据库是中取得当前用户关联的 UserDepartment
+     *
+     * @return
+     */
     List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount);
-
+    /**
+     * 从Redis中取得当前用户关联的 UserDepartment
+     *
+     * @return
+     */
     List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 

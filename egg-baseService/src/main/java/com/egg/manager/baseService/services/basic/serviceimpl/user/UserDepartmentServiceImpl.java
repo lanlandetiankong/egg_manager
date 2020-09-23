@@ -54,11 +54,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     private RedisHelper redisHelper;
 
 
-    /**
-     * 取得当前用户关联的 UserDepartment
-     *
-     * @return
-     */
     @Override
     public List<UserDepartment> dealQueryListByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -71,11 +66,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         return userDepartment;
     }
 
-    /**
-     * 从数据库是中取得当前用户关联的 UserDepartment
-     *
-     * @return
-     */
+
     @Override
     public List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -89,11 +80,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         return userDepartment;
     }
 
-    /**
-     * 从Redis中取得当前用户关联的 UserDepartment
-     *
-     * @return
-     */
+
     @Override
     public List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
@@ -115,13 +102,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    /**
-     * 分页查询 用户与部门关联 列表
-     *
-     * @param result
-     * @param queryFormFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                                        List<AntdvSortBean> sortBeans) {
@@ -139,14 +119,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    /**
-     * 分页查询 用户与部门关联  Dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     *
-     * @param result
-     * @param queryFieldBeanList
-     * @param paginationBean
-     */
     @Override
     public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
                                                                           List<AntdvSortBean> sortBeans) {
@@ -158,12 +130,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    /**
-     * 用户与部门关联 -新增
-     *
-     * @param userDepartmentVo
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
@@ -174,13 +140,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    /**
-     * 用户与部门关联 -更新
-     *
-     * @param userDepartmentVo
-     * @param updateAll        是否更新所有字段
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo, boolean updateAll) throws Exception {
@@ -196,12 +155,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    /**
-     * 用户与部门关联 -删除
-     *
-     * @param delIds 要删除的用户与部门关联 id 集合
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
@@ -214,12 +167,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         return delCount;
     }
 
-    /**
-     * 用户与部门关联 -删除
-     *
-     * @param delId 要删除的用户与部门关联 id
-     * @throws Exception
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {

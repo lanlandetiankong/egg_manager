@@ -20,7 +20,7 @@ public class SmartFormTypeDefinitionMServiceImpl extends MyBaseMongoServiceImpl<
         implements SmartFormTypeDefinitionMService {
 
     @Override
-    public MyCommonResult<SmartFormTypeDefinitionMO> dealResultListSetToEntitySelect(MyCommonResult<SmartFormTypeDefinitionMO> result, List<SmartFormTypeDefinitionMO> list) {
+    public MyCommonResult<SmartFormTypeDefinitionMO> dealResultListToEnums(MyCommonResult<SmartFormTypeDefinitionMO> result, List<SmartFormTypeDefinitionMO> list) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(list)) {
             for (SmartFormTypeDefinitionMO typeDefinitionMO : list) {

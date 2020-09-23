@@ -70,7 +70,7 @@ public class AnnouncementTagController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
-            result = announcementTagService.dealResultListSetToEntitySelect(result);
+            result = announcementTagService.dealResultListToEnums(result);
             dealCommonSuccessCatch(result, "查询公告标签信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

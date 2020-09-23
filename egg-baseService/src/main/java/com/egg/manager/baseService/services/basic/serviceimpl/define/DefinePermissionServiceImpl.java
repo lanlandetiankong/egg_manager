@@ -58,7 +58,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @return
      */
     @Override
-    public List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper) {
+    public List<DefinePermission> getAllEnableList(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefinePermission>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
@@ -187,7 +187,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealEnsureDefinePermissionByArr(UserAccount loginUser, String[] ensureIds) {
+    public Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds) {
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
             List<String> delIdList = Arrays.asList(ensureIds);
@@ -218,13 +218,13 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
      * @return
      */
     @Override
-    public List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser, String userAccountId) {
+    public List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, String userAccountId) {
         if (StringUtils.isBlank(userAccountId)) {
             return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
         if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
-            return getAllEnableDefinePermissions(loginUser, null);
+            return getAllEnableList(loginUser, null);
         } else {
             return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
         }
@@ -239,7 +239,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     @Override
     public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
-        List<DefinePermission> definePermissions = this.dealGetPermissionsByAccountFromDb(loginUser, userAccountId);
+        List<DefinePermission> definePermissions = this.dealGetListByAccountFromDb(loginUser, userAccountId);
         if (definePermissions != null && definePermissions.isEmpty() == false) {
             for (DefinePermission definePermission : definePermissions) {
                 String permissionCode = definePermission.getCode();

@@ -86,5 +86,5 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * 取得的结果 转为 枚举类型
      * @param result
      */
-    MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result);
+    MyCommonResult dealResultListToEnums(MyCommonResult result);
 }

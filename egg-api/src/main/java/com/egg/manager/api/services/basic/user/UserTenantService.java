@@ -23,11 +23,11 @@ import java.util.List;
  */
 public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlService<UserTenantMapper,UserTenant,UserTenantVo> {
 
-    List<UserTenant> dealGetAllUserTenantByAccount(UserAccount account);
+    List<UserTenant> dealGetAllByAccount(UserAccount account);
 
-    List<UserTenant> dealGetAllUserTenantByAccountFromDb(UserAccount userAccount);
+    List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount);
 
-    List<UserTenant> dealGetAllUserTenantByAccountFromRedis(UserAccount userAccount);
+    List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 
     /**

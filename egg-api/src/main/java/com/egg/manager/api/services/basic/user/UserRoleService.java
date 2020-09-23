@@ -23,11 +23,11 @@ import java.util.List;
  */
 public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<UserRoleMapper,UserRole,UserRoleVo> {
 
-    List<UserRole> dealGetAllUserRoleByAccount(UserAccount account);
+    List<UserRole> dealGetAllByAccount(UserAccount account);
 
-    List<UserRole> dealGetAllUserRoleByAccountFromDb(UserAccount userAccount);
+    List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount);
 
-    List<UserRole> dealGetAllUserRoleByAccountFromRedis(UserAccount userAccount);
+    List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 
     /**

@@ -113,7 +113,7 @@ public class DefineTenantController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, null, sortBeans);
-            result = defineTenantService.dealResultListSetToEntitySelect(loginUser, result);
+            result = defineTenantService.dealResultListToEnums(loginUser, result);
             dealCommonSuccessCatch(result, "查询租户定义信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

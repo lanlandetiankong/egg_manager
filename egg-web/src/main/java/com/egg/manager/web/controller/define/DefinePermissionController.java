@@ -202,7 +202,7 @@ public class DefinePermissionController extends BaseController {
         Integer delCount = 0;
         try {
             if (ensureIds != null && ensureIds.length > 0) {
-                delCount = definePermissionService.dealEnsureDefinePermissionByArr(loginUser, ensureIds);
+                delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
                 dealCommonSuccessCatch(result, "批量启用权限定义:" + actionSuccessMsg);
             }
             result.setCount(delCount);

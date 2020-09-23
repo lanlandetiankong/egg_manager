@@ -64,9 +64,9 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        List<UserDepartment> userDepartment = dealGetAllUserDepartmentByAccountFromRedis(userAccount);
+        List<UserDepartment> userDepartment = dealGetAllByAccountFromRedis(userAccount);
         if (userDepartment == null || userDepartment.isEmpty()) {
-            userDepartment = dealGetAllUserDepartmentByAccountFromDb(userAccount);
+            userDepartment = dealGetAllByAccountFromDb(userAccount);
         }
         return userDepartment;
     }
@@ -77,7 +77,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @return
      */
     @Override
-    public List<UserDepartment> dealGetAllUserDepartmentByAccountFromDb(UserAccount userAccount) {
+    public List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
@@ -95,7 +95,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
      * @return
      */
     @Override
-    public List<UserDepartment> dealGetAllUserDepartmentByAccountFromRedis(UserAccount userAccount) {
+    public List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }

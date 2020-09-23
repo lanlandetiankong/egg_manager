@@ -60,9 +60,15 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * @param wrapper
      * @return
      */
-    List<DefineRole> getAllEnableDefineRoles(QueryWrapper<DefineRole> wrapper);
+    List<DefineRole> queryAllEnableList(QueryWrapper<DefineRole> wrapper);
 
-    List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) ;
+    /**
+     * 根据 用户账号 取得所有角色
+     *
+     * @param userAccount
+     * @return
+     */
+    List<DefineRole> dealGetListFormRedisByAccount(UserAccount userAccount) ;
 
 
 

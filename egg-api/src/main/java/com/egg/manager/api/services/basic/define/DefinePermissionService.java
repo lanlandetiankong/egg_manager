@@ -32,7 +32,7 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param wrapper
      * @return
      */
-    List<DefinePermission> getAllEnableDefinePermissions(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper);
+    List<DefinePermission> getAllEnableList(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper);
 
     /**
      * 分页查询 权限定义 列表
@@ -88,14 +88,14 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * @param ensureIds 要启用的权限id 集合
      * @throws Exception
      */
-    Integer dealEnsureDefinePermissionByArr(UserAccount loginUser,String[] ensureIds);
+    Integer dealBatchEnsure(UserAccount loginUser,String[] ensureIds);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> dealGetPermissionsByAccountFromDb(UserAccount loginUser,String userAccountId) ;
+    List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser,String userAccountId) ;
     /**
      * 取得用户 所拥有的 权限code-Set集合
      * @param userAccountId

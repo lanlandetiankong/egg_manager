@@ -143,7 +143,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
      * @param result
      */
     @Override
-    public MyCommonResult dealResultListSetToEntitySelect(UserAccount loginUser, MyCommonResult result) {
+    public MyCommonResult dealResultListToEnums(UserAccount loginUser, MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList();
         if (resultList != null && resultList.isEmpty() == false) {

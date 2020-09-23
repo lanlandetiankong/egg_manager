@@ -70,7 +70,7 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * 取得的结果 转为 枚举类型
      * @param result
      */
-    MyCommonResult dealResultListSetToEntitySelect(UserAccount loginUser,MyCommonResult result);
+    MyCommonResult dealResultListToEnums(UserAccount loginUser,MyCommonResult result);
 
     /**
      * 租户设置管理员

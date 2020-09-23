@@ -287,7 +287,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealLockUserAccountByArr(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
@@ -308,7 +308,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer dealLockUserAccount(UserAccount loginUser, String lockId, boolean isLock) throws Exception {
+    public Integer dealRenewLock(UserAccount loginUser, String lockId, boolean isLock) throws Exception {
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build();
         if (loginUser != null) {

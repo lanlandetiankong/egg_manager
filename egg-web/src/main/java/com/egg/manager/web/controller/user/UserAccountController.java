@@ -278,7 +278,7 @@ public class UserAccountController extends BaseController {
             String lockMsg = lockFlag ? "锁定" : "解锁";
             if (lockIds != null && lockIds.length > 0) {
                 //批量伪删除
-                lockCount = userAccountService.dealLockUserAccountByArr(loginUser, lockIds, lockFlag);
+                lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
                 result.setCount(lockCount);
                 dealCommonSuccessCatch(result, "批量" + lockMsg + "用户:" + actionSuccessMsg);
             }
@@ -300,7 +300,7 @@ public class UserAccountController extends BaseController {
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
             if (StringUtils.isNotBlank(lockId)) {
-                lockCount = userAccountService.dealLockUserAccount(loginUser, lockId, lockFlag);
+                lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
                 dealCommonSuccessCatch(result, lockMsg + "用户:" + actionSuccessMsg);
             }
             result.setCount(lockCount);

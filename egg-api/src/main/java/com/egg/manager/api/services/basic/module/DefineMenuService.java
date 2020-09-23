@@ -55,7 +55,7 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * @param queryWrapper
      * @return
      */
-    List<DefineMenu> getAllEnableDefineMenus(QueryWrapper<DefineMenu> queryWrapper);
+    List<DefineMenu> getAllEnableList(QueryWrapper<DefineMenu> queryWrapper);
     /**
      * [菜单展示]的子节点 构建的树结构
      * @param rootId

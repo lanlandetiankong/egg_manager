@@ -97,7 +97,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccountByArr(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception ;
+    Integer dealBatchRenewLock(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception ;
     /**
      * 用户账号-锁定
      * @param lockId 要锁定的用户账号id
@@ -105,7 +105,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @throws Exception
      */
-    Integer dealLockUserAccount(UserAccount loginUser,String lockId,boolean isLock) throws Exception ;
+    Integer dealRenewLock(UserAccount loginUser,String lockId,boolean isLock) throws Exception ;
 
 
     /**

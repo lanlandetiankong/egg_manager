@@ -29,9 +29,9 @@ public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMy
      */
     List<UserDepartment> dealQueryListByAccount(UserAccount account);
 
-    List<UserDepartment> dealGetAllUserDepartmentByAccountFromDb(UserAccount userAccount);
+    List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount);
 
-    List<UserDepartment> dealGetAllUserDepartmentByAccountFromRedis(UserAccount userAccount);
+    List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount);
 
 
     /**

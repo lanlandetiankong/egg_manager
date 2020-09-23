@@ -83,7 +83,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
         if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
-            return getAllEnableDefineRoles(null);
+            return queryAllEnableList(null);
         } else {
             return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, stateVal);
         }
@@ -133,7 +133,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
      * @return
      */
     @Override
-    public List<DefineRole> getAllEnableDefineRoles(QueryWrapper<DefineRole> wrapper) {
+    public List<DefineRole> queryAllEnableList(QueryWrapper<DefineRole> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefineRole>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
@@ -164,15 +164,10 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    /**
-     * 根据 用户账号 取得所有角色
-     *
-     * @param userAccount
-     * @return
-     */
+
     @Override
-    public List<DefineRole> dealGetRolesFormRedisByAccount(UserAccount userAccount) {
-        List<UserRole> userRoles = userRoleService.dealGetAllUserRoleByAccount(userAccount);
+    public List<DefineRole> dealGetListFormRedisByAccount(UserAccount userAccount) {
+        List<UserRole> userRoles = userRoleService.dealGetAllByAccount(userAccount);
         List<DefineRole> defineRoles = null;
         if (userRoles == null || userRoles.isEmpty()) {
             return defineRoles;

@@ -64,13 +64,13 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      * @return
      */
     @Override
-    public List<UserTenant> dealGetAllUserTenantByAccount(UserAccount userAccount) {
+    public List<UserTenant> dealGetAllByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        List<UserTenant> userTenant = dealGetAllUserTenantByAccountFromRedis(userAccount);
+        List<UserTenant> userTenant = dealGetAllByAccountFromRedis(userAccount);
         if (userTenant == null || userTenant.isEmpty()) {
-            userTenant = dealGetAllUserTenantByAccountFromDb(userAccount);
+            userTenant = dealGetAllByAccountFromDb(userAccount);
         }
         return userTenant;
     }
@@ -81,7 +81,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      * @return
      */
     @Override
-    public List<UserTenant> dealGetAllUserTenantByAccountFromDb(UserAccount userAccount) {
+    public List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
@@ -99,7 +99,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
      * @return
      */
     @Override
-    public List<UserTenant> dealGetAllUserTenantByAccountFromRedis(UserAccount userAccount) {
+    public List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }

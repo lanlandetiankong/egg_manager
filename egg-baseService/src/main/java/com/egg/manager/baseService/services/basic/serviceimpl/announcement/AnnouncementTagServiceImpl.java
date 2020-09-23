@@ -178,7 +178,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
      * @param result
      */
     @Override
-    public MyCommonResult dealResultListSetToEntitySelect(MyCommonResult result) {
+    public MyCommonResult dealResultListToEnums(MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<AnnouncementTagVo> resultList = result.getResultList();
         if (CollectionUtil.isNotEmpty(resultList)) {

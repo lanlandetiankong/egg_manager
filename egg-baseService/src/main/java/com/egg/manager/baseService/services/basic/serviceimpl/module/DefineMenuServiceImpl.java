@@ -68,7 +68,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
         if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
-            return getAllEnableDefineMenus(null);
+            return getAllEnableList(null);
         } else {
             return defineMenuMapper.getUserGrantedMenusByAccountId(userAccountId);
         }
@@ -118,7 +118,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
      * @return
      */
     @Override
-    public List<DefineMenu> getAllEnableDefineMenus(QueryWrapper<DefineMenu> queryWrapper) {
+    public List<DefineMenu> getAllEnableList(QueryWrapper<DefineMenu> queryWrapper) {
         queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<DefineMenu>();
         //筛选与排序
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());

@@ -16,5 +16,5 @@ public interface SmartFormTypeDefinitionMService extends MyBaseMongoService<Smar
      * 数据转枚举select
      * @param result
      */
-    MyCommonResult<SmartFormTypeDefinitionMO> dealResultListSetToEntitySelect(MyCommonResult<SmartFormTypeDefinitionMO> result,List<SmartFormTypeDefinitionMO> list);
+    MyCommonResult<SmartFormTypeDefinitionMO> dealResultListToEnums(MyCommonResult<SmartFormTypeDefinitionMO> result,List<SmartFormTypeDefinitionMO> list);
 }

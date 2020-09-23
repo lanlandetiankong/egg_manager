@@ -59,13 +59,13 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      * @return
      */
     @Override
-    public List<UserRole> dealGetAllUserRoleByAccount(UserAccount userAccount) {
+    public List<UserRole> dealGetAllByAccount(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        List<UserRole> userRoleList = dealGetAllUserRoleByAccountFromRedis(userAccount);
+        List<UserRole> userRoleList = dealGetAllByAccountFromRedis(userAccount);
         if (userRoleList == null || userRoleList.isEmpty()) {
-            userRoleList = dealGetAllUserRoleByAccountFromDb(userAccount);
+            userRoleList = dealGetAllByAccountFromDb(userAccount);
         }
         return userRoleList;
     }
@@ -76,7 +76,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      * @return
      */
     @Override
-    public List<UserRole> dealGetAllUserRoleByAccountFromDb(UserAccount userAccount) {
+    public List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
@@ -94,7 +94,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
      * @return
      */
     @Override
-    public List<UserRole> dealGetAllUserRoleByAccountFromRedis(UserAccount userAccount) {
+    public List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount) {
         if (checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }

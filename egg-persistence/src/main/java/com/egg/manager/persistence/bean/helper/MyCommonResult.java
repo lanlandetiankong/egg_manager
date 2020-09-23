@@ -138,7 +138,7 @@ public class MyCommonResult<T> implements Serializable {
     private Set<String> permissionSet;
 
 
-    public void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean, Long total) {
+    public <T> void myAntdvPaginationBeanSet(AntdvPaginationBean<T> paginationBean, Long total) {
         if (paginationBean != null) {
             paginationBean.setTotal(total);
         }

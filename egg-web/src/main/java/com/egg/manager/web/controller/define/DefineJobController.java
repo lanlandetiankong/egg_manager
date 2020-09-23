@@ -13,6 +13,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 import com.egg.manager.web.controller.BaseController;
@@ -66,7 +67,7 @@ public class DefineJobController extends BaseController {
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
+            AntdvPaginationBean<DefineJob> paginationBean = this.parsePaginationJsonToBean(paginationObj,DefineJob.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
@@ -95,7 +96,7 @@ public class DefineJobController extends BaseController {
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
+            AntdvPaginationBean<DefineJobDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,DefineJobDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);

@@ -50,7 +50,7 @@ public class AntdvPaginationBean<T> extends MyBasePagination {
      * 默认分页
      * @return
      */
-    public static AntdvPaginationBean gainDefaultPaginationBean(){
-        return new AntdvPaginationBean(1,10,0L);
+    public static <T> AntdvPaginationBean<T> gainDefaultPaginationBean(Class<T> clazz){
+        return new AntdvPaginationBean<T>(1,10,0L);
     }
 }

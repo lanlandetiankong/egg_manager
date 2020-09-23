@@ -9,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineJobMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJob> paginationBean,
                                                       List<AntdvSortBean> sortBeans);
 
     /**
@@ -40,7 +41,7 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
                                                          List<AntdvSortBean> sortBeans);
 
     /**

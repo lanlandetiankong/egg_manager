@@ -16,6 +16,7 @@ import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.egg.manager.web.controller.BaseController;
@@ -69,7 +70,7 @@ public class DefineDepartmentController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
+            AntdvPaginationBean<DefineDepartmentDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineDepartmentService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);

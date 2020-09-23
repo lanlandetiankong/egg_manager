@@ -10,6 +10,7 @@ import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
                                                                        List<AntdvSortBean> sortBeans);
 
 

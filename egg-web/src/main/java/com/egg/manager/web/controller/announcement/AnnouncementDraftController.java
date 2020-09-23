@@ -15,6 +15,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraf
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.web.controller.BaseController;
@@ -74,7 +75,7 @@ public class AnnouncementDraftController extends BaseController {
                 queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
+            AntdvPaginationBean<AnnouncementDraftDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDraftDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementDraftService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);

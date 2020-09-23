@@ -9,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModule> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**
@@ -40,7 +41,7 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
     /**
      * 模块定义-新增

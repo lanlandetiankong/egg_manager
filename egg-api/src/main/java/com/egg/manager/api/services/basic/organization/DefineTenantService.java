@@ -9,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**

@@ -9,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlServi
      * @param queryFormFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserTenant> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
@@ -58,7 +59,7 @@ public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlServi
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
 

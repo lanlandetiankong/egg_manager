@@ -13,6 +13,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
 import com.egg.manager.web.controller.BaseController;
@@ -89,7 +90,7 @@ public class AnnouncementTagController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean paginationBean = parsePaginationJsonToBean(paginationObj);
+            AntdvPaginationBean<AnnouncementTagDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,AnnouncementTagDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);

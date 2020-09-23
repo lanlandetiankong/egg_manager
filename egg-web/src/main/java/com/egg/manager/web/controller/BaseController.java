@@ -19,6 +19,7 @@ import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -249,12 +250,12 @@ public class BaseController {
      * @param paginationJson
      * @return
      */
-    public AntdvPaginationBean parsePaginationJsonToBean(String paginationJson) {
-        AntdvPaginationBean paginationBean = null;
+    public <T> AntdvPaginationBean<T> parsePaginationJsonToBean(String paginationJson,Class<T> clazz) {
+        AntdvPaginationBean<T> paginationBean = null;
         if (StringUtils.isNotBlank(paginationJson)) {
             paginationBean = JSONObject.parseObject(paginationJson, AntdvPaginationBean.class);
         } else {
-            paginationBean = AntdvPaginationBean.gainDefaultPaginationBean();
+            paginationBean = AntdvPaginationBean.gainDefaultPaginationBean(clazz);
         }
         return paginationBean;
     }

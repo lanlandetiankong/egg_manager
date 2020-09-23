@@ -10,6 +10,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraft;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                                                          List<AntdvSortBean> sortBeans);
 
     /**

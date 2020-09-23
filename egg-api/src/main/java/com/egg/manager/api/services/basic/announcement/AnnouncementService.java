@@ -11,6 +11,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraf
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementDraftMapper;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
 
@@ -48,7 +49,7 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**
@@ -58,7 +59,7 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**

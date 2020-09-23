@@ -9,6 +9,7 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
+import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTag> paginationBean,
                                                                   List<AntdvSortBean> sortBeans);
     /**
      * 分页查询 公告标签 dto列表
@@ -40,7 +41,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * @param queryFieldBeanList
      * @param paginationBean
      */
-    MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean paginationBean,
+    MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
                                                                      List<AntdvSortBean> sortBeans);
 
     /***

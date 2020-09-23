@@ -59,7 +59,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public List<UserRole> dealGetAllByAccount(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         List<UserRole> userRoleList = dealGetAllByAccountFromRedis(userAccount);
@@ -72,7 +72,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         QueryWrapper<UserRole> userRoleEm = new QueryWrapper<UserRole>();
@@ -86,7 +86,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         Object userRoleListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserRolesKey(), userAccount.getFid());
@@ -94,14 +94,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         List<UserRole> userRoleList = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRole>>() {
         });
         return userRoleList;
-    }
-
-
-    private boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
-            return true;
-        }
-        return false;
     }
 
 

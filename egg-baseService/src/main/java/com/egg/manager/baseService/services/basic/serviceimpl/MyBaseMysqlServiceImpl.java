@@ -201,5 +201,12 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
         return pagination;
     }
 
+    @Override
+    public boolean checkUserAccountIsBlank(UserAccount userAccount) {
+        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
+            return true;
+        }
+        return false;
+    }
 
 }

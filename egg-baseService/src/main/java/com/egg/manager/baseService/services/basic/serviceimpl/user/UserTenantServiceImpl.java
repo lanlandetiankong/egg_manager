@@ -64,7 +64,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Override
     public List<UserTenant> dealGetAllByAccount(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         List<UserTenant> userTenant = dealGetAllByAccountFromRedis(userAccount);
@@ -77,7 +77,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Override
     public List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         QueryWrapper<UserTenant> userTenantEm = new QueryWrapper<UserTenant>();
@@ -91,7 +91,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Override
     public List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         Object userTenantListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserTenantKey(), userAccount.getFid());
@@ -99,14 +99,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         List<UserTenant> userTenant = JSON.parseObject(userTenantListJson, new TypeReference<ArrayList<UserTenant>>() {
         });
         return userTenant;
-    }
-
-
-    private boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
-            return true;
-        }
-        return false;
     }
 
 

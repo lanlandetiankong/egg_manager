@@ -59,7 +59,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public List<UserDepartment> dealQueryListByAccount(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         List<UserDepartment> userDepartment = dealGetAllByAccountFromRedis(userAccount);
@@ -72,7 +72,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         QueryWrapper<UserDepartment> userDepartmentEm = new QueryWrapper<UserDepartment>();
@@ -86,7 +86,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount) {
-        if (checkUserAccountIsBlank(userAccount) == true) {
+        if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
         Object userDepartmentListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserDepartmentKey(), userAccount.getFid());
@@ -94,14 +94,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         List<UserDepartment> userDepartment = JSON.parseObject(userDepartmentListJson, new TypeReference<ArrayList<UserDepartment>>() {
         });
         return userDepartment;
-    }
-
-
-    private boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
-            return true;
-        }
-        return false;
     }
 
 

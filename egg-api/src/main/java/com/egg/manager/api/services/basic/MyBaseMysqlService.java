@@ -111,4 +111,12 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
      * @throws IllegalAccessException
      */
     //UserAccountXlsModel gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
+
+
+    /**
+     * 判断UserAccount是否为空
+     * @param userAccount
+     * @return
+     */
+    boolean checkUserAccountIsBlank(UserAccount userAccount);
 }

@@ -20,6 +20,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineTenantService.class)
 public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenantMapper, DefineTenant, DefineTenantVo>
         implements DefineTenantService {
@@ -59,7 +62,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
@@ -69,7 +71,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -83,7 +84,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return changeCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -95,7 +95,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineTenant updateWrapper = super.doBeforeDeleteOneById(loginUser, DefineTenant.class, delId);
@@ -117,7 +116,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return result;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception {
         Integer changeCount = 0;

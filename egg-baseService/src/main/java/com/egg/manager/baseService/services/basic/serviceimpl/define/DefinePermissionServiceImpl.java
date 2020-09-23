@@ -24,6 +24,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
 import com.google.common.collect.Sets;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,8 @@ import java.util.Set;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefinePermissionService.class)
 public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper, DefinePermission, DefinePermissionVo> implements DefinePermissionService {
     @Autowired
@@ -87,7 +90,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, new QueryWrapper());
@@ -102,7 +104,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo, boolean updateAll) throws Exception {
         QueryWrapper<DefinePermission> uniWrapper = new QueryWrapper<DefinePermission>()
@@ -127,7 +128,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) {
         Integer delCount = 0;
@@ -139,7 +139,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds) {
         Integer delCount = 0;
@@ -151,7 +150,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);

@@ -10,8 +10,10 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RolePermissionVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,8 @@ import java.util.Set;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = RolePermissionService.class)
 public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermissionMapper, RolePermission, RolePermissionVo> implements RolePermissionService {
 

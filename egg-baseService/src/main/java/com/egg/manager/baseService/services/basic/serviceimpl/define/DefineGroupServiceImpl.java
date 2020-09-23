@@ -6,6 +6,8 @@ import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlService
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.db.mysql.mapper.define.DefineGroupMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * \* note:
@@ -15,6 +17,8 @@ import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineGroupService.class)
 public class DefineGroupServiceImpl extends MyBaseMysqlServiceImpl<DefineGroupMapper, DefineGroup, DefineGroupVo> implements DefineGroupService {
 

@@ -23,6 +23,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraft
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,8 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = AnnouncementDraftService.class)
 public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementDraftMapper, AnnouncementDraft, AnnouncementDraftVo>
         implements AnnouncementDraftService {
@@ -67,7 +70,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
         return result;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraft entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
@@ -76,7 +78,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
         return addCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraft entity = announcementDraftMapper.selectById(announcementDraftVo.getFid());
@@ -96,7 +97,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -108,7 +108,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         AnnouncementDraft announcementDraft = super.doBeforeDeleteOneById(loginUser, AnnouncementDraft.class, delId);
@@ -116,7 +115,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchPublishByDraft(UserAccount loginUser, String[] draftIds) throws Exception {
         Integer delCount = 0;
@@ -134,7 +132,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealPublishByDraft(UserAccount loginUser, String draftId, boolean insertFlag) throws Exception {
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);

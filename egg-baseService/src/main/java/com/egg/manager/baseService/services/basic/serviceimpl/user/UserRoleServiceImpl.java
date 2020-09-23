@@ -24,6 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserRoleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserRoleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserRoleService.class)
 public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, UserRole, UserRoleVo> implements UserRoleService {
     @Autowired
@@ -129,8 +132,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return result;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
@@ -139,8 +140,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return addCount;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -154,8 +153,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return changeCount;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -167,7 +164,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserRole userRole = super.doBeforeDeleteOneById(loginUser, UserRole.class, delId);

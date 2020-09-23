@@ -6,6 +6,8 @@ import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlService
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * \* note:
@@ -15,6 +17,8 @@ import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = RoleMenuService.class)
 public class RoleMenuServiceImpl extends MyBaseMysqlServiceImpl<RoleMenuMapper, RoleMenu, RoleMenuVo> implements RoleMenuService {
 

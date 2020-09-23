@@ -17,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineModuleService.class)
 public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModuleMapper, DefineModule, DefineModuleVo> implements DefineModuleService {
     @Autowired
@@ -71,7 +74,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
@@ -80,7 +82,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -94,7 +95,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         return changeCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -106,7 +106,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         DefineModule defineModule = super.doBeforeDeleteOneById(loginUser, DefineModule.class, delId);

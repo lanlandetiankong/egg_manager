@@ -6,6 +6,8 @@ import com.egg.manager.baseService.services.basic.serviceimpl.MyBaseMysqlService
 import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * \* note:
@@ -15,6 +17,8 @@ import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserGroupService.class)
 public class UserGroupServiceImpl extends MyBaseMysqlServiceImpl<UserGroupMapper, UserGroup, UserGroupVo> implements UserGroupService {
 

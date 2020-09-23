@@ -26,6 +26,7 @@ import com.egg.manager.persistence.pojo.mysql.transfer.announcement.Announcement
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,8 @@ import java.util.Map;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = AnnouncementService.class)
 public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper, Announcement, AnnouncementVo>
         implements AnnouncementService {
@@ -92,7 +95,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return result;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, AnnouncementVo announcementVo) throws Exception {
         Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
@@ -101,7 +103,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreateFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         Date now = new Date();
@@ -124,7 +125,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -136,7 +136,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         Announcement announcement = super.doBeforeDeleteOneById(loginUser, Announcement.class, delId);

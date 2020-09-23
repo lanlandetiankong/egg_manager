@@ -24,6 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserDepartmentService.class)
 public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper, UserDepartment, UserDepartmentVo> implements UserDepartmentService {
 
@@ -130,7 +133,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
@@ -140,7 +142,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -155,7 +156,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -167,7 +167,6 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserDepartment userDepartment = super.doBeforeDeleteOneById(loginUser, UserDepartment.class, delId);

@@ -29,6 +29,7 @@ import com.egg.manager.persistence.pojo.mysql.initialize.user.UserRolePojoInitia
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +44,8 @@ import java.util.*;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserAccountService.class)
 public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMapper, UserAccount, UserAccountVo> implements UserAccountService {
     @Autowired
@@ -116,7 +119,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
         if (this.dealCheckDuplicateKey(userAccountVo, new QueryWrapper<>())) {
@@ -153,7 +155,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
         QueryWrapper<UserAccount> uniWrapper = new QueryWrapper<UserAccount>()
@@ -205,7 +206,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -217,7 +217,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserAccount userAccount = super.doBeforeDeleteOneById(loginUser, UserAccount.class, delId);
@@ -226,7 +225,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
@@ -240,7 +238,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealRenewLock(UserAccount loginUser, String lockId, boolean isLock) throws Exception {
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
@@ -252,8 +249,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return lockCount;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealGrantRoleToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
@@ -308,7 +303,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealGrantJobToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;

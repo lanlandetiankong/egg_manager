@@ -10,9 +10,11 @@ import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordM
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service(interfaceClass = HelloService.class)
 @Slf4j
+@Transactional(rollbackFor = Exception.class)
+@Service(interfaceClass = HelloService.class)
 public class HelloServiceImpl implements HelloService {
     @Autowired
     private UserAccountService userAccountService;

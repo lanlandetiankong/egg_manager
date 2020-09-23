@@ -25,6 +25,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserTenantService.class)
 public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper, UserTenant, UserTenantVo> implements UserTenantService {
 
@@ -135,7 +138,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserTenantVo userTenantVo) throws Exception {
         Date now = new Date();
@@ -146,7 +148,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserTenantVo userTenantVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -161,7 +162,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -173,7 +173,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserTenant userTenant = super.doBeforeDeleteOneById(loginUser, UserTenant.class, delId);

@@ -17,6 +17,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserJobDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,8 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserJobService.class)
 public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, UserJob, UserJobVo> implements UserJobService {
     @Autowired
@@ -69,8 +72,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     }
 
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
@@ -79,9 +80,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return addCount;
     }
 
-
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo, boolean updateAll) throws Exception {
         Integer changeCount = 0;
@@ -95,8 +93,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return changeCount;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
@@ -108,7 +104,6 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return delCount;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         UserJob userJob = super.doBeforeDeleteOneById(loginUser, UserJob.class, delId);

@@ -72,7 +72,7 @@ public class UserLoginController extends BaseController {
             //取得用户
             UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             Assert.notNull(userAccount,"账号不存在!"+actionFailMsg);
-            Assert.isFalse(userAccount.getPassword().equals(loginAccountVo.getPassword()),"账号密码不匹配!"+actionFailMsg);
+            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()),"账号密码不匹配!"+actionFailMsg);
             if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
                 //账号密码验证通过

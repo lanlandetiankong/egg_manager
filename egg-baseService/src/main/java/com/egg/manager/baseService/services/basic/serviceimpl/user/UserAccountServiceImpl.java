@@ -66,7 +66,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         QueryWrapper<UserAccount> wrapper = new QueryWrapper<UserAccount>();
         wrapper.setEntity(new UserAccount());
         wrapper.eq("account", loginAccountDTO.getAccount())
-                .eq("state", UserAccountStateEnum.DELETE.getValue());
+                .eq("state", UserAccountStateEnum.ENABLED.getValue());
         return userAccountMapper.selectOne(wrapper);
     }
 

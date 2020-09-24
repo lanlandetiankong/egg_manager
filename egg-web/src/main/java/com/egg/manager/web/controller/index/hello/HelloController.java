@@ -37,7 +37,6 @@ public class HelloController extends BaseController {
 
     @Reference
     private MessageHelloService messageHelloService;
-    @Autowired
     private CommonMenuTree commonMenuTree ;
 
     @PcWebQueryLog(action = "测试当前开发环境", description = "测试当前开发环境", fullPath = "/index/hello/testEnv", flag = false)

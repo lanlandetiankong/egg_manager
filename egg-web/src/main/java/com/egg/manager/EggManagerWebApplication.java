@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jms.annotation.EnableJms;
 
 
@@ -15,6 +16,7 @@ import org.springframework.jms.annotation.EnableJms;
 @EnableCaching
 @EnableDubbo
 @EnableMongoAuditing
+@EnableMongoRepositories
 @EnableEncryptableProperties
 @EnableEggBeanScan(basePackages = {"com.egg.manager"})
 public class EggManagerWebApplication {

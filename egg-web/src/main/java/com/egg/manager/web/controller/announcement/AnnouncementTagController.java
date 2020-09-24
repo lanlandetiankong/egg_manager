@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.announcement;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -108,6 +109,7 @@ public class AnnouncementTagController extends BaseController {
                                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>();
         try {
+            Assert.notBlank(announcementTagId,"未知id:"+actionFailMsg);
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result, "查询公告标签信息:" + actionSuccessMsg);
@@ -126,11 +128,9 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo>();
         Integer addCount = 0;
         try {
-            if (announcementTagVo == null) {
-                throw new Exception("未接收到有效的公告标签！");
-            } else {
-                addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
-            }
+            Assert.notNull(announcementTagVo,"未接收到有效的公告标签!"+actionFailMsg);
+
+            addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增公告标签:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -148,11 +148,9 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (announcementTagVo == null) {
-                throw new Exception("未接收到有效的公告标签！");
-            } else {
-                changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
-            }
+            Assert.notNull(announcementTagVo,"未接收到有效的公告标签!"+actionFailMsg);
+
+            changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新公告标签:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -173,10 +171,10 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除公告标签:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"批量删除公告标签:"+actionFailMsg);
+
+            delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除公告标签:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -195,11 +193,11 @@ public class AnnouncementTagController extends BaseController {
                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除公告标签:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+
+            Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除公告标签:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

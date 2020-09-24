@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.excel.user;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -60,6 +61,7 @@ public class UserExcelController extends BaseController {
             , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
+            Assert.notBlank(menuId,"未知id:"+actionFailMsg);
             DefineMenu defineMenu = defineMenuService.getById(menuId);
             if (defineMenu == null) {
                 throw new BusinessException("指定的无效的菜单！");
@@ -77,10 +79,9 @@ public class UserExcelController extends BaseController {
             , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
+            Assert.notBlank(menuId,"未知id:"+actionFailMsg);
             DefineMenu defineMenu = defineMenuService.getById(menuId);
-            if (defineMenu == null) {
-                throw new BusinessException("指定的无效的菜单！");
-            }
+            Assert.notNull(defineMenu,"无效菜单:"+actionFailMsg);
             //菜单模板配置
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
@@ -98,18 +99,15 @@ public class UserExcelController extends BaseController {
                                          @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (fileArr == null || fileArr.length == 0) {
-                throw new BusinessException("上传的文件为空！");
-            } else {
-                Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
-                for (MultipartFile file : fileArr) {
-                    EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))
-                            .sheet()
-                            .headRowNumber(1)   //前几行是头部，将不读取
-                            .doRead();
-                }
-                this.dealCommonSuccessCatch(result, "成功导入数据！");
+            Assert.notEmpty(fileArr,"上传的文件为空:"+actionFailMsg);
+            Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
+            for (MultipartFile file : fileArr) {
+                EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))
+                        .sheet()
+                        .headRowNumber(1)   //前几行是头部，将不读取
+                        .doRead();
             }
+            this.dealCommonSuccessCatch(result, "成功导入数据！");
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

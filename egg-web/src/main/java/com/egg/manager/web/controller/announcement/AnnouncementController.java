@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.announcement;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
@@ -123,7 +124,6 @@ public class AnnouncementController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            ;
             dealCommonSuccessCatch(result, "查询公告信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -153,7 +153,6 @@ public class AnnouncementController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
             result = announcementService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            ;
             dealCommonSuccessCatch(result, "查询公告信息部分列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -168,6 +167,8 @@ public class AnnouncementController extends BaseController {
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
         try {
+            Assert.notBlank(announcementId,"未知id:"+actionFailMsg);
+
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
@@ -189,10 +190,10 @@ public class AnnouncementController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = announcementService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除公告:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"批量删除公告:"+actionFailMsg);
+
+            delCount = announcementService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除公告:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -210,11 +211,11 @@ public class AnnouncementController extends BaseController {
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = announcementService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除公告:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"删除公告->未知id:" + actionFailMsg);
+
+            Integer delCount = announcementService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除公告:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

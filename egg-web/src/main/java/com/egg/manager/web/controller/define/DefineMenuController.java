@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,6 +31,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.util.Asserts;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +120,7 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询用户可以访问的路由菜单", description = "查询用户可以访问的路由菜单", fullPath = "/define/define_menu/user/getGrantedMenuTree")
     @PostMapping("/user/getGrantedMenuTree")
     public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenu> result = new MyCommonResult<DefineMenu>();
+        MyCommonResult<DefineMenu> result = new MyCommonResult();
         List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser, authorization, loginUser.getFid(), false);
         result.setResultList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
@@ -159,10 +162,12 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询菜单定义信息", description = "根据菜单定义id查询菜单定义信息", fullPath = "/define/define_menu/getDefineMenuById")
     @PostMapping(value = "/getDefineMenuById")
     public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request, String defineMenuId) {
-        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>();
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult();
         try {
-            DefineMenu defineMenu = defineMenuMapper.selectById(defineMenuId);
-            result.setBean(DefineMenuTransfer.transferEntityToVo(defineMenu));
+            Assert.notBlank(defineMenuId,"未知id:"+actionFailMsg);
+
+            DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
+            result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
             dealCommonSuccessCatch(result, "查询菜单定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -174,15 +179,13 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "新增菜单定义", notes = "表单方式新增菜单定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增菜单定义", description = "表单方式新增菜单定义", fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
-    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request, DefineMenuVo defineMenuVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>();
+    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineMenuVo> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            if (defineMenuVo == null) {
-                throw new Exception("未接收到有效的菜单定义！");
-            } else {
-                addCount = defineMenuService.dealCreate(loginUser, defineMenuVo);
-            }
+            Assert.notNull(vo,"未接收到有效的菜单定义！"+actionFailMsg);
+
+            addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增菜单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -195,15 +198,13 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "更新菜单定义", notes = "表单方式更新菜单定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "更新菜单定义", description = "表单方式更新菜单定义", fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
-    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo defineMenuVo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (defineMenuVo == null) {
-                throw new Exception("未接收到有效的菜单定义！");
-            } else {
-                changeCount = defineMenuService.dealUpdate(loginUser, defineMenuVo, false);
-            }
+            Assert.notNull(vo,"未接收到有效的菜单定义！"+actionFailMsg);
+
+            changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新菜单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -220,15 +221,17 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            DefineMenu defineMenu = defineMenuMapper.selectById(menuId);
+            Assert.notBlank(menuId,"未知id:"+actionFailMsg);
+
+            DefineMenu entity = defineMenuMapper.selectById(menuId);
             if (fileUploadBean != null) {
-                defineMenu.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
+                entity.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
             } else {
-                defineMenu.setExcelModelConf(null);
+                entity.setExcelModelConf(null);
             }
-            defineMenu.setLastModifyerId(loginUser.getFid());
-            defineMenu.setUpdateTime(new Date());
-            Integer changeCount = defineMenuMapper.updateById(defineMenu);
+            entity.setLastModifyerId(loginUser.getFid());
+            entity.setUpdateTime(new Date());
+            Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新菜单对应的Excel模板:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -247,10 +250,10 @@ public class DefineMenuController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除菜单定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"批量删除菜单定义:" + actionFailMsg);
+
+            delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除菜单定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -268,11 +271,11 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除菜单定义:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"删除菜单定义:" + actionFailMsg);
+
+            Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除菜单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

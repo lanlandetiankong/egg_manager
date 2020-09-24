@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.user;
 
+import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -186,11 +187,8 @@ public class UserAccountController extends BaseController {
         Integer addCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
-            if (userAccountVo == null) {
-                throw new Exception("未接收到有效的用户信息！");
-            } else {
-                addCount = userAccountService.dealCreate(loginUser, userAccountVo);
-            }
+            Assert.notNull(userAccountVo,"提交的form为空!"+actionFailMsg);
+            addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增用户:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -208,11 +206,8 @@ public class UserAccountController extends BaseController {
         Integer changeCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
-            if (userAccountVo == null) {
-                throw new Exception("未接收到有效的用户信息！");
-            } else {
-                changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
-            }
+            Assert.notNull(userAccountVo,"提交的form为空!"+actionFailMsg);
+            changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新用户:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -232,12 +227,11 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                //批量伪删除
-                delCount = userAccountService.dealBatchDelete(loginUser, delIds);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "批量删除用户:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            //批量伪删除
+            delCount = userAccountService.dealBatchDelete(loginUser, delIds);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "批量删除用户:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -255,10 +249,9 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                delCount = userAccountService.dealDeleteById(loginUser, delId);
-                dealCommonSuccessCatch(result, "删除用户:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            delCount = userAccountService.dealDeleteById(loginUser, delId);
+            dealCommonSuccessCatch(result, "删除用户:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -274,15 +267,15 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
         try {
+            Assert.notEmpty(lockIds,"未知id集合:"+actionFailMsg);
+
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
-            if (lockIds != null && lockIds.length > 0) {
-                //批量伪删除
-                lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
-                result.setCount(lockCount);
-                dealCommonSuccessCatch(result, "批量" + lockMsg + "用户:" + actionSuccessMsg);
-            }
+            //批量伪删除
+            lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
+            result.setCount(lockCount);
+            dealCommonSuccessCatch(result, "批量" + lockMsg + "用户:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -297,13 +290,12 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
         try {
+            Assert.notBlank(lockId,"未知id:"+actionFailMsg);
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
-            if (StringUtils.isNotBlank(lockId)) {
-                lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
-                dealCommonSuccessCatch(result, lockMsg + "用户:" + actionSuccessMsg);
-            }
+            lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
+            dealCommonSuccessCatch(result, lockMsg + "用户:" + actionSuccessMsg);
             result.setCount(lockCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -318,13 +310,10 @@ public class UserAccountController extends BaseController {
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(userAccountId)) {
-                Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
-                result.setCount(grantCount);
-                dealCommonSuccessCatch(result, "用户分配角色:" + actionSuccessMsg);
-            } else {
-                throw new BusinessException("未知要分配角色的用户id");
-            }
+            Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
+            Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
+            result.setCount(grantCount);
+            dealCommonSuccessCatch(result, "用户分配角色:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -339,13 +328,10 @@ public class UserAccountController extends BaseController {
                                            @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(userAccountId)) {
-                Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
-                result.setCount(grantCount);
-                dealCommonSuccessCatch(result, "用户分配职务:" + actionSuccessMsg);
-            } else {
-                throw new BusinessException("未知要分配职务的用户id");
-            }
+            Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
+            Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
+            result.setCount(grantCount);
+            dealCommonSuccessCatch(result, "用户分配职务:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

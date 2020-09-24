@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -132,11 +133,9 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
         Integer addCount = 0;
         try {
-            if (definePermissionVo == null) {
-                throw new Exception("未接收到有效的权限定义！");
-            } else {
-                addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
-            }
+            Assert.notNull(definePermissionVo,"提交的form为空!"+actionFailMsg);
+
+            addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增权限定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -153,6 +152,7 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
+            Assert.notNull(definePermissionVo,"提交的form为空!"+actionFailMsg);
             if (definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             } else {
@@ -167,31 +167,6 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除权限定义", description = "根据权限id批量删除权限定义", fullPath = "/define/define_permission/batchDelDefinePermissionByIds")
-    @ApiOperation(value = "批量删除权限定义", notes = "根据权限id批量删除权限定义", response = MyCommonResult.class, httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的权限定义id数组", required = true, dataTypeClass = String[].class),
-    })
-    @PostMapping(value = "/batchDelDefinePermissionByIds")
-    public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
-        Integer delCount = 0;
-        try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
-                StringBuffer respMsg = new StringBuffer("批量删除权限定义:" + actionSuccessMsg);
-                if (delIds.length > delCount) {
-                    respMsg.append("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
-                }
-                dealCommonSuccessCatch(result, respMsg.toString());
-            }
-            result.setCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
-        return result;
-    }
-
     @PcWebOperationLog(action = "批量启用权限定义", description = "根据权限id批量启用权限定义", fullPath = "/define/define_permission/batchEnsureDefinePermissionByIds")
     @ApiOperation(value = "批量启用权限", notes = "根据权限id批量启用权限定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
@@ -202,10 +177,9 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (ensureIds != null && ensureIds.length > 0) {
-                delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
-                dealCommonSuccessCatch(result, "批量启用权限定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(ensureIds,"未知id集合:"+actionFailMsg);
+            delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
+            dealCommonSuccessCatch(result, "批量启用权限定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -223,18 +197,41 @@ public class DefinePermissionController extends BaseController {
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = definePermissionService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                if (new Integer(0).equals(delCount)) {    //如果删除的是 [已启用的]，则抛出异常
-                    throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
-                }
-                dealCommonSuccessCatch(result, "删除权限定义:" + actionSuccessMsg);
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+
+            Integer delCount = definePermissionService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            if (new Integer(0).equals(delCount)) {    //如果删除的是 [已启用的]，则抛出异常
+                throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
+            dealCommonSuccessCatch(result, "删除权限定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
+    @PcWebOperationLog(action = "批量删除权限定义", description = "根据权限id批量删除权限定义", fullPath = "/define/define_permission/batchDelDefinePermissionByIds")
+    @ApiOperation(value = "批量删除权限定义", notes = "根据权限id批量删除权限定义", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "delIds", value = "要删除的权限定义id数组", required = true, dataTypeClass = String[].class),
+    })
+    @PostMapping(value = "/batchDelDefinePermissionByIds")
+    public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = new MyCommonResult();
+        Integer delCount = 0;
+        try {
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
 
+            delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
+            StringBuffer respMsg = new StringBuffer("批量删除权限定义:" + actionSuccessMsg);
+            if (delIds.length > delCount) {
+                respMsg.append("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
+            }
+            dealCommonSuccessCatch(result, respMsg.toString());
+            result.setCount(delCount);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
+        }
+        return result;
+    }
 }

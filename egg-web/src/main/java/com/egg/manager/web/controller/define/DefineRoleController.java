@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.role.RoleMenuService;
@@ -186,11 +187,8 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>();
         Integer addCount = 0;
         try {
-            if (defineRoleVo == null) {
-                throw new Exception("未接收到有效的角色定义！");
-            } else {
-                addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
-            }
+            Assert.notNull(defineRoleVo,"提交的form为空!"+actionFailMsg);
+            addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增角色定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -206,11 +204,9 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (defineRoleVo == null) {
-                throw new Exception("未接收到有效的角色定义！");
-            } else {
-                changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
-            }
+            Assert.notNull(defineRoleVo,"提交的form为空!"+actionFailMsg);
+
+            changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新角色定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -229,10 +225,10 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除角色定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+
+            delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除角色定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -249,11 +245,11 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除角色定义:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+
+            Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除角色定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -266,13 +262,10 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(roleId)) {
-                Integer grantCount = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
-                result.setCount(grantCount);
-                dealCommonSuccessCatch(result, "角色授权:" + actionSuccessMsg);
-            } else {
-                throw new BusinessException("未知要授权的角色id");
-            }
+            Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
+            Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
+            result.setCount(count);
+            dealCommonSuccessCatch(result, "角色授权:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -287,47 +280,45 @@ public class DefineRoleController extends BaseController {
                                              @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(roleId)) {
-                //取得前端所有 勾选的值
-                checkIds = checkIds != null ? checkIds : new String[]{};
-                halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};
-                Set<String> checkIdAll = Sets.newHashSet(checkIds);
-                checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
+            Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
 
-                //在数据库中 关联分别为 enable、delete 状态
-                Set<String> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
-                Set<String> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DELETE.getValue());
-                //所有 已经在数据库 有的关联行
-                Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
+            //取得前端所有 勾选的值
+            checkIds = checkIds != null ? checkIds : new String[]{};
+            halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};
+            Set<String> checkIdAll = Sets.newHashSet(checkIds);
+            checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
 
-                //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
-                Sets.SetView addSetView = Sets.difference(checkIdAll, oldEnableCheckIdSet);
-                Sets.SetView updateEnableIdSet = Sets.difference(checkIdAll, oldDelCheckIdSet);
-                Sets.SetView updateDelIdSet = Sets.difference(oldCheckIdAll, checkIdAll);
+            //在数据库中 关联分别为 enable、delete 状态
+            Set<String> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
+            Set<String> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DELETE.getValue());
+            //所有 已经在数据库 有的关联行
+            Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
 
-                if (addSetView != null && addSetView.isEmpty() == false) {
-                    List<RoleMenu> addRoleMenuList = Lists.newArrayList();
-                    Iterator<String> addIter = addSetView.iterator();
-                    while (addIter.hasNext()) {
-                        String diffNext = addIter.next();
-                        addRoleMenuList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
-                    }
-                    boolean flag = roleMenuService.saveBatch(addRoleMenuList);
+            //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
+            Sets.SetView addSetView = Sets.difference(checkIdAll, oldEnableCheckIdSet);
+            Sets.SetView updateEnableIdSet = Sets.difference(checkIdAll, oldDelCheckIdSet);
+            Sets.SetView updateDelIdSet = Sets.difference(oldCheckIdAll, checkIdAll);
+
+            if (addSetView != null && addSetView.isEmpty() == false) {
+                List<RoleMenu> addRoleMenuList = Lists.newArrayList();
+                Iterator<String> addIter = addSetView.iterator();
+                while (addIter.hasNext()) {
+                    String diffNext = addIter.next();
+                    addRoleMenuList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
                 }
-                if (updateEnableIdSet != null && updateEnableIdSet.isEmpty() == false) {
-                    Iterator<String> enableIter = updateEnableIdSet.iterator();
-                    List enableIdList = Lists.newArrayList(enableIter);
-                    int count = roleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUser);
-                }
-                if (updateDelIdSet != null && updateDelIdSet.isEmpty() == false) {
-                    Iterator<String> delIter = updateDelIdSet.iterator();
-                    List delIdList = Lists.newArrayList(delIter);
-                    int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUser);
-                }
-                dealCommonSuccessCatch(result, "授权菜单:" + actionSuccessMsg);
-            } else {
-                throw new BusinessException("未知要授权的角色id");
+                boolean flag = roleMenuService.saveBatch(addRoleMenuList);
             }
+            if (updateEnableIdSet != null && updateEnableIdSet.isEmpty() == false) {
+                Iterator<String> enableIter = updateEnableIdSet.iterator();
+                List enableIdList = Lists.newArrayList(enableIter);
+                int count = roleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUser);
+            }
+            if (updateDelIdSet != null && updateDelIdSet.isEmpty() == false) {
+                Iterator<String> delIter = updateDelIdSet.iterator();
+                List delIdList = Lists.newArrayList(delIter);
+                int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUser);
+            }
+            dealCommonSuccessCatch(result, "授权菜单:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

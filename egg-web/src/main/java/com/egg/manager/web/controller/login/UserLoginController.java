@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.login;
 
+import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
@@ -65,45 +66,40 @@ public class UserLoginController extends BaseController {
     ) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>();
         try {
-            //判断前端传递的
-            if (loginAccountVo == null || checkFieldStrBlank(loginAccountVo.getAccount(), loginAccountVo.getPassword())) {
-                throw new LoginFormFieldDeficiencyException("账号名或密码");
-            }
+            Assert.notNull(loginAccountVo,"提交的form为空!"+actionFailMsg);
+            Assert.notEmpty(loginAccountVo.getAccount(),"账号不能为空!"+actionFailMsg);
+            Assert.notNull(loginAccountVo.getPassword(),"密码不能为空!"+actionFailMsg);
+            //取得用户
             UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
-            if (userAccount == null) {
-                throw new Exception("账号未注册！");
-            } else {
-                if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
-                    UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
-                    //账号密码验证通过
-                    result.setAccountToken(userAccountToken);
-                    //用户登录信息验证成功，在shiro进行一些登录处理
-                    //添加用户认证信息
-                    Subject subject = SecurityUtils.getSubject();
-                    String authorization = JWTUtil.sign(userAccount.getFid());
-                    JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
-                    //进行验证，这里可以捕获异常，然后返回对应信息
-                    subject.login(jwtShiroToken);
-                    //所属租户
-                    DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccount.getFid());
-                    if (defineTenantDto != null) {
-                        userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
-                    }
-                    //所属部门
-                    DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccount.getFid());
-                    if (defineDepartmentDto != null) {
-                        userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
-                    }
-                    userAccountToken.setAuthorization(authorization);
-                    //redis30分钟过期
-                    this.dealSetTokenToRedis(loginUser, userAccountToken, result);
-                    //返回给前端 jwt jwt值
-                    result.setAuthorization(authorization);
-                } else {
-                    throw new Exception("账号密码不匹配！");
+            Assert.notNull(userAccount,"账号不存在!"+actionFailMsg);
+            Assert.isFalse(userAccount.getPassword().equals(loginAccountVo.getPassword()),"账号密码不匹配!"+actionFailMsg);
+            if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
+                UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
+                //账号密码验证通过
+                result.setAccountToken(userAccountToken);
+                //用户登录信息验证成功，在shiro进行一些登录处理
+                //添加用户认证信息
+                Subject subject = SecurityUtils.getSubject();
+                String authorization = JWTUtil.sign(userAccount.getFid());
+                JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
+                //进行验证，这里可以捕获异常，然后返回对应信息
+                subject.login(jwtShiroToken);
+                //所属租户
+                DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccount.getFid());
+                if (defineTenantDto != null) {
+                    userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
                 }
+                //所属部门
+                DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccount.getFid());
+                if (defineDepartmentDto != null) {
+                    userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
+                }
+                userAccountToken.setAuthorization(authorization);
+                //redis30分钟过期
+                this.dealSetTokenToRedis(loginUser, userAccountToken, result);
+                //返回给前端 jwt jwt值
+                result.setAuthorization(authorization);
             }
-
             dealCommonSuccessCatch(result, "用户登录:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

@@ -50,7 +50,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-        ;
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数

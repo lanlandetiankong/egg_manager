@@ -17,10 +17,10 @@ public enum UserAccountBaseTypeEnum {
 
     }
 
-    private Integer value ;
-    private String name ;
-    private String label ;
-    private boolean listAble ;  //是否可转化为 list
+    public Integer value ;
+    public String name ;
+    public String label ;
+    public boolean listAble ;  //是否可转化为 list
 
 
     public Integer getValue() {

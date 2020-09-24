@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -71,7 +72,6 @@ public class DefineJobController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            ;
             dealCommonSuccessCatch(result, "查询职务信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -100,7 +100,6 @@ public class DefineJobController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            ;
             dealCommonSuccessCatch(result, "查询职务信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -132,6 +131,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer addCount = 0;
         try {
+            Assert.notNull(defineJobVo,"提交的form为空!"+actionFailMsg);
             if (defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             } else {
@@ -153,11 +153,8 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (defineJobVo == null) {
-                throw new Exception("未接收到有效的职务信息！");
-            } else {
-                changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
-            }
+            Assert.notNull(defineJobVo,"提交的form为空!"+actionFailMsg);
+            changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新职务:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -177,12 +174,11 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                //批量伪删除
-                delCount = defineJobService.dealBatchDelete(loginUser, delIds);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "批量删除职务:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            //批量伪删除
+            delCount = defineJobService.dealBatchDelete(loginUser, delIds);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "批量删除职务:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -200,10 +196,9 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                delCount = defineJobService.dealDeleteById(loginUser, delId);
-                dealCommonSuccessCatch(result, "删除职务:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            delCount = defineJobService.dealDeleteById(loginUser, delId);
+            dealCommonSuccessCatch(result, "删除职务:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

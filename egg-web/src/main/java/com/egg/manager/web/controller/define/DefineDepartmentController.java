@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
@@ -88,6 +89,8 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
         try {
+            Assert.notBlank(defineDepartmentId,"未知id:"+actionFailMsg);
+
             DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
             dealCommonSuccessCatch(result, "查询部门定义信息:" + actionSuccessMsg);
@@ -133,11 +136,9 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
         Integer addCount = 0;
         try {
-            if (defineDepartmentVo == null) {
-                throw new Exception("未接收到有效的部门定义！");
-            } else {
-                addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
-            }
+            Assert.notNull(defineDepartmentVo,"提交的form为空!"+actionFailMsg);
+
+            addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增部门定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -155,11 +156,8 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (defineDepartmentVo == null) {
-                throw new Exception("未接收到有效的部门定义！");
-            } else {
-                changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
-            }
+            Assert.notNull(defineDepartmentVo,"提交的form为空!"+actionFailMsg);
+            changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新部门定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -179,10 +177,9 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"批量删除部门定义:"+actionFailMsg);
+            delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -200,11 +197,10 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"批量删除部门定义:"+actionFailMsg);
+            Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

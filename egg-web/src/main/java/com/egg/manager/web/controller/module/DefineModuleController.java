@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.module;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -102,11 +103,8 @@ public class DefineModuleController extends BaseController {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
         Integer addCount = 0;
         try {
-            if (defineModuleVo == null) {
-                throw new Exception("未接收到有效的模块定义！");
-            } else {
-                addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
-            }
+            Assert.notNull(defineModuleVo,"提交的form为空!"+actionFailMsg);
+            addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增模块定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -123,11 +121,8 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            if (defineModuleVo == null) {
-                throw new Exception("未接收到有效的模块定义！");
-            } else {
-                changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
-            }
+            Assert.notNull(defineModuleVo,"提交的form为空!"+actionFailMsg);
+            changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新模块定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -147,10 +142,9 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -168,11 +162,10 @@ public class DefineModuleController extends BaseController {
     public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

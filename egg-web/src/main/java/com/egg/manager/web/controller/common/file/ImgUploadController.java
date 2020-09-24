@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.common.file;
 
+import cn.hutool.core.lang.Assert;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
@@ -45,40 +46,39 @@ public class ImgUploadController extends BaseController {
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (file == null || file.isEmpty()) {
-                throw new BusinessException("上传的文件为空！");
-            } else {
-                try {
-                    byte[] fileBytes = file.getBytes();
-                    String oldFileName = file.getOriginalFilename();
-                    int lastDotIndex = oldFileName.lastIndexOf(".");
-                    String fileType = "";
-                    if (lastDotIndex > -1) {
-                        fileType = oldFileName.substring(lastDotIndex);
-                    }
-                    String uuidName = MyUUIDUtil.renderSimpleUUID() + fileType;
-                    String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
-                    String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
-                    File folder = new File(baseDir);
-                    if (folder.exists() == false) {
-                        folder.mkdirs();
-                    }
-                    //最终的存储路径
-                    String fileLocation = baseDir + File.separator + uuidName;
-                    Path path = Paths.get(fileLocation);
-                    Files.write(path, fileBytes);
+            Assert.notNull(file,"上传的文件为空!"+actionFailMsg);
+            Assert.isFalse(file.isEmpty(),"上传的文件为空！"+actionFailMsg);
 
-                    FileResBean fileResBean = FileResBean.builder()
-                            .fileName(uuidName)
-                            .fileLocation(fileLocation)
-                            .fileOldName(oldFileName)
-                            .filePrefix(uploadProps.getUrlPrefix() + File.separator)
-                            .fileUri(fileUri)
-                            .build();
-                    result.setFileResBean(fileResBean);
-                } catch (IOException e) {
-                    throw e;
+            try {
+                byte[] fileBytes = file.getBytes();
+                String oldFileName = file.getOriginalFilename();
+                int lastDotIndex = oldFileName.lastIndexOf(".");
+                String fileType = "";
+                if (lastDotIndex > -1) {
+                    fileType = oldFileName.substring(lastDotIndex);
                 }
+                String uuidName = MyUUIDUtil.renderSimpleUUID() + fileType;
+                String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
+                String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
+                File folder = new File(baseDir);
+                if (folder.exists() == false) {
+                    folder.mkdirs();
+                }
+                //最终的存储路径
+                String fileLocation = baseDir + File.separator + uuidName;
+                Path path = Paths.get(fileLocation);
+                Files.write(path, fileBytes);
+
+                FileResBean fileResBean = FileResBean.builder()
+                        .fileName(uuidName)
+                        .fileLocation(fileLocation)
+                        .fileOldName(oldFileName)
+                        .filePrefix(uploadProps.getUrlPrefix() + File.separator)
+                        .fileUri(fileUri)
+                        .build();
+                result.setFileResBean(fileResBean);
+            } catch (IOException e) {
+                throw e;
             }
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

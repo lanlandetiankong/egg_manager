@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.user;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -83,6 +84,7 @@ public class UserJobController extends BaseController {
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
         MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>();
         try {
+            Assert.notBlank(jobId,"未知id:"+actionFailMsg);
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result, "查询用户职务信息:" + actionSuccessMsg);

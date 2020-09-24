@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.forms.smartForm;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -116,6 +117,7 @@ public class SmartFormDefinitionController extends BaseController {
                                                                   @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         try {
+            Assert.notBlank(fid,"未知id:"+actionFailMsg);
             SmartFormDefinitionMO mobj = smartFormDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单定义:" + actionSuccessMsg);
@@ -134,18 +136,15 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            if (formDefinitionMVO == null) {
-                throw new Exception("未接收到有效的表单定义！");
-            } else {
-                Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
-                if (formTypeDefinitionMOOptional.isPresent() == false) {
-                    throw new BusinessException("不是有效的表单类型！");
-                }
-                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
-                formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
-                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser, formDefinitionMO);
-                addCount += (newMO != null) ? 1 : 0;
+            Assert.notNull(formDefinitionMVO,"提交的form为空!"+actionFailMsg);
+            Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
+            if (formTypeDefinitionMOOptional.isPresent() == false) {
+                throw new BusinessException("不是有效的表单类型！");
             }
+            SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
+            formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
+            SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser, formDefinitionMO);
+            addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -164,18 +163,15 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            if (formDefinitionMVO == null) {
-                throw new Exception("未接收到有效的表单定义！");
-            } else {
-                Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
-                if (formTypeDefinitionMOOptional.isPresent() == false) {
-                    throw new BusinessException("不是有效的表单类型！");
-                }
-                SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
-                formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
-                SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser, formDefinitionMO);
-                addCount += (newMO != null) ? 1 : 0;
+            Assert.notNull(formDefinitionMVO,"提交的form为空!"+actionFailMsg);
+            Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
+            if (formTypeDefinitionMOOptional.isPresent() == false) {
+                throw new BusinessException("不是有效的表单类型！");
             }
+            SmartFormDefinitionMO formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMvoToMo(formDefinitionMVO);
+            formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
+            SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser, formDefinitionMO);
+            addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "更新->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -194,6 +190,7 @@ public class SmartFormDefinitionController extends BaseController {
     public MyCommonResult<SmartFormDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
+            Assert.notBlank(delId,"未知id:"+actionFailMsg);
             Long delCount = smartFormDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
@@ -214,10 +211,9 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Long delCount = (long) 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
-                dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
+            dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

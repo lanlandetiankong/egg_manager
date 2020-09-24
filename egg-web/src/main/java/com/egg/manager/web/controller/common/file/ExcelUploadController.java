@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.common.file;
 
+import cn.hutool.core.lang.Assert;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.common.base.exception.BusinessException;
@@ -46,44 +47,42 @@ public class ExcelUploadController extends BaseController {
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (fileArr == null || fileArr.length == 0) {
-                throw new BusinessException("上传的文件为空！");
-            } else {
-                String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
-                List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();
-                for (MultipartFile file : fileArr) {
-                    byte[] fileBytes = file.getBytes();
-                    String oldFileName = file.getOriginalFilename();
-                    int lastDotIndex = oldFileName.lastIndexOf(".");
-                    String fileType = "";
-                    if (lastDotIndex > -1) {
-                        fileType = oldFileName.substring(lastDotIndex);
-                    }
-                    String uuid = MyUUIDUtil.renderSimpleUUID();
-                    String uuidName = uuid + fileType;
-                    String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
-                    File folder = new File(baseDir);
-                    if (folder.exists() == false) {
-                        folder.mkdirs();
-                    }
-                    //最终的存储路径
-                    String fileLocation = baseDir + File.separator + uuidName;
-                    Path path = Paths.get(fileLocation);
-                    Files.write(path, fileBytes);
+            Assert.notEmpty(fileArr,"上传的文件为空!"+actionFailMsg);
 
-                    AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
-                            .name(oldFileName)
-                            .uid(uuid)
-                            .url(uploadProps.getUrlPrefix() + fileUri)
-                            .uri(fileUri)
-                            .urlLocation(fileUri)
-                            .status(AntdFileUploadStatusEnum.Done.getValue())
-                            .response("文件上传成功！")
-                            .build();
-                    uploadBeanList.add(uploadBean);
+            String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
+            List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();
+            for (MultipartFile file : fileArr) {
+                byte[] fileBytes = file.getBytes();
+                String oldFileName = file.getOriginalFilename();
+                int lastDotIndex = oldFileName.lastIndexOf(".");
+                String fileType = "";
+                if (lastDotIndex > -1) {
+                    fileType = oldFileName.substring(lastDotIndex);
                 }
-                result.setFileUploaderBeanList(uploadBeanList);
+                String uuid = MyUUIDUtil.renderSimpleUUID();
+                String uuidName = uuid + fileType;
+                String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
+                File folder = new File(baseDir);
+                if (folder.exists() == false) {
+                    folder.mkdirs();
+                }
+                //最终的存储路径
+                String fileLocation = baseDir + File.separator + uuidName;
+                Path path = Paths.get(fileLocation);
+                Files.write(path, fileBytes);
+
+                AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
+                        .name(oldFileName)
+                        .uid(uuid)
+                        .url(uploadProps.getUrlPrefix() + fileUri)
+                        .uri(fileUri)
+                        .urlLocation(fileUri)
+                        .status(AntdFileUploadStatusEnum.Done.getValue())
+                        .response("文件上传成功！")
+                        .build();
+                uploadBeanList.add(uploadBean);
             }
+            result.setFileUploaderBeanList(uploadBeanList);
             this.dealCommonSuccessCatch(result, "已成功上传Excel文件！");
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

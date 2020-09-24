@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.announcement;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
@@ -79,7 +80,6 @@ public class AnnouncementDraftController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementDraftService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            ;
             dealCommonSuccessCatch(result, "查询公告信息草稿-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -95,7 +95,9 @@ public class AnnouncementDraftController extends BaseController {
                                                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         try {
+            Assert.notBlank(draftId,"未知id:"+actionFailMsg);
             AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
+
             //取得 公告标签 map
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraft, announcementTagMap));
@@ -114,12 +116,10 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         Integer addCount = 0;
         try {
-            if (announcementDraftVo == null) {
-                throw new Exception("未接收到有效的公告草稿！");
-            } else {
-                announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
-                addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
-            }
+            Assert.notNull(announcementDraftVo,"新增公告草稿:"+actionFailMsg);
+
+            announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
+            addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增公告草稿:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -136,12 +136,10 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         Integer updateCount = 0;
         try {
-            if (announcementDraftVo == null) {
-                throw new Exception("未接收到有效的公告草稿！");
-            } else {
-                announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
-                updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
-            }
+            Assert.notNull(announcementDraftVo,"未接收到有效的公告草稿:"+actionFailMsg);
+
+            announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
+            updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
             result.setCount(updateCount);
             dealCommonSuccessCatch(result, "更新公告草稿:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -161,10 +159,10 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            if (delIds != null && delIds.length > 0) {
-                delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
-                dealCommonSuccessCatch(result, "批量删除公告草稿:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(delIds,"批量删除公告草稿:"+actionFailMsg);
+
+            delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
+            dealCommonSuccessCatch(result, "批量删除公告草稿:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -182,11 +180,11 @@ public class AnnouncementDraftController extends BaseController {
     public MyCommonResult doDelOneAnnouncementDraftByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(delId)) {
-                Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
-                result.setCount(delCount);
-                dealCommonSuccessCatch(result, "删除公告草稿:" + actionSuccessMsg);
-            }
+            Assert.notBlank(delId,"公告草稿批量转发布:"+actionFailMsg);
+
+            Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
+            result.setCount(delCount);
+            dealCommonSuccessCatch(result, "删除公告草稿:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -201,10 +199,10 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer publishCount = 0;
         try {
-            if (draftIds != null && draftIds.length > 0) {
-                publishCount = announcementDraftService.dealBatchPublishByDraft(loginUser, draftIds);
-                dealCommonSuccessCatch(result, "公告草稿批量转发布:" + actionSuccessMsg);
-            }
+            Assert.notEmpty(draftIds,"公告草稿批量转发布:"+actionFailMsg);
+
+            publishCount = announcementDraftService.dealBatchPublishByDraft(loginUser, draftIds);
+            dealCommonSuccessCatch(result, "公告草稿批量转发布:" + actionSuccessMsg);
             result.setCount(publishCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -218,11 +216,11 @@ public class AnnouncementDraftController extends BaseController {
     public MyCommonResult doPublishOneAnnouncementDraftById(HttpServletRequest request, String draftId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            if (StringUtils.isNotBlank(draftId)) {
-                Integer publishCount = announcementDraftService.dealPublishByDraft(loginUser, draftId, true);
-                result.setCount(publishCount);
-                dealCommonSuccessCatch(result, "发布公告草稿:" + actionSuccessMsg);
-            }
+            Assert.notBlank(draftId,"发布公告草稿->未知id:"+actionFailMsg);
+
+            Integer publishCount = announcementDraftService.dealPublishByDraft(loginUser, draftId, true);
+            result.setCount(publishCount);
+            dealCommonSuccessCatch(result, "发布公告草稿:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.define.DefineJobFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -139,7 +140,7 @@ public class DefineJobController extends BaseController {
                 addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增职务:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -157,7 +158,7 @@ public class DefineJobController extends BaseController {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新职务:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -179,7 +180,7 @@ public class DefineJobController extends BaseController {
             //批量伪删除
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "批量删除职务:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -199,7 +200,7 @@ public class DefineJobController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, "删除职务:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

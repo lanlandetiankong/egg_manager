@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.announcement;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementDraftFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -70,7 +71,7 @@ public class AnnouncementController extends BaseController {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = announcementService.dealCreate(loginUser, announcementVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增公告:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -188,7 +189,7 @@ public class AnnouncementController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除公告:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -210,7 +211,7 @@ public class AnnouncementController extends BaseController {
 
             Integer delCount = announcementService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除公告:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

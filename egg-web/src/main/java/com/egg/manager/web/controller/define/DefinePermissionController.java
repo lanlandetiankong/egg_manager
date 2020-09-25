@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.define.DefinePermissionFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -138,7 +139,7 @@ public class DefinePermissionController extends BaseController {
 
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增权限定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -154,13 +155,9 @@ public class DefinePermissionController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            if (definePermissionVo == null) {
-                throw new Exception("未接收到有效的权限定义！");
-            } else {
-                changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
-            }
+            changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新权限定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -205,7 +202,7 @@ public class DefinePermissionController extends BaseController {
             if (new Integer(0).equals(delCount)) {    //如果删除的是 [已启用的]，则抛出异常
                 throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
-            dealCommonSuccessCatch(result, "删除权限定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -224,11 +221,11 @@ public class DefinePermissionController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
-            StringBuffer respMsg = new StringBuffer("批量删除权限定义:" + actionSuccessMsg);
             if (delIds.length > delCount) {
-                respMsg.append("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
+                dealCommonSuccessCatch(result, "由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
+            }   else {
+                dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.deleteById);
             }
-            dealCommonSuccessCatch(result, respMsg.toString());
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

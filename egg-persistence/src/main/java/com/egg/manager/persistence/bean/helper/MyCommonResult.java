@@ -138,6 +138,15 @@ public class MyCommonResult<T> implements Serializable {
     private Set<String> permissionSet;
 
 
+
+
+
+    /**
+     * 设置分页信息
+     * @param paginationBean
+     * @param total
+     * @param <T>
+     */
     public <T> void myAntdvPaginationBeanSet(AntdvPaginationBean<T> paginationBean, Long total) {
         if (paginationBean != null) {
             paginationBean.setTotal(total);

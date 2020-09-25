@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.define.DefineDepartmentFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -141,7 +142,7 @@ public class DefineDepartmentController extends BaseController {
 
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增部门定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -160,7 +161,7 @@ public class DefineDepartmentController extends BaseController {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新部门定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -180,7 +181,7 @@ public class DefineDepartmentController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -201,7 +202,7 @@ public class DefineDepartmentController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

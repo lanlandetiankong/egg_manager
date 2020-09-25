@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.announcement;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementDraftFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -122,7 +123,7 @@ public class AnnouncementDraftController extends BaseController {
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增公告草稿:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -142,7 +143,7 @@ public class AnnouncementDraftController extends BaseController {
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
             result.setCount(updateCount);
-            dealCommonSuccessCatch(result, "更新公告草稿:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -163,7 +164,7 @@ public class AnnouncementDraftController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除公告草稿:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -185,7 +186,7 @@ public class AnnouncementDraftController extends BaseController {
 
             Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除公告草稿:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

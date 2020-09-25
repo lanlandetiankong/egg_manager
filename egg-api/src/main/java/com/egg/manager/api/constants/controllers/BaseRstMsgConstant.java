@@ -1,14 +1,14 @@
 package com.egg.manager.api.constants.controllers;
 
 /**
- * @Description: 控制器基本 常量
+ * @Description: 控制器操作信息-基本常量
  * @ClassName: BaseRstMsgConstant
  * @Author: zhoucj
  * @Date: 2020/9/25 9:23
  */
 public class BaseRstMsgConstant {
-    private final static String actionSuccessMsg = "操作成功!";
-    private final static String actionFailMsg = "操作失败!";
+    public final static String actionSuccessMsg = "操作成功!";
+    public final static String actionFailMsg = "操作失败!";
     private final static String nullLoginAccount = "账号不存在!";
     private final static String emptyLoginAccount = "账号不能为空!";
     private final static String emptyLoginPassword = "密码不能为空!";

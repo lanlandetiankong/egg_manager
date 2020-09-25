@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.organization;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -136,7 +137,7 @@ public class DefineTenantController extends BaseController {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增租户定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -154,7 +155,7 @@ public class DefineTenantController extends BaseController {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新租户定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -174,7 +175,7 @@ public class DefineTenantController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除租户定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -195,7 +196,7 @@ public class DefineTenantController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除租户定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

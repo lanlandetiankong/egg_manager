@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.announcement;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementTagFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -133,7 +134,7 @@ public class AnnouncementTagController extends BaseController {
 
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增公告标签:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -153,7 +154,7 @@ public class AnnouncementTagController extends BaseController {
 
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新公告标签:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -175,7 +176,7 @@ public class AnnouncementTagController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除公告标签:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -198,7 +199,7 @@ public class AnnouncementTagController extends BaseController {
 
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除公告标签:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -2,12 +2,12 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.user.UserAccountFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -41,7 +41,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,7 +190,7 @@ public class UserAccountController extends BaseController {
             Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增用户:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -210,7 +209,7 @@ public class UserAccountController extends BaseController {
             Assert.notNull(userAccountVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新用户:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -232,7 +231,7 @@ public class UserAccountController extends BaseController {
             //批量伪删除
             delCount = userAccountService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "批量删除用户:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -252,7 +251,7 @@ public class UserAccountController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userAccountService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, "删除用户:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

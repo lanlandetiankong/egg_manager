@@ -3,6 +3,8 @@ package com.egg.manager.web.controller.module;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.define.DefineRoleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -107,7 +109,7 @@ public class DefineModuleController extends BaseController {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增模块定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -125,7 +127,7 @@ public class DefineModuleController extends BaseController {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新模块定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -145,7 +147,7 @@ public class DefineModuleController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -166,7 +168,7 @@ public class DefineModuleController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

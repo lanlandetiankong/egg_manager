@@ -169,6 +169,8 @@ public class BaseController {
             logger.error(e.getMessage());
             e.printStackTrace();
         }
+        //清空信息
+        result.setInfo("");
         result.setErrorMsg(errmsg);
         if (e instanceof MyAuthenticationExpiredException) {
             result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());

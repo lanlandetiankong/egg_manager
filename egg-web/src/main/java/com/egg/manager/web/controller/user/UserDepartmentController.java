@@ -3,6 +3,8 @@ package com.egg.manager.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.user.UserDepartmentFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -108,7 +110,7 @@ public class UserDepartmentController extends BaseController {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增 [用户与部门关联] :" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -128,7 +130,7 @@ public class UserDepartmentController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除 [用户与部门关联] :" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -149,7 +151,7 @@ public class UserDepartmentController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userDepartmentService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, "删除 [用户与部门关联] :" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

@@ -3,6 +3,8 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.define.DefinePermissionFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.define.DefineRoleFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.role.RoleMenuService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -191,7 +193,7 @@ public class DefineRoleController extends BaseController {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增角色定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -209,7 +211,7 @@ public class DefineRoleController extends BaseController {
 
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新角色定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -229,7 +231,7 @@ public class DefineRoleController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除角色定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -250,7 +252,7 @@ public class DefineRoleController extends BaseController {
 
             Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "删除角色定义:" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -3,6 +3,8 @@ package com.egg.manager.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.user.UserRoleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.user.UserTenantFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -107,7 +109,7 @@ public class UserTenantController extends BaseController {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增 [用户与租户关联] :" + actionSuccessMsg);
+            dealCommonSuccessCatch(result, UserTenantFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -127,7 +129,7 @@ public class UserTenantController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userTenantService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, "批量删除 [用户与租户关联] :" + actionSuccessMsg);
+            dealCommonSuccessCatch(result,  UserTenantFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -149,7 +151,7 @@ public class UserTenantController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             if (StringUtils.isNotBlank(delId)) {
                 delCount = userTenantService.dealDeleteById(loginUser, delId);
-                dealCommonSuccessCatch(result, "删除 [用户与租户关联] :" + actionSuccessMsg);
+                dealCommonSuccessCatch(result, UserTenantFuncModuleConstant.Success.deleteById);
             }
             result.setCount(delCount);
         } catch (Exception e) {

@@ -6,6 +6,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,7 +16,8 @@ import java.util.Map;
 import java.util.Set;
 
 @Data
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MyCommonResult<T> implements Serializable {
     /**
      * token
@@ -153,6 +155,13 @@ public class MyCommonResult<T> implements Serializable {
         return result ;
     }
 
+
+    public static <T> MyCommonResult<T> gainErrorResult(Class<T> clazz,String errorMsg){
+        MyCommonResult<T> result = gainInitBean(clazz);
+        result.setHasError(true);
+        result.setErrorMsg(errorMsg);
+        return result ;
+    }
 
     /**
      * 设置分页信息

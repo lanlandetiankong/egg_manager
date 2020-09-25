@@ -134,7 +134,7 @@ public class MyControllerAdvice {
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:");
         errors.stream().forEach(x -> errorMsg.append(x.getDefaultMessage()));
         log.error(errorMsg.toString());
-        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+        return MyCommonResult.gainErrorResult(Object.class,errorMsg.toString());
     }
 
     /**
@@ -159,7 +159,7 @@ public class MyControllerAdvice {
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
         log.error(errorMsg.toString());
-        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+        return MyCommonResult.gainErrorResult(Object.class,errorMsg.toString());
     }
 
 
@@ -177,7 +177,7 @@ public class MyControllerAdvice {
         LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:" + c.getMessage());
         log.error(errorMsg.toString());
-        return MyCommonResult.builder().hasError(true).errorMsg(errorMsg.toString()).build();
+        return MyCommonResult.gainErrorResult(Object.class,errorMsg.toString());
     }
 
     public Integer getStatusCodeByException(Exception ex) {

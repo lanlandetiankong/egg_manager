@@ -37,7 +37,7 @@ public class ModuleCommonController extends BaseController {
     @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult<DefineModuleVo> doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class);
         try {
             DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ModuleCommonController extends BaseController {
     @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult<DefineMenuVo> doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineMenuVo> result = new MyCommonResult<DefineMenuVo>();
+        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainUniversalResult(DefineMenuVo.class);
         try {
             DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

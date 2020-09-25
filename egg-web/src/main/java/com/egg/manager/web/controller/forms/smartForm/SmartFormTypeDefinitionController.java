@@ -66,7 +66,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainUniversalResult(SmartFormTypeDefinitionMO.class);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -90,7 +90,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataAll")
     public MyCommonResult<SmartFormTypeDefinitionMO> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainUniversalResult(SmartFormTypeDefinitionMO.class);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -111,7 +111,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormTypeDefinitionMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                       @RequestParam(value = "fid", required = true) String fid) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainUniversalResult(SmartFormTypeDefinitionMO.class);
         try {
             Assert.notBlank(fid,BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser, fid);
@@ -130,7 +130,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                  SmartFormTypeDefinitionMO formTypeDefinitionMO) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainUniversalResult(SmartFormTypeDefinitionMO.class);
         Integer addCount = 0;
         try {
             Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -151,7 +151,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMO formTypeDefinitionMO) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainUniversalResult(SmartFormTypeDefinitionMO.class);
         Integer count = 0;
         try {
             Assert.notNull(formTypeDefinitionMO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -177,8 +177,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+    public MyCommonResult<Object> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser, delId);
@@ -197,8 +197,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+    public MyCommonResult<Object> doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

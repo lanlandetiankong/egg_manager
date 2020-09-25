@@ -5,10 +5,9 @@ import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,8 +16,6 @@ import java.util.Set;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class MyCommonResult<T> implements Serializable {
     /**
      * token
@@ -137,8 +134,24 @@ public class MyCommonResult<T> implements Serializable {
      */
     private Set<String> permissionSet;
 
+    public MyCommonResult(){}
+    private static <T> MyCommonResult<T> gainInitBean(Class<T> clazz){
+        MyCommonResult<T> result = new MyCommonResult<>();
+        result.setHasError(false);
+        result.setHasWarning(false);
+        result.setActionFlag(false);
+        return result ;
+    }
 
-
+    public static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz){
+        MyCommonResult<T> result = gainInitBean(clazz);
+        return result ;
+    }
+    public static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz,String info){
+        MyCommonResult<T> result = gainInitBean(clazz);
+        result.setInfo(info);
+        return result ;
+    }
 
 
     /**

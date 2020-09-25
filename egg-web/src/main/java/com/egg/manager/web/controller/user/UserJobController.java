@@ -61,7 +61,7 @@ public class UserJobController extends BaseController {
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>();
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainUniversalResult(UserJobVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -83,7 +83,7 @@ public class UserJobController extends BaseController {
     @PcWebQueryLog(action = "查询用户职务信息", description = "根据用户职务id查询用户职务信息", fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
-        MyCommonResult<UserJobVo> result = new MyCommonResult<UserJobVo>();
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainUniversalResult(UserJobVo.class);
         try {
             Assert.notBlank(jobId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserJob vo = userJobMapper.selectById(jobId);

@@ -68,7 +68,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementDraftDtos")
     public MyCommonResult<AnnouncementDraftVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                         Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
+        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainUniversalResult(AnnouncementDraftVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -95,7 +95,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/getAnnouncementDraftById")
     public MyCommonResult<AnnouncementDraftVo> doGetAnnouncementDraftById(HttpServletRequest request, String draftId,
                                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
+        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainUniversalResult(AnnouncementDraftVo.class);
         try {
             Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
@@ -115,7 +115,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/addAnnouncementDraft")
     public MyCommonResult<AnnouncementDraftVo> doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
+        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainUniversalResult(AnnouncementDraftVo.class);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -135,7 +135,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/updateAnnouncementDraft")
     public MyCommonResult<AnnouncementDraftVo> doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
+        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainUniversalResult(AnnouncementDraftVo.class);
         Integer updateCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -158,7 +158,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/batchDelAnnouncementDraftByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -180,7 +180,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/delOneAnnouncementDraftByIds")
     public MyCommonResult doDelOneAnnouncementDraftByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -198,7 +198,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(action = "公告草稿批量转发布", description = "根据公告草稿id批量发布", fullPath = "/announcement_draft/batchPublishAnnouncementDraftByIds")
     @PostMapping(value = "/batchPublishAnnouncementDraftByIds")
     public MyCommonResult doBatchPublishAnnouncementById(HttpServletRequest request, String[] draftIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer publishCount = 0;
         try {
             Assert.notEmpty(draftIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -216,7 +216,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(action = "公告草稿转发布", description = "根据公告草稿id批量转发布", fullPath = "/announcement_draft/publishOneAnnouncementDraftById")
     @PostMapping(value = "/publishOneAnnouncementDraftById")
     public MyCommonResult doPublishOneAnnouncementDraftById(HttpServletRequest request, String draftId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         try {
             Assert.notBlank(draftId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

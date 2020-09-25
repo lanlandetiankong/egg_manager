@@ -65,7 +65,7 @@ public class UserLoginController extends BaseController {
                                                              @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccount loginUser
     ) {
-        MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>();
+        MyCommonResult<UserAccount> result = MyCommonResult.gainUniversalResult(UserAccount.class);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());

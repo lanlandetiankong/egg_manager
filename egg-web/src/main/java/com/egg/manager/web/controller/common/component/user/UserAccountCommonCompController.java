@@ -45,7 +45,7 @@ public class UserAccountCommonCompController extends BaseController {
     @PostMapping(value = "/getAllUserAccountDtos")
     public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = new MyCommonResult<UserAccountVo>();
+        MyCommonResult<UserAccountVo> result = MyCommonResult.gainUniversalResult(UserAccountVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

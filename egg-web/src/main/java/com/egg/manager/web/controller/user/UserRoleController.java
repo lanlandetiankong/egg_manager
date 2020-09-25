@@ -65,7 +65,7 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>();
+        MyCommonResult<UserRoleVo> result = MyCommonResult.gainUniversalResult(UserRoleVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -87,7 +87,7 @@ public class UserRoleController extends BaseController {
     @PcWebQueryLog(action = "查询用户角色信息", description = "根据用户角色id查询用户角色信息", fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>();
+        MyCommonResult<UserRoleVo> result = MyCommonResult.gainUniversalResult(UserRoleVo.class);
         try {
             Assert.notBlank(roleId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserRole vo = userRoleMapper.selectById(roleId);
@@ -104,7 +104,7 @@ public class UserRoleController extends BaseController {
     @PcWebOperationLog(action = "新增用户角色", description = "表单方式新增用户角色", fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer addCount = 0;
         try {
             Assert.notNull(userRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -125,7 +125,7 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -146,7 +146,7 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/delOneUserRoleByIds")
     public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

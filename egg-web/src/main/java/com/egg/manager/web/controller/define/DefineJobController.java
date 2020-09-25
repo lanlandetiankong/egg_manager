@@ -64,7 +64,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobs")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>();
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -92,7 +92,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobDtos")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>();
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -114,7 +114,7 @@ public class DefineJobController extends BaseController {
     @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/getDefineJobById")
     @PostMapping(value = "/getDefineJobById")
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = new MyCommonResult<DefineJobVo>();
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class);
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));

@@ -35,7 +35,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<DefinePermission> result = new MyCommonResult<DefinePermission>();
+        MyCommonResult<DefinePermission> result = MyCommonResult.gainUniversalResult(DefinePermission.class);
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -54,7 +54,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class);
         try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -74,7 +74,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class);
         try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

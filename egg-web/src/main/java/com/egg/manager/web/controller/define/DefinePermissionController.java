@@ -67,7 +67,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/getAllDefinePermissions")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainUniversalResult(DefinePermissionVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -94,7 +94,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/getAllDefinePermissionDtos")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainUniversalResult(DefinePermissionVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -116,7 +116,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebQueryLog(action = "查询权限定义信息", description = "根据权限定义id查询权限定义信息", fullPath = "/define/define_permission/getDefinePermissionById")
     @PostMapping(value = "/getDefinePermissionById")
     public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainUniversalResult(DefinePermissionVo.class);
         try {
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
@@ -131,8 +131,8 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增权限定义", description = "表单方式新增权限定义", fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
-    public MyCommonResult<DefinePermissionVo> doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
+    public MyCommonResult<Object> doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer addCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -151,7 +151,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "更新权限定义", description = "表单方式更新权限定义", fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -172,7 +172,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchEnsureDefinePermissionByIds")
     public MyCommonResult doBatchEnsureDefinePermissionById(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notEmpty(ensureIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -193,7 +193,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/delOneDefinePermissionByIds")
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -215,7 +215,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefinePermissionByIds")
     public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

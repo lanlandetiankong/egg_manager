@@ -65,7 +65,7 @@ public class UserDepartmentController extends BaseController {
     @PostMapping(value = "/getAllUserDepartments")
     public MyCommonResult<UserDepartmentVo> doGetAllUserDepartments(HttpServletRequest request,
                                                                     String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>();
+        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainUniversalResult(UserDepartmentVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -87,7 +87,7 @@ public class UserDepartmentController extends BaseController {
     @PcWebQueryLog(action = "查询 [用户与部门关联] 信息", description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", fullPath = "/user/user_department/getUserDepartmentById")
     @PostMapping(value = "/getUserDepartmentById")
     public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>();
+        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainUniversalResult(UserDepartmentVo.class);
         try {
             Assert.notBlank(departmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
@@ -104,7 +104,7 @@ public class UserDepartmentController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与部门关联] ", description = "表单方式新增 [用户与部门关联] ", fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
     public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer addCount = 0;
         try {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -125,7 +125,7 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserDepartmentByIds")
     public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -146,7 +146,7 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/delOneUserDepartmentByIds")
     public MyCommonResult doDelOneUserDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

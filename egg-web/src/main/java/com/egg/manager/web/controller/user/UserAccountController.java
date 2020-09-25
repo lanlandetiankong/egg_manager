@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -187,7 +188,7 @@ public class UserAccountController extends BaseController {
         Integer addCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
-            Assert.notNull(userAccountVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增用户:" + actionSuccessMsg);
@@ -206,7 +207,7 @@ public class UserAccountController extends BaseController {
         Integer changeCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
-            Assert.notNull(userAccountVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(userAccountVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新用户:" + actionSuccessMsg);
@@ -227,7 +228,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
             delCount = userAccountService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
@@ -249,7 +250,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userAccountService.dealDeleteById(loginUser, delId);
             dealCommonSuccessCatch(result, "删除用户:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -267,7 +268,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
         try {
-            Assert.notEmpty(lockIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(lockIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
@@ -290,7 +291,7 @@ public class UserAccountController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer lockCount = 0;
         try {
-            Assert.notBlank(lockId,"未知id:"+actionFailMsg);
+            Assert.notBlank(lockId,BaseRstMsgConstant.ErrorMsg.unknowId());
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";

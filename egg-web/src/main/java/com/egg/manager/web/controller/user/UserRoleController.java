@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -86,7 +87,7 @@ public class UserRoleController extends BaseController {
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = new MyCommonResult<UserRoleVo>();
         try {
-            Assert.notBlank(roleId,"未知id:"+actionFailMsg);
+            Assert.notBlank(roleId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result, "查询用户角色信息:" + actionSuccessMsg);
@@ -104,7 +105,7 @@ public class UserRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(userRoleVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(userRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增用户角色:" + actionSuccessMsg);
@@ -125,7 +126,7 @@ public class UserRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userRoleService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除用户角色:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -146,7 +147,7 @@ public class UserRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userRoleService.dealDeleteById(loginUser, delId);
             dealCommonSuccessCatch(result, "删除用户角色:" + actionSuccessMsg);
             result.setCount(delCount);

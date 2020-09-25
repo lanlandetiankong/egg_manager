@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
@@ -46,8 +47,8 @@ public class ImgUploadController extends BaseController {
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notNull(file,"上传的文件为空!"+actionFailMsg);
-            Assert.isFalse(file.isEmpty(),"上传的文件为空！"+actionFailMsg);
+            Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
+            Assert.isFalse(file.isEmpty(),BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
             try {
                 byte[] fileBytes = file.getBytes();

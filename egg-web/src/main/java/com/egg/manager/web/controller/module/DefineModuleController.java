@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.module;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -103,7 +104,7 @@ public class DefineModuleController extends BaseController {
         MyCommonResult<DefineModuleVo> result = new MyCommonResult<DefineModuleVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(defineModuleVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增模块定义:" + actionSuccessMsg);
@@ -121,7 +122,7 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineModuleVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新模块定义:" + actionSuccessMsg);
@@ -142,7 +143,7 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除模块定义:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -162,7 +163,7 @@ public class DefineModuleController extends BaseController {
     public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "删除模块定义:" + actionSuccessMsg);

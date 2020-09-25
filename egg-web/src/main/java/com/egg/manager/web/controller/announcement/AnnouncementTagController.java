@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -109,7 +110,7 @@ public class AnnouncementTagController extends BaseController {
                                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = new MyCommonResult<AnnouncementTagVo>();
         try {
-            Assert.notBlank(announcementTagId,"未知id:"+actionFailMsg);
+            Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
             dealCommonSuccessCatch(result, "查询公告标签信息:" + actionSuccessMsg);
@@ -128,7 +129,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = new MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(announcementTagVo,"未接收到有效的公告标签!"+actionFailMsg);
+            Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
@@ -148,7 +149,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(announcementTagVo,"未接收到有效的公告标签!"+actionFailMsg);
+            Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
@@ -171,7 +172,7 @@ public class AnnouncementTagController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"批量删除公告标签:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除公告标签:" + actionSuccessMsg);
@@ -193,7 +194,7 @@ public class AnnouncementTagController extends BaseController {
                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);

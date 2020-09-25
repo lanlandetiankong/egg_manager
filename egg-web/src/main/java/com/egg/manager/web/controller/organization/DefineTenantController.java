@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.organization;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -88,7 +89,7 @@ public class DefineTenantController extends BaseController {
     public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
         try {
-            Assert.notBlank(defineTenantId,"未知id:"+actionFailMsg);
+            Assert.notBlank(defineTenantId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
             result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
             dealCommonSuccessCatch(result, "查询租户定义信息:" + actionSuccessMsg);
@@ -132,7 +133,7 @@ public class DefineTenantController extends BaseController {
         MyCommonResult<DefineTenantVo> result = new MyCommonResult<DefineTenantVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(defineTenantVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增租户定义:" + actionSuccessMsg);
@@ -150,7 +151,7 @@ public class DefineTenantController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineTenantVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新租户定义:" + actionSuccessMsg);
@@ -171,7 +172,7 @@ public class DefineTenantController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除租户定义:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -191,7 +192,7 @@ public class DefineTenantController extends BaseController {
     public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "删除租户定义:" + actionSuccessMsg);

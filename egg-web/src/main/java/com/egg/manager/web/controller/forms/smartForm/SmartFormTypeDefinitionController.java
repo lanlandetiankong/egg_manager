@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.forms.smartForm;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormTypeDefinitionMService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -112,7 +113,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                                                       @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         try {
-            Assert.notBlank(fid,"未知id:"+actionFailMsg);
+            Assert.notBlank(fid,BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单类型定义:" + actionSuccessMsg);
@@ -132,7 +133,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(formTypeDefinitionMO,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
             SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doInsert(loginUser, formTypeDefinitionMO);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
@@ -153,7 +154,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         MyCommonResult<SmartFormTypeDefinitionMO> result = new MyCommonResult();
         Integer count = 0;
         try {
-            Assert.notNull(formTypeDefinitionMO,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(formTypeDefinitionMO,BaseRstMsgConstant.ErrorMsg.emptyForm());
             SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doUpdateById(loginUser, formTypeDefinitionMO);
             //更新了一条数据
             if (newMO != null) {
@@ -179,7 +180,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
@@ -200,7 +201,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Long delCount = (long) 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
             result.setCount(delCount);

@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.role.RoleMenuService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -187,7 +188,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineRoleVo> result = new MyCommonResult<DefineRoleVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(defineRoleVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增角色定义:" + actionSuccessMsg);
@@ -204,7 +205,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineRoleVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
@@ -225,7 +226,7 @@ public class DefineRoleController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除角色定义:" + actionSuccessMsg);
@@ -245,7 +246,7 @@ public class DefineRoleController extends BaseController {
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);

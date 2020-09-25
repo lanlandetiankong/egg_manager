@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.forms.smartForm;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartForm.SmartFormDefinitionMService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -117,7 +118,7 @@ public class SmartFormDefinitionController extends BaseController {
                                                                   @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         try {
-            Assert.notBlank(fid,"未知id:"+actionFailMsg);
+            Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormDefinitionMO mobj = smartFormDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->表单定义:" + actionSuccessMsg);
@@ -136,7 +137,7 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(formDefinitionMVO,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
             Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
             if (formTypeDefinitionMOOptional.isPresent() == false) {
                 throw new BusinessException("不是有效的表单类型！");
@@ -163,7 +164,7 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult<SmartFormDefinitionMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(formDefinitionMVO,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
             Optional<SmartFormTypeDefinitionMO> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
             if (formTypeDefinitionMOOptional.isPresent() == false) {
                 throw new BusinessException("不是有效的表单类型！");
@@ -190,7 +191,7 @@ public class SmartFormDefinitionController extends BaseController {
     public MyCommonResult<SmartFormDefinitionMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
@@ -211,7 +212,7 @@ public class SmartFormDefinitionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Long delCount = (long) 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
             result.setCount(delCount);

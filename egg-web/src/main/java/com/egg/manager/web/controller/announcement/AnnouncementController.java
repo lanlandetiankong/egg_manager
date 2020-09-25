@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -66,11 +67,8 @@ public class AnnouncementController extends BaseController {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
         Integer addCount = 0;
         try {
-            if (announcementVo == null) {
-                throw new Exception("未接收到有效的公告！");
-            } else {
-                addCount = announcementService.dealCreate(loginUser, announcementVo);
-            }
+            Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            addCount = announcementService.dealCreate(loginUser, announcementVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增公告:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -88,11 +86,8 @@ public class AnnouncementController extends BaseController {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
         Integer addCount = 0;
         try {
-            if (announcementDraftVo == null) {
-                throw new Exception("未接收到有效的公告草稿！");
-            } else {
-                addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
-            }
+            Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "公告草稿发布:" + actionSuccessMsg);
         } catch (Exception e) {
@@ -167,7 +162,7 @@ public class AnnouncementController extends BaseController {
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = new MyCommonResult<AnnouncementVo>();
         try {
-            Assert.notBlank(announcementId,"未知id:"+actionFailMsg);
+            Assert.notBlank(announcementId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
@@ -190,7 +185,7 @@ public class AnnouncementController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"批量删除公告:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除公告:" + actionSuccessMsg);
@@ -211,7 +206,7 @@ public class AnnouncementController extends BaseController {
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"删除公告->未知id:" + actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);

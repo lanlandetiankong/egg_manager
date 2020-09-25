@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.message.email;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.message.services.email.EmailSendRecordMService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -86,7 +87,7 @@ public class EmailSendRecordController extends BaseController {
                                                               @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<EmailSendRecordMO> result = new MyCommonResult();
         try {
-            Assert.notBlank(fid,"未知id:"+actionFailMsg);
+            Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser, fid);
             result.setBean(mobj);
             dealCommonSuccessCatch(result, "根据id查询->邮件记录:" + actionSuccessMsg);
@@ -105,7 +106,7 @@ public class EmailSendRecordController extends BaseController {
         MyCommonResult<EmailSendRecordMO> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(emailSendRecordMVO,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(emailSendRecordMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
             EmailSendRecordMO emailSendRecordMO = EmailSendRecordMapstruct.INSTANCE.translateMvoToMo(emailSendRecordMVO);
             EmailSendRecordMO newMO = emailSendRecordMService.doInsert(loginUser, emailSendRecordMO);
             addCount += (newMO != null) ? 1 : 0;
@@ -127,7 +128,7 @@ public class EmailSendRecordController extends BaseController {
     public MyCommonResult<EmailSendRecordMO> doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "批量删除->邮件记录:" + actionSuccessMsg);
@@ -148,7 +149,7 @@ public class EmailSendRecordController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Long delCount = (long) 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = emailSendRecordMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             dealCommonSuccessCatch(result, "批量删除->邮件记录:" + actionSuccessMsg);
             result.setCount(delCount);

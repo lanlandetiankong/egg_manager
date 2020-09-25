@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -95,7 +96,7 @@ public class AnnouncementDraftController extends BaseController {
                                                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         try {
-            Assert.notBlank(draftId,"未知id:"+actionFailMsg);
+            Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
 
             //取得 公告标签 map
@@ -116,7 +117,7 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(announcementDraftVo,"新增公告草稿:"+actionFailMsg);
+            Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
@@ -136,7 +137,7 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult<AnnouncementDraftVo> result = new MyCommonResult<AnnouncementDraftVo>();
         Integer updateCount = 0;
         try {
-            Assert.notNull(announcementDraftVo,"未接收到有效的公告草稿:"+actionFailMsg);
+            Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
@@ -159,7 +160,7 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"批量删除公告草稿:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除公告草稿:" + actionSuccessMsg);
@@ -180,7 +181,7 @@ public class AnnouncementDraftController extends BaseController {
     public MyCommonResult doDelOneAnnouncementDraftByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"公告草稿批量转发布:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
@@ -199,7 +200,7 @@ public class AnnouncementDraftController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer publishCount = 0;
         try {
-            Assert.notEmpty(draftIds,"公告草稿批量转发布:"+actionFailMsg);
+            Assert.notEmpty(draftIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             publishCount = announcementDraftService.dealBatchPublishByDraft(loginUser, draftIds);
             dealCommonSuccessCatch(result, "公告草稿批量转发布:" + actionSuccessMsg);
@@ -216,7 +217,7 @@ public class AnnouncementDraftController extends BaseController {
     public MyCommonResult doPublishOneAnnouncementDraftById(HttpServletRequest request, String draftId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(draftId,"发布公告草稿->未知id:"+actionFailMsg);
+            Assert.notBlank(draftId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer publishCount = announcementDraftService.dealPublishByDraft(loginUser, draftId, true);
             result.setCount(publishCount);

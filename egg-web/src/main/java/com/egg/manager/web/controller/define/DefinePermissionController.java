@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -133,7 +134,7 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult<DefinePermissionVo> result = new MyCommonResult<DefinePermissionVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(definePermissionVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
@@ -152,7 +153,7 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(definePermissionVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             if (definePermissionVo == null) {
                 throw new Exception("未接收到有效的权限定义！");
             } else {
@@ -177,7 +178,7 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(ensureIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(ensureIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
             dealCommonSuccessCatch(result, "批量启用权限定义:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -197,7 +198,7 @@ public class DefinePermissionController extends BaseController {
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = definePermissionService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
@@ -220,7 +221,7 @@ public class DefinePermissionController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
             StringBuffer respMsg = new StringBuffer("批量删除权限定义:" + actionSuccessMsg);

@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
@@ -66,13 +67,13 @@ public class UserLoginController extends BaseController {
     ) {
         MyCommonResult<UserAccount> result = new MyCommonResult<UserAccount>();
         try {
-            Assert.notNull(loginAccountVo,"提交的form为空!"+actionFailMsg);
-            Assert.notEmpty(loginAccountVo.getAccount(),"账号不能为空!"+actionFailMsg);
-            Assert.notNull(loginAccountVo.getPassword(),"密码不能为空!"+actionFailMsg);
+            Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
+            Assert.notNull(loginAccountVo.getPassword(),BaseRstMsgConstant.ErrorMsg.emptyLoginPassword());
             //取得用户
             UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
-            Assert.notNull(userAccount,"账号不存在!"+actionFailMsg);
-            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()),"账号密码不匹配!"+actionFailMsg);
+            Assert.notNull(userAccount,BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
+            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()),BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
             if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
                 //账号密码验证通过

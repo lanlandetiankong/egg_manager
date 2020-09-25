@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -86,7 +87,7 @@ public class UserDepartmentController extends BaseController {
     public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserDepartmentVo> result = new MyCommonResult<UserDepartmentVo>();
         try {
-            Assert.notBlank(departmentId,"未知id:"+actionFailMsg);
+            Assert.notBlank(departmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
             dealCommonSuccessCatch(result, "查询 [用户与部门关联] 信息:" + actionSuccessMsg);
@@ -104,7 +105,7 @@ public class UserDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(userDepartmentVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
             dealCommonSuccessCatch(result, "新增 [用户与部门关联] :" + actionSuccessMsg);
@@ -125,7 +126,7 @@ public class UserDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除 [用户与部门关联] :" + actionSuccessMsg);
             result.setCount(delCount);
@@ -146,7 +147,7 @@ public class UserDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userDepartmentService.dealDeleteById(loginUser, delId);
             dealCommonSuccessCatch(result, "删除 [用户与部门关联] :" + actionSuccessMsg);
             result.setCount(delCount);

@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -131,7 +132,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(defineJobVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             if (defineJobVo == null) {
                 throw new Exception("未接收到有效的职务信息！");
             } else {
@@ -153,7 +154,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineJobVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新职务:" + actionSuccessMsg);
@@ -174,7 +175,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"未知id集合:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
@@ -196,7 +197,7 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,"未知id:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealDeleteById(loginUser, delId);
             dealCommonSuccessCatch(result, "删除职务:" + actionSuccessMsg);
             result.setCount(delCount);

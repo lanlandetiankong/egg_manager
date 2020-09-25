@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -164,7 +165,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request, String defineMenuId) {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult();
         try {
-            Assert.notBlank(defineMenuId,"未知id:"+actionFailMsg);
+            Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
             DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
@@ -183,7 +184,7 @@ public class DefineMenuController extends BaseController {
         MyCommonResult<DefineMenuVo> result = new MyCommonResult();
         Integer addCount = 0;
         try {
-            Assert.notNull(vo,"未接收到有效的菜单定义！"+actionFailMsg);
+            Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
@@ -202,7 +203,7 @@ public class DefineMenuController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(vo,"未接收到有效的菜单定义！"+actionFailMsg);
+            Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
@@ -221,7 +222,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(menuId,"未知id:"+actionFailMsg);
+            Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             DefineMenu entity = defineMenuMapper.selectById(menuId);
             if (fileUploadBean != null) {
@@ -250,7 +251,7 @@ public class DefineMenuController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"批量删除菜单定义:" + actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除菜单定义:" + actionSuccessMsg);
@@ -271,7 +272,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"删除菜单定义:" + actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);

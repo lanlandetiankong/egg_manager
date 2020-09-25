@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.common.base.exception.BusinessException;
@@ -47,7 +48,7 @@ public class ExcelUploadController extends BaseController {
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notEmpty(fileArr,"上传的文件为空!"+actionFailMsg);
+            Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
             String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
             List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();

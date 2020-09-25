@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -89,7 +90,7 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
         try {
-            Assert.notBlank(defineDepartmentId,"未知id:"+actionFailMsg);
+            Assert.notBlank(defineDepartmentId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
@@ -136,7 +137,7 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult<DefineDepartmentVo> result = new MyCommonResult<DefineDepartmentVo>();
         Integer addCount = 0;
         try {
-            Assert.notNull(defineDepartmentVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
@@ -156,7 +157,7 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineDepartmentVo,"提交的form为空!"+actionFailMsg);
+            Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
             dealCommonSuccessCatch(result, "更新部门定义:" + actionSuccessMsg);
@@ -177,7 +178,7 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = new MyCommonResult();
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,"批量删除部门定义:"+actionFailMsg);
+            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
             dealCommonSuccessCatch(result, "批量删除部门定义:" + actionSuccessMsg);
             result.setCount(delCount);
@@ -197,7 +198,7 @@ public class DefineDepartmentController extends BaseController {
     public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = new MyCommonResult();
         try {
-            Assert.notBlank(delId,"批量删除部门定义:"+actionFailMsg);
+            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
             dealCommonSuccessCatch(result, "删除部门定义:" + actionSuccessMsg);

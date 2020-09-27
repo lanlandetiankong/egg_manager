@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.common;
 
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -34,7 +35,7 @@ public class CommonBindingController extends BaseController {
     @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getSwitchEnumList")
     public MyCommonResult<DefineModuleVo> doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class, AnnouncementFuncModuleConstant.Success.queryEnumList);
         try {
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

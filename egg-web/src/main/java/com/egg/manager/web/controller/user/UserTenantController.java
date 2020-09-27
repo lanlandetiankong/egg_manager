@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.user.UserRoleFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.user.UserTenantFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserTenantService;
@@ -64,7 +65,7 @@ public class UserTenantController extends BaseController {
     @PostMapping(value = "/getAllUserTenants")
     public MyCommonResult<UserTenantVo> doGetAllUserTenants(HttpServletRequest request,
                                                             String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = MyCommonResult.gainUniversalResult(UserTenantVo.class);
+        MyCommonResult<UserTenantVo> result = MyCommonResult.gainUniversalResult(UserTenantVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -86,7 +87,7 @@ public class UserTenantController extends BaseController {
     @PcWebQueryLog(action = "查询 [用户与租户关联] 信息", description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", fullPath = "/user/user_tenant/getUserTenantById")
     @PostMapping(value = "/getUserTenantById")
     public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request, String tenantId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = MyCommonResult.gainUniversalResult(UserTenantVo.class);
+        MyCommonResult<UserTenantVo> result = MyCommonResult.gainUniversalResult(UserTenantVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             Assert.notBlank(tenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserTenant vo = userTenantMapper.selectById(tenantId);
@@ -103,7 +104,7 @@ public class UserTenantController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与租户关联] ", description = "表单方式新增 [用户与租户关联] ", fullPath = "/user/user_tenant/doAddUserTenant")
     @PostMapping(value = "/doAddUserTenant")
     public MyCommonResult doAddUserTenant(HttpServletRequest request, UserTenantVo userTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -124,7 +125,7 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserTenantByIds")
     public MyCommonResult doBatchDeleteUserTenantById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -145,7 +146,7 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/delOneUserTenantByIds")
     public MyCommonResult doDelOneUserTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.deleteById);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.announcement;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementDraftFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -60,42 +60,7 @@ public class AnnouncementController extends BaseController {
     @Reference
     private AnnouncementTagService announcementTagService;
 
-    @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/addAnnouncement")
-    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/addAnnouncement")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
-                                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class);
-        Integer addCount = 0;
-        try {
-            Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreate(loginUser, announcementVo);
-            result.setCount(addCount);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.create);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
-        return result;
-    }
 
-
-    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/addAnnouncementFromDraft")
-    @PostMapping(value = "/addAnnouncementFromDraft")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                                                     @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class);
-        Integer addCount = 0;
-        try {
-            Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
-            result.setCount(addCount);
-            dealCommonSuccessCatch(result, "公告草稿发布:" + actionSuccessMsg);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
-        return result;
-    }
 
     @PcWebQueryLog(action = "查询公告信息-Dto列表", description = "查询公告信息-Dto列表", fullPath = "/announcement/getAllAnnouncementDtos")
     @ApiOperation(value = "查询公告信息-Dto列表", notes = "查询公告信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
@@ -107,7 +72,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementDtos")
     public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -133,7 +98,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getSomeAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
                                                                  Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //这些查询条件暂时用不到
             String queryObj = null, paginationObj = null, sortObj = null;
@@ -161,7 +126,7 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(announcementId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -176,6 +141,44 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
+
+    @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/addAnnouncement")
+    @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class, httpMethod = "POST")
+    @PostMapping(value = "/addAnnouncement")
+    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
+                                                            @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.create);
+        Integer addCount = 0;
+        try {
+            Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            addCount = announcementService.dealCreate(loginUser, announcementVo);
+            result.setCount(addCount);
+            dealCommonSuccessCatch(result, AnnouncementFuncModuleConstant.Success.create);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
+        }
+        return result;
+    }
+
+
+    @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/addAnnouncementFromDraft")
+    @PostMapping(value = "/addAnnouncementFromDraft")
+    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+                                                                     @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.publish);
+        Integer addCount = 0;
+        try {
+            Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
+            result.setCount(addCount);
+            dealCommonSuccessCatch(result, "公告草稿发布:" + actionSuccessMsg);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
+        }
+        return result;
+    }
+
     @PcWebOperationLog(action = "批量删除公告", description = "根据公告id批量删除公告", fullPath = "/announcement/batchDelAnnouncementByIds")
     @ApiOperation(value = "批量删除公告", notes = "根据公告id批量删除公告", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
@@ -183,13 +186,13 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/batchDelAnnouncementByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.deleteById);
+            dealCommonSuccessCatch(result, AnnouncementFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -205,13 +208,13 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/delOneAnnouncementByIds")
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
+            dealCommonSuccessCatch(result, AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

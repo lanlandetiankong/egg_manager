@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.common;
 
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
@@ -35,7 +36,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<DefinePermission> result = MyCommonResult.gainUniversalResult(DefinePermission.class);
+        MyCommonResult<DefinePermission> result = MyCommonResult.gainUniversalResult(DefinePermission.class, AnnouncementFuncModuleConstant.Success.queryEnumList);
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -54,7 +55,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class);
+        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class,AnnouncementFuncModuleConstant.Success.queryEnumList);
         try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -74,7 +75,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class);
+        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainUniversalResult(FrontSelectBean.class,AnnouncementFuncModuleConstant.Success.queryEnumList);
         try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

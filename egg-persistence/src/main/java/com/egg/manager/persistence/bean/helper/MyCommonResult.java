@@ -145,7 +145,7 @@ public class MyCommonResult<T> implements Serializable {
         return result ;
     }
 
-    public static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz){
+    private static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz){
         MyCommonResult<T> result = gainInitBean(clazz);
         return result ;
     }

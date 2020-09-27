@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.module;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.define.DefineRoleFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
@@ -65,7 +66,7 @@ public class DefineModuleController extends BaseController {
     @PostMapping(value = "/getAllDefineModuleDtos")
     public MyCommonResult<DefineModuleVo> doGetAllDefineModuleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -87,7 +88,7 @@ public class DefineModuleController extends BaseController {
     @PcWebQueryLog(action = "查询模块定义信息", description = "根据模块定义id查询模块定义信息", fullPath = "/module/define_module/getDefineModuleById")
     @PostMapping(value = "/getDefineModuleById")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
             result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
@@ -103,7 +104,7 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "新增模块定义", description = "表单方式新增模块定义", fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
     public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class, AnnouncementFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -121,7 +122,7 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "更新模块定义", description = "表单方式更新模块定义", fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -142,7 +143,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineModuleByIds")
     public MyCommonResult doBatchDeleteDefineModuleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -163,7 +164,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineModuleById")
     public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class);
+        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);

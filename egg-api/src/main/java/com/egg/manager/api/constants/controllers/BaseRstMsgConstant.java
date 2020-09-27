@@ -59,5 +59,14 @@ public class BaseRstMsgConstant {
     }
 
 
+    public static class SuccessMsg {
+        public static String queryList(){
+            return nullLoginAccount + actionFailMsg;
+        }
+
+
+    }
+
+
 
 }

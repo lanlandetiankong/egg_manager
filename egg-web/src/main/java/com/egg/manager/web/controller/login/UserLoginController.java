@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
@@ -65,7 +66,7 @@ public class UserLoginController extends BaseController {
                                                              @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccount loginUser
     ) {
-        MyCommonResult<UserAccount> result = MyCommonResult.gainUniversalResult(UserAccount.class);
+        MyCommonResult<UserAccount> result = MyCommonResult.gainUniversalResult(UserAccount.class, AnnouncementFuncModuleConstant.Success.loginOper);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());

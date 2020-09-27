@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.common.component.user;
 
+import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
@@ -45,7 +46,7 @@ public class UserAccountCommonCompController extends BaseController {
     @PostMapping(value = "/getAllUserAccountDtos")
     public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = MyCommonResult.gainUniversalResult(UserAccountVo.class);
+        MyCommonResult<UserAccountVo> result = MyCommonResult.gainUniversalResult(UserAccountVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

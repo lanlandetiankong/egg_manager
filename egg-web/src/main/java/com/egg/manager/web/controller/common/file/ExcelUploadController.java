@@ -46,7 +46,7 @@ public class ExcelUploadController extends BaseController {
     @ApiOperation(value = "上传Excel模板", notes = "上传Excel模板", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult result = MyCommonResult.gainOperationResult(null);
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 

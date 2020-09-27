@@ -71,7 +71,7 @@ public class MyControllerAdvice {
     public MyCommonResult errorHandle(Exception ex) {
         ex.printStackTrace();
         log.error("接口异常：{}", ex.getMessage());
-        return MyResponseHelper.handleRequestFailure(ex, "");
+        return MyResponseHelper.handleRequestFailure(Object.class,ex, "");
     }
 
     /**
@@ -84,7 +84,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public MyCommonResult handleUnauthorized(MyUnauthorizedException e) {
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
+        return MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.UnauthorizedLoginUser);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -92,7 +92,7 @@ public class MyControllerAdvice {
     @ResponseBody
     public MyCommonResult handleShiroException(ShiroException e) {
         e.printStackTrace();
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
+        return MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.NoPermissionOfUser);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -101,9 +101,9 @@ public class MyControllerAdvice {
     public MyCommonResult handleBusinessException(BusinessException e) {
         if (e instanceof BusinessException) {
             log.error("数据操作失败：" + e.getMessage());
-            return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
+            return MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.ErrorOfDb);
         }
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.Error);
+        return MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.Error);
     }
 
 
@@ -113,9 +113,9 @@ public class MyControllerAdvice {
     public MyCommonResult handleParamJsonException(Exception e) {
         if (e instanceof MyParamJsonException) {
             log.info("参数错误：" + e.getMessage());
-            return MyResponseHelper.handleRequestFailure(e, "参数错误");
+            return MyResponseHelper.handleRequestFailure(Object.class,e, "参数错误");
         }
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
+        return MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.ErrorOfParam);
     }
 
     /**

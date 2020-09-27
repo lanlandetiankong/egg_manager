@@ -2,7 +2,6 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.user.UserAccountFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -86,7 +85,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/getAllUserAccountDtos")
     public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = MyCommonResult.gainUniversalResult(UserAccountVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -108,7 +107,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(action = "查询用户信息", description = "根据用户id查询用户信息", fullPath = "/user/user_account/getUserAccountById")
     @PostMapping(value = "/getUserAccountById")
     public MyCommonResult<UserAccountVo> doGetUserAccountById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = MyCommonResult.gainUniversalResult(UserAccountVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountFuncModuleConstant.Success.queryPage);
         try {
             UserAccount account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
@@ -136,7 +135,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(action = "查询用户所拥有的角色", description = "根据用户id查询用户已有的角色", fullPath = "/user/user_account/getAllRoleByUserAccountId")
     @PostMapping(value = "/getAllRoleByUserAccountId")
     public MyCommonResult<DefineRoleVo> doGetAllRoleByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainUniversalResult(DefineRoleVo.class, AnnouncementFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class, UserAccountFuncModuleConstant.Success.queryGranted);
         try {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
@@ -152,7 +151,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/getAllPermissionByUserAccountId")
     public MyCommonResult<DefinePermissionVo> doGetAllPermissionByUserAccountId(HttpServletRequest request, String userAccountId,
                                                                                 @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainUniversalResult(DefinePermissionVo.class, AnnouncementFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class, UserAccountFuncModuleConstant.Success.queryGranted);
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
@@ -168,7 +167,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(action = "查询用户所拥有的职务", description = "根据用户id查询用户已有的职务", fullPath = "/user/user_account/getAllJobByUserAccountId")
     @PostMapping(value = "/getAllJobByUserAccountId")
     public MyCommonResult<DefineJobVo> doGetAllJobByUserAccountId(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class, AnnouncementFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class, UserAccountFuncModuleConstant.Success.queryGranted);
         try {
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
@@ -184,7 +183,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "新增用户", description = "表单方式新增用户", fullPath = "/user/user_account/doAddUserAccount")
     @PostMapping(value = "/doAddUserAccount")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
@@ -203,7 +202,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "更新用户信息", description = "表单方式更新用户信息", fullPath = "/user/user_account/doUpdateUserAccount")
     @PostMapping(value = "/doUpdateUserAccount")
     public MyCommonResult doUpdateUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.update);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
@@ -225,7 +224,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserAccountByIds")
     public MyCommonResult doBatchDeleteUserAccountById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -247,7 +246,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/delOneUserAccountById")
     public MyCommonResult doDelOneUserAccountById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.deleteById);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.deleteById);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -265,7 +264,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "修改用户锁定状态", description = "根据用户id批量锁定或解锁用户", fullPath = "/user/user_account/batchLockUserAccountByIds")
     @PostMapping(value = "/batchLockUserAccountByIds")
     public MyCommonResult doBatchLockUserAccountById(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.updateState);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.updateState);
         Integer lockCount = 0;
         try {
             Assert.notEmpty(lockIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -288,7 +287,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "修改用户锁定状态", description = "根据用户id锁定或解锁用户", fullPath = "/user/user_account/lockOneUserAccountById")
     @PostMapping(value = "/lockOneUserAccountById")
     public MyCommonResult doLockOneUserAccountById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.updateState);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.updateState);
         Integer lockCount = 0;
         try {
             Assert.notBlank(lockId,BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -309,7 +308,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "用户分配角色", description = "为用户分配角色", fullPath = "/user/user_account/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.grantOper);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.grantOper);
         try {
             Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
@@ -327,7 +326,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.grantOper);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserAccountFuncModuleConstant.Success.grantOper);
         try {
             Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);

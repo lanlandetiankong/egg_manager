@@ -72,7 +72,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementDtos")
     public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -98,7 +98,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getSomeAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
                                                                  Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
         try {
             //这些查询条件暂时用不到
             String queryObj = null, paginationObj = null, sortObj = null;
@@ -126,7 +126,7 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(announcementId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -147,7 +147,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/addAnnouncement")
     public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -166,7 +166,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/addAnnouncementFromDraft")
     public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                      @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainUniversalResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.publish);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.publish);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -186,7 +186,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/batchDelAnnouncementByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -208,7 +208,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/delOneAnnouncementByIds")
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.deleteById);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

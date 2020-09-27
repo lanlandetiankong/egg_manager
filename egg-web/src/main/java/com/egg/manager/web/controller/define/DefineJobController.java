@@ -3,7 +3,6 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.define.DefineJobFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -65,7 +64,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobs")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -93,7 +92,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobDtos")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -115,7 +114,7 @@ public class DefineJobController extends BaseController {
     @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/getDefineJobById")
     @PostMapping(value = "/getDefineJobById")
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainUniversalResult(DefineJobVo.class,AnnouncementFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryOneById);
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
@@ -131,7 +130,7 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/doAddDefineJob")
     @PostMapping(value = "/doAddDefineJob")
     public MyCommonResult doAddDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineJobFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -149,7 +148,7 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/doUpdateDefineJob")
     @PostMapping(value = "/doUpdateDefineJob")
     public MyCommonResult doUpdateDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.update);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineJobFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -170,7 +169,7 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineJobByIds")
     public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineJobFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -192,7 +191,7 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineJobById")
     public MyCommonResult doDelOneDefineJobById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementFuncModuleConstant.Success.deleteById);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineJobFuncModuleConstant.Success.deleteById);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

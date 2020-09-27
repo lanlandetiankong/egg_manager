@@ -45,7 +45,7 @@ public class CommonController extends BaseController {
     @PostMapping(value = "/getEnumListByKey")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    @CurrentLoginUser(required = false) UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainUniversalResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.queryEnumList);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

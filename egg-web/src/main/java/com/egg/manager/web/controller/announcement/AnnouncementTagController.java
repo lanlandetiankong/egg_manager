@@ -65,7 +65,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementTagEnums")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainUniversalResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryEnumList);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
@@ -86,7 +86,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementTagDtos")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainUniversalResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -108,7 +108,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAnnouncementTagById")
     public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainUniversalResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
@@ -126,7 +126,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = MyCommonResult.gainUniversalResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.create);
+        MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -146,7 +146,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementTagFuncModuleConstant.Success.update);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -169,7 +169,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/batchDelAnnouncementTagByIds")
     public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, String[] delIds,
                                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -192,7 +192,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/delOneAnnouncementTagById")
     public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, String delId,
                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class,AnnouncementTagFuncModuleConstant.Success.deleteById);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

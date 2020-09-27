@@ -39,7 +39,7 @@ public class HelloMailController extends BaseController {
     @PcWebQueryLog(action = "测试发送消息", description = "测试发送消息", fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainUniversalResult(DefineModuleVo.class,"测试");
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class,"测试");
         try {
             String[] receiveEmails = new String[]{"2773756340@qq.com"};
             EmailSendRecordMVO emailDto = EmailSendRecordMVO.builder().subject("邮件标题123")

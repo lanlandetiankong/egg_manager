@@ -60,7 +60,7 @@ public class UserExcelController extends BaseController {
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult result = MyCommonResult.gainOperationResult(null);
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -78,7 +78,7 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult result = MyCommonResult.gainOperationResult(null);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -98,7 +98,7 @@ public class UserExcelController extends BaseController {
     @ResponseBody
     public MyCommonResult dealImportData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult result = MyCommonResult.gainOperationResult(null);
         try {
             Assert.notEmpty(fileArr,BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());

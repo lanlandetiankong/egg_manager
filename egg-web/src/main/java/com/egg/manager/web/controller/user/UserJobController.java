@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.user.UserJobFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
@@ -62,7 +62,7 @@ public class UserJobController extends BaseController {
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserJobVo> result = MyCommonResult.gainUniversalResult(UserJobVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -84,7 +84,7 @@ public class UserJobController extends BaseController {
     @PcWebQueryLog(action = "查询用户职务信息", description = "根据用户职务id查询用户职务信息", fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
-        MyCommonResult<UserJobVo> result = MyCommonResult.gainUniversalResult(UserJobVo.class, AnnouncementFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(jobId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserJob vo = userJobMapper.selectById(jobId);

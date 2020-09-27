@@ -136,7 +136,7 @@ public class MyCommonResult<T> implements Serializable {
      */
     private Set<String> permissionSet;
 
-    public MyCommonResult(){}
+    private MyCommonResult(){}
     private static <T> MyCommonResult<T> gainInitBean(Class<T> clazz){
         MyCommonResult<T> result = new MyCommonResult<>();
         result.setHasError(false);
@@ -145,12 +145,18 @@ public class MyCommonResult<T> implements Serializable {
         return result ;
     }
 
-    private static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz){
+    private static <T> MyCommonResult<T> gainQueryResult(Class<T> clazz){
         MyCommonResult<T> result = gainInitBean(clazz);
         return result ;
     }
-    public static <T> MyCommonResult<T> gainUniversalResult(Class<T> clazz,String info){
+    public static <T> MyCommonResult<T> gainQueryResult(Class<T> clazz,String info){
         MyCommonResult<T> result = gainInitBean(clazz);
+        result.setInfo(info);
+        return result ;
+    }
+
+    public static MyCommonResult<Object> gainOperationResult(String info){
+        MyCommonResult<Object> result = gainInitBean(Object.class);
         result.setInfo(info);
         return result ;
     }

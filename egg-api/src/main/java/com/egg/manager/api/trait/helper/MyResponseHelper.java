@@ -18,27 +18,24 @@ public class MyResponseHelper {
     public MyResponseHelper() {
     }
 
-    public static <T> MyCommonResult<T> handleRequestFailure(Exception e, String msg) {
-        MyCommonResult<T> result = new MyCommonResult<T>() ;
+    public static <T> MyCommonResult<T> handleRequestFailure(Class<T> clazz,Exception e,String msg) {
         String errorMsg = e.getMessage();
         if(StringUtils.isNotBlank(msg)) {
             errorMsg = msg +" \n " + errorMsg ;
         }
+        MyCommonResult<T> result = MyCommonResult.gainErrorResult(clazz,errorMsg) ;
         result.setActionFlag(false);
         result.setHasError(true);
         result.setStatus(HttpStatus.BAD_REQUEST.value());
         result.setCode(HttpStatus.BAD_REQUEST.getReasonPhrase());
-        result.setErrorMsg(errorMsg);
         return result ;
     }
-    public static <T> MyCommonResult<T> handleRequestFailure(PublicResultEnum resultEnum) {
-        MyCommonResult<T> result = new MyCommonResult<T>() ;
-        String errorMsg = resultEnum.getLabel();
+    public static <T> MyCommonResult<T> handleRequestFailure(Class<T> clazz,PublicResultEnum resultEnum) {
+        MyCommonResult<T> result = MyCommonResult.gainErrorResult(clazz,resultEnum.getLabel()) ;
         result.setActionFlag(false);
         result.setHasError(true);
         result.setStatus(HttpStatus.BAD_REQUEST.value());
         result.setCode(HttpStatus.BAD_REQUEST.getReasonPhrase());
-        result.setErrorMsg(errorMsg);
         if(PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())){
             result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }

@@ -3,21 +3,19 @@ package com.egg.manager.web.controller.organization;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.organization.DefineTenantFuncModuleConstant;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.organization.DefineTenant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.db.mysql.mapper.organization.DefineTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
@@ -28,7 +26,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +64,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/getAllDefineTenantDtos")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainUniversalResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -89,7 +86,7 @@ public class DefineTenantController extends BaseController {
     @PcWebQueryLog(action = "查询租户定义信息", description = "根据租户定义id查询租户定义信息", fullPath = "/organization/define_tenant/getDefineTenantById")
     @PostMapping(value = "/getDefineTenantById")
     public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainUniversalResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.queryPage);
         try {
             Assert.notBlank(defineTenantId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
@@ -111,7 +108,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/getAllDefineTenantEnums")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainUniversalResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.queryOneById);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
@@ -132,7 +129,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
     public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainUniversalResult(DefineTenantVo.class, AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -150,7 +147,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
     public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.update);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -171,7 +168,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineTenantByIds")
     public MyCommonResult doBatchDeleteDefineTenantByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -192,7 +189,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineTenantById")
     public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.deleteById);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
@@ -214,7 +211,7 @@ public class DefineTenantController extends BaseController {
     @PostMapping(value = "/setupTenantManager")
     public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId,String[] userAccountIdArr,
                                                @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainUniversalResult(Object.class, AnnouncementFuncModuleConstant.Success.settingOper);
+        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.settingOper);
         try {
             Assert.notBlank(tenantId,"未知租户id:"+actionFailMsg);
             DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);

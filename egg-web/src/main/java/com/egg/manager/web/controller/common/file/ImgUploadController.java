@@ -45,7 +45,7 @@ public class ImgUploadController extends BaseController {
     @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
-        MyCommonResult result = new MyCommonResult();
+        MyCommonResult result = MyCommonResult.gainOperationResult(null);
         try {
             Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Assert.isFalse(file.isEmpty(),BaseRstMsgConstant.ErrorMsg.emptyUploadFile());

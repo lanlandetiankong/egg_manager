@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.excel.user.UserExcelFuncModuleConstant;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.excel.service.user.UserAccountXlsService;
@@ -60,7 +61,7 @@ public class UserExcelController extends BaseController {
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelExportCheck);
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -70,7 +71,7 @@ public class UserExcelController extends BaseController {
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean, checkIds);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelExportCheck);
             this.respResultJsonToFront(log, response, result);
         }
     }
@@ -78,7 +79,7 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelExportCheck);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -87,7 +88,7 @@ public class UserExcelController extends BaseController {
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelExportCheck);
             this.respResultJsonToFront(log, response, result);
         }
     }
@@ -98,7 +99,7 @@ public class UserExcelController extends BaseController {
     @ResponseBody
     public MyCommonResult dealImportData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelImportData);
         try {
             Assert.notEmpty(fileArr,BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
@@ -109,7 +110,7 @@ public class UserExcelController extends BaseController {
                         .doRead();
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelImportData);
         }
         return result;
     }

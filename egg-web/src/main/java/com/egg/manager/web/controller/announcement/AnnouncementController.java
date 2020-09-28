@@ -85,7 +85,7 @@ public class AnnouncementController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -113,7 +113,7 @@ public class AnnouncementController extends BaseController {
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
             result = announcementService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -132,7 +132,7 @@ public class AnnouncementController extends BaseController {
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementTransfer.transferEntityToVo(announcement, announcementTagMap));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -150,7 +150,7 @@ public class AnnouncementController extends BaseController {
             addCount = announcementService.dealCreate(loginUser, announcementVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -168,7 +168,7 @@ public class AnnouncementController extends BaseController {
             addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.publish);
         }
         return result;
     }
@@ -188,7 +188,7 @@ public class AnnouncementController extends BaseController {
             delCount = announcementService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -208,7 +208,7 @@ public class AnnouncementController extends BaseController {
             Integer delCount = announcementService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

@@ -151,7 +151,7 @@ public class DefineMenuController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineMenuService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -168,7 +168,7 @@ public class DefineMenuController extends BaseController {
             DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -186,7 +186,7 @@ public class DefineMenuController extends BaseController {
             addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -204,7 +204,7 @@ public class DefineMenuController extends BaseController {
             changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -230,7 +230,7 @@ public class DefineMenuController extends BaseController {
             Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -250,7 +250,7 @@ public class DefineMenuController extends BaseController {
             delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -270,7 +270,7 @@ public class DefineMenuController extends BaseController {
             Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

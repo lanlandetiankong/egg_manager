@@ -82,7 +82,7 @@ public class AnnouncementDraftController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementDraftService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,AnnouncementDraftFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -102,7 +102,7 @@ public class AnnouncementDraftController extends BaseController {
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraft, announcementTagMap));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -121,7 +121,7 @@ public class AnnouncementDraftController extends BaseController {
             addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class AnnouncementDraftController extends BaseController {
             updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
             result.setCount(updateCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -161,7 +161,7 @@ public class AnnouncementDraftController extends BaseController {
             delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,AnnouncementDraftFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -181,7 +181,7 @@ public class AnnouncementDraftController extends BaseController {
             Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,AnnouncementDraftFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -199,7 +199,7 @@ public class AnnouncementDraftController extends BaseController {
             publishCount = announcementDraftService.dealBatchPublishByDraft(loginUser, draftIds);
             result.setCount(publishCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,AnnouncementDraftFuncModuleConstant.Failure.batchPublish);
         }
         return result;
     }
@@ -215,7 +215,7 @@ public class AnnouncementDraftController extends BaseController {
             Integer publishCount = announcementDraftService.dealPublishByDraft(loginUser, draftId, true);
             result.setCount(publishCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.publish);
         }
         return result;
     }

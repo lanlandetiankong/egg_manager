@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.announcement;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementDraftFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementTagFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -75,7 +76,7 @@ public class AnnouncementTagController extends BaseController {
             result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = announcementTagService.dealResultListToEnums(result);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -96,7 +97,7 @@ public class AnnouncementTagController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -112,7 +113,7 @@ public class AnnouncementTagController extends BaseController {
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -121,9 +122,9 @@ public class AnnouncementTagController extends BaseController {
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增公告标签", description = "表单方式新增公告标签", fullPath = "/announcement_tag/doAddAnnouncementTag")
     @PostMapping(value = "/doAddAnnouncementTag")
-    public MyCommonResult<AnnouncementTagVo> doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
+    public MyCommonResult doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -131,7 +132,7 @@ public class AnnouncementTagController extends BaseController {
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -150,7 +151,7 @@ public class AnnouncementTagController extends BaseController {
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -172,7 +173,7 @@ public class AnnouncementTagController extends BaseController {
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -193,7 +194,7 @@ public class AnnouncementTagController extends BaseController {
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

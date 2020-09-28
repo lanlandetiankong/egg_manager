@@ -85,7 +85,7 @@ public class ExcelUploadController extends BaseController {
             }
             result.setFileUploaderBeanList(uploadBeanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,ExcelUploadFuncModuleConstant.Failure.uploadExcel);
         }
         return result;
     }

@@ -82,9 +82,9 @@ public class SmartFormDefinitionController extends BaseController {
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
             MyMongoQueryPageBean<SmartFormDefinitionMO> pageBean = smartFormDefinitionMService.doFindPage(loginUser, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean, "查询表单定义信息-Dto列表:" + actionSuccessMsg);
+            dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -106,9 +106,9 @@ public class SmartFormDefinitionController extends BaseController {
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
             MyMongoQueryPageBean<SmartFormDefinitionMO> pageBean = smartFormDefinitionMService.doFindPage(loginUser, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean, "查询表单定义信息-Dto列表:" + actionSuccessMsg);
+            dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -124,7 +124,7 @@ public class SmartFormDefinitionController extends BaseController {
             SmartFormDefinitionMO mobj = smartFormDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -149,7 +149,7 @@ public class SmartFormDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -175,7 +175,7 @@ public class SmartFormDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -194,7 +194,7 @@ public class SmartFormDefinitionController extends BaseController {
             Long delCount = smartFormDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -214,7 +214,7 @@ public class SmartFormDefinitionController extends BaseController {
             delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }

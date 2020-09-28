@@ -96,7 +96,7 @@ public class DefineRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -122,7 +122,7 @@ public class DefineRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -137,7 +137,7 @@ public class DefineRoleController extends BaseController {
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
             result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -150,7 +150,7 @@ public class DefineRoleController extends BaseController {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
             result.setResultList(definePermissionList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryGranted);
         }
         return result;
     }
@@ -170,7 +170,7 @@ public class DefineRoleController extends BaseController {
             }
             result.setResultList(defineMenuList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryGranted);
         }
         return result;
     }
@@ -186,7 +186,7 @@ public class DefineRoleController extends BaseController {
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -203,7 +203,7 @@ public class DefineRoleController extends BaseController {
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -223,7 +223,7 @@ public class DefineRoleController extends BaseController {
             delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -242,7 +242,7 @@ public class DefineRoleController extends BaseController {
             Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -257,7 +257,7 @@ public class DefineRoleController extends BaseController {
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.grantOper);
         }
         return result;
     }
@@ -309,7 +309,7 @@ public class DefineRoleController extends BaseController {
                 int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUser);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.grantOper);
         }
         return result;
     }

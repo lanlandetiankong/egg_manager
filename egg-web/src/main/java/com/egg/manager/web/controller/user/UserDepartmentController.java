@@ -73,7 +73,7 @@ public class UserDepartmentController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userDepartmentService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -89,7 +89,7 @@ public class UserDepartmentController extends BaseController {
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -106,7 +106,7 @@ public class UserDepartmentController extends BaseController {
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -126,7 +126,7 @@ public class UserDepartmentController extends BaseController {
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -146,7 +146,7 @@ public class UserDepartmentController extends BaseController {
             delCount = userDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

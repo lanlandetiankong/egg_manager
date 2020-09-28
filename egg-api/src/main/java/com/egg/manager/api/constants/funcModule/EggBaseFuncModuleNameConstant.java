@@ -39,6 +39,7 @@ public class EggBaseFuncModuleNameConstant {
 
 
     protected final static String uploadExcel = "excel上传" ;
+    protected final static String uploadImg = "图片上传" ;
     protected final static String userAccountCommonComp = "用户账号(通用组件)" ;
 
     protected final static String commonBinding = "通用<接口>" ;
@@ -242,6 +243,49 @@ public class EggBaseFuncModuleNameConstant {
     protected static final String doUploadExcel(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
         String msg = EggFuncActionNameConstant.Prefix.uploadExcel + funcModuleName + EggFuncActionNameConstant.Suffix.uploadExcel;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            return msg ;
+        }
+    }
+
+    protected static final String doExcelExportCheck(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.excelExportCheck + funcModuleName + EggFuncActionNameConstant.Suffix.excelExportCheck;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            return msg ;
+        }
+    }
+
+    protected static final String doExcelExportAll(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.excelExportAll + funcModuleName + EggFuncActionNameConstant.Suffix.excelExportAll;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            return msg ;
+        }
+    }
+
+    protected static final String doExcelImportData(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.excelImportData + funcModuleName + EggFuncActionNameConstant.Suffix.excelImportData;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            return msg ;
+        }
+    }
+    protected static final String doUploadImg(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.uploadImg + funcModuleName + EggFuncActionNameConstant.Suffix.uploadImg;
         if(isSuccess == null){
             return msg ;
         }   else {

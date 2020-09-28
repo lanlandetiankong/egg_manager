@@ -78,7 +78,7 @@ public class DefinePermissionController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -103,7 +103,7 @@ public class DefinePermissionController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -118,7 +118,7 @@ public class DefinePermissionController extends BaseController {
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -136,7 +136,7 @@ public class DefinePermissionController extends BaseController {
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -153,7 +153,7 @@ public class DefinePermissionController extends BaseController {
             changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -173,7 +173,7 @@ public class DefinePermissionController extends BaseController {
             delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.batchEnsure);
         }
         return result;
     }
@@ -196,7 +196,7 @@ public class DefinePermissionController extends BaseController {
                 throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -218,7 +218,7 @@ public class DefinePermissionController extends BaseController {
             }
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }

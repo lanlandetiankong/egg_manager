@@ -46,7 +46,7 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -61,7 +61,7 @@ public class UserCommonController extends BaseController {
             beanList.add(new FrontSelectBean(1, "已锁定"));
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -81,7 +81,7 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }

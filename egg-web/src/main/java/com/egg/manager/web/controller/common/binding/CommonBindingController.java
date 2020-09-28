@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementTagFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.controllers.common.binding.CommonBindingFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -47,7 +48,7 @@ public class CommonBindingController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e, CommonBindingFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }

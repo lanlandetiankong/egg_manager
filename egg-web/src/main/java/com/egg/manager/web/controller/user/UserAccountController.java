@@ -96,7 +96,7 @@ public class UserAccountController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userAccountService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -124,7 +124,7 @@ public class UserAccountController extends BaseController {
             }
             result.setBean(userAccountVo);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -138,7 +138,7 @@ public class UserAccountController extends BaseController {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.queryGranted);
         }
         return result;
     }
@@ -153,7 +153,7 @@ public class UserAccountController extends BaseController {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.queryGranted);
         }
         return result;
     }
@@ -168,7 +168,7 @@ public class UserAccountController extends BaseController {
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.queryGranted);
         }
         return result;
     }
@@ -186,7 +186,7 @@ public class UserAccountController extends BaseController {
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -204,7 +204,7 @@ public class UserAccountController extends BaseController {
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -225,7 +225,7 @@ public class UserAccountController extends BaseController {
             delCount = userAccountService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -245,7 +245,7 @@ public class UserAccountController extends BaseController {
             delCount = userAccountService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -267,7 +267,7 @@ public class UserAccountController extends BaseController {
             lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
             result.setCount(lockCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.updateState);
         }
         return result;
     }
@@ -287,7 +287,7 @@ public class UserAccountController extends BaseController {
             lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
             result.setCount(lockCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.updateState);
         }
         return result;
     }
@@ -303,7 +303,7 @@ public class UserAccountController extends BaseController {
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.grantOper);
         }
         return result;
     }
@@ -320,7 +320,7 @@ public class UserAccountController extends BaseController {
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.grantOper);
         }
         return result;
     }

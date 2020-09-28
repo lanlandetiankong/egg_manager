@@ -73,7 +73,7 @@ public class UserJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -89,7 +89,7 @@ public class UserJobController extends BaseController {
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }

@@ -74,7 +74,7 @@ public class UserRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userRoleService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -90,7 +90,7 @@ public class UserRoleController extends BaseController {
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -107,7 +107,7 @@ public class UserRoleController extends BaseController {
             addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -127,7 +127,7 @@ public class UserRoleController extends BaseController {
             delCount = userRoleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -147,7 +147,7 @@ public class UserRoleController extends BaseController {
             delCount = userRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

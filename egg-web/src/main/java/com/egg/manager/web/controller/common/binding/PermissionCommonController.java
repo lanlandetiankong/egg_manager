@@ -47,7 +47,7 @@ public class PermissionCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -66,7 +66,7 @@ public class PermissionCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -91,7 +91,7 @@ public class PermissionCommonController extends BaseController {
             result.setEnumList(beanList);
             result.setEnumDefaultCheckList(defaultCheckList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }

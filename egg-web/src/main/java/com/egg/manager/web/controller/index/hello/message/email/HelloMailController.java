@@ -48,7 +48,7 @@ public class HelloMailController extends BaseController {
                     .build();
             myBaseEmailService.sendSimpleEmail(emailDto);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,"测试");
         }
         return result;
     }

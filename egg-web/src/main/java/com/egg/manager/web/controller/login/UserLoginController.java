@@ -103,7 +103,7 @@ public class UserLoginController extends BaseController {
                 result.setAuthorization(authorization);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserLoginFuncModuleConstant.Failure.loginOper);
         }
         return result;
     }

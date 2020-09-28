@@ -77,7 +77,7 @@ public class DefineDepartmentController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineDepartmentService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -94,7 +94,7 @@ public class DefineDepartmentController extends BaseController {
             DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class DefineDepartmentController extends BaseController {
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -158,7 +158,7 @@ public class DefineDepartmentController extends BaseController {
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -178,7 +178,7 @@ public class DefineDepartmentController extends BaseController {
             delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -197,7 +197,7 @@ public class DefineDepartmentController extends BaseController {
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

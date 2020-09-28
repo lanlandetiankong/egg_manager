@@ -58,7 +58,7 @@ public class UserAccountCommonCompController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userAccountService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserAccountCommonCompFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }

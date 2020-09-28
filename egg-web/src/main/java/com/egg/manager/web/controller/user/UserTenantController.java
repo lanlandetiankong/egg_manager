@@ -74,7 +74,7 @@ public class UserTenantController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userTenantService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -84,13 +84,13 @@ public class UserTenantController extends BaseController {
     @PcWebQueryLog(action = "查询 [用户与租户关联] 信息", description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", fullPath = "/user/user_tenant/getUserTenantById")
     @PostMapping(value = "/getUserTenantById")
     public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request, String tenantId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(tenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserTenant vo = userTenantMapper.selectById(tenantId);
             result.setBean(UserTenantTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -107,7 +107,7 @@ public class UserTenantController extends BaseController {
             addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -127,7 +127,7 @@ public class UserTenantController extends BaseController {
             delCount = userTenantService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -149,7 +149,7 @@ public class UserTenantController extends BaseController {
             }
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

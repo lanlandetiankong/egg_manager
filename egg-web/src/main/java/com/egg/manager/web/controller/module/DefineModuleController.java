@@ -74,7 +74,7 @@ public class DefineModuleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineModuleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -89,7 +89,7 @@ public class DefineModuleController extends BaseController {
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
             result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -106,7 +106,7 @@ public class DefineModuleController extends BaseController {
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -123,7 +123,7 @@ public class DefineModuleController extends BaseController {
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -143,7 +143,7 @@ public class DefineModuleController extends BaseController {
             delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -162,7 +162,7 @@ public class DefineModuleController extends BaseController {
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

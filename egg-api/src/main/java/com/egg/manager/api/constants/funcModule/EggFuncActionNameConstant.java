@@ -28,6 +28,10 @@ public class EggFuncActionNameConstant {
         public final static String publish = "发布" ;
         public final static String batchPublish = "批量发布" ;
         public final static String uploadExcel = "上传Excel" ;
+        public final static String uploadImg = "上传图片" ;
+        public final static String excelExportCheck = "导出已选" ;
+        public final static String excelExportAll = "导出所有" ;
+        public final static String excelImportData = "导入数据" ;
     }
 
 
@@ -52,6 +56,11 @@ public class EggFuncActionNameConstant {
         public final static String publish = "" ;
         public final static String batchPublish = "" ;
         public final static String uploadExcel = "" ;
+        public final static String uploadImg = "" ;
+
+        public final static String excelExportCheck = "" ;
+        public final static String excelExportAll = "" ;
+        public final static String excelImportData = "" ;
     }
 
 

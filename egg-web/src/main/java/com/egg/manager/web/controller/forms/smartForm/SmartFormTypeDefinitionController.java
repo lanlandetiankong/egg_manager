@@ -76,9 +76,9 @@ public class SmartFormTypeDefinitionController extends BaseController {
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
             MyMongoQueryPageBean<SmartFormTypeDefinitionMO> pageBean = smartFormTypeDefinitionMService.doFindPage(loginUser, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean, "查询表单类型定义信息-Dto列表:" + actionSuccessMsg);
+            dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -102,7 +102,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser, mongoQueryBuffer);
             result = smartFormTypeDefinitionMService.dealResultListToEnums(result, list);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -118,7 +118,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryOneById);
         }
         return result;
 
@@ -130,7 +130,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult<SmartFormTypeDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                  SmartFormTypeDefinitionMO formTypeDefinitionMO) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMO.class,SmartFormTypeDefinitionFuncModuleConstant.Success.create);
+        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMO.class,SmartFormTypeDefinitionFuncModuleConstant.Success.queryOneById);
         Integer addCount = 0;
         try {
             Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -138,7 +138,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -163,7 +163,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             }
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -182,7 +182,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -202,7 +202,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }

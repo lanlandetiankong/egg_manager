@@ -8,17 +8,16 @@ import com.egg.manager.api.constants.funcModule.EggBaseFuncModuleNameConstant;
  * @Author: zhoucj
  * @Date: 2020/9/25 14:13
  */
-public class ExcelUploadFuncModuleConstant extends EggBaseFuncModuleNameConstant {
+public class ImgUploadFuncModuleConstant extends EggBaseFuncModuleNameConstant {
     protected static final String KEY_FUNC_MODULE_NAME = uploadImg;
 
     public static class Success {
         private final static boolean defaultFlag = true;
-        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,defaultFlag);
+        public static String uploadImg = doUploadImg(KEY_FUNC_MODULE_NAME,defaultFlag);
     }
 
     public static class Failure {
         private final static boolean defaultFlag = false;
-        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,defaultFlag);
+        public static String uploadImg = doUploadImg(KEY_FUNC_MODULE_NAME,defaultFlag);
     }
-
 }

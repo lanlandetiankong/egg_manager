@@ -74,9 +74,9 @@ public class EmailSendRecordController extends BaseController {
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
             MyMongoQueryPageBean<EmailSendRecordMO> pageBean = emailSendRecordMService.doFindPage(loginUser, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean, "查询-邮件记录-Dto列表:" + actionSuccessMsg);
+            dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -92,7 +92,7 @@ public class EmailSendRecordController extends BaseController {
             EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -112,7 +112,7 @@ public class EmailSendRecordController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -131,7 +131,7 @@ public class EmailSendRecordController extends BaseController {
             Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -151,7 +151,7 @@ public class EmailSendRecordController extends BaseController {
             delCount = emailSendRecordMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }

@@ -147,23 +147,23 @@ public class BaseController {
         }
     }
 
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e) {
-        dealCommonErrorCatch(logger, result, e, null, true, true);
+    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e,String errorMsg) {
+        dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
     }
 
     /**
      * @param result
      * @param e
-     * @param appendMsg 异常信息
+     * @param errorMsg 异常信息
      * @param isAppend  appendMsg是否追加到 errorMsg 后面
      */
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String appendMsg, boolean isAppend, boolean isPrintStackTrace) {
+    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg, boolean isAppend, boolean isPrintStackTrace) {
         result.setHasError(true);
         String errmsg = null;
         if (isAppend) {
-            errmsg = e.getMessage() + (StringUtils.isBlank(appendMsg) ? "" : appendMsg);
+            errmsg = (StringUtils.isBlank(errorMsg) ? "" : errorMsg) + e.getMessage();
         } else {
-            errmsg = appendMsg;
+            errmsg = errorMsg;
         }
         if (isPrintStackTrace) {
             logger.error(e.getMessage());
@@ -178,8 +178,7 @@ public class BaseController {
     }
 
 
-    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean, String info) {
-        result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);
+    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean) {
         result.setResultList(pageBean.getContent());
         result.setCount(pageBean.getTotal());
     }

@@ -49,7 +49,7 @@ public class ModuleCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,ModuleCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }
@@ -69,7 +69,7 @@ public class ModuleCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,ModuleCommonFuncModuleConstant.Failure.queryEnumList);
         }
         return result;
     }

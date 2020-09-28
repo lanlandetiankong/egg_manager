@@ -75,7 +75,7 @@ public class DefineTenantController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -91,7 +91,7 @@ public class DefineTenantController extends BaseController {
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
             result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -116,7 +116,7 @@ public class DefineTenantController extends BaseController {
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = defineTenantService.dealResultListToEnums(loginUser, result);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -133,7 +133,7 @@ public class DefineTenantController extends BaseController {
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -150,7 +150,7 @@ public class DefineTenantController extends BaseController {
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -170,7 +170,7 @@ public class DefineTenantController extends BaseController {
             delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -189,7 +189,7 @@ public class DefineTenantController extends BaseController {
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }
@@ -212,7 +212,7 @@ public class DefineTenantController extends BaseController {
             int count = defineTenantService.dealTenantSetupManager(loginUser,tenantId,userAccountIdArr);
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.settingOper);
         }
         return result;
     }

@@ -74,7 +74,7 @@ public class DefineJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -101,7 +101,7 @@ public class DefineJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryPage);
         }
         return result;
     }
@@ -116,7 +116,7 @@ public class DefineJobController extends BaseController {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryOneById);
         }
         return result;
     }
@@ -133,7 +133,7 @@ public class DefineJobController extends BaseController {
             addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.create);
         }
         return result;
     }
@@ -150,7 +150,7 @@ public class DefineJobController extends BaseController {
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.update);
         }
         return result;
     }
@@ -171,7 +171,7 @@ public class DefineJobController extends BaseController {
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.batchDeleteByIds);
         }
         return result;
     }
@@ -191,7 +191,7 @@ public class DefineJobController extends BaseController {
             delCount = defineJobService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.deleteById);
         }
         return result;
     }

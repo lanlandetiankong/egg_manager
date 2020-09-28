@@ -70,7 +70,7 @@ public class MyCommonResult<T> implements Serializable {
     /**
      * 树集合
      */
-    private List resultList;
+    private List<T> resultList;
     /**
      * 存储 一些自定义属性的map集合
      */
@@ -137,7 +137,7 @@ public class MyCommonResult<T> implements Serializable {
     private Set<String> permissionSet;
 
     private MyCommonResult(){}
-    private static <T> MyCommonResult<T> gainInitBean(Class<T> clazz){
+    private static <T> MyCommonResult<T> gainInitQueryBean(Class<T> tClass){
         MyCommonResult<T> result = new MyCommonResult<>();
         result.setHasError(false);
         result.setHasWarning(false);
@@ -145,30 +145,36 @@ public class MyCommonResult<T> implements Serializable {
         return result ;
     }
 
-    private static <T> MyCommonResult<T> gainQueryResult(Class<T> clazz){
-        MyCommonResult<T> result = gainInitBean(clazz);
+    private static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass){
+        MyCommonResult<T> result = gainInitQueryBean(tClass);
         return result ;
     }
-    public static <T> MyCommonResult<T> gainQueryResult(Class<T> clazz,String info){
-        MyCommonResult<T> result = gainInitBean(clazz);
+    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String info){
+        MyCommonResult<T> result = gainInitQueryBean(tClass);
         result.setInfo(info);
         return result ;
     }
 
-    public static MyCommonResult<Object> gainOperationResult(String info){
-        MyCommonResult<Object> result = gainInitBean(Object.class);
+    public static <E> MyCommonResult<Object> gainEnumResult(String info){
+        MyCommonResult<Object> result = gainInitQueryBean(Object.class);
         result.setInfo(info);
         return result ;
     }
 
-    public static MyCommonResult<Object> gainErrorResult(String errorMsg){
-        MyCommonResult result = gainInitBean(Object.class);
+    public static MyCommonResult gainOperationResult(String info){
+        MyCommonResult result = gainInitQueryBean(Object.class);
+        result.setInfo(info);
+        return result ;
+    }
+
+    public static MyCommonResult gainErrorResult(String errorMsg){
+        MyCommonResult result = gainInitQueryBean(Object.class);
         result.setHasError(true);
         result.setErrorMsg(errorMsg);
         return result ;
     }
-    public static <T> MyCommonResult<T> gainErrorResult(Class<T> clazz,String errorMsg){
-        MyCommonResult<T> result = gainInitBean(clazz);
+    public static <T> MyCommonResult<T> gainErrorResult(Class<T> tClass,String errorMsg){
+        MyCommonResult<T> result = gainInitQueryBean(tClass);
         result.setHasError(true);
         result.setErrorMsg(errorMsg);
         return result ;

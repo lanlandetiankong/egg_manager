@@ -125,8 +125,8 @@ public class DefineTenantController extends BaseController {
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
-    public MyCommonResult<DefineTenantVo> doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.create);
+    public MyCommonResult doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());

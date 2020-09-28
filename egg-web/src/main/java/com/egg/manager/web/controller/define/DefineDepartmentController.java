@@ -102,37 +102,45 @@ public class DefineDepartmentController extends BaseController {
     @PcWebQueryLog(action = "查询部门TreeSelect", description = "查询部门TreeSelect", fullPath = "/define/define_department/getAllDepartmentTreeSelect")
     @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
-    public MyCommonResult<DefineDepartment> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartment> result = MyCommonResult.gainQueryResult(DefineDepartment.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
-        //筛选与排序
-        QueryWrapper<DefineDepartment> queryWrapper = new QueryWrapper<DefineDepartment>();
-        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        queryWrapper.orderBy(true,true,"level");
-        queryWrapper.orderBy(true,true,"order_num");
-        queryWrapper.orderBy(true,true,"create_time");
-        List<DefineDepartment> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
-        result.setResultList(treeList);
+    public MyCommonResult<CommonTreeSelect> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
+        try{
+            //筛选与排序
+            QueryWrapper<DefineDepartment> queryWrapper = new QueryWrapper<DefineDepartment>();
+            queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+            queryWrapper.orderBy(true,true,"level");
+            queryWrapper.orderBy(true,true,"order_num");
+            queryWrapper.orderBy(true,true,"create_time");
+            List<DefineDepartment> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
+            List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
+            result.setResultList(treeList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryTreeSelect);
+        }
         return result;
     }
 
     @PcWebQueryLog(action = "查询被过滤的部门定义TreeSelect", description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_department/getDepartmentTreeSelectFilterChildrens")
     @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
-    public MyCommonResult<DefineDepartment> doGetDepartmentTreeSelectFilterChildrens(String filterId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartment> result = MyCommonResult.gainQueryResult(DefineDepartment.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
-        List<DefineDepartment> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
-        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
-        result.setResultList(treeList);
+    public MyCommonResult<CommonTreeSelect> doGetDepartmentTreeSelectFilterChildrens(String filterId, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
+        try{
+            List<DefineDepartment> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
+            List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
+            result.setResultList(treeList);
+        }   catch (Exception e){
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryTreeSelect);
+        }
         return result;
     }
 
     @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增部门定义", description = "表单方式新增部门定义", fullPath = "/define/define_department/doAddDefineDepartment")
     @PostMapping(value = "/doAddDefineDepartment")
-    public MyCommonResult<DefineDepartmentVo> doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
+    public MyCommonResult doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());

@@ -73,8 +73,8 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询所有路由菜单TreeSelect", description = "查询所有路由菜单TreeSelect", fullPath = "/define/define_menu/getAllMenuTreeSelect")
     @ApiOperation(value = "查询所有路由菜单TreeSelect", notes = "查询所有路由菜单TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getAllMenuTreeSelect")
-    public MyCommonResult<DefineMenu> doGetAllMenuTreeSelect(Boolean withRoot) {
-        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineMenuFuncModuleConstant.Success.queryTreeSelect);
+    public MyCommonResult<CommonTreeSelect> doGetAllMenuTreeSelect(Boolean withRoot) {
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class, DefineMenuFuncModuleConstant.Success.queryTreeSelect);
         //查询 所有[可用状态]的 [菜单定义]
         List<DefineMenu> allMenus = defineMenuService.getAllEnableList(new QueryWrapper<DefineMenu>());
         List<CommonTreeSelect> treeList = null;
@@ -90,8 +90,8 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询被过滤的路由菜单TreeSelect", description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_menu/getMenuTreeSelectFilterChildrens")
     @ApiOperation(value = "查询被过滤的路由菜单TreeSelect", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getMenuTreeSelectFilterChildrens")
-    public MyCommonResult<DefineMenu> doGetMenuTreeSelectFilterChildrens(String filterId) {
-        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class,DefineMenuFuncModuleConstant.Success.queryTreeSelect);
+    public MyCommonResult<CommonTreeSelect> doGetMenuTreeSelectFilterChildrens(String filterId) {
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineMenuFuncModuleConstant.Success.queryTreeSelect);
         List<DefineMenu> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
         result.setResultList(treeList);
@@ -101,8 +101,8 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "查询所有可以访问的路由菜单", notes = "查询所有可以访问的路由菜单", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebQueryLog(action = "查询所有可以访问的路由菜单", description = "查询所有可以访问的路由菜单", fullPath = "/define/define_menu/user/getAllMenuTree")
     @PostMapping("/user/getAllMenuTree")
-    public MyCommonResult<DefineMenu> doGetAllMenuTree() {
-        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class,DefineMenuFuncModuleConstant.Success.queryPage);
+    public MyCommonResult<CommonMenuTree> doGetAllMenuTree() {
+        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class,DefineMenuFuncModuleConstant.Success.queryPage);
         //筛选与排序
         QueryWrapper<DefineMenu> queryWrapper = new QueryWrapper<DefineMenu>();
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
@@ -119,8 +119,8 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "查询用户可以访问的路由菜单", notes = "查询用户可以访问的路由菜单", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebQueryLog(action = "查询用户可以访问的路由菜单", description = "查询用户可以访问的路由菜单", fullPath = "/define/define_menu/user/getGrantedMenuTree")
     @PostMapping("/user/getGrantedMenuTree")
-    public MyCommonResult<DefineMenu> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineMenuFuncModuleConstant.Success.queryGranted);
+    public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class, DefineMenuFuncModuleConstant.Success.queryGranted);
         List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser, authorization, loginUser.getFid(), false);
         result.setResultList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
@@ -177,8 +177,8 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "新增菜单定义", notes = "表单方式新增菜单定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增菜单定义", description = "表单方式新增菜单定义", fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
-    public MyCommonResult<DefineMenuVo> doAddDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.create);
+    public MyCommonResult doAddDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());

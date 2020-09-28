@@ -127,10 +127,10 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(action = "新增->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
     @ApiOperation(value = "新增->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                  SmartFormTypeDefinitionMO formTypeDefinitionMO) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMO.class,SmartFormTypeDefinitionFuncModuleConstant.Success.queryOneById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.queryOneById);
         Integer addCount = 0;
         try {
             Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -147,10 +147,10 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(action = "更新->表单类型定义", description = "", fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult<SmartFormTypeDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMO formTypeDefinitionMO) {
-        MyCommonResult<SmartFormTypeDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMO.class,SmartFormTypeDefinitionFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.update);
         Integer count = 0;
         try {
             Assert.notNull(formTypeDefinitionMO,BaseRstMsgConstant.ErrorMsg.emptyForm());

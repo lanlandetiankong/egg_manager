@@ -35,8 +35,8 @@ public class PermissionCommonController extends BaseController {
 
     @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionTypeEnumList")
-    public MyCommonResult<DefinePermission> doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class, PermissionCommonFuncModuleConstant.Success.queryEnumList);
+    public MyCommonResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
+        MyCommonResult result = MyCommonResult.gainEnumResult( PermissionCommonFuncModuleConstant.Success.queryEnumList);
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -55,7 +55,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainQueryResult(FrontSelectBean.class,PermissionCommonFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.queryEnumList);
         try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -75,7 +75,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        MyCommonResult<FrontSelectBean> result = MyCommonResult.gainQueryResult(FrontSelectBean.class,PermissionCommonFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.queryEnumList);
         try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

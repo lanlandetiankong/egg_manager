@@ -98,8 +98,8 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "新增模块定义", notes = "表单方式新增模块定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增模块定义", description = "表单方式新增模块定义", fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
-    public MyCommonResult<DefineModuleVo> doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.create);
+    public MyCommonResult doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());

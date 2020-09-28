@@ -132,10 +132,10 @@ public class SmartFormDefinitionController extends BaseController {
     @PcWebOperationLog(action = "新增->表单定义", description = "", fullPath = "/forms/smartForm/formDefinition/addByForm")
     @ApiOperation(value = "新增->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
-    public MyCommonResult<SmartFormDefinitionMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                              @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                                              SmartFormDefinitionMVO formDefinitionMVO) {
-        MyCommonResult<SmartFormDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormDefinitionMO.class,SmartFormDefinitionFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -158,10 +158,10 @@ public class SmartFormDefinitionController extends BaseController {
     @PcWebOperationLog(action = "更新->表单定义", description = "", fullPath = "/forms/smartForm/formDefinition/updateByForm")
     @ApiOperation(value = "更新->表单定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult<SmartFormDefinitionMO> doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                 @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                                                 SmartFormDefinitionMVO formDefinitionMVO) {
-        MyCommonResult<SmartFormDefinitionMO> result = MyCommonResult.gainQueryResult(SmartFormDefinitionMO.class,SmartFormDefinitionFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.update);
         Integer addCount = 0;
         try {
             Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());

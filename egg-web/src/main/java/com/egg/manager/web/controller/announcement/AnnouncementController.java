@@ -141,9 +141,9 @@ public class AnnouncementController extends BaseController {
     @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/addAnnouncement")
     @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addAnnouncement")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
+    public MyCommonResult doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -159,9 +159,9 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/addAnnouncementFromDraft")
     @PostMapping(value = "/addAnnouncementFromDraft")
-    public MyCommonResult<AnnouncementVo> doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+    public MyCommonResult doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                      @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.publish);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.publish);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());

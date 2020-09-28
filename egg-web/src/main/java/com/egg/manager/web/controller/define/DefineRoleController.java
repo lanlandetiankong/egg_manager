@@ -13,6 +13,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
@@ -158,9 +159,9 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "查询角色已获授权的菜单", notes = "根据角色定义id查询角色已获授权的菜单", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllMenuByRoleId")
-    public MyCommonResult<DefinePermission> doGetAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
+    public MyCommonResult<DefineMenu> doGetAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class, DefineRoleFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineRoleFuncModuleConstant.Success.queryGranted);
         try {
             List<DefineMenu> defineMenuList = null;
             if (Boolean.TRUE.equals(filterParentNode)) {  //是否过滤掉 有子节点的 [菜单节点]
@@ -178,8 +179,8 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
-    public MyCommonResult<DefineRoleVo> doAddDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.create);
+    public MyCommonResult doAddDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());

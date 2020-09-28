@@ -110,9 +110,9 @@ public class AnnouncementDraftController extends BaseController {
     @ApiOperation(value = "新增公告草稿", notes = "表单方式新增公告草稿", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增公告草稿", description = "表单方式新增公告草稿", fullPath = "/announcement_draft/addAnnouncementDraft")
     @PostMapping(value = "/addAnnouncementDraft")
-    public MyCommonResult<AnnouncementDraftVo> doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+    public MyCommonResult doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainQueryResult(AnnouncementDraftVo.class,AnnouncementDraftFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -129,9 +129,9 @@ public class AnnouncementDraftController extends BaseController {
     @ApiOperation(value = "更新公告草稿", notes = "表单方式更新公告草稿", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "更新公告草稿", description = "表单方式更新公告草稿", fullPath = "/announcement_draft/updateAnnouncementDraft")
     @PostMapping(value = "/updateAnnouncementDraft")
-    public MyCommonResult<AnnouncementDraftVo> doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+    public MyCommonResult doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainQueryResult(AnnouncementDraftVo.class,AnnouncementDraftFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.update);
         Integer updateCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());

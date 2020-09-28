@@ -2,9 +2,8 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementDraftFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementDraftFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementDraftFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementDraftService;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -28,7 +27,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -159,7 +157,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/batchDelAnnouncementDraftByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -181,7 +179,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/delOneAnnouncementDraftByIds")
     public MyCommonResult doDelOneAnnouncementDraftByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementDraftFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -199,7 +197,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(action = "公告草稿批量转发布", description = "根据公告草稿id批量发布", fullPath = "/announcement_draft/batchPublishAnnouncementDraftByIds")
     @PostMapping(value = "/batchPublishAnnouncementDraftByIds")
     public MyCommonResult doBatchPublishAnnouncementById(HttpServletRequest request, String[] draftIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementDraftFuncModuleConstant.Success.batchPublish);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.batchPublish);
         Integer publishCount = 0;
         try {
             Assert.notEmpty(draftIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -217,7 +215,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(action = "公告草稿转发布", description = "根据公告草稿id批量转发布", fullPath = "/announcement_draft/publishOneAnnouncementDraftById")
     @PostMapping(value = "/publishOneAnnouncementDraftById")
     public MyCommonResult doPublishOneAnnouncementDraftById(HttpServletRequest request, String draftId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementDraftFuncModuleConstant.Success.publish);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.publish);
         try {
             Assert.notBlank(draftId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

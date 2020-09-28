@@ -180,7 +180,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             response.setCharacterEncoding("utf-8");
             out = response.getWriter();
             response.setContentType("application/json; charset=utf-8");
-            out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(Object.class,PublicResultEnum.UnauthorizedLoginUser)));
+            out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser)));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.define.DefineRoleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.define.DefineRoleFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.role.RoleMenuService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -201,7 +201,7 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
     public MyCommonResult doUpdateDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineRoleFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -222,7 +222,7 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineRoleByIds")
     public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineRoleFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -243,7 +243,7 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineRoleByIds")
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineRoleFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -260,7 +260,7 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/grantPermissionToRole")
     public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineRoleFuncModuleConstant.Success.grantOper);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.grantOper);
         try {
             Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
@@ -278,7 +278,7 @@ public class DefineRoleController extends BaseController {
     @Transactional
     public MyCommonResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineRoleFuncModuleConstant.Success.grantOper);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.grantOper);
         try {
             Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
 

@@ -161,7 +161,12 @@ public class MyCommonResult<T> implements Serializable {
         return result ;
     }
 
-
+    public static MyCommonResult<Object> gainErrorResult(String errorMsg){
+        MyCommonResult result = gainInitBean(Object.class);
+        result.setHasError(true);
+        result.setErrorMsg(errorMsg);
+        return result ;
+    }
     public static <T> MyCommonResult<T> gainErrorResult(Class<T> clazz,String errorMsg){
         MyCommonResult<T> result = gainInitBean(clazz);
         result.setHasError(true);

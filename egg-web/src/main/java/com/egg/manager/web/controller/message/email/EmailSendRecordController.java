@@ -2,7 +2,8 @@ package com.egg.manager.web.controller.message.email;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.adviser.MyControllerAdviserFuncModuleConstant;
 import com.egg.manager.api.services.message.services.email.EmailSendRecordMService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -65,7 +66,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<EmailSendRecordMO> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<EmailSendRecordMO> result = MyCommonResult.gainQueryResult(EmailSendRecordMO.class,null);
+        MyCommonResult<EmailSendRecordMO> result = MyCommonResult.gainQueryResult(EmailSendRecordMO.class,MyControllerAdviserFuncModuleConstant.Success.queryPage);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -85,7 +86,7 @@ public class EmailSendRecordController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                               @RequestParam(value = "fid", required = true) String fid) {
-        MyCommonResult<EmailSendRecordMO> result = MyCommonResult.gainQueryResult(EmailSendRecordMO.class,null);
+        MyCommonResult<EmailSendRecordMO> result = MyCommonResult.gainQueryResult(EmailSendRecordMO.class,MyControllerAdviserFuncModuleConstant.Success.queryOneById);
         try {
             Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser, fid);
@@ -100,10 +101,10 @@ public class EmailSendRecordController extends BaseController {
     @PcWebOperationLog(action = "新增->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
-    public MyCommonResult<EmailSendRecordMO> doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                                          EmailSendRecordMVO emailSendRecordMVO) {
-        MyCommonResult<EmailSendRecordMO> result = MyCommonResult.gainQueryResult(EmailSendRecordMO.class,null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(emailSendRecordMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -126,7 +127,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/delOneById")
     public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser, delId);
@@ -146,7 +147,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/batchDelByIds")
     public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.batchDeleteByIds);
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

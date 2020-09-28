@@ -1,10 +1,10 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.common.file.ExcelUploadFuncModuleConstant;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
-import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -46,7 +46,7 @@ public class ExcelUploadController extends BaseController {
     @ApiOperation(value = "上传Excel模板", notes = "上传Excel模板", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(null);
+        MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.uploadExcel);
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 

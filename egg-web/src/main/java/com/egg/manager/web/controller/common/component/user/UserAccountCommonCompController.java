@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.common.component.user;
 
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.controllers.common.component.user.UserAccountCommonCompFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
@@ -36,7 +37,7 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/user/user_account/getAllUserAccountDtos", flag = false)
+    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/getAllUserAccountDtos", flag = false)
     @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表", notes = "[通用组件]-查询用户信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -46,7 +47,7 @@ public class UserAccountCommonCompController extends BaseController {
     @PostMapping(value = "/getAllUserAccountDtos")
     public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountCommonCompFuncModuleConstant.Success.queryPage);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

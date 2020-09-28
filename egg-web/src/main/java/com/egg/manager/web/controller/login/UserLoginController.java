@@ -1,13 +1,13 @@
 package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.controllers.login.UserLoginFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.common.util.jwt.JWTUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
@@ -66,7 +66,7 @@ public class UserLoginController extends BaseController {
                                                              @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccount loginUser
     ) {
-        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, AnnouncementFuncModuleConstant.Success.loginOper);
+        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, UserLoginFuncModuleConstant.Success.loginOper);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());

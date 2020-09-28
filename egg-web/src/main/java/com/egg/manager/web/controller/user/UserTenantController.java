@@ -2,9 +2,8 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.user.UserRoleFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.user.UserTenantFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.user.UserTenantFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -103,7 +102,7 @@ public class UserTenantController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与租户关联] ", description = "表单方式新增 [用户与租户关联] ", fullPath = "/user/user_tenant/doAddUserTenant")
     @PostMapping(value = "/doAddUserTenant")
     public MyCommonResult doAddUserTenant(HttpServletRequest request, UserTenantVo userTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserTenantFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -124,7 +123,7 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserTenantByIds")
     public MyCommonResult doBatchDeleteUserTenantById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserTenantFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -145,7 +144,7 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/delOneUserTenantByIds")
     public MyCommonResult doDelOneUserTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserTenantFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.deleteById);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.module;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.module.DefineModuleFuncModuleConstant;
 import com.egg.manager.api.services.basic.module.DefineModuleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -25,7 +25,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -120,7 +119,7 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "更新模块定义", description = "表单方式更新模块定义", fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineModuleFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -141,7 +140,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineModuleByIds")
     public MyCommonResult doBatchDeleteDefineModuleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -162,7 +161,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineModuleById")
     public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineModuleFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);

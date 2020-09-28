@@ -4,8 +4,8 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.define.DefineMenuFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.define.DefineMenuFuncModuleConstant;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -33,8 +33,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.util.Asserts;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -201,7 +199,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(action = "更新菜单定义", description = "表单方式更新菜单定义", fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
     public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineMenuFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -221,7 +219,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/doUpdateExcelModel")
     @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineMenuFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.update);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -249,7 +247,7 @@ public class DefineMenuController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineMenuByIds")
     public MyCommonResult doBatchDeleteDefineMenuById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineMenuFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -271,7 +269,7 @@ public class DefineMenuController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineMenuById")
     public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineMenuFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

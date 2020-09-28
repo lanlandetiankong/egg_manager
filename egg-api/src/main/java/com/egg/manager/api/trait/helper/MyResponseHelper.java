@@ -3,6 +3,7 @@ package com.egg.manager.api.trait.helper;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -16,6 +17,14 @@ import org.springframework.http.HttpStatus;
 public class MyResponseHelper {
 
     public MyResponseHelper() {
+    }
+
+    public static MyCommonResult<Object> handleRequestFailure(Exception e, String msg) {
+        return handleRequestFailure(Object.class,e,msg) ;
+    }
+
+    public static MyCommonResult<Object> handleRequestFailure(PublicResultEnum resultEnum) {
+        return handleRequestFailure(Object.class,resultEnum) ;
     }
 
     public static <T> MyCommonResult<T> handleRequestFailure(Class<T> clazz,Exception e,String msg) {

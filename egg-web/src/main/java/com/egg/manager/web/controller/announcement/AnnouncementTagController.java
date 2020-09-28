@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.announcement.AnnouncementTagFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementTagFuncModuleConstant;
 import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -146,7 +146,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -169,7 +169,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/batchDelAnnouncementTagByIds")
     public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, String[] delIds,
                                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -192,7 +192,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/delOneAnnouncementTagById")
     public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, String delId,
                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,AnnouncementTagFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 

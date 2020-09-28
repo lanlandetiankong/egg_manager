@@ -3,8 +3,8 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.define.DefineDepartmentFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.define.DefineDepartmentFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -28,7 +28,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -155,7 +154,7 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineDepartmentFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -176,7 +175,7 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineDepartmentByIds")
     public MyCommonResult doBatchDeleteDefineDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineDepartmentFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -197,7 +196,7 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineDepartmentById")
     public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefineDepartmentFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);

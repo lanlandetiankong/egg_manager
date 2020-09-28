@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.define.DefinePermissionFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.define.DefinePermissionFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -28,7 +28,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -131,8 +130,8 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class, httpMethod = "POST")
     @PcWebOperationLog(action = "新增权限定义", description = "表单方式新增权限定义", fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
-    public MyCommonResult<Object> doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefinePermissionFuncModuleConstant.Success.create);
+    public MyCommonResult doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -151,7 +150,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "更新权限定义", description = "表单方式更新权限定义", fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefinePermissionFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -172,7 +171,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchEnsureDefinePermissionByIds")
     public MyCommonResult doBatchEnsureDefinePermissionById(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefinePermissionFuncModuleConstant.Success.batchEnsure);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.batchEnsure);
         Integer delCount = 0;
         try {
             Assert.notEmpty(ensureIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -193,7 +192,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/delOneDefinePermissionByIds")
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefinePermissionFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -215,7 +214,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefinePermissionByIds")
     public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class,DefinePermissionFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.user.UserDepartmentFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.user.UserDepartmentFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -16,7 +16,6 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
 import com.egg.manager.web.controller.BaseController;
@@ -25,7 +24,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,7 +101,7 @@ public class UserDepartmentController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与部门关联] ", description = "表单方式新增 [用户与部门关联] ", fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
     public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserDepartmentFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.create);
         Integer addCount = 0;
         try {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -124,7 +122,7 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserDepartmentByIds")
     public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserDepartmentFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.update);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -145,7 +143,7 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/delOneUserDepartmentByIds")
     public MyCommonResult doDelOneUserDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, UserDepartmentFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.deleteById);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

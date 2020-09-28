@@ -27,6 +27,7 @@ public class EggFuncActionNameConstant {
         public final static String batchEnsure = "批量删除" ;
         public final static String publish = "发布" ;
         public final static String batchPublish = "批量发布" ;
+        public final static String uploadExcel = "上传Excel" ;
     }
 
 
@@ -50,6 +51,7 @@ public class EggFuncActionNameConstant {
         public final static String batchEnsure = "" ;
         public final static String publish = "" ;
         public final static String batchPublish = "" ;
+        public final static String uploadExcel = "" ;
     }
 
 

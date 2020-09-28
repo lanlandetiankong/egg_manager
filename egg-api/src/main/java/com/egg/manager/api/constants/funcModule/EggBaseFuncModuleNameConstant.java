@@ -1,6 +1,5 @@
 package com.egg.manager.api.constants.funcModule;
 
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -37,6 +36,21 @@ public class EggBaseFuncModuleNameConstant {
     protected final static String userJob = "用户<->职务关联" ;
     protected final static String userRole = "用户<->角色关联" ;
     protected final static String userTenant = "用户<->租户关联" ;
+
+
+    protected final static String uploadExcel = "excel上传" ;
+    protected final static String userAccountCommonComp = "用户账号(通用组件)" ;
+
+    protected final static String commonBinding = "通用<接口>" ;
+    protected final static String moduleCommon = "通用接口<模块>" ;
+    protected final static String permissionCommon = "通用接口<权限>" ;
+    protected final static String userCommon = "通用接口<用户>" ;
+
+
+
+    protected final static String controllerAdviser = "接口异常" ;
+
+
 
 
     protected static final String doLoginOper(String funcModuleName,Boolean isSuccess)  {
@@ -218,6 +232,16 @@ public class EggBaseFuncModuleNameConstant {
     protected static final String doBatchPublish(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
         String msg = EggFuncActionNameConstant.Prefix.batchPublish + funcModuleName + EggFuncActionNameConstant.Suffix.batchPublish;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            return msg ;
+        }
+    }
+    protected static final String doUploadExcel(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.uploadExcel + funcModuleName + EggFuncActionNameConstant.Suffix.uploadExcel;
         if(isSuccess == null){
             return msg ;
         }   else {

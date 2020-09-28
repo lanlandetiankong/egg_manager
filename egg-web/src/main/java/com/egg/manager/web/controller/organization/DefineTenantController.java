@@ -2,9 +2,9 @@ package com.egg.manager.web.controller.organization;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.controllers.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.module.DefineModuleFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.organization.DefineTenantFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcModule.controllers.module.DefineModuleFuncModuleConstant;
+import com.egg.manager.api.constants.funcModule.controllers.organization.DefineTenantFuncModuleConstant;
 import com.egg.manager.api.services.basic.organization.DefineTenantService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -147,7 +147,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
     public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.update);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -168,7 +168,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineTenantByIds")
     public MyCommonResult doBatchDeleteDefineTenantByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.batchDeleteByIds);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -189,7 +189,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineTenantById")
     public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.deleteById);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
@@ -211,7 +211,7 @@ public class DefineTenantController extends BaseController {
     @PostMapping(value = "/setupTenantManager")
     public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId,String[] userAccountIdArr,
                                                @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<Object> result = MyCommonResult.gainQueryResult(Object.class, DefineTenantFuncModuleConstant.Success.settingOper);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.settingOper);
         try {
             Assert.notBlank(tenantId,"未知租户id:"+actionFailMsg);
             DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);

@@ -108,7 +108,6 @@ public class UserExcelController extends BaseController {
                         .headRowNumber(1)   //前几行是头部，将不读取
                         .doRead();
             }
-            this.dealCommonSuccessCatch(result, "成功导入数据！");
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

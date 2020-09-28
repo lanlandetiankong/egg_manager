@@ -95,7 +95,6 @@ public class UserAccountController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userAccountService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询用户信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -124,7 +123,6 @@ public class UserAccountController extends BaseController {
                 userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
             }
             result.setBean(userAccountVo);
-            dealCommonSuccessCatch(result, "查询用户信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -139,7 +137,6 @@ public class UserAccountController extends BaseController {
         try {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
-            dealCommonSuccessCatch(result, "查询用户所拥有的角色:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -155,7 +152,6 @@ public class UserAccountController extends BaseController {
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
-            dealCommonSuccessCatch(result, "查询用户所拥有的权限:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -171,7 +167,6 @@ public class UserAccountController extends BaseController {
         try {
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
-            dealCommonSuccessCatch(result, "查询用户所拥有的职务:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -190,7 +185,6 @@ public class UserAccountController extends BaseController {
             Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -209,7 +203,6 @@ public class UserAccountController extends BaseController {
             Assert.notNull(userAccountVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -231,7 +224,6 @@ public class UserAccountController extends BaseController {
             //批量伪删除
             delCount = userAccountService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -251,7 +243,6 @@ public class UserAccountController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userAccountService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, UserAccountFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -275,7 +266,6 @@ public class UserAccountController extends BaseController {
             //批量伪删除
             lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
             result.setCount(lockCount);
-            dealCommonSuccessCatch(result, "批量" + lockMsg + "用户:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -295,7 +285,6 @@ public class UserAccountController extends BaseController {
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
             lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
-            dealCommonSuccessCatch(result, lockMsg + "用户:" + actionSuccessMsg);
             result.setCount(lockCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -313,7 +302,6 @@ public class UserAccountController extends BaseController {
             Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
-            dealCommonSuccessCatch(result, "用户分配角色:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -331,7 +319,6 @@ public class UserAccountController extends BaseController {
             Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
-            dealCommonSuccessCatch(result, "用户分配职务:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

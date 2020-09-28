@@ -85,7 +85,6 @@ public class ${table.controllerName} {
             //取得 排序配置
             List<AntdvSortBean> sortBeans=parseSortJsonToBean(sortObj,true);
             result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortBeans);
-            dealCommonSuccessCatch(result,"查询${cfg.moduleName_Cn}-Dto列表:"+actionSuccessMsg);
         }catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
         }
@@ -101,7 +100,6 @@ public class ${table.controllerName} {
         try{
             ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow}=${cfg.baseEntityName_firstLow}Mapper.selectById(${cfg.baseEntityName_firstLow}Id);
             result.setBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
-            dealCommonSuccessCatch(result,"查询${cfg.moduleName_Cn}:"+actionSuccessMsg);
         }catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
         }
@@ -122,7 +120,6 @@ public class ${table.controllerName} {
                 addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
             }
             result.setCount(addCount);
-            dealCommonSuccessCatch(result,"新增${cfg.moduleName_Cn}:"+actionSuccessMsg);
         }   catch(Exception e){
             this.dealCommonErrorCatch(log,result,e);
         }
@@ -143,7 +140,6 @@ public class ${table.controllerName} {
         changeCount=${cfg.baseEntityName_firstLow}Service.dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser,false);
         }
         result.setCount(changeCount);
-        dealCommonSuccessCatch(result,"更新${cfg.moduleName_Cn}:"+actionSuccessMsg);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
@@ -163,7 +159,6 @@ public class ${table.controllerName} {
         try{
         if(delIds!=null&&delIds.length>0){
         delCount=${cfg.baseEntityName_firstLow}Service.dealDel${cfg.baseEntityName}ByArr(delIds,loginUser);
-        dealCommonSuccessCatch(result,"批量删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
         }
         result.setCount(delCount);
         }catch(Exception e){
@@ -183,9 +178,8 @@ public class ${table.controllerName} {
         MyCommonResult result=new MyCommonResult();
         try{
         if(StringUtils.isNotBlank(delId)){
-        Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
-        result.setCount(delCount);
-        dealCommonSuccessCatch(result,"删除${cfg.moduleName_Cn}:"+actionSuccessMsg);
+            Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
+            result.setCount(delCount);
         }
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);

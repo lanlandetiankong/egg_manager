@@ -102,7 +102,6 @@ public class UserLoginController extends BaseController {
                 //返回给前端 jwt jwt值
                 result.setAuthorization(authorization);
             }
-            dealCommonSuccessCatch(result, "用户登录:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

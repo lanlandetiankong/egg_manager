@@ -72,7 +72,6 @@ public class UserJobController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询用户职务信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -89,7 +88,6 @@ public class UserJobController extends BaseController {
             Assert.notBlank(jobId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result, "查询用户职务信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

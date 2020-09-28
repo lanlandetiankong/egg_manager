@@ -101,7 +101,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
             List<SmartFormTypeDefinitionMO> list = smartFormTypeDefinitionMService.doFindAll(loginUser, mongoQueryBuffer);
             result = smartFormTypeDefinitionMService.dealResultListToEnums(result, list);
-            dealCommonSuccessCatch(result, "查询表单类型信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -118,7 +117,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
             Assert.notBlank(fid,BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormTypeDefinitionMO mobj = smartFormTypeDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
-            dealCommonSuccessCatch(result, "根据id查询->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -139,7 +137,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
             SmartFormTypeDefinitionMO newMO = smartFormTypeDefinitionMService.doInsert(loginUser, formTypeDefinitionMO);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -165,7 +162,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
                 smartFormDefinitionMService.updateFormTypeByTypeId(loginUser, newMO);
             }
             result.setCount(count);
-            dealCommonSuccessCatch(result, "更新->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -185,7 +181,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormTypeDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -205,7 +200,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = smartFormTypeDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
-            dealCommonSuccessCatch(result, "批量删除->表单类型定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

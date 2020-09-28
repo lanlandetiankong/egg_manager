@@ -177,9 +177,6 @@ public class BaseController {
         }
     }
 
-    public void dealCommonSuccessCatch(MyCommonResult result, String info) {
-        result.setInfo(info);
-    }
 
     public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean, String info) {
         result.setInfo(StringUtils.isBlank(info) ? actionSuccessMsg : info);

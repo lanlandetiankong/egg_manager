@@ -123,7 +123,6 @@ public class SmartFormDefinitionController extends BaseController {
             Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormDefinitionMO mobj = smartFormDefinitionMService.doFindById(loginUser, fid);
             result.setBean(mobj);
-            dealCommonSuccessCatch(result, "根据id查询->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -149,7 +148,6 @@ public class SmartFormDefinitionController extends BaseController {
             SmartFormDefinitionMO newMO = smartFormDefinitionMService.doInsert(loginUser, formDefinitionMO);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "新增->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -176,7 +174,6 @@ public class SmartFormDefinitionController extends BaseController {
             SmartFormDefinitionMO newMO = smartFormDefinitionMService.doUpdateById(loginUser, formDefinitionMO);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "更新->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -196,7 +193,6 @@ public class SmartFormDefinitionController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormDefinitionMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -216,7 +212,6 @@ public class SmartFormDefinitionController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = smartFormDefinitionMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
-            dealCommonSuccessCatch(result, "批量删除->表单定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

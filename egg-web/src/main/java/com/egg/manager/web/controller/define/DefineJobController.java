@@ -73,7 +73,6 @@ public class DefineJobController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询职务信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -101,7 +100,6 @@ public class DefineJobController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询职务信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -117,7 +115,6 @@ public class DefineJobController extends BaseController {
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
-            dealCommonSuccessCatch(result, "查询职务信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -135,7 +132,6 @@ public class DefineJobController extends BaseController {
             Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -153,7 +149,6 @@ public class DefineJobController extends BaseController {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -175,7 +170,6 @@ public class DefineJobController extends BaseController {
             //批量伪删除
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -195,7 +189,6 @@ public class DefineJobController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, DefineJobFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

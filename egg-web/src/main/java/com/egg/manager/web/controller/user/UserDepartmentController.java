@@ -72,7 +72,6 @@ public class UserDepartmentController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userDepartmentService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询 [用户与部门关联] 信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -89,7 +88,6 @@ public class UserDepartmentController extends BaseController {
             Assert.notBlank(departmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result, "查询 [用户与部门关联] 信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -107,7 +105,6 @@ public class UserDepartmentController extends BaseController {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -127,7 +124,6 @@ public class UserDepartmentController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -148,7 +144,6 @@ public class UserDepartmentController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userDepartmentService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, UserDepartmentFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

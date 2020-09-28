@@ -73,7 +73,6 @@ public class DefineModuleController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineModuleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询模块定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -89,7 +88,6 @@ public class DefineModuleController extends BaseController {
         try {
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
             result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
-            dealCommonSuccessCatch(result, "查询模块定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -107,7 +105,6 @@ public class DefineModuleController extends BaseController {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -125,7 +122,6 @@ public class DefineModuleController extends BaseController {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -145,7 +141,6 @@ public class DefineModuleController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -166,7 +161,6 @@ public class DefineModuleController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

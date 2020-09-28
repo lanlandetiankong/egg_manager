@@ -77,7 +77,6 @@ public class DefinePermissionController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询权限定义信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -103,7 +102,6 @@ public class DefinePermissionController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询权限定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -119,7 +117,6 @@ public class DefinePermissionController extends BaseController {
         try {
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
-            dealCommonSuccessCatch(result, "查询权限定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -138,7 +135,6 @@ public class DefinePermissionController extends BaseController {
 
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -156,7 +152,6 @@ public class DefinePermissionController extends BaseController {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -176,7 +171,6 @@ public class DefinePermissionController extends BaseController {
         try {
             Assert.notEmpty(ensureIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
-            dealCommonSuccessCatch(result, "批量启用权限定义:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -201,7 +195,6 @@ public class DefinePermissionController extends BaseController {
             if (new Integer(0).equals(delCount)) {    //如果删除的是 [已启用的]，则抛出异常
                 throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
-            dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -221,9 +214,7 @@ public class DefinePermissionController extends BaseController {
 
             delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
             if (delIds.length > delCount) {
-                dealCommonSuccessCatch(result, "由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
-            }   else {
-                dealCommonSuccessCatch(result, DefinePermissionFuncModuleConstant.Success.deleteById);
+                result.setInfo("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
             }
             result.setCount(delCount);
         } catch (Exception e) {

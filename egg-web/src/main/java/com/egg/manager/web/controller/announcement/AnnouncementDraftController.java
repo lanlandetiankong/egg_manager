@@ -81,7 +81,6 @@ public class AnnouncementDraftController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementDraftService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询公告信息草稿-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -102,7 +101,6 @@ public class AnnouncementDraftController extends BaseController {
             //取得 公告标签 map
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraft, announcementTagMap));
-            dealCommonSuccessCatch(result, "查询公告草稿信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -122,7 +120,6 @@ public class AnnouncementDraftController extends BaseController {
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -142,7 +139,6 @@ public class AnnouncementDraftController extends BaseController {
             announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
             updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
             result.setCount(updateCount);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -163,7 +159,6 @@ public class AnnouncementDraftController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -185,7 +180,6 @@ public class AnnouncementDraftController extends BaseController {
 
             Integer delCount = announcementDraftService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, AnnouncementDraftFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -203,7 +197,6 @@ public class AnnouncementDraftController extends BaseController {
             Assert.notEmpty(draftIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             publishCount = announcementDraftService.dealBatchPublishByDraft(loginUser, draftIds);
-            dealCommonSuccessCatch(result, "公告草稿批量转发布:" + actionSuccessMsg);
             result.setCount(publishCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -221,7 +214,6 @@ public class AnnouncementDraftController extends BaseController {
 
             Integer publishCount = announcementDraftService.dealPublishByDraft(loginUser, draftId, true);
             result.setCount(publishCount);
-            dealCommonSuccessCatch(result, "发布公告草稿:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

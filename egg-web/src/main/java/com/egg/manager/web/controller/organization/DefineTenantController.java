@@ -74,7 +74,6 @@ public class DefineTenantController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询租户定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -91,7 +90,6 @@ public class DefineTenantController extends BaseController {
             Assert.notBlank(defineTenantId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
             result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
-            dealCommonSuccessCatch(result, "查询租户定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -117,7 +115,6 @@ public class DefineTenantController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = defineTenantService.dealResultListToEnums(loginUser, result);
-            dealCommonSuccessCatch(result, "查询租户定义信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -135,7 +132,6 @@ public class DefineTenantController extends BaseController {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -153,7 +149,6 @@ public class DefineTenantController extends BaseController {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -173,7 +168,6 @@ public class DefineTenantController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -194,7 +188,6 @@ public class DefineTenantController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineModuleFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -218,7 +211,6 @@ public class DefineTenantController extends BaseController {
             Assert.notNull(defineTenant,"租户不存在:"+actionFailMsg);
             int count = defineTenantService.dealTenantSetupManager(loginUser,tenantId,userAccountIdArr);
             result.setCount(count);
-            dealCommonSuccessCatch(result, "租户-设置管理员:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -95,7 +95,6 @@ public class DefineRoleController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询角色定义信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -122,7 +121,6 @@ public class DefineRoleController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询角色定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -138,7 +136,6 @@ public class DefineRoleController extends BaseController {
         try {
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
             result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
-            dealCommonSuccessCatch(result, "查询角色定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -152,7 +149,6 @@ public class DefineRoleController extends BaseController {
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
             result.setResultList(definePermissionList);
-            dealCommonSuccessCatch(result, "查询角色所拥有的权限:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -173,7 +169,6 @@ public class DefineRoleController extends BaseController {
                 defineMenuList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
             }
             result.setResultList(defineMenuList);
-            dealCommonSuccessCatch(result, "查询角色已获授权的菜单:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -190,7 +185,6 @@ public class DefineRoleController extends BaseController {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -208,7 +202,6 @@ public class DefineRoleController extends BaseController {
 
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -228,7 +221,6 @@ public class DefineRoleController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -249,7 +241,6 @@ public class DefineRoleController extends BaseController {
 
             Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineRoleFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -265,7 +256,6 @@ public class DefineRoleController extends BaseController {
             Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
             result.setCount(count);
-            dealCommonSuccessCatch(result, "角色授权:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -318,7 +308,6 @@ public class DefineRoleController extends BaseController {
                 List delIdList = Lists.newArrayList(delIter);
                 int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUser);
             }
-            dealCommonSuccessCatch(result, "授权菜单:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

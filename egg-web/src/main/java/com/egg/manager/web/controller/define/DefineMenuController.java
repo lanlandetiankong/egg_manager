@@ -150,7 +150,6 @@ public class DefineMenuController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineMenuService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询菜单定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -168,7 +167,6 @@ public class DefineMenuController extends BaseController {
 
             DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
-            dealCommonSuccessCatch(result, "查询菜单定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -187,7 +185,6 @@ public class DefineMenuController extends BaseController {
 
             addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineMenuFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -206,7 +203,6 @@ public class DefineMenuController extends BaseController {
 
             changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineMenuFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -233,7 +229,6 @@ public class DefineMenuController extends BaseController {
             entity.setUpdateTime(new Date());
             Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, "更新菜单对应的Excel模板:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -253,7 +248,6 @@ public class DefineMenuController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, DefineMenuFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -275,7 +269,6 @@ public class DefineMenuController extends BaseController {
 
             Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineMenuFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -76,7 +76,6 @@ public class DefineDepartmentController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineDepartmentService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询部门定义信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -94,7 +93,6 @@ public class DefineDepartmentController extends BaseController {
 
             DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
-            dealCommonSuccessCatch(result, "查询部门定义信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -141,7 +139,6 @@ public class DefineDepartmentController extends BaseController {
 
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -160,7 +157,6 @@ public class DefineDepartmentController extends BaseController {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -180,7 +176,6 @@ public class DefineDepartmentController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -201,7 +196,6 @@ public class DefineDepartmentController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, DefineDepartmentFuncModuleConstant.Success.batchDeleteByIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -73,7 +73,6 @@ public class UserRoleController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userRoleService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询用户角色信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -90,7 +89,6 @@ public class UserRoleController extends BaseController {
             Assert.notBlank(roleId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result, "查询用户角色信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -108,7 +106,6 @@ public class UserRoleController extends BaseController {
             Assert.notNull(userRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, UserRoleFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -128,7 +125,6 @@ public class UserRoleController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userRoleService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, UserRoleFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -149,7 +145,6 @@ public class UserRoleController extends BaseController {
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userRoleService.dealDeleteById(loginUser, delId);
-            dealCommonSuccessCatch(result, UserRoleFuncModuleConstant.Success.deleteById);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

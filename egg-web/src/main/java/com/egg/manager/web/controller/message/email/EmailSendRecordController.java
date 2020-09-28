@@ -91,7 +91,6 @@ public class EmailSendRecordController extends BaseController {
             Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMO mobj = emailSendRecordMService.doFindById(loginUser, fid);
             result.setBean(mobj);
-            dealCommonSuccessCatch(result, "根据id查询->邮件记录:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -112,7 +111,6 @@ public class EmailSendRecordController extends BaseController {
             EmailSendRecordMO newMO = emailSendRecordMService.doInsert(loginUser, emailSendRecordMO);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, "发送->邮件:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -132,7 +130,6 @@ public class EmailSendRecordController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, "批量删除->邮件记录:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -152,7 +149,6 @@ public class EmailSendRecordController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = emailSendRecordMService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
-            dealCommonSuccessCatch(result, "批量删除->邮件记录:" + actionSuccessMsg);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

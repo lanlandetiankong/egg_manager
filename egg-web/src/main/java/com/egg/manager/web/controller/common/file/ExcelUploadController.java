@@ -84,7 +84,6 @@ public class ExcelUploadController extends BaseController {
                 uploadBeanList.add(uploadBean);
             }
             result.setFileUploaderBeanList(uploadBeanList);
-            this.dealCommonSuccessCatch(result, "已成功上传Excel文件！");
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

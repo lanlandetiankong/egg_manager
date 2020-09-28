@@ -74,7 +74,6 @@ public class AnnouncementTagController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = announcementTagService.dealResultListToEnums(result);
-            dealCommonSuccessCatch(result, "查询公告标签信息Select列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -96,7 +95,6 @@ public class AnnouncementTagController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询公告标签信息-Dto列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -113,7 +111,6 @@ public class AnnouncementTagController extends BaseController {
             Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
-            dealCommonSuccessCatch(result, "查询公告标签信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -133,7 +130,6 @@ public class AnnouncementTagController extends BaseController {
 
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -153,7 +149,6 @@ public class AnnouncementTagController extends BaseController {
 
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
-            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.update);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -175,7 +170,6 @@ public class AnnouncementTagController extends BaseController {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -198,7 +192,6 @@ public class AnnouncementTagController extends BaseController {
 
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            dealCommonSuccessCatch(result, AnnouncementTagFuncModuleConstant.Success.deleteById);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

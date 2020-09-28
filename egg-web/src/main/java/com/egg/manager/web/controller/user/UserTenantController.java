@@ -73,7 +73,6 @@ public class UserTenantController extends BaseController {
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userTenantService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
-            dealCommonSuccessCatch(result, "查询 [用户与租户关联] 信息列表:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -90,7 +89,6 @@ public class UserTenantController extends BaseController {
             Assert.notBlank(tenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserTenant vo = userTenantMapper.selectById(tenantId);
             result.setBean(UserTenantTransfer.transferEntityToVo(vo));
-            dealCommonSuccessCatch(result, "查询 [用户与租户关联] 信息:" + actionSuccessMsg);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -108,7 +106,6 @@ public class UserTenantController extends BaseController {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             result.setCount(addCount);
-            dealCommonSuccessCatch(result, UserTenantFuncModuleConstant.Success.create);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -128,7 +125,6 @@ public class UserTenantController extends BaseController {
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userTenantService.dealBatchDelete(loginUser, delIds);
-            dealCommonSuccessCatch(result,  UserTenantFuncModuleConstant.Success.batchDeleteByIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -150,7 +146,6 @@ public class UserTenantController extends BaseController {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             if (StringUtils.isNotBlank(delId)) {
                 delCount = userTenantService.dealDeleteById(loginUser, delId);
-                dealCommonSuccessCatch(result, UserTenantFuncModuleConstant.Success.deleteById);
             }
             result.setCount(delCount);
         } catch (Exception e) {

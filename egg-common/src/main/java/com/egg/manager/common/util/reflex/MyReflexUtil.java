@@ -19,9 +19,9 @@ import java.util.Set;
 public class MyReflexUtil {
 
 
-    public static Update getMOUpdateByObjectWithIgnores(Object object, boolean skipNull, String ... args){
+    public static Update getMoUpdateByObjectWithIgnores(Object object, boolean skipNull, String ... args){
         List list = (args == null) ? new ArrayList() : Lists.newArrayList(args);
-        return getMOUpdateByObject(object,skipNull,list);
+        return getMoUpdateByObject(object,skipNull,list);
     }
     /**
      * 将查询条件对象转换为update
@@ -30,7 +30,7 @@ public class MyReflexUtil {
      * @return
      * @author Jason
      */
-    public static Update getMOUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
+    public static Update getMoUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
         Update update = new Update();
         ignoreKeys = ignoreKeys != null ? ignoreKeys : new ArrayList<>() ;
         //是否取得继承的上一级baseMO的字段

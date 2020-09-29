@@ -72,14 +72,6 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     T doBeforeDeleteOneById(UserAccount loginUser, Class<T> tClass, String idVal);
 
 
-    /**
-     * 取得的结果 转为 枚举类型
-     *
-     * @param result
-     */
-    @Deprecated
-    <T, KV, KL> MyCommonResult doGetResultListSetToEntitySelect(MyCommonResult<T> result, EggPojoReflexFieldConfig<KV> valueConf, EggPojoReflexFieldConfig<KL> labelConf);
-
 
 
 
@@ -102,15 +94,6 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     Page dealAntvPageToPagination(AntdvPaginationBean paginationBean);
 
 
-    /**
-     *  将取得请求的token转化为 UserAccountXlsModel
-     * @param request
-     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
-     * @return UserAccountToken
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     */
-    //UserAccountXlsModel gainUserAccountByRequest(HttpServletRequest request,boolean isRequired) throws InvocationTargetException, IllegalAccessException ;
 
 
     /**

@@ -45,7 +45,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineDepartmentController ", description = "部门定义接口")
+@Api(value = "API-部门定义接口")
 @RestController
 @RequestMapping("/define/define_department")
 public class DefineDepartmentController extends BaseController {

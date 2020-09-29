@@ -127,9 +127,8 @@ public class RegexUtil {
      * @return
      */
     public static String getDomain(String url) {
-        Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE);
-        // 获取完整的域名
-        // Pattern p=Pattern.compile("[^//]*?\\.(com|cn|net|org|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE);
+        String regex = "(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)" ;
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(url);
         matcher.find();
         return matcher.group();

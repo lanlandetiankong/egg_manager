@@ -4,7 +4,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.define;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define.DefineRoleMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Named("defineRoleTransfer")
-public class DefineRoleTransfer extends MyBaseMysqlTransfer {
+public class DefineRoleTransfer extends BaseMysqlTransfer {
     static DefineRoleMapstruct defineRoleMapstruct = DefineRoleMapstruct.INSTANCE;
 
     public static DefineRole transferVoToEntity(DefineRoleVo vo) {

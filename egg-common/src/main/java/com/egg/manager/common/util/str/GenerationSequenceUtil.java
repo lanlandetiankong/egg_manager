@@ -1,5 +1,6 @@
 package com.egg.manager.common.util.str;
 
+import com.egg.manager.common.base.constant.Constant;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.lang.management.ManagementFactory;
@@ -137,7 +138,10 @@ public class GenerationSequenceUtil {
     }
 
 
-    // 创建机器标识符
+    /**
+     * 创建机器标识符
+     * @return
+     */
     private static int createMachineIdentifier () {
         // build a 2-byte machine piece based on NICs info
         int machinePiece;
@@ -167,14 +171,15 @@ public class GenerationSequenceUtil {
         return machinePiece;
     }
 
-    // Creates the process identifier. This does not have to be unique per class loader because
-    // NEXT_COUNTER will provide the uniqueness.
-    // 创建进程标识符。这并不是每个类装入器,因为必须是唯一的
+    /**
+     * 创建进程标识符。这并不是每个类装入器,因为必须是唯一的
+     * @return
+     */
     private static int createProcessIdentifier () {
         int processId;
         try {
             String processName = ManagementFactory.getRuntimeMXBean().getName();
-            if ( processName.contains( "@" ) ) {
+            if ( processName.contains(Constant.SYMBOL_AT) ) {
                 processId = Integer.parseInt( processName.substring( 0 , processName.indexOf( '@' ) ) );
             } else {
                 processId = processName.hashCode();

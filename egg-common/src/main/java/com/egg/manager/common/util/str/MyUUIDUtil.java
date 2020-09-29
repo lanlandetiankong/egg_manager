@@ -3,7 +3,7 @@ package com.egg.manager.common.util.str;
 import java.util.UUID;
 
 public class MyUUIDUtil {
-    public static String renderSimpleUUID() {
+    public static String renderSimpleUuid() {
         return UUID.randomUUID().toString().replace("-","") ;
     }
 

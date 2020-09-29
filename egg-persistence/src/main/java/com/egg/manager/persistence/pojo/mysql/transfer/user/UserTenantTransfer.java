@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.user;
 import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.user.UserTenantMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Named("userTenantTransfer")
-public class UserTenantTransfer extends MyBaseMysqlTransfer {
+public class UserTenantTransfer extends BaseMysqlTransfer {
 
     static UserTenantMapstruct userTenantMapstruct = UserTenantMapstruct.INSTANCE;
 

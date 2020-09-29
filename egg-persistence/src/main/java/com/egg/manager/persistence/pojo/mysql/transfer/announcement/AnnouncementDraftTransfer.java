@@ -7,7 +7,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraf
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraftDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.announcement.AnnouncementDraftMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Component
 @Named("announcementDraftTransfer")
-public class AnnouncementDraftTransfer extends MyBaseMysqlTransfer {
+public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
 
     static AnnouncementDraftMapstruct announcementDraftMapstruct = AnnouncementDraftMapstruct.INSTANCE;
 

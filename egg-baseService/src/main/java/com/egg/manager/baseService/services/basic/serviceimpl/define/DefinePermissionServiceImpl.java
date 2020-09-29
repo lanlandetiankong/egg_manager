@@ -93,7 +93,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     @Override
     public Integer dealCreate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, new QueryWrapper());
-        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
+        if (verifyDuplicateBean.isSuccessFlag() == false) {
+            //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
@@ -109,17 +110,20 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         QueryWrapper<DefinePermission> uniWrapper = new QueryWrapper<DefinePermission>()
                 .ne("fid", definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
-        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
+        if (verifyDuplicateBean.isSuccessFlag() == false) {
+            //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
         DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
         updateEntity = super.doBeforeUpdate(loginUser, updateEntity);
         DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
-        if (SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())) {    //如果已经启用
+        if (SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())) {
+            //如果已经启用
             DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity, oldEntity);
         }
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = definePermissionMapper.updateById(updateEntity);
         } else {
             changeCount = definePermissionMapper.updateById(updateEntity);
@@ -163,7 +167,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
             return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {
+            //如果是[超级管理员]的话可以访问全部菜单
             return getAllEnableList(loginUser, null);
         } else {
             return definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);

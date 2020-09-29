@@ -37,7 +37,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     /**
      * 检验用户是否想要登录
      * 检测header里面是否包含 authorization 字段
-     *
      * @param request
      * @param response
      * @return
@@ -65,7 +64,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 目前只需要 head 包含
-     *
      * @param request
      * @param response
      * @param mappedValue
@@ -86,7 +84,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 跨域支持
-     *
      * @param request
      * @param response
      * @return
@@ -112,7 +109,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     /**
      * 放行有 @ShiroPass 的请求方法
      * (项目启动时，加载所有带有 @ShiroPass 的RequestMapping 到 Constant.METHOD_URL_SET 中)
-     *
      * @param request
      * @param response
      * @param httpServletRequest
@@ -123,11 +119,12 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     private boolean handleVerificationPassAnnotation(ServletRequest request, ServletResponse response, HttpServletRequest httpServletRequest, String authorization) throws Exception {
         for (String urlMethod : Constant.METHOD_URL_SET) {
             String[] urlSplit = urlMethod.split(":--:");
-            if (urlSplit[0].equals(httpServletRequest.getRequestURI())
-                    && (urlSplit[1].equals(httpServletRequest.getMethod()) || urlSplit[1].equals("RequestMapping")
-            )) {
+            boolean eqUriFlag = urlSplit[0].equals(httpServletRequest.getRequestURI()) ;
+            boolean eqMethodFlag = (urlSplit[1].equals(httpServletRequest.getMethod()) || "RequestMapping".equals(urlSplit[1] ));
+            if (eqUriFlag && eqMethodFlag) {
                 //Constant.isPass = true ;
-                if (StringUtils.isBlank(authorization)) { //如果前端没传递 authorization的话，按游客处理，添加游客信息
+                if (StringUtils.isBlank(authorization)) {
+                    //如果前端没传递 authorization的话，按游客处理，添加游客信息
                     httpServletRequest.setAttribute("currentLoginUser", UserAccountPojoInitialize.dealGetVisitor());
                     return true;
                 } else {
@@ -135,8 +132,8 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                 }
             }
             if (StringUtils.countMatches(urlMethod, "{") > 0) {
-                if (StringUtils.countMatches(urlMethod, "/") == StringUtils.countMatches(urlSplit[0], "/")) {
-                    if (urlSplit[1].equals(httpServletRequest.getMethod()) || urlSplit[1].equals("RequestMapping")) {
+                if (StringUtils.countMatches(urlMethod, Constant.SYMBOL_SLASH) == StringUtils.countMatches(urlSplit[0], Constant.SYMBOL_SLASH)) {
+                    if (urlSplit[1].equals(httpServletRequest.getMethod()) || "RequestMapping".equals(urlSplit[1])) {
                         //路径url跟控制器的url一致时
                         if (checkIsSameUrl(urlSplit[0], httpServletRequest.getRequestURI())) {
                             //Constant.isPass=true;
@@ -157,7 +154,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 设置用户信息到request
-     *
      * @param request
      * @param response
      * @param token
@@ -192,14 +188,13 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     /**
      * 判断路径url是否和controller方法的url一致
-     *
      * @param localUrl
      * @param requestUrl
      * @return
      */
     private boolean checkIsSameUrl(String localUrl, String requestUrl) {
-        String[] tempLocalUrls = localUrl.split("/");
-        String[] tempRequestUrls = requestUrl.split("/");
+        String[] tempLocalUrls = localUrl.split(Constant.SYMBOL_SLASH);
+        String[] tempRequestUrls = requestUrl.split(Constant.SYMBOL_SLASH);
         if (tempLocalUrls.length != tempLocalUrls.length) {
             return false;
         }
@@ -210,8 +205,8 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                 tempLocalUrls[i] = "*";
                 tempRequestUrls[i] = "*";
             }
-            localUrlBuilder.append(tempLocalUrls[i] + "/");
-            requestUrlBuilder.append(tempRequestUrls[i] + "/");
+            localUrlBuilder.append(tempLocalUrls[i] + Constant.SYMBOL_SLASH);
+            requestUrlBuilder.append(tempRequestUrls[i] + Constant.SYMBOL_SLASH);
         }
         return localUrlBuilder.toString().trim().equals(requestUrlBuilder.toString().trim());
     }

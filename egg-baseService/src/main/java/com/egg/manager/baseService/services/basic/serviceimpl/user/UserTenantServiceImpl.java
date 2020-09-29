@@ -145,7 +145,8 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         Integer changeCount = 0;
         UserTenant userTenant = UserTenantTransfer.transferVoToEntity(userTenantVo);
         userTenant = super.doBeforeUpdate(loginUser, userTenant);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = userTenantMapper.updateById(userTenant);
         } else {
             changeCount = userTenantMapper.updateById(userTenant);

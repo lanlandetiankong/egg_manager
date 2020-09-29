@@ -83,7 +83,8 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         Integer changeCount = 0;
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob = super.doBeforeUpdate(loginUser, defineJob);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineJobMapper.updateById(defineJob);
         } else {
             changeCount = defineJobMapper.updateById(defineJob);

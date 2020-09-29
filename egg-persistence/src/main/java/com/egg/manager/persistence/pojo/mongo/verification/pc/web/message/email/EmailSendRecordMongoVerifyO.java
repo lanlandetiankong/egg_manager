@@ -6,7 +6,7 @@ import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOf
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.MyBaseMongoVerifyO;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.BaseMongoVerifyO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class EmailSendRecordMongoVerifyO extends MyBaseMongoVerifyO {
+public class EmailSendRecordMongoVerifyO extends BaseMongoVerifyO {
 
 
     @NotBlank(groups = {VerifyGroupOfUpdate.class}, message = "[fid]不能为空!")

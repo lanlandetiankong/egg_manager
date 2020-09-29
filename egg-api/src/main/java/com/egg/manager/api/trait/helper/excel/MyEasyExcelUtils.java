@@ -46,8 +46,10 @@ public class MyEasyExcelUtils {
      * @throws Exception
      */
     public static <T> void export2Web(HttpServletResponse response,String templatePath,String outFileName, String sheetName, Class<T> clazz, List data) throws Exception {
-        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(),"UTF-8") ;  //导出的完整 文件名
-        String outFileFullName2 = outFileName + ExcelTypeEnum.XLSX.getValue();  //导出的完整 文件名
+        //导出的完整 文件名
+        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(),"UTF-8") ;
+        //导出的完整 文件名
+        String outFileFullName2 = outFileName + ExcelTypeEnum.XLSX.getValue();
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码

@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.announcement.AnnouncementMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
@@ -16,13 +16,12 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Component
 @Named("announcementTransfer")
-public class AnnouncementTransfer extends MyBaseMysqlTransfer {
+public class AnnouncementTransfer extends BaseMysqlTransfer {
     static AnnouncementMapstruct announcementMapstruct = AnnouncementMapstruct.INSTANCE;
 
     public static Announcement transferVoToEntity(AnnouncementVo vo) {

@@ -4,7 +4,7 @@ import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMO;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfUpdate;
-import com.egg.manager.persistence.pojo.mongo.verification.pc.web.MyBaseMongoVerifyO;
+import com.egg.manager.persistence.pojo.mongo.verification.pc.web.BaseMongoVerifyO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SmartFormDefinitionMongoVerifyO extends MyBaseMongoVerifyO<SmartFormDefinitionMO> {
+public class SmartFormDefinitionMongoVerifyO extends BaseMongoVerifyO<SmartFormDefinitionMO> {
     @NotBlank(groups = {VerifyGroupOfUpdate.class}, message = "[fid]不能为空!")
     private String fid;
 

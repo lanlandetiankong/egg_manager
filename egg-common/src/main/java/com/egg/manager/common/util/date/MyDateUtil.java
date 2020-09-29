@@ -1,5 +1,7 @@
 package com.egg.manager.common.util.date;
 
+import com.google.common.collect.Maps;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -30,6 +32,7 @@ public class MyDateUtil {
             throws RuntimeException {
         SimpleDateFormat dateFormat = threadLocal.get();
         if (dateFormat == null) {
+            threadLocal.remove();
             synchronized (object) {
                 if (dateFormat == null) {
                     dateFormat = new SimpleDateFormat(pattern);
@@ -76,9 +79,9 @@ public class MyDateUtil {
         String dateString = null;
         MyDateStyle myDateStyle = getDateStyle(date);
         if (myDateStyle != null) {
-            Date myDate = StringToDate(date, myDateStyle);
+            Date myDate = stringToDate(date, myDateStyle);
             myDate = addInteger(myDate, dateType, amount);
-            dateString = DateToString(myDate, myDateStyle);
+            dateString = dateToString(myDate, myDateStyle);
         }
         return dateString;
     }
@@ -115,7 +118,7 @@ public class MyDateUtil {
     private static Date getAccurateDate(List<Long> timestamps) {
         Date date = null;
         long timestamp = 0;
-        Map<Long, long[]> map = new HashMap<Long, long[]>();
+        Map<Long, long[]> map = Maps.newHashMap();
         List<Long> absoluteValues = new ArrayList<Long>();
 
         if (timestamps != null && timestamps.size() > 0) {
@@ -190,7 +193,7 @@ public class MyDateUtil {
      */
     public static MyDateStyle getDateStyle(String date) {
         MyDateStyle myDateStyle = null;
-        Map<Long, MyDateStyle> map = new HashMap<Long, MyDateStyle>();
+        Map<Long, MyDateStyle> map = Maps.newHashMap();
         List<Long> timestamps = new ArrayList<Long>();
         for (MyDateStyle style : MyDateStyle.values()) {
             if (style.isShowOnly()) {
@@ -226,9 +229,9 @@ public class MyDateUtil {
      *            日期字符串
      * @return 日期
      */
-    public static Date StringToDate(String date) {
+    public static Date stringToDate(String date) {
         MyDateStyle myDateStyle = getDateStyle(date);
-        return StringToDate(date, myDateStyle);
+        return stringToDate(date, myDateStyle);
     }
 
     /**
@@ -240,7 +243,7 @@ public class MyDateUtil {
      *            日期格式
      * @return 日期
      */
-    public static Date StringToDate(String date, String pattern) {
+    public static Date stringToDate(String date, String pattern) {
         Date myDate = null;
         if (date != null) {
             try {
@@ -260,10 +263,10 @@ public class MyDateUtil {
      *            日期风格
      * @return 日期
      */
-    public static Date StringToDate(String date, MyDateStyle myDateStyle) {
+    public static Date stringToDate(String date, MyDateStyle myDateStyle) {
         Date myDate = null;
         if (myDateStyle != null) {
-            myDate = StringToDate(date, myDateStyle.getValue());
+            myDate = stringToDate(date, myDateStyle.getValue());
         }
         return myDate;
     }
@@ -277,7 +280,7 @@ public class MyDateUtil {
      *            日期格式
      * @return 日期字符串
      */
-    public static String DateToString(Date date, String pattern) {
+    public static String dateToString(Date date, String pattern) {
         String dateString = null;
         if (date != null) {
             try {
@@ -297,10 +300,10 @@ public class MyDateUtil {
      *            日期风格
      * @return 日期字符串
      */
-    public static String DateToString(Date date, MyDateStyle myDateStyle) {
+    public static String dateToString(Date date, MyDateStyle myDateStyle) {
         String dateString = null;
         if (myDateStyle != null) {
-            dateString = DateToString(date, myDateStyle.getValue());
+            dateString = dateToString(date, myDateStyle.getValue());
         }
         return dateString;
     }
@@ -314,9 +317,9 @@ public class MyDateUtil {
      *            新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String newPattern) {
+    public static String stringToString(String date, String newPattern) {
         MyDateStyle oldMyDateStyle = getDateStyle(date);
-        return StringToString(date, oldMyDateStyle, newPattern);
+        return stringToString(date, oldMyDateStyle, newPattern);
     }
 
     /**
@@ -328,9 +331,9 @@ public class MyDateUtil {
      *            新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, MyDateStyle newMyDateStyle) {
+    public static String stringToString(String date, MyDateStyle newMyDateStyle) {
         MyDateStyle oldMyDateStyle = getDateStyle(date);
-        return StringToString(date, oldMyDateStyle, newMyDateStyle);
+        return stringToString(date, oldMyDateStyle, newMyDateStyle);
     }
 
     /**
@@ -344,9 +347,9 @@ public class MyDateUtil {
      *            新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String olddPattern,
+    public static String stringToString(String date, String olddPattern,
                                         String newPattern) {
-        return DateToString(StringToDate(date, olddPattern), newPattern);
+        return dateToString(stringToDate(date, olddPattern), newPattern);
     }
 
     /**
@@ -360,11 +363,11 @@ public class MyDateUtil {
      *            新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, MyDateStyle olddDteStyle,
+    public static String stringToString(String date, MyDateStyle olddDteStyle,
                                         String newParttern) {
         String dateString = null;
         if (olddDteStyle != null) {
-            dateString = StringToString(date, olddDteStyle.getValue(),
+            dateString = stringToString(date, olddDteStyle.getValue(),
                     newParttern);
         }
         return dateString;
@@ -381,11 +384,11 @@ public class MyDateUtil {
      *            新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String olddPattern,
+    public static String stringToString(String date, String olddPattern,
                                         MyDateStyle newMyDateStyle) {
         String dateString = null;
         if (newMyDateStyle != null) {
-            dateString = StringToString(date, olddPattern,
+            dateString = stringToString(date, olddPattern,
                     newMyDateStyle.getValue());
         }
         return dateString;
@@ -402,11 +405,11 @@ public class MyDateUtil {
      *            新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, MyDateStyle olddDteStyle,
+    public static String stringToString(String date, MyDateStyle olddDteStyle,
                                         MyDateStyle newMyDateStyle) {
         String dateString = null;
         if (olddDteStyle != null && newMyDateStyle != null) {
-            dateString = StringToString(date, olddDteStyle.getValue(),
+            dateString = stringToString(date, olddDteStyle.getValue(),
                     newMyDateStyle.getValue());
         }
         return dateString;
@@ -534,7 +537,7 @@ public class MyDateUtil {
      *
      * @param date
      *            日期
-     * @param dayAmount
+     * @param minuteAmount
      *            增加数量。可为负数
      * @return 增加分钟后的日期
      */
@@ -547,7 +550,7 @@ public class MyDateUtil {
      *
      * @param date
      *            日期字符串
-     * @param dayAmount
+     * @param secondAmount
      *            增加数量。可为负数
      * @return 增加秒钟后的日期字符串
      */
@@ -576,7 +579,7 @@ public class MyDateUtil {
      * @return 年份
      */
     public static int getYear(String date) {
-        return getYear(StringToDate(date));
+        return getYear(stringToDate(date));
     }
 
     /**
@@ -598,7 +601,7 @@ public class MyDateUtil {
      * @return 月份
      */
     public static int getMonth(String date) {
-        return getMonth(StringToDate(date));
+        return getMonth(stringToDate(date));
     }
 
     /**
@@ -620,7 +623,7 @@ public class MyDateUtil {
      * @return 天
      */
     public static int getDay(String date) {
-        return getDay(StringToDate(date));
+        return getDay(stringToDate(date));
     }
 
     /**
@@ -642,7 +645,7 @@ public class MyDateUtil {
      * @return 小时
      */
     public static int getHour(String date) {
-        return getHour(StringToDate(date));
+        return getHour(stringToDate(date));
     }
 
     /**
@@ -664,7 +667,7 @@ public class MyDateUtil {
      * @return 分钟
      */
     public static int getMinute(String date) {
-        return getMinute(StringToDate(date));
+        return getMinute(stringToDate(date));
     }
 
     /**
@@ -686,7 +689,7 @@ public class MyDateUtil {
      * @return 秒钟
      */
     public static int getSecond(String date) {
-        return getSecond(StringToDate(date));
+        return getSecond(stringToDate(date));
     }
 
     /**
@@ -708,7 +711,7 @@ public class MyDateUtil {
      * @return 日期
      */
     public static String getDate(String date) {
-        return StringToString(date, MyDateStyle.YYYY_MM_DD);
+        return stringToString(date, MyDateStyle.YYYY_MM_DD);
     }
 
     /**
@@ -719,7 +722,7 @@ public class MyDateUtil {
      * @return 日期
      */
     public static String getDate(Date date) {
-        return DateToString(date, MyDateStyle.YYYY_MM_DD);
+        return dateToString(date, MyDateStyle.YYYY_MM_DD);
     }
 
     /**
@@ -730,7 +733,7 @@ public class MyDateUtil {
      * @return 时间
      */
     public static String getTime(String date) {
-        return StringToString(date, MyDateStyle.HH_MM_SS);
+        return stringToString(date, MyDateStyle.HH_MM_SS);
     }
 
     /**
@@ -741,7 +744,7 @@ public class MyDateUtil {
      * @return 时间
      */
     public static String getTime(Date date) {
-        return DateToString(date, MyDateStyle.HH_MM_SS);
+        return dateToString(date, MyDateStyle.HH_MM_SS);
     }
 
     /**
@@ -752,7 +755,7 @@ public class MyDateUtil {
      * @return 时间
      */
     public static String getDateTime(String date) {
-        return StringToString(date, MyDateStyle.YYYY_MM_DD_HH_MM_SS);
+        return stringToString(date, MyDateStyle.YYYY_MM_DD_HH_MM_SS);
     }
 
     /**
@@ -763,7 +766,7 @@ public class MyDateUtil {
      * @return 时间
      */
     public static String getDateTime(Date date) {
-        return DateToString(date, MyDateStyle.YYYY_MM_DD_HH_MM_SS);
+        return dateToString(date, MyDateStyle.YYYY_MM_DD_HH_MM_SS);
     }
 
     /**
@@ -777,7 +780,7 @@ public class MyDateUtil {
         MyDateWeek week = null;
         MyDateStyle myDateStyle = getDateStyle(date);
         if (myDateStyle != null) {
-            Date myDate = StringToDate(date, myDateStyle);
+            Date myDate = stringToDate(date, myDateStyle);
             week = getMyDateWeek(myDate);
         }
         return week;
@@ -817,6 +820,8 @@ public class MyDateUtil {
             case 6:
                 week = MyDateWeek.SATURDAY;
                 break;
+            default:
+                week = null ;
         }
         return week;
     }
@@ -831,7 +836,7 @@ public class MyDateUtil {
      * @return 相差天数。如果失败则返回-1
      */
     public static int getIntervalDays(String date, String otherDate) {
-        return getIntervalDays(StringToDate(date), StringToDate(otherDate));
+        return getIntervalDays(stringToDate(date), stringToDate(otherDate));
     }
 
     /**
@@ -843,9 +848,9 @@ public class MyDateUtil {
      */
     public static int getIntervalDays(Date date, Date otherDate) {
         int num = -1;
-        Date dateTmp = MyDateUtil.StringToDate(MyDateUtil.getDate(date),
+        Date dateTmp = MyDateUtil.stringToDate(MyDateUtil.getDate(date),
                 MyDateStyle.YYYY_MM_DD);
-        Date otherDateTmp = MyDateUtil.StringToDate(MyDateUtil.getDate(otherDate),
+        Date otherDateTmp = MyDateUtil.stringToDate(MyDateUtil.getDate(otherDate),
                 MyDateStyle.YYYY_MM_DD);
         if (dateTmp != null && otherDateTmp != null) {
             long time = Math.abs(dateTmp.getTime() - otherDateTmp.getTime());

@@ -52,7 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
-@Api(value = "API ==>>  UserAccountController ", description = "用户账号接口")
+@Api(value = "API-用户账号接口")
 @RestController
 @RequestMapping("/user/user_account")
 public class UserAccountController extends BaseController {

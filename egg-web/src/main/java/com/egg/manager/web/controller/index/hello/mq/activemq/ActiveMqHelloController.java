@@ -25,7 +25,7 @@ import javax.jms.Topic;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  ActiveMqHelloController ", description = "Index")
+@Api(value = "API-测试消息")
 @RestController
 @RequestMapping("/index/hello/mq/activemq")
 public class ActiveMqHelloController extends BaseController {
@@ -53,7 +53,11 @@ public class ActiveMqHelloController extends BaseController {
         return "success";
     }
 
-    // 发送消息，destination是发送到的队列，message是待发送的消息
+    /**
+     * 发送消息，destination是发送到的队列，message是待发送的消息
+     * @param destination
+     * @param message
+     */
     private void sendMessage(Destination destination, final String message) {
         jmsMessagingTemplate.convertAndSend(destination, message);
     }

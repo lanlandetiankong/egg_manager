@@ -126,7 +126,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccount = super.doBeforeCreate(loginUser, userAccount, true);
-        if (null == userAccountVo.getLocked()) {  //如果没设置值，默认不锁定
+        if (null == userAccountVo.getLocked()) {
+            //如果没设置值，默认不锁定
             userAccount.setLocked(SwitchStateEnum.Close.getValue());
         }
         userAccount.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
@@ -159,13 +160,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
         QueryWrapper<UserAccount> uniWrapper = new QueryWrapper<UserAccount>()
                 .ne("fid", userAccountVo.getFid());
-        if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {    //已有重复键值
+        if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {
+            //已有重复键值
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Integer changeCount = 0;
         UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccount = super.doBeforeUpdate(loginUser, userAccount);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = userAccountMapper.updateById(userAccount);
         } else {
             changeCount = userAccountMapper.updateById(userAccount);
@@ -252,7 +255,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Integer dealGrantRoleToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
         String loginUserId = loginUser != null ? loginUser.getFid() : null;
-        if (checkIds == null || checkIds.length == 0) {   //清空所有权限
+        if (checkIds == null || checkIds.length == 0) {
+            //清空所有权限
             changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId, loginUser);
         } else {
             changeCount = checkIds.length;
@@ -273,21 +277,24 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 while (oldCheckIter.hasNext()) {
                     String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
-                    if (isOldRow) {   //原本有的数据行
+                    if (isOldRow) {
+                        //原本有的数据行
                         enableIds.add(oldCheckId);
                         checkIdList.remove(oldCheckId);
                     } else {
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {   //批量启用
+                if (enableIds.isEmpty() == false) {
+                    //批量启用
                     userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
                 }
-                if (disabledIds.isEmpty() == false) {   //批量禁用
+                if (disabledIds.isEmpty() == false) {
+                    //批量禁用
                     userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
                 }
-                if (checkIdList.isEmpty() == false) {     //有新勾选的权限，需要新增行
-                    //批量新增行
+                if (checkIdList.isEmpty() == false) {
+                    //有新勾选的权限，需要新增行
                     List<UserRole> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
                         addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
@@ -306,7 +313,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Integer dealGrantJobToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
         String loginUserId = loginUser != null ? loginUser.getFid() : null;
-        if (checkIds == null || checkIds.length == 0) {   //清空所有权限
+        if (checkIds == null || checkIds.length == 0) {
+            //清空所有权限
             changeCount = userAccountMapper.clearAllJobByUserId(userAccountId, loginUser);
         } else {
             changeCount = checkIds.length;
@@ -327,20 +335,24 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 while (oldCheckIter.hasNext()) {
                     String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
-                    if (isOldRow) {   //原本有的数据行
+                    if (isOldRow) {
+                        //原本有的数据行
                         enableIds.add(oldCheckId);
                         checkIdList.remove(oldCheckId);
                     } else {
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {   //批量启用
+                if (enableIds.isEmpty() == false) {
+                    //批量启用
                     userJobMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
                 }
-                if (disabledIds.isEmpty() == false) {   //批量禁用
+                if (disabledIds.isEmpty() == false) {
+                    //批量禁用
                     userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
                 }
-                if (checkIdList.isEmpty() == false) {     //有新勾选的权限，需要新增行
+                if (checkIdList.isEmpty() == false) {
+                    //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserJob> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {

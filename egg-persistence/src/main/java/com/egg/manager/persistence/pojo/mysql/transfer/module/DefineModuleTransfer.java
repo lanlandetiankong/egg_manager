@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.module;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.module.DefineModuleMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Named("defineModuleTransfer")
-public class DefineModuleTransfer extends MyBaseMysqlTransfer {
+public class DefineModuleTransfer extends BaseMysqlTransfer {
 
     static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE;
 

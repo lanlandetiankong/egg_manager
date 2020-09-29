@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.define;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineJob;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineJobDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define.DefineJobMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineJobVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Named("defineJobTransfer")
-public class DefineJobTransfer extends MyBaseMysqlTransfer {
+public class DefineJobTransfer extends BaseMysqlTransfer {
     static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE;
 
     public static DefineJob transferVoToEntity(DefineJobVo vo) {

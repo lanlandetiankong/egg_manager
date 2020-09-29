@@ -20,15 +20,21 @@ import java.io.Serializable;
 @ConfigurationProperties(prefix = "props.redis.shiro.cache")
 @PropertySource("classpath:universal/${egg.application.build.env}/props/props-redis.properties")
 public class RedisPropsOfShiroCache  implements Serializable {
-    //jwt
+    /**
+     * jwt
+     */
     private String authorizationKey;
 
     /**
-     * key
+     * key->key
      */
-    //token
+    /**
+     * key->token
+     */
     private String tokenKey ;
-    //define
+    /**
+     * key->define
+     */
     private String defineGroupKey ;
     private String defineMenuKey ;
     private String defineRoleKey ;
@@ -37,9 +43,11 @@ public class RedisPropsOfShiroCache  implements Serializable {
     private String defineMenuAllKey ;
     private String defineRoleAllKey ;
     private String definePermissionAllKey ;
-    //role
+
     private String rolePermissionKey ;
-    //user
+    /**
+     * key->user
+     */
     private String userAccountKey ;
     private String userAuthorizationKey ;
     private String userAccountIdKey ;
@@ -55,14 +63,18 @@ public class RedisPropsOfShiroCache  implements Serializable {
 
 
 
+
     /**
-     * ttl
+     * ttl->jwt
      */
-    //jwt
     private long authorizationTtl ;
-    //token
+    /**
+     * ttl->token
+     */
     private long tokenTtl ;
-    //define
+    /**
+     * ttl->define
+     */
     private long defineGroupTtl ;
     private long defineMenuTtl ;
     private long defineRoleTtl ;
@@ -71,9 +83,13 @@ public class RedisPropsOfShiroCache  implements Serializable {
     private long defineMenuAllTtl ;
     private long defineRoleAllTtl ;
     private long definePermissionAllTtl ;
-    //role
+    /**
+     * ttl->role
+     */
     private long rolePermissionTtl ;
-    //user
+    /**
+     * ttl->user
+     */
     private long userAccountTtl ;
     private long userAuthorizationTtl ;
     private long userAccountIdTtl ;

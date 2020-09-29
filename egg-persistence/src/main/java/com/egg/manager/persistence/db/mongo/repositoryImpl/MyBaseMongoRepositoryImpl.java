@@ -46,7 +46,9 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMO<ID>, ID> implemen
 
     private Class<T> tClass;
 
-    //单个更新数量
+    /**
+     * 单个更新数量
+     */
     private final long SingleUpdateMaxSize = 1L;
 
     public Class<T> getTClass() {
@@ -90,7 +92,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMO<ID>, ID> implemen
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(忽略null字段)
-        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s, true);
+        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, true);
         mongoTemplate.updateFirst(query, update, getTClass());
         return s;
     }
@@ -103,7 +105,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMO<ID>, ID> implemen
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
+        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
@@ -120,7 +122,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMO<ID>, ID> implemen
         int idSize = Lists.newArrayList(ids).size();
         Query query = dealGetQueryWithIds(ids, true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = MyReflexUtil.getMOUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
+        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTClass());
         if (result.getModifiedCount() != idSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", idSize, result.getModifiedCount());

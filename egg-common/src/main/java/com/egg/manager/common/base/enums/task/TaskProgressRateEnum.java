@@ -23,6 +23,11 @@ public enum TaskProgressRateEnum {
     private Integer status;
     private String showText ;
 
+    /**
+     * 最大完成率
+     */
+    public static final Integer MAX_RATE = 100 ;
+
 
 
     public String getKey() {
@@ -69,7 +74,7 @@ public enum TaskProgressRateEnum {
         if(isException == true){
             return TaskProgressRateEnum.EXCEPTION ;
         }
-        if(rate == 100) {
+        if(rate == MAX_RATE) {
             return TaskProgressRateEnum.SUCCESS ;
         }   else {
             return TaskProgressRateEnum.DEFAULT ;

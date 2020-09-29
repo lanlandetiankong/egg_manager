@@ -64,6 +64,31 @@ public class Constant implements Serializable {
      */
     public static final int DISABLE = 0;
 
+    /**
+     * 空json对象
+     */
+    public final static String JSON_EMPTY_OBJECT = "{}";
+    /**
+     * 空json数组
+     */
+    public final static String JSON_EMPTY_ARRAY = "[]";
+    /**
+     * 空json数组 字符串
+     */
+    public final static String JSON_EMPTY_ARRAY_STR = "\"[]\"";
+    /**
+     * @ 符号
+     */
+    public final static String SYMBOL_AT = "@";
+    /**
+     * 斜杠 /
+     */
+    public final static String SYMBOL_SLASH = "/";
+
+
+
+
+
     public static class FilePostFix{
         public static final String ZIP_FILE =".zip";
         public static final String [] IMAGES ={"jpg", "jpeg", "JPG", "JPEG", "gif", "GIF", "bmp", "BMP", "png"};

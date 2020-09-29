@@ -28,7 +28,7 @@ public class UserDepartmentPojoInitialize {
     public static UserDepartment generateSimpleInsertEntity(String userAccountId, String defineDepartmentId, UserAccount loginUser) {
         UserDepartment userDepartment = new UserDepartment();
         Date now = new Date();
-        userDepartment.setFid(MyUUIDUtil.renderSimpleUUID());
+        userDepartment.setFid(MyUUIDUtil.renderSimpleUuid());
         userDepartment.setUserAccountId(userAccountId);
         userDepartment.setDefineDepartmentId(defineDepartmentId);
         userDepartment.setIsManager(SwitchStateEnum.Close.getValue());

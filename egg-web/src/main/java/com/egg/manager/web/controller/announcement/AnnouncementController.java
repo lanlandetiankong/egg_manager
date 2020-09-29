@@ -46,7 +46,7 @@ import java.util.Map;
  * \
  */
 @Slf4j
-@Api(value = "API -  AnnouncementController ", description = "发布公告接口")
+@Api(value = "API-发布公告接口")
 @RestController
 @RequestMapping("/announcement")
 public class AnnouncementController extends BaseController {
@@ -76,7 +76,8 @@ public class AnnouncementController extends BaseController {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
-            if (Boolean.TRUE.equals(onlySelf)) {  //只查询自己发布的公告
+            if (Boolean.TRUE.equals(onlySelf)) {
+                //只查询自己发布的公告
                 queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置
@@ -103,14 +104,16 @@ public class AnnouncementController extends BaseController {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
-            if (Boolean.TRUE.equals(onlySelf)) {  //只查询自己发布的公告
+            if (Boolean.TRUE.equals(onlySelf)) {
+                //只查询自己发布的公告
                 queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置
             AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());  //按创建时间 倒序
+            //按创建时间 倒序
+            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
             result = announcementService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryPage);

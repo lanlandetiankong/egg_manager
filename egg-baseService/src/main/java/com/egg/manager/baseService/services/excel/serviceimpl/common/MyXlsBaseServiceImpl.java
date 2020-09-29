@@ -40,7 +40,8 @@ public class MyXlsBaseServiceImpl implements MyXlsBaseService {
 
     @Override
     public <T> void dealSingleFillToExport2Web(HttpServletResponse response, String templatePath, String outFileName, Class<T> clazz, List<T> data) throws Exception {
-        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(), "UTF-8");  //导出的完整 文件名
+        //导出的完整 文件名
+        String outFileFullName = URLEncoder.encode(outFileName + ExcelTypeEnum.XLSX.getValue(), "UTF-8");
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码

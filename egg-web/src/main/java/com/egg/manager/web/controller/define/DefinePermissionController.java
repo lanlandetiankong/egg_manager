@@ -45,7 +45,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefinePermissionController ", description = "权限定义接口")
+@Api(value = "API-权限定义接口")
 @RestController
 @RequestMapping("/define/define_permission")
 public class DefinePermissionController extends BaseController {
@@ -192,7 +192,8 @@ public class DefinePermissionController extends BaseController {
 
             Integer delCount = definePermissionService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
-            if (new Integer(0).equals(delCount)) {    //如果删除的是 [已启用的]，则抛出异常
+            if (new Integer(0).equals(delCount)) {
+                //如果删除的是 [已启用的]，则抛出异常
                 throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
         } catch (Exception e) {

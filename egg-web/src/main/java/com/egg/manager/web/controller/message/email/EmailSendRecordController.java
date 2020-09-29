@@ -46,7 +46,7 @@ import javax.validation.constraints.NotBlank;
  * @Date: 2020/9/11 17:19
  */
 @Slf4j
-@Api(value = "API ==>>  EmailSendRecordController ", description = "Index")
+@Api(value = "API-邮件发送记录")
 @RestController
 @RequestMapping("/message/email/emailSendRecord")
 public class EmailSendRecordController extends BaseController {
@@ -57,7 +57,7 @@ public class EmailSendRecordController extends BaseController {
     private EmailSendRecordMService emailSendRecordMService;
 
 
-    @PcWebQueryLog(action = "分页查询->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/getDataPage")
+    @PcWebQueryLog(action = "分页查询->邮件记录", fullPath = "/message/email/emailSendRecord/getDataPage")
     @ApiOperation(value = "分页查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -81,7 +81,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "根据id查询->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/getOneItemById")
+    @PcWebQueryLog(action = "根据id查询->邮件记录", fullPath = "/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMO> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -97,7 +97,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "新增->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/addByForm")
+    @PcWebOperationLog(action = "新增->邮件记录", fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -118,7 +118,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/delOneById")
+    @PcWebOperationLog(action = "伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/delOneById")
     @ApiOperation(value = "伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
@@ -137,7 +137,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量伪删除->邮件记录", description = "", fullPath = "/message/email/emailSendRecord/batchDelByIds")
+    @PcWebOperationLog(action = "批量伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),

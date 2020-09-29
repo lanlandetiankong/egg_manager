@@ -56,7 +56,7 @@ import java.util.Map;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineMenuController ", description = "菜单定义接口")
+@Api(value = "API-菜单定义接口")
 @RestController
 @RequestMapping("/define/define_menu")
 public class DefineMenuController extends BaseController {

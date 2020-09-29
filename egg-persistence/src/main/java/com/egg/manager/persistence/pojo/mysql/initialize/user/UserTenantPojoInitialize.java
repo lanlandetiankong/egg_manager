@@ -28,7 +28,7 @@ public class UserTenantPojoInitialize {
     public static UserTenant generateSimpleInsertEntity(String userAccountId, String defineTenantId, UserAccount loginUser) {
         UserTenant userTenant = new UserTenant();
         Date now = new Date();
-        userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
+        userTenant.setFid(MyUUIDUtil.renderSimpleUuid());
         userTenant.setUserAccountId(userAccountId);
         userTenant.setDefineTenantId(defineTenantId);
         userTenant.setIsManager(SwitchStateEnum.Close.getValue());
@@ -54,7 +54,7 @@ public class UserTenantPojoInitialize {
     public static UserTenant generateInsertIsManagerEntity(String userAccountId, String defineTenantId, UserAccount loginUser) {
         UserTenant userTenant = new UserTenant();
         Date now = new Date();
-        userTenant.setFid(MyUUIDUtil.renderSimpleUUID());
+        userTenant.setFid(MyUUIDUtil.renderSimpleUuid());
         userTenant.setUserAccountId(userAccountId);
         userTenant.setDefineTenantId(defineTenantId);
         userTenant.setIsManager(SwitchStateEnum.Open.getValue());

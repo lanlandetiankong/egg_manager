@@ -1,13 +1,13 @@
 package com.egg.manager.persistence.pojo.mysql.transfer.user;
 
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.user.UserGroupMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 @Component
 @Named("userGroupTransfer")
-public class UserGroupTransfer extends MyBaseMysqlTransfer {
+public class UserGroupTransfer extends BaseMysqlTransfer {
 
     static UserGroupMapstruct userGroupMapstruct = UserGroupMapstruct.INSTANCE;
 

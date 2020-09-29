@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.message.email.other;
 
-import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.BaseMVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailSendFileInfoMVO extends MyBaseMVO {
+public class EmailSendFileInfoMVO extends BaseMVO {
 
     /**
      * 文件-原名

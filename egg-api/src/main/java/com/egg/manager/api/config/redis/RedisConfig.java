@@ -3,6 +3,7 @@ package com.egg.manager.api.config.redis;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -90,7 +91,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         cacheNames.add("login") ;
 
         //对每个缓存空间应用不同的配置
-        Map<String,RedisCacheConfiguration> configMap = new HashMap<String,RedisCacheConfiguration>() ;
+        Map<String,RedisCacheConfiguration> configMap = Maps.newHashMap() ;
         configMap.put("login",cacheConfiguration.entryTtl(Duration.ofSeconds(30)));
         //注意调用顺序，要先初始化缓存名后再初始化对应的配置
         cacheManager = RedisCacheManager.builder(redisConnectionFactory)

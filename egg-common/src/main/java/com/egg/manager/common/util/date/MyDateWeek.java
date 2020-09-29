@@ -13,28 +13,28 @@ public enum MyDateWeek {
             "Thur.", 4), FRIDAY("星期五", "Friday", "Fri.", 5), SATURDAY("星期六",
             "Saturday", "Sat.", 6), SUNDAY("星期日", "Sunday", "Sun.", 7);
 
-    String name_cn;
-    String name_en;
-    String name_enShort;
+    String nameCn;
+    String nameEn;
+    String nameEnShort;
     int number;
 
-    MyDateWeek(String name_cn, String name_en, String name_enShort, int number) {
-        this.name_cn = name_cn;
-        this.name_en = name_en;
-        this.name_enShort = name_enShort;
+    MyDateWeek(String nameCn, String nameEn, String nameEnShort, int number) {
+        this.nameCn = nameCn;
+        this.nameEn = nameEn;
+        this.nameEnShort = nameEnShort;
         this.number = number;
     }
 
     public String getChineseName() {
-        return name_cn;
+        return nameCn;
     }
 
     public String getName() {
-        return name_en;
+        return nameEn;
     }
 
     public String getShortName() {
-        return name_enShort;
+        return nameEnShort;
     }
 
     public int getNumber() {

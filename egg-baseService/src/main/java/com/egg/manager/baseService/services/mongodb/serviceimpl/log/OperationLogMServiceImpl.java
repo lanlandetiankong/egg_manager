@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 /**
  * MongoDb-PcWebQueryLogMO 操作日志-MService
  */
-//@Service(interfaceClass = OperationLogMService.class)
 @Service
 public class OperationLogMServiceImpl extends MyBaseMongoServiceImpl<PcWebQueryLogRepository, PcWebQueryLogMO, String>
         implements OperationLogMService {

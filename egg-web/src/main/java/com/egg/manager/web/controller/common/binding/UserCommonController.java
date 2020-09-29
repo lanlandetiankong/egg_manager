@@ -27,7 +27,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserCommonController ", description = "通用接口 - 用户")
+@Api(value = "API-通用接口(用户)")
 @RestController
 @RequestMapping("/common_api/user")
 public class UserCommonController extends BaseController {

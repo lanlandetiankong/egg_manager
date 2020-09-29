@@ -20,6 +20,7 @@ import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagM
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementTagDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTagTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,7 +76,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
     @Override
     public Map<String, AnnouncementTag> dealGetAllToMap() {
-        Map<String, AnnouncementTag> map = new HashMap<String, AnnouncementTag>();
+        Map<String, AnnouncementTag> map = Maps.newHashMap();
         QueryWrapper<AnnouncementTag> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTag>();
         announcementTagEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectList(announcementTagEntityWrapper);
@@ -101,7 +102,8 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         Integer changeCount = 0;
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         announcementTag = super.doBeforeUpdate(loginUser, announcementTag);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //更新所有字段
             changeCount = announcementTagMapper.updateById(announcementTag);
         } else {
             changeCount = announcementTagMapper.updateById(announcementTag);

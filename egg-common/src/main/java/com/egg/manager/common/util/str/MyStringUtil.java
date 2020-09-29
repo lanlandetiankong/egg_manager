@@ -54,7 +54,7 @@ public class MyStringUtil {
         return retParam;
     }
 
-    public static boolean isValidURLAddress(String url) {
+    public static boolean isValidUrlAddress(String url) {
         String pattern = "([h]|[H])([t]|[T])([t]|[T])([p]|[P])([s]|[S]){0,1}://([^:/]+)(:([0-9]+))?(/\\S*)*";
         return url.matches(pattern);
     }
@@ -92,28 +92,13 @@ public class MyStringUtil {
         return flag;
     }
 
+
     /**
-     * 验证手机号码，11位数字，1开通，第二位数必须是3456789这些数字之一 *
-     *
-     * @param mobileNumber
+     * 驼峰转下划线
+     * @param param
+     * @param allUpper
      * @return
      */
-    public static boolean checkMobileNumber(String mobileNumber) {
-        boolean flag = false;
-        try {
-            // Pattern regex = Pattern.compile("^(((13[0-9])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8})|(0\\d{2}-\\d{8})|(0\\d{3}-\\d{7})$");
-            Pattern regex = Pattern.compile("^1[345789]\\d{9}$");
-            Matcher matcher = regex.matcher(mobileNumber);
-            flag = matcher.matches();
-        } catch (Exception e) {
-            e.printStackTrace();
-            flag = false;
-        }
-        return flag;
-    }
-
-
-    //驼峰转下划线
     public static String camelToUnderline(String param, boolean allUpper) {
         if (param == null || "".equals(param.trim())) {
             return "";
@@ -126,9 +111,11 @@ public class MyStringUtil {
                 sb.append(UNDERLINE);
             }
             if (allUpper) {
-                sb.append(Character.toUpperCase(c));  //统一都转大写
+                //统一都转大写
+                sb.append(Character.toUpperCase(c));
             } else {
-                sb.append(Character.toLowerCase(c));  //统一都转小写
+                //统一都转小写
+                sb.append(Character.toLowerCase(c));
             }
 
 
@@ -136,24 +123,31 @@ public class MyStringUtil {
         return sb.toString();
     }
 
-    //下划线转驼峰
+    /**
+     * 下划线转驼峰
+     * @param param
+     * @return
+     */
     public static String underlineToCamel(String param) {
         if (param == null || "".equals(param.trim())) {
             return "";
         }
         int len = param.length();
         StringBuilder sb = new StringBuilder(len);
-        Boolean flag = false; // "_" 后转大写标志,默认字符前面没有"_"
+        // "_" 后转大写标志,默认字符前面没有"_"
+        Boolean flag = false;
         for (int i = 0; i < len; i++) {
             char c = param.charAt(i);
             if (c == UNDERLINE) {
                 flag = true;
-                continue;   //标志设置为true,跳过
+                //标志设置为true,跳过
+                continue;
             } else {
                 if (flag == true) {
                     //表示当前字符前面是"_" ,当前字符转大写
                     sb.append(Character.toUpperCase(param.charAt(i)));
-                    flag = false;  //重置标识
+                    //重置标识
+                    flag = false;
                 } else {
                     sb.append(Character.toLowerCase(param.charAt(i)));
                 }
@@ -164,7 +158,7 @@ public class MyStringUtil {
 
 
     public static String htmlDomToText(String input, Integer length) {
-        if (input == null || input.trim().equals("")) {
+        if (input == null || "".equals(input.trim())) {
             return "";
         }
         // 去掉所有html元素,

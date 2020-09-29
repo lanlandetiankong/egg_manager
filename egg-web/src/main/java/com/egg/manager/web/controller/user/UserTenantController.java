@@ -41,7 +41,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserTenantController ", description = "用户与租户关联表的接口")
+@Api(value = "API-用户_租户接口")
 @RestController
 @RequestMapping("/user/user_tenant")
 public class UserTenantController extends BaseController {

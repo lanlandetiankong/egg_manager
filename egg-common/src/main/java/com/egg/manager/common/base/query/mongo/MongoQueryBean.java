@@ -2,6 +2,7 @@ package com.egg.manager.common.base.query.mongo;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoQueryMatchingEnum;
 import com.egg.manager.common.base.query.MyBaseQueryBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -75,7 +76,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         this.data = data;
     }
 
-    //常量
+
     public final static int DEFAULT_PAGE = 0 ;
     public final static int DEFAULT_SIZE = 10 ;
     public final static String PARAMETER_paginationObj = "paginationObj" ;
@@ -123,7 +124,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         Set<String> enableFields = (Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag())) ? enableFields = queryBuffer.getBlackQueryFieldSets() : queryBuffer.getWhiteQueryFieldSets();
         List<Criteria> criterias = new ArrayList<>() ;
         String queryJson = request.getParameter(PARAMETER_queryObj);
-        if(StringUtils.isBlank(queryJson) || "[]".equals(queryJson)){
+        if(StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)){
             return criterias ;
         }   else {
             List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryFormFieldBean.class);
@@ -199,7 +200,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      */
     public static QPageRequest getMPageFromBean(MyMongoQueryPageBean paginationBean){
         paginationBean = paginationBean != null ? paginationBean : MyMongoQueryPageBean.gainDefaultPaginationBean();
-        return new QPageRequest(paginationBean.getCurrent(),paginationBean.getPageSize());
+        return QPageRequest.of(paginationBean.getCurrent(),paginationBean.getPageSize());
     }
 
 
@@ -245,7 +246,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
     public static List<MyMongoSortBean> getSortBeansFromRequest(HttpServletRequest request) {
         String sortObj = request.getParameter(PARAMETER_sortObj);
         List<MyMongoSortBean> sortBeans = new ArrayList<>();
-        if (StringUtils.isNotBlank(sortObj) && "{}".equals(sortObj) == false) {
+        if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
             MyMongoSortBean antdvSortBean = JSONObject.parseObject(sortObj, MyMongoSortBean.class);
             if (antdvSortBean != null) {
                 String fieldName = MyStringUtil.camelToUnderline(antdvSortBean.getField(), false);

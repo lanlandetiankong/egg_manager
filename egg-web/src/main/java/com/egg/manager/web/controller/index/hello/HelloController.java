@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  HelloController ", description = "Index")
+@Api(value = "API-测试接口")
 @RestController
 @RequestMapping("/index/hello")
 public class HelloController extends BaseController {
@@ -50,20 +50,20 @@ public class HelloController extends BaseController {
         return "Error";
     }
 
-    @PcWebQueryLog(action = "测试dubbo调用service", description = "", fullPath = "/index/hello/sayHello", flag = false)
+    @PcWebQueryLog(action = "测试dubbo调用service", fullPath = "/index/hello/sayHello", flag = false)
     @GetMapping(value = "/sayHello")
     public void sayHello() {
         helloService.sayHello();
     }
 
-    @PcWebQueryLog(action = "测试dubbo负载均衡", description = "", fullPath = "/index/hello/loadBalanceTest", flag = false)
+    @PcWebQueryLog(action = "测试dubbo负载均衡", fullPath = "/index/hello/loadBalanceTest", flag = false)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
         String port = helloService.loadBalanceTest();
         System.out.println("for debug..." + port);
     }
 
-    @PcWebQueryLog(action = "测试dubbo负载均衡-相互调用", description = "", fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
+    @PcWebQueryLog(action = "测试dubbo负载均衡-相互调用", fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();
@@ -71,7 +71,7 @@ public class HelloController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "", description = "", fullPath = "/index/hello/testRegistrar", flag = false)
+    @PcWebQueryLog(action = "", fullPath = "/index/hello/testRegistrar", flag = false)
     @GetMapping(value = "/testRegistrar")
     public void testRegistrar() {
         System.out.println("for message  debug..." );

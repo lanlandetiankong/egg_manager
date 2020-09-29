@@ -117,8 +117,8 @@ public class ComUtil {
         return str1 != null ? str1.equals(str2) : str2 == null;
     }
 
-    public static boolean equals(Long L1, Long L2) {
-        return L1 != null ? L1.equals(L2) : L2 == null;
+    public static boolean equals(Long l1, Long l2) {
+        return l1 != null ? l1.equals(l2) : l2 == null;
     }
 
     public static boolean equals(Object obj1, Object obj2) {

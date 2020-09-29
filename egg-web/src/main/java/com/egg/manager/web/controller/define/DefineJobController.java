@@ -42,7 +42,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineJobController ", description = "职务定义接口")
+@Api(value = "API-职务定义接口 ")
 @RestController
 @RequestMapping("/define/define_job")
 public class DefineJobController extends BaseController {

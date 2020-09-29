@@ -42,7 +42,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserRoleController ", description = "用户角色接口")
+@Api(value = "API-用户_角色接口")
 @RestController
 @RequestMapping("/user/user_role")
 public class UserRoleController extends BaseController {

@@ -89,7 +89,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
     public T doBeforeCreate(UserAccount loginUser, T t, boolean uuidFlag) {
         Date now = new Date();
         if (uuidFlag) {
-            EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.FID, MyUUIDUtil.renderSimpleUUID());
+            EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.FID, MyUUIDUtil.renderSimpleUuid());
         }
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.STATE, BaseStateEnum.ENABLED.getValue());
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.CREATE_TIME, now);
@@ -125,24 +125,6 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
     }
 
 
-    @Override
-    @Deprecated
-    public <T, KV, KL> MyCommonResult doGetResultListSetToEntitySelect(MyCommonResult<T> result, EggPojoReflexFieldConfig<KV> valueConf, EggPojoReflexFieldConfig<KL> labelConf) {
-        List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        List<T> resultList = result.getResultList();
-        if (resultList != null && resultList.isEmpty() == false) {
-            for (T t : resultList) {
-                KV kv = EggReflexUtil.handlePojoGetFieldValue(t, valueConf);
-                KL kl = EggReflexUtil.handlePojoGetFieldValue(t, labelConf);
-                String kvStr = kv != null ? (String) kv : "";
-                String klStr = kl != null ? (String) kl : "";
-                enumList.add(new FrontEntitySelectBean(kvStr, klStr));
-            }
-        }
-        result.setEnumList(enumList);
-        return result;
-    }
-
     /**
      * 用userAccountToken 取得 UserAccountXlsModel
      *
@@ -161,31 +143,8 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
                 userAccount = userAccountMapper.selectById(userAccountId);
             }
         }
-        if (isRequired && userAccount == null) {  //强制取得用户身份认证，不存在时抛出异常
-            throw new MyAuthenticationExpiredException();
-        }
-        return userAccount;
-    }
-
-    /**
-     * 将取得请求的token转化为 UserAccountXlsModel
-     * (已改用注解方式注入)
-     *
-     * @param request
-     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
-     * @return UserAccountXlsModel
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     */
-    //@Override
-    @Deprecated
-    public UserAccount gainUserAccountByRequest(HttpServletRequest request, boolean isRequired) throws MyAuthenticationExpiredException, InvocationTargetException, IllegalAccessException {
-        UserAccount userAccount = null;
-        UserAccountToken accountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, isRequired);
-        if (accountToken != null) {
-            userAccount = this.dealUserAccountTokenGetEntity(accountToken, isRequired);
-        }
-        if (isRequired && userAccount == null) {  //强制取得用户身份认证，不存在时抛出异常
+        if (isRequired && userAccount == null) {
+            //强制取得用户身份认证，不存在时抛出异常
             throw new MyAuthenticationExpiredException();
         }
         return userAccount;

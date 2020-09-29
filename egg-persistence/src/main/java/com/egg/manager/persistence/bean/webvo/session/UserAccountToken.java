@@ -60,7 +60,7 @@ public class UserAccountToken extends MyBaseWebVo {
 
     public static UserAccountToken gainByUserAccount(UserAccount userAccount) throws InvocationTargetException, IllegalAccessException {
         UserAccountToken accountToken = UserAccountTokenMapstruct.INSTANCE.userAccount_CopyTo_UserAccountToken(userAccount);
-        String token = MyUUIDUtil.renderSimpleUUID();
+        String token = MyUUIDUtil.renderSimpleUuid();
         accountToken.setToken(token);
         return accountToken;
     }

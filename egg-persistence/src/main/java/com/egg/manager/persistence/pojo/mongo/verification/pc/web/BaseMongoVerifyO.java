@@ -10,6 +10,6 @@ import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
  * \* Description:
  * \
  */
-public abstract class MyBaseMongoVerifyO<T extends MyBaseModelMO> {
+public abstract class BaseMongoVerifyO<T extends MyBaseModelMO> {
 
 }

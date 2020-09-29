@@ -72,9 +72,12 @@ public class RoutineCommonFunc {
      * @return
      */
     public List<String> gainMvcMappingUrl(HttpServletRequest request){
-        List<String> uList = new ArrayList<String>();//存储所有url集合
-        WebApplicationContext wac = (WebApplicationContext) request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);//获取上下文对象
-        RequestMappingHandlerMapping bean = wac.getBean(RequestMappingHandlerMapping.class);//通过上下文对象获取RequestMappingHandlerMapping实例对象
+        //存储所有url集合
+        List<String> uList = new ArrayList<String>();
+        //获取上下文对象
+        WebApplicationContext wac = (WebApplicationContext) request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        //通过上下文对象获取RequestMappingHandlerMapping实例对象
+        RequestMappingHandlerMapping bean = wac.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = bean.getHandlerMethods();
         for (RequestMappingInfo rmi : handlerMethods.keySet()) {
             PatternsRequestCondition prc = rmi.getPatternsCondition();
@@ -98,10 +101,12 @@ public class RoutineCommonFunc {
     public UserAccountToken gainUserAccountTokenBeanByRequest(HttpServletRequest request, boolean isRequired) throws MyAuthenticationExpiredException {
         UserAccountToken accountToken = null ;
         String token = request.getHeader("token");
-        if(StringUtils.isNotBlank(token)){  //如果能取得 token
+        if(StringUtils.isNotBlank(token)){
+            //如果能取得 token
             accountToken = JSON.parseObject(token,UserAccountToken.class);
         }
-        if(isRequired && accountToken == null){ //强制取得用户身份认证，不存在时抛出异常
+        if(isRequired && accountToken == null){
+            //强制取得用户身份认证，不存在时抛出异常
             throw new MyAuthenticationExpiredException() ;
         }
         return accountToken ;

@@ -36,7 +36,7 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
      * @return
      */
     default boolean handleSwitchStateGetBoolean(Short value) {
-        return SwitchStateEnum.Open.getValue() == value;
+        return SwitchStateEnum.Open.getValue().equals(value) ;
     }
 
     /**

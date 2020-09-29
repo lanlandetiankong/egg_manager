@@ -44,7 +44,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API -  AnnouncementTagController ", description = "公告标签接口")
+@Api(value = "API -  公告标签接口")
 @RestController
 @RequestMapping("/announcement_tag")
 public class AnnouncementTagController extends BaseController {

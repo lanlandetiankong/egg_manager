@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.imap.baseExtend;
 
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
-import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseModelMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.BaseModelMVO;
 import org.mapstruct.MapperConfig;
 
 /**
@@ -13,7 +13,7 @@ import org.mapstruct.MapperConfig;
  * @Context : 该注解用于添加额外参数，不会对其进行判断null等操作
  */
 @MapperConfig(disableSubMappingMethodsGeneration = true)
-public interface MyBaseMongoMapstruct<MO extends MyBaseModelMO, MVO extends MyBaseModelMVO>
+public interface MyBaseMongoMapstruct<MO extends MyBaseModelMO, MVO extends BaseModelMVO>
         extends MyBaseMongoCommonFuncMapstruct<MO, MVO>, MyBaseMongoConstantMapstruct<MO, MVO>, MyBaseMongoEnumMapstruct<MO, MVO> {
 
 

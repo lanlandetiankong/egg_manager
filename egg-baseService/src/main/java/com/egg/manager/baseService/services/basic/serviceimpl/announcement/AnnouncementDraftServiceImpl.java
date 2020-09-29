@@ -136,7 +136,8 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     public Integer dealPublishByDraft(UserAccount loginUser, String draftId, boolean insertFlag) throws Exception {
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
         Announcement announcement = announcementTransfer.transferFromDraft(loginUser, announcementDraft);
-        if (announcement != null && insertFlag == true) {       //发布
+        if (announcement != null && insertFlag == true) {
+            //发布
             announcementMapper.insert(announcement);
         }
         announcementDraft.setState(BaseStateEnum.DELETE.getValue());

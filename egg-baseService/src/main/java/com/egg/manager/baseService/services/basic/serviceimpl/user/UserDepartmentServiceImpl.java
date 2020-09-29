@@ -139,7 +139,8 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         Integer changeCount = 0;
         UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
         userDepartment = super.doBeforeUpdate(loginUser, userDepartment);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = userDepartmentMapper.updateById(userDepartment);
         } else {
             changeCount = userDepartmentMapper.updateById(userDepartment);

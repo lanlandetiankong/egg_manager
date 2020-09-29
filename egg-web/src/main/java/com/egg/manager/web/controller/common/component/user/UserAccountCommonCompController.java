@@ -1,6 +1,5 @@
 package com.egg.manager.web.controller.common.component.user;
 
-import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
 import com.egg.manager.api.constants.funcModule.controllers.common.component.user.UserAccountCommonCompFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
-@Api(value = "API ==>>  UserAccountCommonCompController ", description = "[通用组件]-用户账号接口")
+@Api(value = "API-用户账号接口(通用组件) ")
 @RestController
 @RequestMapping("/commmon/component/user/user_account")
 public class UserAccountCommonCompController extends BaseController {

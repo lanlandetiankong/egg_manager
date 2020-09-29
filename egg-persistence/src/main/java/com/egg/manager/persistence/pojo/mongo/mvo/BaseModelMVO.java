@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MyBaseModelMVO<K> extends MyBaseMVO {
+public class BaseModelMVO<K> extends BaseMVO {
     private K fid;
     /**
      * 顺序

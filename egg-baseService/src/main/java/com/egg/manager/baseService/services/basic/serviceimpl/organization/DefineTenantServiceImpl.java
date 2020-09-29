@@ -76,7 +76,8 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         Integer changeCount = 0;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeUpdate(loginUser, defineTenant);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineTenantMapper.updateById(defineTenant);
         } else {
             changeCount = defineTenantMapper.updateById(defineTenant);
@@ -119,7 +120,8 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     @Override
     public Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
-        if (checkIds == null || checkIds.length == 0) {   //清空所有权限
+        if (checkIds == null || checkIds.length == 0) {
+            //清空所有权限
             changeCount = defineTenantMapper.clearAllManagerByTenantId(tenantId, loginUser);
         } else {
             changeCount = checkIds.length;
@@ -140,21 +142,24 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                 while (oldCheckIter.hasNext()) {
                     String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
-                    if (isOldRow) {   //原本有的数据行
+                    if (isOldRow) {
+                        //原本有的数据行
                         enableIds.add(oldCheckId);
                         checkIdList.remove(oldCheckId);
                     } else {
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {   //批量启用
+                if (enableIds.isEmpty() == false) {
+                    //批量启用
                     userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
                 }
-                if (disabledIds.isEmpty() == false) {   //批量禁用
+                if (disabledIds.isEmpty() == false) {
+                    //批量禁用
                     userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
                 }
-                if (checkIdList.isEmpty() == false) {     //有新勾选的权限，需要新增行
-                    //批量新增行
+                if (checkIdList.isEmpty() == false) {
+                    //有新勾选的权限，需要新增行
                     List<UserTenant> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
                         addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));

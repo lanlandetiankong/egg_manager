@@ -45,7 +45,7 @@ import java.util.Map;
  * \
  */
 @Slf4j
-@Api(value = "API -  AnnouncementDraftController ", description = "公告草稿接口")
+@Api(value = "API -  公告草稿接口 ")
 @RestController
 @RequestMapping("/announcement_draft")
 public class AnnouncementDraftController extends BaseController {
@@ -73,7 +73,8 @@ public class AnnouncementDraftController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             queryFieldBeanList.add(QueryFormFieldBean.dealGetNotEqualsBean("is_published", BaseStateEnum.ENABLED.getValue()));
-            if (Boolean.TRUE.equals(onlySelf)) {  //只查询自己发布的公告
+            if (Boolean.TRUE.equals(onlySelf)) {
+                //只查询自己发布的公告
                 queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
             }
             //取得 分页配置

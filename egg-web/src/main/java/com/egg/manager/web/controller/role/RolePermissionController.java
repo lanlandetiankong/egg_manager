@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  RolePermissionController ", description = "角色权限接口")
+@Api(value = "API-角色_权限接口")
 @RestController
 @RequestMapping("/role/role_permission")
 public class RolePermissionController {

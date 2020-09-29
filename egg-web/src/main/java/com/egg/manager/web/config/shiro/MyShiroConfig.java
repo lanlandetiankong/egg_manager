@@ -1,5 +1,6 @@
 package com.egg.manager.web.config.shiro;
 
+import com.google.common.collect.Maps;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -59,7 +60,7 @@ public class MyShiroConfig {
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
 
         //添加自定义过滤器,命名为jwt
-        Map<String, Filter> filterMap = new HashMap<String, Filter>();
+        Map<String, Filter> filterMap = Maps.newHashMap();
         filterMap.put("jwt", new JwtShiroFilter());
 
         //自定义url规则

@@ -36,7 +36,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API -  ExcelUploadController ", description = "Excel上传接口")
+@Api(value = "API-Excel上传接口")
 @RestController
 @RequestMapping(value = "/commom_api/file/excelUpload")
 public class ExcelUploadController extends BaseController {
@@ -60,7 +60,7 @@ public class ExcelUploadController extends BaseController {
                 if (lastDotIndex > -1) {
                     fileType = oldFileName.substring(lastDotIndex);
                 }
-                String uuid = MyUUIDUtil.renderSimpleUUID();
+                String uuid = MyUUIDUtil.renderSimpleUuid();
                 String uuidName = uuid + fileType;
                 String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
                 File folder = new File(baseDir);

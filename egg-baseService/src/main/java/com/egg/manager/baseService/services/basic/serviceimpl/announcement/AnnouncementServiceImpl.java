@@ -110,7 +110,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         String draftId = announcementDraftVo.getFid();
         //发布公告
         Announcement announcement = announcementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
-        announcement.setFid(MyUUIDUtil.renderSimpleUUID());
+        announcement.setFid(MyUUIDUtil.renderSimpleUuid());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
         announcement.setUpdateTime(now);

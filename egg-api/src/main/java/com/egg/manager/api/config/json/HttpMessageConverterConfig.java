@@ -19,8 +19,11 @@ import java.util.List;
 @Configuration
 public class HttpMessageConverterConfig {
 
-    //引入Fastjson解析json，不使用默认的jackson
-    //必须在pom.xml引入fastjson的jar包，并且版必须大于1.2.10
+    /**
+     * 引入Fastjson解析json，不使用默认的jackson
+     * 必须在pom.xml引入fastjson的jar包，并且版必须大于1.2.10
+     * @return
+     */
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         //1、定义一个convert转换消息的对象

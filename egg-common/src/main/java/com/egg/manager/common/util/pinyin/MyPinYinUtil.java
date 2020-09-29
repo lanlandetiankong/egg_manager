@@ -17,7 +17,8 @@ public class MyPinYinUtil {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(toFirstChar("汉字转换为拼音").toUpperCase()); //转为首字母大写
+        //转为首字母大写
+        System.out.println(toFirstChar("汉字转换为拼音").toUpperCase());
         System.out.println(toPinyin("汉字转换为拼音"));
     }
     /**
@@ -27,7 +28,8 @@ public class MyPinYinUtil {
      */
     public static String toFirstChar(String chinese){
         String pinyinStr = "";
-        char[] newChar = chinese.toCharArray();  //转为单个字符
+        //转为单个字符
+        char[] newChar = chinese.toCharArray();
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);

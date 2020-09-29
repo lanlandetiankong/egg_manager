@@ -139,7 +139,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
             defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineDepartmentMapper.updateById(defineDepartment);
         } else {
             changeCount = defineDepartmentMapper.updateById(defineDepartment);

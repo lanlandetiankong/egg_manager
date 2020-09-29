@@ -38,7 +38,9 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @Value("${egg.conf.project.name}")
     private String projectName;
 
-    //@ShiroPass url 与 method  之间的分隔符
+    /**
+     * @ShiroPass url 与 method  之间的分隔符
+     */
     private String urlDelimiter = ":--:";
 
 
@@ -108,24 +110,25 @@ public class MyCommandLineRunner implements CommandLineRunner {
         sb.append(this.projectName);
         if (!ComUtil.isEmpty(classUrl)) {
             for (String url : classUrl) {
-                sb.append(url + "/");
+                sb.append(url + Constant.SYMBOL_SLASH);
             }
         }
         for (String url : methodUrl) {
             sb.append(url);
         }
-        if (sb.toString().endsWith("/")) {
+        if (sb.toString().endsWith(Constant.SYMBOL_SLASH)) {
             sb.deleteCharAt(sb.length() - 1);
         }
-        return sb.toString().replaceAll("/+", "/") + this.urlDelimiter + requestName;
+        return sb.toString().replaceAll("/+", Constant.SYMBOL_SLASH) + this.urlDelimiter + requestName;
     }
 
 
     private void doPackageScanner(String packageName) {
         //把所有的.替换成/
-        URL url = this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", "/"));
+        URL url = this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH));
+        String jarSuffix = ".jar" ;
         // 是否循环迭代
-        if (StringUtils.countMatches(url.getFile(), ".jar") > 0) {
+        if (StringUtils.countMatches(url.getFile(), jarSuffix) > 0) {
             boolean recursive = true;
             JarFile jar;
             // 获取jar
@@ -144,11 +147,11 @@ public class MyCommandLineRunner implements CommandLineRunner {
                         name = name.substring(1);
                     }
                     // 如果前半部分和定义的包名相同
-                    if (name.startsWith(packageName.replaceAll("\\.", "/"))) {
+                    if (name.startsWith(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH))) {
                         int idx = name.lastIndexOf('/');
-                        // 如果以"/"结尾 是一个包
+                        // 如果以Constant.SYMBOL_SLASH结尾 是一个包
                         if (idx != -1) {
-                            // 获取包名 把"/"替换成"."
+                            // 获取包名 把Constant.SYMBOL_SLASH替换成"."
                             packageName = name.substring(0, idx)
                                     .replace('/', '.');
                         }

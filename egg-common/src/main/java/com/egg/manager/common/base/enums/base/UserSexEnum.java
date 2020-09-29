@@ -38,7 +38,8 @@ public enum  UserSexEnum {
     public static Short dealGetValByName(String value){
         UserSexEnum[] enums = UserSexEnum.values();
         value = StringUtils.isBlank(value) ? "" : value ;
-        value = value.trim().replace(" ","");   //去除空格
+        //去除空格
+        value = value.trim().replace(" ","");
         for(UserSexEnum enumObj : enums){
             if(enumObj.getName().equals(value)){
                 return enumObj.getValue() ;

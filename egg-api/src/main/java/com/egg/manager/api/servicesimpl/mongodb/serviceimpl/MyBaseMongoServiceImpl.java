@@ -234,7 +234,6 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
     }
 
 
-    //private methods
     private void dealUpdateSetLoginUserToMO(UserAccount loginUser, T t) {
         if (t != null && loginUser != null) {
             t.setLastModifyerId(loginUser.getFid());
@@ -242,7 +241,6 @@ public class MyBaseMongoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T ex
         }
     }
 
-    //private methods
     private void dealSetModifyInfoToUpdate(UserAccount loginUser, Update update) {
         if (loginUser != null) {
             update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());

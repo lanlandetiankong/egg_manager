@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.log.pc.web;
 
-import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseModelMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.BaseModelMVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PcWebLoginLogMVO extends MyBaseModelMVO<String> {
+public class PcWebLoginLogMVO extends BaseModelMVO<String> {
     /**
      * 登录的用户id
      */

@@ -18,7 +18,9 @@ import java.util.Date;
 @Component
 public class JWTUtil {
 
-    // 默认过期时间1
+    /**
+     * 默认过期时间1
+     */
     public static Long EXPIRE_TIME  ;
     public static String DEFAULT_SECRET ;
 

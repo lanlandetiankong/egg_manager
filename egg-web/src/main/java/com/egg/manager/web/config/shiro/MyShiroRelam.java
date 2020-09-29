@@ -72,7 +72,8 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        if (Constant.isPass) {    //暂不
+        if (Constant.isPass) {
+            //暂不
             //return new SimpleAuthenticationInfo(token, token, this.getName());
         }
         // 解密获得username，用于和数据库进行对比

@@ -41,7 +41,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserJobController ", description = "用户职务接口")
+@Api(value = "API-用户_职务接口")
 @RestController
 @RequestMapping("/user/user_job")
 public class UserJobController extends BaseController {

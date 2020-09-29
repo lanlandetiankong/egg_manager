@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.api.trait.helper.ErrorActionEnum;
+import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -17,6 +18,7 @@ import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
@@ -44,6 +46,7 @@ import java.util.*;
 public class BaseController {
     public final String actionSuccessMsg = "操作成功！";
     public final String actionFailMsg = "操作失败！";
+
 
     @Value("${egg.conf.jwt.sso:true}")
     private boolean jwtSsoFlag;
@@ -84,7 +87,8 @@ public class BaseController {
         if (userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(), userAccountToken.getUserAccountId());
-            if (oldAuthorization != null && jwtSsoFlag) {   //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录] ,jwtSsoFlag由application.properties 配置取得
+            if (oldAuthorization != null && jwtSsoFlag) {
+                //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录] ,jwtSsoFlag由application.properties 配置取得
                 String userAuthorization = (String) oldAuthorization;
                 redisHelper.hashRemove(redisPropsOfShiroCache.getUserAuthorizationKey(), userAuthorization);
                 //清除 authorization 缓存
@@ -122,7 +126,7 @@ public class BaseController {
         String queryJson = request.getParameter(paramKey);
         T bean = null;
         if (StringUtils.isNotBlank(queryJson)) {
-            if (StringUtils.isNotBlank(queryJson) && queryJson != "{}") {
+            if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_OBJECT.equals(queryJson) == false)) {
                 bean = JSONObject.parseObject(queryJson, clazz);
 
             }
@@ -192,8 +196,8 @@ public class BaseController {
      */
     @Deprecated
     public Map<String, Object> parseQueryJsonToMap(String queryJson) {
-        Map<String, Object> map = new HashMap<>();
-        if (StringUtils.isNotBlank(queryJson) && queryJson != "{}") {
+        Map<String, Object> map = Maps.newHashMap();
+        if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_OBJECT.equals(queryJson) == false)) {
             JSONObject jsonObject = JSONObject.parseObject(queryJson);
             if (jsonObject != null && jsonObject.isEmpty() == false) {
                 for (String jsonKey : jsonObject.keySet()) {
@@ -218,7 +222,7 @@ public class BaseController {
      */
     public List<QueryFormFieldBean> parseQueryJsonToBeanList(String queryJson) {
         List<QueryFormFieldBean> fieldBeanList = new ArrayList<>();
-        if (StringUtils.isNotBlank(queryJson) && "[]".equals(queryJson) == false) {
+        if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_ARRAY.equals(queryJson) == false)) {
             List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryFormFieldBean.class);
             if (fieldBeansTemp != null && fieldBeansTemp.isEmpty() == false) {
                 for (QueryFormFieldBean fieldBean : fieldBeansTemp) {
@@ -235,7 +239,7 @@ public class BaseController {
 
     public JSONObject parseQueryJsonToObject(String queryJson) {
         JSONObject jsonObject = null;
-        if (StringUtils.isNotBlank(queryJson) && queryJson != "{}") {
+        if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_OBJECT.equals(queryJson) == false)) {
             jsonObject = JSONObject.parseObject(queryJson);
         }
         jsonObject = jsonObject != null ? jsonObject : new JSONObject();
@@ -267,7 +271,7 @@ public class BaseController {
      */
     public List<AntdvSortBean> parseSortJsonToBean(String sortObj, boolean addCreateTimeDesc) {
         List<AntdvSortBean> sortBeans = new ArrayList<>();
-        if (StringUtils.isNotBlank(sortObj) && "{}".equals(sortObj) == false) {
+        if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
             AntdvSortBean antdvSortBean = JSONObject.parseObject(sortObj, AntdvSortBean.class);
             if (antdvSortBean != null) {
                 String fieldName = MyStringUtil.camelToUnderline(antdvSortBean.getField(), false);
@@ -275,7 +279,8 @@ public class BaseController {
                 sortBeans.add(antdvSortBean);
             }
         }
-        if (addCreateTimeDesc == true) {  //添加日期排序
+        if (addCreateTimeDesc == true) {
+            //添加日期排序
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
         }
         return sortBeans;

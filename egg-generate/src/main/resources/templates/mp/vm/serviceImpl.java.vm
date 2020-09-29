@@ -81,7 +81,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public Integer dealAdd${cfg.baseEntityName}(${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo, UserAccount loginUser) throws Exception{
         Date now = new Date() ;
         ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}Transfer.transferVoToEntity(${cfg.baseEntityName_firstLow}Vo);
-        ${cfg.baseEntityName_firstLow}.setFid(MyUUIDUtil.renderSimpleUUID());
+        ${cfg.baseEntityName_firstLow}.setFid(MyUUIDUtil.renderSimpleUuid());
         ${cfg.baseEntityName_firstLow}.setState(BaseStateEnum.ENABLED.getValue());
         ${cfg.baseEntityName_firstLow}.setCreateTime(now);
         ${cfg.baseEntityName_firstLow}.setUpdateTime(now);
@@ -105,7 +105,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         if(loginUser != null){
             ${cfg.baseEntityName_firstLow}.setLastModifyerId(loginUser.getFid());
         }
-        if(updateAll){  //是否更新所有字段
+        if(updateAll){
+            //是否更新所有字段
             changeCount = ${cfg.baseEntityName_firstLow}Mapper.updateById(${cfg.baseEntityName_firstLow}) ;
         }   else {
             changeCount = ${cfg.baseEntityName_firstLow}Mapper.updateById(${cfg.baseEntityName_firstLow}) ;

@@ -6,6 +6,7 @@ import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRe
 import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
+import com.google.common.collect.Maps;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,6 @@ import java.util.Map;
 
 
 @Slf4j
-//@Service(interfaceClass = MyBaseEmailService.class)
 @Service
 public class MyBaseEmailServiceImpl implements MyBaseEmailService {
     @Autowired
@@ -88,7 +88,7 @@ public class MyBaseEmailServiceImpl implements MyBaseEmailService {
         helper.setFrom(doGetMailFromUser(emailSendRecordMVO),doGetMailPersonalFromUser(emailSendRecordMVO));
         helper.setTo(emailSendRecordMVO.getReceiveUserInfoList().stream().toArray(String[]::new));
         helper.setSubject(emailSendRecordMVO.getSubject());
-        Map<String, String> kvMap = (emailSendRecordMVO.getKvMap() != null) ? emailSendRecordMVO.getKvMap() : new HashMap<>();
+        Map<String, String> kvMap = (emailSendRecordMVO.getKvMap() != null) ? emailSendRecordMVO.getKvMap() : Maps.newHashMap();
         Template template = configuration.getTemplate(emailSendRecordMVO.getTemplate());
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, kvMap);
         helper.setText(text, true);

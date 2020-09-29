@@ -55,7 +55,7 @@ import java.util.Set;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineRoleController ", description = "角色定义接口")
+@Api(value = "API-角色定义接口")
 @RestController
 @RequestMapping("/define/define_role")
 public class DefineRoleController extends BaseController {
@@ -164,7 +164,8 @@ public class DefineRoleController extends BaseController {
         MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineRoleFuncModuleConstant.Success.queryGranted);
         try {
             List<DefineMenu> defineMenuList = null;
-            if (Boolean.TRUE.equals(filterParentNode)) {  //是否过滤掉 有子节点的 [菜单节点]
+            if (Boolean.TRUE.equals(filterParentNode)) {
+                //是否过滤掉 有子节点的 [菜单节点]
                 defineMenuList = defineMenuMapper.findAllMenuByRoleIdFilterParentNode(defineRoleId, BaseStateEnum.ENABLED.getValue());
             } else {
                 defineMenuList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
@@ -266,7 +267,6 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "[菜单-角色]授权", notes = "为角色设置可访问菜单", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/grantMenusToRole")
-    @Transactional
     public MyCommonResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
                                              @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.grantOper);

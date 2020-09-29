@@ -79,7 +79,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
             return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {
+            //如果是[超级管理员]的话可以访问全部菜单
             return queryAllEnableList(null);
         } else {
             return defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, stateVal);
@@ -204,7 +205,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         Integer changeCount = 0;
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole = super.doBeforeUpdate(loginUser, defineRole);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineRoleMapper.updateById(defineRole);
         } else {
             changeCount = defineRoleMapper.updateById(defineRole);
@@ -235,7 +237,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     @Override
     public Integer dealGrantPermissionToRole(UserAccount loginUser, String roleId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
-        if (checkIds == null || checkIds.length == 0) {   //清空所有权限
+        if (checkIds == null || checkIds.length == 0) {
+            //清空所有权限
             changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId, loginUser);
         } else {
             changeCount = checkIds.length;
@@ -256,21 +259,24 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 while (oldCheckIter.hasNext()) {
                     String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
-                    if (isOldRow) {   //原本有的数据行
+                    if (isOldRow) {
+                        //原本有的数据行
                         enableIds.add(oldCheckId);
                         checkIdList.remove(oldCheckId);
                     } else {
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {   //批量启用
+                if (enableIds.isEmpty() == false) {
+                    //批量启用
                     rolePermissionMapper.batchUpdateStateByRole(roleId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
                 }
-                if (disabledIds.isEmpty() == false) {   //批量禁用
+                if (disabledIds.isEmpty() == false) {
+                    //批量禁用
                     rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
                 }
-                if (checkIdList.isEmpty() == false) {     //有新勾选的权限，需要新增行
-                    //批量新增行
+                if (checkIdList.isEmpty() == false) {
+                    //有新勾选的权限，需要新增行
                     List<RolePermission> addEntitys = new ArrayList<>();
                     for (String checkId : checkIdList) {
                         addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));

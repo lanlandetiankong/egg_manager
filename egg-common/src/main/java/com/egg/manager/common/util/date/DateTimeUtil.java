@@ -200,6 +200,12 @@ public class DateTimeUtil {
      */
     public final static String FMT_WW = "EEE";
 
+    private final static int MIN_DAY_OF_MONTH = 1 ;
+    private final static int Max_DAY_OF_MONTH = 31 ;
+    private final static int MIN_MONTH_OF_YEAR = 1 ;
+    private final static int Max_MONTH_OF_YEAR = 12 ;
+
+
     /**
      * 常用的格式化时间的格式组，用于本类中格式化字符串成时间型
      */
@@ -407,7 +413,7 @@ public class DateTimeUtil {
      *             可能抛出的异常
      */
     public static Date parseToDate(int year, int month, int day) throws Exception {
-        if (month < 1 || month > 12 || day < 1 || day > 31) {
+        if (month < MIN_MONTH_OF_YEAR || month > Max_MONTH_OF_YEAR || day < MIN_DAY_OF_MONTH || day > Max_DAY_OF_MONTH) {
             throw new IllegalArgumentException("参数不正确！");
         }
         String yearStr = String.valueOf(year);
@@ -438,7 +444,7 @@ public class DateTimeUtil {
      *             可能抛出的异常
      */
     public static Date parseToDate(int year, int month, int day, int h, int m, int s) throws Exception {
-        if (month < 1 || month > 12 || day < 1 || day > 31 || h < 0 || h > 23 || m < 0 || m > 60 || s < 0 || s > 60) {
+        if (month < MIN_MONTH_OF_YEAR || month > Max_MONTH_OF_YEAR || day < MIN_DAY_OF_MONTH || day > Max_DAY_OF_MONTH || h < 0 || h > 23 || m < 0 || m > 60 || s < 0 || s > 60) {
             throw new IllegalArgumentException("参数不正确！");
         }
         String yearStr = String.valueOf(year);
@@ -1025,17 +1031,17 @@ public class DateTimeUtil {
         calendar.setTime(d);
         long milliseconds = (long) Math.round(Math.abs(times) * qv);
         if (times > 0) {
-            for (; milliseconds > 0; milliseconds -= 2147483647) {
-                if (milliseconds > 2147483647) {
-                    calendar.add(Calendar.MILLISECOND, 2147483647);
+            for (; milliseconds > 0; milliseconds -= Integer.MAX_VALUE) {
+                if (milliseconds > Integer.MAX_VALUE) {
+                    calendar.add(Calendar.MILLISECOND, Integer.MAX_VALUE);
                 } else {
                     calendar.add(Calendar.MILLISECOND, (int) milliseconds);
                 }
             }
         } else {
-            for (; milliseconds > 0; milliseconds -= 2147483647) {
-                if (milliseconds > 2147483647) {
-                    calendar.add(Calendar.MILLISECOND, -2147483647);
+            for (; milliseconds > 0; milliseconds -= Integer.MAX_VALUE) {
+                if (milliseconds > Integer.MAX_VALUE) {
+                    calendar.add(Calendar.MILLISECOND, -Integer.MAX_VALUE);
                 } else {
                     calendar.add(Calendar.MILLISECOND, -(int) milliseconds);
                 }
@@ -1401,7 +1407,7 @@ public class DateTimeUtil {
      * @return 新日期对象
      */
     public static Date getDayLastMonth() {
-        long day = new Date().getTime();
+        long day = System.currentTimeMillis();
         long dayLastMonth = day - 24 * 60 * 60 * 1000 * 20;
         return new Date(dayLastMonth);
     }
@@ -1412,7 +1418,7 @@ public class DateTimeUtil {
      * @return 新日期对象
      */
     public static Date getDayNextMonth() {
-        long day = new Date().getTime();
+        long day = System.currentTimeMillis();
         long dayNextMonth = day + 20 * 24 * 60 * 60 * 1000;
         return new Date(dayNextMonth);
     }
@@ -1659,20 +1665,24 @@ public class DateTimeUtil {
 
             long startMs = start.getTimeInMillis();
             long endMs = end.getTimeInMillis();
-            long l_differ = endMs - startMs;// 毫秒数
-            long ll_differ = l_differ / 1000;// 秒
-
-            long second_differ = l_differ / 1000;// 秒
-
-            long year_differ = second_differ / (60 * 60 * 24 * 365);// 得到年数
-            long month_differ = second_differ / (60 * 60 * 24 * 30);// 得到月数
-            long week_differ = second_differ / (60 * 60 * 24 * 7);// 得到周数
-
-            long day_differ = second_differ / (60 * 60 * 24);// 得到天数
-            second_differ = second_differ - day_differ * 60 * 60 * 24;// 天
-            long hour_differ = second_differ / (60 * 60);// 时
+            // 毫秒数
+            long l_differ = endMs - startMs;
+            // 秒
+            long ll_differ = l_differ / 1000;
+            // 秒
+            long second_differ = l_differ / 1000;
+            // 得到年数
+            long year_differ = second_differ / (60 * 60 * 24 * 365);
+            // 得到月数
+            long month_differ = second_differ / (60 * 60 * 24 * 30);
+            // 得到周数
+            long week_differ = second_differ / (60 * 60 * 24 * 7);
+            // 得到天数
+            long day_differ = second_differ / (60 * 60 * 24);
+            second_differ = second_differ - day_differ * 60 * 60 * 24;
+            long hour_differ = second_differ / (60 * 60);
             second_differ = second_differ - hour_differ * 60 * 60;
-            long minute_differ = second_differ / 60;// 分
+            long minute_differ = second_differ / 60;
             second_differ = second_differ - minute_differ * 60;
 
             return new Object[] { year_differ, month_differ, week_differ, day_differ, hour_differ, minute_differ,

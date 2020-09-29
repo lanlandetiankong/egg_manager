@@ -6,7 +6,7 @@ import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsO
 import com.egg.manager.persistence.pojo.common.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.user.UserAccountMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Component
 @Named("userAccountTransfer")
-public class UserAccountTransfer extends MyBaseMysqlTransfer {
+public class UserAccountTransfer extends BaseMysqlTransfer {
 
     static UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
 
@@ -94,8 +94,9 @@ public class UserAccountTransfer extends MyBaseMysqlTransfer {
         if (xlsInModelList != null || xlsInModelList.isEmpty() == false) {
             accountSet = accountSet != null ? accountSet : new HashSet<>();
             for (UserAccountXlsInModel xlsInModel : xlsInModelList) {
-                if (accountSet.contains(xlsInModel.getAccount())) {  //如果用户的[account]出现重复，对新增行的account后面加上 uuid
-                    xlsInModel.setAccount(xlsInModel.getAccount() + "_" + MyUUIDUtil.renderSimpleUUID());
+                if (accountSet.contains(xlsInModel.getAccount())) {
+                    //如果用户的[account]出现重复，对新增行的account后面加上 uuid
+                    xlsInModel.setAccount(xlsInModel.getAccount() + "_" + MyUUIDUtil.renderSimpleUuid());
                 }
                 accountSet.add(xlsInModel.getAccount());
                 list.add(xlsInModelToEntity(xlsInModel, loginUser));

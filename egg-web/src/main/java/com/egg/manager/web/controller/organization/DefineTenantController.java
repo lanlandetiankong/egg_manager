@@ -44,7 +44,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineTenantController ", description = "租户定义接口")
+@Api(value = "API-租户定义接口")
 @RestController
 @RequestMapping("/organization/define_tenant")
 public class DefineTenantController extends BaseController {

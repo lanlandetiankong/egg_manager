@@ -11,7 +11,9 @@ import org.jasypt.util.text.BasicTextEncryptor;
  */
 public class JasyptUtil {
 
-    //必须与application.properties的值一致
+    /**
+     * 必须与application.properties的值一致
+     */
     private static String jasyptEncryptorPassword = "EggJasypt";
 
     public static void main(String[] args) {

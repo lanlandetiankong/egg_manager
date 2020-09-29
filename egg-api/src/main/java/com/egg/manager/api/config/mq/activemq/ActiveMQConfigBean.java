@@ -52,7 +52,11 @@ public class ActiveMQConfigBean {
         return new JmsMessagingTemplate(connectionFactory());
     }
 
-    // 在Queue模式中，对消息的监听需要对containerFactory进行配置
+    /**
+     * 在Queue模式中，对消息的监听需要对containerFactory进行配置
+     * @param connectionFactory
+     * @return
+     */
     @Bean("queueListener")
     public JmsListenerContainerFactory<?> queueJmsListenerContainerFactory(ConnectionFactory connectionFactory){
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
@@ -61,7 +65,11 @@ public class ActiveMQConfigBean {
         return factory;
     }
 
-    //在Topic模式中，对消息的监听需要对containerFactory进行配置
+    /**
+     * 在Topic模式中，对消息的监听需要对containerFactory进行配置
+     * @param connectionFactory
+     * @return
+     */
     @Bean("topicListener")
     public JmsListenerContainerFactory<?> topicJmsListenerContainerFactory(ConnectionFactory connectionFactory){
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();

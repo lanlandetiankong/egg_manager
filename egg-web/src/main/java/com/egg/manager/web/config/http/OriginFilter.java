@@ -29,7 +29,8 @@ public class OriginFilter {
         corsConfiguration.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
-        this.dealAddExposedHeaders(corsConfiguration, "authorization", "Content-Disposition");    //必要,设置可返回给前端取得的自定义header
+        //必要,设置可返回给前端取得的自定义header
+        this.dealAddExposedHeaders(corsConfiguration, "authorization", "Content-Disposition");
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);

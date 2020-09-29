@@ -64,7 +64,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             return new ArrayList<DefineMenu>();
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {    //如果是[超级管理员]的话可以访问全部菜单
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {
+            //如果是[超级管理员]的话可以访问全部菜单
             return getAllEnableList(null);
         } else {
             return defineMenuMapper.getUserGrantedMenusByAccountId(userAccountId);
@@ -79,7 +80,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         if (defineMenuList != null && defineMenuList.isEmpty() == false) {
             for (DefineMenu defineMenu : defineMenuList) {
                 if (defineMenu != null) {
-                    if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenu.getUrlJumpType())) { //内部router跳转
+                    if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenu.getUrlJumpType())) {
+                        //内部router跳转
                         if (StringUtils.isNotBlank(defineMenu.getRouterUrl())) {
                             urlSets.add(defineMenu.getRouterUrl());
                         }
@@ -208,7 +210,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Override
     public Integer dealCreate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenu>());
-        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
+        if (verifyDuplicateBean.isSuccessFlag() == false) {
+            //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
@@ -245,7 +248,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         QueryWrapper<DefineMenu> uniWrapper = new QueryWrapper<DefineMenu>()
                 .ne("fid", defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
-        if (verifyDuplicateBean.isSuccessFlag() == false) {    //已有重复键值
+        if (verifyDuplicateBean.isSuccessFlag() == false) {
+            //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
@@ -267,7 +271,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineMenuMapper.updateById(defineMenu);
         } else {
             changeCount = defineMenuMapper.updateById(defineMenu);

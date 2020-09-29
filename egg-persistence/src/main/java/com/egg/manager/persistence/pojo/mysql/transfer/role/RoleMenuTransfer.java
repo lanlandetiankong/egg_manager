@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.transfer.role;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.mysql.dto.role.RoleMenuDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.role.RoleMenuMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Named("roleMenuTransfer")
-public class RoleMenuTransfer extends MyBaseMysqlTransfer {
+public class RoleMenuTransfer extends BaseMysqlTransfer {
 
     static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE;
 

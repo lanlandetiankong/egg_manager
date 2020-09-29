@@ -1,6 +1,5 @@
 package com.egg.manager.web.wservices.wserviceimpl.aspect;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
@@ -10,7 +9,7 @@ import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMO;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
-import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
+import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -32,7 +31,7 @@ import java.util.Date;
  * \
  */
 @Service
-public class ControllerAspectWServiceImpl implements ControllerAspectWService {
+public class ControllerAspectServiceImpl implements ControllerAspectService {
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -52,7 +51,8 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
 
             for (int i = 0; i < args.length; i++) {
                 Object argObj = args[i];
-                if (!checkObjectInnstanceOfHttpServlet(argObj)) {     //过滤掉HttpServlet类型的
+                if (!checkObjectInnstanceOfHttpServlet(argObj)) {
+                    //过滤掉HttpServlet类型的
                     String argName = argNames[i];
                     argJsonObj.put(argName, argObj);
                 }
@@ -72,7 +72,7 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
     public void dealSetValToQueryLog(PcWebQueryLogMO pcWebQueryLogMO, JoinPoint joinPoint, HttpServletRequest request) {
         try {
             if (StringUtils.isBlank(pcWebQueryLogMO.getFid())) {
-                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUuid());
             }
             if (pcWebQueryLogMO.getStatus() == null) {
                 pcWebQueryLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
@@ -140,7 +140,7 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
     public void dealSetValToOperationLog(PcWebOperationLogMO pcWebOperationLogMO, JoinPoint joinPoint, HttpServletRequest request) {
         try {
             if (StringUtils.isBlank(pcWebOperationLogMO.getFid())) {
-                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUuid());
             }
             if (pcWebOperationLogMO.getStatus() == null) {
                 pcWebOperationLogMO.setStatus(BaseStateEnum.ENABLED.getValue());
@@ -207,7 +207,7 @@ public class ControllerAspectWServiceImpl implements ControllerAspectWService {
     public void dealSetValToLoginLog(PcWebLoginLogMO pcWebLoginLogMO, JoinPoint joinPoint, HttpServletRequest request) {
         try {
             if (StringUtils.isBlank(pcWebLoginLogMO.getFid())) {
-                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUUID());
+                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUuid());
             }
             if (pcWebLoginLogMO.getStatus() == null) {
                 pcWebLoginLogMO.setStatus(BaseStateEnum.ENABLED.getValue());

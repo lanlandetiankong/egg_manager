@@ -14,7 +14,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebLoginLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
-import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectWService;
+import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -38,7 +38,7 @@ public class ControllerAspect {
     private PcWebLoginLogRepository pcWebLoginLogRepository;
 
     @Autowired
-    private ControllerAspectWService controllerAspectWService;
+    private ControllerAspectService controllerAspectService;
 
 
     @Pointcut("execution(* com.egg.manager.web.controller..*(..)) ")
@@ -48,7 +48,7 @@ public class ControllerAspect {
 
     @Before(value = "aspect()")
     public void beforeController(JoinPoint joinPoint) throws Throwable {
-        Method method = controllerAspectWService.gainReqMethod(joinPoint);
+        Method method = controllerAspectService.gainReqMethod(joinPoint);
         //是否需要记录查询日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
@@ -60,7 +60,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 //请求成功(至少在before
                 pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
                 pcWebQueryLogRepository.insert(pcWebQueryLogMO);
@@ -78,7 +78,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebQueryLogMO, joinPoint, request);
                 //请求成功(至少在before
                 pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
                 pcWebOperationLogRepository.insert(pcWebQueryLogMO);
@@ -95,7 +95,7 @@ public class ControllerAspect {
                 pcWebLoginLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
                 //请求成功(至少在before
                 pcWebLoginLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
                 pcWebLoginLogRepository.insert(pcWebLoginLogMO);
@@ -112,7 +112,7 @@ public class ControllerAspect {
 
     @AfterReturning(value = "aspect()", returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
-        Method method = controllerAspectWService.gainReqMethod(joinPoint);
+        Method method = controllerAspectService.gainReqMethod(joinPoint);
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
@@ -122,10 +122,11 @@ public class ControllerAspect {
                 pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {   //如果是封装的结果
+                    if (result instanceof MyCommonResult) {
+                        //如果是封装的结果
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
@@ -148,10 +149,11 @@ public class ControllerAspect {
                 pcWebOperationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {   //如果是封装的结果
+                    if (result instanceof MyCommonResult) {
+                        //如果是封装的结果
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
@@ -174,10 +176,11 @@ public class ControllerAspect {
                 pcWebLoginLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {   //如果是封装的结果
+                    if (result instanceof MyCommonResult) {
+                        //如果是封装的结果
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
@@ -196,7 +199,7 @@ public class ControllerAspect {
 
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
-        Method method = controllerAspectWService.gainReqMethod(joinPoint);
+        Method method = controllerAspectService.gainReqMethod(joinPoint);
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
@@ -207,7 +210,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
                 //请求失败
                 pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -227,7 +230,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
                 //请求失败
                 pcWebOperationLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -246,7 +249,7 @@ public class ControllerAspect {
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectWService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
                 //请求失败
                 pcWebLoginLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {

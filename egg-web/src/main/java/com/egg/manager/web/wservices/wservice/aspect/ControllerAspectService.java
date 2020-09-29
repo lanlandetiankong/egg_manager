@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * \* Description:
  * \
  */
-public interface ControllerAspectWService {
+public interface ControllerAspectService {
 
     /**
      * 取得 请求的参数

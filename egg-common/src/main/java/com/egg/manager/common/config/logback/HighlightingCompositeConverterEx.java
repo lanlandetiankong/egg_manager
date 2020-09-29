@@ -14,11 +14,14 @@ public class HighlightingCompositeConverterEx extends ForegroundCompositeConvert
         Level level = event.getLevel();
         switch (level.toInt()) {
             case Level.ERROR_INT:
-                return ANSIConstants.BOLD + ANSIConstants.RED_FG; // same as default color scheme
+                // same as default color scheme
+                return ANSIConstants.BOLD + ANSIConstants.RED_FG;
             case Level.WARN_INT:
-                return ANSIConstants.RED_FG;// same as default color scheme
+                // same as default color scheme
+                return ANSIConstants.RED_FG;
             case Level.INFO_INT:
-                return ANSIConstants.CYAN_FG; // use CYAN instead of BLUE
+                // use CYAN instead of BLUE
+                return ANSIConstants.CYAN_FG;
             default:
                 return ANSIConstants.DEFAULT_FG;
         }

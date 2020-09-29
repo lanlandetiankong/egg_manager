@@ -35,7 +35,7 @@ import java.nio.file.Paths;
  * \
  */
 @Slf4j
-@Api(value = "API -  ImgUploadController ", description = "图片上传接口")
+@Api(value = "API-图片上传接口")
 @RestController
 @RequestMapping(value = "/commom_api/file/imgUpload")
 public class ImgUploadController extends BaseController {
@@ -59,7 +59,7 @@ public class ImgUploadController extends BaseController {
                 if (lastDotIndex > -1) {
                     fileType = oldFileName.substring(lastDotIndex);
                 }
-                String uuidName = MyUUIDUtil.renderSimpleUUID() + fileType;
+                String uuidName = MyUUIDUtil.renderSimpleUuid() + fileType;
                 String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
                 String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
                 File folder = new File(baseDir);

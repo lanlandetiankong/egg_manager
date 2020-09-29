@@ -4,7 +4,7 @@ import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define.DefinePermissionMapstruct;
-import com.egg.manager.persistence.pojo.mysql.transfer.MyBaseMysqlTransfer;
+import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Named("definePermissionTransfer")
-public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
+public class DefinePermissionTransfer extends BaseMysqlTransfer {
 
     static DefinePermissionMapstruct definePermissionMapstruct = DefinePermissionMapstruct.INSTANCE;
 
@@ -42,7 +42,11 @@ public class DefinePermissionTransfer extends MyBaseMysqlTransfer {
         return vo;
     }
 
-    //已启用entity 值回设
+    /**
+     * 已启用entity 值回设
+     * @param updateEntity
+     * @param oldEntity
+     */
     public static void handleSwitchOpenChangeFieldChange(DefinePermission updateEntity, DefinePermission oldEntity) {
         if (updateEntity != null && oldEntity != null) {
             //避免前端可能篡改了数据！

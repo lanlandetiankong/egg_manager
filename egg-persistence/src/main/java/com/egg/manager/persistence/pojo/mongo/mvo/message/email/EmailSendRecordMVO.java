@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.message.email;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.egg.manager.persistence.pojo.mongo.mvo.MyBaseModelMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.BaseModelMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
@@ -22,9 +22,7 @@ import java.util.Map;
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
+public class EmailSendRecordMVO extends BaseModelMVO<String> {
 
     /**
      * 发送者-相关信息
@@ -58,11 +56,15 @@ public class EmailSendRecordMVO extends MyBaseModelMVO<String> {
     /**
      * 是否发送成功？
      */
-    private Boolean successFlag = true;
+    private Boolean successFlag ;
     /**
      * 发送日期
      */
     private Date sentDate;
+
+    public EmailSendRecordMVO() {
+        this.successFlag = true ;
+    }
 
     /**
      * 取得-接收人-姓名-集合

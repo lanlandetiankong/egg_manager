@@ -72,7 +72,8 @@ public class AntdFileUploadBean  implements Serializable {
             if(linkProps == null){
                 fileUploadBean.setResponse(null);
             }   else {
-                if(linkProps instanceof String){    //不可以是 string
+                if(linkProps instanceof String){
+                    //不可以是 string
                     fileUploadBean.setLinkProps(null);
                 }
             }

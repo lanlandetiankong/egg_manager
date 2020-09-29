@@ -44,7 +44,7 @@ import java.util.Set;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserExcelController ", description = "用户Excel处理接口")
+@Api(value = "API-用户Excel处理接口")
 @Controller
 @RequestMapping("/excel/user_account")
 public class UserExcelController extends BaseController {
@@ -104,9 +104,10 @@ public class UserExcelController extends BaseController {
             Assert.notEmpty(fileArr,BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
             for (MultipartFile file : fileArr) {
+                //前1行是头部，将不读取
                 EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))
                         .sheet()
-                        .headRowNumber(1)   //前几行是头部，将不读取
+                        .headRowNumber(1)
                         .doRead();
             }
         } catch (Exception e) {

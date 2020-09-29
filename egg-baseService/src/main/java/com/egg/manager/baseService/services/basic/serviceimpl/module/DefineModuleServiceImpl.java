@@ -86,7 +86,8 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         Integer changeCount = 0;
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeUpdate(loginUser, defineModule);
-        if (updateAll) {  //是否更新所有字段
+        if (updateAll) {
+            //是否更新所有字段
             changeCount = defineModuleMapper.updateById(defineModule);
         } else {
             changeCount = defineModuleMapper.updateById(defineModule);

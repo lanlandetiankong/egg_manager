@@ -3,6 +3,7 @@ package com.egg.manager.persistence.bean.tree.common;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.bean.tree.MyBaseTree;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
+import com.google.common.collect.Maps;
 import lombok.*;
 
 import java.util.HashMap;
@@ -100,11 +101,12 @@ public class CommonMenuTree extends MyBaseTree {
      * @return
      */
     public static Map<String, CommonMenuTree> dealTreeListToUrlMap(List<CommonMenuTree> treeList, Map<String, CommonMenuTree> urlMap) {
-        urlMap = urlMap != null ? urlMap : new HashMap<>();
+        urlMap = urlMap != null ? urlMap : Maps.newHashMap();
         if (treeList != null && treeList.isEmpty() == false) {
             for (CommonMenuTree commonMenuTree : treeList) {
                 String routerUrl = commonMenuTree.getRouterUrl();
-                if (routerUrl != null && DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(commonMenuTree.getUrlJumpType())) {    //可跳转的Router 路由
+                if (routerUrl != null && DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(commonMenuTree.getUrlJumpType())) {
+                    //可跳转的Router 路由
                     urlMap.put(routerUrl, commonMenuTree);
                 }
                 dealTreeListToUrlMap(commonMenuTree.children, urlMap);

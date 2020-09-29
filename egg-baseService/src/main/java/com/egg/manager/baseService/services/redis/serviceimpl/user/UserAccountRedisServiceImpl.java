@@ -9,7 +9,7 @@ import com.egg.manager.api.services.basic.module.DefineMenuService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
-import com.egg.manager.baseService.services.redis.serviceimpl.common.MyRedisCommonReqServiceImpl;
+import com.egg.manager.baseService.services.redis.serviceimpl.common.BaseRedisCommonReqServiceImpl;
 import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
@@ -32,7 +32,7 @@ import java.util.Set;
  * \
  */
 @Service(interfaceClass = UserAccountRedisService.class)
-public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl implements UserAccountRedisService {
+public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl implements UserAccountRedisService {
 
     @Reference
     private RedisHelper redisHelper;
@@ -206,37 +206,43 @@ public class UserAccountRedisServiceImpl extends MyRedisCommonReqServiceImpl imp
      */
     @Override
     public void dealRedisListCacheRefresh(UserAccount loginUser, String key, String hashKey, String userAccountId, Long keyTtl) {
-        if (redisPropsOfShiroCache.getUserRolesKey().equals(key)) {    //用户拥有的[角色code-Set]
+        if (redisPropsOfShiroCache.getUserRolesKey().equals(key)) {
+            //用户拥有的[角色code-Set]
             Set<String> defineRoleCodeSet = defineRoleService.dealGetRoleCodeSetByAccountFromDb(userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, defineRoleCodeSet);
             } else {
                 redisHelper.hashTtlPut(key, hashKey, defineRoleCodeSet, keyTtl);
             }
-        } else if (redisPropsOfShiroCache.getUserPermissionsKey().equals(key)) { //用户拥有的[权限code-Set]
+        } else if (redisPropsOfShiroCache.getUserPermissionsKey().equals(key)) {
+            //用户拥有的[权限code-Set]
             Set<String> definePermissionCodeSet = definePermissionService.dealGetPermissionCodeSetByAccountFromDb(loginUser, userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, definePermissionCodeSet);
             } else {
                 redisHelper.hashTtlPut(key, hashKey, definePermissionCodeSet, keyTtl);
             }
-        } else if (redisPropsOfShiroCache.getUserFrontButtonsKey().equals(key)) {    //用户拥有的[前端按钮code-Set]
+        } else if (redisPropsOfShiroCache.getUserFrontButtonsKey().equals(key)) {
+            //用户拥有的[前端按钮code-Set]
             //TODO
-        } else if (redisPropsOfShiroCache.getUserFrontRouterUrlKey().equals(key)) {  //用户拥有的[RouterUrl-Set]
+        } else if (redisPropsOfShiroCache.getUserFrontRouterUrlKey().equals(key)) {
+            //用户拥有的[RouterUrl-Set]
             Set<String> visitAbleUrlSet = defineMenuService.dealGetUserVisitAbleUrl(userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, visitAbleUrlSet);
             } else {
                 redisHelper.hashTtlPut(key, hashKey, visitAbleUrlSet, keyTtl);
             }
-        } else if (redisPropsOfShiroCache.getUserAccountKey().equals(key)) {    //用户信息 缓存
+        } else if (redisPropsOfShiroCache.getUserAccountKey().equals(key)) {
+            //用户信息 缓存
             UserAccount userAccount = userAccountMapper.selectById(userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, userAccount);
             } else {
                 redisHelper.hashTtlPut(key, hashKey, userAccount, keyTtl);
             }
-        } else if (redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)) {     //用户可访问 菜单树
+        } else if (redisPropsOfShiroCache.getUserFrontMenusKey().equals(key)) {
+            //用户可访问 菜单树
             List<CommonMenuTree> treeList = defineMenuService.dealGetUserGrantedMenuTrees(userAccountId);
             if (keyTtl == null) {
                 redisHelper.hashPut(key, hashKey, treeList);

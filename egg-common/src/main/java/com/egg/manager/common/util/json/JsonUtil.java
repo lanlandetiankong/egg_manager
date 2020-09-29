@@ -1,6 +1,7 @@
 package com.egg.manager.common.util.json;
 
 
+import com.google.common.collect.Maps;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,7 +39,7 @@ public class JsonUtil {
 
     public static <T> Map<String, T> readJson2MapObj(String json,Class<T> clz){
         Map<String, JsonObject> map = gson.fromJson(json, new TypeToken<Map<String,JsonObject>>(){}.getType());
-        Map<String, T> result = new HashMap<>();
+        Map<String, T> result = Maps.newHashMap();
         for(String key:map.keySet()){
             result.put(key,gson.fromJson(map.get(key),clz) );
         }
@@ -56,7 +57,7 @@ public class JsonUtil {
 
     public static Map<String,String> readJsonStrMap(String json) {
         Map<String, JsonObject> map = gson.fromJson(json, new TypeToken<Map<String,JsonObject>>(){}.getType());
-        Map<String,String> result = new HashMap<>();
+        Map<String,String> result = Maps.newHashMap();
         for(String key:map.keySet()){
             result.put(key,gson.fromJson(map.get(key),String.class) );
         }
@@ -65,7 +66,7 @@ public class JsonUtil {
 
     public static  Map<byte[], byte[]> readJsonByteMap(String json) {
         Map<String, JsonPrimitive> map = gson.fromJson(json, new TypeToken<Map<String,JsonPrimitive>>(){}.getType());
-        Map<byte[], byte[]> vmap = new HashMap<>();
+        Map<byte[], byte[]> vmap = Maps.newHashMap();
         for(String key:map.keySet()){
             vmap.put(key.getBytes(),gson.fromJson(map.get(key),String.class).getBytes() );
         }

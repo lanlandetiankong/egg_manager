@@ -45,6 +45,6 @@ public class AntdvSortBean extends MyBasePagination {
     }
 
     public boolean getOrderIsAsc(){
-        return this.ORDER_ASC.equalsIgnoreCase(this.order);
+        return AntdvSortBean.ORDER_ASC.equalsIgnoreCase(this.order);
     }
 }

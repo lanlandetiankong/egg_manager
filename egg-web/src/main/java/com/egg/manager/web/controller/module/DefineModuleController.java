@@ -42,7 +42,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  DefineModuleController ", description = "模块定义接口")
+@Api(value = "API-模块定义接口")
 @RestController
 @RequestMapping("/module/define_module")
 public class DefineModuleController extends BaseController {

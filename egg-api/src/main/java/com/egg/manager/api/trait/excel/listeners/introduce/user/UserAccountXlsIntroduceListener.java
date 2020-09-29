@@ -32,9 +32,14 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
 
     List<UserAccountXlsInModel> list = new ArrayList<UserAccountXlsInModel>();
 
-
-    Set<String> accountExistSet = new HashSet<>(); //已存在的 account
-    UserAccount loginUser = null ;  //当前登录用户
+    /**
+     * 已存在的 account
+     */
+    Set<String> accountExistSet = new HashSet<>();
+    /**
+     * 当前登录用户
+     */
+    UserAccount loginUser = null ;
 
 
     /**
@@ -57,7 +62,6 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
      */
     @Override
     public void invoke(UserAccountXlsInModel data, AnalysisContext context) {
-        //log.info("解析到一条数据:{}", JSON.toJSONString(data));
         list.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (list.size() >= BATCH_COUNT) {

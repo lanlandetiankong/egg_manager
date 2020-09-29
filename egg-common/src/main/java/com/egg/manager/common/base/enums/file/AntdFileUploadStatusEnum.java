@@ -22,7 +22,13 @@ public enum AntdFileUploadStatusEnum {
         this.label = label;
     }
 
+    /**
+     * 值
+     */
     private String value ;
+    /**
+     * 展示内容
+     */
     private String label ;
 
 

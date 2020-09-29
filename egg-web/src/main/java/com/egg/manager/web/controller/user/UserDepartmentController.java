@@ -40,7 +40,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  UserDepartmentController ", description = "用户与部门关联表的接口")
+@Api(value = "API-用户_部门接口")
 @RestController
 @RequestMapping("/user/user_department")
 public class UserDepartmentController extends BaseController {

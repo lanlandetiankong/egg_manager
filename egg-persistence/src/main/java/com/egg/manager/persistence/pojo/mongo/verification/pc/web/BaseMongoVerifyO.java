@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.pojo.mongo.verification.pc.web;
 
-import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
+import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMgo;
 
 /**
  * \* note:
@@ -10,6 +10,6 @@ import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
  * \* Description:
  * \
  */
-public abstract class BaseMongoVerifyO<T extends MyBaseModelMO> {
+public abstract class BaseMongoVerifyO<T extends MyBaseModelMgo> {
 
 }

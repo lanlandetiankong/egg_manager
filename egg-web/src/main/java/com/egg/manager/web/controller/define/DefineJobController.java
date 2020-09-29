@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.controllers.define.DefineJobFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.define.DefineJobFuncModuleConstant;
 import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;

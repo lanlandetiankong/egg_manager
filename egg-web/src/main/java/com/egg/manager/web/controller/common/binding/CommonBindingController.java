@@ -1,12 +1,9 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementTagFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.controllers.common.binding.CommonBindingFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.binding.CommonBindingFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

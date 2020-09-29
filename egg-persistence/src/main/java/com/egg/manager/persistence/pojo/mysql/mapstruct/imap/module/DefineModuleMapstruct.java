@@ -4,7 +4,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.imap.module;
 import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
 import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.module.DefineModuleConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

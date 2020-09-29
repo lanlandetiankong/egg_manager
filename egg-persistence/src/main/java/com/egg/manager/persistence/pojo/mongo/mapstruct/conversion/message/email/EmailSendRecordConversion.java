@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.conversion.message.email;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMgvo;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMgvo;
 import com.google.common.collect.Lists;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class EmailSendRecordConversion {
      * @return
      */
     @Named("handleGetFromUserEmailAddress")
-    public String handleGetFromUserEmailAddress(EmailFromUserInfoMVO fromUserInfoMVO) {
+    public String handleGetFromUserEmailAddress(EmailFromUserInfoMgvo fromUserInfoMVO) {
         if (fromUserInfoMVO == null || fromUserInfoMVO.getEmailAddress() == null) {
             return "";
         }
@@ -43,12 +43,12 @@ public class EmailSendRecordConversion {
      * @return
      */
     @Named("handleGetReceiveUserAddressList")
-    public String[] handleGetReceiveUserAddressList(List<EmailReceiveUserInfoMVO> receiveUserInfoList) {
+    public String[] handleGetReceiveUserAddressList(List<EmailReceiveUserInfoMgvo> receiveUserInfoList) {
         List<String> list = Lists.newArrayList();
         if (CollectionUtil.isEmpty(receiveUserInfoList)) {
             return new String[]{};
         }
-        for (EmailReceiveUserInfoMVO receiveUserInfoMVO : receiveUserInfoList) {
+        for (EmailReceiveUserInfoMgvo receiveUserInfoMVO : receiveUserInfoList) {
             if (receiveUserInfoMVO != null) {
                 if (receiveUserInfoMVO.getUserName() != null) {
                     list.add(receiveUserInfoMVO.getUserName());

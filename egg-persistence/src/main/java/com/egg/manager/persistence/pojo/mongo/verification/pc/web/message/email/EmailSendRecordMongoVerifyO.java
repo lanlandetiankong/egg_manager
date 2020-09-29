@@ -1,11 +1,11 @@
 package com.egg.manager.persistence.pojo.mongo.verification.pc.web.message.email;
 
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.pojo.common.verification.igroup.VerifyGroupOfUpdate;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMVO;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMVO;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMVO;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailFromUserInfoMgvo;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMgvo;
+import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMgvo;
 import com.egg.manager.persistence.pojo.mongo.verification.pc.web.BaseMongoVerifyO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * \* note: SmartFormDefinitionMO 对应的验证对象
+ * \* note: SmartFormDefinitionMgo 对应的验证对象
  * \* User: zhouchengjie
  * \* Date: 2020/7/25
  * \* Time: 11:06
  * \* Description:
  *
- * @see SmartFormDefinitionMO
+ * @see SmartFormDefinitionMgo
  * \
  */
 @Data
@@ -39,7 +39,7 @@ public class EmailSendRecordMongoVerifyO extends BaseMongoVerifyO {
      * 发送者-相关信息
      */
     @NotNull(groups = {VerifyGroupOfDefault.class}, message = "[发送者-相关信息]不能为空!")
-    private EmailFromUserInfoMVO fromUserInfo;
+    private EmailFromUserInfoMgvo fromUserInfo;
     /**
      * 主题
      */
@@ -49,7 +49,7 @@ public class EmailSendRecordMongoVerifyO extends BaseMongoVerifyO {
      * 接收方-相关信息(必填参数)
      */
     @NotEmpty(groups = {VerifyGroupOfDefault.class}, message = "[接收方-相关信息]不能为空!")
-    private List<EmailReceiveUserInfoMVO> receiveUserInfoList;
+    private List<EmailReceiveUserInfoMgvo> receiveUserInfoList;
     /**
      * 邮件内容
      */
@@ -67,7 +67,7 @@ public class EmailSendRecordMongoVerifyO extends BaseMongoVerifyO {
     /**
      * 附件-信息-列表(可选)
      */
-    private List<EmailSendFileInfoMVO> accessoryInfoList;
+    private List<EmailSendFileInfoMgvo> accessoryInfoList;
     /**
      * 是否发送成功？
      */

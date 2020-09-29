@@ -4,7 +4,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.define.DefineMenuConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

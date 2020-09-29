@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.controllers.user.UserRoleFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.user.UserRoleFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserRoleService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;

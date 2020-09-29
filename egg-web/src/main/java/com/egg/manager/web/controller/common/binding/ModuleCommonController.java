@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.api.constants.funcModule.controllers.common.binding.ModuleCommonFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.binding.ModuleCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;

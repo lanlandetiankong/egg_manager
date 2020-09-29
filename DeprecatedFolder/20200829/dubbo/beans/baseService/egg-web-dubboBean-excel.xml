@@ -6,16 +6,16 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <!--                                    dir-start:com.egg.manager.baseService.services.excel.serviceimpl.common                                                                -->
-    <bean id="myXlsBaseService" class="com.egg.manager.baseService.services.excel.serviceimpl.common.MyXlsBaseServiceImpl"/>
+    <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
+    <bean id="myXlsBaseService" class="com.egg.manager.baseservice.services.excel.serviceimpl.common.MyXlsBaseServiceImpl"/>
 
-    <!--                                    dir-end:com.egg.manager.baseService.services.excel.serviceimpl.common                                                                -->
+    <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
 
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.excel.serviceimpl.user                                                                -->
-    <bean id="userAccountXlsService" class="com.egg.manager.baseService.services.excel.serviceimpl.user.UserAccountXlsServiceImpl"/>
+    <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
+    <bean id="userAccountXlsService" class="com.egg.manager.baseservice.services.excel.serviceimpl.user.UserAccountXlsServiceImpl"/>
 
-    <!--                                    dir-end:com.egg.manager.baseService.services.excel.serviceimpl.user                                                                -->
+    <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
 
 
 </beans>

@@ -8,9 +8,9 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMO;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebLoginLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
@@ -53,17 +53,17 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
             if (pcWebQueryLog.flag() == true) {
-                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
+                PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
 
                 //当前log的通知方式是 Before
-                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
+                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
                 //请求成功(至少在before
-                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+                pcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
+                pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
             }
         }
 
@@ -71,17 +71,17 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
             PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
             if (pcWebOperationLog.flag() == true) {
-                PcWebOperationLogMO pcWebQueryLogMO = new PcWebOperationLogMO();
+                PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
 
                 //当前log的通知方式是 Before
-                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
+                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
                 //请求成功(至少在before
-                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebOperationLogRepository.insert(pcWebQueryLogMO);
+                pcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
+                pcWebOperationLogRepository.insert(pcWebOperationLogMgo);
             }
         }
 
@@ -90,15 +90,15 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
             if (pcWebLoginLog.flag() == true) {
-                PcWebLoginLogMO pcWebLoginLogMO = new PcWebLoginLogMO();
+                PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMO.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
+                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
                 //请求成功(至少在before
-                pcWebLoginLogMO.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebLoginLogRepository.insert(pcWebLoginLogMO);
+                pcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
+                pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
     }
@@ -117,12 +117,12 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
             if (pcWebQueryLog.flag() == true) {
-                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
+                PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -130,13 +130,13 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebQueryLogMO.setException(commonResult.getErrorMsg());
+                            pcWebQueryLogMgo.setException(commonResult.getErrorMsg());
                         }
                     }
-                    pcWebQueryLogMO.setResult(JSON.toJSONString(result));
+                    pcWebQueryLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebQueryLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
-                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+                pcWebQueryLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
+                pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
             }
         }
 
@@ -144,12 +144,12 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
             PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
             if (pcWebOperationLog.flag() == true) {
-                PcWebOperationLogMO pcWebOperationLogMO = new PcWebOperationLogMO();
+                PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -157,13 +157,13 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebOperationLogMO.setException(commonResult.getErrorMsg());
+                            pcWebOperationLogMgo.setException(commonResult.getErrorMsg());
                         }
                     }
-                    pcWebOperationLogMO.setResult(JSON.toJSONString(result));
+                    pcWebOperationLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebOperationLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
-                pcWebOperationLogRepository.insert(pcWebOperationLogMO);
+                pcWebOperationLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
+                pcWebOperationLogRepository.insert(pcWebOperationLogMgo);
             }
         }
 
@@ -171,12 +171,12 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
             if (pcWebLoginLog.flag() == true) {
-                PcWebLoginLogMO pcWebLoginLogMO = new PcWebLoginLogMO();
+                PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -184,13 +184,13 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebLoginLogMO.setException(commonResult.getErrorMsg());
+                            pcWebLoginLogMgo.setException(commonResult.getErrorMsg());
                         }
                     }
-                    pcWebLoginLogMO.setResult(JSON.toJSONString(result));
+                    pcWebLoginLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebLoginLogMO.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
-                pcWebLoginLogRepository.insert(pcWebLoginLogMO);
+                pcWebLoginLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
+                pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
         //System.out.println("返回。。。afterControllerReturn");
@@ -204,19 +204,19 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
             if (pcWebQueryLog.flag() == true) {
-                PcWebQueryLogMO pcWebQueryLogMO = new PcWebQueryLogMO();
+                PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
                 //请求失败
-                pcWebQueryLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
+                pcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
-                    pcWebQueryLogMO.setException(JSON.toJSONString(exception));
+                    pcWebQueryLogMgo.setException(JSON.toJSONString(exception));
                 }
-                pcWebQueryLogRepository.insert(pcWebQueryLogMO);
+                pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
             }
         }
 
@@ -224,38 +224,38 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
             PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
             if (pcWebOperationLog.flag() == true) {
-                PcWebOperationLogMO pcWebOperationLogMO = new PcWebOperationLogMO();
+                PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
                 //请求失败
-                pcWebOperationLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
+                pcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
-                    pcWebOperationLogMO.setException(JSON.toJSONString(exception));
+                    pcWebOperationLogMgo.setException(JSON.toJSONString(exception));
                 }
-                pcWebOperationLogRepository.insert(pcWebOperationLogMO);
+                pcWebOperationLogRepository.insert(pcWebOperationLogMgo);
             }
         }
         //是否需要记录[登录]日志
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
             if (pcWebLoginLog.flag() == true) {
-                PcWebLoginLogMO pcWebLoginLogMO = new PcWebLoginLogMO();
+                PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMO.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
+                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
 
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMO, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
                 //请求失败
-                pcWebLoginLogMO.setIsSuccess(SwitchStateEnum.Close.getValue());
+                pcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
-                    pcWebLoginLogMO.setException(JSON.toJSONString(exception));
+                    pcWebLoginLogMgo.setException(JSON.toJSONString(exception));
                 }
-                pcWebLoginLogRepository.insert(pcWebLoginLogMO);
+                pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
         //System.out.println("异常。。。afterControllerThrowing");

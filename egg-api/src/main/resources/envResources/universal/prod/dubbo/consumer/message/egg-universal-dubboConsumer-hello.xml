@@ -14,6 +14,6 @@
     <!--                                    dir-end:com.egg.manager.api.services.redis.service.user                                                              -->
 
     <dubbo:reference id="emailSendRecordMService" check="false"
-                     interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMService" />
+                     interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMgoService" />
 
 </beans>

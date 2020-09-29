@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.imap.forms;
 
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormRecordFieldMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormRecordFieldMgo;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.conversion.forms.SmartFormRecordFieldConversion;
-import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.baseExtend.MyBaseMongoMapstruct;
-import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormRecordFieldMVO;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormRecordFieldMgvo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -21,11 +21,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {SmartFormRecordFieldConversion.class})
-public interface SmartFormRecordFieldMapstruct extends MyBaseMongoMapstruct<SmartFormRecordFieldMO, SmartFormRecordFieldMVO> {
+public interface SmartFormRecordFieldMapstruct extends MyBaseMongoMapstruct<SmartFormRecordFieldMgo, SmartFormRecordFieldMgvo> {
     SmartFormRecordFieldMapstruct INSTANCE = Mappers.getMapper(SmartFormRecordFieldMapstruct.class);
 
     @Mappings({
             @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMVOToMO(mvo.getFormRecord()))")
     })
-    SmartFormRecordFieldMO translateMvoToMo(SmartFormRecordFieldMVO mvo);
+    SmartFormRecordFieldMgo translateMvoToMo(SmartFormRecordFieldMgvo mvo);
 }

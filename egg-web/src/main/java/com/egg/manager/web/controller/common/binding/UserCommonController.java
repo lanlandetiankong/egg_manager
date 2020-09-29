@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.api.constants.funcModule.controllers.common.binding.UserCommonFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.binding.UserCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;

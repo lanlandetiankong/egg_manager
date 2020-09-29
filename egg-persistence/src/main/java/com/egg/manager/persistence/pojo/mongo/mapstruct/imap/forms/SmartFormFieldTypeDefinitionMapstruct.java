@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.pojo.mongo.mapstruct.imap.forms;
 
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldTypeDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldTypeDefinitionMgo;
 import com.egg.manager.persistence.pojo.mongo.mapstruct.conversion.forms.SmartFormFieldTypeDefinitionConversion;
-import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.baseExtend.MyBaseMongoMapstruct;
-import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormFieldTypeDefinitionMVO;
+import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.pojo.mongo.mvo.forms.SmartFormFieldTypeDefinitionMgvo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
@@ -20,10 +20,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {SmartFormFieldTypeDefinitionConversion.class})
-public interface SmartFormFieldTypeDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormFieldTypeDefinitionMO, SmartFormFieldTypeDefinitionMVO> {
+public interface SmartFormFieldTypeDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormFieldTypeDefinitionMgo, SmartFormFieldTypeDefinitionMgvo> {
     SmartFormFieldTypeDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormFieldTypeDefinitionMapstruct.class);
 
 
     @Mappings({})
-    SmartFormFieldTypeDefinitionMO translateMvoToMo(SmartFormFieldTypeDefinitionMVO mvo);
+    SmartFormFieldTypeDefinitionMgo translateMvoToMo(SmartFormFieldTypeDefinitionMgvo mvo);
 }

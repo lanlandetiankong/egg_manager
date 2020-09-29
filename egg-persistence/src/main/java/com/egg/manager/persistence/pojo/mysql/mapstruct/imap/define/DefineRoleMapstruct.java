@@ -3,7 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.imap.define;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.define.DefineRoleConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

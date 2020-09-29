@@ -5,7 +5,7 @@ import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementDraf
 import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
 import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.announcement.AnnouncementConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;

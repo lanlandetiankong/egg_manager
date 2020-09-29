@@ -6,7 +6,7 @@ import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsO
 import com.egg.manager.persistence.pojo.common.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserAccountDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.user.UserAccountConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;

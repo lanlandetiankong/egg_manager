@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mongo.repository.message.email;
 
-import com.egg.manager.persistence.db.mongo.mo.message.email.EmailSendRecordMO;
+import com.egg.manager.persistence.db.mongo.mo.message.email.EmailSendRecordMgo;
 import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Component
-public interface EmailSendRecordRepository extends MyBaseMongoRepository<EmailSendRecordMO, String> {
+public interface EmailSendRecordRepository extends MyBaseMongoRepository<EmailSendRecordMgo, String> {
 
 }

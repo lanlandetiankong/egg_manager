@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mongo.repository;
 
-import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMO;
+import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ import java.util.Optional;
  * \* Description:
  * \
  */
-public interface MyBaseMongoRepository<T extends MyBaseModelMO, ID> {
+public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
     /**
      * 插入一个[文档]
      *

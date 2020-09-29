@@ -1,9 +1,8 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.controllers.common.file.ExcelUploadFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.controllers.common.file.ImgUploadFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.file.ImgUploadFuncModuleConstant;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;

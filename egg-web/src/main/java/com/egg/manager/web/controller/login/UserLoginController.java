@@ -1,9 +1,8 @@
 package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.funcModule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcModule.controllers.announcement.AnnouncementFuncModuleConstant;
-import com.egg.manager.api.constants.funcModule.controllers.login.UserLoginFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.login.UserLoginFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;

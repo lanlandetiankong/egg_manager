@@ -1,12 +1,11 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.api.constants.funcModule.controllers.common.binding.PermissionCommonFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.binding.PermissionCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

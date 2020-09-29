@@ -7,45 +7,45 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.announcement                                                              -->
-    <bean id="announcementDraftService" class="com.egg.manager.baseService.services.basic.serviceimpl.announcement.AnnouncementDraftServiceImpl"/>
-    <bean id="AnnouncementService" class="com.egg.manager.baseService.services.basic.serviceimpl.announcement.AnnouncementServiceImpl"/>
-    <bean id="announcementTagService" class="com.egg.manager.baseService.services.basic.serviceimpl.announcement.AnnouncementTagServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.announcement                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.announcement                                                              -->
+    <bean id="announcementDraftService" class="com.egg.manager.baseservice.services.basic.serviceimpl.announcement.AnnouncementDraftServiceImpl"/>
+    <bean id="AnnouncementService" class="com.egg.manager.baseservice.services.basic.serviceimpl.announcement.AnnouncementServiceImpl"/>
+    <bean id="announcementTagService" class="com.egg.manager.baseservice.services.basic.serviceimpl.announcement.AnnouncementTagServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.announcement                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.define                                                              -->
-    <bean id="defineDepartmentService" class="com.egg.manager.baseService.services.basic.serviceimpl.define.DefineDepartmentServiceImpl"/>
-    <bean id="defineGroupService" class="com.egg.manager.baseService.services.basic.serviceimpl.define.DefineGroupServiceImpl"/>
-    <bean id="defineJobService" class="com.egg.manager.baseService.services.basic.serviceimpl.define.DefineJobServiceImpl"/>
-    <bean id="definePermissionService" class="com.egg.manager.baseService.services.basic.serviceimpl.define.DefinePermissionServiceImpl"/>
-    <bean id="defineRoleService" class="com.egg.manager.baseService.services.basic.serviceimpl.define.DefineRoleServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.define                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.define                                                              -->
+    <bean id="defineDepartmentService" class="com.egg.manager.baseservice.services.basic.serviceimpl.define.DefineDepartmentServiceImpl"/>
+    <bean id="defineGroupService" class="com.egg.manager.baseservice.services.basic.serviceimpl.define.DefineGroupServiceImpl"/>
+    <bean id="defineJobService" class="com.egg.manager.baseservice.services.basic.serviceimpl.define.DefineJobServiceImpl"/>
+    <bean id="definePermissionService" class="com.egg.manager.baseservice.services.basic.serviceimpl.define.DefinePermissionServiceImpl"/>
+    <bean id="defineRoleService" class="com.egg.manager.baseservice.services.basic.serviceimpl.define.DefineRoleServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.define                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.hello                                                              -->
-    <bean id="helloService" class="com.egg.manager.baseService.services.basic.serviceimpl.hello.HelloServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.hello                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.hello                                                              -->
+    <bean id="helloService" class="com.egg.manager.baseservice.services.basic.serviceimpl.hello.HelloServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.hello                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.module                                                              -->
-    <bean id="defineMenuService" class="com.egg.manager.baseService.services.basic.serviceimpl.module.DefineMenuServiceImpl"/>
-    <bean id="defineModuleService" class="com.egg.manager.baseService.services.basic.serviceimpl.module.DefineModuleServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.module                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.module                                                              -->
+    <bean id="defineMenuService" class="com.egg.manager.baseservice.services.basic.serviceimpl.module.DefineMenuServiceImpl"/>
+    <bean id="defineModuleService" class="com.egg.manager.baseservice.services.basic.serviceimpl.module.DefineModuleServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.module                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.organization                                                              -->
-    <bean id="defineTenantService" class="com.egg.manager.baseService.services.basic.serviceimpl.organization.DefineTenantServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.organization                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
+    <bean id="defineTenantService" class="com.egg.manager.baseservice.services.basic.serviceimpl.organization.DefineTenantServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.role                                                              -->
-    <bean id="roleMenuService" class="com.egg.manager.baseService.services.basic.serviceimpl.role.RoleMenuServiceImpl"/>
-    <bean id="rolePermissionService" class="com.egg.manager.baseService.services.basic.serviceimpl.role.RolePermissionServiceImpl"/>
-    <!--                                    dir-end:com.egg.manager.baseService.services.basic.serviceimpl.role                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.role                                                              -->
+    <bean id="roleMenuService" class="com.egg.manager.baseservice.services.basic.serviceimpl.role.RoleMenuServiceImpl"/>
+    <bean id="rolePermissionService" class="com.egg.manager.baseservice.services.basic.serviceimpl.role.RolePermissionServiceImpl"/>
+    <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.role                                                              -->
 
-    <!--                                    dir-start:com.egg.manager.baseService.services.basic.serviceimpl.user                                                              -->
-    <bean id="userAccountService" class="com.egg.manager.baseService.services.basic.serviceimpl.user.UserAccountServiceImpl"/>
-    <bean id="userGroupService" class="com.egg.manager.baseService.services.basic.serviceimpl.user.UserGroupServiceImpl"/>
-    <bean id="userJobService" class="com.egg.manager.baseService.services.basic.serviceimpl.user.UserJobServiceImpl"/>
-    <bean id="userRoleService" class="com.egg.manager.baseService.services.basic.serviceimpl.user.UserRoleServiceImpl"/>
-    <bean id="userTenantService" class="com.egg.manager.baseService.services.basic.serviceimpl.user.UserTenantServiceImpl"/>
-    <!--                                    dir-end:com.com.egg.manager.baseService.services.basic.serviceimpl.user                                                              -->
+    <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.user                                                              -->
+    <bean id="userAccountService" class="com.egg.manager.baseservice.services.basic.serviceimpl.user.UserAccountServiceImpl"/>
+    <bean id="userGroupService" class="com.egg.manager.baseservice.services.basic.serviceimpl.user.UserGroupServiceImpl"/>
+    <bean id="userJobService" class="com.egg.manager.baseservice.services.basic.serviceimpl.user.UserJobServiceImpl"/>
+    <bean id="userRoleService" class="com.egg.manager.baseservice.services.basic.serviceimpl.user.UserRoleServiceImpl"/>
+    <bean id="userTenantService" class="com.egg.manager.baseservice.services.basic.serviceimpl.user.UserTenantServiceImpl"/>
+    <!--                                    dir-end:com.com.egg.manager.baseservice.services.basic.serviceimpl.user                                                              -->
 
 
 

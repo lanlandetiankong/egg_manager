@@ -1,6 +1,6 @@
 package com.egg.manager.web.controller.common.component.user;
 
-import com.egg.manager.api.constants.funcModule.controllers.common.component.user.UserAccountCommonCompFuncModuleConstant;
+import com.egg.manager.api.constants.funcmodule.controllers.common.component.user.UserAccountCommonCompFuncModuleConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;

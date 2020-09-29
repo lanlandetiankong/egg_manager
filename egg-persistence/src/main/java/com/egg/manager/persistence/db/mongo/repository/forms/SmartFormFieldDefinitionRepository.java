@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mongo.repository.forms;
 
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldDefinitionMO;
+import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldDefinitionMgo;
 import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Component
-public interface SmartFormFieldDefinitionRepository extends MyBaseMongoRepository<SmartFormFieldDefinitionMO, String> {
+public interface SmartFormFieldDefinitionRepository extends MyBaseMongoRepository<SmartFormFieldDefinitionMgo, String> {
 
 
 }

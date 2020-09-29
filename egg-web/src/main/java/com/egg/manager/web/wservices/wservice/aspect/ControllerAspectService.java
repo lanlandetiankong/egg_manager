@@ -1,9 +1,9 @@
 package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMO;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMO;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMO;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
+import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 
@@ -29,32 +29,32 @@ public interface ControllerAspectService {
     JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint);
 
     /**
-     * 设置一些值到 PcWebQueryLogMO
+     * 设置一些值到 PcWebQueryLogMgo
      *
-     * @param pcWebQueryLogMO
+     * @param pcWebQueryLogMgo
      * @param joinPoint
      * @param request
      */
-    void dealSetValToQueryLog(PcWebQueryLogMO pcWebQueryLogMO, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToQueryLog(PcWebQueryLogMgo pcWebQueryLogMgo, JoinPoint joinPoint, HttpServletRequest request);
 
     /**
-     * 设置一些值到 PcWebOperationLogMO
+     * 设置一些值到 PcWebOperationLogMgo
      *
-     * @param pcWebOperationLogMO
+     * @param pcWebOperationLogMgo
      * @param joinPoint
      * @param request
      */
-    void dealSetValToOperationLog(PcWebOperationLogMO pcWebOperationLogMO, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request);
 
 
     /**
-     * 设置一些值到 PcWebLoginLogMO
+     * 设置一些值到 PcWebLoginLogMgo
      *
-     * @param pcWebLoginLogMO
+     * @param pcWebLoginLogMgo
      * @param joinPoint
      * @param request
      */
-    void dealSetValToLoginLog(PcWebLoginLogMO pcWebLoginLogMO, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToLoginLog(PcWebLoginLogMgo pcWebLoginLogMgo, JoinPoint joinPoint, HttpServletRequest request);
 
 
     /**

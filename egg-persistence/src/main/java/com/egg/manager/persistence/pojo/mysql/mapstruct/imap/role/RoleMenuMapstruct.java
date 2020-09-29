@@ -4,7 +4,7 @@ package com.egg.manager.persistence.pojo.mysql.mapstruct.imap.role;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.pojo.mysql.dto.role.RoleMenuDto;
 import com.egg.manager.persistence.pojo.mysql.mapstruct.conversion.role.RoleMenuConversion;
-import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.baseExtend.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

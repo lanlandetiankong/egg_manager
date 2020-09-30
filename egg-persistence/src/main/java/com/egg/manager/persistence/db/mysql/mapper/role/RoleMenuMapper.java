@@ -19,6 +19,7 @@ public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
      * @param roleId
      * @param menuIdList
      * @param stateVal
+     * @param loginUser
      * @return
      */
     int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("menuIdList") List<String> menuIdList, @Param("stateVal") Short stateVal

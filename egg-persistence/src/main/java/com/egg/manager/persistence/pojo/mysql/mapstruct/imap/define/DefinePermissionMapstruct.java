@@ -18,12 +18,20 @@ import org.mapstruct.factory.Mappers;
 )
 public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePermission, DefinePermissionVo, DefinePermissionDto> {
     DefinePermissionMapstruct INSTANCE = Mappers.getMapper(DefinePermissionMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({
             @Mapping(target = "ensure", expression = "java(handleSwitchStateGetShort(vo.getEnsure()))")
     })
     DefinePermission transferVoToEntity(DefinePermissionVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "ensureStr", expression = "java(handleSwitchStateGetName(entity.getEnsure()))"),
             @Mapping(target = "typeStr", expression = "java(handleDefinePermissionTypeGetLabel(entity.getType()))"),
@@ -31,7 +39,11 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefinePermissionVo transferEntityToVo(DefinePermission entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

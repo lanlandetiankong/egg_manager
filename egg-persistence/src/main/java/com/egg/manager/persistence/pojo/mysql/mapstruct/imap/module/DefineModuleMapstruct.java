@@ -18,10 +18,18 @@ import org.mapstruct.factory.Mappers;
 )
 public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule, DefineModuleVo, DefineModuleDto> {
     DefineModuleMapstruct INSTANCE = Mappers.getMapper(DefineModuleMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineModule transferVoToEntity(DefineModuleVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "typeStr", expression = "java(handleDefineModuleTypeGetLabel(entity.getType()))"),
             @Mapping(target = "iconVal", source = "icon"),
@@ -31,7 +39,11 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineModuleVo transferEntityToVo(DefineModule entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "typeStr", expression = "java(handleDefineModuleTypeGetLabel(dto.getType()))"),
             @Mapping(target = "iconVal", source = "icon"),

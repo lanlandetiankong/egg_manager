@@ -16,7 +16,11 @@ import java.util.List;
 public class AnnouncementTagTransfer extends BaseMysqlTransfer {
 
     static AnnouncementTagMapstruct announcementTagMapstruct = AnnouncementTagMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static AnnouncementTag transferVoToEntity(AnnouncementTagVo vo) {
         if (vo == null) {
             return null;
@@ -24,7 +28,11 @@ public class AnnouncementTagTransfer extends BaseMysqlTransfer {
         AnnouncementTag entity = announcementTagMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static AnnouncementTagVo transferEntityToVo(AnnouncementTag entity) {
         if (entity == null) {
             return null;
@@ -32,7 +40,11 @@ public class AnnouncementTagTransfer extends BaseMysqlTransfer {
         AnnouncementTagVo vo = announcementTagMapstruct.transferEntityToVo(entity);
         return vo;
     }
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static AnnouncementTagVo transferDtoToVo(AnnouncementTagDto dto) {
         if (dto == null) {
             return null;

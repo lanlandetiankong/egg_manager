@@ -19,12 +19,22 @@ import java.util.Map;
 )
 public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement, AnnouncementVo, AnnouncementDto> {
     AnnouncementMapstruct INSTANCE = Mappers.getMapper(AnnouncementMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
     Announcement transferVoToEntity(AnnouncementVo vo);
 
+    /**
+     * entity转vo
+     * @param entity db实体类
+     * @param announcementTagMap 公告标签Map
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))"),
@@ -34,7 +44,12 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "lastModifyer", ignore = true)
     })
     AnnouncementVo transferEntityToVo(Announcement entity, @Context Map<String, AnnouncementTag> announcementTagMap);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @param announcementTagMap
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))"),
@@ -43,9 +58,11 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
     })
     AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<String, AnnouncementTag> announcementTagMap);
 
-
-    @Mappings({
-
-    })
+    /**
+     * 公告草稿转公告(entity->entity)
+     * @param draft 公告草稿entity
+     * @return
+     */
+    @Mappings({})
     Announcement transferFromDraftEntity(AnnouncementDraft draft);
 }

@@ -27,21 +27,21 @@ public interface MyBaseMongoCommonFuncMapstruct<E extends MyBaseModelMgo, V exte
     /**
      * 表单类型定义 mvo转mo
      *
-     * @param mvo
+     * @param mgvo
      * @return
      */
-    default SmartFormTypeDefinitionMgo commonTranslateSmartFormTypeDefinitionMVOToMO(SmartFormTypeDefinitionMgvo mvo) {
-        return smartFormTypeDefinitionMapstruct.translateMvoToMo(mvo);
+    default SmartFormTypeDefinitionMgo commonTranslateSmartFormTypeDefinitionMVOToMO(SmartFormTypeDefinitionMgvo mgvo) {
+        return smartFormTypeDefinitionMapstruct.translateMgvoToMgo(mgvo);
     }
 
     /**
      * 表单记录 mvo转mo
      *
-     * @param mvo
+     * @param mgvo
      * @return
      */
-    default SmartFormRecordMgo commonTranslateSmartFormRecordMVOToMO(SmartFormRecordMgvo mvo) {
-        return smartFormRecordMapstruct.translateMvoToMo(mvo);
+    default SmartFormRecordMgo commonTranslateSmartFormRecordMVOToMO(SmartFormRecordMgvo mgvo) {
+        return smartFormRecordMapstruct.translateMgvoToMgo(mgvo);
     }
 
 

@@ -19,17 +19,29 @@ import org.mapstruct.factory.Mappers;
 public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, DefineJobVo, DefineJobDto> {
     DefineJobMapstruct INSTANCE = Mappers.getMapper(DefineJobMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineJob transferVoToEntity(DefineJobVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "typeStr", expression = "java(handleDefineJobTypeGetGetLabel(entity.getType()))"),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineJobVo transferEntityToVo(DefineJob entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

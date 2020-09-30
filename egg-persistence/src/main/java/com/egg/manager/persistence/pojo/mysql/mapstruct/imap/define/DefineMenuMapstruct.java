@@ -19,10 +19,18 @@ import org.mapstruct.factory.Mappers;
 public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, DefineMenuVo, DefineMenuDto> {
     DefineMenuMapstruct INSTANCE = Mappers.getMapper(DefineMenuMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineMenu transferVoToEntity(DefineMenuVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "urlJumpTypeStr", expression = "java(handleDefineMenuUrlJumpTypeGetLabel(entity.getUrlJumpType()))"),
             @Mapping(target = "parentMenu", ignore = true),
@@ -31,7 +39,11 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, De
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineMenuVo transferEntityToVo(DefineMenu entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "urlJumpTypeStr", expression = "java(handleDefineMenuUrlJumpTypeGetLabel(dto.getUrlJumpType()))"),
             @Mapping(target = "parentMenu", expression = "java(transferDtoToVo(dto.getParentMenuDto()))"),

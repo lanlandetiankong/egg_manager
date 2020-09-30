@@ -32,15 +32,22 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
     String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment" ;
 
 
-
+    /**
+     * 根据LoginAccountDTO查询对应的用户账号entity
+     * @param loginAccountDTO
+     * @return
+     */
     UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) ;
 
 
     /**
      * 分页查询 用户列表
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccount> paginationBean,
                                                           List<AntdvSortBean> sortBeans);
@@ -48,44 +55,55 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
     /**
      * 分页查询 用户 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
                                                              List<AntdvSortBean> sortBeans);
 
     /**
      * 用户账号-新增
+     * @param loginUser 当前登录用户
      * @param userAccountVo
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealCreate(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
 
     /**
      * 用户账号-更新
+     * @param loginUser 当前登录用户
      * @param userAccountVo
      * @param loginUser 当前登录用户
      * @param updateAll 是否更新所有字段
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealUpdate(UserAccount loginUser,UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
 
     /**
      * 用户账号-删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的用户id 集合
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
 
     /**
      * 用户账号-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的用户id
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
 
@@ -93,37 +111,45 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
 
     /**
      * 用户账号-锁定
+     * @param loginUser 当前登录用户
      * @param lockIds 要锁定的用户账号id 集合
      * @param isLock 是否锁定
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealBatchRenewLock(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception ;
     /**
      * 用户账号-锁定
+     * @param loginUser 当前登录用户
      * @param lockId 要锁定的用户账号id
      * @param isLock 是否锁定
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealRenewLock(UserAccount loginUser,String lockId,boolean isLock) throws Exception ;
 
 
     /**
      * 用户分配角色
+     * @param loginUser 当前登录用户
      * @param userAccountId 用户id
      * @param checkIds 角色id集合
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealGrantRoleToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
+     * @param loginUser 当前登录用户
      * @param userAccountId 用户id
      * @param checkIds 职务id集合
      * @param loginUser 当前登录用户
      * @throws Exception
+     * @return
      */
     Integer dealGrantJobToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
 
@@ -139,6 +165,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
 
     /**
      * 查询要导出的[用户账号] xlsModel 集合
+     * @param loginUser 当前登录用户
      * @param checkIds
      * @param wrapper
      * @return
@@ -148,6 +175,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
 
     /**
      * 查询所有已存在的 用户账号account
+     * @param loginUser 当前登录用户
      * @param state
      * @param wrapper
      * @return

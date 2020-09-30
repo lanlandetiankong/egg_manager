@@ -20,16 +20,28 @@ public interface RolePermissionMapstruct extends MyBaseMysqlMapstruct<RolePermis
 
     RolePermissionMapstruct INSTANCE = Mappers.getMapper(RolePermissionMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     RolePermission transferVoToEntity(RolePermissionVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     RolePermissionVo transferEntityToVo(RolePermission entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

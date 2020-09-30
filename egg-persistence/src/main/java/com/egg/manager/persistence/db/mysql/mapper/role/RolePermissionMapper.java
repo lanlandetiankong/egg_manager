@@ -32,6 +32,7 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
      * @param roleId
      * @param permissionIdList
      * @param stateVal
+     * @param loginUser
      * @return
      */
     int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("permissionIdList") List<String> permissionIdList, @Param("stateVal") Short stateVal

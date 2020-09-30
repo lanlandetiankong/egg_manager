@@ -5,7 +5,7 @@ import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.trait.helper.MyResponseHelper;
 import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
-import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserAccountPojoInitialize;
@@ -53,7 +53,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String authorization = httpServletRequest.getHeader("authorization");
-        String userAccountId = JWTUtil.getUserAccountId(authorization);
+        String userAccountId = JwtUtil.getUserAccountId(authorization);
         JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
         // 触发 Relam.doGetAuthenticationInfo
         getSubject(request, response).login(jwtShiroToken);
@@ -163,7 +163,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class);
         }
         //取得用户id
-        String userId = JWTUtil.getUserAccountId(token.getPrincipal().toString());
+        String userId = JwtUtil.getUserAccountId(token.getPrincipal().toString());
         UserAccount userAccount = userAccountService.getById(userId);
         if (userAccount != null) {
             request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccount));

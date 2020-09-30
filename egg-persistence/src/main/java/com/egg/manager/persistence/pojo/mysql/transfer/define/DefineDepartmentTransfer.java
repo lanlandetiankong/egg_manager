@@ -16,7 +16,11 @@ import java.util.List;
 public class DefineDepartmentTransfer extends BaseMysqlTransfer {
     static DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE;
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static DefineDepartment transferVoToEntity(DefineDepartmentVo vo) {
         if (vo == null) {
             return null;
@@ -24,7 +28,11 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
         DefineDepartment entity = defineDepartmentMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static DefineDepartmentVo transferEntityToVo(DefineDepartment entity) {
         if (entity == null) {
             return null;
@@ -33,7 +41,11 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static DefineDepartmentVo transferDtoToVo(DefineDepartmentDto dto) {
         if (dto == null) {
             return null;

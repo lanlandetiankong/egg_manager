@@ -3,7 +3,7 @@ package com.egg.manager.web.config.shiro;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.common.base.constant.Constant;
-import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -50,7 +50,7 @@ public class MyShiroRelam extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //当前登录用户id
         String authorization = principalCollection.toString();
-        String userAccountId = JWTUtil.getUserAccountId(principalCollection.toString());
+        String userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
         if (userAccountRedisService == null) {
             this.userAccountRedisService = SpringContextBeanUtil.getBean(UserAccountRedisService.class);
         }
@@ -72,16 +72,11 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        if (Constant.isPass) {
-            //暂不
-            //return new SimpleAuthenticationInfo(token, token, this.getName());
-        }
-        // 解密获得username，用于和数据库进行对比
-        String userAccountId = JWTUtil.getUserAccountId(token);
+        String userAccountId = JwtUtil.getUserAccountId(token);
         if (userAccountId == null) {
             throw new UnauthorizedException("token invalid");
         }
-        if (!JWTUtil.verify(token, userAccountId)) {
+        if (!JwtUtil.verify(token, userAccountId)) {
             throw new UnauthorizedException("JWT:账号信息不匹配！");
         }
         return new SimpleAuthenticationInfo(token, token, this.getName());

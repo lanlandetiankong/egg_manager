@@ -15,7 +15,7 @@ import javax.jms.Queue;
 import javax.jms.Topic;
 
 @Configuration
-public class ActiveMQConfigBean {
+public class ActiveMqConfigBean {
 
     @Value("${spring.activemq.broker-url}")
     private String brokerUrl;

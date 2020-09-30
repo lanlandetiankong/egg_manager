@@ -19,16 +19,28 @@ import org.mapstruct.factory.Mappers;
 public interface DefineGroupMapstruct extends MyBaseMysqlMapstruct<DefineGroup, DefineGroupVo, DefineGroupDto> {
     DefineGroupMapstruct INSTANCE = Mappers.getMapper(DefineGroupMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineGroup transferVoToEntity(DefineGroupVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineGroupVo transferEntityToVo(DefineGroup entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

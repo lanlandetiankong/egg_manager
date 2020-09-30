@@ -69,7 +69,6 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
             String fileName = null;
             for (EmailSendFileInfoMgvo sendFileInfoMVO : emailSendRecordMgvo.getAccessoryInfoList()) {
                 fileName = MimeUtility.encodeText(sendFileInfoMVO.getFileName(), "GB2312", "B");
-                //TODO helper.addAttachment(fileName, file);
             }
         } catch (Exception e) {
             e.printStackTrace();

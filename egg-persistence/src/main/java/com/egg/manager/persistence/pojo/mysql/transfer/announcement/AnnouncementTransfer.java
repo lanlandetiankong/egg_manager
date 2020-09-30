@@ -23,7 +23,11 @@ import java.util.Map;
 @Named("announcementTransfer")
 public class AnnouncementTransfer extends BaseMysqlTransfer {
     static AnnouncementMapstruct announcementMapstruct = AnnouncementMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static Announcement transferVoToEntity(AnnouncementVo vo) {
         if (vo == null) {
             return null;
@@ -33,8 +37,8 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
     }
 
     /**
+     * entity转vo
      * @param entity
-     * @param announcementTagMap
      * @return
      */
     public static AnnouncementVo transferEntityToVo(Announcement entity, Map<String, AnnouncementTag> announcementTagMap) {
@@ -79,7 +83,11 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         }
     }
 
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static AnnouncementVo transferDtoToVo(AnnouncementDto dto, Map<String, AnnouncementTag> announcementTagMap) {
         if (dto == null) {
             return null;

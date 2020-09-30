@@ -18,17 +18,29 @@ import org.mapstruct.factory.Mappers;
 public interface DefineDepartmentMapstruct extends MyBaseMysqlMapstruct<DefineDepartment, DefineDepartmentVo, DefineDepartmentDto> {
     DefineDepartmentMapstruct INSTANCE = Mappers.getMapper(DefineDepartmentMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineDepartment transferVoToEntity(DefineDepartmentVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "parentDepartment", ignore = true),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineDepartmentVo transferEntityToVo(DefineDepartment entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "parentDepartment", expression = "java(transferDtoToVo(dto.getParentDepartment()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),

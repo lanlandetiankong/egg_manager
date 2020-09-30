@@ -101,6 +101,10 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
         return (StringUtils.isBlank(content)) ? defaultValue : MyStringUtil.htmlDomToText(content, null);
     }
 
+    /**
+     * 取得当前时间
+     * @return
+     */
     default Date handleGetNowDate() {
         return new Date();
     }

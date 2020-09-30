@@ -13,80 +13,125 @@ public interface RedisHelper<HK,T> {
 
     /**
      * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
+     * @param key
+     * @param hashKey
+     * @param domain
      */
     void hashPut(String key, HK hashKey, T domain);
 
     /**
-     * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
-     * 可设置过期时间
+     * Hash结构 添加元素(可设置过期时间)
+     * @param key
+     * @param hashKey
+     * @param domain
+     * @param timeout
+     * @return
      */
     boolean hashTtlPut(String key, HK hashKey,T domain,Long timeout);
 
     /**
-     * Hash结构 获取指定key所有键值对 * @param key * @return
+     * Hash结构 获取指定key所有键值对
+     * @param key
+     * @return
      */
     Map<HK, T> hashFindAll(String key);
 
     /**
-     * Hash结构 获取单个元素 * @param key * @param hashKey * @return
+     * Hash结构 获取单个元素
+     * @param key
+     * @param hashKey
+     * @return
      */
     T hashGet(String key, HK hashKey);
 
+    /**
+     * hashmap移除key
+     * @param key
+     * @param hashKey
+     */
     void hashRemove(String key, HK hashKey);
 
     /**
-     * List结构 向尾部(Right)添加元素 * @param key * @param domain * @return
+     * List结构 向尾部(Right)添加元素
+     * @param key
+     * @param domain
+     * @return
      */
     Long listPush(String key, T domain);
 
     /**
-     * List结构 向头部(Left)添加元素 * @param key * @param domain * @return
+     * List结构 向头部(Left)添加元素
+     * @param key 键
+     * @param domain 实体类
+     * @return
      */
     Long listUnshift(String key, T domain);
 
     /**
      * List结构 获取所有元素 * @param key * @return
      */
+    /**
+     * 根据key找到集合
+     * @param key 键
+     * @return List<T>
+     */
     List<T> listFindAll(String key);
 
     /**
      * List结构 移除并获取数组第一个元素 * @param key * @return
      */
+    /**
+     * List集合出栈
+     * @param key 键
+     * @return T
+     */
     T listLPop(String key);
 
     /**
      * 对象的实体类
-     * @param key
-     * @param domain
-     * @return
+     * @param key 键
+     * @param domain 实体类
+     * @return void
      */
     void valuePut(String key, T domain);
 
     /**
      * 有时限的 对象的实体类
-     * @param key
-     * @param domain
-     * @param timeout
-     * @param timeUnit
+     * @param key 键
+     * @param domain 实体类
+     * @param timeout 过期时间
+     * @param timeUnit 时间单位
      * @return
      */
     boolean valuePut(String key, T domain, long timeout, TimeUnit timeUnit) ;
 
     /**
      * 获取对象实体类
-     * @param key
+     * @param key 键
      * @return
      */
     T getValue(String key);
 
+    /**
+     * 根据key移除
+     * @param key 键
+     */
     void remove(String key);
 
     /**
-     * 设置过期时间 * @param key 键 * @param timeout 时间 * @param timeUnit 时间单位
+     * 设置过期时间
+     * @param key 键
+     * @param timeout 时间
+     * @param timeUnit 时间单位
+     * @return
      */
     boolean expirse(String key, long timeout, TimeUnit timeUnit);
 
-
+    /**
+     * 判断key是否存在
+     * @param key
+     * @return
+     */
     boolean isExistKey(String key);
 
 }

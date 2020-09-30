@@ -253,7 +253,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public List<T> findAll(Query query, Sort sort) {
         query = query != null ? query : new Query();
-        //Document sortObject = query.getSortObject();
         if (sort != null) {
             query.with(sort);
         }

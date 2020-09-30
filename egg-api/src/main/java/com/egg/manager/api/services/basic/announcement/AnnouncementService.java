@@ -31,23 +31,30 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
 
     /**
      * 新增公告
+     * @param loginUser 当前登录用户
      * @param announcementVo
      * @throws Exception
+     * @return
      */
     Integer dealCreate(UserAccount loginUser,AnnouncementVo announcementVo) throws Exception;
 
     /**
      * 公告草稿发布
+     * @param loginUser 当前登录用户
      * @param announcementDraftVo
      * @throws Exception
+     * @return
      */
     Integer dealCreateFromDraft(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 分页查询 公告 列表
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
@@ -55,23 +62,30 @@ public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlS
     /**
      * 分页查询 公告 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**
      * 公告-删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的公告id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
     /**
      * 公告-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的公告id
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 }

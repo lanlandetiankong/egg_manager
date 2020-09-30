@@ -29,12 +29,12 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
 
     /**
-     * [分页搜索查询] - 用户
-     *
+     * 分页搜索查询
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
-     * @param sortBeans
+     * @param queryTenantFieldBeanList
+     * @param queryDepartmentFieldBeanList
      * @return
      */
     List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
@@ -67,6 +67,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * 批量伪删除 指定用户的所有角色关联
      *
      * @param userAccountId
+     * @param loginUser
      * @return
      */
     int clearAllRoleByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);
@@ -75,6 +76,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * 批量伪删除 指定用户的所有职务关联
      *
      * @param userAccountId
+     * @param loginUser
      * @return
      */
     int clearAllJobByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);

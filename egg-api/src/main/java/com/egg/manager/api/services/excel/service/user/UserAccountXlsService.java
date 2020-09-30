@@ -18,10 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface UserAccountXlsService extends MyXlsBaseService {
 
+    /**
+     * 根据模板导出已选数据文件
+     * @param loginUser 当前登录用户
+     * @param response
+     * @param defineMenu
+     * @param fileUploadBean
+     * @param checkIds
+     * @throws Exception
+     */
     void dealCheckExportSingleWithTemplate2Web(UserAccount loginUser, HttpServletResponse response, DefineMenu defineMenu, AntdFileUploadBean fileUploadBean, String[] checkIds) throws Exception;
 
     /**
      * 导出所有 用户账号 到excel
+     * @param loginUser 当前登录用户
      * @param response
      * @param defineMenu
      * @param fileUploadBean

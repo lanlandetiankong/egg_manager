@@ -26,7 +26,11 @@ import org.mapstruct.factory.Mappers;
 public interface PcWebOperationLogMapstruct extends MyBaseMongoMapstruct<PcWebOperationLogMgo, PcWebOperationLogMgvo> {
 
     PcWebOperationLogMapstruct INSTANCE = Mappers.getMapper(PcWebOperationLogMapstruct.class);
-
+    /**
+     * mgvo转mgo
+     * @param mgvo
+     * @return
+     */
     @Mappings({})
-    PcWebQueryLogMgo translateMvoToMo(PcWebQueryLogMgvo mvo);
+    PcWebQueryLogMgo translateMgvoToMgo(PcWebQueryLogMgvo mgvo);
 }

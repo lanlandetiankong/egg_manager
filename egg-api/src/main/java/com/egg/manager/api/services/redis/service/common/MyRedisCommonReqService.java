@@ -12,6 +12,14 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
  */
 public interface MyRedisCommonReqService {
 
+    /**
+     * redis缓存刷新
+     * @param loginUser
+     * @param key
+     * @param hashKey
+     * @param userAccountId
+     * @param keyTtl
+     */
     void dealRedisListCacheRefresh(UserAccount loginUser,String key, String hashKey, String userAccountId, Long keyTtl);
 
 }

@@ -16,7 +16,11 @@ import java.util.List;
 public class RoleMenuTransfer extends BaseMysqlTransfer {
 
     static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
         if (vo == null) {
             return null;
@@ -25,7 +29,11 @@ public class RoleMenuTransfer extends BaseMysqlTransfer {
         return entity;
     }
 
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static RoleMenuVo transferEntityToVo(RoleMenu entity) {
         if (entity == null) {
             return null;
@@ -34,7 +42,11 @@ public class RoleMenuTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static RoleMenuVo transferDtoToVo(RoleMenuDto dto) {
         if (dto == null) {
             return null;

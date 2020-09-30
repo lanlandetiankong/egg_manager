@@ -23,9 +23,13 @@ import org.mapstruct.factory.Mappers;
         uses = {SmartFormRecordFieldConversion.class})
 public interface SmartFormRecordFieldMapstruct extends MyBaseMongoMapstruct<SmartFormRecordFieldMgo, SmartFormRecordFieldMgvo> {
     SmartFormRecordFieldMapstruct INSTANCE = Mappers.getMapper(SmartFormRecordFieldMapstruct.class);
-
+    /**
+     * mgvo转mgo
+     * @param mgvo
+     * @return
+     */
     @Mappings({
-            @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMVOToMO(mvo.getFormRecord()))")
+            @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMVOToMO(mgvo.getFormRecord()))")
     })
-    SmartFormRecordFieldMgo translateMvoToMo(SmartFormRecordFieldMgvo mvo);
+    SmartFormRecordFieldMgo translateMgvoToMgo(SmartFormRecordFieldMgvo mgvo);
 }

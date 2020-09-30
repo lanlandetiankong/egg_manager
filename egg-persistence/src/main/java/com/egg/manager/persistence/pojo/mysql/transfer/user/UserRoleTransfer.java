@@ -16,7 +16,11 @@ import java.util.List;
 public class UserRoleTransfer extends BaseMysqlTransfer {
 
     static UserRoleMapstruct userRoleMapstruct = UserRoleMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static UserRole transferVoToEntity(UserRoleVo vo) {
         if (vo == null) {
             return null;
@@ -25,7 +29,11 @@ public class UserRoleTransfer extends BaseMysqlTransfer {
         return entity;
     }
 
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static UserRoleVo transferEntityToVo(UserRole entity) {
         if (entity == null) {
             return null;
@@ -34,7 +42,11 @@ public class UserRoleTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static UserRoleVo transferDtoToVo(UserRoleDto dto) {
         if (dto == null) {
             return null;

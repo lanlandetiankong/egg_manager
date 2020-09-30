@@ -19,16 +19,29 @@ import org.mapstruct.factory.Mappers;
 public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMenuVo, RoleMenuDto> {
     RoleMenuMapstruct INSTANCE = Mappers.getMapper(RoleMenuMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     RoleMenu transferVoToEntity(RoleMenuVo vo);
 
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     RoleMenuVo transferEntityToVo(RoleMenu entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

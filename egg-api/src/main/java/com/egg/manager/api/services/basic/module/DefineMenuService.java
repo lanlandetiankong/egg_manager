@@ -84,9 +84,12 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
 
     /**
      * 分页查询 菜单定义 列表
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenu> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
@@ -94,45 +97,57 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
     /**
      * 分页查询 菜单定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
     /**
      * 菜单定义-新增
+     * @param loginUser 当前登录用户
      * @param defineMenuVo
      * @throws Exception
+     * @return
      */
     Integer dealCreate(UserAccount loginUser,DefineMenuVo defineMenuVo) throws Exception ;
 
     /**
      * 菜单定义-更新
+     * @param loginUser 当前登录用户
      * @param defineMenuVo
      * @param updateAll 是否更新所有字段
      * @throws Exception
+     * @return
      */
     Integer dealUpdate(UserAccount loginUser,DefineMenuVo defineMenuVo, boolean updateAll) throws Exception ;
 
     /**
      * 菜单定义-批量删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的菜单id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 菜单定义-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的菜单id
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
      * 验证 数据库 中的唯一冲突
+     * @param loginUser 当前登录用户
      * @param defineMenuVo
      * @param defineMenuWrapper
      * @return

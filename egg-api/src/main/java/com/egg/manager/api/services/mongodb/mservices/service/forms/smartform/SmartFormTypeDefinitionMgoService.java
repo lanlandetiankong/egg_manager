@@ -15,6 +15,8 @@ public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<Smar
     /**
      * 数据转枚举select
      * @param result
+     * @param list
+     * @return
      */
     MyCommonResult<SmartFormTypeDefinitionMgo> dealResultListToEnums(MyCommonResult<SmartFormTypeDefinitionMgo> result, List<SmartFormTypeDefinitionMgo> list);
 }

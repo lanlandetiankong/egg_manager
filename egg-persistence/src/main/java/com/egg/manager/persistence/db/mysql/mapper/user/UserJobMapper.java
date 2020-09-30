@@ -64,6 +64,7 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
      * @param userAccountId
      * @param jobIdList
      * @param stateVal
+     * @param loginUser
      * @return
      */
     int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("jobIdList") List<String> jobIdList, @Param("stateVal") Short stateVal,

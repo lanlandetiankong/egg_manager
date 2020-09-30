@@ -19,17 +19,29 @@ import org.mapstruct.factory.Mappers;
 public interface DefineTenantMapstruct extends MyBaseMysqlMapstruct<DefineTenant, DefineTenantVo, DefineTenantDto> {
 
     DefineTenantMapstruct INSTANCE = Mappers.getMapper(DefineTenantMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     DefineTenant transferVoToEntity(DefineTenantVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "typeStr", ignore = true),
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineTenantVo transferEntityToVo(DefineTenant entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

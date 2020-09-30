@@ -16,7 +16,7 @@ import java.util.Date;
  * @author zhouchengjie
  */
 @Component
-public class JWTUtil {
+public class JwtUtil {
 
     /**
      * 默认过期时间1

@@ -16,6 +16,7 @@ public interface LoginAccountMapstruct {
     LoginAccountMapstruct INSTANCE = Mappers.getMapper(LoginAccountMapstruct.class);
 
     /**
+     * vo转dto
      * @param loginAccountVo
      * @return
      */

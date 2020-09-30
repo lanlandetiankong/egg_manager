@@ -107,7 +107,7 @@ public class EmailSendRecordController extends BaseController {
         Integer addCount = 0;
         try {
             Assert.notNull(emailSendRecordMgvo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMvoToMo(emailSendRecordMgvo);
+            EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMgvoToMgo(emailSendRecordMgvo);
             EmailSendRecordMgo newMO = emailSendRecordMgoService.doInsert(loginUser, emailSendRecordMgo);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);

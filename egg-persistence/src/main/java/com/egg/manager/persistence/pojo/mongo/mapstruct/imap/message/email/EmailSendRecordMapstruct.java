@@ -24,9 +24,13 @@ import org.springframework.mail.SimpleMailMessage;
 public interface EmailSendRecordMapstruct extends MyBaseMongoMapstruct<EmailSendRecordMgo, EmailSendRecordMgvo> {
     EmailSendRecordMapstruct INSTANCE = Mappers.getMapper(EmailSendRecordMapstruct.class);
 
-
+    /**
+     * mgvo转mgo
+     * @param mgvo
+     * @return
+     */
     @Mappings({})
-    EmailSendRecordMgo translateMvoToMo(EmailSendRecordMgvo mvo);
+    EmailSendRecordMgo translateMgvoToMgo(EmailSendRecordMgvo mgvo);
 
 
     /**

@@ -17,12 +17,21 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
 
     AnnouncementDraftMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftMapstruct.class);
 
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
     AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo);
 
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(entity.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(entity.getContent(),\"\"))"),
@@ -34,6 +43,11 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
     @InheritConfiguration(name = "defaultConfigVoToDto")
     AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity);
 
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdJsonStringToList(dto.getTagIds()))"),
             @Mapping(target = "shortContent", expression = "java(handleHtmlDomToText(dto.getContent(),\"\"))"),

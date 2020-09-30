@@ -16,7 +16,11 @@ import java.util.List;
 @Named("defineMenuTransfer")
 public class DefineMenuTransfer extends BaseMysqlTransfer {
     static DefineMenuMapstruct defineMenuMapstruct = DefineMenuMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static DefineMenu transferVoToEntity(DefineMenuVo vo) {
         if (vo == null) {
             return null;
@@ -24,7 +28,11 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
         DefineMenu entity = defineMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static DefineMenuVo transferEntityToVo(DefineMenu entity) {
         if (entity == null) {
             return null;
@@ -35,7 +43,11 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static DefineMenuVo transferDtoToVo(DefineMenuDto dto) {
         if (dto == null) {
             return null;

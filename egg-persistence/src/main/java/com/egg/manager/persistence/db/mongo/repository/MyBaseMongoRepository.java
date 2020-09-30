@@ -94,6 +94,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      *
      * @param ids   要更新的文档ids
      * @param state 修改值
+     * @param user 用户
      * @return
      */
     <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);

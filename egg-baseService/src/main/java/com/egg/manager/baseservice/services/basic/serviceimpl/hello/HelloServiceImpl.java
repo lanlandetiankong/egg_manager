@@ -32,8 +32,6 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public String sayHello() {
-        //userAccountService.selectPage(null);
-
         myBaseEmailMgoService.sendSimpleEmail(EmailSendRecordMgvo.builder().content("测试").build());
         return "ok";
     }

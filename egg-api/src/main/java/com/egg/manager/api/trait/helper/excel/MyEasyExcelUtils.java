@@ -54,18 +54,8 @@ public class MyEasyExcelUtils {
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码
         response.setHeader("Content-disposition", "attachment;filename=" + outFileFullName);
-       /* ExcelWriter excelWriter = EasyExcel.write(outFileFullName,clazz).withTemplate(templatePath).build();
-        WriteSheet writeSheet = EasyExcel.writerSheet(sheetName).build();
-        excelWriter.write(data, writeSheet);
-        excelWriter.finish();*/
-
         // 这里 会填充到第一个sheet， 然后文件流会自动关闭
        EasyExcel.write(response.getOutputStream(),clazz).withTemplate(templatePath).sheet().doFill(data);
-
-
-        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        //EasyExcel.write(outFileFullName).withTemplate(templatePath).sheet().doFill(data);
-
     }
 
 

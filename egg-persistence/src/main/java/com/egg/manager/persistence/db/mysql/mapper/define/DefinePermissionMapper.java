@@ -53,6 +53,7 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
      * 删除指定角色id下的所有权限
      *
      * @param roleId
+     * @param loginUser
      * @return
      */
     int clearAllPermissionByRoleId(@Param("roleId") String roleId, @Param("loginUser") UserAccount loginUser);

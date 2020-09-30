@@ -71,9 +71,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToQueryLog(PcWebQueryLogMgo pcWebQueryLogMgo, JoinPoint joinPoint, HttpServletRequest request) {
         try {
-            if (StringUtils.isBlank(pcWebQueryLogMgo.getFid())) {
-                //pcWebQueryLogMgo.setFid(MyUUIDUtil.renderSimpleUuid());
-            }
             if (pcWebQueryLogMgo.getStatus() == null) {
                 pcWebQueryLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
@@ -139,9 +136,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request) {
         try {
-            if (StringUtils.isBlank(pcWebOperationLogMgo.getFid())) {
-                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUuid());
-            }
             if (pcWebOperationLogMgo.getStatus() == null) {
                 pcWebOperationLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
@@ -206,9 +200,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToLoginLog(PcWebLoginLogMgo pcWebLoginLogMgo, JoinPoint joinPoint, HttpServletRequest request) {
         try {
-            if (StringUtils.isBlank(pcWebLoginLogMgo.getFid())) {
-                //pcWebQueryLogMO.setFid(MyUUIDUtil.renderSimpleUuid());
-            }
             if (pcWebLoginLogMgo.getStatus() == null) {
                 pcWebLoginLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }

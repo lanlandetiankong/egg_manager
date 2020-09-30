@@ -16,7 +16,11 @@ import java.util.List;
 public class DefineModuleTransfer extends BaseMysqlTransfer {
 
     static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static DefineModule transferVoToEntity(DefineModuleVo vo) {
         if (vo == null) {
             return null;
@@ -24,7 +28,11 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
         DefineModule entity = defineModuleMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static DefineModuleVo transferEntityToVo(DefineModule entity) {
         if (entity == null) {
             return null;
@@ -32,7 +40,11 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
         DefineModuleVo vo = defineModuleMapstruct.transferEntityToVo(entity);
         return vo;
     }
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static DefineModuleVo transferDtoToVo(DefineModuleDto dto) {
         if (dto == null) {
             return null;

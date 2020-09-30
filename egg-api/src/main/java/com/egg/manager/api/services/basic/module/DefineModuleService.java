@@ -27,9 +27,12 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
 
     /**
      * 分页查询 模块
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModule> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
@@ -37,38 +40,49 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
     /**
      * 分页查询 模块 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
     /**
      * 模块定义-新增
+     * @param loginUser 当前登录用户
      * @param defineModuleVo
      * @throws Exception
+     * @return
      */
     Integer dealCreate(UserAccount loginUser,DefineModuleVo defineModuleVo) throws Exception ;
 
     /**
      * 模块定义-更新
+     * @param loginUser 当前登录用户
      * @param defineModuleVo
      * @param updateAll 是否更新所有字段
      * @throws Exception
+     * @return
      */
     Integer dealUpdate(UserAccount loginUser,DefineModuleVo defineModuleVo,boolean updateAll) throws Exception ;
 
     /**
      * 模块定义-批量删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的模块id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 模块定义-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的模块id
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 }

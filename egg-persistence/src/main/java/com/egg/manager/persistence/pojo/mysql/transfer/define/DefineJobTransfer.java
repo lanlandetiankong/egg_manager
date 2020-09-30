@@ -15,7 +15,11 @@ import java.util.List;
 @Named("defineJobTransfer")
 public class DefineJobTransfer extends BaseMysqlTransfer {
     static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static DefineJob transferVoToEntity(DefineJobVo vo) {
         if (vo == null) {
             return null;
@@ -23,7 +27,11 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
         DefineJob entity = defineJobMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static DefineJobVo transferEntityToVo(DefineJob entity) {
         if (entity == null) {
             return null;
@@ -31,7 +39,11 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
         DefineJobVo vo = defineJobMapstruct.transferEntityToVo(entity);
         return vo;
     }
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static DefineJobVo transferDtoToVo(DefineJobDto dto) {
         if (dto == null) {
             return null;

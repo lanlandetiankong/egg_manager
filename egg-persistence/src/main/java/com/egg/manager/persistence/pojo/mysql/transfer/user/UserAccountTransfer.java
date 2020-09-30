@@ -21,7 +21,11 @@ import java.util.Set;
 public class UserAccountTransfer extends BaseMysqlTransfer {
 
     static UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static UserAccount transferVoToEntity(UserAccountVo vo) {
         if (vo == null) {
             return null;
@@ -29,7 +33,11 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         UserAccount entity = userAccountMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static UserAccountVo transferEntityToVo(UserAccount entity) {
         if (entity == null) {
             return null;
@@ -37,7 +45,11 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
         return vo;
     }
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static UserAccountVo transferDtoToVo(UserAccountDto dto) {
         if (dto == null) {
             return null;

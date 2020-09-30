@@ -27,7 +27,7 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
         extends IService<T> {
     /**
      * 取得前端传递的分页配置
-     *
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
@@ -37,14 +37,18 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                           List<AntdvSortBean> sortBeans);
 
-
+    /**
+     * 将条件封装类集合设置到QueryWrapper
+     * @param queryWrapper
+     * @param queryFieldBeanList
+     */
     void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList);
 
 
     /**
      * 更新Entity之前调用
      *
-     * @param loginUser
+     * @param loginUser 当前登录用户
      * @param t
      * @param uuidFlag
      * @return
@@ -54,7 +58,7 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     /**
      * 更新Entity之前调用
      *
-     * @param loginUser
+     * @param loginUser 当前登录用户
      * @param t
      * @return
      */
@@ -64,7 +68,7 @@ public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>,
     /**
      * 根据id删除(删除前调用)
      *
-     * @param loginUser
+     * @param loginUser 当前登录用户
      * @param tClass
      * @param idVal
      * @return

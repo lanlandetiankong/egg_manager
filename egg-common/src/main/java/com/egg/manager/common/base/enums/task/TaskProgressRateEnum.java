@@ -74,7 +74,7 @@ public enum TaskProgressRateEnum {
         if(isException == true){
             return TaskProgressRateEnum.EXCEPTION ;
         }
-        if(rate == MAX_RATE) {
+        if(MAX_RATE.equals(rate)) {
             return TaskProgressRateEnum.SUCCESS ;
         }   else {
             return TaskProgressRateEnum.DEFAULT ;

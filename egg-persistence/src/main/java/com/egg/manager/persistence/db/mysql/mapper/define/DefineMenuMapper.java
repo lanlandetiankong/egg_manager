@@ -33,16 +33,16 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     /**
      * 取得角色拥有的所有[菜单]集合
-     *
      * @param roleId
+     * @param state
      * @return
      */
     List<DefineMenu> findAllMenuByRoleId(@Param("roleId") String roleId, @Param("stateVal") Short state);
 
     /**
      * 取得角色拥有的所有[菜单]集合(忽略 有子节点的菜单节点)
-     *
      * @param roleId
+     * @param state
      * @return
      */
     List<DefineMenu> findAllMenuByRoleIdFilterParentNode(@Param("roleId") String roleId, @Param("stateVal") Short state);

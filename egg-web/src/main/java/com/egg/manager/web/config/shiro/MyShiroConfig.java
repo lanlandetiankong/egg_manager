@@ -68,11 +68,6 @@ public class MyShiroConfig {
         filterRuleMap.put("/druid/**", "anon");
         //放行webSocket
         filterRuleMap.put("/websocket/*", "anon");
-        //放行swagger
-       /* filterRuleMap.put("/swagger-ui.html", "anon");
-        filterRuleMap.put("/swagger-resources", "anon");
-        filterRuleMap.put("/v2/api-docs", "anon");
-        filterRuleMap.put("/webjars/springfox-swagger-ui/**", "anon");*/
         //放行swagger & swagger-bootstrap-ui
         filterRuleMap.put("/swagger-resources", "anon");
         filterRuleMap.put("/v2/api-docs", "anon");
@@ -81,7 +76,6 @@ public class MyShiroConfig {
         filterRuleMap.put("/webjars/**", "anon");
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/user/login/byAccountForm", "anon");
-        //filterRuleMap.put("/**", "anon");
         filterRuleMap.put("/**", "jwt");
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         filterFactoryBean.setFilters(filterMap);

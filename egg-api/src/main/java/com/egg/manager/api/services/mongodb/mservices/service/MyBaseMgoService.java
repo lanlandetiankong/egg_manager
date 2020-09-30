@@ -125,8 +125,8 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 删除所有(禁用)
-     *
      * @param loginUser 当前登录用户(必要)
+     * @throws MyMongoException
      */
     @Deprecated
     void doDeleteAll(@NotNull UserAccount loginUser) throws MyMongoException;
@@ -198,6 +198,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
     MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean);
     /**
      * 根据封装的MongoQueryBean进行分页查询
+     * @param loginUser 当前登录用户
      * @param queryBuffer
      * @return
      */

@@ -23,7 +23,11 @@ import org.mapstruct.factory.Mappers;
 public interface SmartFormFieldTypeDefinitionMapstruct extends MyBaseMongoMapstruct<SmartFormFieldTypeDefinitionMgo, SmartFormFieldTypeDefinitionMgvo> {
     SmartFormFieldTypeDefinitionMapstruct INSTANCE = Mappers.getMapper(SmartFormFieldTypeDefinitionMapstruct.class);
 
-
+    /**
+     * mgvo转mgo
+     * @param mgvo
+     * @return
+     */
     @Mappings({})
-    SmartFormFieldTypeDefinitionMgo translateMvoToMo(SmartFormFieldTypeDefinitionMgvo mvo);
+    SmartFormFieldTypeDefinitionMgo translateMgvoToMgo(SmartFormFieldTypeDefinitionMgvo mgvo);
 }

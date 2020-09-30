@@ -69,6 +69,7 @@ public interface DefineTenantMapper extends BaseMapper<DefineTenant> {
     /**
      * 删除指定租户id下的所有管理员
      * @param tenantId
+     * @param loginUser
      * @return
      */
     int clearAllManagerByTenantId(@Param("tenantId") String tenantId, @Param("loginUser") UserAccount loginUser);

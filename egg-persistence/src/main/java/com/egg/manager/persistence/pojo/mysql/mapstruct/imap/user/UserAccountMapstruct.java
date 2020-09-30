@@ -18,10 +18,18 @@ import org.mapstruct.factory.Mappers;
 public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, UserAccountVo, UserAccountDto> {
 
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     UserAccount transferVoToEntity(UserAccountVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
             @Mapping(target = "uploadImgBean", ignore = true),
@@ -33,7 +41,11 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserAccountVo transferEntityToVo(UserAccount entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(dto.getUserType()))"),
             @Mapping(target = "belongTenant", expression = "java(commonTranslateDefineTenantDtoToVo(dto.getBelongTenant()))"),
@@ -43,6 +55,11 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
     })
     UserAccountVo transferDtoToVo(UserAccountDto dto);
 
+    /**
+     * entity转excel导出模型类
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "userTypeStr", expression = "java(handleUserTypeGetStr(entity.getUserType()))"),
             @Mapping(target = "sexStr", expression = "java(handleUserSexGetName(entity.getSex()))"),
@@ -50,6 +67,12 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
     })
     UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity);
 
+    /**
+     * excel导入模型类转entity
+     * @param xlsInModel
+     * @param loginUser
+     * @return
+     */
     @Mappings({
             @Mapping(target = "sex", expression = "java(handleUserSexGetValue(xlsInModel.getSexStr()))"),
             @Mapping(target = "userType", expression = "java(handleGetUserAccountDefaultUserType())"),

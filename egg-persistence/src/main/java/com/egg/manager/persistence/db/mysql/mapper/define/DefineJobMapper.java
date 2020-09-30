@@ -43,6 +43,9 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
 
     /**
      * 批量 伪删除
+     * @param delIds
+     * @param loginUser
+     * @return
      */
     int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
 

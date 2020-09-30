@@ -63,6 +63,7 @@ public interface UserDepartmentMapper extends BaseMapper<UserDepartment> {
      * @param userAccountId
      * @param departmentIdList
      * @param stateVal
+     * @param loginUser
      * @return
      */
     int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("departmentIdList") List<String> departmentIdList, @Param("stateVal") Short stateVal

@@ -58,7 +58,6 @@ public class GenerationSequenceUtil {
         return generateUUID(null);
     }
     public static void main(String[] args) {
-//        System.out.println(GenerationSequenceUtil.SnowflakeIdWorker.getNextValue());
         System.out.println(generateUUID("menu"));
     }
 

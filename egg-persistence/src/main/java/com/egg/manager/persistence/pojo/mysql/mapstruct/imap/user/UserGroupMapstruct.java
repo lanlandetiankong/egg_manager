@@ -18,16 +18,28 @@ import org.mapstruct.factory.Mappers;
 )
 public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup, UserGroupVo, UserGroupDto> {
     UserGroupMapstruct INSTANCE = Mappers.getMapper(UserGroupMapstruct.class);
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     @Mappings({})
     UserGroup transferVoToEntity(UserGroupVo vo);
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserGroupVo transferEntityToVo(UserGroup entity);
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     @Mappings({
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")

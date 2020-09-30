@@ -7,7 +7,7 @@ import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.util.jwt.JWTUtil;
+import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
@@ -81,7 +81,7 @@ public class UserLoginController extends BaseController {
                 //用户登录信息验证成功，在shiro进行一些登录处理
                 //添加用户认证信息
                 Subject subject = SecurityUtils.getSubject();
-                String authorization = JWTUtil.sign(userAccount.getFid());
+                String authorization = JwtUtil.sign(userAccount.getFid());
                 JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
                 //进行验证，这里可以捕获异常，然后返回对应信息
                 subject.login(jwtShiroToken);

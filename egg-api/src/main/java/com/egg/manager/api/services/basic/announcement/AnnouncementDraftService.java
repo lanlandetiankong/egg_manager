@@ -28,55 +28,71 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>,My
 
     /**
      * 新增公告草稿
+     * @param loginUser 当前登录用户
      * @param announcementDraftVo
      * @throws Exception
+     * @return Integer
      */
     Integer dealCreate(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 更新公告草稿
+     * @param loginUser 当前登录用户
      * @param announcementDraftVo
      * @throws Exception
+     * @return Integer
      */
     Integer dealUpdate(UserAccount loginUser,AnnouncementDraftVo announcementDraftVo) throws Exception ;
 
     /**
      * 分页查询 公告草稿 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return MyCommonResult<AnnouncementDraftVo>
      */
     MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                                                          List<AntdvSortBean> sortBeans);
 
     /**
      * 公告草稿-删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的公告草稿id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
 
     /**
      * 公告草稿-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的公告草稿id
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
      * 公告草稿-发布
+     * @param loginUser 当前登录用户
      * @param draftIds 要发布的公告草稿id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchPublishByDraft(UserAccount loginUser,String[] draftIds) throws Exception;
 
     /**
      * 公告草稿-发布
+     * @param loginUser 当前登录用户
      * @param draftId 要发布的公告草稿id
+     * @param insertFlag
      * @throws Exception
+     * @return
      */
     Integer dealPublishByDraft(UserAccount loginUser,String draftId,boolean insertFlag) throws Exception ;
 

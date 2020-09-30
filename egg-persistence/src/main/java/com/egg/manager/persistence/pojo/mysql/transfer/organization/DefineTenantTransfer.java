@@ -15,7 +15,11 @@ import java.util.List;
 @Named("defineTenantTransfer")
 public class DefineTenantTransfer extends BaseMysqlTransfer {
     static DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
-
+    /**
+     * vo转entity
+     * @param vo
+     * @return
+     */
     public static DefineTenant transferVoToEntity(DefineTenantVo vo) {
         if (vo == null) {
             return null;
@@ -23,7 +27,11 @@ public class DefineTenantTransfer extends BaseMysqlTransfer {
         DefineTenant entity = defineTenantMapstruct.transferVoToEntity(vo);
         return entity;
     }
-
+    /**
+     * entity转vo
+     * @param entity
+     * @return
+     */
     public static DefineTenantVo transferEntityToVo(DefineTenant entity) {
         if (entity == null) {
             return null;
@@ -31,7 +39,11 @@ public class DefineTenantTransfer extends BaseMysqlTransfer {
         DefineTenantVo vo = defineTenantMapstruct.transferEntityToVo(entity);
         return vo;
     }
-
+    /**
+     * dto转vo
+     * @param dto
+     * @return
+     */
     public static DefineTenantVo transferDtoToVo(DefineTenantDto dto) {
         if (dto == null) {
             return null;

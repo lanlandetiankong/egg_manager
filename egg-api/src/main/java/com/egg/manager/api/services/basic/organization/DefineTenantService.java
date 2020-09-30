@@ -30,54 +30,69 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
     /**
      * 分页查询 租户
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
+     * @param sortBeans
+     * @return
      */
     MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
                                                                List<AntdvSortBean> sortBeans);
 
     /**
      * 租户定义-新增
+     * @param loginUser 当前登录用户
      * @param defineTenantVo
      * @throws Exception
+     * @return
      */
     Integer dealCreate(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception ;
 
     /**
      * 租户定义-更新
+     * @param loginUser 当前登录用户
      * @param defineTenantVo
      * @param updateAll 是否更新所有字段
      * @throws Exception
+     * @return
      */
     Integer dealUpdate(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception ;
 
     /**
      * 租户定义-批量删除
+     * @param loginUser 当前登录用户
      * @param delIds 要删除的租户id 集合
      * @throws Exception
+     * @return
      */
     Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception;
 
     /**
      * 租户定义-删除
+     * @param loginUser 当前登录用户
      * @param delId 要删除的租户id
      * @throws Exception
+     * @return
      */
     Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception;
 
 
     /**
      * 取得的结果 转为 枚举类型
+     * @param loginUser 当前登录用户
      * @param result
+     * @return
      */
     MyCommonResult dealResultListToEnums(UserAccount loginUser,MyCommonResult result);
 
     /**
      * 租户设置管理员
+     * @param loginUser 当前登录用户
      * @param tenantId   租户id
      * @param checkIds 要设置的管理员id
      * @throws Exception
+     * @return
      */
     Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception;
 }

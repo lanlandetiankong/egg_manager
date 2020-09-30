@@ -113,7 +113,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/addAnnouncementDraft")
     public MyCommonResult doAddAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -122,7 +122,7 @@ public class AnnouncementDraftController extends BaseController {
             addCount = announcementDraftService.dealCreate(loginUser, announcementDraftVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -132,7 +132,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/updateAnnouncementDraft")
     public MyCommonResult doUpdateAnnouncementDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.UPDATE_OPER);
         Integer updateCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -141,7 +141,7 @@ public class AnnouncementDraftController extends BaseController {
             updateCount = announcementDraftService.dealUpdate(loginUser, announcementDraftVo);
             result.setCount(updateCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementDraftFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

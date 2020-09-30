@@ -23,8 +23,8 @@ public class MyControllerAdviserFuncModuleConstant extends EggBaseFuncModuleName
 
         public static String BATCH_PUBLISH = doBatchPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String PUBLISH = doPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
-        public static String CREATE = doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
-        public static String UPDATE = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String CREATE_OPER= doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE_OPER = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String UPDATE_STATE = doUpdateState(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String GRANT_OPER = doGrantOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String SETTING_OPER = doSettingOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
@@ -45,8 +45,8 @@ public class MyControllerAdviserFuncModuleConstant extends EggBaseFuncModuleName
 
         public static String BATCH_PUBLISH = doBatchPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String PUBLISH = doPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
-        public static String CREATE = doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
-        public static String UPDATE = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String CREATE_OPER= doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE_OPER = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String UPDATE_STATE = doUpdateState(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String GRANT_OPER = doGrantOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String SETTING_OPER = doSettingOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);

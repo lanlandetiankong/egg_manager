@@ -125,14 +125,14 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/doAddDefineTenant")
     @PostMapping(value = "/doAddDefineTenant")
     public MyCommonResult doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -142,14 +142,14 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/doUpdateDefineTenant")
     @PostMapping(value = "/doUpdateDefineTenant")
     public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

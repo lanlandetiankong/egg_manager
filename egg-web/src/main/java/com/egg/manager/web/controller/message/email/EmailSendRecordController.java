@@ -103,7 +103,7 @@ public class EmailSendRecordController extends BaseController {
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                                          EmailSendRecordMgvo emailSendRecordMgvo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(emailSendRecordMgvo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -112,7 +112,7 @@ public class EmailSendRecordController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }

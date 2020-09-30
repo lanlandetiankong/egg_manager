@@ -79,15 +79,15 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
 
     public final static int DEFAULT_PAGE = 0 ;
     public final static int DEFAULT_SIZE = 10 ;
-    public final static String PARAMETER_paginationObj = "paginationObj" ;
-    public final static String PARAMETER_queryObj = "queryObj" ;
-    public final static String PARAMETER_sortObj = "sortObj" ;
+    public final static String PARAMETER_PAGINATION_OBJ = "paginationObj" ;
+    public final static String PARAMETER_QUERY_OBJ = "queryObj" ;
+    public final static String PARAMETER_SORT_OBJ = "sortObj" ;
     public static final String ORDER_ASC = "ascend";
     public static final String ORDER_DESC = "descend";
 
 
-    public static final String MOFIELD_createTime = "createTime";
-    public static final String MOFIELD_orderNum = "orderNum";
+    public static final String MOFIELD_CREATE_TIME = "createTime";
+    public static final String MOFIELD_ORDER_NUM = "orderNum";
 
 
 
@@ -123,7 +123,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         boolean isWhiteList =  Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag());
         Set<String> enableFields = (Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag())) ? enableFields = queryBuffer.getBlackQueryFieldSets() : queryBuffer.getWhiteQueryFieldSets();
         List<Criteria> criterias = new ArrayList<>() ;
-        String queryJson = request.getParameter(PARAMETER_queryObj);
+        String queryJson = request.getParameter(PARAMETER_QUERY_OBJ);
         if(StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)){
             return criterias ;
         }   else {
@@ -181,7 +181,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @return
      */
     public static MyMongoQueryPageBean getPageBeanFromRequest(HttpServletRequest request){
-        String paginationJson = request.getParameter(PARAMETER_paginationObj) ;
+        String paginationJson = request.getParameter(PARAMETER_PAGINATION_OBJ) ;
         MyMongoQueryPageBean paginationBean = null;
         if (StringUtils.isNotBlank(paginationJson)) {
             paginationBean = JSONObject.parseObject(paginationJson, MyMongoQueryPageBean.class);
@@ -244,7 +244,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @return
      */
     public static List<MyMongoSortBean> getSortBeansFromRequest(HttpServletRequest request) {
-        String sortObj = request.getParameter(PARAMETER_sortObj);
+        String sortObj = request.getParameter(PARAMETER_SORT_OBJ);
         List<MyMongoSortBean> sortBeans = new ArrayList<>();
         if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
             MyMongoSortBean antdvSortBean = JSONObject.parseObject(sortObj, MyMongoSortBean.class);

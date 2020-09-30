@@ -46,7 +46,7 @@ public class ExcelUploadController extends BaseController {
     @ApiOperation(value = "上传Excel模板", notes = "上传Excel模板", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.uploadExcel);
+        MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.UPLOAD_EXCEL);
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
@@ -85,7 +85,7 @@ public class ExcelUploadController extends BaseController {
             }
             result.setFileUploaderBeanList(uploadBeanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,ExcelUploadFuncModuleConstant.Failure.uploadExcel);
+            this.dealCommonErrorCatch(log, result, e,ExcelUploadFuncModuleConstant.Failure.UPLOAD_EXCEL);
         }
         return result;
     }

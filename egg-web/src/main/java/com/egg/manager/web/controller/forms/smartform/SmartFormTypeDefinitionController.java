@@ -149,7 +149,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.UPDATE_OPER);
         Integer count = 0;
         try {
             Assert.notNull(formTypeDefinitionMO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -162,7 +162,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             }
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

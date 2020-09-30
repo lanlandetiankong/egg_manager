@@ -15,9 +15,9 @@ import java.util.*;
  */
 public class MyDateUtil {
 
-    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>();
+    private static final ThreadLocal<SimpleDateFormat> THREAD_LOCAL = new ThreadLocal<SimpleDateFormat>();
 
-    private static final Object object = new Object();
+    private static final Object OBJECT = new Object();
 
     /**
      * 获取SimpleDateFormat
@@ -30,14 +30,14 @@ public class MyDateUtil {
      */
     private static SimpleDateFormat getDateFormat(String pattern)
             throws RuntimeException {
-        SimpleDateFormat dateFormat = threadLocal.get();
+        SimpleDateFormat dateFormat = THREAD_LOCAL.get();
         if (dateFormat == null) {
-            threadLocal.remove();
-            synchronized (object) {
+            THREAD_LOCAL.remove();
+            synchronized (OBJECT) {
                 if (dateFormat == null) {
                     dateFormat = new SimpleDateFormat(pattern);
                     dateFormat.setLenient(false);
-                    threadLocal.set(dateFormat);
+                    THREAD_LOCAL.set(dateFormat);
                 }
             }
         }

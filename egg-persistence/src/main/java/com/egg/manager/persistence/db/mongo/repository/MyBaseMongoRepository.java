@@ -74,10 +74,9 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      *
      * @param query  过滤要筛选的
      * @param update 更新后的值
-     * @param <S>
      * @return
      */
-    long batchUpdate(Query query, Update UPDATE);
+    long batchUpdate(Query query, Update update);
 
     /**
      * 更新[文档]的Status

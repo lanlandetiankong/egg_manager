@@ -99,14 +99,14 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "新增模块定义", description = "表单方式新增模块定义", fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
     public MyCommonResult doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -116,14 +116,14 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "更新模块定义", description = "表单方式更新模块定义", fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

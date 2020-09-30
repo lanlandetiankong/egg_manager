@@ -26,8 +26,8 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
+    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
+    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
 
     /**
      * 判断值 是否为 启用

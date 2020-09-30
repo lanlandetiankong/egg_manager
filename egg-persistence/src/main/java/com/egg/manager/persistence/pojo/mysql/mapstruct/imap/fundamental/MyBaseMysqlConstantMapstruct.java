@@ -20,8 +20,8 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlConstantMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
+    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
+    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
 
     /**
      * 用户账号 默认 用户类型

@@ -35,9 +35,9 @@ import java.util.List;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
-    DefineDepartmentMapstruct defineDepartmentMapstruct = DefineDepartmentMapstruct.INSTANCE;
+    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
+    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
+    DefineDepartmentMapstruct DEFINE_DEPARTMENT_MAPSTRUCT = DefineDepartmentMapstruct.INSTANCE;
 
 
     /**
@@ -119,7 +119,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
+        UserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
         return vo;
     }
 
@@ -133,7 +133,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
+        UserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
         return vo;
     }
 
@@ -144,7 +144,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @return
      */
     default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenant entity) {
-        return defineTenantMapstruct.transferEntityToVo(entity);
+        return DEFINE_TENANT_MAPSTRUCT.transferEntityToVo(entity);
     }
 
     /**
@@ -154,7 +154,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @return
      */
     default DefineTenantVo commonTranslateDefineTenantDtoToVo(DefineTenantDto dto) {
-        return defineTenantMapstruct.transferDtoToVo(dto);
+        return DEFINE_TENANT_MAPSTRUCT.transferDtoToVo(dto);
     }
 
     /**
@@ -164,6 +164,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @return
      */
     default DefineDepartmentVo commonTranslateDefineDepartmentDtoToVo(DefineDepartmentDto dto) {
-        return defineDepartmentMapstruct.transferDtoToVo(dto);
+        return DEFINE_DEPARTMENT_MAPSTRUCT.transferDtoToVo(dto);
     }
 }

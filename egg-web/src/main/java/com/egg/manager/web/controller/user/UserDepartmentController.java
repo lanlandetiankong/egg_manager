@@ -99,14 +99,14 @@ public class UserDepartmentController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与部门关联] ", description = "表单方式新增 [用户与部门关联] ", fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
     public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -119,14 +119,14 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserDepartmentByIds")
     public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.UPDATE_OPER);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

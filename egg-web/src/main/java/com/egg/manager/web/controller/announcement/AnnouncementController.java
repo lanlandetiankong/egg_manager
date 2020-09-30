@@ -146,14 +146,14 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/addAnnouncement")
     public MyCommonResult doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = announcementService.dealCreate(loginUser, announcementVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }

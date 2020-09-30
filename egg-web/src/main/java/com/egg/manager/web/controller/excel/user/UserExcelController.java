@@ -61,7 +61,7 @@ public class UserExcelController extends BaseController {
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelExportCheck);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_EXPORT_CHECK);
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -71,7 +71,7 @@ public class UserExcelController extends BaseController {
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean, checkIds);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelExportCheck);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
             this.respResultJsonToFront(log, response, result);
         }
     }
@@ -79,7 +79,7 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelExportCheck);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_EXPORT_CHECK);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
@@ -88,7 +88,7 @@ public class UserExcelController extends BaseController {
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelExportCheck);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
             this.respResultJsonToFront(log, response, result);
         }
     }
@@ -99,7 +99,7 @@ public class UserExcelController extends BaseController {
     @ResponseBody
     public MyCommonResult dealImportData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.excelImportData);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_IMPORT_DATA);
         try {
             Assert.notEmpty(fileArr,BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
@@ -111,7 +111,7 @@ public class UserExcelController extends BaseController {
                         .doRead();
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.excelImportData);
+            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_IMPORT_DATA);
         }
         return result;
     }

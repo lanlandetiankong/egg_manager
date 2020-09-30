@@ -178,7 +178,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "新增用户", description = "表单方式新增用户", fullPath = "/user/user_account/doAddUserAccount")
     @PostMapping(value = "/doAddUserAccount")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
@@ -186,7 +186,7 @@ public class UserAccountController extends BaseController {
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -196,7 +196,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(action = "更新用户信息", description = "表单方式更新用户信息", fullPath = "/user/user_account/doUpdateUserAccount")
     @PostMapping(value = "/doUpdateUserAccount")
     public MyCommonResult doUpdateUserAccount(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
@@ -204,7 +204,7 @@ public class UserAccountController extends BaseController {
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

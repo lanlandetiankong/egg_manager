@@ -126,14 +126,14 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/doAddDefineJob")
     @PostMapping(value = "/doAddDefineJob")
     public MyCommonResult doAddDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -143,14 +143,14 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/doUpdateDefineJob")
     @PostMapping(value = "/doUpdateDefineJob")
     public MyCommonResult doUpdateDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

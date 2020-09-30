@@ -128,7 +128,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "新增权限定义", description = "表单方式新增权限定义", fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
     public MyCommonResult doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -136,7 +136,7 @@ public class DefinePermissionController extends BaseController {
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -146,14 +146,14 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "更新权限定义", description = "表单方式更新权限定义", fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

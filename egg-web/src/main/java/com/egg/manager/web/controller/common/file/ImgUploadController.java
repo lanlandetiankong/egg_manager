@@ -45,7 +45,7 @@ public class ImgUploadController extends BaseController {
     @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.uploadImg);
+        MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.UPLOAD_IMG);
         try {
             Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Assert.isFalse(file.isEmpty(),BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
@@ -82,7 +82,7 @@ public class ImgUploadController extends BaseController {
                 throw e;
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,ImgUploadFuncModuleConstant.Failure.uploadImg);
+            this.dealCommonErrorCatch(log, result, e,ImgUploadFuncModuleConstant.Failure.UPLOAD_IMG);
         }
         return result;
     }

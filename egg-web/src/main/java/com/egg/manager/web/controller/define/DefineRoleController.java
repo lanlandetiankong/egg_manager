@@ -179,14 +179,14 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
     public MyCommonResult doAddDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -195,7 +195,7 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
     public MyCommonResult doUpdateDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -203,7 +203,7 @@ public class DefineRoleController extends BaseController {
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

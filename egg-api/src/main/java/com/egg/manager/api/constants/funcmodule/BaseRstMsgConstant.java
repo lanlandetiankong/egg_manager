@@ -7,17 +7,17 @@ package com.egg.manager.api.constants.funcmodule;
  * @Date: 2020/9/25 9:23
  */
 public class BaseRstMsgConstant {
-    public final static String actionSuccessMsg = "操作成功!";
-    public final static String actionFailMsg = "操作失败!";
-    private final static String nullLoginAccount = "账号不存在!";
-    private final static String emptyLoginAccount = "账号不能为空!";
-    private final static String emptyLoginPassword = "密码不能为空!";
-    private final static String notMatchaccountPassword = "账号密码不匹配!";
-    private final static String emptyForm = "提交的form为空!";
-    private final static String unknowId = "未知id!";
-    private final static String unknowIdCollection = "未知id集合!";
-    private final static String userIsLoingOut = "用户未登录!";
-    private final static String emptyUploadFile = "上传的文件为空!";
+    public final static String ACTION_SUCCESS_MSG = "操作成功!";
+    public final static String ACTION_FAIL_MSG = "操作失败!";
+    private final static String NULL_LOGIN_ACCOUNT = "账号不存在!";
+    private final static String EMPTY_LOGIN_ACCOUNT = "账号不能为空!";
+    private final static String EMPTY_LOGIN_PASSWORD = "密码不能为空!";
+    private final static String NOT_MATCH_ACCOUNT_PASSWORD= "账号密码不匹配!";
+    private final static String EMPTY_FORM= "提交的form为空!";
+    private final static String UNKNOW_ID= "未知id!";
+    private final static String UNKNOW_ID_COLLECTION= "未知id集合!";
+    private final static String USER_IS_LOGIN_OUT= "用户未登录!";
+    private final static String EMPTY_UPLOAD_FILE = "上传的文件为空!";
 
 
     /**
@@ -25,45 +25,39 @@ public class BaseRstMsgConstant {
      */
     public static class ErrorMsg {
         public static String nullLoginAccount(){
-            return nullLoginAccount + actionFailMsg;
+            return NULL_LOGIN_ACCOUNT + ACTION_FAIL_MSG;
         }
 
         public static String emptyLoginAccount(){
-            return emptyLoginAccount + actionFailMsg;
+            return EMPTY_LOGIN_ACCOUNT + ACTION_FAIL_MSG;
         }
 
         public static String emptyLoginPassword(){
-            return emptyLoginPassword + actionFailMsg;
+            return EMPTY_LOGIN_PASSWORD + ACTION_FAIL_MSG;
         }
 
         public static String emptyForm(){
-            return emptyForm + actionFailMsg;
+            return EMPTY_FORM+ ACTION_FAIL_MSG;
         }
         public static String unknowId(){
-            return unknowId + actionFailMsg;
+            return UNKNOW_ID+ ACTION_FAIL_MSG;
         }
         public static String unknowIdCollection(){
-            return unknowIdCollection + actionFailMsg;
+            return UNKNOW_ID_COLLECTION+ ACTION_FAIL_MSG;
         }
         public static String userIsLoingOut(){
-            return userIsLoingOut + actionFailMsg;
+            return USER_IS_LOGIN_OUT+ ACTION_FAIL_MSG;
         }
         public static String emptyUploadFile(){
-            return emptyUploadFile + actionFailMsg;
+            return EMPTY_UPLOAD_FILE + ACTION_FAIL_MSG;
         }
         public static String notMatchaccountPassword(){
-            return notMatchaccountPassword + actionFailMsg;
+            return NOT_MATCH_ACCOUNT_PASSWORD+ ACTION_FAIL_MSG;
         }
-
-
     }
 
 
     public static class SuccessMsg {
-        public static String QUERY_LIST(){
-            return nullLoginAccount + actionFailMsg;
-        }
-
 
     }
 

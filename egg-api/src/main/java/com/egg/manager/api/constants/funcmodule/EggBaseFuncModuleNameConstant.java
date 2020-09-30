@@ -38,8 +38,8 @@ public class EggBaseFuncModuleNameConstant {
     protected final static String userTenant = "用户<->租户关联" ;
 
 
-    protected final static String uploadExcel = "excel上传" ;
-    protected final static String uploadImg = "图片上传" ;
+    protected final static String UPLOAD_EXCEL = "excel上传" ;
+    protected final static String UPLOAD_IMG = "图片上传" ;
     protected final static String userAccountCommonComp = "用户账号(通用组件)" ;
 
     protected final static String commonBinding = "通用<接口>" ;
@@ -60,7 +60,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -70,7 +70,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -81,7 +81,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -92,7 +92,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -103,7 +103,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -114,18 +114,18 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
 
     protected static final String doQueryEnumList(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.doQueryOneById + funcModuleName + EggFuncActionNameConstant.Suffix.doQueryOneById;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_ONE_BY_ID + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_ONE_BY_ID;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -134,22 +134,22 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doCreate(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.create + funcModuleName + EggFuncActionNameConstant.Suffix.create;
+        String msg = EggFuncActionNameConstant.Prefix.CREATE_OPER+ funcModuleName + EggFuncActionNameConstant.Suffix.CREATE_OPER;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
 
     protected static final String doUpdate(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg =  EggFuncActionNameConstant.Prefix.update + funcModuleName + EggFuncActionNameConstant.Suffix.update;
+        String msg =  EggFuncActionNameConstant.Prefix.UPDATE_OPER + funcModuleName + EggFuncActionNameConstant.Suffix.UPDATE_OPER;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -160,7 +160,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -171,7 +171,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -182,7 +182,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -193,7 +193,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -204,7 +204,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -215,7 +215,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -225,7 +225,7 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
@@ -236,60 +236,60 @@ public class EggBaseFuncModuleNameConstant {
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
     protected static final String doUploadExcel(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.uploadExcel + funcModuleName + EggFuncActionNameConstant.Suffix.uploadExcel;
+        String msg = EggFuncActionNameConstant.Prefix.UPLOAD_EXCEL + funcModuleName + EggFuncActionNameConstant.Suffix.UPLOAD_EXCEL;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
 
     protected static final String doExcelExportCheck(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.excelExportCheck + funcModuleName + EggFuncActionNameConstant.Suffix.excelExportCheck;
+        String msg = EggFuncActionNameConstant.Prefix.EXCEL_EXPORT_CHECK + funcModuleName + EggFuncActionNameConstant.Suffix.EXCEL_EXPORT_CHECK;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
 
     protected static final String doExcelExportAll(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.excelExportAll + funcModuleName + EggFuncActionNameConstant.Suffix.excelExportAll;
+        String msg = EggFuncActionNameConstant.Prefix.EXCEL_EXPORT_ALL + funcModuleName + EggFuncActionNameConstant.Suffix.EXCEL_EXPORT_ALL;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
 
     protected static final String doExcelImportData(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.excelImportData + funcModuleName + EggFuncActionNameConstant.Suffix.excelImportData;
+        String msg = EggFuncActionNameConstant.Prefix.EXCEL_IMPORT_DATA + funcModuleName + EggFuncActionNameConstant.Suffix.EXCEL_IMPORT_DATA;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }
     protected static final String doUploadImg(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.uploadImg + funcModuleName + EggFuncActionNameConstant.Suffix.uploadImg;
+        String msg = EggFuncActionNameConstant.Prefix.UPLOAD_IMG + funcModuleName + EggFuncActionNameConstant.Suffix.UPLOAD_IMG;
         if(isSuccess == null){
             return msg ;
         }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.actionSuccessMsg : BaseRstMsgConstant.actionFailMsg ;
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
             return msg ;
         }
     }

@@ -134,7 +134,7 @@ public class SmartFormDefinitionController extends BaseController {
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                              @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                                              SmartFormDefinitionMgvo formDefinitionMVO) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -148,7 +148,7 @@ public class SmartFormDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -160,7 +160,7 @@ public class SmartFormDefinitionController extends BaseController {
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                 @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                                                 SmartFormDefinitionMgvo formDefinitionMVO) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.UPDATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(formDefinitionMVO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -174,7 +174,7 @@ public class SmartFormDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,SmartFormDefinitionFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

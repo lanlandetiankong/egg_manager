@@ -123,7 +123,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -131,7 +131,7 @@ public class AnnouncementTagController extends BaseController {
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -142,7 +142,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -150,7 +150,7 @@ public class AnnouncementTagController extends BaseController {
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

@@ -100,14 +100,14 @@ public class UserTenantController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与租户关联] ", description = "表单方式新增 [用户与租户关联] ", fullPath = "/user/user_tenant/doAddUserTenant")
     @PostMapping(value = "/doAddUserTenant")
     public MyCommonResult doAddUserTenant(HttpServletRequest request, UserTenantVo userTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }

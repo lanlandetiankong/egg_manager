@@ -178,7 +178,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(action = "新增菜单定义", description = "表单方式新增菜单定义", fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
     public MyCommonResult doAddDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -186,7 +186,7 @@ public class DefineMenuController extends BaseController {
             addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -196,7 +196,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(action = "更新菜单定义", description = "表单方式更新菜单定义", fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
     public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -204,7 +204,7 @@ public class DefineMenuController extends BaseController {
             changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }
@@ -215,7 +215,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/doUpdateExcelModel")
     @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE_OPER);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -230,7 +230,7 @@ public class DefineMenuController extends BaseController {
             Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

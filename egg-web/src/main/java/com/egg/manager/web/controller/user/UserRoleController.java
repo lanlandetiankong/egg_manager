@@ -100,14 +100,14 @@ public class UserRoleController extends BaseController {
     @PcWebOperationLog(action = "新增用户角色", description = "表单方式新增用户角色", fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(userRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -120,14 +120,14 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.UPDATE_OPER);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userRoleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

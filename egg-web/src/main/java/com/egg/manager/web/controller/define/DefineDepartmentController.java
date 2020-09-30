@@ -140,7 +140,7 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/doAddDefineDepartment")
     public MyCommonResult doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.CREATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -148,7 +148,7 @@ public class DefineDepartmentController extends BaseController {
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.CREATE);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
@@ -159,14 +159,14 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.UPDATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.UPDATE);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }

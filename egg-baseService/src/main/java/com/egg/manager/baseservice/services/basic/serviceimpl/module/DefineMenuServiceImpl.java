@@ -47,8 +47,6 @@ import java.util.*;
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineMenuService.class)
 public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapper, DefineMenu, DefineMenuVo> implements DefineMenuService {
-    @Autowired
-    private DefineMenuTransfer defineMenuTransfer;
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -190,7 +188,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
         List<DefineMenu> defineMenus = iPage.getRecords();
-        result.setResultList(defineMenuTransfer.transferEntityToVoList(defineMenus));
+        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenus));
         return result;
     }
 
@@ -201,7 +199,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(defineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
     }
 
@@ -215,7 +213,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
-        DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         defineMenu = super.doBeforeCreate(loginUser, defineMenu, true);
         String parentId = defineMenu.getParentId();
         //
@@ -253,7 +251,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
-        DefineMenu defineMenu = defineMenuTransfer.transferVoToEntity(defineMenuVo);
+        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         defineMenu = super.doBeforeUpdate(loginUser, defineMenu);
         String parentId = defineMenu.getParentId();
         if (StringUtils.isNotBlank(parentId)) {

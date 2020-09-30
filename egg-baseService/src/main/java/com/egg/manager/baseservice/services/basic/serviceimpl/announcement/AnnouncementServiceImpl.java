@@ -48,8 +48,6 @@ import java.util.Map;
 @Service(interfaceClass = AnnouncementService.class)
 public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper, Announcement, AnnouncementVo>
         implements AnnouncementService {
-    @Autowired
-    private AnnouncementTransfer announcementTransfer ;
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -109,7 +107,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         //公告草稿id
         String draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = announcementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
+        Announcement announcement = AnnouncementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
         announcement.setFid(MyUUIDUtil.renderSimpleUuid());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);

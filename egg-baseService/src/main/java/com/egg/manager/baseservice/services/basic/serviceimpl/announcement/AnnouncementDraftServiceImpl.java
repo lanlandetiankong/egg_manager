@@ -44,8 +44,6 @@ import java.util.Map;
 @Service(interfaceClass = AnnouncementDraftService.class)
 public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementDraftMapper, AnnouncementDraft, AnnouncementDraftVo>
         implements AnnouncementDraftService {
-    @Autowired
-    private AnnouncementTransfer announcementTransfer ;
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -135,7 +133,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     @Override
     public Integer dealPublishByDraft(UserAccount loginUser, String draftId, boolean insertFlag) throws Exception {
         AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
-        Announcement announcement = announcementTransfer.transferFromDraft(loginUser, announcementDraft);
+        Announcement announcement = AnnouncementTransfer.transferFromDraft(loginUser, announcementDraft);
         if (announcement != null && insertFlag == true) {
             //发布
             announcementMapper.insert(announcement);

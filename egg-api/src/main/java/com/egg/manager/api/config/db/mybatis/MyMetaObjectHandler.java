@@ -1,4 +1,4 @@
-package com.egg.manager.api.config.db;
+package com.egg.manager.api.config.db.mybatis;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.egg.manager.persistence.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;

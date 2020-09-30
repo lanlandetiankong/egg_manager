@@ -1,5 +1,6 @@
-package com.egg.manager.api.config.db;
+package com.egg.manager.api.config.db.mybatis;
 
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -17,5 +18,14 @@ public class MybatisPlusConfig {
     @Bean
     public Page paginationInterceptor() {
         return new Page();
+    }
+
+    /**
+     * 支持乐观锁
+     * @return
+     */
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
     }
 }

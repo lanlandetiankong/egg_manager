@@ -46,4 +46,8 @@ public class MyBaseMysqlDto implements Serializable {
      * 最后更新人-vo
      */
     private UserAccount lastModifyer;
+    /**
+     * 版本号
+     */
+    private Integer version ;
 }

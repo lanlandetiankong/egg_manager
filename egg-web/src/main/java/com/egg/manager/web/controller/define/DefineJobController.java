@@ -63,7 +63,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobs")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -74,7 +74,7 @@ public class DefineJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -90,7 +90,7 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/getAllDefineJobDtos")
     public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -101,7 +101,7 @@ public class DefineJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -111,12 +111,12 @@ public class DefineJobController extends BaseController {
     @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/getDefineJobById")
     @PostMapping(value = "/getDefineJobById")
     public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -126,14 +126,14 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/doAddDefineJob")
     @PostMapping(value = "/doAddDefineJob")
     public MyCommonResult doAddDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -143,14 +143,14 @@ public class DefineJobController extends BaseController {
     @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/doUpdateDefineJob")
     @PostMapping(value = "/doUpdateDefineJob")
     public MyCommonResult doUpdateDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -163,7 +163,7 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineJobByIds")
     public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -171,7 +171,7 @@ public class DefineJobController extends BaseController {
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -184,14 +184,14 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineJobById")
     public MyCommonResult doDelOneDefineJobById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

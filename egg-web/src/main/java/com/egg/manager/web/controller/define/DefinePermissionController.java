@@ -66,7 +66,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/getAllDefinePermissions")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissions(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class, DefinePermissionFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class, DefinePermissionFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -78,7 +78,7 @@ public class DefinePermissionController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -92,7 +92,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/getAllDefinePermissionDtos")
     public MyCommonResult<DefinePermissionVo> doGetAllDefinePermissionDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class,DefinePermissionFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class,DefinePermissionFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -103,7 +103,7 @@ public class DefinePermissionController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -113,12 +113,12 @@ public class DefinePermissionController extends BaseController {
     @PcWebQueryLog(action = "查询权限定义信息", description = "根据权限定义id查询权限定义信息", fullPath = "/define/define_permission/getDefinePermissionById")
     @PostMapping(value = "/getDefinePermissionById")
     public MyCommonResult<DefinePermissionVo> doGetDefinePermissionById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class,DefinePermissionFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class,DefinePermissionFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
             result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -128,7 +128,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "新增权限定义", description = "表单方式新增权限定义", fullPath = "/define/define_permission/doAddDefinePermission")
     @PostMapping(value = "/doAddDefinePermission")
     public MyCommonResult doAddDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -136,7 +136,7 @@ public class DefinePermissionController extends BaseController {
             addCount = definePermissionService.dealCreate(loginUser, definePermissionVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -146,14 +146,14 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(action = "更新权限定义", description = "表单方式更新权限定义", fullPath = "/define/define_permission/doUpdateDefinePermission")
     @PostMapping(value = "/doUpdateDefinePermission")
     public MyCommonResult doUpdateDefinePermission(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -166,14 +166,14 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchEnsureDefinePermissionByIds")
     public MyCommonResult doBatchEnsureDefinePermissionById(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.batchEnsure);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.BATCH_ENSURE);
         Integer delCount = 0;
         try {
             Assert.notEmpty(ensureIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = definePermissionService.dealBatchEnsure(loginUser, ensureIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.batchEnsure);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.BATCH_ENSURE);
         }
         return result;
     }
@@ -186,7 +186,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/delOneDefinePermissionByIds")
     public MyCommonResult doDelOneDefinePermissionByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -197,7 +197,7 @@ public class DefinePermissionController extends BaseController {
                 throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
@@ -208,7 +208,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefinePermissionByIds")
     public MyCommonResult doBatchDeleteDefinePermissionById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -219,7 +219,7 @@ public class DefinePermissionController extends BaseController {
             }
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }

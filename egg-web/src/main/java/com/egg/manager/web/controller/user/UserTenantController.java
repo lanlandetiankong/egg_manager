@@ -63,7 +63,7 @@ public class UserTenantController extends BaseController {
     @PostMapping(value = "/getAllUserTenants")
     public MyCommonResult<UserTenantVo> doGetAllUserTenants(HttpServletRequest request,
                                                             String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -74,7 +74,7 @@ public class UserTenantController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userTenantService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -84,13 +84,13 @@ public class UserTenantController extends BaseController {
     @PcWebQueryLog(action = "查询 [用户与租户关联] 信息", description = "根据 [用户与租户关联] id查询 [用户与租户关联] 信息", fullPath = "/user/user_tenant/getUserTenantById")
     @PostMapping(value = "/getUserTenantById")
     public MyCommonResult<UserTenantVo> doGetUserTenantById(HttpServletRequest request, String tenantId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<UserTenantVo> result = MyCommonResult.gainQueryResult(UserTenantVo.class, UserTenantFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(tenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserTenant vo = userTenantMapper.selectById(tenantId);
             result.setBean(UserTenantTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -100,14 +100,14 @@ public class UserTenantController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与租户关联] ", description = "表单方式新增 [用户与租户关联] ", fullPath = "/user/user_tenant/doAddUserTenant")
     @PostMapping(value = "/doAddUserTenant")
     public MyCommonResult doAddUserTenant(HttpServletRequest request, UserTenantVo userTenantVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(userTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userTenantService.dealCreate(loginUser, userTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -120,14 +120,14 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserTenantByIds")
     public MyCommonResult doBatchDeleteUserTenantById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userTenantService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class UserTenantController extends BaseController {
     })
     @PostMapping(value = "/delOneUserTenantByIds")
     public MyCommonResult doDelOneUserTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserTenantFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -149,7 +149,7 @@ public class UserTenantController extends BaseController {
             }
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,UserTenantFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

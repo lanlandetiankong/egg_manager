@@ -84,7 +84,7 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/getAllDefineRoles")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class, DefineRoleFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class, DefineRoleFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -95,7 +95,7 @@ public class DefineRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -110,7 +110,7 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/getAllDefineRoleDtos")
     public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -121,7 +121,7 @@ public class DefineRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineRoleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -131,12 +131,12 @@ public class DefineRoleController extends BaseController {
     @PcWebOperationLog(action = "查询角色定义信息", description = "根据角色定义id查询角色定义信息", fullPath = "/define/define_role/getDefineRoleById")
     @PostMapping(value = "/getDefineRoleById")
     public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
             result.setBean(DefineRoleTransfer.transferEntityToVo(defineRole));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -144,12 +144,12 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllPermissionByRoleId")
     public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class, DefineRoleFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class, DefineRoleFuncModuleConstant.Success.QUERY_GRANTED);
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
             result.setResultList(definePermissionList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryGranted);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.QUERY_GRANTED);
         }
         return result;
     }
@@ -159,7 +159,7 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/getAllMenuByRoleId")
     public MyCommonResult<DefineMenu> doGetAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
                                                                  @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineRoleFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineRoleFuncModuleConstant.Success.QUERY_GRANTED);
         try {
             List<DefineMenu> defineMenuList = null;
             if (Boolean.TRUE.equals(filterParentNode)) {
@@ -170,7 +170,7 @@ public class DefineRoleController extends BaseController {
             }
             result.setResultList(defineMenuList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.queryGranted);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.QUERY_GRANTED);
         }
         return result;
     }
@@ -179,14 +179,14 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doAddDefineRole")
     public MyCommonResult doAddDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUser, defineRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -195,7 +195,7 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/doUpdateDefineRole")
     public MyCommonResult doUpdateDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -203,7 +203,7 @@ public class DefineRoleController extends BaseController {
             changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -215,7 +215,7 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineRoleByIds")
     public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -223,7 +223,7 @@ public class DefineRoleController extends BaseController {
             delCount = defineRoleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -235,14 +235,14 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineRoleByIds")
     public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
@@ -251,13 +251,13 @@ public class DefineRoleController extends BaseController {
     @ApiOperation(value = "角色授权", notes = "为角色分配权限", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/grantPermissionToRole")
     public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.grantOper);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.GRANT_OPER);
         try {
             Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.grantOper);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.GRANT_OPER);
         }
         return result;
     }
@@ -267,7 +267,7 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/grantMenusToRole")
     public MyCommonResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
                                              @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.grantOper);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineRoleFuncModuleConstant.Success.GRANT_OPER);
         try {
             Assert.notBlank(roleId,"未知角色id:"+actionFailMsg);
 
@@ -308,7 +308,7 @@ public class DefineRoleController extends BaseController {
                 int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUser);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.grantOper);
+            this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.GRANT_OPER);
         }
         return result;
     }

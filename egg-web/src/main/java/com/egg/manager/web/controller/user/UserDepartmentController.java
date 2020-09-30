@@ -62,7 +62,7 @@ public class UserDepartmentController extends BaseController {
     @PostMapping(value = "/getAllUserDepartments")
     public MyCommonResult<UserDepartmentVo> doGetAllUserDepartments(HttpServletRequest request,
                                                                     String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainQueryResult(UserDepartmentVo.class, UserDepartmentFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainQueryResult(UserDepartmentVo.class, UserDepartmentFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -73,7 +73,7 @@ public class UserDepartmentController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userDepartmentService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -83,13 +83,13 @@ public class UserDepartmentController extends BaseController {
     @PcWebQueryLog(action = "查询 [用户与部门关联] 信息", description = "根据 [用户与部门关联] id查询 [用户与部门关联] 信息", fullPath = "/user/user_department/getUserDepartmentById")
     @PostMapping(value = "/getUserDepartmentById")
     public MyCommonResult<UserDepartmentVo> doGetUserDepartmentById(HttpServletRequest request, String departmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainQueryResult(UserDepartmentVo.class, UserDepartmentFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserDepartmentVo> result = MyCommonResult.gainQueryResult(UserDepartmentVo.class, UserDepartmentFuncModuleConstant.Success.QUERY_PAGE);
         try {
             Assert.notBlank(departmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserDepartment vo = userDepartmentMapper.selectById(departmentId);
             result.setBean(UserDepartmentTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -99,14 +99,14 @@ public class UserDepartmentController extends BaseController {
     @PcWebOperationLog(action = "新增 [用户与部门关联] ", description = "表单方式新增 [用户与部门关联] ", fullPath = "/user/user_department/doAddUserDepartment")
     @PostMapping(value = "/doAddUserDepartment")
     public MyCommonResult doAddUserDepartment(HttpServletRequest request, UserDepartmentVo userDepartmentVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(userDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userDepartmentService.dealCreate(loginUser, userDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -119,14 +119,14 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserDepartmentByIds")
     public MyCommonResult doBatchDeleteUserDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.UPDATE);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userDepartmentService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -139,14 +139,14 @@ public class UserDepartmentController extends BaseController {
     })
     @PostMapping(value = "/delOneUserDepartmentByIds")
     public MyCommonResult doDelOneUserDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserDepartmentFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,UserDepartmentFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

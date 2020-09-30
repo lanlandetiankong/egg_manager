@@ -182,7 +182,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
 
     @Override
-    public void deleteById(ID id) {
+    public void DELETE_BY_ID(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
         Query query = dealGetQueryWithId(id, true);
         mongoTemplate.remove(query);

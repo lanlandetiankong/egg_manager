@@ -62,7 +62,7 @@ public class UserJobController extends BaseController {
     @PostMapping(value = "/getAllUserJobs")
     public MyCommonResult<UserJobVo> doGetAllUserAccouts(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -73,7 +73,7 @@ public class UserJobController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -83,13 +83,13 @@ public class UserJobController extends BaseController {
     @PcWebQueryLog(action = "查询用户职务信息", description = "根据用户职务id查询用户职务信息", fullPath = "/user/user_job/getUserJobById")
     @PostMapping(value = "/getUserJobById")
     public MyCommonResult<UserJobVo> doGetUserJobById(HttpServletRequest request, String jobId) {
-        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<UserJobVo> result = MyCommonResult.gainQueryResult(UserJobVo.class, UserJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(jobId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserJob vo = userJobMapper.selectById(jobId);
             result.setBean(UserJobTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,UserJobFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }

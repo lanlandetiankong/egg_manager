@@ -12,13 +12,13 @@ public class ExcelUploadFuncModuleConstant extends EggBaseFuncModuleNameConstant
     protected static final String KEY_FUNC_MODULE_NAME = uploadImg;
 
     public static class Success {
-        private final static boolean defaultFlag = true;
-        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,defaultFlag);
+        private final static boolean DEFAULT_OK_FLAG = true;
+        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
     }
 
     public static class Failure {
-        private final static boolean defaultFlag = false;
-        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,defaultFlag);
+        private final static boolean DEFAULT_OK_FLAG = false;
+        public static String uploadExcel = doUploadExcel(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
     }
 
 }

@@ -65,7 +65,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementTagEnums")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                           @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
@@ -75,7 +75,7 @@ public class AnnouncementTagController extends BaseController {
             result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = announcementTagService.dealResultListToEnums(result);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryEnumList);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
@@ -85,7 +85,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementTagDtos")
     public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -96,7 +96,7 @@ public class AnnouncementTagController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -106,13 +106,13 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/getAnnouncementTagById")
     public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -123,7 +123,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doAddAnnouncementTag")
     public MyCommonResult doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -131,7 +131,7 @@ public class AnnouncementTagController extends BaseController {
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -142,7 +142,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/doUpdateAnnouncementTag")
     public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -150,7 +150,7 @@ public class AnnouncementTagController extends BaseController {
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -164,7 +164,7 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/batchDelAnnouncementTagByIds")
     public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, String[] delIds,
                                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -172,7 +172,7 @@ public class AnnouncementTagController extends BaseController {
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -186,14 +186,14 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/delOneAnnouncementTagById")
     public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, String delId,
                                                       @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

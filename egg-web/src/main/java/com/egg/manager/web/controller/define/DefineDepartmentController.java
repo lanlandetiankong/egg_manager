@@ -66,7 +66,7 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/getAllDefineDepartmentDtos")
     public MyCommonResult<DefineDepartmentVo> doGetAllDefineDepartmentDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -77,7 +77,7 @@ public class DefineDepartmentController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineDepartmentService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -87,14 +87,14 @@ public class DefineDepartmentController extends BaseController {
     @PcWebQueryLog(action = "查询部门定义信息", description = "根据部门定义id查询部门定义信息", fullPath = "/define/define_department/getDefineDepartmentById")
     @PostMapping(value = "/getDefineDepartmentById")
     public MyCommonResult<DefineDepartmentVo> doGetDefineDepartmentById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(defineDepartmentId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
             result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -103,7 +103,7 @@ public class DefineDepartmentController extends BaseController {
     @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getAllDepartmentTreeSelect")
     public MyCommonResult<CommonTreeSelect> doGetAllDepartmentTreeSelect(@CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.QUERY_TREE_SELECT);
         try{
             //筛选与排序
             QueryWrapper<DefineDepartment> queryWrapper = new QueryWrapper<DefineDepartment>();
@@ -115,7 +115,7 @@ public class DefineDepartmentController extends BaseController {
             List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
             result.setResultList(treeList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryTreeSelect);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.QUERY_TREE_SELECT);
         }
         return result;
     }
@@ -124,13 +124,13 @@ public class DefineDepartmentController extends BaseController {
     @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getDepartmentTreeSelectFilterChildrens")
     public MyCommonResult<CommonTreeSelect> doGetDepartmentTreeSelectFilterChildrens(String filterId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.queryTreeSelect);
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.QUERY_TREE_SELECT);
         try{
             List<DefineDepartment> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
             List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
             result.setResultList(treeList);
         }   catch (Exception e){
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.queryTreeSelect);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.QUERY_TREE_SELECT);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/doAddDefineDepartment")
     public MyCommonResult doAddDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -148,7 +148,7 @@ public class DefineDepartmentController extends BaseController {
             addCount = defineDepartmentService.dealCreate(loginUser, defineDepartmentVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -159,14 +159,14 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/doUpdateDefineDepartment")
     public MyCommonResult doUpdateDefineDepartment(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -179,14 +179,14 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineDepartmentByIds")
     public MyCommonResult doBatchDeleteDefineDepartmentById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -199,13 +199,13 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineDepartmentById")
     public MyCommonResult doDelOneDefineDepartmentById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

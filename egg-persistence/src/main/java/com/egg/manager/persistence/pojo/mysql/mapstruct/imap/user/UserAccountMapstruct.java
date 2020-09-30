@@ -83,6 +83,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "updateTime", expression = "java(handleGetNowDate())"),
             @Mapping(target = "createUserId", expression = "java(handleGetLoginUserId(loginUser,false))"),
             @Mapping(target = "lastModifyerId", expression = "java(handleGetLoginUserId(loginUser,false))"),
+            @Mapping(target = "version", ignore = true),
     })
     UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccount loginUser);
 }

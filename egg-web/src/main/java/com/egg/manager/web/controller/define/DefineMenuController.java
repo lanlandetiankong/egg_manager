@@ -74,7 +74,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "查询所有路由菜单TreeSelect", notes = "查询所有路由菜单TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getAllMenuTreeSelect")
     public MyCommonResult<CommonTreeSelect> doGetAllMenuTreeSelect(Boolean withRoot) {
-        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class, DefineMenuFuncModuleConstant.Success.queryTreeSelect);
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class, DefineMenuFuncModuleConstant.Success.QUERY_TREE_SELECT);
         //查询 所有[可用状态]的 [菜单定义]
         List<DefineMenu> allMenus = defineMenuService.getAllEnableList(new QueryWrapper<DefineMenu>());
         List<CommonTreeSelect> treeList = null;
@@ -91,7 +91,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "查询被过滤的路由菜单TreeSelect", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping("/getMenuTreeSelectFilterChildrens")
     public MyCommonResult<CommonTreeSelect> doGetMenuTreeSelectFilterChildrens(String filterId) {
-        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineMenuFuncModuleConstant.Success.queryTreeSelect);
+        MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineMenuFuncModuleConstant.Success.QUERY_TREE_SELECT);
         List<DefineMenu> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
         result.setResultList(treeList);
@@ -102,7 +102,7 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询所有可以访问的路由菜单", description = "查询所有可以访问的路由菜单", fullPath = "/define/define_menu/user/getAllMenuTree")
     @PostMapping("/user/getAllMenuTree")
     public MyCommonResult<CommonMenuTree> doGetAllMenuTree() {
-        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class,DefineMenuFuncModuleConstant.Success.queryPage);
+        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class,DefineMenuFuncModuleConstant.Success.QUERY_PAGE);
         //筛选与排序
         QueryWrapper<DefineMenu> queryWrapper = new QueryWrapper<DefineMenu>();
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
@@ -120,7 +120,7 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询用户可以访问的路由菜单", description = "查询用户可以访问的路由菜单", fullPath = "/define/define_menu/user/getGrantedMenuTree")
     @PostMapping("/user/getGrantedMenuTree")
     public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class, DefineMenuFuncModuleConstant.Success.queryGranted);
+        MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class, DefineMenuFuncModuleConstant.Success.QUERY_GRANTED);
         List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser, authorization, loginUser.getFid(), false);
         result.setResultList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
@@ -140,7 +140,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<DefineMenuVo> doGetAllDefineMenuDtos(HttpServletRequest request,
                                                                String queryObj, String paginationObj, String sortObj,
                                                                @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -151,7 +151,7 @@ public class DefineMenuController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineMenuService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -161,14 +161,14 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询菜单定义信息", description = "根据菜单定义id查询菜单定义信息", fullPath = "/define/define_menu/getDefineMenuById")
     @PostMapping(value = "/getDefineMenuById")
     public MyCommonResult<DefineMenuVo> doGetDefineMenuById(HttpServletRequest request, String defineMenuId) {
-        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
             DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -178,7 +178,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(action = "新增菜单定义", description = "表单方式新增菜单定义", fullPath = "/define/define_menu/doAddDefineMenu")
     @PostMapping(value = "/doAddDefineMenu")
     public MyCommonResult doAddDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -186,7 +186,7 @@ public class DefineMenuController extends BaseController {
             addCount = defineMenuService.dealCreate(loginUser, vo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -196,7 +196,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(action = "更新菜单定义", description = "表单方式更新菜单定义", fullPath = "/define/define_menu/doUpdateDefineMenu")
     @PostMapping(value = "/doUpdateDefineMenu")
     public MyCommonResult doUpdateDefineMenu(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -204,7 +204,7 @@ public class DefineMenuController extends BaseController {
             changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -215,7 +215,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/doUpdateExcelModel")
     @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
     public MyCommonResult doUpdateExcelModelConf(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE);
         try {
             Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -230,7 +230,7 @@ public class DefineMenuController extends BaseController {
             Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -242,7 +242,7 @@ public class DefineMenuController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineMenuByIds")
     public MyCommonResult doBatchDeleteDefineMenuById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -250,7 +250,7 @@ public class DefineMenuController extends BaseController {
             delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -263,14 +263,14 @@ public class DefineMenuController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineMenuById")
     public MyCommonResult doDelOneDefineMenuById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = defineMenuService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

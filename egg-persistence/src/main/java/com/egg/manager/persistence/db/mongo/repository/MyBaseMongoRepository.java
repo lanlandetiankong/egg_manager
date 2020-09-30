@@ -77,7 +77,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * @param <S>
      * @return
      */
-    long batchUpdate(Query query, Update update);
+    long batchUpdate(Query query, Update UPDATE);
 
     /**
      * 更新[文档]的Status
@@ -105,7 +105,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      *
      * @param id
      */
-    void deleteById(ID id);
+    void DELETE_BY_ID(ID id);
 
     /**
      * 根据MO删除[文档]

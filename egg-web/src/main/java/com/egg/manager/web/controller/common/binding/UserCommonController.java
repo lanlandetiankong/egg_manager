@@ -35,7 +35,7 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "检索所有用户类型", notes = "检索所有用户类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllUserTypeEnumList")
     public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -46,7 +46,7 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
@@ -54,14 +54,14 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "检索所有用户锁定状态", notes = "检索所有用户锁定状态", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             List<FrontSelectBean> beanList = new ArrayList<>();
             beanList.add(new FrontSelectBean(0, "未锁定"));
             beanList.add(new FrontSelectBean(1, "已锁定"));
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
@@ -70,7 +70,7 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "检索所有职务类型", notes = "检索所有职务类型", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -81,7 +81,7 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.queryEnumList);
+            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }

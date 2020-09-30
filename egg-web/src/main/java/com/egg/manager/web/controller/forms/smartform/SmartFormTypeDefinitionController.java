@@ -67,7 +67,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class, SmartFormTypeDefinitionFuncModuleConstant.Success.queryPage);
+        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class, SmartFormTypeDefinitionFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -77,7 +77,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             MyMongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUser, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -91,7 +91,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataAll")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class,SmartFormTypeDefinitionFuncModuleConstant.Success.queryPage);
+        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class,SmartFormTypeDefinitionFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -101,7 +101,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUser, mongoQueryBuffer);
             result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -111,13 +111,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                        @RequestParam(value = "fid", required = true) String fid) {
-        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class,SmartFormTypeDefinitionFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class,SmartFormTypeDefinitionFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(fid,BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormTypeDefinitionMgo mobj = smartFormTypeDefinitionMgoService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
 
@@ -129,7 +129,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                  SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.queryOneById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         Integer addCount = 0;
         try {
             Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -137,7 +137,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -149,7 +149,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                                                     SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.UPDATE);
         Integer count = 0;
         try {
             Assert.notNull(formTypeDefinitionMO,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -162,7 +162,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             }
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -175,13 +175,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/delOneById")
     public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormTypeDefinitionMgoService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
@@ -194,14 +194,14 @@ public class SmartFormTypeDefinitionController extends BaseController {
     })
     @PostMapping(value = "/batchDelByIds")
     public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = smartFormTypeDefinitionMgoService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,SmartFormTypeDefinitionFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }

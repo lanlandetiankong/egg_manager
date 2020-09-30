@@ -34,7 +34,7 @@ public class CommonBindingController extends BaseController {
     @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getSwitchEnumList")
     public MyCommonResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(CommonBindingFuncModuleConstant.Success.queryEnumList);
+        MyCommonResult result = MyCommonResult.gainEnumResult(CommonBindingFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CommonBindingController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, CommonBindingFuncModuleConstant.Failure.queryEnumList);
+            this.dealCommonErrorCatch(log, result, e, CommonBindingFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }

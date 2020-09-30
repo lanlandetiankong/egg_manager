@@ -12,46 +12,46 @@ public class DefineDepartmentFuncModuleConstant  extends EggBaseFuncModuleNameCo
     protected static final String KEY_FUNC_MODULE_NAME = defineDepartment;
 
     public static class Success {
-        private final static boolean defaultFlag = true;
-        public static String loginOper = doLoginOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryPage = doQueryPage(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryList = doQueryList(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryOneById = doQueryOneById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryEnumList = doQueryOneById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryTreeSelect = doQueryTreeSelect(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryGranted = doQueryGranted(KEY_FUNC_MODULE_NAME,defaultFlag);
+        private final static boolean DEFAULT_OK_FLAG = true;
+        public static String LOGIN_OPER = doLoginOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_PAGE = doQueryPage(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_LIST = doQueryList(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_ONE_BY_ID = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_ENUM_LIST = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_TREE_SELECT = doQueryTreeSelect(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_GRANTED = doQueryGranted(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
 
-        public static String batchPublish = doBatchPublish(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String publish = doPublish(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String create = doCreate(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String update = doUpdate(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String updateState = doUpdateState(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String grantOper = doGrantOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String settingOper = doSettingOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String deleteById = doDeleteById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String batchDeleteByIds = doBatchDeleteByIds(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String batchEnsure = doBatchEnsure(KEY_FUNC_MODULE_NAME,defaultFlag);
+        public static String BATCH_PUBLISH = doBatchPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String PUBLISH = doPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String CREATE = doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE_STATE = doUpdateState(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String GRANT_OPER = doGrantOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String SETTING_OPER = doSettingOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String DELETE_BY_ID = doDeleteById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String BATCH_DELETE_BY_IDS = doBatchDeleteByIds(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String BATCH_ENSURE = doBatchEnsure(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
     }
 
     public static class Failure {
-        private final static boolean defaultFlag = false;
-        public static String loginOper = doLoginOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryPage = doQueryPage(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryList = doQueryList(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryOneById = doQueryOneById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryEnumList = doQueryOneById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryTreeSelect = doQueryTreeSelect(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String queryGranted = doQueryGranted(KEY_FUNC_MODULE_NAME,defaultFlag);
+        private final static boolean DEFAULT_OK_FLAG = false;
+        public static String LOGIN_OPER = doLoginOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_PAGE = doQueryPage(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_LIST = doQueryList(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_ONE_BY_ID = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_ENUM_LIST = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_TREE_SELECT = doQueryTreeSelect(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_GRANTED = doQueryGranted(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
 
-        public static String batchPublish = doBatchPublish(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String publish = doPublish(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String create = doCreate(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String update = doUpdate(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String updateState = doUpdateState(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String grantOper = doGrantOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String settingOper = doSettingOper(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String deleteById = doDeleteById(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String batchDeleteByIds = doBatchDeleteByIds(KEY_FUNC_MODULE_NAME,defaultFlag);
-        public static String batchEnsure = doBatchEnsure(KEY_FUNC_MODULE_NAME,defaultFlag);
+        public static String BATCH_PUBLISH = doBatchPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String PUBLISH = doPublish(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String CREATE = doCreate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE = doUpdate(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String UPDATE_STATE = doUpdateState(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String GRANT_OPER = doGrantOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String SETTING_OPER = doSettingOper(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String DELETE_BY_ID = doDeleteById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String BATCH_DELETE_BY_IDS = doBatchDeleteByIds(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String BATCH_ENSURE = doBatchEnsure(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
     }
 }

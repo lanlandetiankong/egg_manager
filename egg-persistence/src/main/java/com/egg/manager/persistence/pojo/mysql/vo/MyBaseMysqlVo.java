@@ -42,4 +42,9 @@ public class MyBaseMysqlVo implements Serializable {
      * 最后更新人-vo
      */
     private UserAccountVo lastModifyer;
+
+    /**
+     * 版本号
+     */
+    private Integer version ;
 }

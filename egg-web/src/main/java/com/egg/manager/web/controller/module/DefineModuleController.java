@@ -63,7 +63,7 @@ public class DefineModuleController extends BaseController {
     @PostMapping(value = "/getAllDefineModuleDtos")
     public MyCommonResult<DefineModuleVo> doGetAllDefineModuleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -74,7 +74,7 @@ public class DefineModuleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineModuleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -84,12 +84,12 @@ public class DefineModuleController extends BaseController {
     @PcWebQueryLog(action = "查询模块定义信息", description = "根据模块定义id查询模块定义信息", fullPath = "/module/define_module/getDefineModuleById")
     @PostMapping(value = "/getDefineModuleById")
     public MyCommonResult<DefineModuleVo> doGetDefineModuleById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.queryPage);
+        MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.QUERY_PAGE);
         try {
             DefineModule defineModule = defineModuleMapper.selectById(defineModuleId);
             result.setBean(DefineModuleTransfer.transferEntityToVo(defineModule));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -99,14 +99,14 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "新增模块定义", description = "表单方式新增模块定义", fullPath = "/module/define_module/doAddDefineModule")
     @PostMapping(value = "/doAddDefineModule")
     public MyCommonResult doAddDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -116,14 +116,14 @@ public class DefineModuleController extends BaseController {
     @PcWebOperationLog(action = "更新模块定义", description = "表单方式更新模块定义", fullPath = "/module/define_module/doUpdateDefineModule")
     @PostMapping(value = "/doUpdateDefineModule")
     public MyCommonResult doUpdateDefineModule(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.UPDATE);
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -136,14 +136,14 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/batchDelDefineModuleByIds")
     public MyCommonResult doBatchDeleteDefineModuleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -156,13 +156,13 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/delOneDefineModuleById")
     public MyCommonResult doDelOneDefineModuleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

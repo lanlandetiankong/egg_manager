@@ -53,7 +53,7 @@ public class TransactionalConfig {
             "upload*",
             "batch*",
             "has*",
-            "publish*",
+            "PUBLISH*",
             "import*",
             "export*",
             "disable*",

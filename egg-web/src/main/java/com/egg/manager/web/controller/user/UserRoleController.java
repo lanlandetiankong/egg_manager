@@ -63,7 +63,7 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/getAllUserRoles")
     public MyCommonResult<UserRoleVo> doGetAllUserRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.queryPage);
+        MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -74,7 +74,7 @@ public class UserRoleController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userRoleService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -84,13 +84,13 @@ public class UserRoleController extends BaseController {
     @PcWebQueryLog(action = "查询用户角色信息", description = "根据用户角色id查询用户角色信息", fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(roleId, BaseRstMsgConstant.ErrorMsg.unknowId());
             UserRole vo = userRoleMapper.selectById(roleId);
             result.setBean(UserRoleTransfer.transferEntityToVo(vo));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -100,14 +100,14 @@ public class UserRoleController extends BaseController {
     @PcWebOperationLog(action = "新增用户角色", description = "表单方式新增用户角色", fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(userRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userRoleService.dealCreate(loginUser, userRoleVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -120,14 +120,14 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.update);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.UPDATE);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = userRoleService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.update);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.UPDATE);
         }
         return result;
     }
@@ -140,14 +140,14 @@ public class UserRoleController extends BaseController {
     })
     @PostMapping(value = "/delOneUserRoleByIds")
     public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userRoleService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,UserRoleFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

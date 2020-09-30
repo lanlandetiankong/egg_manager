@@ -71,7 +71,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getAllAnnouncementDtos")
     public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -86,7 +86,7 @@ public class AnnouncementController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = announcementService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -97,7 +97,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/getSomeAnnouncements")
     public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
                                                                  Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryPage);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //这些查询条件暂时用不到
             String queryObj = null, paginationObj = null, sortObj = null;
@@ -116,7 +116,7 @@ public class AnnouncementController extends BaseController {
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
             result = announcementService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -126,7 +126,7 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class, httpMethod = "POST")
     @PostMapping(value = "/getAnnouncementById")
     public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(announcementId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -135,7 +135,7 @@ public class AnnouncementController extends BaseController {
             Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementTransfer.transferEntityToVo(announcement, announcementTagMap));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -146,14 +146,14 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/addAnnouncement")
     public MyCommonResult doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = announcementService.dealCreate(loginUser, announcementVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -164,14 +164,14 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/addAnnouncementFromDraft")
     public MyCommonResult doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                      @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.publish);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.PUBLISH);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.publish);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.PUBLISH);
         }
         return result;
     }
@@ -183,7 +183,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/batchDelAnnouncementByIds")
     public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -191,7 +191,7 @@ public class AnnouncementController extends BaseController {
             delCount = announcementService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
@@ -204,14 +204,14 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/delOneAnnouncementByIds")
     public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,AnnouncementFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

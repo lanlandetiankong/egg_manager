@@ -121,7 +121,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     @Override
     public void doDeleteById(UserAccount loginUser, ID id) {
-        baseRepository.deleteById(id);
+        baseRepository.DELETE_BY_ID(id);
     }
 
     @Override

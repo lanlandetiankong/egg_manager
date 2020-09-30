@@ -89,7 +89,9 @@ public class DefineDepartment extends Model<DefineDepartment> {
      */
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
-
+    /**
+     * 版本号
+     */
     @Version
     @TableField(value = "version")
     private Integer version ;

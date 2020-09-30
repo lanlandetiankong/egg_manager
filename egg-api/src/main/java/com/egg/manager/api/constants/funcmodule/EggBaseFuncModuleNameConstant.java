@@ -56,7 +56,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doLoginOper(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.loginOper + funcModuleName + EggFuncActionNameConstant.Suffix.loginOper;
+        String msg = EggFuncActionNameConstant.Prefix.LOGIN_OPER + funcModuleName + EggFuncActionNameConstant.Suffix.LOGIN_OPER;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -66,7 +66,7 @@ public class EggBaseFuncModuleNameConstant {
     }
     protected static final String doQueryPage(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.queryPage + funcModuleName + EggFuncActionNameConstant.Suffix.queryPage;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_PAGE + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_PAGE;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -77,7 +77,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doQueryList(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.queryList + funcModuleName + EggFuncActionNameConstant.Suffix.queryList;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_LIST + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_LIST;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -88,7 +88,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doQueryOneById(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.queryEnumList + funcModuleName + EggFuncActionNameConstant.Suffix.queryEnumList;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_ENUM_LIST + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_ENUM_LIST;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -99,7 +99,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doQueryTreeSelect(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.queryTreeSelect + funcModuleName + EggFuncActionNameConstant.Suffix.queryTreeSelect;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_TREE_SELECT + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_TREE_SELECT;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -110,7 +110,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doQueryGranted(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.queryGranted + funcModuleName + EggFuncActionNameConstant.Suffix.queryGranted;
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_GRANTED + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_GRANTED;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -156,7 +156,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doUpdateState(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg =  EggFuncActionNameConstant.Prefix.updateState + funcModuleName + EggFuncActionNameConstant.Suffix.updateState;
+        String msg =  EggFuncActionNameConstant.Prefix.UPDATE_STATE + funcModuleName + EggFuncActionNameConstant.Suffix.UPDATE_STATE;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -167,7 +167,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doGrantOper(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg =  EggFuncActionNameConstant.Prefix.grantOper + funcModuleName + EggFuncActionNameConstant.Suffix.grantOper;
+        String msg =  EggFuncActionNameConstant.Prefix.GRANT_OPER + funcModuleName + EggFuncActionNameConstant.Suffix.GRANT_OPER;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -178,7 +178,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doSettingOper(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg =  EggFuncActionNameConstant.Prefix.settingOper + funcModuleName + EggFuncActionNameConstant.Suffix.settingOper;
+        String msg =  EggFuncActionNameConstant.Prefix.SETTING_OPER + funcModuleName + EggFuncActionNameConstant.Suffix.SETTING_OPER;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -189,7 +189,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doDeleteById(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg =  EggFuncActionNameConstant.Prefix.deleteById + funcModuleName + EggFuncActionNameConstant.Suffix.deleteById;
+        String msg =  EggFuncActionNameConstant.Prefix.DELETE_BY_ID + funcModuleName + EggFuncActionNameConstant.Suffix.DELETE_BY_ID;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -200,7 +200,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doBatchDeleteByIds(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.batchDeleteByIds + funcModuleName + EggFuncActionNameConstant.Suffix.batchDeleteByIds;
+        String msg = EggFuncActionNameConstant.Prefix.BATCH_DELETE_BY_IDS + funcModuleName + EggFuncActionNameConstant.Suffix.BATCH_DELETE_BY_IDS;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -211,7 +211,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doBatchEnsure(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.batchEnsure + funcModuleName + EggFuncActionNameConstant.Suffix.batchEnsure;
+        String msg = EggFuncActionNameConstant.Prefix.BATCH_ENSURE + funcModuleName + EggFuncActionNameConstant.Suffix.BATCH_ENSURE;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -221,7 +221,7 @@ public class EggBaseFuncModuleNameConstant {
     }
     protected static final String doPublish(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.publish + funcModuleName + EggFuncActionNameConstant.Suffix.publish;
+        String msg = EggFuncActionNameConstant.Prefix.PUBLISH + funcModuleName + EggFuncActionNameConstant.Suffix.PUBLISH;
         if(isSuccess == null){
             return msg ;
         }   else {
@@ -232,7 +232,7 @@ public class EggBaseFuncModuleNameConstant {
 
     protected static final String doBatchPublish(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.batchPublish + funcModuleName + EggFuncActionNameConstant.Suffix.batchPublish;
+        String msg = EggFuncActionNameConstant.Prefix.BATCH_PUBLISH + funcModuleName + EggFuncActionNameConstant.Suffix.BATCH_PUBLISH;
         if(isSuccess == null){
             return msg ;
         }   else {

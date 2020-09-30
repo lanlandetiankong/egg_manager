@@ -60,7 +60,7 @@ public class BaseRstMsgConstant {
 
 
     public static class SuccessMsg {
-        public static String queryList(){
+        public static String QUERY_LIST(){
             return nullLoginAccount + actionFailMsg;
         }
 

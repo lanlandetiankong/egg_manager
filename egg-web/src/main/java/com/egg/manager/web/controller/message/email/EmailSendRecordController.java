@@ -66,7 +66,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<EmailSendRecordMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.queryPage);
+        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -76,7 +76,7 @@ public class EmailSendRecordController extends BaseController {
             MyMongoQueryPageBean<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUser, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.queryPage);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
@@ -86,13 +86,13 @@ public class EmailSendRecordController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                @RequestParam(value = "fid", required = true) String fid) {
-        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.queryOneById);
+        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMgo mobj = emailSendRecordMgoService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.queryOneById);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
@@ -103,7 +103,7 @@ public class EmailSendRecordController extends BaseController {
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                                          EmailSendRecordMgvo emailSendRecordMgvo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.create);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.CREATE);
         Integer addCount = 0;
         try {
             Assert.notNull(emailSendRecordMgvo,BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -112,7 +112,7 @@ public class EmailSendRecordController extends BaseController {
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.create);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.CREATE);
         }
         return result;
     }
@@ -125,13 +125,13 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/delOneById")
     public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.deleteById);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.deleteById);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
@@ -144,14 +144,14 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/batchDelByIds")
     public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.batchDeleteByIds);
+        MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = emailSendRecordMgoService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.batchDeleteByIds);
+            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }

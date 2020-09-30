@@ -9,24 +9,24 @@ package com.egg.manager.api.constants.funcmodule;
 public class EggFuncActionNameConstant {
 
     public static class Prefix {
-        public final static String loginOper = "登录" ;
+        public final static String LOGIN_OPER = "登录" ;
 
-        public final static String queryPage = "查询分页" ;
-        public final static String queryList = "查询列表" ;
+        public final static String QUERY_PAGE = "查询分页" ;
+        public final static String QUERY_LIST = "查询列表" ;
         public final static String doQueryOneById = "根据id查询" ;
-        public final static String queryEnumList = "查询" ;
-        public final static String queryTreeSelect = "查询" ;
-        public final static String queryGranted = "查询" ;
+        public final static String QUERY_ENUM_LIST = "查询" ;
+        public final static String QUERY_TREE_SELECT = "查询" ;
+        public final static String QUERY_GRANTED = "查询" ;
         public final static String create = "新增" ;
         public final static String update = "更新" ;
-        public final static String updateState = "更新" ;
-        public final static String grantOper = "配置" ;
-        public final static String settingOper = "配置" ;
-        public final static String deleteById = "根据id删除" ;
-        public final static String batchDeleteByIds = "批量删除" ;
-        public final static String batchEnsure = "批量删除" ;
-        public final static String publish = "发布" ;
-        public final static String batchPublish = "批量发布" ;
+        public final static String UPDATE_STATE = "更新" ;
+        public final static String GRANT_OPER = "配置" ;
+        public final static String SETTING_OPER = "配置" ;
+        public final static String DELETE_BY_ID = "根据id删除" ;
+        public final static String BATCH_DELETE_BY_IDS = "批量删除" ;
+        public final static String BATCH_ENSURE = "批量删除" ;
+        public final static String PUBLISH = "发布" ;
+        public final static String BATCH_PUBLISH = "批量发布" ;
         public final static String uploadExcel = "上传Excel" ;
         public final static String uploadImg = "上传图片" ;
         public final static String excelExportCheck = "导出已选" ;
@@ -37,24 +37,24 @@ public class EggFuncActionNameConstant {
 
 
     public static class Suffix {
-        public final static String loginOper = "" ;
+        public final static String LOGIN_OPER = "" ;
 
-        public final static String queryPage = "" ;
-        public final static String queryList = "" ;
+        public final static String QUERY_PAGE = "" ;
+        public final static String QUERY_LIST = "" ;
         public final static String doQueryOneById = "" ;
-        public final static String queryEnumList = "列表" ;
-        public final static String queryTreeSelect = "列表" ;
-        public final static String queryGranted = "列表" ;
+        public final static String QUERY_ENUM_LIST = "列表" ;
+        public final static String QUERY_TREE_SELECT = "列表" ;
+        public final static String QUERY_GRANTED = "列表" ;
         public final static String create = "" ;
         public final static String update = "" ;
-        public final static String updateState = "" ;
-        public final static String grantOper = "" ;
-        public final static String settingOper = "" ;
-        public final static String deleteById = "" ;
-        public final static String batchDeleteByIds = "" ;
-        public final static String batchEnsure = "" ;
-        public final static String publish = "" ;
-        public final static String batchPublish = "" ;
+        public final static String UPDATE_STATE = "" ;
+        public final static String GRANT_OPER = "" ;
+        public final static String SETTING_OPER = "" ;
+        public final static String DELETE_BY_ID = "" ;
+        public final static String BATCH_DELETE_BY_IDS = "" ;
+        public final static String BATCH_ENSURE = "" ;
+        public final static String PUBLISH = "" ;
+        public final static String BATCH_PUBLISH = "" ;
         public final static String uploadExcel = "" ;
         public final static String uploadImg = "" ;
 

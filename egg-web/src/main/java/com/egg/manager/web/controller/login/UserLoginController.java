@@ -65,7 +65,7 @@ public class UserLoginController extends BaseController {
                                                              @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccount loginUser
     ) {
-        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, UserLoginFuncModuleConstant.Success.loginOper);
+        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, UserLoginFuncModuleConstant.Success.LOGIN_OPER);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
@@ -102,7 +102,7 @@ public class UserLoginController extends BaseController {
                 result.setAuthorization(authorization);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserLoginFuncModuleConstant.Failure.loginOper);
+            this.dealCommonErrorCatch(log, result, e,UserLoginFuncModuleConstant.Failure.LOGIN_OPER);
         }
         return result;
     }

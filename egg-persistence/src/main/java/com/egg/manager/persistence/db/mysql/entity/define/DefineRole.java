@@ -69,7 +69,9 @@ public class DefineRole extends Model<DefineRole> {
      */
     @TableField(value = "last_modifyer_id")
     private String lastModifyerId;
-
+    /**
+     * 版本号
+     */
     @Version
     @TableField(value = "version")
     private Integer version ;

@@ -39,6 +39,10 @@ public interface MyBaseMysqlEntityFieldConstant {
      * 最后更新人id
      */
     EggPojoReflexFieldConfig<String> LAST_MODIFYER_ID = new EggPojoReflexFieldConfig("lastModifyerId", String.class, "last_modifyer_id");
+    /**
+     * 版本号
+     */
+    EggPojoReflexFieldConfig<Integer> VERSION = new EggPojoReflexFieldConfig("version", Integer.class, "version");
 
 
 }

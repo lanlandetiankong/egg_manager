@@ -4,12 +4,8 @@ import cn.hutool.core.util.ReflectUtil;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
-import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @Description:
@@ -21,12 +17,12 @@ public class TestReflex {
     public static void main(String[] args) {
         UserAccount userAccount = new UserAccount() ;
         Method methodOfObj = ReflectUtil.getMethod(UserAccount.class, "setFid", String.class);
-        ReflectUtil.invoke(userAccount,methodOfObj, MyUUIDUtil.renderSimpleUUID());
+        ReflectUtil.invoke(userAccount,methodOfObj, MyUUIDUtil.renderSimpleUuid());
 
 
         UserAccount userAccount2 = new UserAccount() ;
 
-        handlePojoSetFieldValue(userAccount2,"fidsss",String.class,MyUUIDUtil.renderSimpleUUID());
+        handlePojoSetFieldValue(userAccount2,"fidsss",String.class,MyUUIDUtil.renderSimpleUuid());
 
 
         System.out.println("for debug");

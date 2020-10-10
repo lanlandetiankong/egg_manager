@@ -72,16 +72,11 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
         Integer changeCount = 0;
         DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
         defineTenant = super.doBeforeUpdate(loginUser, defineTenant);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineTenantMapper.updateById(defineTenant);
-        } else {
-            changeCount = defineTenantMapper.updateById(defineTenant);
-        }
+        changeCount = defineTenantMapper.updateById(defineTenant);
         return changeCount;
     }
 

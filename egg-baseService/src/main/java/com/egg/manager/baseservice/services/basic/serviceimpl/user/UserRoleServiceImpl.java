@@ -132,16 +132,11 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
         Integer changeCount = 0;
         UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
         userRole = super.doBeforeUpdate(loginUser, userRole);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = userRoleMapper.updateById(userRole);
-        } else {
-            changeCount = userRoleMapper.updateById(userRole);
-        }
+        changeCount = userRoleMapper.updateById(userRole);
         return changeCount;
     }
 

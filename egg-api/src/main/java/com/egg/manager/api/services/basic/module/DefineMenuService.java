@@ -120,11 +120,10 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
      * 菜单定义-更新
      * @param loginUser 当前登录用户
      * @param defineMenuVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineMenuVo defineMenuVo, boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineMenuVo defineMenuVo) throws Exception ;
 
     /**
      * 菜单定义-批量删除

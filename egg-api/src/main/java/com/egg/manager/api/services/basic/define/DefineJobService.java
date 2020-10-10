@@ -63,11 +63,10 @@ public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService
      * 职务账号-更新
      * @param loginUser 当前登录用户
      * @param defineJobVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineJobVo defineJobVo, boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineJobVo defineJobVo) throws Exception ;
 
     /**
      * 职务账号-删除

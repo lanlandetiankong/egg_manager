@@ -79,16 +79,11 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineJobVo defineJobVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineJobVo defineJobVo) throws Exception {
         Integer changeCount = 0;
         DefineJob defineJob = DefineJobTransfer.transferVoToEntity(defineJobVo);
         defineJob = super.doBeforeUpdate(loginUser, defineJob);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineJobMapper.updateById(defineJob);
-        } else {
-            changeCount = defineJobMapper.updateById(defineJob);
-        }
+        changeCount = defineJobMapper.updateById(defineJob);
         return changeCount;
     }
 

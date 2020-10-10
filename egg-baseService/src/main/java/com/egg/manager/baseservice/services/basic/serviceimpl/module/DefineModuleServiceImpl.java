@@ -82,16 +82,11 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
         Integer changeCount = 0;
         DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
         defineModule = super.doBeforeUpdate(loginUser, defineModule);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineModuleMapper.updateById(defineModule);
-        } else {
-            changeCount = defineModuleMapper.updateById(defineModule);
-        }
+        changeCount = defineModuleMapper.updateById(defineModule);
         return changeCount;
     }
 

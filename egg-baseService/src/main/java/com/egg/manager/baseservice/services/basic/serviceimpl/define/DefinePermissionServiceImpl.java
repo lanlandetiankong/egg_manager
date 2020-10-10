@@ -106,7 +106,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
         QueryWrapper<DefinePermission> uniWrapper = new QueryWrapper<DefinePermission>()
                 .ne("fid", definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
@@ -122,12 +122,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
             //如果已经启用
             DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity, oldEntity);
         }
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = definePermissionMapper.updateById(updateEntity);
-        } else {
-            changeCount = definePermissionMapper.updateById(updateEntity);
-        }
+        changeCount = definePermissionMapper.updateById(updateEntity);
         return changeCount;
     }
 

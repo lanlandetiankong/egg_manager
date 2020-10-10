@@ -53,11 +53,10 @@ public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlS
      * 租户定义-更新
      * @param loginUser 当前登录用户
      * @param defineTenantVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineTenantVo defineTenantVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineTenantVo defineTenantVo) throws Exception ;
 
     /**
      * 租户定义-批量删除

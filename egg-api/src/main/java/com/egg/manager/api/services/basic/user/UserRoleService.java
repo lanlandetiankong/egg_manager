@@ -82,11 +82,10 @@ public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<U
      * 用户角色-更新
      * @param loginUser 当前登录用户
      * @param userRoleVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,UserRoleVo userRoleVo, boolean updateAll) throws Exception;
+    Integer dealUpdate(UserAccount loginUser,UserRoleVo userRoleVo) throws Exception;
 
     /**
      * 用户角色-删除

@@ -116,11 +116,10 @@ public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlServi
      * 角色定义-更新
      * @param loginUser 当前登录用户
      * @param defineRoleVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineRoleVo defineRoleVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineRoleVo defineRoleVo) throws Exception ;
 
     /**
      * 角色定义-批量删除

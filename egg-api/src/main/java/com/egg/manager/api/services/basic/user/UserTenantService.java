@@ -82,11 +82,10 @@ public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlServi
      * 用户与租户关联-更新
      * @param loginUser 当前登录用户
      * @param userTenantVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,UserTenantVo userTenantVo, boolean updateAll) throws Exception;
+    Integer dealUpdate(UserAccount loginUser,UserTenantVo userTenantVo) throws Exception;
 
     /**
      * 用户与租户关联-删除

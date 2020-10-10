@@ -157,7 +157,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
         QueryWrapper<UserAccount> uniWrapper = new QueryWrapper<UserAccount>()
                 .ne("fid", userAccountVo.getFid());
         if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {
@@ -167,12 +167,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         Integer changeCount = 0;
         UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccount = super.doBeforeUpdate(loginUser, userAccount);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = userAccountMapper.updateById(userAccount);
-        } else {
-            changeCount = userAccountMapper.updateById(userAccount);
-        }
+        changeCount = userAccountMapper.updateById(userAccount);
         //关联 租户
         if (StringUtils.isNotBlank(userAccount.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
             QueryWrapper<UserTenant> tenantQueryWrapper = new QueryWrapper<UserTenant>();

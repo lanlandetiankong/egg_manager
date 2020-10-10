@@ -242,7 +242,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
         QueryWrapper<DefineMenu> uniWrapper = new QueryWrapper<DefineMenu>()
                 .ne("fid", defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
@@ -269,12 +269,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineMenuMapper.updateById(defineMenu);
-        } else {
-            changeCount = defineMenuMapper.updateById(defineMenu);
-        }
+        changeCount = defineMenuMapper.updateById(defineMenu);
         return changeCount;
     }
 

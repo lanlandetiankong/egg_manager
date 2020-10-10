@@ -74,11 +74,10 @@ public interface DefinePermissionService extends IService<DefinePermission>,MyBa
      * 权限定义-更新
      * @param loginUser 当前登录用户
      * @param definePermissionVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefinePermissionVo definePermissionVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefinePermissionVo definePermissionVo) throws Exception ;
 
     /**
      * 权限定义-批量删除

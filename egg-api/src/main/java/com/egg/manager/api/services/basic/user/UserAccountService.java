@@ -80,12 +80,11 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginUser 当前登录用户
      * @param userAccountVo
      * @param loginUser 当前登录用户
-     * @param updateAll 是否更新所有字段
      * @param loginUser 当前登录用户
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,UserAccountVo userAccountVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
 
     /**
      * 用户账号-删除

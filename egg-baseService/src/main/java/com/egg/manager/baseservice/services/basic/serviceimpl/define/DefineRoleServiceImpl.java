@@ -201,16 +201,11 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineRoleVo defineRoleVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineRoleVo defineRoleVo) throws Exception {
         Integer changeCount = 0;
         DefineRole defineRole = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
         defineRole = super.doBeforeUpdate(loginUser, defineRole);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineRoleMapper.updateById(defineRole);
-        } else {
-            changeCount = defineRoleMapper.updateById(defineRole);
-        }
+        changeCount = defineRoleMapper.updateById(defineRole);
         return changeCount;
     }
 

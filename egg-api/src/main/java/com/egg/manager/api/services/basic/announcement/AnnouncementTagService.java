@@ -69,11 +69,10 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBase
      * 公告标签-更新
      * @param loginUser 当前登录用户
      * @param announcementTagVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,AnnouncementTagVo announcementTagVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,AnnouncementTagVo announcementTagVo) throws Exception ;
 
 
 

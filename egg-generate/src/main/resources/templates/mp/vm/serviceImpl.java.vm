@@ -97,7 +97,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Transactional(rollbackFor=Exception.class)
     @Override
-    public Integer dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo, UserAccount loginUser, boolean updateAll) throws Exception{
+    public Integer dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo, UserAccount loginUser) throws Exception{
         Integer changeCount = 0;
         Date now = new Date() ;
         ${cfg.baseEntityName_firstLow}Vo.setUpdateTime(now);
@@ -105,12 +105,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         if(loginUser != null){
             ${cfg.baseEntityName_firstLow}.setLastModifyerId(loginUser.getFid());
         }
-        if(updateAll){
-            //是否更新所有字段
-            changeCount = ${cfg.baseEntityName_firstLow}Mapper.updateById(${cfg.baseEntityName_firstLow}) ;
-        }   else {
-            changeCount = ${cfg.baseEntityName_firstLow}Mapper.updateById(${cfg.baseEntityName_firstLow}) ;
-        }
+        changeCount = ${cfg.baseEntityName_firstLow}Mapper.updateById(${cfg.baseEntityName_firstLow}) ;
         return changeCount ;
     }
 

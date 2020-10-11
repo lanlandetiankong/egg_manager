@@ -119,7 +119,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
         Integer changeCount = 0;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeUpdate(loginUser, defineDepartment);
@@ -139,12 +139,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
             defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = defineDepartmentMapper.updateById(defineDepartment);
-        } else {
-            changeCount = defineDepartmentMapper.updateById(defineDepartment);
-        }
+        changeCount = defineDepartmentMapper.updateById(defineDepartment);
         return changeCount;
     }
 

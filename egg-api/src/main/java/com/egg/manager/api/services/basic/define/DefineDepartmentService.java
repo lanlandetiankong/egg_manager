@@ -72,11 +72,10 @@ public interface DefineDepartmentService extends IService<DefineDepartment>,MyBa
      * 部门定义-更新
      * @param loginUser 当前登录用户
      * @param defineDepartmentVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo, boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineDepartmentVo defineDepartmentVo) throws Exception ;
 
     /**
      * 部门定义-批量删除

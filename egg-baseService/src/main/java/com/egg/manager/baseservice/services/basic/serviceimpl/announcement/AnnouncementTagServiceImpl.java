@@ -98,16 +98,11 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, AnnouncementTagVo announcementTagVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
         Integer changeCount = 0;
         AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
         announcementTag = super.doBeforeUpdate(loginUser, announcementTag);
-        if (updateAll) {
-            //更新所有字段
-            changeCount = announcementTagMapper.updateById(announcementTag);
-        } else {
-            changeCount = announcementTagMapper.updateById(announcementTag);
-        }
+        changeCount = announcementTagMapper.updateById(announcementTag);
         return changeCount;
     }
 

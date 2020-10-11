@@ -46,10 +46,9 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
         /**
          * ${cfg.moduleName_Cn}-更新
          * @param ${cfg.baseEntityName}Vo
-         * @param updateAll 是否更新所有字段
          * @throws Exception
          */
-        Integer dealUpdate${cfg.baseEntityName}(UserAccount loginUser,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo, boolean updateAll) throws Exception;
+        Integer dealUpdate${cfg.baseEntityName}(UserAccount loginUser,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo) throws Exception;
 
         /**
          * ${cfg.moduleName_Cn}-删除

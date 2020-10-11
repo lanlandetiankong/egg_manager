@@ -81,16 +81,11 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
     }
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo, boolean updateAll) throws Exception {
+    public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
         Integer changeCount = 0;
         UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
         userJob = super.doBeforeUpdate(loginUser, userJob);
-        if (updateAll) {
-            //是否更新所有字段
-            changeCount = userJobMapper.updateById(userJob);
-        } else {
-            changeCount = userJobMapper.updateById(userJob);
-        }
+        changeCount = userJobMapper.updateById(userJob);
         return changeCount;
     }
 

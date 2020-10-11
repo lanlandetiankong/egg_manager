@@ -62,11 +62,10 @@ public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlS
      * 模块定义-更新
      * @param loginUser 当前登录用户
      * @param defineModuleVo
-     * @param updateAll 是否更新所有字段
      * @throws Exception
      * @return
      */
-    Integer dealUpdate(UserAccount loginUser,DefineModuleVo defineModuleVo,boolean updateAll) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser,DefineModuleVo defineModuleVo) throws Exception ;
 
     /**
      * 模块定义-批量删除

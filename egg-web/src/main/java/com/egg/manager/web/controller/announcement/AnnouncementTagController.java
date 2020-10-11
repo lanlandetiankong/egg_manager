@@ -55,15 +55,15 @@ public class AnnouncementTagController extends BaseController {
     private AnnouncementTagService announcementTagService;
 
 
-    @PcWebQueryLog(action = "查询公告标签信息Select列表", description = "查询公告标签信息Select列表", fullPath = "/announcement_tag/getAllAnnouncementTagEnums")
+    @PcWebQueryLog(action = "查询公告标签信息Select列表", description = "查询公告标签信息Select列表", fullPath = "/announcement_tag/gainEnumSelect")
     @ApiOperation(value = "查询公告标签信息Select列表", notes = "查询公告标签信息Select列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllAnnouncementTagEnums")
-    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/gainEnumSelect")
+    public MyCommonResult<AnnouncementTagVo> gainEnumSelect(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
@@ -81,9 +81,9 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询公告标签信息-Dto列表", description = "查询公告标签信息-Dto列表", fullPath = "/announcement_tag/getAllAnnouncementTagDtos")
-    @PostMapping(value = "/getAllAnnouncementTagDtos")
-    public MyCommonResult<AnnouncementTagVo> doGetAllAnnouncementTagDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PcWebQueryLog(action = "查询公告标签信息-Dto列表", description = "查询公告标签信息-Dto列表", fullPath = "/announcement_tag/queryDtoPage")
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<AnnouncementTagVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -102,9 +102,9 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询公告标签信息", description = "根据公告标签id查询公告标签信息", fullPath = "/announcement_tag/getAnnouncementTagById")
-    @PostMapping(value = "/getAnnouncementTagById")
-    public MyCommonResult<AnnouncementTagVo> doGetAnnouncementTagById(HttpServletRequest request, String announcementTagId,
+    @PcWebQueryLog(action = "查询公告标签信息", description = "根据公告标签id查询公告标签信息", fullPath = "/announcement_tag/queryOneById")
+    @PostMapping(value = "/queryOneById")
+    public MyCommonResult<AnnouncementTagVo> queryOneById(HttpServletRequest request, String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
@@ -119,15 +119,14 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增公告标签", description = "表单方式新增公告标签", fullPath = "/announcement_tag/doAddAnnouncementTag")
-    @PostMapping(value = "/doAddAnnouncementTag")
-    public MyCommonResult doAddAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
+    @PcWebOperationLog(action = "新增公告标签", description = "表单方式新增公告标签", fullPath = "/announcement_tag/createByForm")
+    @PostMapping(value = "/createByForm")
+    public MyCommonResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
         } catch (Exception e) {
@@ -138,9 +137,9 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新公告标签", description = "表单方式更新公告标签", fullPath = "/announcement_tag/doUpdateAnnouncementTag")
-    @PostMapping(value = "/doUpdateAnnouncementTag")
-    public MyCommonResult doUpdateAnnouncementTag(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
+    @PcWebOperationLog(action = "更新公告标签", description = "表单方式更新公告标签", fullPath = "/announcement_tag/updateByForm")
+    @PostMapping(value = "/updateByForm")
+    public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
@@ -156,13 +155,13 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除公告标签", description = "根据公告标签id批量删除公告标签", fullPath = "/announcement_tag/batchDelAnnouncementTagByIds")
+    @PcWebOperationLog(action = "批量删除公告标签", description = "根据公告标签id批量删除公告标签", fullPath = "/announcement_tag/batchDeleteByIds")
     @ApiOperation(value = "批量删除公告标签", notes = "根据公告标签id批量删除公告标签", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的公告标签id数组", required = true, dataTypeClass = String[].class),
     })
-    @PostMapping(value = "/batchDelAnnouncementTagByIds")
-    public MyCommonResult doBatchDeleteAnnouncementTagById(HttpServletRequest request, String[] delIds,
+    @PostMapping(value = "/batchDeleteByIds")
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
                                                            @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
@@ -178,13 +177,13 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除公告标签", description = "根据id删除公告标签", fullPath = "/announcement_tag/delOneAnnouncementTagById")
+    @PcWebOperationLog(action = "删除公告标签", description = "根据id删除公告标签", fullPath = "/announcement_tag/deleteById")
     @ApiOperation(value = "删除公告标签", notes = "根据id删除公告标签", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的公告标签id", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/delOneAnnouncementTagById")
-    public MyCommonResult doDelOneAnnouncementTagById(HttpServletRequest request, String delId,
+    @PostMapping(value = "/deleteById")
+    public MyCommonResult deleteById(HttpServletRequest request, String delId,
                                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.DELETE_BY_ID);
         try {

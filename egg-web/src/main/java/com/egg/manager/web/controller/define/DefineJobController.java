@@ -53,15 +53,15 @@ public class DefineJobController extends BaseController {
     private DefineJobService defineJobService;
 
 
-    @PcWebQueryLog(action = "查询职务信息列表", description = "查询职务信息列表", fullPath = "/define/define_job/")
+    @PcWebQueryLog(action = "查询职务信息列表", description = "查询职务信息列表", fullPath = "/define/define_job/queryPage")
     @ApiOperation(value = "查询职务信息列表", notes = "查询职务信息列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineJobs")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobs(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryPage")
+    public MyCommonResult<DefineJobVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -80,15 +80,15 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "查询职务信息-Dto列表", description = "查询职务信息-Dto列表", fullPath = "/define/define_job/getAllDefineJobDtos")
+    @PcWebQueryLog(action = "查询职务信息-Dto列表", description = "查询职务信息-Dto列表", fullPath = "/define/define_job/queryDtoPage")
     @ApiOperation(value = "查询职务信息-Dto列表", notes = "查询职务信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineJobDtos")
-    public MyCommonResult<DefineJobVo> doGetAllDefineJobDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<DefineJobVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                              @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -108,9 +108,9 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/getDefineJobById")
-    @PostMapping(value = "/getDefineJobById")
-    public MyCommonResult<DefineJobVo> doGetDefineJobById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/queryOneById")
+    @PostMapping(value = "/queryOneById")
+    public MyCommonResult<DefineJobVo> queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
@@ -123,9 +123,9 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/doAddDefineJob")
-    @PostMapping(value = "/doAddDefineJob")
-    public MyCommonResult doAddDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/createByForm")
+    @PostMapping(value = "/createByForm")
+    public MyCommonResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
@@ -140,9 +140,9 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/doUpdateDefineJob")
-    @PostMapping(value = "/doUpdateDefineJob")
-    public MyCommonResult doUpdateDefineJob(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/updateByForm")
+    @PostMapping(value = "/updateByForm")
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
@@ -156,13 +156,13 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除职务", description = "根据职务id批量删除职务", fullPath = "/define/define_job/batchDelDefineJobByIds")
+    @PcWebOperationLog(action = "批量删除职务", description = "根据职务id批量删除职务", fullPath = "/define/define_job/batchDeleteByIds")
     @ApiOperation(value = "批量删除职务", notes = "根据职务id批量删除职务", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的职务定义id数组", required = true, dataTypeClass = String[].class),
     })
-    @PostMapping(value = "/batchDelDefineJobByIds")
-    public MyCommonResult doBatchDeleteDefineJobByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/batchDeleteByIds")
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
@@ -177,13 +177,13 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除职务", description = "根据职务id删除职务", fullPath = "/define/define_job/delOneDefineJobById")
+    @PcWebOperationLog(action = "删除职务", description = "根据职务id删除职务", fullPath = "/define/define_job/deleteById")
     @ApiOperation(value = "删除职务", notes = "根据职务id删除职务", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的职务定义id", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/delOneDefineJobById")
-    public MyCommonResult doDelOneDefineJobById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/deleteById")
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {

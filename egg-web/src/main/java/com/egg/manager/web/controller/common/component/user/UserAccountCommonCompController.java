@@ -36,15 +36,15 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/getAllUserAccountDtos", flag = false)
+    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
     @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表", notes = "[通用组件]-查询用户信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllUserAccountDtos")
-    public MyCommonResult<UserAccountVo> doGetAllUserAccountDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                  @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountCommonCompFuncModuleConstant.Success.QUERY_PAGE);
         try {

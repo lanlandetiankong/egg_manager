@@ -95,9 +95,9 @@ public class UserExcelController extends BaseController {
 
 
     @ApiOperation(value = "导入数据", notes = "导入数据", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/dealImportData")
+    @PostMapping(value = "/importData")
     @ResponseBody
-    public MyCommonResult dealImportData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
+    public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
                                          @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_IMPORT_DATA);
         try {

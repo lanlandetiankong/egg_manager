@@ -61,15 +61,15 @@ public class AnnouncementController extends BaseController {
 
 
 
-    @PcWebQueryLog(action = "查询公告信息-Dto列表", description = "查询公告信息-Dto列表", fullPath = "/announcement/getAllAnnouncementDtos")
+    @PcWebQueryLog(action = "查询公告信息-Dto列表", description = "查询公告信息-Dto列表", fullPath = "/announcement/queryDtoPage")
     @ApiOperation(value = "查询公告信息-Dto列表", notes = "查询公告信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllAnnouncementDtos")
-    public MyCommonResult<AnnouncementVo> doGetAllAnnouncementDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<AnnouncementVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                    Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -93,9 +93,9 @@ public class AnnouncementController extends BaseController {
 
 
     @ApiOperation(value = "查询公告信息部分列表", notes = "查询公告信息部分列表", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询公告信息部分列表", description = "查询公告信息部分列表", fullPath = "/announcement/getSomeAnnouncements")
-    @PostMapping(value = "/getSomeAnnouncements")
-    public MyCommonResult<AnnouncementVo> doGetSomeAnnouncements(HttpServletRequest request, Integer limitSize,
+    @PcWebQueryLog(action = "查询公告信息部分列表", description = "查询公告信息部分列表", fullPath = "/announcement/queryFilteredPage")
+    @PostMapping(value = "/queryFilteredPage")
+    public MyCommonResult<AnnouncementVo> queryFilteredPage(HttpServletRequest request, Integer limitSize,
                                                                  Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -122,10 +122,10 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "查询公告信息", description = "根据id查询公告信息", fullPath = "/announcement/getAnnouncementById")
+    @PcWebQueryLog(action = "查询公告信息", description = "根据id查询公告信息", fullPath = "/announcement/queryOneById")
     @ApiOperation(value = "查询公告信息", notes = "根据id查询公告信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/getAnnouncementById")
-    public MyCommonResult<AnnouncementVo> doGetAnnouncementById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/queryOneById")
+    public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(announcementId,BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -141,10 +141,10 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/addAnnouncement")
+    @PcWebOperationLog(action = "新增公告", description = "表单方式新增公告", fullPath = "/announcement/createByForm")
     @ApiOperation(value = "新增公告", notes = "表单方式新增公告", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/addAnnouncement")
-    public MyCommonResult doAddAnnouncement(HttpServletRequest request, AnnouncementVo announcementVo,
+    @PostMapping(value = "/createByForm")
+    public MyCommonResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
@@ -160,9 +160,9 @@ public class AnnouncementController extends BaseController {
 
 
     @ApiOperation(value = "公告草稿发布", notes = "表单方式发布公告草稿", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/addAnnouncementFromDraft")
-    @PostMapping(value = "/addAnnouncementFromDraft")
-    public MyCommonResult doAddAnnouncementFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
+    @PcWebOperationLog(action = "公告草稿发布", description = "表单方式发布公告草稿", fullPath = "/announcement/createFromDraft")
+    @PostMapping(value = "/createFromDraft")
+    public MyCommonResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                      @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.PUBLISH);
         Integer addCount = 0;
@@ -176,13 +176,13 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "批量删除公告", description = "根据公告id批量删除公告", fullPath = "/announcement/batchDelAnnouncementByIds")
+    @PcWebOperationLog(action = "批量删除公告", description = "根据公告id批量删除公告", fullPath = "/announcement/batchDeleteByIds")
     @ApiOperation(value = "批量删除公告", notes = "根据公告id批量删除公告", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的公告id数组", required = true, dataTypeClass = String[].class),
     })
-    @PostMapping(value = "/batchDelAnnouncementByIds")
-    public MyCommonResult doBatchDeleteAnnouncementById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/batchDeleteByIds")
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
@@ -198,12 +198,12 @@ public class AnnouncementController extends BaseController {
 
 
     @ApiOperation(value = "删除公告", notes = "根据公告id删除公告", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "删除公告", description = "根据公告id删除公告", fullPath = "/announcement/delOneAnnouncementByIds")
+    @PcWebOperationLog(action = "删除公告", description = "根据公告id删除公告", fullPath = "/announcement/deleteById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的公告id", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/delOneAnnouncementByIds")
-    public MyCommonResult doDelOneAnnouncementByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/deleteById")
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

@@ -74,15 +74,15 @@ public class DefineRoleController extends BaseController {
     private DefineRoleService defineRoleService;
 
 
-    @PcWebOperationLog(action = "查询角色定义信息列表", description = "查询角色定义信息列表", fullPath = "/define/define_role/getAllDefineRoles")
+    @PcWebOperationLog(action = "查询角色定义信息列表", description = "查询角色定义信息列表", fullPath = "/define/define_role/queryPage")
     @ApiOperation(value = "查询角色定义信息列表", notes = "查询角色定义信息列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineRoles")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoles(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryPage")
+    public MyCommonResult<DefineRoleVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                             @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class, DefineRoleFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -100,15 +100,15 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "查询角色定义信息-Dto列表", description = "查询角色定义信息-Dto列表", fullPath = "/define/define_role/getAllDefineRoleDtos")
+    @PcWebOperationLog(action = "查询角色定义信息-Dto列表", description = "查询角色定义信息-Dto列表", fullPath = "/define/define_role/queryDtoPage")
     @ApiOperation(value = "查询角色定义信息-Dto列表", notes = "查询角色定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineRoleDtos")
-    public MyCommonResult<DefineRoleVo> doGetAllDefineRoleDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<DefineRoleVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_PAGE);
         try {
@@ -128,9 +128,9 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "查询角色定义信息", notes = "根据角色定义id查询角色定义信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "查询角色定义信息", description = "根据角色定义id查询角色定义信息", fullPath = "/define/define_role/getDefineRoleById")
-    @PostMapping(value = "/getDefineRoleById")
-    public MyCommonResult<DefineRoleVo> doGetDefineRoleById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebOperationLog(action = "查询角色定义信息", description = "根据角色定义id查询角色定义信息", fullPath = "/define/define_role/queryOneById")
+    @PostMapping(value = "/queryOneById")
+    public MyCommonResult<DefineRoleVo> queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefineRole defineRole = defineRoleMapper.selectById(defineRoleId);
@@ -142,8 +142,8 @@ public class DefineRoleController extends BaseController {
     }
 
     @ApiOperation(value = "查询角色所拥有的权限", notes = "根据角色定义id查询角色已有的权限", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/getAllPermissionByRoleId")
-    public MyCommonResult<DefinePermission> doGetAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/gainAllPermissionByRoleId")
+    public MyCommonResult<DefinePermission> gainAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class, DefineRoleFuncModuleConstant.Success.QUERY_GRANTED);
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
@@ -156,8 +156,8 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "查询角色已获授权的菜单", notes = "根据角色定义id查询角色已获授权的菜单", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/getAllMenuByRoleId")
-    public MyCommonResult<DefineMenu> doGetAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
+    @PostMapping(value = "/gainAllMenuByRoleId")
+    public MyCommonResult<DefineMenu> gainAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
                                                                  @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class, DefineRoleFuncModuleConstant.Success.QUERY_GRANTED);
         try {
@@ -177,8 +177,8 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "新增角色定义", notes = "表单方式新增角色定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/doAddDefineRole")
-    public MyCommonResult doAddDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/createByForm")
+    public MyCommonResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
@@ -193,8 +193,8 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "更新角色定义", notes = "表单方式更新角色定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PostMapping(value = "/doUpdateDefineRole")
-    public MyCommonResult doUpdateDefineRole(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/updateByForm")
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
@@ -208,13 +208,13 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "批量删除角色定义", description = "根据角色id批量删除角色定义", fullPath = "/define/define_role/batchDelDefineRoleByIds")
+    @PcWebOperationLog(action = "批量删除角色定义", description = "根据角色id批量删除角色定义", fullPath = "/define/define_role/batchDeleteByIds")
     @ApiOperation(value = "批量删除角色定义", notes = "根据角色id批量删除角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的权限定义id数组", required = true, dataTypeClass = String[].class),
     })
-    @PostMapping(value = "/batchDelDefineRoleByIds")
-    public MyCommonResult doBatchDeleteDefineRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/batchDeleteByIds")
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
@@ -228,13 +228,13 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "删除角色定义", description = "根据角色id删除角色定义", fullPath = "/define/define_role/delOneDefineRoleByIds")
+    @PcWebOperationLog(action = "删除角色定义", description = "根据角色id删除角色定义", fullPath = "/define/define_role/deleteById")
     @ApiOperation(value = "删除角色定义", notes = "根据角色id删除角色定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的角色定义id", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/delOneDefineRoleByIds")
-    public MyCommonResult doDelOneDefineRoleByIds(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/deleteById")
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineRoleFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

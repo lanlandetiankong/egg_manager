@@ -54,15 +54,15 @@ public class DefineTenantController extends BaseController {
     private DefineTenantService defineTenantService;
 
 
-    @PcWebQueryLog(action = "查询租户定义信息-Dto列表", description = "查询租户定义信息-Dto列表", fullPath = "/organization/define_tenant/getAllDefineTenantDtos")
+    @PcWebQueryLog(action = "查询租户定义信息-Dto列表", description = "查询租户定义信息-Dto列表", fullPath = "/organization/define_tenant/queryDtoPage")
     @ApiOperation(value = "查询租户定义信息-Dto列表", notes = "查询租户定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineTenantDtos")
-    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantDtos(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/queryDtoPage")
+    public MyCommonResult<DefineTenantVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
@@ -81,9 +81,9 @@ public class DefineTenantController extends BaseController {
 
 
     @ApiOperation(value = "查询租户定义信息", notes = "根据租户定义id查询租户定义信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询租户定义信息", description = "根据租户定义id查询租户定义信息", fullPath = "/organization/define_tenant/getDefineTenantById")
-    @PostMapping(value = "/getDefineTenantById")
-    public MyCommonResult<DefineTenantVo> doGetDefineTenantById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebQueryLog(action = "查询租户定义信息", description = "根据租户定义id查询租户定义信息", fullPath = "/organization/define_tenant/queryOneById")
+    @PostMapping(value = "/queryOneById")
+    public MyCommonResult<DefineTenantVo> queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.QUERY_PAGE);
         try {
             Assert.notBlank(defineTenantId,BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -96,14 +96,14 @@ public class DefineTenantController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "查询租户定义信息-Enum列表", description = "查询租户定义信息-Enum列表", fullPath = "/organization/define_tenant/getAllDefineTenantEnums")
+    @PcWebQueryLog(action = "查询租户定义信息-Enum列表", description = "查询租户定义信息-Enum列表", fullPath = "/organization/define_tenant/gainEnumSelect")
     @ApiOperation(value = "查询租户定义信息-Enum列表", notes = "查询租户定义信息-Enum列表", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/getAllDefineTenantEnums")
+    @PostMapping(value = "/gainEnumSelect")
     public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
@@ -122,9 +122,9 @@ public class DefineTenantController extends BaseController {
 
 
     @ApiOperation(value = "新增租户定义", notes = "表单方式新增租户定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/doAddDefineTenant")
-    @PostMapping(value = "/doAddDefineTenant")
-    public MyCommonResult doAddDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebOperationLog(action = "新增租户定义", description = "表单方式新增租户定义", fullPath = "/organization/define_tenant/createByForm")
+    @PostMapping(value = "/createByForm")
+    public MyCommonResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
@@ -139,9 +139,9 @@ public class DefineTenantController extends BaseController {
 
 
     @ApiOperation(value = "更新租户定义", notes = "表单方式更新租户定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/doUpdateDefineTenant")
-    @PostMapping(value = "/doUpdateDefineTenant")
-    public MyCommonResult doUpdateDefineTenant(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+    @PcWebOperationLog(action = "更新租户定义", description = "表单方式更新租户定义", fullPath = "/organization/define_tenant/updateByForm")
+    @PostMapping(value = "/updateByForm")
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
@@ -155,13 +155,13 @@ public class DefineTenantController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除租户定义", description = "根据租户定义id批量删除租户定义", fullPath = "/organization/define_tenant/batchDelDefineTenantByIds")
+    @PcWebOperationLog(action = "批量删除租户定义", description = "根据租户定义id批量删除租户定义", fullPath = "/organization/define_tenant/batchDeleteByIds")
     @ApiOperation(value = "批量删除租户定义", notes = "根据租户定义id批量删除租户定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的租户定义id数组", required = true, dataTypeClass = String[].class),
     })
-    @PostMapping(value = "/batchDelDefineTenantByIds")
-    public MyCommonResult doBatchDeleteDefineTenantByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/batchDeleteByIds")
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
@@ -175,13 +175,13 @@ public class DefineTenantController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除租户定义", description = "根据租户id删除租户定义", fullPath = "/organization/define_tenant/delOneDefineTenantById")
+    @PcWebOperationLog(action = "删除租户定义", description = "根据租户id删除租户定义", fullPath = "/organization/define_tenant/deleteById")
     @ApiOperation(value = "删除租户定义", notes = "根据租户id删除租户定义", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的租户定义id", required = true, dataTypeClass = String.class),
     })
-    @PostMapping(value = "/delOneDefineTenantById")
-    public MyCommonResult doDelOneDefineTenantById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    @PostMapping(value = "/deleteById")
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());

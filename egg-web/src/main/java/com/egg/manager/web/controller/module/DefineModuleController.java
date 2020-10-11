@@ -120,7 +120,7 @@ public class DefineModuleController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo, false);
+            changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,DefineModuleFuncModuleConstant.Failure.UPDATE_OPER);

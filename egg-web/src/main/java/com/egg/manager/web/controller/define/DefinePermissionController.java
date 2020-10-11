@@ -150,7 +150,7 @@ public class DefinePermissionController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo, false);
+            changeCount = definePermissionService.dealUpdate(loginUser, definePermissionVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result,e,DefinePermissionFuncModuleConstant.Failure.UPDATE_OPER);

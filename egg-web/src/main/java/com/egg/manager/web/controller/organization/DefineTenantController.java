@@ -146,7 +146,7 @@ public class DefineTenantController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo, false);
+            changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.UPDATE_OPER);

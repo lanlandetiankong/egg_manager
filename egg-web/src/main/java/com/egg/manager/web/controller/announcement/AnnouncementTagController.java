@@ -146,7 +146,7 @@ public class AnnouncementTagController extends BaseController {
         try {
             Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo, false);
+            changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.UPDATE_OPER);

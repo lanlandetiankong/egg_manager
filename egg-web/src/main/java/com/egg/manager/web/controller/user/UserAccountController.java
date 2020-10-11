@@ -201,7 +201,7 @@ public class UserAccountController extends BaseController {
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
             Assert.notNull(userAccountVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = userAccountService.dealUpdate(loginUser, userAccountVo, false);
+            changeCount = userAccountService.dealUpdate(loginUser, userAccountVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE_OPER);

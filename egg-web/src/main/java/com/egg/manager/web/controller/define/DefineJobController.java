@@ -147,7 +147,7 @@ public class DefineJobController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineJobService.dealUpdate(loginUser, defineJobVo, false);
+            changeCount = defineJobService.dealUpdate(loginUser, defineJobVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.UPDATE_OPER);

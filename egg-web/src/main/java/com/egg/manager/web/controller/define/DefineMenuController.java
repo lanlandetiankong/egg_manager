@@ -183,7 +183,7 @@ public class DefineMenuController extends BaseController {
         try {
             Assert.notNull(vo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = defineMenuService.dealUpdate(loginUser, vo, false);
+            changeCount = defineMenuService.dealUpdate(loginUser, vo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result,e,DefineMenuFuncModuleConstant.Failure.UPDATE_OPER);

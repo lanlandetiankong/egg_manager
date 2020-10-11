@@ -163,7 +163,7 @@ public class DefineDepartmentController extends BaseController {
         Integer changeCount = 0;
         try {
             Assert.notNull(defineDepartmentVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo, false);
+            changeCount = defineDepartmentService.dealUpdate(loginUser, defineDepartmentVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,DefineDepartmentFuncModuleConstant.Failure.UPDATE_OPER);

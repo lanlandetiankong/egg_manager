@@ -200,7 +200,7 @@ public class DefineRoleController extends BaseController {
         try {
             Assert.notNull(defineRoleVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo, false);
+            changeCount = defineRoleService.dealUpdate(loginUser, defineRoleVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result,e,DefineRoleFuncModuleConstant.Failure.UPDATE_OPER);

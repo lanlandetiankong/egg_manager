@@ -1,12 +1,15 @@
-package com.egg.manager.generate.mybatis;
+package com.egg.manager.generate.commons.mybatis;
 
 
 import com.egg.manager.persistence.db.mysql.mapper.common.OperTableInfoMapper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.boot.SpringApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -16,14 +19,19 @@ import java.util.List;
  * @Author: zhoucj
  * @Date: 2020/10/14 17:06
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest()
+//@WebAppConfiguration
 public class QueryMysqlTableInfoUtil {
 
+    @Autowired
+    private OperTableInfoMapper operTableInfoMapper;
 
 
-
-    public static void main(String[] args) {
+    @Test
+    public void queryTableNameList() {
         //String sql = "select table_name from information_schema.tables where table_schema='egg_manager';" ;
-        ApplicationContext context = new ClassPathXmlApplicationContext();
+        ApplicationContext context = new ClassPathXmlApplicationContext("mapper/common/OperTableInfoMapper.xml");
         BeanFactory factory = (BeanFactory) context;
         OperTableInfoMapper customerInfoMapper=factory.getBean(OperTableInfoMapper.class);
         try {

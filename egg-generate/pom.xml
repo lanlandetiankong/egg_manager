@@ -20,6 +20,30 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
   <dependencies>
       <dependency>
           <groupId>com.teaegg</groupId>
@@ -29,6 +53,14 @@
               <exclusion>
                   <groupId>com.baomidou</groupId>
                   <artifactId>mybatis-plus</artifactId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>asm</artifactId>
+                  <groupId>org.ow2.asm</groupId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>javassist</artifactId>
+                  <groupId>org.javassist</groupId>
               </exclusion>
           </exclusions>
       </dependency>
@@ -41,11 +73,21 @@
                   <artifactId>commons-logging</artifactId>
                   <groupId>commons-logging</groupId>
               </exclusion>
+              <exclusion>
+                  <artifactId>commons-lang</artifactId>
+                  <groupId>commons-lang</groupId>
+              </exclusion>
           </exclusions>
       </dependency>
       <dependency>
           <groupId>org.apache.velocity</groupId>
           <artifactId>velocity</artifactId>
+          <exclusions>
+              <exclusion>
+                  <artifactId>commons-collections</artifactId>
+                  <groupId>commons-collections</groupId>
+              </exclusion>
+          </exclusions>
       </dependency>
       <!-- sql server数据库驱动 -->
       <dependency>
@@ -63,9 +105,19 @@
           <artifactId>mybatis-plus</artifactId>
           <version>2.1.8</version>
       </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 
   <build>
-
+      
   </build>
 </project>

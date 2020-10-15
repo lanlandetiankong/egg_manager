@@ -1,5 +1,6 @@
 package com.egg.manager.common.util.encrypt;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
@@ -9,6 +10,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
  * @Date: 2020/8/5 13:55
  * @doc https://juejin.im/post/6850418120726446093#comment
  */
+@Slf4j
 public class JasyptUtil {
 
     /**
@@ -31,7 +33,7 @@ public class JasyptUtil {
         // 要加密的数据（如数据库的用户名或密码）
         String username = textEncryptor.encrypt("root");
         String password = textEncryptor.encrypt("root");
-        System.out.println("username: " + username);
-        System.out.println("password: " + password);
+        log.debug("username:{}",username);
+        log.debug("password:{}",password);
     }
 }

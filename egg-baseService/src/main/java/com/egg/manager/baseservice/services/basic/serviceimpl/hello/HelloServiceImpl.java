@@ -38,7 +38,7 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public String loadBalanceTest() {
-        System.out.println("for service ->" + serverPort);
+        log.info("for service ->" + serverPort);
         return serverPort;
     }
 

@@ -81,7 +81,9 @@ public class MyCommonResult<T> implements Serializable {
      * 分页bean
      */
     private AntdvPaginationBean paginationBean;
-
+    /**
+     * 更多参数,配置 com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey
+     */
     @Builder.Default
     private Map<String,Object> moreAttribute = new HashMap<>();
 

@@ -57,9 +57,7 @@ public class GenerationSequenceUtil {
     public static String generateUUID(){
         return generateUUID(null);
     }
-    public static void main(String[] args) {
-        System.out.println(generateUUID("menu"));
-    }
+
 
     /** 机器码 加 进程号 会导致生成的序列号很长, 基于这两个值做一些截取 */
     private static final String MP;

@@ -106,7 +106,6 @@ public class ControllerAspect {
 
     @After(value = "aspect()")
     public void afterController(JoinPoint joinPoint) throws Throwable {
-        //System.out.println("后。。。afterController");
     }
 
 
@@ -193,7 +192,6 @@ public class ControllerAspect {
                 pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
-        //System.out.println("返回。。。afterControllerReturn");
     }
 
 
@@ -258,7 +256,6 @@ public class ControllerAspect {
                 pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
-        //System.out.println("异常。。。afterControllerThrowing");
     }
 
 

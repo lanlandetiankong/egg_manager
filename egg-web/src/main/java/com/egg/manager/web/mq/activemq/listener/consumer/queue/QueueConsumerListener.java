@@ -1,8 +1,10 @@
 package com.egg.manager.web.mq.activemq.listener.consumer.queue;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class QueueConsumerListener {
 
@@ -12,7 +14,7 @@ public class QueueConsumerListener {
      */
     @JmsListener(destination = "${egg.conf.mq.activemq.queue-name}", containerFactory = "queueListener")
     public void readActiveQueue(String message) {
-        System.out.println("queue接受到：" + message);
+        log.debug("queue接受到：" + message);
     }
 
 

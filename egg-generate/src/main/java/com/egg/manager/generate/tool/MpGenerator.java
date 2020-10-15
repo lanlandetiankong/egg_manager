@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @author zhouchengjie
  * @since 2019-09-12
  */
+@Slf4j
 public class MpGenerator {
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
@@ -50,7 +52,7 @@ public class MpGenerator {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
-                System.out.println("转换类型：" + fieldType);
+                log.debug("转换类型：" + fieldType);
                 // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
                 return super.processTypeConvert(fieldType);
             }

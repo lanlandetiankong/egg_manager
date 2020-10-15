@@ -1,5 +1,6 @@
 package com.egg.manager.common.util.pinyin;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
  * 汉字转换为拼音
  * @author Red
  */
+@Slf4j
 public class MyPinYinUtil {
     /**
      * 测试main方法
@@ -18,8 +20,8 @@ public class MyPinYinUtil {
      */
     public static void main(String[] args) {
         //转为首字母大写
-        System.out.println(toFirstChar("汉字转换为拼音").toUpperCase());
-        System.out.println(toPinyin("汉字转换为拼音"));
+        log.debug(toFirstChar("汉字转换为拼音").toUpperCase());
+        log.debug(toPinyin("汉字转换为拼音"));
     }
     /**
      * 获取字符串拼音的第一个字母

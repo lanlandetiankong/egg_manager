@@ -1,8 +1,10 @@
 package com.egg.manager.web.mq.activemq.listener.consumer.topic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class TopicConsumerListener {
     /**
@@ -11,6 +13,6 @@ public class TopicConsumerListener {
      */
     @JmsListener(destination = "${egg.conf.mq.activemq.topic-name}", containerFactory = "topicListener")
     public void readActiveQueue(String message) {
-        System.out.println("topic接受到：" + message);
+        log.debug("topic接受到：" + message);
     }
 }

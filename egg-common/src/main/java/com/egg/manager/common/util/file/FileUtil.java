@@ -177,7 +177,7 @@ public class FileUtil {
         for (File f : tempList) {
             if (f.isFile()) {
                 listFile.add(f.getPath());
-                System.out.println(f.getPath());
+                log.debug(f.getPath());
                 continue;
             }
             if (f.isDirectory()) {
@@ -1074,12 +1074,6 @@ public class FileUtil {
         return decoder.decodeBuffer(base64String);
     }
 
-//    public static void main(String[] args) throws Exception {
-//        //System.out.println(Jsoup.parse(new File("D:\\result.htm"),"GBK").outerHtml());
-//        //System.out.println(readFileContent(new File("D:\\result.htm"),Charset.forName("GBK")));
-//        //System.out.println(image2Base64String(new FileInputStream(new File("D://123.png"))));
-//        System.out.println("data:image/png;base64,".replaceAll("data:image/(jpg|png|jpeg);base64,",""));
-//    }
 
     /**
      * 创建文件路径(文件夹)

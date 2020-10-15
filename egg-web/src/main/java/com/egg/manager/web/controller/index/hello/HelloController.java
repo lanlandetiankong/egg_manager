@@ -60,20 +60,20 @@ public class HelloController extends BaseController {
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
         String port = helloService.loadBalanceTest();
-        System.out.println("for debug..." + port);
+        log.info("for debug..." + port);
     }
 
     @PcWebQueryLog(action = "测试dubbo负载均衡-相互调用", fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();
-        System.out.println("for message  debug..." + port);
+        log.info("for message  debug..." + port);
     }
 
 
     @PcWebQueryLog(action = "", fullPath = "/index/hello/testRegistrar", flag = false)
     @GetMapping(value = "/testRegistrar")
     public void testRegistrar() {
-        System.out.println("for message  debug..." );
+        log.info("for message  debug..." );
     }
 }

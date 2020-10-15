@@ -24,8 +24,6 @@ public class TestReflex {
 
         handlePojoSetFieldValue(userAccount2,"fidsss",String.class,MyUUIDUtil.renderSimpleUuid());
 
-
-        System.out.println("for debug");
     }
 
 

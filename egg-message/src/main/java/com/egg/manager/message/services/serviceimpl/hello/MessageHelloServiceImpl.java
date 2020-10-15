@@ -18,7 +18,7 @@ public class MessageHelloServiceImpl implements MessageHelloService {
     private HelloService helloService ;
     @Override
     public String loadBalancePort(){
-        System.out.println("for message ->"+serverPort);
+        log.info("for message ->"+serverPort);
         return serverPort;
     }
 

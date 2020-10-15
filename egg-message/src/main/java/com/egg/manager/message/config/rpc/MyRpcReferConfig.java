@@ -17,4 +17,5 @@ public class MyRpcReferConfig {
     static class DubboReferConfig {
 
     }
+
 }

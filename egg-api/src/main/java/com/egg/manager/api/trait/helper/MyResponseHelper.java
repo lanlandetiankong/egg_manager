@@ -33,18 +33,14 @@ public class MyResponseHelper {
             errorMsg = msg +" \n " + errorMsg ;
         }
         MyCommonResult<T> result = MyCommonResult.gainErrorResult(clazz,errorMsg) ;
-        result.setActionFlag(false);
         result.setHasError(true);
-        result.setStatus(HttpStatus.BAD_REQUEST.value());
-        result.setCode(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        result.setCode(HttpStatus.BAD_REQUEST.value());
         return result ;
     }
     public static <T> MyCommonResult<T> handleRequestFailure(Class<T> clazz,PublicResultEnum resultEnum) {
         MyCommonResult<T> result = MyCommonResult.gainErrorResult(clazz,resultEnum.getLabel()) ;
-        result.setActionFlag(false);
         result.setHasError(true);
-        result.setStatus(HttpStatus.BAD_REQUEST.value());
-        result.setCode(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        result.setCode(HttpStatus.BAD_REQUEST.value());
         if(PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())){
             result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }

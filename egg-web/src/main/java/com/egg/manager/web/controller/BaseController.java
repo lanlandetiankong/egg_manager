@@ -16,6 +16,7 @@ import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.common.util.str.MyStringUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.google.common.collect.Maps;
@@ -113,8 +114,8 @@ public class BaseController {
             userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
-                result.setRouterUrlSet(routerUrlSet);
-                result.setPermissionSet(permissionSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_Set,routerUrlSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_Set,permissionSet);
             }
         } else {
             log.error("未能成功缓存用户信息到Redis");

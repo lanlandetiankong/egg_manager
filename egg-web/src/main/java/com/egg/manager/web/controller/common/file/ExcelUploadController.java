@@ -8,6 +8,7 @@ import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -83,7 +84,7 @@ public class ExcelUploadController extends BaseController {
                         .build();
                 uploadBeanList.add(uploadBean);
             }
-            result.setFileUploaderBeanList(uploadBeanList);
+            result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILEUPLOAD_BEANLIST,uploadBeanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e,ExcelUploadFuncModuleConstant.Failure.UPLOAD_EXCEL);
         }

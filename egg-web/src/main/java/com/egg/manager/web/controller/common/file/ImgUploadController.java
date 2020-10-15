@@ -7,6 +7,7 @@ import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -77,7 +78,7 @@ public class ImgUploadController extends BaseController {
                         .filePrefix(uploadProps.getUrlPrefix() + File.separator)
                         .fileUri(fileUri)
                         .build();
-                result.setFileResBean(fileResBean);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILERES_BEAN,fileResBean);
             } catch (IOException e) {
                 throw e;
             }

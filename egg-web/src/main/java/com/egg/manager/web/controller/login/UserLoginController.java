@@ -9,6 +9,7 @@ import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.bean.webvo.login.LoginAccountVo;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.bean.webvo.verification.login.LoginAccountVerifyO;
@@ -77,7 +78,7 @@ public class UserLoginController extends BaseController {
             if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
                 //账号密码验证通过
-                result.setAccountToken(userAccountToken);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN,userAccountToken);
                 //用户登录信息验证成功，在shiro进行一些登录处理
                 //添加用户认证信息
                 Subject subject = SecurityUtils.getSubject();

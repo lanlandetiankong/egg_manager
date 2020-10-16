@@ -9,6 +9,7 @@ import com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.Sm
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
@@ -59,7 +60,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
 
     @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
-    @ApiOperation(value = "分页查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -83,7 +84,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
     @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
-    @ApiOperation(value = "分页查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -107,7 +108,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
     @PcWebQueryLog(action = "根据id查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
-    @ApiOperation(value = "根据id查询->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "根据id查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                        @RequestParam(value = "fid", required = true) String fid) {
@@ -124,7 +125,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
     @PcWebOperationLog(action = "新增->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
-    @ApiOperation(value = "新增->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "新增->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
@@ -144,7 +145,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
 
     @PcWebOperationLog(action = "更新->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
-    @ApiOperation(value = "更新->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "更新->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
@@ -169,7 +170,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
 
     @PcWebOperationLog(action = "删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
-    @ApiOperation(value = "删除->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
     })
@@ -188,7 +189,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
 
     @PcWebOperationLog(action = "批量删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
-    @ApiOperation(value = "批量删除->表单类型定义", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "批量删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
     })

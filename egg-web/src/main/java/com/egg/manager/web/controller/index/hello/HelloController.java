@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.hello.HelloService;
 import com.egg.manager.api.services.message.services.hello.MessageHelloService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.web.controller.BaseController;
@@ -39,8 +40,8 @@ public class HelloController extends BaseController {
     private MessageHelloService messageHelloService;
     private CommonMenuTree commonMenuTree ;
 
-    @PcWebQueryLog(action = "测试当前开发环境", description = "测试当前开发环境", fullPath = "/index/hello/testEnv", flag = false)
-    @ApiOperation(value = "测试当前开发环境", notes = "测试当前开发环境", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "测试当前开发环境",fullPath = "/index/hello/testEnv", flag = false)
+    @ApiOperation(value = "测试当前开发环境",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
         try {

@@ -8,6 +8,7 @@ import com.egg.manager.api.services.basic.define.DefineJobService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -53,8 +54,8 @@ public class DefineJobController extends BaseController {
     private DefineJobService defineJobService;
 
 
-    @PcWebQueryLog(action = "查询职务信息列表", description = "查询职务信息列表", fullPath = "/define/define_job/queryPage")
-    @ApiOperation(value = "查询职务信息列表", notes = "查询职务信息列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询职务信息列表",fullPath = "/define/define_job/queryPage")
+    @ApiOperation(value = "查询职务信息列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -80,8 +81,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "查询职务信息-Dto列表", description = "查询职务信息-Dto列表", fullPath = "/define/define_job/queryDtoPage")
-    @ApiOperation(value = "查询职务信息-Dto列表", notes = "查询职务信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询职务信息-Dto列表",fullPath = "/define/define_job/queryDtoPage")
+    @ApiOperation(value = "查询职务信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -107,8 +108,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询职务信息", notes = "根据职务id查询职务信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询职务信息", description = "根据职务id查询职务信息", fullPath = "/define/define_job/queryOneById")
+    @ApiOperation(value = "查询职务信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询职务信息",fullPath = "/define/define_job/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineJobVo> queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -122,8 +123,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增职务", notes = "表单方式新增职务", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增职务", description = "表单方式新增职务", fullPath = "/define/define_job/createByForm")
+    @ApiOperation(value = "新增职务",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增职务",fullPath = "/define/define_job/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE_OPER);
@@ -139,8 +140,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新职务信息", notes = "表单方式更新职务信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新职务信息", description = "表单方式更新职务信息", fullPath = "/define/define_job/updateByForm")
+    @ApiOperation(value = "更新职务信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新职务信息",fullPath = "/define/define_job/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE_OPER);
@@ -156,8 +157,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除职务", description = "根据职务id批量删除职务", fullPath = "/define/define_job/batchDeleteByIds")
-    @ApiOperation(value = "批量删除职务", notes = "根据职务id批量删除职务", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除职务",fullPath = "/define/define_job/batchDeleteByIds")
+    @ApiOperation(value = "批量删除职务",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的职务定义id数组", required = true, dataTypeClass = String[].class),
     })
@@ -177,8 +178,8 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除职务", description = "根据职务id删除职务", fullPath = "/define/define_job/deleteById")
-    @ApiOperation(value = "删除职务", notes = "根据职务id删除职务", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "删除职务",fullPath = "/define/define_job/deleteById")
+    @ApiOperation(value = "删除职务",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的职务定义id", required = true, dataTypeClass = String.class),
     })

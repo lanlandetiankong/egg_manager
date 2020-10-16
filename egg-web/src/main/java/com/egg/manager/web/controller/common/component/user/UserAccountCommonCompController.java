@@ -4,6 +4,7 @@ import com.egg.manager.api.constants.funcmodule.controllers.common.component.use
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -36,8 +37,8 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", description = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
-    @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表", notes = "[通用组件]-查询用户信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
+    @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),

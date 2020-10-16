@@ -7,6 +7,7 @@ import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey;
@@ -56,7 +57,7 @@ public class UserLoginController extends BaseController {
     private UserAccountService userAccountService;
 
     @PcWebLoginLog(action = "用户登录接口", description = "账号密码方式登录接口", fullPath = "/user/login/loginByForm")
-    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo", value = "要登录用户的相关信息", required = true, dataTypeClass = LoginAccountVo.class),
     })

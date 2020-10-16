@@ -9,6 +9,7 @@ import com.egg.manager.api.services.basic.define.DefineDepartmentService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -56,8 +57,8 @@ public class DefineDepartmentController extends BaseController {
     private DefineDepartmentService defineDepartmentService;
 
 
-    @PcWebQueryLog(action = "查询部门定义信息-Dto列表", description = "查询部门定义信息-Dto列表", fullPath = "/define/define_department/queryDtoPage")
-    @ApiOperation(value = "查询部门定义信息-Dto列表", notes = "查询部门定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询部门定义信息-Dto列表",fullPath = "/define/define_department/queryDtoPage")
+    @ApiOperation(value = "查询部门定义信息-Dto列表", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -83,8 +84,8 @@ public class DefineDepartmentController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询部门定义信息", notes = "根据部门定义id查询部门定义信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询部门定义信息", description = "根据部门定义id查询部门定义信息", fullPath = "/define/define_department/queryOneById")
+    @ApiOperation(value = "查询部门定义信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询部门定义信息",fullPath = "/define/define_department/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineDepartmentVo> queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class,DefineDepartmentFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -99,8 +100,8 @@ public class DefineDepartmentController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "查询部门TreeSelect", description = "查询部门TreeSelect", fullPath = "/define/define_department/queryTreeSelect")
-    @ApiOperation(value = "查询部门TreeSelect", notes = "查询部门TreeSelect", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询部门TreeSelect",fullPath = "/define/define_department/queryTreeSelect")
+    @ApiOperation(value = "查询部门TreeSelect",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryTreeSelect(@CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.QUERY_TREE_SELECT);
@@ -120,8 +121,8 @@ public class DefineDepartmentController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "查询被过滤的部门定义TreeSelect", description = "查询被过滤部门定义TreeSelect", fullPath = "/define/define_department/queryFilteredTreeSelect")
-    @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询被过滤的部门定义TreeSelect", description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_department/queryFilteredTreeSelect")
+    @ApiOperation(value = "查询被过滤的部门定义TreeSelect", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineDepartmentFuncModuleConstant.Success.QUERY_TREE_SELECT);
@@ -135,8 +136,8 @@ public class DefineDepartmentController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "新增部门定义", notes = "表单方式新增部门定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增部门定义", description = "表单方式新增部门定义", fullPath = "/define/define_department/createByForm")
+    @ApiOperation(value = "新增部门定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增部门定义",fullPath = "/define/define_department/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                                     @CurrentLoginUser UserAccount loginUser) {
@@ -154,8 +155,8 @@ public class DefineDepartmentController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新部门定义", notes = "表单方式更新部门定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新部门定义", description = "表单方式更新部门定义", fullPath = "/define/define_department/updateByForm")
+    @ApiOperation(value = "更新部门定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新部门定义",fullPath = "/define/define_department/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                                    @CurrentLoginUser UserAccount loginUser) {
@@ -172,8 +173,8 @@ public class DefineDepartmentController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除部门定义", description = "根据部门id批量删除部门定义", fullPath = "/define/define_department/batchDeleteByIds")
-    @ApiOperation(value = "批量删除部门定义", notes = "根据部门id批量删除部门定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除部门定义",fullPath = "/define/define_department/batchDeleteByIds")
+    @ApiOperation(value = "批量删除部门定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的部门定义id数组", required = true, dataTypeClass = String[].class),
     })
@@ -192,8 +193,8 @@ public class DefineDepartmentController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除部门定义", description = "根据部门id删除部门定义", fullPath = "/define/define_department/deleteById")
-    @ApiOperation(value = "删除部门定义", notes = "根据部门id删除部门定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "删除部门定义",fullPath = "/define/define_department/deleteById")
+    @ApiOperation(value = "删除部门定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的部门定义id", required = true, dataTypeClass = String.class),
     })

@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
 import com.egg.manager.api.constants.funcmodule.controllers.common.file.ExcelUploadFuncModuleConstant;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
@@ -44,7 +45,7 @@ public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传Excel模板", notes = "上传Excel模板", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "上传Excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.UPLOAD_EXCEL);

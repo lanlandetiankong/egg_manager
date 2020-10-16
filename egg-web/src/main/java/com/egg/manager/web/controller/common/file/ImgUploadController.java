@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
 import com.egg.manager.api.constants.funcmodule.controllers.common.file.ImgUploadFuncModuleConstant;
 import com.egg.manager.common.base.beans.file.FileResBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -43,7 +44,7 @@ public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传头像", notes = "上传头像", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "上传头像",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.UPLOAD_IMG);

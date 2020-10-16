@@ -8,6 +8,7 @@ import com.egg.manager.api.services.message.services.email.EmailSendRecordMgoSer
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
@@ -58,7 +59,7 @@ public class EmailSendRecordController extends BaseController {
 
 
     @PcWebQueryLog(action = "分页查询->邮件记录", fullPath = "/message/email/emailSendRecord/getDataPage")
-    @ApiOperation(value = "分页查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "分页查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
@@ -82,7 +83,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
     @PcWebQueryLog(action = "根据id查询->邮件记录", fullPath = "/message/email/emailSendRecord/getOneItemById")
-    @ApiOperation(value = "根据id查询->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "根据id查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                @RequestParam(value = "fid", required = true) String fid) {
@@ -98,7 +99,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
     @PcWebOperationLog(action = "新增->邮件记录", fullPath = "/message/email/emailSendRecord/addByForm")
-    @ApiOperation(value = "新增->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "新增->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
@@ -119,7 +120,7 @@ public class EmailSendRecordController extends BaseController {
 
 
     @PcWebOperationLog(action = "伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/delOneById")
-    @ApiOperation(value = "伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
     })
@@ -138,7 +139,7 @@ public class EmailSendRecordController extends BaseController {
 
 
     @PcWebOperationLog(action = "批量伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/batchDelByIds")
-    @ApiOperation(value = "批量伪删除->邮件记录", notes = "", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "批量伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),
     })

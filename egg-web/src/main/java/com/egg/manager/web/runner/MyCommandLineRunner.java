@@ -2,6 +2,7 @@ package com.egg.manager.web.runner;
 
 import com.egg.manager.common.annotation.shiro.ShiroPass;
 import com.egg.manager.common.base.constant.Constant;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.util.str.ComUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -72,7 +73,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
                         if (ComUtil.isEmpty(methodUrl)) {
                             methodUrl = method.getAnnotation(PostMapping.class).path();
                         }
-                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "POST");
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, HttpMethodConstant.POST);
                     } else if (!ComUtil.isEmpty(method.getAnnotation(GetMapping.class))) {
                         methodUrl = method.getAnnotation(GetMapping.class).value();
                         if (ComUtil.isEmpty(methodUrl)) {

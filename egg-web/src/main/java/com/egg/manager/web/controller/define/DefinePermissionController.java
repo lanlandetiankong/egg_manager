@@ -8,6 +8,7 @@ import com.egg.manager.api.services.basic.define.DefinePermissionService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
@@ -57,8 +58,8 @@ public class DefinePermissionController extends BaseController {
     private DefinePermissionService definePermissionService;
 
 
-    @PcWebQueryLog(action = "查询权限定义信息列表", description = "查询权限定义信息列表", fullPath = "/define/define_permission/queryPage")
-    @ApiOperation(value = "查询权限定义信息列表", notes = "查询权限定义信息列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询权限定义信息列表",fullPath = "/define/define_permission/queryPage")
+    @ApiOperation(value = "查询权限定义信息列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -83,8 +84,8 @@ public class DefinePermissionController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "查询权限定义信息-Dto列表", description = "查询权限定义信息-Dto列表", fullPath = "/define/define_permission/queryDtoPage")
-    @ApiOperation(value = "查询权限定义信息-Dto列表", notes = "查询权限定义信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询权限定义信息-Dto列表",fullPath = "/define/define_permission/queryDtoPage")
+    @ApiOperation(value = "查询权限定义信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -109,8 +110,8 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询权限定义信息", notes = "根据权限定义id查询权限定义信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询权限定义信息", description = "根据权限定义id查询权限定义信息", fullPath = "/define/define_permission/queryOneById")
+    @ApiOperation(value = "查询权限定义信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询权限定义信息",fullPath = "/define/define_permission/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefinePermissionVo> queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class,DefinePermissionFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -124,8 +125,8 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增权限定义", notes = "表单方式新增权限定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增权限定义", description = "表单方式新增权限定义", fullPath = "/define/define_permission/createByForm")
+    @ApiOperation(value = "新增权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增权限定义",fullPath = "/define/define_permission/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.CREATE_OPER);
@@ -142,8 +143,8 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新权限定义", notes = "表单方式更新权限定义", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新权限定义", description = "表单方式更新权限定义", fullPath = "/define/define_permission/updateByForm")
+    @ApiOperation(value = "更新权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新权限定义",fullPath = "/define/define_permission/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefinePermissionFuncModuleConstant.Success.UPDATE_OPER);
@@ -159,8 +160,8 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量启用权限定义", description = "根据权限id批量启用权限定义", fullPath = "/define/define_permission/batchEnsureByIds")
-    @ApiOperation(value = "批量启用权限", notes = "根据权限id批量启用权限定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "批量启用权限定义",fullPath = "/define/define_permission/batchEnsureByIds")
+    @ApiOperation(value = "批量启用权限",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要启用的权限定义id数组", required = true, dataTypeClass = String[].class),
     })
@@ -179,8 +180,8 @@ public class DefinePermissionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除权限定义", description = "根据权限id删除权限定义", fullPath = "/define/define_permission/deleteById")
-    @ApiOperation(value = "删除权限定义", notes = "根据权限id删除权限定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "删除权限定义",fullPath = "/define/define_permission/deleteById")
+    @ApiOperation(value = "删除权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的权限定义id", required = true, dataTypeClass = String.class),
     })
@@ -201,8 +202,8 @@ public class DefinePermissionController extends BaseController {
         }
         return result;
     }
-    @PcWebOperationLog(action = "批量删除权限定义", description = "根据权限id批量删除权限定义", fullPath = "/define/define_permission/batchDeleteByIds")
-    @ApiOperation(value = "批量删除权限定义", notes = "根据权限id批量删除权限定义", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除权限定义",fullPath = "/define/define_permission/batchDeleteByIds")
+    @ApiOperation(value = "批量删除权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的权限定义id数组", required = true, dataTypeClass = String[].class),
     })

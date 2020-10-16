@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.index.hello.mq.activemq;
 
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class ActiveMqHelloController extends BaseController {
     private Topic topic;
 
     @PcWebOperationLog(action = "测试ActiveMq-Queue", fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
-    @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = "POST")
+    @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
         this.sendMessage(this.queue, str);
@@ -46,7 +47,7 @@ public class ActiveMqHelloController extends BaseController {
     }
 
     @PcWebOperationLog(action = "测试ActiveMq-Topic", fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
-    @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = "POST")
+    @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {
         this.sendMessage(this.topic, str);

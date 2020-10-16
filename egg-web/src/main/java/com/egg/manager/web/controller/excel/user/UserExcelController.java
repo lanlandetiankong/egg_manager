@@ -12,6 +12,7 @@ import com.egg.manager.api.services.excel.service.user.UserAccountXlsService;
 import com.egg.manager.api.trait.excel.listeners.introduce.user.UserAccountXlsIntroduceListener;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -94,7 +95,7 @@ public class UserExcelController extends BaseController {
     }
 
 
-    @ApiOperation(value = "导入数据", notes = "导入数据", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "导入数据",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/importData")
     @ResponseBody
     public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,

@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.api.constants.funcmodule.controllers.common.binding.ModuleCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.common.base.enums.module.DefineModuleTypeEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
@@ -33,7 +34,7 @@ import java.util.List;
 public class ModuleCommonController extends BaseController {
 
 
-    @ApiOperation(value = "检索所有模块类型", notes = "检索所有模块类型", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "检索所有模块类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -53,7 +54,7 @@ public class ModuleCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "检索所有菜单跳转类型", notes = "检索所有菜单跳转类型", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "检索所有菜单跳转类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult( ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);

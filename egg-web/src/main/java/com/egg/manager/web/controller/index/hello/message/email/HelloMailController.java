@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.index.hello.message.email;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.message.services.email.MyBaseEmailMgoService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailReceiveUserInfoMgvo;
@@ -34,8 +35,8 @@ public class HelloMailController extends BaseController {
     @Reference
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
-    @ApiOperation(value = "测试发送消息", notes = "测试发送消息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "测试发送消息", description = "测试发送消息", fullPath = "/message/email/hello/sendMail")
+    @ApiOperation(value = "测试发送消息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "测试发送消息",fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult doGetDefineModuleById(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainOperationResult("测试");

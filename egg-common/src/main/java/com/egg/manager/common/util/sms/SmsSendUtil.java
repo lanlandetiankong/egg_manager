@@ -2,6 +2,7 @@ package com.egg.manager.common.util.sms;
 
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.common.base.constant.Constant;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.sms.send.SmsSendRequest;
 import com.egg.manager.common.base.sms.send.SmsSendResponse;
@@ -73,7 +74,7 @@ public class SmsSendUtil {
         try {
             url = new URL(path);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestMethod(HttpMethodConstant.POST);
             httpURLConnection.setConnectTimeout(10000);
             httpURLConnection.setReadTimeout(10000);
             // 发送POST请求必须设置如下两行

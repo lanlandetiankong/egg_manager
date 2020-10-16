@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.api.constants.funcmodule.controllers.common.binding.CommonBindingFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
@@ -31,7 +32,7 @@ import java.util.List;
 @RequestMapping("/common_api/binding")
 public class CommonBindingController extends BaseController {
 
-    @ApiOperation(value = "取得开关式取值的枚举列表", notes = "取得开关式取值的枚举列表", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "取得开关式取值的枚举列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
     public MyCommonResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(CommonBindingFuncModuleConstant.Success.QUERY_ENUM_LIST);

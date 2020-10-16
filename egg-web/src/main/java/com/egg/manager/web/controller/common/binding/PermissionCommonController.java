@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.api.constants.funcmodule.controllers.common.binding.PermissionCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
@@ -32,7 +33,7 @@ import java.util.List;
 @RequestMapping("/common_api/permission")
 public class PermissionCommonController extends BaseController {
 
-    @ApiOperation(value = "检索所有权限类型", notes = "检索所有权限类型", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "检索所有权限类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult( PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -51,7 +52,7 @@ public class PermissionCommonController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "检索所有角色类型", notes = "检索所有角色类型", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "检索所有角色类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -71,7 +72,7 @@ public class PermissionCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "检索所有权限Code前缀类型", notes = "检索所有权限Code前缀类型", response = MyCommonResult.class, httpMethod = "POST")
+    @ApiOperation(value = "检索所有权限Code前缀类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);

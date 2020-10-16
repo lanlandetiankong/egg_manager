@@ -8,6 +8,7 @@ import com.egg.manager.api.services.basic.announcement.AnnouncementTagService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -55,8 +56,8 @@ public class AnnouncementTagController extends BaseController {
     private AnnouncementTagService announcementTagService;
 
 
-    @PcWebQueryLog(action = "查询公告标签信息Select列表", description = "查询公告标签信息Select列表", fullPath = "/announcement_tag/gainEnumSelect")
-    @ApiOperation(value = "查询公告标签信息Select列表", notes = "查询公告标签信息Select列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(action = "查询公告标签信息Select列表",fullPath = "/announcement_tag/gainEnumSelect")
+    @ApiOperation(value = "查询公告标签信息Select列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -80,8 +81,8 @@ public class AnnouncementTagController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "查询公告标签信息-Dto列表", notes = "查询公告标签信息-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询公告标签信息-Dto列表", description = "查询公告标签信息-Dto列表", fullPath = "/announcement_tag/queryDtoPage")
+    @ApiOperation(value = "查询公告标签信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询公告标签信息-Dto列表",fullPath = "/announcement_tag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementTagVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
@@ -101,8 +102,8 @@ public class AnnouncementTagController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "查询公告标签信息", notes = "根据公告标签id查询公告标签信息", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询公告标签信息", description = "根据公告标签id查询公告标签信息", fullPath = "/announcement_tag/queryOneById")
+    @ApiOperation(value = "查询公告标签信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询公告标签信息",fullPath = "/announcement_tag/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementTagVo> queryOneById(HttpServletRequest request, String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
@@ -118,8 +119,8 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增公告标签", notes = "表单方式新增公告标签", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增公告标签", description = "表单方式新增公告标签", fullPath = "/announcement_tag/createByForm")
+    @ApiOperation(value = "新增公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增公告标签",fullPath = "/announcement_tag/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
@@ -136,8 +137,8 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新公告标签", notes = "表单方式更新公告标签", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新公告标签", description = "表单方式更新公告标签", fullPath = "/announcement_tag/updateByForm")
+    @ApiOperation(value = "更新公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新公告标签",fullPath = "/announcement_tag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
@@ -155,8 +156,8 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除公告标签", description = "根据公告标签id批量删除公告标签", fullPath = "/announcement_tag/batchDeleteByIds")
-    @ApiOperation(value = "批量删除公告标签", notes = "根据公告标签id批量删除公告标签", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "批量删除公告标签",fullPath = "/announcement_tag/batchDeleteByIds")
+    @ApiOperation(value = "批量删除公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的公告标签id数组", required = true, dataTypeClass = String[].class),
     })
@@ -177,8 +178,8 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除公告标签", description = "根据id删除公告标签", fullPath = "/announcement_tag/deleteById")
-    @ApiOperation(value = "删除公告标签", notes = "根据id删除公告标签", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(action = "删除公告标签",fullPath = "/announcement_tag/deleteById")
+    @ApiOperation(value = "删除公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的公告标签id", required = true, dataTypeClass = String.class),
     })

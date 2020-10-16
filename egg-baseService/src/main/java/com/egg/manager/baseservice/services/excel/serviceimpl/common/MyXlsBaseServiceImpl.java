@@ -7,6 +7,7 @@ import com.egg.manager.api.services.excel.service.common.MyXlsBaseService;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Service(interfaceClass = MyXlsBaseService.class)
 public class MyXlsBaseServiceImpl implements MyXlsBaseService {
 

@@ -29,8 +29,8 @@ import java.util.jar.JarFile;
  * \* Description:
  * \
  */
-@Component
 @Slf4j
+@Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
     @Value("${egg.conf.controller.scanPackage}")

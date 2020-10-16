@@ -8,6 +8,7 @@ import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormDefinitionRepository;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Update;
 /**
  * MongoDb-FormDefinitionMO 表单定义-MService
  */
+@Slf4j
 @Service(interfaceClass = SmartFormDefinitionMgoService.class)
 public class SmartFormDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormDefinitionRepository, SmartFormDefinitionMgo, String>
         implements SmartFormDefinitionMgoService {

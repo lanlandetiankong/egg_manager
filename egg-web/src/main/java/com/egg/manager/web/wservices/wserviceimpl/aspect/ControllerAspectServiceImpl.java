@@ -10,6 +10,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -30,6 +31,7 @@ import java.util.Date;
  * \* Description:
  * \
  */
+@Slf4j
 @Service
 public class ControllerAspectServiceImpl implements ControllerAspectService {
 

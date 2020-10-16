@@ -12,6 +12,7 @@ import com.egg.manager.common.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.db.mongo.repository.MyBaseMongoRepository;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import java.util.Optional;
  * \* Description:
  * \
  */
+@Slf4j
 public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T extends MyBaseModelMgo, ID> implements MyBaseMgoService<T, ID> {
     @Autowired
     protected R baseRepository;

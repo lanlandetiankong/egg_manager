@@ -18,6 +18,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +32,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
+@Slf4j
 @Service(interfaceClass = UserAccountRedisService.class)
 public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl implements UserAccountRedisService {
 

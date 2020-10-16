@@ -11,6 +11,7 @@ import com.egg.manager.common.base.props.upload.UploadProps;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import java.util.List;
  * \* Description:
  * \
  */
+@Slf4j
 @Service(interfaceClass = UserAccountXlsService.class)
 public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements UserAccountXlsService {
     @Autowired

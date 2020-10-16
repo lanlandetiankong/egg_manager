@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service(interfaceClass = RedisHelper.class)
 public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
     /**

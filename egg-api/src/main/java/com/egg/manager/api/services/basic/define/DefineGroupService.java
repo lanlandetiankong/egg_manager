@@ -14,7 +14,7 @@ import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
  * \* Description:
  * \
  */
-public interface DefineGroupService extends IService<DefineGroup>,MyBaseMysqlService<DefineGroupMapper,DefineGroup,DefineGroupVo> {
+public interface DefineGroupService extends IService<DefineGroup>,MyBaseMysqlService<DefineGroup,DefineGroupMapper,DefineGroupVo> {
 
 
 }

@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService<DefineJobMapper,DefineJob,DefineJobVo> {
+public interface DefineJobService extends IService<DefineJob>,MyBaseMysqlService<DefineJob,DefineJobMapper,DefineJobVo> {
 
 
     /**

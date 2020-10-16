@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserJobService extends IService<UserJob>,MyBaseMysqlService<UserJobMapper,UserJob,UserJobVo> {
+public interface UserJobService extends IService<UserJob>,MyBaseMysqlService<UserJob,UserJobMapper,UserJobVo> {
 
     /**
      * 分页查询 用户职务列表

@@ -23,7 +23,7 @@ import java.util.Map;
  * \* Description:
  * \
  */
-public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBaseMysqlService<AnnouncementTagMapper,AnnouncementTag,AnnouncementTagVo> {
+public interface AnnouncementTagService extends IService<AnnouncementTag>,MyBaseMysqlService<AnnouncementTag,AnnouncementTagMapper,AnnouncementTagVo> {
 
 
     /**

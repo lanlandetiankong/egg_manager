@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlService<DefineTenantMapper,DefineTenant,DefineTenantVo> {
+public interface DefineTenantService extends IService<DefineTenant>,MyBaseMysqlService<DefineTenant,DefineTenantMapper,DefineTenantVo> {
 
 
 

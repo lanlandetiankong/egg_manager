@@ -24,7 +24,7 @@ import java.util.List;
  * \
  */
 
-public interface AnnouncementDraftService extends IService<AnnouncementDraft>,MyBaseMysqlService<AnnouncementDraftMapper,AnnouncementDraft,AnnouncementDraftVo> {
+public interface AnnouncementDraftService extends IService<AnnouncementDraft>,MyBaseMysqlService<AnnouncementDraft,AnnouncementDraftMapper,AnnouncementDraftVo> {
 
     /**
      * 新增公告草稿

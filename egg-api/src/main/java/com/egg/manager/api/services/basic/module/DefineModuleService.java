@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlService<DefineModuleMapper,DefineModule,DefineModuleVo> {
+public interface DefineModuleService extends IService<DefineModule>,MyBaseMysqlService<DefineModule,DefineModuleMapper,DefineModuleVo> {
 
 
     /**

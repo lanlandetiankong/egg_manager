@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlService<UserTenantMapper,UserTenant,UserTenantVo> {
+public interface UserTenantService extends IService<UserTenant>,MyBaseMysqlService<UserTenant,UserTenantMapper,UserTenantVo> {
     /**
      * 取得当前用户关联的 UserTenant
      * @param userAccount

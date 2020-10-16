@@ -12,7 +12,6 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
-import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
  * @Author: zhoucj
  * @Date: 2020/9/18 9:21
  */
-public interface MyBaseMysqlService<M extends BaseMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo>
+public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V extends MyBaseMysqlVo>
         extends IService<T> {
     /**
      * 取得前端传递的分页配置

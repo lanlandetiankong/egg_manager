@@ -14,7 +14,7 @@ import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
  * \* Description:
  * \
  */
-public interface UserGroupService extends IService<UserGroup>,MyBaseMysqlService<UserGroupMapper,UserGroup,UserGroupVo> {
+public interface UserGroupService extends IService<UserGroup>,MyBaseMysqlService<UserGroup,UserGroupMapper,UserGroupVo> {
 
     
 }

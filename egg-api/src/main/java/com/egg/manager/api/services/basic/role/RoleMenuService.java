@@ -12,6 +12,6 @@ import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
  * \* User: zhouchengjie
  * \* Description:
  */
-public interface RoleMenuService extends IService<RoleMenu>,MyBaseMysqlService<RoleMenuMapper,RoleMenu,RoleMenuVo> {
+public interface RoleMenuService extends IService<RoleMenu>,MyBaseMysqlService<RoleMenu,RoleMenuMapper,RoleMenuVo> {
 
 }

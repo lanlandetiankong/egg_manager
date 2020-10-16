@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMysqlService<UserDepartmentMapper,UserDepartment,UserDepartmentVo> {
+public interface UserDepartmentService extends IService<UserDepartment>,MyBaseMysqlService<UserDepartment,UserDepartmentMapper,UserDepartmentVo> {
 
     /**
      * 查询账号下的所有[用户-部门关联]

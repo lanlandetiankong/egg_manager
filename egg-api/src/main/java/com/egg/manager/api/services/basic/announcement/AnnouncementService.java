@@ -26,7 +26,7 @@ import java.util.List;
  * \
  */
 
-public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlService<AnnouncementMapper,Announcement,AnnouncementVo> {
+public interface AnnouncementService extends IService<Announcement>,MyBaseMysqlService<Announcement,AnnouncementMapper,AnnouncementVo> {
 
 
     /**

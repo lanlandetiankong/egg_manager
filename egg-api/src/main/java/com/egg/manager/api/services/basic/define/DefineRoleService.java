@@ -25,7 +25,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlService<DefineRoleMapper,DefineRole,DefineRoleVo> {
+public interface DefineRoleService extends IService<DefineRole>,MyBaseMysqlService<DefineRole,DefineRoleMapper,DefineRoleVo> {
     /**
      * 取得用户 所拥有的 角色定义-List集合
      * @param userAccountId

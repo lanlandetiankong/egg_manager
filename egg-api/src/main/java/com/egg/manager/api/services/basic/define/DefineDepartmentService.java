@@ -23,7 +23,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface DefineDepartmentService extends IService<DefineDepartment>,MyBaseMysqlService<DefineDepartmentMapper,DefineDepartment,DefineDepartmentVo> {
+public interface DefineDepartmentService extends IService<DefineDepartment>,MyBaseMysqlService<DefineDepartment,DefineDepartmentMapper,DefineDepartmentVo> {
 
     /**
      * 分页查询 部门 dto列表

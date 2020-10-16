@@ -34,7 +34,7 @@ import java.util.List;
  * @Date: 2020/9/18 9:21
  */
 public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo> extends ServiceImpl<M, T>
-        implements MyBaseMysqlService<M, T, V> {
+        implements MyBaseMysqlService<T,M, V> {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 

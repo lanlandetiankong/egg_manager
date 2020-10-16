@@ -26,7 +26,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefinePermissionService extends IService<DefinePermission>,MyBaseMysqlService<DefinePermissionMapper,DefinePermission,DefinePermissionVo> {
+public interface DefinePermissionService extends IService<DefinePermission>,MyBaseMysqlService<DefinePermission,DefinePermissionMapper,DefinePermissionVo> {
 
     /**
      * 查询 所有[可用状态]的 [权限定义]

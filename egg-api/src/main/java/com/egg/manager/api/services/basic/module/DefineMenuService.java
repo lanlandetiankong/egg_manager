@@ -28,7 +28,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlService<DefineMenuMapper,DefineMenu,DefineMenuVo> {
+public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlService<DefineMenu,DefineMenuMapper,DefineMenuVo> {
 
     /**
      * 查询 用户 可访问的[菜单定义]

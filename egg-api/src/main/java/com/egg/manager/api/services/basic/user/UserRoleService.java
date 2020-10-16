@@ -22,7 +22,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<UserRoleMapper,UserRole,UserRoleVo> {
+public interface UserRoleService extends IService<UserRole>,MyBaseMysqlService<UserRole,UserRoleMapper,UserRoleVo> {
     /**
      * 取得当前用户关联的 UserRole
      * @param account

@@ -26,7 +26,7 @@ import java.util.Set;
  * \* Description:
  * \
  */
-public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlService<UserAccountMapper,UserAccount,UserAccountVo> {
+public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlService<UserAccount,UserAccountMapper,UserAccountVo> {
 
     String FOREIGN_NAME_OF_USER_TENANT = "userTenant" ;
     String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment" ;

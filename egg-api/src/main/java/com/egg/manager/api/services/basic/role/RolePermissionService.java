@@ -18,7 +18,7 @@ import java.util.List;
  * \* Description:
  * \
  */
-public interface RolePermissionService extends IService<RolePermission>,MyBaseMysqlService<RolePermissionMapper,RolePermission,RolePermissionVo> {
+public interface RolePermissionService extends IService<RolePermission>,MyBaseMysqlService<RolePermission,RolePermissionMapper,RolePermissionVo> {
 
     /**
      * 查询 角色列表 拥有的所有权限

@@ -25,7 +25,7 @@ public class MyCommonResult<T> implements Serializable {
     /**
      * 提示信息、错误信息等，用于展示
      */
-    private String info;
+    private String msg;
     /**
      * 是否有操作异常
      */
@@ -73,10 +73,7 @@ public class MyCommonResult<T> implements Serializable {
      */
     @Builder.Default
     private Integer code = HttpStatus.HTTP_OK;
-    /**
-     * 错误信息
-     */
-    private String errorMsg;
+
     /**
      * 分页bean
      */
@@ -103,34 +100,34 @@ public class MyCommonResult<T> implements Serializable {
         MyCommonResult<T> result = gainInitQueryBean(tClass);
         return result ;
     }
-    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String info){
+    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String msg){
         MyCommonResult<T> result = gainInitQueryBean(tClass);
-        result.setInfo(info);
+        result.setMsg(msg);
         return result ;
     }
 
-    public static <E> MyCommonResult<Object> gainEnumResult(String info){
+    public static <E> MyCommonResult<Object> gainEnumResult(String msg){
         MyCommonResult<Object> result = gainInitQueryBean(Object.class);
-        result.setInfo(info);
+        result.setMsg(msg);
         return result ;
     }
 
     public static MyCommonResult gainOperationResult(String info){
         MyCommonResult result = gainInitQueryBean(Object.class);
-        result.setInfo(info);
+        result.setMsg(info);
         return result ;
     }
 
     public static MyCommonResult gainErrorResult(String errorMsg){
         MyCommonResult result = gainInitQueryBean(Object.class);
         result.setHasError(true);
-        result.setErrorMsg(errorMsg);
+        result.setMsg(errorMsg);
         return result ;
     }
     public static <T> MyCommonResult<T> gainErrorResult(Class<T> tClass,String errorMsg){
         MyCommonResult<T> result = gainInitQueryBean(tClass);
         result.setHasError(true);
-        result.setErrorMsg(errorMsg);
+        result.setMsg(errorMsg);
         return result ;
     }
 

@@ -129,7 +129,7 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebQueryLogMgo.setException(commonResult.getErrorMsg());
+                            pcWebQueryLogMgo.setException(commonResult.getMsg());
                         }
                     }
                     pcWebQueryLogMgo.setResult(JSON.toJSONString(result));
@@ -156,7 +156,7 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebOperationLogMgo.setException(commonResult.getErrorMsg());
+                            pcWebOperationLogMgo.setException(commonResult.getMsg());
                         }
                     }
                     pcWebOperationLogMgo.setResult(JSON.toJSONString(result));
@@ -183,7 +183,7 @@ public class ControllerAspect {
                         MyCommonResult commonResult = (MyCommonResult) result;
                         if (commonResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebLoginLogMgo.setException(commonResult.getErrorMsg());
+                            pcWebLoginLogMgo.setException(commonResult.getMsg());
                         }
                     }
                     pcWebLoginLogMgo.setResult(JSON.toJSONString(result));

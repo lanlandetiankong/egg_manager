@@ -1,13 +1,31 @@
-
-dealCreate
-dealUpdate
-
-dealBatchDelete
-dealDeleteById
+gainEnumSelect
+queryTreeSelect
+queryFilteredTreeSelect
 
 
-dealGetEntityByDTO
-dealQueryPageByDtos
-dealQueryPageByEntitys
+queryPage
+queryDtoPage
+queryFilteredPage
+queryOneById
+createByForm
+updateByForm
 
-dealPublishByDraft
+deleteById
+batchDeleteByIds
+
+createFromDraft
+batchPublishDraft
+publishDraft
+
+
+updateExcelModel
+
+gainAccessibleTree
+gainGrantTree
+
+batchEnsureByIds
+batchUpdateLockByIds
+updateLockById
+
+gainAllPermissionByRoleId
+gainAllMenuByRoleId

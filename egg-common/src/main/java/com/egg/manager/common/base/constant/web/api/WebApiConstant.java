@@ -1,7 +1,7 @@
 package com.egg.manager.common.base.constant.web.api;
 
 /**
- * @Description: 常量
+ * @Description: api 常量
  * @ClassName: WebApiConstant
  * @Author: zhoucj
  * @Date: 2020/10/19 11:49
@@ -11,4 +11,10 @@ public interface WebApiConstant {
     String PAGINATION_OBJ_LABEL = "分页配置(json格式)" ;
     String SORT_OBJ_LABEL = "排序对象(json格式)" ;
 
+    /**
+     * 分页查询相关字段名
+     */
+    String FIELDNAME_QUERY_OBJ = "queryObj" ;
+    String FIELDNAME_PAGINATION_OBJ = "paginationObj" ;
+    String FIELDNAME_SORT_OBJ = "sortObj" ;
 }

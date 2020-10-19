@@ -3,6 +3,7 @@ package com.egg.manager.common.base.query.mongo;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.base.constant.Constant;
+import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoQueryMatchingEnum;
 import com.egg.manager.common.base.query.MyBaseQueryBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -79,9 +80,9 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
 
     public final static int DEFAULT_PAGE = 0 ;
     public final static int DEFAULT_SIZE = 10 ;
-    public final static String PARAMETER_PAGINATION_OBJ = "paginationObj" ;
-    public final static String PARAMETER_QUERY_OBJ = "queryObj" ;
-    public final static String PARAMETER_SORT_OBJ = "sortObj" ;
+    public final static String PARAMETER_PAGINATION_OBJ = WebApiConstant.FIELDNAME_PAGINATION_OBJ ;
+    public final static String PARAMETER_QUERY_OBJ = WebApiConstant.FIELDNAME_QUERY_OBJ ;
+    public final static String PARAMETER_SORT_OBJ = WebApiConstant.FIELDNAME_SORT_OBJ ;
     public static final String ORDER_ASC = "ascend";
     public static final String ORDER_DESC = "descend";
 

@@ -62,9 +62,9 @@ public class DefinePermissionController extends BaseController {
     @PcWebQueryLog(action = "分页查询->权限定义",fullPath = "/define/define_permission/queryPage")
     @ApiOperation(value = "分页查询->权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryPage")
     public MyCommonResult<DefinePermissionVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
@@ -85,12 +85,12 @@ public class DefinePermissionController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "分页查询->权限定义(dto)",fullPath = "/define/define_permission/queryDtoPage")
-    @ApiOperation(value = "分页查询->权限定义(dto)",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "分页查询(dto)->权限定义",fullPath = "/define/define_permission/queryDtoPage")
+    @ApiOperation(value = "分页查询(dto)->权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefinePermissionVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {

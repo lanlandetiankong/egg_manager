@@ -64,3 +64,8 @@ gainAllMenuByRoleId
 查询已获授权/用户->职务定义
 
 授权/用户->角色定义
+
+
+WebApiConstant.FIELDNAME_QUERY_OBJ
+WebApiConstant.FIELDNAME_PAGINATION_OBJ
+WebApiConstant.FIELDNAME_SORT_OBJ

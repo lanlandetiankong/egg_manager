@@ -17,7 +17,7 @@ public class AnnouncementDraftFuncModuleConstant extends EggBaseFuncModuleNameCo
         public static String QUERY_PAGE = doQueryPage(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String QUERY_LIST = doQueryList(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String QUERY_ONE_BY_ID = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
-        public static String QUERY_ENUM_LIST = doQueryOneById(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
+        public static String QUERY_ENUM_LIST = doQueryEnumList(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String QUERY_TREE_SELECT = doQueryTreeSelect(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
         public static String QUERY_GRANTED = doQueryGranted(KEY_FUNC_MODULE_NAME,DEFAULT_OK_FLAG);
 

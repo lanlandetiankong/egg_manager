@@ -85,6 +85,16 @@ public class EggBaseFuncModuleNameConstant {
             return msg ;
         }
     }
+    protected static final String doQueryEnumList(String funcModuleName,Boolean isSuccess)  {
+        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
+        String msg = EggFuncActionNameConstant.Prefix.QUERY_ONE_BY_ID + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_ONE_BY_ID;
+        if(isSuccess == null){
+            return msg ;
+        }   else {
+            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
+            return msg ;
+        }
+    }
 
     protected static final String doQueryOneById(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
@@ -111,17 +121,6 @@ public class EggBaseFuncModuleNameConstant {
     protected static final String doQueryGranted(String funcModuleName,Boolean isSuccess)  {
         funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
         String msg = EggFuncActionNameConstant.Prefix.QUERY_GRANTED + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_GRANTED;
-        if(isSuccess == null){
-            return msg ;
-        }   else {
-            msg += (isSuccess == true) ? BaseRstMsgConstant.ACTION_SUCCESS_MSG : BaseRstMsgConstant.ACTION_FAIL_MSG ;
-            return msg ;
-        }
-    }
-
-    protected static final String doQueryEnumList(String funcModuleName,Boolean isSuccess)  {
-        funcModuleName = StringUtils.defaultIfBlank(funcModuleName,"");
-        String msg = EggFuncActionNameConstant.Prefix.QUERY_ONE_BY_ID + funcModuleName + EggFuncActionNameConstant.Suffix.QUERY_ONE_BY_ID;
         if(isSuccess == null){
             return msg ;
         }   else {

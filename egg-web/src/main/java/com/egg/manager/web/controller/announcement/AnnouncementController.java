@@ -63,8 +63,8 @@ public class AnnouncementController extends BaseController {
 
 
 
-    @PcWebQueryLog(action = "查询公告信息-Dto列表",fullPath = "/announcement/queryDtoPage")
-    @ApiOperation(value = "查询公告信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "分页查询->公告",fullPath = "/announcement/queryDtoPage")
+    @ApiOperation(value = "分页查询->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -94,7 +94,7 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询公告信息部分列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "筛选查询->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(action = "查询公告信息部分列表",fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
     public MyCommonResult<AnnouncementVo> queryFilteredPage(HttpServletRequest request, Integer limitSize,
@@ -124,8 +124,8 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "查询公告信息",fullPath = "/announcement/queryOneById")
-    @ApiOperation(value = "查询公告信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "根据id查询->公告",fullPath = "/announcement/queryOneById")
+    @ApiOperation(value = "根据id查询->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class,AnnouncementFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -143,8 +143,8 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "新增公告",fullPath = "/announcement/createByForm")
-    @ApiOperation(value = "新增公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增->公告",fullPath = "/announcement/createByForm")
+    @ApiOperation(value = "新增->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
                                                             @CurrentLoginUser UserAccount loginUser) {
@@ -161,8 +161,8 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @ApiOperation(value = "公告草稿发布",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "公告草稿发布",fullPath = "/announcement/createFromDraft")
+    @ApiOperation(value = "发布->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "发布->公告草稿",fullPath = "/announcement/createFromDraft")
     @PostMapping(value = "/createFromDraft")
     public MyCommonResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                      @CurrentLoginUser UserAccount loginUser) {
@@ -178,10 +178,10 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "批量删除公告",fullPath = "/announcement/batchDeleteByIds")
-    @ApiOperation(value = "批量删除公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "批量伪删除->公告",fullPath = "/announcement/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的公告id数组", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
@@ -199,10 +199,10 @@ public class AnnouncementController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "删除公告",fullPath = "/announcement/deleteById")
+    @ApiOperation(value = "伪删除->公告",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "伪删除->公告",fullPath = "/announcement/deleteById")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的公告id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {

@@ -169,10 +169,10 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
-    @ApiOperation(value = "删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "伪删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
+    @ApiOperation(value = "伪删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
     public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {

@@ -54,8 +54,8 @@ public class DefineModuleController extends BaseController {
     private DefineModuleService defineModuleService;
 
 
-    @PcWebQueryLog(action = "查询模块定义信息-Dto列表",fullPath = "/module/define_module/queryDtoPage")
-    @ApiOperation(value = "查询模块定义信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "分页查询->模块定义",fullPath = "/module/define_module/queryDtoPage")
+    @ApiOperation(value = "分页查询->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -81,8 +81,8 @@ public class DefineModuleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询模块定义信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "查询模块定义信息",fullPath = "/module/define_module/queryOneById")
+    @ApiOperation(value = "根据id查询->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "根据id查询->模块定义",fullPath = "/module/define_module/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineModuleVo> queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class, DefineModuleFuncModuleConstant.Success.QUERY_PAGE);
@@ -96,8 +96,8 @@ public class DefineModuleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增模块定义",fullPath = "/module/define_module/createByForm")
+    @ApiOperation(value = "新增->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增->模块定义",fullPath = "/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.CREATE_OPER);
@@ -113,8 +113,8 @@ public class DefineModuleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新模块定义",fullPath = "/module/define_module/updateByForm")
+    @ApiOperation(value = "更新->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新->模块定义",fullPath = "/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( DefineModuleFuncModuleConstant.Success.UPDATE_OPER);
@@ -130,10 +130,10 @@ public class DefineModuleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除模块定义",fullPath = "/module/define_module/batchDeleteByIds")
-    @ApiOperation(value = "批量删除模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "批量伪删除->模块定义",fullPath = "/module/define_module/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的模块定义id数组", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
@@ -150,10 +150,10 @@ public class DefineModuleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除模块定义",fullPath = "/module/define_module/deleteById")
-    @ApiOperation(value = "删除模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "伪删除->模块定义",fullPath = "/module/define_module/deleteById")
+    @ApiOperation(value = "伪删除->模块定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的模块定义id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {

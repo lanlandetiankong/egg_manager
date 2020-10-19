@@ -71,8 +71,8 @@ public class DefineMenuController extends BaseController {
     private UserAccountRedisService userAccountRedisService;
 
 
-    @PcWebQueryLog(action = "查询所有路由菜单TreeSelect",fullPath = "/define/define_menu/queryTreeSelect")
-    @ApiOperation(value = "查询所有路由菜单TreeSelect",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "查询下拉树->菜单定义",fullPath = "/define/define_menu/queryTreeSelect")
+    @ApiOperation(value = "查询下拉树->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryTreeSelect(Boolean withRoot) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class, DefineMenuFuncModuleConstant.Success.QUERY_TREE_SELECT);
@@ -88,8 +88,8 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "查询被过滤的路由菜单TreeSelect",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_menu/queryFilteredTreeSelect")
-    @ApiOperation(value = "查询被过滤的路由菜单TreeSelect", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "筛选查询下拉树->菜单定义",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_menu/queryFilteredTreeSelect")
+    @ApiOperation(value = "筛选查询下拉树->菜单定义", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class,DefineMenuFuncModuleConstant.Success.QUERY_TREE_SELECT);
@@ -99,8 +99,8 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "查询用户可以访问的路由菜单",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "查询用户可以访问的路由菜单",fullPath = "/define/define_menu/user/gainGrantTree")
+    @ApiOperation(value = "权限筛选查询下拉树->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "权限筛选查询下拉树->菜单定义",fullPath = "/define/define_menu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
     public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class, DefineMenuFuncModuleConstant.Success.QUERY_GRANTED);
@@ -140,8 +140,8 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询菜单定义信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "查询菜单定义信息",fullPath = "/define/define_menu/queryOneById")
+    @ApiOperation(value = "根据id查询->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "根据id查询->菜单定义",fullPath = "/define/define_menu/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineMenuVo> queryOneById(HttpServletRequest request, String defineMenuId) {
         MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -157,8 +157,8 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增菜单定义",fullPath = "/define/define_menu/createByForm")
+    @ApiOperation(value = "新增->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增->菜单定义",fullPath = "/define/define_menu/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.CREATE_OPER);
@@ -175,8 +175,8 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新菜单定义",fullPath = "/define/define_menu/updateByForm")
+    @ApiOperation(value = "更新->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新->菜单定义",fullPath = "/define/define_menu/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE_OPER);
@@ -193,8 +193,8 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新菜单对应的Excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新菜单对应的Excel模板", fullPath = "/define/define_menu/updateExcelModel")
+    @ApiOperation(value = "更新->菜单定义/excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新->菜单定义/excel模板", fullPath = "/define/define_menu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
     public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
@@ -218,8 +218,8 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "批量删除菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "批量删除菜单定义",fullPath = "/define/define_menu/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "批量伪删除->菜单定义",fullPath = "/define/define_menu/batchDeleteByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",required = true, dataTypeClass = String[].class),
     })
@@ -239,10 +239,10 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除菜单定义",fullPath = "/define/define_menu/deleteById")
-    @ApiOperation(value = "删除菜单定义", notes = "根据菜单id删除菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "伪删除->菜单定义",fullPath = "/define/define_menu/deleteById")
+    @ApiOperation(value = "伪删除->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的菜单定义id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {

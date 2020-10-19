@@ -58,8 +58,8 @@ public class AnnouncementDraftController extends BaseController {
     @Reference
     private AnnouncementTagService announcementTagService;
 
-    @PcWebQueryLog(action = "查询公告信息草稿-Dto列表",fullPath = "/announcement_draft/queryDtoPage")
-    @ApiOperation(value = "查询公告信息草稿-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "分页查询->公告草稿",fullPath = "/announcement_draft/queryDtoPage")
+    @ApiOperation(value = "分页查询->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
@@ -90,8 +90,8 @@ public class AnnouncementDraftController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询公告草稿信息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "查询公告草稿信息",fullPath = "/announcement_draft/queryOneById")
+    @ApiOperation(value = "根据id查询->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(action = "根据id查询->公告草稿",fullPath = "/announcement_draft/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementDraftVo> queryOneById(HttpServletRequest request, String draftId,
                                                                           @CurrentLoginUser UserAccount loginUser) {
@@ -109,8 +109,8 @@ public class AnnouncementDraftController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "新增公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增公告草稿",fullPath = "/announcement_draft/createByForm")
+    @ApiOperation(value = "新增->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "新增->公告草稿",fullPath = "/announcement_draft/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                       @CurrentLoginUser UserAccount loginUser) {
@@ -128,8 +128,8 @@ public class AnnouncementDraftController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "更新公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新公告草稿",fullPath = "/announcement_draft/updateByForm")
+    @ApiOperation(value = "更新->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "更新->公告草稿",fullPath = "/announcement_draft/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                                                          @CurrentLoginUser UserAccount loginUser) {
@@ -148,8 +148,8 @@ public class AnnouncementDraftController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除公告草稿",fullPath = "/announcement_draft/batchDeleteByIds")
-    @ApiOperation(value = "批量删除公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "批量伪删除->公告草稿",fullPath = "/announcement_draft/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
     })
@@ -169,10 +169,10 @@ public class AnnouncementDraftController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "删除公告草稿",fullPath = "/announcement_draft/deleteById")
-    @ApiOperation(value = "删除公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "伪删除->公告草稿",fullPath = "/announcement_draft/deleteById")
+    @ApiOperation(value = "伪删除->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的公告草稿id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
@@ -189,8 +189,8 @@ public class AnnouncementDraftController extends BaseController {
     }
 
 
-    @ApiOperation(value = "公告草稿批量转发布",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "公告草稿批量转发布",fullPath = "/announcement_draft/batchPublishDraft")
+    @ApiOperation(value = "批量发布->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "批量发布->公告草稿",fullPath = "/announcement_draft/batchPublishDraft")
     @PostMapping(value = "/batchPublishDraft")
     public MyCommonResult batchPublishDraft(HttpServletRequest request, String[] draftIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.BATCH_PUBLISH);
@@ -206,8 +206,8 @@ public class AnnouncementDraftController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "公告草稿转发布",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "公告草稿转发布",fullPath = "/announcement_draft/publishDraft")
+    @ApiOperation(value = "发布->公告草稿",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(action = "发布->公告草稿",fullPath = "/announcement_draft/publishDraft")
     @PostMapping(value = "/publishDraft")
     public MyCommonResult publishDraft(HttpServletRequest request, String draftId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementDraftFuncModuleConstant.Success.PUBLISH);

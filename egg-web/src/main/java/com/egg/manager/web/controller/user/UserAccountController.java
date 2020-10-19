@@ -8,6 +8,7 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.common.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -76,7 +77,7 @@ public class UserAccountController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
+    @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     @PcWebOperationLog(action = "分页查询(dto)->用户账号",fullPath = "/user/user_account/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({

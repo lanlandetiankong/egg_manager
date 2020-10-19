@@ -14,6 +14,7 @@ import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.constant.define.DefineMenuConstant;
+import com.egg.manager.common.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
@@ -197,7 +198,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "更新->菜单定义/excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(action = "更新->菜单定义/excel模板", fullPath = "/define/define_menu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
-    @RequiresRoles(value = {"Root", "SuperRoot"}, logical = Logical.OR)
+    @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE_OPER);
         try {

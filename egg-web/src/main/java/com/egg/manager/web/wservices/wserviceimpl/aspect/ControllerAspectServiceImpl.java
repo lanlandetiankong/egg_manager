@@ -10,6 +10,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -34,6 +35,8 @@ import java.util.Date;
 @Slf4j
 @Service
 public class ControllerAspectServiceImpl implements ControllerAspectService {
+
+    private final String UNKNOW_METHOD_ACTION_NAME = "未知方法操作名!!!";
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -92,8 +95,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebQueryLogMgo.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
                 PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
                 if (pcWebQueryLog != null) {
-                    pcWebQueryLogMgo.setAction(pcWebQueryLog.action());
-                    pcWebQueryLogMgo.setLogDescription(pcWebQueryLog.description());
+                    pcWebQueryLogMgo.setAction(this.gainApiOperationMsgWhenBlank(method,pcWebQueryLog.action()));
+                    pcWebQueryLogMgo.setLogDescription(this.gainApiOperationNotesIfBlank(method,pcWebQueryLog.description()));
                     //请求的全路径(代码中取得)
                     pcWebQueryLogMgo.setFullPath(pcWebQueryLog.fullPath());
                 }
@@ -157,8 +160,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebOperationLogMgo.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
                 PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
                 if (pcWebQueryLog != null) {
-                    pcWebOperationLogMgo.setAction(pcWebQueryLog.action());
-                    pcWebOperationLogMgo.setLogDescription(pcWebQueryLog.description());
+                    pcWebOperationLogMgo.setAction(this.gainApiOperationMsgWhenBlank(method,pcWebQueryLog.action()));
+                    pcWebOperationLogMgo.setLogDescription(this.gainApiOperationNotesIfBlank(method,pcWebQueryLog.description()));
                     //请求的全路径(代码中取得)
                     pcWebOperationLogMgo.setFullPath(pcWebQueryLog.fullPath());
                 }
@@ -220,8 +223,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebLoginLogMgo.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
                 PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
                 if (pcWebQueryLog != null) {
-                    pcWebLoginLogMgo.setAction(pcWebQueryLog.action());
-                    pcWebLoginLogMgo.setLogDescription(pcWebQueryLog.description());
+                    pcWebLoginLogMgo.setAction(this.gainApiOperationMsgWhenBlank(method,pcWebQueryLog.action()));
+                    pcWebLoginLogMgo.setLogDescription(this.gainApiOperationNotesIfBlank(method,pcWebQueryLog.description()));
                     //请求的全路径(代码中取得)
                     pcWebLoginLogMgo.setFullPath(pcWebQueryLog.fullPath());
                 }
@@ -308,5 +311,66 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             flag = true;
         }
         return flag;
+    }
+
+
+
+    /**
+     * 取得方法上@ApiOperation的value
+     * @param method 方法
+     * @param value 要判断的值
+     * @return
+     */
+    private String gainApiOperationMsgWhenBlank(Method method,String value){
+        if(StringUtils.isNotBlank(value)){
+            return value ;
+        }
+        return gainApiOperationMsg(method) ;
+    }
+
+    /**
+     * 取得方法上@ApiOperation的value
+     * @param method 方法
+     * @return
+     */
+    private String gainApiOperationMsg(Method method){
+        //是否有[Api操作]注解
+        if (method.isAnnotationPresent(ApiOperation.class)) {
+            ApiOperation anno = method.getAnnotation(ApiOperation.class);
+            if(StringUtils.isNotBlank(anno.value())){
+                return anno.value();
+            }
+        }
+        return "" ;
+    }
+
+    /**
+     * 取得方法上@ApiOperation的note
+     * @param method 方法
+     * @param value 要判断的值
+     * @return
+     */
+    private String gainApiOperationNotesIfBlank(Method method,String value){
+        if(StringUtils.isNotBlank(value)){
+            return value ;
+        }
+        return gainApiOperationNotes(method) ;
+    }
+
+
+    /**
+     * 取得方法上@ApiOperation的note
+     * @param method 方法
+     * @return
+     */
+    private String gainApiOperationNotes(Method method){
+        //是否有[Api操作]注解
+        if (method.isAnnotationPresent(ApiOperation.class)) {
+            ApiOperation anno = method.getAnnotation(ApiOperation.class);
+            if(StringUtils.isNotBlank(anno.value())){
+                return anno.notes();
+            }
+        }
+        return UNKNOW_METHOD_ACTION_NAME ;
     }
 }

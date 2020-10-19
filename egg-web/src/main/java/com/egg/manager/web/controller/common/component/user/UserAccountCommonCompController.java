@@ -40,9 +40,9 @@ public class UserAccountCommonCompController extends BaseController {
     @PcWebOperationLog(action = "[通用组件]-查询用户信息-Dto列表", fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
     @ApiOperation(value = "[通用组件]-查询用户信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,

@@ -11,6 +11,7 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
+import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -60,9 +61,9 @@ public class DefineDepartmentController extends BaseController {
     @PcWebQueryLog(action = "分页查询->部门定义",fullPath = "/define/define_department/queryDtoPage")
     @ApiOperation(value = "分页查询->部门定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineDepartmentVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj

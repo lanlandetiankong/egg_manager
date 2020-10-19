@@ -115,9 +115,9 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(action = "查询菜单定义信息-Dto列表",fullPath = "/define/define_menu/queryDtoPage")
     @ApiOperation(value = "查询菜单定义信息-Dto列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 -> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 -> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineMenuVo> queryDtoPage(HttpServletRequest request,

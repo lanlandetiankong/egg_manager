@@ -10,6 +10,7 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.common.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.common.base.query.mongo.MongoQueryBean;
@@ -62,8 +63,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
@@ -86,9 +87,9 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "queryObj", value = "字段查询配置 ->> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "paginationObj", value = "分页配置 ->> json格式", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "sortObj", value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "queryObj", value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "paginationObj", value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "sortObj", value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataAll")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {

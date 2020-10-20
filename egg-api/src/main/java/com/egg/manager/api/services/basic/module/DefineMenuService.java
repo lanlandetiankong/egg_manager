@@ -53,10 +53,9 @@ public interface DefineMenuService extends IService<DefineMenu>,MyBaseMysqlServi
     List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId);
     /**
      * 查询 所有[可用状态]的 [菜单定义]
-     * @param queryWrapper
      * @return
      */
-    List<DefineMenu> getAllEnableList(QueryWrapper<DefineMenu> queryWrapper);
+    List<DefineMenu> getAllEnableList();
     /**
      * [菜单展示]的子节点 构建的树结构
      * @param rootId

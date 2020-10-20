@@ -75,7 +75,7 @@ public class MyShiroConfig {
         filterRuleMap.put("/doc.html", "anon");
         filterRuleMap.put("/webjars/**", "anon");
         // 所有请求通过我们自己的JWT Filter
-        filterRuleMap.put("/user/login/byAccountForm", "anon");
+        filterRuleMap.put("/user/login/loginByForm", "anon");
         filterRuleMap.put("/**", "jwt");
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         filterFactoryBean.setFilters(filterMap);

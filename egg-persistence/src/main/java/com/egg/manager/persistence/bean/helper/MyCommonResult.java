@@ -2,6 +2,7 @@ package com.egg.manager.persistence.bean.helper;
 
 import cn.hutool.http.HttpStatus;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
+import com.google.common.collect.Maps;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -82,7 +83,7 @@ public class MyCommonResult<T> implements Serializable {
      * 更多参数,配置 com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey
      */
     @Builder.Default
-    private Map<String,Object> moreAttribute = new HashMap<>();
+    private Map<String,Object> moreAttribute = Maps.newHashMap();
 
 
 
@@ -151,6 +152,7 @@ public class MyCommonResult<T> implements Serializable {
      * @param value
      */
     public void addMoreAttribute(String key,Object value){
+        this.moreAttribute = (this.moreAttribute == null) ? Maps.newHashMap() : this.moreAttribute ;
         this.moreAttribute.put(key,value) ;
     }
 }

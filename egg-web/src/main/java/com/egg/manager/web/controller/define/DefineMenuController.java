@@ -79,7 +79,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<CommonTreeSelect> queryTreeSelect(Boolean withRoot) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class, DefineMenuFuncModuleConstant.Success.QUERY_TREE_SELECT);
         //查询 所有[可用状态]的 [菜单定义]
-        List<DefineMenu> allMenus = defineMenuService.getAllEnableList(new QueryWrapper<DefineMenu>());
+        List<DefineMenu> allMenus = defineMenuService.getAllEnableList();
         List<CommonTreeSelect> treeList = null;
         if (Boolean.TRUE.equals(withRoot)) {
             treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);

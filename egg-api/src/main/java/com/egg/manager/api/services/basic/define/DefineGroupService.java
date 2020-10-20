@@ -8,7 +8,7 @@ import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 23:41
  * \* Description:

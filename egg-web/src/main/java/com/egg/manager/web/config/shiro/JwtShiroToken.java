@@ -5,7 +5,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 
 /**
  * \* note: shiro jwt token令牌
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 16:46
  * \* Description:

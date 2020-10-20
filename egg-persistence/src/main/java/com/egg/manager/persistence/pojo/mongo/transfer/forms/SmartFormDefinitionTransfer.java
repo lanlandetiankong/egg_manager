@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/7/22
  * \* Time: 22:35
  * \* Description:

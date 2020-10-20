@@ -16,7 +16,7 @@ import java.util.List;
  * 用户&租户 Mapper 接口
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  */
 public interface UserTenantMapper extends BaseMapper<UserTenant> {
     /**

@@ -14,7 +14,7 @@ import org.mapstruct.factory.Mappers;
  * 操作日志表 - MongoDB
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2020-08-11
  */
 @Mapper(componentModel = "spring",

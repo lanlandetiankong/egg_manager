@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/7/22
  * \* Time: 23:15
  * \* Description:

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 用户-部门 关联service
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Description:
  * \
  */

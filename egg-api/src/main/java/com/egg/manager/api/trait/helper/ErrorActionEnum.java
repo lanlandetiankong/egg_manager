@@ -2,7 +2,7 @@ package com.egg.manager.api.trait.helper;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/2/11
  * \* Time: 20:03
  * \* Description:

@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.*;
 
 /**
  * \* note: mongodb 相关配置
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/8/11
  * \* Time: 9:36
  * \* Description:

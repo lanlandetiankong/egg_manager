@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * \* note: 在Controller方法参数上使用该注解将会在映射时注入当前登录的 UserAccount,同时表明该方法是需要验证用户登录
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 14:47
  * \* To change this template use File | Settings | File Templates.

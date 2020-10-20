@@ -16,7 +16,7 @@ import java.util.List;
  * 用户&部门 Mapper 接口
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  */
 public interface UserDepartmentMapper extends BaseMapper<UserDepartment> {
     /**

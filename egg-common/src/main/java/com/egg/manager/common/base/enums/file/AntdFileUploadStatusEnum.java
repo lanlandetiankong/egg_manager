@@ -2,7 +2,7 @@ package com.egg.manager.common.base.enums.file;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/4/4
  * \* Time: 14:45
  * \* Description:

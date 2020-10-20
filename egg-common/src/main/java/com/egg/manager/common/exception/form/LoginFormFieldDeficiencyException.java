@@ -2,7 +2,7 @@ package com.egg.manager.common.exception.form;
 
 /**
  * \* note: 登录表单字段缺失异常
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/10/5
  * \* Time: 14:35
  * \* Description:

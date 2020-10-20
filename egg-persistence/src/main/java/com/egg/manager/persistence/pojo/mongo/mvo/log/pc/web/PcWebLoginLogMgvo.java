@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 登录日志表 - MongoDB
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2020-07-19
  */
 @Data

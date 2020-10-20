@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
  * 定义的用户组 Mapper 接口
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2019-09-12
  */
 public interface DefineGroupMapper extends BaseMapper<DefineGroup> {

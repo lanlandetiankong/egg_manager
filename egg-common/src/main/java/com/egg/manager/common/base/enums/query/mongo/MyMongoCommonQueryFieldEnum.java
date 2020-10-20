@@ -4,7 +4,7 @@ import com.egg.manager.common.base.enums.base.BaseStateEnum;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/8/8
  * \* Time: 19:06
  * \* Description:

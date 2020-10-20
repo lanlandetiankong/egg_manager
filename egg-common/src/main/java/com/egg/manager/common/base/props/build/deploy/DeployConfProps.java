@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * \* note: 本地、服务器部署配置文件的映射
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Description:
  * \
  */

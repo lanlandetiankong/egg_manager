@@ -3,7 +3,7 @@ package com.egg.manager.common.base.enums.aspect;
 /**
  * 切面通知 的类型 枚举
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/10/6
  * \* Time: 0:34
  * \* Description:

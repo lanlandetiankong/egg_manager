@@ -16,7 +16,7 @@ import java.util.List;
  * 租户表 Mapper 接口
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2019-09-12
  */
 public interface DefineTenantMapper extends BaseMapper<DefineTenant> {

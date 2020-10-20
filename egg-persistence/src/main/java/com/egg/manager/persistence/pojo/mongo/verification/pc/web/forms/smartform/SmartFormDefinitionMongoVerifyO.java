@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * \* note: SmartFormDefinitionMgo 对应的验证对象
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/7/25
  * \* Time: 11:06
  * \* Description:

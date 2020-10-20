@@ -15,7 +15,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
  * \* note: 增强方法注入，将含有 @CurrentLoginUser 注解的方法参数注入当前登录用户
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 16:51
  * \* Description:

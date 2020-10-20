@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  * \* note: 数据库查询字段 ，用作dubbo各个service之间的传输对象
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/8/8
  * \* Time: 19:06
  * \* Description:

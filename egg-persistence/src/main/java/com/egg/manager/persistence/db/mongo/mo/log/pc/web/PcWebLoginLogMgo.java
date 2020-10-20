@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 查询日志表 - MongoDB
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2020-07-19
  */
 @Data

@@ -24,7 +24,7 @@ import java.util.jar.JarFile;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/3/18
  * \* Time: 22:17
  * \* Description:

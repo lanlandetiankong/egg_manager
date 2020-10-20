@@ -3,7 +3,7 @@ package com.egg.manager.common.base.enums.user.info;
 /**
  * 学历 类型枚举类
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/2/16
  * \* Time: 14:07
  * \* Description:

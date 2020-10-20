@@ -3,7 +3,7 @@ package com.egg.manager.common.base.constant.redis;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/10/5
  * \* Time: 16:30
  * \* Description:

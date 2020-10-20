@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 公告草稿-entity
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/2/21
  * \* Time: 13:42
  * \* Description:

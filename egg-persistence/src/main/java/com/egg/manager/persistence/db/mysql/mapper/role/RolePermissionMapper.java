@@ -12,7 +12,7 @@ import java.util.List;
  * 角色权限 Mapper 接口
  * </p>
  *
- * @author zhouchengjie123
+ * @author zhouchengjie
  * @since 2019-09-12
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {

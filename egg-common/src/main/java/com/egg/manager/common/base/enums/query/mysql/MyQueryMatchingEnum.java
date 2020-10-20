@@ -4,7 +4,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 
 /**
  * \* note:
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/8/1
  * \* Time: 16:03
  * \* Description:

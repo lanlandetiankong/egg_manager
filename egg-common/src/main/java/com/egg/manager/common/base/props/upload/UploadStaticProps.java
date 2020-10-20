@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * \* note: 静态方法可以调用 props-upload.properties配置的参数
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/10/5
  * \* Time: 18:24
  * \* Description:

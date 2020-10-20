@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * \* note: 登录表单 对应的验证对象
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/7/25
  * \* Time: 11:06
  * \* Description:

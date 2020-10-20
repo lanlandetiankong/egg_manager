@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * \* note:表单项
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2020/7/22
  * \* Time: 23:58
  * \* Description:

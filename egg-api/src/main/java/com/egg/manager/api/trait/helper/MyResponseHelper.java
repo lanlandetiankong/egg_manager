@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 
 /**
  * \* note: 统一返回相应参数
- * \* User: zhouchengjie
+ * @author: zhouchengjie
  * \* Date: 2019/9/14
  * \* Time: 15:00
  * \* Description:

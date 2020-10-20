@@ -12,6 +12,10 @@ import java.util.List;
  */
 public interface OperTableInfoMapper {
 
-
+    /**
+     * 取得所有 表名
+     * @param databaseName
+     * @return
+     */
     List<String> getAllTableName(@Param("databaseName") String databaseName);
 }

@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -30,11 +31,16 @@ public class MpGenerator {
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir("J://projects//generate//egg-manager");
         gc.setFileOverride(true);
-        gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
-        gc.setEnableCache(false);// XML 二级缓存
-        gc.setBaseResultMap(true);// XML ResultMap
-        gc.setBaseColumnList(true);// XML columList
-        // .setKotlin(true) 是否生成 kotlin 代码
+        // 不需要ActiveRecord特性的请改为false
+        gc.setActiveRecord(true);
+        // XML 二级缓存
+        gc.setEnableCache(false);
+        // XML ResultMap
+        gc.setBaseResultMap(true);
+        // XML columList
+        gc.setBaseColumnList(true);
+        //是否生成 kotlin 代码
+        // .setKotlin(true)
         gc.setAuthor("zhoucj");
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
@@ -65,17 +71,22 @@ public class MpGenerator {
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "em_"});// 此处可以修改为您的表前缀
-        strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+        // 全局大写命名 ORACLE 注意
+        // strategy.setCapitalMode(true);
+        // 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "em_"});
+        // 表名生成策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);
         String[] allTableNameArr = new String[] {
                 "em_define_group","em_define_menu","em_define_permission","em_define_role",
                 "em_role_permission",
                 "em_user_account","em_user_group","em_user_role"
                 } ;
         String[] willAddTableNameArr = new String[] {"em_operation_log"} ;
-         strategy.setInclude(willAddTableNameArr); // 需要生成的表
-        // strategy.setExclude(new String[]{"test"}); // 排除生成的表
+        // 需要生成的表
+         strategy.setInclude(willAddTableNameArr);
+        // 排除生成的表
+        // strategy.setExclude(new String[]{"test"});
         // 自定义实体父类
 //         strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
         // 自定义实体，公共字段
@@ -113,7 +124,7 @@ public class MpGenerator {
         InjectionConfig cfg = new InjectionConfig() {
             @Override
             public void initMap() {
-                Map<String, Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = Maps.newHashMap();
                 map.put("abc", this.getConfig().getGlobalConfig().getAuthor());
                 //模块名-中文
                 map.put("moduleName_Cn","模块定义");

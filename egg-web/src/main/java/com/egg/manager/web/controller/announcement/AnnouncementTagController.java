@@ -57,7 +57,7 @@ public class AnnouncementTagController extends BaseController {
     private AnnouncementTagService announcementTagService;
 
 
-    @PcWebQueryLog(action = "分页查询->公告标签",fullPath = "/announcement_tag/gainEnumSelect")
+    @PcWebQueryLog(fullPath = "/announcement_tag/gainEnumSelect")
     @ApiOperation(value = "分页查询->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -83,7 +83,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "分页查询(dto)->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "分页查询(dto)->公告标签",fullPath = "/announcement_tag/queryDtoPage")
+    @PcWebQueryLog(fullPath = "/announcement_tag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementTagVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                                                          @CurrentLoginUser UserAccount loginUser) {
@@ -104,7 +104,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "根据id查询->公告标签",fullPath = "/announcement_tag/queryOneById")
+    @PcWebQueryLog(fullPath = "/announcement_tag/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementTagVo> queryOneById(HttpServletRequest request, String announcementTagId,
                                                                       @CurrentLoginUser UserAccount loginUser) {
@@ -121,7 +121,7 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "新增->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增->公告标签",fullPath = "/announcement_tag/createByForm")
+    @PcWebOperationLog(fullPath = "/announcement_tag/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                                   @CurrentLoginUser UserAccount loginUser) {
@@ -139,7 +139,7 @@ public class AnnouncementTagController extends BaseController {
 
 
     @ApiOperation(value = "更新->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新->公告标签",fullPath = "/announcement_tag/updateByForm")
+    @PcWebOperationLog(fullPath = "/announcement_tag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
                                                   @CurrentLoginUser UserAccount loginUser) {
@@ -157,7 +157,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量伪删除->公告标签",fullPath = "/announcement_tag/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/announcement_tag/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
@@ -179,7 +179,7 @@ public class AnnouncementTagController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->公告标签",fullPath = "/announcement_tag/deleteById")
+    @PcWebOperationLog(fullPath = "/announcement_tag/deleteById")
     @ApiOperation(value = "伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),

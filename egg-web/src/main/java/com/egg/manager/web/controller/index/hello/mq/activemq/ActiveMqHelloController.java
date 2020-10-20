@@ -38,7 +38,7 @@ public class ActiveMqHelloController extends BaseController {
     @Autowired
     private Topic topic;
 
-    @PcWebOperationLog(action = "测试ActiveMq-Queue", fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
+    @PcWebOperationLog(fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
@@ -46,7 +46,7 @@ public class ActiveMqHelloController extends BaseController {
         return "success";
     }
 
-    @PcWebOperationLog(action = "测试ActiveMq-Topic", fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
+    @PcWebOperationLog(fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {

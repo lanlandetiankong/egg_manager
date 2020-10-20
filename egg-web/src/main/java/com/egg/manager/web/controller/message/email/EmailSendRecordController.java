@@ -59,7 +59,7 @@ public class EmailSendRecordController extends BaseController {
     private EmailSendRecordMgoService emailSendRecordMgoService;
 
 
-    @PcWebQueryLog(action = "分页查询->邮件记录", fullPath = "/message/email/emailSendRecord/getDataPage")
+    @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getDataPage")
     @ApiOperation(value = "分页查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -83,7 +83,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "根据id查询->邮件记录", fullPath = "/message/email/emailSendRecord/getOneItemById")
+    @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -99,7 +99,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "新增->邮件记录", fullPath = "/message/email/emailSendRecord/addByForm")
+    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -120,7 +120,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/delOneById")
+    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
     @ApiOperation(value = "伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
@@ -139,7 +139,7 @@ public class EmailSendRecordController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量伪删除->邮件记录", fullPath = "/message/email/emailSendRecord/batchDelByIds")
+    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),

@@ -56,7 +56,7 @@ public class UserRoleController extends BaseController {
     private UserRoleService userRoleService;
 
 
-    @PcWebQueryLog(action = "分页查询->用户角色",fullPath = "/user/user_role/getAllUserRoles")
+    @PcWebQueryLog(fullPath = "/user/user_role/getAllUserRoles")
     @ApiOperation(value = "分页查询->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -83,7 +83,7 @@ public class UserRoleController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "根据id查询->用户角色",fullPath = "/user/user_role/getUserRoleById")
+    @PcWebQueryLog(fullPath = "/user/user_role/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -99,7 +99,7 @@ public class UserRoleController extends BaseController {
 
 
     @ApiOperation(value = "新增->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增->用户角色",fullPath = "/user/user_role/doAddUserRole")
+    @PcWebOperationLog(fullPath = "/user/user_role/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.CREATE_OPER);
@@ -115,7 +115,7 @@ public class UserRoleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量伪删除->用户角色",fullPath = "/user/user_role/batchDelUserRoleByIds")
+    @PcWebOperationLog(fullPath = "/user/user_role/batchDelUserRoleByIds")
     @ApiOperation(value = "批量伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
@@ -135,7 +135,7 @@ public class UserRoleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->用户角色",fullPath = "/user/user_role/delOneUserRoleByIds")
+    @PcWebOperationLog(fullPath = "/user/user_role/delOneUserRoleByIds")
     @ApiOperation(value = "伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),

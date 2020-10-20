@@ -73,7 +73,7 @@ public class DefineMenuController extends BaseController {
     private UserAccountRedisService userAccountRedisService;
 
 
-    @PcWebQueryLog(action = "查询下拉树->菜单定义",fullPath = "/define/define_menu/queryTreeSelect")
+    @PcWebQueryLog(fullPath = "/define/define_menu/queryTreeSelect")
     @ApiOperation(value = "查询下拉树->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryTreeSelect(Boolean withRoot) {
@@ -90,7 +90,7 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "筛选查询下拉树->菜单定义",description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_menu/queryFilteredTreeSelect")
+    @PcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/define_menu/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->菜单定义", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId) {
@@ -102,7 +102,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "权限筛选查询下拉树->菜单定义",fullPath = "/define/define_menu/user/gainGrantTree")
+    @PcWebQueryLog(fullPath = "/define/define_menu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
     public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class, DefineMenuFuncModuleConstant.Success.QUERY_GRANTED);
@@ -114,7 +114,7 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "分页查询(dto)->菜单定义",fullPath = "/define/define_menu/queryDtoPage")
+    @PcWebQueryLog(fullPath = "/define/define_menu/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -143,7 +143,7 @@ public class DefineMenuController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "根据id查询->菜单定义",fullPath = "/define/define_menu/queryOneById")
+    @PcWebQueryLog(fullPath = "/define/define_menu/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineMenuVo> queryOneById(HttpServletRequest request, String defineMenuId) {
         MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class,DefineMenuFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -160,7 +160,7 @@ public class DefineMenuController extends BaseController {
 
 
     @ApiOperation(value = "新增->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增->菜单定义",fullPath = "/define/define_menu/createByForm")
+    @PcWebOperationLog(fullPath = "/define/define_menu/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.CREATE_OPER);
@@ -178,7 +178,7 @@ public class DefineMenuController extends BaseController {
 
 
     @ApiOperation(value = "更新->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新->菜单定义",fullPath = "/define/define_menu/updateByForm")
+    @PcWebOperationLog(fullPath = "/define/define_menu/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineMenuFuncModuleConstant.Success.UPDATE_OPER);
@@ -196,7 +196,7 @@ public class DefineMenuController extends BaseController {
 
 
     @ApiOperation(value = "更新->菜单定义/excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新->菜单定义/excel模板", fullPath = "/define/define_menu/updateExcelModel")
+    @PcWebOperationLog(fullPath = "/define/define_menu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
@@ -221,7 +221,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "批量伪删除->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "批量伪删除->菜单定义",fullPath = "/define/define_menu/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/define/define_menu/batchDeleteByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds",required = true, dataTypeClass = String[].class),
     })
@@ -241,7 +241,7 @@ public class DefineMenuController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->菜单定义",fullPath = "/define/define_menu/deleteById")
+    @PcWebOperationLog(fullPath = "/define/define_menu/deleteById")
     @ApiOperation(value = "伪删除->菜单定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),

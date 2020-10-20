@@ -36,7 +36,7 @@ public class HelloMailController extends BaseController {
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
     @ApiOperation(value = "测试发送消息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "测试发送消息",fullPath = "/message/email/hello/sendMail")
+    @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult doGetDefineModuleById(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainOperationResult("测试");

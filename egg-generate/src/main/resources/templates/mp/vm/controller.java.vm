@@ -9,7 +9,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
-
+import com.egg.manager.common.base.constant.web.api.WebApiConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -65,8 +65,8 @@ public class ${table.controllerName} {
     @Reference
     private ${cfg.baseEntityName}Service ${cfg.baseEntityName_firstLow}Service;
 
-    @PcWebQueryLog(action = "查询${cfg.moduleName_Cn}-Dto列表", description = "查询${cfg.moduleName_Cn}-Dto列表", fullPath = "${cfg.baseReqUrl}/getAllDtos")
-    @ApiOperation(value = "查询${cfg.moduleName_Cn}-Dto列表", notes = "查询${cfg.moduleName_Cn}-Dto列表", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
+    @ApiOperation(value = "分页查询(dto)->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -92,8 +92,8 @@ public class ${table.controllerName} {
     }
 
 
-    @ApiOperation(value = "查询${cfg.moduleName_Cn}", notes = "根据${cfg.moduleName_Cn}id查询${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(action = "查询${cfg.moduleName_Cn}", description = "根据${cfg.moduleName_Cn}id查询${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/getOneItemById")
+    @ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
@@ -107,8 +107,8 @@ public class ${table.controllerName} {
     }
 
 
-    @ApiOperation(value = "新增${cfg.moduleName_Cn}", notes = "表单方式新增${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "新增${cfg.moduleName_Cn}", description = "表单方式新增${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/addByForm")
+    @ApiOperation(value = "新增->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
     @PostMapping(value = "/addByForm")
     public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
@@ -127,8 +127,8 @@ public class ${table.controllerName} {
     }
 
 
-    @ApiOperation(value = "更新${cfg.moduleName_Cn}", notes = "表单方式更新${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(action = "更新${cfg.moduleName_Cn}", description = "表单方式更新${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/updateByForm")
+    @ApiOperation(value = "更新->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result=new MyCommonResult();
@@ -147,8 +147,8 @@ public class ${table.controllerName} {
     }
 
 
-    @PcWebOperationLog(action = "批量删除${cfg.moduleName_Cn}", description = "批量删除${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/batchDelByIds")
-    @ApiOperation(value = "批量删除${cfg.moduleName_Cn}", notes = "批量删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
+    @ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
     })
@@ -168,8 +168,8 @@ public class ${table.controllerName} {
     }
 
 
-    @PcWebOperationLog(action = "删除${cfg.moduleName_Cn}", description = "根据id删除${cfg.moduleName_Cn}", fullPath = "${cfg.baseReqUrl}/delOneById")
-    @ApiOperation(value = "删除${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
+    @ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),
     })

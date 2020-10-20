@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
+import java.io.File;
 import java.util.Set;
 
 
@@ -57,7 +58,7 @@ public class UserExcelController extends BaseController {
     private UserAccountXlsService userAccountXlsService;
     @Reference
     private UserAccountService userAccountService;
-
+    @ApiOperation(value = "导出/所选->excel文件",response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportCheckList")
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
@@ -76,7 +77,7 @@ public class UserExcelController extends BaseController {
             this.respResultJsonToFront(log, response, result);
         }
     }
-
+    @ApiOperation(value = "导出/全部->excel文件",response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser UserAccount loginUser) {
@@ -95,7 +96,7 @@ public class UserExcelController extends BaseController {
     }
 
 
-    @ApiOperation(value = "导入数据",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "导入->excel文件",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/importData")
     @ResponseBody
     public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,

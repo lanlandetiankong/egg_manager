@@ -40,8 +40,8 @@ public class HelloController extends BaseController {
     private MessageHelloService messageHelloService;
     private CommonMenuTree commonMenuTree ;
 
-    @PcWebQueryLog(action = "测试当前开发环境",fullPath = "/index/hello/testEnv", flag = false)
-    @ApiOperation(value = "测试当前开发环境",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(fullPath = "/index/hello/testEnv", flag = false)
+    @ApiOperation(value = "测试当前开发环境",response = MyCommonResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
         try {
@@ -51,30 +51,27 @@ public class HelloController extends BaseController {
         return "Error";
     }
 
-    @PcWebQueryLog(action = "测试dubbo调用service", fullPath = "/index/hello/sayHello", flag = false)
+    @PcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)
+    @ApiOperation(value = "测试当前开发环境",response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/sayHello")
     public void sayHello() {
         helloService.sayHello();
     }
 
-    @PcWebQueryLog(action = "测试dubbo负载均衡", fullPath = "/index/hello/loadBalanceTest", flag = false)
+    @PcWebQueryLog(fullPath = "/index/hello/loadBalanceTest", flag = false)
+    @ApiOperation(value = "测试dubbo负载均衡",response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
         String port = helloService.loadBalanceTest();
         log.info("for debug..." + port);
     }
 
-    @PcWebQueryLog(action = "测试dubbo负载均衡-相互调用", fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
+    @PcWebQueryLog(fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
+    @ApiOperation(value = "测试dubbo负载均衡-相互调用",response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();
         log.info("for message  debug..." + port);
     }
 
-
-    @PcWebQueryLog(action = "", fullPath = "/index/hello/testRegistrar", flag = false)
-    @GetMapping(value = "/testRegistrar")
-    public void testRegistrar() {
-        log.info("for message  debug..." );
-    }
 }

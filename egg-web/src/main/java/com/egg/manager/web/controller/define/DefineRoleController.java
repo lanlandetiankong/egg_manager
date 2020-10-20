@@ -76,7 +76,7 @@ public class DefineRoleController extends BaseController {
     private DefineRoleService defineRoleService;
 
 
-    @PcWebOperationLog(action = "分页查询->角色定义",fullPath = "/define/define_role/queryPage")
+    @PcWebOperationLog(fullPath = "/define/define_role/queryPage")
     @ApiOperation(value = "分页查询->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -102,7 +102,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "分页查询(dto)->角色定义",fullPath = "/define/define_role/queryDtoPage")
+    @PcWebOperationLog(fullPath = "/define/define_role/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -130,7 +130,7 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "根据id查询->角色定义",fullPath = "/define/define_role/queryOneById")
+    @PcWebOperationLog(fullPath = "/define/define_role/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineRoleVo> queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -210,7 +210,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "批量伪删除->角色定义",fullPath = "/define/define_role/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/define/define_role/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
@@ -230,7 +230,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(action = "伪删除->角色定义",fullPath = "/define/define_role/deleteById")
+    @PcWebOperationLog(fullPath = "/define/define_role/deleteById")
     @ApiOperation(value = "伪删除->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),

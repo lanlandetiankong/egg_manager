@@ -38,7 +38,7 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(action = "通用组件?分页查询(dto)->用户账号", fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
+    @PcWebOperationLog(fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(dto)->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

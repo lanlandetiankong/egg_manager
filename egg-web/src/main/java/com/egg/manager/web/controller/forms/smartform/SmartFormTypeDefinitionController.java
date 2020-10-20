@@ -60,7 +60,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     private SmartFormDefinitionMgoService smartFormDefinitionMgoService;
 
 
-    @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
+    @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -84,7 +84,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "分页查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
+    @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -108,7 +108,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(action = "根据id查询->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
+    @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -125,7 +125,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
 
     }
 
-    @PcWebOperationLog(action = "新增->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
+    @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
     @ApiOperation(value = "新增->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -145,7 +145,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "更新->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
+    @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
@@ -170,7 +170,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
+    @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
     @ApiOperation(value = "伪删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
@@ -189,7 +189,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量删除->表单类型定义", fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
+    @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单类型定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),

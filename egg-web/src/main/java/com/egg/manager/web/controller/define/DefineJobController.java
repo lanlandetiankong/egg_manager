@@ -55,7 +55,7 @@ public class DefineJobController extends BaseController {
     private DefineJobService defineJobService;
 
 
-    @PcWebQueryLog(action = "分页查询->职务定义",fullPath = "/define/define_job/queryPage")
+    @PcWebQueryLog(fullPath = "/define/define_job/queryPage")
     @ApiOperation(value = "分页查询->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -82,7 +82,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebQueryLog(action = "分页查询(dto)->职务定义",fullPath = "/define/define_job/queryDtoPage")
+    @PcWebQueryLog(fullPath = "/define/define_job/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -110,7 +110,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(action = "根据id查询->职务定义",fullPath = "/define/define_job/queryOneById")
+    @PcWebQueryLog(fullPath = "/define/define_job/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineJobVo> queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -125,7 +125,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "新增->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "新增->职务定义",fullPath = "/define/define_job/createByForm")
+    @PcWebOperationLog(fullPath = "/define/define_job/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE_OPER);
@@ -142,7 +142,7 @@ public class DefineJobController extends BaseController {
 
 
     @ApiOperation(value = "更新->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(action = "更新->职务定义",fullPath = "/define/define_job/updateByForm")
+    @PcWebOperationLog(fullPath = "/define/define_job/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.UPDATE_OPER);
@@ -158,7 +158,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "批量伪删除->职务定义",fullPath = "/define/define_job/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/define/define_job/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
@@ -179,7 +179,7 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @PcWebOperationLog(action = "伪删除->职务定义",fullPath = "/define/define_job/deleteById")
+    @PcWebOperationLog(fullPath = "/define/define_job/deleteById")
     @ApiOperation(value = "伪删除->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),

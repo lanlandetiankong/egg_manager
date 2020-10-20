@@ -118,7 +118,7 @@ public class UserRoleController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/user_role/batchDelUserRoleByIds")
     @ApiOperation(value = "批量伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelUserRoleByIds")
     public MyCommonResult doBatchDeleteUserRoleById(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
@@ -138,7 +138,7 @@ public class UserRoleController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/user_role/delOneUserRoleByIds")
     @ApiOperation(value = "伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneUserRoleByIds")
     public MyCommonResult doDelOneUserRoleById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {

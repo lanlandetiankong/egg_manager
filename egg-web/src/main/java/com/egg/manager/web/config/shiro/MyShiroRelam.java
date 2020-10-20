@@ -2,7 +2,6 @@ package com.egg.manager.web.config.shiro;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
-import com.egg.manager.common.base.constant.Constant;
 import com.egg.manager.common.util.jwt.JwtUtil;
 import com.egg.manager.common.util.spring.SpringContextBeanUtil;
 import org.apache.shiro.authc.AuthenticationException;

@@ -34,7 +34,7 @@ import java.util.List;
 public class ModuleCommonController extends BaseController {
 
 
-    @ApiOperation(value = "检索所有模块类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->模块类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -54,7 +54,7 @@ public class ModuleCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "检索所有菜单跳转类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->菜单跳转类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult( ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);

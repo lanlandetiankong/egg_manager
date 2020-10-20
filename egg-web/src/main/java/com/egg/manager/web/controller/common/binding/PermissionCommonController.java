@@ -28,12 +28,12 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API-通用接口-权限 ")
+@Api(value = "API-通用接口-权限")
 @RestController
 @RequestMapping("/common_api/permission")
 public class PermissionCommonController extends BaseController {
 
-    @ApiOperation(value = "检索所有权限类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult( PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -52,7 +52,7 @@ public class PermissionCommonController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "检索所有角色类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->角色类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -72,7 +72,7 @@ public class PermissionCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "检索所有权限Code前缀类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限Code前缀类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);

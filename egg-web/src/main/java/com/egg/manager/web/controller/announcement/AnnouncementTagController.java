@@ -45,7 +45,7 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API -  公告标签接口")
+@Api(value = "API-公告标签接口")
 @RestController
 @RequestMapping("/announcement_tag")
 public class AnnouncementTagController extends BaseController {
@@ -160,7 +160,7 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement_tag/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的id数组", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
@@ -182,7 +182,7 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement_tag/deleteById")
     @ApiOperation(value = "伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "指定删除的id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId,

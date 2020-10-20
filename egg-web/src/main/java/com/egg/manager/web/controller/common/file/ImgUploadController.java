@@ -44,7 +44,7 @@ public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传头像",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/图片->头像",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.UPLOAD_IMG);

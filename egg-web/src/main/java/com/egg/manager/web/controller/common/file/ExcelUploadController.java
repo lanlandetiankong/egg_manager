@@ -45,7 +45,7 @@ public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传Excel模板",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/模板->excel",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.UPLOAD_EXCEL);

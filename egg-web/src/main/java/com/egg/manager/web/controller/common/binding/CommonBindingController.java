@@ -27,12 +27,12 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API ==>>  通用接口(参数绑定)")
+@Api(value = "API-通用接口/参数绑定")
 @RestController
 @RequestMapping("/common_api/binding")
 public class CommonBindingController extends BaseController {
 
-    @ApiOperation(value = "取得开关式取值的枚举列表",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->开关",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
     public MyCommonResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(CommonBindingFuncModuleConstant.Success.QUERY_ENUM_LIST);

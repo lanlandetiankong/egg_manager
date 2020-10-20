@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
-@Api(value = "API-用户账号接口(通用组件) ")
+@Api(value = "API-通用组件/用户账号接口")
 @RestController
 @RequestMapping("/commmon/component/user/user_account")
 public class UserAccountCommonCompController extends BaseController {

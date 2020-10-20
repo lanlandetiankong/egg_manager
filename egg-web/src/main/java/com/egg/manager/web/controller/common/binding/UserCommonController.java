@@ -33,7 +33,7 @@ import java.util.List;
 @RequestMapping("/common_api/user")
 public class UserCommonController extends BaseController {
 
-    @ApiOperation(value = "检索所有用户类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserTypeEnumList")
     public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -52,7 +52,7 @@ public class UserCommonController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "检索所有用户锁定状态",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户锁类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -68,7 +68,7 @@ public class UserCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "检索所有职务类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->职务类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);

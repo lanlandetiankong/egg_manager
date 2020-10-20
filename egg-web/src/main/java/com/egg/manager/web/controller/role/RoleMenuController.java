@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-角色_菜单接口")
 @RestController
-@RequestMapping("/role/role_menus")
+@RequestMapping("/role/roleMenus")
 public class RoleMenuController extends BaseController {
 
     @Autowired

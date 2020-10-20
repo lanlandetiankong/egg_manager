@@ -57,7 +57,7 @@ import java.util.Set;
 @Slf4j
 @Api(value = "API-角色定义接口")
 @RestController
-@RequestMapping("/define/define_role")
+@RequestMapping("/define/defineRole")
 public class DefineRoleController extends BaseController {
 
     @Autowired
@@ -76,7 +76,7 @@ public class DefineRoleController extends BaseController {
     private DefineRoleService defineRoleService;
 
 
-    @PcWebOperationLog(fullPath = "/define/define_role/queryPage")
+    @PcWebOperationLog(fullPath = "/define/defineRole/queryPage")
     @ApiOperation(value = "分页查询->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -102,7 +102,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/define_role/queryDtoPage")
+    @PcWebOperationLog(fullPath = "/define/defineRole/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -130,7 +130,7 @@ public class DefineRoleController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/define_role/queryOneById")
+    @PcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineRoleVo> queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class,DefineRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -210,7 +210,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/define_role/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -230,7 +230,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/define_role/deleteById")
+    @PcWebOperationLog(fullPath = "/define/defineRole/deleteById")
     @ApiOperation(value = "伪删除->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

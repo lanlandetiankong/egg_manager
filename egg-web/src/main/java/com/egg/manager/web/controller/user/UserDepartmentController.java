@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-用户_部门接口")
 @RestController
-@RequestMapping("/user/user_department")
+@RequestMapping("/user/userDepartment")
 public class UserDepartmentController extends BaseController {
 
 

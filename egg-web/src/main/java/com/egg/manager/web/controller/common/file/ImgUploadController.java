@@ -38,7 +38,7 @@ import java.nio.file.Paths;
 @Slf4j
 @Api(value = "API-图片上传接口")
 @RestController
-@RequestMapping(value = "/commom_api/file/imgUpload")
+@RequestMapping(value = "/commomApi/file/imgUpload")
 public class ImgUploadController extends BaseController {
 
     @Autowired

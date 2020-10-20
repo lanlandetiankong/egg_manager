@@ -28,9 +28,9 @@ import java.util.List;
  * \
  */
 @Slf4j
-@Api(value = "API-通用接口-权限")
+@Api(value = "API-通用接口->权限")
 @RestController
-@RequestMapping("/common_api/permission")
+@RequestMapping("/commonApi/permission")
 public class PermissionCommonController extends BaseController {
 
     @ApiOperation(value = "查询枚举->权限类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)

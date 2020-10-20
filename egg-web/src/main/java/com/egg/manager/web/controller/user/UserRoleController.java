@@ -46,7 +46,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-用户_角色接口")
 @RestController
-@RequestMapping("/user/user_role")
+@RequestMapping("/user/userRole")
 public class UserRoleController extends BaseController {
 
 
@@ -56,7 +56,7 @@ public class UserRoleController extends BaseController {
     private UserRoleService userRoleService;
 
 
-    @PcWebQueryLog(fullPath = "/user/user_role/getAllUserRoles")
+    @PcWebQueryLog(fullPath = "/user/userRole/getAllUserRoles")
     @ApiOperation(value = "分页查询->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -83,7 +83,7 @@ public class UserRoleController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/user_role/getUserRoleById")
+    @PcWebQueryLog(fullPath = "/user/userRole/getUserRoleById")
     @PostMapping(value = "/getUserRoleById")
     public MyCommonResult<UserRoleVo> doGetUserRoleById(HttpServletRequest request, String roleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserRoleVo> result = MyCommonResult.gainQueryResult(UserRoleVo.class, UserRoleFuncModuleConstant.Success.QUERY_ONE_BY_ID);
@@ -99,7 +99,7 @@ public class UserRoleController extends BaseController {
 
 
     @ApiOperation(value = "新增->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_role/doAddUserRole")
+    @PcWebOperationLog(fullPath = "/user/userRole/doAddUserRole")
     @PostMapping(value = "/doAddUserRole")
     public MyCommonResult doAddUserRole(HttpServletRequest request, UserRoleVo userRoleVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserRoleFuncModuleConstant.Success.CREATE_OPER);
@@ -115,7 +115,7 @@ public class UserRoleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(fullPath = "/user/user_role/batchDelUserRoleByIds")
+    @PcWebOperationLog(fullPath = "/user/userRole/batchDelUserRoleByIds")
     @ApiOperation(value = "批量伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -135,7 +135,7 @@ public class UserRoleController extends BaseController {
     }
 
 
-    @PcWebOperationLog(fullPath = "/user/user_role/delOneUserRoleByIds")
+    @PcWebOperationLog(fullPath = "/user/userRole/delOneUserRoleByIds")
     @ApiOperation(value = "伪删除->用户角色",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

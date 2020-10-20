@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-用户_组别接口")
 @RestController
-@RequestMapping("/user/user_group")
+@RequestMapping("/user/userGroup")
 public class UserGroupController {
 
 

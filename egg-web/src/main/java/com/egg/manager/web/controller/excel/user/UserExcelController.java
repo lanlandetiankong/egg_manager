@@ -48,7 +48,7 @@ import java.util.Set;
 @Slf4j
 @Api(value = "API-用户Excel处理接口")
 @Controller
-@RequestMapping("/excel/user_account")
+@RequestMapping("/excel/userAccount")
 public class UserExcelController extends BaseController {
 
 

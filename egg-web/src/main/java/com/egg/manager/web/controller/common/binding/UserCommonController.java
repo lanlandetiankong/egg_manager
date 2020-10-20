@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口(用户)")
 @RestController
-@RequestMapping("/common_api/user")
+@RequestMapping("/commonApi/user")
 public class UserCommonController extends BaseController {
 
     @ApiOperation(value = "查询枚举->用户类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)

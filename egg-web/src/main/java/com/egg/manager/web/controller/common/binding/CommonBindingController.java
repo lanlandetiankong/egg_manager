@@ -29,7 +29,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口/参数绑定")
 @RestController
-@RequestMapping("/common_api/binding")
+@RequestMapping("/commonApi/binding")
 public class CommonBindingController extends BaseController {
 
     @ApiOperation(value = "查询枚举->开关",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)

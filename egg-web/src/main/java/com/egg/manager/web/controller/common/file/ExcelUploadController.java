@@ -40,7 +40,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-Excel上传接口")
 @RestController
-@RequestMapping(value = "/commom_api/file/excelUpload")
+@RequestMapping(value = "/commomApi/file/excelUpload")
 public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;

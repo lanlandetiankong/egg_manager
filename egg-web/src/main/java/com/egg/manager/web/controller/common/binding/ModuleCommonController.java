@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口(模块)")
 @RestController
-@RequestMapping("/common_api/module")
+@RequestMapping("/commonApi/module")
 public class ModuleCommonController extends BaseController {
 
 

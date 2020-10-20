@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-组别定义接口")
 @RestController
-@RequestMapping("/define/define_group")
+@RequestMapping("/define/defineGroup")
 public class DefineGroupController {
 
 

@@ -57,7 +57,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-用户账号接口")
 @RestController
-@RequestMapping("/user/user_account")
+@RequestMapping("/user/userAccount")
 public class UserAccountController extends BaseController {
 
     @Autowired
@@ -78,7 +78,7 @@ public class UserAccountController extends BaseController {
 
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
-    @PcWebOperationLog(fullPath = "/user/user_account/queryDtoPage")
+    @PcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -106,7 +106,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "根据id查询->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/user_account/queryOneById")
+    @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<UserAccountVo> queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountFuncModuleConstant.Success.QUERY_PAGE);
@@ -133,7 +133,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/user_account/gainGrantedRole")
+    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
     public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class, UserAccountFuncModuleConstant.Success.QUERY_GRANTED);
@@ -147,7 +147,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/user_account/gainGrantedPermission")
+    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
     public MyCommonResult<DefinePermissionVo> gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                                                                 @CurrentLoginUser UserAccount loginUser) {
@@ -163,7 +163,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "查询已获授权/用户账号->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/user_account/gainGrantedJob")
+    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class, UserAccountFuncModuleConstant.Success.QUERY_GRANTED);
@@ -178,7 +178,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "新增->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/createByForm")
+    @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.CREATE_OPER);
@@ -196,7 +196,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "更新->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/updateByForm")
+    @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_OPER);
@@ -213,7 +213,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @PcWebOperationLog(fullPath = "/user/user_account/batchDeleteByIds")
+    @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -234,7 +234,7 @@ public class UserAccountController extends BaseController {
     }
 
 
-    @PcWebOperationLog(fullPath = "/user/user_account/deleteById")
+    @PcWebOperationLog(fullPath = "/user/userAccount/deleteById")
     @ApiOperation(value = "伪删除->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -255,7 +255,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "更新/批量修改状态->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/batchUpdateLockByIds")
+    @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public MyCommonResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_STATE);
@@ -277,7 +277,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "更新/修改状态->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/updateLockById")
+    @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public MyCommonResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_STATE);
@@ -297,7 +297,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "授权/用户账号->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/grantRoleToUser")
+    @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.GRANT_OPER);
@@ -313,7 +313,7 @@ public class UserAccountController extends BaseController {
 
 
     @ApiOperation(value = "授权/用户账号->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/user_account/grantJobToUser")
+    @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                            @CurrentLoginUser UserAccount loginUser) {

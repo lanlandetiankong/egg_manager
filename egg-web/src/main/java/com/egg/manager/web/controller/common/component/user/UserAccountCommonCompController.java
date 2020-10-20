@@ -31,14 +31,14 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用组件/用户账号接口")
 @RestController
-@RequestMapping("/commmon/component/user/user_account")
+@RequestMapping("/commmon/component/user/userAccount")
 public class UserAccountCommonCompController extends BaseController {
 
     @Autowired
     private UserAccountService userAccountService;
 
 
-    @PcWebOperationLog(fullPath = "/commmon/component/user/user_account/queryDtoPage", flag = false)
+    @PcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(dto)->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

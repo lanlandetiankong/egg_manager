@@ -67,7 +67,7 @@ public class PcWebLoginLogMgo extends MyBaseModelMgo<String> {
      */
     private String result;
     /**
-     *
+     * 异常信息
      */
     private String exception;
 

@@ -1,9 +1,11 @@
 package com.egg.manager.web.wservices.wserviceimpl.aspect;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
+import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
@@ -21,8 +23,11 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author zhoucj
@@ -44,12 +49,20 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
      * @return JSONObject
      */
     @Override
-    public JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint) {
+    public JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint,HttpServletRequest request) {
         JSONObject argJsonObj = new JSONObject();
+        //先从request取得传递的参数
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        if(CollectionUtil.isNotEmpty(parameterMap)){
+            Set<String> strings = parameterMap.keySet();
+            for(String key : strings){
+                argJsonObj.put(key, parameterMap.get(key));
+            }
+        }
+        //取得方法上定义要取得的参数，如果从手动从request取得的参数在joinpoint无法取得，重复的key将会覆盖上方的参数值
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length > 0) {
             String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
-
             for (int i = 0; i < args.length; i++) {
                 Object argObj = args[i];
                 if (!checkObjectInnstanceOfHttpServlet(argObj)) {
@@ -75,7 +88,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebQueryLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
-            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);
             pcWebQueryLogMgo.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature();
@@ -96,11 +109,22 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     pcWebQueryLogMgo.setFullPath(pcWebQueryLog.fullPath());
                 }
             }
-
             if (request != null) {
                 //请求路径
-                pcWebQueryLogMgo.setRequestUri(request.getRequestURI());
-                pcWebQueryLogMgo.setRequestUrl(request.getRequestURL().toString());
+                if(HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())){
+                    String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString() ;
+                    pcWebQueryLogMgo.setRequestUri(request.getRequestURI() + queryString);
+                    pcWebQueryLogMgo.setRequestUrl(request.getRequestURL().toString() + queryString);
+                }   else {
+                    pcWebQueryLogMgo.setRequestUri(request.getRequestURI());
+                    pcWebQueryLogMgo.setRequestUrl(request.getRequestURL().toString());
+                }
+                pcWebQueryLogMgo.setReqMethod(request.getMethod());
+                //请求的sessionid
+                HttpSession session = request.getSession();
+                if(session != null){
+                    pcWebQueryLogMgo.setSessionId(session.getId());
+                }
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
@@ -117,7 +141,6 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     pcWebQueryLogMgo.setIpAddr(request.getRemoteAddr());
                 }
             }
-
             Date now = new Date();
             pcWebQueryLogMgo.setCreateTime(now);
             pcWebQueryLogMgo.setLastModifiedDate(now);
@@ -139,7 +162,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebOperationLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
-            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);
             pcWebOperationLogMgo.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature();
@@ -163,8 +186,20 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
 
             if (request != null) {
                 //请求路径
-                pcWebOperationLogMgo.setRequestUri(request.getRequestURI());
-                pcWebOperationLogMgo.setRequestUrl(request.getRequestURL().toString());
+                if(HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())){
+                    String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString() ;
+                    pcWebOperationLogMgo.setRequestUri(request.getRequestURI() + queryString);
+                    pcWebOperationLogMgo.setRequestUrl(request.getRequestURL().toString() + queryString);
+                }   else {
+                    pcWebOperationLogMgo.setRequestUri(request.getRequestURI());
+                    pcWebOperationLogMgo.setRequestUrl(request.getRequestURL().toString());
+                }
+                pcWebOperationLogMgo.setReqMethod(request.getMethod());
+                //请求的sessionid
+                HttpSession session = request.getSession();
+                if(session != null){
+                    pcWebOperationLogMgo.setSessionId(session.getId());
+                }
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
@@ -202,7 +237,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 pcWebLoginLogMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
-            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint);
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);
             pcWebLoginLogMgo.setActionArgs(argJsonObj.toJSONString());
             Signature signature = joinPoint.getSignature();
             String methodName = signature.getName();
@@ -224,8 +259,20 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             }
             if (request != null) {
                 //请求路径
-                pcWebLoginLogMgo.setRequestUri(request.getRequestURI());
-                pcWebLoginLogMgo.setRequestUrl(request.getRequestURL().toString());
+                if(HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())){
+                    String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString() ;
+                    pcWebLoginLogMgo.setRequestUri(request.getRequestURI() + queryString);
+                    pcWebLoginLogMgo.setRequestUrl(request.getRequestURL().toString() + queryString);
+                }   else {
+                    pcWebLoginLogMgo.setRequestUri(request.getRequestURI());
+                    pcWebLoginLogMgo.setRequestUrl(request.getRequestURL().toString());
+                }
+                pcWebLoginLogMgo.setReqMethod(request.getMethod());
+                //请求的sessionid
+                HttpSession session = request.getSession();
+                if(session != null){
+                    pcWebLoginLogMgo.setSessionId(session.getId());
+                }
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {

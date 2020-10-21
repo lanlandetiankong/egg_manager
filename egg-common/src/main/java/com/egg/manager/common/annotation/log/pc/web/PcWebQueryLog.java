@@ -1,5 +1,7 @@
 package com.egg.manager.common.annotation.log.pc.web;
 
+import com.egg.manager.common.base.constant.aspect.AspectTypeConstant;
+
 import java.lang.annotation.*;
 
 
@@ -40,4 +42,10 @@ public @interface PcWebQueryLog {
      * @return
      */
     boolean flag() default true;
+
+    /**
+     * 操作类型
+     * @return
+     */
+    String type() default AspectTypeConstant.QUERY_API ;
 }

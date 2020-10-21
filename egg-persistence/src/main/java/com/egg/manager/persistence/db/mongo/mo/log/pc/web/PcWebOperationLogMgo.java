@@ -32,7 +32,14 @@ public class PcWebOperationLogMgo extends MyBaseModelMgo<String> {
      * 方法名称
      */
     private String methodName;
-
+    /**
+     * http请求方式
+     */
+    private String reqMethod ;
+    /**
+     * session id
+     */
+    private String sessionId ;
     /**
      * 操作
      */

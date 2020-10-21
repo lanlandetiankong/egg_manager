@@ -51,64 +51,6 @@ public class ControllerAspect {
     }
 
 
-    @Before(value = "aspect()")
-    public void beforeController(JoinPoint joinPoint) throws Throwable {
-        Method method = controllerAspectService.gainReqMethod(joinPoint);
-        //是否需要记录查询日志
-        if (method.isAnnotationPresent(PcWebQueryLog.class)) {
-            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
-            if (pcWebQueryLog.flag() == true) {
-                PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
-
-                //当前log的通知方式是 Before
-                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
-
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
-                //请求成功(至少在before
-                pcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
-            }
-        }
-
-        //是否需要记录[操作]日志
-        if (method.isAnnotationPresent(PcWebOperationLog.class)) {
-            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
-            if (pcWebOperationLog.flag() == true) {
-                PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
-
-                //当前log的通知方式是 Before
-                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
-
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
-                //请求成功(至少在before
-                pcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebOperationLogRepository.insert(pcWebOperationLogMgo);
-            }
-        }
-
-        //pcWebLoginLogRepository
-        //是否需要记录[操作]日志
-        if (method.isAnnotationPresent(PcWebLoginLog.class)) {
-            PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
-            if (pcWebLoginLog.flag() == true) {
-                PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
-                //当前log的通知方式是 Before
-                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.Before.getValue());
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
-                //请求成功(至少在before
-                pcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Open.getValue());
-                pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
-            }
-        }
-    }
-
-
     @After(value = "aspect()")
     public void afterController(JoinPoint joinPoint) throws Throwable {
     }
@@ -116,15 +58,17 @@ public class ControllerAspect {
 
     @AfterReturning(value = "aspect()", returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
+        //通知类型
+        final String ASPECT_NOTIFY_TYPE = AspectNotifyTypeEnum.AfterReturning.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
             if (pcWebQueryLog.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
                 boolean isSuccess = true;
@@ -150,8 +94,7 @@ public class ControllerAspect {
             if (pcWebOperationLog.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
                 boolean isSuccess = true;
@@ -177,8 +120,7 @@ public class ControllerAspect {
             if (pcWebLoginLog.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
                 boolean isSuccess = true;
@@ -202,16 +144,17 @@ public class ControllerAspect {
 
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
+        //通知类型
+        final String ASPECT_NOTIFY_TYPE = AspectNotifyTypeEnum.AfterReturning.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
             if (pcWebQueryLog.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
                 //请求失败
@@ -229,9 +172,7 @@ public class ControllerAspect {
             if (pcWebOperationLog.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
                 //请求失败
@@ -248,9 +189,7 @@ public class ControllerAspect {
             if (pcWebLoginLog.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMgo.setAspectNotifyType(AspectNotifyTypeEnum.AfterReturning.getValue());
-
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
                 //请求失败

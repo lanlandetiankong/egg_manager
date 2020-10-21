@@ -22,7 +22,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @return JSONObject
      */
-    JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint);
+    JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint,HttpServletRequest request);
 
     /**
      * 设置一些值到 PcWebQueryLogMgo

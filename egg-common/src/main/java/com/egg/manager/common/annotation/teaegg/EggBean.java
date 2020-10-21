@@ -3,10 +3,9 @@ package com.egg.manager.common.annotation.teaegg;
 import java.lang.annotation.*;
 
 /**
- * @Description:
- * @ClassName: EggBean
- * @Author: zhoucj
- * @Date: 2020/9/21 17:00
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Documented
 @Inherited

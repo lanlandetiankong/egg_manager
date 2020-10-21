@@ -11,10 +11,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
 /**
- * @Description: 注解->注册
- * @ClassName: EggBeanDefinitionRegistrar
- * @Author: zhoucj
- * @Date: 2020/9/21 17:02
+ * @author zhoucj
+ * @description: 注解->注册
+ * @date 2020/10/21
  */
 public class EggBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
     private ResourceLoader resourceLoader;
@@ -36,7 +35,7 @@ public class EggBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar
     /**
      * 获取{@link EnableEggBeanScan}中声明的扫描包路径
      * @param metadata the meta
-     * @return  包路径数组
+     * @return 包路径数组
      */
     private String[] getBasePackagesToScan(AnnotationMetadata metadata) {
         String name = EnableEggBeanScan.class.getName();

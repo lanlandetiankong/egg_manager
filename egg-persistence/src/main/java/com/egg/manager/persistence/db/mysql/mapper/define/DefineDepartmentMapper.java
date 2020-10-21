@@ -12,19 +12,16 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 定义的部门 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
 
     /**
      * [分页搜索查询] - 部门定义
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -34,7 +31,6 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -44,7 +40,6 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
     /**
      * 查询部门(过滤指定节点下的所有节点
-     *
      * @param filterId
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
@@ -53,7 +48,6 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
     /**
      * 根据用户id查询 所属的部门详情
-     *
      * @param userAccountId
      * @param departmentState
      * @return
@@ -62,7 +56,6 @@ public interface DefineDepartmentMapper extends BaseMapper<DefineDepartment> {
 
     /**
      * 根据用户id查询 所属的部门详情-dto
-     *
      * @param userAccountId
      * @return
      */

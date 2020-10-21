@@ -8,19 +8,15 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/15
- * \* Time: 20:58
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-
 public interface UserAccountXlsService extends MyXlsBaseService {
 
     /**
      * 根据模板导出已选数据文件
-     * @param loginUser 当前登录用户
+     * @param loginUser      当前登录用户
      * @param response
      * @param defineMenu
      * @param fileUploadBean
@@ -31,11 +27,11 @@ public interface UserAccountXlsService extends MyXlsBaseService {
 
     /**
      * 导出所有 用户账号 到excel
-     * @param loginUser 当前登录用户
+     * @param loginUser      当前登录用户
      * @param response
      * @param defineMenu
      * @param fileUploadBean
      * @throws Exception
      */
-    void dealAllExportSingleWithTemplate2Web(UserAccount loginUser,HttpServletResponse response, DefineMenu defineMenu, AntdFileUploadBean fileUploadBean) throws Exception;
+    void dealAllExportSingleWithTemplate2Web(UserAccount loginUser, HttpServletResponse response, DefineMenu defineMenu, AntdFileUploadBean fileUploadBean) throws Exception;
 }

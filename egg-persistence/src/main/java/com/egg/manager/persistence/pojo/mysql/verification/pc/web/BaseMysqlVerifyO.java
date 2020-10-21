@@ -1,12 +1,10 @@
 package com.egg.manager.persistence.pojo.mysql.verification.pc.web;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:26
- * \* Description:
- * \
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public abstract class BaseMysqlVerifyO {
 

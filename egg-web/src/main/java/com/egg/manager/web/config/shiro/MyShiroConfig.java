@@ -16,12 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 22:58
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Configuration
 public class MyShiroConfig {

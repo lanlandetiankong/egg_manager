@@ -6,7 +6,9 @@ import ch.qos.logback.core.pattern.color.ANSIConstants;
 import ch.qos.logback.core.pattern.color.ForegroundCompositeConverterBase;
 
 /**
- * log4j 输出样式配置
+ * @author zhoucj
+ * @description: log4j 输出样式配置
+ * @date 2020/10/20
  */
 public class HighlightingCompositeConverterEx extends ForegroundCompositeConverterBase<ILoggingEvent> {
     @Override

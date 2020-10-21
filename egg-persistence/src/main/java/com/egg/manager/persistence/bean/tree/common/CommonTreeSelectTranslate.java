@@ -4,13 +4,17 @@ import com.egg.manager.persistence.bean.tree.MyBaseTree;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 
-
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20 17:16
+ */
 public class CommonTreeSelectTranslate extends MyBaseTree {
 
 
     /**
      * 部门 树选择 ->entity 转 CommonTreeSelect
-     *
      * @param defineDepartment
      * @param tree
      * @return
@@ -26,7 +30,6 @@ public class CommonTreeSelectTranslate extends MyBaseTree {
 
     /**
      * 菜单 树选择 ->entity 转 CommonTreeSelect
-     *
      * @param menu
      * @param tree
      * @return

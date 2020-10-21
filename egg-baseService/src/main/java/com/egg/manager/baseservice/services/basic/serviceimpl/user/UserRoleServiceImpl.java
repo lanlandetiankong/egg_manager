@@ -34,12 +34,9 @@ import java.util.List;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -77,7 +74,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         QueryWrapper<UserRole> userRoleEm = new QueryWrapper<UserRole>();
         userRoleEm.eq("state", BaseStateEnum.ENABLED.getValue())
                 .eq("user_account_id", userAccount.getFid());
-        userRoleEm.orderBy(true,false,"update_time");
+        userRoleEm.orderBy(true, false, "update_time");
         List<UserRole> userRoleList = userRoleMapper.selectList(userRoleEm);
         return userRoleList;
     }
@@ -98,7 +95,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRole> paginationBean,
-                                                           List<AntdvSortBean> sortBeans) {
+                                                             List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -115,7 +112,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
-                                                              List<AntdvSortBean> sortBeans) {
+                                                          List<AntdvSortBean> sortBeans) {
         Page<UserRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());

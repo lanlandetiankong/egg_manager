@@ -1,11 +1,8 @@
 package com.egg.manager.common.util.date;
 
 /**
- *
  * 星期
- *
  * @author 段
- *
  */
 public enum MyDateWeek {
     MONDAY("星期一", "Monday", "Mon.", 1), TUESDAY("星期二", "Tuesday", "Tues.", 2), WEDNESDAY(

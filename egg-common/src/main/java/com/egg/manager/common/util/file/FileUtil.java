@@ -20,7 +20,7 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 /**
- * @author zhouchengjie
+ * @author
  */
 @Slf4j
 public class FileUtil {
@@ -32,7 +32,7 @@ public class FileUtil {
     /**
      * 文件名最大长度
      */
-    public static final int MAX_FILE_NAME_LENGTH = 255 ;
+    public static final int MAX_FILE_NAME_LENGTH = 255;
 
     /**
      * 判断当前文件是否是zip文件
@@ -607,8 +607,8 @@ public class FileUtil {
         if (!sourceFile.exists() || !sourceFile.isFile()) {
             return;
         }
-        Integer offset = 0 ;
-        Integer length = 10000 ;
+        Integer offset = 0;
+        Integer length = 10000;
         InputStream inputStream = null;
         File targetFile = new File(target + File.separator + sourceFile.getName());
         OutputStream outputStream = null;
@@ -950,8 +950,8 @@ public class FileUtil {
         if (ComUtil.isEmpty(file) && ComUtil.isEmpty(fullFilePath)) {
             return false;
         }
-        if(ComUtil.isEmpty(content)){
-            return false ;
+        if (ComUtil.isEmpty(content)) {
+            return false;
         }
         if (ComUtil.isEmpty(file)) {
             file = new File(fullFilePath);
@@ -1023,7 +1023,7 @@ public class FileUtil {
     }
 
     public static String readFileContent(File file, Charset charset) throws Exception {
-        if (!file.exists() || file.isDirectory()){
+        if (!file.exists() || file.isDirectory()) {
             throw new Exception("file is not exists or is a directory");
         }
         StringWriter out = new StringWriter();
@@ -1035,10 +1035,10 @@ public class FileUtil {
                 out.write(new String(buffer, 0, length, charset));
             }
         } finally {
-            if (in != null){
+            if (in != null) {
                 in.close();
             }
-            if (out != null){
+            if (out != null) {
                 out.close();
             }
         }
@@ -1054,10 +1054,10 @@ public class FileUtil {
                 out.write(buffer, 0, length);
             }
         } finally {
-            if (content != null){
+            if (content != null) {
                 content.close();
             }
-            if (out != null){
+            if (out != null) {
                 out.close();
             }
         }
@@ -1066,7 +1066,7 @@ public class FileUtil {
     }
 
     public static byte[] base64String2Image(String base64String) throws Exception {
-        if (ComUtil.isEmpty(base64String)){
+        if (ComUtil.isEmpty(base64String)) {
             return null;
         }
         base64String = base64String.replaceAll("data:image/(jpg|png|jpeg);base64,", "");

@@ -40,12 +40,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -103,7 +100,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-
     @Override
     public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal) {
         if (StringUtils.isBlank(roleId)) {
@@ -119,7 +115,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefineRole>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy( true,false,"create_time");
+        wrapper.orderBy(true, false, "create_time");
         return defineRoleMapper.selectList(wrapper);
     }
 
@@ -138,7 +134,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         }
         return idSet;
     }
-
 
 
     @Override
@@ -182,7 +177,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Override
     public MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
-                                                                  List<AntdvSortBean> sortBeans) {
+                                                            List<AntdvSortBean> sortBeans) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());

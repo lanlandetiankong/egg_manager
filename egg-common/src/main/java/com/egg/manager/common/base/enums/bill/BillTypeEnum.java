@@ -1,19 +1,22 @@
 package com.egg.manager.common.base.enums.bill;
 
+/**
+ * @author zhoucj
+ * @description: 枚举->订单类型
+ * @date 2020/10/20
+ */
 public enum BillTypeEnum {
-    Money_In(1,"入账"),
-    Money_Out(2,"出账")
-    ;
+    Money_In(1, "入账"),
+    Money_Out(2, "出账");
 
-    private Integer value ;
-    private String name ;
+    private Integer value;
+    private String name;
 
 
     BillTypeEnum(Integer value, String name) {
         this.value = value;
         this.name = name;
     }
-
 
 
     public Integer getValue() {

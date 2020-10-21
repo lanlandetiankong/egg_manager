@@ -7,11 +7,10 @@ import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
 
 /**
- *  [角色-菜单] Service
- * \* note:
- * @author: zhouchengjie
- * \* Description:
+ * @author zhoucj
+ * @description: [角色-菜单] Service
+ * @date 2020/10/20
  */
-public interface RoleMenuService extends IService<RoleMenu>,MyBaseMysqlService<RoleMenu,RoleMenuMapper,RoleMenuVo> {
+public interface RoleMenuService extends IService<RoleMenu>, MyBaseMysqlService<RoleMenu, RoleMenuMapper, RoleMenuVo> {
 
 }

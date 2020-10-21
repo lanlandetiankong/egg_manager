@@ -35,12 +35,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -59,13 +56,13 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefinePermission>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy(true,false,"create_time");
+        wrapper.orderBy(true, false, "create_time");
         return definePermissionMapper.selectList(wrapper);
     }
 
     @Override
     public MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermission> paginationBean,
-                                                                           List<AntdvSortBean> sortBeans) {
+                                                                     List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -81,7 +78,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     public MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
-                                                                              List<AntdvSortBean> sortBeans) {
+                                                                  List<AntdvSortBean> sortBeans) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());

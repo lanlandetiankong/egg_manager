@@ -3,12 +3,9 @@ package com.egg.manager.common.base.enums.query.mongo;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/8/8
- * \* Time: 19:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public enum MyMongoCommonQueryFieldEnum {
     Status_Eq_Enable("status", MyMongoQueryMatchingEnum.EqualsMatch, "", BaseStateEnum.ENABLED.getValue()),

@@ -18,12 +18,9 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:02
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Component
 public class MyShiroRelam extends AuthorizingRealm {
@@ -35,7 +32,6 @@ public class MyShiroRelam extends AuthorizingRealm {
     /**
      * 判断此Realm是否支持此Token
      * (配置shiro允许的 token 类型，修改为自定义的 TokenBean)
-     *
      * @param token
      * @return
      */
@@ -63,7 +59,6 @@ public class MyShiroRelam extends AuthorizingRealm {
 
     /**
      * 根据 Token 获取认证信息
-     *
      * @param auth
      * @return
      * @throws AuthenticationException

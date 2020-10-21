@@ -32,12 +32,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/21
- * \* Time: 13:42
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -58,7 +55,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
     @Override
     public MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
-                                                                                List<AntdvSortBean> sortBeans) {
+                                                                   List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
         Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(paginationBean);

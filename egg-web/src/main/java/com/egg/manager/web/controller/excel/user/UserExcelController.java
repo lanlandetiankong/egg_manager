@@ -38,12 +38,9 @@ import java.util.Set;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-用户Excel处理接口")
@@ -58,7 +55,8 @@ public class UserExcelController extends BaseController {
     private UserAccountXlsService userAccountXlsService;
     @Reference
     private UserAccountService userAccountService;
-    @ApiOperation(value = "导出/所选->excel文件",response = File.class, httpMethod = HttpMethodConstant.POST)
+
+    @ApiOperation(value = "导出/所选->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportCheckList")
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
@@ -73,37 +71,38 @@ public class UserExcelController extends BaseController {
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean, checkIds);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
+            this.dealCommonErrorCatch(log, result, e, UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
             this.respResultJsonToFront(log, response, result);
         }
     }
-    @ApiOperation(value = "导出/全部->excel文件",response = File.class, httpMethod = HttpMethodConstant.POST)
+
+    @ApiOperation(value = "导出/全部->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_EXPORT_CHECK);
         try {
-            Assert.notBlank(menuId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenu defineMenu = defineMenuService.getById(menuId);
-            Assert.notNull(defineMenu,"无效菜单:"+actionFailMsg);
+            Assert.notNull(defineMenu, "无效菜单:" + actionFailMsg);
             //菜单模板配置
             AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
             userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
+            this.dealCommonErrorCatch(log, result, e, UserExcelFuncModuleConstant.Failure.EXCEL_EXPORT_CHECK);
             this.respResultJsonToFront(log, response, result);
         }
     }
 
 
-    @ApiOperation(value = "导入->excel文件",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "导入->excel文件", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/importData")
     @ResponseBody
     public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
-                                         @CurrentLoginUser UserAccount loginUser) {
+                                     @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(UserExcelFuncModuleConstant.Success.EXCEL_IMPORT_DATA);
         try {
-            Assert.notEmpty(fileArr,BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
+            Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
             for (MultipartFile file : fileArr) {
                 //前1行是头部，将不读取
@@ -113,7 +112,7 @@ public class UserExcelController extends BaseController {
                         .doRead();
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserExcelFuncModuleConstant.Failure.EXCEL_IMPORT_DATA);
+            this.dealCommonErrorCatch(log, result, e, UserExcelFuncModuleConstant.Failure.EXCEL_IMPORT_DATA);
         }
         return result;
     }

@@ -4,56 +4,58 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment">
-        <id column="fid" property="fid" />
-        <result column="name" property="name" />
-        <result column="code" property="code" />
-        <result column="parent_id" property="parentId" />
-        <result column="level" property="level" />
-        <result column="order_num" property="orderNum" />
-        <result column="description" property="description" />
+        <id column="fid" property="fid"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="description" property="description"/>
 
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
     <!-- 通用查询映射结果 -->
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto">
-        <id column="fid" property="fid" />
-        <result column="name" property="name" />
-        <result column="code" property="code" />
-        <result column="parent_id" property="parentId" />
-        <result column="level" property="level" />
-        <result column="order_num" property="orderNum" />
-        <result column="description" property="description" />
+        <id column="fid" property="fid"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="description" property="description"/>
 
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="parent_id"  property="parentDepartment"
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="parent_id" property="parentDepartment"
                      columnPrefix="parent_"
                      javaType="com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto">
             <id column="fid" property="fid"/>
-            <result column="name" property="name" />
-            <result column="code" property="code" />
-            <result column="parent_id" property="parentId" />
-            <result column="level" property="level" />
-            <result column="order_num" property="orderNum" />
-            <result column="description" property="description" />
-            <result column="state" property="state" />
-            <result column="create_time" property="createTime" />
-            <result column="update_time" property="updateTime" />
-            <result column="create_user_id" property="createUserId" />
-            <result column="last_modifyer_id" property="lastModifyerId" />
+            <result column="name" property="name"/>
+            <result column="code" property="code"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="level" property="level"/>
+            <result column="order_num" property="orderNum"/>
+            <result column="description" property="description"/>
+            <result column="state" property="state"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="create_user_id" property="createUserId"/>
+            <result column="last_modifyer_id" property="lastModifyerId"/>
         </association>
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
 
@@ -109,29 +111,32 @@
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="edd" />
+            <property name="base_alias_name" value="edd"/>
         </include>
-        , <include refid="Base_Alias_TableColumn_List">
-            <property name="base_alias_name" value="par_edd" />
-            <property name="base_alias_col_prefix" value="parent_" />
+        ,
+        <include refid="Base_Alias_TableColumn_List">
+            <property name="base_alias_name" value="par_edd"/>
+            <property name="base_alias_col_prefix" value="parent_"/>
         </include>
         FROM em_define_department edd
         LEFT JOIN em_define_department par_edd
         on edd.parent_id = par_edd.fid
         <where>
-            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
-                <property name="table_name_alias" value="edd" />
+            <include
+                    refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="edd"/>
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
-            <property name="table_name_alias" value="edd" />
+        <include
+                refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="edd"/>
         </include>
     </select>
 
     <select id="getDepartmentFilterChildrens" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Alias_Table_List" >
-            <property name="base_alias_name" value="dd" />
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dd"/>
         </include>
         from em_define_department dd
         left join em_define_department ddc
@@ -147,13 +152,13 @@
     <select id="selectOneOfUserBelongDepartment" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="edd" />
+            <property name="base_alias_name" value="edd"/>
         </include>
         FROM em_define_department edd
-        LEFT  JOIN  em_user_department eud
+        LEFT JOIN em_user_department eud
         ON edd.fid = eud.define_department_id
         WHERE eud.user_account_id = #{userAccountId}
-        <if test="departmentState != null" >
+        <if test="departmentState != null">
             AND edd.state = #{departmentState}
         </if>
     </select>
@@ -161,15 +166,15 @@
     <select id="selectOneDtoOfUserBelongDepartment" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="edd" />
+            <property name="base_alias_name" value="edd"/>
         </include>
         FROM em_define_department edd
-        LEFT  JOIN  em_user_department eud
+        LEFT JOIN em_user_department eud
         ON edd.fid = eud.define_department_id
         WHERE eud.user_account_id = #{userAccountId}
     </select>
 
-    <update id="batchFakeDelByIds" >
+    <update id="batchFakeDelByIds">
         UPDATE em_define_department
         SET state = -1
         <if test="loginUser != null">
@@ -180,9 +185,6 @@
             #{item}
         </foreach>
     </update>
-
-
-
 
 
 </mapper>

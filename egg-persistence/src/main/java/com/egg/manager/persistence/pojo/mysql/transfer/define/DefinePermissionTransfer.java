@@ -12,11 +12,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("definePermissionTransfer")
 public class DefinePermissionTransfer extends BaseMysqlTransfer {
 
     static DefinePermissionMapstruct definePermissionMapstruct = DefinePermissionMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo

@@ -12,12 +12,18 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserTenantConversion.class}
 )
 public interface UserTenantMapstruct extends MyBaseMysqlMapstruct<UserTenant, UserTenantVo, UserTenantDto> {
     UserTenantMapstruct INSTANCE = Mappers.getMapper(UserTenantMapstruct.class);
+
     /**
      * vo转entity
      * @param vo
@@ -25,6 +31,7 @@ public interface UserTenantMapstruct extends MyBaseMysqlMapstruct<UserTenant, Us
      */
     @Mappings({})
     UserTenant transferVoToEntity(UserTenantVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -35,6 +42,7 @@ public interface UserTenantMapstruct extends MyBaseMysqlMapstruct<UserTenant, Us
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserTenantVo transferEntityToVo(UserTenant entity);
+
     /**
      * dto转vo
      * @param dto

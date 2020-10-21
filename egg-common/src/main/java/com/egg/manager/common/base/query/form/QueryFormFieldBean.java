@@ -14,18 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/7
- * \* Time: 20:30
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueryFormFieldBean  extends MyBaseQueryBean {
+public class QueryFormFieldBean extends MyBaseQueryBean {
     /**
      * 字段名
      */
@@ -33,78 +30,77 @@ public class QueryFormFieldBean  extends MyBaseQueryBean {
     /**
      * 匹配方式
      */
-    private String matching ;
+    private String matching;
     /**
      * 外键名
      */
-    private String foreignName ;
+    private String foreignName;
     /**
      * 数据库匹配方式
      */
-    private String sqlMatching ;
+    private String sqlMatching;
     /**
      * 匹配的值
      */
-    private Object value ;
+    private Object value;
 
 
-
-    public static QueryFormFieldBean dealGetEqualsBean(String fieldName,Object value){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetEqualsBean(String fieldName, Object value) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
 
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
-        return bean ;
+        return bean;
     }
 
-    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName,Object value){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName, Object value) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
-        return bean ;
+        return bean;
     }
 
-    public static QueryFormFieldBean dealGetLikeBean(String fieldName,Object value){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetLikeBean(String fieldName, Object value) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
-        return bean ;
+        return bean;
     }
 
-    public static QueryFormFieldBean dealGetEqualsBean(String fieldName,Object value,String foreignName){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetEqualsBean(String fieldName, Object value, String foreignName) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
-        return bean ;
+        return bean;
     }
 
-    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName,Object value,String foreignName){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetNotEqualsBean(String fieldName, Object value, String foreignName) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
-        return bean ;
+        return bean;
     }
 
-    public static QueryFormFieldBean dealGetLikeBean(String fieldName,Object value,String foreignName){
-        QueryFormFieldBean bean = new QueryFormFieldBean() ;
+    public static QueryFormFieldBean dealGetLikeBean(String fieldName, Object value, String foreignName) {
+        QueryFormFieldBean bean = new QueryFormFieldBean();
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
         MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
-        return bean ;
+        return bean;
     }
 
 
@@ -113,9 +109,9 @@ public class QueryFormFieldBean  extends MyBaseQueryBean {
      * @param fieldEnum
      * @return
      */
-    public static QueryFormFieldBean handle_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum fieldEnum){
-        if(fieldEnum == null){
-            return null ;
+    public static QueryFormFieldBean handle_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum fieldEnum) {
+        if (fieldEnum == null) {
+            return null;
         }
         return QueryFormFieldBean.builder().fieldName(fieldEnum.getFieldName())
                 .foreignName(fieldEnum.getForeignName())
@@ -125,9 +121,9 @@ public class QueryFormFieldBean  extends MyBaseQueryBean {
                 .build();
     }
 
-    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum ... fieldEnum){
+    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum... fieldEnum) {
         List list = new ArrayList<QueryFormFieldBean>();
-        if(fieldEnum == null || fieldEnum.length == 0){
+        if (fieldEnum == null || fieldEnum.length == 0) {
             return list;
         }
         return handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(Lists.newArrayList(fieldEnum));
@@ -138,15 +134,15 @@ public class QueryFormFieldBean  extends MyBaseQueryBean {
      * @param queryFieldEnumList
      * @return
      */
-    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(List<MyMongoCommonQueryFieldEnum> queryFieldEnumList){
+    public static List<QueryFormFieldBean> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(List<MyMongoCommonQueryFieldEnum> queryFieldEnumList) {
         List list = new ArrayList<QueryFormFieldBean>();
-        if(CollectionUtils.isEmpty(queryFieldEnumList)){
+        if (CollectionUtils.isEmpty(queryFieldEnumList)) {
             return list;
         }
-        for(MyMongoCommonQueryFieldEnum queryFieldEnum : queryFieldEnumList){
+        for (MyMongoCommonQueryFieldEnum queryFieldEnum : queryFieldEnumList) {
             list.add(handle_MyMongoCommonQueryFieldEnum_CopyTo_Self(queryFieldEnum));
         }
-        return list ;
+        return list;
     }
 
 }

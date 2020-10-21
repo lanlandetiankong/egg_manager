@@ -8,7 +8,6 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-
     <!--                                    dir-start:com.egg.manager.api.services.basic.announcement                                                              -->
     <dubbo:reference id="announcementDraftService" check="false"
                      interface="com.egg.manager.api.services.basic.announcement.AnnouncementDraftService"/>

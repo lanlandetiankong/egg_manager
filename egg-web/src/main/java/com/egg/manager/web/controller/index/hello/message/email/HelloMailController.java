@@ -19,12 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/8/6
- * \* Time: 22:30
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @RestController
@@ -35,7 +32,7 @@ public class HelloMailController extends BaseController {
     @Reference
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
-    @ApiOperation(value = "测试发送消息",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "测试发送消息", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult doGetDefineModuleById(HttpServletRequest request) {
@@ -48,7 +45,7 @@ public class HelloMailController extends BaseController {
                     .build();
             myBaseEmailMgoService.sendSimpleEmail(emailDto);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,"测试");
+            this.dealCommonErrorCatch(log, result, e, "测试");
         }
         return result;
     }

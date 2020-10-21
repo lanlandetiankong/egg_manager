@@ -12,7 +12,7 @@
     <formats>
         <!-- 可以同时打多种格式的包  -->
         <!--<format>tar.gz</format>-->
-         <format>zip</format>
+        <format>zip</format>
     </formats>
     <!--  默认值是true，此时将创建一个名为artifactId-version的根文件夹，
             所有outputDirectory标签指定的路径将变为相对于该文件夹的路径。

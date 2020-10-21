@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * @Description: email-发送的附件-文件信息
- * @ClassName: EmailSendFileInfoMgvo
- * @Author: zhoucj
- * @Date: 2020/9/11 15:18
+ * @author zhoucj
+ * @description: email-发送的附件-文件信息
+ * @date 2020/10/21
  */
 @Data
 @Builder

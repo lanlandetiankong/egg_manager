@@ -1,15 +1,20 @@
 package com.egg.manager.common.base.enums.user;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum UserAccountRegisterTypeEnum {
-    FRONT_REGISTER(1,"用户注册页面");
+    FRONT_REGISTER(1, "用户注册页面");
 
     UserAccountRegisterTypeEnum(Integer value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    private Integer value ;
-    private String name ;
+    private Integer value;
+    private String name;
 
 
     public Integer getValue() {

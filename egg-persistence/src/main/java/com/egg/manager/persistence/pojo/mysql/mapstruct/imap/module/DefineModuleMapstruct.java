@@ -12,12 +12,18 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineModuleConversion.class}
 )
 public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule, DefineModuleVo, DefineModuleDto> {
     DefineModuleMapstruct INSTANCE = Mappers.getMapper(DefineModuleMapstruct.class);
+
     /**
      * vo转entity
      * @param vo
@@ -25,6 +31,7 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
      */
     @Mappings({})
     DefineModule transferVoToEntity(DefineModuleVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -39,6 +46,7 @@ public interface DefineModuleMapstruct extends MyBaseMysqlMapstruct<DefineModule
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineModuleVo transferEntityToVo(DefineModule entity);
+
     /**
      * dto转vo
      * @param dto

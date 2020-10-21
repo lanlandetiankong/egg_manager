@@ -17,12 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/16
- * \* Time: 22:13
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Configuration
 @EnableSwagger2

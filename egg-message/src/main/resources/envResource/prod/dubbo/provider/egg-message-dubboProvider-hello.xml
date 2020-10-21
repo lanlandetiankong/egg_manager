@@ -9,7 +9,8 @@
 
 
     <!--                                    dir-start:com.egg.manager.api.services.message.services.hello                                                               -->
-    <dubbo:service protocol="dubbo" ref="messageHelloService" interface="com.egg.manager.api.services.message.services.hello.MessageHelloService"/>
+    <dubbo:service protocol="dubbo" ref="messageHelloService"
+                   interface="com.egg.manager.api.services.message.services.hello.MessageHelloService"/>
 
     <!--                                    dir-end:com.egg.manager.api.services.message.services.hello                                                                -->
 

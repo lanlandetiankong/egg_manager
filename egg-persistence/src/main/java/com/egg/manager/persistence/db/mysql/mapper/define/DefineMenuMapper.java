@@ -12,18 +12,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 菜单表 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     /**
      * [分页搜索查询] - 菜单定义
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -50,7 +47,6 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     /**
      * 查询 用户 可访问的[菜单定义]
-     *
      * @param userAccountId
      * @return
      */
@@ -58,7 +54,6 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     /**
      * 查询菜单(过滤指定节点下的所有节点
-     *
      * @param filterId
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
@@ -67,7 +62,6 @@ public interface DefineMenuMapper extends BaseMapper<DefineMenu> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return

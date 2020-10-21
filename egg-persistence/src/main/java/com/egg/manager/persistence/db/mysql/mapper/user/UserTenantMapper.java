@@ -12,16 +12,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 用户&租户 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface UserTenantMapper extends BaseMapper<UserTenant> {
     /**
      * [分页搜索查询] - 用户&租户
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -31,7 +29,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
 
     /**
      * 取得用户拥有的所有租户id集合
-     *
      * @param userAccountId
      * @param filterEnable  是否只查询状态为可用的
      * @return
@@ -41,7 +38,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -51,7 +47,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
 
     /**
      * 批量新增 用户-租户 关联
-     *
      * @param tenantList
      * @return
      */
@@ -59,7 +54,6 @@ public interface UserTenantMapper extends BaseMapper<UserTenant> {
 
     /**
      * 根据用户id 修改指定租户关联 是否管理员 的状态
-     *
      * @param tenantId
      * @param userAccountIdList
      * @param stateVal

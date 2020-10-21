@@ -7,10 +7,9 @@ import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
- * @Description: 启动参数 工具类
- * @ClassName: PropUtil
- * @Author: zhoucj
- * @Date: 2020/7/6 11:12
+ * @author zhoucj
+ * @description:启动参数 工具类
+ * @date 2020/10/21
  */
 public class MyJvmPropUtil {
     public static final String ENV_OF_DEV = "dev";
@@ -20,7 +19,6 @@ public class MyJvmPropUtil {
 
     /**
      * 取得 jvm启动时的所有参数
-     *
      * @return
      */
     public static List<String> getAllJvmParamsList() {
@@ -30,7 +28,6 @@ public class MyJvmPropUtil {
 
     /**
      * 取得 jvm启动时的 -d参数
-     *
      * @param key        参数名
      * @param defaultVal 默认值
      * @return
@@ -49,8 +46,7 @@ public class MyJvmPropUtil {
 
     /**
      * 取得 jvm启动时的 -d参数
-     *
-     *  @return dev:开发环境、prod:生产环境、test:测试环境
+     * @return dev:开发环境、prod:生产环境、test:测试环境
      */
     public static String getSpringProfilesActive() {
         return getDefineParams("spring.profiles.active", "dev");
@@ -61,17 +57,17 @@ public class MyJvmPropUtil {
      * @param envList 需要判断的 环境值
      * @return
      */
-    public static boolean judgeRunInTestEnv(String ... envList){
-        if(envList == null || envList.length == 0){
-            return false ;
+    public static boolean judgeRunInTestEnv(String... envList) {
+        if (envList == null || envList.length == 0) {
+            return false;
         }
-        boolean flag = false ;
-        for (String env : envList){
-            if(StringUtils.isNotEmpty(env)){
+        boolean flag = false;
+        for (String env : envList) {
+            if (StringUtils.isNotEmpty(env)) {
                 flag = env.equalsIgnoreCase(getSpringProfilesActive());
             }
-            if(flag){
-                break ;
+            if (flag) {
+                break;
             }
         }
         return flag;

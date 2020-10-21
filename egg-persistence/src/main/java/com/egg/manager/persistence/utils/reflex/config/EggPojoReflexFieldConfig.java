@@ -3,10 +3,10 @@ package com.egg.manager.persistence.utils.reflex.config;
 import lombok.Data;
 
 /**
- * @Description: 反射
- * @ClassName: EggPojoReflexFieldConfig
- * @Author: zhoucj
- * @Date: 2020/9/18 16:04
+ * @author zhoucj
+ * @version V1.0
+ * @description: 反射
+ * @date 2020/9/18 16:04
  */
 @Data
 public class EggPojoReflexFieldConfig<K> {

@@ -18,14 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * \* note: SmartFormDefinitionMgo 对应的验证对象
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:06
- * \* Description:
- *
+ * @author zhoucj
+ * @description:SmartFormDefinitionMgo 对应的验证对象
+ * @date 2020/10/21
  * @see SmartFormDefinitionMgo
- * \
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

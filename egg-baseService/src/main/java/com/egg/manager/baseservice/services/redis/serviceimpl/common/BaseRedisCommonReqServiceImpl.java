@@ -17,12 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/3/19
- * \* Time: 22:36
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqService {

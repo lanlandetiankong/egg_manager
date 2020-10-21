@@ -9,19 +9,21 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 请求头 bean
+ * @author zhoucj
+ * @description: 请求头 bean
+ * @date 2020/10/21
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RequestHeaderBean  implements Serializable {
-    private String host ;
-    private String connection ;
-    private String contentLength ;
-    private String accept ;
-    private String origin ;
-    private String token ;
+public class RequestHeaderBean implements Serializable {
+    private String host;
+    private String connection;
+    private String contentLength;
+    private String accept;
+    private String origin;
+    private String token;
     private String userAgent;
     private String contentType;
     private String referer;
@@ -29,12 +31,10 @@ public class RequestHeaderBean  implements Serializable {
     private String acceptLanguage;
 
 
-
-
-    public static RequestHeaderBean jsonObjectToBean(JSONObject jsonObject){
-        RequestHeaderBean requestHeaderBean = null ;
-        if(jsonObject != null) {
-            requestHeaderBean = new RequestHeaderBean() ;
+    public static RequestHeaderBean jsonObjectToBean(JSONObject jsonObject) {
+        RequestHeaderBean requestHeaderBean = null;
+        if (jsonObject != null) {
+            requestHeaderBean = new RequestHeaderBean();
             requestHeaderBean.setHost(jsonObject.getString("host"));
             requestHeaderBean.setConnection(jsonObject.getString("connection"));
             requestHeaderBean.setContentLength(jsonObject.getString("content-length"));
@@ -47,10 +47,8 @@ public class RequestHeaderBean  implements Serializable {
             requestHeaderBean.setAcceptEncoding(jsonObject.getString("accept-encoding"));
             requestHeaderBean.setAcceptLanguage(jsonObject.getString("accept-language"));
         }
-        return requestHeaderBean ;
+        return requestHeaderBean;
     }
-
-
 
 
 }

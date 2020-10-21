@@ -3,7 +3,6 @@ package com.egg.manager.common.util.date;
 /**
  * 日期类型
  * @author 段
- *
  */
 public enum MyDateStyle {
     YYYY_MM("yyyy-MM", false),

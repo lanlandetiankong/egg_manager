@@ -11,6 +11,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 @Builder
 @NoArgsConstructor

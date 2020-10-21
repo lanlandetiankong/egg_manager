@@ -42,10 +42,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @Description: 邮件发送记录-Controller
- * @ClassName: EmailSendRecordController
- * @Author: zhoucj
- * @Date: 2020/9/11 17:19
+ * @author zhoucj
+ * @description:邮件发送记录-Controller
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-邮件发送记录")
@@ -60,7 +59,7 @@ public class EmailSendRecordController extends BaseController {
 
 
     @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getDataPage")
-    @ApiOperation(value = "分页查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -68,7 +67,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<EmailSendRecordMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.QUERY_PAGE);
+        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class, MyControllerAdviserFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -78,50 +77,50 @@ public class EmailSendRecordController extends BaseController {
             MyMongoQueryPageBean<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUser, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
     @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
-    @ApiOperation(value = "根据id查询->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                                                @RequestParam(value = "fid", required = true) String fid) {
-        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class,MyControllerAdviserFuncModuleConstant.Success.QUERY_ONE_BY_ID);
+        MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class, MyControllerAdviserFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMgo mobj = emailSendRecordMgoService.doFindById(loginUser, fid);
             result.setBean(mobj);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
 
     @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
-    @ApiOperation(value = "新增->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                         @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
-                                                         EmailSendRecordMgvo emailSendRecordMgvo) {
+                                      @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
+                                      EmailSendRecordMgvo emailSendRecordMgvo) {
         MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
-            Assert.notNull(emailSendRecordMgvo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(emailSendRecordMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMgvoToMgo(emailSendRecordMgvo);
             EmailSendRecordMgo newMO = emailSendRecordMgoService.doInsert(loginUser, emailSendRecordMgo);
             addCount += (newMO != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.CREATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
-    @ApiOperation(value = "伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
     })
@@ -129,18 +128,18 @@ public class EmailSendRecordController extends BaseController {
     public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.DELETE_BY_ID);
         try {
-            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.DELETE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
-    @ApiOperation(value = "批量伪删除->邮件记录",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),
     })
@@ -149,11 +148,11 @@ public class EmailSendRecordController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(MyControllerAdviserFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Long delCount = (long) 0;
         try {
-            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = emailSendRecordMgoService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,MyControllerAdviserFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
+            this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }

@@ -5,38 +5,35 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 18:24
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Component
 @ConfigurationProperties(prefix = "props.upload")
-public class UploadProps implements Serializable{
+public class UploadProps implements Serializable {
     /**
      * 访问路径前缀
      */
-    private String urlPrefix ;
+    private String urlPrefix;
     /**
      * 路径位置前缀
      */
-    private String locationPrefix ;
+    private String locationPrefix;
     /**
      * 图片存放路径
      */
-    private String locationOfImg ;
+    private String locationOfImg;
     /**
      * excel存放路径
      */
-    private String locationOfExcel ;
+    private String locationOfExcel;
     /**
      * 项目名
      */
-    private String projectName ;
-
+    private String projectName;
 
 
     //setter 、getter

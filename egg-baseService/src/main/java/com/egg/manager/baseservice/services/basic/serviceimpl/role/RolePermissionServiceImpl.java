@@ -20,12 +20,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -34,7 +31,6 @@ public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermis
 
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
-
 
 
     @Override

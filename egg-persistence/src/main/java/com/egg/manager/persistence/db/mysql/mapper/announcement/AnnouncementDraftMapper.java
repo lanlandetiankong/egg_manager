@@ -12,19 +12,16 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 定义的职务 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface AnnouncementDraftMapper extends BaseMapper<AnnouncementDraft> {
 
 
     /**
      * [分页搜索查询] - 公告草稿
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -34,7 +31,6 @@ public interface AnnouncementDraftMapper extends BaseMapper<AnnouncementDraft> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -45,7 +41,6 @@ public interface AnnouncementDraftMapper extends BaseMapper<AnnouncementDraft> {
     /**
      * 批量 发布 公告草稿
      * (只是修改 AnnouncementDraft 的值，具体发布到Announcement 需要自行另外操作)
-     *
      * @param delIds
      * @param loginUser
      * @return

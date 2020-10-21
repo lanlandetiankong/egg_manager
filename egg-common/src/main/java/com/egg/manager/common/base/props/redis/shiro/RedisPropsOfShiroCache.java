@@ -8,18 +8,15 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 18:24
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Data
 @Component
 @ConfigurationProperties(prefix = "props.redis.shiro.cache")
 @PropertySource("classpath:universal/${egg.application.build.env}/props/props-redis.properties")
-public class RedisPropsOfShiroCache  implements Serializable {
+public class RedisPropsOfShiroCache implements Serializable {
     /**
      * jwt
      */
@@ -31,77 +28,75 @@ public class RedisPropsOfShiroCache  implements Serializable {
     /**
      * key->token
      */
-    private String tokenKey ;
+    private String tokenKey;
     /**
      * key->define
      */
-    private String defineGroupKey ;
-    private String defineMenuKey ;
-    private String defineRoleKey ;
-    private String definePermissionKey ;
-    private String defineGroupAllKey ;
-    private String defineMenuAllKey ;
-    private String defineRoleAllKey ;
-    private String definePermissionAllKey ;
+    private String defineGroupKey;
+    private String defineMenuKey;
+    private String defineRoleKey;
+    private String definePermissionKey;
+    private String defineGroupAllKey;
+    private String defineMenuAllKey;
+    private String defineRoleAllKey;
+    private String definePermissionAllKey;
 
-    private String rolePermissionKey ;
+    private String rolePermissionKey;
     /**
      * key->user
      */
-    private String userAccountKey ;
-    private String userAuthorizationKey ;
-    private String userAccountIdKey ;
-    private String userTokenKey ;
-    private String userGroupKey ;
-    private String userTenantKey ;
-    private String UserDepartmentKey ;
-    private String userRolesKey ;
-    private String userPermissionsKey ;
-    private String userFrontMenusKey ;
-    private String userFrontRouterUrlKey ;
-    private String userFrontButtonsKey ;
-
-
+    private String userAccountKey;
+    private String userAuthorizationKey;
+    private String userAccountIdKey;
+    private String userTokenKey;
+    private String userGroupKey;
+    private String userTenantKey;
+    private String UserDepartmentKey;
+    private String userRolesKey;
+    private String userPermissionsKey;
+    private String userFrontMenusKey;
+    private String userFrontRouterUrlKey;
+    private String userFrontButtonsKey;
 
 
     /**
      * ttl->jwt
      */
-    private long authorizationTtl ;
+    private long authorizationTtl;
     /**
      * ttl->token
      */
-    private long tokenTtl ;
+    private long tokenTtl;
     /**
      * ttl->define
      */
-    private long defineGroupTtl ;
-    private long defineMenuTtl ;
-    private long defineRoleTtl ;
-    private long definePermissionTtl ;
-    private long defineGroupAllTtl ;
-    private long defineMenuAllTtl ;
-    private long defineRoleAllTtl ;
-    private long definePermissionAllTtl ;
+    private long defineGroupTtl;
+    private long defineMenuTtl;
+    private long defineRoleTtl;
+    private long definePermissionTtl;
+    private long defineGroupAllTtl;
+    private long defineMenuAllTtl;
+    private long defineRoleAllTtl;
+    private long definePermissionAllTtl;
     /**
      * ttl->role
      */
-    private long rolePermissionTtl ;
+    private long rolePermissionTtl;
     /**
      * ttl->user
      */
-    private long userAccountTtl ;
-    private long userAuthorizationTtl ;
-    private long userAccountIdTtl ;
-    private long userTokenTtl ;
-    private long userGroupTtl ;
-    private long userTenantTtl ;
-    private long userDepartmentTtl ;
-    private long userRolesTtl ;
-    private long userPermissionsTtl ;
-    private long userFrontMenusTtl ;
-    private long userFrontRouterUrlTtl ;
-    private long userFrontButtonsTtl ;
+    private long userAccountTtl;
+    private long userAuthorizationTtl;
+    private long userAccountIdTtl;
+    private long userTokenTtl;
+    private long userGroupTtl;
+    private long userTenantTtl;
+    private long userDepartmentTtl;
+    private long userRolesTtl;
+    private long userPermissionsTtl;
+    private long userFrontMenusTtl;
+    private long userFrontRouterUrlTtl;
+    private long userFrontButtonsTtl;
 
 
 }

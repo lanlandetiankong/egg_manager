@@ -9,17 +9,16 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
 import java.util.Date;
 
 /**
- * @Description:
- * @ClassName: UserTenantPojoInitialize
- * @Author: zhoucj
- * @Date: 2020/9/22 11:54
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public class UserTenantPojoInitialize {
 
 
     /**
      * 返回一个通用的 entity实例
-     *
      * @param userAccountId
      * @param defineTenantId
      * @param loginUser      当前登录用户
@@ -45,7 +44,6 @@ public class UserTenantPojoInitialize {
 
     /**
      * 返回一个通用的 entity实例
-     *
      * @param userAccountId
      * @param defineTenantId
      * @param loginUser      当前登录用户

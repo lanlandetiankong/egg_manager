@@ -2,9 +2,9 @@ package com.egg.manager.common.exception.login;
 
 /**
  * 登录失败
- * @author zhouchengjie
+ * @author
  */
-public class MyLoginFailureException extends RuntimeException{
+public class MyLoginFailureException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -17,7 +17,8 @@ public class MyLoginFailureException extends RuntimeException{
         return message;
     }
 
-    public MyLoginFailureException() {}
+    public MyLoginFailureException() {
+    }
 
     public MyLoginFailureException(String message) {
         super(message);

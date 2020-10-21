@@ -36,12 +36,9 @@ import java.util.*;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -102,9 +99,9 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         QueryWrapper<DefineMenu> queryWrapper = new QueryWrapper<DefineMenu>();
         //筛选与排序
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        queryWrapper.orderBy(true,true,"level");
-        queryWrapper.orderBy(true,true,"order_num");
-        queryWrapper.orderBy(true,true,"create_time");
+        queryWrapper.orderBy(true, true, "level");
+        queryWrapper.orderBy(true, true, "order_num");
+        queryWrapper.orderBy(true, true, "create_time");
         return defineMenuMapper.selectList(queryWrapper);
     }
 
@@ -134,7 +131,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         }
         return childList;
     }
-
 
 
     @Override
@@ -175,7 +171,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-
     @Override
     public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenu> paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
@@ -195,14 +190,13 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
     @Override
     public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
-                                                                  List<AntdvSortBean> sortBeans) {
+                                                            List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
         result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
     }
-
 
 
     @Override
@@ -238,7 +232,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         }
         return defineMenuMapper.insert(defineMenu);
     }
-
 
 
     @Override
@@ -291,7 +284,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         DefineMenu defineMenu = super.doBeforeDeleteOneById(loginUser, DefineMenu.class, delId);
         return defineMenuMapper.updateById(defineMenu);
     }
-
 
 
     @Override

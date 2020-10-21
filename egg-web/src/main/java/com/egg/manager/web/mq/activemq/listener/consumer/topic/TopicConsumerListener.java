@@ -4,6 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Slf4j
 @Component
 public class TopicConsumerListener {

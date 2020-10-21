@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper" >
-
-
+<mapper namespace="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper">
 
 
     <!--
@@ -36,7 +34,7 @@
     -->
     <sql id="Default_Common_QueryPage_Sort_Sql">
         <if test="sortFieldList != null and sortFieldList.size()>0">
-            ORDER  BY
+            ORDER BY
             <foreach collection="sortFieldList" index="index" item="item" separator=",">
                 ${table_name_alias}.${item.field}
                 <choose>

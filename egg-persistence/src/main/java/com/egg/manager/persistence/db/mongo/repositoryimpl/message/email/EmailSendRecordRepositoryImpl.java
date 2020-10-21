@@ -6,10 +6,9 @@ import com.egg.manager.persistence.db.mongo.repositoryimpl.MyBaseMongoRepository
 import org.springframework.stereotype.Repository;
 
 /**
- * @Description:
- * @ClassName: EmailSendRecordMgo
- * @Author: zhoucj
- * @Date: 2020/9/11 14:55
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Repository
 public class EmailSendRecordRepositoryImpl extends MyBaseMongoRepositoryImpl<EmailSendRecordMgo, String>

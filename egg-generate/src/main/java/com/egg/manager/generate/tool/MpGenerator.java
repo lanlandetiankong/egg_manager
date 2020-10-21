@@ -13,14 +13,13 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 代码生成器
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @description: 代码生成器
+ * @date 2020/10/21
  */
 @Slf4j
 public class MpGenerator {
@@ -54,7 +53,7 @@ public class MpGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setTypeConvert(new MySqlTypeConvert(){
+        dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
@@ -74,17 +73,17 @@ public class MpGenerator {
         // 全局大写命名 ORACLE 注意
         // strategy.setCapitalMode(true);
         // 此处可以修改为您的表前缀
-        strategy.setTablePrefix(new String[] { "em_"});
+        strategy.setTablePrefix(new String[]{"em_"});
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
-        String[] allTableNameArr = new String[] {
-                "em_define_group","em_define_menu","em_define_permission","em_define_role",
+        String[] allTableNameArr = new String[]{
+                "em_define_group", "em_define_menu", "em_define_permission", "em_define_role",
                 "em_role_permission",
-                "em_user_account","em_user_group","em_user_role"
-                } ;
-        String[] willAddTableNameArr = new String[] {"em_operation_log"} ;
+                "em_user_account", "em_user_group", "em_user_role"
+        };
+        String[] willAddTableNameArr = new String[]{"em_operation_log"};
         // 需要生成的表
-         strategy.setInclude(willAddTableNameArr);
+        strategy.setInclude(willAddTableNameArr);
         // 排除生成的表
         // strategy.setExclude(new String[]{"test"});
         // 自定义实体父类
@@ -127,13 +126,13 @@ public class MpGenerator {
                 Map<String, Object> map = Maps.newHashMap();
                 map.put("abc", this.getConfig().getGlobalConfig().getAuthor());
                 //模块名-中文
-                map.put("moduleName_Cn","模块定义");
-                map.put("baseReqUrl","/define/define_module");
-                map.put("baseEntityName","DefineModule");
-                map.put("baseEntityName_firstLow","defineModule");
+                map.put("moduleName_Cn", "模块定义");
+                map.put("baseReqUrl", "/define/define_module");
+                map.put("baseEntityName", "DefineModule");
+                map.put("baseEntityName_firstLow", "defineModule");
 
                 //swagger注解
-                map.put("swagger2",true);
+                map.put("swagger2", true);
 
 
                 this.setMap(map);

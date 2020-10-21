@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/18
- * \* Time: 14:19
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-测试接口")
@@ -37,10 +34,10 @@ public class HelloController extends BaseController {
 
     @Reference
     private MessageHelloService messageHelloService;
-    private CommonMenuTree commonMenuTree ;
+    private CommonMenuTree commonMenuTree;
 
     @PcWebQueryLog(fullPath = "/index/hello/testEnv", flag = false)
-    @ApiOperation(value = "测试当前开发环境",response = MyCommonResult.class, httpMethod = HttpMethodConstant.GET)
+    @ApiOperation(value = "测试当前开发环境", response = MyCommonResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
         try {
@@ -51,14 +48,14 @@ public class HelloController extends BaseController {
     }
 
     @PcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)
-    @ApiOperation(value = "测试当前开发环境",response = Void.class, httpMethod = HttpMethodConstant.GET)
+    @ApiOperation(value = "测试当前开发环境", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/sayHello")
     public void sayHello() {
         helloService.sayHello();
     }
 
     @PcWebQueryLog(fullPath = "/index/hello/loadBalanceTest", flag = false)
-    @ApiOperation(value = "测试dubbo负载均衡",response = Void.class, httpMethod = HttpMethodConstant.GET)
+    @ApiOperation(value = "测试dubbo负载均衡", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
         String port = helloService.loadBalanceTest();
@@ -66,7 +63,7 @@ public class HelloController extends BaseController {
     }
 
     @PcWebQueryLog(fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
-    @ApiOperation(value = "测试dubbo负载均衡-相互调用",response = Void.class, httpMethod = HttpMethodConstant.GET)
+    @ApiOperation(value = "测试dubbo负载均衡-相互调用", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();

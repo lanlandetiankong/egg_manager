@@ -5,10 +5,12 @@ import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormFieldDefinitionMgo
 import org.springframework.stereotype.Repository;
 
 /**
- * MongoDb-FormDefinitionMO 表单字段定义-MService
+ * @author zhoucj
+ * @description:表单字段定义-MService
+ * @date 2020/10/20
  */
 @Repository
-public interface SmartFormFieldDefinitionMgoService extends MyBaseMgoService<SmartFormFieldDefinitionMgo,String> {
+public interface SmartFormFieldDefinitionMgoService extends MyBaseMgoService<SmartFormFieldDefinitionMgo, String> {
 
 
 }

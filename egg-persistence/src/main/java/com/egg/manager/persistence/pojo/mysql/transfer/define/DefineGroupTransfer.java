@@ -8,11 +8,18 @@ import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineGroupTransfer")
 public class DefineGroupTransfer extends BaseMysqlTransfer {
 
     static DefineGroupMapstruct defineGroupMapstruct = DefineGroupMapstruct.INSTANCE;
+
     /**
      * entity转vo
      * @param entity

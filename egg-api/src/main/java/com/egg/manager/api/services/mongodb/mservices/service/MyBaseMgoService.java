@@ -12,18 +12,14 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 0:18
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 查询一条记录
-     *
      * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
@@ -32,7 +28,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 批量插入
-     *
      * @param iterables
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
@@ -42,7 +37,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 更新项(非null字段)
-     *
      * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
@@ -51,7 +45,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 更新项(所有字段)
-     *
      * @param t
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
@@ -61,8 +54,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
     /**
      * 批量更新
      * (如果没在update设置 最后更新时间，那么会自动在update添加 最后更新人信息)
-     *
-     * @param loginUser          当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @param updateBean
      * @return
@@ -71,7 +63,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据id-伪删除
-     *
      * @param id
      * @param loginUser
      * @return
@@ -81,7 +72,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据根据实体类-伪删除
-     *
      * @param t
      * @param loginUser
      * @return
@@ -91,7 +81,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据id集合伪删除
-     *
      * @param loginUser    当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      * @return
@@ -101,7 +90,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据id删除对应项
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      */
@@ -109,7 +97,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据项删除
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param t
      */
@@ -117,7 +104,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据 项集合 删除
-     *
      * @param loginUser    当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      */
@@ -133,7 +119,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据id查询对应的项
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      * @return
@@ -143,7 +128,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 查询所有记录
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
@@ -151,7 +135,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 查询所有记录
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param sort
      * @return
@@ -160,7 +143,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据id集合查询所有相应的记录
-     *
      * @param loginUser    当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      * @return
@@ -168,11 +150,9 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
     Iterable<T> doFindAllById(UserAccount loginUser, Iterable<ID> iterableList);
 
 
-
     /**
      * 根据封装的bean进行查询
-     *
-     * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @return
      */
@@ -180,8 +160,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据查询条件查询记录并排序
-     *
-     * @param loginUser         当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @param sort
      * @return
@@ -190,34 +169,31 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 分页查询
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param pageBean
      * @return
      */
     MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean);
+
     /**
      * 根据封装的MongoQueryBean进行分页查询
-     * @param loginUser 当前登录用户
+     * @param loginUser   当前登录用户
      * @param queryBuffer
      * @return
      */
     MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+
     /**
      * 根据条件查询首个项
-     *
-     * @param loginUser         当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @return
      */
     T doFindOne(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
 
 
-
-
     /**
      * 统计个数
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
@@ -225,8 +201,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 统计筛选条件后的数量
-     *
-     * @param loginUser         当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @return
      */
@@ -234,8 +209,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 根据条件，判断是否有项存在
-     *
-     * @param loginUser         当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
+     * @param loginUser   当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param queryBuffer
      * @return
      */
@@ -243,7 +217,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
 
     /**
      * 判断id是否有对应项
-     *
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      * @return

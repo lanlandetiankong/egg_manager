@@ -54,6 +54,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Slf4j
 @Api(value = "API-用户账号接口")
 @RestController
@@ -79,7 +84,7 @@ public class UserAccountController extends BaseController {
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     @PcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
-    @ApiOperation(value = "分页查询(dto)->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(dto)->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -87,25 +92,25 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                 @CurrentLoginUser UserAccount loginUser) {
+                                                      @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class, UserAccountFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<UserAccountDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,UserAccountDto.class);
+            AntdvPaginationBean<UserAccountDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = userAccountService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "根据id查询->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<UserAccountVo> queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
@@ -127,12 +132,12 @@ public class UserAccountController extends BaseController {
             }
             result.setBean(userAccountVo);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询已获授权/用户账号->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
     public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
@@ -141,28 +146,28 @@ public class UserAccountController extends BaseController {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询已获授权/用户账号->权限定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询已获授权/用户账号->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
     public MyCommonResult<DefinePermissionVo> gainGrantedPermission(HttpServletRequest request, String userAccountId,
-                                                                                @CurrentLoginUser UserAccount loginUser) {
+                                                                    @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class, UserAccountFuncModuleConstant.Success.QUERY_GRANTED);
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "查询已获授权/用户账号->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
@@ -171,17 +176,17 @@ public class UserAccountController extends BaseController {
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.QUERY_GRANTED);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "新增->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.CREATE_OPER);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
@@ -189,79 +194,79 @@ public class UserAccountController extends BaseController {
             addCount = userAccountService.dealCreate(loginUser, userAccountVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.CREATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_OPER);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
             UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
-            Assert.notNull(userAccountVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = userAccountService.dealUpdate(loginUser, userAccountVo);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
             delCount = userAccountService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/user/userAccount/deleteById")
-    @ApiOperation(value = "伪删除->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.DELETE_BY_ID);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = userAccountService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.DELETE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新/批量修改状态->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新/批量修改状态->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public MyCommonResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_STATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.UPDATE_STATE);
         Integer lockCount = 0;
         try {
-            Assert.notEmpty(lockIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(lockIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
@@ -270,60 +275,60 @@ public class UserAccountController extends BaseController {
             lockCount = userAccountService.dealBatchRenewLock(loginUser, lockIds, lockFlag);
             result.setCount(lockCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE_STATE);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.UPDATE_STATE);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新/修改状态->用户账号",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新/修改状态->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public MyCommonResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.UPDATE_STATE);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.UPDATE_STATE);
         Integer lockCount = 0;
         try {
-            Assert.notBlank(lockId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
             lockCount = userAccountService.dealRenewLock(loginUser, lockId, lockFlag);
             result.setCount(lockCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.UPDATE_STATE);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.UPDATE_STATE);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "授权/用户账号->角色定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.GRANT_OPER);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.GRANT_OPER);
         try {
-            Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
+            Assert.notBlank(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.GRANT_OPER);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.GRANT_OPER);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "授权/用户账号->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "授权/用户账号->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                            @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult result = MyCommonResult.gainOperationResult( UserAccountFuncModuleConstant.Success.GRANT_OPER);
+        MyCommonResult result = MyCommonResult.gainOperationResult(UserAccountFuncModuleConstant.Success.GRANT_OPER);
         try {
-            Assert.notBlank(userAccountId,"未知用户id:"+actionFailMsg);
+            Assert.notBlank(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserAccountFuncModuleConstant.Failure.GRANT_OPER);
+            this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.GRANT_OPER);
         }
         return result;
     }

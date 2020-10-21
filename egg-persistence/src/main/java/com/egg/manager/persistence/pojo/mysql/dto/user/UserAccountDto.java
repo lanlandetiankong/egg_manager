@@ -11,6 +11,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -47,13 +53,11 @@ public class UserAccountDto extends MyBaseMysqlDto {
     private String email;
     /**
      * 性别
-     *
      * @see UserSexEnum
      */
     private Short sex;
     /**
      * 用户类型
-     *
      * @see UserAccountBaseTypeEnum
      */
     private Integer userType;

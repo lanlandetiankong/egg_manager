@@ -11,12 +11,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:15
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 public class MyBaseModelMgo<K> implements Serializable {

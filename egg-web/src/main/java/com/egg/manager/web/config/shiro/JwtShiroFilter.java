@@ -22,13 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:11
- * \* Description:
- * 代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
- * \
+ * @author zhoucj
+ * @description: 代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
+ * @date 2020/10/21
  */
 public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
@@ -119,8 +115,8 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     private boolean handleVerificationPassAnnotation(ServletRequest request, ServletResponse response, HttpServletRequest httpServletRequest, String authorization) throws Exception {
         for (String urlMethod : Constant.METHOD_URL_SET) {
             String[] urlSplit = urlMethod.split(":--:");
-            boolean eqUriFlag = urlSplit[0].equals(httpServletRequest.getRequestURI()) ;
-            boolean eqMethodFlag = (urlSplit[1].equals(httpServletRequest.getMethod()) || "RequestMapping".equals(urlSplit[1] ));
+            boolean eqUriFlag = urlSplit[0].equals(httpServletRequest.getRequestURI());
+            boolean eqMethodFlag = (urlSplit[1].equals(httpServletRequest.getMethod()) || "RequestMapping".equals(urlSplit[1]));
             if (eqUriFlag && eqMethodFlag) {
                 //Constant.isPass = true ;
                 if (StringUtils.isBlank(authorization)) {

@@ -1,10 +1,15 @@
 package com.egg.manager.common.base.enums.user;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum UserAccountStateEnum {
-    ENABLED((short) 1,"启用","启用"),
-    DISABLED((short)0,"禁用","禁用"),
-    DELETE((short)-1,"删除","用户已被删除"),
-    LOCKED((short)-10,"锁定","用户已被锁定"),
+    ENABLED((short) 1, "启用", "启用"),
+    DISABLED((short) 0, "禁用", "禁用"),
+    DELETE((short) -1, "删除", "用户已被删除"),
+    LOCKED((short) -10, "锁定", "用户已被锁定"),
     ;
 
     UserAccountStateEnum(Short value, String name, String info) {
@@ -13,24 +18,23 @@ public enum UserAccountStateEnum {
         this.info = info;
     }
 
-    private Short value ;
-    private String name ;
-    private String info ;
+    private Short value;
+    private String name;
+    private String info;
 
 
-    public static String doGetEnumInfoByValue(Short value){
-        if(value == null){
-            return null ;
+    public static String doGetEnumInfoByValue(Short value) {
+        if (value == null) {
+            return null;
         }
         UserAccountStateEnum[] enums = UserAccountStateEnum.values();
-        for(UserAccountStateEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj.getInfo() ;
+        for (UserAccountStateEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj.getInfo();
             }
         }
-        return "" ;
+        return "";
     }
-
 
 
     public Short getValue() {

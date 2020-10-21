@@ -8,14 +8,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * [角色-菜单] Mapper 接口
- * </p>
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
     /**
      * 根据角色id 修改指定权限 的可用状态
-     *
      * @param roleId
      * @param menuIdList
      * @param stateVal

@@ -7,14 +7,11 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineGroupMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public interface DefineGroupService extends IService<DefineGroup>,MyBaseMysqlService<DefineGroup,DefineGroupMapper,DefineGroupVo> {
+public interface DefineGroupService extends IService<DefineGroup>, MyBaseMysqlService<DefineGroup, DefineGroupMapper, DefineGroupVo> {
 
 
 }

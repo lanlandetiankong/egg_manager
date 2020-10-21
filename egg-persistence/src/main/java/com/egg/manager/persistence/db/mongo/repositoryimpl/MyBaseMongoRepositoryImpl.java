@@ -30,12 +30,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/26
- * \* Time: 16:23
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Component
 @Repository
@@ -229,7 +226,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 查询所有
-     *
      * @return
      */
     @Override
@@ -330,7 +326,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 判断传入的id是否为空
-     *
      * @param id
      * @return
      */
@@ -344,7 +339,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 将Iterable转化为List
-     *
      * @param iterable      带判断的迭代器
      * @param exceptionAble 当迭代器为空或转化后的集合为空时，是否抛出异常
      * @param <P>
@@ -367,7 +361,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 判断id是否不为空，并返回一个带有id.eq的Query
-     *
      * @param id
      * @param exceptionAble
      * @return
@@ -380,7 +373,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 批量设置id到in，exceptionAble决定当迭代器为空或长度为0时是否报错
-     *
      * @param idIters
      * @param exceptionAble
      * @return
@@ -393,7 +385,6 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     /**
      * 根据实体类对象批量设置id到in
-     *
      * @param idIters
      * @param nullAble
      * @return

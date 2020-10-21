@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
+ */
 @EnableTransactionManagement
 @Configuration
 @MapperScan("com.egg.manager.persistence.db.mysql.mapper")

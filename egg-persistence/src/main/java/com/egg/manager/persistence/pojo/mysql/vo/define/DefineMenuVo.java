@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +29,6 @@ public class DefineMenuVo extends MyBaseMysqlVo {
     private String menuName;
     /**
      * 路径跳转方式
-     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     private Integer urlJumpType;

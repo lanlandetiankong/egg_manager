@@ -1,20 +1,16 @@
 package com.egg.manager.common.base.enums.file;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/4
- * \* Time: 14:45
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public enum AntdFileUploadStatusEnum {
 
-    Uploading("uploading ","上传中..."),
-    Done("done","已上传"),
-    Error("error","上传失败"),
-    Remove("removed","已移除")
-    ;
+    Uploading("uploading ", "上传中..."),
+    Done("done", "已上传"),
+    Error("error", "上传失败"),
+    Remove("removed", "已移除");
 
 
     AntdFileUploadStatusEnum(String value, String label) {
@@ -25,11 +21,11 @@ public enum AntdFileUploadStatusEnum {
     /**
      * 值
      */
-    private String value ;
+    private String value;
     /**
      * 展示内容
      */
-    private String label ;
+    private String label;
 
 
     public String getValue() {

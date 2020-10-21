@@ -10,12 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * \* note: 表单类型
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:表单类型
+ * @date 2020/10/21
  */
 @Component
 @Named("messageEmailConversion")
@@ -24,7 +21,6 @@ public class EmailSendRecordConversion {
 
     /**
      * 取得-发送人-邮箱地址
-     *
      * @param fromUserInfoMVO
      * @return
      */
@@ -38,7 +34,6 @@ public class EmailSendRecordConversion {
 
     /**
      * 取得-发送人-邮箱地址
-     *
      * @param receiveUserInfoList
      * @return
      */

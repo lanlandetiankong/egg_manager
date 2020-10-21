@@ -6,10 +6,9 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
- * @Description: 在@Configuration或启动类 添加，
- * @ClassName: EnableEggBeanScan
- * @Author: zhoucj
- * @Date: 2020/9/21 16:59
+ * @author zhoucj
+ * @description: 在@Configuration或启动类 添加，
+ * @date 2020/10/21
  */
 @Documented
 @Inherited

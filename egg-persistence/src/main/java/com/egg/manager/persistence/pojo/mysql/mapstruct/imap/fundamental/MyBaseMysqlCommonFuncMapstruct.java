@@ -25,11 +25,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 可在该接口写公用的转化方法,定义的方法请勿修改方法名、参数、返回值等！
- * <p>
- * <p>
- * Notes:
- *
+ * @author zhoucj
+ * @description: 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！
+ * @date 2020/10/20
  * @Context : 该注解用于添加额外参数，不会对其进行判断null等操作
  */
 @MapperConfig(disableSubMappingMethodsGeneration = true)
@@ -42,7 +40,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * tagIds 转 json字符串
-     *
      * @param tagIds
      * @return
      */
@@ -53,7 +50,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * json字符串 转 id集合
-     *
      * @param tagIds
      * @return
      */
@@ -74,7 +70,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 取得 登录用户id
-     *
      * @param userAccount
      * @param required    当userAccount为null时是否抛出异常
      * @return
@@ -92,7 +87,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * html转简要文本
-     *
      * @param content
      * @param defaultValue
      * @return
@@ -111,7 +105,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 创建用户 entity转vo
-     *
      * @param entity
      * @return
      */
@@ -125,7 +118,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 更新用户 entity转vo
-     *
      * @param entity
      * @return
      */
@@ -139,7 +131,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 租户 entity转为vo
-     *
      * @param entity
      * @return
      */
@@ -149,7 +140,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 租户 dto转为vo
-     *
      * @param dto
      * @return
      */
@@ -159,7 +149,6 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 部门 dto转为vo
-     *
      * @param dto
      * @return
      */

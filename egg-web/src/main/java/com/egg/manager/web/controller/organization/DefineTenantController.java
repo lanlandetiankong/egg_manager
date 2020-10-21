@@ -38,8 +38,7 @@ import java.util.List;
 
 /**
  * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
+ * @author: \* Date: 2019/9/14
  * \* Time: 23:41
  * \
  */
@@ -70,35 +69,35 @@ public class DefineTenantController extends BaseController {
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineTenantDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,DefineTenantDto.class);
+            AntdvPaginationBean<DefineTenantDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineTenantDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "根据id查询->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineTenantVo> queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class, DefineTenantFuncModuleConstant.Success.QUERY_PAGE);
         try {
-            Assert.notBlank(defineTenantId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(defineTenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
             result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
 
     @PcWebQueryLog(fullPath = "/organization/defineTenant/gainEnumSelect")
-    @ApiOperation(value = "查询枚举下拉->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举下拉->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -116,13 +115,13 @@ public class DefineTenantController extends BaseController {
             result = defineTenantService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = defineTenantService.dealResultListToEnums(loginUser, result);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "新增->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
@@ -133,31 +132,31 @@ public class DefineTenantController extends BaseController {
             addCount = defineTenantService.dealCreate(loginUser, defineTenantVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.CREATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
-            Assert.notNull(defineTenantVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineTenantService.dealUpdate(loginUser, defineTenantVo);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.UPDATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -166,18 +165,18 @@ public class DefineTenantController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/organization/defineTenant/deleteById")
-    @ApiOperation(value = "伪删除->租户定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String.class),
     })
@@ -185,11 +184,11 @@ public class DefineTenantController extends BaseController {
     public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.DELETE_BY_ID);
         try {
-            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.DELETE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }
@@ -199,20 +198,20 @@ public class DefineTenantController extends BaseController {
     @ApiOperation(value = "更新->租户定义/设置管理员", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tenantId", value = "要配置的租户定义id", required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = "userAccountIdArr", value = "要设置为管理员的用户id-数组", required = true, dataTypeClass = String.class,allowMultiple=true),
+            @ApiImplicitParam(name = "userAccountIdArr", value = "要设置为管理员的用户id-数组", required = true, dataTypeClass = String.class, allowMultiple = true),
     })
     @PostMapping(value = "/setupTenantManager")
-    public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId,String[] userAccountIdArr,
+    public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId, String[] userAccountIdArr,
                                                @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.SETTING_OPER);
         try {
-            Assert.notBlank(tenantId,"未知租户id:"+actionFailMsg);
+            Assert.notBlank(tenantId, "未知租户id:" + actionFailMsg);
             DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);
-            Assert.notNull(defineTenant,"租户不存在:"+actionFailMsg);
-            int count = defineTenantService.dealTenantSetupManager(loginUser,tenantId,userAccountIdArr);
+            Assert.notNull(defineTenant, "租户不存在:" + actionFailMsg);
+            int count = defineTenantService.dealTenantSetupManager(loginUser, tenantId, userAccountIdArr);
             result.setCount(count);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineTenantFuncModuleConstant.Failure.SETTING_OPER);
+            this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.SETTING_OPER);
         }
         return result;
     }

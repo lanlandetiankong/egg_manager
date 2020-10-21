@@ -13,7 +13,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Component
 public class JwtUtil {
@@ -21,8 +23,8 @@ public class JwtUtil {
     /**
      * 默认过期时间1
      */
-    public static Long EXPIRE_TIME  ;
-    public static String DEFAULT_SECRET ;
+    public static Long EXPIRE_TIME;
+    public static String DEFAULT_SECRET;
 
 
     /**
@@ -63,7 +65,7 @@ public class JwtUtil {
      */
     public static String sign(String userAccountId) {
         try {
-            Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
+            Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(DEFAULT_SECRET);
             // 附带username信息
             return JWT.create()
@@ -84,6 +86,6 @@ public class JwtUtil {
 
     @Value("${egg.conf.jwt.secret}")
     public void setDefaultPwd(String defaultSecret) {
-        DEFAULT_SECRET = StringUtils.isBlank(defaultSecret) ? "EggPwd" : defaultSecret ;
+        DEFAULT_SECRET = StringUtils.isBlank(defaultSecret) ? "EggPwd" : defaultSecret;
     }
 }

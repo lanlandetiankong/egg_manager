@@ -8,10 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * MongoDb-FormTypeDefinitionMO 表单类型定义-MService
+ * @author zhoucj
+ * @description:表单类型定义-MService
+ * @date 2020/10/20
  */
 @Repository
-public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<SmartFormTypeDefinitionMgo,String> {
+public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<SmartFormTypeDefinitionMgo, String> {
     /**
      * 数据转枚举select
      * @param result

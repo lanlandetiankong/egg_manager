@@ -9,6 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,13 +50,11 @@ public class UserAccountVo extends MyBaseMysqlVo {
     private String email;
     /**
      * 性别
-     *
      * @see UserSexEnum
      */
     private Short sex;
     /**
      * 用户类型
-     *
      * @see UserAccountBaseTypeEnum
      */
     private Integer userType;

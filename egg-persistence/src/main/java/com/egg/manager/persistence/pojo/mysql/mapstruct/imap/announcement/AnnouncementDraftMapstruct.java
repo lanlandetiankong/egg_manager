@@ -8,7 +8,11 @@ import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftV
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementDraftConversion.class}

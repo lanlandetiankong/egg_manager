@@ -6,10 +6,9 @@ import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 /**
- * @Description:
- * @ClassName: EggBeanDefinitionScanner
- * @Author: zhoucj
- * @Date: 2020/9/21 17:01
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class EggBeanDefinitionScanner extends ClassPathBeanDefinitionScanner {
     public EggBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {

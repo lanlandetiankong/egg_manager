@@ -30,12 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/2
- * \* Time: 23:00
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-Excel上传接口")
@@ -45,7 +42,7 @@ public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传/模板->excel",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/模板->excel", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.UPLOAD_EXCEL);
@@ -85,9 +82,9 @@ public class ExcelUploadController extends BaseController {
                         .build();
                 uploadBeanList.add(uploadBean);
             }
-            result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILEUPLOAD_BEANLIST,uploadBeanList);
+            result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILEUPLOAD_BEANLIST, uploadBeanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,ExcelUploadFuncModuleConstant.Failure.UPLOAD_EXCEL);
+            this.dealCommonErrorCatch(log, result, e, ExcelUploadFuncModuleConstant.Failure.UPLOAD_EXCEL);
         }
         return result;
     }

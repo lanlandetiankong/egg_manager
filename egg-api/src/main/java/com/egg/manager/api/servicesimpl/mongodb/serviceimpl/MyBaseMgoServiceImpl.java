@@ -28,12 +28,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 0:18
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T extends MyBaseModelMgo, ID> implements MyBaseMgoService<T, ID> {
@@ -71,10 +68,10 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     @Override
     public Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean) {
-        Assert.notNull(updateBean,"updateBean不能为空！");
-        Assert.notNull(updateBean.getDocument(),"document不能为空！");
+        Assert.notNull(updateBean, "updateBean不能为空！");
+        Assert.notNull(updateBean.getDocument(), "document不能为空！");
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         Document document = updateBean.getDocument();
         Update update = Update.fromDocument(document);
         //如果已经在update指定了最后更新时间，则不再往update添加最后更新时间、最后更新人等信息
@@ -148,12 +145,12 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Sort sort) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
-        return doFindAll(loginUser,query,sort);
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
+        return doFindAll(loginUser, query, sort);
     }
 
     private List<T> doFindAll(UserAccount loginUser, Query query, Sort sort) {
-        query = query != null ? query : new Query() ;
+        query = query != null ? query : new Query();
         if (sort == null) {
             return baseRepository.findAll(query);
         } else {
@@ -169,7 +166,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     @Override
     public List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
-        return this.doFindAll(loginUser, queryBuffer,null);
+        return this.doFindAll(loginUser, queryBuffer, null);
     }
 
     @Override
@@ -192,7 +189,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public T doFindOne(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.findOne(query).get();
     }
 
@@ -205,14 +202,14 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public long doCount(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.count(query);
     }
 
     @Override
     public boolean doExists(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.exists(query);
     }
 
@@ -225,11 +222,12 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
-        Query query = getQueryByCriteriaList(null,queryBean.getCriteriaList());
+        Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         QPageRequest mPageFromBean = MongoQueryBean.<T>getMPageFromBean(queryBuffer.getPageBean());
         Page<T> page = baseRepository.findPage(query, mPageFromBean);
-        return  MongoQueryBean.getPageBeanFromPage(page) ;
+        return MongoQueryBean.getPageBeanFromPage(page);
     }
+
     @Override
     public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean) {
         return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMPageFromBean(pageBean)));
@@ -253,7 +251,6 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     /**
      * 更新时 设置登录用户字段
-     *
      * @param t
      * @param loginUser
      */
@@ -267,14 +264,14 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
 
-    private Query getQueryByCriteriaList(Query query,List<Criteria> criteriaList){
-        query = (query != null) ? query : new Query() ;
-        if(CollectionUtils.isEmpty(criteriaList)){
-            return query ;
+    private Query getQueryByCriteriaList(Query query, List<Criteria> criteriaList) {
+        query = (query != null) ? query : new Query();
+        if (CollectionUtils.isEmpty(criteriaList)) {
+            return query;
         }
-        for (Criteria criteria : criteriaList){
+        for (Criteria criteria : criteriaList) {
             query.addCriteria(criteria);
         }
-        return query ;
+        return query;
     }
 }

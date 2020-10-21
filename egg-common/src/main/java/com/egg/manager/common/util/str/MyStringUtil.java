@@ -14,7 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class MyStringUtil {
     public static final char UNDERLINE = '_';
@@ -35,7 +37,6 @@ public class MyStringUtil {
 
     /**
      * 获取方法中指定注解的value值返回
-     *
      * @param method               方法名
      * @param validationParamValue 注解的类名
      * @return
@@ -61,7 +62,6 @@ public class MyStringUtil {
 
     /**
      * 将utf-8编码的汉字转为中文
-     *
      * @param str
      * @return
      * @author zhaoqiang
@@ -165,7 +165,7 @@ public class MyStringUtil {
         String str = input.replaceAll("\\&[a-zA-Z]{1,10};", "").replaceAll(
                 "<[^>]*>", "");
         str = str.replaceAll("[(/>)<]", "");
-        length = length != null ? length : 50 ;
+        length = length != null ? length : 50;
         int len = str.length();
         if (len <= length) {
             return str;
@@ -182,10 +182,10 @@ public class MyStringUtil {
      * @return
      */
     public static String captureFirstWord(String value) {
-        if(StringUtils.isBlank(value)){
-            return value ;
+        if (StringUtils.isBlank(value)) {
+            return value;
         }
         value = value.substring(0, 1).toUpperCase() + value.substring(1);
-        return  value;
+        return value;
     }
 }

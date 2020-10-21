@@ -40,97 +40,98 @@ import ${superControllerClassPackage};
  * @since ${date}
  */
 @Slf4j
-@Api(value = "API ==>>  ${table.controllerName} ",description = "${cfg.moduleName_Cn}接口")
-#if(${restControllerStyle})
-@RestController
-#else
-@Controller
-#end
-//@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+@Api(value = "API ==>>  ${table.controllerName} ", description = "${cfg.moduleName_Cn}接口")
+    #if(${restControllerStyle})
+    @RestController
+    #else
+    @Controller
+    #end
+//@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end
+/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
 @RequestMapping("${cfg.baseReqUrl}")
 #if(${kotlin})
 class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
 
 #else
-#if(${superControllerClass})
-public class ${table.controllerName} extends ${superControllerClass} {
-#else
-public class ${table.controllerName} {
-#end
+    #if(${superControllerClass})
+    public class ${table.controllerName} extends ${superControllerClass} {
+    #else
+    public class ${table.controllerName} {
+    #end
 
 
 
-    @Autowired
-    private ${cfg.baseEntityName}Mapper ${cfg.baseEntityName_firstLow}Mapper;
-    @Reference
-    private ${cfg.baseEntityName}Service ${cfg.baseEntityName_firstLow}Service;
+@Autowired
+private ${cfg.baseEntityName}Mapper ${cfg.baseEntityName_firstLow}Mapper;
+@Reference
+private ${cfg.baseEntityName}Service ${cfg.baseEntityName_firstLow}Service;
 
-    @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
-    @ApiOperation(value = "分页查询(dto)->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
-            @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
-    })
-    @PostMapping(value = "/getAllDtos")
-    public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos(HttpServletRequest request,String queryObj,String paginationObj,String sortObj,
-    @CurrentLoginUser UserAccount loginUser){
+@PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
+@ApiOperation(value = "分页查询(dto)->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiImplicitParams({
+        @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
+        @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
+        @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
+})
+@PostMapping(value = "/getAllDtos")
+public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos(HttpServletRequest request,String queryObj,String paginationObj,String sortObj,
+@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
         try{
-            //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList=this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state",BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPaginationBean paginationBean=parsePaginationJsonToBean(paginationObj);
-            //取得 排序配置
-            List<AntdvSortBean> sortBeans=parseSortJsonToBean(sortObj,true);
-            result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortBeans);
+        //解析 搜索条件
+        List<QueryFormFieldBean> queryFieldBeanList=this.parseQueryJsonToBeanList(queryObj);
+        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state",BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPaginationBean paginationBean=parsePaginationJsonToBean(paginationObj);
+        //取得 排序配置
+        List<AntdvSortBean> sortBeans=parseSortJsonToBean(sortObj,true);
+        result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortBeans);
         }catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
+        this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-    @ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
-    @PostMapping(value = "/getOneItemById")
-    public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser UserAccount loginUser){
+@ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
+@PostMapping(value = "/getOneItemById")
+public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
         try{
-            ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow}=${cfg.baseEntityName_firstLow}Mapper.selectById(${cfg.baseEntityName_firstLow}Id);
-            result.setBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
+    ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow}=${cfg.baseEntityName_firstLow}Mapper.selectById(${cfg.baseEntityName_firstLow}Id);
+        result.setBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
         }catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
+        this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-    @ApiOperation(value = "新增->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
-    @PostMapping(value = "/addByForm")
-    public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
+@ApiOperation(value = "新增->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
+@PostMapping(value = "/addByForm")
+public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
         Integer addCount=0;
         try{
-            if(${cfg.baseEntityName_firstLow}Vo==null){
-                throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
-            }   else{
-                addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
-            }
-            result.setCount(addCount);
-        }   catch(Exception e){
-            this.dealCommonErrorCatch(log,result,e);
+        if(${cfg.baseEntityName_firstLow}Vo==null){
+        throw new Exception("未接收到有效的${cfg.moduleName_Cn}表单！");
+        }else{
+        addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
+        }
+        result.setCount(addCount);
+        }catch(Exception e){
+        this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-    @ApiOperation(value = "更新->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
-    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
-    @PostMapping(value = "/updateByForm")
-    public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
+@ApiOperation(value = "更新->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
+@PostMapping(value = "/updateByForm")
+public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result=new MyCommonResult();
         Integer changeCount=0;
         try{
@@ -144,16 +145,16 @@ public class ${table.controllerName} {
         this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
-    @ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}",response = MyCommonResult.class, httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
-    })
-    @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,@CurrentLoginUser UserAccount loginUser){
+@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
+@ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiImplicitParams({
+        @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
+})
+@PostMapping(value = "/batchDelByIds")
+public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result=new MyCommonResult();
         Integer delCount=0;
         try{
@@ -165,30 +166,29 @@ public class ${table.controllerName} {
         this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-    @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
-    @ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),
-    })
-    @PostMapping(value = "/delOneById")
-    public MyCommonResult doDelOneById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
+@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
+@ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiImplicitParams({
+        @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),
+})
+@PostMapping(value = "/delOneById")
+public MyCommonResult doDelOneById(HttpServletRequest request,String delId,@CurrentLoginUser UserAccount loginUser){
         MyCommonResult result=new MyCommonResult();
         try{
         if(StringUtils.isNotBlank(delId)){
-            Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
-            result.setCount(delCount);
+        Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
+        result.setCount(delCount);
         }
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
         return result;
-    }
+        }
 
 
-
-}
+        }
 
 #end

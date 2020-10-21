@@ -1,5 +1,10 @@
 package com.egg.manager.api.services.message.services.hello;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public interface MessageHelloService {
     /**
      * 测试 负载均衡端口号

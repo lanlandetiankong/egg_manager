@@ -12,18 +12,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 定义的职务 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface DefineJobMapper extends BaseMapper<DefineJob> {
 
     /**
      * [分页搜索查询] - 职务定义
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -33,7 +30,6 @@ public interface DefineJobMapper extends BaseMapper<DefineJob> {
 
     /**
      * 查询指定用户的 用户-职务 关联表
-     *
      * @param userAccountId
      * @param stateVal      指定state的值
      * @return

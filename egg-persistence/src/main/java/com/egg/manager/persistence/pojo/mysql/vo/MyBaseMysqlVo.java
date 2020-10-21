@@ -6,6 +6,12 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 public class MyBaseMysqlVo implements Serializable {
     private String fid;
@@ -46,5 +52,5 @@ public class MyBaseMysqlVo implements Serializable {
     /**
      * 版本号
      */
-    private Integer version ;
+    private Integer version;
 }

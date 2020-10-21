@@ -6,12 +6,9 @@ import com.egg.manager.persistence.db.mongo.repositoryimpl.MyBaseMongoRepository
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>
- * 操作日志表 - MongoDB
- * </p>
- *
- * @author zhouchengjie
- * @since 2020-07-19
+ * @author zhoucj
+ * @description: 操作日志表 - MongoDB
+ * @date 2020/10/21
  */
 @Repository
 public class PcWebOperationLogRepositoryImpl extends MyBaseMongoRepositoryImpl<PcWebOperationLogMgo, String> implements PcWebOperationLogRepository {

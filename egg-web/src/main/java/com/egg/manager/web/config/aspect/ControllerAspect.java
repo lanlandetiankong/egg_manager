@@ -26,6 +26,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Aspect
 @Configuration
 public class ControllerAspect {
@@ -261,7 +267,6 @@ public class ControllerAspect {
 
     /**
      * 根据方法名取得对应 Method
-     *
      * @param joinPoint
      * @param methodName
      * @return

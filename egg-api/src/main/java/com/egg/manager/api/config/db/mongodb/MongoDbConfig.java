@@ -13,20 +13,17 @@ import org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexRes
 import org.springframework.data.mongodb.core.mapping.*;
 
 /**
- * \* note: mongodb 相关配置
- * @author: zhouchengjie
- * \* Date: 2020/8/11
- * \* Time: 9:36
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: mongodb 相关配置
+ * @date 2020/10/20
  */
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
 public class MongoDbConfig {
 
-    private final MongoTemplate mongoTemplate ;
-    private final MongoConverter mongoConverter ;
+    private final MongoTemplate mongoTemplate;
+    private final MongoConverter mongoConverter;
 
     /**
      * @since spring data mongo 3.0 需要引用该段配置，否则启动时会抛异常

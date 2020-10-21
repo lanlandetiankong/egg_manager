@@ -11,33 +11,32 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Description:
- * @ClassName: MyReflexUtil
- * @Author: zhoucj
- * @Date: 2020/7/27 11:56
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class MyReflexUtil {
 
 
-    public static Update getMoUpdateByObjectWithIgnores(Object object, boolean skipNull, String ... args){
+    public static Update getMoUpdateByObjectWithIgnores(Object object, boolean skipNull, String... args) {
         List list = (args == null) ? new ArrayList() : Lists.newArrayList(args);
-        return getMoUpdateByObject(object,skipNull,list);
+        return getMoUpdateByObject(object, skipNull, list);
     }
+
     /**
      * 将查询条件对象转换为update
-     *
      * @param object
      * @return
      * @author Jason
      */
     public static Update getMoUpdateByObject(Object object, boolean skipNull, List<String> ignoreKeys) {
         Update update = new Update();
-        ignoreKeys = ignoreKeys != null ? ignoreKeys : new ArrayList<>() ;
+        ignoreKeys = ignoreKeys != null ? ignoreKeys : new ArrayList<>();
         //是否取得继承的上一级baseMO的字段
-        boolean isWithSuper = true ;
-        Set<String> filedSet = getFiledName(object,isWithSuper);
-        for (String filedName :filedSet) {
-            if (ignoreKeys.contains(filedName)){
+        boolean isWithSuper = true;
+        Set<String> filedSet = getFiledName(object, isWithSuper);
+        for (String filedName : filedSet) {
+            if (ignoreKeys.contains(filedName)) {
                 //该字段将不会被设置到Update
                 continue;
             }
@@ -56,20 +55,20 @@ public class MyReflexUtil {
      * @param isWithSuper 是否也要继承
      * @return
      */
-    private static Set<String> getFiledName(Object o,boolean isWithSuper) {
+    private static Set<String> getFiledName(Object o, boolean isWithSuper) {
         //pojo定义的字段
         Field[] fields = o.getClass().getDeclaredFields();
-        Set<String> fieldNames = new HashSet<>() ;
+        Set<String> fieldNames = new HashSet<>();
         for (int i = 0; i < fields.length; ++i) {
             fieldNames.add(fields[i].getName());
         }
-        if(isWithSuper){
+        if (isWithSuper) {
             //pojo继承的实体类
             Class superClazz = o.getClass().getSuperclass();
-            if(superClazz != null){
+            if (superClazz != null) {
                 Field[] superFields = superClazz.getDeclaredFields();
-                if(superFields != null && superFields.length > 0){
-                    for (Field superFieldItem : superFields){
+                if (superFields != null && superFields.length > 0) {
+                    for (Field superFieldItem : superFields) {
                         fieldNames.add(superFieldItem.getName());
                     }
                 }

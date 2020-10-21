@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 正则验证工具
+ * @author zhoucj
+ * @description: 正则验证工具
+ * @date 2020/10/21
  */
 public class RegexUtil {
 
@@ -25,31 +27,31 @@ public class RegexUtil {
      */
     public static boolean checkIdCard(String idCard) {
         String regex = "[1-9]\\d{16}[a-zA-Z0-9]{1}";
-        return Pattern.matches(regex,idCard);
+        return Pattern.matches(regex, idCard);
     }
 
     /**
      * 验证手机号码（支持国际格式，+86135xxxx...（中国内地），+00852137xxxx...（中国香港））
      * @param mobile 移动、联通、电信运营商的号码段
-     *<p>移动的号段：134(0-8)、135、136、137、138、139、147（预计用于TD上网卡）
-     *、150、151、152、157（TD专用）、158、159、187（未启用）、188（TD专用）</p>
-     *<p>联通的号段：130、131、132、155、156（世界风专用）、185（未启用）、186（3g）</p>
-     *<p>电信的号段：133、153、180（未启用）、189</p>
+     *               <p>移动的号段：134(0-8)、135、136、137、138、139、147（预计用于TD上网卡）
+     *               、150、151、152、157（TD专用）、158、159、187（未启用）、188（TD专用）</p>
+     *               <p>联通的号段：130、131、132、155、156（世界风专用）、185（未启用）、186（3g）</p>
+     *               <p>电信的号段：133、153、180（未启用）、189</p>
      * @return 验证成功返回true，验证失败返回false
      */
     public static boolean checkMobile(String mobile) {
         String regex = "(\\+\\d+)?1[3458]\\d{9}$";
-        return Pattern.matches(regex,mobile);
+        return Pattern.matches(regex, mobile);
     }
 
     /**
      * 验证固定电话号码
      * @param phone 电话号码，格式：国家（地区）电话代码 + 区号（城市代码） + 电话号码，如：+8602085588447
-     * <p><b>国家（地区） 代码 ：</b>标识电话号码的国家（地区）的标准国家（地区）代码。它包含从 0 到 9 的一位或多位数字，
-     *  数字之后是空格分隔的国家（地区）代码。</p>
-     * <p><b>区号（城市代码）：</b>这可能包含一个或多个从 0 到 9 的数字，地区或城市代码放在圆括号——
-     * 对不使用地区或城市代码的国家（地区），则省略该组件。</p>
-     * <p><b>电话号码：</b>这包含从 0 到 9 的一个或多个数字 </p>
+     *              <p><b>国家（地区） 代码 ：</b>标识电话号码的国家（地区）的标准国家（地区）代码。它包含从 0 到 9 的一位或多位数字，
+     *              数字之后是空格分隔的国家（地区）代码。</p>
+     *              <p><b>区号（城市代码）：</b>这可能包含一个或多个从 0 到 9 的数字，地区或城市代码放在圆括号——
+     *              对不使用地区或城市代码的国家（地区），则省略该组件。</p>
+     *              <p><b>电话号码：</b>这包含从 0 到 9 的一个或多个数字 </p>
      * @return 验证成功返回true，验证失败返回false
      */
     public static boolean checkPhone(String phone) {
@@ -64,7 +66,7 @@ public class RegexUtil {
      */
     public static boolean checkDigit(String digit) {
         String regex = "\\-?[1-9]\\d+";
-        return Pattern.matches(regex,digit);
+        return Pattern.matches(regex, digit);
     }
 
     /**
@@ -74,7 +76,7 @@ public class RegexUtil {
      */
     public static boolean checkDecimals(String decimals) {
         String regex = "\\-?[1-9]\\d+(\\.\\d+)?";
-        return Pattern.matches(regex,decimals);
+        return Pattern.matches(regex, decimals);
     }
 
     /**
@@ -84,7 +86,7 @@ public class RegexUtil {
      */
     public static boolean checkBlankSpace(String blankSpace) {
         String regex = "\\s+";
-        return Pattern.matches(regex,blankSpace);
+        return Pattern.matches(regex, blankSpace);
     }
 
     /**
@@ -94,7 +96,7 @@ public class RegexUtil {
      */
     public static boolean checkChinese(String chinese) {
         String regex = "^[\u4E00-\u9FA5]+$";
-        return Pattern.matches(regex,chinese);
+        return Pattern.matches(regex, chinese);
     }
 
     /**
@@ -104,7 +106,7 @@ public class RegexUtil {
      */
     public static boolean checkBirthday(String birthday) {
         String regex = "[1-9]{4}([-./])\\d{1,2}\\1\\d{1,2}";
-        return Pattern.matches(regex,birthday);
+        return Pattern.matches(regex, birthday);
     }
 
     /**
@@ -122,17 +124,17 @@ public class RegexUtil {
      * 获取网址 URL 的一级域名
      * http://detail.tmall.com/item.htm?spm=a230r.1.10.44.1xpDSH&id=15453106243&_u=f4ve1uq1092 ->> tmall.com
      * </pre>
-     *
      * @param url
      * @return
      */
     public static String getDomain(String url) {
-        String regex = "(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)" ;
+        String regex = "(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)";
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(url);
         matcher.find();
         return matcher.group();
     }
+
     /**
      * 匹配中国邮政编码
      * @param postcode 邮政编码

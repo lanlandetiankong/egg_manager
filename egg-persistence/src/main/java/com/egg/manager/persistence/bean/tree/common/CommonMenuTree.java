@@ -4,19 +4,18 @@ import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.bean.tree.MyBaseTree;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.google.common.collect.Maps;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/19
- * \* Time: 19:44
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Builder
 @Data
@@ -74,7 +73,6 @@ public class CommonMenuTree extends MyBaseTree {
 
     /**
      * 定义的菜单=>菜单树
-     *
      * @param menu
      * @param tree
      * @return
@@ -95,7 +93,6 @@ public class CommonMenuTree extends MyBaseTree {
 
     /**
      * 定义的菜单=>菜单树
-     *
      * @param treeList
      * @param urlMap
      * @return

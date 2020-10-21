@@ -1,7 +1,10 @@
 package com.egg.manager.common.base.constant.define;
 
 /**
- * 部门定义-常量
+ * @author zhoucj
+ * @version V1.0
+ * @description: 部门定义-常量
+ * @date 2020/10/20
  */
 public interface DefineDepartmentConstant {
     /**

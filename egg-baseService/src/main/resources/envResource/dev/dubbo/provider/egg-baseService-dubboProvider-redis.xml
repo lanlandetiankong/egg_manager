@@ -9,7 +9,8 @@
 
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.redis.serviceimpl.user                                                              -->
-    <dubbo:service protocol="dubbo" ref="userAccountRedisService" interface="com.egg.manager.api.services.redis.service.user.UserAccountRedisService"/>
+    <dubbo:service protocol="dubbo" ref="userAccountRedisService"
+                   interface="com.egg.manager.api.services.redis.service.user.UserAccountRedisService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.redis.serviceimpl.user                                                              -->
 
 

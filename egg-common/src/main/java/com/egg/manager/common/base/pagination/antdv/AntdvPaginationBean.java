@@ -5,12 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/4
- * \* Time: 14:51
- * \* Description:
- * \p
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Data
 @Builder
@@ -18,15 +15,15 @@ public class AntdvPaginationBean<T> extends MyBasePagination {
     /**
      * 当前页数
      */
-    private Integer current ;
+    private Integer current;
     /**
      * 单页数据量
      */
-    private Integer pageSize ;
+    private Integer pageSize;
     /**
      * 总数据量
      */
-    private Long total ;
+    private Long total;
 
     public AntdvPaginationBean() {
     }
@@ -42,15 +39,15 @@ public class AntdvPaginationBean<T> extends MyBasePagination {
         this.total = total;
     }
 
-    public static AntdvPaginationBean gainLimitPaginationBean(Integer pageSize){
-        return new AntdvPaginationBean(1,pageSize,0L);
+    public static AntdvPaginationBean gainLimitPaginationBean(Integer pageSize) {
+        return new AntdvPaginationBean(1, pageSize, 0L);
     }
 
     /**
      * 默认分页
      * @return
      */
-    public static <T> AntdvPaginationBean<T> gainDefaultPaginationBean(Class<T> clazz){
-        return new AntdvPaginationBean<T>(1,10,0L);
+    public static <T> AntdvPaginationBean<T> gainDefaultPaginationBean(Class<T> clazz) {
+        return new AntdvPaginationBean<T>(1, 10, 0L);
     }
 }

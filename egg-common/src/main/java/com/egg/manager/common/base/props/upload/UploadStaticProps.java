@@ -7,12 +7,9 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * \* note: 静态方法可以调用 props-upload.properties配置的参数
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 18:24
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 静态方法可以调用 props-upload.properties配置的参数
+ * @date 2020/10/21
  */
 @Component
 @ConfigurationProperties(prefix = "props.upload")
@@ -20,25 +17,23 @@ public class UploadStaticProps implements Serializable {
     /**
      * 访问路径前缀
      */
-    private static String urlPrefix ;
+    private static String urlPrefix;
     /**
      * 路径位置前缀
      */
-    private static String locationPrefix ;
+    private static String locationPrefix;
     /**
      * 图片存放路径
      */
-    private static String locationOfImg ;
+    private static String locationOfImg;
     /**
      * excel存放路径
      */
-    private static String locationOfExcel ;
+    private static String locationOfExcel;
     /**
      * 项目名
      */
-    private static String projectName ;
-
-
+    private static String projectName;
 
 
     //setter
@@ -47,18 +42,22 @@ public class UploadStaticProps implements Serializable {
     public void setUrlPrefix(String urlPrefix) {
         UploadStaticProps.urlPrefix = urlPrefix;
     }
+
     @Value("${props.upload.locationPrefix}")
     public void setLocationPrefix(String locationPrefix) {
         UploadStaticProps.locationPrefix = locationPrefix;
     }
+
     @Value("${props.upload.locationOfImg}")
     public void setLocationOfImg(String locationOfImg) {
         UploadStaticProps.locationOfImg = locationOfImg;
     }
+
     @Value("${props.upload.locationOfExcel}")
     public void setLocationOfExcel(String locationOfExcel) {
         UploadStaticProps.locationOfExcel = locationOfExcel;
     }
+
     @Value("${props.upload.projectName}")
     public void setProjectName(String projectName) {
         UploadStaticProps.projectName = projectName;

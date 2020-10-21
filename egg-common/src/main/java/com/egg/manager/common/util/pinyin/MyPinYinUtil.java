@@ -23,12 +23,13 @@ public class MyPinYinUtil {
         log.debug(toFirstChar("汉字转换为拼音").toUpperCase());
         log.debug(toPinyin("汉字转换为拼音"));
     }
+
     /**
      * 获取字符串拼音的第一个字母
      * @param chinese
      * @return
      */
-    public static String toFirstChar(String chinese){
+    public static String toFirstChar(String chinese) {
         String pinyinStr = "";
         //转为单个字符
         char[] newChar = chinese.toCharArray();
@@ -42,7 +43,7 @@ public class MyPinYinUtil {
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 pinyinStr += newChar[i];
             }
         }
@@ -54,9 +55,9 @@ public class MyPinYinUtil {
      * @param chinese
      * @return
      */
-    public static String toPinyin(String chinese){
-        if(StringUtils.isBlank(chinese)){
-            return null ;
+    public static String toPinyin(String chinese) {
+        if (StringUtils.isBlank(chinese)) {
+            return null;
         }
         String pinyinStr = "";
         char[] newChar = chinese.toCharArray();
@@ -70,7 +71,7 @@ public class MyPinYinUtil {
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 pinyinStr += newChar[i];
             }
         }

@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class DateTimeUtil {
     /**
@@ -113,12 +115,12 @@ public class DateTimeUtil {
     /**
      * 把时间格式化成如：20020806 格式的(8位)字符串
      */
-    public final static String FMT_yyyyMMdd_8= "yyyyMMdd";
+    public final static String FMT_yyyyMMdd_8 = "yyyyMMdd";
 
     /**
      * 把时间格式化成如：200208 格式的(6位)字符串
      */
-    public final static String FMT_yyyyMM_6= "yyyyMM";
+    public final static String FMT_yyyyMM_6 = "yyyyMM";
 
     /**
      * 把时间格式化成如：12:08 PM(下午) 格式的字符串
@@ -200,20 +202,20 @@ public class DateTimeUtil {
      */
     public final static String FMT_WW = "EEE";
 
-    private final static int MIN_DAY_OF_MONTH = 1 ;
-    private final static int Max_DAY_OF_MONTH = 31 ;
-    private final static int MIN_MONTH_OF_YEAR = 1 ;
-    private final static int Max_MONTH_OF_YEAR = 12 ;
+    private final static int MIN_DAY_OF_MONTH = 1;
+    private final static int Max_DAY_OF_MONTH = 31;
+    private final static int MIN_MONTH_OF_YEAR = 1;
+    private final static int Max_MONTH_OF_YEAR = 12;
 
 
     /**
      * 常用的格式化时间的格式组，用于本类中格式化字符串成时间型
      */
-    private final static String[] formatStr = { FMT_yyyyMMddHHmmssS, FMT_yyyyMMddHHmmss, FMT_yyyyMMddHHmm,
+    private final static String[] formatStr = {FMT_yyyyMMddHHmmssS, FMT_yyyyMMddHHmmss, FMT_yyyyMMddHHmm,
             FMT_yyyyMMddHH, FMT_yyyyMMdd, FMT_HHmmss, FMT_HHmmssS, FMT_HHmm, FMT_HHmmz, FMT_HHmmzzzz,
             FMT_yyyyMMddHHmmssSa_12, FMT_yyyyMMddHHmmssa_12, FMT_yyyyMMddHHmma_12, FMT_yyyyMMddHHa_12,
             FMT_yyyyMMdda, FMT_HHmmA_12, FMT_HHmmAz_12, FMT_HHmmAzzzz_12, FMT_HHmmssA_12, FMT_HHmmssAz_12,
-            FMT_HHmmssAzzzz_12, FMT_yyyyMMddHHmmssSa };
+            FMT_HHmmssAzzzz_12, FMT_yyyyMMddHHmmssSa};
 
     /**
      * 私有化构造器，使得不能产生该类对象，类中所有的方法均为静态方法
@@ -223,11 +225,8 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的Date值和格式串采用操作系统的默认所在的国家风格来格式化时间，并返回相应的字符串
-     *
-     * @param date
-     *            日期对象
-     * @param formatStr
-     *            日期格式
+     * @param date      日期对象
+     * @param formatStr 日期格式
      * @return 如果为null，返回字符串""
      */
     public static String formatDateTimetoString(Date date, String formatStr) {
@@ -243,9 +242,7 @@ public class DateTimeUtil {
 
     /**
      * 获取系统时间
-     *
-     * @param fmtstr
-     *            日期格式
+     * @param fmtstr 日期格式
      * @return 系统时间
      */
     public static Date getSystemDate(String fmtstr) {
@@ -260,13 +257,9 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的Date值和格式串采用给定的国家所在的国家风格来格式化时间，并返回相应的字符串
-     *
-     * @param date
-     *            日期对象
-     * @param formatStr
-     *            日期格式
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param date      日期对象
+     * @param formatStr 日期格式
+     * @param locale    日期格式符号要被使用的语言环境
      * @return 如果为null，返回字符串""
      */
     public static String formatDateTimetoString(Date date, String formatStr, Locale locale) {
@@ -281,14 +274,10 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的Date值字符串和格式串采用操作系统的默认所在的国家风格来格式化时间，并返回相应的字符串
-     *
-     * @param dateStr
-     *            日期字符串
-     * @param formatStr
-     *            日期格式
+     * @param dateStr   日期字符串
+     * @param formatStr 日期格式
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDateTimetoString(String dateStr, String formatStr) throws Exception {
         String dStr = "";
@@ -300,16 +289,11 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的Date值字符串和格式串采用指定国家的风格来格式化时间，并返回相应的字符串
-     *
-     * @param dateStr
-     *            日期字符串
-     * @param formatStr
-     *            日期格式
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateStr   日期字符串
+     * @param formatStr 日期格式
+     * @param locale    日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDateTimetoString(String dateStr, String formatStr, Locale locale) throws Exception {
         String dStr = "";
@@ -322,14 +306,10 @@ public class DateTimeUtil {
 
     /**
      * 按指定的格式和操作系统默认国家的风格把给定的日期字符串格式化为一个Date型日期
-     *
-     * @param dateTimeStr
-     *            日期毫秒字符串
-     * @param formatStr
-     *            日期格式
+     * @param dateTimeStr 日期毫秒字符串
+     * @param formatStr   日期格式
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(String dateTimeStr, String formatStr) throws Exception {
         if (dateTimeStr == null || formatStr == null || dateTimeStr.trim().length() < 1
@@ -347,16 +327,11 @@ public class DateTimeUtil {
 
     /**
      * 按指定的格式和指定国家的风格把给定的日期字符串格式化为一个Date型日期
-     *
-     * @param dateTimeStr
-     *            日期字符串
-     * @param formatStr
-     *            日期格式
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTimeStr 日期字符串
+     * @param formatStr   日期格式
+     * @param locale      日期格式符号要被使用的语言环境
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(String dateTimeStr, String formatStr, Locale locale) throws Exception {
         if (dateTimeStr != null && formatStr != null && locale != null && dateTimeStr.trim().length() > 0
@@ -375,12 +350,9 @@ public class DateTimeUtil {
 
     /**
      * 按操作系统默认国家的风格把给定的日期字符串格式化为一个Date型日期
-     *
-     * @param dateTimeStr
-     *            日期字符串
+     * @param dateTimeStr 日期字符串
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(String dateTimeStr) throws Exception {
         if (dateTimeStr == null || dateTimeStr.trim().length() < 1) {
@@ -401,16 +373,11 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的年月和日返回一个日期型的对象
-     *
-     * @param year
-     *            年
-     * @param month
-     *            月 ，1到12
-     * @param day
-     *            日 ，1到31
+     * @param year  年
+     * @param month 月 ，1到12
+     * @param day   日 ，1到31
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(int year, int month, int day) throws Exception {
         if (month < MIN_MONTH_OF_YEAR || month > Max_MONTH_OF_YEAR || day < MIN_DAY_OF_MONTH || day > Max_DAY_OF_MONTH) {
@@ -426,22 +393,14 @@ public class DateTimeUtil {
 
     /**
      * 根据给出的年月日、时分秒、返回一个对应的Date型对象
-     *
-     * @param year
-     *            年
-     * @param month
-     *            月 ，1到12
-     * @param day
-     *            日 ，1到31
-     * @param h
-     *            小时，从0到23
-     * @param m
-     *            分，从0到60
-     * @param s
-     *            秒，从0到60
+     * @param year  年
+     * @param month 月 ，1到12
+     * @param day   日 ，1到31
+     * @param h     小时，从0到23
+     * @param m     分，从0到60
+     * @param s     秒，从0到60
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(int year, int month, int day, int h, int m, int s) throws Exception {
         if (month < MIN_MONTH_OF_YEAR || month > Max_MONTH_OF_YEAR || day < MIN_DAY_OF_MONTH || day > Max_DAY_OF_MONTH || h < 0 || h > 23 || m < 0 || m > 60 || s < 0 || s > 60) {
@@ -460,14 +419,10 @@ public class DateTimeUtil {
 
     /**
      * 按指定国家的风格把给定的日期字符串格式化为一个Date型日期
-     *
-     * @param dateTimeStr
-     *            日期字符串
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTimeStr 日期字符串
+     * @param locale      日期格式符号要被使用的语言环境
      * @return java.util.Date类型对象
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static Date parseToDate(String dateTimeStr, Locale locale) throws Exception {
         if (dateTimeStr == null || dateTimeStr.trim().length() < 1 || locale == null) {
@@ -488,12 +443,9 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间字符串按操作系统默认的国家风格格式化成"yyyy-MM-dd HH:mm:ss"格式的日期时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
+     * @param dateTimeStr 日期字符串
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDateTimetoString(String dateTimeStr) throws Exception {
         return formatDateTimetoString(dateTimeStr, FMT_yyyyMMddHHmmss);
@@ -501,14 +453,10 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间字符串按指定国家的风格格式化成"yyyy-MM-dd HH:mm:ss"格式的日期时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTimeStr 日期字符串
+     * @param locale      日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDateTimetoString(String dateTimeStr, Locale locale) throws Exception {
         return formatDateTimetoString(dateTimeStr, FMT_yyyyMMddHHmmss, locale);
@@ -516,9 +464,7 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间按操作系统默认的国家内格格式化成"yyyy-MM-dd HH:mm:ss"格式的日期时间串
-     *
-     * @param dateTime
-     *            日期对象
+     * @param dateTime 日期对象
      * @return 如果为null，返回""
      */
     public static String formatDateTimetoString(Date dateTime) {
@@ -527,11 +473,8 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间按指定国家的风格格式化成"yyyy-MM-dd HH:mm:ss"格式的日期时间串
-     *
-     * @param dateTime
-     *            日期对象
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTime 日期对象
+     * @param locale   日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
      */
     public static String formatDateTimetoString(Date dateTime, Locale locale) {
@@ -540,12 +483,9 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期字符串按操作系统默认的国家风格格式化成"yyyy-MM-dd"格式的日期串
-     *
-     * @param dateStr
-     *            日期字符串
+     * @param dateStr 日期字符串
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDatetoString(String dateStr) throws Exception {
         return formatDateTimetoString(dateStr, FMT_yyyyMMdd);
@@ -553,14 +493,10 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期字符串按指定国家的风格格式化成"yyyy-MM-dd"格式的日期串
-     *
-     * @param dateStr
-     *            日期字符串
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateStr 日期字符串
+     * @param locale  日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatDatetoString(String dateStr, Locale locale) throws Exception {
         return formatDateTimetoString(dateStr, FMT_yyyyMMdd, locale);
@@ -568,9 +504,7 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期按指定操作系统默认国家的风格格式化成"yyyy-MM-dd"格式的日期串
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 如果为null，返回""
      */
     public static String formatDatetoString(Date d) {
@@ -579,11 +513,8 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期按指定国家的风格格式化成"yyyy-MM-dd"格式的日期串
-     *
-     * @param d
-     *            日期对象
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param d      日期对象
+     * @param locale 日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
      */
     public static String formatDatetoString(Date d, Locale locale) {
@@ -592,12 +523,9 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间字符串按操作系统默认的国家风格格式化成"HH:mm:ss"格式的时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
+     * @param dateTimeStr 日期字符串
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatTimetoString(String dateTimeStr) throws Exception {
         return formatDateTimetoString(dateTimeStr, FMT_HHmmss);
@@ -605,14 +533,10 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间字符串按指定国家的风格格式化成"HH:mm:ss"格式的时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTimeStr 日期字符串
+     * @param locale      日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
-     * @throws Exception
-     *             可能抛出的异常
+     * @throws Exception 可能抛出的异常
      */
     public static String formatTimetoString(String dateTimeStr, Locale locale) throws Exception {
         return formatDateTimetoString(dateTimeStr, FMT_HHmmss, locale);
@@ -620,9 +544,7 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间按指定操作系统默认国家的风格格式化成"HH:mm:ss"格式的时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
+     * @param dateTimeStr 日期字符串
      * @return 如果为null，返回""
      */
     public static String formatTimetoString(Date dateTimeStr) {
@@ -631,11 +553,8 @@ public class DateTimeUtil {
 
     /**
      * 将给定的日期时间按指定国家的风格格式化成"HH:mm:ss"格式的时间串
-     *
-     * @param dateTimeStr
-     *            日期字符串
-     * @param locale
-     *            日期格式符号要被使用的语言环境
+     * @param dateTimeStr 日期字符串
+     * @param locale      日期格式符号要被使用的语言环境
      * @return 如果为null，返回""
      */
     public static String formatTimetoString(Date dateTimeStr, Locale locale) {
@@ -644,9 +563,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的年份整数
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 年份
      */
     public static int getYearOfDate(Date d) {
@@ -660,9 +577,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的月份整数
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 月份
      */
     public static int getMonthOfYear(Date d) {
@@ -676,9 +591,7 @@ public class DateTimeUtil {
 
     /**
      * 获取指定日期的1号0点0分0秒
-     *
-     * @param d
-     *            指定日期
+     * @param d 指定日期
      * @return 指定日期的0点0分0秒
      */
     public static Date getDateByFirstDayOfMonth(Date d) {
@@ -694,9 +607,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的天份整数，是这个月的第几天
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 天份
      */
     public static int getDayOfMonth(Date d) {
@@ -710,9 +621,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的天份整数，是这个年份的第几天
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 天份
      */
     public static int getDayOfYear(Date d) {
@@ -726,9 +635,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的天份整数，是这个周的第几天
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 天份
      */
     public static int getDayOfWeek(Date d) {
@@ -742,9 +649,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的周的整数，是这个月的第几周
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 周
      */
     public static int getWeekOfMonth(Date d) {
@@ -758,9 +663,7 @@ public class DateTimeUtil {
 
     /**
      * 返回一个时间的周的整数，是这个年份的第几周
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 周
      */
     public static int getWeekOfYear(Date d) {
@@ -774,9 +677,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间所对应的在一天中的小时数的整数，如当前(Date now)是下午3点，返回为15
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 小时
      */
     public static int getHoursOfDay(Date d) {
@@ -791,9 +692,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间所对应的在一天中的小时数的整数(采用12小时制)，如当前(Date now)是下午3点，返回为3
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 小时
      */
     public static int getHoursOfDay12(Date d) {
@@ -808,9 +707,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间所对应的分钟数中的整数，如now是15点14分，则返回14
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 分钟
      */
     public static int getMinutesOfHour(Date d) {
@@ -826,9 +723,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间所对应的秒数中的整数，如now是15点14分34秒，则返回34
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 秒
      */
     public static int getSecondsOfMinute(Date d) {
@@ -844,9 +739,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间所对应的毫秒数中的整数，如now是15点14分34秒470毫秒，则返回470
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 毫秒
      */
     public static int getMillisecondsOfSecond(Date d) {
@@ -862,9 +755,7 @@ public class DateTimeUtil {
 
     /**
      * 返回该时间相对于1970年1月1日开始计算的对应的毫秒数
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 毫秒数
      */
     public static long getTime(Date d) {
@@ -876,11 +767,8 @@ public class DateTimeUtil {
 
     /**
      * 比较两个时间的先后顺序。 如果时间d1在d2之前，返回1，如果时间d1在d2之后，返回-1，如果二者相等，返回0
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 如果时间d1在d2之前，返回1，如果时间d1在d2之后，返回-1，如果二者相等，返回0
      */
     public static int compareTwoDate(Date d1, Date d2) {
@@ -903,11 +791,8 @@ public class DateTimeUtil {
 
     /**
      * 返回两个日期之间的毫秒数的差距
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 二者至1970年1.1后的毫秒数的差值
      */
     public static long getMillisecondsOfTwoDate(Date d1, Date d2) {
@@ -921,11 +806,8 @@ public class DateTimeUtil {
 
     /**
      * 获得两个日期之间相差的秒数
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 两日期之间相差的秒数
      */
     public static double getSecondsOfTwoDate(Date d1, Date d2) {
@@ -939,11 +821,8 @@ public class DateTimeUtil {
 
     /**
      * 获得两个日期之间相差的分钟数
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 两日期之间相差的分钟数
      */
     public static double getMinutesOfTwoDate(Date d1, Date d2) {
@@ -956,11 +835,8 @@ public class DateTimeUtil {
 
     /**
      * 获得两个日期之间相差的小时数
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 两日期之间相差的小时数
      */
     public static double getHoursOfTwoDate(Date d1, Date d2) {
@@ -973,11 +849,8 @@ public class DateTimeUtil {
 
     /**
      * 获得两个日期之间相差的天数
-     *
-     * @param d1
-     *            日期对象
-     * @param d2
-     *            日期对象
+     * @param d1 日期对象
+     * @param d2 日期对象
      * @return 两日期之间相差的天数
      */
     public static double getDaysOfTwoDate(Date d1, Date d2) {
@@ -990,17 +863,13 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的时间值，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param times
-     *            时间值
-     * @param type
-     *            类型，Calendar.MILLISECOND，毫秒<BR>
-     *            Calendar.SECOND，秒<BR>
-     *            Calendar.MINUTE，分钟<BR>
-     *            Calendar.HOUR，小时<BR>
-     *            Calendar.DATE，日<BR>
+     * @param d     需要设定的日期对象
+     * @param times 时间值
+     * @param type  类型，Calendar.MILLISECOND，毫秒<BR>
+     *              Calendar.SECOND，秒<BR>
+     *              Calendar.MINUTE，分钟<BR>
+     *              Calendar.HOUR，小时<BR>
+     *              Calendar.DATE，日<BR>
      * @return 如果d为null，返回null
      */
     public static Date addTime(Date d, double times, int type) {
@@ -1052,11 +921,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的年份，可以为负，返回新的被加上了年份的日期对象，不影响参数日期对象值
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param years
-     *            年份
+     * @param d     需要设定的日期对象
+     * @param years 年份
      * @return 新日期对象
      */
     public static Date addYears(Date d, int years) {
@@ -1071,11 +937,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的月份，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param months
-     *            月份
+     * @param d      需要设定的日期对象
+     * @param months 月份
      * @return 新日期对象
      */
     public static Date addMonths(Date d, int months) {
@@ -1090,11 +953,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的天数，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param days
-     *            天数
+     * @param d    需要设定的日期对象
+     * @param days 天数
      * @return 新日期对象
      */
     public static Date addDays(Date d, int days) {
@@ -1109,11 +969,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的小时，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param hours
-     *            小时
+     * @param d     需要设定的日期对象
+     * @param hours 小时
      * @return 新日期对象
      */
     public static Date addHours(Date d, int hours) {
@@ -1128,11 +985,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的分钟，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param minutes
-     *            分钟
+     * @param d       需要设定的日期对象
+     * @param minutes 分钟
      * @return 新日期对象
      */
     public static Date addMinutes(Date d, int minutes) {
@@ -1147,11 +1001,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的秒数，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param seconds
-     *            秒
+     * @param d       需要设定的日期对象
+     * @param seconds 秒
      * @return 新日期对象
      */
     public static Date addSeconds(Date d, int seconds) {
@@ -1166,11 +1017,8 @@ public class DateTimeUtil {
 
     /**
      * 把给定的时间加上指定的毫秒数，可以为负
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param milliseconds
-     *            毫秒
+     * @param d            需要设定的日期对象
+     * @param milliseconds 毫秒
      * @return 新日期对象
      */
     public static Date addMilliseconds(Date d, int milliseconds) {
@@ -1185,11 +1033,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的年份是新的给定的年份
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param year
-     *            新的年份
+     * @param d    需要设定的日期对象
+     * @param year 新的年份
      * @return 新日期对象
      */
     public static Date setYearOfDate(Date d, int year) {
@@ -1204,11 +1049,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的月份是新的给定的月份
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param month
-     *            新的月份
+     * @param d     需要设定的日期对象
+     * @param month 新的月份
      * @return 新日期对象
      */
     public static Date setMonthOfDate(Date d, int month) {
@@ -1223,11 +1065,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的天是新的给定的天
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param day
-     *            新的天
+     * @param d   需要设定的日期对象
+     * @param day 新的天
      * @return 新日期对象
      */
     public static Date setDayOfDate(Date d, int day) {
@@ -1242,11 +1081,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的小时是新的给定的小时
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param hour
-     *            新的小时数
+     * @param d    需要设定的日期对象
+     * @param hour 新的小时数
      * @return 新日期对象
      */
     public static Date setHourOfDate(Date d, int hour) {
@@ -1261,11 +1097,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的分钟是新的给定的分钟数
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param minute
-     *            新的分钟数
+     * @param d      需要设定的日期对象
+     * @param minute 新的分钟数
      * @return 新日期对象
      */
     public static Date setMinuteOfDate(Date d, int minute) {
@@ -1280,11 +1113,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的秒数是新的给定的分钟数
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param second
-     *            新的秒数
+     * @param d      需要设定的日期对象
+     * @param second 新的秒数
      * @return 新日期对象
      */
     public static Date setSecondOfDate(Date d, int second) {
@@ -1299,11 +1129,8 @@ public class DateTimeUtil {
 
     /**
      * 设置一个日期对象的毫秒数是新的给定的分钟数
-     *
-     * @param d
-     *            需要设定的日期对象
-     * @param millisecond
-     *            新的毫秒数
+     * @param d           需要设定的日期对象
+     * @param millisecond 新的毫秒数
      * @return 新日期对象
      */
     public static Date setMillisecondOfDate(Date d, int millisecond) {
@@ -1318,9 +1145,7 @@ public class DateTimeUtil {
 
     /**
      * 返回指定日期的月份的天数量
-     *
-     * @param d
-     *            日期对象
+     * @param d 日期对象
      * @return 天数
      */
     public static int getDaysOfMonth(Date d) {
@@ -1331,11 +1156,8 @@ public class DateTimeUtil {
 
     /**
      * 返回指定日期的月份的天数量
-     *
-     * @param year
-     *            年
-     * @param month
-     *            月
+     * @param year  年
+     * @param month 月
      * @return 天数
      */
     public static int getDaysOfMonth(int year, int month) {
@@ -1359,7 +1181,6 @@ public class DateTimeUtil {
 
     /**
      * 返回系统时间，以日期对象形式返回
-     *
      * @return 系统时间
      */
     public static Date getSystemDate() {
@@ -1368,7 +1189,6 @@ public class DateTimeUtil {
 
     /**
      * 返回系统时间，以毫秒形式返回
-     *
      * @return 毫秒数
      */
     public static long getSystemTime() {
@@ -1377,9 +1197,7 @@ public class DateTimeUtil {
 
     /**
      * 返回24小时前的时间
-     *
-     * @param date
-     *            指定日期
+     * @param date 指定日期
      * @return 新日期对象
      */
     public static Date getLastDay(Date date) {
@@ -1390,9 +1208,7 @@ public class DateTimeUtil {
 
     /**
      * 返回24小时后的时间
-     *
-     * @param date
-     *            指定日期
+     * @param date 指定日期
      * @return 新日期对象
      */
     public static Date getTomorrow(Date date) {
@@ -1403,7 +1219,6 @@ public class DateTimeUtil {
 
     /**
      * 取得30天前的这个时间
-     *
      * @return 新日期对象
      */
     public static Date getDayLastMonth() {
@@ -1414,7 +1229,6 @@ public class DateTimeUtil {
 
     /**
      * 取得30天后的这个时间
-     *
      * @return 新日期对象
      */
     public static Date getDayNextMonth() {
@@ -1425,11 +1239,8 @@ public class DateTimeUtil {
 
     /**
      * 计算两个时间见得月份差，可为负数
-     *
-     * @param sDate
-     *            开始时间
-     * @param eDate
-     *            结束时间
+     * @param sDate 开始时间
+     * @param eDate 结束时间
      * @return 月份差
      */
     public static int getMonthCount(Date sDate, Date eDate) {
@@ -1441,11 +1252,8 @@ public class DateTimeUtil {
 
     /**
      * 计算两个时间见得年份差，可为负数
-     *
-     * @param sDate
-     *            开始时间
-     * @param eDate
-     *            结束时间
+     * @param sDate 开始时间
+     * @param eDate 结束时间
      * @return 年份差
      */
     public static int getYearCount(Date sDate, Date eDate) {
@@ -1456,9 +1264,7 @@ public class DateTimeUtil {
 
     /**
      * 取得下个月的这天，比如2月1日可取得3月1日，此方法有很大局限性，不能用于月末的天数
-     *
-     * @param date
-     *            指定日期
+     * @param date 指定日期
      * @return 新日期对象
      */
     public static Date getDayNextMonth(Date date) {
@@ -1486,7 +1292,6 @@ public class DateTimeUtil {
 
     /**
      * 获取当月开始时0点0分0秒
-     *
      * @return 日期对象
      */
     public static Date getCurrentMouthStart() {
@@ -1500,9 +1305,7 @@ public class DateTimeUtil {
 
     /**
      * 返回下月的这天
-     *
-     * @param date
-     *            指定日期
+     * @param date 指定日期
      * @return 日期对象
      */
     public static Date getDateNextMonth(Date date) {
@@ -1514,9 +1317,7 @@ public class DateTimeUtil {
 
     /**
      * 默认方法，计算指定时间与当前时间之间的相差的天数
-     *
-     * @param date
-     *            指定日期
+     * @param date 指定日期
      * @return 所差天数
      */
     public static Integer daysDifference(Date date) {
@@ -1527,9 +1328,7 @@ public class DateTimeUtil {
 
     /**
      * 获取指定日期的 0点0分0秒
-     *
-     * @param d
-     *            指定日期
+     * @param d 指定日期
      * @return 指定日期的0点0分0秒
      */
     private static long get24HourMill(Date d) {
@@ -1544,9 +1343,7 @@ public class DateTimeUtil {
 
     /**
      * 获取指定日期的 0点0分0秒
-     *
-     * @param d
-     *            指定日期
+     * @param d 指定日期
      * @return 指定日期的0点0分0秒
      */
     public static Date getZeroDate(Date d) {
@@ -1564,8 +1361,8 @@ public class DateTimeUtil {
 
     /**
      * 获取指定日期的 23点59分59秒
-     *
-     *            指定日期
+     * <p>
+     * 指定日期
      * @return 指定日期的0点0分0秒
      */
     public static Date getLastDate(Date date) {
@@ -1583,15 +1380,12 @@ public class DateTimeUtil {
 
     /**
      * 不确定表示方式的时间差函数
-     *
-     * @param startDate
-     *            指定时间
-     * @param endDate
-     *            结束时间
+     * @param startDate 指定时间
+     * @param endDate   结束时间
      * @return 时间差指定格式字符串
      */
     private static String otherDiff(Date startDate, Date endDate) {
-        String[] type = new String[] { "年", "个月", "星期", "天", "小时", "分钟", "秒", "秒" };
+        String[] type = new String[]{"年", "个月", "星期", "天", "小时", "分钟", "秒", "秒"};
         Object[] obj = timeDifference(startDate, endDate);
         String value = "1秒前";
         for (int i = 0; i < obj.length; i++) {
@@ -1605,11 +1399,8 @@ public class DateTimeUtil {
 
     /**
      * 动态表示方式的时间差函数
-     *
-     * @param startDate
-     *            指定时间
-     * @param endDate
-     *            结束时间
+     * @param startDate 指定时间
+     * @param endDate   结束时间
      * @return 时间差指定格式字符串
      */
     public static String dynDiff(Date startDate, Date endDate) {
@@ -1627,11 +1418,8 @@ public class DateTimeUtil {
 
     /**
      * 资源表示方式的时间差函数
-     *
-     * @param startDate
-     *            指定时间
-     * @param endDate
-     *            结束时间
+     * @param startDate 指定时间
+     * @param endDate   结束时间
      * @return 时间差指定格式字符串
      */
     public static String resDiff(Date startDate, Date endDate) {
@@ -1647,16 +1435,13 @@ public class DateTimeUtil {
 
     /**
      * 时间差
-     *
-     * @param startTime
-     *            开始时间
-     * @param endTime
-     *            结束时间
+     * @param startTime 开始时间
+     * @param endTime   结束时间
      * @return 返回时间差数组：(年，月，周，天，时，分，秒，毫秒)
      */
     private static Object[] timeDifference(Date startTime, Date endTime) {
         if (startTime == null || endTime == null) {
-            return new Object[] { 0, 0, 0, 0, 0, 0, 0 };
+            return new Object[]{0, 0, 0, 0, 0, 0, 0};
         } else {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
@@ -1685,8 +1470,8 @@ public class DateTimeUtil {
             long minute_differ = second_differ / 60;
             second_differ = second_differ - minute_differ * 60;
 
-            return new Object[] { year_differ, month_differ, week_differ, day_differ, hour_differ, minute_differ,
-                    second_differ, ll_differ };
+            return new Object[]{year_differ, month_differ, week_differ, day_differ, hour_differ, minute_differ,
+                    second_differ, ll_differ};
         }
     }
 

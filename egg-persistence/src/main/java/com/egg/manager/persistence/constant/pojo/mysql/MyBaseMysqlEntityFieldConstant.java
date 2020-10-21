@@ -4,11 +4,11 @@ import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
 
 import java.util.Date;
 
+
 /**
- * @Description: mysql
- * @ClassName: MyBaseMysqlEntityFieldConstant
- * @Author: zhoucj
- * @Date: 2020/9/18 16:02
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public interface MyBaseMysqlEntityFieldConstant {
     /**

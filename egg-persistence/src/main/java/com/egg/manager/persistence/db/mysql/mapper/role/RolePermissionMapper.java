@@ -8,19 +8,16 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 角色权限 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
 
     /**
      * 批量新增 角色-权限 关联
-     *
      * @param permissionList
      * @return
      */
@@ -28,7 +25,6 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
     /**
      * 根据角色id 修改指定权限 的可用状态
-     *
      * @param roleId
      * @param permissionIdList
      * @param stateVal

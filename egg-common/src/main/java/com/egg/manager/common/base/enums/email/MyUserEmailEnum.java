@@ -2,18 +2,22 @@ package com.egg.manager.common.base.enums.email;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum MyUserEmailEnum {
-    Default(1,"default","MarsWilldo验证码通知","您刚才在MarsWilldo注册的验证码为 %s ,请勿将验证码交给他人，验证码半小时内有效!","",30, TimeUnit.HOURS)
-    ;
-    private Integer value ;
-    private String type ;
-    private String title ;
-    private String content ;
-    private String params ;
-    private Integer limitTime ;
-    private TimeUnit timeUnit ;
+    Default(1, "default", "MarsWilldo验证码通知", "您刚才在MarsWilldo注册的验证码为 %s ,请勿将验证码交给他人，验证码半小时内有效!", "", 30, TimeUnit.HOURS);
+    private Integer value;
+    private String type;
+    private String title;
+    private String content;
+    private String params;
+    private Integer limitTime;
+    private TimeUnit timeUnit;
 
-    MyUserEmailEnum(Integer value, String type, String title, String content, String params,Integer limitTime,TimeUnit timeUnit) {
+    MyUserEmailEnum(Integer value, String type, String title, String content, String params, Integer limitTime, TimeUnit timeUnit) {
         this.value = value;
         this.type = type;
         this.title = title;

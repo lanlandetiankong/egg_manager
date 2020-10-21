@@ -1,21 +1,26 @@
 package com.egg.manager.common.base.enums.role;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum DefineRoleTypeEnum {
-    SimpleRole(1,"普通角色","普通角色",true),
-    ManagerRole(100,"管理角色","管理角色",true),
+    SimpleRole(1, "普通角色", "普通角色", true),
+    ManagerRole(100, "管理角色", "管理角色", true),
     ;
 
     DefineRoleTypeEnum(Integer value, String name, String label, boolean isNeedFilter) {
         this.value = value;
         this.name = name;
         this.label = label;
-        this.isNeedFilter = isNeedFilter ;
+        this.isNeedFilter = isNeedFilter;
     }
 
-    private Integer value ;
-    private String name ;
-    private boolean isNeedFilter ;
-    private String label ;
+    private Integer value;
+    private String name;
+    private boolean isNeedFilter;
+    private String label;
 
     public Integer getValue() {
         return value;
@@ -40,6 +45,7 @@ public enum DefineRoleTypeEnum {
     public void setLabel(String label) {
         this.label = label;
     }
+
     public boolean getIsNeedFilter() {
         return isNeedFilter;
     }
@@ -49,18 +55,17 @@ public enum DefineRoleTypeEnum {
     }
 
 
-
-    public static DefineRoleTypeEnum doGetEnumByValue(Integer value){
-        if(value == null){
-            return null ;
+    public static DefineRoleTypeEnum doGetEnumByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
         DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
-        for(DefineRoleTypeEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj ;
+        for (DefineRoleTypeEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj;
             }
         }
-        return null ;
+        return null;
     }
 
 

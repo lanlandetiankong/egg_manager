@@ -5,7 +5,9 @@ import com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.Sm
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * MongoDb-FormDefinitionMO 表单定义-MService
+ * @author zhoucj
+ * @description:表单定义
+ * @date 2020/10/20
  */
 @Slf4j
 @Service(interfaceClass = SmartFormRecordFieldMgoService.class)

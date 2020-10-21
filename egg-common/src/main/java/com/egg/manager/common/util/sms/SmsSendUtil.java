@@ -14,8 +14,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public class SmsSendUtil {
@@ -40,7 +43,7 @@ public class SmsSendUtil {
 
     private static final String REPORT = "true";
 
-    private static final String SIGNATURE ="【*****】";
+    private static final String SIGNATURE = "【*****】";
 
     /**
      * 调用第三方平台，下发短信
@@ -50,7 +53,7 @@ public class SmsSendUtil {
      */
     public static SmsSendResponse sendMessage(String receiveUser, String message) throws BusinessException {
         String str = SIGNATURE + message;
-        SmsSendRequest smsSingleRequest = new SmsSendRequest(ACCOUNT, PASSWORD, str, receiveUser,REPORT);
+        SmsSendRequest smsSingleRequest = new SmsSendRequest(ACCOUNT, PASSWORD, str, receiveUser, REPORT);
         String requestJson = JSON.toJSONString(smsSingleRequest);
         log.info("before request string is: " + requestJson);
         String response = sendSmsByPost(URL, requestJson);
@@ -61,9 +64,6 @@ public class SmsSendUtil {
     }
 
     /**
-     *
-     * @author tianyh
-     * @Description
      * @param path
      * @param postContent
      * @return String
@@ -84,7 +84,7 @@ public class SmsSendUtil {
             httpURLConnection.setRequestProperty("Content-Type", "application/json");
 
             httpURLConnection.connect();
-            OutputStream os=httpURLConnection.getOutputStream();
+            OutputStream os = httpURLConnection.getOutputStream();
             os.write(postContent.getBytes(CHARSET));
             os.flush();
 
@@ -109,7 +109,7 @@ public class SmsSendUtil {
         }
     }
 
-    public enum SMSType{
+    public enum SMSType {
         AUTH,
 
         REG,
@@ -121,13 +121,12 @@ public class SmsSendUtil {
 
         /**
          * toString
-         *
          * @return String
          */
         @Override
-        public String toString(){
+        public String toString() {
             String sMSType = "";
-            switch (this){
+            switch (this) {
                 case AUTH:
                     sMSType = "登陆验证";
                     break;
@@ -146,9 +145,9 @@ public class SmsSendUtil {
             return sMSType;
         }
 
-        public static Integer getType(String str){
+        public static Integer getType(String str) {
             Integer sMSType;
-            switch (str){
+            switch (str) {
                 case "AUTH":
                     sMSType = 1;
                     break;
@@ -167,10 +166,10 @@ public class SmsSendUtil {
             return sMSType;
         }
 
-        public static SMSType getSMSType(String str){
+        public static SMSType getSMSType(String str) {
             SMSType sMSType = null;
-            for (SMSType ut : SMSType.values()){
-                if (ut.name().equals(str)){
+            for (SMSType ut : SMSType.values()) {
+                if (ut.name().equals(str)) {
                     sMSType = ut;
                     break;
                 }
@@ -179,15 +178,15 @@ public class SmsSendUtil {
         }
     }
 
-    public static boolean isCaptchaPassTime(Long sendTime){
+    public static boolean isCaptchaPassTime(Long sendTime) {
         long now = System.currentTimeMillis();
-        if(now - sendTime > Constant.PASS_TIME){
-           return true;
+        if (now - sendTime > Constant.PASS_TIME) {
+            return true;
         }
         return false;
     }
 
-    public static void main(String[] args) throws BusinessException{
-         sendMessage("13888888888", "我试试请求，看一看结果");
+    public static void main(String[] args) throws BusinessException {
+        sendMessage("13888888888", "我试试请求，看一看结果");
     }
 }

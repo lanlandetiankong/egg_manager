@@ -13,10 +13,9 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 
 /**
- * @Description: MySql文档生成
- * @ClassName: MySqlDocsGenerator
- * @Author: zhoucj
- * @Date: 2020/8/5 10:20
+ * @author zhoucj
+ * @description: MySql文档生成
+ * @date 2020/10/21
  */
 public class MySqlDocsGenerator {
     public static void main(String[] args) {

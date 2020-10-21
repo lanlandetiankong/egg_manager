@@ -6,7 +6,9 @@ import com.egg.manager.persistence.db.mongo.repositoryimpl.MyBaseMongoRepository
 import org.springframework.stereotype.Repository;
 
 /**
- * MongoDb-FormTypeDefinitionMgo 表单类型定义-dao
+ * @author zhoucj
+ * @description: 表单类型定义-dao
+ * @date 2020/10/21
  */
 @Repository
 public class SmartFormTypeDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormTypeDefinitionMgo, String> implements SmartFormTypeDefinitionRepository {

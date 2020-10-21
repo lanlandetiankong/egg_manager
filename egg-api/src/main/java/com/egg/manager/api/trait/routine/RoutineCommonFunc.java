@@ -8,8 +8,6 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.RowBounds;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
@@ -22,7 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
- * 如果有不可用于dubbo的，迁移到此处
+ * @author zhoucj
+ * @description: 如果有不可用于dubbo的，迁移到此处
+ * @date 2020/10/21
  */
 @Component
 public class RoutineCommonFunc {
@@ -32,38 +32,32 @@ public class RoutineCommonFunc {
      * @return
      */
     public <T> Page<T> parsePaginationToRowBounds(AntdvPaginationBean<T> paginationBean) {
-        if(paginationBean != null){
+        if (paginationBean != null) {
             Integer current = paginationBean.getCurrent();
             Integer pageSize = paginationBean.getPageSize();
             current = current != null ? current : 1;
             pageSize = pageSize != null ? pageSize : 0;
-            int offset = (current - 1) * pageSize ;
-            return new Page<>(offset,pageSize);
-        }   else {
-            return new Page<T>() ;
+            int offset = (current - 1) * pageSize;
+            return new Page<>(offset, pageSize);
+        } else {
+            return new Page<T>();
         }
     }
 
 
-
     /**
-     *  将取得请求的header转化为 RequestHeaderBean
+     * 将取得请求的header转化为 RequestHeaderBean
      * @param request
      */
     public RequestHeaderBean gainRequestHeaderBeanByRequest(HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
-        JSONObject jsonObject = new JSONObject() ;
-        if(headerNames.hasMoreElements()){
-            String headerName  = headerNames.nextElement() ;
-            jsonObject.put(headerName,request.getHeader(headerName));
+        JSONObject jsonObject = new JSONObject();
+        if (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            jsonObject.put(headerName, request.getHeader(headerName));
         }
         return RequestHeaderBean.jsonObjectToBean(jsonObject);
     }
-
-
-
-
-
 
 
     /**
@@ -71,7 +65,7 @@ public class RoutineCommonFunc {
      * @param request
      * @return
      */
-    public List<String> gainMvcMappingUrl(HttpServletRequest request){
+    public List<String> gainMvcMappingUrl(HttpServletRequest request) {
         //存储所有url集合
         List<String> uList = new ArrayList<String>();
         //获取上下文对象
@@ -91,7 +85,7 @@ public class RoutineCommonFunc {
 
 
     /**
-     *  将取得请求的token转化为 UserAccountToken
+     * 将取得请求的token转化为 UserAccountToken
      * @param request
      * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
      * @return UserAccountToken
@@ -99,16 +93,16 @@ public class RoutineCommonFunc {
      * @throws IllegalAccessException
      */
     public UserAccountToken gainUserAccountTokenBeanByRequest(HttpServletRequest request, boolean isRequired) throws MyAuthenticationExpiredException {
-        UserAccountToken accountToken = null ;
+        UserAccountToken accountToken = null;
         String token = request.getHeader("token");
-        if(StringUtils.isNotBlank(token)){
+        if (StringUtils.isNotBlank(token)) {
             //如果能取得 token
-            accountToken = JSON.parseObject(token,UserAccountToken.class);
+            accountToken = JSON.parseObject(token, UserAccountToken.class);
         }
-        if(isRequired && accountToken == null){
+        if (isRequired && accountToken == null) {
             //强制取得用户身份认证，不存在时抛出异常
-            throw new MyAuthenticationExpiredException() ;
+            throw new MyAuthenticationExpiredException();
         }
-        return accountToken ;
+        return accountToken;
     }
 }

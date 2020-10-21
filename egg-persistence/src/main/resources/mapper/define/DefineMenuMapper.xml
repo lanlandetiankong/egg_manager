@@ -43,7 +43,7 @@
         <result column="update_time" property="updateTime"/>
         <result column="create_user_id" property="createUserId"/>
         <result column="last_modifyer_id" property="lastModifyerId"/>
-        <association column="parent_id"  property="parentMenuDto"
+        <association column="parent_id" property="parentMenuDto"
                      columnPrefix="parent_"
                      javaType="com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto">
             <id column="fid" property="fid"/>
@@ -63,8 +63,10 @@
             <result column="create_user_id" property="createUserId"/>
             <result column="last_modifyer_id" property="lastModifyerId"/>
         </association>
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -125,7 +127,7 @@
     <select id="getMenusFilterChildrens" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="dm" />
+            <property name="base_alias_name" value="dm"/>
         </include>
         from em_define_menu dm
         left join em_define_menu dmc
@@ -142,29 +144,32 @@
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="dm" />
+            <property name="base_alias_name" value="dm"/>
         </include>
-        , <include refid="Base_Alias_TableColumn_List">
-        <property name="base_alias_name" value="par_dm" />
-        <property name="base_alias_col_prefix" value="parent_" />
-    </include>
+        ,
+        <include refid="Base_Alias_TableColumn_List">
+            <property name="base_alias_name" value="par_dm"/>
+            <property name="base_alias_col_prefix" value="parent_"/>
+        </include>
         FROM em_define_menu dm
         LEFT JOIN em_define_menu par_dm
         on dm.parent_id = par_dm.fid
         <where>
-            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
-                <property name="table_name_alias" value="dm" />
+            <include
+                    refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="dm"/>
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
-            <property name="table_name_alias" value="dm" />
+        <include
+                refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="dm"/>
         </include>
     </select>
 
     <select id="findAllMenuByRoleId" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Alias_Table_List" >
-            <property name="base_alias_name" value="edm" />
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
         </include>
         FROM em_define_menu edm
         left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
@@ -176,26 +181,26 @@
 
     <select id="getUserGrantedMenusByAccountId" resultMap="BaseResultMap">
         SELECT DISTINCT
-            <include refid="Base_Alias_Table_List">
-                <property name="base_alias_name" value="edm" />
-            </include>
-            FROM
-                em_define_menu edm
-            LEFT JOIN em_role_menu erm ON edm.fid = erm.define_menu_id
-            LEFT JOIN em_user_role eur ON erm.define_role_id = eur.define_role_id
-            LEFT JOIN em_user_account eua ON eur.user_account_id = eua.fid
-            WHERE
-                edm.state = 1
-            AND erm.state = 1
-            AND eur.state = 1
-            AND eua.fid = #{userAccountId}
-            order by level,order_num,create_time
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
+        </include>
+        FROM
+        em_define_menu edm
+        LEFT JOIN em_role_menu erm ON edm.fid = erm.define_menu_id
+        LEFT JOIN em_user_role eur ON erm.define_role_id = eur.define_role_id
+        LEFT JOIN em_user_account eua ON eur.user_account_id = eua.fid
+        WHERE
+        edm.state = 1
+        AND erm.state = 1
+        AND eur.state = 1
+        AND eua.fid = #{userAccountId}
+        order by level,order_num,create_time
     </select>
 
     <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Alias_Table_List" >
-            <property name="base_alias_name" value="edm" />
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
         </include>
         FROM em_define_menu edm
         left JOIN em_role_menu erm on edm.fid = erm.define_menu_id

@@ -18,12 +18,9 @@ import javax.jms.Queue;
 import javax.jms.Topic;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/18
- * \* Time: 14:19
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-测试消息")

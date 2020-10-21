@@ -12,18 +12,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 权限表 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * [分页搜索查询] - 权限定义
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -33,7 +30,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -42,7 +38,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 批量 启用
-     *
      * @param ensureIds
      * @param loginUser
      * @return
@@ -51,7 +46,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 删除指定角色id下的所有权限
-     *
      * @param roleId
      * @param loginUser
      * @return
@@ -60,7 +54,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 取得角色拥有的所有权限集合
-     *
      * @param roleId
      * @return
      */
@@ -68,7 +61,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 取得角色拥有的所有权限id集合
-     *
      * @param roleId
      * @param filterEnable 是否只查询状态为可用的
      * @return
@@ -78,7 +70,6 @@ public interface DefinePermissionMapper extends BaseMapper<DefinePermission> {
 
     /**
      * 查询 用户拥有的所有权限
-     *
      * @param userAccountId
      * @return
      */

@@ -11,19 +11,16 @@ import com.egg.manager.persistence.pojo.mysql.vo.role.RolePermissionVo;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public interface RolePermissionService extends IService<RolePermission>,MyBaseMysqlService<RolePermission,RolePermissionMapper,RolePermissionVo> {
+public interface RolePermissionService extends IService<RolePermission>, MyBaseMysqlService<RolePermission, RolePermissionMapper, RolePermissionVo> {
 
     /**
      * 查询 角色列表 拥有的所有权限
      * @param defineRoles
      * @return
      */
-    List<DefinePermission> dealQueryPageByEntitys(List<DefineRole> defineRoles) ;
+    List<DefinePermission> dealQueryPageByEntitys(List<DefineRole> defineRoles);
 }

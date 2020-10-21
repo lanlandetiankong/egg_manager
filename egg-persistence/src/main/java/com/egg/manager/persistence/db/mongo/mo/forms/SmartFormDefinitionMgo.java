@@ -8,14 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 22:35
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-
 @Data
 @Builder
 @AllArgsConstructor

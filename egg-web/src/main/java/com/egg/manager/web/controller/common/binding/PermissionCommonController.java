@@ -20,12 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/4
- * \* Time: 19:08
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-通用接口->权限")
@@ -33,10 +30,10 @@ import java.util.List;
 @RequestMapping("/commonApi/permission")
 public class PermissionCommonController extends BaseController {
 
-    @ApiOperation(value = "查询枚举->权限类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public MyCommonResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainEnumResult( PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
+        MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -47,12 +44,12 @@ public class PermissionCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询枚举->角色类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->角色类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -66,13 +63,13 @@ public class PermissionCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "查询枚举->权限Code前缀类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限Code前缀类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
         MyCommonResult result = MyCommonResult.gainEnumResult(PermissionCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -91,7 +88,7 @@ public class PermissionCommonController extends BaseController {
             result.setEnumList(beanList);
             result.setEnumDefaultCheckList(defaultCheckList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, PermissionCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }

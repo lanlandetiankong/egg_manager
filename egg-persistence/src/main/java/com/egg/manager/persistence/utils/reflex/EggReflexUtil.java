@@ -7,17 +7,16 @@ import com.egg.manager.persistence.utils.reflex.config.EggPojoReflexFieldConfig;
 import java.lang.reflect.Method;
 
 /**
- * @Description:
- * @ClassName: EggReflexUtil
- * @Author: zhoucj
- * @Date: 2020/9/18 15:59
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public class EggReflexUtil {
 
 
     /**
      * 根据字段名设置pojo对应字段的值
-     *
      * @param obj
      * @param fieldConfig 字段相关配置
      * @param value
@@ -28,7 +27,6 @@ public class EggReflexUtil {
 
     /**
      * 根据字段名设置pojo对应字段的值
-     *
      * @param t
      * @param fieldName
      * @param valClz
@@ -47,7 +45,6 @@ public class EggReflexUtil {
 
     /**
      * 根据字段名取得pojo对应字段的值
-     *
      * @param obj
      * @param fieldConfig
      */
@@ -57,7 +54,6 @@ public class EggReflexUtil {
 
     /**
      * 根据字段名取得pojo对应字段的值
-     *
      * @param obj
      * @param fieldName
      * @param valClz    返回值class
@@ -78,7 +74,6 @@ public class EggReflexUtil {
 
     /**
      * (请确保pojo都能有无参构造)
-     *
      * @param clazz
      * @param params
      * @param <T>

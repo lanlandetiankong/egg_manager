@@ -2,14 +2,12 @@ package com.egg.manager.common.base.constant.redis;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 16:30
- * \* Description:
- * \
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2019/10/5
  */
-public interface RedisShiroKeyConstant  {
+public interface RedisShiroKeyConstant {
     String SHIRO_CACHE_PREFIX = "shiro:cache";
     String SHIRO_CACHE_TOKEN = SHIRO_CACHE_PREFIX + ":token";
     String SHIRO_CACHE_ACCOUNT = SHIRO_CACHE_PREFIX + ":account";
@@ -17,6 +15,6 @@ public interface RedisShiroKeyConstant  {
     /**
      * 过期时间
      */
-    Long SHIRO_CACHE_TOKEN_TTL = 30*60*1000L ;
+    Long SHIRO_CACHE_TOKEN_TTL = 30 * 60 * 1000L;
 
 }

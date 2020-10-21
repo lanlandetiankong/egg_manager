@@ -11,18 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/19
- * \* Time: 16:10
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public interface ControllerAspectService {
 
     /**
      * 取得 请求的参数
-     *
      * @param joinPoint
      * @return JSONObject
      */
@@ -30,7 +26,6 @@ public interface ControllerAspectService {
 
     /**
      * 设置一些值到 PcWebQueryLogMgo
-     *
      * @param pcWebQueryLogMgo
      * @param joinPoint
      * @param request
@@ -39,7 +34,6 @@ public interface ControllerAspectService {
 
     /**
      * 设置一些值到 PcWebOperationLogMgo
-     *
      * @param pcWebOperationLogMgo
      * @param joinPoint
      * @param request
@@ -49,7 +43,6 @@ public interface ControllerAspectService {
 
     /**
      * 设置一些值到 PcWebLoginLogMgo
-     *
      * @param pcWebLoginLogMgo
      * @param joinPoint
      * @param request
@@ -59,7 +52,6 @@ public interface ControllerAspectService {
 
     /**
      * 取得当前调用的方法
-     *
      * @param signature
      * @return
      */
@@ -68,7 +60,6 @@ public interface ControllerAspectService {
 
     /**
      * 取得当前调用的方法
-     *
      * @param joinPoint
      * @return
      */

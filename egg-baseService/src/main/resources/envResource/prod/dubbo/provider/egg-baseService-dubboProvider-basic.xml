@@ -8,46 +8,63 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.announcement                                                              -->
-    <dubbo:service protocol="dubbo" ref="announcementDraftService" interface="com.egg.manager.api.services.basic.announcement.AnnouncementDraftService"/>
-    <dubbo:service protocol="dubbo" ref="announcementService" interface="com.egg.manager.api.services.basic.announcement.AnnouncementService"/>
-    <dubbo:service protocol="dubbo" ref="announcementTagService" interface="com.egg.manager.api.services.basic.announcement.AnnouncementTagService"/>
+    <dubbo:service protocol="dubbo" ref="announcementDraftService"
+                   interface="com.egg.manager.api.services.basic.announcement.AnnouncementDraftService"/>
+    <dubbo:service protocol="dubbo" ref="announcementService"
+                   interface="com.egg.manager.api.services.basic.announcement.AnnouncementService"/>
+    <dubbo:service protocol="dubbo" ref="announcementTagService"
+                   interface="com.egg.manager.api.services.basic.announcement.AnnouncementTagService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.announcement                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.define                                                              -->
-    <dubbo:service protocol="dubbo" ref="defineDepartmentService" interface="com.egg.manager.api.services.basic.define.DefineDepartmentService"/>
-    <dubbo:service protocol="dubbo" ref="defineGroupService" interface="com.egg.manager.api.services.basic.define.DefineGroupService"/>
-    <dubbo:service protocol="dubbo" ref="defineJobService" interface="com.egg.manager.api.services.basic.define.DefineJobService"/>
-    <dubbo:service protocol="dubbo" ref="definePermissionService" interface="com.egg.manager.api.services.basic.define.DefinePermissionService"/>
-    <dubbo:service protocol="dubbo" ref="defineRoleService" interface="com.egg.manager.api.services.basic.define.DefineRoleService"/>
+    <dubbo:service protocol="dubbo" ref="defineDepartmentService"
+                   interface="com.egg.manager.api.services.basic.define.DefineDepartmentService"/>
+    <dubbo:service protocol="dubbo" ref="defineGroupService"
+                   interface="com.egg.manager.api.services.basic.define.DefineGroupService"/>
+    <dubbo:service protocol="dubbo" ref="defineJobService"
+                   interface="com.egg.manager.api.services.basic.define.DefineJobService"/>
+    <dubbo:service protocol="dubbo" ref="definePermissionService"
+                   interface="com.egg.manager.api.services.basic.define.DefinePermissionService"/>
+    <dubbo:service protocol="dubbo" ref="defineRoleService"
+                   interface="com.egg.manager.api.services.basic.define.DefineRoleService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.define                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.hello                                                              -->
-    <dubbo:service protocol="dubbo" ref="helloService" interface="com.egg.manager.api.services.basic.hello.HelloService"/>
+    <dubbo:service protocol="dubbo" ref="helloService"
+                   interface="com.egg.manager.api.services.basic.hello.HelloService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.hello                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.module                                                              -->
-    <dubbo:service protocol="dubbo" ref="defineMenuService" interface="com.egg.manager.api.services.basic.module.DefineMenuService"/>
-    <dubbo:service protocol="dubbo" ref="defineModuleService" interface="com.egg.manager.api.services.basic.module.DefineModuleService"/>
+    <dubbo:service protocol="dubbo" ref="defineMenuService"
+                   interface="com.egg.manager.api.services.basic.module.DefineMenuService"/>
+    <dubbo:service protocol="dubbo" ref="defineModuleService"
+                   interface="com.egg.manager.api.services.basic.module.DefineModuleService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.module                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
-    <dubbo:service protocol="dubbo" ref="defineTenantService" interface="com.egg.manager.api.services.basic.organization.DefineTenantService"/>
+    <dubbo:service protocol="dubbo" ref="defineTenantService"
+                   interface="com.egg.manager.api.services.basic.organization.DefineTenantService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.role                                                              -->
-    <dubbo:service protocol="dubbo" ref="roleMenuService" interface="com.egg.manager.api.services.basic.role.RoleMenuService"/>
-    <dubbo:service protocol="dubbo" ref="rolePermissionService" interface="com.egg.manager.api.services.basic.role.RolePermissionService"/>
+    <dubbo:service protocol="dubbo" ref="roleMenuService"
+                   interface="com.egg.manager.api.services.basic.role.RoleMenuService"/>
+    <dubbo:service protocol="dubbo" ref="rolePermissionService"
+                   interface="com.egg.manager.api.services.basic.role.RolePermissionService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.role                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.user                                                              -->
-    <dubbo:service protocol="dubbo" ref="userAccountService" interface="com.egg.manager.api.services.basic.user.UserAccountService"/>
-    <dubbo:service protocol="dubbo" ref="userGroupService" interface="com.egg.manager.api.services.basic.user.UserGroupService"/>
-    <dubbo:service protocol="dubbo" ref="userJobService" interface="com.egg.manager.api.services.basic.user.UserJobService"/>
-    <dubbo:service protocol="dubbo" ref="userRoleService" interface="com.egg.manager.api.services.basic.user.UserRoleService"/>
-    <dubbo:service protocol="dubbo" ref="userTenantService" interface="com.egg.manager.api.services.basic.user.UserTenantService"/>
+    <dubbo:service protocol="dubbo" ref="userAccountService"
+                   interface="com.egg.manager.api.services.basic.user.UserAccountService"/>
+    <dubbo:service protocol="dubbo" ref="userGroupService"
+                   interface="com.egg.manager.api.services.basic.user.UserGroupService"/>
+    <dubbo:service protocol="dubbo" ref="userJobService"
+                   interface="com.egg.manager.api.services.basic.user.UserJobService"/>
+    <dubbo:service protocol="dubbo" ref="userRoleService"
+                   interface="com.egg.manager.api.services.basic.user.UserRoleService"/>
+    <dubbo:service protocol="dubbo" ref="userTenantService"
+                   interface="com.egg.manager.api.services.basic.user.UserTenantService"/>
     <!--                                    dir-end:com.com.egg.manager.baseservice.services.basic.serviceimpl.user                                                              -->
-
-
 
 
 </beans>

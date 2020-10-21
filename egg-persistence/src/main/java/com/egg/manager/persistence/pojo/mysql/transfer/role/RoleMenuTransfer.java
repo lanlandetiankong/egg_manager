@@ -11,11 +11,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("roleMenuTransfer")
 public class RoleMenuTransfer extends BaseMysqlTransfer {
 
     static RoleMenuMapstruct roleMenuMapstruct = RoleMenuMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo

@@ -11,18 +11,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 用户账号表 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * [通用查询] 根据用户id查询用户entity
-     *
      * @return
      */
     UserAccount commonSelectUserAccountById();
@@ -46,7 +43,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -55,7 +51,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * 批量 锁定用户
-     *
      * @param lockIds
      * @param lockState
      * @param loginUser
@@ -65,7 +60,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * 批量伪删除 指定用户的所有角色关联
-     *
      * @param userAccountId
      * @param loginUser
      * @return
@@ -74,7 +68,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
      * 批量伪删除 指定用户的所有职务关联
-     *
      * @param userAccountId
      * @param loginUser
      * @return

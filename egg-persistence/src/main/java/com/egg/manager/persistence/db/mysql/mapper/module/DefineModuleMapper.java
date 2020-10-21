@@ -12,19 +12,16 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 模块表 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface DefineModuleMapper extends BaseMapper<DefineModule> {
 
 
     /**
      * [分页搜索查询] - 模块定义
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -34,7 +31,6 @@ public interface DefineModuleMapper extends BaseMapper<DefineModule> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return

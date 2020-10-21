@@ -28,12 +28,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/12
- * \* Time: 18:49
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-图片上传接口")
@@ -44,13 +41,13 @@ public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传/图片->头像",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/图片->头像", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
         MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.UPLOAD_IMG);
         try {
             Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
-            Assert.isFalse(file.isEmpty(),BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
+            Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
             try {
                 byte[] fileBytes = file.getBytes();
@@ -79,12 +76,12 @@ public class ImgUploadController extends BaseController {
                         .filePrefix(uploadProps.getUrlPrefix() + File.separator)
                         .fileUri(fileUri)
                         .build();
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILERES_BEAN,fileResBean);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILERES_BEAN, fileResBean);
             } catch (IOException e) {
                 throw e;
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,ImgUploadFuncModuleConstant.Failure.UPLOAD_IMG);
+            this.dealCommonErrorCatch(log, result, e, ImgUploadFuncModuleConstant.Failure.UPLOAD_IMG);
         }
         return result;
     }

@@ -1,12 +1,9 @@
 package com.egg.manager.persistence.pojo.common.verification.igroup;
 
 /**
- * \* note: 更新form 验证分组
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:04
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 更新form 验证分组
+ * @date 2020/10/20
  */
 public interface VerifyGroupOfCreate {
 }

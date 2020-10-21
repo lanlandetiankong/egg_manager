@@ -12,18 +12,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
- * 用户-职务 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * [分页搜索查询] - 用户职务
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -33,7 +30,6 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -42,7 +38,6 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 取得用户拥有的所有职务id集合
-     *
      * @param userAccountId
      * @param filterEnable  是否只查询状态为可用的
      * @return
@@ -52,7 +47,6 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 批量新增 用户-职务 关联
-     *
      * @param jobList
      * @return
      */
@@ -60,7 +54,6 @@ public interface UserJobMapper extends BaseMapper<UserJob> {
 
     /**
      * 根据用户id 修改指定职务关联 的可用状态
-     *
      * @param userAccountId
      * @param jobIdList
      * @param stateVal

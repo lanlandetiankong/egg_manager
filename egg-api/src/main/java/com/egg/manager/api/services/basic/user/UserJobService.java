@@ -15,74 +15,71 @@ import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public interface UserJobService extends IService<UserJob>,MyBaseMysqlService<UserJob,UserJobMapper,UserJobVo> {
+public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<UserJob, UserJobMapper, UserJobVo> {
 
     /**
      * 分页查询 用户职务列表
-     * @param loginUser 当前登录用户
+     * @param loginUser              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJob> paginationBean,
-                                                  List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJob> paginationBean,
+                                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户职务 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser 当前登录用户
+     * @param loginUser              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
-                                                     List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
+                                                  List<AntdvSortBean> sortBeans);
 
 
     /**
      * 用户职务-新增
      * @param loginUser 当前登录用户
      * @param UserJobVo
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser,UserJobVo UserJobVo) throws Exception;
+    Integer dealCreate(UserAccount loginUser, UserJobVo UserJobVo) throws Exception;
 
     /**
      * 用户职务-更新
      * @param loginUser 当前登录用户
      * @param UserJobVo
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser,UserJobVo UserJobVo) throws Exception;
+    Integer dealUpdate(UserAccount loginUser, UserJobVo UserJobVo) throws Exception;
 
     /**
      * 用户职务-删除
      * @param loginUser 当前登录用户
-     * @param delIds 要删除的用户职务id 集合
-     * @throws Exception
+     * @param delIds    要删除的用户职务id 集合
      * @return
+     * @throws Exception
      */
-    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception;
 
     /**
      * 用户职务-删除
      * @param loginUser 当前登录用户
-     * @param delId 要删除的用户职务id
-     * @throws Exception
+     * @param delId     要删除的用户职务id
      * @return
+     * @throws Exception
      */
-    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
+    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

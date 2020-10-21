@@ -10,10 +10,10 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.redis.service.user                                                              -->
     <dubbo:reference id="messageHelloService" check="false"
-                     interface="com.egg.manager.api.services.message.services.hello.MessageHelloService" />
+                     interface="com.egg.manager.api.services.message.services.hello.MessageHelloService"/>
     <!--                                    dir-end:com.egg.manager.api.services.redis.service.user                                                              -->
 
     <dubbo:reference id="emailSendRecordMService" check="false"
-                     interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMgoService" />
+                     interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMgoService"/>
 
 </beans>

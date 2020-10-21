@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:
- * @Author: zhoucj
- * @Date: 2020/9/11 14:55
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Data
 @Builder
@@ -54,7 +54,7 @@ public class EmailSendRecordMgvo extends BaseModelMgvo<String> {
     /**
      * 是否发送成功？
      */
-    private Boolean successFlag ;
+    private Boolean successFlag;
     /**
      * 发送日期
      */
@@ -63,7 +63,6 @@ public class EmailSendRecordMgvo extends BaseModelMgvo<String> {
 
     /**
      * 取得-接收人-姓名-集合
-     *
      * @return
      */
     public List<String> doGainReceiveUserNameList() {

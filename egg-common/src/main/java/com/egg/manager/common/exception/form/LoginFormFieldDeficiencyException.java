@@ -1,14 +1,11 @@
 package com.egg.manager.common.exception.form;
 
 /**
- * \* note: 登录表单字段缺失异常
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 14:35
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 登录表单字段缺失异常
+ * @date 2020/10/21
  */
-public class LoginFormFieldDeficiencyException extends RuntimeException{
+public class LoginFormFieldDeficiencyException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -26,7 +23,7 @@ public class LoginFormFieldDeficiencyException extends RuntimeException{
     }
 
     public LoginFormFieldDeficiencyException(String message) {
-        super("登录表单的["+message+"]字段缺失异常!");
+        super("登录表单的[" + message + "]字段缺失异常!");
         this.message = super.getMessage();
     }
 

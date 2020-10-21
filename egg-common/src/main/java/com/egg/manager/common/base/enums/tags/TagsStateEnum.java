@@ -1,10 +1,14 @@
 package com.egg.manager.common.base.enums.tags;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum TagsStateEnum {
-    ENABLED(1,"启用","启用"),
-    DISABLED(-1,"禁用","禁用"),
-    DELETE(-2,"已删除","项目已删除")
-            ;
+    ENABLED(1, "启用", "启用"),
+    DISABLED(-1, "禁用", "禁用"),
+    DELETE(-2, "已删除", "项目已删除");
 
     TagsStateEnum(Integer value, String name, String info) {
         this.value = value;
@@ -12,11 +16,9 @@ public enum TagsStateEnum {
         this.info = info;
     }
 
-    private Integer value ;
-    private String name ;
-    private String info ;
-
-
+    private Integer value;
+    private String name;
+    private String info;
 
 
     public Integer getValue() {

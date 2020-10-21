@@ -2,9 +2,9 @@ package com.egg.manager.common.exception;
 
 /**
  * 参数异常
- * @author zhouchengjie
+ * @author
  */
-public class MyParamJsonException extends RuntimeException{
+public class MyParamJsonException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,8 @@ public class MyParamJsonException extends RuntimeException{
         return message;
     }
 
-    public MyParamJsonException() {}
+    public MyParamJsonException() {
+    }
 
     public MyParamJsonException(String message) {
         super(message);

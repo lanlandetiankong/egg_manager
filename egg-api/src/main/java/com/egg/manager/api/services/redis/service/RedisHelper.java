@@ -5,11 +5,13 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * K 指以hash结构操作时 键类型
+ * @author zhoucj
+ * @description: K 指以hash结构操作时 键类型
  * T 为数据实体 应实现序列化接口,并定义serialVersionUID * RedisTemplate 提供了五种数据结构操作类型 hash / list / set / zset / value
  * 方法命名格式为 数据操作类型 + 操作 如 hashPut 指以hash结构(也就是map)想key添加键值对
+ * @date 2020/10/21
  */
-public interface RedisHelper<HK,T> {
+public interface RedisHelper<HK, T> {
 
     /**
      * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
@@ -27,7 +29,7 @@ public interface RedisHelper<HK,T> {
      * @param timeout
      * @return
      */
-    boolean hashTtlPut(String key, HK hashKey,T domain,Long timeout);
+    boolean hashTtlPut(String key, HK hashKey, T domain, Long timeout);
 
     /**
      * Hash结构 获取指定key所有键值对
@@ -61,14 +63,14 @@ public interface RedisHelper<HK,T> {
 
     /**
      * List结构 向头部(Left)添加元素
-     * @param key 键
+     * @param key    键
      * @param domain 实体类
      * @return
      */
     Long listUnshift(String key, T domain);
 
     /**
-     * List结构 获取所有元素 * @param key * @return
+     List结构 获取所有元素 * @param key * @return
      */
     /**
      * 根据key找到集合
@@ -78,7 +80,7 @@ public interface RedisHelper<HK,T> {
     List<T> listFindAll(String key);
 
     /**
-     * List结构 移除并获取数组第一个元素 * @param key * @return
+     List结构 移除并获取数组第一个元素 * @param key * @return
      */
     /**
      * List集合出栈
@@ -89,7 +91,7 @@ public interface RedisHelper<HK,T> {
 
     /**
      * 对象的实体类
-     * @param key 键
+     * @param key    键
      * @param domain 实体类
      * @return void
      */
@@ -97,13 +99,13 @@ public interface RedisHelper<HK,T> {
 
     /**
      * 有时限的 对象的实体类
-     * @param key 键
-     * @param domain 实体类
-     * @param timeout 过期时间
+     * @param key      键
+     * @param domain   实体类
+     * @param timeout  过期时间
      * @param timeUnit 时间单位
      * @return
      */
-    boolean valuePut(String key, T domain, long timeout, TimeUnit timeUnit) ;
+    boolean valuePut(String key, T domain, long timeout, TimeUnit timeUnit);
 
     /**
      * 获取对象实体类
@@ -120,8 +122,8 @@ public interface RedisHelper<HK,T> {
 
     /**
      * 设置过期时间
-     * @param key 键
-     * @param timeout 时间
+     * @param key      键
+     * @param timeout  时间
      * @param timeUnit 时间单位
      * @return
      */

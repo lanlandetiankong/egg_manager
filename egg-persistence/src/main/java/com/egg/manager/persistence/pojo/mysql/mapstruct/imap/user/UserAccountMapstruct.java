@@ -11,6 +11,11 @@ import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserAccountConversion.class}
@@ -18,6 +23,7 @@ import org.mapstruct.factory.Mappers;
 public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, UserAccountVo, UserAccountDto> {
 
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
+
     /**
      * vo转entity
      * @param vo
@@ -25,6 +31,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
      */
     @Mappings({})
     UserAccount transferVoToEntity(UserAccountVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -41,6 +48,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserAccountVo transferEntityToVo(UserAccount entity);
+
     /**
      * dto转vo
      * @param dto

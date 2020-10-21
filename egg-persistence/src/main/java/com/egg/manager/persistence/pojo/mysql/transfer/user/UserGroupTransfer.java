@@ -5,6 +5,12 @@ import com.egg.manager.persistence.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("userGroupTransfer")
 public class UserGroupTransfer extends BaseMysqlTransfer {

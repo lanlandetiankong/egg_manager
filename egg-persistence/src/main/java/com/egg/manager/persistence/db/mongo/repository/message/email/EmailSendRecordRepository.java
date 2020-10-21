@@ -6,10 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
- * @Description:
- * @ClassName: EmailSendRecordRepository
- * @Author: zhoucj
- * @Date: 2020/9/11 14:55
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Repository
 @Component

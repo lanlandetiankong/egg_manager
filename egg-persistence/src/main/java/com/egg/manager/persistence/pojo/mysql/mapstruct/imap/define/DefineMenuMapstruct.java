@@ -12,6 +12,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineMenuConversion.class}
@@ -26,6 +31,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, De
      */
     @Mappings({})
     DefineMenu transferVoToEntity(DefineMenuVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -39,6 +45,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, De
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineMenuVo transferEntityToVo(DefineMenu entity);
+
     /**
      * dto转vo
      * @param dto

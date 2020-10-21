@@ -8,12 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * <p>
- * 操作日志表 - MongoDB
- * </p>
- *
- * @author zhouchengjie
- * @since 2020-07-19
+ * @author zhoucj
+ * @description: 操作日志表
+ * @date 2020/10/20
  */
 @Data
 @AllArgsConstructor

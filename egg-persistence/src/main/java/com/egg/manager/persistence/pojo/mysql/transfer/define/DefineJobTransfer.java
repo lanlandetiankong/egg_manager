@@ -11,10 +11,17 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineJobTransfer")
 public class DefineJobTransfer extends BaseMysqlTransfer {
     static DefineJobMapstruct defineJobMapstruct = DefineJobMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -27,6 +34,7 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
         DefineJob entity = defineJobMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -39,6 +47,7 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
         DefineJobVo vo = defineJobMapstruct.transferEntityToVo(entity);
         return vo;
     }
+
     /**
      * dto转vo
      * @param dto

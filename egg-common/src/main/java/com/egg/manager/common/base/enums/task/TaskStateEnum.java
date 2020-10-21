@@ -1,11 +1,15 @@
 package com.egg.manager.common.base.enums.task;
 
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum TaskStateEnum {
-    ENABLED(1,"启用","启用"),
-    DISABLED(-1,"禁用","禁用"),
-    DELETE(-2,"已删除","任务已删除")
-    ;
+    ENABLED(1, "启用", "启用"),
+    DISABLED(-1, "禁用", "禁用"),
+    DELETE(-2, "已删除", "任务已删除");
 
     TaskStateEnum(Integer value, String name, String info) {
         this.value = value;
@@ -13,11 +17,9 @@ public enum TaskStateEnum {
         this.info = info;
     }
 
-    private Integer value ;
-    private String name ;
-    private String info ;
-
-
+    private Integer value;
+    private String name;
+    private String info;
 
 
     public Integer getValue() {

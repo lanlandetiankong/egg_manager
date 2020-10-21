@@ -4,13 +4,11 @@ import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.forms.SmartFormFiel
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
+
 /**
- * \* note: 表单类型
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Component
 @Named("smartFormFieldDefinitionTransfer")

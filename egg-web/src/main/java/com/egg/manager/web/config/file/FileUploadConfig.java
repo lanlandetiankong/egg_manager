@@ -8,12 +8,9 @@ import org.springframework.util.unit.DataSize;
 import javax.servlet.MultipartConfigElement;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/16
- * \* Time: 20:53
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Configuration
 public class FileUploadConfig {
@@ -21,8 +18,8 @@ public class FileUploadConfig {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        DataSize minSize = DataSize.ofBytes(50*1024L);
-        DataSize maxSize = DataSize.ofBytes(100*1024L);
+        DataSize minSize = DataSize.ofBytes(50 * 1024L);
+        DataSize maxSize = DataSize.ofBytes(100 * 1024L);
         factory.setMaxFileSize(minSize);
         factory.setMaxRequestSize(maxSize);
         return factory.createMultipartConfig();

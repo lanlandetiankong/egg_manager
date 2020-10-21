@@ -11,12 +11,16 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 public interface AnnouncementMapper extends BaseMapper<Announcement> {
 
     /**
      * [分页搜索查询] - 公告
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -26,7 +30,6 @@ public interface AnnouncementMapper extends BaseMapper<Announcement> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return

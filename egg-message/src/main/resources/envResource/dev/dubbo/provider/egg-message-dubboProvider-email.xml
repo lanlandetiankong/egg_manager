@@ -16,6 +16,4 @@
                    interface="com.egg.manager.api.services.message.services.email.EmailSendRecordMgoService"/>
 
 
-
-
 </beans>

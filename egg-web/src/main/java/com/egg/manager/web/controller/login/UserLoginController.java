@@ -37,12 +37,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/3/20
- * \* Time: 20:22
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @RestController
@@ -70,16 +67,16 @@ public class UserLoginController extends BaseController {
         MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, UserLoginFuncModuleConstant.Success.LOGIN_OPER);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            Assert.notEmpty(loginAccountVo.getAccount(),BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
-            Assert.notNull(loginAccountVo.getPassword(),BaseRstMsgConstant.ErrorMsg.emptyLoginPassword());
+            Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
+            Assert.notNull(loginAccountVo.getPassword(), BaseRstMsgConstant.ErrorMsg.emptyLoginPassword());
             //取得用户
             UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
-            Assert.notNull(userAccount,BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
-            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()),BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
+            Assert.notNull(userAccount, BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
+            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
             if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
                 //账号密码验证通过
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN,userAccountToken);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN, userAccountToken);
                 //用户登录信息验证成功，在shiro进行一些登录处理
                 //添加用户认证信息
                 Subject subject = SecurityUtils.getSubject();
@@ -104,7 +101,7 @@ public class UserLoginController extends BaseController {
                 result.setAuthorization(authorization);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserLoginFuncModuleConstant.Failure.LOGIN_OPER);
+            this.dealCommonErrorCatch(log, result, e, UserLoginFuncModuleConstant.Failure.LOGIN_OPER);
         }
         return result;
     }

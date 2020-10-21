@@ -3,9 +3,12 @@ package com.egg.manager.message.config.rpc;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
-
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public class MyRpcReferConfig {
-
 
 
     @Configuration

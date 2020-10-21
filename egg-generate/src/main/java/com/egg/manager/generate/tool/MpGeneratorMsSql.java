@@ -12,15 +12,13 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:
- * @ClassName: MpGeneratorMsSql
- * @Author: zhoucj
- * @Date: 2020/9/7 10:38
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public class MpGeneratorMsSql {
@@ -63,7 +61,7 @@ public class MpGeneratorMsSql {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.SQL_SERVER);
-        dsc.setTypeConvert(new SqlServerTypeConvert(){
+        dsc.setTypeConvert(new SqlServerTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
@@ -83,7 +81,7 @@ public class MpGeneratorMsSql {
         // 全局大写命名 ORACLE 注意
         // strategy.setCapitalMode(true);
         // 此处可以修改为您的表前缀
-        strategy.setTablePrefix(new String[] {});
+        strategy.setTablePrefix(new String[]{});
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 需要生成的表

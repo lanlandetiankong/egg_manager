@@ -1,27 +1,25 @@
 package com.egg.manager.api.trait.helper;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/11
- * \* Time: 20:03
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public enum ErrorActionEnum {
-    AuthenticationExpired("AuthenticationExpired","身份认证过期","")
-    ;
+    AuthenticationExpired("AuthenticationExpired", "身份认证过期", "");
 
-    ErrorActionEnum(){
+    ErrorActionEnum() {
     }
-    ErrorActionEnum(String type,String description,String info){
-        this.type  = type;
-        this.description  = description;
-        this.info  = info;
+
+    ErrorActionEnum(String type, String description, String info) {
+        this.type = type;
+        this.description = description;
+        this.info = info;
     }
-    private String type ;
-    private String description ;
-    private String info ;
+
+    private String type;
+    private String description;
+    private String info;
 
 
     public String getType() {
@@ -39,6 +37,7 @@ public enum ErrorActionEnum {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getInfo() {
         return info;
     }

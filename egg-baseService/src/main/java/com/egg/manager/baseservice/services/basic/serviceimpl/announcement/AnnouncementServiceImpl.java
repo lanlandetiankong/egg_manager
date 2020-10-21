@@ -36,12 +36,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/21
- * \* Time: 13:42
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -63,8 +60,8 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement>  paginationBean,
-                                                                   List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement> paginationBean,
+                                                                 List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -81,8 +78,8 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto>  paginationBean,
-                                                                      List<AntdvSortBean> sortBeans) {
+    public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
+                                                              List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
 

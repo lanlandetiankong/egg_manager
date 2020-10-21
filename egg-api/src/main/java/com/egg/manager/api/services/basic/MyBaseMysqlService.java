@@ -16,17 +16,17 @@ import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+
 /**
- * @Description: 基本实现接口
- * @ClassName: MyBaseMysqlServiceImpl
- * @Author: zhoucj
- * @Date: 2020/9/18 9:21
+ * @author zhoucj
+ * @description:基本实现接口
+ * @date 2020/10/20
  */
-public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V extends MyBaseMysqlVo>
+public interface MyBaseMysqlService<T extends Model<T>, M extends BaseMapper<T>, V extends MyBaseMysqlVo>
         extends IService<T> {
     /**
      * 取得前端传递的分页配置
-     * @param loginUser 当前登录用户
+     * @param loginUser              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
@@ -46,7 +46,6 @@ public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V
 
     /**
      * 更新Entity之前调用
-     *
      * @param loginUser 当前登录用户
      * @param t
      * @param uuidFlag
@@ -56,7 +55,6 @@ public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V
 
     /**
      * 更新Entity之前调用
-     *
      * @param loginUser 当前登录用户
      * @param t
      * @return
@@ -66,7 +64,6 @@ public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V
 
     /**
      * 根据id删除(删除前调用)
-     *
      * @param loginUser 当前登录用户
      * @param tClass
      * @param idVal
@@ -75,13 +72,10 @@ public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V
     T doBeforeDeleteOneById(UserAccount loginUser, Class<T> tClass, String idVal);
 
 
-
-
-
     /**
-     *  用userAccountToken 取得 UserAccountXlsModel
+     * 用userAccountToken 取得 UserAccountXlsModel
      * @param userAccountToken
-     * @param isRequired 是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
+     * @param isRequired       是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
      * @return UserAccountXlsModel
      * @throws InvocationTargetException
      * @throws IllegalAccessException
@@ -95,8 +89,6 @@ public interface MyBaseMysqlService<T extends Model<T>,M extends BaseMapper<T>,V
      * @return
      */
     Page dealAntvPageToPagination(AntdvPaginationBean paginationBean);
-
-
 
 
     /**

@@ -10,12 +10,9 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * \* note:表单项
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:58
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 表单项
+ * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -23,6 +20,7 @@ import org.mapstruct.factory.Mappers;
 public interface SmartFormRecordMapstruct extends MyBaseMongoMapstruct<SmartFormRecordMgo, SmartFormRecordMgvo> {
 
     SmartFormRecordMapstruct INSTANCE = Mappers.getMapper(SmartFormRecordMapstruct.class);
+
     /**
      * mgvo转mgo
      * @param mgvo

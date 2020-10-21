@@ -20,12 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/4
- * \* Time: 19:08
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-通用接口(用户)")
@@ -33,7 +30,7 @@ import java.util.List;
 @RequestMapping("/commonApi/user")
 public class UserCommonController extends BaseController {
 
-    @ApiOperation(value = "查询枚举->用户类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserTypeEnumList")
     public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -47,12 +44,12 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询枚举->用户锁类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户锁类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -62,13 +59,13 @@ public class UserCommonController extends BaseController {
             beanList.add(new FrontSelectBean(1, "已锁定"));
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "查询枚举->职务类型",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->职务类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         MyCommonResult result = MyCommonResult.gainEnumResult(UserCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
@@ -82,7 +79,7 @@ public class UserCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, UserCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }

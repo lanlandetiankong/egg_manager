@@ -4,10 +4,10 @@ import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 
 /**
- * @Description:
- * @ClassName: UserAccountPojoInitialize
- * @Author: zhoucj
- * @Date: 2020/9/22 11:57
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public class UserAccountPojoInitialize {
 

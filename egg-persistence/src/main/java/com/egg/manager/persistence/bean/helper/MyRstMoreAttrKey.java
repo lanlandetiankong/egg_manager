@@ -1,32 +1,31 @@
 package com.egg.manager.persistence.bean.helper;
 
 /**
- * @Description: 更多参数Map 的key 常量
- * @ClassName: MyRstMoreAttrKey
- * @Author: zhoucj
- * @Date: 2020/10/15 16:03
+ * @author zhoucj
+ * @description: 更多参数Map 的key 常量
+ * @date 2020/10/20
  */
 public interface MyRstMoreAttrKey {
     /**
      * 权限-Set集合
      */
-    public static final String KEY_PERMISSION_Set = "permissionSet";
+    String KEY_PERMISSION_Set = "permissionSet";
     /**
-     *  可访问的路由地址-Set集合
+     * 可访问的路由地址-Set集合
      */
-    public static final String KEY_ROUTER_URL_Set = "routerUrlSet";
+    String KEY_ROUTER_URL_Set = "routerUrlSet";
     /**
      * 文件信息-bean
      */
-    public static final String KEY_FILERES_BEAN = "fileResBean";
+    String KEY_FILERES_BEAN = "fileResBean";
     /**
      * 文件上传-beanList
      */
-    public static final String KEY_FILEUPLOAD_BEANLIST = "fileUploaderBeanList";
+    String KEY_FILEUPLOAD_BEANLIST = "fileUploaderBeanList";
     /**
      * 账号token
      */
-    public static final String KEY_ACCOUNTTOKEN = "accountToken";
+    String KEY_ACCOUNTTOKEN = "accountToken";
 
 
 }

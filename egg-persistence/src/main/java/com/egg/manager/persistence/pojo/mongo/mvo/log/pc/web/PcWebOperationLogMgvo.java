@@ -7,12 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>
- * 操作日志表 - MongoDB
- * </p>
- *
- * @author zhouchengjie
- * @since 2020-07-19
+ * @author zhoucj
+ * @version V1.0
+ * @description: 操作日志表 - MongoDB
+ * @date 2020/10/20
  */
 @Data
 @Builder

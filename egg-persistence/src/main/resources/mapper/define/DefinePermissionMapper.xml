@@ -4,39 +4,41 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.define.DefinePermission">
-        <id column="fid" property="fid" />
-        <result column="name" property="name" />
-        <result column="code" property="code" />
-        <result column="ensure" property="ensure" />
-        <result column="type" property="type" />
+        <id column="fid" property="fid"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="ensure" property="ensure"/>
+        <result column="type" property="type"/>
 
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
-        <result column="remark" property="remark" />
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <result column="remark" property="remark"/>
     </resultMap>
 
 
     <!-- 通用查询映射结果 -->
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto">
-        <id column="fid" property="fid" />
-        <result column="name" property="name" />
-        <result column="code" property="code" />
-        <result column="ensure" property="ensure" />
-        <result column="type" property="type" />
+        <id column="fid" property="fid"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="ensure" property="ensure"/>
+        <result column="type" property="type"/>
 
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="remark" property="remark" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -88,21 +90,23 @@
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="edp" />
+            <property name="base_alias_name" value="edp"/>
         </include>
         FROM em_define_permission edp
         <where>
-            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
-                <property name="table_name_alias" value="edp" />
+            <include
+                    refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="edp"/>
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
-            <property name="table_name_alias" value="edp" />
+        <include
+                refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="edp"/>
         </include>
     </select>
 
 
-    <update id="batchFakeDelByIds" >
+    <update id="batchFakeDelByIds">
         UPDATE em_define_permission
         SET state = -1
         <if test="loginUser != null">
@@ -115,7 +119,7 @@
         and ensure != 1
     </update>
 
-    <update id="batchEnsureByIds" >
+    <update id="batchEnsureByIds">
         UPDATE em_define_permission
         SET ensure = 1
         <if test="loginUser != null">
@@ -127,7 +131,7 @@
         </foreach>
     </update>
 
-    <update id="clearAllPermissionByRoleId" >
+    <update id="clearAllPermissionByRoleId">
         UPDATE em_role_permission
         SET state = -1
         <if test="loginUser != null">
@@ -138,15 +142,15 @@
 
     <select id="findAllPermissionByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
-            <include refid="Base_Alias_Table_List" >
-                <property name="base_alias_name" value="dp" />
-            </include>
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dp"/>
+        </include>
         FROM em_define_permission dp
         left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
         WHERE rp.define_role_id = #{roleId} and rp.state = 1 and dp.ensure = 1
     </select>
 
-    <select id="findAllPermissionIdByRoleId"  resultType="java.lang.String">
+    <select id="findAllPermissionIdByRoleId" resultType="java.lang.String">
         SELECT dp.fid FROM em_define_permission dp
         left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
         <where>
@@ -159,20 +163,20 @@
 
     </select>
 
-    <select id="findAllPermissionByUserAcccountId"  resultMap="BaseResultMap">
+    <select id="findAllPermissionByUserAcccountId" resultMap="BaseResultMap">
         SELECT DISTINCT
-            <include refid="Base_Alias_Table_List" >
-                <property name="base_alias_name" value="dp" />
-            </include>
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dp"/>
+        </include>
         FROM em_define_permission dp
         left JOIN em_role_permission rp on rp.define_permission_id = dp.fid
         left JOIN em_user_role ur on ur.define_role_id = rp.define_role_id
         WHERE
-            ur.user_account_id = #{userAccountId}
-            and  dp.state = 1
-            and  rp.state = 1
-            and  ur.state = 1
-            and dp.ensure = 1
+        ur.user_account_id = #{userAccountId}
+        and dp.state = 1
+        and rp.state = 1
+        and ur.state = 1
+        and dp.ensure = 1
     </select>
 
 </mapper>

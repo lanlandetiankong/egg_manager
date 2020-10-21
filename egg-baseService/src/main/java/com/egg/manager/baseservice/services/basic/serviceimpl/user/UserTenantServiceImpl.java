@@ -36,10 +36,9 @@ import java.util.List;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -58,7 +57,6 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Reference
     private RedisHelper redisHelper;
-
 
 
     @Override
@@ -82,7 +80,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         QueryWrapper<UserTenant> userTenantEm = new QueryWrapper<UserTenant>();
         userTenantEm.eq("state", BaseStateEnum.ENABLED.getValue())
                 .eq("user_account_id", userAccount.getFid());
-        userTenantEm.orderBy(true,false,"update_time");
+        userTenantEm.orderBy(true, false, "update_time");
         List<UserTenant> userTenant = userTenantMapper.selectList(userTenantEm);
         return userTenant;
     }
@@ -120,7 +118,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Override
     public MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
-                                                                  List<AntdvSortBean> sortBeans) {
+                                                            List<AntdvSortBean> sortBeans) {
         Page<UserTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserTenantDto> userTenantDtoList = userTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());

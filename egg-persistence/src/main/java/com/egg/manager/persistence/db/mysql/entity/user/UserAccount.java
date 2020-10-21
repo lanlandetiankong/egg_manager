@@ -14,7 +14,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户账号-entity
+ * @author zhoucj
+ * @description: 用户账号
+ * @date 2020/10/20
  */
 @Data
 @Builder
@@ -61,14 +63,12 @@ public class UserAccount extends Model<UserAccount> {
     private String email;
     /**
      * 性别
-     *
      * @see UserSexEnum
      */
     @TableField("sex")
     private Short sex;
     /**
      * 用户类型
-     *
      * @see UserAccountBaseTypeEnum
      */
     @TableField("user_type")
@@ -93,17 +93,17 @@ public class UserAccount extends Model<UserAccount> {
     /**
      * 状态
      */
-    @TableField(value = "state",fill = FieldFill.INSERT)
+    @TableField(value = "state", fill = FieldFill.INSERT)
     private Short state;
     /**
      * 创建时间
      */
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 修改时间
      */
-    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 创建用户id
@@ -120,7 +120,7 @@ public class UserAccount extends Model<UserAccount> {
      */
     @Version
     @TableField(value = "version")
-    private Integer version ;
+    private Integer version;
 
     @Override
     protected Serializable pkVal() {

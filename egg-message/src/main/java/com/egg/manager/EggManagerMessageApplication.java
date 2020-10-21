@@ -10,6 +10,11 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jms.annotation.EnableJms;
 
+/**
+ * @author zhoucj
+ * @description:Springboot启动类
+ * @date 2020/06/07
+ */
 @SpringBootApplication
 @EnableJms
 @EnableCaching

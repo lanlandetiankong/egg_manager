@@ -3,17 +3,14 @@ package com.egg.manager.common.base.enums.query.mongo;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/8/1
- * \* Time: 16:03
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public enum MyMongoQueryMatchingEnum {
-    EqualsMatch("equals","=","相等查询"),
-    NotEqualsMatch("notEquals","!=","字符串非等查询"),
-    LikeMatch("like","like","字符串通配查询"),
+    EqualsMatch("equals", "=", "相等查询"),
+    NotEqualsMatch("notEquals", "!=", "字符串非等查询"),
+    LikeMatch("like", "like", "字符串通配查询"),
 
 
     ;
@@ -28,19 +25,19 @@ public enum MyMongoQueryMatchingEnum {
      * 将枚举的参数设置到QueryFormFieldBean
      * @param bean
      */
-    public void dealSetToQueryFormFieldBean(QueryFormFieldBean bean){
+    public void dealSetToQueryFormFieldBean(QueryFormFieldBean bean) {
         bean = bean != null ? bean : new QueryFormFieldBean();
         bean.setMatching(this.getValue());
         bean.setSqlMatching(this.getSqlMatchingValue());
     }
 
-    public boolean equalsValue(String value){
+    public boolean equalsValue(String value) {
         return this.value.equals(value);
     }
 
-    private String value ;
-    private String sqlMatchingValue ;
-    private String label ;
+    private String value;
+    private String sqlMatchingValue;
+    private String label;
 
 
     public String getValue() {

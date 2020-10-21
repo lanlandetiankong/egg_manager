@@ -36,12 +36,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-职务定义接口 ")
@@ -56,7 +53,7 @@ public class DefineJobController extends BaseController {
 
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryPage")
-    @ApiOperation(value = "分页查询->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -64,26 +61,26 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/queryPage")
     public MyCommonResult<DefineJobVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
+                                                 @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class, DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineJob> paginationBean = this.parsePaginationJsonToBean(paginationObj,DefineJob.class);
+            AntdvPaginationBean<DefineJob> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineJob.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByEntitys(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryDtoPage")
-    @ApiOperation(value = "分页查询(dto)->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(dto)->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -91,57 +88,57 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineJobVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                             @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_PAGE);
+                                                    @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class, DefineJobFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineJobDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,DefineJobDto.class);
+            AntdvPaginationBean<DefineJobDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = defineJobService.dealQueryPageByDtos(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "根据id查询->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineJob/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<DefineJobVo> queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class,DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
+        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class, DefineJobFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             DefineJob defineJob = defineJobMapper.selectById(defineJobId);
             result.setBean(DefineJobTransfer.transferEntityToVo(defineJob));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "新增->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
-            Assert.notNull(defineJobVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineJobService.dealCreate(loginUser, defineJobVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,DefineJobFuncModuleConstant.Failure.CREATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser UserAccount loginUser) {
@@ -152,14 +149,14 @@ public class DefineJobController extends BaseController {
             changeCount = defineJobService.dealUpdate(loginUser, defineJobVo);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.UPDATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/define/defineJob/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -168,19 +165,19 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
             delCount = defineJobService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/define/defineJob/deleteById")
-    @ApiOperation(value = "伪删除->职务定义",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
@@ -189,11 +186,11 @@ public class DefineJobController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineJobFuncModuleConstant.Success.DELETE_BY_ID);
         Integer delCount = 0;
         try {
-            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result,e,DefineJobFuncModuleConstant.Failure.DELETE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

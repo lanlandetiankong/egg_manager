@@ -37,12 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-公告标签接口")
@@ -58,7 +55,7 @@ public class AnnouncementTagController extends BaseController {
 
 
     @PcWebQueryLog(fullPath = "/announcementTag/gainEnumSelect")
-    @ApiOperation(value = "分页查询->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -66,8 +63,8 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/gainEnumSelect")
     public MyCommonResult<AnnouncementTagVo> gainEnumSelect(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                          @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ENUM_LIST);
+                                                            @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class, AnnouncementTagFuncModuleConstant.Success.QUERY_ENUM_LIST);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
@@ -77,124 +74,124 @@ public class AnnouncementTagController extends BaseController {
             result = announcementTagService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, null, sortBeans);
             result = announcementTagService.dealResultListToEnums(result);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.QUERY_ENUM_LIST);
         }
         return result;
     }
 
-    @ApiOperation(value = "分页查询(dto)->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(dto)->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcementTag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementTagVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                                         @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_PAGE);
+                                                          @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class, AnnouncementTagFuncModuleConstant.Success.QUERY_PAGE);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<AnnouncementTagDto> paginationBean = this.parsePaginationJsonToBean(paginationObj,AnnouncementTagDto.class);
+            AntdvPaginationBean<AnnouncementTagDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementTagDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             announcementTagService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_PAGE);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.QUERY_PAGE);
         }
         return result;
     }
 
-    @ApiOperation(value = "根据id查询->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcementTag/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementTagVo> queryOneById(HttpServletRequest request, String announcementTagId,
-                                                                      @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class,AnnouncementTagFuncModuleConstant.Success.QUERY_ONE_BY_ID);
+                                                          @CurrentLoginUser UserAccount loginUser) {
+        MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class, AnnouncementTagFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         try {
             Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
             result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "新增->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementTag/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                                                  @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
-            Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = announcementTagService.dealCreate(loginUser, announcementTagVo);
             result.setCount(addCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.CREATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.CREATE_OPER);
         }
         return result;
     }
 
 
-    @ApiOperation(value = "更新->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementTag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                                  @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.UPDATE_OPER);
         Integer changeCount = 0;
         try {
-            Assert.notNull(announcementTagVo,BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             changeCount = announcementTagService.dealUpdate(loginUser, announcementTagVo);
             result.setCount(changeCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.UPDATE_OPER);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.UPDATE_OPER);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/announcementTag/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
-                                                           @CurrentLoginUser UserAccount loginUser) {
+                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {
-            Assert.notEmpty(delIds,BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = announcementTagService.dealBatchDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);
         }
         return result;
     }
 
 
     @PcWebOperationLog(fullPath = "/announcementTag/deleteById")
-    @ApiOperation(value = "伪删除->公告标签",response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->公告标签", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId,
-                                                      @CurrentLoginUser UserAccount loginUser) {
+                                     @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(AnnouncementTagFuncModuleConstant.Success.DELETE_BY_ID);
         try {
-            Assert.notBlank(delId,BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = announcementTagService.dealDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e,AnnouncementTagFuncModuleConstant.Failure.DELETE_BY_ID);
+            this.dealCommonErrorCatch(log, result, e, AnnouncementTagFuncModuleConstant.Failure.DELETE_BY_ID);
         }
         return result;
     }

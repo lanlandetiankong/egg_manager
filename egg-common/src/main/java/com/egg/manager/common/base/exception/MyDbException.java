@@ -1,13 +1,15 @@
 package com.egg.manager.common.base.exception;
 
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
-public class MyDbException extends Exception{
+public class MyDbException extends Exception {
 
     private static final long serialVersionUID = 3455708526465670020L;
 
-    public MyDbException(String msg){
+    public MyDbException(String msg) {
         super(msg);
     }
 }

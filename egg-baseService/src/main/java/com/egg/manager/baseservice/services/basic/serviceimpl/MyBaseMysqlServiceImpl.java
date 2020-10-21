@@ -28,13 +28,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description:
- * @ClassName: MyBaseMysqlServiceImpl
- * @Author: zhoucj
- * @Date: 2020/9/18 9:21
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo> extends ServiceImpl<M, T>
-        implements MyBaseMysqlService<T,M, V> {
+        implements MyBaseMysqlService<T, M, V> {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -52,7 +51,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
         //添加排序
         if (sortBeans != null && sortBeans.isEmpty() == false) {
             for (AntdvSortBean sortBean : sortBeans) {
-                entityWrapper.orderBy(true, sortBean.getOrderIsAsc(),sortBean.getField());
+                entityWrapper.orderBy(true, sortBean.getOrderIsAsc(), sortBean.getField());
             }
         }
         return entityWrapper;
@@ -123,7 +122,6 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
 
     /**
      * 用userAccountToken 取得 UserAccountXlsModel
-     *
      * @param userAccountToken
      * @param isRequired       是否必须取得 用户身份信息(获取失败时将抛出MyAuthenticationExpiredException异常)
      * @return UserAccountXlsModel

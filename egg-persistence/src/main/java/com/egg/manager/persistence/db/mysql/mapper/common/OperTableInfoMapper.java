@@ -5,10 +5,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description:
- * @ClassName: OperTableInfoMapper
- * @Author: zhoucj
- * @Date: 2020/10/14 17:12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface OperTableInfoMapper {
 

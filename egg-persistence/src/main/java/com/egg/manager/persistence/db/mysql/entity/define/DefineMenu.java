@@ -12,7 +12,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 菜单定义-entity
+ * @author zhoucj
+ * @description: 菜单定义
+ * @date 2020/10/20
  */
 @Data
 @Builder
@@ -34,7 +36,6 @@ public class DefineMenu extends Model<DefineMenu> {
     private String menuName;
     /**
      * 路径跳转方式
-     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     @TableField(value = "url_jump_type")
@@ -84,17 +85,17 @@ public class DefineMenu extends Model<DefineMenu> {
     /**
      * 状态
      */
-    @TableField(value = "state",fill = FieldFill.INSERT)
+    @TableField(value = "state", fill = FieldFill.INSERT)
     private Short state;
     /**
      * 创建时间
      */
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 修改时间
      */
-    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 创建用户id
@@ -111,7 +112,7 @@ public class DefineMenu extends Model<DefineMenu> {
      */
     @Version
     @TableField(value = "version")
-    private Integer version ;
+    private Integer version;
 
     @Override
     protected Serializable pkVal() {

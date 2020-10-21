@@ -7,12 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * \* note: 表单 字段类型
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:23
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 表单 字段类型
+ * @date 2020/10/20
  */
 @Data
 @Builder

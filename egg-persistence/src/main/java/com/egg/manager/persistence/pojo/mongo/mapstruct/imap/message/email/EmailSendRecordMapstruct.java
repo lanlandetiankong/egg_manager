@@ -12,10 +12,9 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.mail.SimpleMailMessage;
 
 /**
- * @Description:
- * @ClassName: EmailSendRecordMapstruct
- * @Author: zhoucj
- * @Date: 2020/8/7 9:56
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -35,7 +34,6 @@ public interface EmailSendRecordMapstruct extends MyBaseMongoMapstruct<EmailSend
 
     /**
      * 复制-EmailSendRecordMgvo->SimpleMailMessage
-     *
      * @param emailSendRecordMgvo
      * @return
      */

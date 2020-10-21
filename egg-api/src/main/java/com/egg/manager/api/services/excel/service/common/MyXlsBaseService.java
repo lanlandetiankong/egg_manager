@@ -7,12 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/15
- * \* Time: 21:00
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public interface MyXlsBaseService {
 

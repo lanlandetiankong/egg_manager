@@ -11,6 +11,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineRoleConversion.class}
@@ -25,6 +30,7 @@ public interface DefineRoleMapstruct extends MyBaseMysqlMapstruct<DefineRole, De
      */
     @Mappings({})
     DefineRole transferVoToEntity(DefineRoleVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -36,6 +42,7 @@ public interface DefineRoleMapstruct extends MyBaseMysqlMapstruct<DefineRole, De
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineRoleVo transferEntityToVo(DefineRole entity);
+
     /**
      * dto转vo
      * @param dto

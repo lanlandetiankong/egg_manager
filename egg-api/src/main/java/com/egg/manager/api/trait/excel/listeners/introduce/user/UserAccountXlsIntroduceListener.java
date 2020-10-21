@@ -14,12 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/16
- * \* Time: 21:51
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserAccountXlsInModel> {
@@ -39,25 +36,24 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     /**
      * 当前登录用户
      */
-    UserAccount loginUser = null ;
+    UserAccount loginUser = null;
 
 
     /**
      * 如果使用了spring,请使用这个构造方法。每次创建Listener的时候需要把spring管理的类传进来
      * @param userAccountService
      */
-    public UserAccountXlsIntroduceListener(UserAccountService userAccountService,UserAccount loginUser,Set<String> accountExistSet) {
+    public UserAccountXlsIntroduceListener(UserAccountService userAccountService, UserAccount loginUser, Set<String> accountExistSet) {
         this.userAccountService = userAccountService;
         this.loginUser = loginUser;
-        if(accountExistSet != null && accountExistSet.isEmpty() == false){
+        if (accountExistSet != null && accountExistSet.isEmpty() == false) {
             this.accountExistSet.addAll(accountExistSet);
         }
     }
+
     /**
      * 这个每一条数据解析都会来调用
-     *
-     * @param data
-     *            one row value. Is is same as {@link AnalysisContext#readRowHolder()}
+     * @param data    one row value. Is is same as {@link AnalysisContext#readRowHolder()}
      * @param context
      */
     @Override
@@ -70,6 +66,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
             list.clear();
         }
     }
+
     /**
      * 所有数据解析完成了 都会来调用
      * @param context
@@ -80,13 +77,14 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
         saveData();
         log.info("所有数据解析完成！");
     }
+
     /**
      * 加上存储数据库
      */
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
-        if(list != null && list.isEmpty() == false){
-            userAccountService.saveBatch(UserAccountTransfer.xlsModelListToEntitys(list,loginUser,accountExistSet));
+        if (list != null && list.isEmpty() == false) {
+            userAccountService.saveBatch(UserAccountTransfer.xlsModelListToEntitys(list, loginUser, accountExistSet));
             log.info("存储数据库成功！");
         }
     }

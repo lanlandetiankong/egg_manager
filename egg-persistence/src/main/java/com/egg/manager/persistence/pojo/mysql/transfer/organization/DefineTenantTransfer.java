@@ -11,10 +11,17 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineTenantTransfer")
 public class DefineTenantTransfer extends BaseMysqlTransfer {
     static DefineTenantMapstruct defineTenantMapstruct = DefineTenantMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -27,6 +34,7 @@ public class DefineTenantTransfer extends BaseMysqlTransfer {
         DefineTenant entity = defineTenantMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -39,6 +47,7 @@ public class DefineTenantTransfer extends BaseMysqlTransfer {
         DefineTenantVo vo = defineTenantMapstruct.transferEntityToVo(entity);
         return vo;
     }
+
     /**
      * dto转vo
      * @param dto

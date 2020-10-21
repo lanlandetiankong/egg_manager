@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * @author zhouchengjie
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 public class ComUtil {
 
@@ -93,7 +95,6 @@ public class ComUtil {
             return false;
         }
     }
-
 
 
     public static String trim(String aStr) {

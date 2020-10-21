@@ -2,7 +2,6 @@ package com.egg.manager.persistence.pojo.mysql.initialize.user;
 
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.base.SwitchStateEnum;
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
@@ -10,16 +9,15 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
 import java.util.Date;
 
 /**
- * @Description:
- * @ClassName: UserAccountPojoInitialize
- * @Author: zhoucj
- * @Date: 2020/9/22 11:57
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public class UserDepartmentPojoInitialize {
 
     /**
      * 返回一个通用的 entity实例
-     *
      * @param userAccountId
      * @param defineDepartmentId
      * @param loginUser          当前登录用户

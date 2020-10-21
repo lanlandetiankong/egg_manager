@@ -34,10 +34,9 @@ import java.util.List;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
@@ -77,7 +76,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         QueryWrapper<UserDepartment> userDepartmentEm = new QueryWrapper<UserDepartment>();
         userDepartmentEm.eq("state", BaseStateEnum.ENABLED.getValue())
                 .eq("user_account_id", userAccount.getFid());
-        userDepartmentEm.orderBy(true,false,"update_time");
+        userDepartmentEm.orderBy(true, false, "update_time");
         List<UserDepartment> userDepartment = userDepartmentMapper.selectList(userDepartmentEm);
         return userDepartment;
     }
@@ -98,7 +97,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartment> paginationBean,
-                                                                       List<AntdvSortBean> sortBeans) {
+                                                                   List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -115,7 +114,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
-                                                                          List<AntdvSortBean> sortBeans) {
+                                                                List<AntdvSortBean> sortBeans) {
         Page<UserDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());

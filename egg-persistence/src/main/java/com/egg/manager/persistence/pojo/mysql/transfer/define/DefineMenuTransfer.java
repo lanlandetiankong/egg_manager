@@ -12,10 +12,17 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineMenuTransfer")
 public class DefineMenuTransfer extends BaseMysqlTransfer {
     static DefineMenuMapstruct defineMenuMapstruct = DefineMenuMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -28,6 +35,7 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
         DefineMenu entity = defineMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity

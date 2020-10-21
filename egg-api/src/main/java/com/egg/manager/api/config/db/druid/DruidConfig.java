@@ -16,8 +16,9 @@ import java.sql.SQLException;
 
 
 /**
- * Druid数据库连接池
- * @author : zhouchengjie
+ * @author zhoucj
+ * @description: Druid数据库连接池
+ * @date 2020/10/20
  */
 @Configuration
 public class DruidConfig {
@@ -62,7 +63,6 @@ public class DruidConfig {
 
     /**
      * 注册一个StatViewServlet
-     *
      * @return
      */
     @Bean
@@ -86,7 +86,7 @@ public class DruidConfig {
      * @return
      */
     @Bean
-    public FilterRegistrationBean druidStatFilterBean(){
+    public FilterRegistrationBean druidStatFilterBean() {
         FilterRegistrationBean filter = new FilterRegistrationBean();
         filter.setFilter(new WebStatFilter());
         filter.setName("druidWebStatFilter");
@@ -103,7 +103,7 @@ public class DruidConfig {
      */
     @Bean
     @Primary
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(this.dbUrl);
         datasource.setUsername(username);
@@ -127,7 +127,7 @@ public class DruidConfig {
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
-            System.err.println("druid configuration initialization filter: "+ e);
+            System.err.println("druid configuration initialization filter: " + e);
         }
         datasource.setConnectionProperties(connectionProperties);
         return datasource;

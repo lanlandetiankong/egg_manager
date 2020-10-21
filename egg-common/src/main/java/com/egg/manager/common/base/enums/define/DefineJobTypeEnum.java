@@ -1,8 +1,12 @@
 package com.egg.manager.common.base.enums.define;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum DefineJobTypeEnum {
-    SimpleJob(1,"普通职务","普通职务")
-    ;
+    SimpleJob(1, "普通职务", "普通职务");
 
     DefineJobTypeEnum(Integer value, String name, String label) {
         this.value = value;
@@ -11,9 +15,9 @@ public enum DefineJobTypeEnum {
 
     }
 
-    private Integer value ;
-    private String name ;
-    private String label ;
+    private Integer value;
+    private String name;
+    private String label;
 
     public Integer getValue() {
         return value;
@@ -40,18 +44,17 @@ public enum DefineJobTypeEnum {
     }
 
 
-
-    public static DefineJobTypeEnum doGetEnumByValue(Integer value){
-        if(value == null){
-            return null ;
+    public static DefineJobTypeEnum doGetEnumByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
         DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
-        for(DefineJobTypeEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj ;
+        for (DefineJobTypeEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj;
             }
         }
-        return null ;
+        return null;
     }
 
 

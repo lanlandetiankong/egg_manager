@@ -16,12 +16,9 @@ import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import org.mapstruct.MapperConfig;
 
 /**
- * 可在该接口写公用的转化方法,定义的方法请勿修改方法名、参数、返回值等！
- * <p>
- * 枚举相关方法 default定义
- * Notes:
- *
- * @Context : 该注解用于添加额外参数，不会对其进行判断null等操作
+ * @author zhoucj
+ * @description: 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！ 枚举相关方法 default定义
+ * @date 2020/10/20
  */
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
@@ -31,17 +28,15 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 判断值 是否为 启用
-     *
      * @param value
      * @return
      */
     default boolean handleSwitchStateGetBoolean(Short value) {
-        return SwitchStateEnum.Open.getValue().equals(value) ;
+        return SwitchStateEnum.Open.getValue().equals(value);
     }
 
     /**
      * 开关式枚举 取得值
-     *
      * @param value
      * @return
      */
@@ -51,7 +46,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 开关式枚举 取得名称
-     *
      * @param value
      * @return
      */
@@ -61,7 +55,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 性别 枚举 取得名称
-     *
      * @param value
      * @return
      */
@@ -71,7 +64,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 性别 枚举 取得值
-     *
      * @param value
      * @return
      */
@@ -81,7 +73,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 用户状态 枚举 取得名称
-     *
      * @param value
      * @return
      */
@@ -91,7 +82,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 取得[用户类型]名称
-     *
      * @param value
      * @return
      */
@@ -105,7 +95,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 模块类型 取得label
-     *
      * @param type
      * @return
      */
@@ -121,7 +110,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 取得 角色类型 label
-     *
      * @param type
      * @return
      */
@@ -137,7 +125,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 权限 类型 取得 label
-     *
      * @param value
      * @return
      */
@@ -151,7 +138,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 取得菜单跳转类型 label
-     *
      * @param type
      * @return
      */
@@ -167,7 +153,6 @@ public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends 
 
     /**
      * 取得 职务 类型label
-     *
      * @param type
      * @return
      */

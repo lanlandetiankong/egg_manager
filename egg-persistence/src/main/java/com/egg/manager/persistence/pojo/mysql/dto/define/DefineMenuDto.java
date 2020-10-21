@@ -10,6 +10,12 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,7 +31,6 @@ public class DefineMenuDto extends MyBaseMysqlDto {
     private String menuName;
     /**
      * 路径跳转方式
-     *
      * @see DefineMenuUrlJumpTypeEnum
      */
     private Integer urlJumpType;

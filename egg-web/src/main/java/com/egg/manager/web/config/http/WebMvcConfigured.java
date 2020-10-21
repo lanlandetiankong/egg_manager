@@ -13,12 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 17:04
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Configuration
 public class WebMvcConfigured extends WebMvcConfigurationSupport {
@@ -42,7 +39,6 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport {
     /**
      * 添加跨域请求
      * allowCredentials 是否携带jsessionid
-     *
      * @param registry
      */
     @Override
@@ -57,7 +53,6 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport {
 
     /**
      * 添加 swagger-ui 等的文件路径映射
-     *
      * @param registry
      */
     @Override

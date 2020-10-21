@@ -5,12 +5,9 @@ import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 /**
- * \* note:表单项
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:58
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:表单项
+ * @date 2020/10/20
  */
 @Component
 @Named("smartFormRecordTransfer")

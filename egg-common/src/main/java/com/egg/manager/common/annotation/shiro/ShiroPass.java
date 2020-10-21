@@ -3,7 +3,9 @@ package com.egg.manager.common.annotation.shiro;
 import java.lang.annotation.*;
 
 /**
- * shiro 跳过 注解
+ * @author zhoucj
+ * @description: shiro 跳过 注解
+ * @date 2020/10/21
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

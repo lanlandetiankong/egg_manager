@@ -8,12 +8,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 14:21
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @Builder

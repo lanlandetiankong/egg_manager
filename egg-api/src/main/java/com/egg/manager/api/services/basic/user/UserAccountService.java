@@ -1,6 +1,5 @@
 package com.egg.manager.api.services.basic.user;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
@@ -19,17 +18,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlService<UserAccount,UserAccountMapper,UserAccountVo> {
+public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlService<UserAccount, UserAccountMapper, UserAccountVo> {
 
-    String FOREIGN_NAME_OF_USER_TENANT = "userTenant" ;
-    String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment" ;
+    String FOREIGN_NAME_OF_USER_TENANT = "userTenant";
+    String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment";
 
 
     /**
@@ -37,120 +33,120 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param loginAccountDTO
      * @return
      */
-    UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) ;
+    UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO);
 
 
     /**
      * 分页查询 用户列表
-     * @param loginUser 当前登录用户
+     * @param loginUser              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccount> paginationBean,
-                                                          List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccount> paginationBean,
+                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser 当前登录用户
+     * @param loginUser              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser,MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
-                                                             List<AntdvSortBean> sortBeans);
+    MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+                                                      List<AntdvSortBean> sortBeans);
 
     /**
      * 用户账号-新增
-     * @param loginUser 当前登录用户
+     * @param loginUser     当前登录用户
      * @param userAccountVo
-     * @param loginUser 当前登录用户
-     * @throws Exception
+     * @param loginUser     当前登录用户
      * @return
+     * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
+    Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception;
 
     /**
      * 用户账号-更新
-     * @param loginUser 当前登录用户
+     * @param loginUser     当前登录用户
      * @param userAccountVo
-     * @param loginUser 当前登录用户
-     * @param loginUser 当前登录用户
-     * @throws Exception
+     * @param loginUser     当前登录用户
+     * @param loginUser     当前登录用户
      * @return
+     * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser,UserAccountVo userAccountVo) throws Exception ;
+    Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception;
 
     /**
      * 用户账号-删除
      * @param loginUser 当前登录用户
-     * @param delIds 要删除的用户id 集合
+     * @param delIds    要删除的用户id 集合
      * @param loginUser 当前登录用户
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealBatchDelete(UserAccount loginUser,String[] delIds) throws Exception ;
+    Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception;
 
     /**
      * 用户账号-删除
      * @param loginUser 当前登录用户
-     * @param delId 要删除的用户id
+     * @param delId     要删除的用户id
      * @param loginUser 当前登录用户
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealDeleteById(UserAccount loginUser,String delId) throws Exception ;
-
+    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 
 
     /**
      * 用户账号-锁定
      * @param loginUser 当前登录用户
-     * @param lockIds 要锁定的用户账号id 集合
-     * @param isLock 是否锁定
+     * @param lockIds   要锁定的用户账号id 集合
+     * @param isLock    是否锁定
      * @param loginUser 当前登录用户
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealBatchRenewLock(UserAccount loginUser,String[] lockIds,boolean isLock) throws Exception ;
+    Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception;
+
     /**
      * 用户账号-锁定
      * @param loginUser 当前登录用户
-     * @param lockId 要锁定的用户账号id
-     * @param isLock 是否锁定
+     * @param lockId    要锁定的用户账号id
+     * @param isLock    是否锁定
      * @param loginUser 当前登录用户
-     * @throws Exception
      * @return
+     * @throws Exception
      */
-    Integer dealRenewLock(UserAccount loginUser,String lockId,boolean isLock) throws Exception ;
+    Integer dealRenewLock(UserAccount loginUser, String lockId, boolean isLock) throws Exception;
 
 
     /**
      * 用户分配角色
-     * @param loginUser 当前登录用户
+     * @param loginUser     当前登录用户
      * @param userAccountId 用户id
-     * @param checkIds 角色id集合
-     * @param loginUser 当前登录用户
-     * @throws Exception
+     * @param checkIds      角色id集合
+     * @param loginUser     当前登录用户
      * @return
+     * @throws Exception
      */
-    Integer dealGrantRoleToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
+    Integer dealGrantRoleToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
-     * @param loginUser 当前登录用户
+     * @param loginUser     当前登录用户
      * @param userAccountId 用户id
-     * @param checkIds 职务id集合
-     * @param loginUser 当前登录用户
-     * @throws Exception
+     * @param checkIds      职务id集合
+     * @param loginUser     当前登录用户
      * @return
+     * @throws Exception
      */
-    Integer dealGrantJobToUser(UserAccount loginUser,String userAccountId,String[] checkIds) throws Exception;
+    Integer dealGrantJobToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception;
 
 
     /**
@@ -169,7 +165,7 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser,String[] checkIds, QueryWrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser, String[] checkIds, QueryWrapper<UserAccount> wrapper);
 
 
     /**
@@ -179,5 +175,5 @@ public interface UserAccountService extends IService<UserAccount>,MyBaseMysqlSer
      * @param wrapper
      * @return
      */
-    Set<String> dealGetExistAccountSet(UserAccount loginUser,Short state, QueryWrapper<UserAccount> wrapper);
+    Set<String> dealGetExistAccountSet(UserAccount loginUser, Short state, QueryWrapper<UserAccount> wrapper);
 }

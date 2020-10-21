@@ -12,6 +12,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserRoleConversion.class}
@@ -26,6 +31,7 @@ public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRole, UserRo
      */
     @Mappings({})
     UserRole transferVoToEntity(UserRoleVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -36,6 +42,7 @@ public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRole, UserRo
             @Mapping(target = "lastModifyer", ignore = true)
     })
     UserRoleVo transferEntityToVo(UserRole entity);
+
     /**
      * dto转vo
      * @param dto

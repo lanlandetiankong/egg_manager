@@ -12,6 +12,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {RoleMenuConversion.class}
@@ -37,6 +42,7 @@ public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMe
             @Mapping(target = "lastModifyer", ignore = true)
     })
     RoleMenuVo transferEntityToVo(RoleMenu entity);
+
     /**
      * dto转vo
      * @param dto

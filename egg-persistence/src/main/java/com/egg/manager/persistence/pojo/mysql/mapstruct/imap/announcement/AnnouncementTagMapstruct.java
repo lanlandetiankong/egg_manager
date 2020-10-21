@@ -11,6 +11,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementTagConversion.class}
@@ -25,6 +30,7 @@ public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<Announcem
      */
     @Mappings({})
     AnnouncementTag transferVoToEntity(AnnouncementTagVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -35,6 +41,7 @@ public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<Announcem
             @Mapping(target = "lastModifyer", ignore = true)
     })
     AnnouncementTagVo transferEntityToVo(AnnouncementTag entity);
+
     /**
      * dto转vo
      * @param dto

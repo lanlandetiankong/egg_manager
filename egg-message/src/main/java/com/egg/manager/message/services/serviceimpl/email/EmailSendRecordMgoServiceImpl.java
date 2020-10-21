@@ -7,10 +7,14 @@ import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRe
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Slf4j
 @Service
-public class EmailSendRecordMgoServiceImpl extends MyBaseMgoServiceImpl<EmailSendRecordRepository, EmailSendRecordMgo,String>
+public class EmailSendRecordMgoServiceImpl extends MyBaseMgoServiceImpl<EmailSendRecordRepository, EmailSendRecordMgo, String>
         implements EmailSendRecordMgoService {
 
 }

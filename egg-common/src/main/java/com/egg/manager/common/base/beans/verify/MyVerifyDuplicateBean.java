@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 验证 重复
- * @param <T>
+ * @author zhoucj
+ * @description: 验证 重复
+ * @date 2020/10/21
  */
 @Data
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class MyVerifyDuplicateBean<T> implements Serializable {
     /**
      * 错误信息
      */
-    private String errorMsg ;
+    private String errorMsg;
     /**
      * 字段名-集合
      */
@@ -35,13 +36,14 @@ public class MyVerifyDuplicateBean<T> implements Serializable {
      */
     private List<String> columnList = new ArrayList<>();
 
-    public MyVerifyDuplicateBean dealAddFieldName(String str){
-        fidldNameList.add(str) ;
-        return this ;
+    public MyVerifyDuplicateBean dealAddFieldName(String str) {
+        fidldNameList.add(str);
+        return this;
     }
-    public MyVerifyDuplicateBean dealAddColumn(String str){
-        columnList.add(str) ;
-        return this ;
+
+    public MyVerifyDuplicateBean dealAddColumn(String str) {
+        columnList.add(str);
+        return this;
     }
 
 }

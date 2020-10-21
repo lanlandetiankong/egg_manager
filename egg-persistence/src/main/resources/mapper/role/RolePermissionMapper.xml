@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.role.RolePermission">
-        <id column="fid" property="fid" />
-        <result column="define_role_id" property="defineRoleId" />
-        <result column="define_permission_id" property="definePermissionId" />
-        <result column="type" property="type" />
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
+        <id column="fid" property="fid"/>
+        <result column="define_role_id" property="defineRoleId"/>
+        <result column="define_permission_id" property="definePermissionId"/>
+        <result column="type" property="type"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -41,18 +41,18 @@
 
     <insert id="customBatchInsert">
         INSERT INTO em_role_permission(
-          <include refid="Base_Insert_Column_List" />
+        <include refid="Base_Insert_Column_List"/>
         )
         VALUES
-        <foreach collection="list" item="item" index="index" separator="," >
+        <foreach collection="list" item="item" index="index" separator=",">
             (
-              <include refid="Base_Insert_Item_Column_List" />
+            <include refid="Base_Insert_Item_Column_List"/>
             )
         </foreach>
     </insert>
     <update id="batchUpdateStateByRole">
         UPDATE em_role_permission
-        SET  state = #{stateVal}
+        SET state = #{stateVal}
         <if test="loginUser != null">
             ,last_modifyer_id = #{loginUser.fid}
         </if>

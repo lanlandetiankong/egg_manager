@@ -1,19 +1,15 @@
 package com.egg.manager.common.base.enums.base;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/6
- * \* Time: 0:34
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public enum  BaseStateEnum {
-    ENABLED((short)1,"启用","启用"),
-    DISABLED((short)0,"禁用","禁用"),
-    DELETE((short)-1,"删除","删除"),
-    LOCKED((short)-10,"锁定","锁定")
-    ;
+public enum BaseStateEnum {
+    ENABLED((short) 1, "启用", "启用"),
+    DISABLED((short) 0, "禁用", "禁用"),
+    DELETE((short) -1, "删除", "删除"),
+    LOCKED((short) -10, "锁定", "锁定");
 
     BaseStateEnum(Short value, String name, String info) {
         this.value = value;
@@ -21,9 +17,9 @@ public enum  BaseStateEnum {
         this.info = info;
     }
 
-    private Short value ;
-    private String name ;
-    private String info ;
+    private Short value;
+    private String name;
+    private String info;
 
     public Short getValue() {
         return value;

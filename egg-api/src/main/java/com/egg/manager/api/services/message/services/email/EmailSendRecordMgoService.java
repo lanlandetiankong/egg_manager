@@ -5,10 +5,12 @@ import com.egg.manager.persistence.db.mongo.mo.message.email.EmailSendRecordMgo;
 import org.springframework.stereotype.Repository;
 
 /**
- * MongoDb-FormDefinitionMO 表单定义-MService
+ * @author zhoucj
+ * @description: 表单定义
+ * @date 2020/10/20
  */
 @Repository
-public interface EmailSendRecordMgoService extends MyBaseMgoService<EmailSendRecordMgo,String> {
+public interface EmailSendRecordMgoService extends MyBaseMgoService<EmailSendRecordMgo, String> {
 
 
 }

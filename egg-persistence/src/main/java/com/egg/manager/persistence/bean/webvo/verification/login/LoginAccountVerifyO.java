@@ -8,12 +8,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * \* note: 登录表单 对应的验证对象
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 登录表单 对应的验证对象
+ * @date 2020/10/20
  */
 @Data
 public class LoginAccountVerifyO extends WebVoBaseVerifyO<LoginAccountVo> {

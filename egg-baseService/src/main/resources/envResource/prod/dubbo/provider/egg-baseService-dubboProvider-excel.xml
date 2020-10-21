@@ -7,13 +7,15 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
-    <dubbo:service protocol="dubbo" ref="myXlsBaseService" interface="com.egg.manager.api.services.excel.service.common.MyXlsBaseService"/>
+    <dubbo:service protocol="dubbo" ref="myXlsBaseService"
+                   interface="com.egg.manager.api.services.excel.service.common.MyXlsBaseService"/>
 
     <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
 
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
-    <dubbo:service protocol="dubbo" ref="userAccountXlsService" interface="com.egg.manager.api.services.excel.service.user.UserAccountXlsService"/>
+    <dubbo:service protocol="dubbo" ref="userAccountXlsService"
+                   interface="com.egg.manager.api.services.excel.service.user.UserAccountXlsService"/>
 
     <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
 

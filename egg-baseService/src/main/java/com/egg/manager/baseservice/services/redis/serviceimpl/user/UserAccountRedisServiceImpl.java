@@ -27,10 +27,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Service(interfaceClass = UserAccountRedisService.class)
@@ -59,7 +58,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
 
     /**
      * 根据 jwt的authorization值 取得 当前用户 Entity
-     *
      * @param authorization jwt值
      * @return
      */
@@ -87,7 +85,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
 
     /**
      * 取得 当前用户 Entity
-     *
      * @param userAccountId
      * @return
      */
@@ -120,7 +117,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
 
     /**
      * 取得 当前用户所属租户 Entity
-     *
      * @param defineTenantId
      * @return
      */
@@ -132,7 +128,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
 
     /**
      * 取得 当前用户 的所有 角色-Set<String>
-     *
      * @param userAccountId
      * @return
      */
@@ -146,7 +141,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
     /**
      * 取得 当前用户 的所有 权限-Set<String>
      * 如果取得为空的话会 自动刷新缓存
-     *
      * @param userAccountId
      * @return
      */
@@ -160,7 +154,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
     /**
      * 取得 当前用户 的所有 routerUrl-List<String>
      * 如果取得为空的话会 自动刷新缓存
-     *
      * @param userAccountId
      * @return
      */
@@ -175,7 +168,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
     /**
      * 取得 当前用户 index界面展示的菜单列表-List<String>
      * 如果取得为空的话会 自动刷新缓存
-     *
      * @param userAccountId
      * @return
      */
@@ -189,7 +181,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
     /**
      * 取得 当前用户 的所有 按钮-Set<String>
      * 如果取得为空的话会 自动刷新缓存
-     *
      * @param userAccountId
      * @return
      */
@@ -201,7 +192,6 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
 
     /**
      * 刷新缓存 处理
-     *
      * @param key
      * @param hashKey
      * @param userAccountId

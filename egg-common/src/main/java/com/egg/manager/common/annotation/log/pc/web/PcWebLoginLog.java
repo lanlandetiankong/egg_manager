@@ -3,10 +3,16 @@ package com.egg.manager.common.annotation.log.pc.web;
 import java.lang.annotation.*;
 
 /**
- * 登录 日志记录到数据库 注解
+ *
+ */
+
+/**
+ * @description: 登录 日志记录到数据库 注解
  * aop 对controller 切面 记录
  * 1、当action为空时，会改为取用@ApiOperation的value
  * 2、当description为空时，会改为取用@ApiOperation的notes
+ * @author zhoucj
+ * @date 2020/10/21
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,26 +21,26 @@ public @interface PcWebLoginLog {
 
 
     /**
-     * 操作
-     * @return
+     操作
+     @return
      */
-    String action() default "" ;
+    String action() default "";
 
     /**
-     * 相对于项目的 全路径
-     * @return
+     相对于项目的 全路径
+     @return
      */
-    String fullPath() ;
+    String fullPath();
 
     /**
-     * 描述
-     * @return
+     描述
+     @return
      */
-    String description() default "" ;
+    String description() default "";
 
     /**
-     * 是否记录到 mongodb
-     * @return
+     是否记录到 mongodb
+     @return
      */
-    boolean flag()  default true ;
+    boolean flag() default true;
 }

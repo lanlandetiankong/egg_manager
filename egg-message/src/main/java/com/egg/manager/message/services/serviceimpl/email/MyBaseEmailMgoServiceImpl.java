@@ -24,7 +24,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.util.Map;
 
-
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Slf4j
 @Service
 public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
@@ -42,9 +46,8 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
     private String DEFAULT_SEND_PERSONAL_USER_NAME;
 
 
-
     @Autowired
-    private EmailSendRecordRepository emailSendRecordRepository ;
+    private EmailSendRecordRepository emailSendRecordRepository;
 
     @Override
     public void sendSimpleEmail(EmailSendRecordMgvo emailSendRecordMgvo) {
@@ -56,10 +59,11 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
         emailSendRecordRepository.save(emailSendRecordMO);*/
         log.info("发送给{}的标题为< {} >邮件已经发送。参数JSON为{}", emailSendRecordMgvo.doGainReceiveUserNameList(), emailSendRecordMgvo.getSubject(), JSON.toJSONString(mailMessage));
     }
+
     @Override
     public void sendAttachmentsMail(EmailSendRecordMgvo emailSendRecordMgvo) {
         MimeMessage message = javaMailSender.createMimeMessage();
-        int fileSize = CollectionUtils.isNotEmpty(emailSendRecordMgvo.getAccessoryInfoList()) ? emailSendRecordMgvo.getAccessoryInfoList().size() : 0 ;
+        int fileSize = CollectionUtils.isNotEmpty(emailSendRecordMgvo.getAccessoryInfoList()) ? emailSendRecordMgvo.getAccessoryInfoList().size() : 0;
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(this.doGetMailFromUser(emailSendRecordMgvo));
@@ -75,7 +79,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
         }
         javaMailSender.send(message);
         //TODO 保存记录到数据库
-        log.info("发送给{}的标题为< {} >邮件已经发送(含附件共{}个)。参数JSON为{}", emailSendRecordMgvo.doGainReceiveUserNameList(), emailSendRecordMgvo.getSubject(),fileSize,JSON.toJSONString(emailSendRecordMgvo));
+        log.info("发送给{}的标题为< {} >邮件已经发送(含附件共{}个)。参数JSON为{}", emailSendRecordMgvo.doGainReceiveUserNameList(), emailSendRecordMgvo.getSubject(), fileSize, JSON.toJSONString(emailSendRecordMgvo));
     }
 
     @Override
@@ -83,7 +87,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         //这里可以自定义发信名称比如：爪哇笔记
-        helper.setFrom(doGetMailFromUser(emailSendRecordMgvo),doGetMailPersonalFromUser(emailSendRecordMgvo));
+        helper.setFrom(doGetMailFromUser(emailSendRecordMgvo), doGetMailPersonalFromUser(emailSendRecordMgvo));
         helper.setTo(emailSendRecordMgvo.getReceiveUserInfoList().stream().toArray(String[]::new));
         helper.setSubject(emailSendRecordMgvo.getSubject());
         Map<String, String> kvMap = (emailSendRecordMgvo.getKvMap() != null) ? emailSendRecordMgvo.getKvMap() : Maps.newHashMap();
@@ -103,21 +107,22 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
      * @param emailSendRecordMgvo
      * @return
      */
-    private String doGetMailFromUser(EmailSendRecordMgvo emailSendRecordMgvo){
-        if(emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getEmailAddress())){
-            return DEFAULT_SEND_USER_NAME ;
+    private String doGetMailFromUser(EmailSendRecordMgvo emailSendRecordMgvo) {
+        if (emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getEmailAddress())) {
+            return DEFAULT_SEND_USER_NAME;
         }
         return emailSendRecordMgvo.getFromUserInfo().getEmailAddress();
     }
+
     /**
      * 取得发送人(个性化)
      * @param emailSendRecordMgvo
      * @return
      */
-    private String doGetMailPersonalFromUser(EmailSendRecordMgvo emailSendRecordMgvo){
-        if(emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getPersonal())){
-            return DEFAULT_SEND_PERSONAL_USER_NAME ;
+    private String doGetMailPersonalFromUser(EmailSendRecordMgvo emailSendRecordMgvo) {
+        if (emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getPersonal())) {
+            return DEFAULT_SEND_PERSONAL_USER_NAME;
         }
-        return emailSendRecordMgvo.getFromUserInfo().getPersonal() ;
+        return emailSendRecordMgvo.getFromUserInfo().getPersonal();
     }
 }

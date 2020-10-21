@@ -1,9 +1,14 @@
 package com.egg.manager.common.base.enums.module;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum DefineMenuUrlJumpTypeEnum {
-    RouterUrlJump(1,"Router地址跳转","Router地址跳转"),
-    OutUrlJump(2,"在当前页面打开外部链接","在当前页面打开外部链接"),
-    OutUrlBlankJump(3,"在新页面打开外部链接","在新页面打开外部链接"),
+    RouterUrlJump(1, "Router地址跳转", "Router地址跳转"),
+    OutUrlJump(2, "在当前页面打开外部链接", "在当前页面打开外部链接"),
+    OutUrlBlankJump(3, "在新页面打开外部链接", "在新页面打开外部链接"),
     ;
 
     DefineMenuUrlJumpTypeEnum(Integer value, String name, String label) {
@@ -12,10 +17,10 @@ public enum DefineMenuUrlJumpTypeEnum {
         this.label = label;
     }
 
-    private Integer value ;
-    private String name ;
-    private boolean isNeedFilter ;
-    private String label ;
+    private Integer value;
+    private String name;
+    private boolean isNeedFilter;
+    private String label;
 
     public Integer getValue() {
         return value;
@@ -40,6 +45,7 @@ public enum DefineMenuUrlJumpTypeEnum {
     public void setLabel(String label) {
         this.label = label;
     }
+
     public boolean getIsNeedFilter() {
         return isNeedFilter;
     }
@@ -49,18 +55,17 @@ public enum DefineMenuUrlJumpTypeEnum {
     }
 
 
-
-    public static DefineMenuUrlJumpTypeEnum doGetEnumByValue(Integer value){
-        if(value == null){
-            return null ;
+    public static DefineMenuUrlJumpTypeEnum doGetEnumByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
         DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
-        for(DefineMenuUrlJumpTypeEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj ;
+        for (DefineMenuUrlJumpTypeEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj;
             }
         }
-        return null ;
+        return null;
     }
 
 

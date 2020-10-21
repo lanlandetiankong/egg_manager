@@ -9,10 +9,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhoucj
+ * @description: 通用的返回结果模型
+ * @date 2020/10/20
+ */
 @Data
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -83,53 +87,57 @@ public class MyCommonResult<T> implements Serializable {
      * 更多参数,配置 com.egg.manager.persistence.bean.helper.MyRstMoreAttrKey
      */
     @Builder.Default
-    private Map<String,Object> moreAttribute = Maps.newHashMap();
+    private Map<String, Object> moreAttribute = Maps.newHashMap();
 
 
+    /**
+     * 只允许通过static构造类
+     */
+    private MyCommonResult() {
+    }
 
-
-
-    private MyCommonResult(){}
-    private static <T> MyCommonResult<T> gainInitQueryBean(Class<T> tClass){
+    private static <T> MyCommonResult<T> gainInitQueryBean(Class<T> tClass) {
         MyCommonResult<T> result = new MyCommonResult<>();
         result.setHasError(false);
         result.setHasWarning(false);
-        return result ;
+        return result;
     }
 
-    private static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass){
+    private static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass) {
         MyCommonResult<T> result = gainInitQueryBean(tClass);
-        return result ;
+        return result;
     }
-    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String msg){
+
+    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String msg) {
         MyCommonResult<T> result = gainInitQueryBean(tClass);
         result.setMsg(msg);
-        return result ;
+        return result;
     }
 
-    public static <E> MyCommonResult<Object> gainEnumResult(String msg){
+    public static <E> MyCommonResult<Object> gainEnumResult(String msg) {
         MyCommonResult<Object> result = gainInitQueryBean(Object.class);
         result.setMsg(msg);
-        return result ;
+        return result;
     }
 
-    public static MyCommonResult gainOperationResult(String info){
+    public static MyCommonResult gainOperationResult(String info) {
         MyCommonResult result = gainInitQueryBean(Object.class);
         result.setMsg(info);
-        return result ;
+        return result;
     }
 
-    public static MyCommonResult gainErrorResult(String errorMsg){
+    public static MyCommonResult gainErrorResult(String errorMsg) {
         MyCommonResult result = gainInitQueryBean(Object.class);
         result.setHasError(true);
         result.setMsg(errorMsg);
-        return result ;
+        return result;
     }
-    public static <T> MyCommonResult<T> gainErrorResult(Class<T> tClass,String errorMsg){
+
+    public static <T> MyCommonResult<T> gainErrorResult(Class<T> tClass, String errorMsg) {
         MyCommonResult<T> result = gainInitQueryBean(tClass);
         result.setHasError(true);
         result.setMsg(errorMsg);
-        return result ;
+        return result;
     }
 
     /**
@@ -151,8 +159,8 @@ public class MyCommonResult<T> implements Serializable {
      * @param key
      * @param value
      */
-    public void addMoreAttribute(String key,Object value){
-        this.moreAttribute = (this.moreAttribute == null) ? Maps.newHashMap() : this.moreAttribute ;
-        this.moreAttribute.put(key,value) ;
+    public void addMoreAttribute(String key, Object value) {
+        this.moreAttribute = (this.moreAttribute == null) ? Maps.newHashMap() : this.moreAttribute;
+        this.moreAttribute.put(key, value);
     }
 }

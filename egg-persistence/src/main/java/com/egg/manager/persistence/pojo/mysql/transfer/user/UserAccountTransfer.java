@@ -16,11 +16,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("userAccountTransfer")
 public class UserAccountTransfer extends BaseMysqlTransfer {
 
     static UserAccountMapstruct userAccountMapstruct = UserAccountMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -33,6 +40,7 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         UserAccount entity = userAccountMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -45,6 +53,7 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         UserAccountVo vo = userAccountMapstruct.transferEntityToVo(entity);
         return vo;
     }
+
     /**
      * dto转vo
      * @param dto

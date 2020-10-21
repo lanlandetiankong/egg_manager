@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:
- * @ClassName: EmailSendRecordMgo
- * @Author: zhoucj
- * @Date: 2020/9/11 14:55
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @Builder

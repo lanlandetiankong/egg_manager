@@ -18,11 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("announcementDraftTransfer")
 public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
 
     static AnnouncementDraftMapstruct announcementDraftMapstruct = AnnouncementDraftMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -35,6 +42,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
         AnnouncementDraft entity = announcementDraftMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -93,7 +101,6 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
 
     /**
      * 设置tag的相关信息
-     *
      * @param tagIds
      * @param vo
      * @param announcementTagMap

@@ -2,6 +2,11 @@ package com.egg.manager.common.base.pagination;
 
 import java.io.Serializable;
 
-public class MyBasePagination implements Serializable{
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
+public class MyBasePagination implements Serializable {
 
 }

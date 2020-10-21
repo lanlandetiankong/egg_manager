@@ -8,28 +8,23 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/4
- * \* Time: 22:35
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FrontEntitySelectBean  implements Serializable {
+public class FrontEntitySelectBean implements Serializable {
     /**
      * Select的值
      */
-    private String value ;
+    private String value;
     /**
      * Select展示的名称
      */
-    private String label ;
-
-
+    private String label;
 
 
 }

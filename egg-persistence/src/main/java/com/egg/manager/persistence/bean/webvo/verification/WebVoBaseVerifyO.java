@@ -3,12 +3,9 @@ package com.egg.manager.persistence.bean.webvo.verification;
 import java.io.Serializable;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:26
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public class WebVoBaseVerifyO<T> implements Serializable {
 

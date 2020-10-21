@@ -2,13 +2,18 @@ package com.egg.manager.api.services.message.services.email;
 
 import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMgvo;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public interface MyBaseEmailMgoService {
 
     /**
      * 发送普通文本
      * @param emailSendRecordMgvo
      */
-    void sendSimpleEmail(EmailSendRecordMgvo emailSendRecordMgvo) ;
+    void sendSimpleEmail(EmailSendRecordMgvo emailSendRecordMgvo);
 
     /**
      * 发送邮件(带附件)

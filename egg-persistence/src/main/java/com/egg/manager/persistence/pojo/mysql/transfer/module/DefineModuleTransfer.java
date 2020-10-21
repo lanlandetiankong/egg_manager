@@ -11,11 +11,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineModuleTransfer")
 public class DefineModuleTransfer extends BaseMysqlTransfer {
 
     static DefineModuleMapstruct defineModuleMapstruct = DefineModuleMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -28,6 +35,7 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
         DefineModule entity = defineModuleMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -40,6 +48,7 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
         DefineModuleVo vo = defineModuleMapstruct.transferEntityToVo(entity);
         return vo;
     }
+
     /**
      * dto转vo
      * @param dto

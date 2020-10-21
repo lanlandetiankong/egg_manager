@@ -3,21 +3,18 @@ package com.egg.manager.common.base.enums.base;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/4/15
- * \* Time: 22:03
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public enum  UserSexEnum {
-    Man((short)1,"男","男"),
-    Woman((short)0,"女","女"),
-    Unknow((short)-1,"未知","未知"),
+public enum UserSexEnum {
+    Man((short) 1, "男", "男"),
+    Woman((short) 0, "女", "女"),
+    Unknow((short) -1, "未知", "未知"),
     ;
-    private Short value ;
-    private String  name ;
-    private String  label ;
+    private Short value;
+    private String name;
+    private String label;
 
     UserSexEnum(Short value, String name, String label) {
         this.value = value;
@@ -25,27 +22,27 @@ public enum  UserSexEnum {
         this.label = label;
     }
 
-    public static String dealGetNameByVal(Short value){
+    public static String dealGetNameByVal(Short value) {
         UserSexEnum[] enums = UserSexEnum.values();
-        for(UserSexEnum enumObj : enums){
-            if(enumObj.getValue().equals(value)){
-                return enumObj.getName() ;
+        for (UserSexEnum enumObj : enums) {
+            if (enumObj.getValue().equals(value)) {
+                return enumObj.getName();
             }
         }
-        return "" ;
+        return "";
     }
 
-    public static Short dealGetValByName(String value){
+    public static Short dealGetValByName(String value) {
         UserSexEnum[] enums = UserSexEnum.values();
-        value = StringUtils.isBlank(value) ? "" : value ;
+        value = StringUtils.isBlank(value) ? "" : value;
         //去除空格
-        value = value.trim().replace(" ","");
-        for(UserSexEnum enumObj : enums){
-            if(enumObj.getName().equals(value)){
-                return enumObj.getValue() ;
+        value = value.trim().replace(" ", "");
+        for (UserSexEnum enumObj : enums) {
+            if (enumObj.getName().equals(value)) {
+                return enumObj.getValue();
             }
         }
-        return Unknow.getValue() ;
+        return Unknow.getValue();
     }
 
 

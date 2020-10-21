@@ -19,10 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("announcementTransfer")
 public class AnnouncementTransfer extends BaseMysqlTransfer {
     static AnnouncementMapstruct announcementMapstruct = AnnouncementMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo

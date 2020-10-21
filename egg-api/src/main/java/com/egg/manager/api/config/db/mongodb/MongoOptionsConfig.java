@@ -5,12 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * \* note: mongodb 相关配置
- * @author: zhouchengjie
- * \* Date: 2020/8/11
- * \* Time: 9:36
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: mongodb 相关配置
+ * @date 2020/10/21
  */
 @Configuration
 public class MongoOptionsConfig {

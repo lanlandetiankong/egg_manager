@@ -1,9 +1,13 @@
 package com.egg.manager.common.base.enums.module;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 public enum DefineModuleTypeEnum {
-    DefaultHas(1,"默认拥有","默认拥有"),
-    AuthorizedDistribution(100,"授权分配","授权分配")
-    ;
+    DefaultHas(1, "默认拥有", "默认拥有"),
+    AuthorizedDistribution(100, "授权分配", "授权分配");
 
     DefineModuleTypeEnum(Integer value, String name, String label) {
         this.value = value;
@@ -11,10 +15,10 @@ public enum DefineModuleTypeEnum {
         this.label = label;
     }
 
-    private Integer value ;
-    private String name ;
-    private boolean isNeedFilter ;
-    private String label ;
+    private Integer value;
+    private String name;
+    private boolean isNeedFilter;
+    private String label;
 
     public Integer getValue() {
         return value;
@@ -39,6 +43,7 @@ public enum DefineModuleTypeEnum {
     public void setLabel(String label) {
         this.label = label;
     }
+
     public boolean getIsNeedFilter() {
         return isNeedFilter;
     }
@@ -48,18 +53,17 @@ public enum DefineModuleTypeEnum {
     }
 
 
-
-    public static DefineModuleTypeEnum doGetEnumByValue(Integer value){
-        if(value == null){
-            return null ;
+    public static DefineModuleTypeEnum doGetEnumByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
         DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
-        for(DefineModuleTypeEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj ;
+        for (DefineModuleTypeEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj;
             }
         }
-        return null ;
+        return null;
     }
 
 

@@ -10,14 +10,10 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 
 /**
- * \* note: SmartFormTypeDefinitionMgo 对应的验证对象
- * @author: zhouchengjie
- * \* Date: 2020/7/25
- * \* Time: 11:06
- * \* Description:
- *
+ * @author zhoucj
+ * @description: SmartFormTypeDefinitionMgo 对应的验证对象
+ * @date 2020/10/21
  * @see SmartFormTypeDefinitionMgo
- * \
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

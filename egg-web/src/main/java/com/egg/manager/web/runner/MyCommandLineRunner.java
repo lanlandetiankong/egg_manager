@@ -23,12 +23,9 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/3/18
- * \* Time: 22:17
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Component
@@ -127,7 +124,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
     private void doPackageScanner(String packageName) {
         //把所有的.替换成/
         URL url = this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH));
-        String jarSuffix = ".jar" ;
+        String jarSuffix = ".jar";
         // 是否循环迭代
         if (StringUtils.countMatches(url.getFile(), jarSuffix) > 0) {
             boolean recursive = true;

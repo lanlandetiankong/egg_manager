@@ -11,11 +11,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("userJobTransfer")
 public class UserJobTransfer extends BaseMysqlTransfer {
 
     static UserJobMapstruct userJobMapstruct = UserJobMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo

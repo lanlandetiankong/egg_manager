@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * \* note: 表单类型
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @Builder

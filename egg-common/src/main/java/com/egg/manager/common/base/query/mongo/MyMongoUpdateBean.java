@@ -9,10 +9,9 @@ import org.bson.Document;
 import org.springframework.data.mongodb.core.query.Update;
 
 /**
- * @Description:
- * @ClassName: MyMongoUpdateBean
- * @Author: zhoucj
- * @Date: 2020/8/19 16:44
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @AllArgsConstructor
@@ -22,16 +21,16 @@ public class MyMongoUpdateBean<T> {
     /**
      * 更新的文档对象
      */
-    private Document document ;
+    private Document document;
     /**
      * class
      */
-    private Class clazz ;
+    private Class clazz;
 
 
-    public static <T> MyMongoUpdateBean getByMongoUpdate(Update update,Class<T> clazz){
-        Assert.notNull(update,"请传入要更新的update对象!");
-        Assert.notNull(clazz,"请指定要clazz参数!");
+    public static <T> MyMongoUpdateBean getByMongoUpdate(Update update, Class<T> clazz) {
+        Assert.notNull(update, "请传入要更新的update对象!");
+        Assert.notNull(clazz, "请指定要clazz参数!");
         return MyMongoUpdateBean.builder().document(update.getUpdateObject()).clazz(clazz).build();
     }
 

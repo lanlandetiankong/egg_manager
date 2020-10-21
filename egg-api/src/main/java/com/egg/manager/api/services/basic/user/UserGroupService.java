@@ -7,14 +7,11 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
-public interface UserGroupService extends IService<UserGroup>,MyBaseMysqlService<UserGroup,UserGroupMapper,UserGroupVo> {
+public interface UserGroupService extends IService<UserGroup>, MyBaseMysqlService<UserGroup, UserGroupMapper, UserGroupVo> {
 
-    
+
 }

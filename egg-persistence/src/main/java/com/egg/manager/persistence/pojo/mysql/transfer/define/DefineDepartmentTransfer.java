@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineDepartmentTransfer")
 public class DefineDepartmentTransfer extends BaseMysqlTransfer {
@@ -28,6 +34,7 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
         DefineDepartment entity = defineDepartmentMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity

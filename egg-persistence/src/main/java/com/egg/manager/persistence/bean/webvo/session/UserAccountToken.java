@@ -12,12 +12,9 @@ import lombok.NoArgsConstructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 15:45
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 @Data
 @Builder

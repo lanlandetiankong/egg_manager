@@ -12,13 +12,18 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Map;
 
-
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementConversion.class}
 )
 public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement, AnnouncementVo, AnnouncementDto> {
     AnnouncementMapstruct INSTANCE = Mappers.getMapper(AnnouncementMapstruct.class);
+
     /**
      * vo转entity
      * @param vo
@@ -31,7 +36,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
 
     /**
      * entity转vo
-     * @param entity db实体类
+     * @param entity             db实体类
      * @param announcementTagMap 公告标签Map
      * @return
      */
@@ -44,6 +49,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "lastModifyer", ignore = true)
     })
     AnnouncementVo transferEntityToVo(Announcement entity, @Context Map<String, AnnouncementTag> announcementTagMap);
+
     /**
      * dto转vo
      * @param dto

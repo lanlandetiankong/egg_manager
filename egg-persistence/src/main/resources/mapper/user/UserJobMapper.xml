@@ -4,31 +4,33 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.user.UserJob">
-        <id column="fid" property="fid" />
-        <result column="user_account_id" property="userAccountId" />
-        <result column="define_job_id" property="defineJobId" />
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
+        <id column="fid" property="fid"/>
+        <result column="user_account_id" property="userAccountId"/>
+        <result column="define_job_id" property="defineJobId"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
 
     <!-- Dto通用查询映射结果 -->
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.user.UserJobDto">
-        <id column="fid" property="fid" />
-        <result column="user_account_id" property="userAccountId" />
-        <result column="define_job_id" property="defineJobId" />
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <id column="fid" property="fid"/>
+        <result column="user_account_id" property="userAccountId"/>
+        <result column="define_job_id" property="defineJobId"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -73,7 +75,6 @@
     </sql>
 
 
-
     <sql id="Base_Insert_Item_Column_List">
         #{item.fid},
         #{item.userAccountId},
@@ -90,28 +91,30 @@
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="euj" />
+            <property name="base_alias_name" value="euj"/>
         </include>
         FROM em_user_job euj
         <where>
-            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
-                <property name="table_name_alias" value="euj" />
+            <include
+                    refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="euj"/>
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
-            <property name="table_name_alias" value="euj" />
+        <include
+                refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="euj"/>
         </include>
     </select>
 
 
     <insert id="customBatchInsert">
         INSERT INTO em_user_job(
-          <include refid="Base_Insert_Column_List" />
+        <include refid="Base_Insert_Column_List"/>
         )
         VALUES
-        <foreach collection="list" item="item" index="index" separator="," >
+        <foreach collection="list" item="item" index="index" separator=",">
             (
-            <include refid="Base_Insert_Item_Column_List" />
+            <include refid="Base_Insert_Item_Column_List"/>
             )
         </foreach>
     </insert>
@@ -119,9 +122,9 @@
     <update id="batchFakeDelByIds" parameterType="java.util.List">
         UPDATE em_user_job
         SET state = -1
-            <if test="loginUser != null">
-                ,last_modifyer_id=#{loginUser.fid}
-            </if>
+        <if test="loginUser != null">
+            ,last_modifyer_id=#{loginUser.fid}
+        </if>
         where fid IN
         <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
             #{item}
@@ -130,10 +133,10 @@
 
     <update id="batchUpdateStateByUserAccountId">
         UPDATE em_user_job
-        SET  state = #{stateVal}
-            <if test="loginUser != null">
-                ,last_modifyer_id=#{loginUser.fid}
-            </if>
+        SET state = #{stateVal}
+        <if test="loginUser != null">
+            ,last_modifyer_id=#{loginUser.fid}
+        </if>
         where user_account_id = #{userAccountId}
         and define_job_id IN
         <foreach collection="jobIdList" item="item" index="index" separator="," open="(" close=")">
@@ -141,7 +144,7 @@
         </foreach>
     </update>
 
-    <select id="findAllJobIdByUserAccountId"  resultType="java.lang.String">
+    <select id="findAllJobIdByUserAccountId" resultType="java.lang.String">
         SELECT dr.fid FROM em_define_job dr
         left JOIN em_user_job uj on dr.fid = uj.define_job_id
         <where>
@@ -152,7 +155,6 @@
         </where>
 
     </select>
-
 
 
 </mapper>

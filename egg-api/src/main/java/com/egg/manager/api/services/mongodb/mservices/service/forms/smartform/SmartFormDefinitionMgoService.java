@@ -7,14 +7,16 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.springframework.stereotype.Repository;
 
 /**
- * MongoDb-FormDefinitionMO 表单定义-MService
+ * @author zhoucj
+ * @description:表单定义-MService
+ * @date 2020/10/20
  */
 @Repository
-public interface SmartFormDefinitionMgoService extends MyBaseMgoService<SmartFormDefinitionMgo,String> {
+public interface SmartFormDefinitionMgoService extends MyBaseMgoService<SmartFormDefinitionMgo, String> {
 
     /**
      * 根据表单类型id更新表单中冗余的表单类型数据
-     * @param userAccount 当前登录用户
+     * @param userAccount          当前登录用户
      * @param formTypeDefinitionMO
      * @return
      */

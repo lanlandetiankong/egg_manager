@@ -7,12 +7,9 @@ import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * \* note:表单项
- * @author: zhouchengjie
- * \* Date: 2020/7/22
- * \* Time: 23:58
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 表单记录
+ * @date 2020/10/20
  */
 @Data
 @Builder

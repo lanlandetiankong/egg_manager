@@ -12,6 +12,11 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineJobConversion.class}
@@ -26,6 +31,7 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
      */
     @Mappings({})
     DefineJob transferVoToEntity(DefineJobVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -37,6 +43,7 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefineJobVo transferEntityToVo(DefineJob entity);
+
     /**
      * dto转vo
      * @param dto

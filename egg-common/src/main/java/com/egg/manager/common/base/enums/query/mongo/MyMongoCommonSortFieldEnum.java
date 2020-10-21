@@ -1,18 +1,15 @@
 package com.egg.manager.common.base.enums.query.mongo;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/8/8
- * \* Time: 19:06
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
  */
 public enum MyMongoCommonSortFieldEnum {
-    CreateTime_Asc("create",true),
-    CreateTime_Desc("createTime",true),
-    LastModifiedDate_Asc("lastModifiedDate",true),
-    LastModifiedDate_Desc("lastModifiedDate",false),
+    CreateTime_Asc("create", true),
+    CreateTime_Desc("createTime", true),
+    LastModifiedDate_Asc("lastModifiedDate", true),
+    LastModifiedDate_Desc("lastModifiedDate", false),
     ;
 
 

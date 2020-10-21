@@ -11,7 +11,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户&角色 关联-entity
+ * -entity
+ */
+
+/**
+ * @author zhoucj
+ * @description: 用户&角色 关联
+ * @date 2020/10/20
  */
 @Data
 @Builder
@@ -46,17 +52,17 @@ public class UserRole extends Model<UserRole> {
     /**
      * 状态
      */
-    @TableField(value = "state",fill = FieldFill.INSERT)
+    @TableField(value = "state", fill = FieldFill.INSERT)
     private Short state;
     /**
      * 创建时间
      */
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 修改时间
      */
-    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 创建用户id
@@ -73,7 +79,7 @@ public class UserRole extends Model<UserRole> {
      */
     @Version
     @TableField(value = "version")
-    private Integer version ;
+    private Integer version;
 
     @Override
     protected Serializable pkVal() {

@@ -14,12 +14,9 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * \* note: 增强方法注入，将含有 @CurrentLoginerBelongTenant 注解的方法参数注入当前登录用户
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 16:51
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 增强方法注入，将含有 @CurrentLoginerBelongTenant 注解的方法参数注入当前登录用户
+ * @date 2020/10/21
  */
 public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -30,7 +27,6 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
      * 判断:
      * 1、方法参数列表是否有 [DefineTenant]参数
      * 2、是否有 @CurrentLoginerBelongTenant 注解
-     *
      * @param parameter
      * @return
      */
@@ -41,7 +37,6 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
 
     /**
      * 取得用户并返回注入，取得租户信息失败将会抛出UnauthorizedException异常
-     *
      * @param methodParameter
      * @param modelAndViewContainer
      * @param nativeWebRequest

@@ -12,12 +12,9 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * <p>
- * 登录日志表 - MongoDB
- * </p>
- *
- * @author zhouchengjie
- * @since 2020-08-11
+ * @author zhoucj
+ * @description: 登录日志表
+ * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -26,6 +23,7 @@ import org.mapstruct.factory.Mappers;
 public interface PcWebLoginLogMapstruct extends MyBaseMongoMapstruct<PcWebLoginLogMgo, PcWebLoginLogMgvo> {
 
     PcWebLoginLogMapstruct INSTANCE = Mappers.getMapper(PcWebLoginLogMapstruct.class);
+
     /**
      * mgvo转mgo
      * @param mgvo

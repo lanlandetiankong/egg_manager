@@ -12,10 +12,17 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Component
 @Named("defineRoleTransfer")
 public class DefineRoleTransfer extends BaseMysqlTransfer {
     static DefineRoleMapstruct defineRoleMapstruct = DefineRoleMapstruct.INSTANCE;
+
     /**
      * vo转entity
      * @param vo
@@ -28,6 +35,7 @@ public class DefineRoleTransfer extends BaseMysqlTransfer {
         DefineRole entity = defineRoleMapstruct.transferVoToEntity(vo);
         return entity;
     }
+
     /**
      * entity转vo
      * @param entity
@@ -40,6 +48,7 @@ public class DefineRoleTransfer extends BaseMysqlTransfer {
         DefineRoleVo vo = defineRoleMapstruct.transferEntityToVo(entity);
         return vo;
     }
+
     /**
      * dto转vo
      * @param dto

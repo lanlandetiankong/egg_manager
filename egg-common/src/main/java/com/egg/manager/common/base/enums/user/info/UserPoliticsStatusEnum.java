@@ -1,30 +1,26 @@
 package com.egg.manager.common.base.enums.user.info;
 
 /**
- * 政治面貌 类型枚举类
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2020/2/16
- * \* Time: 14:07
- * \* Description:
- * \
+ * @author zhoucj
+ * @description: 政治面貌 类型枚举类
+ * @date 2020/10/20
  */
 public enum UserPoliticsStatusEnum {
-    PuTongGongMin(0,"普通公民","普通公民"),
-    GongQingTuanYuan(60,"共青团员","共青团员"),
-    ZhongGongYuBeiTuanYuan(80,"中共预备党员","中共预备党员"),
-    ZhongGongDangYuan(100,"中共党员","中共党员")
-    ;
-    UserPoliticsStatusEnum(Integer value, String name,String label) {
+    PuTongGongMin(0, "普通公民", "普通公民"),
+    GongQingTuanYuan(60, "共青团员", "共青团员"),
+    ZhongGongYuBeiTuanYuan(80, "中共预备党员", "中共预备党员"),
+    ZhongGongDangYuan(100, "中共党员", "中共党员");
+
+    UserPoliticsStatusEnum(Integer value, String name, String label) {
         this.value = value;
         this.name = name;
         this.label = label;
 
     }
 
-    private Integer value ;
-    private String name ;
-    private String label ;
+    private Integer value;
+    private String name;
+    private String label;
 
 
     public Integer getValue() {
@@ -52,17 +48,16 @@ public enum UserPoliticsStatusEnum {
     }
 
 
-
-    public static UserPoliticsStatusEnum doGetEnumByValue(Integer value){
-        if(value == null){
-            return null ;
+    public static UserPoliticsStatusEnum doGetEnumByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
         UserPoliticsStatusEnum[] enums = UserPoliticsStatusEnum.values();
-        for(UserPoliticsStatusEnum enumObj : enums){
-            if(enumObj.value.equals(value)){
-                return enumObj ;
+        for (UserPoliticsStatusEnum enumObj : enums) {
+            if (enumObj.value.equals(value)) {
+                return enumObj;
             }
         }
-        return null ;
+        return null;
     }
 }

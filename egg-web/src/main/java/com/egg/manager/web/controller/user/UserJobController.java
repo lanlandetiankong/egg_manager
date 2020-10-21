@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 23:41
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 @Api(value = "API-用户_职务接口")
@@ -29,8 +26,6 @@ public class UserJobController extends BaseController {
     private UserJobMapper userJobMapper;
     @Reference
     private UserJobService userJobService;
-
-
 
 
 }

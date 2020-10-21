@@ -14,6 +14,12 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 import javax.jms.Topic;
 
+/**
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
+ */
 @Configuration
 public class ActiveMqConfigBean {
 
@@ -43,12 +49,12 @@ public class ActiveMqConfigBean {
     }
 
     @Bean
-    public ConnectionFactory connectionFactory(){
+    public ConnectionFactory connectionFactory() {
         return new ActiveMQConnectionFactory(username, password, brokerUrl);
     }
 
     @Bean
-    public JmsMessagingTemplate jmsMessageTemplate(){
+    public JmsMessagingTemplate jmsMessageTemplate() {
         return new JmsMessagingTemplate(connectionFactory());
     }
 
@@ -58,7 +64,7 @@ public class ActiveMqConfigBean {
      * @return
      */
     @Bean("queueListener")
-    public JmsListenerContainerFactory<?> queueJmsListenerContainerFactory(ConnectionFactory connectionFactory){
+    public JmsListenerContainerFactory<?> queueJmsListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setPubSubDomain(false);
@@ -71,7 +77,7 @@ public class ActiveMqConfigBean {
      * @return
      */
     @Bean("topicListener")
-    public JmsListenerContainerFactory<?> topicJmsListenerContainerFactory(ConnectionFactory connectionFactory){
+    public JmsListenerContainerFactory<?> topicJmsListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setPubSubDomain(true);

@@ -30,19 +30,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/9/14
- * \* Time: 14:53
- * \* Description:
- * \
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2019/9/14
  */
 @Slf4j
 @ControllerAdvice
 public class MyControllerAdvice {
     /**
      * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
-     *
      * @param binder
      */
     @InitBinder
@@ -52,7 +49,6 @@ public class MyControllerAdvice {
 
     /**
      * 把值绑定到model中，那么全局@RequestMapping可以获取到该值
-     *
      * @param model
      */
     @ModelAttribute
@@ -62,7 +58,6 @@ public class MyControllerAdvice {
 
     /**
      * 全局异常
-     *
      * @param ex
      * @return
      */
@@ -77,7 +72,6 @@ public class MyControllerAdvice {
     /**
      * 拦截UnauthorizedException处理
      * 用户没有权限的异常
-     *
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
@@ -120,7 +114,6 @@ public class MyControllerAdvice {
 
     /**
      * 字段验证不通过处理
-     *
      * @param ex
      * @param request
      * @param response
@@ -139,7 +132,6 @@ public class MyControllerAdvice {
 
     /**
      * 请求参数绑定异常 处理
-     *
      * @param ex
      * @param request
      * @param response
@@ -165,7 +157,6 @@ public class MyControllerAdvice {
 
     /**
      * 登录表单字段缺失异常-处理
-     *
      * @param ex
      * @param request
      * @param response

@@ -37,13 +37,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
- * \* note:
- * @author: zhouchengjie
- * \* Date: 2019/10/5
- * \* Time: 14:28
- * \* Description:
- * \
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/21
  */
 @Slf4j
 public class BaseController {
@@ -80,7 +78,6 @@ public class BaseController {
 
     /**
      * 设置/刷新 用户信息缓存到redis
-     *
      * @param userAccountToken
      * @param result
      * @throws InvocationTargetException
@@ -116,8 +113,8 @@ public class BaseController {
             userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_Set,routerUrlSet);
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_Set,permissionSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_Set, routerUrlSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_Set, permissionSet);
             }
         } else {
             log.error("未能成功缓存用户信息到Redis");
@@ -154,7 +151,7 @@ public class BaseController {
         }
     }
 
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e,String errorMsg) {
+    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg) {
         dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
     }
 
@@ -162,7 +159,7 @@ public class BaseController {
      * @param result
      * @param e
      * @param errorMsg 异常信息
-     * @param isAppend  appendMsg是否追加到 errorMsg 后面
+     * @param isAppend appendMsg是否追加到 errorMsg 后面
      */
     public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg, boolean isAppend, boolean isPrintStackTrace) {
         result.setHasError(true);
@@ -192,7 +189,6 @@ public class BaseController {
 
     /**
      * 解析 搜索条件 map
-     *
      * @param queryJson
      * @return
      */
@@ -218,7 +214,6 @@ public class BaseController {
 
     /**
      * 解析 搜索条件 map
-     *
      * @param queryJson
      * @return
      */
@@ -250,11 +245,10 @@ public class BaseController {
 
     /**
      * 取得分页 bean
-     *
      * @param paginationJson
      * @return
      */
-    public <T> AntdvPaginationBean<T> parsePaginationJsonToBean(String paginationJson,Class<T> clazz) {
+    public <T> AntdvPaginationBean<T> parsePaginationJsonToBean(String paginationJson, Class<T> clazz) {
         AntdvPaginationBean<T> paginationBean = null;
         if (StringUtils.isNotBlank(paginationJson)) {
             paginationBean = JSONObject.parseObject(paginationJson, AntdvPaginationBean.class);
@@ -267,7 +261,6 @@ public class BaseController {
 
     /**
      * 取得排序 bean
-     *
      * @param sortObj
      * @return
      */

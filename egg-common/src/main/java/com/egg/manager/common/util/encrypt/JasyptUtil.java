@@ -4,11 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
- * @Description: spring配置项加密
- * @ClassName: JasyptUtil
- * @Author: zhoucj
- * @Date: 2020/8/5 13:55
- * @doc https://juejin.im/post/6850418120726446093#comment
+ * @author zhoucj
+ * @description: spring配置项加密
+ * @date 2020/10/21
  */
 @Slf4j
 public class JasyptUtil {
@@ -26,14 +24,14 @@ public class JasyptUtil {
      * 取得mysql加密后的配置信息
      * 相当于java -cp ./jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI password="ADUMDFUOV7834*" algorithm=PBEWithMD5AndDES input=root
      */
-    public static void encryptMySqlConfig(){
+    public static void encryptMySqlConfig() {
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         // 加密密钥
         textEncryptor.setPassword(jasyptEncryptorPassword);
         // 要加密的数据（如数据库的用户名或密码）
         String username = textEncryptor.encrypt("root");
         String password = textEncryptor.encrypt("root");
-        log.debug("username:{}",username);
-        log.debug("password:{}",password);
+        log.debug("username:{}", username);
+        log.debug("password:{}", password);
     }
 }

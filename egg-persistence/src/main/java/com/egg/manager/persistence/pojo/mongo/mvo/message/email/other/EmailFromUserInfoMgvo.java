@@ -6,12 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
- * @Description: email-发送者-相关信息
- * @ClassName: EmailFromUserInfoMgvo
- * @Author: zhoucj
- * @Date: 2020/9/11 15:05
+ * @author zhoucj
+ * @description: email-发送者-相关信息
+ * @date 2020/10/21
  */
 @Data
 @Builder

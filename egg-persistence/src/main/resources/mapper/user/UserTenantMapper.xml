@@ -4,34 +4,36 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.db.mysql.entity.user.UserTenant">
-        <id column="fid" property="fid" />
-        <result column="user_account_id" property="userAccountId" />
-        <result column="define_tenant_id" property="defineTenantId" />
-        <result column="type" property="type" />
-        <result column="is_manager" property="isManager" />
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
+        <id column="fid" property="fid"/>
+        <result column="user_account_id" property="userAccountId"/>
+        <result column="define_tenant_id" property="defineTenantId"/>
+        <result column="type" property="type"/>
+        <result column="is_manager" property="isManager"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto">
-        <id column="fid" property="fid" />
-        <result column="user_account_id" property="userAccountId" />
-        <result column="define_tenant_id" property="defineTenantId" />
-        <result column="type" property="type" />
-        <result column="is_manager" property="isManager" />
-        <result column="remark" property="remark" />
-        <result column="state" property="state" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_user_id" property="createUserId" />
-        <result column="last_modifyer_id" property="lastModifyerId" />
-        <association column="create_user_id" property="createUser" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
-        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy" select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById" />
+        <id column="fid" property="fid"/>
+        <result column="user_account_id" property="userAccountId"/>
+        <result column="define_tenant_id" property="defineTenantId"/>
+        <result column="type" property="type"/>
+        <result column="is_manager" property="isManager"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
 
@@ -98,21 +100,23 @@
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
-            <property name="base_alias_name" value="eua" />
+            <property name="base_alias_name" value="eua"/>
         </include>
         FROM em_user_account eua
         <where>
-            <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql" >
-                <property name="table_name_alias" value="eua" />
+            <include
+                    refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="eua"/>
             </include>
         </where>
-        <include refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql" >
-            <property name="table_name_alias" value="eua" />
+        <include
+                refid="com.egg.manager.persistence.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="eua"/>
         </include>
     </select>
 
 
-    <select id="findAllTenantIdByUserAccountId"  resultType="java.lang.String">
+    <select id="findAllTenantIdByUserAccountId" resultType="java.lang.String">
         SELECT edt.fid FROM em_define_tenant edt
         left JOIN em_user_tenant eut on edt.fid = eut.define_tenant_id
         <where>
@@ -125,12 +129,12 @@
 
     <insert id="customBatchInsert">
         INSERT INTO em_user_tenant(
-          <include refid="Base_Insert_Column_List" />
+        <include refid="Base_Insert_Column_List"/>
         )
         VALUES
-        <foreach collection="list" item="item" index="index" separator="," >
+        <foreach collection="list" item="item" index="index" separator=",">
             (
-            <include refid="Base_Insert_Item_Column_List" />
+            <include refid="Base_Insert_Item_Column_List"/>
             )
         </foreach>
     </insert>
@@ -138,9 +142,9 @@
     <update id="batchFakeDelByIds" parameterType="java.util.List">
         UPDATE em_user_tenant
         SET state = -1
-            <if test="loginUser != null">
-                ,last_modifyer_id=#{loginUser.fid}
-            </if>
+        <if test="loginUser != null">
+            ,last_modifyer_id=#{loginUser.fid}
+        </if>
         where fid IN
         <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
             #{item}
@@ -149,11 +153,11 @@
 
     <update id="batchUpdateManagerUserStateByTenantId">
         UPDATE em_user_tenant
-        SET  state = 1,
-            is_manager = #{stateVal}
-            <if test="loginUser != null">
-                ,last_modifyer_id=#{loginUser.fid}
-            </if>
+        SET state = 1,
+        is_manager = #{stateVal}
+        <if test="loginUser != null">
+            ,last_modifyer_id=#{loginUser.fid}
+        </if>
         where define_tenant_id = #{tenantId}
         and user_account_id IN
         <foreach collection="userAccountIdList" item="item" index="index" separator="," open="(" close=")">

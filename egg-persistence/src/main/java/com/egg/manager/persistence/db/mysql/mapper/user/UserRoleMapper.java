@@ -7,23 +7,19 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.db.mysql.entity.user.UserRole;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserRoleDto;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserRoleVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * <p>
- * 用户角色 Mapper 接口
- * </p>
- *
- * @author zhouchengjie
- * @since 2019-09-12
+ * @author zhoucj
+ * @version V1.0
+ * @description:
+ * @date 2020/10/20
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
     /**
      * [分页搜索查询] - 用户角色
-     *
      * @param page
      * @param queryFieldBeanList
      * @param sortBeans
@@ -33,7 +29,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     /**
      * 取得用户拥有的所有角色id集合
-     *
      * @param userAccountId
      * @param filterEnable  是否只查询状态为可用的
      * @return
@@ -42,7 +37,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     /**
      * 批量 伪删除
-     *
      * @param delIds
      * @param loginUser
      * @return
@@ -52,7 +46,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     /**
      * 批量新增 用户-角色 关联
-     *
      * @param roleList
      * @return
      */
@@ -60,7 +53,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     /**
      * 根据用户id 修改指定角色关联 的可用状态
-     *
      * @param userAccountId
      * @param roleIdList
      * @param stateVal

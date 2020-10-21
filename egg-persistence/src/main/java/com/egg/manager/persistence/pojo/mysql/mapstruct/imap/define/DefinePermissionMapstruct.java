@@ -12,12 +12,18 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefinePermissionConversion.class}
 )
 public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePermission, DefinePermissionVo, DefinePermissionDto> {
     DefinePermissionMapstruct INSTANCE = Mappers.getMapper(DefinePermissionMapstruct.class);
+
     /**
      * vo转entity
      * @param vo
@@ -27,6 +33,7 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
             @Mapping(target = "ensure", expression = "java(handleSwitchStateGetShort(vo.getEnsure()))")
     })
     DefinePermission transferVoToEntity(DefinePermissionVo vo);
+
     /**
      * entity转vo
      * @param entity
@@ -39,6 +46,7 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
             @Mapping(target = "lastModifyer", ignore = true)
     })
     DefinePermissionVo transferEntityToVo(DefinePermission entity);
+
     /**
      * dto转vo
      * @param dto

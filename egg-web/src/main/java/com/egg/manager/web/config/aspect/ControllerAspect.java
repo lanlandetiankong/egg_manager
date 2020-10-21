@@ -64,13 +64,13 @@ public class ControllerAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
-            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
-            if (pcWebQueryLog.flag() == true) {
+            PcWebQueryLog queryLogAnno = method.getAnnotation(PcWebQueryLog.class);
+            if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
                 pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -90,13 +90,13 @@ public class ControllerAspect {
 
         //是否需要记录[操作]日志
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
-            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
-            if (pcWebOperationLog.flag() == true) {
+            PcWebOperationLog operationLogAnno = method.getAnnotation(PcWebOperationLog.class);
+            if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
                 pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -116,13 +116,13 @@ public class ControllerAspect {
 
         //是否需要记录[登录]日志
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
-            PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
-            if (pcWebLoginLog.flag() == true) {
+            PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
+            if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
                 pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof MyCommonResult) {
@@ -150,13 +150,13 @@ public class ControllerAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
-            PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
-            if (pcWebQueryLog.flag() == true) {
+            PcWebQueryLog queryLogAnno = method.getAnnotation(PcWebQueryLog.class);
+            if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
                 pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
                 //请求失败
                 pcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -165,16 +165,15 @@ public class ControllerAspect {
                 pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
             }
         }
-
         //是否需要记录[操作]日志
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
-            PcWebOperationLog pcWebOperationLog = method.getAnnotation(PcWebOperationLog.class);
-            if (pcWebOperationLog.flag() == true) {
+            PcWebOperationLog operationLogAnno = method.getAnnotation(PcWebOperationLog.class);
+            if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
                 pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
                 //请求失败
                 pcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -185,13 +184,13 @@ public class ControllerAspect {
         }
         //是否需要记录[登录]日志
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
-            PcWebLoginLog pcWebLoginLog = method.getAnnotation(PcWebLoginLog.class);
-            if (pcWebLoginLog.flag() == true) {
+            PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
+            if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
                 pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
                 //请求失败
                 pcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {

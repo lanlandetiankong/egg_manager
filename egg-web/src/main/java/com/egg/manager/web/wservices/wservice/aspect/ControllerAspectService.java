@@ -1,6 +1,9 @@
 package com.egg.manager.web.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
@@ -30,7 +33,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @param request
      */
-    void dealSetValToQueryLog(PcWebQueryLogMgo pcWebQueryLogMgo, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToQueryLog(PcWebQueryLogMgo pcWebQueryLogMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebQueryLog queryLogAnno);
 
     /**
      * 设置一些值到 PcWebOperationLogMgo
@@ -38,7 +41,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @param request
      */
-    void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request,PcWebOperationLog operationLogAnno);
 
 
     /**
@@ -47,7 +50,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @param request
      */
-    void dealSetValToLoginLog(PcWebLoginLogMgo pcWebLoginLogMgo, JoinPoint joinPoint, HttpServletRequest request);
+    void dealSetValToLoginLog(PcWebLoginLogMgo pcWebLoginLogMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebLoginLog loginLogAnno);
 
 
     /**

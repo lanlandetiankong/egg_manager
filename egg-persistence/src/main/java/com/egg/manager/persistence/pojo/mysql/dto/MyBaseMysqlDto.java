@@ -8,7 +8,6 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description: Dto 继承类(后续可在此处添加通用功能)
  * @date 2020/10/20
  */

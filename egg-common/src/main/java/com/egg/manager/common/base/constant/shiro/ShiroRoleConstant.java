@@ -2,7 +2,6 @@ package com.egg.manager.common.base.constant.shiro;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description: shiro 常用的 角色名 常量
  * @date 2020/10/20
  */

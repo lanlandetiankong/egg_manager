@@ -2,7 +2,6 @@ package com.egg.manager.common.base.constant.define;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description: 用户账号-常量
  * @date 2020/10/20
  */

@@ -6,7 +6,6 @@ import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description:
  * @date 2020/10/20 17:16
  */

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description: 表单类型
  * @date 2020/10/20
  */

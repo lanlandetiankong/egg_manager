@@ -3,7 +3,6 @@ package com.egg.manager.common.base.constant.redis;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description:
  * @date 2019/10/5
  */

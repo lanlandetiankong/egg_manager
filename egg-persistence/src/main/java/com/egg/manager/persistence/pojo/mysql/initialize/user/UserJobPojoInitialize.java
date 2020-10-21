@@ -9,7 +9,6 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @version V1.0
  * @description: [用户职务] pojo static生成
  * @date 2020/10/20
  */

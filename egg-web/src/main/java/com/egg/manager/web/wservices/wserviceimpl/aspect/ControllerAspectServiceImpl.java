@@ -164,6 +164,9 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     public void dealSetValToQueryLog(PcWebQueryLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request,PcWebQueryLog queryLogAnno) {
         try {
             logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
+            if(queryLogAnno != null){
+                logMgo.setAnnotationOperationType(queryLogAnno.type());
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -179,6 +182,9 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     public void dealSetValToOperationLog(PcWebOperationLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebOperationLog operationLogAnno) {
         try {
             logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
+            if(operationLogAnno != null){
+                logMgo.setAnnotationOperationType(operationLogAnno.type());
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -193,6 +199,9 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     public void dealSetValToLoginLog(PcWebLoginLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebLoginLog loginLogAnno) {
         try {
             logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
+            if(loginLogAnno != null){
+                logMgo.setAnnotationOperationType(loginLogAnno.type());
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }

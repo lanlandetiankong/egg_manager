@@ -12,8 +12,6 @@
 
 - [ ] sql分布式事务
 
-- [ ] mongodb分布式事务
-
 - [ ] 动态配置nacos
 
 - [x] mongodb service、dao 都需要传递 loginuser,但内部逻辑都必须对user判空再处理(登录的必要性交给外部控制)
@@ -36,13 +34,8 @@
 
 - [x] ing>docs txt改md
 
-- [ ] ing>docs 文件整理
-
 - [x] docs 区分出 assets
 
 - [ ] mysql多数据源
 
 - [ ] 结合mycat进行数据库分库
-
-- [ ] assets 部署到静态资源上 anywhere。
-

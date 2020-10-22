@@ -15,22 +15,26 @@ import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebLoginLogR
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @author zhoucj
  * @description:
  * @date 2020/10/20
  */
+@Slf4j
 @Aspect
 @Configuration
 public class ControllerAspect {
@@ -56,10 +60,28 @@ public class ControllerAspect {
     }
 
 
-    @AfterReturning(value = "aspect()", returning = "result")
-    public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
+    @Around(value = "aspect()")
+    public Object afterControllerReturn(ProceedingJoinPoint joinPoint) throws Throwable {
+        //方法返回值
+        Object result = null ;
+        boolean defaultFlag = true ;
+        //计时器
+        StopWatch watch = new StopWatch();
+        //方法开始时间
+        Date startTime = new Date() ;
+        watch.start();
+        if(defaultFlag){
+            //调用目标方法，如果没调用这个则表示拦截实际的方法调用。
+            result = joinPoint.proceed();
+        }   else {
+            return null ;
+        }
+        //方法结束时间
+        Date endTime = new Date() ;
+        watch.stop();
+        log.info(watch.prettyPrint());
         //通知类型
-        final String aspectNotifyType = AspectNotifyTypeEnum.AfterReturning.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.Around.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
@@ -83,6 +105,10 @@ public class ControllerAspect {
                     }
                     pcWebQueryLogMgo.setResult(JSON.toJSONString(result));
                 }
+                pcWebQueryLogMgo.setStartMethodTime(startTime);
+                pcWebQueryLogMgo.setEndMethodTime(endTime);
+                pcWebQueryLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
+                pcWebQueryLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebQueryLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
                 pcWebQueryLogRepository.insert(pcWebQueryLogMgo);
             }
@@ -109,11 +135,14 @@ public class ControllerAspect {
                     }
                     pcWebOperationLogMgo.setResult(JSON.toJSONString(result));
                 }
+                pcWebOperationLogMgo.setStartMethodTime(startTime);
+                pcWebOperationLogMgo.setEndMethodTime(endTime);
+                pcWebOperationLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
+                pcWebOperationLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebOperationLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
                 pcWebOperationLogRepository.insert(pcWebOperationLogMgo);
             }
         }
-
         //是否需要记录[登录]日志
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
@@ -135,17 +164,22 @@ public class ControllerAspect {
                     }
                     pcWebLoginLogMgo.setResult(JSON.toJSONString(result));
                 }
+                pcWebLoginLogMgo.setStartMethodTime(startTime);
+                pcWebLoginLogMgo.setEndMethodTime(endTime);
+                pcWebLoginLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
+                pcWebLoginLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebLoginLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
                 pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
         }
+        return result ;
     }
 
 
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
         //通知类型
-        final String aspectNotifyType = AspectNotifyTypeEnum.AfterReturning.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.AfterThrowing.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
@@ -153,7 +187,7 @@ public class ControllerAspect {
             PcWebQueryLog queryLogAnno = method.getAnnotation(PcWebQueryLog.class);
             if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
-                //当前log的通知方式是 Before
+                //当前log的通知方式是 AfterThrowing
                 pcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
@@ -170,7 +204,7 @@ public class ControllerAspect {
             PcWebOperationLog operationLogAnno = method.getAnnotation(PcWebOperationLog.class);
             if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
-                //当前log的通知方式是 Before
+                //当前log的通知方式是 AfterThrowing
                 pcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
@@ -187,7 +221,7 @@ public class ControllerAspect {
             PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
             if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
-                //当前log的通知方式是 Before
+                //当前log的通知方式是 AfterThrowing
                 pcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);

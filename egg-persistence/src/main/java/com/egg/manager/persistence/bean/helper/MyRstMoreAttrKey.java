@@ -9,11 +9,11 @@ public interface MyRstMoreAttrKey {
     /**
      * 权限-Set集合
      */
-    String KEY_PERMISSION_Set = "permissionSet";
+    String KEY_PERMISSION_SET = "permissionSet";
     /**
      * 可访问的路由地址-Set集合
      */
-    String KEY_ROUTER_URL_Set = "routerUrlSet";
+    String KEY_ROUTER_URL_SET = "routerUrlSet";
     /**
      * 文件信息-bean
      */

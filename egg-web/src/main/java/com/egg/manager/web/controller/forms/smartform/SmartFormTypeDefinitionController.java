@@ -127,13 +127,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                       @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
-                                      SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
+                                      SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.QUERY_ONE_BY_ID);
         Integer addCount = 0;
         try {
-            Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            SmartFormTypeDefinitionMgo newMO = smartFormTypeDefinitionMgoService.doInsert(loginUser, formTypeDefinitionMO);
-            addCount += (newMO != null) ? 1 : 0;
+            Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doInsert(loginUser, formTypeDefinitionMgo);
+            addCount += (newMgo != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, SmartFormTypeDefinitionFuncModuleConstant.Failure.QUERY_ONE_BY_ID);
@@ -147,17 +147,17 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
-                                         SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
+                                         SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormTypeDefinitionFuncModuleConstant.Success.UPDATE_OPER);
         Integer count = 0;
         try {
-            Assert.notNull(formTypeDefinitionMO, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            SmartFormTypeDefinitionMgo newMO = smartFormTypeDefinitionMgoService.doUpdateById(loginUser, formTypeDefinitionMO);
+            Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doUpdateById(loginUser, formTypeDefinitionMgo);
             //更新了一条数据
-            if (newMO != null) {
+            if (newMgo != null) {
                 count += 1;
                 //触发formDefinetion 更新
-                smartFormDefinitionMgoService.updateFormTypeByTypeId(loginUser, newMO);
+                smartFormDefinitionMgoService.updateFormTypeByTypeId(loginUser, newMgo);
             }
             result.setCount(count);
         } catch (Exception e) {

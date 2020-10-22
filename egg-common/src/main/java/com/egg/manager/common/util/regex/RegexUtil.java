@@ -114,7 +114,7 @@ public class RegexUtil {
      * @param url 格式：http://blog.csdn.net:80/xyang81/article/details/7705960? 或 http://www.csdn.net:80
      * @return 验证成功返回true，验证失败返回false
      */
-    public static boolean checkURL(String url) {
+    public static boolean checkUrl(String url) {
         String regex = "(https?://(w{3}\\.)?)?\\w+\\.\\w+(\\.[a-zA-Z]+)*(:\\d{1,5})?(/\\w*)*(\\??(.+=.*)?(&.+=.*)?)?";
         return Pattern.matches(regex, url);
     }

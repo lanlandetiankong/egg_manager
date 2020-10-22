@@ -41,9 +41,9 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
     @Autowired
     public Configuration configuration;
     @Value("${spring.mail.username}")
-    private String DEFAULT_SEND_USER_NAME;
+    private String defaultSendUserName;
     @Value("${spring.application.name}")
-    private String DEFAULT_SEND_PERSONAL_USER_NAME;
+    private String defaultSendPersonalUserName;
 
 
     @Autowired
@@ -71,8 +71,8 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
             helper.setSubject(emailSendRecordMgvo.getSubject());
             helper.setText(emailSendRecordMgvo.getContent());
             String fileName = null;
-            for (EmailSendFileInfoMgvo sendFileInfoMVO : emailSendRecordMgvo.getAccessoryInfoList()) {
-                fileName = MimeUtility.encodeText(sendFileInfoMVO.getFileName(), "GB2312", "B");
+            for (EmailSendFileInfoMgvo sendFileInfoMgvo : emailSendRecordMgvo.getAccessoryInfoList()) {
+                fileName = MimeUtility.encodeText(sendFileInfoMgvo.getFileName(), "GB2312", "B");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +109,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
      */
     private String doGetMailFromUser(EmailSendRecordMgvo emailSendRecordMgvo) {
         if (emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getEmailAddress())) {
-            return DEFAULT_SEND_USER_NAME;
+            return defaultSendPersonalUserName;
         }
         return emailSendRecordMgvo.getFromUserInfo().getEmailAddress();
     }
@@ -121,7 +121,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
      */
     private String doGetMailPersonalFromUser(EmailSendRecordMgvo emailSendRecordMgvo) {
         if (emailSendRecordMgvo.getFromUserInfo() == null || StringUtils.isBlank(emailSendRecordMgvo.getFromUserInfo().getPersonal())) {
-            return DEFAULT_SEND_PERSONAL_USER_NAME;
+            return defaultSendPersonalUserName;
         }
         return emailSendRecordMgvo.getFromUserInfo().getPersonal();
     }

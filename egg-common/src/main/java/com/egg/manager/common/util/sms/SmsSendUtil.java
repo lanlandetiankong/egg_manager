@@ -73,27 +73,27 @@ public class SmsSendUtil {
         java.net.URL url = null;
         try {
             url = new URL(path);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod(HttpMethodConstant.POST);
-            httpURLConnection.setConnectTimeout(10000);
-            httpURLConnection.setReadTimeout(10000);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod(HttpMethodConstant.POST);
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
             // 发送POST请求必须设置如下两行
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setDoInput(true);
-            httpURLConnection.setRequestProperty("Charset", CHARSET);
-            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+            urlConnection.setRequestProperty("Charset", CHARSET);
+            urlConnection.setRequestProperty("Content-Type", "application/json");
 
-            httpURLConnection.connect();
-            OutputStream os = httpURLConnection.getOutputStream();
+            urlConnection.connect();
+            OutputStream os = urlConnection.getOutputStream();
             os.write(postContent.getBytes(CHARSET));
             os.flush();
 
             StringBuilder sb = new StringBuilder();
-            int httpRspCode = httpURLConnection.getResponseCode();
+            int httpRspCode = urlConnection.getResponseCode();
             if (httpRspCode == HttpURLConnection.HTTP_OK) {
                 // 开始获取数据
                 BufferedReader br = new BufferedReader(
-                        new InputStreamReader(httpURLConnection.getInputStream(), CHARSET));
+                        new InputStreamReader(urlConnection.getInputStream(), CHARSET));
                 String line = null;
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
@@ -125,56 +125,56 @@ public class SmsSendUtil {
          */
         @Override
         public String toString() {
-            String sMSType = "";
+            String smsType = "";
             switch (this) {
                 case AUTH:
-                    sMSType = "登陆验证";
+                    smsType = "登陆验证";
                     break;
                 case REG:
-                    sMSType = "注册账号";
+                    smsType = "注册账号";
                     break;
                 case FINDPASSWORD:
-                    sMSType = "修改密码";
+                    smsType = "修改密码";
                     break;
                 case MODIFYINFO:
-                    sMSType = "修改账号";
+                    smsType = "修改账号";
                     break;
                 default:
-                    sMSType = "";
+                    smsType = "";
             }
-            return sMSType;
+            return smsType;
         }
 
         public static Integer getType(String str) {
-            Integer sMSType;
+            Integer smsType;
             switch (str) {
                 case "AUTH":
-                    sMSType = 1;
+                    smsType = 1;
                     break;
                 case "REG":
-                    sMSType = 2;
+                    smsType = 2;
                     break;
                 case "FINDPASSWORD":
-                    sMSType = 3;
+                    smsType = 3;
                     break;
                 case "MODIFYINFO":
-                    sMSType = 4;
+                    smsType = 4;
                     break;
                 default:
-                    sMSType = 0;
+                    smsType = 0;
             }
-            return sMSType;
+            return smsType;
         }
 
-        public static SMSType getSMSType(String str) {
-            SMSType sMSType = null;
+        public static SMSType getSmsType(String str) {
+            SMSType smsType = null;
             for (SMSType ut : SMSType.values()) {
                 if (ut.name().equals(str)) {
-                    sMSType = ut;
+                    smsType = ut;
                     break;
                 }
             }
-            return sMSType;
+            return smsType;
         }
     }
 

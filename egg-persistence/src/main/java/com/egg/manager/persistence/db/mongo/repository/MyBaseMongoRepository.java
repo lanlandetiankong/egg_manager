@@ -92,13 +92,13 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * 根据id删除[文档]
      * @param id
      */
-    void DELETE_BY_ID(ID id);
+    void deleteById(ID id);
 
     /**
      * 根据MO删除[文档]
-     * @param T
+     * @param t
      */
-    void delete(T T);
+    void delete(T t);
 
     /**
      * 根据MO集合批量删除[文档]

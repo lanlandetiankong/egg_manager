@@ -48,7 +48,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
      */
     private final long SingleUpdateMaxSize = 1L;
 
-    public Class<T> getTClass() {
+    public Class<T> getTypeClass() {
         if (tClass != null) {
             return tClass;
         }
@@ -84,26 +84,26 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     public <S extends T> S updateById(S s) {
         //验证更新的[文档]不能为空
-        dealVerifyTNotNull(s, true);
+        dealVerifyTypeNotNull(s, true);
         //验证id不能为空
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(忽略null字段)
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, true);
-        mongoTemplate.updateFirst(query, update, getTClass());
+        mongoTemplate.updateFirst(query, update, getTypeClass());
         return s;
     }
 
     @Override
     public <S extends T> S updateById(S s, boolean isAllColumn) {
         //验证更新的[文档]不能为空
-        dealVerifyTNotNull(s, true);
+        dealVerifyTypeNotNull(s, true);
         //验证id不能为空
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
-        UpdateResult result = mongoTemplate.updateFirst(query, update, getTClass());
+        UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
@@ -120,7 +120,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Query query = dealGetQueryWithIds(ids, true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
-        UpdateResult result = mongoTemplate.updateMulti(query, update, getTClass());
+        UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != idSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", idSize, result.getModifiedCount());
             log.error(errmsg);
@@ -131,20 +131,20 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     @Override
     public long batchUpdate(Query query, Update update) {
-        UpdateResult result = mongoTemplate.updateMulti(query, update, getTClass());
+        UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         return result.getModifiedCount();
     }
 
     @Override
     public <S extends T> S updateStatusById(S s, Short status) {
         //验证更新的[文档]不能为空
-        dealVerifyTNotNull(s, true);
+        dealVerifyTypeNotNull(s, true);
         //验证id不能为空
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = new Update().set(MongoModelFieldConstant.FIELD_STATUS, status);
-        UpdateResult result = mongoTemplate.updateFirst(query, update, getTClass());
+        UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
@@ -160,7 +160,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         int size = Lists.newArrayList(ids).size();
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = new Update().set(MongoModelFieldConstant.FIELD_STATUS, status);
-        UpdateResult result = mongoTemplate.updateMulti(query, update, getTClass());
+        UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
             log.error(errmsg);
@@ -172,14 +172,14 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     @Override
     public <S extends T> S save(S s) {
-        dealVerifyTNotNull(s, true);
+        dealVerifyTypeNotNull(s, true);
         mongoTemplate.save(s);
         return s;
     }
 
 
     @Override
-    public void DELETE_BY_ID(ID id) {
+    public void deleteById(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
         Query query = dealGetQueryWithId(id, true);
         mongoTemplate.remove(query);
@@ -187,7 +187,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     @Override
     public void delete(T t) {
-        dealVerifyTNotNull(t, true);
+        dealVerifyTypeNotNull(t, true);
         DeleteResult result = mongoTemplate.remove(t);
     }
 
@@ -195,7 +195,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     public void batchDelete(Iterable<? extends T> iterable) {
         //List<? extends T> list = dealGetListFromIterable(iterable,false);
         Query query = dealGetQueryWithIdsFromT(iterable, true);
-        mongoTemplate.remove(query, getTClass());
+        mongoTemplate.remove(query, getTypeClass());
     }
 
     @Override
@@ -208,20 +208,20 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public Optional<T> findOne(Query query) {
         query = query != null ? query : new Query();
-        return Optional.of(mongoTemplate.findOne(query, getTClass()));
+        return Optional.of(mongoTemplate.findOne(query, getTypeClass()));
     }
 
     @Override
     public Optional<T> findById(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
-        return Optional.of(mongoTemplate.findById(id, getTClass()));
+        return Optional.of(mongoTemplate.findById(id, getTypeClass()));
     }
 
     @Override
     public Iterable<T> findAllById(Iterable<ID> iterable) {
         List<ID> list = dealGetListFromIterable(iterable, true);
         Query query = dealGetQueryWithIds(list, true);
-        return mongoTemplate.find(query, getTClass());
+        return mongoTemplate.find(query, getTypeClass());
     }
 
     /**
@@ -230,20 +230,20 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
      */
     @Override
     public List<T> findAll() {
-        return mongoTemplate.findAll(getTClass());
+        return mongoTemplate.findAll(getTypeClass());
     }
 
     @Override
     public List<T> findAll(Sort sort) {
         Query query = (sort == null) ? new Query() : new Query().with(sort);
-        return mongoTemplate.find(query, getTClass());
+        return mongoTemplate.find(query, getTypeClass());
     }
 
 
     @Override
     public List<T> findAll(Query query) {
         query = query != null ? query : new Query();
-        return mongoTemplate.find(query, getTClass());
+        return mongoTemplate.find(query, getTypeClass());
     }
 
     @Override
@@ -252,7 +252,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         if (sort != null) {
             query.with(sort);
         }
-        return mongoTemplate.find(query, getTClass());
+        return mongoTemplate.find(query, getTypeClass());
     }
 
     @Override
@@ -261,8 +261,8 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
             throw new MyMongoException("请先传入分页配置后再进行查询！");
         }
         Query query = (pageable == null) ? new Query() : new Query().with(pageable);
-        long total = mongoTemplate.count(query, getTClass());
-        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTClass());
+        long total = mongoTemplate.count(query, getTypeClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTypeClass());
         return PageableExecutionUtils.getPage(list, pageable, () -> total);
         //return new PageImpl(list, pageable, total);
     }
@@ -274,8 +274,8 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         }
         query = query != null ? query : new Query();
         query.with(pageable);
-        long total = mongoTemplate.count(query, getTClass());
-        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTClass());
+        long total = mongoTemplate.count(query, getTypeClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTypeClass());
         return PageableExecutionUtils.getPage(list, pageable, () -> total);
     }
 
@@ -289,35 +289,35 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
             query.with(sort);
         }
         query.with(pageable);
-        long total = mongoTemplate.count(query, getTClass());
-        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTClass());
+        long total = mongoTemplate.count(query, getTypeClass());
+        List<T> list = (total == 0) ? new ArrayList<T>() : mongoTemplate.find(query, getTypeClass());
         return PageableExecutionUtils.getPage(list, pageable, () -> total);
     }
 
     @Override
     public long count() {
-        return mongoTemplate.count(new Query(), getTClass());
+        return mongoTemplate.count(new Query(), getTypeClass());
     }
 
 
     @Override
     public long count(Query query) {
-        return mongoTemplate.count(query, getTClass());
+        return mongoTemplate.count(query, getTypeClass());
     }
 
     @Override
     public boolean existsById(ID id) {
         boolean idFlag = dealVerifyIdBlank(id, true);
-        return mongoTemplate.findById(id, getTClass()) != null;
+        return mongoTemplate.findById(id, getTypeClass()) != null;
     }
 
     @Override
     public boolean exists(Query query) {
-        return mongoTemplate.exists(query, getTClass());
+        return mongoTemplate.exists(query, getTypeClass());
     }
 
 
-    private boolean dealVerifyTNotNull(T t, boolean exceptionAble) {
+    private boolean dealVerifyTypeNotNull(T t, boolean exceptionAble) {
         if (t == null && exceptionAble) {
             throw new MyMongoException("操作的实体类对象不允许为空!");
         }

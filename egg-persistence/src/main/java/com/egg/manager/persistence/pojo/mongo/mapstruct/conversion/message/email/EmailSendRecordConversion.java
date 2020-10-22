@@ -21,15 +21,15 @@ public class EmailSendRecordConversion {
 
     /**
      * 取得-发送人-邮箱地址
-     * @param fromUserInfoMVO
+     * @param fromUserInfoMgvo
      * @return
      */
     @Named("handleGetFromUserEmailAddress")
-    public String handleGetFromUserEmailAddress(EmailFromUserInfoMgvo fromUserInfoMVO) {
-        if (fromUserInfoMVO == null || fromUserInfoMVO.getEmailAddress() == null) {
+    public String handleGetFromUserEmailAddress(EmailFromUserInfoMgvo fromUserInfoMgvo) {
+        if (fromUserInfoMgvo == null || fromUserInfoMgvo.getEmailAddress() == null) {
             return "";
         }
-        return fromUserInfoMVO.getEmailAddress();
+        return fromUserInfoMgvo.getEmailAddress();
     }
 
     /**
@@ -43,10 +43,10 @@ public class EmailSendRecordConversion {
         if (CollectionUtil.isEmpty(receiveUserInfoList)) {
             return new String[]{};
         }
-        for (EmailReceiveUserInfoMgvo receiveUserInfoMVO : receiveUserInfoList) {
-            if (receiveUserInfoMVO != null) {
-                if (receiveUserInfoMVO.getUserName() != null) {
-                    list.add(receiveUserInfoMVO.getUserName());
+        for (EmailReceiveUserInfoMgvo receiveUserInfoMgvo : receiveUserInfoList) {
+            if (receiveUserInfoMgvo != null) {
+                if (receiveUserInfoMgvo.getUserName() != null) {
+                    list.add(receiveUserInfoMgvo.getUserName());
                 }
             }
         }

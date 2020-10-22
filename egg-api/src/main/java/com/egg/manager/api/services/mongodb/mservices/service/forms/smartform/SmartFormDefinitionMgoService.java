@@ -17,10 +17,10 @@ public interface SmartFormDefinitionMgoService extends MyBaseMgoService<SmartFor
     /**
      * 根据表单类型id更新表单中冗余的表单类型数据
      * @param userAccount          当前登录用户
-     * @param formTypeDefinitionMO
+     * @param formTypeDefinitionMgo
      * @return
      */
-    Long updateFormTypeByTypeId(UserAccount userAccount, SmartFormTypeDefinitionMgo formTypeDefinitionMO);
+    Long updateFormTypeByTypeId(UserAccount userAccount, SmartFormTypeDefinitionMgo formTypeDefinitionMgo);
 
 
 }

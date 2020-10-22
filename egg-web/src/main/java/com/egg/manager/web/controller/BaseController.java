@@ -113,8 +113,8 @@ public class BaseController {
             userAccountRedisService.dealGetCurrentUserFrontButtons(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             Set<String> routerUrlSet = userAccountRedisService.dealGetCurrentUserFrontRouterUrls(loginUser, authorization, userAccountToken.getUserAccountId(), true);
             if (result != null) {
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_Set, routerUrlSet);
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_Set, permissionSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_SET, routerUrlSet);
+                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_SET, permissionSet);
             }
         } else {
             log.error("未能成功缓存用户信息到Redis");

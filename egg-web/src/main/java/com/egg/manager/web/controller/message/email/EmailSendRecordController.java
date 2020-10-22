@@ -109,8 +109,8 @@ public class EmailSendRecordController extends BaseController {
         try {
             Assert.notNull(emailSendRecordMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMgvoToMgo(emailSendRecordMgvo);
-            EmailSendRecordMgo newMO = emailSendRecordMgoService.doInsert(loginUser, emailSendRecordMgo);
-            addCount += (newMO != null) ? 1 : 0;
+            EmailSendRecordMgo newMgo = emailSendRecordMgoService.doInsert(loginUser, emailSendRecordMgo);
+            addCount += (newMgo != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, MyControllerAdviserFuncModuleConstant.Failure.CREATE_OPER);

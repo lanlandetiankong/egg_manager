@@ -27,8 +27,8 @@ public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<
     public MyCommonResult<SmartFormTypeDefinitionMgo> dealResultListToEnums(MyCommonResult<SmartFormTypeDefinitionMgo> result, List<SmartFormTypeDefinitionMgo> list) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(list)) {
-            for (SmartFormTypeDefinitionMgo typeDefinitionMO : list) {
-                enumList.add(new FrontEntitySelectBean(typeDefinitionMO.getFid(), typeDefinitionMO.getName()));
+            for (SmartFormTypeDefinitionMgo typeDefinitionMgo : list) {
+                enumList.add(new FrontEntitySelectBean(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
             }
         }
         result.setEnumList(enumList);

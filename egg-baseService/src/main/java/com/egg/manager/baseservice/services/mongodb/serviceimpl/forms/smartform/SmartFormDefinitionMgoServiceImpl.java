@@ -28,11 +28,11 @@ public class SmartFormDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<Smar
     private SmartFormDefinitionRepository smartFormDefinitionRepository;
 
     @Override
-    public Long updateFormTypeByTypeId(UserAccount userAccount, SmartFormTypeDefinitionMgo formTypeDefinitionMO) {
+    public Long updateFormTypeByTypeId(UserAccount userAccount, SmartFormTypeDefinitionMgo smartFormTypeDefinitionMgo) {
         //表单类型id匹配的
-        Query query = new Query().addCriteria(Criteria.where("formType." + MongoModelFieldConstant.FIELD_FID).is(formTypeDefinitionMO.getFid()));
+        Query query = new Query().addCriteria(Criteria.where("formType." + MongoModelFieldConstant.FIELD_FID).is(smartFormTypeDefinitionMgo.getFid()));
         Update update = new Update();
-        update.set("formType", formTypeDefinitionMO);
+        update.set("formType", smartFormTypeDefinitionMgo);
         return smartFormDefinitionRepository.batchUpdate(query, update);
     }
 }

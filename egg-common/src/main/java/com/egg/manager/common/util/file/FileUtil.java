@@ -673,7 +673,7 @@ public class FileUtil {
      * @param sPath 要删除的目录或文件
      * @return 删除成功返回 true，否则返回 false。
      */
-    public static boolean DeleteFolder(String sPath) {
+    public static boolean deleteFolder(String sPath) {
         boolean flag = false;
         File file = new File(sPath);
         // 判断目录或文件是否存在

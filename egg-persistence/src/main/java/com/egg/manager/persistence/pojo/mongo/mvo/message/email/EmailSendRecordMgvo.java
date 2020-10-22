@@ -70,10 +70,10 @@ public class EmailSendRecordMgvo extends BaseModelMgvo<String> {
         if (CollectionUtil.isEmpty(this.receiveUserInfoList)) {
             return list;
         }
-        for (EmailReceiveUserInfoMgvo receiveUserInfoMVO : this.receiveUserInfoList) {
-            if (receiveUserInfoMVO != null) {
-                if (receiveUserInfoMVO.getUserName() != null) {
-                    list.add(receiveUserInfoMVO.getUserName());
+        for (EmailReceiveUserInfoMgvo receiveUserInfoMgvo : this.receiveUserInfoList) {
+            if (receiveUserInfoMgvo != null) {
+                if (receiveUserInfoMgvo.getUserName() != null) {
+                    list.add(receiveUserInfoMgvo.getUserName());
                 }
             }
         }

@@ -66,8 +66,8 @@ public class UserDepartmentTransfer extends BaseMysqlTransfer {
             return null;
         } else {
             List<UserDepartmentVo> list = new ArrayList<>();
-            for (UserDepartment UserDepartment : userTenants) {
-                list.add(transferEntityToVo(UserDepartment));
+            for (UserDepartment userDepartment : userTenants) {
+                list.add(transferEntityToVo(userDepartment));
             }
             return list;
         }

@@ -28,7 +28,7 @@ public interface SmartFormDefinitionMapstruct extends MyBaseMongoMapstruct<Smart
      * @return
      */
     @Mappings({
-            @Mapping(target = "formType", expression = "java(commonTranslateSmartFormTypeDefinitionMVOToMO(mgvo.getFormType()))")
+            @Mapping(target = "formType", expression = "java(commonTranslateSmartFormTypeDefinitionMgvoToMo(mgvo.getFormType()))")
     })
     SmartFormDefinitionMgo translateMgvoToMgo(SmartFormDefinitionMgvo mgvo);
 }

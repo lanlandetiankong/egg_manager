@@ -26,7 +26,7 @@ public interface MyBaseMongoCommonFuncMapstruct<E extends MyBaseModelMgo, V exte
      * @param mgvo
      * @return
      */
-    default SmartFormTypeDefinitionMgo commonTranslateSmartFormTypeDefinitionMVOToMO(SmartFormTypeDefinitionMgvo mgvo) {
+    default SmartFormTypeDefinitionMgo commonTranslateSmartFormTypeDefinitionMgvoToMo(SmartFormTypeDefinitionMgvo mgvo) {
         return smartFormTypeDefinitionMapstruct.translateMgvoToMgo(mgvo);
     }
 
@@ -35,7 +35,7 @@ public interface MyBaseMongoCommonFuncMapstruct<E extends MyBaseModelMgo, V exte
      * @param mgvo
      * @return
      */
-    default SmartFormRecordMgo commonTranslateSmartFormRecordMVOToMO(SmartFormRecordMgvo mgvo) {
+    default SmartFormRecordMgo commonTranslateSmartFormRecordMgvoToMgo(SmartFormRecordMgvo mgvo) {
         return smartFormRecordMapstruct.translateMgvoToMgo(mgvo);
     }
 

@@ -138,7 +138,7 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ServletRequestBindingException.class)
     @ResponseBody
-    public MyCommonResult MethodArgumentNotValidException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public MyCommonResult handleMethodArgumentNotValidException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         ServletRequestBindingException extException = (ServletRequestBindingException) ex;
         StringBuffer errorMsg = new StringBuffer("参数异常信息：");
         //参数值为空

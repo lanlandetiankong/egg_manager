@@ -133,19 +133,19 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/addByForm")
     public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                       @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
-                                      SmartFormDefinitionMgvo formDefinitionMVO) {
+                                      SmartFormDefinitionMgvo smartFormDefinitionMgvo) {
         MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.CREATE_OPER);
         Integer addCount = 0;
         try {
-            Assert.notNull(formDefinitionMVO, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
-            if (formTypeDefinitionMOOptional.isPresent() == false) {
+            Assert.notNull(smartFormDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(smartFormDefinitionMgvo.getFormTypeId());
+            if (formTypeDefinitionMgoOptional.isPresent() == false) {
                 throw new BusinessException("不是有效的表单类型！");
             }
-            SmartFormDefinitionMgo formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(formDefinitionMVO);
-            formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
-            SmartFormDefinitionMgo newMO = smartFormDefinitionMgoService.doInsert(loginUser, formDefinitionMO);
-            addCount += (newMO != null) ? 1 : 0;
+            SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(smartFormDefinitionMgvo);
+            formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());
+            SmartFormDefinitionMgo newMgo = smartFormDefinitionMgoService.doInsert(loginUser, formDefinitionMgo);
+            addCount += (newMgo != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, SmartFormDefinitionFuncModuleConstant.Failure.CREATE_OPER);
@@ -159,19 +159,19 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/updateByForm")
     public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
-                                         SmartFormDefinitionMgvo formDefinitionMVO) {
+                                         SmartFormDefinitionMgvo formDefinitionMgvo) {
         MyCommonResult result = MyCommonResult.gainOperationResult(SmartFormDefinitionFuncModuleConstant.Success.UPDATE_OPER);
         Integer addCount = 0;
         try {
-            Assert.notNull(formDefinitionMVO, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMOOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMVO.getFormTypeId());
-            if (formTypeDefinitionMOOptional.isPresent() == false) {
+            Assert.notNull(formDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+            Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMgvo.getFormTypeId());
+            if (formTypeDefinitionMgoOptional.isPresent() == false) {
                 throw new BusinessException("不是有效的表单类型！");
             }
-            SmartFormDefinitionMgo formDefinitionMO = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(formDefinitionMVO);
-            formDefinitionMO.setFormType(formTypeDefinitionMOOptional.get());
-            SmartFormDefinitionMgo newMO = smartFormDefinitionMgoService.doUpdateById(loginUser, formDefinitionMO);
-            addCount += (newMO != null) ? 1 : 0;
+            SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(formDefinitionMgvo);
+            formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());
+            SmartFormDefinitionMgo newMgo = smartFormDefinitionMgoService.doUpdateById(loginUser, formDefinitionMgo);
+            addCount += (newMgo != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, SmartFormDefinitionFuncModuleConstant.Failure.UPDATE_OPER);

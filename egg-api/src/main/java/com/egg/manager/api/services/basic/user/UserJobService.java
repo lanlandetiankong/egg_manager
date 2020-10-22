@@ -50,20 +50,20 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
     /**
      * 用户职务-新增
      * @param loginUser 当前登录用户
-     * @param UserJobVo
+     * @param userJobVo
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserJobVo UserJobVo) throws Exception;
+    Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception;
 
     /**
      * 用户职务-更新
      * @param loginUser 当前登录用户
-     * @param UserJobVo
+     * @param userJobVo
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserJobVo UserJobVo) throws Exception;
+    Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo) throws Exception;
 
     /**
      * 用户职务-删除

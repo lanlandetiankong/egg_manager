@@ -51,7 +51,7 @@ public class RedisPropsOfShiroCache implements Serializable {
     private String userTokenKey;
     private String userGroupKey;
     private String userTenantKey;
-    private String UserDepartmentKey;
+    private String userDepartmentKey;
     private String userRolesKey;
     private String userPermissionsKey;
     private String userFrontMenusKey;

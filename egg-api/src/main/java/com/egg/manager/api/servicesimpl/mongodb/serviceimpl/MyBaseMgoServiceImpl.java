@@ -120,7 +120,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     @Override
     public void doDeleteById(UserAccount loginUser, ID id) {
-        baseRepository.DELETE_BY_ID(id);
+        baseRepository.deleteById(id);
     }
 
     @Override
@@ -223,14 +223,14 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
-        QPageRequest mPageFromBean = MongoQueryBean.<T>getMPageFromBean(queryBuffer.getPageBean());
+        QPageRequest mPageFromBean = MongoQueryBean.<T>getMgPageFromBean(queryBuffer.getPageBean());
         Page<T> page = baseRepository.findPage(query, mPageFromBean);
         return MongoQueryBean.getPageBeanFromPage(page);
     }
 
     @Override
     public MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean) {
-        return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMPageFromBean(pageBean)));
+        return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMgPageFromBean(pageBean)));
     }
 
 

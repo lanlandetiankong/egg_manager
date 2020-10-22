@@ -13,8 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @date 2020/10/20
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "em_pc_web_login_log")
 public class PcWebLoginLogMgo extends MyBaseWebLogMgo<String> {

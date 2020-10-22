@@ -59,7 +59,7 @@ public class ControllerAspect {
     @AfterReturning(value = "aspect()", returning = "result")
     public void afterControllerReturn(JoinPoint joinPoint, Object result) throws Throwable {
         //通知类型
-        final String ASPECT_NOTIFY_TYPE = AspectNotifyTypeEnum.AfterReturning.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.AfterReturning.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
@@ -68,7 +68,7 @@ public class ControllerAspect {
             if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
                 boolean isSuccess = true;
@@ -94,7 +94,7 @@ public class ControllerAspect {
             if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
                 boolean isSuccess = true;
@@ -120,7 +120,7 @@ public class ControllerAspect {
             if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
                 boolean isSuccess = true;
@@ -145,7 +145,7 @@ public class ControllerAspect {
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
         //通知类型
-        final String ASPECT_NOTIFY_TYPE = AspectNotifyTypeEnum.AfterReturning.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.AfterReturning.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
@@ -154,7 +154,7 @@ public class ControllerAspect {
             if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
-                pcWebQueryLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
                 //请求失败
@@ -171,7 +171,7 @@ public class ControllerAspect {
             if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
-                pcWebOperationLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
                 //请求失败
@@ -188,7 +188,7 @@ public class ControllerAspect {
             if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
-                pcWebLoginLogMgo.setAspectNotifyType(ASPECT_NOTIFY_TYPE);
+                pcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
                 //请求失败

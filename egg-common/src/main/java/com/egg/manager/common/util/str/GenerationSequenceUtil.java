@@ -48,7 +48,7 @@ public class GenerationSequenceUtil {
      * @param prefix 前缀
      * @return
      */
-    public static String generateUUID(String prefix) {
+    public static String generateUuid(String prefix) {
         String uuid = (UUID.randomUUID().toString()).replaceAll("-", "");
         if (!ComUtil.isEmpty(prefix)) {
             uuid = prefix + "-" + uuid;
@@ -60,8 +60,8 @@ public class GenerationSequenceUtil {
      * 生成UUID
      * @return
      */
-    public static String generateUUID() {
-        return generateUUID(null);
+    public static String generateUuid() {
+        return generateUuid(null);
     }
 
 

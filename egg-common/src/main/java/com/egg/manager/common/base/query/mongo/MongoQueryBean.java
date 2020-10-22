@@ -60,7 +60,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
             this.criteriaList.addAll(criterias);
         }
         this.pageBean = pageBean;
-        this.pageRequest = MongoQueryBean.getMPageFromBean(pageBean);
+        this.pageRequest = MongoQueryBean.getMgPageFromBean(pageBean);
         this.sort = sort;
     }
 
@@ -69,7 +69,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
             this.criteriaList.addAll(criterias);
         }
         this.pageBean = pageBean;
-        this.pageRequest = MongoQueryBean.getMPageFromBean(pageBean);
+        this.pageRequest = MongoQueryBean.getMgPageFromBean(pageBean);
         this.sort = sort;
         this.data = data;
     }
@@ -91,7 +91,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
     public static MyMongoQueryBuffer getMongoQueryBeanFromRequest(HttpServletRequest request, MyMongoQueryBuffer queryBuffer) {
         //查询字段
         List<Criteria> criterias = new ArrayList<>();
-        criterias.addAll(getMQueryFilterFromRequest(request, queryBuffer));
+        criterias.addAll(getMgQueryFilterFromRequest(request, queryBuffer));
         //分页
         MyMongoQueryPageBean pageBean = getPageBeanFromRequest(request);
         List<MyMongoSortBean> sortBeans = getSortBeansFromRequest(request);
@@ -115,7 +115,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param queryBuffer 查询配置
      * @return
      */
-    public static List<Criteria> getMQueryFilterFromRequest(HttpServletRequest request, MyMongoQueryBuffer queryBuffer) {
+    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, MyMongoQueryBuffer queryBuffer) {
         boolean isWhiteList = Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag());
         Set<String> enableFields = (Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag())) ? enableFields = queryBuffer.getBlackQueryFieldSets() : queryBuffer.getWhiteQueryFieldSets();
         List<Criteria> criterias = new ArrayList<>();
@@ -194,7 +194,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param paginationBean
      * @return
      */
-    public static QPageRequest getMPageFromBean(MyMongoQueryPageBean paginationBean) {
+    public static QPageRequest getMgPageFromBean(MyMongoQueryPageBean paginationBean) {
         paginationBean = paginationBean != null ? paginationBean : MyMongoQueryPageBean.gainDefaultPaginationBean();
         return QPageRequest.of(paginationBean.getCurrent(), paginationBean.getPageSize());
     }

@@ -27,7 +27,7 @@ public interface SmartFormRecordFieldMapstruct extends MyBaseMongoMapstruct<Smar
      * @return
      */
     @Mappings({
-            @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMVOToMO(mgvo.getFormRecord()))")
+            @Mapping(target = "formRecordMO", expression = "java(commonTranslateSmartFormRecordMgvoToMgo(mgvo.getFormRecord()))")
     })
     SmartFormRecordFieldMgo translateMgvoToMgo(SmartFormRecordFieldMgvo mgvo);
 }

@@ -154,4 +154,14 @@ public class MyBaseModelMgo<K> implements Serializable {
      */
     @Field(value = "remark")
     private String remark;
+    /**
+     * 方法总花费时间
+     */
+    @Field(value = "totalSpendTime")
+    private Long totalSpendTime ;
+    /**
+     * 计时器 输出信息
+     */
+    @Field(value = "stopWatchPrint")
+    private String stopWatchPrint ;
 }

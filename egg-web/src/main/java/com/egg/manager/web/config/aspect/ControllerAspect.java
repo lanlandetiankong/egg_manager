@@ -67,8 +67,6 @@ public class ControllerAspect {
         boolean defaultFlag = true ;
         //计时器
         StopWatch watch = new StopWatch();
-        //方法开始时间
-        Date startTime = new Date() ;
         watch.start();
         if(defaultFlag){
             //调用目标方法，如果没调用这个则表示拦截实际的方法调用。
@@ -76,8 +74,6 @@ public class ControllerAspect {
         }   else {
             return null ;
         }
-        //方法结束时间
-        Date endTime = new Date() ;
         watch.stop();
         log.info(watch.prettyPrint());
         //通知类型
@@ -105,8 +101,6 @@ public class ControllerAspect {
                     }
                     pcWebQueryLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebQueryLogMgo.setStartMethodTime(startTime);
-                pcWebQueryLogMgo.setEndMethodTime(endTime);
                 pcWebQueryLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
                 pcWebQueryLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebQueryLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
@@ -135,8 +129,6 @@ public class ControllerAspect {
                     }
                     pcWebOperationLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebOperationLogMgo.setStartMethodTime(startTime);
-                pcWebOperationLogMgo.setEndMethodTime(endTime);
                 pcWebOperationLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
                 pcWebOperationLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebOperationLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
@@ -164,8 +156,6 @@ public class ControllerAspect {
                     }
                     pcWebLoginLogMgo.setResult(JSON.toJSONString(result));
                 }
-                pcWebLoginLogMgo.setStartMethodTime(startTime);
-                pcWebLoginLogMgo.setEndMethodTime(endTime);
                 pcWebLoginLogMgo.setTotalSpendTime(watch.getTotalTimeMillis());
                 pcWebLoginLogMgo.setStopWatchPrint(watch.prettyPrint());
                 pcWebLoginLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());

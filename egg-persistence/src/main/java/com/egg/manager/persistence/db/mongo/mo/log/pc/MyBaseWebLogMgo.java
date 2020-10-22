@@ -4,7 +4,6 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
 
 /**
  *@description:
@@ -73,23 +72,5 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      */
     @Field(value = "ipAddr")
     private String ipAddr;
-    /**
-     * 方法开始执行时间
-     */
-    @Field(value = "startMethodTime")
-    private Date startMethodTime ;
-    /**
-     * 方法执行结束时间
-     */
-    @Field(value = "endMethodTime")
-    private Date endMethodTime ;
-    /**
-     * 方法总花费时间
-     */
-    @Field(value = "totalSpendTime")
-    private Long totalSpendTime ;
-    /**
-     * 计时器 输出信息
-     */
-    private String stopWatchPrint ;
+
 }

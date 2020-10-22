@@ -1,7 +1,9 @@
 package com.egg.manager.web.wservices.wserviceimpl.aspect;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
@@ -14,6 +16,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.MyBaseWebLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +49,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
+    @Reference
+    private UserAccountRedisService userAccountRedisService;
 
     /**
      * 取得 请求的参数
@@ -133,11 +138,18 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
+                    //取得当前登录的用户
+                    UserAccount loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
                     logMgo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     String userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);
                     logMgo.setCreateUserId(userAccountId);
                     logMgo.setLastModifyerId(userAccountId);
+                    //记录当前登录用户信息
+                    if(loginUser != null){
+                        logMgo.setUserNickName(loginUser.getNickName());
+                        logMgo.setLoginUser(loginUser);
+                    }
                 }
                 //取得 请求头bean
                 RequestHeaderBean requestHeaderBean = routineCommonFunc.gainRequestHeaderBeanByRequest(request);

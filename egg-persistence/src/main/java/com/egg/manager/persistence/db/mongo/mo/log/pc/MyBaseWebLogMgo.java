@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mongo.mo.log.pc;
 import com.egg.manager.persistence.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -15,6 +16,16 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      */
     @Field(value = "userAccountId")
     private String userAccountId;
+    /**
+     * 登录的用户名称
+     */
+    @Field(value = "userNickName")
+    private String userNickName;
+    /**
+     * 登录的用户
+     */
+    @Field(value = "loginUser")
+    private UserAccount loginUser;
     /**
      * 注解操作类型
      */

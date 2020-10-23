@@ -13,9 +13,9 @@ import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -42,8 +42,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserRoleService.class)
 public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, UserRole, UserRoleVo> implements UserRoleService {
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
+
     @Reference
     private RedisHelper redisHelper;
     @Autowired
@@ -85,7 +84,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        Object userRoleListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserRolesKey(), userAccount.getFid());
+        Object userRoleListObj = redisHelper.hashGet(RedisShiroCacheEnum.userRoles.getKey(), userAccount.getFid());
         String userRoleListJson = JSONObject.toJSONString(userRoleListObj);
         List<UserRole> userRoleList = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRole>>() {
         });

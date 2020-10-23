@@ -13,9 +13,9 @@ import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -43,8 +43,7 @@ import java.util.List;
 @Service(interfaceClass = UserDepartmentService.class)
 public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper, UserDepartment, UserDepartmentVo> implements UserDepartmentService {
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
+
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -87,7 +86,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
         if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        Object userDepartmentListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserDepartmentKey(), userAccount.getFid());
+        Object userDepartmentListObj = redisHelper.hashGet(RedisShiroCacheEnum.userDepartment.getKey(), userAccount.getFid());
         String userDepartmentListJson = JSONObject.toJSONString(userDepartmentListObj);
         List<UserDepartment> userDepartment = JSON.parseObject(userDepartmentListJson, new TypeReference<ArrayList<UserDepartment>>() {
         });

@@ -8,7 +8,6 @@ import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
 import com.egg.manager.common.base.constant.Constant;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
     @Reference
     private RedisHelper redisHelper;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
 
     @Autowired
     public UserAccountService userAccountService;

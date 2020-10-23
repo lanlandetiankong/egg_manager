@@ -14,7 +14,6 @@ import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
@@ -48,8 +47,7 @@ import java.util.*;
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineRoleService.class)
 public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapper, DefineRole, DefineRoleVo> implements DefineRoleService {
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
+
     @Reference
     private RedisHelper redisHelper;
     @Autowired

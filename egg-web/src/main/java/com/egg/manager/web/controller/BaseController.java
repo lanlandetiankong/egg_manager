@@ -7,10 +7,10 @@ import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
 import com.egg.manager.api.trait.helper.ErrorActionEnum;
 import com.egg.manager.common.base.constant.Constant;
+import com.egg.manager.common.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
@@ -23,7 +23,6 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 
@@ -55,8 +54,6 @@ public class BaseController {
     @Reference
     private RedisHelper redisHelper;
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
 
     @Reference
     private UserAccountRedisService userAccountRedisService;
@@ -86,25 +83,25 @@ public class BaseController {
     public void dealSetTokenToRedis(UserAccount loginUser, UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
         if (userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
-            Object oldAuthorization = redisHelper.hashGet(redisPropsOfShiroCache.getUserAuthorizationKey(), userAccountToken.getUserAccountId());
+            Object oldAuthorization = redisHelper.hashGet(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountToken.getUserAccountId());
             if (oldAuthorization != null && jwtSsoFlag) {
                 //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录] ,jwtSsoFlag由application.properties 配置取得
                 String userAuthorization = (String) oldAuthorization;
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserAuthorizationKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userAuthorization.getKey(), userAuthorization);
                 //清除 authorization 缓存
-                redisHelper.hashRemove(redisPropsOfShiroCache.getAuthorizationKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.authorization.getKey(), userAuthorization);
 
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserAccountKey(), userAuthorization);
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserPermissionsKey(), userAuthorization);
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserRolesKey(), userAuthorization);
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontButtonsKey(), userAuthorization);
-                redisHelper.hashRemove(redisPropsOfShiroCache.getUserFrontRouterUrlKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userAccount.getKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userPermissions.getKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userRoles.getKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userFrontButtons.getKey(), userAuthorization);
+                redisHelper.hashRemove(RedisShiroCacheEnum.userFrontRouterUrl.getKey(), userAuthorization);
             }
             String authorization = userAccountToken.getAuthorization();
             //设置 用户id指向当前 的 authorization
-            redisHelper.hashTtlPut(redisPropsOfShiroCache.getUserAuthorizationKey(), userAccountToken.getUserAccountId(), authorization, redisPropsOfShiroCache.getUserAuthorizationTtl());
+            redisHelper.hashTtlPut(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountToken.getUserAccountId(), authorization, RedisShiroCacheEnum.userAuthorization.getTtl());
             //设置 authorization 缓存 当前用户的token
-            redisHelper.hashTtlPut(redisPropsOfShiroCache.getAuthorizationKey(), authorization, userAccountToken, redisPropsOfShiroCache.getAuthorizationTtl());
+            redisHelper.hashTtlPut(RedisShiroCacheEnum.authorization.getKey(), authorization, userAccountToken, RedisShiroCacheEnum.authorization.getTtl());
 
             //设置到缓存,hashKey 都是 authorization
             userAccountRedisService.dealGetCurrentUserEntity(loginUser, authorization, userAccountToken.getUserAccountId(), true);

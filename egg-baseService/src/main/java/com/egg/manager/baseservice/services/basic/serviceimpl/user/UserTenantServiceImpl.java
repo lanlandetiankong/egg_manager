@@ -13,9 +13,9 @@ import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.props.redis.shiro.RedisPropsOfShiroCache;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -45,8 +45,6 @@ import java.util.List;
 @Service(interfaceClass = UserTenantService.class)
 public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper, UserTenant, UserTenantVo> implements UserTenantService {
 
-    @Autowired
-    private RedisPropsOfShiroCache redisPropsOfShiroCache;
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -91,7 +89,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         if (super.checkUserAccountIsBlank(userAccount) == true) {
             return null;
         }
-        Object userTenantListObj = redisHelper.hashGet(redisPropsOfShiroCache.getUserTenantKey(), userAccount.getFid());
+        Object userTenantListObj = redisHelper.hashGet(RedisShiroCacheEnum.userTenant.getKey(), userAccount.getFid());
         String userTenantListJson = JSONObject.toJSONString(userTenantListObj);
         List<UserTenant> userTenant = JSON.parseObject(userTenantListJson, new TypeReference<ArrayList<UserTenant>>() {
         });

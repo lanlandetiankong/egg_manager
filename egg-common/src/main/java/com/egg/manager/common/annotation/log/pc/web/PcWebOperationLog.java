@@ -42,6 +42,11 @@ public @interface PcWebOperationLog {
      */
     boolean flag() default true;
     /**
+     * 是否打印出 计时器日志
+     * @return
+     */
+    boolean printWatchFlag() default false;
+    /**
      * 操作类型
      * @return
      */

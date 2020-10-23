@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author zhoucj
- * @description:
+ * @description: @Controller层进行日志切面，并记录到mongodb
  * @date 2020/10/20
  */
 @Slf4j
@@ -74,7 +74,7 @@ public class ControllerAspect {
             return null ;
         }
         watch.stop();
-        log.info(watch.prettyPrint());
+        boolean printWatchFlag = false ;
         //通知类型
         final String aspectNotifyType = AspectNotifyTypeEnum.Around.getValue() ;
         Method method = controllerAspectService.gainReqMethod(joinPoint);
@@ -82,6 +82,8 @@ public class ControllerAspect {
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog queryLogAnno = method.getAnnotation(PcWebQueryLog.class);
+            //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
+            printWatchFlag = ifNullGetOther(printWatchFlag,queryLogAnno.printWatchFlag());
             if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
@@ -110,6 +112,8 @@ public class ControllerAspect {
         //是否需要记录[操作]日志
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
             PcWebOperationLog operationLogAnno = method.getAnnotation(PcWebOperationLog.class);
+            //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
+            printWatchFlag = ifNullGetOther(printWatchFlag,operationLogAnno.printWatchFlag());
             if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
@@ -137,6 +141,8 @@ public class ControllerAspect {
         //是否需要记录[登录]日志
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
+            //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
+            printWatchFlag = ifNullGetOther(printWatchFlag,loginLogAnno.printWatchFlag());
             if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
@@ -160,6 +166,10 @@ public class ControllerAspect {
                 pcWebLoginLogMgo.setIsSuccess(isSuccess ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue());
                 pcWebLoginLogRepository.insert(pcWebLoginLogMgo);
             }
+        }
+        //上方设置该接口可以打印日志计时器记录时才打印。
+        if(printWatchFlag){
+            log.info(watch.prettyPrint());
         }
         return result ;
     }
@@ -241,6 +251,11 @@ public class ControllerAspect {
             }
         }
         return resultMethod;
+    }
+
+
+    private boolean ifNullGetOther(boolean value,boolean other){
+        return value ? value : other;
     }
 
 }

@@ -17,33 +17,37 @@ import java.lang.annotation.*;
 @Documented
 public @interface PcWebLoginLog {
 
-
     /**
-     操作
-     @return
+     * 操作
+     * @return
      */
     String action() default "";
 
     /**
-     相对于项目的 全路径
-     @return
+     * 相对于项目的 全路径
+     * @return
      */
     String fullPath();
 
     /**
-     描述
-     @return
+     * 描述
+     * @return
      */
     String description() default "";
 
     /**
-     是否记录到 mongodb
-     @return
+     * 是否记录到 mongodb
+     * @return
      */
     boolean flag() default true;
+    /**
+     * 是否打印出 计时器日志
+     * @return
+     */
+    boolean printWatchFlag() default false;
     /**
      * 操作类型
      * @return
      */
-    String type() default AspectTypeConstant.LOGIN_API ;
+    String type() default AspectTypeConstant.OPERATION_API ;
 }

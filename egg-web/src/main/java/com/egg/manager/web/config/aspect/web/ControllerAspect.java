@@ -1,4 +1,4 @@
-package com.egg.manager.web.config.aspect;
+package com.egg.manager.web.config.aspect.web;
 
 
 import com.alibaba.fastjson.JSON;
@@ -14,7 +14,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebLoginLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebOperationLogRepository;
 import com.egg.manager.persistence.db.mongo.repository.log.pc.web.PcWebQueryLogRepository;
-import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
+import com.egg.manager.web.wservices.wservice.aspect.web.ControllerAspectService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -27,7 +27,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Date;
 
 /**
  * @author zhoucj

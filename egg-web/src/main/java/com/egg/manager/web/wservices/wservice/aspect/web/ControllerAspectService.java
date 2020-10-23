@@ -1,4 +1,4 @@
-package com.egg.manager.web.wservices.wservice.aspect;
+package com.egg.manager.web.wservices.wservice.aspect.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;

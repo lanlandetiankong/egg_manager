@@ -1,4 +1,4 @@
-package com.egg.manager.web.wservices.wserviceimpl.aspect;
+package com.egg.manager.web.wservices.wserviceimpl.aspect.web;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -17,7 +17,7 @@ import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.web.wservices.wservice.aspect.ControllerAspectService;
+import com.egg.manager.web.wservices.wservice.aspect.web.ControllerAspectService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

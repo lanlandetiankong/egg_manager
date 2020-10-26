@@ -59,19 +59,6 @@ public class BaseController {
     private UserAccountRedisService userAccountRedisService;
 
 
-    public static boolean checkFieldStrBlank(String... strs) {
-        boolean blankFlag = false;
-        if (strs.length > 0) {
-            for (String str : strs) {
-                if (StringUtils.isBlank(str)) {
-                    blankFlag = true;
-                    break;
-                }
-            }
-        }
-        return blankFlag;
-    }
-
 
     /**
      * 设置/刷新 用户信息缓存到redis
@@ -230,15 +217,6 @@ public class BaseController {
         return fieldBeanList;
     }
 
-
-    public JSONObject parseQueryJsonToObject(String queryJson) {
-        JSONObject jsonObject = null;
-        if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_OBJECT.equals(queryJson) == false)) {
-            jsonObject = JSONObject.parseObject(queryJson);
-        }
-        jsonObject = jsonObject != null ? jsonObject : new JSONObject();
-        return jsonObject;
-    }
 
     /**
      * 取得分页 bean

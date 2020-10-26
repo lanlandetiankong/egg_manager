@@ -59,9 +59,5 @@ public class SmartFormFieldDefinitionMgo extends MyBaseModelMgo<String> {
      * 类型描述
      */
     private String description;
-    /**
-     * 备注
-     */
-    private String remark;
 
 }

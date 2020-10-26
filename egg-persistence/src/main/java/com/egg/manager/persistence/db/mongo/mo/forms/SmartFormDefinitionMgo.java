@@ -40,10 +40,6 @@ public class SmartFormDefinitionMgo extends MyBaseModelMgo<String> {
      * 表单描述
      */
     private String description;
-    /**
-     * 备注
-     */
-    private String remark;
 
 
 }

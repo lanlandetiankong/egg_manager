@@ -29,7 +29,5 @@ public class SmartFormTypeDefinitionMgo extends MyBaseModelMgo<String> {
      * 类型描述
      */
     private String description;
-    private String remark;
-
 
 }

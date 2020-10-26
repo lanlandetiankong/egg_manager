@@ -281,7 +281,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineMenuMapper.fakeDeleteById(delId);;
+        return defineMenuMapper.fakeDeleteById(delId);
     }
 
 

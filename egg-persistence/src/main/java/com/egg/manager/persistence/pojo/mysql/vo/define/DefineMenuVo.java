@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.pojo.mysql.vo.define;
 
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;

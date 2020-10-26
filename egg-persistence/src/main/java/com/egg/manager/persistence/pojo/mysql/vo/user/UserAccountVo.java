@@ -1,6 +1,8 @@
 package com.egg.manager.persistence.pojo.mysql.vo.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
+import com.egg.manager.common.base.enums.base.UserSexEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;

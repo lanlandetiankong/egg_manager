@@ -1,6 +1,8 @@
 package com.egg.manager.persistence.pojo.mysql.dto.user;
 
 import com.egg.manager.common.base.beans.file.FileResBean;
+import com.egg.manager.common.base.enums.base.UserSexEnum;
+import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;

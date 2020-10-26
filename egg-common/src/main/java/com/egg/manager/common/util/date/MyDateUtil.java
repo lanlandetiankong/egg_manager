@@ -469,7 +469,6 @@ public class MyDateUtil {
     /**
      * 增加日期的秒钟。失败返回null。
      * @param date      日期
-     * @param dayAmount 增加数量。可为负数
      * @return 增加秒钟后的日期
      */
     public static Date addSecond(Date date, int secondAmount) {

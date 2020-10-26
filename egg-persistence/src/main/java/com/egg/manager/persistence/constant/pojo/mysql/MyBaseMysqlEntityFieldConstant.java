@@ -14,7 +14,7 @@ public interface MyBaseMysqlEntityFieldConstant {
     /**
      * fid，即id
      */
-    EggPojoReflexFieldConfig<String> FID = new EggPojoReflexFieldConfig("fid", String.class, "");
+    EggPojoReflexFieldConfig<String> FID = new EggPojoReflexFieldConfig("fid", String.class, "fid");
     /**
      * 备注
      */

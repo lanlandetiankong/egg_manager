@@ -158,8 +158,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        UserTenant userTenant = super.doBeforeDeleteOneById(loginUser, UserTenant.class, delId);
-        Integer delCount = userTenantMapper.updateById(userTenant);
+        Integer delCount = userTenantMapper.fakeDeleteById(delId);
         return delCount;
     }
 

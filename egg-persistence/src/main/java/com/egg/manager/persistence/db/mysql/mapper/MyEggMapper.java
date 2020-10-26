@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
 
@@ -15,7 +16,7 @@ public interface  MyEggMapper<T> extends BaseMapper<T> {
      * 根据id伪删除
      * @return
      */
-    int fakeDeleteById(Serializable fid);
+    int fakeDeleteById(@Param("fid") Serializable fid);
 
 
 }

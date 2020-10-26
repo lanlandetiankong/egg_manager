@@ -98,8 +98,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        DefineJob defineJob = super.doBeforeDeleteOneById(loginUser, DefineJob.class, delId);
-        return defineJobMapper.updateById(defineJob);
+        return defineJobMapper.fakeDeleteById(delId);
     }
 
 

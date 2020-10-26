@@ -119,9 +119,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        AnnouncementTag announcementTag = super.doBeforeDeleteOneById(loginUser, AnnouncementTag.class, delId);
-        Integer delCount = announcementTagMapper.updateById(announcementTag);
-        return delCount;
+        return announcementTagMapper.fakeDeleteById(delId);
     }
 
     @Override

@@ -148,8 +148,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        DefinePermission updateEntity = super.doBeforeDeleteOneById(loginUser, DefinePermission.class, delId);
-        return definePermissionMapper.updateById(updateEntity);
+        return definePermissionMapper.fakeDeleteById(delId);
     }
 
 

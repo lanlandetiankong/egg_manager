@@ -69,6 +69,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends BaseMapper<T>,
      * @param idVal
      * @return
      */
+    @Deprecated
     T doBeforeDeleteOneById(UserAccount loginUser, Class<T> tClass, String idVal);
 
 

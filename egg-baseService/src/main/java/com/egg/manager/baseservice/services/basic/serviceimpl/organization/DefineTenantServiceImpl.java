@@ -90,8 +90,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        DefineTenant updateWrapper = super.doBeforeDeleteOneById(loginUser, DefineTenant.class, delId);
-        Integer count = defineTenantMapper.updateById(updateWrapper);
+        Integer count = defineTenantMapper.fakeDeleteById(delId);
         return count;
     }
 

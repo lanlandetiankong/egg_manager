@@ -214,8 +214,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        UserAccount userAccount = super.doBeforeDeleteOneById(loginUser, UserAccount.class, delId);
-        return userAccountMapper.updateById(userAccount);
+        return userAccountMapper.fakeDeleteById(delId);
     }
 
 

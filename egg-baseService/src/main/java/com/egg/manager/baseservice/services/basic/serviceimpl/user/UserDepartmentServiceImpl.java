@@ -154,8 +154,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        UserDepartment userDepartment = super.doBeforeDeleteOneById(loginUser, UserDepartment.class, delId);
-        Integer delCount = userDepartmentMapper.updateById(userDepartment);
+        Integer delCount = userDepartmentMapper.fakeDeleteById(delId);
         return delCount;
     }
 

@@ -99,8 +99,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        UserJob userJob = super.doBeforeDeleteOneById(loginUser, UserJob.class, delId);
-        Integer delCount = userJobMapper.updateById(userJob);
+        Integer delCount = userJobMapper.fakeDeleteById(delId);
         return delCount;
     }
 }

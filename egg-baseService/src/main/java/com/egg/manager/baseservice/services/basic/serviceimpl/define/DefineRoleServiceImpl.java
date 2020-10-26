@@ -217,8 +217,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        DefineRole defineRole = super.doBeforeDeleteOneById(loginUser, DefineRole.class, delId);
-        return defineRoleMapper.updateById(defineRole);
+        return defineRoleMapper.fakeDeleteById(delId);;
     }
 
 

@@ -100,7 +100,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        DefineModule defineModule = super.doBeforeDeleteOneById(loginUser, DefineModule.class, delId);
-        return defineModuleMapper.updateById(defineModule);
+        return defineModuleMapper.fakeDeleteById(delId);
     }
 }

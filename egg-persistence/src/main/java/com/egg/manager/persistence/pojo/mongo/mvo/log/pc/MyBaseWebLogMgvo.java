@@ -1,7 +1,9 @@
 package com.egg.manager.persistence.pojo.mongo.mvo.log.pc;
 
+import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mongo.mvo.BaseModelMgvo;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  *@description:
@@ -14,6 +16,14 @@ public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
      * 登录的用户id
      */
     private String userAccountId;
+    /**
+     * 登录的用户名称
+     */
+    private String userNickName;
+    /**
+     * 登录的用户
+     */
+    private UserAccount loginUser;
     /**
      * 注解操作类型
      */

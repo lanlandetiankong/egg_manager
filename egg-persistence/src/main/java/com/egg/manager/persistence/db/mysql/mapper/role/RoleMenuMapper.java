@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.role;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +12,7 @@ import java.util.List;
  * @description:
  * @date 2020/10/20
  */
-public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
+public interface RoleMenuMapper extends MyEggMapper<RoleMenu> {
     /**
      * 根据角色id 修改指定权限 的可用状态
      * @param roleId

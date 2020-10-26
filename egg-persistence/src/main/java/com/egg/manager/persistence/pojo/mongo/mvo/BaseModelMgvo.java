@@ -114,4 +114,13 @@ public class BaseModelMgvo<K> extends BaseMgvo {
      */
     private Date lastModifiedDate;
     private String remark;
+
+    /**
+     * 方法总花费时间
+     */
+    private Long totalSpendTime ;
+    /**
+     * 计时器 输出信息
+     */
+    private String stopWatchPrint ;
 }

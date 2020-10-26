@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
 
 /**
@@ -8,7 +8,7 @@ import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
  * @description:
  * @date 2020/10/20
  */
-public interface UserGroupMapper extends BaseMapper<UserGroup> {
+public interface UserGroupMapper extends MyEggMapper<UserGroup> {
 
 
 }

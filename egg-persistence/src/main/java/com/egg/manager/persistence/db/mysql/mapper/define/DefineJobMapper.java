@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.define;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
@@ -16,7 +16,7 @@ import java.util.List;
  * @description:
  * @date 2020/10/20
  */
-public interface DefineJobMapper extends BaseMapper<DefineJob> {
+public interface DefineJobMapper extends MyEggMapper<DefineJob> {
 
     /**
      * [分页搜索查询] - 职务定义

@@ -33,8 +33,12 @@
     <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 
-    <dubbo:service protocol="dubbo" ref="operationLogMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMgoService"/>
+    <dubbo:service protocol="dubbo" ref="pcWebOperationLogMgoService"
+                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebOperationLogMgoService"/>
+    <dubbo:service protocol="dubbo" ref="pcWebLoginLogMgoService"
+                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebLoginLogMgoService"/>
+    <dubbo:service protocol="dubbo" ref="pcWebQueryLogMgoService"
+                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebQueryLogMgoService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 

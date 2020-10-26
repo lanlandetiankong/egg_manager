@@ -28,7 +28,7 @@
     <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 
-    <bean id="operationLogMService" class="com.egg.manager.baseservice.services.mongodb.serviceimpl.log.OperationLogMServiceImpl"/>
+    <bean id="pcWebOperationLogMgoService" class="com.egg.manager.baseservice.services.mongodb.serviceimpl.log.OperationLogMServiceImpl"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 

@@ -29,7 +29,11 @@
 
 
     <!--                                    dir-start:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
-    <dubbo:reference id="operationLogMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.OperationLogMgoService"/>
+    <dubbo:reference id="pcWebOperationLogMgoService" check="false"
+                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebOperationLogMgoService"/>
+    <dubbo:reference id="pcWebLoginLogMgoService" check="false"
+                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebLoginLogMgoService"/>
+    <dubbo:reference id="pcWebQueryLogMgoService" check="false"
+                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebQueryLogMgoService"/>
     <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
 </beans>

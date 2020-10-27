@@ -2,6 +2,7 @@ package com.egg.manager.persistence.pojo.common.excel.introduce.user;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.egg.manager.persistence.pojo.common.excel.MyBaseXls;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -102,5 +103,14 @@ public class UserAccountXlsInModel extends MyBaseXls {
      */
     @ExcelIgnore
     private String lastModifyerId;
-
+    /**
+     * 删除时间
+     */
+    @ExcelIgnore
+    private short isDeleted;
+    /**
+     * 删除时间
+     */
+    @ExcelIgnore
+    private Date deletedTime;
 }

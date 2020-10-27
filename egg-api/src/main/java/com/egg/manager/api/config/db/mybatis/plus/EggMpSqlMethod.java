@@ -4,7 +4,8 @@ public enum EggMpSqlMethod {
     /**
      * 根据id伪删除
      */
-    FAKE_DELETE_BY_ID("fakeDeleteById","根据id伪删除","<script>\nupdate %s set %s = %d where %s = #{fid}\n</script>")
+    FAKE_DELETE_BY_ID("fakeDeleteById","根据id伪删除","<script>\nupdate %s set %s = %d where %s = #{fid}\n</script>"),
+
     ;
 
     private final String method;

@@ -25,10 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhoucj
@@ -80,12 +77,13 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
-        Integer delCount = 0;
-        if (delIds != null && delIds.length > 0) {
+        DefineTenant entity = null ;
+        Integer delCount = defineTenantMapper.batchDeleteByIdsWithFill(Lists.newArrayList(delIds),entity);
+        /*if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = defineTenantMapper.batchFakeDelByIds(delIdList, loginUser);
-        }
+        }*/
         return delCount;
     }
 

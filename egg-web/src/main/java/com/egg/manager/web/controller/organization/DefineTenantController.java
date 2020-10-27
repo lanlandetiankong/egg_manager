@@ -161,7 +161,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.BATCH_DELETE_BY_IDS);
         Integer delCount = 0;
         try {

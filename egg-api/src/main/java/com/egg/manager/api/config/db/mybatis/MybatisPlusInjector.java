@@ -2,7 +2,11 @@ package com.egg.manager.api.config.db.mybatis;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
+import com.baomidou.mybatisplus.core.injector.methods.DeleteBatchByIds;
+import com.baomidou.mybatisplus.extension.injector.methods.LogicDeleteByIdWithFill;
 import com.egg.manager.api.config.db.mybatis.plus.methods.FakeDeleteByIdMethod;
+import com.egg.manager.api.config.db.mybatis.plus.methods.LogicBatchDeleteWithFillMethod;
+import com.egg.manager.api.config.db.mybatis.plus.methods.LogicDeleteWithFillMethod;
 
 import java.util.List;
 
@@ -25,6 +29,10 @@ public class MybatisPlusInjector extends DefaultSqlInjector {
         //||添加自定义方法类
         //方法-根据id伪删除
         methodList.add(new FakeDeleteByIdMethod());
+        methodList.add(new LogicDeleteByIdWithFill());
+        //methodList.add(new LogicDeleteWithFillMethod());
+        methodList.add(new LogicBatchDeleteWithFillMethod());
+
         return methodList;
     }
 

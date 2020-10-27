@@ -105,7 +105,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementDraftMapper.fakeDeleteById(delId);
+        return announcementDraftMapper.deleteById(delId);
     }
 
 

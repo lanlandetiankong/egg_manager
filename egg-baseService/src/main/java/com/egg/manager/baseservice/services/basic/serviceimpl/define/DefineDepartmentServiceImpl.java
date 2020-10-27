@@ -154,6 +154,6 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineDepartmentMapper.fakeDeleteById(delId);
+        return defineDepartmentMapper.deleteById(delId);
     }
 }

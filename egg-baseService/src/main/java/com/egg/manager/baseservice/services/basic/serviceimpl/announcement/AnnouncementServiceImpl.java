@@ -133,7 +133,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementMapper.fakeDeleteById(delId);
+        return announcementMapper.deleteById(delId);
     }
 
 }

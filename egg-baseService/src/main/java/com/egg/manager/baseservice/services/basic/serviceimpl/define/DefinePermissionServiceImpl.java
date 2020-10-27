@@ -148,7 +148,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return definePermissionMapper.fakeDeleteById(delId);
+        return definePermissionMapper.deleteById(delId);
     }
 
 

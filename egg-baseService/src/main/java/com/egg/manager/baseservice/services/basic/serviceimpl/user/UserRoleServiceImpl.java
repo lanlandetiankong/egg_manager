@@ -149,7 +149,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userRoleMapper.fakeDeleteById(delId);
+        Integer delCount = userRoleMapper.deleteById(delId);
         return delCount;
     }
 }

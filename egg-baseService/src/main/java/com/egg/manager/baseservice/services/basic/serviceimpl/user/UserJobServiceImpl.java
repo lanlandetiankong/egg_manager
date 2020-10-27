@@ -99,7 +99,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userJobMapper.fakeDeleteById(delId);
+        Integer delCount = userJobMapper.deleteById(delId);
         return delCount;
     }
 }

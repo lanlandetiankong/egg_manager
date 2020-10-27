@@ -119,7 +119,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementTagMapper.fakeDeleteById(delId);
+        return announcementTagMapper.deleteById(delId);
     }
 
     @Override

@@ -98,7 +98,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineJobMapper.fakeDeleteById(delId);
+        return defineJobMapper.deleteById(delId);
     }
 
 

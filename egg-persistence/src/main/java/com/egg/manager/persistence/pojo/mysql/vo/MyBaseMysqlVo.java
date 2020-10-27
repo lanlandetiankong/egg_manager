@@ -56,8 +56,5 @@ public class MyBaseMysqlVo implements Serializable {
      * 是否已经删除，0:否 1:是
      */
     private short isDeleted;
-    /**
-     * 删除时间
-     */
-    private Date deletedTime;
+
 }

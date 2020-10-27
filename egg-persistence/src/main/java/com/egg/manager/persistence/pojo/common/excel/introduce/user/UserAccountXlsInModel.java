@@ -108,9 +108,5 @@ public class UserAccountXlsInModel extends MyBaseXls {
      */
     @ExcelIgnore
     private short isDeleted;
-    /**
-     * 删除时间
-     */
-    @ExcelIgnore
-    private Date deletedTime;
+
 }

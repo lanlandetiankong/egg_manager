@@ -3,10 +3,7 @@ package com.egg.manager.persistence.pojo.mysql.dto.define;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +14,8 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class DefineMenuDto extends MyBaseMysqlDto {
     /**
      * 上级id
@@ -71,6 +67,7 @@ public class DefineMenuDto extends MyBaseMysqlDto {
     /**
      * 当前菜单已上传的Excel模板文件bean
      */
+    @Builder.Default
     private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();
 
     /**

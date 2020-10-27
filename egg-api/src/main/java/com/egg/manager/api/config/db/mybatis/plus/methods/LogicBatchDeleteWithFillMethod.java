@@ -38,7 +38,7 @@ public class LogicBatchDeleteWithFillMethod extends AbstractMethod {
                     .filter(i -> i.getFieldFill() == FieldFill.UPDATE || i.getFieldFill() == FieldFill.INSERT_UPDATE && (i.getField().isAnnotationPresent(TableLogic.class) == false))
                     .collect(Collectors.toList());
             if (CollectionUtils.isNotEmpty(fieldInfos)) {
-                String sqlSet = "SET " + fieldInfos.stream().map(i -> i.getSqlSet(ENTITY_DOT)).collect(Collectors.joining(EMPTY))
+                String sqlSet = "SET " + fieldInfos.stream().map(i -> getNotNullSetSql(i)).collect(Collectors.joining(EMPTY))
                         + tableInfo.getLogicDeleteSql(false, false);
                 //逻辑值 && 版本号
                 String additional = tableInfo.getLogicDeleteSql(true, true)+optlockVersion(tableInfo);
@@ -63,6 +63,16 @@ public class LogicBatchDeleteWithFillMethod extends AbstractMethod {
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);
             return this.addDeleteMappedStatement(mapperClass, getMethod(sqlMethod), sqlSource);
         }
+    }
+
+
+    public String getNotNullSetSql(TableFieldInfo fieldInfo) {
+        if(fieldInfo == null){
+            return "" ;
+        }
+        String partenSql = "<if test=\"%s!= null\"> \n %s \n </if>";
+        String propertyName = ENTITY_DOT+fieldInfo.getProperty();
+        return String.format(partenSql,propertyName,fieldInfo.getSqlSet(ENTITY_DOT)) ;
     }
 
 }

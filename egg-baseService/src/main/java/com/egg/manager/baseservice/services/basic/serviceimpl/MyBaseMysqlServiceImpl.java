@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
+import com.egg.manager.api.utils.shiro.EggShiroUtil;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -161,5 +162,7 @@ public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>,
         }
         return false;
     }
+
+
 
 }

@@ -181,7 +181,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser(required = false) UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

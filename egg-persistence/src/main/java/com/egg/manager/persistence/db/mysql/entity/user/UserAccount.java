@@ -124,7 +124,7 @@ public class UserAccount extends Model<UserAccount> {
     /**
      * 是否已经删除，0:否 1:是
      */
-    //@TableLogic
+    @TableLogic
     @TableField(value = "is_deleted")
     private short isDeleted;
     /**

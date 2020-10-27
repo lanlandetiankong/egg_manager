@@ -28,7 +28,7 @@ public class MpGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("J://projects//generate//egg-manager");
+        gc.setOutputDir("D://projects//generate//egg-manager");
         gc.setFileOverride(true);
         // 不需要ActiveRecord特性的请改为false
         gc.setActiveRecord(true);
@@ -139,7 +139,7 @@ public class MpGenerator {
             }
         };
         // 调整 xml 生成目录演示
-        focList.add(new FileOutConfig("/templates/mp/mapper.xml.vm") {
+        focList.add(new FileOutConfig("/templates/mp/vm/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 return "/develop/code/xml/" + tableInfo.getEntityName() + ".xml";

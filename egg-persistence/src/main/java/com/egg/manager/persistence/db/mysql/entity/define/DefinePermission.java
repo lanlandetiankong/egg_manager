@@ -81,6 +81,17 @@ public class DefinePermission extends Model<DefinePermission> {
     @Version
     @TableField(value = "version")
     private Integer version;
+    /**
+     * 是否已经删除，0:否 1:是
+     */
+    //@TableLogic
+    @TableField(value = "is_deleted")
+    private short isDeleted;
+    /**
+     * 删除时间
+     */
+    @TableField(value = "deleted_time")
+    private Date deletedTime;
 
     @Override
     protected Serializable pkVal() {

@@ -52,4 +52,12 @@ public class MyBaseMysqlDto implements Serializable {
      * 版本号
      */
     private Integer version;
+    /**
+     * 是否已经删除，0:否 1:是
+     */
+    private short isDeleted;
+    /**
+     * 删除时间
+     */
+    private Date deletedTime;
 }

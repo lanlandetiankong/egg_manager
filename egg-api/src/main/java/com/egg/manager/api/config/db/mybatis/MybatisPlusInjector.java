@@ -7,7 +7,7 @@ import com.egg.manager.api.config.db.mybatis.plus.methods.FakeDeleteByIdMethod;
 import java.util.List;
 
 /**
- * @description:
+ * @description:  mybatisplus 增强方法注入器
  * @author zhoucj
  * @date 2020/10/26
  */

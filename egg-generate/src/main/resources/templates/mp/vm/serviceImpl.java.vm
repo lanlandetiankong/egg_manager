@@ -113,7 +113,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         public Integer dealDel${cfg.baseEntityName}ByArr(String[]delIds,UserAccount loginUser)throws Exception{
         Integer delCount=0;
         if(delIds!=null&&delIds.length>0){
-        List<String>delIdList=Arrays.asList(delIds);
+        List<String>delIdList=Lists.newArrayList(delIds);
         //批量伪删除
         delCount= ${cfg.baseEntityName_firstLow}Mapper.batchFakeDelByIds(delIdList,loginUser);
         }

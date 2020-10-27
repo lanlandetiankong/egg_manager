@@ -23,6 +23,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefinePermissionDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefinePermissionTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefinePermissionVo;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -128,7 +129,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = definePermissionMapper.batchFakeDelByIds(delIdList, loginUser);
         }
@@ -139,7 +140,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     public Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds) {
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
-            List<String> delIdList = Arrays.asList(ensureIds);
+            List<String> delIdList = Lists.newArrayList(ensureIds);
             //批量伪删除
             delCount = definePermissionMapper.batchEnsureByIds(delIdList, loginUser);
         }

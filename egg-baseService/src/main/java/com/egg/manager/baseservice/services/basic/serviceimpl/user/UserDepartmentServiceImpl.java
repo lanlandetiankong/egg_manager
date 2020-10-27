@@ -24,6 +24,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -145,7 +146,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = userDepartmentMapper.batchFakeDelByIds(delIdList, loginUser);
         }

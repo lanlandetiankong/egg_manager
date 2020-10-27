@@ -27,6 +27,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineMenuTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -271,7 +272,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = defineMenuMapper.batchFakeDelByIds(delIdList, loginUser);
         }

@@ -29,6 +29,7 @@ import com.egg.manager.persistence.pojo.mysql.initialize.user.UserRolePojoInitia
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserAccountTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserAccountVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,7 +206,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = userAccountMapper.batchFakeDelByIds(delIdList, loginUser);
         }
@@ -223,7 +224,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
-            List<String> lockIdList = Arrays.asList(lockIds);
+            List<String> lockIdList = Lists.newArrayList(lockIds);
             //批量设置为 锁定
             lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUser);
         }
@@ -261,7 +262,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 //批量新增行
                 userRoleMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<String> enableIds = new ArrayList<>();
                 List<String> disabledIds = new ArrayList<>();
                 Iterator<String> oldCheckIter = oldCheckRoleIds.iterator();
@@ -319,7 +320,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 //批量新增行
                 userJobMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<String> enableIds = new ArrayList<>();
                 List<String> disabledIds = new ArrayList<>();
                 Iterator<String> oldCheckIter = oldCheckJobIds.iterator();

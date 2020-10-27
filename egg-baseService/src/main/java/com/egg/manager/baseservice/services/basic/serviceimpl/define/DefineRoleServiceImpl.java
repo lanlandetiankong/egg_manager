@@ -30,6 +30,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.define.DefineRoleDto;
 import com.egg.manager.persistence.pojo.mysql.initialize.role.RolePermissionPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineRoleTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineRoleVo;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -207,7 +208,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = defineRoleMapper.batchFakeDelByIds(delIdList, loginUser);
         }
@@ -239,7 +240,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 //批量新增行
                 rolePermissionMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<String> enableIds = new ArrayList<>();
                 List<String> disabledIds = new ArrayList<>();
                 Iterator<String> oldCheckIter = oldCheckPermIds.iterator();

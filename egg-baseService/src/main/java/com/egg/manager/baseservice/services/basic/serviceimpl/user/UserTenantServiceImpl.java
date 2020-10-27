@@ -25,6 +25,7 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.user.UserTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -149,7 +150,7 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = userTenantMapper.batchFakeDelByIds(delIdList, loginUser);
         }

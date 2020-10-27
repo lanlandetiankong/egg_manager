@@ -23,6 +23,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDraft
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,7 +97,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = announcementDraftMapper.batchFakeDelByIds(delIdList, loginUser);
         }
@@ -113,7 +114,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     public Integer dealBatchPublishByDraft(UserAccount loginUser, String[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {
-            List<String> delIdList = Arrays.asList(draftIds);
             //批量伪删除
             for (String draftId : draftIds) {
                 Integer addCount = this.dealPublishByDraft(loginUser, draftId, true);

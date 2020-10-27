@@ -20,6 +20,7 @@ import com.egg.manager.persistence.pojo.mysql.dto.organization.DefineTenantDto;
 import com.egg.manager.persistence.pojo.mysql.initialize.user.UserTenantPojoInitialize;
 import com.egg.manager.persistence.pojo.mysql.transfer.organization.DefineTenantTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.organization.DefineTenantVo;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,7 +82,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Arrays.asList(delIds);
+            List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
             delCount = defineTenantMapper.batchFakeDelByIds(delIdList, loginUser);
         }
@@ -126,7 +127,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                 //批量新增行
                 userTenantMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Arrays.asList(checkIds));
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<String> enableIds = new ArrayList<>();
                 List<String> disabledIds = new ArrayList<>();
                 Iterator<String> oldCheckIter = oldCheckIds.iterator();

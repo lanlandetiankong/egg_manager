@@ -16,17 +16,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @description: 根据ids更新状态为
+ * @description: 根据ids更新状态为删除状态
  * @author zhoucj
  * @date 2020/10/27
  */
 @Slf4j
-public class LogicBatchDeleteWithFillMethod extends AbstractMethod {
+public class LogicBatchDeleteWithEntityMethod extends AbstractMethod {
 
     /**
      * mapper 对应的方法名
      */
-    private static final String MAPPER_METHOD = "batchDeleteByIdsWithFill";
+    private static final String MAPPER_METHOD = "batchDeleteByIdsWithEntity";
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
@@ -65,6 +65,10 @@ public class LogicBatchDeleteWithFillMethod extends AbstractMethod {
         }
     }
 
+    @Override
+    public String getMethod(SqlMethod sqlMethod){
+        return "batchDeleteByIdsWithEntity";
+    }
 
     public String getNotNullSetSql(TableFieldInfo fieldInfo) {
         if(fieldInfo == null){

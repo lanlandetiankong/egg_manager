@@ -159,7 +159,7 @@ public class AnnouncementDraftController extends BaseController {
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = announcementDraftService.dealBatchDelete(loginUser, delIds);
+            delCount = announcementDraftService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, AnnouncementDraftFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

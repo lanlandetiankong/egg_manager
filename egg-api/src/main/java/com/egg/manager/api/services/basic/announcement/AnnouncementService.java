@@ -69,15 +69,6 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
     /**
      * 公告-删除
      * @param loginUser 当前登录用户
-     * @param delIds    要删除的公告id 集合
-     * @return
-     * @throws Exception
-     */
-    Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception;
-
-    /**
-     * 公告-删除
-     * @param loginUser 当前登录用户
      * @param delId     要删除的公告id
      * @return
      * @throws Exception

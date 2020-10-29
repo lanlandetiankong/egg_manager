@@ -230,7 +230,7 @@ public class UserAccountController extends BaseController {
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
-            delCount = userAccountService.dealBatchDelete(loginUser, delIds);
+            delCount = userAccountService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

@@ -18,9 +18,11 @@ import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.utils.reflex.EggReflexUtil;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,14 +35,26 @@ import java.util.List;
  * @description:
  * @date 2020/10/21
  */
-public class MyBaseMysqlServiceImpl<M extends BaseMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo> extends ServiceImpl<M, T>
+public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo> extends ServiceImpl<M, T>
         implements MyBaseMysqlService<T, M, V> {
+
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
     @Autowired
     private UserAccountMapper userAccountMapper;
 
+
+    @Override
+    public Integer dealBatchLogicDelete(UserAccount loginUser, String[] delIds) throws Exception {
+        Integer delCount = 0;
+        if (delIds != null && delIds.length > 0) {
+            List<String> delIdList = Lists.newArrayList(delIds);
+            //批量伪删除
+            delCount = baseMapper.batchDeleteByIdsWithModifyFill(delIdList,loginUser);
+        }
+        return delCount;
+    }
 
     @Override
     public QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,

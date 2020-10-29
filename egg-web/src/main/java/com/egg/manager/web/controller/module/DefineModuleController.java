@@ -139,7 +139,7 @@ public class DefineModuleController extends BaseController {
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineModuleService.dealBatchDelete(loginUser, delIds);
+            delCount = defineModuleService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineModuleFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

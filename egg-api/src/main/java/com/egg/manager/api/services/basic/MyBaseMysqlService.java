@@ -1,7 +1,6 @@
 package com.egg.manager.api.services.basic;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -11,6 +10,7 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,8 +22,19 @@ import java.util.List;
  * @description:基本实现接口
  * @date 2020/10/20
  */
-public interface MyBaseMysqlService<T extends Model<T>, M extends BaseMapper<T>, V extends MyBaseMysqlVo>
+public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>, V extends MyBaseMysqlVo>
         extends IService<T> {
+    /**
+     * 批量逻辑删除
+     * @param loginUser 当前登录用户
+     * @param delIds    要删除的公告id 集合
+     * @return
+     * @throws Exception
+     */
+    Integer dealBatchLogicDelete(UserAccount loginUser, String[] delIds) throws Exception;
+
+
+
     /**
      * 取得前端传递的分页配置
      * @param loginUser              当前登录用户

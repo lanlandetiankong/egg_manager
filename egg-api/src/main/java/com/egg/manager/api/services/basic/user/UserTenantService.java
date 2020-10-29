@@ -89,15 +89,6 @@ public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlServ
     /**
      * 用户与租户关联-删除
      * @param loginUser 当前登录用户
-     * @param delIds    要删除的用户与租户关联id 集合
-     * @return
-     * @throws Exception
-     */
-    Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception;
-
-    /**
-     * 用户与租户关联-删除
-     * @param loginUser 当前登录用户
      * @param delId     要删除的用户与租户关联id
      * @return
      * @throws Exception

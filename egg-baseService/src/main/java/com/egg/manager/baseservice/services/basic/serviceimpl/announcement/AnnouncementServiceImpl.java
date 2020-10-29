@@ -122,17 +122,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
 
     @Override
-    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
-        Integer delCount = 0;
-        if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Lists.newArrayList(delIds);
-            //批量伪删除
-            delCount = announcementMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
-        }
-        return delCount;
-    }
-
-    @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
         return announcementMapper.deleteByIdWithModifyFill(delId,loginUser);
     }

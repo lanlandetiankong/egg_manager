@@ -166,7 +166,7 @@ public class DefineTenantController extends BaseController {
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineTenantService.dealBatchDelete(loginUser, delIds);
+            delCount = defineTenantService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

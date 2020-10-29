@@ -182,7 +182,7 @@ public class DefineDepartmentController extends BaseController {
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineDepartmentService.dealBatchDelete(loginUser, delIds);
+            delCount = defineDepartmentService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineDepartmentFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

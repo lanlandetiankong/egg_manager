@@ -227,7 +227,7 @@ public class DefineMenuController extends BaseController {
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = defineMenuService.dealBatchDelete(loginUser, delIds);
+            delCount = defineMenuService.dealBatchLogicDelete(loginUser, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineMenuFuncModuleConstant.Failure.BATCH_DELETE_BY_IDS);

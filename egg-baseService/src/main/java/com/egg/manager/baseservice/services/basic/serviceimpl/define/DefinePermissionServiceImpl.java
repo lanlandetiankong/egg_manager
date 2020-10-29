@@ -124,18 +124,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         return changeCount;
     }
 
-
-    @Override
-    public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) {
-        Integer delCount = 0;
-        if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Lists.newArrayList(delIds);
-            //批量伪删除
-            delCount = definePermissionMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
-        }
-        return delCount;
-    }
-
     @Override
     public Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds) {
         Integer delCount = 0;

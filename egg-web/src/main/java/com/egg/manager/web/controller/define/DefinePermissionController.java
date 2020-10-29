@@ -213,7 +213,7 @@ public class DefinePermissionController extends BaseController {
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = definePermissionService.dealBatchDelete(loginUser, delIds);
+            delCount = definePermissionService.dealBatchLogicDelete(loginUser, delIds);
             if (delIds.length > delCount) {
                 result.setMsg("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
             }

@@ -53,8 +53,8 @@ public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
         String dot = notFisrt ? "," : "";
         String partenSql = "<if test=\"%s != null\"> "+dot+" %s=#{%s},%s=%s</if>";
         //eg: loginUser.fid
-        String loginUserIdKey = EggMpSqlConst.LOGIN_USER+DOT+EggMpSqlConst.COLUMN_FID;
-        return String.format(partenSql, EggMpSqlConst.LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
+        String loginUserIdKey = EggMpSqlConst.PARAMOF_LOGIN_USER +DOT+EggMpSqlConst.COLUMN_FID;
+        return String.format(partenSql, EggMpSqlConst.PARAMOF_LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
                         EggMpSqlConst.COLUMN_DELETE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
     }
 

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.define;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -25,7 +26,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param sortBeans
      * @return
      */
-    List<DefinePermissionDto> selectQueryPage(Page<DefinePermissionDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefinePermissionDto> selectQueryPage(Page<DefinePermissionDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
     /**
      * 批量 启用
@@ -33,7 +34,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds, @Param("loginUser") UserAccount loginUser);
+    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 删除指定角色id下的所有权限
@@ -41,7 +42,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int clearAllPermissionByRoleId(@Param("roleId") String roleId, @Param("loginUser") UserAccount loginUser);
+    int clearAllPermissionByRoleId(@Param("roleId") String roleId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 取得角色拥有的所有权限集合
@@ -64,5 +65,5 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> findAllPermissionByUserAcccountId(@Param("userAccountId") String userAccountId);
+    List<DefinePermission> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 }

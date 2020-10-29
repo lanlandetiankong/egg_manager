@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.role;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -31,5 +32,5 @@ public interface RolePermissionMapper extends MyEggMapper<RolePermission> {
      * @return
      */
     int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("permissionIdList") List<String> permissionIdList, @Param("stateVal") Short stateVal
-            , @Param("loginUser") UserAccount loginUser);
+            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

@@ -1,11 +1,11 @@
 package com.egg.manager.persistence.db.mysql.mapper.define;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +25,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenu> {
      * @param sortBeans
      * @return
      */
-    List<DefineMenuDto> selectQueryPage(Page<DefineMenuDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineMenuDto> selectQueryPage(Page<DefineMenuDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
     /**
      * 取得角色拥有的所有[菜单]集合
@@ -49,7 +49,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenu> {
      * @param userAccountId
      * @return
      */
-    List<DefineMenu> getUserGrantedMenusByAccountId(@Param("userAccountId") String userAccountId);
+    List<DefineMenu> getUserGrantedMenusByAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 
     /**
      * 查询菜单(过滤指定节点下的所有节点

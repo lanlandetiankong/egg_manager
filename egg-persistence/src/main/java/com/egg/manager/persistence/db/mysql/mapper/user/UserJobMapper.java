@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -25,7 +26,7 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param sortBeans
      * @return
      */
-    List<UserJobDto> selectQueryPage(Page<UserJobDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserJobDto> selectQueryPage(Page<UserJobDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
     /**
      * 取得用户拥有的所有职务id集合
@@ -33,7 +34,7 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllJobIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<String> findAllJobIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
@@ -51,6 +52,6 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("jobIdList") List<String> jobIdList, @Param("stateVal") Short stateVal,
-                                        @Param("loginUser") UserAccount loginUser);
+    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("jobIdList") List<String> jobIdList, @Param("stateVal") Short stateVal,
+                                        @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

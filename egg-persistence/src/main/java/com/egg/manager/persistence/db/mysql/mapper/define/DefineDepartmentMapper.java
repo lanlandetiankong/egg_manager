@@ -1,11 +1,11 @@
 package com.egg.manager.persistence.db.mysql.mapper.define;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +26,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
      * @param sortBeans
      * @return
      */
-    List<DefineDepartmentDto> selectQueryPage(Page<DefineDepartmentDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineDepartmentDto> selectQueryPage(Page<DefineDepartmentDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
     /**
      * 查询部门(过滤指定节点下的所有节点
@@ -42,12 +42,12 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
      * @param departmentState
      * @return
      */
-    DefineDepartment selectOneOfUserBelongDepartment(@Param("userAccountId") String userAccountId, @Param("departmentState") Short departmentState);
+    DefineDepartment selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentState") Short departmentState);
 
     /**
      * 根据用户id查询 所属的部门详情-dto
      * @param userAccountId
      * @return
      */
-    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param("userAccountId") String userAccountId);
+    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 }

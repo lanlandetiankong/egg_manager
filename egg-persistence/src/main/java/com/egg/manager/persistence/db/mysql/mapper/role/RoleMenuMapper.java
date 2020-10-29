@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.role;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -22,5 +23,5 @@ public interface RoleMenuMapper extends MyEggMapper<RoleMenu> {
      * @return
      */
     int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("menuIdList") List<String> menuIdList, @Param("stateVal") Short stateVal
-            , @Param("loginUser") UserAccount loginUser);
+            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

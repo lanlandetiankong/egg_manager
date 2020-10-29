@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -24,7 +25,7 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartment> {
      * @param sortBeans
      * @return
      */
-    List<UserDepartmentDto> selectQueryPage(Page<UserDepartmentDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<UserDepartmentDto> selectQueryPage(Page<UserDepartmentDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
     /**
      * 取得用户拥有的所有部门id集合
@@ -32,7 +33,7 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartment> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<String> findAllIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
 
     /**
      * 批量新增 用户-部门 关联
@@ -49,6 +50,6 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartment> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param("userAccountId") String userAccountId, @Param("departmentIdList") List<String> departmentIdList, @Param("stateVal") Short stateVal
-            , @Param("loginUser") UserAccount loginUser);
+    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentIdList") List<String> departmentIdList, @Param("stateVal") Short stateVal
+            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

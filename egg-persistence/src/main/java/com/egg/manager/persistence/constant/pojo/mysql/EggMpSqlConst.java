@@ -8,9 +8,30 @@ package com.egg.manager.persistence.constant.pojo.mysql;
  */
 public interface EggMpSqlConst {
     /**
-     * 当前登录用户
+     * 参数KEY：当前登录用户
      */
-    String LOGIN_USER = "loginUser" ;
+    String PARAMOF_LOGIN_USER = "loginUser" ;
+    /**
+     * 参数KEY：排序
+     */
+    String PARAMOF_SORT_FIELD_LIST = "sortFieldList" ;
+    /**
+     * 参数KEY：查询字段
+     */
+    String PARAMOF_QUERY_FIELD_LIST = "queryFieldList" ;
+
+    /**
+     * 参数KEY：id集合
+     */
+    String PARAMOF_IDS = "ids" ;
+    /**
+     * 参数KEY：用户id
+     */
+    String PARAMOF_USER_ACCOUNT_ID = "userAccountId" ;
+
+
+
+
 
     /**
      * 字段-最后修改人id

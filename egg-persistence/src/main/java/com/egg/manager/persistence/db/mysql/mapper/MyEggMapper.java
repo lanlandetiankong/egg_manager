@@ -36,7 +36,7 @@ public interface  MyEggMapper<T> extends BaseMapper<T> {
      * @param loginUser 当前用户
      * @return
      */
-    int batchDeleteByIdsWithModifyFill(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList,@Param(EggMpSqlConst.LOGIN_USER) UserAccount loginUser);
+    int batchDeleteByIdsWithModifyFill(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
 
     /**
@@ -52,7 +52,7 @@ public interface  MyEggMapper<T> extends BaseMapper<T> {
      * @param loginUser 当前登录用户
      * @return
      */
-    int deleteByIdWithModifyFill(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid,@Param(EggMpSqlConst.LOGIN_USER) UserAccount loginUser);
+    int deleteByIdWithModifyFill(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
 
 

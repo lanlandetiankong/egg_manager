@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.user;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -33,8 +34,8 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param queryDepartmentFieldBeanList
      * @return
      */
-    List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList,
-                                         @Param("sortFieldList") List<AntdvSortBean> sortBeans,
+    List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList,
+                                         @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans,
                                          @Param("queryTenantFieldBeanList") List<QueryFormFieldBean> queryTenantFieldBeanList,
                                          @Param("queryDepartmentFieldBeanList") List<QueryFormFieldBean> queryDepartmentFieldBeanList
     );
@@ -46,7 +47,7 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param loginUser
      * @return
      */
-    int batchLockUserByIds(@Param("lockIds") List<String> lockIds, @Param("lockState") int lockState, @Param("loginUser") UserAccount loginUser);
+    int batchLockUserByIds(@Param("lockIds") List<String> lockIds, @Param("lockState") int lockState, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 批量伪删除 指定用户的所有角色关联
@@ -54,7 +55,7 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param loginUser
      * @return
      */
-    int clearAllRoleByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);
+    int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 批量伪删除 指定用户的所有职务关联
@@ -62,5 +63,5 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param loginUser
      * @return
      */
-    int clearAllJobByUserId(@Param("userAccountId") String userAccountId, @Param("loginUser") UserAccount loginUser);
+    int clearAllJobByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

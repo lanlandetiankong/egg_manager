@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.db.mysql.mapper.organization;
 
+import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -25,7 +26,7 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
      * @param sortBeans
      * @return
      */
-    List<DefineTenantDto> selectQueryPage(Page<DefineTenantDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
+    List<DefineTenantDto> selectQueryPage(Page<DefineTenantDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
 
 
     /**
@@ -34,14 +35,14 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
      * @param tenantState
      * @return
      */
-    DefineTenant selectOneOfUserBelongTenant(@Param("userAccountId") String userAccountId, @Param("tenantState") Short tenantState);
+    DefineTenant selectOneOfUserBelongTenant(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("tenantState") Short tenantState);
 
     /**
      * 根据用户id查询 所属的租户详情-dto
      * @param userAccountId
      * @return
      */
-    DefineTenantDto selectOneDtoOfUserBelongTenant(@Param("userAccountId") String userAccountId);
+    DefineTenantDto selectOneDtoOfUserBelongTenant(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 
     /**
      * 取得租户设置的所有管理员的用户id集合
@@ -57,5 +58,5 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
      * @param loginUser
      * @return
      */
-    int clearAllManagerByTenantId(@Param("tenantId") String tenantId, @Param("loginUser") UserAccount loginUser);
+    int clearAllManagerByTenantId(@Param("tenantId") String tenantId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

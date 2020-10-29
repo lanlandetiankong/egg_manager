@@ -2,17 +2,10 @@ package com.egg.manager.api.config.db.mybatis.plus.methods;
 
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
-import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.egg.manager.persistence.constant.pojo.mysql.EggMpSqlConst;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @Description:
@@ -56,6 +49,6 @@ public class LogicDeleteByIdWithModifyFill extends AbstractMethod {
         //eg: loginUser.fid
         String loginUserIdKey = EggMpSqlConst.LOGIN_USER+DOT+EggMpSqlConst.COLUMN_FID;
         return String.format(partenSql, EggMpSqlConst.LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
-                EggMpSqlConst.COLUMN_UPDATE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
+                EggMpSqlConst.COLUMN_DELETE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
     }
 }

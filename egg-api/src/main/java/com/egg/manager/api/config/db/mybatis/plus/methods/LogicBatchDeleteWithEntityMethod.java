@@ -23,10 +23,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LogicBatchDeleteWithEntityMethod extends AbstractMethod {
 
-    /**
-     * mapper 对应的方法名
-     */
-    private static final String MAPPER_METHOD = "batchDeleteByIdsWithEntity";
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
@@ -55,7 +51,7 @@ public class LogicBatchDeleteWithEntityMethod extends AbstractMethod {
                         additional);
             }
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-            return this.addUpdateMappedStatement(mapperClass, modelClass, MAPPER_METHOD, sqlSource);
+            return this.addUpdateMappedStatement(mapperClass, modelClass, getMethod(sqlMethod), sqlSource);
         } else {
             sqlMethod = SqlMethod.DELETE_BATCH_BY_IDS;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), tableInfo.getKeyColumn(),

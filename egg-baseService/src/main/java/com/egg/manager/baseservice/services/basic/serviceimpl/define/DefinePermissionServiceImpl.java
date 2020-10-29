@@ -131,7 +131,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = definePermissionMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = definePermissionMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
@@ -149,7 +149,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return definePermissionMapper.deleteById(delId);
+        return definePermissionMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 

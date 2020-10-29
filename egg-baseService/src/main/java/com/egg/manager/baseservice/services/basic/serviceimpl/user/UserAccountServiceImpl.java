@@ -208,14 +208,14 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = userAccountMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = userAccountMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return userAccountMapper.deleteById(delId);
+        return userAccountMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 

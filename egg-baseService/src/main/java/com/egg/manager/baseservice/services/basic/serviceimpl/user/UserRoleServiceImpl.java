@@ -143,14 +143,14 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = userRoleMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = userRoleMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userRoleMapper.deleteById(delId);
+        Integer delCount = userRoleMapper.deleteByIdWithModifyFill(delId,loginUser);
         return delCount;
     }
 }

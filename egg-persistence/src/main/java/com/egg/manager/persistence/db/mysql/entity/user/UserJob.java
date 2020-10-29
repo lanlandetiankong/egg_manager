@@ -77,6 +77,11 @@ public class UserJob extends Model<UserJob> {
     @TableLogic
     @TableField(value = "is_deleted")
     private short isDeleted;
+    /**
+     * 数据删除时间
+     */
+    @TableField(value = "deleted_time")
+    private Date deletedTime;
 
     @Override
     protected Serializable pkVal() {

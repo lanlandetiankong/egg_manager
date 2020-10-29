@@ -127,14 +127,14 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = announcementMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = announcementMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementMapper.deleteById(delId);
+        return announcementMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 }

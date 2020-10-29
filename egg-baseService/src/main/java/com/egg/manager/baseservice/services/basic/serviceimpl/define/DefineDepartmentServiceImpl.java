@@ -148,13 +148,13 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = defineDepartmentMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = defineDepartmentMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineDepartmentMapper.deleteById(delId);
+        return defineDepartmentMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 }

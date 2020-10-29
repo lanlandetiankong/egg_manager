@@ -21,6 +21,10 @@ public interface EggMpSqlConst {
      */
     String COLUMN_UPDATE_TIME = "update_time" ;
     /**
+     * 数据被删除时间
+     */
+    String COLUMN_DELETE_TIME = "deleted_time" ;
+    /**
      * 字段-fid
      */
     String COLUMN_FID = "fid" ;

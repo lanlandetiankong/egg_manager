@@ -17,19 +17,15 @@ import org.apache.ibatis.mapping.SqlSource;
 @Slf4j
 public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
 
-    /**
-     * mapper 对应的方法名
-     */
-    private static final String MAPPER_METHOD = "batchDeleteByIdsWithModifyFill";
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         String sql;
         SqlMethod sqlMethod = SqlMethod.LOGIC_DELETE_BATCH_BY_IDS;
         if (tableInfo.isWithLogicDelete()) {
-            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) +getLoginUserSetSql(tableInfo,true) ;
-            //逻辑值 && 版本号
-            String additional = tableInfo.getLogicDeleteSql(true, true)+optlockVersion(tableInfo);
+            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) + getLoginUserSetSql(tableInfo,true) ;
+            //逻辑值
+            String additional = tableInfo.getLogicDeleteSql(true, true) ;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                     tableInfo.getKeyColumn(),
                     SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
@@ -45,7 +41,10 @@ public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
         }
     }
 
-
+    @Override
+    public String getMethod(SqlMethod sqlMethod) {
+        return "batchDeleteByIdsWithModifyFill";
+    }
 
     public String getLoginUserSetSql(TableInfo tableInfo,boolean notFisrt) {
         if(tableInfo == null){
@@ -56,7 +55,7 @@ public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
         //eg: loginUser.fid
         String loginUserIdKey = EggMpSqlConst.LOGIN_USER+DOT+EggMpSqlConst.COLUMN_FID;
         return String.format(partenSql, EggMpSqlConst.LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
-                        EggMpSqlConst.COLUMN_UPDATE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
+                        EggMpSqlConst.COLUMN_DELETE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.pojo.mysql.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
 import lombok.Data;
 
@@ -56,5 +57,10 @@ public class MyBaseMysqlDto implements Serializable {
      * 是否已经删除，0:否 1:是
      */
     private short isDeleted;
+    /**
+     * 数据删除时间
+     */
+    private Date deletedTime;
+
 
 }

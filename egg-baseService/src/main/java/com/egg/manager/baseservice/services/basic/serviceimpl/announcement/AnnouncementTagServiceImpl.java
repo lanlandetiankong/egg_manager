@@ -113,14 +113,14 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = announcementTagMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = announcementTagMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementTagMapper.deleteById(delId);
+        return announcementTagMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
     @Override

@@ -92,14 +92,14 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = defineJobMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = defineJobMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineJobMapper.deleteById(delId);
+        return defineJobMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 

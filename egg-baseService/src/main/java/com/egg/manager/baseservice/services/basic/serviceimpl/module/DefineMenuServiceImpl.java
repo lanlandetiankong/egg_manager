@@ -274,7 +274,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = defineMenuMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = defineMenuMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
@@ -282,7 +282,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineMenuMapper.deleteById(delId);
+        return defineMenuMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 

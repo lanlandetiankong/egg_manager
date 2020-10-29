@@ -77,19 +77,13 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Override
     public Integer dealBatchDelete(UserAccount loginUser, String[] delIds) throws Exception {
-        DefineTenant entity = new DefineTenant() ;
-        Integer delCount = defineTenantMapper.batchDeleteByIdsWithEntity(Lists.newArrayList(delIds),entity);
-        /*if (delIds != null && delIds.length > 0) {
-            List<String> delIdList = Lists.newArrayList(delIds);
-            //批量伪删除
-            delCount = defineTenantMapper.batchFakeDelByIds(delIdList, loginUser);
-        }*/
+        Integer delCount = defineTenantMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         return delCount;
     }
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer count = defineTenantMapper.deleteById(delId);
+        Integer count = defineTenantMapper.deleteByIdWithModifyFill(delId,loginUser);
         return count;
     }
 

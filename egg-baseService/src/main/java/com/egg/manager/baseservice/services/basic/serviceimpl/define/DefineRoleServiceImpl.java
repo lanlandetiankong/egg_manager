@@ -210,7 +210,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = defineRoleMapper.batchFakeDelByIds(delIdList, loginUser);
+            delCount = defineRoleMapper.batchDeleteByIdsWithModifyFill(Lists.newArrayList(delIds),loginUser);
         }
         return delCount;
     }
@@ -218,7 +218,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Override
     public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineRoleMapper.deleteById(delId);
+        return defineRoleMapper.deleteByIdWithModifyFill(delId,loginUser);
     }
 
 

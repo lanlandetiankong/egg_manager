@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -22,11 +21,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class LogicDeleteWithFillMethod extends AbstractMethod {
-
-    /**
-     * mapper 对应的方法名
-     */
-    private static final String MAPPER_METHOD = "deleteByIdsWithFill";
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
@@ -60,6 +54,12 @@ public class LogicDeleteWithFillMethod extends AbstractMethod {
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);
             return this.addDeleteMappedStatement(mapperClass, getMethod(sqlMethod), sqlSource);
         }
+    }
+
+    @Override
+    public String getMethod(SqlMethod sqlMethod) {
+        // 自定义 mapper 方法名
+        return "deleteByIdsWithFill";
     }
 
 }

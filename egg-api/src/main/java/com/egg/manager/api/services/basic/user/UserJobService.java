@@ -65,12 +65,4 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
      */
     Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo) throws Exception;
 
-    /**
-     * 用户职务-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的用户职务id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

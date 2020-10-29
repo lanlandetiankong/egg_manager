@@ -87,9 +87,5 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userJobMapper.deleteByIdWithModifyFill(delId,loginUser);
-        return delCount;
-    }
+
 }

@@ -204,12 +204,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return userAccountMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
-
-    @Override
     public Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;

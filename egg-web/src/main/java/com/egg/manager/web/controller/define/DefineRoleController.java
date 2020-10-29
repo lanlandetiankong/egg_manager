@@ -239,7 +239,7 @@ public class DefineRoleController extends BaseController {
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = defineRoleService.dealDeleteById(loginUser, delId);
+            Integer delCount = defineRoleService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineRoleFuncModuleConstant.Failure.DELETE_BY_ID);

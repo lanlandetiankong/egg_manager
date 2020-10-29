@@ -185,7 +185,7 @@ public class DefineTenantController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineTenantFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineTenantService.dealDeleteById(loginUser, delId);
+            Integer delCount = defineTenantService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineTenantFuncModuleConstant.Failure.DELETE_BY_ID);

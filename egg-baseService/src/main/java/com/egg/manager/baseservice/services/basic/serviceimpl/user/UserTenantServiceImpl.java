@@ -145,11 +145,5 @@ public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapp
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userTenantMapper.deleteByIdWithModifyFill(delId,loginUser);
-        return delCount;
-    }
-
 
 }

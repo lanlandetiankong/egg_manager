@@ -65,15 +65,4 @@ public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlServic
      */
     Integer dealUpdate(UserAccount loginUser, DefineJobVo defineJobVo) throws Exception;
 
-
-    /**
-     * 职务账号-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的职务id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
 }

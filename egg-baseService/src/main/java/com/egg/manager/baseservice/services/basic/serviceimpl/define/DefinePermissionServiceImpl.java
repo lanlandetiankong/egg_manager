@@ -136,12 +136,6 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return definePermissionMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
-
-    @Override
     public List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, String userAccountId) {
         if (StringUtils.isBlank(userAccountId)) {
             return null;

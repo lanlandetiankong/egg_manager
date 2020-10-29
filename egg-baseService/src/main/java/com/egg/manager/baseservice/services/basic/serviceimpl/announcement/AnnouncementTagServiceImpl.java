@@ -107,10 +107,6 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementTagMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
 
     @Override
     public MyCommonResult dealResultListToEnums(MyCommonResult result) {

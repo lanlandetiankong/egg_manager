@@ -52,17 +52,6 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
     MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
-
-    /**
-     * 公告草稿-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的公告草稿id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
     /**
      * 公告草稿-发布
      * @param loginUser 当前登录用户

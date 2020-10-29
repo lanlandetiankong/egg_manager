@@ -250,7 +250,7 @@ public class UserAccountController extends BaseController {
         Integer delCount = 0;
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            delCount = userAccountService.dealDeleteById(loginUser, delId);
+            delCount = userAccountService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, UserAccountFuncModuleConstant.Failure.DELETE_BY_ID);

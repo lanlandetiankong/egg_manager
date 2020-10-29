@@ -122,16 +122,6 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
     Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception;
 
     /**
-     * 菜单定义-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的菜单id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
-    /**
      * 验证 数据库 中的唯一冲突
      * @param loginUser         当前登录用户
      * @param defineMenuVo

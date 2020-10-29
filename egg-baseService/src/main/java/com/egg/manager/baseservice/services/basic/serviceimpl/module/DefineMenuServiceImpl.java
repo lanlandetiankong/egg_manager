@@ -267,11 +267,6 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineMenuMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
 
     @Override
     public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> queryWrapper) {

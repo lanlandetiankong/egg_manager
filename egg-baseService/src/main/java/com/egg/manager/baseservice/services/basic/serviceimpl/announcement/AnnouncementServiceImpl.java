@@ -120,10 +120,4 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         return addCount;
     }
 
-
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
 }

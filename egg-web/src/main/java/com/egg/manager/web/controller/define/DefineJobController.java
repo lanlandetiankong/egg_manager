@@ -187,7 +187,7 @@ public class DefineJobController extends BaseController {
         Integer delCount = 0;
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            delCount = defineJobService.dealDeleteById(loginUser, delId);
+            delCount = defineJobService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineJobFuncModuleConstant.Failure.DELETE_BY_ID);

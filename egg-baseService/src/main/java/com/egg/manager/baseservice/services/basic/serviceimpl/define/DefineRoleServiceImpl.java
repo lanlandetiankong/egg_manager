@@ -204,11 +204,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineRoleMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
 
     @Override
     public Integer dealGrantPermissionToRole(UserAccount loginUser, String roleId, String[] checkIds) throws Exception {

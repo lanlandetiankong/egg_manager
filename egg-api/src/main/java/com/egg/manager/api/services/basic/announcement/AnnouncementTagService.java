@@ -73,17 +73,6 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>, MyBas
      */
     Integer dealUpdate(UserAccount loginUser, AnnouncementTagVo announcementTagVo) throws Exception;
 
-
-    /**
-     * 公告标签-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的公告标签id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
     /**
      * 取得的结果 转为 枚举类型
      * @param result

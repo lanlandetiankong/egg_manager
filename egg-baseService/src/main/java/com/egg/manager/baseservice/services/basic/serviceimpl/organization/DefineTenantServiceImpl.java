@@ -75,12 +75,6 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer count = defineTenantMapper.deleteByIdWithModifyFill(delId,loginUser);
-        return count;
-    }
-
 
     @Override
     public MyCommonResult dealResultListToEnums(UserAccount loginUser, MyCommonResult result) {

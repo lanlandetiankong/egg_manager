@@ -65,12 +65,4 @@ public interface DefineModuleService extends IService<DefineModule>, MyBaseMysql
      */
     Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception;
 
-    /**
-     * 模块定义-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的模块id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

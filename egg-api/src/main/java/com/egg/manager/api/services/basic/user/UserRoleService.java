@@ -86,12 +86,4 @@ public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<
      */
     Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception;
 
-    /**
-     * 用户角色-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的用户角色id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

@@ -137,9 +137,5 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        Integer delCount = userRoleMapper.deleteByIdWithModifyFill(delId,loginUser);
-        return delCount;
-    }
+
 }

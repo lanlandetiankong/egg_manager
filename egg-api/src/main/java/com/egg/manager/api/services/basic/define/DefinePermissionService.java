@@ -76,16 +76,6 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
     Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception;
 
     /**
-     * 权限定义-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的权限id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
-    /**
      * 权限定义-启用
      * @param loginUser 当前登录用户
      * @param ensureIds 要启用的权限id 集合

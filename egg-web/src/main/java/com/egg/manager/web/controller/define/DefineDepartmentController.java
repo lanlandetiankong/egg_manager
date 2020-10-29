@@ -201,7 +201,7 @@ public class DefineDepartmentController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineDepartmentFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineDepartmentService.dealDeleteById(loginUser, delId);
+            Integer delCount = defineDepartmentService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineDepartmentFuncModuleConstant.Failure.DELETE_BY_ID);

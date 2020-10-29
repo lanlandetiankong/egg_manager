@@ -66,12 +66,4 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
     MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
-    /**
-     * 公告-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的公告id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

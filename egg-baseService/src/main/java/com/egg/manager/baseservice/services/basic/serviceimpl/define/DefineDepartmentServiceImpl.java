@@ -141,8 +141,4 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineDepartmentMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
 }

@@ -113,15 +113,6 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
     Integer dealUpdate(UserAccount loginUser, DefineRoleVo defineRoleVo) throws Exception;
 
     /**
-     * 角色定义-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的角色id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-    /**
      * 角色授权
      * @param loginUser 当前登录用户
      * @param roleId    要授权的角色id

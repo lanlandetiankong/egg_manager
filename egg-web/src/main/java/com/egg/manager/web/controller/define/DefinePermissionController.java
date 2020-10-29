@@ -189,7 +189,7 @@ public class DefinePermissionController extends BaseController {
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = definePermissionService.dealDeleteById(loginUser, delId);
+            Integer delCount = definePermissionService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
             if (new Integer(0).equals(delCount)) {
                 //如果删除的是 [已启用的]，则抛出异常

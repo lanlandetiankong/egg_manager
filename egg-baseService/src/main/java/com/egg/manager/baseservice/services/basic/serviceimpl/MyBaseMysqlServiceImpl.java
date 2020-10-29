@@ -44,6 +44,11 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     @Autowired
     private UserAccountMapper userAccountMapper;
 
+    @Override
+    public Integer dealLogicDeleteById(UserAccount loginUser, String delId) throws Exception {
+        Integer count = baseMapper.deleteByIdWithModifyFill(delId,loginUser);
+        return count;
+    }
 
     @Override
     public Integer dealBatchLogicDelete(UserAccount loginUser, String[] delIds) throws Exception {

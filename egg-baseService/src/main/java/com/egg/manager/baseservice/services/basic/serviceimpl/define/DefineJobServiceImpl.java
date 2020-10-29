@@ -85,10 +85,4 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         return changeCount;
     }
 
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineJobMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
-
 }

@@ -54,16 +54,6 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
     Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception;
 
     /**
-     * 租户定义-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的租户id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
-    /**
      * 取得的结果 转为 枚举类型
      * @param loginUser 当前登录用户
      * @param result

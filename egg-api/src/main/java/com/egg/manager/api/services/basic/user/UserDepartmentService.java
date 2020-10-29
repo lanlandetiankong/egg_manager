@@ -86,13 +86,4 @@ public interface UserDepartmentService extends IService<UserDepartment>, MyBaseM
      * @throws Exception
      */
     Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception;
-
-    /**
-     * 用户与部门关联-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的用户与部门关联id
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
 }

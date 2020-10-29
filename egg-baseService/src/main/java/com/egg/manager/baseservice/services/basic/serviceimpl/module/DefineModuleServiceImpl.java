@@ -88,9 +88,4 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         return changeCount;
     }
 
-
-    @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return defineModuleMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
 }

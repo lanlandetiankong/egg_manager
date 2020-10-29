@@ -83,17 +83,6 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
     Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception;
 
     /**
-     * 用户账号-删除
-     * @param loginUser 当前登录用户
-     * @param delId     要删除的用户id
-     * @param loginUser 当前登录用户
-     * @return
-     * @throws Exception
-     */
-    Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception;
-
-
-    /**
      * 用户账号-锁定
      * @param loginUser 当前登录用户
      * @param lockIds   要锁定的用户账号id 集合

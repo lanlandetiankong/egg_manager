@@ -158,7 +158,7 @@ public class DefineModuleController extends BaseController {
         MyCommonResult result = MyCommonResult.gainOperationResult(DefineModuleFuncModuleConstant.Success.DELETE_BY_ID);
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineModuleService.dealDeleteById(loginUser, delId);
+            Integer delCount = defineModuleService.dealLogicDeleteById(loginUser, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e, DefineModuleFuncModuleConstant.Failure.DELETE_BY_ID);

@@ -24,10 +24,20 @@ import java.util.List;
  */
 public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>, V extends MyBaseMysqlVo>
         extends IService<T> {
+
+    /**
+     * 根据id进行逻辑删除
+     * @param loginUser 当前登录用户
+     * @param delId     要删除的id
+     * @return
+     * @throws Exception
+     */
+    Integer dealLogicDeleteById(UserAccount loginUser, String delId) throws Exception;
+
     /**
      * 批量逻辑删除
      * @param loginUser 当前登录用户
-     * @param delIds    要删除的公告id 集合
+     * @param delIds    要删除的id 集合
      * @return
      * @throws Exception
      */

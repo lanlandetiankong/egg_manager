@@ -93,12 +93,6 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
     @Override
-    public Integer dealDeleteById(UserAccount loginUser, String delId) throws Exception {
-        return announcementDraftMapper.deleteByIdWithModifyFill(delId,loginUser);
-    }
-
-
-    @Override
     public Integer dealBatchPublishByDraft(UserAccount loginUser, String[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {

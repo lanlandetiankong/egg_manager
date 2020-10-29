@@ -27,12 +27,4 @@ public interface AnnouncementTagMapper extends MyEggMapper<AnnouncementTag> {
      */
     List<AnnouncementTagDto> selectQueryPage(Page<AnnouncementTagDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
-    /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
 }

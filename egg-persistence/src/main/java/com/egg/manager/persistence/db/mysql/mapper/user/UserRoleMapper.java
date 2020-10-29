@@ -35,15 +35,6 @@ public interface UserRoleMapper extends MyEggMapper<UserRole> {
     List<String> findAllRoleIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-
-    /**
      * 批量新增 用户-角色 关联
      * @param roleList
      * @return

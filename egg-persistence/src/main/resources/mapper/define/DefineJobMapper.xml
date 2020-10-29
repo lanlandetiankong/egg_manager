@@ -109,16 +109,4 @@
         and uj.state = #{stateVal}
     </select>
 
-
-    <update id="batchFakeDelByIds" parameterType="java.util.List">
-        UPDATE em_define_job SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id = #{loginUser.fid}
-        </if>
-        WHERE fid IN (
-        <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
-            #{item}
-        </foreach>
-        )
-    </update>
 </mapper>

@@ -34,13 +34,4 @@ public interface DefineRoleMapper extends MyEggMapper<DefineRole> {
      */
     List<DefineRole> findAllRoleByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal") Short stateVal);
 
-    /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-
 }

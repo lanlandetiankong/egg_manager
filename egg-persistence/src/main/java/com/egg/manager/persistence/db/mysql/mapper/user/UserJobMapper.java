@@ -28,14 +28,6 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
     List<UserJobDto> selectQueryPage(Page<UserJobDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-    /**
      * 取得用户拥有的所有职务id集合
      * @param userAccountId
      * @param filterEnable  是否只查询状态为可用的

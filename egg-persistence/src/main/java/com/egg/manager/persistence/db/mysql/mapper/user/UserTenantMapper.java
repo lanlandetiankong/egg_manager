@@ -34,16 +34,6 @@ public interface UserTenantMapper extends MyEggMapper<UserTenant> {
      */
     List<String> findAllTenantIdByUserAccountId(@Param("userAccountId") String userAccountId, @Param("filterEnable") boolean filterEnable);
 
-
-    /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-
     /**
      * 批量新增 用户-租户 关联
      * @param tenantList

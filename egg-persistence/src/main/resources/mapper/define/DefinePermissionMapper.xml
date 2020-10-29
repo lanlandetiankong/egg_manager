@@ -105,20 +105,6 @@
         </include>
     </select>
 
-
-    <update id="batchFakeDelByIds">
-        UPDATE em_define_permission
-        SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id = #{loginUser.fid}
-        </if>
-        WHERE fid IN
-        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
-            #{item}
-        </foreach>
-        and ensure != 1
-    </update>
-
     <update id="batchEnsureByIds">
         UPDATE em_define_permission
         SET ensure = 1

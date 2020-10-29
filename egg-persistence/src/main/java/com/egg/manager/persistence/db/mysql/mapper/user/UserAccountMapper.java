@@ -39,15 +39,6 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
                                          @Param("queryDepartmentFieldBeanList") List<QueryFormFieldBean> queryDepartmentFieldBeanList
     );
 
-
-    /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
     /**
      * 批量 锁定用户
      * @param lockIds

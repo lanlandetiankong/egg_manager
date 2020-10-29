@@ -28,14 +28,6 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
     List<DefinePermissionDto> selectQueryPage(Page<DefinePermissionDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-    /**
      * 批量 启用
      * @param ensureIds
      * @param loginUser

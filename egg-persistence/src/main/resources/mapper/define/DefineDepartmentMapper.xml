@@ -174,17 +174,4 @@
         WHERE eud.user_account_id = #{userAccountId}
     </select>
 
-    <update id="batchFakeDelByIds">
-        UPDATE em_define_department
-        SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id = #{loginUser.fid}
-        </if>
-        WHERE fid IN
-        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
-            #{item}
-        </foreach>
-    </update>
-
-
 </mapper>

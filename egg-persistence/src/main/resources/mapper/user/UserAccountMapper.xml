@@ -153,15 +153,6 @@
         </include>
     </select>
 
-
-    <update id="batchFakeDelByIds">
-        UPDATE em_user_account SET state = -1,last_modifyer_id = #{loginUser.fid}
-        WHERE fid IN (
-        <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
-            #{item}
-        </foreach>
-        )
-    </update>
     <update id="batchLockUserByIds">
         UPDATE em_user_account SET locked = #{lockState}
         <if test="loginUser != null">

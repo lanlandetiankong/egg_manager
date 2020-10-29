@@ -52,14 +52,6 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
     List<String> findAllManagerUserIdByTenantId(@Param("tenantId") String tenantId, @Param("filterEnable") boolean filterEnable);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-    /**
      * 删除指定租户id下的所有管理员
      * @param tenantId
      * @param loginUser

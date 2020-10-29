@@ -29,15 +29,6 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
     List<DefineDepartmentDto> selectQueryPage(Page<DefineDepartmentDto> page, @Param("queryFieldList") List<QueryFormFieldBean> queryFieldBeanList, @Param("sortFieldList") List<AntdvSortBean> sortBeans);
 
     /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-
-    /**
      * 查询部门(过滤指定节点下的所有节点
      * @param filterId
      * @param onlyEnable 是否只查询 状态为 可用 的数据

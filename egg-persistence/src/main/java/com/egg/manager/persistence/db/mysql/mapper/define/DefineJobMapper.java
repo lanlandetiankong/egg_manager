@@ -35,14 +35,4 @@ public interface DefineJobMapper extends MyEggMapper<DefineJob> {
      */
     List<DefineJob> findAllJobByUserAcccountId(@Param("userAccountId") String userAccountId, @Param("stateVal") Short stateVal);
 
-
-    /**
-     * 批量 伪删除
-     * @param delIds
-     * @param loginUser
-     * @return
-     */
-    int batchFakeDelByIds(@Param("delIds") List<String> delIds, @Param("loginUser") UserAccount loginUser);
-
-
 }

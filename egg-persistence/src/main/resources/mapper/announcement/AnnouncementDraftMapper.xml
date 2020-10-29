@@ -114,19 +114,6 @@
         </include>
     </select>
 
-
-    <update id="batchFakeDelByIds">
-        UPDATE em_announcement_draft
-        SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id = #{loginUser.fid}
-        </if>
-        WHERE fid IN
-        <foreach collection="delIds" index="index" open="(" close=")" separator="," item="item">
-            #{item}
-        </foreach>
-    </update>
-
     <update id="batchPublishByIds">
         UPDATE em_announcement_draft
         SET state = -1,is_published = 1

@@ -139,18 +139,6 @@
         </foreach>
     </insert>
 
-    <update id="batchFakeDelByIds" parameterType="java.util.List">
-        UPDATE em_user_tenant
-        SET state = -1
-        <if test="loginUser != null">
-            ,last_modifyer_id=#{loginUser.fid}
-        </if>
-        where fid IN
-        <foreach collection="delIds" item="item" index="index" separator="," open="(" close=")">
-            #{item}
-        </foreach>
-    </update>
-
     <update id="batchUpdateManagerUserStateByTenantId">
         UPDATE em_user_tenant
         SET state = 1,

@@ -76,19 +76,19 @@ public class MyCommandLineRunner implements CommandLineRunner {
                         if (ComUtil.isEmpty(methodUrl)) {
                             methodUrl = method.getAnnotation(GetMapping.class).path();
                         }
-                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "GET");
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, HttpMethodConstant.GET);
                     } else if (!ComUtil.isEmpty(method.getAnnotation(DeleteMapping.class))) {
                         methodUrl = method.getAnnotation(DeleteMapping.class).value();
                         if (ComUtil.isEmpty(methodUrl)) {
                             methodUrl = method.getAnnotation(DeleteMapping.class).path();
                         }
-                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "DELETE");
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, HttpMethodConstant.DELETE);
                     } else if (!ComUtil.isEmpty(method.getAnnotation(PutMapping.class))) {
                         methodUrl = method.getAnnotation(PutMapping.class).value();
                         if (ComUtil.isEmpty(methodUrl)) {
                             methodUrl = method.getAnnotation(PutMapping.class).path();
                         }
-                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, "PUT");
+                        baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, HttpMethodConstant.PUT);
                     } else {
                         methodUrl = method.getAnnotation(RequestMapping.class).value();
                         baseUrl = this.dealGetRequestUrl(classUrl, methodUrl, sb, RequestMapping.class.getSimpleName());
@@ -108,7 +108,14 @@ public class MyCommandLineRunner implements CommandLineRunner {
         sb.append(this.projectName);
         if (!ComUtil.isEmpty(classUrl)) {
             for (String url : classUrl) {
-                sb.append(url + Constant.SYMBOL_SLASH);
+                if(StringUtils.isBlank(url)){
+                    continue;
+                }
+                if(url.trim().indexOf("/") != -1){
+                    sb.append("/"+url + Constant.SYMBOL_SLASH);
+                }   else {
+                    sb.append(url + Constant.SYMBOL_SLASH);
+                }
             }
         }
         for (String url : methodUrl) {

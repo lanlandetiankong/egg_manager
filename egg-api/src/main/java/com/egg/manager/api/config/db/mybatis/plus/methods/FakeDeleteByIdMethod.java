@@ -20,7 +20,7 @@ public class FakeDeleteByIdMethod extends AbstractMethod {
         EggMpSqlMethod sqlMethod = EggMpSqlMethod.FAKE_DELETE_BY_ID;
         String sql = String.format(sqlMethod.getSql(),tableInfo.getTableName(),MyBaseMysqlEntityFieldConstant.STATE.getColumnName(),BaseStateEnum.DELETE.getValue(),MyBaseMysqlEntityFieldConstant.FID.getColumnName());
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-        return addDeleteMappedStatement(mapperClass, sqlMethod.getMethod(), sqlSource);
+        return addUpdateMappedStatement(mapperClass,modelClass,sqlMethod.getMethod(), sqlSource);
     }
 
 }

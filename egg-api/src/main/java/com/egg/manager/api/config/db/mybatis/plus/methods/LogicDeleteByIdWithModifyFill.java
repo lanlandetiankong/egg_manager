@@ -24,13 +24,16 @@ public class LogicDeleteByIdWithModifyFill extends AbstractMethod {
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                     tableInfo.getKeyColumn(), tableInfo.getKeyProperty(),
                     tableInfo.getLogicDeleteSql(true, true));
+            SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
+            return addUpdateMappedStatement(mapperClass, modelClass, getMethod(sqlMethod), sqlSource);
         } else {
             sqlMethod = SqlMethod.DELETE_BY_ID;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), tableInfo.getKeyColumn(),
                     tableInfo.getKeyProperty());
+            SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
+            return addDeleteMappedStatement(mapperClass, getMethod(sqlMethod), sqlSource);
         }
-        SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-        return addUpdateMappedStatement(mapperClass, modelClass, getMethod(sqlMethod), sqlSource);
+
     }
 
     @Override

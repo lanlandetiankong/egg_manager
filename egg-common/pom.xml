@@ -213,6 +213,12 @@
             <scope>compile</scope>
         </dependency>
         <!-- activeMQ end -->
+
+        <!-- 阿里云OSS -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <resources>

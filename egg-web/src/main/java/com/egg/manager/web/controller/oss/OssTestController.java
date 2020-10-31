@@ -2,15 +2,6 @@ package com.egg.manager.web.controller.oss;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.BucketInfo;
-import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.OSSObjectSummary;
-import com.aliyun.oss.model.ObjectListing;
-import com.egg.manager.api.config.oss.AliyunOssConfig;
 import com.egg.manager.api.utils.oss.AliyunOSSUtil;
 import com.egg.manager.persistence.bean.oss.AliyunOssResult;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +35,7 @@ public class OssTestController {
      */
     @GetMapping("/uploadFile")
     public AliyunOssResult uploadFile() {
-        return AliyunOSSUtil.uploadFile(new File(this.getClass().getResource("/").getPath()+"/config/config/others/banner.txt"), "png/banner.txt");
+        return AliyunOSSUtil.uploadFile(new File(this.getClass().getResource("/").getPath()+ "/config/others/banner.txt"), "png/banner.txt");
     }
     /**
      * 上传文件-指定目录

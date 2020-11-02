@@ -1,4 +1,4 @@
-package com.egg.manager.api.constants.funcmodule;
+package com.egg.manager.common.base.constant.rst;
 
 /**
  * @author zhoucj

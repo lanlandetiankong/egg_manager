@@ -1,8 +1,7 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcmodule.controllers.common.file.ImgUploadFuncModuleConstant;
+import com.egg.manager.common.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.common.base.beans.file.FileResBean;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.props.upload.UploadProps;
@@ -44,7 +43,7 @@ public class ImgUploadController extends BaseController {
     @ApiOperation(value = "上传/图片->头像", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(ImgUploadFuncModuleConstant.Success.UPLOAD_IMG);
+        MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
@@ -81,7 +80,7 @@ public class ImgUploadController extends BaseController {
                 throw e;
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, ImgUploadFuncModuleConstant.Failure.UPLOAD_IMG);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

@@ -1,8 +1,7 @@
 package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcmodule.controllers.login.UserLoginFuncModuleConstant;
+import com.egg.manager.common.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.common.annotation.shiro.ShiroPass;
@@ -64,7 +63,7 @@ public class UserLoginController extends BaseController {
                                                              @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccount loginUser
     ) {
-        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class, UserLoginFuncModuleConstant.Success.LOGIN_OPER);
+        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
@@ -101,7 +100,7 @@ public class UserLoginController extends BaseController {
                 result.setAuthorization(authorization);
             }
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, UserLoginFuncModuleConstant.Failure.LOGIN_OPER);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

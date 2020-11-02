@@ -54,7 +54,7 @@ public class PcWebOperationLogController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<PcWebOperationLogMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<PcWebOperationLogMgo> result = MyCommonResult.gainQueryResult(PcWebOperationLogMgo.class, "分页查询");
+        MyCommonResult<PcWebOperationLogMgo> result = MyCommonResult.gainQueryResult(PcWebOperationLogMgo.class);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -64,7 +64,7 @@ public class PcWebOperationLogController extends BaseController {
             MyMongoQueryPageBean<PcWebOperationLogMgo> pageBean = pcWebOperationLogMgoService.doFindPage(loginUser, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, "分页查询-操作失败");
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

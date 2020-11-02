@@ -1,7 +1,6 @@
 package com.egg.manager.web.controller.log.pc.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.constants.funcmodule.controllers.forms.smartform.SmartFormDefinitionFuncModuleConstant;
 import com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebQueryLogMgoService;
 import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.annotation.user.CurrentLoginUser;
@@ -56,7 +55,7 @@ public class PcWebQueryLogController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public MyCommonResult<PcWebQueryLogMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
-        MyCommonResult<PcWebQueryLogMgo> result = MyCommonResult.gainQueryResult(PcWebQueryLogMgo.class, "分页查询");
+        MyCommonResult<PcWebQueryLogMgo> result = MyCommonResult.gainQueryResult(PcWebQueryLogMgo.class);
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
@@ -66,7 +65,7 @@ public class PcWebQueryLogController extends BaseController {
             MyMongoQueryPageBean<PcWebQueryLogMgo> pageBean = pcWebQueryLogMgoService.doFindPage(loginUser, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, "分页查询-操作失败");
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

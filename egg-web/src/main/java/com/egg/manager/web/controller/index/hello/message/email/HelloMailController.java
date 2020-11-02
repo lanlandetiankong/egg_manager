@@ -36,7 +36,7 @@ public class HelloMailController extends BaseController {
     @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public MyCommonResult doGetDefineModuleById(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainOperationResult("测试");
+        MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             String[] receiveEmails = new String[]{"2773756340@qq.com"};
             EmailSendRecordMgvo emailDto = EmailSendRecordMgvo.builder().subject("邮件标题123")
@@ -45,7 +45,7 @@ public class HelloMailController extends BaseController {
                     .build();
             myBaseEmailMgoService.sendSimpleEmail(emailDto);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, "测试");
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

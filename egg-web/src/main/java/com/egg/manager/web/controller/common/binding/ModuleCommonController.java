@@ -1,6 +1,5 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.api.constants.funcmodule.controllers.common.binding.ModuleCommonFuncModuleConstant;
 import com.egg.manager.common.base.beans.front.FrontSelectBean;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.module.DefineMenuUrlJumpTypeEnum;
@@ -34,7 +33,7 @@ public class ModuleCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->模块类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public MyCommonResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
+        MyCommonResult result = MyCommonResult.gainEnumResult();
         try {
             DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -45,7 +44,7 @@ public class ModuleCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, ModuleCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
@@ -54,7 +53,7 @@ public class ModuleCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->菜单跳转类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public MyCommonResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult(ModuleCommonFuncModuleConstant.Success.QUERY_ENUM_LIST);
+        MyCommonResult result = MyCommonResult.gainEnumResult();
         try {
             DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -65,7 +64,7 @@ public class ModuleCommonController extends BaseController {
             }
             result.setEnumList(beanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, ModuleCommonFuncModuleConstant.Failure.QUERY_ENUM_LIST);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

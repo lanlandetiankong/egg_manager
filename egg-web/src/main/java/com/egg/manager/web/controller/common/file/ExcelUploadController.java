@@ -1,8 +1,7 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.constants.funcmodule.BaseRstMsgConstant;
-import com.egg.manager.api.constants.funcmodule.controllers.common.file.ExcelUploadFuncModuleConstant;
+import com.egg.manager.common.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.file.AntdFileUploadStatusEnum;
@@ -45,7 +44,7 @@ public class ExcelUploadController extends BaseController {
     @ApiOperation(value = "上传/模板->excel", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
-        MyCommonResult result = MyCommonResult.gainOperationResult(ExcelUploadFuncModuleConstant.Success.UPLOAD_EXCEL);
+        MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
@@ -84,7 +83,7 @@ public class ExcelUploadController extends BaseController {
             }
             result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILEUPLOAD_BEANLIST, uploadBeanList);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e, ExcelUploadFuncModuleConstant.Failure.UPLOAD_EXCEL);
+            this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }

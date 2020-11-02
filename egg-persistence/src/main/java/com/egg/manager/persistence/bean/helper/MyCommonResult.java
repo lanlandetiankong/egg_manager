@@ -1,6 +1,8 @@
 package com.egg.manager.persistence.bean.helper;
 
 import cn.hutool.http.HttpStatus;
+import com.egg.manager.common.base.constant.rst.BaseRstMsgConstant;
+import com.egg.manager.common.base.enums.PublicResultEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.google.common.collect.Maps;
 import lombok.AccessLevel;
@@ -98,31 +100,26 @@ public class MyCommonResult<T> implements Serializable {
 
     private static <T> MyCommonResult<T> gainInitQueryBean(Class<T> tClass) {
         MyCommonResult<T> result = new MyCommonResult<>();
+        result.setMsg(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
         result.setHasError(false);
         result.setHasWarning(false);
         return result;
     }
 
-    private static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass) {
+    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass) {
         MyCommonResult<T> result = gainInitQueryBean(tClass);
         return result;
     }
 
-    public static <T> MyCommonResult<T> gainQueryResult(Class<T> tClass, String msg) {
-        MyCommonResult<T> result = gainInitQueryBean(tClass);
-        result.setMsg(msg);
-        return result;
-    }
-
-    public static <E> MyCommonResult<Object> gainEnumResult(String msg) {
+    public static <E> MyCommonResult<Object> gainEnumResult() {
         MyCommonResult<Object> result = gainInitQueryBean(Object.class);
-        result.setMsg(msg);
+        result.setMsg(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
         return result;
     }
 
-    public static MyCommonResult gainOperationResult(String info) {
+    public static MyCommonResult gainOperationResult() {
         MyCommonResult result = gainInitQueryBean(Object.class);
-        result.setMsg(info);
+        result.setMsg(PublicResultEnum.Success.getLabel());
         return result;
     }
 

@@ -135,7 +135,10 @@ public class BaseController {
         }
     }
 
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg) {
+    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e) {
+        dealCommonErrorCatch(logger, result, e, this.actionFailMsg, true, true);
+    }
+    private void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg) {
         dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
     }
 

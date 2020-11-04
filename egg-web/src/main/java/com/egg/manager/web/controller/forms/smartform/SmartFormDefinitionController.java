@@ -23,7 +23,7 @@ import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.expand.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.expand.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.expand.verification.igroup.VerifyGroupOfUpdate;
-import com.egg.manager.persistence.em.forms.pojo.mapstruct.mapstruct.imap.SmartFormDefinitionMapstruct;
+import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormDefinitionMapstruct;
 import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormDefinitionMgvo;
 import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormDefinitionMongoVerifyO;
 import com.egg.manager.web.controller.BaseController;

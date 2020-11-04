@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.forms.pojo.mapstruct.mapstruct.conversion;
+package com.egg.manager.persistence.em.forms.pojo.mapstruct.conversion;
 
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

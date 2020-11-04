@@ -3,7 +3,7 @@ package com.egg.manager.message.services.serviceimpl.email;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.message.services.email.MyBaseEmailMgoService;
 import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
-import com.egg.manager.persistence.em.message.pojo.mapstruct.mapstruct.imap.email.EmailSendRecordMapstruct;
+import com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email.EmailSendRecordMapstruct;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;
 import com.google.common.collect.Maps;

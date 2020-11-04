@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.message.pojo.mapstruct.mapstruct.conversion.email;
+package com.egg.manager.persistence.em.message.pojo.mapstruct.conversion.email;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailFromUserInfoMgvo;

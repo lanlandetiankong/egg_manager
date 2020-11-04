@@ -22,8 +22,8 @@ import java.util.Date;
 @TableName("em_announcement")
 public class Announcement extends Model<Announcement> {
 
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
 
     /**
      * 标题
@@ -79,12 +79,12 @@ public class Announcement extends Model<Announcement> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

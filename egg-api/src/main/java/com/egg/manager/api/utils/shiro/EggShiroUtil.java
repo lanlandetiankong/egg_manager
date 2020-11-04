@@ -39,12 +39,12 @@ public class EggShiroUtil {
      * 取得挡墙登录用户id
      * @param isRequired 是否必要，当true且userAccount为null时抛出异常
      */
-    public static String gainCurrentUserId(boolean isRequired) {
+    public static Long gainCurrentUserId(boolean isRequired) {
         UserAccount user = gainCurrentUser(isRequired);
         if(user == null && isRequired){
             throw new MyAuthenticationExpiredException();
         }
-        if(StringUtils.isBlank(user.getFid()) && isRequired){
+        if(user.getFid() != null && isRequired){
             throw new MyAuthenticationExpiredException();
         }
         return user.getFid();

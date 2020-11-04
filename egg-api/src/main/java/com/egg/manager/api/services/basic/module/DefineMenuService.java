@@ -31,21 +31,21 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param userAccountId
      * @return
      */
-    List<DefineMenu> dealGetUserGrantedMenusByAccountId(String userAccountId);
+    List<DefineMenu> dealGetUserGrantedMenusByAccountId(Long userAccountId);
 
     /**
      * 查询 用户 可访问的 菜单路径
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetUserVisitAbleUrl(String userAccountId);
+    Set<String> dealGetUserVisitAbleUrl(Long userAccountId);
 
     /**
      * 查询 用户 可访问的[菜单定义] Tree
      * @param userAccountId
      * @return
      */
-    List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId);
+    List<CommonMenuTree> dealGetUserGrantedMenuTrees(Long userAccountId);
 
     /**
      * 查询 所有[可用状态]的 [菜单定义]
@@ -59,7 +59,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonMenuTree> getMenuTreeChildNodes(String rootId, List<DefineMenu> allMenus);
+    List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenu> allMenus);
 
     /**
      * [菜单展示]的子节点 构建的TreeSelect结构
@@ -67,7 +67,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodes(String rootId, List<DefineMenu> allMenus);
+    List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenu> allMenus);
 
     /**
      * [菜单展示]的子节点 构建的TreeSelect结构(包含最顶层)
@@ -75,7 +75,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId, List<DefineMenu> allMenus);
+    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenu> allMenus);
 
 
     /**

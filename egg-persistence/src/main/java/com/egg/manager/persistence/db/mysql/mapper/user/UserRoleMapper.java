@@ -33,7 +33,7 @@ public interface UserRoleMapper extends MyEggMapper<UserRole> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllRoleIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<Long> findAllRoleIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
     /**
      * 批量新增 用户-角色 关联
@@ -50,6 +50,6 @@ public interface UserRoleMapper extends MyEggMapper<UserRole> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("roleIdList") List<String> roleIdList, @Param("stateVal") Short stateVal
+    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("roleIdList") List<Long> roleIdList, @Param("stateVal") Short stateVal
             , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

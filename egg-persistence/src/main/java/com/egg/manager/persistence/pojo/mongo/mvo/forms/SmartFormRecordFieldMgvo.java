@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmartFormRecordFieldMgvo extends BaseModelMgvo<String> {
+public class SmartFormRecordFieldMgvo extends BaseModelMgvo<Long> {
     /**
      * 表单record
      */

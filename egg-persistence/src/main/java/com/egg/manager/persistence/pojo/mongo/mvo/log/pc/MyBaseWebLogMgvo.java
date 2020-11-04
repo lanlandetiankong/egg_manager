@@ -15,7 +15,7 @@ public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
     /**
      * 登录的用户id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 登录的用户名称
      */

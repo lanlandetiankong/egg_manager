@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
  * @date 2020/10/21
  */
 @Component
-public interface SmartFormTypeDefinitionRepository extends MyBaseMongoRepository<SmartFormTypeDefinitionMgo, String> {
+public interface SmartFormTypeDefinitionRepository extends MyBaseMongoRepository<SmartFormTypeDefinitionMgo, Long> {
 
 }

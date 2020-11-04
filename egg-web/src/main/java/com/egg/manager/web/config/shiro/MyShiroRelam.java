@@ -45,7 +45,7 @@ public class MyShiroRelam extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //当前登录用户id
         String authorization = principalCollection.toString();
-        String userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
+        Long userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
         if (userAccountRedisService == null) {
             this.userAccountRedisService = SpringContextBeanUtil.getBean(UserAccountRedisService.class);
         }
@@ -66,7 +66,7 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        String userAccountId = JwtUtil.getUserAccountId(token);
+        Long userAccountId = JwtUtil.getUserAccountId(token);
         if (userAccountId == null) {
             throw new UnauthorizedException("token invalid");
         }

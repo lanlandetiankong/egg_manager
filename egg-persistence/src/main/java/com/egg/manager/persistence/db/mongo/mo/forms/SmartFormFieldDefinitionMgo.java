@@ -22,7 +22,7 @@ import java.util.List;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class SmartFormFieldDefinitionMgo extends MyBaseModelMgo<String> {
+public class SmartFormFieldDefinitionMgo extends MyBaseModelMgo<Long> {
 
     /**
      * 类型名

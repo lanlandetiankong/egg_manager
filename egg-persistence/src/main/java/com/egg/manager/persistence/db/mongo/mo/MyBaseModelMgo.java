@@ -121,7 +121,7 @@ public class MyBaseModelMgo<K> implements Serializable {
      * 创建人id
      */
     @Field(value = "createUserId")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 创建人名称
      */
@@ -137,7 +137,7 @@ public class MyBaseModelMgo<K> implements Serializable {
      * 最后更新用户id
      */
     @Field(value = "lastModifyerId")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 最后更新用户名称
      */

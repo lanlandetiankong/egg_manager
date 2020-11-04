@@ -33,7 +33,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenu> {
      * @param state
      * @return
      */
-    List<DefineMenu> findAllMenuByRoleId(@Param("roleId") String roleId, @Param("stateVal") Short state);
+    List<DefineMenu> findAllMenuByRoleId(@Param("roleId") Long roleId, @Param("stateVal") Short state);
 
     /**
      * 取得角色拥有的所有[菜单]集合(忽略 有子节点的菜单节点)
@@ -41,7 +41,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenu> {
      * @param state
      * @return
      */
-    List<DefineMenu> findAllMenuByRoleIdFilterParentNode(@Param("roleId") String roleId, @Param("stateVal") Short state);
+    List<DefineMenu> findAllMenuByRoleIdFilterParentNode(@Param("roleId") Long roleId, @Param("stateVal") Short state);
 
 
     /**
@@ -49,7 +49,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenu> {
      * @param userAccountId
      * @return
      */
-    List<DefineMenu> getUserGrantedMenusByAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
+    List<DefineMenu> getUserGrantedMenusByAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
 
     /**
      * 查询菜单(过滤指定节点下的所有节点

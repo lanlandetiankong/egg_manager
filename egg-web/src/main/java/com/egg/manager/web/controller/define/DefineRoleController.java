@@ -142,7 +142,7 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "查询已获授权/角色->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/gainAllPermissionByRoleId")
-    public MyCommonResult<DefinePermission> gainAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefinePermission> gainAllPermissionByRoleId(HttpServletRequest request, Long defineRoleId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermission> result = MyCommonResult.gainQueryResult(DefinePermission.class);
         try {
             List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
@@ -156,7 +156,7 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "查询已获授权/角色->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/gainAllMenuByRoleId")
-    public MyCommonResult<DefineMenu> gainAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
+    public MyCommonResult<DefineMenu> gainAllMenuByRoleId(HttpServletRequest request, Long defineRoleId, Boolean filterParentNode,
                                                           @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineMenu> result = MyCommonResult.gainQueryResult(DefineMenu.class);
         try {
@@ -210,7 +210,7 @@ public class DefineRoleController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
@@ -249,10 +249,10 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "更新授权->角色+权限", notes = "为角色分配权限", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantPermissionToRole")
-    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, Long roleId, Long[] checkIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
-            Assert.notBlank(roleId, "未知角色id:" + actionFailMsg);
+            Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUser, roleId, checkIds);
             result.setCount(count);
         } catch (Exception e) {
@@ -264,23 +264,23 @@ public class DefineRoleController extends BaseController {
 
     @ApiOperation(value = "更新授权->角色+菜单", notes = "为角色设置可访问菜单", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantMenusToRole")
-    public MyCommonResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
+    public MyCommonResult doGrantMenusToRole(HttpServletRequest request, Long roleId, Long[] checkIds, Long[] halfCheckIds,
                                              @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
-            Assert.notBlank(roleId, "未知角色id:" + actionFailMsg);
+            Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
 
             //取得前端所有 勾选的值
-            checkIds = checkIds != null ? checkIds : new String[]{};
-            halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};
-            Set<String> checkIdAll = Sets.newHashSet(checkIds);
+            checkIds = checkIds != null ? checkIds : new Long[]{};
+            halfCheckIds = halfCheckIds != null ? halfCheckIds : new Long[]{};
+            Set<Long> checkIdAll = Sets.newHashSet(checkIds);
             checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
 
             //在数据库中 关联分别为 enable、delete 状态
-            Set<String> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
-            Set<String> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DELETE.getValue());
+            Set<Long> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
+            Set<Long> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DELETE.getValue());
             //所有 已经在数据库 有的关联行
-            Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
+            Set<Long> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
 
             //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
             Sets.SetView addSetView = Sets.difference(checkIdAll, oldEnableCheckIdSet);

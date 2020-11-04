@@ -119,7 +119,7 @@
         WHERE eum.user_account_id = #{userAccountId}
     </select>
 
-    <select id="findAllManagerUserIdByTenantId" resultType="java.lang.String">
+    <select id="findAllManagerUserIdByTenantId" resultType="java.lang.Long">
         SELECT eua.fid FROM em_user_account eua
         left JOIN em_user_tenant eut on eua.fid = eut.user_account_id
         <where>

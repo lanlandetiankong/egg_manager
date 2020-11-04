@@ -33,6 +33,6 @@ public interface DefineJobMapper extends MyEggMapper<DefineJob> {
      * @param stateVal      指定state的值
      * @return
      */
-    List<DefineJob> findAllJobByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("stateVal") Short stateVal);
+    List<DefineJob> findAllJobByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("stateVal") Short stateVal);
 
 }

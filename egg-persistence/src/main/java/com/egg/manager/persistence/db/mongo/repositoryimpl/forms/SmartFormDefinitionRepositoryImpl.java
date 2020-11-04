@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/21
  */
 @Repository
-public class SmartFormDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormDefinitionMgo, String>
+public class SmartFormDefinitionRepositoryImpl extends MyBaseMongoRepositoryImpl<SmartFormDefinitionMgo, Long>
         implements SmartFormDefinitionRepository {
 
 

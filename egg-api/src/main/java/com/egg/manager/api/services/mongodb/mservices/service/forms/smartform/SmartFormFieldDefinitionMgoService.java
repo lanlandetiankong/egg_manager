@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/20
  */
 @Repository
-public interface SmartFormFieldDefinitionMgoService extends MyBaseMgoService<SmartFormFieldDefinitionMgo, String> {
+public interface SmartFormFieldDefinitionMgoService extends MyBaseMgoService<SmartFormFieldDefinitionMgo, Long> {
 
 
 }

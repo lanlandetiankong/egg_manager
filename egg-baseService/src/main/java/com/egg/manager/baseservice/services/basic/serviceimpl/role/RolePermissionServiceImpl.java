@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.services.basic.role.RolePermissionService;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
 import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
@@ -39,9 +40,9 @@ public class RolePermissionServiceImpl extends MyBaseMysqlServiceImpl<RolePermis
             return null;
         }
         //所有的角色id
-        Set<String> defineRoleIds = new HashSet<String>();
+        Set<Long> defineRoleIds = new HashSet<Long>();
         for (DefineRole role : defineRoles) {
-            if (role != null && StringUtils.isNotBlank(role.getFid())) {
+            if (role != null && LongUtils.isNotBlank(role.getFid())) {
                 defineRoleIds.add(role.getFid());
             }
         }

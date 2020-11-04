@@ -17,7 +17,7 @@ public class UserRoleVo extends MyBaseMysqlVo {
     /**
      * 账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 角色id
      */

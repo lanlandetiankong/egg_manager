@@ -15,6 +15,7 @@ import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
 import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
@@ -125,10 +126,10 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds) {
+    public Integer dealBatchEnsure(UserAccount loginUser, Long[] ensureIds) {
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
-            List<String> delIdList = Lists.newArrayList(ensureIds);
+            List<Long> delIdList = Lists.newArrayList(ensureIds);
             //批量伪删除
             delCount = definePermissionMapper.batchEnsureByIds(delIdList, loginUser);
         }
@@ -136,8 +137,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, String userAccountId) {
-        if (StringUtils.isBlank(userAccountId)) {
+    public List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, Long userAccountId) {
+        if (LongUtils.isBlank(userAccountId)) {
             return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
@@ -151,7 +152,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, String userAccountId) {
+    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefinePermission> definePermissions = this.dealGetListByAccountFromDb(loginUser, userAccountId);
         if (definePermissions != null && definePermissions.isEmpty() == false) {

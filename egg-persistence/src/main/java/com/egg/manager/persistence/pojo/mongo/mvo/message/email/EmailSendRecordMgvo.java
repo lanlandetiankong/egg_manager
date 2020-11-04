@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Data
 @Builder
-public class EmailSendRecordMgvo extends BaseModelMgvo<String> {
+public class EmailSendRecordMgvo extends BaseModelMgvo<Long> {
 
     /**
      * 发送者-相关信息

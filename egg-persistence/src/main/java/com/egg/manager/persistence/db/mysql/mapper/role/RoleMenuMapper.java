@@ -22,6 +22,6 @@ public interface RoleMenuMapper extends MyEggMapper<RoleMenu> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("menuIdList") List<String> menuIdList, @Param("stateVal") Short stateVal
+    int batchUpdateStateByRole(@Param("roleId") Long roleId, @Param("menuIdList") List<String> menuIdList, @Param("stateVal") Short stateVal
             , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

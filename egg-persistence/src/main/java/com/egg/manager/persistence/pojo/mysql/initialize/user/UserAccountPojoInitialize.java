@@ -15,6 +15,8 @@ public class UserAccountPojoInitialize {
      * @return
      */
     public static UserAccount dealGetVisitor() {
-        return UserAccount.builder().fid("Visitor").userType(UserAccountBaseTypeEnum.Visitor.getValue()).build();
+        return UserAccount.builder()
+                //.fid("Visitor")
+                .userType(UserAccountBaseTypeEnum.Visitor.getValue()).build();
     }
 }

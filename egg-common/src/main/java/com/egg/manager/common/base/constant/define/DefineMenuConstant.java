@@ -9,7 +9,8 @@ public interface DefineMenuConstant {
     /**
      * 菜单的顶级id
      */
-    String ROOT_ID = "root_menu_id";
+    //String ROOT_ID = "root_menu_id";
+    Long ROOT_ID = 0L;
     /**
      * 最顶级level
      */

@@ -157,7 +157,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccount loginUser) {
@@ -200,11 +200,11 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "userAccountIdArr", value = "要设置为管理员的用户id-数组", required = true, dataTypeClass = String.class, allowMultiple = true),
     })
     @PostMapping(value = "/setupTenantManager")
-    public MyCommonResult doSetupTenantManager(HttpServletRequest request, String tenantId, String[] userAccountIdArr,
+    public MyCommonResult doSetupTenantManager(HttpServletRequest request, Long tenantId, Long[] userAccountIdArr,
                                                @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
-            Assert.notBlank(tenantId, "未知租户id:" + actionFailMsg);
+            Assert.notNull(tenantId, "未知租户id:" + actionFailMsg);
             DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);
             Assert.notNull(defineTenant, "租户不存在:" + actionFailMsg);
             int count = defineTenantService.dealTenantSetupManager(loginUser, tenantId, userAccountIdArr);

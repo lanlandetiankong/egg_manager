@@ -21,18 +21,18 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_job")
 public class UserJob extends Model<UserJob> {
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
     /**
      * 账号id
      */
     @TableField(value = "user_account_id")
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 职务id
      */
     @TableField(value = "define_job_id")
-    private String defineJobId;
+    private Long defineJobId;
 
 
     /**
@@ -59,12 +59,12 @@ public class UserJob extends Model<UserJob> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

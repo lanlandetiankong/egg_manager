@@ -55,7 +55,7 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param loginUser
      * @return
      */
-    int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 批量伪删除 指定用户的所有职务关联
@@ -63,5 +63,5 @@ public interface UserAccountMapper extends MyEggMapper<UserAccount> {
      * @param loginUser
      * @return
      */
-    int clearAllJobByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int clearAllJobByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

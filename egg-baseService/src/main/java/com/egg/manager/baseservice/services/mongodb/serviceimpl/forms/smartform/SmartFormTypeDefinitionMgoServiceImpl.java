@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service(interfaceClass = SmartFormTypeDefinitionMgoService.class)
-public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMgo, String>
+public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMgo, Long>
         implements SmartFormTypeDefinitionMgoService {
 
     @Override

@@ -21,10 +21,10 @@ public class UserJobPojoInitialize {
      * @param loginUser     当前登录用户
      * @return
      */
-    public static UserJob generateSimpleInsertEntity(String userAccountId, String defineJobId, UserAccount loginUser) {
+    public static UserJob generateSimpleInsertEntity(Long userAccountId, Long defineJobId, UserAccount loginUser) {
         UserJob userJob = new UserJob();
         Date now = new Date();
-        userJob.setFid(MyUUIDUtil.renderSimpleUuid());
+        //userJob.setFid(MyUUIDUtil.renderSimpleUuid());
         userJob.setUserAccountId(userAccountId);
         userJob.setDefineJobId(defineJobId);
         userJob.setState(BaseStateEnum.ENABLED.getValue());

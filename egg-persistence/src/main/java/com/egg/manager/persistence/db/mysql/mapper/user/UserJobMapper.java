@@ -34,7 +34,7 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllJobIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<Long> findAllJobIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
@@ -52,6 +52,6 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("jobIdList") List<String> jobIdList, @Param("stateVal") Short stateVal,
+    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("jobIdList") List<Long> jobIdList, @Param("stateVal") Short stateVal,
                                         @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

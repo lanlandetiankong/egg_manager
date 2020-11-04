@@ -69,5 +69,5 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception;
+    Integer dealTenantSetupManager(UserAccount loginUser, Long tenantId, Long[] checkIds) throws Exception;
 }

@@ -21,18 +21,18 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_tenant")
 public class UserTenant extends Model<UserTenant> {
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
     /**
      * 账号id
      */
     @TableField(value = "user_account_id")
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 租户id
      */
     @TableField(value = "define_tenant_id")
-    private String defineTenantId;
+    private Long defineTenantId;
     /**
      * 类型
      */
@@ -69,12 +69,12 @@ public class UserTenant extends Model<UserTenant> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

@@ -19,7 +19,7 @@ public class UserDepartmentDto extends MyBaseMysqlDto {
     /**
      * 用户账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 部门id
      */

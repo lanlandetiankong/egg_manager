@@ -22,8 +22,8 @@ import java.util.Date;
 @TableName("em_define_job")
 public class DefineJob extends Model<DefineJob> {
 
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
     /**
      * 名称
      */
@@ -64,12 +64,12 @@ public class DefineJob extends Model<DefineJob> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

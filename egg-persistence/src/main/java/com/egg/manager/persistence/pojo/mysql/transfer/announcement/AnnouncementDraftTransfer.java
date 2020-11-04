@@ -47,7 +47,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity, Map<String, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity, Map<Long, AnnouncementTag> announcementTagMap) {
         if (entity == null) {
             return null;
         }
@@ -61,7 +61,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param dto
      * @return
      */
-    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<String, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<Long, AnnouncementTag> announcementTagMap) {
         if (dto == null) {
             return null;
         }
@@ -72,7 +72,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts, Map<Long, AnnouncementTag> announcementTagMap) {
         if (announcementDrafts == null) {
             return null;
         } else {
@@ -85,7 +85,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<Long, AnnouncementTag> announcementTagMap) {
         if (announcementDraftDtos == null) {
             return null;
         } else {
@@ -104,7 +104,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param vo
      * @param announcementTagMap
      */
-    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<String, AnnouncementTag> announcementTagMap) {
+    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<Long, AnnouncementTag> announcementTagMap) {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);

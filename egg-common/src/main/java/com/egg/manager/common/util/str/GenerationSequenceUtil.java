@@ -112,7 +112,7 @@ public class GenerationSequenceUtil {
      * @param userAccountId : 用户ID
      * @return 全局唯一ID
      */
-    public static String globalUniqueId(final String userAccountId) {
+    public static String globalUniqueId(final Long userAccountId) {
         return globalUniqueId() + userAccountId;
     }
 

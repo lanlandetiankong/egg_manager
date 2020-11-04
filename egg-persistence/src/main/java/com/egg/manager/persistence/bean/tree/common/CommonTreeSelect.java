@@ -24,15 +24,15 @@ public class CommonTreeSelect extends MyBaseTree {
     /**
      * 值
      */
-    private String value;
+    private Long value;
     /**
      * vue-key
      */
-    private String key;
+    private Long key;
     /**
      * 上级id
      */
-    private String parentId;
+    private Long parentId;
     /**
      * 子项
      */

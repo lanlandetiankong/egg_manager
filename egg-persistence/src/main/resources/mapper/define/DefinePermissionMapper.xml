@@ -136,7 +136,7 @@
         WHERE rp.define_role_id = #{roleId} and rp.state = 1 and dp.ensure = 1
     </select>
 
-    <select id="findAllPermissionIdByRoleId" resultType="java.lang.String">
+    <select id="findAllPermissionIdByRoleId" resultType="java.lang.Long">
         SELECT dp.fid FROM em_define_permission dp
         left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
         <where>

@@ -32,7 +32,7 @@ public class JwtUtil {
      * @param token
      * @return 是否正确
      */
-    public static boolean verify(String token, String userAccountId) {
+    public static boolean verify(String token, Long userAccountId) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(DEFAULT_SECRET);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -49,10 +49,10 @@ public class JwtUtil {
      * 获得 token 中的信息无需secret解密也能获得
      * @return token中包含的用户名
      */
-    public static String getUserAccountId(String token) {
+    public static Long getUserAccountId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("userAccountId").asString();
+            return jwt.getClaim("userAccountId").asLong();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -63,7 +63,7 @@ public class JwtUtil {
      * @param userAccountId 用户id
      * @return 加密的token
      */
-    public static String sign(String userAccountId) {
+    public static String sign(Long userAccountId) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(DEFAULT_SECRET);

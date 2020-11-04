@@ -47,7 +47,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementVo transferEntityToVo(Announcement entity, Map<String, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementVo transferEntityToVo(Announcement entity, Map<Long, AnnouncementTag> announcementTagMap) {
         if (entity == null) {
             return null;
         }
@@ -77,7 +77,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<AnnouncementVo> transferEntityToVoList(List<Announcement> entityList, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferEntityToVoList(List<Announcement> entityList, Map<Long, AnnouncementTag> announcementTagMap) {
         if (entityList == null) {
             return null;
         } else {
@@ -94,7 +94,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
      * @param dto
      * @return
      */
-    public static AnnouncementVo transferDtoToVo(AnnouncementDto dto, Map<String, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementVo transferDtoToVo(AnnouncementDto dto, Map<Long, AnnouncementTag> announcementTagMap) {
         if (dto == null) {
             return null;
         }
@@ -124,7 +124,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> dtos, Map<String, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> dtos, Map<Long, AnnouncementTag> announcementTagMap) {
         if (dtos == null) {
             return null;
         } else {

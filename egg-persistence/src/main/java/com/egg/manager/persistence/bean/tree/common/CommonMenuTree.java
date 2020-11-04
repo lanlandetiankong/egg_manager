@@ -25,15 +25,15 @@ public class CommonMenuTree extends MyBaseTree {
     /**
      * 菜单id
      */
-    private String id;
+    private Long id;
     /**
      * vue的key
      */
-    private String key;
+    private Long key;
     /**
      * 上级id
      */
-    private String pid;
+    private Long pid;
     /**
      * 模块id
      */

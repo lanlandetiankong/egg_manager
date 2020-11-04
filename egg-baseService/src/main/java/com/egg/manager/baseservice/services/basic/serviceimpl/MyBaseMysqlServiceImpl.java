@@ -13,6 +13,7 @@ import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.common.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
@@ -152,8 +153,8 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     public UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException {
         UserAccount userAccount = null;
         if (userAccountToken != null) {
-            String userAccountId = userAccountToken.getUserAccountId();
-            if (StringUtils.isNotBlank(userAccountId)) {
+            Long userAccountId = userAccountToken.getUserAccountId();
+            if (LongUtils.isNotBlank(userAccountId)) {
                 userAccount = userAccountMapper.selectById(userAccountId);
             }
         }
@@ -176,7 +177,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
     @Override
     public boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if (userAccount == null || StringUtils.isBlank(userAccount.getFid())) {
+        if (userAccount == null || LongUtils.isBlank(userAccount.getFid())) {
             return true;
         }
         return false;

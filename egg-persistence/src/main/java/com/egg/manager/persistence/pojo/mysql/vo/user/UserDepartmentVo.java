@@ -17,7 +17,7 @@ public class UserDepartmentVo extends MyBaseMysqlVo {
     /**
      * 用户账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 部门id
      */

@@ -20,7 +20,7 @@ public class FrontEntitySelectBean implements Serializable {
     /**
      * Select的值
      */
-    private String value;
+    private Long value;
     /**
      * Select展示的名称
      */

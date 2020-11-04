@@ -73,7 +73,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         IPage iPage = announcementMapper.selectPage(page, announcementEntityWrapper);
         List<Announcement> announcements = iPage.getRecords();
         //取得 公告标签 map
-        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
         result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements, announcementTagMap));
         return result;
     }
@@ -82,7 +82,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
 
         Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -103,10 +103,10 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     public Integer dealCreateFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         Date now = new Date();
         //公告草稿id
-        String draftId = announcementDraftVo.getFid();
+        Long draftId = announcementDraftVo.getFid();
         //发布公告
         Announcement announcement = AnnouncementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
-        announcement.setFid(MyUUIDUtil.renderSimpleUuid());
+        //id->announcement.setFid(MyUUIDUtil.renderSimpleUuid());
         announcement.setState(BaseStateEnum.ENABLED.getValue());
         announcement.setCreateTime(now);
         announcement.setUpdateTime(now);

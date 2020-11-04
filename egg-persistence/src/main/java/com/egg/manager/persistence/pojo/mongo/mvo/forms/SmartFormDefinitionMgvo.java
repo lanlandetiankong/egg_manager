@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmartFormDefinitionMgvo extends BaseModelMgvo<String> {
+public class SmartFormDefinitionMgvo extends BaseModelMgvo<Long> {
 
     /**
      * 表单名称
@@ -42,7 +42,7 @@ public class SmartFormDefinitionMgvo extends BaseModelMgvo<String> {
     /**
      * 表单类型
      */
-    private String formTypeId;
+    private Long formTypeId;
 
 
 }

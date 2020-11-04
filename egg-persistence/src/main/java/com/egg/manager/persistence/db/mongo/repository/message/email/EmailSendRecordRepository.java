@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Component
-public interface EmailSendRecordRepository extends MyBaseMongoRepository<EmailSendRecordMgo, String> {
+public interface EmailSendRecordRepository extends MyBaseMongoRepository<EmailSendRecordMgo, Long> {
 
 }

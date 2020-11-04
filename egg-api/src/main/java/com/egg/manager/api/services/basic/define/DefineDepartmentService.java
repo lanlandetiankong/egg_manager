@@ -44,7 +44,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>, MyB
      * @param allDepartments
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, String rootId, List<DefineDepartment> allDepartments);
+    List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, Long rootId, List<DefineDepartment> allDepartments);
 
     /**
      * [部门展示]的子节点 构建的 TreeSelect 结构(包含最顶层)
@@ -54,7 +54,7 @@ public interface DefineDepartmentService extends IService<DefineDepartment>, MyB
      * @param allDefineDepartments
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, String rootId, List<DefineDepartment> allDefineDepartments);
+    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, Long rootId, List<DefineDepartment> allDefineDepartments);
 
     /**
      * 部门定义-新增

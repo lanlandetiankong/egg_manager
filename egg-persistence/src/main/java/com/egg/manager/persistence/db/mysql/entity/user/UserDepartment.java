@@ -21,18 +21,18 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_user_department")
 public class UserDepartment extends Model<UserDepartment> {
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
     /**
      * 用户账号id
      */
     @TableField(value = "user_account_id")
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 部门id
      */
     @TableField(value = "define_department_id")
-    private String defineDepartmentId;
+    private Long defineDepartmentId;
     /**
      * 类型
      */
@@ -69,12 +69,12 @@ public class UserDepartment extends Model<UserDepartment> {
      * 创建人id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改人id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

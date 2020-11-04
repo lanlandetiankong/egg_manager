@@ -68,7 +68,7 @@ public class BaseController {
      * @throws IllegalAccessException
      */
     public void dealSetTokenToRedis(UserAccount loginUser, UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {   //将用户 token 分别存入到redis
-        if (userAccountToken != null && StringUtils.isNotBlank(userAccountToken.getUserAccountId()) && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
+        if (userAccountToken != null && userAccountToken.getUserAccountId() != null && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountToken.getUserAccountId());
             if (oldAuthorization != null && jwtSsoFlag) {

@@ -76,8 +76,8 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
     @Override
-    public Map<String, AnnouncementTag> dealGetAllToMap() {
-        Map<String, AnnouncementTag> map = Maps.newHashMap();
+    public Map<Long, AnnouncementTag> dealGetAllToMap() {
+        Map<Long, AnnouncementTag> map = Maps.newHashMap();
         QueryWrapper<AnnouncementTag> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTag>();
         announcementTagEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         List<AnnouncementTag> announcementTags = announcementTagMapper.selectList(announcementTagEntityWrapper);

@@ -21,8 +21,8 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_define_department")
 public class DefineDepartment extends Model<DefineDepartment> {
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
     /**
      * 名称
      */
@@ -37,7 +37,7 @@ public class DefineDepartment extends Model<DefineDepartment> {
      * 上级id
      */
     @TableField("parent_id")
-    private String parentId;
+    private Long parentId;
     /**
      * 层级
      */
@@ -79,12 +79,12 @@ public class DefineDepartment extends Model<DefineDepartment> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

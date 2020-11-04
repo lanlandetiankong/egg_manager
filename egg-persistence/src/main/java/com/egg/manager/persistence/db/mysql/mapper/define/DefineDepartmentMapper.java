@@ -42,12 +42,12 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
      * @param departmentState
      * @return
      */
-    DefineDepartment selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentState") Short departmentState);
+    DefineDepartment selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("departmentState") Short departmentState);
 
     /**
      * 根据用户id查询 所属的部门详情-dto
      * @param userAccountId
      * @return
      */
-    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
+    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
 }

@@ -217,7 +217,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "批量伪删除->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {

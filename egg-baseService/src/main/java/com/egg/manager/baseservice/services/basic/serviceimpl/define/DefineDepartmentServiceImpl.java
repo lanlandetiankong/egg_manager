@@ -9,6 +9,7 @@ import com.egg.manager.common.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelectTranslate;
@@ -18,14 +19,11 @@ import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineDepartmentTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,7 +54,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, String rootId, List<DefineDepartment> allDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, Long rootId, List<DefineDepartment> allDepartments) {
         if (allDepartments == null || allDepartments.size() == 0) {
             return null;
         }
@@ -64,7 +62,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
         for (DefineDepartment defineDepartment : allDepartments) {
-            if (StringUtils.isNotBlank(defineDepartment.getParentId())) {
+            if (LongUtils.isNotBlank(defineDepartment.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(defineDepartment.getParentId())) {
                         tree = new CommonTreeSelect();
@@ -83,7 +81,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, String rootId, List<DefineDepartment> allDefineDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, Long rootId, List<DefineDepartment> allDefineDepartments) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser, rootId, allDefineDepartments);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).title("部门首层项").value(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
@@ -96,8 +94,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     public Integer dealCreate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeCreate(loginUser, defineDepartment, true);
-        String parentId = defineDepartment.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
+        Long parentId = defineDepartment.getParentId();
+        if (LongUtils.isNotBlank(parentId)) {
             DefineDepartment parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {
@@ -121,8 +119,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         Integer changeCount = 0;
         DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartment = super.doBeforeUpdate(loginUser, defineDepartment);
-        String parentId = defineDepartment.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
+        Long parentId = defineDepartment.getParentId();
+        if (LongUtils.isNotBlank(parentId)) {
             DefineDepartment parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {

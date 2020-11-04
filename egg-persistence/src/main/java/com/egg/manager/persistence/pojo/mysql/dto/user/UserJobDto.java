@@ -19,7 +19,7 @@ public class UserJobDto extends MyBaseMysqlDto {
     /**
      * 账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 职务id
      */

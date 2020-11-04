@@ -21,10 +21,10 @@ public class UserRolePojoInitialize {
      * @param loginUser     当前登录用户
      * @return
      */
-    public static UserRole generateSimpleInsertEntity(String userAccountId, String defineRoleId, UserAccount loginUser) {
+    public static UserRole generateSimpleInsertEntity(Long userAccountId, Long defineRoleId, UserAccount loginUser) {
         UserRole userRole = new UserRole();
         Date now = new Date();
-        userRole.setFid(MyUUIDUtil.renderSimpleUuid());
+        //userRole.setFid(MyUUIDUtil.renderSimpleUuid());
         userRole.setUserAccountId(userAccountId);
         userRole.setDefineRoleId(defineRoleId);
         userRole.setType(1);

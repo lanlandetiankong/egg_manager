@@ -29,14 +29,14 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param stateVal      状态值
      * @return
      */
-    List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId, Short stateVal);
+    List<DefineRole> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal);
 
     /**
      * 取得用户 所拥有的 角色code-Set集合
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId);
+    Set<String> dealGetRoleCodeSetByAccountFromDb(Long userAccountId);
 
     /**
      * 取得角色 所拥有的 菜单定义-List集合
@@ -44,7 +44,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param stateVal 状态值
      * @return
      */
-    List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal);
+    List<DefineMenu> dealGetMenusByRoleIdFromDb(Long roleId, Short stateVal);
 
     /**
      * 取得角色 所拥有的 菜单定义id-Set集合
@@ -52,7 +52,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param stateVal 状态值
      * @return
      */
-    Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId, Short stateVal);
+    Set<Long> dealGetMenuIdSetByRoleIdFromDb(Long roleId, Short stateVal);
 
     /**
      * 查询 所有[可用状态]的 [角色定义]
@@ -121,6 +121,6 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(UserAccount loginUser, String roleId, String[] checkIds) throws Exception;
+    Integer dealGrantPermissionToRole(UserAccount loginUser, Long roleId, Long[] checkIds) throws Exception;
 
 }

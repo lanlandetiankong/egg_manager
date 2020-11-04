@@ -31,6 +31,6 @@ public interface RolePermissionMapper extends MyEggMapper<RolePermission> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByRole(@Param("roleId") String roleId, @Param("permissionIdList") List<String> permissionIdList, @Param("stateVal") Short stateVal
+    int batchUpdateStateByRole(@Param("roleId") Long roleId, @Param("permissionIdList") List<Long> permissionIdList, @Param("stateVal") Short stateVal
             , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

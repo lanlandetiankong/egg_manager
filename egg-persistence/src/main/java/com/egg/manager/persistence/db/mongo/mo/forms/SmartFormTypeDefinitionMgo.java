@@ -20,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class SmartFormTypeDefinitionMgo extends MyBaseModelMgo<String> {
+public class SmartFormTypeDefinitionMgo extends MyBaseModelMgo<Long> {
     /**
      * 类型名
      */

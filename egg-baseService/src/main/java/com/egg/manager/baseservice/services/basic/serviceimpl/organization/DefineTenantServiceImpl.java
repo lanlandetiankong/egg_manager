@@ -90,7 +90,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
     @Override
-    public Integer dealTenantSetupManager(UserAccount loginUser, String tenantId, String[] checkIds) throws Exception {
+    public Integer dealTenantSetupManager(UserAccount loginUser, Long tenantId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
@@ -98,21 +98,21 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的用户id 集合
-            List<String> oldCheckIds = defineTenantMapper.findAllManagerUserIdByTenantId(tenantId, false);
+            List<Long> oldCheckIds = defineTenantMapper.findAllManagerUserIdByTenantId(tenantId, false);
             if (oldCheckIds == null || oldCheckIds.isEmpty()) {
                 List<UserTenant> addEntitys = new ArrayList<>();
-                for (String checkId : checkIds) {
+                for (Long checkId : checkIds) {
                     addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                 }
                 //批量新增行
                 userTenantMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
-                List<String> enableIds = new ArrayList<>();
-                List<String> disabledIds = new ArrayList<>();
-                Iterator<String> oldCheckIter = oldCheckIds.iterator();
+                List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
+                List<Long> enableIds = new ArrayList<>();
+                List<Long> disabledIds = new ArrayList<>();
+                Iterator<Long> oldCheckIter = oldCheckIds.iterator();
                 while (oldCheckIter.hasNext()) {
-                    String oldCheckId = oldCheckIter.next();
+                    Long oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
                     if (isOldRow) {
                         //原本有的数据行
@@ -133,7 +133,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     List<UserTenant> addEntitys = new ArrayList<>();
-                    for (String checkId : checkIdList) {
+                    for (Long checkId : checkIdList) {
                         addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                     }
                     //批量新增行

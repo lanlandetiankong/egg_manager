@@ -15,6 +15,7 @@ import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
 import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
@@ -70,8 +71,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public List<DefineRole> dealGetRolesByAccountFromDb(String userAccountId, Short stateVal) {
-        if (StringUtils.isBlank(userAccountId)) {
+    public List<DefineRole> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal) {
+        if (LongUtils.isBlank(userAccountId)) {
             return null;
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
@@ -84,7 +85,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     }
 
     @Override
-    public Set<String> dealGetRoleCodeSetByAccountFromDb(String userAccountId) {
+    public Set<String> dealGetRoleCodeSetByAccountFromDb(Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefineRole> defineRoles = this.dealGetRolesByAccountFromDb(userAccountId, BaseStateEnum.ENABLED.getValue());
         if (defineRoles != null && defineRoles.isEmpty() == false) {
@@ -100,8 +101,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public List<DefineMenu> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal) {
-        if (StringUtils.isBlank(roleId)) {
+    public List<DefineMenu> dealGetMenusByRoleIdFromDb(Long roleId, Short stateVal) {
+        if (LongUtils.isBlank(roleId)) {
             return null;
         } else {
             return defineMenuMapper.findAllMenuByRoleId(roleId, stateVal);
@@ -120,13 +121,13 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId, Short stateVal) {
-        Set<String> idSet = Sets.newHashSet();
+    public Set<Long> dealGetMenuIdSetByRoleIdFromDb(Long roleId, Short stateVal) {
+        Set<Long> idSet = Sets.newHashSet();
         List<DefineMenu> defineMenuList = this.dealGetMenusByRoleIdFromDb(roleId, stateVal);
         if (defineMenuList != null && defineMenuList.isEmpty() == false) {
             for (DefineMenu defineMenu : defineMenuList) {
-                String menuFid = defineMenu.getFid();
-                if (StringUtils.isNotBlank(menuFid)) {
+                Long menuFid = defineMenu.getFid();
+                if (LongUtils.isNotBlank(menuFid)) {
                     idSet.add(menuFid);
                 }
             }
@@ -142,9 +143,9 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         if (userRoles == null || userRoles.isEmpty()) {
             return defineRoles;
         } else {
-            Set<String> roleIds = new HashSet<String>();
+            Set<Long> roleIds = new HashSet<Long>();
             for (UserRole userRole : userRoles) {
-                if (StringUtils.isNotBlank(userRole.getDefineRoleId())) {
+                if (LongUtils.isNotBlank(userRole.getDefineRoleId())) {
                     roleIds.add(userRole.getDefineRoleId());
                 }
             }
@@ -206,7 +207,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Integer dealGrantPermissionToRole(UserAccount loginUser, String roleId, String[] checkIds) throws Exception {
+    public Integer dealGrantPermissionToRole(UserAccount loginUser, Long roleId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
@@ -214,21 +215,21 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的权限id 集合
-            List<String> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId, false);
+            List<Long> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId, false);
             if (oldCheckPermIds == null || oldCheckPermIds.isEmpty()) {
                 List<RolePermission> addEntitys = new ArrayList<>();
-                for (String checkId : checkIds) {
+                for (Long checkId : checkIds) {
                     addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
                 }
                 //批量新增行
                 rolePermissionMapper.customBatchInsert(addEntitys);
             } else {
-                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
-                List<String> enableIds = new ArrayList<>();
-                List<String> disabledIds = new ArrayList<>();
-                Iterator<String> oldCheckIter = oldCheckPermIds.iterator();
+                List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
+                List<Long> enableIds = new ArrayList<>();
+                List<Long> disabledIds = new ArrayList<>();
+                Iterator<Long> oldCheckIter = oldCheckPermIds.iterator();
                 while (oldCheckIter.hasNext()) {
-                    String oldCheckId = oldCheckIter.next();
+                    Long oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
                     if (isOldRow) {
                         //原本有的数据行
@@ -249,7 +250,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     List<RolePermission> addEntitys = new ArrayList<>();
-                    for (String checkId : checkIdList) {
+                    for (Long checkId : checkIdList) {
                         addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
                     }
                     //批量新增行

@@ -21,14 +21,14 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("em_role_menu")
 public class RoleMenu extends Model<RoleMenu> {
-    @TableId(value = "fid")
-    private String fid;
+    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    private Long fid;
 
     /**
      * 角色id
      */
     @TableField(value = "define_role_id")
-    private String defineRoleId;
+    private Long defineRoleId;
     /**
      * 菜单id
      */
@@ -65,12 +65,12 @@ public class RoleMenu extends Model<RoleMenu> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private String createUserId;
+    private Long createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private String lastModifyerId;
+    private Long lastModifyerId;
     /**
      * 版本号
      */

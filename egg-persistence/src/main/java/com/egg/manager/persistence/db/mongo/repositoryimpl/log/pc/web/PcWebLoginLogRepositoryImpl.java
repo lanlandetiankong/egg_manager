@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/21
  */
 @Repository
-public class PcWebLoginLogRepositoryImpl extends MyBaseMongoRepositoryImpl<PcWebLoginLogMgo, String> implements PcWebLoginLogRepository {
+public class PcWebLoginLogRepositoryImpl extends MyBaseMongoRepositoryImpl<PcWebLoginLogMgo, Long> implements PcWebLoginLogRepository {
 
 
 }

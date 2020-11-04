@@ -17,7 +17,7 @@ public class UserJobVo extends MyBaseMysqlVo {
     /**
      * 账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 职务id
      */

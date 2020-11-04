@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Repository
-public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<SmartFormTypeDefinitionMgo, String> {
+public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<SmartFormTypeDefinitionMgo, Long> {
     /**
      * 数据转枚举select
      * @param result

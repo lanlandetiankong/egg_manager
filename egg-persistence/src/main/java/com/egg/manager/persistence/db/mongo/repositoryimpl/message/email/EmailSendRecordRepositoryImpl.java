@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/21
  */
 @Repository
-public class EmailSendRecordRepositoryImpl extends MyBaseMongoRepositoryImpl<EmailSendRecordMgo, String>
+public class EmailSendRecordRepositoryImpl extends MyBaseMongoRepositoryImpl<EmailSendRecordMgo, Long>
         implements EmailSendRecordRepository {
 
 }

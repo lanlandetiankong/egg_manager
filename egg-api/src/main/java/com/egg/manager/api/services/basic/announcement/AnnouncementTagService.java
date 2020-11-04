@@ -52,7 +52,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTag>, MyBas
      * 查询可用的 公告标签 并转为map
      * @return
      */
-    Map<String, AnnouncementTag> dealGetAllToMap();
+    Map<Long, AnnouncementTag> dealGetAllToMap();
 
     /**
      * 公告标签-新增

@@ -140,7 +140,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     //取得当前登录的用户
                     UserAccount loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
                     logMgo.setTokenBean(JSONObject.toJSONString(userAccountToken));
-                    String userAccountId = userAccountToken.getUserAccountId();
+                    Long userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);
                     logMgo.setCreateUserId(userAccountId);
                     logMgo.setLastModifyerId(userAccountId);

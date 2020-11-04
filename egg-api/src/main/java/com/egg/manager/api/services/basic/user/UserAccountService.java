@@ -102,7 +102,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealRenewLock(UserAccount loginUser, String lockId, boolean isLock) throws Exception;
+    Integer dealRenewLock(UserAccount loginUser, Long lockId, boolean isLock) throws Exception;
 
 
     /**
@@ -114,7 +114,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealGrantRoleToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception;
+    Integer dealGrantRoleToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
@@ -125,7 +125,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealGrantJobToUser(UserAccount loginUser, String userAccountId, String[] checkIds) throws Exception;
+    Integer dealGrantJobToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception;
 
 
     /**
@@ -144,7 +144,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser, String[] checkIds, QueryWrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser, Long[] checkIds, QueryWrapper<UserAccount> wrapper);
 
 
     /**

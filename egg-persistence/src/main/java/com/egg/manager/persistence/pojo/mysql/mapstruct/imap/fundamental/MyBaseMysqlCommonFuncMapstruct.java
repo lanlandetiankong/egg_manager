@@ -74,7 +74,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param required    当userAccount为null时是否抛出异常
      * @return
      */
-    default String handleGetLoginUserId(UserAccount userAccount, boolean required) {
+    default Long handleGetLoginUserId(UserAccount userAccount, boolean required) {
         if (userAccount == null) {
             if (required) {
                 throw new MyRuntimeBusinessException("无法取得当前用户信息！");

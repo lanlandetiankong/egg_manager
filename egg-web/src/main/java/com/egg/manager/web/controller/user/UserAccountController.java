@@ -139,7 +139,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
-    public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class);
         try {
             List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
@@ -153,7 +153,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
-    public MyCommonResult<DefinePermissionVo> gainGrantedPermission(HttpServletRequest request, String userAccountId,
+    public MyCommonResult<DefinePermissionVo> gainGrantedPermission(HttpServletRequest request, Long userAccountId,
                                                                     @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class);
         try {
@@ -169,7 +169,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
-    public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
         try {
             List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
@@ -220,7 +220,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
@@ -283,11 +283,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/修改状态->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
-    public MyCommonResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateLockById(HttpServletRequest request, Long lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer lockCount = 0;
         try {
-            Assert.notBlank(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
+            Assert.notNull(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
             //操作类型为锁定？如果没传递值默认锁定
             lockFlag = lockFlag != null ? lockFlag : true;
             String lockMsg = lockFlag ? "锁定" : "解锁";
@@ -303,10 +303,10 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
-    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
-            Assert.notBlank(userAccountId, "未知用户id:" + actionFailMsg);
+            Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {
@@ -319,11 +319,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
-    public MyCommonResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
+    public MyCommonResult doGrantJobToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds,
                                            @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
-            Assert.notBlank(userAccountId, "未知用户id:" + actionFailMsg);
+            Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUser, userAccountId, checkIds);
             result.setCount(grantCount);
         } catch (Exception e) {

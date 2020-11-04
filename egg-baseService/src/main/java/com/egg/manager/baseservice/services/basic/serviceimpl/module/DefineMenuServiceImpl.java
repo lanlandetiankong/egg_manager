@@ -16,6 +16,7 @@ import com.egg.manager.common.base.exception.MyDbException;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.persistence.bean.helper.MyCommonResult;
 import com.egg.manager.persistence.bean.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
@@ -27,7 +28,6 @@ import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
 import com.egg.manager.persistence.pojo.mysql.dto.define.DefineMenuDto;
 import com.egg.manager.persistence.pojo.mysql.transfer.define.DefineMenuTransfer;
 import com.egg.manager.persistence.pojo.mysql.vo.define.DefineMenuVo;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +55,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     private UserAccountMapper userAccountMapper;
 
     @Override
-    public List<DefineMenu> dealGetUserGrantedMenusByAccountId(String userAccountId) {
-        if (StringUtils.isBlank(userAccountId)) {
+    public List<DefineMenu> dealGetUserGrantedMenusByAccountId(Long userAccountId) {
+        if (LongUtils.isBlank(userAccountId)) {
             return new ArrayList<DefineMenu>();
         }
         UserAccount userAccount = userAccountMapper.selectById(userAccountId);
@@ -70,7 +70,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public Set<String> dealGetUserVisitAbleUrl(String userAccountId) {
+    public Set<String> dealGetUserVisitAbleUrl(Long userAccountId) {
         Set<String> urlSets = new HashSet<>();
         List<DefineMenu> defineMenuList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         if (defineMenuList != null && defineMenuList.isEmpty() == false) {
@@ -89,7 +89,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
     @Override
-    public List<CommonMenuTree> dealGetUserGrantedMenuTrees(String userAccountId) {
+    public List<CommonMenuTree> dealGetUserGrantedMenuTrees(Long userAccountId) {
         List<DefineMenu> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         return treeList != null ? treeList : new ArrayList<CommonMenuTree>();
@@ -108,14 +108,14 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonMenuTree> getMenuTreeChildNodes(String rootId, List<DefineMenu> allMenus) {
+    public List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenu> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
             return null;
         }
         List<CommonMenuTree> childList = new ArrayList<CommonMenuTree>();
         CommonMenuTree tree = null;
         for (DefineMenu menu : allMenus) {
-            if (StringUtils.isNotBlank(menu.getParentId())) {
+            if (LongUtils.isNotBlank(menu.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(menu.getParentId())) {
                         tree = new CommonMenuTree();
@@ -135,7 +135,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(String rootId, List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenu> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
             return null;
         }
@@ -143,7 +143,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
         for (DefineMenu menu : allMenus) {
-            if (StringUtils.isNotBlank(menu.getParentId())) {
+            if (LongUtils.isNotBlank(menu.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(menu.getParentId())) {
                         tree = new CommonTreeSelect();
@@ -163,7 +163,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(String rootId, List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenu> allMenus) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(rootId, allMenus);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineMenuConstant.ROOT_ID).title("菜单首层项").value(DefineMenuConstant.ROOT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
@@ -210,9 +210,9 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         Date now = new Date();
         DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         defineMenu = super.doBeforeCreate(loginUser, defineMenu, true);
-        String parentId = defineMenu.getParentId();
+        Long parentId = defineMenu.getParentId();
         //
-        if (StringUtils.isBlank(parentId)) {
+        if (LongUtils.isBlank(parentId)) {
             defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
             defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
         } else if (DefineMenuConstant.ROOT_ID.equals(parentId)) {
@@ -247,8 +247,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         Integer changeCount = 0;
         DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
         defineMenu = super.doBeforeUpdate(loginUser, defineMenu);
-        String parentId = defineMenu.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
+        Long parentId = defineMenu.getParentId();
+        if (LongUtils.isNotBlank(parentId)) {
             DefineMenu parentMenu = defineMenuMapper.selectById(parentId);
             Integer parentMenuLevel = null;
             if (parentMenu != null) {

@@ -33,7 +33,7 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartment> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<String> findAllIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
     /**
      * 批量新增 用户-部门 关联
@@ -50,6 +50,6 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartment> {
      * @param loginUser
      * @return
      */
-    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentIdList") List<String> departmentIdList, @Param("stateVal") Short stateVal
+    int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("departmentIdList") List<String> departmentIdList, @Param("stateVal") Short stateVal
             , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 }

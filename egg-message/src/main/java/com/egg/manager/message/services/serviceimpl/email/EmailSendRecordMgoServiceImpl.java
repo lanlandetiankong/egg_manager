@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class EmailSendRecordMgoServiceImpl extends MyBaseMgoServiceImpl<EmailSendRecordRepository, EmailSendRecordMgo, String>
+public class EmailSendRecordMgoServiceImpl extends MyBaseMgoServiceImpl<EmailSendRecordRepository, EmailSendRecordMgo, Long>
         implements EmailSendRecordMgoService {
 
 }

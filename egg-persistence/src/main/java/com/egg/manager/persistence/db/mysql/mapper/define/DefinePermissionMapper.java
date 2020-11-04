@@ -34,7 +34,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int batchEnsureByIds(@Param("ensureIds") List<String> ensureIds, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int batchEnsureByIds(@Param("ensureIds") List<Long> ensureIds, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 删除指定角色id下的所有权限
@@ -42,14 +42,14 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int clearAllPermissionByRoleId(@Param("roleId") String roleId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int clearAllPermissionByRoleId(@Param("roleId") Long roleId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
 
     /**
      * 取得角色拥有的所有权限集合
      * @param roleId
      * @return
      */
-    List<DefinePermission> findAllPermissionByRoleId(String roleId);
+    List<DefinePermission> findAllPermissionByRoleId(Long roleId);
 
     /**
      * 取得角色拥有的所有权限id集合
@@ -57,7 +57,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param filterEnable 是否只查询状态为可用的
      * @return
      */
-    List<String> findAllPermissionIdByRoleId(@Param("roleId") String roleId, @Param("filterEnable") boolean filterEnable);
+    List<Long> findAllPermissionIdByRoleId(@Param("roleId") Long roleId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
@@ -65,5 +65,5 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
+    List<DefinePermission> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
 }

@@ -129,7 +129,7 @@ public class AnnouncementController extends BaseController {
 
             Announcement announcement = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
-            Map<String, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
+            Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
             result.setBean(AnnouncementTransfer.transferEntityToVo(announcement, announcementTagMap));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -176,7 +176,7 @@ public class AnnouncementController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {

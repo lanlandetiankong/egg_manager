@@ -19,7 +19,7 @@ public class UserTenantDto extends MyBaseMysqlDto {
     /**
      * 账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 租户id
      */

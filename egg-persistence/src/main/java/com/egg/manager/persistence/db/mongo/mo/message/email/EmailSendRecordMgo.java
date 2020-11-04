@@ -27,7 +27,7 @@ import java.util.Map;
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
-public class EmailSendRecordMgo extends MyBaseModelMgo<String> {
+public class EmailSendRecordMgo extends MyBaseModelMgo<Long> {
 
     /**
      * 发送者-相关信息

@@ -19,7 +19,7 @@ public class EmailReceiveUserInfoMgvo extends BaseMgvo {
     /**
      * 发送者-账号id
      */
-    private String userAccountId;
+    private Long userAccountId;
     /**
      * 发送者-用户名
      */

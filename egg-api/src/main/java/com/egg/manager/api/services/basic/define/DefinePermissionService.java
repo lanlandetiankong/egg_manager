@@ -82,7 +82,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @return
      * @throws Exception
      */
-    Integer dealBatchEnsure(UserAccount loginUser, String[] ensureIds);
+    Integer dealBatchEnsure(UserAccount loginUser, Long[] ensureIds);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
@@ -90,7 +90,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, String userAccountId);
+    List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, Long userAccountId);
 
     /**
      * 取得用户 所拥有的 权限code-Set集合
@@ -98,7 +98,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, String userAccountId);
+    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, Long userAccountId);
 
 
     /**

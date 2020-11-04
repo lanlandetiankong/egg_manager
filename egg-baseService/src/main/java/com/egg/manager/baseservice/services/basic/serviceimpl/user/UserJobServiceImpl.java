@@ -10,19 +10,17 @@ import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlService
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.entity.user.UserJob;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserJobMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.user.UserJobDto;
-import com.egg.manager.persistence.pojo.mysql.transfer.user.UserJobTransfer;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserJobVo;
-import com.google.common.collect.Lists;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserJobMapper;
+import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
+import com.egg.manager.persistence.em.user.pojo.transfer.UserJobTransfer;
+import com.egg.manager.persistence.em.user.pojo.vo.UserJobVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 

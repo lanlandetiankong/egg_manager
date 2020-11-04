@@ -5,12 +5,12 @@ import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.entity.user.UserTenant;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserTenantMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.user.UserTenantDto;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserTenantVo;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserTenantMapper;
+import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
+import com.egg.manager.persistence.em.user.pojo.vo.UserTenantVo;
 
 import java.util.List;
 

@@ -1,13 +1,11 @@
 package com.egg.manager.baseservice.services.basic.serviceimpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.api.trait.routine.RoutineCommonFunc;
-import com.egg.manager.api.utils.shiro.EggShiroUtil;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
@@ -15,16 +13,15 @@ import com.egg.manager.common.base.query.form.QueryFormFieldBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.common.util.LongUtils;
 import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
-import com.egg.manager.persistence.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserAccountMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
-import com.egg.manager.persistence.utils.reflex.EggReflexUtil;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.persistence.commons.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.expand.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
+import com.egg.manager.persistence.expand.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.commons.utils.reflex.EggReflexUtil;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;

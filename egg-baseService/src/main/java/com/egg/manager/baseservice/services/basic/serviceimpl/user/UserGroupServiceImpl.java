@@ -3,9 +3,9 @@ package com.egg.manager.baseservice.services.basic.serviceimpl.user;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.basic.user.UserGroupService;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
-import com.egg.manager.persistence.db.mysql.entity.user.UserGroup;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserGroupMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserGroupVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserGroup;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserGroupMapper;
+import com.egg.manager.persistence.em.user.pojo.vo.UserGroupVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 

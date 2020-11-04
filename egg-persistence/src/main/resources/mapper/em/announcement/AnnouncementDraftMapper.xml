@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft">
+        <id column="fid" property="fid"/>
+        <result column="title" property="title"/>
+        <result column="key_word" property="keyWord"/>
+        <result column="publish_department" property="publishDepartment"/>
+        <result column="content" property="content"/>
+        <result column="tag_ids" property="tagIds"/>
+        <result column="accessory" property="accessory"/>
+        <result column="content" property="content"/>
+        <result column="is_published" property="isPublished"/>
+
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+    </resultMap>
+
+
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto">
+        <id column="fid" property="fid"/>
+        <result column="title" property="title"/>
+        <result column="key_word" property="keyWord"/>
+        <result column="publish_department" property="publishDepartment"/>
+        <result column="content" property="content"/>
+        <result column="tag_ids" property="tagIds"/>
+        <result column="accessory" property="accessory"/>
+        <result column="content" property="content"/>
+        <result column="is_published" property="isPublished"/>
+
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid,title,key_word,publish_department,content,is_published,tag_ids,accessory,
+        remark,state,create_time, update_time,create_user_id,last_modifyer_id
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+        ${base_alias_name}.fid,
+        ${base_alias_name}.title,
+        ${base_alias_name}.key_word,
+        ${base_alias_name}.publish_department,
+        ${base_alias_name}.content,
+        ${base_alias_name}.is_published,
+        ${base_alias_name}.tag_ids,
+        ${base_alias_name}.accessory,
+        ${base_alias_name}.remark,
+        ${base_alias_name}.state,
+        ${base_alias_name}.create_time,
+         ${base_alias_name}.update_time,
+         ${base_alias_name}.create_user_id,
+         ${base_alias_name}.last_modifyer_id
+    </sql>
+
+
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+        ${base_alias_name}.title AS ${base_alias_col_prefix}title,
+        ${base_alias_name}.key_word AS ${base_alias_col_prefix}key_word,
+        ${base_alias_name}.publish_department AS ${base_alias_col_prefix}publish_department,
+        ${base_alias_name}.content AS ${base_alias_col_prefix}content,
+        ${base_alias_name}.is_published AS ${base_alias_col_prefix}is_published,
+        ${base_alias_name}.tag_ids AS ${base_alias_col_prefix}tag_ids,
+        ${base_alias_name}.accessory AS ${base_alias_col_prefix}accessory,
+        ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+        ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+        ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+        ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+        ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+        ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
+    </sql>
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="ad"/>
+        </include>
+        FROM em_announcement_draft ad
+        <where>
+            <include
+                    refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="ad"/>
+            </include>
+        </where>
+        <include
+                refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="ad"/>
+        </include>
+    </select>
+
+    <update id="batchPublishByIds">
+        UPDATE em_announcement_draft
+        SET state = -1,is_published = 1
+        <if test="loginUser != null">
+            ,last_modifyer_id = #{loginUser.fid}
+        </if>
+        WHERE fid IN
+        <foreach collection="ids" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

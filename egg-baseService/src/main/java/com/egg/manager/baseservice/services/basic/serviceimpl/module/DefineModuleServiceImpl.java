@@ -10,19 +10,17 @@ import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlService
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.module.DefineModule;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.module.DefineModuleMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.module.DefineModuleDto;
-import com.egg.manager.persistence.pojo.mysql.transfer.module.DefineModuleTransfer;
-import com.egg.manager.persistence.pojo.mysql.vo.module.DefineModuleVo;
-import com.google.common.collect.Lists;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModule;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
+import com.egg.manager.persistence.em.define.pojo.transfer.DefineModuleTransfer;
+import com.egg.manager.persistence.em.define.pojo.vo.DefineModuleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 

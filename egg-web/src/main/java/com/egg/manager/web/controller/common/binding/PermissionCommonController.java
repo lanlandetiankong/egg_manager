@@ -5,7 +5,7 @@ import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.common.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.common.base.enums.role.DefineRoleTypeEnum;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

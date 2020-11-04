@@ -3,9 +3,9 @@ package com.egg.manager.baseservice.services.basic.serviceimpl.role;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.basic.role.RoleMenuService;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
-import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
-import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.RoleMenuMapper;
+import com.egg.manager.persistence.em.user.pojo.vo.RoleMenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 

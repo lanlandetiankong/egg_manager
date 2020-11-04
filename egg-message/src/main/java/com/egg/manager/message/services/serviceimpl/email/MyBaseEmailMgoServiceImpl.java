@@ -2,10 +2,10 @@ package com.egg.manager.message.services.serviceimpl.email;
 
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.message.services.email.MyBaseEmailMgoService;
-import com.egg.manager.persistence.db.mongo.repository.message.email.EmailSendRecordRepository;
-import com.egg.manager.persistence.pojo.mongo.mapstruct.imap.message.email.EmailSendRecordMapstruct;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMgvo;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.other.EmailSendFileInfoMgvo;
+import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
+import com.egg.manager.persistence.em.message.pojo.mapstruct.mapstruct.imap.email.EmailSendRecordMapstruct;
+import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
+import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;
 import com.google.common.collect.Maps;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.role;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.basic.module.DefineMenuService;
-import com.egg.manager.persistence.db.mysql.mapper.define.DefineMenuMapper;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

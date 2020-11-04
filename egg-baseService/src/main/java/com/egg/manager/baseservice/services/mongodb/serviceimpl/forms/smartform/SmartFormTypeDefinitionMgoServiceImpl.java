@@ -5,9 +5,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormTypeDefinitionMgoService;
 import com.egg.manager.api.servicesimpl.mongodb.serviceimpl.MyBaseMgoServiceImpl;
 import com.egg.manager.common.base.beans.front.FrontEntitySelectBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMgo;
-import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormTypeDefinitionRepository;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
+import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormTypeDefinitionRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

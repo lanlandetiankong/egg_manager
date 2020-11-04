@@ -13,21 +13,19 @@ import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.announcement.AnnouncementTag;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementTagMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementTagDto;
-import com.egg.manager.persistence.pojo.mysql.transfer.announcement.AnnouncementTagTransfer;
-import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementTagVo;
-import com.google.common.collect.Lists;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
+import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
+import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTagTransfer;
+import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementTagVo;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

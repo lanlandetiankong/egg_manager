@@ -6,7 +6,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.basic.hello.HelloService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.message.services.email.MyBaseEmailMgoService;
-import com.egg.manager.persistence.pojo.mongo.mvo.message.email.EmailSendRecordMgvo;
+import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

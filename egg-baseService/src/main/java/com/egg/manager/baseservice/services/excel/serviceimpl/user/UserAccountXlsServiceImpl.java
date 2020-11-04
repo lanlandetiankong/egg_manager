@@ -8,9 +8,9 @@ import com.egg.manager.baseservice.services.excel.serviceimpl.common.MyXlsBaseSe
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.base.props.upload.UploadProps;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.pojo.common.excel.export.user.UserAccountXlsOutModel;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

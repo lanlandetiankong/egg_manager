@@ -3,8 +3,8 @@ package com.egg.manager.baseservice.services.mongodb.serviceimpl.forms.smartform
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormRecordMgoService;
 import com.egg.manager.api.servicesimpl.mongodb.serviceimpl.MyBaseMgoServiceImpl;
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormRecordMgo;
-import com.egg.manager.persistence.db.mongo.repository.forms.SmartFormRecordRepository;
+import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormRecordMgo;
+import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormRecordRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**

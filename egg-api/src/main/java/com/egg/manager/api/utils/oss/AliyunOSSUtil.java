@@ -11,7 +11,7 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.aliyun.oss.model.*;
 import com.egg.manager.api.config.oss.AliyunOssConfig;
-import com.egg.manager.persistence.bean.oss.AliyunOssResult;
+import com.egg.manager.persistence.commons.bean.oss.AliyunOssResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;

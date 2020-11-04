@@ -6,7 +6,7 @@ import com.egg.manager.common.base.exception.BusinessException;
 import com.egg.manager.common.exception.MyParamJsonException;
 import com.egg.manager.common.exception.MyUnauthorizedException;
 import com.egg.manager.common.exception.form.LoginFormFieldDeficiencyException;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.beans.ConversionNotSupportedException;

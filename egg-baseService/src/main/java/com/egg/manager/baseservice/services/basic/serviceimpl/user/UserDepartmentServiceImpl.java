@@ -17,20 +17,18 @@ import com.egg.manager.common.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.entity.user.UserDepartment;
-import com.egg.manager.persistence.db.mysql.mapper.user.UserDepartmentMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.user.UserDepartmentDto;
-import com.egg.manager.persistence.pojo.mysql.transfer.user.UserDepartmentTransfer;
-import com.egg.manager.persistence.pojo.mysql.vo.user.UserDepartmentVo;
-import com.google.common.collect.Lists;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserDepartmentMapper;
+import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
+import com.egg.manager.persistence.em.user.pojo.transfer.UserDepartmentTransfer;
+import com.egg.manager.persistence.em.user.pojo.vo.UserDepartmentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

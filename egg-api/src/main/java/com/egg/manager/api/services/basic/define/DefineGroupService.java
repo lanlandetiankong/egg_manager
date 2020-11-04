@@ -2,9 +2,9 @@ package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineGroup;
-import com.egg.manager.persistence.db.mysql.mapper.define.DefineGroupMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.define.DefineGroupVo;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineGroupMapper;
+import com.egg.manager.persistence.em.define.pojo.vo.DefineGroupVo;
 
 /**
  * @author zhoucj

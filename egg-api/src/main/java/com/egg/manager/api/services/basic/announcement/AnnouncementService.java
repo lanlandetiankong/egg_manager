@@ -5,13 +5,13 @@ import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.db.mysql.entity.announcement.Announcement;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.announcement.AnnouncementMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.announcement.AnnouncementDto;
-import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementDraftVo;
-import com.egg.manager.persistence.pojo.mysql.vo.announcement.AnnouncementVo;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
+import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
+import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
+import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementVo;
 
 import java.util.List;
 

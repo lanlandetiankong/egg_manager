@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.mongodb.mservices.service.log.pc.web;
 
 import com.egg.manager.api.services.mongodb.mservices.service.MyBaseMgoService;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
+import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -2,9 +2,9 @@ package com.egg.manager.api.services.basic.role;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.db.mysql.entity.role.RoleMenu;
-import com.egg.manager.persistence.db.mysql.mapper.role.RoleMenuMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.role.RoleMenuVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.RoleMenuMapper;
+import com.egg.manager.persistence.em.user.pojo.vo.RoleMenuVo;
 
 /**
  * @author zhoucj

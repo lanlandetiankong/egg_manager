@@ -11,12 +11,12 @@ import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.MyBaseWebLogMgo;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebLoginLogMgo;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebOperationLogMgo;
-import com.egg.manager.persistence.db.mongo.mo.log.pc.web.PcWebQueryLogMgo;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.MyBaseWebLogMgo;
+import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
+import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
+import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.web.wservices.wservice.aspect.web.ControllerAspectService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -85,10 +85,10 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
 
     /**
      * 设置基本log的基本属性
-     * @param logMgo 要处理的类必须继承 com.egg.manager.persistence.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
+     * @param logMgo 要处理的类必须继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
      * @param joinPoint 切面
      * @param request http请求
-     * @param <T>  继承 com.egg.manager.persistence.db.mongo.mo.log.pcMyBaseWebLogMgo的类
+     * @param <T>  继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo的类
      * @return logMgo
      */
     protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo,JoinPoint joinPoint, HttpServletRequest request){

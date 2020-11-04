@@ -1,9 +1,9 @@
 package com.egg.manager.api.services.mongodb.mservices.service.forms.smartform;
 
 import com.egg.manager.api.services.mongodb.mservices.service.MyBaseMgoService;
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormDefinitionMgo;
-import com.egg.manager.persistence.db.mongo.mo.forms.SmartFormTypeDefinitionMgo;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
+import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.springframework.stereotype.Repository;
 
 /**

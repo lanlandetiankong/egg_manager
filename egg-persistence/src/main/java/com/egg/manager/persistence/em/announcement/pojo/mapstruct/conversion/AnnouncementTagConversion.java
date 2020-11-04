@@ -1,0 +1,17 @@
+package com.egg.manager.persistence.em.announcement.pojo.mapstruct.conversion;
+
+import com.egg.manager.persistence.expand.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author zhoucj
+ * @description:
+ * @date 2020/10/20
+ */
+@Component
+@Named("announcementTagConversion")
+public class AnnouncementTagConversion extends MyBaseMysqlConversion {
+
+
+}

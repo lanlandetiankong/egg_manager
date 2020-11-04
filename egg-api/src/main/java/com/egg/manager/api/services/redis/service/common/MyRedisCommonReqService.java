@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.redis.service.common;
 
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 
 /**
  * @author zhoucj

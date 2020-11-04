@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.MyEggMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.expand.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.expand.pojo.mysql.vo.MyBaseMysqlVo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

@@ -6,13 +6,12 @@ import com.egg.manager.api.services.basic.role.RolePermissionService;
 import com.egg.manager.baseservice.services.basic.serviceimpl.MyBaseMysqlServiceImpl;
 import com.egg.manager.common.base.enums.base.BaseStateEnum;
 import com.egg.manager.common.util.LongUtils;
-import com.egg.manager.persistence.db.mysql.entity.define.DefinePermission;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineRole;
-import com.egg.manager.persistence.db.mysql.entity.role.RolePermission;
-import com.egg.manager.persistence.db.mysql.mapper.role.RolePermissionMapper;
-import com.egg.manager.persistence.pojo.mysql.vo.role.RolePermissionVo;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRole;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermission;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.RolePermissionMapper;
+import com.egg.manager.persistence.em.user.pojo.vo.RolePermissionVo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

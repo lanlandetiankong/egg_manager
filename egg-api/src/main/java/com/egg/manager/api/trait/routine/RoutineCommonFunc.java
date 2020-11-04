@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.common.base.beans.request.RequestHeaderBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.bean.webvo.session.UserAccountToken;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu">
+        <id column="fid" property="fid"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="url_jump_type" property="urlJumpType"/>
+        <result column="icon_name" property="iconName"/>
+        <result column="router_url" property="routerUrl"/>
+        <result column="href_url" property="hrefUrl"/>
+        <result column="label" property="label"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="excel_model_conf" property="excelModelConf"/>
+
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+    </resultMap>
+
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto">
+        <id column="fid" property="fid"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="url_jump_type" property="urlJumpType"/>
+        <result column="icon_name" property="iconName"/>
+        <result column="router_url" property="routerUrl"/>
+        <result column="href_url" property="hrefUrl"/>
+        <result column="label" property="label"/>
+        <result column="level" property="level"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="excel_model_conf" property="excelModelConf"/>
+
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="last_modifyer_id" property="lastModifyerId"/>
+        <association column="parent_id" property="parentMenuDto"
+                     columnPrefix="parent_"
+                     javaType="com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto">
+            <id column="fid" property="fid"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="menu_name" property="menuName"/>
+            <result column="url_jump_type" property="urlJumpType"/>
+            <result column="icon_name" property="iconName"/>
+            <result column="router_url" property="routerUrl"/>
+            <result column="href_url" property="hrefUrl"/>
+            <result column="label" property="label"/>
+            <result column="level" property="level"/>
+            <result column="order_num" property="orderNum"/>
+            <result column="excel_model_conf" property="excelModelConf"/>
+            <result column="state" property="state"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="create_user_id" property="createUserId"/>
+            <result column="last_modifyer_id" property="lastModifyerId"/>
+        </association>
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid,parent_id,menu_name, url_jump_type,icon_name,router_url,href_url,label,level,order_num,excel_model_conf,
+        remark,state, create_time, update_time,create_user_id,last_modifyer_id
+    </sql>
+
+    <!--
+        通用查询结果列(多表查询用)
+        需要参数 base_alias_name 本次查询该表的别名
+    -->
+    <sql id="Base_Alias_Table_List">
+        ${base_alias_name}.fid,
+        ${base_alias_name}.parent_id,
+        ${base_alias_name}.menu_name,
+         ${base_alias_name}.url_jump_type,
+         ${base_alias_name}.icon_name,
+         ${base_alias_name}.router_url,
+         ${base_alias_name}.href_url,
+         ${base_alias_name}.label,
+         ${base_alias_name}.level,
+         ${base_alias_name}.order_num,
+         ${base_alias_name}.excel_model_conf,
+        ${base_alias_name}.remark,
+        ${base_alias_name}.state,
+         ${base_alias_name}.create_time,
+        ${base_alias_name}.update_time,
+        ${base_alias_name}.create_user_id,
+        ${base_alias_name}.last_modifyer_id
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+        ${base_alias_name}.parent_id AS ${base_alias_col_prefix}parent_id,
+        ${base_alias_name}.menu_name AS ${base_alias_col_prefix}menu_name,
+         ${base_alias_name}.url_jump_type AS ${base_alias_col_prefix}url_jump_type,
+         ${base_alias_name}.icon_name AS ${base_alias_col_prefix}icon_name,
+         ${base_alias_name}.router_url AS ${base_alias_col_prefix}router_url,
+         ${base_alias_name}.href_url AS ${base_alias_col_prefix}href_url,
+         ${base_alias_name}.label AS ${base_alias_col_prefix}label,
+         ${base_alias_name}.level AS ${base_alias_col_prefix}level,
+         ${base_alias_name}.order_num AS ${base_alias_col_prefix}order_num,
+         ${base_alias_name}.excel_model_conf AS ${base_alias_col_prefix}excel_model_conf,
+         ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+        ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+         ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+        ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+        ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
+    </sql>
+
+
+    <select id="getMenusFilterChildrens" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dm"/>
+        </include>
+        from em_define_menu dm
+        left join em_define_menu dmc
+        on dm.parent_id = dmc.fid
+        where
+        (dm.parent_id != #{filterId} and dm.fid != #{filterId} )
+        <if test="onlyEnable == true">
+            and dm.state = 1
+        </if>
+        order by level,order_num,create_time desc
+    </select>
+
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dm"/>
+        </include>
+        ,
+        <include refid="Base_Alias_TableColumn_List">
+            <property name="base_alias_name" value="par_dm"/>
+            <property name="base_alias_col_prefix" value="parent_"/>
+        </include>
+        FROM em_define_menu dm
+        LEFT JOIN em_define_menu par_dm
+        on dm.parent_id = par_dm.fid
+        <where>
+            <include
+                    refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="dm"/>
+            </include>
+        </where>
+        <include
+                refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="dm"/>
+        </include>
+    </select>
+
+    <select id="findAllMenuByRoleId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
+        </include>
+        FROM em_define_menu edm
+        left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
+        WHERE erm.define_role_id = #{roleId}
+        <if test="stateVal != null">
+            and erm.state = #{stateVal}
+        </if>
+    </select>
+
+    <select id="getUserGrantedMenusByAccountId" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
+        </include>
+        FROM
+        em_define_menu edm
+        LEFT JOIN em_role_menu erm ON edm.fid = erm.define_menu_id
+        LEFT JOIN em_user_role eur ON erm.define_role_id = eur.define_role_id
+        LEFT JOIN em_user_account eua ON eur.user_account_id = eua.fid
+        WHERE
+        edm.state = 1
+        AND erm.state = 1
+        AND eur.state = 1
+        AND eua.fid = #{userAccountId}
+        order by level,order_num,create_time
+    </select>
+
+    <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edm"/>
+        </include>
+        FROM em_define_menu edm
+        left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
+        left JOIN em_define_menu edmp on edm.parent_id = edmp.fid
+        WHERE erm.define_role_id = #{roleId}
+        and edmp.parent_id is not NULL
+        <if test="stateVal != null">
+            and erm.state = #{stateVal}
+        </if>
+    </select>
+
+
+</mapper>

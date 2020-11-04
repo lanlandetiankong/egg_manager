@@ -5,13 +5,13 @@ import com.egg.manager.api.services.basic.MyBaseMysqlService;
 import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.bean.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineDepartment;
-import com.egg.manager.persistence.db.mysql.entity.user.UserAccount;
-import com.egg.manager.persistence.db.mysql.mapper.define.DefineDepartmentMapper;
-import com.egg.manager.persistence.pojo.mysql.dto.define.DefineDepartmentDto;
-import com.egg.manager.persistence.pojo.mysql.vo.define.DefineDepartmentVo;
+import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.bean.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
+import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 
 import java.util.List;
 

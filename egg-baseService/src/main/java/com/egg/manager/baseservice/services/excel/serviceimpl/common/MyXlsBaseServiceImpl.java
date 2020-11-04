@@ -6,7 +6,7 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.egg.manager.api.services.excel.service.common.MyXlsBaseService;
 import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.common.base.exception.BusinessException;
-import com.egg.manager.persistence.db.mysql.entity.define.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

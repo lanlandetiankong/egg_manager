@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.api.services.basic.define.DefinePermissionService;
+import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;

@@ -8,14 +8,14 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
     <dubbo:service protocol="dubbo" ref="myXlsBaseService"
-                   interface="com.egg.manager.api.services.excel.service.common.MyXlsBaseService"/>
+                   interface="com.egg.manager.api.exchange.services.xls.MyXlsBaseService"/>
 
     <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.common                                                                -->
 
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
     <dubbo:service protocol="dubbo" ref="userAccountXlsService"
-                   interface="com.egg.manager.api.services.excel.service.user.UserAccountXlsService"/>
+                   interface="com.egg.manager.api.services.em.user.xls.UserAccountXlsService"/>
 
     <!--                                    dir-end:com.egg.manager.baseservice.services.excel.serviceimpl.user                                                                -->
 

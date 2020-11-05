@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.basic.user.UserTenantService;
+import com.egg.manager.api.services.em.user.basic.UserTenantService;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserTenantMapper;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;

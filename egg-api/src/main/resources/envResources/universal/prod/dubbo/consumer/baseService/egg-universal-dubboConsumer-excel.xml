@@ -10,8 +10,8 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.excel                                                              -->
     <dubbo:reference id="myXlsBaseService" check="false"
-                     interface="com.egg.manager.api.services.excel.service.common.MyXlsBaseService"/>
+                     interface="com.egg.manager.api.exchange.services.xls.MyXlsBaseService"/>
     <dubbo:reference id="userAccountXlsService" check="false"
-                     interface="com.egg.manager.api.services.excel.service.user.UserAccountXlsService"/>
+                     interface="com.egg.manager.api.services.em.user.xls.UserAccountXlsService"/>
     <!--                                    dir-end:com.egg.manager.api.services.excel                                                              -->
 </beans>

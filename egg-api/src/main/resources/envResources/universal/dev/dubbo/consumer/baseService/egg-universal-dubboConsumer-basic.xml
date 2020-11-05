@@ -10,56 +10,56 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.basic.announcement                                                              -->
     <dubbo:reference id="announcementDraftService" check="false"
-                     interface="com.egg.manager.api.services.basic.announcement.AnnouncementDraftService"/>
+                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService"/>
     <dubbo:reference id="announcementService" check="false"
-                     interface="com.egg.manager.api.services.basic.announcement.AnnouncementService"/>
+                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementService"/>
     <dubbo:reference id="announcementTagService" check="false"
-                     interface="com.egg.manager.api.services.basic.announcement.AnnouncementTagService"/>
+                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.announcement                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.define                                                              -->
     <dubbo:reference id="defineDepartmentService" check="false"
-                     interface="com.egg.manager.api.services.basic.define.DefineDepartmentService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineDepartmentService"/>
     <dubbo:reference id="defineGroupService" check="false"
-                     interface="com.egg.manager.api.services.basic.define.DefineGroupService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineGroupService"/>
     <dubbo:reference id="defineJobService" check="false"
-                     interface="com.egg.manager.api.services.basic.define.DefineJobService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineJobService"/>
     <dubbo:reference id="definePermissionService" check="false"
-                     interface="com.egg.manager.api.services.basic.define.DefinePermissionService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefinePermissionService"/>
     <dubbo:reference id="defineRoleService" check="false"
-                     interface="com.egg.manager.api.services.basic.define.DefineRoleService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineRoleService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.define                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.hello                                                              -->
     <dubbo:reference id="helloService" check="false"
-                     interface="com.egg.manager.api.services.basic.hello.HelloService"/>
+                     interface="com.egg.manager.api.services.em.hello.basic.HelloService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.hello                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.module                                                              -->
     <dubbo:reference id="defineMenuService" check="false"
-                     interface="com.egg.manager.api.services.basic.module.DefineMenuService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineMenuService"/>
     <dubbo:reference id="defineModuleService" check="false"
-                     interface="com.egg.manager.api.services.basic.module.DefineModuleService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineModuleService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.module                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.organization                                                              -->
     <dubbo:reference id="defineTenantService" check="false"
-                     interface="com.egg.manager.api.services.basic.organization.DefineTenantService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.DefineTenantService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.organization                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.role                                                              -->
     <dubbo:reference id="roleMenuService" check="false"
-                     interface="com.egg.manager.api.services.basic.role.RoleMenuService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.RoleMenuService"/>
     <dubbo:reference id="rolePermissionService" check="false"
-                     interface="com.egg.manager.api.services.basic.role.RolePermissionService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.RolePermissionService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.role                                                              -->
 
     <!--                                    dir-start:com.egg.manager.api.services.basic.user                                                              -->
     <dubbo:reference id="userAccountService" check="false"
-                     interface="com.egg.manager.api.services.basic.user.UserAccountService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.UserAccountService"/>
     <dubbo:reference id="userGroupService" check="false"
-                     interface="com.egg.manager.api.services.basic.user.UserGroupService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.UserGroupService"/>
     <dubbo:reference id="userJobService" check="false"
-                     interface="com.egg.manager.api.services.basic.user.UserJobService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.UserJobService"/>
     <dubbo:reference id="userRoleService" check="false"
-                     interface="com.egg.manager.api.services.basic.user.UserRoleService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.UserRoleService"/>
     <dubbo:reference id="userTenantService" check="false"
-                     interface="com.egg.manager.api.services.basic.user.UserTenantService"/>
+                     interface="com.egg.manager.api.services.em.user.basic.UserTenantService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.user                                                              -->
 
 </beans>

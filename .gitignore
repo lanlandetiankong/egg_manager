@@ -27,9 +27,7 @@
 .idea/
 AssetsInclude/
 egg-api/target/
-egg-common/target/
 egg-generate/target/
-egg-message/target/
 #egg-mongodb/target/
 egg-persistence/target/
 egg-baseService/target/
@@ -38,7 +36,6 @@ egg-web/target/
 egg-api.iml
 egg-common.iml
 egg-generate.iml
-egg-message.iml
 #egg-mongodb.iml
 egg-persistence.iml
 egg-baseService.iml
@@ -55,7 +52,6 @@ hs_err_pid*
 egg-api/src/test/
 egg-common/src/test/
 egg-generate/src/test/
-egg-message/src/test/
 #egg-mongodb/src/test/
 egg-persistence/src/test/
 egg-baseService/src/test/

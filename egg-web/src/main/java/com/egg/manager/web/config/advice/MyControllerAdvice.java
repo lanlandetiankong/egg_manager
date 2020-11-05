@@ -1,6 +1,6 @@
 package com.egg.manager.web.config.advice;
 
-import com.egg.manager.api.trait.helper.MyResponseHelper;
+import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;

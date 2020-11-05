@@ -1,8 +1,8 @@
 package com.egg.manager.web.controller.index.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.basic.hello.HelloService;
-import com.egg.manager.api.services.message.services.hello.MessageHelloService;
+import com.egg.manager.api.services.em.hello.basic.HelloService;
+import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;

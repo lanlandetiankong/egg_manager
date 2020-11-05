@@ -8,32 +8,32 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!--                                    dir-start:com.egg.manager.api.services.mongodb.mservices.service.forms                                                              -->
-    <!--                                    dir-start:com.egg.manager.api.services.mongodb.mservices.service.forms.smartform                                                              -->
+    <!--                                    dir-start:com.egg.manager.api.services.em.forms                                                              -->
+    <!--                                    dir-start:com.egg.manager.api.services.em.forms.mongo.smartform                                                              -->
     <dubbo:reference id="smartFormDefinitionMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormDefinitionMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService"/>
     <dubbo:reference id="smartFormFieldDefinitionMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormFieldDefinitionMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldDefinitionMgoService"/>
     <dubbo:reference id="smartFormFieldTypeDefinitionMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormFieldTypeDefinitionMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService"/>
     <dubbo:reference id="smartFormRecordFieldMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormRecordFieldMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordFieldMgoService"/>
     <dubbo:reference id="smartFormRecordMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormRecordMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordMgoService"/>
     <dubbo:reference id="smartFormTypeDefinitionMService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormTypeDefinitionMgoService"/>
+                     interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService"/>
 
 
-    <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.forms.smartform                                                              -->
-    <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.forms                                                              -->
+    <!--                                    dir-end:com.egg.manager.api.services.em.forms.mongo.smartform                                                              -->
+    <!--                                    dir-end:com.egg.manager.api.services.em.forms                                                              -->
 
 
-    <!--                                    dir-start:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
+    <!--                                    dir-start:com.egg.manager.api.services.em.log                                                              -->
     <dubbo:reference id="pcWebOperationLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebOperationLogMgoService"/>
+                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebOperationLogMgoService"/>
     <dubbo:reference id="pcWebLoginLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebLoginLogMgoService"/>
+                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebLoginLogMgoService"/>
     <dubbo:reference id="pcWebQueryLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebQueryLogMgoService"/>
-    <!--                                    dir-end:com.egg.manager.api.services.mongodb.mservices.service.log                                                              -->
+                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebQueryLogMgoService"/>
+    <!--                                    dir-end:com.egg.manager.api.services.em.log                                                              -->
 </beans>

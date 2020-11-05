@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.api.services.basic.define.DefineDepartmentService;
+import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;

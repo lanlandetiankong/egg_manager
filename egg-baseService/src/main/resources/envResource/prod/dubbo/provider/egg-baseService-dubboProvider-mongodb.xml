@@ -9,22 +9,22 @@
     <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms                                                                -->
     <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms.smartform                                                               -->
     <dubbo:service protocol="dubbo" ref="smartFormDefinitionMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormDefinitionMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormFieldDefinitionMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormFieldDefinitionMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormFieldTypeDefinitionMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormFieldTypeDefinitionMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormRecordFieldMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormRecordFieldMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordFieldMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormRecordMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormRecordMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormTypeDefinitionMService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.forms.smartform.SmartFormTypeDefinitionMgoService"/>
+                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService"/>
 
 
     <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms.smartform                                                               -->
@@ -34,11 +34,11 @@
 
 
     <dubbo:service protocol="dubbo" ref="pcWebOperationLogMgoService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebOperationLogMgoService"/>
+                   interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebOperationLogMgoService"/>
     <dubbo:service protocol="dubbo" ref="pcWebLoginLogMgoService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebLoginLogMgoService"/>
+                   interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebLoginLogMgoService"/>
     <dubbo:service protocol="dubbo" ref="pcWebQueryLogMgoService"
-                   interface="com.egg.manager.api.services.mongodb.mservices.service.log.pc.web.PcWebQueryLogMgoService"/>
+                   interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebQueryLogMgoService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 

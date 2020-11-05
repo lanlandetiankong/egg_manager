@@ -2,7 +2,7 @@ package com.egg.manager.api.trait.excel.listeners.introduce.user;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.egg.manager.api.services.basic.user.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;

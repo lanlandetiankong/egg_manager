@@ -1,8 +1,8 @@
 package com.egg.manager.web.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.services.basic.user.UserAccountService;
-import com.egg.manager.api.trait.helper.MyResponseHelper;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;

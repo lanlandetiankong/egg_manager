@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.login;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.api.services.basic.user.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.persistence.exchange.annotation.shiro.ShiroPass;
 import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;

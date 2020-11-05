@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.oss;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
-import com.egg.manager.api.utils.oss.AliyunOSSUtil;
+import com.egg.manager.api.trait.utils.oss.AliyunOSSUtil;
 import com.egg.manager.persistence.commons.base.beans.oss.AliyunOssResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;

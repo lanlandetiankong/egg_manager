@@ -12,7 +12,6 @@
         <module>egg-persistence</module>
         <module>egg-api</module>
         <module>egg-generate</module>
-        <module>egg-message</module>
         <module>egg-baseService</module>
         <module>egg-web</module>
     </modules>

@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineDepartmentConversion;
-import com.egg.manager.persistence.enhance.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

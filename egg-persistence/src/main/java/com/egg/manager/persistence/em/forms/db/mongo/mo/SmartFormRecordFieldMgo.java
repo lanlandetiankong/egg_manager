@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.forms.db.mongo.mo;
 
-import com.egg.manager.persistence.enhance.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

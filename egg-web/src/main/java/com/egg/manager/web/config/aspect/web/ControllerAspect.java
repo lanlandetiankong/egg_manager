@@ -2,9 +2,9 @@ package com.egg.manager.web.config.aspect.web;
 
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebLoginLog;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.commons.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.em.message.db.mongo.repositoryimpl.email;
 
 import com.egg.manager.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
 import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
-import com.egg.manager.persistence.enhance.db.mongo.repositoryimpl.MyBaseMongoRepositoryImpl;
+import com.egg.manager.persistence.exchange.db.mongo.repositoryimpl.MyBaseMongoRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -1,6 +1,6 @@
 package com.egg.manager.web.runner;
 
-import com.egg.manager.persistence.exchange.annotation.shiro.ShiroPass;
+import com.egg.manager.persistence.enhance.annotation.shiro.ShiroPass;
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.util.str.ComUtil;

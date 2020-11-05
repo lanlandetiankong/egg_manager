@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.exchange.annotation.shiro;
+package com.egg.manager.persistence.enhance.annotation.shiro;
 
 import java.lang.annotation.*;
 

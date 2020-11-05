@@ -88,12 +88,12 @@
         FROM em_announcement_tag eat
         <where>
             <include
-                    refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="eat"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="eat"/>
         </include>
     </select>

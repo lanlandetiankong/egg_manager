@@ -129,7 +129,7 @@
             <if test="queryTenantFieldBeanList != null and queryTenantFieldBeanList.size()>0">
                 <foreach collection="queryTenantFieldBeanList" index="index" item="item" separator="">
                     <include
-                            refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
+                            refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
                         <property name="table_name_alias" value="eut"/>
                     </include>
                 </foreach>
@@ -137,18 +137,18 @@
             <if test="queryDepartmentFieldBeanList != null and queryDepartmentFieldBeanList.size()>0">
                 <foreach collection="queryDepartmentFieldBeanList" index="index" item="item" separator="">
                     <include
-                            refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
+                            refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
                         <property name="table_name_alias" value="eud"/>
                     </include>
                 </foreach>
             </if>
             <include
-                    refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="eua"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="eua"/>
         </include>
     </select>

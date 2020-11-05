@@ -2,7 +2,7 @@ package com.egg.manager.persistence.em.logs.db.mongo.repositoryimpl.pc.web;
 
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.repository.pc.web.PcWebQueryLogRepository;
-import com.egg.manager.persistence.enhance.db.mongo.repositoryimpl.MyBaseMongoRepositoryImpl;
+import com.egg.manager.persistence.exchange.db.mongo.repositoryimpl.MyBaseMongoRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 /**

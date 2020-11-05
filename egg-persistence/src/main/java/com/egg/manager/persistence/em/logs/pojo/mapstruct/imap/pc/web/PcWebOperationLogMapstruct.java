@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.logs.pojo.mapstruct.imap.pc.web;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.em.logs.pojo.mapstruct.conversion.pc.web.PcWebQueryLogConversion;
-import com.egg.manager.persistence.enhance.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.exchange.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
 import com.egg.manager.persistence.em.logs.pojo.mvo.pc.web.PcWebOperationLogMgvo;
 import com.egg.manager.persistence.em.logs.pojo.mvo.pc.web.PcWebQueryLogMgvo;
 import org.mapstruct.Mapper;

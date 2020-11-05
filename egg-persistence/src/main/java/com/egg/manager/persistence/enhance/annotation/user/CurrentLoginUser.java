@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.exchange.annotation.user;
+package com.egg.manager.persistence.enhance.annotation.user;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

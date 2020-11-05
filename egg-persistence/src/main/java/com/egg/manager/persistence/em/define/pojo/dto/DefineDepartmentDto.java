@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.pojo.dto;
 
-import com.egg.manager.persistence.enhance.pojo.mysql.dto.MyBaseMysqlDto;
+import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

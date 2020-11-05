@@ -1,8 +1,8 @@
 package com.egg.manager.web.controller.common.component.user;
 
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;

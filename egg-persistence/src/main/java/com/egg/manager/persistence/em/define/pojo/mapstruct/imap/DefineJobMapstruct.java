@@ -4,7 +4,7 @@ package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineJobConversion;
-import com.egg.manager.persistence.enhance.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
+import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineJobVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

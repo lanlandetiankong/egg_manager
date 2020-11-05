@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.user.pojo.verification.login;
 
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
-import com.egg.manager.persistence.enhance.bean.webvo.verification.WebVoBaseVerifyO;
-import com.egg.manager.persistence.enhance.verification.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.exchange.bean.webvo.verification.WebVoBaseVerifyO;
+import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

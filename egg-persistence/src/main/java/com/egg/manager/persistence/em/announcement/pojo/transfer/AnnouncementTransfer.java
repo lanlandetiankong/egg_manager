@@ -8,7 +8,7 @@ import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementT
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap.AnnouncementMapstruct;
-import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementVo;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;

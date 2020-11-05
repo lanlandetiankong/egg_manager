@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.message.db.mongo.mo.email;
 
-import com.egg.manager.persistence.enhance.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailFromUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;

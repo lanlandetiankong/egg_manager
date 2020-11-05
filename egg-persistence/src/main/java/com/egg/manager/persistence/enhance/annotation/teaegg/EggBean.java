@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.exchange.annotation.teaegg;
+package com.egg.manager.persistence.enhance.annotation.teaegg;
 
 import java.lang.annotation.*;
 

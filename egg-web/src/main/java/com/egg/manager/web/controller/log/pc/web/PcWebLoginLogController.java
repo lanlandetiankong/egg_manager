@@ -2,8 +2,8 @@ package com.egg.manager.web.controller.log.pc.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.log.basic.pc.web.PcWebLoginLogMgoService;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;

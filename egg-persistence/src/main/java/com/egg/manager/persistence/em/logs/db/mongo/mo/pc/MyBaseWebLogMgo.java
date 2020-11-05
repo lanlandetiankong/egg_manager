@@ -1,5 +1,5 @@
 package com.egg.manager.persistence.em.logs.db.mongo.mo.pc;
-import com.egg.manager.persistence.enhance.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Field;

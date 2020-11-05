@@ -1,6 +1,6 @@
-package com.egg.manager.persistence.exchange.annotation.teaegg;
+package com.egg.manager.persistence.enhance.annotation.teaegg;
 
-import com.egg.manager.persistence.exchange.scanner.EggBeanDefinitionRegistrar;
+import com.egg.manager.persistence.enhance.scanner.EggBeanDefinitionRegistrar;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

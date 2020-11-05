@@ -1,9 +1,9 @@
 package ${package.Controller};
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import io.swagger.annotations.Api;

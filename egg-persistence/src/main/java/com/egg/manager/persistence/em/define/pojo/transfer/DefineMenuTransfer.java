@@ -4,7 +4,7 @@ import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineMenuMapstruct;
-import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

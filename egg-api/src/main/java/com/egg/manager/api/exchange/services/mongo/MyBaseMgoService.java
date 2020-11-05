@@ -4,7 +4,7 @@ import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
-import com.egg.manager.persistence.enhance.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.springframework.data.domain.Sort;
 

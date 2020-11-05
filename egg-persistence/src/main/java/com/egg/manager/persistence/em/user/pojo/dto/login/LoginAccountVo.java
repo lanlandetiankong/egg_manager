@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.dto.login;
 
-import com.egg.manager.persistence.enhance.bean.webvo.MyBaseWebVo;
+import com.egg.manager.persistence.exchange.bean.webvo.MyBaseWebVo;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.login.LoginAccountMapstruct;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

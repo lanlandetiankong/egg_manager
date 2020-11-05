@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.exchange.annotation.log.pc.web;
+package com.egg.manager.persistence.enhance.annotation.log.pc.web;
 
 import com.egg.manager.persistence.commons.base.constant.aspect.AspectTypeConstant;
 

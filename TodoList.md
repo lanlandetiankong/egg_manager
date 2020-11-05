@@ -22,7 +22,7 @@
 
 - [x] ```
   com.egg.manager.api.services.exception  -->  com.egg.manager.persistence.commons.exception
-  com.egg.manager.api.services.annotation    -->     com.egg.manager.persistence.exchange.annotation
+  com.egg.manager.api.services.annotation    -->     com.egg.manager.persistence.enhance.annotation
   com.egg.manager.api.services.helper -->    com.egg.manager.api.trait.helper
   ```
 

@@ -6,7 +6,7 @@ import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXls
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
-import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

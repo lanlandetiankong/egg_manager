@@ -2,7 +2,7 @@ package com.egg.manager.persistence.em.forms.pojo.mapstruct.imap;
 
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.pojo.mapstruct.conversion.SmartFormTypeDefinitionConversion;
-import com.egg.manager.persistence.enhance.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.exchange.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
 import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormTypeDefinitionMgvo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;

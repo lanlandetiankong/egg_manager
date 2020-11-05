@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.exchange.config.logback;
+package com.egg.manager.persistence.enhance.config.logback;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;

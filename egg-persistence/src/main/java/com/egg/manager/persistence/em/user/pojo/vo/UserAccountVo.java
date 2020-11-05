@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.user.pojo.vo;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.enhance.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

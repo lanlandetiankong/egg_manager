@@ -156,12 +156,12 @@
         on dm.parent_id = par_dm.fid
         <where>
             <include
-                    refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="dm"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="dm"/>
         </include>
     </select>

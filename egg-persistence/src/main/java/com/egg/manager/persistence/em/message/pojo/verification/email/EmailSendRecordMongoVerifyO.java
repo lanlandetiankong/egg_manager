@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.message.pojo.verification.email;
 
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
-import com.egg.manager.persistence.enhance.verification.igroup.VerifyGroupOfDefault;
-import com.egg.manager.persistence.enhance.verification.igroup.VerifyGroupOfUpdate;
+import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
+import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfUpdate;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailFromUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;
-import com.egg.manager.persistence.enhance.pojo.mongo.verification.BaseMongoVerifyO;
+import com.egg.manager.persistence.exchange.pojo.mongo.verification.BaseMongoVerifyO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

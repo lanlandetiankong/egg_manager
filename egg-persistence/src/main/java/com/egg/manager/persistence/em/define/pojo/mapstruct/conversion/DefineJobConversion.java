@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.pojo.mapstruct.conversion;
 
-import com.egg.manager.persistence.expand.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
+import com.egg.manager.persistence.enhance.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

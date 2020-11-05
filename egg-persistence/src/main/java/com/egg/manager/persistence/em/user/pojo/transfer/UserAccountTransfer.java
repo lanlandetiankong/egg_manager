@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
-import com.egg.manager.common.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
-import com.egg.manager.persistence.expand.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

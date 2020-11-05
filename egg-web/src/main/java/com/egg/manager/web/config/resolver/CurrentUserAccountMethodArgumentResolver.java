@@ -2,8 +2,8 @@ package com.egg.manager.web.config.resolver;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.redis.service.user.UserAccountRedisService;
-import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.exception.MyUnauthorizedException;
+import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;

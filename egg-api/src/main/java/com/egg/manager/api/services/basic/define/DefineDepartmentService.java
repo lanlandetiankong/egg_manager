@@ -2,11 +2,11 @@ package com.egg.manager.api.services.basic.define;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.services.basic.MyBaseMysqlService;
-import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.bean.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;

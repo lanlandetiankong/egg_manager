@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.excel.service.user;
 
 import com.egg.manager.api.services.excel.service.common.MyXlsBaseService;
-import com.egg.manager.common.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 

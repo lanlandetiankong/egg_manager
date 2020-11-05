@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.redis.service.user;
 
 import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
-import com.egg.manager.persistence.commons.bean.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 

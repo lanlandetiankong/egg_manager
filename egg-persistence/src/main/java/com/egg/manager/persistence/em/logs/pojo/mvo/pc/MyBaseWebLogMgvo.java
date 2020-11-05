@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.logs.pojo.mvo.pc;
 
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.expand.pojo.mongo.mvo.BaseModelMgvo;
+import com.egg.manager.persistence.enhance.pojo.mongo.mvo.BaseModelMgvo;
 import lombok.Data;
 
 /**

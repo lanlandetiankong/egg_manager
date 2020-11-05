@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
-import com.egg.manager.persistence.commons.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;

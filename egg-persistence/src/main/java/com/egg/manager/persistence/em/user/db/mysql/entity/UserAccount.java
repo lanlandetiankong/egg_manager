@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.egg.manager.common.base.enums.base.UserSexEnum;
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
+import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

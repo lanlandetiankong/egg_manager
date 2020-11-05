@@ -96,12 +96,12 @@
         FROM em_user_job euj
         <where>
             <include
-                    refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="euj"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.persistence.expand.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.enhance.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="euj"/>
         </include>
     </select>

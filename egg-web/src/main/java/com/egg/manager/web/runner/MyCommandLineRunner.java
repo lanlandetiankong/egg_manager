@@ -1,9 +1,9 @@
 package com.egg.manager.web.runner;
 
-import com.egg.manager.common.annotation.shiro.ShiroPass;
-import com.egg.manager.common.base.constant.Constant;
-import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.common.util.str.ComUtil;
+import com.egg.manager.persistence.exchange.annotation.shiro.ShiroPass;
+import com.egg.manager.persistence.commons.base.constant.Constant;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.util.str.ComUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

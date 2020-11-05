@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.message.pojo.mvo.email.other;
 
-import com.egg.manager.persistence.expand.pojo.mongo.mvo.BaseMgvo;
+import com.egg.manager.persistence.enhance.pojo.mongo.mvo.BaseMgvo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,10 +1,10 @@
 package com.egg.manager.web.controller.common.binding;
 
-import com.egg.manager.common.base.beans.front.FrontSelectBean;
-import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.common.base.enums.define.DefineJobTypeEnum;
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.enums.define.DefineJobTypeEnum;
+import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

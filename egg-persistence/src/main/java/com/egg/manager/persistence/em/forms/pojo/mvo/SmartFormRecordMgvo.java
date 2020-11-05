@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.forms.pojo.mvo;
 
-import com.egg.manager.persistence.expand.pojo.mongo.mvo.BaseModelMgvo;
+import com.egg.manager.persistence.enhance.pojo.mongo.mvo.BaseModelMgvo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

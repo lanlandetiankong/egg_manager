@@ -2,9 +2,9 @@ package com.egg.manager.web.controller.index.hello.message.email;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.message.services.email.MyBaseEmailMgoService;
-import com.egg.manager.common.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.web.controller.BaseController;

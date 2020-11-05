@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>2.0.2-SNAPSHOT</version>
     <modules>
-        <module>egg-common</module>
         <module>egg-persistence</module>
         <module>egg-api</module>
         <module>egg-generate</module>

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.message.db.mongo.repository.email;
 
 import com.egg.manager.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
-import com.egg.manager.persistence.expand.db.mongo.repository.MyBaseMongoRepository;
+import com.egg.manager.persistence.enhance.db.mongo.repository.MyBaseMongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 

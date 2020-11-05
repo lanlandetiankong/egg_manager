@@ -1,6 +1,6 @@
 package com.egg.manager.api.utils.shiro;
 
-import com.egg.manager.common.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;

@@ -1,10 +1,10 @@
 package com.egg.manager.api.services.mongodb.mservices.service;
 
-import com.egg.manager.common.base.exception.MyMongoException;
-import com.egg.manager.common.base.query.mongo.MyMongoQueryBuffer;
-import com.egg.manager.common.base.query.mongo.MyMongoQueryPageBean;
-import com.egg.manager.common.base.query.mongo.MyMongoUpdateBean;
-import com.egg.manager.persistence.expand.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.commons.base.exception.MyMongoException;
+import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
+import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
+import com.egg.manager.persistence.enhance.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.springframework.data.domain.Sort;
 

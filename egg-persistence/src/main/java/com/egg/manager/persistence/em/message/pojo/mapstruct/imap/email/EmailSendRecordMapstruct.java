@@ -2,7 +2,7 @@ package com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email;
 
 import com.egg.manager.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
 import com.egg.manager.persistence.em.message.pojo.mapstruct.conversion.email.EmailSendRecordConversion;
-import com.egg.manager.persistence.expand.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
+import com.egg.manager.persistence.enhance.pojo.mongo.mapstruct.imap.fundamental.MyBaseMongoMapstruct;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

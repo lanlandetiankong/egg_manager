@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
-import com.egg.manager.persistence.expand.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.enhance.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
 
 /**

@@ -21,8 +21,8 @@
 - [x] com.egg.manager.service非api接口，迁移出来
 
 - [x] ```
-  com.egg.manager.api.services.exception  -->  com.egg.manager.common.exception
-  com.egg.manager.api.services.annotation    -->     com.egg.manager.common.annotation
+  com.egg.manager.api.services.exception  -->  com.egg.manager.persistence.commons.exception
+  com.egg.manager.api.services.annotation    -->     com.egg.manager.persistence.exchange.annotation
   com.egg.manager.api.services.helper -->    com.egg.manager.api.trait.helper
   ```
 

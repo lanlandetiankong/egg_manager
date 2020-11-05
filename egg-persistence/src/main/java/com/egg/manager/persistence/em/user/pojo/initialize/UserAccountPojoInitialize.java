@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
-import com.egg.manager.common.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 
 /**

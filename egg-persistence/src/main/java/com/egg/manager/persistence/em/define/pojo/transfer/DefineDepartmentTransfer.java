@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.define.pojo.transfer;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineDepartmentMapstruct;
-import com.egg.manager.persistence.expand.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

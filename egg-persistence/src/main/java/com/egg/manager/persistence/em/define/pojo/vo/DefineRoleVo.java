@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.vo;
 
 
-import com.egg.manager.persistence.expand.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.enhance.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

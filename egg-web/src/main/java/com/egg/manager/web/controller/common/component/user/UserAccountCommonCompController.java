@@ -1,15 +1,15 @@
 package com.egg.manager.web.controller.common.component.user;
 
 import com.egg.manager.api.services.basic.user.UserAccountService;
-import com.egg.manager.common.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.common.annotation.user.CurrentLoginUser;
-import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.common.base.constant.web.api.WebApiConstant;
-import com.egg.manager.common.base.enums.base.BaseStateEnum;
-import com.egg.manager.common.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
+import com.egg.manager.persistence.exchange.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.exchange.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
+import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;

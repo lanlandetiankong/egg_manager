@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.bean;
 
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.expand.bean.webvo.MyBaseWebVo;
+import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.enhance.bean.webvo.MyBaseWebVo;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session.UserAccountTokenMapstruct;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import lombok.AllArgsConstructor;

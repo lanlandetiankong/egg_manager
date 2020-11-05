@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.define.pojo.transfer;
 
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineGroupMapstruct;
-import com.egg.manager.persistence.expand.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineGroupVo;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;

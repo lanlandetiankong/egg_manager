@@ -1,13 +1,13 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.common.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.common.base.beans.file.FileResBean;
-import com.egg.manager.common.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.common.base.props.upload.UploadProps;
-import com.egg.manager.common.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.commons.bean.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.bean.helper.MyRstMoreAttrKey;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
+import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.props.upload.UploadProps;
+import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

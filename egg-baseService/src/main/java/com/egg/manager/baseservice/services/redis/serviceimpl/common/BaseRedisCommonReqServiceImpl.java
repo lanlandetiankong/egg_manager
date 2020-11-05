@@ -7,7 +7,7 @@ import com.egg.manager.api.services.basic.define.DefineRoleService;
 import com.egg.manager.api.services.basic.user.UserAccountService;
 import com.egg.manager.api.services.redis.service.RedisHelper;
 import com.egg.manager.api.services.redis.service.common.MyRedisCommonReqService;
-import com.egg.manager.common.base.constant.Constant;
+import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

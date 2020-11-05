@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
-import com.egg.manager.persistence.commons.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.expand.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.enhance.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.apache.ibatis.annotations.Param;

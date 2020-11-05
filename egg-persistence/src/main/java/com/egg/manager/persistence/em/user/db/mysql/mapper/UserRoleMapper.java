@@ -1,10 +1,10 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
-import com.egg.manager.persistence.commons.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.expand.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.enhance.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.common.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.common.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserRole;
 import com.egg.manager.persistence.em.user.pojo.dto.UserRoleDto;

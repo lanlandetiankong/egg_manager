@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.RolePermissionMapstruct;
-import com.egg.manager.persistence.expand.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.enhance.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

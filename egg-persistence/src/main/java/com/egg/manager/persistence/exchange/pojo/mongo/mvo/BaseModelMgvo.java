@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.exchange.pojo.mongo.mvo;
 
+import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,29 +14,11 @@ import java.util.Date;
 public class BaseModelMgvo<K> extends BaseMgvo {
     private K fid;
 
-    /**
-     * 类名称
-     */
-    private String className;
-    /**
-     * 方法名称
-     */
-    private String methodName;
 
     /**
-     * 操作
+     * 切面类的class相关信息
      */
-    private String action;
-
-    /**
-     * 日志描述
-     */
-    private String logDescription;
-
-    /**
-     * aop通知方式
-     */
-    private String aspectNotifyType;
+    private EggClazzInfoLogMgo clazzInfo ;
 
     /**
      * 返回结果-json
@@ -55,29 +38,11 @@ public class BaseModelMgvo<K> extends BaseMgvo {
      */
     private String message;
 
-    /**
-     * 方法参数->json
-     */
-    private String actionArgs;
-    /**
-     * method 返回值类型
-     */
-    private String returnTypeName;
 
     /**
-     * 请求的方法完整内容
+     * aop通知方式
      */
-    private String signatureLong;
-    /**
-     * aop类型，由joinPoint取得
-     */
-    private String aspectKind;
-
-    /**
-     * 定义的注解->json
-     */
-    private String declaredAnnotations;
-
+    private String aspectNotifyType;
     /**
      * 顺序
      */

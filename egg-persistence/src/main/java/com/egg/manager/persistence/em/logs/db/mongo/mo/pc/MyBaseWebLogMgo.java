@@ -1,4 +1,6 @@
 package com.egg.manager.persistence.em.logs.db.mongo.mo.pc;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import lombok.Data;
@@ -33,44 +35,19 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
     @Field(value = "annotationOperationType")
     private String annotationOperationType;
     /**
-     * http请求方式
-     */
-    @Field(value = "reqMethod")
-    private String reqMethod ;
-    /**
-     * session id
-     */
-    @Field(value = "sessionId")
-    private String sessionId ;
-    /**
-     * 发起请求的token ->json(从request取得)
-     */
-    @Field(value = "tokenBean")
-    private String tokenBean;
-    /**
-     * 发起请求的header ->json(从request取得)
-     */
-    @Field(value = "headers")
-    private String headers;
-    /**
-     * 发起请求的uri(从request取得)
-     */
-    @Field(value = "requestUri")
-    private String requestUri;
-    /**
-     * 发起请求的路径(从request取得)
-     */
-    @Field(value = "requestUrl")
-    private String requestUrl;
-    /**
      * 请求的全路径(相对于项目路径)
      */
     @Field(value = "fullPath")
     private String fullPath;
     /**
-     * 发起请求的ip地址
+     * 请求的Request信息
      */
-    @Field(value = "ipAddr")
-    private String ipAddr;
+    @Field(value = "requestInfo")
+    private EggRequestInfo requestInfo ;
+    /**
+     * userAgent信息
+     */
+    @Field(value = "userAgent")
+    private EggUserAgentMgo userAgent;
 
 }

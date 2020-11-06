@@ -1,8 +1,11 @@
 package com.egg.manager.persistence.em.logs.pojo.mvo.pc;
 
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  *@description:
@@ -28,35 +31,17 @@ public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
      */
     private String annotationOperationType;
     /**
-     * http请求方式
+     * 请求的Request信息
      */
-    private String reqMethod ;
+    private EggRequestInfo requestInfo ;
     /**
-     * session id
+     * userAgent信息
      */
-    private String sessionId ;
-    /**
-     * 发起请求的token ->json(从request取得)
-     */
-    private String tokenBean;
-    /**
-     * 发起请求的header ->json(从request取得)
-     */
-    private String headers;
-    /**
-     * 发起请求的uri(从request取得)
-     */
-    private String requestUri;
-    /**
-     * 发起请求的路径(从request取得)
-     */
-    private String requestUrl;
+    private EggUserAgentMgo userAgent;
+
     /**
      * 请求的全路径(相对于项目路径)
      */
     private String fullPath;
-    /**
-     * 发起请求的ip地址
-     */
-    private String ipAddr;
+
 }

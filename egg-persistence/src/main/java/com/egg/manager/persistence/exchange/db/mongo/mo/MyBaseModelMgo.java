@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.exchange.db.mongo.mo;
 
+import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -22,33 +23,11 @@ public class MyBaseModelMgo<K> implements Serializable {
     private K fid;
 
     /**
-     * 类名称
+     * 切面类的class相关信息
      */
-    @Field(value = "className")
-    private String className;
-    /**
-     * 方法名称
-     */
-    @Field(value = "methodName")
-    private String methodName;
+    @Field(value = "clazzInfo")
+    private EggClazzInfoLogMgo clazzInfo ;
 
-    /**
-     * 操作
-     */
-    @Field(value = "action")
-    private String action;
-
-    /**
-     * 日志描述
-     */
-    @Field(value = "logDescription")
-    private String logDescription;
-
-    /**
-     * aop通知方式
-     */
-    @Field(value = "aspectNotifyType")
-    private String aspectNotifyType;
 
     /**
      * 返回结果-json
@@ -72,36 +51,12 @@ public class MyBaseModelMgo<K> implements Serializable {
     @Field(value = "message")
     private String message;
 
-    /**
-     * 方法参数->json
-     */
-    @Field(value = "actionArgs")
-    private String actionArgs;
-    /**
-     * method 返回值类型
-     */
-    @Field(value = "returnTypeName")
-    private String returnTypeName;
 
     /**
-     * 请求的方法完整内容
+     * aop通知方式
      */
-    @Field(value = "signatureLong")
-    private String signatureLong;
-    /**
-     * aop类型，由joinPoint取得
-     */
-    @Field(value = "aspectKind")
-    private String aspectKind;
-
-    /**
-     * 定义的注解->json
-     */
-    @Field(value = "declaredAnnotations")
-    private String declaredAnnotations;
-
-
-
+    @Field(value = "aspectNotifyType")
+    private String aspectNotifyType;
 
     /**
      * 顺序
@@ -113,6 +68,7 @@ public class MyBaseModelMgo<K> implements Serializable {
      */
     @Field(value = "status")
     private Short status;
+
     @Version
     @Field(value = "version")
     private Integer version;

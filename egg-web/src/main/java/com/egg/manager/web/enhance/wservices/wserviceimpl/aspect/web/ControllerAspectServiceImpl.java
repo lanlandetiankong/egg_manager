@@ -1,22 +1,26 @@
 package com.egg.manager.web.enhance.wservices.wserviceimpl.aspect.web;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
+import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.MyBaseWebLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.web.enhance.wservices.wservice.aspect.web.ControllerAspectService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -93,53 +97,61 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
      */
     protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo,JoinPoint joinPoint, HttpServletRequest request){
         try {
+            EggClazzInfoLogMgo clazzInfoLog = new EggClazzInfoLogMgo();
             if (logMgo.getStatus() == null) {
                 logMgo.setStatus(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
             JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);
-            logMgo.setActionArgs(argJsonObj.toJSONString());
+            clazzInfoLog.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature();
             String methodName = signature.getName();
-            logMgo.setAspectKind(joinPoint.getKind());
-            logMgo.setClassName(signature.getDeclaringTypeName());
-            logMgo.setMethodName(methodName);
-            logMgo.setSignatureLong(signature.toLongString());
+            clazzInfoLog.setAspectKind(joinPoint.getKind());
+            clazzInfoLog.setClassName(signature.getDeclaringTypeName());
+            clazzInfoLog.setMethodName(methodName);
+            clazzInfoLog.setSignatureLong(signature.toLongString());
             Method method = this.gainReqMethod(signature);
             if (method != null) {
-                logMgo.setReturnTypeName(method.getReturnType().getName());
-                logMgo.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
+                clazzInfoLog.setReturnTypeName(method.getReturnType().getName());
+                clazzInfoLog.setDeclaredAnnotations(JSONObject.toJSONString(method.getDeclaredAnnotations()));
                 PcWebQueryLog pcWebQueryLog = method.getAnnotation(PcWebQueryLog.class);
                 if (pcWebQueryLog != null) {
-                    logMgo.setAction(this.gainApiOperationMsgWhenBlank(method, pcWebQueryLog.action()));
-                    logMgo.setLogDescription(this.gainApiOperationNotesIfBlank(method, pcWebQueryLog.description()));
+                    clazzInfoLog.setAction(this.gainApiOperationMsgWhenBlank(method, pcWebQueryLog.action()));
+                    clazzInfoLog.setLogDescription(this.gainApiOperationNotesIfBlank(method, pcWebQueryLog.description()));
                     //请求的全路径(代码中取得)
                     logMgo.setFullPath(pcWebQueryLog.fullPath());
                 }
             }
             if (request != null) {
+                //获取UserAgent相关信息
+                String reqUserAgent = request.getHeader("User-Agent");
+                if(StringUtils.isNotBlank(reqUserAgent)){
+                    EggUserAgentMgo eggUserAgent = new EggUserAgentMgo(UserAgentUtil.parse(reqUserAgent),reqUserAgent);
+                    logMgo.setUserAgent(eggUserAgent);
+                }
+                EggRequestInfo requestInfo = new EggRequestInfo();
                 //请求路径
                 if(HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())){
                     String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString() ;
-                    logMgo.setRequestUri(request.getRequestURI() + queryString);
-                    logMgo.setRequestUrl(request.getRequestURL().toString() + queryString);
+                    requestInfo.setRequestUri(request.getRequestURI() + queryString);
+                    requestInfo.setRequestUrl(request.getRequestURL().toString() + queryString);
                 }   else {
-                    logMgo.setRequestUri(request.getRequestURI());
-                    logMgo.setRequestUrl(request.getRequestURL().toString());
+                    requestInfo.setRequestUri(request.getRequestURI());
+                    requestInfo.setRequestUrl(request.getRequestURL().toString());
                 }
-                logMgo.setReqMethod(request.getMethod());
+                requestInfo.setReqMethod(request.getMethod());
                 //请求的sessionid
                 HttpSession session = request.getSession();
                 if(session != null){
-                    logMgo.setSessionId(session.getId());
+                    requestInfo.setSessionId(session.getId());
                 }
                 //取得 请求头的token信息
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
                     //取得当前登录的用户
                     UserAccount loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
-                    logMgo.setTokenBean(JSONObject.toJSONString(userAccountToken));
+                    requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     Long userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);
                     logMgo.setCreateUserId(userAccountId);
@@ -153,10 +165,12 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 //取得 请求头bean
                 RequestHeaderBean requestHeaderBean = routineCommonFunc.gainRequestHeaderBeanByRequest(request);
                 if (requestHeaderBean != null) {
-                    logMgo.setHeaders(JSONObject.toJSONString(requestHeaderBean));
-                    logMgo.setIpAddr(request.getRemoteAddr());
+                    requestInfo.setHeaders(JSONObject.toJSONString(requestHeaderBean));
+                    requestInfo.setIpAddr(request.getRemoteAddr());
                 }
+                logMgo.setRequestInfo(requestInfo);
             }
+            logMgo.setClazzInfo(clazzInfoLog);
             Date now = new Date();
             logMgo.setCreateTime(now);
             logMgo.setLastModifiedDate(now);

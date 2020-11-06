@@ -4,7 +4,7 @@ import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public interface MyRedisCommonReqService {

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * @author zhoucj
- * @description: SmartFormTypeDefinitionMgo 对应的验证对象
+ * @description SmartFormTypeDefinitionMgo 对应的验证对象
  * @date 2020/10/21
  * @see SmartFormTypeDefinitionMgo
  */

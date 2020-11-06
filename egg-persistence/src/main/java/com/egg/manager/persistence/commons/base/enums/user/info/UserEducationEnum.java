@@ -3,7 +3,7 @@ package com.egg.manager.persistence.commons.base.enums.user.info;
 
 /**
  * @author zhoucj
- * @description: 学历 类型枚举类
+ * @description 学历 类型枚举类
  * @date 2020/10/20
  */
 public enum UserEducationEnum {

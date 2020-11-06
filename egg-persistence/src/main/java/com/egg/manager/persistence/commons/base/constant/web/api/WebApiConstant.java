@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.constant.web.api;
 
 /**
  * @author zhoucj
- * @description: api 常量
+ * @description api 常量
  * @date 2020/10/20
  */
 public interface WebApiConstant {

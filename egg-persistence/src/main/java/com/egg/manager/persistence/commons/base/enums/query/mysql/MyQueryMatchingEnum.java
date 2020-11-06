@@ -4,7 +4,7 @@ import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public enum MyQueryMatchingEnum {

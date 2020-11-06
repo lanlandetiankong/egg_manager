@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  * @author zhoucj
- * @description:数据库查询字段，用作dubbo各个service之间的传输对象
+ * @description数据库查询字段，用作dubbo各个service之间的传输对象
  * @date 2020/10/20
  */
 @Data

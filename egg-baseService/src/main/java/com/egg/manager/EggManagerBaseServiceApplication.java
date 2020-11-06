@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 /**
  * @author zhoucj
- * @description: Springboot启动类
+ * @description Springboot启动类
  * @date 2020/06/07
  */
 @EnableCaching

@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description: 用户&分组 关联
+ * @description 用户&分组 关联
  * @date 2020/10/20
  */
 @Data

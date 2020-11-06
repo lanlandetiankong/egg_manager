@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author zhoucj
- * @description: 本地、服务器部署配置文件的映射
+ * @description 本地、服务器部署配置文件的映射
  * @date 2020/10/21
  */
 @Data

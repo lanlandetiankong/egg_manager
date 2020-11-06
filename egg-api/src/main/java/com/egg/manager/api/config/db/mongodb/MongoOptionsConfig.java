@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author zhoucj
- * @description: mongodb 相关配置
+ * @description mongodb 相关配置
  * @date 2020/10/21
  */
 @Configuration

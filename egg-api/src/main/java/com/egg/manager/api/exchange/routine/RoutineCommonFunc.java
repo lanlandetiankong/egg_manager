@@ -21,7 +21,7 @@ import java.util.*;
 
 /**
  * @author zhoucj
- * @description: 如果有不可用于dubbo的，迁移到此处
+ * @description 如果有不可用于dubbo的，迁移到此处
  * @date 2020/10/21
  */
 @Component

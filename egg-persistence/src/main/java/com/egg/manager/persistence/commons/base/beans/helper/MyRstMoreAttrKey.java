@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 /**
  * @author zhoucj
- * @description: 更多参数Map 的key 常量
+ * @description 更多参数Map 的key 常量
  * @date 2020/10/20
  */
 public interface MyRstMoreAttrKey {

@@ -4,7 +4,7 @@ import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface MyBaseEmailMgoService {

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public abstract class BaseMysqlTransfer<T extends Model<T>, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> implements Serializable {

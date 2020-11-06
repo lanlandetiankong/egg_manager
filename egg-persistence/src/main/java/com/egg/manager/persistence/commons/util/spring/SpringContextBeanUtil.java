@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * @description: 获取spring上下文
+ * @description 获取spring上下文
  * @author zhoucj
  * @date 2020/10/20
  */

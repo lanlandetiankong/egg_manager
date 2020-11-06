@@ -11,7 +11,7 @@ import org.mapstruct.MapperConfig;
 
 /**
  * @author zhoucj
- * @description: 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！
+ * @description 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！
  * @date 2020/10/20
  * @Context : 该注解用于添加额外参数，不会对其进行判断null等操作
  */

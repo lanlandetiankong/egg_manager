@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 /**
  * @author zhoucj
- * @description:统一返回相应参数
+ * @description统一返回相应参数
  * @date 2020/10/21
  */
 public class MyResponseHelper {

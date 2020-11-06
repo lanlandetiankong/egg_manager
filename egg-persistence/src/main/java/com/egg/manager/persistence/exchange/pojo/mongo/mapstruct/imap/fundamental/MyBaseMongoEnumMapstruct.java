@@ -6,7 +6,7 @@ import org.mapstruct.MapperConfig;
 
 /**
  * @author zhoucj
- * @description: 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！枚举相关方法 default定义
+ * @description 可在该接口写公用的转化方法, 定义的方法请勿修改方法名、参数、返回值等！枚举相关方法 default定义
  * @date 2020/10/20
  */
 @MapperConfig(disableSubMappingMethodsGeneration = true)

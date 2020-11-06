@@ -5,7 +5,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
  * @author zhoucj
- * @description: spring配置项加密
+ * @description spring配置项加密
  * @date 2020/10/21
  */
 @Slf4j

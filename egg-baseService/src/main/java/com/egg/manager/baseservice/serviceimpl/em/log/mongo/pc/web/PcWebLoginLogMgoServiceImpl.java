@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author zhoucj
- * @description: 登录日志-MService
+ * @description 登录日志-MService
  * @date 2020/10/21
  */
 @Slf4j

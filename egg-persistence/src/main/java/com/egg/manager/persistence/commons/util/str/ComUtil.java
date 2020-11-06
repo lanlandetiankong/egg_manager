@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public class ComUtil {

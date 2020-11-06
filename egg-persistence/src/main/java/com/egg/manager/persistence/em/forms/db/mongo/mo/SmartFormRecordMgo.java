@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author zhoucj
- * @description: 表单记录
+ * @description 表单记录
  * @date 2020/10/20
  */
 @Data

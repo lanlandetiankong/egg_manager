@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 @Slf4j

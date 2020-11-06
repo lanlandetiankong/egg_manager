@@ -8,7 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 /**
- * @description:  shiro 工具类
+ * @description  shiro 工具类
  * @author zhoucj
  * @date 2020/10/27
  */

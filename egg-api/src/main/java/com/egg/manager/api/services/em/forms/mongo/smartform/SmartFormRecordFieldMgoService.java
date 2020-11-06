@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description:表单定义-MService
+ * @description表单定义-MService
  * @date 2020/10/20
  */
 @Repository

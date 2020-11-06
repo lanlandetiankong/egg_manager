@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description: 通用的返回结果模型
+ * @description 通用的返回结果模型
  * @date 2020/10/20
  */
 @Data

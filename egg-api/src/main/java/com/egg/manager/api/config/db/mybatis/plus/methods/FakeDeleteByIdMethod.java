@@ -9,7 +9,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 /**
- * @description: 自定义-mybatisplus增强方法->根据id伪删除
+ * @description 自定义-mybatisplus增强方法->根据id伪删除
  * @author zhoucj
  * @date 2020/10/26
  */

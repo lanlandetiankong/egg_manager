@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description: 验证 重复
+ * @description 验证 重复
  * @date 2020/10/21
  */
 @Data

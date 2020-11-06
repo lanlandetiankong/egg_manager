@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface AnnouncementTagService extends IService<AnnouncementTag>, MyBaseMysqlService<AnnouncementTag, AnnouncementTagMapper, AnnouncementTagVo> {

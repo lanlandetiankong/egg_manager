@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj
- * @description: email-发送的附件-文件信息
+ * @description email-发送的附件-文件信息
  * @date 2020/10/21
  */
 @Data

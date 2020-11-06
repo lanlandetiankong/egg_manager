@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author zhoucj
- * @description: 操作日志表
+ * @description 操作日志表
  * @date 2020/10/20
  */
 @Data

@@ -8,7 +8,7 @@ import com.egg.manager.persistence.em.user.pojo.vo.RoleMenuVo;
 
 /**
  * @author zhoucj
- * @description: [角色-菜单] Service
+ * @description [角色-菜单] Service
  * @date 2020/10/20
  */
 public interface RoleMenuService extends IService<RoleMenu>, MyBaseMysqlService<RoleMenu, RoleMenuMapper, RoleMenuVo> {

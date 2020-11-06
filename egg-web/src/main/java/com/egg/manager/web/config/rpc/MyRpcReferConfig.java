@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public class MyRpcReferConfig {

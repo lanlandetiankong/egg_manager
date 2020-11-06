@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.constant.shiro;
 
 /**
  * @author zhoucj
- * @description: shiro 常用的 角色名 常量
+ * @description shiro 常用的 角色名 常量
  * @date 2020/10/20
  */
 public interface ShiroRoleConstant {

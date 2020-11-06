@@ -14,7 +14,7 @@ import java.util.Collections;
 
 /**
  * @author zhoucj
- * @description: 声明式事物配置
+ * @description 声明式事物配置
  * @date 2020/10/21
  */
 @Configuration

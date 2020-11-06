@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description:表单类型定义
+ * @description表单类型定义
  * @date 2020/10/20
  */
 @Slf4j

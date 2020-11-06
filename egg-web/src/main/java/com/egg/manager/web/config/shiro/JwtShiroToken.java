@@ -5,7 +5,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 
 /**
  * @author zhoucj
- * @description:shiro jwt token令牌
+ * @descriptionshiro jwt token令牌
  * @date 2019/9/14
  */
 @Setter

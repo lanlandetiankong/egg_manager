@@ -12,7 +12,7 @@ import org.springframework.jms.annotation.EnableJms;
 
 /**
  * @author zhoucj
- * @description: Springboot启动类
+ * @description Springboot启动类
  * @date 2020/06/07
  */
 @SpringBootApplication

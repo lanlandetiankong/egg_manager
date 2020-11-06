@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.exception;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public class MyMongoException extends RuntimeException {

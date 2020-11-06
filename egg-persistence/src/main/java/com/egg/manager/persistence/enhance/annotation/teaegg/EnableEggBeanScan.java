@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 
 /**
  * @author zhoucj
- * @description: 在@Configuration或启动类 添加，
+ * @description 在@Configuration或启动类 添加，
  * @date 2020/10/21
  */
 @Documented

@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author zhoucj
- * @description:表单 字段类型
+ * @description表单 字段类型
  * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",

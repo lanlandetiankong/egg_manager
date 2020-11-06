@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.enums.user.info;
 
 /**
  * @author zhoucj
- * @description: 政治面貌 类型枚举类
+ * @description 政治面貌 类型枚举类
  * @date 2020/10/20
  */
 public enum UserPoliticsStatusEnum {

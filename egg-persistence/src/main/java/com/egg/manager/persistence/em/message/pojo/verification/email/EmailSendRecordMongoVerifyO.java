@@ -19,7 +19,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description:SmartFormDefinitionMgo 对应的验证对象
+ * @descriptionSmartFormDefinitionMgo 对应的验证对象
  * @date 2020/10/21
  * @see SmartFormDefinitionMgo
  */

@@ -8,7 +8,7 @@ import com.egg.manager.persistence.em.user.pojo.vo.UserGroupVo;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface UserGroupService extends IService<UserGroup>, MyBaseMysqlService<UserGroup, UserGroupMapper, UserGroupVo> {

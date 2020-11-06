@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author zhoucj
- * @description: 操作日志表
+ * @description 操作日志表
  * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",

@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author zhoucj
- * @description: @Controller层进行日志切面，并记录到mongodb
+ * @description @Controller层进行日志切面，并记录到mongodb
  * @date 2020/10/20
  */
 @Slf4j

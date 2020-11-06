@@ -3,7 +3,7 @@ package com.egg.manager.persistence.commons.base.constant.redis;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2019/10/5
  */
 public interface RedisShiroKeyConstant {

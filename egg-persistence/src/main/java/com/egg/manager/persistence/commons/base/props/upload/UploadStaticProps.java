@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author zhoucj
- * @description: 静态方法可以调用 props-upload.properties配置的参数
+ * @description 静态方法可以调用 props-upload.properties配置的参数
  * @date 2020/10/21
  */
 @Component

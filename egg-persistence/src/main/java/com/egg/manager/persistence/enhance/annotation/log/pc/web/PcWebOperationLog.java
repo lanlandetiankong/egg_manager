@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 /**
  * @author zhoucj
- * @description: 操作日志记录到数据库 注解
+ * @description 操作日志记录到数据库 注解
  * aop 对controller 切面 记录
  * 1、当action为空时，会改为取用@ApiOperation的value
  * 2、当description为空时，会改为取用@ApiOperation的notes

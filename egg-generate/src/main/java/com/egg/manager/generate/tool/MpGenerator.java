@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description: 代码生成器
+ * @description 代码生成器
  * @date 2020/10/21
  */
 @Slf4j

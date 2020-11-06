@@ -13,7 +13,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 @Mapper(componentModel = "spring",

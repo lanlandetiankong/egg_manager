@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zhoucj
- * @description: 表单定义-MService
+ * @description 表单定义-MService
  * @date 2020/10/20
  */
 @Slf4j

@@ -19,7 +19,7 @@ import java.util.Set;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlService<DefineRole, DefineRoleMapper, DefineRoleVo> {

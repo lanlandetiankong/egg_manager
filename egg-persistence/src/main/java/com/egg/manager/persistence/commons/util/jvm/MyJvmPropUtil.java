@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description:启动参数 工具类
+ * @description启动参数 工具类
  * @date 2020/10/21
  */
 public class MyJvmPropUtil {

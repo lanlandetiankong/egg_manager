@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description:基本实现接口
+ * @description基本实现接口
  * @date 2020/10/20
  */
 public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>, V extends MyBaseMysqlVo>

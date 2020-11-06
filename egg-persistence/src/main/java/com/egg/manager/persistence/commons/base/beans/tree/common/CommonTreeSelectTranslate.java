@@ -6,7 +6,7 @@ import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20 17:16
  */
 public class CommonTreeSelectTranslate extends MyBaseTree {

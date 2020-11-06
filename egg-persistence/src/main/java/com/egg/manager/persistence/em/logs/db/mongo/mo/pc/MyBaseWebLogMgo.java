@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 
 /**
- *@description:
+ *@description
  *@author: zhoucj
  *@create: 2020-10-21 14:59
  */

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description:操作日志-MService
+ * @description操作日志-MService
  * @date 2020/10/20
  */
 @Repository

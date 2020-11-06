@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public enum TaskProgressRateEnum {

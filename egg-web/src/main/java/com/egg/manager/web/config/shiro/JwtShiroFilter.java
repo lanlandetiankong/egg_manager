@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 
 /**
  * @author zhoucj
- * @description: 代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
+ * @description 代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
  * @date 2020/10/21
  */
 public class JwtShiroFilter extends BasicHttpAuthenticationFilter {

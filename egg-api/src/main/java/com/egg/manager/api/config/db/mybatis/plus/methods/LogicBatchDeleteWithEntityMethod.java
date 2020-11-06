@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @description: 根据ids更新状态为删除状态
+ * @description 根据ids更新状态为删除状态
  * @author zhoucj
  * @date 2020/10/27
  */

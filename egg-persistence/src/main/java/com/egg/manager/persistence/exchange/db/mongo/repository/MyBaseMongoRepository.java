@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {

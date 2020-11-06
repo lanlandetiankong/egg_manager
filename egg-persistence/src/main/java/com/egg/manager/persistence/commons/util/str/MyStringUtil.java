@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public class MyStringUtil {

@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author zhoucj
- * @description: MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 MyMongoQueryBuffer 中
+ * @description MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 MyMongoQueryBuffer 中
  * @date 2020/10/20
  */
 @Slf4j

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.constant.define;
 
 /**
  * @author zhoucj
- * @description: 菜单定义-常量
+ * @description 菜单定义-常量
  * @date 2020/10/20
  */
 public interface DefineMenuConstant {

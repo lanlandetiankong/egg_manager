@@ -16,7 +16,7 @@ import javax.jms.Topic;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 @Configuration

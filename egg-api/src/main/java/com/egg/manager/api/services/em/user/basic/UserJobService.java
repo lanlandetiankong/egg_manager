@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<UserJob, UserJobMapper, UserJobVo> {

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.enums.aspect;
 
 /**
  * @author zhoucj
- * @description: 切面通知 的类型 枚举
+ * @description 切面通知 的类型 枚举
  * @date 2020/10/20
  */
 public enum AspectNotifyTypeEnum {

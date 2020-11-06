@@ -10,7 +10,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 /**
- * @description: 根据ids更新状态为 逻辑删除，并存储相应的更新信息
+ * @description 根据ids更新状态为 逻辑删除，并存储相应的更新信息
  * @author zhoucj
  * @date 2020/10/27
  */

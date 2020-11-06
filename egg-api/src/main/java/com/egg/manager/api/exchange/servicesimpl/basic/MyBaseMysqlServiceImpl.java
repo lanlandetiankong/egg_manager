@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>, V extends MyBaseMysqlVo> extends ServiceImpl<M, T>

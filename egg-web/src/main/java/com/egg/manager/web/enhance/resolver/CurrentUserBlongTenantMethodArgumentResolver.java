@@ -15,7 +15,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
  * @author zhoucj
- * @description: 增强方法注入，将含有 @CurrentLoginerBelongTenant 注解的方法参数注入当前登录用户
+ * @description 增强方法注入，将含有 @CurrentLoginerBelongTenant 注解的方法参数注入当前登录用户
  * @date 2020/10/21
  */
 public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMethodArgumentResolver {

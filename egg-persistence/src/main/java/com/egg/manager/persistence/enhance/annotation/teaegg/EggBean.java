@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 @Documented

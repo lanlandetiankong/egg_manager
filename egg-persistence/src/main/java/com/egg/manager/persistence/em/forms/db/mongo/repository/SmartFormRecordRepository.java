@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description: 表单记录-dao
+ * @description 表单记录-dao
  * @date 2020/10/21
  */
 @Repository

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * @author zhoucj
- * @description: 请求头 bean
+ * @description 请求头 bean
  * @date 2020/10/21
  */
 @Data

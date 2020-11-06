@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.helper;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/21
  */
 public enum ErrorActionEnum {

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 /**
  * @author zhoucj
- * @description: Druid数据库连接池
+ * @description Druid数据库连接池
  * @date 2020/10/20
  */
 @Configuration

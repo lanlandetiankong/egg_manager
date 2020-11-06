@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author zhoucj
- * @description: 登录日志表 - MongoDB
+ * @description 登录日志表 - MongoDB
  * @date 2020/10/20
  */
 @Data

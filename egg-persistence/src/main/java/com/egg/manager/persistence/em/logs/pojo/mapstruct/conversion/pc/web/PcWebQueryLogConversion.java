@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author zhoucj
- * @description: 查询日志表
+ * @description 查询日志表
  * @date 2020/10/21
  */
 @Component

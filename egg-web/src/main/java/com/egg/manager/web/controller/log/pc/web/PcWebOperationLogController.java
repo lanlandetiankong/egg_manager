@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zhoucj
- * @description: 操作接口日志
+ * @description 操作接口日志
  * @date 2020/10/21
  */
 @Slf4j

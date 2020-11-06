@@ -13,7 +13,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 @Mapper(

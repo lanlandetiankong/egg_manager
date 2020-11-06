@@ -4,7 +4,7 @@ import com.egg.manager.persistence.commons.base.sms.MyBaseSms;
 
 /**
  * @author zhoucj
- * @description: 普通短信发送响应实体类
+ * @description 普通短信发送响应实体类
  * @date 2020/10/20
  */
 public class SmsSendResponse extends MyBaseSms {

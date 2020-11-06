@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description: [用户职务] pojo static生成
+ * @description [用户职务] pojo static生成
  * @date 2020/10/20
  */
 public class UserJobPojoInitialize {

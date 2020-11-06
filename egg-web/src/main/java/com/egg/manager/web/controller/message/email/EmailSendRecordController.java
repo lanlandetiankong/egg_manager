@@ -42,7 +42,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * @author zhoucj
- * @description:邮件发送记录-Controller
+ * @description邮件发送记录-Controller
  * @date 2020/10/21
  */
 @Slf4j

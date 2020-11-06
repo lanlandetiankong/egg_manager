@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zhoucj
- * @description: 表单定义
+ * @description 表单定义
  * @date 2020/10/20
  */
 @Slf4j

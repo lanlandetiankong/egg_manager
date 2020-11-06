@@ -12,7 +12,7 @@ import org.springframework.util.ClassUtils;
 
 /**
  * @author zhoucj
- * @description: 注解->注册
+ * @description 注解->注册
  * @date 2020/10/21
  */
 public class EggBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {

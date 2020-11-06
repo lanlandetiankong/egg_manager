@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.exception.form;
 
 /**
  * @author zhoucj
- * @description: 登录表单字段缺失异常
+ * @description 登录表单字段缺失异常
  * @date 2020/10/21
  */
 public class LoginFormFieldDeficiencyException extends RuntimeException {

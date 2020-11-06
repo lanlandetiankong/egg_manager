@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * @author zhoucj
- * @description: MySql文档生成
+ * @description MySql文档生成
  * @date 2020/10/21
  */
 public class MySqlDocsGenerator {

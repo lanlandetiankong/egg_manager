@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.enums.bill;
 
 /**
  * @author zhoucj
- * @description: 枚举->订单类型
+ * @description 枚举->订单类型
  * @date 2020/10/20
  */
 public enum BillTypeEnum {

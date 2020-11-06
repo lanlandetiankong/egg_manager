@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description: 表单定义
+ * @description 表单定义
  * @date 2020/10/20
  */
 @Repository

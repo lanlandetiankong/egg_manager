@@ -5,7 +5,7 @@ import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public interface DefineGroupMapper extends MyEggMapper<DefineGroup> {

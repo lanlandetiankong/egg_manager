@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description:mybatisplus 字段填充
+ * @descriptionmybatisplus 字段填充
  * @date 2020/10/21
  */
 @Slf4j

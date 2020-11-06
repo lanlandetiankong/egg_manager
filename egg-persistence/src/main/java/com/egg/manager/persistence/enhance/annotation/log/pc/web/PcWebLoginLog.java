@@ -5,7 +5,7 @@ import com.egg.manager.persistence.commons.base.constant.aspect.AspectTypeConsta
 import java.lang.annotation.*;
 
 /**
- * @description: 登录 日志记录到数据库 注解
+ * @description 登录 日志记录到数据库 注解
  * aop 对controller 切面 记录
  * 1、当action为空时，会改为取用@ApiOperation的value
  * 2、当description为空时，会改为取用@ApiOperation的notes

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.constant.rst;
 
 /**
  * @author zhoucj
- * @description: 控制器操作信息-基本常量
+ * @description 控制器操作信息-基本常量
  * @date 2020/10/21
  */
 public class BaseRstMsgConstant {

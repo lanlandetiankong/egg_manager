@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description: 用户账号
+ * @description 用户账号
  * @date 2020/10/20
  */
 @Data

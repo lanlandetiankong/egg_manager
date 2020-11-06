@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj
- * @description: 表单类型
+ * @description 表单类型
  * @date 2020/10/20
  */
 @Data

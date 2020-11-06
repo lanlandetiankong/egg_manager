@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.enums.tags;
 
 /**
  * @author zhoucj
- * @description:
+ * @description
  * @date 2020/10/20
  */
 public enum TagsStateEnum {

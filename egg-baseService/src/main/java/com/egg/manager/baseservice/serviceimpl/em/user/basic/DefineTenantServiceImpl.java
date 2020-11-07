@@ -82,7 +82,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         List<DefineTenantVo> resultList = result.getResultList();
         if (resultList != null && resultList.isEmpty() == false) {
             for (DefineTenantVo defineTenantVo : resultList) {
-                enumList.add(new FrontEntitySelectBean(defineTenantVo.getFid(), defineTenantVo.getName()));
+                enumList.add(new FrontEntitySelectBean<Long>(defineTenantVo.getFid(), defineTenantVo.getName()));
             }
         }
         result.setEnumList(enumList);

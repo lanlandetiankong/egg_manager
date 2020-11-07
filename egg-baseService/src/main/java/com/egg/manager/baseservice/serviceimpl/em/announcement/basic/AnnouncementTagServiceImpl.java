@@ -112,7 +112,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         List<AnnouncementTagVo> resultList = result.getResultList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (AnnouncementTagVo announcementTagVo : resultList) {
-                enumList.add(new FrontEntitySelectBean(announcementTagVo.getFid(), announcementTagVo.getName()));
+                enumList.add(new FrontEntitySelectBean<Long>(announcementTagVo.getFid(), announcementTagVo.getName()));
             }
         }
         result.setEnumList(enumList);

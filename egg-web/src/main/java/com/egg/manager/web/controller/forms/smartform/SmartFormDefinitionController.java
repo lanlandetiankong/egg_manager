@@ -115,7 +115,7 @@ public class SmartFormDefinitionController extends BaseController {
     @ApiOperation(value = "根据id查询->表单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public MyCommonResult<SmartFormDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
-                                                                   @RequestParam(value = "fid", required = true) Long fid) {
+                                                                   @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormDefinitionMgo.class);
         try {
             Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -185,7 +185,7 @@ public class SmartFormDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
-    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank Long delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -204,7 +204,7 @@ public class SmartFormDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult doBatchDelByIds(HttpServletRequest request, Long[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Long delCount = (long) 0;
         try {

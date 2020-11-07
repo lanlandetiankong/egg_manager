@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/20
  */
 @Repository
-public interface EmailSendRecordMgoService extends MyBaseMgoService<EmailSendRecordMgo, Long> {
+public interface EmailSendRecordMgoService extends MyBaseMgoService<EmailSendRecordMgo, String> {
 
 
 }

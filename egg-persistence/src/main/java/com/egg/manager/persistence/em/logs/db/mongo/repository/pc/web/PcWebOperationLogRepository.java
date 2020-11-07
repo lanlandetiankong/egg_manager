@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/21
  */
 @Repository
-public interface PcWebOperationLogRepository extends MyBaseMongoRepository<PcWebOperationLogMgo, Long> {
+public interface PcWebOperationLogRepository extends MyBaseMongoRepository<PcWebOperationLogMgo, String> {
 
 }

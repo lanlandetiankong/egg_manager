@@ -16,11 +16,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FrontEntitySelectBean implements Serializable {
+public class FrontEntitySelectBean<K> implements Serializable {
     /**
      * Select的值
      */
-    private Long value;
+    private K value;
     /**
      * Select展示的名称
      */

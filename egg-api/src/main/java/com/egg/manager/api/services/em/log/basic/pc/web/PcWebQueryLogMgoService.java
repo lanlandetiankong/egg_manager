@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/20
  */
 @Repository
-public interface PcWebQueryLogMgoService extends MyBaseMgoService<PcWebQueryLogMgo, Long> {
+public interface PcWebQueryLogMgoService extends MyBaseMgoService<PcWebQueryLogMgo, String> {
 
 
 }

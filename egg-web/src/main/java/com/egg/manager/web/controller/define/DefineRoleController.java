@@ -289,9 +289,9 @@ public class DefineRoleController extends BaseController {
 
             if (addSetView != null && addSetView.isEmpty() == false) {
                 List<RoleMenu> addRoleMenuList = Lists.newArrayList();
-                Iterator<String> addIter = addSetView.iterator();
+                Iterator<Long> addIter = addSetView.iterator();
                 while (addIter.hasNext()) {
-                    String diffNext = addIter.next();
+                    Long diffNext = addIter.next();
                     addRoleMenuList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUser));
                 }
                 boolean flag = roleMenuService.saveBatch(addRoleMenuList);

@@ -33,7 +33,7 @@ public class RoleMenu extends Model<RoleMenu> {
      * 菜单id
      */
     @TableField(value = "define_menu_id")
-    private String defineMenuId;
+    private Long defineMenuId;
     /**
      * 类型
      */

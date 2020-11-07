@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.query.Update;
  */
 @Slf4j
 @Service(interfaceClass = SmartFormDefinitionMgoService.class)
-public class SmartFormDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormDefinitionRepository, SmartFormDefinitionMgo, Long>
+public class SmartFormDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormDefinitionRepository, SmartFormDefinitionMgo, String>
         implements SmartFormDefinitionMgoService {
 
     @Autowired

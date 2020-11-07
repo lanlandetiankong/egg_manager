@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/10/20
  */
 @Repository
-public interface SmartFormDefinitionMgoService extends MyBaseMgoService<SmartFormDefinitionMgo, Long> {
+public interface SmartFormDefinitionMgoService extends MyBaseMgoService<SmartFormDefinitionMgo, String> {
 
     /**
      * 根据表单类型id更新表单中冗余的表单类型数据

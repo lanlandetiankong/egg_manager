@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service(interfaceClass = SmartFormTypeDefinitionMgoService.class)
-public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMgo, Long>
+public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormTypeDefinitionRepository, SmartFormTypeDefinitionMgo, String>
         implements SmartFormTypeDefinitionMgoService {
 
     @Override
@@ -28,7 +28,7 @@ public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(list)) {
             for (SmartFormTypeDefinitionMgo typeDefinitionMgo : list) {
-                enumList.add(new FrontEntitySelectBean(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
+                enumList.add(new FrontEntitySelectBean<String>(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
             }
         }
         result.setEnumList(enumList);

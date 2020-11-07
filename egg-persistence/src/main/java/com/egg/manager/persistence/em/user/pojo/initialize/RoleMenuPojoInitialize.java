@@ -20,7 +20,7 @@ public class RoleMenuPojoInitialize {
      * @param loginUser    当前登录用户
      * @return
      */
-    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, String defineMenuId, UserAccount loginUser) {
+    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, UserAccount loginUser) {
         return RoleMenuPojoInitialize.generateSimpleInsertEntity(defineRoleId, defineMenuId, BaseStateEnum.ENABLED.getValue(), loginUser);
     }
 
@@ -31,7 +31,7 @@ public class RoleMenuPojoInitialize {
      * @param loginUser    当前登录用户
      * @return
      */
-    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, String defineMenuId, Short stateVal, UserAccount loginUser) {
+    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, Short stateVal, UserAccount loginUser) {
         RoleMenu roleMenu = new RoleMenu();
         Date now = new Date();
         //roleMenu.setFid(MyUUIDUtil.renderSimpleUuid());

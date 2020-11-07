@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "em_pc_web_operation_log")
-public class PcWebOperationLogMgo extends MyBaseWebLogMgo<Long> {
+public class PcWebOperationLogMgo extends MyBaseWebLogMgo<String> {
 
     private static final long serialVersionUID = 1L;
 }

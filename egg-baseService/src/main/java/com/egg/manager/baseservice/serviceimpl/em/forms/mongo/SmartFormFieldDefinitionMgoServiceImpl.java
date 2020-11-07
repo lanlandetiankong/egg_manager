@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service(interfaceClass = SmartFormFieldDefinitionMgoService.class)
-public class SmartFormFieldDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormFieldDefinitionRepository, SmartFormFieldDefinitionMgo, Long>
+public class SmartFormFieldDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<SmartFormFieldDefinitionRepository, SmartFormFieldDefinitionMgo, String>
         implements SmartFormFieldDefinitionMgoService {
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmartFormFieldDefinitionMgvo extends BaseModelMgvo<Long> {
+public class SmartFormFieldDefinitionMgvo extends BaseModelMgvo<String> {
 
     /**
      * 类型名

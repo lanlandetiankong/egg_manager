@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class PcWebOperationLogMgoServiceImpl extends MyBaseMgoServiceImpl<PcWebOperationLogRepository, PcWebOperationLogMgo, Long>
+public class PcWebOperationLogMgoServiceImpl extends MyBaseMgoServiceImpl<PcWebOperationLogRepository, PcWebOperationLogMgo, String>
         implements PcWebOperationLogMgoService {
 
 

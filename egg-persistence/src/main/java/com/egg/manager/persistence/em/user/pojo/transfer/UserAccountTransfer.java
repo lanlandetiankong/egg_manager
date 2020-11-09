@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
 import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
@@ -32,11 +32,11 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static UserAccount transferVoToEntity(UserAccountVo vo) {
+    public static UserAccountEntity transferVoToEntity(UserAccountVo vo) {
         if (vo == null) {
             return null;
         }
-        UserAccount entity = userAccountMapstruct.transferVoToEntity(vo);
+        UserAccountEntity entity = userAccountMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -45,7 +45,7 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static UserAccountVo transferEntityToVo(UserAccount entity) {
+    public static UserAccountVo transferEntityToVo(UserAccountEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -66,12 +66,12 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<UserAccountVo> transferEntityToVoList(List<UserAccount> userAccounts) {
-        if (userAccounts == null) {
+    public static List<UserAccountVo> transferEntityToVoList(List<UserAccountEntity> userAccountEntities) {
+        if (userAccountEntities == null) {
             return null;
         } else {
             List<UserAccountVo> list = new ArrayList<>();
-            for (UserAccount account : userAccounts) {
+            for (UserAccountEntity account : userAccountEntities) {
                 list.add(transferEntityToVo(account));
             }
             return list;
@@ -90,27 +90,27 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
         }
     }
 
-    public static UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity) {
+    public static UserAccountXlsOutModel entityToXlsOutModel(UserAccountEntity entity) {
         UserAccountXlsOutModel userAccountXlsOutModel = userAccountMapstruct.entityToXlsOutModel(entity);
         return userAccountXlsOutModel;
     }
 
-    public static List<UserAccountXlsOutModel> entityListToXlsOutModels(List<UserAccount> entityList) {
+    public static List<UserAccountXlsOutModel> entityListToXlsOutModels(List<UserAccountEntity> entityList) {
         List<UserAccountXlsOutModel> list = new ArrayList<>();
-        for (UserAccount entity : entityList) {
+        for (UserAccountEntity entity : entityList) {
             list.add(entityToXlsOutModel(entity));
         }
         return list;
     }
 
 
-    public static UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, UserAccount loginUser) {     //excel导入默认转化
-        UserAccount entity = userAccountMapstruct.xlsInModelToEntity(xlsInModel, loginUser);
+    public static UserAccountEntity xlsInModelToEntity(UserAccountXlsInModel xlsInModel, UserAccountEntity loginUser) {     //excel导入默认转化
+        UserAccountEntity entity = userAccountMapstruct.xlsInModelToEntity(xlsInModel, loginUser);
         return entity;
     }
 
-    public static List<UserAccount> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccount loginUser, Set<String> accountSet) {
-        List<UserAccount> list = new ArrayList<>();
+    public static List<UserAccountEntity> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccountEntity loginUser, Set<String> accountSet) {
+        List<UserAccountEntity> list = new ArrayList<>();
         if (xlsInModelList != null || xlsInModelList.isEmpty() == false) {
             accountSet = accountSet != null ? accountSet : new HashSet<>();
             for (UserAccountXlsInModel xlsInModel : xlsInModelList) {

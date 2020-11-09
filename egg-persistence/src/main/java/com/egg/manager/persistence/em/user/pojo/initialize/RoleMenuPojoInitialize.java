@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenuEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ public class RoleMenuPojoInitialize {
      * @param loginUser    当前登录用户
      * @return
      */
-    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, UserAccount loginUser) {
+    public static RoleMenuEntity generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, UserAccountEntity loginUser) {
         return RoleMenuPojoInitialize.generateSimpleInsertEntity(defineRoleId, defineMenuId, BaseStateEnum.ENABLED.getValue(), loginUser);
     }
 
@@ -31,20 +31,20 @@ public class RoleMenuPojoInitialize {
      * @param loginUser    当前登录用户
      * @return
      */
-    public static RoleMenu generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, Short stateVal, UserAccount loginUser) {
-        RoleMenu roleMenu = new RoleMenu();
+    public static RoleMenuEntity generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, Short stateVal, UserAccountEntity loginUser) {
+        RoleMenuEntity roleMenuEntity = new RoleMenuEntity();
         Date now = new Date();
         //roleMenu.setFid(MyUUIDUtil.renderSimpleUuid());
-        roleMenu.setDefineRoleId(defineRoleId);
-        roleMenu.setDefineMenuId(defineMenuId);
-        roleMenu.setType(1);
-        roleMenu.setState(stateVal);
-        roleMenu.setCreateTime(now);
-        roleMenu.setUpdateTime(now);
+        roleMenuEntity.setDefineRoleId(defineRoleId);
+        roleMenuEntity.setDefineMenuId(defineMenuId);
+        roleMenuEntity.setType(1);
+        roleMenuEntity.setState(stateVal);
+        roleMenuEntity.setCreateTime(now);
+        roleMenuEntity.setUpdateTime(now);
         if (loginUser != null) {
-            roleMenu.setCreateUserId(loginUser.getFid());
-            roleMenu.setLastModifyerId(loginUser.getFid());
+            roleMenuEntity.setCreateUserId(loginUser.getFid());
+            roleMenuEntity.setLastModifyerId(loginUser.getFid());
         }
-        return roleMenu;
+        return roleMenuEntity;
     }
 }

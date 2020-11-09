@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 
 import java.util.Date;
 
@@ -21,21 +21,21 @@ public class UserDepartmentPojoInitialize {
      * @param loginUser          当前登录用户
      * @return
      */
-    public static UserDepartment generateSimpleInsertEntity(Long userAccountId, Long defineDepartmentId, UserAccount loginUser) {
-        UserDepartment userDepartment = new UserDepartment();
+    public static UserDepartmentEntity generateSimpleInsertEntity(Long userAccountId, Long defineDepartmentId, UserAccountEntity loginUser) {
+        UserDepartmentEntity userDepartmentEntity = new UserDepartmentEntity();
         Date now = new Date();
         //userDepartment.setFid(MyUUIDUtil.renderSimpleUuid());
-        userDepartment.setUserAccountId(userAccountId);
-        userDepartment.setDefineDepartmentId(defineDepartmentId);
-        userDepartment.setIsManager(SwitchStateEnum.Close.getValue());
-        userDepartment.setType(1);
-        userDepartment.setState(BaseStateEnum.ENABLED.getValue());
-        userDepartment.setCreateTime(now);
-        userDepartment.setUpdateTime(now);
+        userDepartmentEntity.setUserAccountId(userAccountId);
+        userDepartmentEntity.setDefineDepartmentId(defineDepartmentId);
+        userDepartmentEntity.setIsManager(SwitchStateEnum.Close.getValue());
+        userDepartmentEntity.setType(1);
+        userDepartmentEntity.setState(BaseStateEnum.ENABLED.getValue());
+        userDepartmentEntity.setCreateTime(now);
+        userDepartmentEntity.setUpdateTime(now);
         if (loginUser != null) {
-            userDepartment.setCreateUserId(loginUser.getFid());
-            userDepartment.setLastModifyerId(loginUser.getFid());
+            userDepartmentEntity.setCreateUserId(loginUser.getFid());
+            userDepartmentEntity.setLastModifyerId(loginUser.getFid());
         }
-        return userDepartment;
+        return userDepartmentEntity;
     }
 }

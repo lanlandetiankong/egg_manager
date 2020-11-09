@@ -15,8 +15,8 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -59,16 +59,16 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportCheckList")
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, Long[] checkIds
-            , @CurrentLoginUser UserAccount loginUser) {
+            , @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            DefineMenu defineMenu = defineMenuService.getById(menuId);
-            if (defineMenu == null) {
+            DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
+            if (defineMenuEntity == null) {
                 throw new BusinessException("指定的无效的菜单！");
             }
-            AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
-            userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean, checkIds);
+            AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
+            userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUser, response, defineMenuEntity, fileUploadBean, checkIds);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
             this.respResultJsonToFront(log, response, result);
@@ -78,15 +78,15 @@ public class UserExcelController extends BaseController {
     @ApiOperation(value = "导出/全部->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
-            , @CurrentLoginUser UserAccount loginUser) {
+            , @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            DefineMenu defineMenu = defineMenuService.getById(menuId);
-            Assert.notNull(defineMenu, "无效菜单:" + actionFailMsg);
+            DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
+            Assert.notNull(defineMenuEntity, "无效菜单:" + actionFailMsg);
             //菜单模板配置
-            AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenu);
-            userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenu, fileUploadBean);
+            AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
+            userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUser, response, defineMenuEntity, fileUploadBean);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
             this.respResultJsonToFront(log, response, result);
@@ -98,11 +98,11 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/importData")
     @ResponseBody
     public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
-                                     @CurrentLoginUser UserAccount loginUser) {
+                                     @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
-            Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccount>());
+            Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUser, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccountEntity>());
             for (MultipartFile file : fileArr) {
                 //前1行是头部，将不读取
                 EasyExcel.read(file.getInputStream(), UserAccountXlsInModel.class, new UserAccountXlsIntroduceListener(userAccountService, loginUser, accountExistSet))

@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.UserGroupMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.UserGroup">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.UserGroupEntity">
         <id column="fid" property="fid"/>
         <result column="define_group_id" property="defineGroupId"/>
         <result column="user_account_id" property="userAccountId"/>

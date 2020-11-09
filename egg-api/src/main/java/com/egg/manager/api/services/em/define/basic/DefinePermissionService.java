@@ -8,8 +8,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefinePermissionVo;
@@ -22,7 +22,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface DefinePermissionService extends IService<DefinePermission>, MyBaseMysqlService<DefinePermission, DefinePermissionMapper, DefinePermissionVo> {
+public interface DefinePermissionService extends IService<DefinePermissionEntity>, MyBaseMysqlService<DefinePermissionEntity, DefinePermissionMapper, DefinePermissionVo> {
 
     /**
      * 查询 所有[可用状态]的 [权限定义]
@@ -30,7 +30,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param wrapper
      * @return
      */
-    List<DefinePermission> getAllEnableList(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper);
+    List<DefinePermissionEntity> getAllEnableList(UserAccountEntity loginUser, QueryWrapper<DefinePermissionEntity> wrapper);
 
     /**
      * 分页查询 权限定义 列表
@@ -41,7 +41,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermission> paginationBean,
+    MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
                                                               List<AntdvSortBean> sortBeans);
 
     /**
@@ -54,7 +54,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
+    MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
                                                            List<AntdvSortBean> sortBeans);
 
     /**
@@ -64,7 +64,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, DefinePermissionVo definePermissionVo) throws Exception;
 
     /**
      * 权限定义-更新
@@ -73,7 +73,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, DefinePermissionVo definePermissionVo) throws Exception;
 
     /**
      * 权限定义-启用
@@ -82,7 +82,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @return
      * @throws Exception
      */
-    Integer dealBatchEnsure(UserAccount loginUser, Long[] ensureIds);
+    Integer dealBatchEnsure(UserAccountEntity loginUser, Long[] ensureIds);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
@@ -90,7 +90,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, Long userAccountId);
+    List<DefinePermissionEntity> dealGetListByAccountFromDb(UserAccountEntity loginUser, Long userAccountId);
 
     /**
      * 取得用户 所拥有的 权限code-Set集合
@@ -98,7 +98,7 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, Long userAccountId);
+    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccountEntity loginUser, Long userAccountId);
 
 
     /**
@@ -107,5 +107,5 @@ public interface DefinePermissionService extends IService<DefinePermission>, MyB
      * @param definePermissionWrap
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, QueryWrapper<DefinePermission> definePermissionWrap);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, QueryWrapper<DefinePermissionEntity> definePermissionWrap);
 }

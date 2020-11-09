@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -17,8 +18,7 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefinePermissionTransfer;
@@ -63,7 +63,7 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryPage")
-    public MyCommonResult<DefinePermissionVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefinePermissionVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class);
         try {
             //解析 搜索条件
@@ -71,7 +71,7 @@ public class DefinePermissionController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("ensure", SwitchStateEnum.Open.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefinePermission> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefinePermission.class);
+            AntdvPaginationBean<DefinePermissionEntity> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             result = definePermissionService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
@@ -89,7 +89,7 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public MyCommonResult<DefinePermissionVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefinePermissionVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class);
         try {
             //解析 搜索条件
@@ -110,11 +110,11 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "根据id查询->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/definePermission/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefinePermissionVo> queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefinePermissionVo> queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class);
         try {
-            DefinePermission definePermission = definePermissionMapper.selectById(definePermissionId);
-            result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermission));
+            DefinePermissionEntity definePermissionEntity = definePermissionMapper.selectById(definePermissionId);
+            result.setBean(DefinePermissionTransfer.transferEntityToVo(definePermissionEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -125,7 +125,7 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "新增->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -143,7 +143,7 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "更新->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -163,7 +163,7 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = "要启用的权限定义id数组", required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchEnsureByIds")
-    public MyCommonResult batchEnsureByIds(HttpServletRequest request, Long[] ensureIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchEnsureByIds(HttpServletRequest request, Long[] ensureIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -183,7 +183,7 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -206,7 +206,7 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {

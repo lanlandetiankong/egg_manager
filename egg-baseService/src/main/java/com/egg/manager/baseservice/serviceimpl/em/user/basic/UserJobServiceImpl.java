@@ -11,8 +11,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserJobMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserJobTransfer;
@@ -32,7 +32,7 @@ import java.util.List;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserJobService.class)
-public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, UserJob, UserJobVo> implements UserJobService {
+public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, UserJobEntity, UserJobVo> implements UserJobService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -41,24 +41,24 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
 
 
     @Override
-    public MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJob> paginationBean,
+    public MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobEntity> paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserJob> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserJobEntity> userJobEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userJobMapper.selectCount(userJobEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = userJobMapper.selectPage(page, userJobEntityWrapper);
-        List<UserJob> userJobs = iPage.getRecords();
-        result.setResultList(UserJobTransfer.transferEntityToVoList(userJobs));
+        List<UserJobEntity> userJobEntities = iPage.getRecords();
+        result.setResultList(UserJobTransfer.transferEntityToVoList(userJobEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
+    public MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
                                                          List<AntdvSortBean> sortBeans) {
         Page<UserJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserJobDto> userJobDtoList = userJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -69,19 +69,19 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
-        UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
-        userJob = super.doBeforeCreate(loginUser, userJob, true);
-        Integer addCount = userJobMapper.insert(userJob);
+    public Integer dealCreate(UserAccountEntity loginUser, UserJobVo userJobVo) throws Exception {
+        UserJobEntity userJobEntity = UserJobTransfer.transferVoToEntity(userJobVo);
+        userJobEntity = super.doBeforeCreate(loginUser, userJobEntity, true);
+        Integer addCount = userJobMapper.insert(userJobEntity);
         return addCount;
     }
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, UserJobVo userJobVo) throws Exception {
         Integer changeCount = 0;
-        UserJob userJob = UserJobTransfer.transferVoToEntity(userJobVo);
-        userJob = super.doBeforeUpdate(loginUser, userJob);
-        changeCount = userJobMapper.updateById(userJob);
+        UserJobEntity userJobEntity = UserJobTransfer.transferVoToEntity(userJobVo);
+        userJobEntity = super.doBeforeUpdate(loginUser, userJobEntity);
+        changeCount = userJobMapper.updateById(userJobEntity);
         return changeCount;
     }
 

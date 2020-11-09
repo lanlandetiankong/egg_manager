@@ -1,7 +1,10 @@
-package com.egg.manager.persistence.em.define.db.mysql.entity;
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
+import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,47 +15,74 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 部门定义
+ * @description 用户账号
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_department")
-public class DefineDepartment extends Model<DefineDepartment> {
+@TableName("em_user_account")
+public class UserAccountEntity extends Model<UserAccountEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 名称
+     * 用户名
      */
-    @TableField("name")
-    private String name;
+    @TableField("user_name")
+    private String userName;
     /**
-     * 编码
+     * 账号
      */
-    @TableField("code")
-    private String code;
+    @TableField("account")
+    private String account;
     /**
-     * 上级id
+     * 昵称
      */
-    @TableField("parent_id")
-    private Long parentId;
+    @TableField("nick_name")
+    private String nickName;
     /**
-     * 层级
+     * 头像地址
      */
-    @TableField("level")
-    private Integer level;
+    @TableField("avatar_url")
+    private String avatarUrl;
     /**
-     * 排序值
+     * 密码
      */
-    @TableField("order_num")
-    private Integer orderNum;
+    @JsonIgnore
+    private String password;
     /**
-     * 描述
+     * 手机号码
      */
-    @TableField("description")
-    private String description;
+    @TableField("phone")
+    private String phone;
+    /**
+     * 邮箱地址
+     */
+    @TableField("email")
+    private String email;
+    /**
+     * 性别
+     * @see UserSexEnum
+     */
+    @TableField("sex")
+    private Short sex;
+    /**
+     * 用户类型
+     * @see UserAccountBaseTypeEnum
+     */
+    @TableField("user_type")
+    private Integer userType;
+    /**
+     * 用户类型 数值
+     */
+    @TableField("user_type_num")
+    private Integer userTypeNum;
+    /**
+     * 是否锁定账号
+     */
+    @TableField("locked")
+    private short locked;
 
 
     /**
@@ -107,4 +137,6 @@ public class DefineDepartment extends Model<DefineDepartment> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
+
 }

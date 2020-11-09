@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineGroupDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineGroupConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineGroupConversion.class}
 )
-public interface DefineGroupMapstruct extends MyBaseMysqlMapstruct<DefineGroup, DefineGroupVo, DefineGroupDto> {
+public interface DefineGroupMapstruct extends MyBaseMysqlMapstruct<DefineGroupEntity, DefineGroupVo, DefineGroupDto> {
     DefineGroupMapstruct INSTANCE = Mappers.getMapper(DefineGroupMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface DefineGroupMapstruct extends MyBaseMysqlMapstruct<DefineGroup, 
      * @return
      */
     @Mappings({})
-    DefineGroup transferVoToEntity(DefineGroupVo vo);
+    DefineGroupEntity transferVoToEntity(DefineGroupVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface DefineGroupMapstruct extends MyBaseMysqlMapstruct<DefineGroup, 
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    DefineGroupVo transferEntityToVo(DefineGroup entity);
+    DefineGroupVo transferEntityToVo(DefineGroupEntity entity);
 
     /**
      * dto转vo

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenuEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.RoleMenuDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.RoleMenuConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {RoleMenuConversion.class}
 )
-public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMenuVo, RoleMenuDto> {
+public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenuEntity, RoleMenuVo, RoleMenuDto> {
     RoleMenuMapstruct INSTANCE = Mappers.getMapper(RoleMenuMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMe
      * @return
      */
     @Mappings({})
-    RoleMenu transferVoToEntity(RoleMenuVo vo);
+    RoleMenuEntity transferVoToEntity(RoleMenuVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface RoleMenuMapstruct extends MyBaseMysqlMapstruct<RoleMenu, RoleMe
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    RoleMenuVo transferEntityToVo(RoleMenu entity);
+    RoleMenuVo transferEntityToVo(RoleMenuEntity entity);
 
     /**
      * dto转vo

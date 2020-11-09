@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap;
 
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.conversion.AnnouncementConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import java.util.Map;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementConversion.class}
 )
-public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement, AnnouncementVo, AnnouncementDto> {
+public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<AnnouncementEntity, AnnouncementVo, AnnouncementDto> {
     AnnouncementMapstruct INSTANCE = Mappers.getMapper(AnnouncementMapstruct.class);
 
     /**
@@ -32,7 +32,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
-    Announcement transferVoToEntity(AnnouncementVo vo);
+    AnnouncementEntity transferVoToEntity(AnnouncementVo vo);
 
     /**
      * entity转vo
@@ -48,7 +48,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    AnnouncementVo transferEntityToVo(Announcement entity, @Context Map<Long, AnnouncementTag> announcementTagMap);
+    AnnouncementVo transferEntityToVo(AnnouncementEntity entity, @Context Map<Long, AnnouncementTagEntity> announcementTagMap);
 
     /**
      * dto转vo
@@ -62,7 +62,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<Long, AnnouncementTag> announcementTagMap);
+    AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<Long, AnnouncementTagEntity> announcementTagMap);
 
     /**
      * 公告草稿转公告(entity->entity)
@@ -70,5 +70,5 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
      * @return
      */
     @Mappings({})
-    Announcement transferFromDraftEntity(AnnouncementDraft draft);
+    AnnouncementEntity transferFromDraftEntity(AnnouncementDraftEntity draft);
 }

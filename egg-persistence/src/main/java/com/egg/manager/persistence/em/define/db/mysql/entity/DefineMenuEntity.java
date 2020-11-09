@@ -1,7 +1,8 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,37 +13,68 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户&租户 关联-entity
+ * @description 菜单定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_tenant")
-public class UserTenant extends Model<UserTenant> {
+@TableName("em_define_menu")
+public class DefineMenuEntity extends Model<DefineMenuEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 账号id
+     * 上级id
      */
-    @TableField(value = "user_account_id")
-    private Long userAccountId;
+    @TableField(value = "parent_id")
+    private Long parentId;
     /**
-     * 租户id
+     * 菜单名称
      */
-    @TableField(value = "define_tenant_id")
-    private Long defineTenantId;
+    @TableField(value = "menu_name")
+    private String menuName;
     /**
-     * 类型
+     * 路径跳转方式
+     * @see DefineMenuUrlJumpTypeEnum
      */
-    @TableField("type")
-    private Integer type;
+    @TableField(value = "url_jump_type")
+    private Integer urlJumpType;
     /**
-     * 是否管理员
+     * 图标名称
      */
-    @TableField(value = "is_manager")
-    private Short isManager;
+    @TableField(value = "icon_name")
+    private String iconName;
+    /**
+     * 路由跳转
+     */
+    @TableField(value = "router_url")
+    private String routerUrl;
+    /**
+     * 外部跳转路径
+     */
+    @TableField(value = "href_url")
+    private String hrefUrl;
+    /**
+     * 标签名
+     */
+    @TableField("label")
+    private String label;
+    /**
+     * 层级
+     */
+    @TableField("level")
+    private Integer level;
+    /**
+     * 排序值
+     */
+    @TableField("order_num")
+    private Integer orderNum;
+    /**
+     * excel配置信息
+     */
+    @TableField("excel_model_conf")
+    private String excelModelConf;
 
 
     /**

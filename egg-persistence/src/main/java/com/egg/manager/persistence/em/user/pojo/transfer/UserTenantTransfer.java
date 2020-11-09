@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserTenantMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class UserTenantTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static UserTenant transferVoToEntity(UserTenantVo vo) {
+    public static UserTenantEntity transferVoToEntity(UserTenantVo vo) {
         if (vo == null) {
             return null;
         }
-        UserTenant entity = userTenantMapstruct.transferVoToEntity(vo);
+        UserTenantEntity entity = userTenantMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class UserTenantTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static UserTenantVo transferEntityToVo(UserTenant entity) {
+    public static UserTenantVo transferEntityToVo(UserTenantEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,13 +61,13 @@ public class UserTenantTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<UserTenantVo> transferEntityToVoList(List<UserTenant> userTenants) {
-        if (userTenants == null) {
+    public static List<UserTenantVo> transferEntityToVoList(List<UserTenantEntity> userTenantEntities) {
+        if (userTenantEntities == null) {
             return null;
         } else {
             List<UserTenantVo> list = new ArrayList<>();
-            for (UserTenant userTenant : userTenants) {
-                list.add(transferEntityToVo(userTenant));
+            for (UserTenantEntity userTenantEntity : userTenantEntities) {
+                list.add(transferEntityToVo(userTenantEntity));
             }
             return list;
         }

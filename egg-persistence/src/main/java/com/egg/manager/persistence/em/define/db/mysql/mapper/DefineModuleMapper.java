@@ -5,7 +5,7 @@ import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModule;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefineModuleMapper extends MyEggMapper<DefineModule> {
+public interface DefineModuleMapper extends MyEggMapper<DefineModuleEntity> {
 
 
     /**

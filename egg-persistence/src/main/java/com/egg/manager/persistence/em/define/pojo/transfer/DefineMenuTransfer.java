@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineMenuMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefineMenu transferVoToEntity(DefineMenuVo vo) {
+    public static DefineMenuEntity transferVoToEntity(DefineMenuVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineMenu entity = defineMenuMapstruct.transferVoToEntity(vo);
+        DefineMenuEntity entity = defineMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineMenuVo transferEntityToVo(DefineMenu entity) {
+    public static DefineMenuVo transferEntityToVo(DefineMenuEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -65,13 +65,13 @@ public class DefineMenuTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenu> defineMenus) {
-        if (defineMenus == null) {
+    public static List<DefineMenuVo> transferEntityToVoList(List<DefineMenuEntity> defineMenuEntities) {
+        if (defineMenuEntities == null) {
             return null;
         } else {
             List<DefineMenuVo> list = new ArrayList<>();
-            for (DefineMenu defineMenu : defineMenus) {
-                list.add(transferEntityToVo(defineMenu));
+            for (DefineMenuEntity defineMenuEntity : defineMenuEntities) {
+                list.add(transferEntityToVo(defineMenuEntity));
             }
             return list;
         }

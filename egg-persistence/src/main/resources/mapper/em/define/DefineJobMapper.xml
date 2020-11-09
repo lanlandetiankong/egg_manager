@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>

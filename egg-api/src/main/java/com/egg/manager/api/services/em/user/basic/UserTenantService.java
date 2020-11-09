@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserTenantMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserTenantVo;
@@ -19,27 +19,27 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlService<UserTenant, UserTenantMapper, UserTenantVo> {
+public interface UserTenantService extends IService<UserTenantEntity>, MyBaseMysqlService<UserTenantEntity, UserTenantMapper, UserTenantVo> {
     /**
      * 取得当前用户关联的 UserTenant
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserTenant> dealGetAllByAccount(UserAccount userAccount);
+    List<UserTenantEntity> dealGetAllByAccount(UserAccountEntity userAccountEntity);
 
     /**
      * 从数据库是中取得当前用户关联的 UserTenant
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserTenant> dealGetAllByAccountFromDb(UserAccount userAccount);
+    List<UserTenantEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity);
 
     /**
      * 从Redis中取得当前用户关联的 UserTenant
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserTenant> dealGetAllByAccountFromRedis(UserAccount userAccount);
+    List<UserTenantEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity);
 
 
     /**
@@ -51,7 +51,7 @@ public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserTenant> paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserTenantEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
@@ -64,7 +64,7 @@ public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
 
@@ -75,7 +75,7 @@ public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserTenantVo userTenantVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, UserTenantVo userTenantVo) throws Exception;
 
     /**
      * 用户与租户关联-更新
@@ -84,6 +84,6 @@ public interface UserTenantService extends IService<UserTenant>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserTenantVo userTenantVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, UserTenantVo userTenantVo) throws Exception;
 
 }

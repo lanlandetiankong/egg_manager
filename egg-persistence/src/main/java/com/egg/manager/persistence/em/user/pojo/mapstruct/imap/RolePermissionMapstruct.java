@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermission;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.RolePermissionDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.RolePermissionConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {RolePermissionConversion.class}
 )
-public interface RolePermissionMapstruct extends MyBaseMysqlMapstruct<RolePermission, RolePermissionVo, RolePermissionDto> {
+public interface RolePermissionMapstruct extends MyBaseMysqlMapstruct<RolePermissionEntity, RolePermissionVo, RolePermissionDto> {
 
     RolePermissionMapstruct INSTANCE = Mappers.getMapper(RolePermissionMapstruct.class);
 
@@ -31,7 +31,7 @@ public interface RolePermissionMapstruct extends MyBaseMysqlMapstruct<RolePermis
      * @return
      */
     @Mappings({})
-    RolePermission transferVoToEntity(RolePermissionVo vo);
+    RolePermissionEntity transferVoToEntity(RolePermissionVo vo);
 
     /**
      * entity转vo
@@ -42,7 +42,7 @@ public interface RolePermissionMapstruct extends MyBaseMysqlMapstruct<RolePermis
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    RolePermissionVo transferEntityToVo(RolePermission entity);
+    RolePermissionVo transferEntityToVo(RolePermissionEntity entity);
 
     /**
      * dto转vo

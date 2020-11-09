@@ -46,7 +46,7 @@ import java.util.*;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserAccountService.class)
-public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMapper, UserAccount, UserAccountVo> implements UserAccountService {
+public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMapper, UserAccountEntity, UserAccountVo> implements UserAccountService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
     @Autowired
@@ -61,9 +61,9 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     private UserDepartmentMapper userDepartmentMapper;
 
     @Override
-    public UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
-        QueryWrapper<UserAccount> wrapper = new QueryWrapper<UserAccount>();
-        wrapper.setEntity(new UserAccount());
+    public UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
+        QueryWrapper<UserAccountEntity> wrapper = new QueryWrapper<UserAccountEntity>();
+        wrapper.setEntity(new UserAccountEntity());
         wrapper.eq("account", loginAccountDTO.getAccount())
                 .eq("state", UserAccountStateEnum.ENABLED.getValue());
         return userAccountMapper.selectOne(wrapper);
@@ -71,23 +71,23 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccount> paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
                                                                 List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserAccount> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
-        List<UserAccount> userAccounts = iPage.getRecords();
-        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccounts));
+        List<UserAccountEntity> userAccountEntities = iPage.getRecords();
+        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
                                                              List<AntdvSortBean> sortBeans) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
@@ -119,35 +119,35 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
+    public Integer dealCreate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception {
         if (this.dealCheckDuplicateKey(userAccountVo, new QueryWrapper<>())) {
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
-        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccount = super.doBeforeCreate(loginUser, userAccount, true);
+        UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
+        userAccountEntity = super.doBeforeCreate(loginUser, userAccountEntity, true);
         if (null == userAccountVo.getLocked()) {
             //如果没设置值，默认不锁定
-            userAccount.setLocked(SwitchStateEnum.Close.getValue());
+            userAccountEntity.setLocked(SwitchStateEnum.Close.getValue());
         }
-        userAccount.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
+        userAccountEntity.setUserType(UserAccountBaseTypeEnum.SimpleUser.getValue());
         if (StringUtils.isBlank(userAccountVo.getPassword())) {
             String pwd = UserAccountConstant.DEFAULT_PWD;
             userAccountVo.setPassword(pwd);
-            userAccount.setPassword(pwd);
+            userAccountEntity.setPassword(pwd);
         }
-        Integer addCount = userAccountMapper.insert(userAccount);
+        Integer addCount = userAccountMapper.insert(userAccountEntity);
         //关联 租户
-        if (LongUtils.isNotBlank(userAccount.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
-            UserTenant userTenant = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
-            userTenantMapper.insert(userTenant);
+        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
+            UserTenantEntity userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+            userTenantMapper.insert(userTenantEntity);
         } else {
             throw new BusinessException("关联用户与租户失败！创建用户失败！");
         }
 
         //关联 部门
-        if (LongUtils.isNotBlank(userAccount.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
-            UserDepartment userDepartment = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
-            userDepartmentMapper.insert(userDepartment);
+        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
+            UserDepartmentEntity userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+            userDepartmentMapper.insert(userDepartmentEntity);
         } else {
             throw new BusinessException("关联用户与部门失败！创建用户失败！");
         }
@@ -156,45 +156,45 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception {
-        QueryWrapper<UserAccount> uniWrapper = new QueryWrapper<UserAccount>()
+    public Integer dealUpdate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception {
+        QueryWrapper<UserAccountEntity> uniWrapper = new QueryWrapper<UserAccountEntity>()
                 .ne("fid", userAccountVo.getFid());
         if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {
             //已有重复键值
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         Integer changeCount = 0;
-        UserAccount userAccount = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccount = super.doBeforeUpdate(loginUser, userAccount);
-        changeCount = userAccountMapper.updateById(userAccount);
+        UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
+        userAccountEntity = super.doBeforeUpdate(loginUser, userAccountEntity);
+        changeCount = userAccountMapper.updateById(userAccountEntity);
         //关联 租户
-        if (LongUtils.isNotBlank(userAccount.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
-            QueryWrapper<UserTenant> tenantQueryWrapper = new QueryWrapper<UserTenant>();
-            tenantQueryWrapper.eq("user_account_id", userAccount.getFid())
+        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
+            QueryWrapper<UserTenantEntity> tenantQueryWrapper = new QueryWrapper<UserTenantEntity>();
+            tenantQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
                     .eq("state", BaseStateEnum.ENABLED.getValue());
-            UserTenant userTenant = userTenantMapper.selectOne(tenantQueryWrapper);
-            if (userTenant == null) {
-                userTenant = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongTenantId(), loginUser);
-                userTenantMapper.insert(userTenant);
+            UserTenantEntity userTenantEntity = userTenantMapper.selectOne(tenantQueryWrapper);
+            if (userTenantEntity == null) {
+                userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+                userTenantMapper.insert(userTenantEntity);
             } else {
-                userTenant.setDefineTenantId(userAccountVo.getBelongTenantId());
-                userTenantMapper.updateById(userTenant);
+                userTenantEntity.setDefineTenantId(userAccountVo.getBelongTenantId());
+                userTenantMapper.updateById(userTenantEntity);
             }
         } else {
             throw new BusinessException("关联用户与租户失败！更新用户失败！");
         }
         //关联 部门
-        if (LongUtils.isNotBlank(userAccount.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
-            QueryWrapper<UserDepartment> departmentQueryWrapper = new QueryWrapper<UserDepartment>();
-            departmentQueryWrapper.eq("user_account_id", userAccount.getFid())
+        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
+            QueryWrapper<UserDepartmentEntity> departmentQueryWrapper = new QueryWrapper<UserDepartmentEntity>();
+            departmentQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
                     .eq("state", BaseStateEnum.ENABLED.getValue());
-            UserDepartment userDepartment = userDepartmentMapper.selectOne(departmentQueryWrapper);
-            if (userDepartment == null) {
-                userDepartment = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccount.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
-                userDepartmentMapper.insert(userDepartment);
+            UserDepartmentEntity userDepartmentEntity = userDepartmentMapper.selectOne(departmentQueryWrapper);
+            if (userDepartmentEntity == null) {
+                userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+                userDepartmentMapper.insert(userDepartmentEntity);
             } else {
-                userDepartment.setDefineDepartmentId(userAccountVo.getBelongDepartmentId());
-                userDepartmentMapper.updateById(userDepartment);
+                userDepartmentEntity.setDefineDepartmentId(userAccountVo.getBelongDepartmentId());
+                userDepartmentMapper.updateById(userDepartmentEntity);
             }
         } else {
             throw new BusinessException("关联用户与租户失败！更新用户失败！");
@@ -205,7 +205,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(UserAccountEntity loginUser, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
@@ -218,18 +218,18 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealRenewLock(UserAccount loginUser, Long lockId, boolean isLock) throws Exception {
+    public Integer dealRenewLock(UserAccountEntity loginUser, Long lockId, boolean isLock) throws Exception {
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
-        UserAccount userAccount = UserAccount.builder().fid(lockId).locked(lockState).build();
+        UserAccountEntity userAccountEntity = UserAccountEntity.builder().fid(lockId).locked(lockState).build();
         if (loginUser != null) {
-            userAccount.setLastModifyerId(loginUser.getFid());
+            userAccountEntity.setLastModifyerId(loginUser.getFid());
         }
-        Integer lockCount = userAccountMapper.updateById(userAccount);
+        Integer lockCount = userAccountMapper.updateById(userAccountEntity);
         return lockCount;
     }
 
     @Override
-    public Integer dealGrantRoleToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantRoleToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         Long loginUserId = loginUser != null ? loginUser.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
@@ -240,7 +240,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             //取得曾勾选的角色id 集合
             List<Long> oldCheckRoleIds = userRoleMapper.findAllRoleIdByUserAccountId(userAccountId, false);
             if (oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()) {
-                List<UserRole> addEntitys = new ArrayList<>();
+                List<UserRoleEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                 }
@@ -272,7 +272,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
-                    List<UserRole> addEntitys = new ArrayList<>();
+                    List<UserRoleEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
                         addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                     }
@@ -287,7 +287,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealGrantJobToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantJobToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         Long loginUserId = loginUser != null ? loginUser.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
@@ -298,7 +298,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             //取得曾勾选的职务id 集合
             List<Long> oldCheckJobIds = userJobMapper.findAllJobIdByUserAccountId(userAccountId, false);
             if (oldCheckJobIds == null || oldCheckJobIds.isEmpty()) {
-                List<UserJob> addEntitys = new ArrayList<>();
+                List<UserJobEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                 }
@@ -331,7 +331,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     //批量新增行
-                    List<UserJob> addEntitys = new ArrayList<>();
+                    List<UserJobEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
                         addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
                     }
@@ -345,7 +345,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccount> wrapper) {
+    public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         wrapper.eq("account", userAccountVo.getAccount());
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
@@ -353,7 +353,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser, Long[] checkIds, QueryWrapper<UserAccount> wrapper) {
+    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccountEntity loginUser, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         if (checkIds != null) {
             wrapper.in("fid", checkIds);
@@ -363,15 +363,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Set<String> dealGetExistAccountSet(UserAccount loginUser, Short state, QueryWrapper<UserAccount> wrapper) {
+    public Set<String> dealGetExistAccountSet(UserAccountEntity loginUser, Short state, QueryWrapper<UserAccountEntity> wrapper) {
         Set<String> accountSet = new HashSet<>();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         if (state != null) {
             wrapper.eq("state", state);
         }
-        List<UserAccount> userAccountList = userAccountMapper.selectList(wrapper);
-        if (userAccountList != null && userAccountList.isEmpty() == false) {
-            for (UserAccount user : userAccountList) {
+        List<UserAccountEntity> userAccountEntityList = userAccountMapper.selectList(wrapper);
+        if (userAccountEntityList != null && userAccountEntityList.isEmpty() == false) {
+            for (UserAccountEntity user : userAccountEntityList) {
                 accountSet.add(user.getAccount());
             }
         }

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserRole;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserRoleDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.UserRoleConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserRoleConversion.class}
 )
-public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRole, UserRoleVo, UserRoleDto> {
+public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRoleEntity, UserRoleVo, UserRoleDto> {
     UserRoleMapstruct INSTANCE = Mappers.getMapper(UserRoleMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRole, UserRo
      * @return
      */
     @Mappings({})
-    UserRole transferVoToEntity(UserRoleVo vo);
+    UserRoleEntity transferVoToEntity(UserRoleVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface UserRoleMapstruct extends MyBaseMysqlMapstruct<UserRole, UserRo
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    UserRoleVo transferEntityToVo(UserRole entity);
+    UserRoleVo transferEntityToVo(UserRoleEntity entity);
 
     /**
      * dto转vo

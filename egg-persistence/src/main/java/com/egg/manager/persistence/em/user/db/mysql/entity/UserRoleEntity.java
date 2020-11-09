@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.announcement.db.mysql.entity;
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -11,50 +11,39 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * -entity
+ */
+
+/**
  * @author zhoucj
- * @description 公告
+ * @description 用户&角色 关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_announcement")
-public class Announcement extends Model<Announcement> {
-
+@TableName("em_user_role")
+public class UserRoleEntity extends Model<UserRoleEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
+    /**
+     * 账号id
+     */
+    @TableField(value = "user_account_id")
+    private Long userAccountId;
+    /**
+     * 角色id
+     */
+    @TableField(value = "define_role_id")
+    private Long defineRoleId;
+    /**
+     * 类型
+     */
+    @TableField("type")
+    private Integer type;
 
-    /**
-     * 标题
-     */
-    @TableField("title")
-    private String title;
-    /**
-     * 关键字
-     */
-    @TableField("key_word")
-    private String keyWord;
-    /**
-     * 发布部门
-     */
-    @TableField("publish_department")
-    private String publishDepartment;
-    /**
-     * 内容
-     */
-    @TableField("content")
-    private String content;
-    /**
-     * 公告标签 集合
-     */
-    @TableField("tag_ids")
-    private String tagIds;
-    /**
-     * 附件
-     */
-    @TableField("accessory")
-    private String accessory;
+
     /**
      * 备注
      */
@@ -107,5 +96,6 @@ public class Announcement extends Model<Announcement> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
 
 }

@@ -4,6 +4,8 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.user.basic.DefineTenantService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -14,8 +16,6 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.DefineTenantTransfer;
@@ -61,7 +61,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public MyCommonResult<DefineTenantVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineTenantVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class);
         try {
             //解析 搜索条件
@@ -82,12 +82,12 @@ public class DefineTenantController extends BaseController {
     @ApiOperation(value = "根据id查询->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefineTenantVo> queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineTenantVo> queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class);
         try {
             Assert.notBlank(defineTenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            DefineTenant defineTenant = defineTenantMapper.selectById(defineTenantId);
-            result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenant));
+            DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(defineTenantId);
+            result.setBean(DefineTenantTransfer.transferEntityToVo(defineTenantEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -103,7 +103,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/gainEnumSelect")
-    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineTenantVo> doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineTenantVo> result = MyCommonResult.gainQueryResult(DefineTenantVo.class);
         try {
             //解析 搜索条件
@@ -123,7 +123,7 @@ public class DefineTenantController extends BaseController {
     @ApiOperation(value = "新增->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -140,7 +140,7 @@ public class DefineTenantController extends BaseController {
     @ApiOperation(value = "更新->租户定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -160,7 +160,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -180,7 +180,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -201,12 +201,12 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/setupTenantManager")
     public MyCommonResult doSetupTenantManager(HttpServletRequest request, Long tenantId, Long[] userAccountIdArr,
-                                               @CurrentLoginUser UserAccount loginUser) {
+                                               @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(tenantId, "未知租户id:" + actionFailMsg);
-            DefineTenant defineTenant = defineTenantMapper.selectById(tenantId);
-            Assert.notNull(defineTenant, "租户不存在:" + actionFailMsg);
+            DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(tenantId);
+            Assert.notNull(defineTenantEntity, "租户不存在:" + actionFailMsg);
             int count = defineTenantService.dealTenantSetupManager(loginUser, tenantId, userAccountIdArr);
             result.setCount(count);
         } catch (Exception e) {

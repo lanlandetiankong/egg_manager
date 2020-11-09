@@ -21,8 +21,8 @@ import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -44,7 +44,7 @@ import java.util.*;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineMenuService.class)
-public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapper, DefineMenu, DefineMenuVo> implements DefineMenuService {
+public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapper, DefineMenuEntity, DefineMenuVo> implements DefineMenuService {
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -55,12 +55,12 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     private UserAccountMapper userAccountMapper;
 
     @Override
-    public List<DefineMenu> dealGetUserGrantedMenusByAccountId(Long userAccountId) {
+    public List<DefineMenuEntity> dealGetUserGrantedMenusByAccountId(Long userAccountId) {
         if (LongUtils.isBlank(userAccountId)) {
-            return new ArrayList<DefineMenu>();
+            return new ArrayList<DefineMenuEntity>();
         }
-        UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {
+        UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccountEntity.getUserTypeNum())) {
             //如果是[超级管理员]的话可以访问全部菜单
             return getAllEnableList();
         } else {
@@ -72,14 +72,14 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Override
     public Set<String> dealGetUserVisitAbleUrl(Long userAccountId) {
         Set<String> urlSets = new HashSet<>();
-        List<DefineMenu> defineMenuList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
-        if (defineMenuList != null && defineMenuList.isEmpty() == false) {
-            for (DefineMenu defineMenu : defineMenuList) {
-                if (defineMenu != null) {
-                    if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenu.getUrlJumpType())) {
+        List<DefineMenuEntity> defineMenuEntityList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
+        if (defineMenuEntityList != null && defineMenuEntityList.isEmpty() == false) {
+            for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
+                if (defineMenuEntity != null) {
+                    if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenuEntity.getUrlJumpType())) {
                         //内部router跳转
-                        if (StringUtils.isNotBlank(defineMenu.getRouterUrl())) {
-                            urlSets.add(defineMenu.getRouterUrl());
+                        if (StringUtils.isNotBlank(defineMenuEntity.getRouterUrl())) {
+                            urlSets.add(defineMenuEntity.getRouterUrl());
                         }
                     }
                 }
@@ -90,14 +90,14 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
     @Override
     public List<CommonMenuTree> dealGetUserGrantedMenuTrees(Long userAccountId) {
-        List<DefineMenu> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
+        List<DefineMenuEntity> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         return treeList != null ? treeList : new ArrayList<CommonMenuTree>();
     }
 
     @Override
-    public List<DefineMenu> getAllEnableList() {
-        QueryWrapper<DefineMenu> queryWrapper = new QueryWrapper<DefineMenu>();
+    public List<DefineMenuEntity> getAllEnableList() {
+        QueryWrapper<DefineMenuEntity> queryWrapper = new QueryWrapper<DefineMenuEntity>();
         //筛选与排序
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
@@ -108,13 +108,13 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenu> allMenus) {
+    public List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenuEntity> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
             return null;
         }
         List<CommonMenuTree> childList = new ArrayList<CommonMenuTree>();
         CommonMenuTree tree = null;
-        for (DefineMenu menu : allMenus) {
+        for (DefineMenuEntity menu : allMenus) {
             if (LongUtils.isNotBlank(menu.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(menu.getParentId())) {
@@ -135,14 +135,14 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenuEntity> allMenus) {
         if (allMenus == null || allMenus.size() == 0) {
             return null;
         }
         //添加最底层的根节点
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
-        for (DefineMenu menu : allMenus) {
+        for (DefineMenuEntity menu : allMenus) {
             if (LongUtils.isNotBlank(menu.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(menu.getParentId())) {
@@ -163,7 +163,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenu> allMenus) {
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenuEntity> allMenus) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(rootId, allMenus);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineMenuConstant.ROOT_ID).title("菜单首层项").value(DefineMenuConstant.ROOT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
@@ -173,24 +173,24 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenu> paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<DefineMenu> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineMenuMapper.selectCount(queryWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
-        List<DefineMenu> defineMenus = iPage.getRecords();
-        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenus));
+        List<DefineMenuEntity> defineMenuEntities = iPage.getRecords();
+        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -201,43 +201,43 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenu>());
+    public Integer dealCreate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception {
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenuEntity>());
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
-        defineMenu = super.doBeforeCreate(loginUser, defineMenu, true);
-        Long parentId = defineMenu.getParentId();
+        DefineMenuEntity defineMenuEntity = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        defineMenuEntity = super.doBeforeCreate(loginUser, defineMenuEntity, true);
+        Long parentId = defineMenuEntity.getParentId();
         //
         if (LongUtils.isBlank(parentId)) {
-            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
-            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
+            defineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+            defineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
         } else if (DefineMenuConstant.ROOT_ID.equals(parentId)) {
             //如果上级是 根级菜单
-            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
-            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
+            defineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+            defineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
         } else {
-            DefineMenu parentMenu = defineMenuMapper.selectById(parentId);
+            DefineMenuEntity parentMenu = defineMenuMapper.selectById(parentId);
             Integer parentMenuLevel = null;
             if (parentMenu != null) {
                 parentMenuLevel = parentMenu.getLevel();
             }
             if (parentMenuLevel != null) {
-                defineMenu.setLevel(parentMenuLevel + 1);
+                defineMenuEntity.setLevel(parentMenuLevel + 1);
             } else {
-                defineMenu.setLevel(parentMenuLevel);
+                defineMenuEntity.setLevel(parentMenuLevel);
             }
         }
-        return defineMenuMapper.insert(defineMenu);
+        return defineMenuMapper.insert(defineMenuEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception {
-        QueryWrapper<DefineMenu> uniWrapper = new QueryWrapper<DefineMenu>()
+    public Integer dealUpdate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception {
+        QueryWrapper<DefineMenuEntity> uniWrapper = new QueryWrapper<DefineMenuEntity>()
                 .ne("fid", defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {
@@ -245,31 +245,31 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
-        DefineMenu defineMenu = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
-        defineMenu = super.doBeforeUpdate(loginUser, defineMenu);
-        Long parentId = defineMenu.getParentId();
+        DefineMenuEntity defineMenuEntity = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
+        defineMenuEntity = super.doBeforeUpdate(loginUser, defineMenuEntity);
+        Long parentId = defineMenuEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
-            DefineMenu parentMenu = defineMenuMapper.selectById(parentId);
+            DefineMenuEntity parentMenu = defineMenuMapper.selectById(parentId);
             Integer parentMenuLevel = null;
             if (parentMenu != null) {
                 parentMenuLevel = parentMenu.getLevel();
             }
             if (parentMenuLevel != null) {
-                defineMenu.setLevel(parentMenuLevel + 1);
+                defineMenuEntity.setLevel(parentMenuLevel + 1);
             } else {
-                defineMenu.setLevel(parentMenuLevel);
+                defineMenuEntity.setLevel(parentMenuLevel);
             }
         } else {
-            defineMenu.setParentId(DefineMenuConstant.ROOT_ID);
-            defineMenu.setLevel(DefineMenuConstant.ROOT_LEVEL);
+            defineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+            defineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
-        changeCount = defineMenuMapper.updateById(defineMenu);
+        changeCount = defineMenuMapper.updateById(defineMenuEntity);
         return changeCount;
     }
 
 
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> queryWrapper) {
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccountEntity loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> queryWrapper) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<>();
         queryWrapper.eq("router_url", defineMenuVo.getRouterUrl());

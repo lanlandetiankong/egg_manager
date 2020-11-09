@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserGroup;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserGroupEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserGroupDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.UserGroupConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserGroupConversion.class}
 )
-public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup, UserGroupVo, UserGroupDto> {
+public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroupEntity, UserGroupVo, UserGroupDto> {
     UserGroupMapstruct INSTANCE = Mappers.getMapper(UserGroupMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup, User
      * @return
      */
     @Mappings({})
-    UserGroup transferVoToEntity(UserGroupVo vo);
+    UserGroupEntity transferVoToEntity(UserGroupVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface UserGroupMapstruct extends MyBaseMysqlMapstruct<UserGroup, User
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    UserGroupVo transferEntityToVo(UserGroup entity);
+    UserGroupVo transferEntityToVo(UserGroupEntity entity);
 
     /**
      * dto转vo

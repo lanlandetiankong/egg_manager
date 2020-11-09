@@ -3,9 +3,9 @@ package com.egg.manager.persistence.exchange.db.mongo.repositoryimpl;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.util.reflex.MyReflexUtil;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.repository.MyBaseMongoRepository;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.google.common.collect.Lists;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
@@ -154,7 +154,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     }
 
     @Override
-    public <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short status, U user) {
+    public <U extends UserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short status, U user) {
         //id迭代器 不能为空
         Query query = dealGetQueryWithIds(ids, true);
         int size = Lists.newArrayList(ids).size();

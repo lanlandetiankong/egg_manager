@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session;
 
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -17,11 +17,11 @@ public interface UserAccountTokenMapstruct {
 
     /**
      * 复制-UserAccount->UserAccountToken
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
     @Mapping(source = "fid", target = "userAccountId")
-    UserAccountToken userAccount_CopyTo_UserAccountToken(UserAccount userAccount);
+    UserAccountToken userAccount_CopyTo_UserAccountToken(UserAccountEntity userAccountEntity);
 
 
 }

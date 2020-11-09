@@ -6,7 +6,7 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.egg.manager.api.exchange.services.xls.MyXlsBaseService;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,8 +25,8 @@ public class MyXlsBaseServiceImpl implements MyXlsBaseService {
 
 
     @Override
-    public AntdFileUploadBean dealVerifyMenuExportAble(DefineMenu defineMenu) throws Exception {
-        AntdFileUploadBean fileUploadBean = AntdFileUploadBean.dealJsonStrToBean(defineMenu.getExcelModelConf());
+    public AntdFileUploadBean dealVerifyMenuExportAble(DefineMenuEntity defineMenuEntity) throws Exception {
+        AntdFileUploadBean fileUploadBean = AntdFileUploadBean.dealJsonStrToBean(defineMenuEntity.getExcelModelConf());
         if (fileUploadBean == null) {
             throw new BusinessException("当前菜单定义未上传Excel模板，请先上传后再使用导出Excel功能！");
         }

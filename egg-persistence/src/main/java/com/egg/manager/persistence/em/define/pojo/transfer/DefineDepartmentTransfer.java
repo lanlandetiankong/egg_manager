@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineDepartmentMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -26,11 +26,11 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefineDepartment transferVoToEntity(DefineDepartmentVo vo) {
+    public static DefineDepartmentEntity transferVoToEntity(DefineDepartmentVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineDepartment entity = defineDepartmentMapstruct.transferVoToEntity(vo);
+        DefineDepartmentEntity entity = defineDepartmentMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -39,7 +39,7 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineDepartmentVo transferEntityToVo(DefineDepartment entity) {
+    public static DefineDepartmentVo transferEntityToVo(DefineDepartmentEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -60,13 +60,13 @@ public class DefineDepartmentTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<DefineDepartmentVo> transferEntityToVoList(List<DefineDepartment> defineDepartments) {
-        if (defineDepartments == null) {
+    public static List<DefineDepartmentVo> transferEntityToVoList(List<DefineDepartmentEntity> defineDepartmentEntities) {
+        if (defineDepartmentEntities == null) {
             return null;
         } else {
             List<DefineDepartmentVo> list = new ArrayList<>();
-            for (DefineDepartment defineDepartment : defineDepartments) {
-                list.add(transferEntityToVo(defineDepartment));
+            for (DefineDepartmentEntity defineDepartmentEntity : defineDepartmentEntities) {
+                list.add(transferEntityToVo(defineDepartmentEntity));
             }
             return list;
         }

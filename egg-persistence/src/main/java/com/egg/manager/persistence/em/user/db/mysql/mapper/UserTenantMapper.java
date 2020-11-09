@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserTenantMapper extends MyEggMapper<UserTenant> {
+public interface UserTenantMapper extends MyEggMapper<UserTenantEntity> {
     /**
      * [分页搜索查询] - 用户&租户
      * @param page
@@ -40,7 +40,7 @@ public interface UserTenantMapper extends MyEggMapper<UserTenant> {
      * @param tenantList
      * @return
      */
-    int customBatchInsert(List<UserTenant> tenantList);
+    int customBatchInsert(List<UserTenantEntity> tenantList);
 
     /**
      * 根据用户id 修改指定租户关联 是否管理员 的状态
@@ -51,5 +51,5 @@ public interface UserTenantMapper extends MyEggMapper<UserTenant> {
      * @return
      */
     int batchUpdateManagerUserStateByTenantId(@Param("tenantId") Long tenantId, @Param("userAccountIdList") List<Long> userAccountIdList, @Param("stateVal") Short stateVal
-            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

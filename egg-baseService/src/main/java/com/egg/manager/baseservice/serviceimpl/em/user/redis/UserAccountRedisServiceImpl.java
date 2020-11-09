@@ -12,9 +12,9 @@ import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
 import com.egg.manager.api.exchange.servicesimpl.redis.BaseRedisCommonReqServiceImpl;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -59,7 +59,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public UserAccount dealGetCurrentLoginUserByAuthorization(UserAccount loginUser, String authorization) {
+    public UserAccountEntity dealGetCurrentLoginUserByAuthorization(UserAccountEntity loginUser, String authorization) {
         if (StringUtils.isNotBlank(authorization)) {
             Object obj = redisHelper.hashGet(RedisShiroCacheEnum.authorization.getKey(), authorization);
             if (obj != null) {
@@ -86,13 +86,13 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public UserAccount dealGetCurrentUserEntity(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
-        return dealAutoGetRedisObjectCache(loginUser, RedisShiroCacheEnum.userAccount.getKey(), authorization, userAccountId, UserAccount.class,
+    public UserAccountEntity dealGetCurrentUserEntity(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+        return dealAutoGetRedisObjectCache(loginUser, RedisShiroCacheEnum.userAccount.getKey(), authorization, userAccountId, UserAccountEntity.class,
                 almostRefresh, RedisShiroCacheEnum.userAccount.getTtl());
     }
 
     @Override
-    public DefineTenant dealGetCurrentLoginerBelongTenantByAuthorization(UserAccount loginUser, String authorization) {
+    public DefineTenantEntity dealGetCurrentLoginerBelongTenantByAuthorization(UserAccountEntity loginUser, String authorization) {
         if (StringUtils.isNotBlank(authorization)) {
             Object obj = redisHelper.hashGet(RedisShiroCacheEnum.authorization.getKey(), authorization);
             if (obj != null) {
@@ -118,8 +118,8 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public DefineTenant dealGetCurrentUserBelongTenantEntity(UserAccount loginUser, String authorization, Long defineTenantId, boolean almostRefresh) {
-        return dealAutoGetRedisObjectCache(loginUser, RedisShiroCacheEnum.userTenant.getKey(), authorization, defineTenantId, DefineTenant.class,
+    public DefineTenantEntity dealGetCurrentUserBelongTenantEntity(UserAccountEntity loginUser, String authorization, Long defineTenantId, boolean almostRefresh) {
+        return dealAutoGetRedisObjectCache(loginUser, RedisShiroCacheEnum.userTenant.getKey(), authorization, defineTenantId, DefineTenantEntity.class,
                 almostRefresh, RedisShiroCacheEnum.userTenant.getTtl());
     }
 
@@ -129,7 +129,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public Set<String> dealGetCurrentUserAllRoleSet(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+    public Set<String> dealGetCurrentUserAllRoleSet(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
         List<String> roleCodeList = dealAutoGetRedisListCache(loginUser, RedisShiroCacheEnum.userRoles.getKey(), authorization, userAccountId, String.class, almostRefresh, RedisShiroCacheEnum.userRoles.getTtl());
         roleCodeList = roleCodeList != null ? roleCodeList : new ArrayList<String>();
         return Sets.newHashSet(roleCodeList);
@@ -142,7 +142,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public Set<String> dealGetCurrentUserAllPermissionSet(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+    public Set<String> dealGetCurrentUserAllPermissionSet(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
         List<String> permissionCodeList = dealAutoGetRedisListCache(loginUser, RedisShiroCacheEnum.userPermissions.getKey(), authorization, userAccountId, String.class, almostRefresh, RedisShiroCacheEnum.userPermissions.getTtl());
         permissionCodeList = permissionCodeList != null ? permissionCodeList : new ArrayList<String>();
         return Sets.newHashSet(permissionCodeList);
@@ -155,7 +155,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public Set<String> dealGetCurrentUserFrontRouterUrls(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+    public Set<String> dealGetCurrentUserFrontRouterUrls(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
         List<String> menuCodeList = dealAutoGetRedisListCache(loginUser, RedisShiroCacheEnum.userFrontRouterUrl.getKey(), authorization, userAccountId, String.class, almostRefresh, RedisShiroCacheEnum.userFrontRouterUrl.getTtl());
         menuCodeList = menuCodeList != null ? menuCodeList : new ArrayList<String>();
         return Sets.newHashSet(menuCodeList);
@@ -169,7 +169,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public List<CommonMenuTree> dealGetCurrentUserFrontMenuTrees(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+    public List<CommonMenuTree> dealGetCurrentUserFrontMenuTrees(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
         List<CommonMenuTree> menuTreeList = dealAutoGetRedisListCache(loginUser, RedisShiroCacheEnum.userFrontMenus.getKey(), authorization, userAccountId, CommonMenuTree.class, almostRefresh, RedisShiroCacheEnum.userFrontMenus.getTtl());
         menuTreeList = menuTreeList != null ? menuTreeList : new ArrayList<CommonMenuTree>();
         return Lists.newArrayList(menuTreeList);
@@ -182,7 +182,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @return
      */
     @Override
-    public Set<String> dealGetCurrentUserFrontButtons(UserAccount loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
+    public Set<String> dealGetCurrentUserFrontButtons(UserAccountEntity loginUser, String authorization, Long userAccountId, boolean almostRefresh) {
         Set<String> menusSet = Sets.newHashSet();
         return menusSet;
     }
@@ -194,7 +194,7 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
      * @param userAccountId
      */
     @Override
-    public void dealRedisListCacheRefresh(UserAccount loginUser, String key, String hashKey, Long userAccountId, Long keyTtl) {
+    public void dealRedisListCacheRefresh(UserAccountEntity loginUser, String key, String hashKey, Long userAccountId, Long keyTtl) {
         if (RedisShiroCacheEnum.userRoles.getKey().equals(key)) {
             //用户拥有的[角色code-Set]
             Set<String> defineRoleCodeSet = defineRoleService.dealGetRoleCodeSetByAccountFromDb(userAccountId);
@@ -224,11 +224,11 @@ public class UserAccountRedisServiceImpl extends BaseRedisCommonReqServiceImpl i
             }
         } else if (RedisShiroCacheEnum.userAccount.getKey().equals(key)) {
             //用户信息 缓存
-            UserAccount userAccount = userAccountMapper.selectById(userAccountId);
+            UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
             if (keyTtl == null) {
-                redisHelper.hashPut(key, hashKey, userAccount);
+                redisHelper.hashPut(key, hashKey, userAccountEntity);
             } else {
-                redisHelper.hashTtlPut(key, hashKey, userAccount, keyTtl);
+                redisHelper.hashTtlPut(key, hashKey, userAccountEntity, keyTtl);
             }
         } else if (RedisShiroCacheEnum.userFrontMenus.getKey().equals(key)) {
             //用户可访问 菜单树

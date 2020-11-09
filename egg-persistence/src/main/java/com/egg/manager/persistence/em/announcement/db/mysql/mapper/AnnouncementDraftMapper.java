@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.announcement.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface AnnouncementDraftMapper extends MyEggMapper<AnnouncementDraft> {
+public interface AnnouncementDraftMapper extends MyEggMapper<AnnouncementDraftEntity> {
 
 
     /**
@@ -36,5 +36,5 @@ public interface AnnouncementDraftMapper extends MyEggMapper<AnnouncementDraft> 
      * @param loginUser
      * @return
      */
-    int batchPublishByIds(@Param(EggMpSqlConst.PARAMOF_IDS) List<String> ids, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int batchPublishByIds(@Param(EggMpSqlConst.PARAMOF_IDS) List<String> ids, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

@@ -2,9 +2,6 @@ package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,74 +12,32 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户账号
+ * @description 角色&权限  关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_account")
-public class UserAccount extends Model<UserAccount> {
+@TableName("em_role_permission")
+public class RolePermissionEntity extends Model<RolePermissionEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 用户名
+     * 角色id
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("define_role_id")
+    private Long defineRoleId;
     /**
-     * 账号
+     * 权限id
      */
-    @TableField("account")
-    private String account;
+    @TableField("define_permission_id")
+    private Long definePermissionId;
     /**
-     * 昵称
+     * 类型
      */
-    @TableField("nick_name")
-    private String nickName;
-    /**
-     * 头像地址
-     */
-    @TableField("avatar_url")
-    private String avatarUrl;
-    /**
-     * 密码
-     */
-    @JsonIgnore
-    private String password;
-    /**
-     * 手机号码
-     */
-    @TableField("phone")
-    private String phone;
-    /**
-     * 邮箱地址
-     */
-    @TableField("email")
-    private String email;
-    /**
-     * 性别
-     * @see UserSexEnum
-     */
-    @TableField("sex")
-    private Short sex;
-    /**
-     * 用户类型
-     * @see UserAccountBaseTypeEnum
-     */
-    @TableField("user_type")
-    private Integer userType;
-    /**
-     * 用户类型 数值
-     */
-    @TableField("user_type_num")
-    private Integer userTypeNum;
-    /**
-     * 是否锁定账号
-     */
-    @TableField("locked")
-    private short locked;
+    @TableField("type")
+    private Integer type;
 
 
     /**

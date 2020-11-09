@@ -14,9 +14,9 @@ import com.egg.manager.persistence.commons.base.exception.login.MyAuthentication
 import com.egg.manager.persistence.commons.util.LongUtils;
 import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
@@ -43,13 +43,13 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     private UserAccountMapper userAccountMapper;
 
     @Override
-    public Integer dealLogicDeleteById(UserAccount loginUser, String delId) throws Exception {
+    public Integer dealLogicDeleteById(UserAccountEntity loginUser, String delId) throws Exception {
         Integer count = baseMapper.deleteByIdWithModifyFill(delId,loginUser);
         return count;
     }
 
     @Override
-    public Integer dealBatchLogicDelete(UserAccount loginUser, String[] delIds) throws Exception {
+    public Integer dealBatchLogicDelete(UserAccountEntity loginUser, String[] delIds) throws Exception {
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
@@ -60,7 +60,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                  List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
@@ -99,7 +99,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
 
     @Override
-    public T doBeforeCreate(UserAccount loginUser, T t, boolean uuidFlag) {
+    public T doBeforeCreate(UserAccountEntity loginUser, T t, boolean uuidFlag) {
         Date now = new Date();
         if (uuidFlag) {
             EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.FID, MyUUIDUtil.renderSimpleUuid());
@@ -115,7 +115,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public T doBeforeUpdate(UserAccount loginUser, T t) {
+    public T doBeforeUpdate(UserAccountEntity loginUser, T t) {
         Date now = new Date();
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.STATE, BaseStateEnum.ENABLED.getValue());
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.UPDATE_TIME, now);
@@ -127,7 +127,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
 
     @Override
-    public T doBeforeDeleteOneById(UserAccount loginUser, Class<T> tClass, String idVal) {
+    public T doBeforeDeleteOneById(UserAccountEntity loginUser, Class<T> tClass, String idVal) {
         T t = EggReflexUtil.handlePojoGetInstance(tClass);
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.FID, idVal);
         EggReflexUtil.handlePojoSetFieldValue(t, MyBaseMysqlEntityFieldConstant.STATE, BaseStateEnum.DELETE.getValue());
@@ -147,19 +147,19 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
      * @throws IllegalAccessException
      */
     @Override
-    public UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException {
-        UserAccount userAccount = null;
+    public UserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException {
+        UserAccountEntity userAccountEntity = null;
         if (userAccountToken != null) {
             Long userAccountId = userAccountToken.getUserAccountId();
             if (LongUtils.isNotBlank(userAccountId)) {
-                userAccount = userAccountMapper.selectById(userAccountId);
+                userAccountEntity = userAccountMapper.selectById(userAccountId);
             }
         }
-        if (isRequired && userAccount == null) {
+        if (isRequired && userAccountEntity == null) {
             //强制取得用户身份认证，不存在时抛出异常
             throw new MyAuthenticationExpiredException();
         }
-        return userAccount;
+        return userAccountEntity;
     }
 
     @Override
@@ -173,8 +173,8 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public boolean checkUserAccountIsBlank(UserAccount userAccount) {
-        if (userAccount == null || LongUtils.isBlank(userAccount.getFid())) {
+    public boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity) {
+        if (userAccountEntity == null || LongUtils.isBlank(userAccountEntity.getFid())) {
             return true;
         }
         return false;

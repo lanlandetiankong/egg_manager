@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.announcement.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,33 +12,55 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 租户定义
+ * @description 公告草稿
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_tenant")
-public class DefineTenant extends Model<DefineTenant> {
+@TableName("em_announcement_draft")
+public class AnnouncementDraftEntity extends Model<AnnouncementDraftEntity> {
 
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
+
     /**
-     * 名称
+     * 标题
      */
-    @TableField("name")
-    private String name;
+    @TableField("title")
+    private String title;
     /**
-     * 编码
+     * 关键字
      */
-    @TableField("code")
-    private String code;
+    @TableField("key_word")
+    private String keyWord;
     /**
-     * 数据库类型 code
+     * 发布部门
      */
-    @TableField("db_code")
-    private String dbCode;
+    @TableField("publish_department")
+    private String publishDepartment;
+    /**
+     * 内容
+     */
+    @TableField("content")
+    private String content;
+    /**
+     * 公告标签 集合
+     */
+    @TableField("tag_ids")
+    private String tagIds;
+    /**
+     * 附件
+     */
+    @TableField("accessory")
+    private String accessory;
+    /**
+     * 是否已提交
+     */
+    @TableField("is_published")
+    private short isPublished;
+
 
     /**
      * 备注
@@ -88,9 +110,9 @@ public class DefineTenant extends Model<DefineTenant> {
     @TableField(value = "deleted_time")
     private Date deletedTime;
 
-
     @Override
     protected Serializable pkVal() {
         return this.fid;
     }
+
 }

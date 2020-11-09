@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserAccountPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
 import org.apache.commons.lang3.StringUtils;
@@ -134,7 +134,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                         if (checkIsSameUrl(urlSplit[0], httpServletRequest.getRequestURI())) {
                             //Constant.isPass=true;
                             if (StringUtils.isBlank(authorization)) {
-                                httpServletRequest.setAttribute("currentLoginUser", new UserAccount());
+                                httpServletRequest.setAttribute("currentLoginUser", new UserAccountEntity());
                                 return true;
                             } else {
                                 super.preHandle(request, response);
@@ -160,9 +160,9 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
         }
         //取得用户id
         Long userId = JwtUtil.getUserAccountId(token.getPrincipal().toString());
-        UserAccount userAccount = userAccountService.getById(userId);
-        if (userAccount != null) {
-            request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccount));
+        UserAccountEntity userAccountEntity = userAccountService.getById(userId);
+        if (userAccountEntity != null) {
+            request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccountEntity));
         }
     }
 

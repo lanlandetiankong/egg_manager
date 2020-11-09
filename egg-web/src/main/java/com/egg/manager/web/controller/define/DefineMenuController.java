@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -21,8 +23,6 @@ import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineMenuTransfer;
@@ -73,7 +73,7 @@ public class DefineMenuController extends BaseController {
     public MyCommonResult<CommonTreeSelect> queryTreeSelect(Boolean withRoot) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class);
         //查询 所有[可用状态]的 [菜单定义]
-        List<DefineMenu> allMenus = defineMenuService.getAllEnableList();
+        List<DefineMenuEntity> allMenus = defineMenuService.getAllEnableList();
         List<CommonTreeSelect> treeList = null;
         if (Boolean.TRUE.equals(withRoot)) {
             treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
@@ -89,7 +89,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping("/queryFilteredTreeSelect")
     public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class);
-        List<DefineMenu> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
+        List<DefineMenuEntity> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
         result.setResultList(treeList);
         return result;
@@ -98,7 +98,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineMenu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
-    public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class);
         List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser, authorization, loginUser.getFid(), false);
         result.setResultList(treeList);
@@ -118,7 +118,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineMenuVo> queryDtoPage(HttpServletRequest request,
                                                      String queryObj, String paginationObj, String sortObj,
-                                                     @CurrentLoginUser UserAccount loginUser) {
+                                                     @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class);
         try {
             //解析 搜索条件
@@ -144,7 +144,7 @@ public class DefineMenuController extends BaseController {
         try {
             Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineMenu entity = defineMenuMapper.selectById(defineMenuId);
+            DefineMenuEntity entity = defineMenuMapper.selectById(defineMenuId);
             result.setBean(DefineMenuTransfer.transferEntityToVo(entity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -156,7 +156,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "新增->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -174,7 +174,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "更新->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -193,12 +193,12 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineMenu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
-    public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineMenu entity = defineMenuMapper.selectById(menuId);
+            DefineMenuEntity entity = defineMenuMapper.selectById(menuId);
             if (fileUploadBean != null) {
                 entity.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
             } else {
@@ -220,7 +220,7 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -241,7 +241,7 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

@@ -3,7 +3,7 @@ package com.egg.manager.api.trait.excel.listeners.introduce.user;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
 import lombok.extern.slf4j.Slf4j;
@@ -36,14 +36,14 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     /**
      * 当前登录用户
      */
-    UserAccount loginUser = null;
+    UserAccountEntity loginUser = null;
 
 
     /**
      * 如果使用了spring,请使用这个构造方法。每次创建Listener的时候需要把spring管理的类传进来
      * @param userAccountService
      */
-    public UserAccountXlsIntroduceListener(UserAccountService userAccountService, UserAccount loginUser, Set<String> accountExistSet) {
+    public UserAccountXlsIntroduceListener(UserAccountService userAccountService, UserAccountEntity loginUser, Set<String> accountExistSet) {
         this.userAccountService = userAccountService;
         this.loginUser = loginUser;
         if (accountExistSet != null && accountExistSet.isEmpty() == false) {

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserJobMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserJobVo;
@@ -19,7 +19,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<UserJob, UserJobMapper, UserJobVo> {
+public interface UserJobService extends IService<UserJobEntity>, MyBaseMysqlService<UserJobEntity, UserJobMapper, UserJobVo> {
 
     /**
      * 分页查询 用户职务列表
@@ -30,7 +30,7 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJob> paginationBean,
+    MyCommonResult<UserJobVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobEntity> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
     /**
@@ -43,7 +43,7 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
+    MyCommonResult<UserJobVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserJobDto> paginationBean,
                                                   List<AntdvSortBean> sortBeans);
 
 
@@ -54,7 +54,7 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserJobVo userJobVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, UserJobVo userJobVo) throws Exception;
 
     /**
      * 用户职务-更新
@@ -63,6 +63,6 @@ public interface UserJobService extends IService<UserJob>, MyBaseMysqlService<Us
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserJobVo userJobVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, UserJobVo userJobVo) throws Exception;
 
 }

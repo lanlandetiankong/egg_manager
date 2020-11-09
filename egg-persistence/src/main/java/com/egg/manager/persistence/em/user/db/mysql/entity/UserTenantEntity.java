@@ -12,15 +12,15 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户&职务 关联
+ * @description 用户&租户 关联-entity
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_job")
-public class UserJob extends Model<UserJob> {
+@TableName("em_user_tenant")
+public class UserTenantEntity extends Model<UserTenantEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
@@ -29,10 +29,20 @@ public class UserJob extends Model<UserJob> {
     @TableField(value = "user_account_id")
     private Long userAccountId;
     /**
-     * 职务id
+     * 租户id
      */
-    @TableField(value = "define_job_id")
-    private Long defineJobId;
+    @TableField(value = "define_tenant_id")
+    private Long defineTenantId;
+    /**
+     * 类型
+     */
+    @TableField("type")
+    private Integer type;
+    /**
+     * 是否管理员
+     */
+    @TableField(value = "is_manager")
+    private Short isManager;
 
 
     /**

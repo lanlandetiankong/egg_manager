@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.UserJobConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserJobConversion.class}
 )
-public interface UserJobMapstruct extends MyBaseMysqlMapstruct<UserJob, UserJobVo, UserJobDto> {
+public interface UserJobMapstruct extends MyBaseMysqlMapstruct<UserJobEntity, UserJobVo, UserJobDto> {
     UserJobMapstruct INSTANCE = Mappers.getMapper(UserJobMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface UserJobMapstruct extends MyBaseMysqlMapstruct<UserJob, UserJobV
      * @return
      */
     @Mappings({})
-    UserJob transferVoToEntity(UserJobVo vo);
+    UserJobEntity transferVoToEntity(UserJobVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface UserJobMapstruct extends MyBaseMysqlMapstruct<UserJob, UserJobV
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    UserJobVo transferEntityToVo(UserJob entity);
+    UserJobVo transferEntityToVo(UserJobEntity entity);
 
     /**
      * dto转vo

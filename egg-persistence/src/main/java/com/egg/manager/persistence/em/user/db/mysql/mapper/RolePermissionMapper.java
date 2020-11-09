@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
-import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface RolePermissionMapper extends MyEggMapper<RolePermission> {
+public interface RolePermissionMapper extends MyEggMapper<RolePermissionEntity> {
 
 
     /**
@@ -21,7 +21,7 @@ public interface RolePermissionMapper extends MyEggMapper<RolePermission> {
      * @param permissionList
      * @return
      */
-    int customBatchInsert(List<RolePermission> permissionList);
+    int customBatchInsert(List<RolePermissionEntity> permissionList);
 
     /**
      * 根据角色id 修改指定权限 的可用状态
@@ -32,5 +32,5 @@ public interface RolePermissionMapper extends MyEggMapper<RolePermission> {
      * @return
      */
     int batchUpdateStateByRole(@Param("roleId") Long roleId, @Param("permissionIdList") List<Long> permissionIdList, @Param("stateVal") Short stateVal
-            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+            , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

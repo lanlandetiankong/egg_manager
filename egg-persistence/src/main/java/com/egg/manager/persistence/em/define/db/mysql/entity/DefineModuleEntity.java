@@ -12,38 +12,43 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户组定义
+ * @description 模块定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_group")
-public class DefineGroup extends Model<DefineGroup> {
-
+@TableName("em_define_module")
+public class DefineModuleEntity extends Model<DefineModuleEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
+
     /**
      * 名称
      */
     @TableField("name")
     private String name;
     /**
-     * 上级id
+     * 编码
      */
-    @TableField("pid")
-    private String pid;
+    @TableField("code")
+    private String code;
     /**
-     * 是否成员可继承组权限
+     * 图标名
      */
-    @TableField(value = "is_inherit")
-    private Integer isInherit;
+    @TableField("icon")
+    private String icon;
+    /**
+     * 样式json
+     */
+    @TableField("style")
+    private String style;
     /**
      * 类型
      */
     @TableField("type")
-    private String type;
+    private Integer type;
 
     /**
      * 备注
@@ -97,5 +102,6 @@ public class DefineGroup extends Model<DefineGroup> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
 
 }

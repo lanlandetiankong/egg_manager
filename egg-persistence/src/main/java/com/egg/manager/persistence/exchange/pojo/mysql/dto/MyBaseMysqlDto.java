@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.dto;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -43,11 +43,11 @@ public class MyBaseMysqlDto implements Serializable {
     /**
      * 创建人-vo
      */
-    private UserAccount createUser;
+    private UserAccountEntity createUser;
     /**
      * 最后更新人-vo
      */
-    private UserAccount lastModifyer;
+    private UserAccountEntity lastModifyer;
     /**
      * 版本号
      */

@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity">
         <id column="fid" property="fid"/>
         <result column="parent_id" property="parentId"/>
         <result column="menu_name" property="menuName"/>

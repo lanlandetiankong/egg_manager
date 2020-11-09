@@ -1,7 +1,7 @@
 package com.egg.manager.api.exchange.services.xls;
 
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -15,11 +15,11 @@ public interface MyXlsBaseService {
 
     /**
      * 判断 该菜单 是否可以导出excel
-     * @param defineMenu
+     * @param defineMenuEntity
      * @return
      * @throws Exception
      */
-    AntdFileUploadBean dealVerifyMenuExportAble(DefineMenu defineMenu) throws Exception;
+    AntdFileUploadBean dealVerifyMenuExportAble(DefineMenuEntity defineMenuEntity) throws Exception;
 
     /**
      * web导出 单个sheet,返回blob到前端

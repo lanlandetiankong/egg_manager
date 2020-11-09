@@ -5,6 +5,9 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -15,9 +18,6 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTransfer;
@@ -67,7 +67,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                       Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+                                                       Boolean onlySelf, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             //解析 搜索条件
@@ -93,7 +93,7 @@ public class AnnouncementController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
     public MyCommonResult<AnnouncementVo> queryFilteredPage(HttpServletRequest request, Integer limitSize,
-                                                            Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+                                                            Boolean onlySelf, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             //这些查询条件暂时用不到
@@ -122,15 +122,15 @@ public class AnnouncementController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcement/queryOneById")
     @ApiOperation(value = "根据id查询->公告", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Announcement announcement = announcementMapper.selectById(announcementId);
+            AnnouncementEntity announcementEntity = announcementMapper.selectById(announcementId);
             //取得 公告标签 map
-            Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
-            result.setBean(AnnouncementTransfer.transferEntityToVo(announcement, announcementTagMap));
+            Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+            result.setBean(AnnouncementTransfer.transferEntityToVo(announcementEntity, announcementTagMap));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -142,7 +142,7 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "新增->公告", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -160,7 +160,7 @@ public class AnnouncementController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement/createFromDraft")
     @PostMapping(value = "/createFromDraft")
     public MyCommonResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                          @CurrentLoginUser UserAccount loginUser) {
+                                          @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -179,7 +179,7 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -200,7 +200,7 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

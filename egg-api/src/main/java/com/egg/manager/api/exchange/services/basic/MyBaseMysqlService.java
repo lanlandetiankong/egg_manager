@@ -9,7 +9,7 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 
@@ -32,7 +32,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      * @throws Exception
      */
-    Integer dealLogicDeleteById(UserAccount loginUser, String delId) throws Exception;
+    Integer dealLogicDeleteById(UserAccountEntity loginUser, String delId) throws Exception;
 
     /**
      * 批量逻辑删除
@@ -41,7 +41,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      * @throws Exception
      */
-    Integer dealBatchLogicDelete(UserAccount loginUser, String[] delIds) throws Exception;
+    Integer dealBatchLogicDelete(UserAccountEntity loginUser, String[] delIds) throws Exception;
 
 
 
@@ -54,7 +54,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param sortBeans
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccount loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                           List<AntdvSortBean> sortBeans);
 
     /**
@@ -72,7 +72,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param uuidFlag
      * @return
      */
-    T doBeforeCreate(UserAccount loginUser, T t, boolean uuidFlag);
+    T doBeforeCreate(UserAccountEntity loginUser, T t, boolean uuidFlag);
 
     /**
      * 更新Entity之前调用
@@ -80,7 +80,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param t
      * @return
      */
-    T doBeforeUpdate(UserAccount loginUser, T t);
+    T doBeforeUpdate(UserAccountEntity loginUser, T t);
 
 
     /**
@@ -91,7 +91,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      */
     @Deprecated
-    T doBeforeDeleteOneById(UserAccount loginUser, Class<T> tClass, String idVal);
+    T doBeforeDeleteOneById(UserAccountEntity loginUser, Class<T> tClass, String idVal);
 
 
     /**
@@ -102,7 +102,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    UserAccount dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
+    UserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
 
 
     /**
@@ -115,8 +115,8 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
 
     /**
      * 判断UserAccount是否为空
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    boolean checkUserAccountIsBlank(UserAccount userAccount);
+    boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity);
 }

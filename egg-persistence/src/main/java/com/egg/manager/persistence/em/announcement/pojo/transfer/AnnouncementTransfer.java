@@ -2,10 +2,10 @@ package com.egg.manager.persistence.em.announcement.pojo.transfer;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap.AnnouncementMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -34,11 +34,11 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static Announcement transferVoToEntity(AnnouncementVo vo) {
+    public static AnnouncementEntity transferVoToEntity(AnnouncementVo vo) {
         if (vo == null) {
             return null;
         }
-        Announcement entity = announcementMapstruct.transferVoToEntity(vo);
+        AnnouncementEntity entity = announcementMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -47,7 +47,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementVo transferEntityToVo(Announcement entity, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementVo transferEntityToVo(AnnouncementEntity entity, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (entity == null) {
             return null;
         }
@@ -61,9 +61,9 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
                     List<String> tagNameList = new ArrayList<>();
                     if (announcementTagMap != null && announcementTagMap.isEmpty() == false) {
                         for (String tagId : tagList) {
-                            AnnouncementTag announcementTag = announcementTagMap.get(tagId);
-                            if (announcementTag != null) {
-                                tagNameList.add(announcementTag.getName());
+                            AnnouncementTagEntity announcementTagEntity = announcementTagMap.get(tagId);
+                            if (announcementTagEntity != null) {
+                                tagNameList.add(announcementTagEntity.getName());
                             }
                         }
                     }
@@ -77,12 +77,12 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<AnnouncementVo> transferEntityToVoList(List<Announcement> entityList, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferEntityToVoList(List<AnnouncementEntity> entityList, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (entityList == null) {
             return null;
         } else {
             List<AnnouncementVo> list = new ArrayList<>();
-            for (Announcement entity : entityList) {
+            for (AnnouncementEntity entity : entityList) {
                 list.add(transferEntityToVo(entity, announcementTagMap));
             }
             return list;
@@ -94,7 +94,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
      * @param dto
      * @return
      */
-    public static AnnouncementVo transferDtoToVo(AnnouncementDto dto, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementVo transferDtoToVo(AnnouncementDto dto, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (dto == null) {
             return null;
         }
@@ -108,9 +108,9 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
                     List<String> tagNameList = new ArrayList<>();
                     if (announcementTagMap != null && announcementTagMap.isEmpty() == false) {
                         for (String tagId : tagList) {
-                            AnnouncementTag announcementTag = announcementTagMap.get(tagId);
-                            if (announcementTag != null) {
-                                tagNameList.add(announcementTag.getName());
+                            AnnouncementTagEntity announcementTagEntity = announcementTagMap.get(tagId);
+                            if (announcementTagEntity != null) {
+                                tagNameList.add(announcementTagEntity.getName());
                             }
                         }
                     }
@@ -124,7 +124,7 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> dtos, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementVo> transferDtoToVoList(List<AnnouncementDto> dtos, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (dtos == null) {
             return null;
         } else {
@@ -139,18 +139,18 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
     /**
      * 公告草稿 转 公告 entity
      * @param loginUser
-     * @param announcementDraft
+     * @param announcementDraftEntity
      * @return
      */
-    public static Announcement transferFromDraft(UserAccount loginUser, AnnouncementDraft announcementDraft) {
-        Announcement announcement = announcementMapstruct.transferFromDraftEntity(announcementDraft);
+    public static AnnouncementEntity transferFromDraft(UserAccountEntity loginUser, AnnouncementDraftEntity announcementDraftEntity) {
+        AnnouncementEntity announcementEntity = announcementMapstruct.transferFromDraftEntity(announcementDraftEntity);
         if (loginUser != null) {
-            announcement.setCreateUserId(loginUser.getFid());
-            announcement.setLastModifyerId(loginUser.getFid());
+            announcementEntity.setCreateUserId(loginUser.getFid());
+            announcementEntity.setLastModifyerId(loginUser.getFid());
         } else {
-            announcement.setCreateUserId(announcementDraft.getCreateUserId());
-            announcement.setLastModifyerId(announcementDraft.getLastModifyerId());
+            announcementEntity.setCreateUserId(announcementDraftEntity.getCreateUserId());
+            announcementEntity.setLastModifyerId(announcementDraftEntity.getLastModifyerId());
         }
-        return announcement;
+        return announcementEntity;
     }
 }

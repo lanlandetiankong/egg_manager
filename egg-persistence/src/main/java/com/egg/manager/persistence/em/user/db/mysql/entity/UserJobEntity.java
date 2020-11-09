@@ -1,8 +1,7 @@
-package com.egg.manager.persistence.em.define.db.mysql.entity;
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,68 +12,27 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 菜单定义
+ * @description 用户&职务 关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_menu")
-public class DefineMenu extends Model<DefineMenu> {
+@TableName("em_user_job")
+public class UserJobEntity extends Model<UserJobEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 上级id
+     * 账号id
      */
-    @TableField(value = "parent_id")
-    private Long parentId;
+    @TableField(value = "user_account_id")
+    private Long userAccountId;
     /**
-     * 菜单名称
+     * 职务id
      */
-    @TableField(value = "menu_name")
-    private String menuName;
-    /**
-     * 路径跳转方式
-     * @see DefineMenuUrlJumpTypeEnum
-     */
-    @TableField(value = "url_jump_type")
-    private Integer urlJumpType;
-    /**
-     * 图标名称
-     */
-    @TableField(value = "icon_name")
-    private String iconName;
-    /**
-     * 路由跳转
-     */
-    @TableField(value = "router_url")
-    private String routerUrl;
-    /**
-     * 外部跳转路径
-     */
-    @TableField(value = "href_url")
-    private String hrefUrl;
-    /**
-     * 标签名
-     */
-    @TableField("label")
-    private String label;
-    /**
-     * 层级
-     */
-    @TableField("level")
-    private Integer level;
-    /**
-     * 排序值
-     */
-    @TableField("order_num")
-    private Integer orderNum;
-    /**
-     * excel配置信息
-     */
-    @TableField("excel_model_conf")
-    private String excelModelConf;
+    @TableField(value = "define_job_id")
+    private Long defineJobId;
 
 
     /**

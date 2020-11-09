@@ -1,11 +1,11 @@
 package com.egg.manager.persistence.em.announcement.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface AnnouncementMapper extends MyEggMapper<Announcement> {
+public interface AnnouncementMapper extends MyEggMapper<AnnouncementEntity> {
 
     /**
      * [分页搜索查询] - 公告

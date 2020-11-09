@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineMenuConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineMenuConversion.class}
 )
-public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, DefineMenuVo, DefineMenuDto> {
+public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenuEntity, DefineMenuVo, DefineMenuDto> {
     DefineMenuMapstruct INSTANCE = Mappers.getMapper(DefineMenuMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, De
      * @return
      */
     @Mappings({})
-    DefineMenu transferVoToEntity(DefineMenuVo vo);
+    DefineMenuEntity transferVoToEntity(DefineMenuVo vo);
 
     /**
      * entity转vo
@@ -44,7 +44,7 @@ public interface DefineMenuMapstruct extends MyBaseMysqlMapstruct<DefineMenu, De
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    DefineMenuVo transferEntityToVo(DefineMenu entity);
+    DefineMenuVo transferEntityToVo(DefineMenuEntity entity);
 
     /**
      * dto转vo

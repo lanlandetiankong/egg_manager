@@ -14,7 +14,7 @@ import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.repository.pc.web.PcWebLoginLogRepository;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -53,7 +53,7 @@ public class PcWebLoginLogController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<PcWebLoginLogMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<PcWebLoginLogMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<PcWebLoginLogMgo> result = MyCommonResult.gainQueryResult(PcWebLoginLogMgo.class);
         try {
             //添加状态过滤,时间倒序排序

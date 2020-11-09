@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineRole">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="code" property="code"/>

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserDepartmentMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserDepartmentVo;
@@ -19,28 +19,28 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserDepartmentService extends IService<UserDepartment>, MyBaseMysqlService<UserDepartment, UserDepartmentMapper, UserDepartmentVo> {
+public interface UserDepartmentService extends IService<UserDepartmentEntity>, MyBaseMysqlService<UserDepartmentEntity, UserDepartmentMapper, UserDepartmentVo> {
 
     /**
      * 查询账号下的所有[用户-部门关联]
      * @param account
      * @return
      */
-    List<UserDepartment> dealQueryListByAccount(UserAccount account);
+    List<UserDepartmentEntity> dealQueryListByAccount(UserAccountEntity account);
 
     /**
      * 从数据库是中取得当前用户关联的 UserDepartment
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount);
+    List<UserDepartmentEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity);
 
     /**
      * 从Redis中取得当前用户关联的 UserDepartment
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount);
+    List<UserDepartmentEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity);
 
 
     /**
@@ -52,7 +52,7 @@ public interface UserDepartmentService extends IService<UserDepartment>, MyBaseM
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartment> paginationBean,
+    MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartmentEntity> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**
@@ -65,7 +65,7 @@ public interface UserDepartmentService extends IService<UserDepartment>, MyBaseM
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
+    MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
                                                          List<AntdvSortBean> sortBeans);
 
 
@@ -76,7 +76,7 @@ public interface UserDepartmentService extends IService<UserDepartment>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception;
 
     /**
      * 用户与部门关联-更新
@@ -85,5 +85,5 @@ public interface UserDepartmentService extends IService<UserDepartment>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception;
 }

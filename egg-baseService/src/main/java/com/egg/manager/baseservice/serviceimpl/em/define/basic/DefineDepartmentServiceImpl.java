@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.util.LongUtils;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTransfer;
@@ -34,7 +34,7 @@ import java.util.List;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineDepartmentService.class)
-public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDepartmentMapper, DefineDepartment, DefineDepartmentVo>
+public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDepartmentMapper, DefineDepartmentEntity, DefineDepartmentVo>
         implements DefineDepartmentService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -43,7 +43,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -54,19 +54,19 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccount loginUser, Long rootId, List<DefineDepartment> allDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccountEntity loginUser, Long rootId, List<DefineDepartmentEntity> allDepartments) {
         if (allDepartments == null || allDepartments.size() == 0) {
             return null;
         }
         //添加最底层的根节点
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
-        for (DefineDepartment defineDepartment : allDepartments) {
-            if (LongUtils.isNotBlank(defineDepartment.getParentId())) {
+        for (DefineDepartmentEntity defineDepartmentEntity : allDepartments) {
+            if (LongUtils.isNotBlank(defineDepartmentEntity.getParentId())) {
                 if (rootId != null) {
-                    if (rootId.equals(defineDepartment.getParentId())) {
+                    if (rootId.equals(defineDepartmentEntity.getParentId())) {
                         tree = new CommonTreeSelect();
-                        childList.add(CommonTreeSelectTranslate.setDefineDepartmentParamToTreeSelect(defineDepartment, tree));
+                        childList.add(CommonTreeSelectTranslate.setDefineDepartmentParamToTreeSelect(defineDepartmentEntity, tree));
                     }
                 }
             }
@@ -81,8 +81,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccount loginUser, Long rootId, List<DefineDepartment> allDefineDepartments) {
-        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser, rootId, allDefineDepartments);
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccountEntity loginUser, Long rootId, List<DefineDepartmentEntity> allDefineDepartmentEntities) {
+        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser, rootId, allDefineDepartmentEntities);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).title("部门首层项").value(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
         treeSelectListWithRoot.add(rootItem);
@@ -91,51 +91,51 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
-        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
-        defineDepartment = super.doBeforeCreate(loginUser, defineDepartment, true);
-        Long parentId = defineDepartment.getParentId();
+    public Integer dealCreate(UserAccountEntity loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
+        DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
+        defineDepartmentEntity = super.doBeforeCreate(loginUser, defineDepartmentEntity, true);
+        Long parentId = defineDepartmentEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
-            DefineDepartment parentDepartment = defineDepartmentMapper.selectById(parentId);
+            DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {
                 parentLevel = parentDepartment.getLevel();
             }
             if (parentLevel != null) {
-                defineDepartment.setLevel(parentLevel + 1);
+                defineDepartmentEntity.setLevel(parentLevel + 1);
             } else {
-                defineDepartment.setLevel(parentLevel);
+                defineDepartmentEntity.setLevel(parentLevel);
             }
         } else {
-            defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
-            defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
+            defineDepartmentEntity.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
+            defineDepartmentEntity.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
-        return defineDepartmentMapper.insert(defineDepartment);
+        return defineDepartmentMapper.insert(defineDepartmentEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
         Integer changeCount = 0;
-        DefineDepartment defineDepartment = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
-        defineDepartment = super.doBeforeUpdate(loginUser, defineDepartment);
-        Long parentId = defineDepartment.getParentId();
+        DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
+        defineDepartmentEntity = super.doBeforeUpdate(loginUser, defineDepartmentEntity);
+        Long parentId = defineDepartmentEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
-            DefineDepartment parentDepartment = defineDepartmentMapper.selectById(parentId);
+            DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {
                 parentLevel = parentDepartment.getLevel();
             }
             if (parentLevel != null) {
-                defineDepartment.setLevel(parentLevel + 1);
+                defineDepartmentEntity.setLevel(parentLevel + 1);
             } else {
-                defineDepartment.setLevel(parentLevel);
+                defineDepartmentEntity.setLevel(parentLevel);
             }
         } else {
-            defineDepartment.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
-            defineDepartment.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
+            defineDepartmentEntity.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
+            defineDepartmentEntity.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
-        changeCount = defineDepartmentMapper.updateById(defineDepartment);
+        changeCount = defineDepartmentMapper.updateById(defineDepartmentEntity);
         return changeCount;
     }
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity">
         <id column="fid" property="fid"/>
         <result column="title" property="title"/>
         <result column="key_word" property="keyWord"/>

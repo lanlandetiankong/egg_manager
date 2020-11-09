@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,34 +12,33 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 角色&菜单 关联
+ * @description 职务定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_role_menu")
-public class RoleMenu extends Model<RoleMenu> {
+@TableName("em_define_job")
+public class DefineJobEntity extends Model<DefineJobEntity> {
+
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
-
     /**
-     * 角色id
+     * 名称
      */
-    @TableField(value = "define_role_id")
-    private Long defineRoleId;
+    @TableField("name")
+    private String name;
     /**
-     * 菜单id
+     * 描述
      */
-    @TableField(value = "define_menu_id")
-    private Long defineMenuId;
+    @TableField("description")
+    private String description;
     /**
      * 类型
      */
     @TableField("type")
     private Integer type;
-
 
     /**
      * 备注
@@ -93,6 +92,5 @@ public class RoleMenu extends Model<RoleMenu> {
     protected Serializable pkVal() {
         return this.fid;
     }
-
 
 }

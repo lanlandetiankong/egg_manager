@@ -1,11 +1,11 @@
 package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
+public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEntity> {
 
 
     /**
@@ -34,7 +34,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
      */
-    List<DefineDepartment> getDepartmentFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
+    List<DefineDepartmentEntity> getDepartmentFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
 
     /**
      * 根据用户id查询 所属的部门详情
@@ -42,7 +42,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartment> {
      * @param departmentState
      * @return
      */
-    DefineDepartment selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("departmentState") Short departmentState);
+    DefineDepartmentEntity selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("departmentState") Short departmentState);
 
     /**
      * 根据用户id查询 所属的部门详情-dto

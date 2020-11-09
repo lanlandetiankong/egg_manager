@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import com.egg.manager.web.controller.BaseController;
@@ -51,7 +51,7 @@ public class UserAccountCommonCompController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                      @CurrentLoginUser UserAccount loginUser) {
+                                                      @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class);
         try {
             //解析 搜索条件

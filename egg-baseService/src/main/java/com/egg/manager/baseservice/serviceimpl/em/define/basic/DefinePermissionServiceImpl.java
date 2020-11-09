@@ -17,8 +17,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
@@ -43,7 +43,7 @@ import java.util.Set;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefinePermissionService.class)
-public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper, DefinePermission, DefinePermissionVo> implements DefinePermissionService {
+public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePermissionMapper, DefinePermissionEntity, DefinePermissionVo> implements DefinePermissionService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -53,8 +53,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     private UserAccountMapper userAccountMapper;
 
     @Override
-    public List<DefinePermission> getAllEnableList(UserAccount loginUser, QueryWrapper<DefinePermission> wrapper) {
-        wrapper = wrapper != null ? wrapper : new QueryWrapper<DefinePermission>();
+    public List<DefinePermissionEntity> getAllEnableList(UserAccountEntity loginUser, QueryWrapper<DefinePermissionEntity> wrapper) {
+        wrapper = wrapper != null ? wrapper : new QueryWrapper<DefinePermissionEntity>();
         //筛选与排序
         wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         wrapper.orderBy(true, false, "create_time");
@@ -62,23 +62,23 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermission> paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
                                                                      List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        QueryWrapper<DefinePermission> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(queryWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = definePermissionMapper.selectPage(page, queryWrapper);
-        List<DefinePermission> definePermissions = iPage.getRecords();
-        result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissions));
+        List<DefinePermissionEntity> definePermissionEntities = iPage.getRecords();
+        result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
+    public MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -89,23 +89,23 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
+    public Integer dealCreate(UserAccountEntity loginUser, DefinePermissionVo definePermissionVo) throws Exception {
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, new QueryWrapper());
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
-        DefinePermission definePermission = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        definePermission = super.doBeforeCreate(loginUser, definePermission, true);
-        definePermission.setEnsure(BaseStateEnum.DISABLED.getValue());
-        return definePermissionMapper.insert(definePermission);
+        DefinePermissionEntity definePermissionEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
+        definePermissionEntity = super.doBeforeCreate(loginUser, definePermissionEntity, true);
+        definePermissionEntity.setEnsure(BaseStateEnum.DISABLED.getValue());
+        return definePermissionMapper.insert(definePermissionEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefinePermissionVo definePermissionVo) throws Exception {
-        QueryWrapper<DefinePermission> uniWrapper = new QueryWrapper<DefinePermission>()
+    public Integer dealUpdate(UserAccountEntity loginUser, DefinePermissionVo definePermissionVo) throws Exception {
+        QueryWrapper<DefinePermissionEntity> uniWrapper = new QueryWrapper<DefinePermissionEntity>()
                 .ne("fid", definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {
@@ -113,9 +113,9 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
-        DefinePermission updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
+        DefinePermissionEntity updateEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
         updateEntity = super.doBeforeUpdate(loginUser, updateEntity);
-        DefinePermission oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
+        DefinePermissionEntity oldEntity = definePermissionMapper.selectById(definePermissionVo.getFid());
         if (SwitchStateEnum.Open.getValue().equals(oldEntity.getEnsure())) {
             //如果已经启用
             DefinePermissionTransfer.handleSwitchOpenChangeFieldChange(updateEntity, oldEntity);
@@ -125,7 +125,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public Integer dealBatchEnsure(UserAccount loginUser, Long[] ensureIds) {
+    public Integer dealBatchEnsure(UserAccountEntity loginUser, Long[] ensureIds) {
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
             List<Long> delIdList = Lists.newArrayList(ensureIds);
@@ -136,12 +136,12 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public List<DefinePermission> dealGetListByAccountFromDb(UserAccount loginUser, Long userAccountId) {
+    public List<DefinePermissionEntity> dealGetListByAccountFromDb(UserAccountEntity loginUser, Long userAccountId) {
         if (LongUtils.isBlank(userAccountId)) {
             return null;
         }
-        UserAccount userAccount = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccount.getUserTypeNum())) {
+        UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccountEntity.getUserTypeNum())) {
             //如果是[超级管理员]的话可以访问全部菜单
             return getAllEnableList(loginUser, null);
         } else {
@@ -151,12 +151,12 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccount loginUser, Long userAccountId) {
+    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccountEntity loginUser, Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
-        List<DefinePermission> definePermissions = this.dealGetListByAccountFromDb(loginUser, userAccountId);
-        if (definePermissions != null && definePermissions.isEmpty() == false) {
-            for (DefinePermission definePermission : definePermissions) {
-                String permissionCode = definePermission.getCode();
+        List<DefinePermissionEntity> definePermissionEntities = this.dealGetListByAccountFromDb(loginUser, userAccountId);
+        if (definePermissionEntities != null && definePermissionEntities.isEmpty() == false) {
+            for (DefinePermissionEntity definePermissionEntity : definePermissionEntities) {
+                String permissionCode = definePermissionEntity.getCode();
                 if (StringUtils.isNotBlank(permissionCode)) {
                     codeSet.add(permissionCode);
                 }
@@ -167,7 +167,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, QueryWrapper<DefinePermission> wrapper) {
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(DefinePermissionVo definePermissionVo, QueryWrapper<DefinePermissionEntity> wrapper) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         wrapper.eq("code", definePermissionVo.getCode());

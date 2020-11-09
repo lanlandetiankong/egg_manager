@@ -14,8 +14,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTagTransfer;
@@ -37,7 +37,7 @@ import java.util.Map;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = AnnouncementTagService.class)
-public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementTagMapper, AnnouncementTag, AnnouncementTagVo>
+public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementTagMapper, AnnouncementTagEntity, AnnouncementTagVo>
         implements AnnouncementTagService {
 
     @Autowired
@@ -48,23 +48,23 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     private AnnouncementTagMapper announcementTagMapper;
 
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTag> paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
                                                                     List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        QueryWrapper<AnnouncementTag> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = announcementTagMapper.selectPage(page, announcementTagEntityWrapper);
-        List<AnnouncementTag> announcementTags = iPage.getRecords();
-        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTags));
+        List<AnnouncementTagEntity> announcementTagEntities = iPage.getRecords();
+        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTagEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
+    public MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
                                                                  List<AntdvSortBean> sortBeans) {
         Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -74,13 +74,13 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
     @Override
-    public Map<Long, AnnouncementTag> dealGetAllToMap() {
-        Map<Long, AnnouncementTag> map = Maps.newHashMap();
-        QueryWrapper<AnnouncementTag> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTag>();
+    public Map<Long, AnnouncementTagEntity> dealGetAllToMap() {
+        Map<Long, AnnouncementTagEntity> map = Maps.newHashMap();
+        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTagEntity>();
         announcementTagEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        List<AnnouncementTag> announcementTags = announcementTagMapper.selectList(announcementTagEntityWrapper);
-        if (announcementTags != null && announcementTags.isEmpty() == false) {
-            for (AnnouncementTag tag : announcementTags) {
+        List<AnnouncementTagEntity> announcementTagEntities = announcementTagMapper.selectList(announcementTagEntityWrapper);
+        if (announcementTagEntities != null && announcementTagEntities.isEmpty() == false) {
+            for (AnnouncementTagEntity tag : announcementTagEntities) {
                 map.put(tag.getFid(), tag);
             }
         }
@@ -89,19 +89,19 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
-        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
-        super.doBeforeCreate(loginUser, announcementTag, true);
-        return announcementTagMapper.insert(announcementTag);
+    public Integer dealCreate(UserAccountEntity loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
+        AnnouncementTagEntity announcementTagEntity = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
+        super.doBeforeCreate(loginUser, announcementTagEntity, true);
+        return announcementTagMapper.insert(announcementTagEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, AnnouncementTagVo announcementTagVo) throws Exception {
         Integer changeCount = 0;
-        AnnouncementTag announcementTag = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
-        announcementTag = super.doBeforeUpdate(loginUser, announcementTag);
-        changeCount = announcementTagMapper.updateById(announcementTag);
+        AnnouncementTagEntity announcementTagEntity = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
+        announcementTagEntity = super.doBeforeUpdate(loginUser, announcementTagEntity);
+        changeCount = announcementTagMapper.updateById(announcementTagEntity);
         return changeCount;
     }
 

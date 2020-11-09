@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 
 import java.util.Date;
 
@@ -20,21 +20,21 @@ public class RolePermissionPojoInitialize {
      * @param loginUser
      * @return
      */
-    public static RolePermission generateSimpleInsertEntity(Long defineRoleId, Long definePermissionId, UserAccount loginUser) {
-        RolePermission rolePermission = new RolePermission();
+    public static RolePermissionEntity generateSimpleInsertEntity(Long defineRoleId, Long definePermissionId, UserAccountEntity loginUser) {
+        RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
         Date now = new Date();
         //rolePermission.setFid(MyUUIDUtil.renderSimpleUuid());
-        rolePermission.setDefineRoleId(defineRoleId);
-        rolePermission.setDefinePermissionId(definePermissionId);
-        rolePermission.setType(1);
-        rolePermission.setState(BaseStateEnum.ENABLED.getValue());
-        rolePermission.setCreateTime(now);
-        rolePermission.setUpdateTime(now);
+        rolePermissionEntity.setDefineRoleId(defineRoleId);
+        rolePermissionEntity.setDefinePermissionId(definePermissionId);
+        rolePermissionEntity.setType(1);
+        rolePermissionEntity.setState(BaseStateEnum.ENABLED.getValue());
+        rolePermissionEntity.setCreateTime(now);
+        rolePermissionEntity.setUpdateTime(now);
         if (loginUser != null) {
-            rolePermission.setCreateUserId(loginUser.getFid());
-            rolePermission.setLastModifyerId(loginUser.getFid());
+            rolePermissionEntity.setCreateUserId(loginUser.getFid());
+            rolePermissionEntity.setLastModifyerId(loginUser.getFid());
         }
-        rolePermission.setRemark(null);
-        return rolePermission;
+        rolePermissionEntity.setRemark(null);
+        return rolePermissionEntity;
     }
 }

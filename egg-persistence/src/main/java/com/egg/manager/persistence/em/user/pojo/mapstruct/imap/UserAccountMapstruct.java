@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
@@ -20,7 +20,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserAccountConversion.class}
 )
-public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, UserAccountVo, UserAccountDto> {
+public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccountEntity, UserAccountVo, UserAccountDto> {
 
     UserAccountMapstruct INSTANCE = Mappers.getMapper(UserAccountMapstruct.class);
 
@@ -30,7 +30,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
      * @return
      */
     @Mappings({})
-    UserAccount transferVoToEntity(UserAccountVo vo);
+    UserAccountEntity transferVoToEntity(UserAccountVo vo);
 
     /**
      * entity转vo
@@ -47,7 +47,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    UserAccountVo transferEntityToVo(UserAccount entity);
+    UserAccountVo transferEntityToVo(UserAccountEntity entity);
 
     /**
      * dto转vo
@@ -73,7 +73,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "sexStr", expression = "java(handleUserSexGetName(entity.getSex()))"),
             @Mapping(target = "lockedStr", expression = "java(handleUserAccountStateGetInfo(entity.getLocked()))"),
     })
-    UserAccountXlsOutModel entityToXlsOutModel(UserAccount entity);
+    UserAccountXlsOutModel entityToXlsOutModel(UserAccountEntity entity);
 
     /**
      * excel导入模型类转entity
@@ -93,5 +93,5 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccount, 
             @Mapping(target = "lastModifyerId", expression = "java(handleGetLoginUserId(loginUser,false))"),
             @Mapping(target = "version", ignore = true),
     })
-    UserAccount xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccount loginUser);
+    UserAccountEntity xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccountEntity loginUser);
 }

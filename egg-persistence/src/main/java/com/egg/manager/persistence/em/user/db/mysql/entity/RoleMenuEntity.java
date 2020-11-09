@@ -10,36 +10,35 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
  * @author zhoucj
- * @description 用户&分组 关联
+ * @description 角色&菜单 关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_group")
-public class UserGroup extends Model<UserGroup> {
+@TableName("em_role_menu")
+public class RoleMenuEntity extends Model<RoleMenuEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
 
     /**
-     * 组织id
+     * 角色id
      */
-    @TableField("define_group_id")
-    private String defineGroupId;
+    @TableField(value = "define_role_id")
+    private Long defineRoleId;
     /**
-     * 账号id
+     * 菜单id
      */
-    @TableField("user_account_id")
-    private Long userAccountId;
+    @TableField(value = "define_menu_id")
+    private Long defineMenuId;
     /**
      * 类型
      */
     @TableField("type")
-    private String type;
+    private Integer type;
 
 
     /**
@@ -94,5 +93,6 @@ public class UserGroup extends Model<UserGroup> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
 
 }

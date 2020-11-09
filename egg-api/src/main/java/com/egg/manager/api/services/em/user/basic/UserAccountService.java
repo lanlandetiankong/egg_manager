@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
@@ -22,7 +22,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlService<UserAccount, UserAccountMapper, UserAccountVo> {
+public interface UserAccountService extends IService<UserAccountEntity>, MyBaseMysqlService<UserAccountEntity, UserAccountMapper, UserAccountVo> {
 
     String FOREIGN_NAME_OF_USER_TENANT = "userTenant";
     String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment";
@@ -33,7 +33,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param loginAccountDTO
      * @return
      */
-    UserAccount dealGetEntityByDTO(LoginAccountDTO loginAccountDTO);
+    UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO);
 
 
     /**
@@ -45,7 +45,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccount> paginationBean,
+    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
                                                          List<AntdvSortBean> sortBeans);
 
     /**
@@ -58,7 +58,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+    MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
                                                       List<AntdvSortBean> sortBeans);
 
     /**
@@ -69,7 +69,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception;
 
     /**
      * 用户账号-更新
@@ -80,7 +80,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserAccountVo userAccountVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception;
 
     /**
      * 用户账号-锁定
@@ -91,7 +91,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealBatchRenewLock(UserAccount loginUser, String[] lockIds, boolean isLock) throws Exception;
+    Integer dealBatchRenewLock(UserAccountEntity loginUser, String[] lockIds, boolean isLock) throws Exception;
 
     /**
      * 用户账号-锁定
@@ -102,7 +102,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealRenewLock(UserAccount loginUser, Long lockId, boolean isLock) throws Exception;
+    Integer dealRenewLock(UserAccountEntity loginUser, Long lockId, boolean isLock) throws Exception;
 
 
     /**
@@ -114,7 +114,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealGrantRoleToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception;
+    Integer dealGrantRoleToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
@@ -125,7 +125,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @return
      * @throws Exception
      */
-    Integer dealGrantJobToUser(UserAccount loginUser, Long userAccountId, Long[] checkIds) throws Exception;
+    Integer dealGrantJobToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception;
 
 
     /**
@@ -134,7 +134,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param wrapper
      * @return
      */
-    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccount> wrapper);
+    boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccountEntity> wrapper);
 
 
     /**
@@ -144,7 +144,7 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccount loginUser, Long[] checkIds, QueryWrapper<UserAccount> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccountEntity loginUser, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper);
 
 
     /**
@@ -154,5 +154,5 @@ public interface UserAccountService extends IService<UserAccount>, MyBaseMysqlSe
      * @param wrapper
      * @return
      */
-    Set<String> dealGetExistAccountSet(UserAccount loginUser, Short state, QueryWrapper<UserAccount> wrapper);
+    Set<String> dealGetExistAccountSet(UserAccountEntity loginUser, Short state, QueryWrapper<UserAccountEntity> wrapper);
 }

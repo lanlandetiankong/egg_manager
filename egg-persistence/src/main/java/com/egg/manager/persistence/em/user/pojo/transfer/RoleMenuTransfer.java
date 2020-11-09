@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenuEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.RoleMenuDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.RoleMenuMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class RoleMenuTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static RoleMenu transferVoToEntity(RoleMenuVo vo) {
+    public static RoleMenuEntity transferVoToEntity(RoleMenuVo vo) {
         if (vo == null) {
             return null;
         }
-        RoleMenu entity = roleMenuMapstruct.transferVoToEntity(vo);
+        RoleMenuEntity entity = roleMenuMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class RoleMenuTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static RoleMenuVo transferEntityToVo(RoleMenu entity) {
+    public static RoleMenuVo transferEntityToVo(RoleMenuEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,12 +61,12 @@ public class RoleMenuTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenu> roleMenus) {
-        if (roleMenus == null) {
+    public static List<RoleMenuVo> transferEntityToVoList(List<RoleMenuEntity> roleMenuEntities) {
+        if (roleMenuEntities == null) {
             return null;
         } else {
             List<RoleMenuVo> list = new ArrayList<>();
-            for (RoleMenu role : roleMenus) {
+            for (RoleMenuEntity role : roleMenuEntities) {
                 list.add(transferEntityToVo(role));
             }
             return list;

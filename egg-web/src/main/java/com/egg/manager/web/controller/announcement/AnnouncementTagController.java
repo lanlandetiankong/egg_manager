@@ -14,8 +14,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTagTransfer;
@@ -62,7 +62,7 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/gainEnumSelect")
     public MyCommonResult<AnnouncementTagVo> gainEnumSelect(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                            @CurrentLoginUser UserAccount loginUser) {
+                                                            @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class);
         try {
             //解析 搜索条件
@@ -82,7 +82,7 @@ public class AnnouncementTagController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcementTag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementTagVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                          @CurrentLoginUser UserAccount loginUser) {
+                                                          @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class);
         try {
             //解析 搜索条件
@@ -103,12 +103,12 @@ public class AnnouncementTagController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcementTag/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementTagVo> queryOneById(HttpServletRequest request, String announcementTagId,
-                                                          @CurrentLoginUser UserAccount loginUser) {
+                                                          @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementTagVo> result = MyCommonResult.gainQueryResult(AnnouncementTagVo.class);
         try {
             Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            AnnouncementTag announcementTag = announcementTagMapper.selectById(announcementTagId);
-            result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTag));
+            AnnouncementTagEntity announcementTagEntity = announcementTagMapper.selectById(announcementTagId);
+            result.setBean(AnnouncementTagTransfer.transferEntityToVo(announcementTagEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -120,7 +120,7 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementTag/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -138,7 +138,7 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementTag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -160,7 +160,7 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
-                                           @CurrentLoginUser UserAccount loginUser) {
+                                           @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -182,7 +182,7 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public MyCommonResult deleteById(HttpServletRequest request, String delId,
-                                     @CurrentLoginUser UserAccount loginUser) {
+                                     @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.user.login;
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.shiro.ShiroPass;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -13,7 +14,6 @@ import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.em.user.pojo.verification.login.LoginAccountVerifyO;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
@@ -59,37 +59,37 @@ public class UserLoginController extends BaseController {
     })
     @ShiroPass
     @PostMapping(value = "/loginByForm")
-    public MyCommonResult<UserAccount> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
-                                                             @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
-            , @CurrentLoginUser(required = false) UserAccount loginUser
+    public MyCommonResult<UserAccountEntity> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
+                                                                   @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
+            , @CurrentLoginUser(required = false) UserAccountEntity loginUser
     ) {
-        MyCommonResult<UserAccount> result = MyCommonResult.gainQueryResult(UserAccount.class);
+        MyCommonResult<UserAccountEntity> result = MyCommonResult.gainQueryResult(UserAccountEntity.class);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
             Assert.notNull(loginAccountVo.getPassword(), BaseRstMsgConstant.ErrorMsg.emptyLoginPassword());
             //取得用户
-            UserAccount userAccount = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
-            Assert.notNull(userAccount, BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
-            Assert.isTrue(userAccount.getPassword().equals(loginAccountVo.getPassword()), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
-            if (userAccount.getPassword().equals(loginAccountVo.getPassword())) {
-                UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccount);
+            UserAccountEntity userAccountEntity = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
+            Assert.notNull(userAccountEntity, BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
+            Assert.isTrue(userAccountEntity.getPassword().equals(loginAccountVo.getPassword()), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
+            if (userAccountEntity.getPassword().equals(loginAccountVo.getPassword())) {
+                UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
                 //账号密码验证通过
                 result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN, userAccountToken);
                 //用户登录信息验证成功，在shiro进行一些登录处理
                 //添加用户认证信息
                 Subject subject = SecurityUtils.getSubject();
-                String authorization = JwtUtil.sign(userAccount.getFid());
+                String authorization = JwtUtil.sign(userAccountEntity.getFid());
                 JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
                 //进行验证，这里可以捕获异常，然后返回对应信息
                 subject.login(jwtShiroToken);
                 //所属租户
-                DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccount.getFid());
+                DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccountEntity.getFid());
                 if (defineTenantDto != null) {
                     userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
                 }
                 //所属部门
-                DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccount.getFid());
+                DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccountEntity.getFid());
                 if (defineDepartmentDto != null) {
                     userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
                 }

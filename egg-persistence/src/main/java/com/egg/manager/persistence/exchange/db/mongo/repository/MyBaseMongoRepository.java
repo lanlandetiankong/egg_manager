@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.exchange.db.mongo.repository;
 
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -85,7 +85,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * @param user  用户
      * @return
      */
-    <U extends UserAccount> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
+    <U extends UserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
 
 
     /**

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.pojo.vo.DefineTenantVo;
@@ -19,7 +19,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysqlService<DefineTenant, DefineTenantMapper, DefineTenantVo> {
+public interface DefineTenantService extends IService<DefineTenantEntity>, MyBaseMysqlService<DefineTenantEntity, DefineTenantMapper, DefineTenantVo> {
 
 
     /**
@@ -32,7 +32,7 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
     /**
@@ -42,7 +42,7 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception;
 
     /**
      * 租户定义-更新
@@ -51,7 +51,7 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception;
 
     /**
      * 取得的结果 转为 枚举类型
@@ -59,7 +59,7 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @param result
      * @return
      */
-    MyCommonResult dealResultListToEnums(UserAccount loginUser, MyCommonResult result);
+    MyCommonResult dealResultListToEnums(UserAccountEntity loginUser, MyCommonResult result);
 
     /**
      * 租户设置管理员
@@ -69,5 +69,5 @@ public interface DefineTenantService extends IService<DefineTenant>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealTenantSetupManager(UserAccount loginUser, Long tenantId, Long[] checkIds) throws Exception;
+    Integer dealTenantSetupManager(UserAccountEntity loginUser, Long tenantId, Long[] checkIds) throws Exception;
 }

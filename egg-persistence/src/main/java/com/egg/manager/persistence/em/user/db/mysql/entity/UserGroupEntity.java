@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.announcement.db.mysql.entity;
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -10,36 +10,36 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+
 /**
  * @author zhoucj
- * @description 公告标签
+ * @description 用户&分组 关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_announcement_tag")
-public class AnnouncementTag extends Model<AnnouncementTag> {
-
-
+@TableName("em_user_group")
+public class UserGroupEntity extends Model<UserGroupEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
+
     /**
-     * 名称
+     * 组织id
      */
-    @TableField("name")
-    private String name;
+    @TableField("define_group_id")
+    private String defineGroupId;
     /**
-     * 描述
+     * 账号id
      */
-    @TableField("description")
-    private String description;
+    @TableField("user_account_id")
+    private Long userAccountId;
     /**
-     * 排序值
+     * 类型
      */
-    @TableField("ordering")
-    private Integer ordering;
+    @TableField("type")
+    private String type;
 
 
     /**
@@ -94,6 +94,5 @@ public class AnnouncementTag extends Model<AnnouncementTag> {
     protected Serializable pkVal() {
         return this.fid;
     }
-
 
 }

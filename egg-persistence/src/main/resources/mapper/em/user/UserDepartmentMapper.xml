@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.UserDepartmentMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity">
         <id column="fid" property="fid"/>
         <result column="user_account_id" property="userAccountId"/>
         <result column="define_department_id" property="defineDepartmentId"/>

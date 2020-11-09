@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.commons.base.beans.tree.common;
 
 import com.egg.manager.persistence.commons.base.beans.tree.MyBaseTree;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 
 /**
  * @author zhoucj
@@ -14,15 +14,15 @@ public class CommonTreeSelectTranslate extends MyBaseTree {
 
     /**
      * 部门 树选择 ->entity 转 CommonTreeSelect
-     * @param defineDepartment
+     * @param defineDepartmentEntity
      * @param tree
      * @return
      */
-    public static CommonTreeSelect setDefineDepartmentParamToTreeSelect(DefineDepartment defineDepartment, CommonTreeSelect tree) {
-        tree.setKey(defineDepartment.getFid());
-        tree.setValue(defineDepartment.getFid());
-        tree.setTitle(defineDepartment.getName());
-        tree.setParentId(defineDepartment.getParentId());
+    public static CommonTreeSelect setDefineDepartmentParamToTreeSelect(DefineDepartmentEntity defineDepartmentEntity, CommonTreeSelect tree) {
+        tree.setKey(defineDepartmentEntity.getFid());
+        tree.setValue(defineDepartmentEntity.getFid());
+        tree.setTitle(defineDepartmentEntity.getName());
+        tree.setParentId(defineDepartmentEntity.getParentId());
         return tree;
     }
 
@@ -33,7 +33,7 @@ public class CommonTreeSelectTranslate extends MyBaseTree {
      * @param tree
      * @return
      */
-    public static CommonTreeSelect setDefineMenuParamToTreeSelect(DefineMenu menu, CommonTreeSelect tree) {
+    public static CommonTreeSelect setDefineMenuParamToTreeSelect(DefineMenuEntity menu, CommonTreeSelect tree) {
         tree.setKey(menu.getFid());
         tree.setValue(menu.getFid());
         tree.setTitle(menu.getMenuName());

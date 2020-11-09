@@ -12,15 +12,15 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 权限定义
+ * @description 部门定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_permission")
-public class DefinePermission extends Model<DefinePermission> {
+@TableName("em_define_department")
+public class DefineDepartmentEntity extends Model<DefineDepartmentEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
@@ -34,15 +34,25 @@ public class DefinePermission extends Model<DefinePermission> {
     @TableField("code")
     private String code;
     /**
-     * 是否确认发布，发布之后不可修改
+     * 上级id
      */
-    @TableField("ensure")
-    private Short ensure;
+    @TableField("parent_id")
+    private Long parentId;
     /**
-     * 类型
+     * 层级
      */
-    @TableField("type")
-    private Integer type;
+    @TableField("level")
+    private Integer level;
+    /**
+     * 排序值
+     */
+    @TableField("order_num")
+    private Integer orderNum;
+    /**
+     * 描述
+     */
+    @TableField("description")
+    private String description;
 
 
     /**

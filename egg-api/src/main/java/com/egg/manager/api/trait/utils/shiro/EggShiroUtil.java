@@ -1,7 +1,7 @@
 package com.egg.manager.api.trait.utils.shiro;
 
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -26,8 +26,8 @@ public class EggShiroUtil {
      * 取得挡墙登录用户
      * @param isRequired 是否必要，当true且userAccount为null时抛出异常
      */
-    public static UserAccount gainCurrentUser(boolean isRequired) {
-        UserAccount user = (UserAccount) SecurityUtils.getSubject().getPrincipal();
+    public static UserAccountEntity gainCurrentUser(boolean isRequired) {
+        UserAccountEntity user = (UserAccountEntity) SecurityUtils.getSubject().getPrincipal();
         if(user == null && isRequired){
             throw new MyAuthenticationExpiredException();
         }
@@ -40,7 +40,7 @@ public class EggShiroUtil {
      * @param isRequired 是否必要，当true且userAccount为null时抛出异常
      */
     public static Long gainCurrentUserId(boolean isRequired) {
-        UserAccount user = gainCurrentUser(isRequired);
+        UserAccountEntity user = gainCurrentUser(isRequired);
         if(user == null && isRequired){
             throw new MyAuthenticationExpiredException();
         }

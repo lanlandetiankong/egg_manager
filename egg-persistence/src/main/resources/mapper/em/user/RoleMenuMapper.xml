@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.RoleMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenu">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenuEntity">
         <id column="fid" property="fid"/>
         <result column="define_role_id" property="defineRoleId"/>
         <result column="define_menu_id" property="defineMenuId"/>

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
@@ -20,7 +20,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface AnnouncementService extends IService<Announcement>, MyBaseMysqlService<Announcement, AnnouncementMapper, AnnouncementVo> {
+public interface AnnouncementService extends IService<AnnouncementEntity>, MyBaseMysqlService<AnnouncementEntity, AnnouncementMapper, AnnouncementVo> {
 
 
     /**
@@ -30,7 +30,7 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, AnnouncementVo announcementVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, AnnouncementVo announcementVo) throws Exception;
 
     /**
      * 公告草稿发布
@@ -39,7 +39,7 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
      * @return
      * @throws Exception
      */
-    Integer dealCreateFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
+    Integer dealCreateFromDraft(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
 
     /**
      * 分页查询 公告 列表
@@ -50,7 +50,7 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
      * @param sortBeans
      * @return
      */
-    MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement> paginationBean,
+    MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementEntity> paginationBean,
                                                           List<AntdvSortBean> sortBeans);
 
     /**
@@ -63,7 +63,7 @@ public interface AnnouncementService extends IService<Announcement>, MyBaseMysql
      * @param sortBeans
      * @return
      */
-    MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
+    MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
 }

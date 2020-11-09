@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
+public interface DefinePermissionMapper extends MyEggMapper<DefinePermissionEntity> {
 
     /**
      * [分页搜索查询] - 权限定义
@@ -34,7 +34,7 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int batchEnsureByIds(@Param("ensureIds") List<Long> ensureIds, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int batchEnsureByIds(@Param("ensureIds") List<Long> ensureIds, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
     /**
      * 删除指定角色id下的所有权限
@@ -42,14 +42,14 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param loginUser
      * @return
      */
-    int clearAllPermissionByRoleId(@Param("roleId") Long roleId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int clearAllPermissionByRoleId(@Param("roleId") Long roleId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
     /**
      * 取得角色拥有的所有权限集合
      * @param roleId
      * @return
      */
-    List<DefinePermission> findAllPermissionByRoleId(Long roleId);
+    List<DefinePermissionEntity> findAllPermissionByRoleId(Long roleId);
 
     /**
      * 取得角色拥有的所有权限id集合
@@ -65,5 +65,5 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermission> {
      * @param userAccountId
      * @return
      */
-    List<DefinePermission> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
+    List<DefinePermissionEntity> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
 }

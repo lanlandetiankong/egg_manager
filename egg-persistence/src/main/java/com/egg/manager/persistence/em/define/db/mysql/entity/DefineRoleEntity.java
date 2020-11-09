@@ -1,4 +1,5 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
+
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -11,32 +12,28 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * -entity
- */
-
-/**
  * @author zhoucj
- * @description 用户&角色 关联
+ * @description 角色定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_role")
-public class UserRole extends Model<UserRole> {
+@TableName("em_define_role")
+public class DefineRoleEntity extends Model<DefineRoleEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 账号id
+     * 名称
      */
-    @TableField(value = "user_account_id")
-    private Long userAccountId;
+    @TableField("name")
+    private String name;
     /**
-     * 角色id
+     * 编码
      */
-    @TableField(value = "define_role_id")
-    private Long defineRoleId;
+    @TableField("code")
+    private String code;
     /**
      * 类型
      */
@@ -96,6 +93,4 @@ public class UserRole extends Model<UserRole> {
     protected Serializable pkVal() {
         return this.fid;
     }
-
-
 }

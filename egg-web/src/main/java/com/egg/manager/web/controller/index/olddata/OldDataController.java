@@ -1,18 +1,13 @@
 package com.egg.manager.web.controller.index.olddata;
 
-import cn.hutool.core.collection.CollectionUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +40,7 @@ public class OldDataController extends BaseController {
     }
 
     public void runRestore(JSONArray jsonArray) {
-        List<UserAccount> list = new ArrayList<>() ;
+        List<UserAccountEntity> list = new ArrayList<>() ;
         int count = 0 ;
         for(int i=0;i<jsonArray.size();i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -54,7 +49,7 @@ public class OldDataController extends BaseController {
             jsonObject.put("create_time",null);
             jsonObject.put("update_time",null);
             jsonObject.put("fid",null);
-            UserAccount obj = jsonArray.getObject(i, UserAccount.class);
+            UserAccountEntity obj = jsonArray.getObject(i, UserAccountEntity.class);
             list.add(obj);
             count += userAccountMapper.insert(obj);
         }

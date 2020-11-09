@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserRole;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 
 import java.util.Date;
 
@@ -20,20 +20,20 @@ public class UserRolePojoInitialize {
      * @param loginUser     当前登录用户
      * @return
      */
-    public static UserRole generateSimpleInsertEntity(Long userAccountId, Long defineRoleId, UserAccount loginUser) {
-        UserRole userRole = new UserRole();
+    public static UserRoleEntity generateSimpleInsertEntity(Long userAccountId, Long defineRoleId, UserAccountEntity loginUser) {
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
         Date now = new Date();
         //userRole.setFid(MyUUIDUtil.renderSimpleUuid());
-        userRole.setUserAccountId(userAccountId);
-        userRole.setDefineRoleId(defineRoleId);
-        userRole.setType(1);
-        userRole.setState(BaseStateEnum.ENABLED.getValue());
-        userRole.setCreateTime(now);
-        userRole.setUpdateTime(now);
+        userRoleEntity.setUserAccountId(userAccountId);
+        userRoleEntity.setDefineRoleId(defineRoleId);
+        userRoleEntity.setType(1);
+        userRoleEntity.setState(BaseStateEnum.ENABLED.getValue());
+        userRoleEntity.setCreateTime(now);
+        userRoleEntity.setUpdateTime(now);
         if (loginUser != null) {
-            userRole.setCreateUserId(loginUser.getFid());
-            userRole.setLastModifyerId(loginUser.getFid());
+            userRoleEntity.setCreateUserId(loginUser.getFid());
+            userRoleEntity.setLastModifyerId(loginUser.getFid());
         }
-        return userRole;
+        return userRoleEntity;
     }
 }

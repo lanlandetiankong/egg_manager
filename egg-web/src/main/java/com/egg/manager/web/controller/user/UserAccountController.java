@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -14,12 +15,11 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRole;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
@@ -91,7 +91,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                      @CurrentLoginUser UserAccount loginUser) {
+                                                      @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class);
         try {
             //解析 搜索条件
@@ -112,19 +112,19 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "根据id查询->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<UserAccountVo> queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<UserAccountVo> queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class);
         try {
-            UserAccount account = userAccountMapper.selectById(accountId);
+            UserAccountEntity account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
             //取得 所属的 租户定义
-            DefineTenant belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
+            DefineTenantEntity belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
             if (belongTenant != null) {
                 userAccountVo.setBelongTenantId(belongTenant.getFid());
                 userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
             }
             //取得 所属的 部门定义
-            DefineDepartment belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
+            DefineDepartmentEntity belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
             if (belongDepartment != null) {
                 userAccountVo.setBelongDepartmentId(belongDepartment.getFid());
                 userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
@@ -139,11 +139,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
-    public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineRoleVo> gainGrantedRole(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class);
         try {
-            List<DefineRole> defineRoleList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleList));
+            List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+            result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -154,11 +154,11 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
     public MyCommonResult<DefinePermissionVo> gainGrantedPermission(HttpServletRequest request, Long userAccountId,
-                                                                    @CurrentLoginUser UserAccount loginUser) {
+                                                                    @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefinePermissionVo> result = MyCommonResult.gainQueryResult(DefinePermissionVo.class);
         try {
-            List<DefinePermission> definePermissionList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-            result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionList));
+            List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
+            result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -169,11 +169,11 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
-    public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
         try {
-            List<DefineJob> defineJobList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-            result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobList));
+            List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+            result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -184,7 +184,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "新增->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -202,7 +202,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -223,7 +223,7 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -244,7 +244,7 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -261,7 +261,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
-    public MyCommonResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer lockCount = 0;
         try {
@@ -283,7 +283,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/修改状态->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
-    public MyCommonResult updateLockById(HttpServletRequest request, Long lockId, Boolean lockFlag, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult updateLockById(HttpServletRequest request, Long lockId, Boolean lockFlag, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer lockCount = 0;
         try {
@@ -303,7 +303,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
-    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doGrantRoleToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
@@ -320,7 +320,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public MyCommonResult doGrantJobToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds,
-                                           @CurrentLoginUser UserAccount loginUser) {
+                                           @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);

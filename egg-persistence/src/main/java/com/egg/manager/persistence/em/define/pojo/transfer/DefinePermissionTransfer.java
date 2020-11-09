@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefinePermissionMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -28,15 +28,15 @@ public class DefinePermissionTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefinePermission transferVoToEntity(DefinePermissionVo vo) {
+    public static DefinePermissionEntity transferVoToEntity(DefinePermissionVo vo) {
         if (vo == null) {
             return null;
         }
-        DefinePermission entity = definePermissionMapstruct.transferVoToEntity(vo);
+        DefinePermissionEntity entity = definePermissionMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
-    public static DefinePermissionVo transferEntityToVo(DefinePermission entity) {
+    public static DefinePermissionVo transferEntityToVo(DefinePermissionEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -57,7 +57,7 @@ public class DefinePermissionTransfer extends BaseMysqlTransfer {
      * @param updateEntity
      * @param oldEntity
      */
-    public static void handleSwitchOpenChangeFieldChange(DefinePermission updateEntity, DefinePermission oldEntity) {
+    public static void handleSwitchOpenChangeFieldChange(DefinePermissionEntity updateEntity, DefinePermissionEntity oldEntity) {
         if (updateEntity != null && oldEntity != null) {
             //避免前端可能篡改了数据！
             updateEntity.setEnsure(SwitchStateEnum.Open.getValue());
@@ -65,13 +65,13 @@ public class DefinePermissionTransfer extends BaseMysqlTransfer {
         }
     }
 
-    public static List<DefinePermissionVo> transferEntityToVoList(List<DefinePermission> definePermissions) {
-        if (definePermissions == null) {
+    public static List<DefinePermissionVo> transferEntityToVoList(List<DefinePermissionEntity> definePermissionEntities) {
+        if (definePermissionEntities == null) {
             return null;
         } else {
             List<DefinePermissionVo> list = new ArrayList<>();
-            for (DefinePermission definePermission : definePermissions) {
-                list.add(transferEntityToVo(definePermission));
+            for (DefinePermissionEntity definePermissionEntity : definePermissionEntities) {
+                list.add(transferEntityToVo(definePermissionEntity));
             }
             return list;
         }

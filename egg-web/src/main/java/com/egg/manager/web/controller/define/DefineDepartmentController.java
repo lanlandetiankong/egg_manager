@@ -5,6 +5,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -17,8 +19,6 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartment;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTransfer;
@@ -63,7 +63,7 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineDepartmentVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
-            , @CurrentLoginUser UserAccount loginUser) {
+            , @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class);
         try {
             //解析 搜索条件
@@ -84,13 +84,13 @@ public class DefineDepartmentController extends BaseController {
     @ApiOperation(value = "根据id查询->部门定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineDepartment/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefineDepartmentVo> queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<DefineDepartmentVo> queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<DefineDepartmentVo> result = MyCommonResult.gainQueryResult(DefineDepartmentVo.class);
         try {
             Assert.notBlank(defineDepartmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineDepartment defineDepartment = defineDepartmentService.getById(defineDepartmentId);
-            result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartment));
+            DefineDepartmentEntity defineDepartmentEntity = defineDepartmentService.getById(defineDepartmentId);
+            result.setBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartmentEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -100,16 +100,16 @@ public class DefineDepartmentController extends BaseController {
     @PcWebQueryLog(fullPath = "/define/defineDepartment/queryTreeSelect")
     @ApiOperation(value = "查询下拉树->部门定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
-    public MyCommonResult<CommonTreeSelect> queryTreeSelect(@CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<CommonTreeSelect> queryTreeSelect(@CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class);
         try {
             //筛选与排序
-            QueryWrapper<DefineDepartment> queryWrapper = new QueryWrapper<DefineDepartment>();
+            QueryWrapper<DefineDepartmentEntity> queryWrapper = new QueryWrapper<DefineDepartmentEntity>();
             queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
             queryWrapper.orderBy(true, true, "level");
             queryWrapper.orderBy(true, true, "order_num");
             queryWrapper.orderBy(true, true, "create_time");
-            List<DefineDepartment> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
+            List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
             List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
             result.setResultList(treeList);
         } catch (Exception e) {
@@ -121,10 +121,10 @@ public class DefineDepartmentController extends BaseController {
     @PcWebQueryLog(description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineDepartment/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->部门定义", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
-    public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<CommonTreeSelect> queryFilteredTreeSelect(String filterId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<CommonTreeSelect> result = MyCommonResult.gainQueryResult(CommonTreeSelect.class);
         try {
-            List<DefineDepartment> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
+            List<DefineDepartmentEntity> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
             List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUser, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
             result.setResultList(treeList);
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class DefineDepartmentController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineDepartment/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -156,7 +156,7 @@ public class DefineDepartmentController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineDepartment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
@@ -176,7 +176,7 @@ public class DefineDepartmentController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -196,7 +196,7 @@ public class DefineDepartmentController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

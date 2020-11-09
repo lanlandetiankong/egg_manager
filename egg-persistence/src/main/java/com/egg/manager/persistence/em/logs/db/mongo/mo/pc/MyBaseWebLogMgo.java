@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.logs.db.mongo.mo.pc;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -28,7 +28,7 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      * 登录的用户
      */
     @Field(value = "loginUser")
-    private UserAccount loginUser;
+    private UserAccountEntity loginUser;
     /**
      * 注解操作类型
      */

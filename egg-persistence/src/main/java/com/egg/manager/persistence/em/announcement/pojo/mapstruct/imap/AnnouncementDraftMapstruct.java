@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap;
 
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.conversion.AnnouncementDraftConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -17,7 +17,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementDraftConversion.class}
 )
-public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<AnnouncementDraft, AnnouncementDraftVo, AnnouncementDraftDto> {
+public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<AnnouncementDraftEntity, AnnouncementDraftVo, AnnouncementDraftDto> {
 
     AnnouncementDraftMapstruct INSTANCE = Mappers.getMapper(AnnouncementDraftMapstruct.class);
 
@@ -29,7 +29,7 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
     @Mappings({
             @Mapping(target = "tagIds", expression = "java(handleTagIdListToJsonString(vo.getTagIds()))")
     })
-    AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo);
+    AnnouncementDraftEntity transferVoToEntity(AnnouncementDraftVo vo);
 
     /**
      * entity转vo
@@ -45,7 +45,7 @@ public interface AnnouncementDraftMapstruct extends MyBaseMysqlMapstruct<Announc
             @Mapping(target = "lastModifyer", ignore = true)
     })
     @InheritConfiguration(name = "defaultConfigVoToDto")
-    AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity);
+    AnnouncementDraftVo transferEntityToVo(AnnouncementDraftEntity entity);
 
     /**
      * dto转vo

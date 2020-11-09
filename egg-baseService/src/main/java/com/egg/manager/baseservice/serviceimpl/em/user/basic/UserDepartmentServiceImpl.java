@@ -18,8 +18,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserDepartmentMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserDepartmentTransfer;
@@ -40,7 +40,7 @@ import java.util.List;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserDepartmentService.class)
-public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper, UserDepartment, UserDepartmentVo> implements UserDepartmentService {
+public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper, UserDepartmentEntity, UserDepartmentVo> implements UserDepartmentService {
 
 
     @Autowired
@@ -54,64 +54,64 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
 
     @Override
-    public List<UserDepartment> dealQueryListByAccount(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserDepartmentEntity> dealQueryListByAccount(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        List<UserDepartment> userDepartment = dealGetAllByAccountFromRedis(userAccount);
-        if (userDepartment == null || userDepartment.isEmpty()) {
-            userDepartment = dealGetAllByAccountFromDb(userAccount);
+        List<UserDepartmentEntity> userDepartmentEntity = dealGetAllByAccountFromRedis(userAccountEntity);
+        if (userDepartmentEntity == null || userDepartmentEntity.isEmpty()) {
+            userDepartmentEntity = dealGetAllByAccountFromDb(userAccountEntity);
         }
-        return userDepartment;
+        return userDepartmentEntity;
     }
 
 
     @Override
-    public List<UserDepartment> dealGetAllByAccountFromDb(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserDepartmentEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        QueryWrapper<UserDepartment> userDepartmentEm = new QueryWrapper<UserDepartment>();
+        QueryWrapper<UserDepartmentEntity> userDepartmentEm = new QueryWrapper<UserDepartmentEntity>();
         userDepartmentEm.eq("state", BaseStateEnum.ENABLED.getValue())
-                .eq("user_account_id", userAccount.getFid());
+                .eq("user_account_id", userAccountEntity.getFid());
         userDepartmentEm.orderBy(true, false, "update_time");
-        List<UserDepartment> userDepartment = userDepartmentMapper.selectList(userDepartmentEm);
-        return userDepartment;
+        List<UserDepartmentEntity> userDepartmentEntity = userDepartmentMapper.selectList(userDepartmentEm);
+        return userDepartmentEntity;
     }
 
 
     @Override
-    public List<UserDepartment> dealGetAllByAccountFromRedis(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserDepartmentEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        Object userDepartmentListObj = redisHelper.hashGet(RedisShiroCacheEnum.userDepartment.getKey(), userAccount.getFid());
+        Object userDepartmentListObj = redisHelper.hashGet(RedisShiroCacheEnum.userDepartment.getKey(), userAccountEntity.getFid());
         String userDepartmentListJson = JSONObject.toJSONString(userDepartmentListObj);
-        List<UserDepartment> userDepartment = JSON.parseObject(userDepartmentListJson, new TypeReference<ArrayList<UserDepartment>>() {
+        List<UserDepartmentEntity> userDepartmentEntity = JSON.parseObject(userDepartmentListJson, new TypeReference<ArrayList<UserDepartmentEntity>>() {
         });
-        return userDepartment;
+        return userDepartmentEntity;
     }
 
 
     @Override
-    public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartment> paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartmentEntity> paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserDepartment> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserDepartmentEntity> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userDepartmentMapper.selectCount(userDepartmentEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = userDepartmentMapper.selectPage(page, userDepartmentEntityWrapper);
-        List<UserDepartment> userDepartments = iPage.getRecords();
-        result.setResultList(UserDepartmentTransfer.transferEntityToVoList(userDepartments));
+        List<UserDepartmentEntity> userDepartmentEntities = iPage.getRecords();
+        result.setResultList(UserDepartmentTransfer.transferEntityToVoList(userDepartmentEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
                                                                 List<AntdvSortBean> sortBeans) {
         Page<UserDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -122,20 +122,20 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
-        UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        userDepartment = super.doBeforeCreate(loginUser, userDepartment, true);
-        Integer addCount = userDepartmentMapper.insert(userDepartment);
+    public Integer dealCreate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
+        UserDepartmentEntity userDepartmentEntity = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
+        userDepartmentEntity = super.doBeforeCreate(loginUser, userDepartmentEntity, true);
+        Integer addCount = userDepartmentMapper.insert(userDepartmentEntity);
         return addCount;
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
         Integer changeCount = 0;
-        UserDepartment userDepartment = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        userDepartment = super.doBeforeUpdate(loginUser, userDepartment);
-        changeCount = userDepartmentMapper.updateById(userDepartment);
+        UserDepartmentEntity userDepartmentEntity = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
+        userDepartmentEntity = super.doBeforeUpdate(loginUser, userDepartmentEntity);
+        changeCount = userDepartmentMapper.updateById(userDepartmentEntity);
         return changeCount;
     }
 

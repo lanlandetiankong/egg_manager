@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.DefineTenantConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineTenantConversion.class}
 )
-public interface DefineTenantMapstruct extends MyBaseMysqlMapstruct<DefineTenant, DefineTenantVo, DefineTenantDto> {
+public interface DefineTenantMapstruct extends MyBaseMysqlMapstruct<DefineTenantEntity, DefineTenantVo, DefineTenantDto> {
 
     DefineTenantMapstruct INSTANCE = Mappers.getMapper(DefineTenantMapstruct.class);
 
@@ -31,7 +31,7 @@ public interface DefineTenantMapstruct extends MyBaseMysqlMapstruct<DefineTenant
      * @return
      */
     @Mappings({})
-    DefineTenant transferVoToEntity(DefineTenantVo vo);
+    DefineTenantEntity transferVoToEntity(DefineTenantVo vo);
 
     /**
      * entity转vo
@@ -43,7 +43,7 @@ public interface DefineTenantMapstruct extends MyBaseMysqlMapstruct<DefineTenant
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    DefineTenantVo transferEntityToVo(DefineTenant entity);
+    DefineTenantVo transferEntityToVo(DefineTenantEntity entity);
 
     /**
      * dto转vo

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRole;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineRoleDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineRoleMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class DefineRoleTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefineRole transferVoToEntity(DefineRoleVo vo) {
+    public static DefineRoleEntity transferVoToEntity(DefineRoleVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineRole entity = defineRoleMapstruct.transferVoToEntity(vo);
+        DefineRoleEntity entity = defineRoleMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class DefineRoleTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineRoleVo transferEntityToVo(DefineRole entity) {
+    public static DefineRoleVo transferEntityToVo(DefineRoleEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,12 +61,12 @@ public class DefineRoleTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<DefineRoleVo> transferEntityToVoList(List<DefineRole> definePermissions) {
+    public static List<DefineRoleVo> transferEntityToVoList(List<DefineRoleEntity> definePermissions) {
         if (definePermissions == null) {
             return null;
         } else {
             List<DefineRoleVo> list = new ArrayList<>();
-            for (DefineRole definePermission : definePermissions) {
+            for (DefineRoleEntity definePermission : definePermissions) {
                 list.add(transferEntityToVo(definePermission));
             }
             return list;

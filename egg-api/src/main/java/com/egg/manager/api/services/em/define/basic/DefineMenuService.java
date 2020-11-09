@@ -10,8 +10,8 @@ import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
@@ -24,14 +24,14 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlService<DefineMenu, DefineMenuMapper, DefineMenuVo> {
+public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMysqlService<DefineMenuEntity, DefineMenuMapper, DefineMenuVo> {
 
     /**
      * 查询 用户 可访问的[菜单定义]
      * @param userAccountId
      * @return
      */
-    List<DefineMenu> dealGetUserGrantedMenusByAccountId(Long userAccountId);
+    List<DefineMenuEntity> dealGetUserGrantedMenusByAccountId(Long userAccountId);
 
     /**
      * 查询 用户 可访问的 菜单路径
@@ -51,7 +51,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * 查询 所有[可用状态]的 [菜单定义]
      * @return
      */
-    List<DefineMenu> getAllEnableList();
+    List<DefineMenuEntity> getAllEnableList();
 
     /**
      * [菜单展示]的子节点 构建的树结构
@@ -59,7 +59,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenu> allMenus);
+    List<CommonMenuTree> getMenuTreeChildNodes(Long rootId, List<DefineMenuEntity> allMenus);
 
     /**
      * [菜单展示]的子节点 构建的TreeSelect结构
@@ -67,7 +67,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenu> allMenus);
+    List<CommonTreeSelect> getTreeSelectChildNodes(Long rootId, List<DefineMenuEntity> allMenus);
 
     /**
      * [菜单展示]的子节点 构建的TreeSelect结构(包含最顶层)
@@ -75,7 +75,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param allMenus
      * @return
      */
-    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenu> allMenus);
+    List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(Long rootId, List<DefineMenuEntity> allMenus);
 
 
     /**
@@ -87,7 +87,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenu> paginationBean,
+    MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
@@ -100,7 +100,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+    MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
     /**
@@ -110,7 +110,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception;
 
     /**
      * 菜单定义-更新
@@ -119,7 +119,7 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, DefineMenuVo defineMenuVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception;
 
     /**
      * 验证 数据库 中的唯一冲突
@@ -128,5 +128,5 @@ public interface DefineMenuService extends IService<DefineMenu>, MyBaseMysqlServ
      * @param defineMenuWrapper
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccount loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenu> defineMenuWrapper);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccountEntity loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> defineMenuWrapper);
 }

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
@@ -19,7 +19,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface AnnouncementDraftService extends IService<AnnouncementDraft>, MyBaseMysqlService<AnnouncementDraft, AnnouncementDraftMapper, AnnouncementDraftVo> {
+public interface AnnouncementDraftService extends IService<AnnouncementDraftEntity>, MyBaseMysqlService<AnnouncementDraftEntity, AnnouncementDraftMapper, AnnouncementDraftVo> {
 
     /**
      * 新增公告草稿
@@ -28,7 +28,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
 
     /**
      * 更新公告草稿
@@ -37,7 +37,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception;
 
     /**
      * 分页查询 公告草稿 dto列表
@@ -49,7 +49,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
      * @param sortBeans
      * @return MyCommonResult<AnnouncementDraftVo>
      */
-    MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+    MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                                             List<AntdvSortBean> sortBeans);
 
     /**
@@ -59,7 +59,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
      * @return
      * @throws Exception
      */
-    Integer dealBatchPublishByDraft(UserAccount loginUser, Long[] draftIds) throws Exception;
+    Integer dealBatchPublishByDraft(UserAccountEntity loginUser, Long[] draftIds) throws Exception;
 
     /**
      * 公告草稿-发布
@@ -69,6 +69,6 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraft>, M
      * @return
      * @throws Exception
      */
-    Integer dealPublishByDraft(UserAccount loginUser, Long draftId, boolean insertFlag) throws Exception;
+    Integer dealPublishByDraft(UserAccountEntity loginUser, Long draftId, boolean insertFlag) throws Exception;
 
 }

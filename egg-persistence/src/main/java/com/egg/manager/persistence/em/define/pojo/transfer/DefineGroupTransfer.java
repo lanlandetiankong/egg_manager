@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineGroupMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineGroupVo;
@@ -24,7 +24,7 @@ public class DefineGroupTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineGroupVo transferEntityToVo(DefineGroup entity) {
+    public static DefineGroupVo transferEntityToVo(DefineGroupEntity entity) {
         if (entity == null) {
             return null;
         }

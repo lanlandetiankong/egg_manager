@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserJobMapper extends MyEggMapper<UserJob> {
+public interface UserJobMapper extends MyEggMapper<UserJobEntity> {
 
     /**
      * [分页搜索查询] - 用户职务
@@ -42,7 +42,7 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @param jobList
      * @return
      */
-    int customBatchInsert(List<UserJob> jobList);
+    int customBatchInsert(List<UserJobEntity> jobList);
 
     /**
      * 根据用户id 修改指定职务关联 的可用状态
@@ -53,5 +53,5 @@ public interface UserJobMapper extends MyEggMapper<UserJob> {
      * @return
      */
     int batchUpdateStateByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("jobIdList") List<Long> jobIdList, @Param("stateVal") Short stateVal,
-                                        @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+                                        @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

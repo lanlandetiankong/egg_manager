@@ -3,8 +3,8 @@ package com.egg.manager.persistence.em.announcement.pojo.transfer;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap.AnnouncementDraftMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -34,11 +34,11 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static AnnouncementDraft transferVoToEntity(AnnouncementDraftVo vo) {
+    public static AnnouncementDraftEntity transferVoToEntity(AnnouncementDraftVo vo) {
         if (vo == null) {
             return null;
         }
-        AnnouncementDraft entity = announcementDraftMapstruct.transferVoToEntity(vo);
+        AnnouncementDraftEntity entity = announcementDraftMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -47,7 +47,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraft entity, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraftEntity entity, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (entity == null) {
             return null;
         }
@@ -61,7 +61,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param dto
      * @return
      */
-    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (dto == null) {
             return null;
         }
@@ -72,12 +72,12 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraft> announcementDrafts, Map<Long, AnnouncementTag> announcementTagMap) {
-        if (announcementDrafts == null) {
+    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraftEntity> announcementDraftEntities, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+        if (announcementDraftEntities == null) {
             return null;
         } else {
             List<AnnouncementDraftVo> list = new ArrayList<>();
-            for (AnnouncementDraft entity : announcementDrafts) {
+            for (AnnouncementDraftEntity entity : announcementDraftEntities) {
                 list.add(transferEntityToVo(entity, announcementTagMap));
             }
             return list;
@@ -85,7 +85,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<Long, AnnouncementTag> announcementTagMap) {
+    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (announcementDraftDtos == null) {
             return null;
         } else {
@@ -104,7 +104,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param vo
      * @param announcementTagMap
      */
-    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<Long, AnnouncementTag> announcementTagMap) {
+    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<Long, AnnouncementTagEntity> announcementTagMap) {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);
@@ -113,9 +113,9 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
                     List<String> tagNameList = new ArrayList<>();
                     if (CollectionUtil.isNotEmpty(announcementTagMap)) {
                         for (String tagId : tagList) {
-                            AnnouncementTag announcementTag = announcementTagMap.get(tagId);
-                            if (announcementTag != null) {
-                                tagNameList.add(announcementTag.getName());
+                            AnnouncementTagEntity announcementTagEntity = announcementTagMap.get(tagId);
+                            if (announcementTagEntity != null) {
+                                tagNameList.add(announcementTagEntity.getName());
                             }
                         }
                     }

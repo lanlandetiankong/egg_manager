@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.announcement.pojo.transfer;
 
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap.AnnouncementTagMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class AnnouncementTagTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static AnnouncementTag transferVoToEntity(AnnouncementTagVo vo) {
+    public static AnnouncementTagEntity transferVoToEntity(AnnouncementTagVo vo) {
         if (vo == null) {
             return null;
         }
-        AnnouncementTag entity = announcementTagMapstruct.transferVoToEntity(vo);
+        AnnouncementTagEntity entity = announcementTagMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class AnnouncementTagTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementTagVo transferEntityToVo(AnnouncementTag entity) {
+    public static AnnouncementTagVo transferEntityToVo(AnnouncementTagEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,12 +61,12 @@ public class AnnouncementTagTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<AnnouncementTagVo> transferEntityToVoList(List<AnnouncementTag> entityList) {
+    public static List<AnnouncementTagVo> transferEntityToVoList(List<AnnouncementTagEntity> entityList) {
         if (entityList == null) {
             return null;
         } else {
             List<AnnouncementTagVo> list = new ArrayList<>();
-            for (AnnouncementTag entity : entityList) {
+            for (AnnouncementTagEntity entity : entityList) {
                 list.add(transferEntityToVo(entity));
             }
             return list;

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineJobConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefineJobConversion.class}
 )
-public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, DefineJobVo, DefineJobDto> {
+public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJobEntity, DefineJobVo, DefineJobDto> {
     DefineJobMapstruct INSTANCE = Mappers.getMapper(DefineJobMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
      * @return
      */
     @Mappings({})
-    DefineJob transferVoToEntity(DefineJobVo vo);
+    DefineJobEntity transferVoToEntity(DefineJobVo vo);
 
     /**
      * entity转vo
@@ -42,7 +42,7 @@ public interface DefineJobMapstruct extends MyBaseMysqlMapstruct<DefineJob, Defi
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    DefineJobVo transferEntityToVo(DefineJob entity);
+    DefineJobVo transferEntityToVo(DefineJobEntity entity);
 
     /**
      * dto转vo

@@ -4,8 +4,8 @@ import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import org.springframework.data.domain.Sort;
 
 import javax.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doInsert(UserAccount loginUser, T t);
+    T doInsert(UserAccountEntity loginUser, T t);
 
     /**
      * 批量插入
@@ -32,7 +32,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    List<T> doInsert(UserAccount loginUser, Iterable<T> iterables);
+    List<T> doInsert(UserAccountEntity loginUser, Iterable<T> iterables);
 
 
     /**
@@ -41,7 +41,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doUpdateById(UserAccount loginUser, T t);
+    T doUpdateById(UserAccountEntity loginUser, T t);
 
     /**
      * 更新项(所有字段)
@@ -49,7 +49,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    T doUpdateAllColById(UserAccount loginUser, T t);
+    T doUpdateAllColById(UserAccountEntity loginUser, T t);
 
     /**
      * 批量更新
@@ -59,7 +59,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param updateBean
      * @return
      */
-    Long doBatchUpdate(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean);
+    Long doBatchUpdate(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean);
 
     /**
      * 根据id-伪删除
@@ -68,7 +68,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteById(UserAccount loginUser, ID id) throws MyMongoException;
+    Long doFakeDeleteById(UserAccountEntity loginUser, ID id) throws MyMongoException;
 
     /**
      * 根据根据实体类-伪删除
@@ -77,7 +77,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDelete(UserAccount loginUser, T t) throws MyMongoException;
+    Long doFakeDelete(UserAccountEntity loginUser, T t) throws MyMongoException;
 
     /**
      * 根据id集合伪删除
@@ -86,28 +86,28 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteByIds(UserAccount loginUser, Iterable<ID> iterableList) throws MyMongoException;
+    Long doFakeDeleteByIds(UserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException;
 
     /**
      * 根据id删除对应项
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param id
      */
-    void doDeleteById(UserAccount loginUser, ID id);
+    void doDeleteById(UserAccountEntity loginUser, ID id);
 
     /**
      * 根据项删除
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param t
      */
-    void doDelete(UserAccount loginUser, T t);
+    void doDelete(UserAccountEntity loginUser, T t);
 
     /**
      * 根据 项集合 删除
      * @param loginUser    当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      */
-    void doDeleteAll(UserAccount loginUser, Iterable<? extends T> iterableList);
+    void doDeleteAll(UserAccountEntity loginUser, Iterable<? extends T> iterableList);
 
     /**
      * 删除所有(禁用)
@@ -115,7 +115,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @throws MyMongoException
      */
     @Deprecated
-    void doDeleteAll(@NotNull UserAccount loginUser) throws MyMongoException;
+    void doDeleteAll(@NotNull UserAccountEntity loginUser) throws MyMongoException;
 
     /**
      * 根据id查询对应的项
@@ -123,7 +123,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param id
      * @return
      */
-    T doFindById(UserAccount loginUser, ID id);
+    T doFindById(UserAccountEntity loginUser, ID id);
 
 
     /**
@@ -131,7 +131,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    List<T> doFindAll(UserAccount loginUser);
+    List<T> doFindAll(UserAccountEntity loginUser);
 
     /**
      * 查询所有记录
@@ -139,7 +139,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param sort
      * @return
      */
-    List<T> doFindAll(UserAccount loginUser, Sort sort);
+    List<T> doFindAll(UserAccountEntity loginUser, Sort sort);
 
     /**
      * 根据id集合查询所有相应的记录
@@ -147,7 +147,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param iterableList
      * @return
      */
-    Iterable<T> doFindAllById(UserAccount loginUser, Iterable<ID> iterableList);
+    Iterable<T> doFindAllById(UserAccountEntity loginUser, Iterable<ID> iterableList);
 
 
     /**
@@ -156,7 +156,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+    List<T> doFindAll(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer);
 
     /**
      * 根据查询条件查询记录并排序
@@ -165,7 +165,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param sort
      * @return
      */
-    List<T> doFindAll(UserAccount loginUser, MyMongoQueryBuffer queryBuffer, Sort sort);
+    List<T> doFindAll(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer, Sort sort);
 
     /**
      * 分页查询
@@ -173,7 +173,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param pageBean
      * @return
      */
-    MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryPageBean<T> pageBean);
+    MyMongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MyMongoQueryPageBean<T> pageBean);
 
     /**
      * 根据封装的MongoQueryBean进行分页查询
@@ -181,7 +181,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    MyMongoQueryPageBean<T> doFindPage(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+    MyMongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer);
 
     /**
      * 根据条件查询首个项
@@ -189,7 +189,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    T doFindOne(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+    T doFindOne(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer);
 
 
     /**
@@ -197,7 +197,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param loginUser 当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @return
      */
-    long doCount(UserAccount loginUser);
+    long doCount(UserAccountEntity loginUser);
 
     /**
      * 统计筛选条件后的数量
@@ -205,7 +205,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    long doCount(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+    long doCount(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer);
 
     /**
      * 根据条件，判断是否有项存在
@@ -213,7 +213,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    boolean doExists(UserAccount loginUser, MyMongoQueryBuffer queryBuffer);
+    boolean doExists(UserAccountEntity loginUser, MyMongoQueryBuffer queryBuffer);
 
     /**
      * 判断id是否有对应项
@@ -221,6 +221,6 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param id
      * @return
      */
-    boolean doExistsById(UserAccount loginUser, ID id);
+    boolean doExistsById(UserAccountEntity loginUser, ID id);
 
 }

@@ -1,5 +1,4 @@
-package com.egg.manager.persistence.em.define.db.mysql.entity;
-
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -13,15 +12,16 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 角色定义
+ * @description 租户定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_role")
-public class DefineRole extends Model<DefineRole> {
+@TableName("em_define_tenant")
+public class DefineTenantEntity extends Model<DefineTenantEntity> {
+
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
@@ -35,11 +35,10 @@ public class DefineRole extends Model<DefineRole> {
     @TableField("code")
     private String code;
     /**
-     * 类型
+     * 数据库类型 code
      */
-    @TableField("type")
-    private Integer type;
-
+    @TableField("db_code")
+    private String dbCode;
 
     /**
      * 备注
@@ -88,6 +87,7 @@ public class DefineRole extends Model<DefineRole> {
      */
     @TableField(value = "deleted_time")
     private Date deletedTime;
+
 
     @Override
     protected Serializable pkVal() {

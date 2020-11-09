@@ -7,9 +7,9 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenu;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRole;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineRoleDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineRoleVo;
@@ -22,14 +22,14 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlService<DefineRole, DefineRoleMapper, DefineRoleVo> {
+public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMysqlService<DefineRoleEntity, DefineRoleMapper, DefineRoleVo> {
     /**
      * 取得用户 所拥有的 角色定义-List集合
      * @param userAccountId
      * @param stateVal      状态值
      * @return
      */
-    List<DefineRole> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal);
+    List<DefineRoleEntity> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal);
 
     /**
      * 取得用户 所拥有的 角色code-Set集合
@@ -44,7 +44,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param stateVal 状态值
      * @return
      */
-    List<DefineMenu> dealGetMenusByRoleIdFromDb(Long roleId, Short stateVal);
+    List<DefineMenuEntity> dealGetMenusByRoleIdFromDb(Long roleId, Short stateVal);
 
     /**
      * 取得角色 所拥有的 菜单定义id-Set集合
@@ -59,14 +59,14 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param wrapper
      * @return
      */
-    List<DefineRole> queryAllEnableList(QueryWrapper<DefineRole> wrapper);
+    List<DefineRoleEntity> queryAllEnableList(QueryWrapper<DefineRoleEntity> wrapper);
 
     /**
      * 根据 用户账号 取得所有角色
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<DefineRole> dealGetListFormRedisByAccount(UserAccount userAccount);
+    List<DefineRoleEntity> dealGetListFormRedisByAccount(UserAccountEntity userAccountEntity);
 
 
     /**
@@ -78,7 +78,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRole> paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
@@ -91,7 +91,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
     /**
@@ -101,7 +101,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, DefineRoleVo defineRoleVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception;
 
     /**
      * 角色定义-更新
@@ -110,7 +110,7 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, DefineRoleVo defineRoleVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception;
 
     /**
      * 角色授权
@@ -121,6 +121,6 @@ public interface DefineRoleService extends IService<DefineRole>, MyBaseMysqlServ
      * @return
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(UserAccount loginUser, Long roleId, Long[] checkIds) throws Exception;
+    Integer dealGrantPermissionToRole(UserAccountEntity loginUser, Long roleId, Long[] checkIds) throws Exception;
 
 }

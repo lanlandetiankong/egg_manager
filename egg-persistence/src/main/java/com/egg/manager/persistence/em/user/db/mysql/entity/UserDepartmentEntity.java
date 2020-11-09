@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.define.db.mysql.entity;
+package com.egg.manager.persistence.em.user.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,33 +12,38 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 职务定义
+ * @description 用户&部门 关联
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_job")
-public class DefineJob extends Model<DefineJob> {
-
+@TableName("em_user_department")
+public class UserDepartmentEntity extends Model<UserDepartmentEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 名称
+     * 用户账号id
      */
-    @TableField("name")
-    private String name;
+    @TableField(value = "user_account_id")
+    private Long userAccountId;
     /**
-     * 描述
+     * 部门id
      */
-    @TableField("description")
-    private String description;
+    @TableField(value = "define_department_id")
+    private Long defineDepartmentId;
     /**
      * 类型
      */
     @TableField("type")
     private Integer type;
+    /**
+     * 是否部门管理员
+     */
+    @TableField(value = "is_manager")
+    private Short isManager;
+
 
     /**
      * 备注
@@ -61,12 +66,12 @@ public class DefineJob extends Model<DefineJob> {
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
-     * 创建用户id
+     * 创建人id
      */
     @TableField(value = "create_user_id")
     private Long createUserId;
     /**
-     * 最后修改用户id
+     * 最后修改人id
      */
     @TableField(value = "last_modifyer_id")
     private Long lastModifyerId;
@@ -92,5 +97,6 @@ public class DefineJob extends Model<DefineJob> {
     protected Serializable pkVal() {
         return this.fid;
     }
+
 
 }

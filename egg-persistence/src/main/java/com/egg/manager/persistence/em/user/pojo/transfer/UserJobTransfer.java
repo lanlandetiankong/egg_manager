@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserJobDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserJobMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class UserJobTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static UserJob transferVoToEntity(UserJobVo vo) {
+    public static UserJobEntity transferVoToEntity(UserJobVo vo) {
         if (vo == null) {
             return null;
         }
-        UserJob entity = userJobMapstruct.transferVoToEntity(vo);
+        UserJobEntity entity = userJobMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class UserJobTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static UserJobVo transferEntityToVo(UserJob entity) {
+    public static UserJobVo transferEntityToVo(UserJobEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,12 +61,12 @@ public class UserJobTransfer extends BaseMysqlTransfer {
         return entity;
     }
 
-    public static List<UserJobVo> transferEntityToVoList(List<UserJob> userJobs) {
-        if (userJobs == null) {
+    public static List<UserJobVo> transferEntityToVoList(List<UserJobEntity> userJobEntities) {
+        if (userJobEntities == null) {
             return null;
         } else {
             List<UserJobVo> list = new ArrayList<>();
-            for (UserJob job : userJobs) {
+            for (UserJobEntity job : userJobEntities) {
                 list.add(transferEntityToVo(job));
             }
             return list;

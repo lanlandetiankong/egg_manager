@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.define.db.mysql.entity;
+package com.egg.manager.persistence.em.announcement.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,43 +12,35 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 模块定义
+ * @description 公告标签
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_define_module")
-public class DefineModule extends Model<DefineModule> {
+@TableName("em_announcement_tag")
+public class AnnouncementTagEntity extends Model<AnnouncementTagEntity> {
+
+
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
-
     /**
      * 名称
      */
     @TableField("name")
     private String name;
     /**
-     * 编码
+     * 描述
      */
-    @TableField("code")
-    private String code;
+    @TableField("description")
+    private String description;
     /**
-     * 图标名
+     * 排序值
      */
-    @TableField("icon")
-    private String icon;
-    /**
-     * 样式json
-     */
-    @TableField("style")
-    private String style;
-    /**
-     * 类型
-     */
-    @TableField("type")
-    private Integer type;
+    @TableField("ordering")
+    private Integer ordering;
+
 
     /**
      * 备注

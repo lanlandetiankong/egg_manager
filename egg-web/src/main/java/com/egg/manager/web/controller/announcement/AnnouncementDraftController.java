@@ -5,6 +5,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -15,9 +17,7 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraft;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementDraftTransfer;
@@ -65,7 +65,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementDraftVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                            Boolean onlySelf, @CurrentLoginUser UserAccount loginUser) {
+                                                            Boolean onlySelf, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainQueryResult(AnnouncementDraftVo.class);
         try {
             //解析 搜索条件
@@ -92,15 +92,15 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcementDraft/queryOneById")
     @PostMapping(value = "/queryOneById")
     public MyCommonResult<AnnouncementDraftVo> queryOneById(HttpServletRequest request, String draftId,
-                                                            @CurrentLoginUser UserAccount loginUser) {
+                                                            @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<AnnouncementDraftVo> result = MyCommonResult.gainQueryResult(AnnouncementDraftVo.class);
         try {
             Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            AnnouncementDraft announcementDraft = announcementDraftMapper.selectById(draftId);
+            AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
 
             //取得 公告标签 map
-            Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
-            result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraft, announcementTagMap));
+            Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+            result.setBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraftEntity, announcementTagMap));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -111,7 +111,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementDraft/createByForm")
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
@@ -130,7 +130,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementDraft/updateByForm")
     @PostMapping(value = "/updateByForm")
     public MyCommonResult updateByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                       @CurrentLoginUser UserAccount loginUser) {
+                                       @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer updateCount = 0;
         try {
@@ -152,7 +152,7 @@ public class AnnouncementDraftController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
@@ -173,7 +173,7 @@ public class AnnouncementDraftController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -190,7 +190,7 @@ public class AnnouncementDraftController extends BaseController {
     @ApiOperation(value = "批量发布->公告草稿", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementDraft/batchPublishDraft")
     @PostMapping(value = "/batchPublishDraft")
-    public MyCommonResult batchPublishDraft(HttpServletRequest request, Long[] draftIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult batchPublishDraft(HttpServletRequest request, Long[] draftIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer publishCount = 0;
         try {
@@ -207,7 +207,7 @@ public class AnnouncementDraftController extends BaseController {
     @ApiOperation(value = "发布->公告草稿", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementDraft/publishDraft")
     @PostMapping(value = "/publishDraft")
-    public MyCommonResult publishDraft(HttpServletRequest request, Long draftId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult publishDraft(HttpServletRequest request, Long draftId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());

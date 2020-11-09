@@ -12,15 +12,15 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 公告草稿
+ * @description 公告
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_announcement_draft")
-public class AnnouncementDraft extends Model<AnnouncementDraft> {
+@TableName("em_announcement")
+public class AnnouncementEntity extends Model<AnnouncementEntity> {
 
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
@@ -55,13 +55,6 @@ public class AnnouncementDraft extends Model<AnnouncementDraft> {
      */
     @TableField("accessory")
     private String accessory;
-    /**
-     * 是否已提交
-     */
-    @TableField("is_published")
-    private short isPublished;
-
-
     /**
      * 备注
      */

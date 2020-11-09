@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineJobMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -26,11 +26,11 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefineJob transferVoToEntity(DefineJobVo vo) {
+    public static DefineJobEntity transferVoToEntity(DefineJobVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineJob entity = defineJobMapstruct.transferVoToEntity(vo);
+        DefineJobEntity entity = defineJobMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -39,7 +39,7 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineJobVo transferEntityToVo(DefineJob entity) {
+    public static DefineJobVo transferEntityToVo(DefineJobEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -60,13 +60,13 @@ public class DefineJobTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<DefineJobVo> transferEntityToVoList(List<DefineJob> defineJobs) {
-        if (defineJobs == null) {
+    public static List<DefineJobVo> transferEntityToVoList(List<DefineJobEntity> defineJobEntities) {
+        if (defineJobEntities == null) {
             return null;
         } else {
             List<DefineJobVo> list = new ArrayList<>();
-            for (DefineJob defineJob : defineJobs) {
-                list.add(transferEntityToVo(defineJob));
+            for (DefineJobEntity defineJobEntity : defineJobEntities) {
+                list.add(transferEntityToVo(defineJobEntity));
             }
             return list;
         }

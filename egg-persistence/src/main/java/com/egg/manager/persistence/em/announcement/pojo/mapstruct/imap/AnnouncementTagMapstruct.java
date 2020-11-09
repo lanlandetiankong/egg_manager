@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap;
 
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
 import com.egg.manager.persistence.em.announcement.pojo.mapstruct.conversion.AnnouncementTagConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -20,7 +20,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {AnnouncementTagConversion.class}
 )
-public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<AnnouncementTag, AnnouncementTagVo, AnnouncementTagDto> {
+public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<AnnouncementTagEntity, AnnouncementTagVo, AnnouncementTagDto> {
     AnnouncementTagMapstruct INSTANCE = Mappers.getMapper(AnnouncementTagMapstruct.class);
 
     /**
@@ -29,7 +29,7 @@ public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<Announcem
      * @return
      */
     @Mappings({})
-    AnnouncementTag transferVoToEntity(AnnouncementTagVo vo);
+    AnnouncementTagEntity transferVoToEntity(AnnouncementTagVo vo);
 
     /**
      * entity转vo
@@ -40,7 +40,7 @@ public interface AnnouncementTagMapstruct extends MyBaseMysqlMapstruct<Announcem
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    AnnouncementTagVo transferEntityToVo(AnnouncementTag entity);
+    AnnouncementTagVo transferEntityToVo(AnnouncementTagEntity entity);
 
     /**
      * dto转vo

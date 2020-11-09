@@ -11,9 +11,9 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserTenantMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
@@ -35,7 +35,7 @@ import java.util.*;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineTenantService.class)
-public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenantMapper, DefineTenant, DefineTenantVo>
+public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenantMapper, DefineTenantEntity, DefineTenantVo>
         implements DefineTenantService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -47,7 +47,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+    public MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
         Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -58,26 +58,26 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
-        DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
-        defineTenant = super.doBeforeCreate(loginUser, defineTenant, true);
-        Integer addCount = defineTenantMapper.insert(defineTenant);
+    public Integer dealCreate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception {
+        DefineTenantEntity defineTenantEntity = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
+        defineTenantEntity = super.doBeforeCreate(loginUser, defineTenantEntity, true);
+        Integer addCount = defineTenantMapper.insert(defineTenantEntity);
         return addCount;
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineTenantVo defineTenantVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception {
         Integer changeCount = 0;
-        DefineTenant defineTenant = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
-        defineTenant = super.doBeforeUpdate(loginUser, defineTenant);
-        changeCount = defineTenantMapper.updateById(defineTenant);
+        DefineTenantEntity defineTenantEntity = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
+        defineTenantEntity = super.doBeforeUpdate(loginUser, defineTenantEntity);
+        changeCount = defineTenantMapper.updateById(defineTenantEntity);
         return changeCount;
     }
 
 
     @Override
-    public MyCommonResult dealResultListToEnums(UserAccount loginUser, MyCommonResult result) {
+    public MyCommonResult dealResultListToEnums(UserAccountEntity loginUser, MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList();
         if (resultList != null && resultList.isEmpty() == false) {
@@ -90,7 +90,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     }
 
     @Override
-    public Integer dealTenantSetupManager(UserAccount loginUser, Long tenantId, Long[] checkIds) throws Exception {
+    public Integer dealTenantSetupManager(UserAccountEntity loginUser, Long tenantId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
@@ -100,7 +100,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
             //取得曾勾选的用户id 集合
             List<Long> oldCheckIds = defineTenantMapper.findAllManagerUserIdByTenantId(tenantId, false);
             if (oldCheckIds == null || oldCheckIds.isEmpty()) {
-                List<UserTenant> addEntitys = new ArrayList<>();
+                List<UserTenantEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                 }
@@ -132,7 +132,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                 }
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
-                    List<UserTenant> addEntitys = new ArrayList<>();
+                    List<UserTenantEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
                         addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUser));
                     }

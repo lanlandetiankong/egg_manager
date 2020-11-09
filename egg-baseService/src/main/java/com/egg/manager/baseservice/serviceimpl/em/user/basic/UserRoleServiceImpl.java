@@ -18,8 +18,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserRole;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserRoleMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserRoleDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserRoleTransfer;
@@ -40,7 +40,7 @@ import java.util.List;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = UserRoleService.class)
-public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, UserRole, UserRoleVo> implements UserRoleService {
+public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, UserRoleEntity, UserRoleVo> implements UserRoleService {
 
     @Reference
     private RedisHelper redisHelper;
@@ -52,64 +52,64 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
 
 
     @Override
-    public List<UserRole> dealGetAllByAccount(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserRoleEntity> dealGetAllByAccount(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        List<UserRole> userRoleList = dealGetAllByAccountFromRedis(userAccount);
-        if (userRoleList == null || userRoleList.isEmpty()) {
-            userRoleList = dealGetAllByAccountFromDb(userAccount);
+        List<UserRoleEntity> userRoleEntityList = dealGetAllByAccountFromRedis(userAccountEntity);
+        if (userRoleEntityList == null || userRoleEntityList.isEmpty()) {
+            userRoleEntityList = dealGetAllByAccountFromDb(userAccountEntity);
         }
-        return userRoleList;
+        return userRoleEntityList;
     }
 
 
     @Override
-    public List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserRoleEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        QueryWrapper<UserRole> userRoleEm = new QueryWrapper<UserRole>();
+        QueryWrapper<UserRoleEntity> userRoleEm = new QueryWrapper<UserRoleEntity>();
         userRoleEm.eq("state", BaseStateEnum.ENABLED.getValue())
-                .eq("user_account_id", userAccount.getFid());
+                .eq("user_account_id", userAccountEntity.getFid());
         userRoleEm.orderBy(true, false, "update_time");
-        List<UserRole> userRoleList = userRoleMapper.selectList(userRoleEm);
-        return userRoleList;
+        List<UserRoleEntity> userRoleEntityList = userRoleMapper.selectList(userRoleEm);
+        return userRoleEntityList;
     }
 
 
     @Override
-    public List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount) {
-        if (super.checkUserAccountIsBlank(userAccount) == true) {
+    public List<UserRoleEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity) {
+        if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
         }
-        Object userRoleListObj = redisHelper.hashGet(RedisShiroCacheEnum.userRoles.getKey(), userAccount.getFid());
+        Object userRoleListObj = redisHelper.hashGet(RedisShiroCacheEnum.userRoles.getKey(), userAccountEntity.getFid());
         String userRoleListJson = JSONObject.toJSONString(userRoleListObj);
-        List<UserRole> userRoleList = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRole>>() {
+        List<UserRoleEntity> userRoleEntityList = JSON.parseObject(userRoleListJson, new TypeReference<ArrayList<UserRoleEntity>>() {
         });
-        return userRoleList;
+        return userRoleEntityList;
     }
 
 
     @Override
-    public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRole> paginationBean,
+    public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRoleEntity> paginationBean,
                                                              List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserRole> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserRoleEntity> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = userRoleMapper.selectPage(page, userRoleEntityWrapper);
-        List<UserRole> userRoles = iPage.getRecords();
-        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoles));
+        List<UserRoleEntity> userRoleEntities = iPage.getRecords();
+        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoleEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
+    public MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
                                                           List<AntdvSortBean> sortBeans) {
         Page<UserRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -119,19 +119,19 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
-        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        userRole = super.doBeforeCreate(loginUser, userRole, true);
-        Integer addCount = userRoleMapper.insert(userRole);
+    public Integer dealCreate(UserAccountEntity loginUser, UserRoleVo userRoleVo) throws Exception {
+        UserRoleEntity userRoleEntity = UserRoleTransfer.transferVoToEntity(userRoleVo);
+        userRoleEntity = super.doBeforeCreate(loginUser, userRoleEntity, true);
+        Integer addCount = userRoleMapper.insert(userRoleEntity);
         return addCount;
     }
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, UserRoleVo userRoleVo) throws Exception {
         Integer changeCount = 0;
-        UserRole userRole = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        userRole = super.doBeforeUpdate(loginUser, userRole);
-        changeCount = userRoleMapper.updateById(userRole);
+        UserRoleEntity userRoleEntity = UserRoleTransfer.transferVoToEntity(userRoleVo);
+        userRoleEntity = super.doBeforeUpdate(loginUser, userRoleEntity);
+        changeCount = userRoleMapper.updateById(userRoleEntity);
         return changeCount;
     }
 

@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.define.pojo.transfer;
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModule;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineModuleMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static DefineModule transferVoToEntity(DefineModuleVo vo) {
+    public static DefineModuleEntity transferVoToEntity(DefineModuleVo vo) {
         if (vo == null) {
             return null;
         }
-        DefineModule entity = defineModuleMapstruct.transferVoToEntity(vo);
+        DefineModuleEntity entity = defineModuleMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static DefineModuleVo transferEntityToVo(DefineModule entity) {
+    public static DefineModuleVo transferEntityToVo(DefineModuleEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,13 +61,13 @@ public class DefineModuleTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<DefineModuleVo> transferEntityToVoList(List<DefineModule> defineModules) {
-        if (defineModules == null) {
+    public static List<DefineModuleVo> transferEntityToVoList(List<DefineModuleEntity> defineModuleEntities) {
+        if (defineModuleEntities == null) {
             return null;
         } else {
             List<DefineModuleVo> list = new ArrayList<>();
-            for (DefineModule defineModule : defineModules) {
-                list.add(transferEntityToVo(defineModule));
+            for (DefineModuleEntity defineModuleEntity : defineModuleEntities) {
+                list.add(transferEntityToVo(defineModuleEntity));
             }
             return list;
         }

@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserRole;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserRoleMapper;
 import com.egg.manager.persistence.em.user.pojo.dto.UserRoleDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserRoleVo;
@@ -19,27 +19,27 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<UserRole, UserRoleMapper, UserRoleVo> {
+public interface UserRoleService extends IService<UserRoleEntity>, MyBaseMysqlService<UserRoleEntity, UserRoleMapper, UserRoleVo> {
     /**
      * 取得当前用户关联的 UserRole
      * @param account
      * @return
      */
-    List<UserRole> dealGetAllByAccount(UserAccount account);
+    List<UserRoleEntity> dealGetAllByAccount(UserAccountEntity account);
 
     /**
      * 从数据库是中取得当前用户关联的 UserRole
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserRole> dealGetAllByAccountFromDb(UserAccount userAccount);
+    List<UserRoleEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity);
 
     /**
      * 从Redis中取得当前用户关联的 UserRole
-     * @param userAccount
+     * @param userAccountEntity
      * @return
      */
-    List<UserRole> dealGetAllByAccountFromRedis(UserAccount userAccount);
+    List<UserRoleEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity);
 
 
     /**
@@ -51,7 +51,7 @@ public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRole> paginationBean,
+    MyCommonResult<UserRoleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRoleEntity> paginationBean,
                                                       List<AntdvSortBean> sortBeans);
 
     /**
@@ -64,7 +64,7 @@ public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
+    MyCommonResult<UserRoleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
                                                    List<AntdvSortBean> sortBeans);
 
 
@@ -75,7 +75,7 @@ public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, UserRoleVo userRoleVo) throws Exception;
 
     /**
      * 用户角色-更新
@@ -84,6 +84,6 @@ public interface UserRoleService extends IService<UserRole>, MyBaseMysqlService<
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, UserRoleVo userRoleVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, UserRoleVo userRoleVo) throws Exception;
 
 }

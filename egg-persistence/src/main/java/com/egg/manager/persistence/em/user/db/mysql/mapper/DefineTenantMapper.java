@@ -1,12 +1,12 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
+public interface DefineTenantMapper extends MyEggMapper<DefineTenantEntity> {
 
     /**
      * [分页搜索查询] - 租户定义
@@ -35,7 +35,7 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
      * @param tenantState
      * @return
      */
-    DefineTenant selectOneOfUserBelongTenant(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("tenantState") Short tenantState);
+    DefineTenantEntity selectOneOfUserBelongTenant(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("tenantState") Short tenantState);
 
     /**
      * 根据用户id查询 所属的租户详情-dto
@@ -58,5 +58,5 @@ public interface DefineTenantMapper extends MyEggMapper<DefineTenant> {
      * @param loginUser
      * @return
      */
-    int clearAllManagerByTenantId(@Param("tenantId") Long tenantId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int clearAllManagerByTenantId(@Param("tenantId") Long tenantId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

@@ -16,7 +16,7 @@ import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.MyBaseWebLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
@@ -150,7 +150,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
                     //取得当前登录的用户
-                    UserAccount loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
+                    UserAccountEntity loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
                     requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     Long userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);

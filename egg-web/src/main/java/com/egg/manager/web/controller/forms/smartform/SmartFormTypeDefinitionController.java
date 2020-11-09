@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -17,7 +18,6 @@ import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfUpdate;
@@ -64,7 +64,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
             //添加状态过滤,时间倒序排序
@@ -88,7 +88,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataAll")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
             //添加状态过滤,时间倒序排序
@@ -107,7 +107,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
                                                                        @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
@@ -124,7 +124,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
     @ApiOperation(value = "新增->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
-    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
                                       @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                       SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
@@ -144,7 +144,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                          SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
@@ -172,7 +172,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
-    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -191,7 +191,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Long delCount = (long) 0;
         try {

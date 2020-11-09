@@ -2,9 +2,9 @@ package com.egg.manager.web.enhance.resolver;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginerBelongTenant;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -32,7 +32,7 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
      */
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(DefineTenant.class) && parameter.hasParameterAnnotation(CurrentLoginerBelongTenant.class);
+        return parameter.getParameterType().isAssignableFrom(DefineTenantEntity.class) && parameter.hasParameterAnnotation(CurrentLoginerBelongTenant.class);
     }
 
     /**
@@ -46,20 +46,20 @@ public class CurrentUserBlongTenantMethodArgumentResolver implements HandlerMeth
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        DefineTenant defineTenant = (DefineTenant) nativeWebRequest.getAttribute("currentLoginerBelongTenant", RequestAttributes.SCOPE_REQUEST);
-        if (defineTenant == null) {
+        DefineTenantEntity defineTenantEntity = (DefineTenantEntity) nativeWebRequest.getAttribute("currentLoginerBelongTenant", RequestAttributes.SCOPE_REQUEST);
+        if (defineTenantEntity == null) {
             String authorization = nativeWebRequest.getHeader("authorization");
             if (StringUtils.isNotBlank(authorization)) {
-                defineTenant = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(null, authorization);
+                defineTenantEntity = userAccountRedisService.dealGetCurrentLoginerBelongTenantByAuthorization(null, authorization);
             }
         }
         CurrentLoginerBelongTenant currentLoginerBelongTenantAnno = methodParameter.getParameterAnnotation(CurrentLoginerBelongTenant.class);
         if (currentLoginerBelongTenantAnno != null) {
             boolean required = currentLoginerBelongTenantAnno.required();
-            if (defineTenant == null && required) {
+            if (defineTenantEntity == null && required) {
                 throw new MyUnauthorizedException("获取所属租户信息失败");
             }
         }
-        return defineTenant;
+        return defineTenantEntity;
     }
 }

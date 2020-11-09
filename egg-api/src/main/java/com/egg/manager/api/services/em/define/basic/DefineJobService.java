@@ -6,8 +6,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJob;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineJobVo;
@@ -19,7 +19,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlService<DefineJob, DefineJobMapper, DefineJobVo> {
+public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysqlService<DefineJobEntity, DefineJobMapper, DefineJobVo> {
 
 
     /**
@@ -31,7 +31,7 @@ public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlServic
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJob> paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
     /**
@@ -44,7 +44,7 @@ public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlServic
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
+    MyCommonResult<DefineJobVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
                                                     List<AntdvSortBean> sortBeans);
 
     /**
@@ -54,7 +54,7 @@ public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlServic
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccount loginUser, DefineJobVo defineJobVo) throws Exception;
+    Integer dealCreate(UserAccountEntity loginUser, DefineJobVo defineJobVo) throws Exception;
 
     /**
      * 职务账号-更新
@@ -63,6 +63,6 @@ public interface DefineJobService extends IService<DefineJob>, MyBaseMysqlServic
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccount loginUser, DefineJobVo defineJobVo) throws Exception;
+    Integer dealUpdate(UserAccountEntity loginUser, DefineJobVo defineJobVo) throws Exception;
 
 }

@@ -15,9 +15,9 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.Announcement;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTag;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
@@ -41,7 +41,7 @@ import java.util.Map;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = AnnouncementService.class)
-public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper, Announcement, AnnouncementVo>
+public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<AnnouncementMapper, AnnouncementEntity, AnnouncementVo>
         implements AnnouncementService {
 
     @Autowired
@@ -58,28 +58,28 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<Announcement> paginationBean,
+    public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementEntity> paginationBean,
                                                                  List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        QueryWrapper<Announcement> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<AnnouncementEntity> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = announcementMapper.selectPage(page, announcementEntityWrapper);
-        List<Announcement> announcements = iPage.getRecords();
+        List<AnnouncementEntity> announcementEntities = iPage.getRecords();
         //取得 公告标签 map
-        Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
-        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcements, announcementTagMap));
+        Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
         return result;
     }
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
+    public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<Long, AnnouncementTag> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
 
         Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -89,31 +89,31 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     }
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, AnnouncementVo announcementVo) throws Exception {
-        Announcement announcement = AnnouncementTransfer.transferVoToEntity(announcementVo);
-        announcement = super.doBeforeCreate(loginUser, announcement, true);
-        return announcementMapper.insert(announcement);
+    public Integer dealCreate(UserAccountEntity loginUser, AnnouncementVo announcementVo) throws Exception {
+        AnnouncementEntity announcementEntity = AnnouncementTransfer.transferVoToEntity(announcementVo);
+        announcementEntity = super.doBeforeCreate(loginUser, announcementEntity, true);
+        return announcementMapper.insert(announcementEntity);
     }
 
 
     @Override
-    public Integer dealCreateFromDraft(UserAccount loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+    public Integer dealCreateFromDraft(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
         Date now = new Date();
         //公告草稿id
         Long draftId = announcementDraftVo.getFid();
         //发布公告
-        Announcement announcement = AnnouncementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
+        AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUser, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
         //id->announcement.setFid(MyUUIDUtil.renderSimpleUuid());
-        announcement.setState(BaseStateEnum.ENABLED.getValue());
-        announcement.setCreateTime(now);
-        announcement.setUpdateTime(now);
+        announcementEntity.setState(BaseStateEnum.ENABLED.getValue());
+        announcementEntity.setCreateTime(now);
+        announcementEntity.setUpdateTime(now);
         if (loginUser != null) {
-            announcement.setCreateUserId(loginUser.getFid());
-            announcement.setLastModifyerId(loginUser.getFid());
+            announcementEntity.setCreateUserId(loginUser.getFid());
+            announcementEntity.setLastModifyerId(loginUser.getFid());
         }
         //修改 公告草稿 状态
         announcementDraftService.dealPublishByDraft(loginUser, draftId, false);
-        Integer addCount = announcementMapper.insert(announcement);
+        Integer addCount = announcementMapper.insert(announcementEntity);
         return addCount;
     }
 

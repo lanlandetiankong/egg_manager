@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -32,7 +32,7 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
      */
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(UserAccount.class) && parameter.hasParameterAnnotation(CurrentLoginUser.class);
+        return parameter.getParameterType().isAssignableFrom(UserAccountEntity.class) && parameter.hasParameterAnnotation(CurrentLoginUser.class);
     }
 
     /**
@@ -46,20 +46,20 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        UserAccount userAccount = (UserAccount) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST);
-        if (userAccount == null) {
+        UserAccountEntity userAccountEntity = (UserAccountEntity) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST);
+        if (userAccountEntity == null) {
             String authorization = nativeWebRequest.getHeader("authorization");
             if (StringUtils.isNotBlank(authorization)) {
-                userAccount = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, authorization);
+                userAccountEntity = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, authorization);
             }
         }
         CurrentLoginUser currentLoginUserAnno = methodParameter.getParameterAnnotation(CurrentLoginUser.class);
         if (currentLoginUserAnno != null) {
             boolean required = currentLoginUserAnno.required();
-            if (userAccount == null && required) {
+            if (userAccountEntity == null && required) {
                 throw new MyUnauthorizedException("获取用户信息失败");
             }
         }
-        return userAccount;
+        return userAccountEntity;
     }
 }

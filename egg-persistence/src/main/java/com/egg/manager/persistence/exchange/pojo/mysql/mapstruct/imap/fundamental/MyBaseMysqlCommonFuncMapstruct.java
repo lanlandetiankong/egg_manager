@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
@@ -70,18 +70,18 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 取得 登录用户id
-     * @param userAccount
+     * @param userAccountEntity
      * @param required    当userAccount为null时是否抛出异常
      * @return
      */
-    default Long handleGetLoginUserId(UserAccount userAccount, boolean required) {
-        if (userAccount == null) {
+    default Long handleGetLoginUserId(UserAccountEntity userAccountEntity, boolean required) {
+        if (userAccountEntity == null) {
             if (required) {
                 throw new MyRuntimeBusinessException("无法取得当前用户信息！");
             }
             return null;
         } else {
-            return userAccount.getFid();
+            return userAccountEntity.getFid();
         }
     }
 
@@ -108,7 +108,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default UserAccountVo translateCreateUserEntityToVo(UserAccount entity) {
+    default UserAccountVo translateCreateUserEntityToVo(UserAccountEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -121,7 +121,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default UserAccountVo translateUpdateUserEntityToVo(UserAccount entity) {
+    default UserAccountVo translateUpdateUserEntityToVo(UserAccountEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -134,7 +134,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenant entity) {
+    default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenantEntity entity) {
         return DEFINE_TENANT_MAPSTRUCT.transferEntityToVo(entity);
     }
 

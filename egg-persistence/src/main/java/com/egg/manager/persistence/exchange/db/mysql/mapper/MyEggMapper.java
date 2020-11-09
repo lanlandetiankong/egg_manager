@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
@@ -36,7 +36,7 @@ public interface  MyEggMapper<T> extends BaseMapper<T> {
      * @param loginUser 当前用户
      * @return
      */
-    int batchDeleteByIdsWithModifyFill(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int batchDeleteByIdsWithModifyFill(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
 
     /**
@@ -52,7 +52,7 @@ public interface  MyEggMapper<T> extends BaseMapper<T> {
      * @param loginUser 当前登录用户
      * @return
      */
-    int deleteByIdWithModifyFill(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccount loginUser);
+    int deleteByIdWithModifyFill(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid,@Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
 
 

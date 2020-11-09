@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenant;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 
 import java.util.Date;
 
@@ -22,22 +22,22 @@ public class UserTenantPojoInitialize {
      * @param loginUser      当前登录用户
      * @return
      */
-    public static UserTenant generateSimpleInsertEntity(Long userAccountId, Long defineTenantId, UserAccount loginUser) {
-        UserTenant userTenant = new UserTenant();
+    public static UserTenantEntity generateSimpleInsertEntity(Long userAccountId, Long defineTenantId, UserAccountEntity loginUser) {
+        UserTenantEntity userTenantEntity = new UserTenantEntity();
         Date now = new Date();
         //userTenant.setFid(MyUUIDUtil.renderSimpleUuid());
-        userTenant.setUserAccountId(userAccountId);
-        userTenant.setDefineTenantId(defineTenantId);
-        userTenant.setIsManager(SwitchStateEnum.Close.getValue());
-        userTenant.setType(1);
-        userTenant.setState(BaseStateEnum.ENABLED.getValue());
-        userTenant.setCreateTime(now);
-        userTenant.setUpdateTime(now);
+        userTenantEntity.setUserAccountId(userAccountId);
+        userTenantEntity.setDefineTenantId(defineTenantId);
+        userTenantEntity.setIsManager(SwitchStateEnum.Close.getValue());
+        userTenantEntity.setType(1);
+        userTenantEntity.setState(BaseStateEnum.ENABLED.getValue());
+        userTenantEntity.setCreateTime(now);
+        userTenantEntity.setUpdateTime(now);
         if (loginUser != null) {
-            userTenant.setCreateUserId(loginUser.getFid());
-            userTenant.setLastModifyerId(loginUser.getFid());
+            userTenantEntity.setCreateUserId(loginUser.getFid());
+            userTenantEntity.setLastModifyerId(loginUser.getFid());
         }
-        return userTenant;
+        return userTenantEntity;
     }
 
     /**
@@ -47,21 +47,21 @@ public class UserTenantPojoInitialize {
      * @param loginUser      当前登录用户
      * @return
      */
-    public static UserTenant generateInsertIsManagerEntity(Long userAccountId, Long defineTenantId, UserAccount loginUser) {
-        UserTenant userTenant = new UserTenant();
+    public static UserTenantEntity generateInsertIsManagerEntity(Long userAccountId, Long defineTenantId, UserAccountEntity loginUser) {
+        UserTenantEntity userTenantEntity = new UserTenantEntity();
         Date now = new Date();
         //userTenant.setFid(MyUUIDUtil.renderSimpleUuid());
-        userTenant.setUserAccountId(userAccountId);
-        userTenant.setDefineTenantId(defineTenantId);
-        userTenant.setIsManager(SwitchStateEnum.Open.getValue());
-        userTenant.setType(1);
-        userTenant.setState(BaseStateEnum.ENABLED.getValue());
-        userTenant.setCreateTime(now);
-        userTenant.setUpdateTime(now);
+        userTenantEntity.setUserAccountId(userAccountId);
+        userTenantEntity.setDefineTenantId(defineTenantId);
+        userTenantEntity.setIsManager(SwitchStateEnum.Open.getValue());
+        userTenantEntity.setType(1);
+        userTenantEntity.setState(BaseStateEnum.ENABLED.getValue());
+        userTenantEntity.setCreateTime(now);
+        userTenantEntity.setUpdateTime(now);
         if (loginUser != null) {
-            userTenant.setCreateUserId(loginUser.getFid());
-            userTenant.setLastModifyerId(loginUser.getFid());
+            userTenantEntity.setCreateUserId(loginUser.getFid());
+            userTenantEntity.setLastModifyerId(loginUser.getFid());
         }
-        return userTenant;
+        return userTenantEntity;
     }
 }

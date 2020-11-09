@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 
 /**
  * @author zhoucj
@@ -14,8 +14,8 @@ public class UserAccountPojoInitialize {
      * 游客
      * @return
      */
-    public static UserAccount dealGetVisitor() {
-        return UserAccount.builder()
+    public static UserAccountEntity dealGetVisitor() {
+        return UserAccountEntity.builder()
                 //.fid("Visitor")
                 .userType(UserAccountBaseTypeEnum.Visitor.getValue()).build();
     }

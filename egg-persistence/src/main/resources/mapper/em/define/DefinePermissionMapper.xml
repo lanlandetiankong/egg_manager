@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="code" property="code"/>

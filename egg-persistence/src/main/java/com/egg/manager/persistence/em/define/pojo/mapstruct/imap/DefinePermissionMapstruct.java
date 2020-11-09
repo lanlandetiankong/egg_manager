@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermission;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefinePermissionConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {DefinePermissionConversion.class}
 )
-public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePermission, DefinePermissionVo, DefinePermissionDto> {
+public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePermissionEntity, DefinePermissionVo, DefinePermissionDto> {
     DefinePermissionMapstruct INSTANCE = Mappers.getMapper(DefinePermissionMapstruct.class);
 
     /**
@@ -32,7 +32,7 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
     @Mappings({
             @Mapping(target = "ensure", expression = "java(handleSwitchStateGetShort(vo.getEnsure()))")
     })
-    DefinePermission transferVoToEntity(DefinePermissionVo vo);
+    DefinePermissionEntity transferVoToEntity(DefinePermissionVo vo);
 
     /**
      * entity转vo
@@ -45,7 +45,7 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    DefinePermissionVo transferEntityToVo(DefinePermission entity);
+    DefinePermissionVo transferEntityToVo(DefinePermissionEntity entity);
 
     /**
      * dto转vo

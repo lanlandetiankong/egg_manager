@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserDepartmentMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
@@ -27,11 +27,11 @@ public class UserDepartmentTransfer extends BaseMysqlTransfer {
      * @param vo
      * @return
      */
-    public static UserDepartment transferVoToEntity(UserDepartmentVo vo) {
+    public static UserDepartmentEntity transferVoToEntity(UserDepartmentVo vo) {
         if (vo == null) {
             return null;
         }
-        UserDepartment entity = userDepartmentMapstruct.transferVoToEntity(vo);
+        UserDepartmentEntity entity = userDepartmentMapstruct.transferVoToEntity(vo);
         return entity;
     }
 
@@ -40,7 +40,7 @@ public class UserDepartmentTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static UserDepartmentVo transferEntityToVo(UserDepartment entity) {
+    public static UserDepartmentVo transferEntityToVo(UserDepartmentEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -61,13 +61,13 @@ public class UserDepartmentTransfer extends BaseMysqlTransfer {
         return vo;
     }
 
-    public static List<UserDepartmentVo> transferEntityToVoList(List<UserDepartment> userTenants) {
+    public static List<UserDepartmentVo> transferEntityToVoList(List<UserDepartmentEntity> userTenants) {
         if (userTenants == null) {
             return null;
         } else {
             List<UserDepartmentVo> list = new ArrayList<>();
-            for (UserDepartment userDepartment : userTenants) {
-                list.add(transferEntityToVo(userDepartment));
+            for (UserDepartmentEntity userDepartmentEntity : userTenants) {
+                list.add(transferEntityToVo(userDepartmentEntity));
             }
             return list;
         }

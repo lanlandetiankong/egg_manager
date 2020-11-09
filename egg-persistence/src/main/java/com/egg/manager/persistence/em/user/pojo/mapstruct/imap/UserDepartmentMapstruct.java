@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartment;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.UserDepartmentConversion;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
         unmappedTargetPolicy = ReportingPolicy.ERROR,
         uses = {UserDepartmentConversion.class}
 )
-public interface UserDepartmentMapstruct extends MyBaseMysqlMapstruct<UserDepartment, UserDepartmentVo, UserDepartmentDto> {
+public interface UserDepartmentMapstruct extends MyBaseMysqlMapstruct<UserDepartmentEntity, UserDepartmentVo, UserDepartmentDto> {
     UserDepartmentMapstruct INSTANCE = Mappers.getMapper(UserDepartmentMapstruct.class);
 
     /**
@@ -30,7 +30,7 @@ public interface UserDepartmentMapstruct extends MyBaseMysqlMapstruct<UserDepart
      * @return
      */
     @Mappings({})
-    UserDepartment transferVoToEntity(UserDepartmentVo vo);
+    UserDepartmentEntity transferVoToEntity(UserDepartmentVo vo);
 
     /**
      * entity转vo
@@ -41,7 +41,7 @@ public interface UserDepartmentMapstruct extends MyBaseMysqlMapstruct<UserDepart
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    UserDepartmentVo transferEntityToVo(UserDepartment entity);
+    UserDepartmentVo transferEntityToVo(UserDepartmentEntity entity);
 
     /**
      * dto转vo

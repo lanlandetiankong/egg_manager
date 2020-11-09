@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,33 +12,38 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 角色&权限  关联
+ * @description 用户组定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_role_permission")
-public class RolePermission extends Model<RolePermission> {
+@TableName("em_define_group")
+public class DefineGroupEntity extends Model<DefineGroupEntity> {
+
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 角色id
+     * 名称
      */
-    @TableField("define_role_id")
-    private Long defineRoleId;
+    @TableField("name")
+    private String name;
     /**
-     * 权限id
+     * 上级id
      */
-    @TableField("define_permission_id")
-    private Long definePermissionId;
+    @TableField("pid")
+    private String pid;
+    /**
+     * 是否成员可继承组权限
+     */
+    @TableField(value = "is_inherit")
+    private Integer isInherit;
     /**
      * 类型
      */
     @TableField("type")
-    private Integer type;
-
+    private String type;
 
     /**
      * 备注
@@ -92,6 +97,5 @@ public class RolePermission extends Model<RolePermission> {
     protected Serializable pkVal() {
         return this.fid;
     }
-
 
 }

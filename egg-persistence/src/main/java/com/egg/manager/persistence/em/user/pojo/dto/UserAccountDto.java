@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.user.pojo.dto;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroup;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -93,7 +93,7 @@ public class UserAccountDto extends MyBaseMysqlDto {
     /**
      * 所属用户组-entity
      */
-    private DefineGroup belongGroup;
+    private DefineGroupEntity belongGroup;
 
     /**
      * 所属部门-id

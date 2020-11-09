@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.message.basic.email.EmailSendRecordMgoService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -17,7 +18,6 @@ import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
 import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email.EmailSendRecordMapstruct;
@@ -65,7 +65,7 @@ public class EmailSendRecordController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<EmailSendRecordMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult<EmailSendRecordMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class);
         try {
             //添加状态过滤,时间倒序排序
@@ -84,7 +84,7 @@ public class EmailSendRecordController extends BaseController {
     @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
-    public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult<EmailSendRecordMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
                                                                @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<EmailSendRecordMgo> result = MyCommonResult.gainQueryResult(EmailSendRecordMgo.class);
         try {
@@ -100,7 +100,7 @@ public class EmailSendRecordController extends BaseController {
     @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
-    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccount loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
                                       @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                       EmailSendRecordMgvo emailSendRecordMgvo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
@@ -124,7 +124,7 @@ public class EmailSendRecordController extends BaseController {
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
-    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -143,7 +143,7 @@ public class EmailSendRecordController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccount loginUser) {
+    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Long delCount = (long) 0;
         try {

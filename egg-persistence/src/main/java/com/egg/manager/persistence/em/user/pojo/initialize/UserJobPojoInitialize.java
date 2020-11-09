@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserJob;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 
 import java.util.Date;
 
@@ -20,19 +20,19 @@ public class UserJobPojoInitialize {
      * @param loginUser     当前登录用户
      * @return
      */
-    public static UserJob generateSimpleInsertEntity(Long userAccountId, Long defineJobId, UserAccount loginUser) {
-        UserJob userJob = new UserJob();
+    public static UserJobEntity generateSimpleInsertEntity(Long userAccountId, Long defineJobId, UserAccountEntity loginUser) {
+        UserJobEntity userJobEntity = new UserJobEntity();
         Date now = new Date();
         //userJob.setFid(MyUUIDUtil.renderSimpleUuid());
-        userJob.setUserAccountId(userAccountId);
-        userJob.setDefineJobId(defineJobId);
-        userJob.setState(BaseStateEnum.ENABLED.getValue());
-        userJob.setCreateTime(now);
-        userJob.setUpdateTime(now);
+        userJobEntity.setUserAccountId(userAccountId);
+        userJobEntity.setDefineJobId(defineJobId);
+        userJobEntity.setState(BaseStateEnum.ENABLED.getValue());
+        userJobEntity.setCreateTime(now);
+        userJobEntity.setUpdateTime(now);
         if (loginUser != null) {
-            userJob.setCreateUserId(loginUser.getFid());
-            userJob.setLastModifyerId(loginUser.getFid());
+            userJobEntity.setCreateUserId(loginUser.getFid());
+            userJobEntity.setLastModifyerId(loginUser.getFid());
         }
-        return userJob;
+        return userJobEntity;
     }
 }

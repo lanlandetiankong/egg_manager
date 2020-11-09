@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,37 +12,37 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户&部门 关联
+ * @description 权限定义
  * @date 2020/10/20
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("em_user_department")
-public class UserDepartment extends Model<UserDepartment> {
+@TableName("em_define_permission")
+public class DefinePermissionEntity extends Model<DefinePermissionEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
     private Long fid;
     /**
-     * 用户账号id
+     * 名称
      */
-    @TableField(value = "user_account_id")
-    private Long userAccountId;
+    @TableField("name")
+    private String name;
     /**
-     * 部门id
+     * 编码
      */
-    @TableField(value = "define_department_id")
-    private Long defineDepartmentId;
+    @TableField("code")
+    private String code;
+    /**
+     * 是否确认发布，发布之后不可修改
+     */
+    @TableField("ensure")
+    private Short ensure;
     /**
      * 类型
      */
     @TableField("type")
     private Integer type;
-    /**
-     * 是否部门管理员
-     */
-    @TableField(value = "is_manager")
-    private Short isManager;
 
 
     /**
@@ -66,12 +66,12 @@ public class UserDepartment extends Model<UserDepartment> {
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
-     * 创建人id
+     * 创建用户id
      */
     @TableField(value = "create_user_id")
     private Long createUserId;
     /**
-     * 最后修改人id
+     * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
     private Long lastModifyerId;
@@ -97,6 +97,4 @@ public class UserDepartment extends Model<UserDepartment> {
     protected Serializable pkVal() {
         return this.fid;
     }
-
-
 }

@@ -11,8 +11,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModule;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccount;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineModuleTransfer;
@@ -32,7 +32,7 @@ import java.util.List;
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
 @Service(interfaceClass = DefineModuleService.class)
-public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModuleMapper, DefineModule, DefineModuleVo> implements DefineModuleService {
+public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModuleMapper, DefineModuleEntity, DefineModuleVo> implements DefineModuleService {
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
 
@@ -42,24 +42,24 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
 
     @Override
-    public MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModule> paginationBean,
+    public MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleEntity> paginationBean,
                                                                  List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<DefineModule> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineModuleEntity> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineModuleMapper.selectPage(page, defineModuleEntityWrapper);
-        List<DefineModule> defineModules = iPage.getRecords();
-        result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModules));
+        List<DefineModuleEntity> defineModuleEntities = iPage.getRecords();
+        result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModuleEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccount loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
+    public MyCommonResult<DefineModuleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
                                                               List<AntdvSortBean> sortBeans) {
         Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -70,19 +70,19 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
 
     @Override
-    public Integer dealCreate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
-        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
-        defineModule = super.doBeforeCreate(loginUser, defineModule, true);
-        return defineModuleMapper.insert(defineModule);
+    public Integer dealCreate(UserAccountEntity loginUser, DefineModuleVo defineModuleVo) throws Exception {
+        DefineModuleEntity defineModuleEntity = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
+        defineModuleEntity = super.doBeforeCreate(loginUser, defineModuleEntity, true);
+        return defineModuleMapper.insert(defineModuleEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccount loginUser, DefineModuleVo defineModuleVo) throws Exception {
+    public Integer dealUpdate(UserAccountEntity loginUser, DefineModuleVo defineModuleVo) throws Exception {
         Integer changeCount = 0;
-        DefineModule defineModule = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
-        defineModule = super.doBeforeUpdate(loginUser, defineModule);
-        changeCount = defineModuleMapper.updateById(defineModule);
+        DefineModuleEntity defineModuleEntity = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
+        defineModuleEntity = super.doBeforeUpdate(loginUser, defineModuleEntity);
+        changeCount = defineModuleMapper.updateById(defineModuleEntity);
         return changeCount;
     }
 

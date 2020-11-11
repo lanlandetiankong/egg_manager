@@ -65,7 +65,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    @Override
     public List<UserRoleEntity> dealGetAllByAccountFromDb(UserAccountEntity userAccountEntity) {
         if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
@@ -79,7 +78,6 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    @Override
     public List<UserRoleEntity> dealGetAllByAccountFromRedis(UserAccountEntity userAccountEntity) {
         if (super.checkUserAccountIsBlank(userAccountEntity) == true) {
             return null;
@@ -92,49 +90,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-    @Override
-    public MyCommonResult<UserRoleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserRoleEntity> paginationBean,
-                                                             List<AntdvSortBean> sortBeans) {
-        //解析 搜索条件
-        QueryWrapper<UserRoleEntity> userRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
-        //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
-        //取得 总数
-        Integer total = userRoleMapper.selectCount(userRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
-        IPage iPage = userRoleMapper.selectPage(page, userRoleEntityWrapper);
-        List<UserRoleEntity> userRoleEntities = iPage.getRecords();
-        result.setResultList(UserRoleTransfer.transferEntityToVoList(userRoleEntities));
-        return result;
-    }
 
-
-    @Override
-    public MyCommonResult<UserRoleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserRoleDto> paginationBean,
-                                                          List<AntdvSortBean> sortBeans) {
-        Page<UserRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<UserRoleDto> userRoleDtoList = userRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(UserRoleTransfer.transferDtoToVoList(userRoleDtoList));
-        return result;
-    }
-
-    @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, UserRoleVo userRoleVo) throws Exception {
-        UserRoleEntity userRoleEntity = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        userRoleEntity = super.doBeforeCreate(loginUserInfo, userRoleEntity, true);
-        Integer addCount = userRoleMapper.insert(userRoleEntity);
-        return addCount;
-    }
-
-    @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, UserRoleVo userRoleVo) throws Exception {
-        Integer changeCount = 0;
-        UserRoleEntity userRoleEntity = UserRoleTransfer.transferVoToEntity(userRoleVo);
-        userRoleEntity = super.doBeforeUpdate(loginUserInfo, userRoleEntity);
-        changeCount = userRoleMapper.updateById(userRoleEntity);
-        return changeCount;
-    }
 
 
 }

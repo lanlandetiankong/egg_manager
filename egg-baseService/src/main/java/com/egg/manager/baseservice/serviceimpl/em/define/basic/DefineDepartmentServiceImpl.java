@@ -2,7 +2,6 @@ package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
@@ -36,8 +35,6 @@ import java.util.List;
 @Service(interfaceClass = DefineDepartmentService.class)
 public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDepartmentMapper, DefineDepartmentEntity, DefineDepartmentVo>
         implements DefineDepartmentService {
-    @Autowired
-    private RoutineCommonFunc routineCommonFunc;
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
 

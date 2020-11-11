@@ -48,7 +48,7 @@
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
                      select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
         <association column="fid" property="belongTenant" fetchType="lazy"
-                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper.selectOneDtoOfUserBelongTenant"/>
+                     select="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper.selectOneDtoOfUserBelongTenant"/>
         <association column="fid" property="belongDepartment" fetchType="lazy"
                      select="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper.selectOneDtoOfUserBelongDepartment"/>
     </resultMap>

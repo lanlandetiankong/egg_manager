@@ -2,7 +2,7 @@ package com.egg.manager.persistence.em.user.pojo.bean;
 
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import lombok.Data;
 

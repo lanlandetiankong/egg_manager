@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.pojo.vo;
+package com.egg.manager.persistence.em.define.pojo.vo;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;

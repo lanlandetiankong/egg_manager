@@ -40,7 +40,7 @@
     <!--                                    dir-end:com.egg.manager.api.services.basic.module                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.organization                                                              -->
     <dubbo:reference id="defineTenantService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.DefineTenantService"/>
+                     interface="com.egg.manager.api.services.em.define.basic.DefineTenantService"/>
     <!--                                    dir-end:com.egg.manager.api.services.basic.organization                                                              -->
     <!--                                    dir-start:com.egg.manager.api.services.basic.role                                                              -->
     <dubbo:reference id="roleMenuService" check="false"

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.db.mysql.entity;
+package com.egg.manager.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

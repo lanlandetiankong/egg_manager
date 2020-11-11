@@ -5,6 +5,7 @@ import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

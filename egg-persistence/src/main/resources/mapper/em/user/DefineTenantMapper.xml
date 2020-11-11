@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper">
+<mapper namespace="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="code" property="code"/>
@@ -17,7 +17,7 @@
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="code" property="code"/>

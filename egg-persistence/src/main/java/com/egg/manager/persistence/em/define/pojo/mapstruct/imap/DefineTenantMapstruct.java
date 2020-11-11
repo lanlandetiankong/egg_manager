@@ -1,10 +1,10 @@
-package com.egg.manager.persistence.em.user.pojo.mapstruct.imap;
+package com.egg.manager.persistence.em.define.pojo.mapstruct.imap;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
-import com.egg.manager.persistence.em.user.pojo.mapstruct.conversion.DefineTenantConversion;
-import com.egg.manager.persistence.em.user.pojo.vo.DefineTenantVo;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
+import com.egg.manager.persistence.em.define.pojo.mapstruct.conversion.DefineTenantConversion;
+import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

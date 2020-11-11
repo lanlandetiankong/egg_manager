@@ -43,7 +43,7 @@
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
     <dubbo:service protocol="dubbo" ref="defineTenantService"
-                   interface="com.egg.manager.api.services.em.user.basic.DefineTenantService"/>
+                   interface="com.egg.manager.api.services.em.define.basic.DefineTenantService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.basic.serviceimpl.organization                                                              -->
 
     <!--                                    dir-start:com.egg.manager.baseservice.services.basic.serviceimpl.role                                                              -->

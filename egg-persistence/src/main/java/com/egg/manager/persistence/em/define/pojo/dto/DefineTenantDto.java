@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.em.user.pojo.dto;
+package com.egg.manager.persistence.em.define.pojo.dto;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.AllArgsConstructor;

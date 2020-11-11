@@ -1,4 +1,4 @@
-package com.egg.manager.api.services.em.user.basic;
+package com.egg.manager.api.services.em.define.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
@@ -6,11 +6,11 @@ import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
-import com.egg.manager.persistence.em.user.pojo.vo.DefineTenantVo;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
+import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
 
 import java.util.List;
 

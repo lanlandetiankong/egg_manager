@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
@@ -146,7 +147,7 @@ public class BaseController {
         List<QueryFormFieldBean> fieldBeanList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_ARRAY.equals(queryJson) == false)) {
             List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryFormFieldBean.class);
-            if (fieldBeansTemp != null && fieldBeansTemp.isEmpty() == false) {
+            if (CollectionUtil.isNotEmpty(fieldBeansTemp)) {
                 for (QueryFormFieldBean fieldBean : fieldBeansTemp) {
                     //驼峰参数 转 下划线 参数 风格
                     String fieldName = MyStringUtil.camelToUnderline(fieldBean.getFieldName(), false);

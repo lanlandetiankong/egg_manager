@@ -1,5 +1,6 @@
 package com.egg.manager.web.controller.define;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
@@ -287,7 +288,7 @@ public class DefineRoleController extends BaseController {
             Sets.SetView updateEnableIdSet = Sets.difference(checkIdAll, oldDelCheckIdSet);
             Sets.SetView updateDelIdSet = Sets.difference(oldCheckIdAll, checkIdAll);
 
-            if (addSetView != null && addSetView.isEmpty() == false) {
+            if (CollectionUtil.isNotEmpty(addSetView)) {
                 List<RoleMenuEntity> addRoleMenuEntityList = Lists.newArrayList();
                 Iterator<Long> addIter = addSetView.iterator();
                 while (addIter.hasNext()) {
@@ -296,12 +297,12 @@ public class DefineRoleController extends BaseController {
                 }
                 boolean flag = roleMenuService.saveBatch(addRoleMenuEntityList);
             }
-            if (updateEnableIdSet != null && updateEnableIdSet.isEmpty() == false) {
+            if (CollectionUtil.isNotEmpty(updateEnableIdSet)) {
                 Iterator<String> enableIter = updateEnableIdSet.iterator();
                 List enableIdList = Lists.newArrayList(enableIter);
                 int count = roleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
             }
-            if (updateDelIdSet != null && updateDelIdSet.isEmpty() == false) {
+            if (CollectionUtil.isNotEmpty(updateDelIdSet)) {
                 Iterator<String> delIter = updateDelIdSet.iterator();
                 List delIdList = Lists.newArrayList(delIter);
                 int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUserInfo);

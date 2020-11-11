@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -242,7 +243,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             changeCount = checkIds.length;
             //取得曾勾选的角色id 集合
             List<Long> oldCheckRoleIds = userRoleMapper.findAllRoleIdByUserAccountId(userAccountId, false);
-            if (oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()) {
+            if (CollectionUtil.isEmpty(oldCheckRoleIds)) {
                 List<UserRoleEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
@@ -265,15 +266,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(enableIds)) {
                     //批量启用
                     userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
-                if (disabledIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
                     userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
-                if (checkIdList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     List<UserRoleEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
@@ -300,7 +301,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             changeCount = checkIds.length;
             //取得曾勾选的职务id 集合
             List<Long> oldCheckJobIds = userJobMapper.findAllJobIdByUserAccountId(userAccountId, false);
-            if (oldCheckJobIds == null || oldCheckJobIds.isEmpty()) {
+            if (CollectionUtil.isEmpty(oldCheckJobIds)) {
                 List<UserJobEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
@@ -323,15 +324,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(enableIds)) {
                     //批量启用
                     userJobMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
-                if (disabledIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
                     userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
-                if (checkIdList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserJobEntity> addEntitys = new ArrayList<>();
@@ -373,7 +374,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             wrapper.eq("state", state);
         }
         List<UserAccountEntity> userAccountEntityList = userAccountMapper.selectList(wrapper);
-        if (userAccountEntityList != null && userAccountEntityList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(userAccountEntityList)) {
             for (UserAccountEntity user : userAccountEntityList) {
                 accountSet.add(user.getAccount());
             }

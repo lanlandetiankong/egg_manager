@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
@@ -111,7 +112,7 @@ public class UserAccountTransfer extends BaseMysqlTransfer {
 
     public static List<UserAccountEntity> xlsModelListToEntitys(List<UserAccountXlsInModel> xlsInModelList, UserAccountEntity loginUser, Set<String> accountSet) {
         List<UserAccountEntity> list = new ArrayList<>();
-        if (xlsInModelList != null || xlsInModelList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(xlsInModelList)) {
             accountSet = accountSet != null ? accountSet : new HashSet<>();
             for (UserAccountXlsInModel xlsInModel : xlsInModelList) {
                 if (accountSet.contains(xlsInModel.getAccount())) {

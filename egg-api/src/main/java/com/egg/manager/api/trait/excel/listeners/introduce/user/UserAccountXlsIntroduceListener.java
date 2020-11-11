@@ -1,5 +1,6 @@
 package com.egg.manager.api.trait.excel.listeners.introduce.user;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
@@ -46,7 +47,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     public UserAccountXlsIntroduceListener(UserAccountService userAccountService, UserAccountEntity loginUser, Set<String> accountExistSet) {
         this.userAccountService = userAccountService;
         this.loginUser = loginUser;
-        if (accountExistSet != null && accountExistSet.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(accountExistSet)) {
             this.accountExistSet.addAll(accountExistSet);
         }
     }
@@ -83,7 +84,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
      */
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
-        if (list != null && list.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(list)) {
             userAccountService.saveBatch(UserAccountTransfer.xlsModelListToEntitys(list, loginUser, accountExistSet));
             log.info("存储数据库成功！");
         }

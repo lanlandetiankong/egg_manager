@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.em.announcement.pojo.transfer;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
@@ -56,10 +57,10 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);
-                if (tagList != null && tagList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(tagList)) {
                     vo.setTagIds(tagList);
                     List<String> tagNameList = new ArrayList<>();
-                    if (announcementTagMap != null && announcementTagMap.isEmpty() == false) {
+                    if (CollectionUtil.isNotEmpty(announcementTagMap)) {
                         for (String tagId : tagList) {
                             AnnouncementTagEntity announcementTagEntity = announcementTagMap.get(tagId);
                             if (announcementTagEntity != null) {
@@ -103,10 +104,10 @@ public class AnnouncementTransfer extends BaseMysqlTransfer {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);
-                if (tagList != null && tagList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(tagList)) {
                     vo.setTagIds(tagList);
                     List<String> tagNameList = new ArrayList<>();
-                    if (announcementTagMap != null && announcementTagMap.isEmpty() == false) {
+                    if (CollectionUtil.isNotEmpty(announcementTagMap)) {
                         for (String tagId : tagList) {
                             AnnouncementTagEntity announcementTagEntity = announcementTagMap.get(tagId);
                             if (announcementTagEntity != null) {

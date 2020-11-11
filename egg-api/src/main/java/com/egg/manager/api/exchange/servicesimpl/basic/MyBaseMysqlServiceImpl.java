@@ -1,5 +1,6 @@
 package com.egg.manager.api.exchange.servicesimpl.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -67,7 +68,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
         //调用方法将查询条件设置到userAccountEntityWrapper
         this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFormFieldBeanList);
         //添加排序
-        if (sortBeans != null && sortBeans.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(sortBeans)) {
             for (AntdvSortBean sortBean : sortBeans) {
                 entityWrapper.orderBy(true, sortBean.getOrderIsAsc(), sortBean.getField());
             }
@@ -78,7 +79,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
     @Override
     public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList) {
-        if (queryFieldBeanList != null && queryFieldBeanList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(queryFieldBeanList)) {
             for (QueryFormFieldBean queryFormFieldBean : queryFieldBeanList) {
                 Object fieldValue = queryFormFieldBean.getValue();
                 if (fieldValue == null) {

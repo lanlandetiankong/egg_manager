@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -158,7 +159,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     public Set<String> queryDbToCacheable(Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefinePermissionEntity> definePermissionEntities = this.dealGetListByAccountFromDb(userAccountId);
-        if (definePermissionEntities != null && definePermissionEntities.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(definePermissionEntities)) {
             for (DefinePermissionEntity definePermissionEntity : definePermissionEntities) {
                 String permissionCode = definePermissionEntity.getCode();
                 if (StringUtils.isNotBlank(permissionCode)) {

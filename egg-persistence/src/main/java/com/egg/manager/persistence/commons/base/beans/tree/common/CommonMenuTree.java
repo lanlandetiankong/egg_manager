@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.base.beans.tree.common;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.egg.manager.persistence.commons.base.beans.tree.MyBaseTree;
 import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
@@ -99,7 +100,7 @@ public class CommonMenuTree extends MyBaseTree {
      */
     public static Map<String, CommonMenuTree> dealTreeListToUrlMap(List<CommonMenuTree> treeList, Map<String, CommonMenuTree> urlMap) {
         urlMap = urlMap != null ? urlMap : Maps.newHashMap();
-        if (treeList != null && treeList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(treeList)) {
             for (CommonMenuTree commonMenuTree : treeList) {
                 String routerUrl = commonMenuTree.getRouterUrl();
                 if (routerUrl != null && DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(commonMenuTree.getUrlJumpType())) {

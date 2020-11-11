@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
@@ -58,7 +59,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 tagList = JSONArray.parseArray(tagIds, String.class);
-                if (tagList != null && tagList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(tagList)) {
 
                 }
             } catch (JSONException e) {

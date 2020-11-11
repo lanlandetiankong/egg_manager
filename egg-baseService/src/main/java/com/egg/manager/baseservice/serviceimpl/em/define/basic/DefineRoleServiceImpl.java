@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -93,7 +94,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public Set<String> queryDbToCacheable(Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefineRoleEntity> defineRoleEntities = this.dealGetRolesByAccountFromDb(userAccountId, BaseStateEnum.ENABLED.getValue());
-        if (defineRoleEntities != null && defineRoleEntities.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(defineRoleEntities)) {
             for (DefineRoleEntity defineRoleEntity : defineRoleEntities) {
                 String roleCode = defineRoleEntity.getCode();
                 if (StringUtils.isNotBlank(roleCode)) {
@@ -129,7 +130,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public Set<Long> dealGetMenuIdSetByRoleIdFromDb(Long roleId, Short stateVal) {
         Set<Long> idSet = Sets.newHashSet();
         List<DefineMenuEntity> defineMenuEntityList = this.dealGetMenusByRoleIdFromDb(roleId, stateVal);
-        if (defineMenuEntityList != null && defineMenuEntityList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(defineMenuEntityList)) {
             for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
                 Long menuFid = defineMenuEntity.getFid();
                 if (LongUtils.isNotBlank(menuFid)) {
@@ -145,7 +146,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public List<DefineRoleEntity> dealGetListFormRedisByAccount(UserAccountEntity userAccountEntity) {
         List<UserRoleEntity> userRoleEntities = userRoleService.dealGetAllByAccount(userAccountEntity);
         List<DefineRoleEntity> defineRoleEntities = null;
-        if (userRoleEntities == null || userRoleEntities.isEmpty()) {
+        if (CollectionUtil.isEmpty(userRoleEntities)) {
             return defineRoleEntities;
         } else {
             Set<Long> roleIds = new HashSet<Long>();
@@ -221,7 +222,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
             changeCount = checkIds.length;
             //取得曾勾选的权限id 集合
             List<Long> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId, false);
-            if (oldCheckPermIds == null || oldCheckPermIds.isEmpty()) {
+            if (CollectionUtil.isEmpty(oldCheckPermIds)) {
                 List<RolePermissionEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
@@ -244,15 +245,15 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(enableIds)) {
                     //批量启用
                     rolePermissionMapper.batchUpdateStateByRole(roleId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
-                if (disabledIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
                     rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
-                if (checkIdList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     List<RolePermissionEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {

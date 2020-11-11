@@ -79,7 +79,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTagEntity>();
         announcementTagEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         List<AnnouncementTagEntity> announcementTagEntities = announcementTagMapper.selectList(announcementTagEntityWrapper);
-        if (announcementTagEntities != null && announcementTagEntities.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(announcementTagEntities)) {
             for (AnnouncementTagEntity tag : announcementTagEntities) {
                 map.put(tag.getFid(), tag);
             }

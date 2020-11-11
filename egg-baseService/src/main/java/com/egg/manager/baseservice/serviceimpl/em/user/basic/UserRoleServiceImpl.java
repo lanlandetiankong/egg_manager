@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
@@ -58,7 +59,7 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
             return null;
         }
         List<UserRoleEntity> userRoleEntityList = dealGetAllByAccountFromRedis(userAccountEntity);
-        if (userRoleEntityList == null || userRoleEntityList.isEmpty()) {
+        if (CollectionUtil.isEmpty(userRoleEntityList)) {
             userRoleEntityList = dealGetAllByAccountFromDb(userAccountEntity);
         }
         return userRoleEntityList;

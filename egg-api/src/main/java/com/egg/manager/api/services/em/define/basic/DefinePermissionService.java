@@ -26,7 +26,6 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
 
     /**
      * 查询 所有[可用状态]的 [权限定义]
-     * @param loginUserInfo 当前登录用户
      * @param wrapper
      * @return
      */
@@ -86,7 +85,6 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
-     * @param loginUserInfo     当前登录用户
      * @param userAccountId
      * @return
      */

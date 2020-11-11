@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
@@ -82,7 +83,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     public MyCommonResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, MyCommonResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList();
-        if (resultList != null && resultList.isEmpty() == false) {
+        if (CollectionUtil.isNotEmpty(resultList)) {
             for (DefineTenantVo defineTenantVo : resultList) {
                 enumList.add(new FrontEntitySelectBean<Long>(defineTenantVo.getFid(), defineTenantVo.getName()));
             }
@@ -101,7 +102,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
             changeCount = checkIds.length;
             //取得曾勾选的用户id 集合
             List<Long> oldCheckIds = defineTenantMapper.findAllManagerUserIdByTenantId(tenantId, false);
-            if (oldCheckIds == null || oldCheckIds.isEmpty()) {
+            if (CollectionUtil.isEmpty(oldCheckIds)) {
                 List<UserTenantEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
                     addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUserInfo));
@@ -124,15 +125,15 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                         disabledIds.add(oldCheckId);
                     }
                 }
-                if (enableIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(enableIds)) {
                     //批量启用
                     userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
-                if (disabledIds.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
                     userTenantMapper.batchUpdateManagerUserStateByTenantId(tenantId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
-                if (checkIdList.isEmpty() == false) {
+                if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     List<UserTenantEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {

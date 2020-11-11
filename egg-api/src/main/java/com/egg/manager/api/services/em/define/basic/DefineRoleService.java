@@ -36,7 +36,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetRoleCodeSetByAccountFromDb(Long userAccountId);
+    Set<String> queryDbToCacheable(Long userAccountId);
 
     /**
      * 取得角色 所拥有的 菜单定义-List集合

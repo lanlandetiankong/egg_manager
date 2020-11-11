@@ -33,7 +33,7 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
     public DefineRoleService defineRoleService;
 
 
-    protected <T> T dealAutoGetRedisObjectCache(UserAccountEntity loginUser, String key, String hashKey, Long userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
+    /*protected <T> T dealAutoGetRedisObjectCache(UserAccountEntity loginUser, String key, String hashKey, Long userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
         T t = null;
         boolean retryFlag = false;
         if (almostRefresh == true) {
@@ -96,7 +96,7 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
 
         tList = tList != null ? tList : new ArrayList<T>();
         return tList;
-    }
+    }*/
 
 
 }

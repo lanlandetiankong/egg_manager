@@ -3,30 +3,29 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
-import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.define.DefineMenuConstant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineMenuTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
@@ -63,8 +62,6 @@ public class DefineMenuController extends BaseController {
 
     @Reference
     private DefineMenuService defineMenuService;
-    @Reference
-    private UserAccountRedisService userAccountRedisService;
 
 
     @PcWebQueryLog(fullPath = "/define/defineMenu/queryTreeSelect")
@@ -100,7 +97,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping("/user/gainGrantTree")
     public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccountEntity loginUser) {
         MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class);
-        List<CommonMenuTree> treeList = userAccountRedisService.dealGetCurrentUserFrontMenuTrees(loginUser, authorization, loginUser.getFid(), false);
+        List<CommonMenuTree> treeList = defineMenuService.queryDbToCacheable(loginUser.getFid());
         result.setResultList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
         result.setResultMap(urlMap);

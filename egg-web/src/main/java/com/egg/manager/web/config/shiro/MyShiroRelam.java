@@ -1,9 +1,14 @@
 package com.egg.manager.web.config.shiro;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
+import com.egg.manager.api.services.em.define.basic.DefineMenuService;
+import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
+import com.egg.manager.api.services.em.define.basic.DefineRoleService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -26,7 +31,13 @@ import java.util.Set;
 public class MyShiroRelam extends AuthorizingRealm {
 
     @Reference
-    private UserAccountRedisService userAccountRedisService;
+    public DefineRoleService defineRoleService;
+    @Reference
+    public DefinePermissionService definePermissionService;
+    @Reference
+    public DefineMenuService defineMenuService;
+    @Reference
+    public UserAccountService userAccountService;
 
 
     /**
@@ -40,18 +51,39 @@ public class MyShiroRelam extends AuthorizingRealm {
         return token instanceof JwtShiroToken;
     }
 
+    public void initReference(){
+        if (defineRoleService == null) {
+            this.defineRoleService = SpringContextBeanUtil.getBean(DefineRoleService.class);
+        }
+        if (definePermissionService == null) {
+            this.definePermissionService = SpringContextBeanUtil.getBean(DefinePermissionService.class);
+        }
+        if (defineMenuService == null) {
+            this.defineMenuService = SpringContextBeanUtil.getBean(DefineMenuService.class);
+        }
+        if (userAccountService == null) {
+            this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class);
+        }
+    }
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //初始化引用,避免service等为null的情况
+        this.initReference();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //当前登录用户id
         String authorization = principalCollection.toString();
         Long userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
-        if (userAccountRedisService == null) {
-            this.userAccountRedisService = SpringContextBeanUtil.getBean(UserAccountRedisService.class);
+        if(StringUtils.isBlank(authorization) || userAccountId == null){
+            return simpleAuthorizationInfo;
+        }
+        UserAccountEntity userAccountEntity = userAccountService.queryDbToCacheable(userAccountId);
+        if(userAccountEntity == null){
+            return simpleAuthorizationInfo;
         }
         //取得 当前用户 有用的 角色、权限
-        Set<String> roleSet = userAccountRedisService.dealGetCurrentUserAllRoleSet(null, authorization, userAccountId, false);
-        Set<String> permissionSet = userAccountRedisService.dealGetCurrentUserAllPermissionSet(null, authorization, userAccountId, false);
+        Set<String> roleSet = defineRoleService.queryDbToCacheable(userAccountId);
+        Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountEntity,userAccountId);
         simpleAuthorizationInfo.setRoles(roleSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;

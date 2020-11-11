@@ -5,7 +5,7 @@ import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
-import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
 import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
@@ -52,8 +52,9 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
+
     @Reference
-    private UserAccountRedisService userAccountRedisService;
+    private UserAccountService userAccountService;
 
     /**
      * 取得 请求的参数
@@ -150,7 +151,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
                     //取得当前登录的用户
-                    UserAccountEntity loginUser = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, userAccountToken.getAuthorization());
+                    UserAccountEntity loginUser = userAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
                     requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     Long userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);

@@ -1,11 +1,15 @@
 package com.egg.manager.web.enhance.resolver;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.em.user.redis.UserAccountRedisService;
+import com.egg.manager.api.exchange.helper.redis.RedisHelper;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -21,7 +25,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Reference
-    private UserAccountRedisService userAccountRedisService;
+    private UserAccountService userAccountService;
+    @Reference
+    private RedisHelper redisHelper ;
 
     /**
      * 判断:
@@ -50,7 +56,11 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
         if (userAccountEntity == null) {
             String authorization = nativeWebRequest.getHeader("authorization");
             if (StringUtils.isNotBlank(authorization)) {
-                userAccountEntity = userAccountRedisService.dealGetCurrentLoginUserByAuthorization(null, authorization);
+                Object userTokenObj = redisHelper.hashGet(RedisShiroCacheEnum.authorization.getKey(), authorization);
+                if(userTokenObj != null){
+                    UserAccountToken userToken = (UserAccountToken)userTokenObj;
+                    userAccountEntity = userAccountService.queryDbToCacheable(userToken.getUserAccountId());
+                }
             }
         }
         CurrentLoginUser currentLoginUserAnno = methodParameter.getParameterAnnotation(CurrentLoginUser.class);

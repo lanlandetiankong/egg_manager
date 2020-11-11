@@ -8,6 +8,7 @@ import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
+import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -34,6 +35,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -378,4 +380,12 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         return accountSet;
     }
 
+    @Override
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ACCOUNT,key = "#userAccountId",condition = "#userAccountId!=null")
+    public UserAccountEntity queryDbToCacheable(Long userAccountId) {
+        if(userAccountId == null){
+            return null ;
+        }
+        return userAccountMapper.selectById(userAccountId);
+    }
 }

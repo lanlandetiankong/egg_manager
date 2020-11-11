@@ -1,5 +1,6 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -9,6 +10,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.constant.define.DefineMenuConstant;
+import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -31,9 +33,12 @@ import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -69,27 +74,33 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
+
     @Override
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL,key = "#userAccountId",condition = "#userAccountId!=null")
     public Set<String> dealGetUserVisitAbleUrl(Long userAccountId) {
         Set<String> urlSets = new HashSet<>();
         List<DefineMenuEntity> defineMenuEntityList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
-        if (defineMenuEntityList != null && defineMenuEntityList.isEmpty() == false) {
-            for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
-                if (defineMenuEntity != null) {
-                    if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenuEntity.getUrlJumpType())) {
-                        //内部router跳转
-                        if (StringUtils.isNotBlank(defineMenuEntity.getRouterUrl())) {
-                            urlSets.add(defineMenuEntity.getRouterUrl());
-                        }
-                    }
+        if(CollectionUtil.isEmpty(defineMenuEntityList)){
+            return urlSets ;
+        }
+        for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
+            if (defineMenuEntity == null) {
+                continue;
+            }
+            //内部router跳转
+            if (DefineMenuUrlJumpTypeEnum.RouterUrlJump.getValue().equals(defineMenuEntity.getUrlJumpType())) {
+                if (StringUtils.isNotBlank(defineMenuEntity.getRouterUrl())) {
+                    urlSets.add(defineMenuEntity.getRouterUrl());
                 }
             }
         }
         return urlSets;
     }
 
+
     @Override
-    public List<CommonMenuTree> dealGetUserGrantedMenuTrees(Long userAccountId) {
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS,key = "#userAccountId",condition = "#userAccountId!=null")
+    public List<CommonMenuTree> queryDbToCacheable(Long userAccountId) {
         List<DefineMenuEntity> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         return treeList != null ? treeList : new ArrayList<CommonMenuTree>();

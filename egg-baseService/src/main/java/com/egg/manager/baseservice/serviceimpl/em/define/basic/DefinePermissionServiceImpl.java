@@ -8,6 +8,7 @@ import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
+import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -29,6 +30,7 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -151,7 +153,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    public Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccountEntity loginUser, Long userAccountId) {
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_PERMISSION,key = "#userAccountId",condition = "#userAccountId!=null")
+    public Set<String> queryDbToCacheable(UserAccountEntity loginUser, Long userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefinePermissionEntity> definePermissionEntities = this.dealGetListByAccountFromDb(loginUser, userAccountId);
         if (definePermissionEntities != null && definePermissionEntities.isEmpty() == false) {

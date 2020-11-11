@@ -98,7 +98,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetPermissionCodeSetByAccountFromDb(UserAccountEntity loginUser, Long userAccountId);
+    Set<String> queryDbToCacheable(UserAccountEntity loginUser, Long userAccountId);
 
 
     /**

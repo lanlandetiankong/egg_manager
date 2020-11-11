@@ -45,7 +45,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param userAccountId
      * @return
      */
-    List<CommonMenuTree> dealGetUserGrantedMenuTrees(Long userAccountId);
+    List<CommonMenuTree> queryDbToCacheable(Long userAccountId);
 
     /**
      * 查询 所有[可用状态]的 [菜单定义]

@@ -155,4 +155,11 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      */
     Set<String> dealGetExistAccountSet(UserAccountEntity loginUser, Short state, QueryWrapper<UserAccountEntity> wrapper);
+
+    /**
+     * 配置缓存用-当前用户信息
+     * @param userAccountId 用户id
+     * @return
+     */
+    UserAccountEntity queryDbToCacheable(Long userAccountId);
 }

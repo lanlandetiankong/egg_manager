@@ -3,8 +3,8 @@ package com.egg.manager.persistence.em.user.pojo.transfer;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserDepartmentMapstruct;
-import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserDepartmentVo;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

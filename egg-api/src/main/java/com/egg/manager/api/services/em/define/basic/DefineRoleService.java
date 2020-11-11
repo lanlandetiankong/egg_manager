@@ -3,16 +3,17 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineRoleDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineRoleVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 
 import java.util.List;
 import java.util.Set;
@@ -71,56 +72,56 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
 
     /**
      * 分页查询 角色定义 列表
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 角色定义 列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
     /**
      * 角色定义-新增
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param defineRoleVo
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception;
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineRoleVo defineRoleVo) throws Exception;
 
     /**
      * 角色定义-更新
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param defineRoleVo
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception;
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineRoleVo defineRoleVo) throws Exception;
 
     /**
      * 角色授权
-     * @param loginUser 当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param roleId    要授权的角色id
      * @param checkIds  权限id集合
-     * @param loginUser 当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
      */
-    Integer dealGrantPermissionToRole(UserAccountEntity loginUser, Long roleId, Long[] checkIds) throws Exception;
+    Integer dealGrantPermissionToRole(CurrentLoginUserInfo loginUserInfo, Long roleId, Long[] checkIds) throws Exception;
 
 }

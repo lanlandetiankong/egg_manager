@@ -2,13 +2,14 @@ package com.egg.manager.api.services.em.user.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserTenantMapper;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
 import com.egg.manager.persistence.em.user.pojo.vo.UserTenantVo;
 
@@ -44,46 +45,46 @@ public interface UserTenantService extends IService<UserTenantEntity>, MyBaseMys
 
     /**
      * 分页查询 用户与租户关联列表
-     * @param loginUser              当前登录用户
+     * @param loginUserInfo              当前登录用户
      * @param result
      * @param queryFormFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserTenantEntity> paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserTenantEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户与租户关联 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserTenantVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
+    MyCommonResult<UserTenantVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserTenantDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
 
     /**
      * 用户与租户关联-新增
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param userTenantVo
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccountEntity loginUser, UserTenantVo userTenantVo) throws Exception;
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, UserTenantVo userTenantVo) throws Exception;
 
     /**
      * 用户与租户关联-更新
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param userTenantVo
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccountEntity loginUser, UserTenantVo userTenantVo) throws Exception;
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, UserTenantVo userTenantVo) throws Exception;
 
 }

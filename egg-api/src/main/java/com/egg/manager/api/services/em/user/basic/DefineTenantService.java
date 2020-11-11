@@ -2,13 +2,13 @@ package com.egg.manager.api.services.em.user.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.DefineTenantMapper;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.pojo.vo.DefineTenantVo;
 
@@ -25,49 +25,49 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
     /**
      * 分页查询 租户
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
                                                        List<AntdvSortBean> sortBeans);
 
     /**
      * 租户定义-新增
-     * @param loginUser      当前登录用户
+     * @param loginUserInfo      当前登录用户
      * @param defineTenantVo
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception;
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineTenantVo defineTenantVo) throws Exception;
 
     /**
      * 租户定义-更新
-     * @param loginUser      当前登录用户
+     * @param loginUserInfo      当前登录用户
      * @param defineTenantVo
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccountEntity loginUser, DefineTenantVo defineTenantVo) throws Exception;
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineTenantVo defineTenantVo) throws Exception;
 
     /**
      * 取得的结果 转为 枚举类型
-     * @param loginUser 当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param result
      * @return
      */
-    MyCommonResult dealResultListToEnums(UserAccountEntity loginUser, MyCommonResult result);
+    MyCommonResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, MyCommonResult result);
 
     /**
      * 租户设置管理员
-     * @param loginUser 当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param tenantId  租户id
      * @param checkIds  要设置的管理员id
      * @return
      * @throws Exception
      */
-    Integer dealTenantSetupManager(UserAccountEntity loginUser, Long tenantId, Long[] checkIds) throws Exception;
+    Integer dealTenantSetupManager(CurrentLoginUserInfo loginUserInfo, Long tenantId, Long[] checkIds) throws Exception;
 }

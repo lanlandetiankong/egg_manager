@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.commons.util.reflex;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.egg.manager.persistence.commons.util.reflex.config.EggPojoReflexFieldConfig;
+import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 
 import java.lang.reflect.Method;
 

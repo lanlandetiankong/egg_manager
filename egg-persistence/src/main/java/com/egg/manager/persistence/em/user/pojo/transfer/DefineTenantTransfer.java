@@ -3,8 +3,8 @@ package com.egg.manager.persistence.em.user.pojo.transfer;
 import com.egg.manager.persistence.em.user.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.DefineTenantMapstruct;
-import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.DefineTenantVo;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

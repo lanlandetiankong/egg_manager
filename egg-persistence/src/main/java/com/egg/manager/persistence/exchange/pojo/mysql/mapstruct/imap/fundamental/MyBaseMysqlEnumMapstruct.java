@@ -9,9 +9,9 @@ import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissio
 import com.egg.manager.persistence.commons.base.enums.role.DefineRoleTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
-import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.DefineTenantMapstruct;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
+import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import org.mapstruct.MapperConfig;
 

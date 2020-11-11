@@ -7,20 +7,20 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
-import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
-import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
-import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.MyBaseWebLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebOperationLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebQueryLogMgo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.web.enhance.wservices.wservice.aspect.web.ControllerAspectService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -151,16 +151,16 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
                     //取得当前登录的用户
-                    UserAccountEntity loginUser = userAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
+                    CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
                     requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     Long userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);
                     logMgo.setCreateUserId(userAccountId);
                     logMgo.setLastModifyerId(userAccountId);
                     //记录当前登录用户信息
-                    if(loginUser != null){
-                        logMgo.setUserNickName(loginUser.getNickName());
-                        logMgo.setLoginUser(loginUser);
+                    if(loginUserInfo != null){
+                        logMgo.setUserNickName(loginUserInfo.getNickName());
+                        logMgo.setLoginUser(loginUserInfo);
                     }
                 }
                 //取得 请求头bean

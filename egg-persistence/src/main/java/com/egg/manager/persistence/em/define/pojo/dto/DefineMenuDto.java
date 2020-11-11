@@ -3,7 +3,9 @@ package com.egg.manager.persistence.em.define.pojo.dto;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -22,7 +22,7 @@ import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineMenuTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -95,9 +95,9 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineMenu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
-    public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult<CommonMenuTree> doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<CommonMenuTree> result = MyCommonResult.gainQueryResult(CommonMenuTree.class);
-        List<CommonMenuTree> treeList = defineMenuService.queryDbToCacheable(loginUser.getFid());
+        List<CommonMenuTree> treeList = defineMenuService.queryDbToCacheable(loginUserInfo.getFid());
         result.setResultList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
         result.setResultMap(urlMap);
@@ -115,7 +115,7 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineMenuVo> queryDtoPage(HttpServletRequest request,
                                                      String queryObj, String paginationObj, String sortObj,
-                                                     @CurrentLoginUser UserAccountEntity loginUser) {
+                                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<DefineMenuVo> result = MyCommonResult.gainQueryResult(DefineMenuVo.class);
         try {
             //解析 搜索条件
@@ -125,7 +125,7 @@ public class DefineMenuController extends BaseController {
             AntdvPaginationBean<DefineMenuDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineMenuDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineMenuService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineMenuService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -153,13 +153,13 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "新增->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            addCount = defineMenuService.dealCreate(loginUser, vo);
+            addCount = defineMenuService.dealCreate(loginUserInfo, vo);
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -171,13 +171,13 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "更新->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
             Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = defineMenuService.dealUpdate(loginUser, vo);
+            changeCount = defineMenuService.dealUpdate(loginUserInfo, vo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -190,7 +190,7 @@ public class DefineMenuController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineMenu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
-    public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -201,7 +201,7 @@ public class DefineMenuController extends BaseController {
             } else {
                 entity.setExcelModelConf(null);
             }
-            entity.setLastModifyerId(loginUser.getFid());
+            entity.setLastModifyerId(loginUserInfo.getFid());
             entity.setUpdateTime(new Date());
             Integer changeCount = defineMenuMapper.updateById(entity);
             result.setCount(changeCount);
@@ -217,13 +217,13 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = defineMenuService.dealBatchLogicDelete(loginUser, delIds);
+            delCount = defineMenuService.dealBatchLogicDelete(loginUserInfo, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -238,12 +238,12 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = defineMenuService.dealLogicDeleteById(loginUser, delId);
+            Integer delCount = defineMenuService.dealLogicDeleteById(loginUserInfo, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

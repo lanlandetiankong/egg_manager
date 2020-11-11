@@ -1,10 +1,10 @@
 package com.egg.manager.persistence.em.message.pojo.mvo.email;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailFromUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;
+import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Data;

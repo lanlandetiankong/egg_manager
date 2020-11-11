@@ -2,24 +2,24 @@ package com.egg.manager.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.define.basic.DefineModuleService;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineModuleTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineModuleVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -60,7 +60,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<DefineModuleVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                       @CurrentLoginUser UserAccountEntity loginUser) {
+                                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class);
         try {
             //解析 搜索条件
@@ -70,7 +70,7 @@ public class DefineModuleController extends BaseController {
             AntdvPaginationBean<DefineModuleDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineModuleDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineModuleService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -81,7 +81,7 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "根据id查询->模块定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/module/define_module/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefineModuleVo> queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult<DefineModuleVo> queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<DefineModuleVo> result = MyCommonResult.gainQueryResult(DefineModuleVo.class);
         try {
             DefineModuleEntity defineModuleEntity = defineModuleMapper.selectById(defineModuleId);
@@ -96,12 +96,12 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "新增->模块定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = defineModuleService.dealCreate(loginUser, defineModuleVo);
+            addCount = defineModuleService.dealCreate(loginUserInfo, defineModuleVo);
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -113,12 +113,12 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "更新->模块定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer changeCount = 0;
         try {
             Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineModuleService.dealUpdate(loginUser, defineModuleVo);
+            changeCount = defineModuleService.dealUpdate(loginUserInfo, defineModuleVo);
             result.setCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -133,12 +133,12 @@ public class DefineModuleController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineModuleService.dealBatchLogicDelete(loginUser, delIds);
+            delCount = defineModuleService.dealBatchLogicDelete(loginUserInfo, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -153,11 +153,11 @@ public class DefineModuleController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineModuleService.dealLogicDeleteById(loginUser, delId);
+            Integer delCount = defineModuleService.dealLogicDeleteById(loginUserInfo, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

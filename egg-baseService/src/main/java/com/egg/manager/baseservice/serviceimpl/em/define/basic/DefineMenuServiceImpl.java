@@ -5,9 +5,13 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.define.basic.DefineMenuService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.constant.define.DefineMenuConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
@@ -19,17 +23,14 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineMenuTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -184,10 +183,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -201,7 +200,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -212,15 +211,15 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception {
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, new QueryWrapper<DefineMenuEntity>());
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo) throws Exception {
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUserInfo, defineMenuVo, new QueryWrapper<DefineMenuEntity>());
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Date now = new Date();
         DefineMenuEntity defineMenuEntity = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
-        defineMenuEntity = super.doBeforeCreate(loginUser, defineMenuEntity, true);
+        defineMenuEntity = super.doBeforeCreate(loginUserInfo, defineMenuEntity, true);
         Long parentId = defineMenuEntity.getParentId();
         //
         if (LongUtils.isBlank(parentId)) {
@@ -247,17 +246,17 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo) throws Exception {
         QueryWrapper<DefineMenuEntity> uniWrapper = new QueryWrapper<DefineMenuEntity>()
                 .ne("fid", defineMenuVo.getFid());
-        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUser, defineMenuVo, uniWrapper);
+        MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUserInfo, defineMenuVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
             throw new MyDbException(verifyDuplicateBean.getErrorMsg());
         }
         Integer changeCount = 0;
         DefineMenuEntity defineMenuEntity = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
-        defineMenuEntity = super.doBeforeUpdate(loginUser, defineMenuEntity);
+        defineMenuEntity = super.doBeforeUpdate(loginUserInfo, defineMenuEntity);
         Long parentId = defineMenuEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
             DefineMenuEntity parentMenu = defineMenuMapper.selectById(parentId);
@@ -280,7 +279,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccountEntity loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> queryWrapper) {
+    public MyVerifyDuplicateBean dealCheckDuplicateKey(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> queryWrapper) {
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<>();
         queryWrapper.eq("router_url", defineMenuVo.getRouterUrl());

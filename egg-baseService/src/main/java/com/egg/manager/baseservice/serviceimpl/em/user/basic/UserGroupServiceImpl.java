@@ -1,8 +1,8 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.services.em.user.basic.UserGroupService;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.user.basic.UserGroupService;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserGroupEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserGroupMapper;
 import com.egg.manager.persistence.em.user.pojo.vo.UserGroupVo;

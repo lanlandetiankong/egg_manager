@@ -1,13 +1,13 @@
 package com.egg.manager.persistence.exchange.pojo.mongo.mapstruct.imap.fundamental;
 
-import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormRecordMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormRecordMapstruct;
 import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormTypeDefinitionMapstruct;
-import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormRecordMgvo;
 import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormTypeDefinitionMgvo;
+import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
+import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import org.mapstruct.MapperConfig;
 
 /**

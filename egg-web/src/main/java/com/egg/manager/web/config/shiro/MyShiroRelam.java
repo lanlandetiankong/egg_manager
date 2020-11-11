@@ -7,7 +7,7 @@ import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -77,13 +77,13 @@ public class MyShiroRelam extends AuthorizingRealm {
         if(StringUtils.isBlank(authorization) || userAccountId == null){
             return simpleAuthorizationInfo;
         }
-        UserAccountEntity userAccountEntity = userAccountService.queryDbToCacheable(userAccountId);
-        if(userAccountEntity == null){
+        CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountId);
+        if(loginUserInfo == null){
             return simpleAuthorizationInfo;
         }
         //取得 当前用户 有用的 角色、权限
         Set<String> roleSet = defineRoleService.queryDbToCacheable(userAccountId);
-        Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountEntity,userAccountId);
+        Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountId);
         simpleAuthorizationInfo.setRoles(roleSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;

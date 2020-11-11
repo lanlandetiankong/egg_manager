@@ -4,25 +4,25 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService;
-import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService;
+import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementDraftTransfer;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTransfer;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +53,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+    public MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
@@ -65,17 +65,17 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraftEntity entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
-        entity = super.doBeforeCreate(loginUser, entity, true);
+        entity = super.doBeforeCreate(loginUserInfo, entity, true);
         Integer addCount = announcementDraftMapper.insert(entity);
         return addCount;
     }
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, AnnouncementDraftVo announcementDraftVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraftEntity entity = announcementDraftMapper.selectById(announcementDraftVo.getFid());
-        entity = super.doBeforeUpdate(loginUser, entity);
+        entity = super.doBeforeUpdate(loginUserInfo, entity);
         entity.setTitle(announcementDraftVo.getTitle());
         entity.setKeyWord(announcementDraftVo.getKeyWord());
         entity.setPublishDepartment(announcementDraftVo.getPublishDepartment());
@@ -91,12 +91,12 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
     @Override
-    public Integer dealBatchPublishByDraft(UserAccountEntity loginUser, Long[] draftIds) throws Exception {
+    public Integer dealBatchPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {
             //批量伪删除
             for (Long draftId : draftIds) {
-                Integer addCount = this.dealPublishByDraft(loginUser, draftId, true);
+                Integer addCount = this.dealPublishByDraft(loginUserInfo, draftId, true);
                 if (addCount != null) {
                     delCount += addCount;
                 }
@@ -107,17 +107,17 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public Integer dealPublishByDraft(UserAccountEntity loginUser, Long draftId, boolean insertFlag) throws Exception {
+    public Integer dealPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long draftId, boolean insertFlag) throws Exception {
         AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
-        AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUser, announcementDraftEntity);
+        AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUserInfo, announcementDraftEntity);
         if (announcementEntity != null && insertFlag == true) {
             //发布
             announcementMapper.insert(announcementEntity);
         }
         announcementDraftEntity.setState(BaseStateEnum.DELETE.getValue());
         announcementDraftEntity.setIsPublished(BaseStateEnum.ENABLED.getValue());
-        if (loginUser != null) {
-            announcementDraftEntity.setLastModifyerId(loginUser.getFid());
+        if (loginUserInfo != null) {
+            announcementDraftEntity.setLastModifyerId(loginUserInfo.getFid());
         }
         //修稿 草稿标识
         Integer delCount = announcementDraftMapper.updateById(announcementDraftEntity);

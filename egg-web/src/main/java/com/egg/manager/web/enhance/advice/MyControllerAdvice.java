@@ -1,12 +1,12 @@
 package com.egg.manager.web.enhance.advice;
 
-import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.commons.base.exception.form.LoginFormFieldDeficiencyException;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.beans.ConversionNotSupportedException;

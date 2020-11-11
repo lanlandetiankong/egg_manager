@@ -2,26 +2,26 @@ package com.egg.manager.web.controller.forms.smartform;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
+import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormTypeDefinitionMongoVerifyO;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfUpdate;
-import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormTypeDefinitionMongoVerifyO;
 import com.egg.manager.web.controller.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
@@ -64,7 +64,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
             //添加状态过滤,时间倒序排序
@@ -72,7 +72,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-            MyMongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUser, mongoQueryBuffer);
+            MyMongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -88,7 +88,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataAll")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
             //添加状态过滤,时间倒序排序
@@ -96,7 +96,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-            List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUser, mongoQueryBuffer);
+            List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, mongoQueryBuffer);
             result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -107,12 +107,12 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
-    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
+    public MyCommonResult<SmartFormTypeDefinitionMgo> doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                                                        @RequestParam(value = "fid", required = true) String fid) {
         MyCommonResult<SmartFormTypeDefinitionMgo> result = MyCommonResult.gainQueryResult(SmartFormTypeDefinitionMgo.class);
         try {
             Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
-            SmartFormTypeDefinitionMgo mobj = smartFormTypeDefinitionMgoService.doFindById(loginUser, fid);
+            SmartFormTypeDefinitionMgo mobj = smartFormTypeDefinitionMgoService.doFindById(loginUserInfo, fid);
             result.setBean(mobj);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -124,14 +124,14 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
     @ApiOperation(value = "新增->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
-    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
+    public MyCommonResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                       @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                       SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doInsert(loginUser, formTypeDefinitionMgo);
+            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doInsert(loginUserInfo, formTypeDefinitionMgo);
             addCount += (newMgo != null) ? 1 : 0;
             result.setCount(addCount);
         } catch (Exception e) {
@@ -144,19 +144,19 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser UserAccountEntity loginUser,
+    public MyCommonResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                          @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormTypeDefinitionMongoVerifyO formTypeDefinitionVerifyO,
                                          SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer count = 0;
         try {
             Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doUpdateById(loginUser, formTypeDefinitionMgo);
+            SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doUpdateById(loginUserInfo, formTypeDefinitionMgo);
             //更新了一条数据
             if (newMgo != null) {
                 count += 1;
                 //触发formDefinetion 更新
-                smartFormDefinitionMgoService.updateFormTypeByTypeId(loginUser, newMgo);
+                smartFormDefinitionMgoService.updateFormTypeByTypeId(loginUserInfo, newMgo);
             }
             result.setCount(count);
         } catch (Exception e) {
@@ -172,11 +172,11 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
-    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Long delCount = smartFormTypeDefinitionMgoService.doFakeDeleteById(loginUser, delId);
+            Long delCount = smartFormTypeDefinitionMgoService.doFakeDeleteById(loginUserInfo, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -191,12 +191,12 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDelByIds")
-    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = smartFormTypeDefinitionMgoService.doFakeDeleteByIds(loginUser, Lists.newArrayList(delIds));
+            delCount = smartFormTypeDefinitionMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

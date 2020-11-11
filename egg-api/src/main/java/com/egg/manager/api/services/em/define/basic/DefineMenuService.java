@@ -3,18 +3,18 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 
 import java.util.List;
 import java.util.Set;
@@ -80,53 +80,53 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
 
     /**
      * 分页查询 菜单定义 列表
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+    MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
                                                         List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 菜单定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUser          当前登录用户
+     * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+    MyCommonResult<DefineMenuVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
                                                      List<AntdvSortBean> sortBeans);
 
     /**
      * 菜单定义-新增
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param defineMenuVo
      * @return
      * @throws Exception
      */
-    Integer dealCreate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception;
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo) throws Exception;
 
     /**
      * 菜单定义-更新
-     * @param loginUser    当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param defineMenuVo
      * @return
      * @throws Exception
      */
-    Integer dealUpdate(UserAccountEntity loginUser, DefineMenuVo defineMenuVo) throws Exception;
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo) throws Exception;
 
     /**
      * 验证 数据库 中的唯一冲突
-     * @param loginUser         当前登录用户
+     * @param loginUserInfo         当前登录用户
      * @param defineMenuVo
      * @param defineMenuWrapper
      * @return
      */
-    MyVerifyDuplicateBean dealCheckDuplicateKey(UserAccountEntity loginUser, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> defineMenuWrapper);
+    MyVerifyDuplicateBean dealCheckDuplicateKey(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo, QueryWrapper<DefineMenuEntity> defineMenuWrapper);
 }

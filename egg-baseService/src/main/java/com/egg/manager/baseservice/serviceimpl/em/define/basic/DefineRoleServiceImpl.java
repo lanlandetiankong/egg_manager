@@ -5,11 +5,12 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.define.basic.DefineRoleService;
-import com.egg.manager.api.services.em.user.basic.UserRoleService;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.define.basic.DefineRoleService;
+import com.egg.manager.api.services.em.user.basic.UserRoleService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -17,21 +18,21 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.RolePermissionMapper;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineRoleDto;
-import com.egg.manager.persistence.em.user.pojo.initialize.RolePermissionPojoInitialize;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineRoleTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineRoleVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.RolePermissionMapper;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.initialize.RolePermissionPojoInitialize;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
@@ -163,10 +164,10 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
+    public MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
                                                                List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -180,7 +181,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public MyCommonResult<DefineRoleVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+    public MyCommonResult<DefineRoleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
                                                             List<AntdvSortBean> sortBeans) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -191,19 +192,19 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception {
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineRoleVo defineRoleVo) throws Exception {
         Date now = new Date();
         DefineRoleEntity defineRoleEntity = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
-        defineRoleEntity = super.doBeforeCreate(loginUser, defineRoleEntity, true);
+        defineRoleEntity = super.doBeforeCreate(loginUserInfo, defineRoleEntity, true);
         return defineRoleMapper.insert(defineRoleEntity);
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, DefineRoleVo defineRoleVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineRoleVo defineRoleVo) throws Exception {
         Integer changeCount = 0;
         DefineRoleEntity defineRoleEntity = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
-        defineRoleEntity = super.doBeforeUpdate(loginUser, defineRoleEntity);
+        defineRoleEntity = super.doBeforeUpdate(loginUserInfo, defineRoleEntity);
         changeCount = defineRoleMapper.updateById(defineRoleEntity);
         return changeCount;
     }
@@ -211,11 +212,11 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Integer dealGrantPermissionToRole(UserAccountEntity loginUser, Long roleId, Long[] checkIds) throws Exception {
+    public Integer dealGrantPermissionToRole(CurrentLoginUserInfo loginUserInfo, Long roleId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
-            changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId, loginUser);
+            changeCount = definePermissionMapper.clearAllPermissionByRoleId(roleId, loginUserInfo);
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的权限id 集合
@@ -223,7 +224,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
             if (oldCheckPermIds == null || oldCheckPermIds.isEmpty()) {
                 List<RolePermissionEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
-                    addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
+                    addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 rolePermissionMapper.customBatchInsert(addEntitys);
@@ -245,17 +246,17 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 }
                 if (enableIds.isEmpty() == false) {
                     //批量启用
-                    rolePermissionMapper.batchUpdateStateByRole(roleId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
+                    rolePermissionMapper.batchUpdateStateByRole(roleId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
                 if (disabledIds.isEmpty() == false) {
                     //批量禁用
-                    rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
+                    rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     List<RolePermissionEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
-                        addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUser));
+                        addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                     }
                     //批量新增行
                     rolePermissionMapper.customBatchInsert(addEntitys);

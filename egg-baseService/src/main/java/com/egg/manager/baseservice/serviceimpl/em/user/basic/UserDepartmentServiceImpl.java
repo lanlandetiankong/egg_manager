@@ -8,19 +8,20 @@ import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.user.basic.UserDepartmentService;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.user.basic.UserDepartmentService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserDepartmentEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserDepartmentMapper;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserDepartmentDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserDepartmentTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserDepartmentVo;
@@ -94,10 +95,10 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
 
     @Override
-    public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartmentEntity> paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserDepartmentEntity> paginationBean,
                                                                    List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserDepartmentEntity> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserDepartmentEntity> userDepartmentEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -111,7 +112,7 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
 
     @Override
-    public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
+    public MyCommonResult<UserDepartmentVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserDepartmentDto> paginationBean,
                                                                 List<AntdvSortBean> sortBeans) {
         Page<UserDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -122,19 +123,19 @@ public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepart
 
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, UserDepartmentVo userDepartmentVo) throws Exception {
         UserDepartmentEntity userDepartmentEntity = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        userDepartmentEntity = super.doBeforeCreate(loginUser, userDepartmentEntity, true);
+        userDepartmentEntity = super.doBeforeCreate(loginUserInfo, userDepartmentEntity, true);
         Integer addCount = userDepartmentMapper.insert(userDepartmentEntity);
         return addCount;
     }
 
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, UserDepartmentVo userDepartmentVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, UserDepartmentVo userDepartmentVo) throws Exception {
         Integer changeCount = 0;
         UserDepartmentEntity userDepartmentEntity = UserDepartmentTransfer.transferVoToEntity(userDepartmentVo);
-        userDepartmentEntity = super.doBeforeUpdate(loginUser, userDepartmentEntity);
+        userDepartmentEntity = super.doBeforeUpdate(loginUserInfo, userDepartmentEntity);
         changeCount = userDepartmentMapper.updateById(userDepartmentEntity);
         return changeCount;
     }

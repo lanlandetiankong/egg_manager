@@ -2,27 +2,27 @@ package com.egg.manager.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
-import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
+import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDto;
 import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTransfer;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -67,7 +67,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public MyCommonResult<AnnouncementVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                       Boolean onlySelf, @CurrentLoginUser UserAccountEntity loginUser) {
+                                                       Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             //解析 搜索条件
@@ -75,13 +75,13 @@ public class AnnouncementController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             if (Boolean.TRUE.equals(onlySelf)) {
                 //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
             }
             //取得 分页配置
             AntdvPaginationBean<AnnouncementDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
             //取得 排序配置
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = announcementService.dealQueryPageByDtos(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -93,7 +93,7 @@ public class AnnouncementController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
     public MyCommonResult<AnnouncementVo> queryFilteredPage(HttpServletRequest request, Integer limitSize,
-                                                            Boolean onlySelf, @CurrentLoginUser UserAccountEntity loginUser) {
+                                                            Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             //这些查询条件暂时用不到
@@ -103,7 +103,7 @@ public class AnnouncementController extends BaseController {
             queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
             if (Boolean.TRUE.equals(onlySelf)) {
                 //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUser.getFid()));
+                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
             }
             //取得 分页配置
             AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
@@ -111,7 +111,7 @@ public class AnnouncementController extends BaseController {
             List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
             //按创建时间 倒序
             sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
-            result = announcementService.dealQueryPageByEntitys(loginUser, result, queryFieldBeanList, paginationBean, sortBeans);
+            result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -122,7 +122,7 @@ public class AnnouncementController extends BaseController {
     @PcWebQueryLog(fullPath = "/announcement/queryOneById")
     @ApiOperation(value = "根据id查询->公告", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult<AnnouncementVo> queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<AnnouncementVo> result = MyCommonResult.gainQueryResult(AnnouncementVo.class);
         try {
             Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -142,12 +142,12 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "新增->公告", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public MyCommonResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
-                                       @CurrentLoginUser UserAccountEntity loginUser) {
+                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreate(loginUser, announcementVo);
+            addCount = announcementService.dealCreate(loginUserInfo, announcementVo);
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -160,12 +160,12 @@ public class AnnouncementController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement/createFromDraft")
     @PostMapping(value = "/createFromDraft")
     public MyCommonResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                          @CurrentLoginUser UserAccountEntity loginUser) {
+                                          @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreateFromDraft(loginUser, announcementDraftVo);
+            addCount = announcementService.dealCreateFromDraft(loginUserInfo, announcementDraftVo);
             result.setCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -179,13 +179,13 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = announcementService.dealBatchLogicDelete(loginUser, delIds);
+            delCount = announcementService.dealBatchLogicDelete(loginUserInfo, delIds);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -200,12 +200,12 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser UserAccountEntity loginUser) {
+    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult result = MyCommonResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = announcementService.dealLogicDeleteById(loginUser, delId);
+            Integer delCount = announcementService.dealLogicDeleteById(loginUserInfo, delId);
             result.setCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

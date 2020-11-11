@@ -165,7 +165,7 @@ public class UserLoginController extends BaseController {
 
             //设置到缓存,hashKey 都是 authorization
             userAccountService.queryDbToCacheable(userAccountId);
-            Set<String> permissionSet = definePermissionService.queryDbToCacheable(loginUser,userAccountId);
+            Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountId);
             defineRoleService.queryDbToCacheable(userAccountId);
             defineRoleService.queryDbToCacheable(userAccountId);
             Set<String> routerUrlSet = defineMenuService.dealGetUserVisitAbleUrl(userAccountId);

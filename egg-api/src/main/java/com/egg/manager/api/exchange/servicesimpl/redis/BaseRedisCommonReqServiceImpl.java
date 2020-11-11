@@ -1,19 +1,12 @@
 package com.egg.manager.api.exchange.servicesimpl.redis;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.services.em.define.basic.DefineRoleService;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.services.redis.MyRedisCommonReqService;
-import com.egg.manager.persistence.commons.base.constant.Constant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.api.services.em.define.basic.DefineRoleService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author zhoucj

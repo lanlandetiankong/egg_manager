@@ -4,9 +4,10 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -19,12 +20,12 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.em.user.db.mysql.entity.*;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.*;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountDTO;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;
-import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserDepartmentPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserJobPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserRolePojoInitialize;
@@ -73,10 +74,10 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
                                                                 List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
-        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUser, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -89,7 +90,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
                                                              List<AntdvSortBean> sortBeans) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
@@ -121,12 +122,12 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception {
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, UserAccountVo userAccountVo) throws Exception {
         if (this.dealCheckDuplicateKey(userAccountVo, new QueryWrapper<>())) {
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccountEntity = super.doBeforeCreate(loginUser, userAccountEntity, true);
+        userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity, true);
         if (null == userAccountVo.getLocked()) {
             //如果没设置值，默认不锁定
             userAccountEntity.setLocked(SwitchStateEnum.Close.getValue());
@@ -140,7 +141,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         Integer addCount = userAccountMapper.insert(userAccountEntity);
         //关联 租户
         if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
-            UserTenantEntity userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+            UserTenantEntity userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUserInfo);
             userTenantMapper.insert(userTenantEntity);
         } else {
             throw new BusinessException("关联用户与租户失败！创建用户失败！");
@@ -148,7 +149,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
         //关联 部门
         if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
-            UserDepartmentEntity userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+            UserDepartmentEntity userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUserInfo);
             userDepartmentMapper.insert(userDepartmentEntity);
         } else {
             throw new BusinessException("关联用户与部门失败！创建用户失败！");
@@ -158,7 +159,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, UserAccountVo userAccountVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, UserAccountVo userAccountVo) throws Exception {
         QueryWrapper<UserAccountEntity> uniWrapper = new QueryWrapper<UserAccountEntity>()
                 .ne("fid", userAccountVo.getFid());
         if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {
@@ -167,7 +168,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         Integer changeCount = 0;
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccountEntity = super.doBeforeUpdate(loginUser, userAccountEntity);
+        userAccountEntity = super.doBeforeUpdate(loginUserInfo, userAccountEntity);
         changeCount = userAccountMapper.updateById(userAccountEntity);
         //关联 租户
         if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
@@ -176,7 +177,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     .eq("state", BaseStateEnum.ENABLED.getValue());
             UserTenantEntity userTenantEntity = userTenantMapper.selectOne(tenantQueryWrapper);
             if (userTenantEntity == null) {
-                userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUser);
+                userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUserInfo);
                 userTenantMapper.insert(userTenantEntity);
             } else {
                 userTenantEntity.setDefineTenantId(userAccountVo.getBelongTenantId());
@@ -192,7 +193,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     .eq("state", BaseStateEnum.ENABLED.getValue());
             UserDepartmentEntity userDepartmentEntity = userDepartmentMapper.selectOne(departmentQueryWrapper);
             if (userDepartmentEntity == null) {
-                userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUser);
+                userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUserInfo);
                 userDepartmentMapper.insert(userDepartmentEntity);
             } else {
                 userDepartmentEntity.setDefineDepartmentId(userAccountVo.getBelongDepartmentId());
@@ -207,36 +208,36 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealBatchRenewLock(UserAccountEntity loginUser, String[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
             List<String> lockIdList = Lists.newArrayList(lockIds);
             //批量设置为 锁定
-            lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUser);
+            lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUserInfo);
         }
         return lockCount;
     }
 
 
     @Override
-    public Integer dealRenewLock(UserAccountEntity loginUser, Long lockId, boolean isLock) throws Exception {
+    public Integer dealRenewLock(CurrentLoginUserInfo loginUserInfo, Long lockId, boolean isLock) throws Exception {
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         UserAccountEntity userAccountEntity = UserAccountEntity.builder().fid(lockId).locked(lockState).build();
-        if (loginUser != null) {
-            userAccountEntity.setLastModifyerId(loginUser.getFid());
+        if (loginUserInfo != null) {
+            userAccountEntity.setLastModifyerId(loginUserInfo.getFid());
         }
         Integer lockCount = userAccountMapper.updateById(userAccountEntity);
         return lockCount;
     }
 
     @Override
-    public Integer dealGrantRoleToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantRoleToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
-        Long loginUserId = loginUser != null ? loginUser.getFid() : null;
+        Long loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
-            changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId, loginUser);
+            changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId, loginUserInfo);
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的角色id 集合
@@ -244,7 +245,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             if (oldCheckRoleIds == null || oldCheckRoleIds.isEmpty()) {
                 List<UserRoleEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
-                    addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                    addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 userRoleMapper.customBatchInsert(addEntitys);
@@ -266,17 +267,17 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (enableIds.isEmpty() == false) {
                     //批量启用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
                 if (disabledIds.isEmpty() == false) {
                     //批量禁用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     List<UserRoleEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
-                        addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                        addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
                     userRoleMapper.customBatchInsert(addEntitys);
@@ -289,12 +290,12 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealGrantJobToUser(UserAccountEntity loginUser, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantJobToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception {
         Integer changeCount = 0;
-        Long loginUserId = loginUser != null ? loginUser.getFid() : null;
+        Long loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
-            changeCount = userAccountMapper.clearAllJobByUserId(userAccountId, loginUser);
+            changeCount = userAccountMapper.clearAllJobByUserId(userAccountId, loginUserInfo);
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的职务id 集合
@@ -302,7 +303,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             if (oldCheckJobIds == null || oldCheckJobIds.isEmpty()) {
                 List<UserJobEntity> addEntitys = new ArrayList<>();
                 for (Long checkId : checkIds) {
-                    addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                    addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 userJobMapper.customBatchInsert(addEntitys);
@@ -324,18 +325,18 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (enableIds.isEmpty() == false) {
                     //批量启用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUser);
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, enableIds, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
                 }
                 if (disabledIds.isEmpty() == false) {
                     //批量禁用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUser);
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
                 }
                 if (checkIdList.isEmpty() == false) {
                     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserJobEntity> addEntitys = new ArrayList<>();
                     for (Long checkId : checkIdList) {
-                        addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUser));
+                        addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
                     userJobMapper.customBatchInsert(addEntitys);
@@ -355,7 +356,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(UserAccountEntity loginUser, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
+    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         if (checkIds != null) {
             wrapper.in("fid", checkIds);
@@ -365,7 +366,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Set<String> dealGetExistAccountSet(UserAccountEntity loginUser, Short state, QueryWrapper<UserAccountEntity> wrapper) {
+    public Set<String> dealGetExistAccountSet(CurrentLoginUserInfo loginUserInfo, Short state, QueryWrapper<UserAccountEntity> wrapper) {
         Set<String> accountSet = new HashSet<>();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         if (state != null) {
@@ -382,10 +383,12 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
     @Override
     @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ACCOUNT,key = "#userAccountId",condition = "#userAccountId!=null")
-    public UserAccountEntity queryDbToCacheable(Long userAccountId) {
+    public CurrentLoginUserInfo queryDbToCacheable(Long userAccountId) {
         if(userAccountId == null){
             return null ;
         }
-        return userAccountMapper.selectById(userAccountId);
+        UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
+        //TODO
+        return CurrentLoginUserInfo.transferFromEntity(userAccountEntity);
     }
 }

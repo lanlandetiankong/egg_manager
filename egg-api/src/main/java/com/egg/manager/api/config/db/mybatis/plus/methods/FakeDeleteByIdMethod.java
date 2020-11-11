@@ -3,8 +3,8 @@ package com.egg.manager.api.config.db.mybatis.plus.methods;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.egg.manager.api.config.db.mybatis.plus.EggMpSqlMethod;
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
+import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 

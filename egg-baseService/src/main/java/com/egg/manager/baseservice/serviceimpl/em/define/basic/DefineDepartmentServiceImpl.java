@@ -2,23 +2,23 @@ package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
+import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
+import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.commons.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(UserAccountEntity loginUser, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
+    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
                                                                   List<AntdvSortBean> sortBeans) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -54,7 +54,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(UserAccountEntity loginUser, Long rootId, List<DefineDepartmentEntity> allDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(CurrentLoginUserInfo loginUserInfo, Long rootId, List<DefineDepartmentEntity> allDepartments) {
         if (allDepartments == null || allDepartments.size() == 0) {
             return null;
         }
@@ -75,14 +75,14 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
             return null;
         }
         for (CommonTreeSelect treeItem : childList) {
-            treeItem.setChildren(this.getTreeSelectChildNodes(loginUser, treeItem.getKey(), allDepartments));
+            treeItem.setChildren(this.getTreeSelectChildNodes(loginUserInfo, treeItem.getKey(), allDepartments));
         }
         return childList;
     }
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(UserAccountEntity loginUser, Long rootId, List<DefineDepartmentEntity> allDefineDepartmentEntities) {
-        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUser, rootId, allDefineDepartmentEntities);
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(CurrentLoginUserInfo loginUserInfo, Long rootId, List<DefineDepartmentEntity> allDefineDepartmentEntities) {
+        List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUserInfo, rootId, allDefineDepartmentEntities);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).title("部门首层项").value(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
         treeSelectListWithRoot.add(rootItem);
@@ -91,9 +91,9 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public Integer dealCreate(UserAccountEntity loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
+    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineDepartmentVo defineDepartmentVo) throws Exception {
         DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
-        defineDepartmentEntity = super.doBeforeCreate(loginUser, defineDepartmentEntity, true);
+        defineDepartmentEntity = super.doBeforeCreate(loginUserInfo, defineDepartmentEntity, true);
         Long parentId = defineDepartmentEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
             DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);
@@ -115,10 +115,10 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public Integer dealUpdate(UserAccountEntity loginUser, DefineDepartmentVo defineDepartmentVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineDepartmentVo defineDepartmentVo) throws Exception {
         Integer changeCount = 0;
         DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
-        defineDepartmentEntity = super.doBeforeUpdate(loginUser, defineDepartmentEntity);
+        defineDepartmentEntity = super.doBeforeUpdate(loginUserInfo, defineDepartmentEntity);
         Long parentId = defineDepartmentEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
             DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);

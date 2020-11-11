@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap.login;
 
-import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountDTO;
+import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

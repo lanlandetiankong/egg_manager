@@ -1,7 +1,5 @@
 package com.egg.manager.api.exchange.services.redis;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-
 /**
  * @author zhoucj
  * @description

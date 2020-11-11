@@ -173,7 +173,7 @@ public class UserAccountController extends BaseController {
     public MyCommonResult<DefineJobVo> gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
         try {
-            List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllJobByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+            List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

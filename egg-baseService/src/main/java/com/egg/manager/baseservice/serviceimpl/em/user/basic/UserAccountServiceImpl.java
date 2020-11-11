@@ -1,6 +1,7 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -8,6 +9,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.UserGroupService;
+import com.egg.manager.api.services.em.user.basic.UserJobService;
 import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
@@ -21,6 +24,8 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPagination
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
 import com.egg.manager.persistence.commons.util.LongUtils;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.*;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.*;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
@@ -63,6 +68,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     private UserTenantMapper userTenantMapper;
     @Autowired
     private UserDepartmentMapper userDepartmentMapper;
+
+    @Reference
+    private UserJobService userJobService ;
+    @Reference
+    private UserGroupService userGroupService ;
 
     @Override
     public UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
@@ -359,9 +369,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     @Override
     public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        if (checkIds != null) {
-            wrapper.in("fid", checkIds);
-        }
+        wrapper.in(checkIds != null,"fid", checkIds);
         return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
     }
 
@@ -370,9 +378,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Set<String> dealGetExistAccountSet(CurrentLoginUserInfo loginUserInfo, Short state, QueryWrapper<UserAccountEntity> wrapper) {
         Set<String> accountSet = new HashSet<>();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        if (state != null) {
-            wrapper.eq("state", state);
-        }
+        wrapper.eq(state != null,"state", state);
         List<UserAccountEntity> userAccountEntityList = userAccountMapper.selectList(wrapper);
         if (CollectionUtil.isNotEmpty(userAccountEntityList)) {
             for (UserAccountEntity user : userAccountEntityList) {
@@ -388,8 +394,14 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         if(userAccountId == null){
             return null ;
         }
+        //用户信息
         UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
-        //TODO
-        return CurrentLoginUserInfo.transferFromEntity(userAccountEntity);
+        //用户所属职务
+        List<DefineJobEntity> belongJobs = userJobService.queryAllUserBelong(userAccountId);
+        List<DefineGroupEntity> belongGroups = userGroupService.queryAllUserBelong(userAccountId);
+        CurrentLoginUserInfo loginUserInfo = CurrentLoginUserInfo.transferFromEntity(userAccountEntity);
+        loginUserInfo.setBelongJobList(belongJobs);
+        loginUserInfo.setBelongGroupList(belongGroups);
+        return loginUserInfo;
     }
 }

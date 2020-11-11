@@ -97,7 +97,7 @@
     </select>
 
 
-    <select id="findAllJobByUserAcccountId" resultMap="BaseResultMap">
+    <select id="findAllByUserAcccountId" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
             <property name="base_alias_name" value="dj"/>

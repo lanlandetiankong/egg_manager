@@ -49,6 +49,10 @@ public interface EggMpSqlConst {
      * 字段-fid
      */
     String COLUMN_FID = "fid" ;
+    /**
+     *
+     */
+    String COLUMN_USER_ACCOUNT_ID = "fid" ;
 
     /**
      * MYSQL-时间函数

@@ -62,5 +62,16 @@
         ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
     </sql>
 
+    <select id="findAllByUserAcccountId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dg"/>
+        </include>
+        FROM em_define_group dg
+        left JOIN em_user_group ug on dg.fid = ug.define_job_id
+        WHERE
+        ug.user_account_id = #{userAccountId}
+        and ug.is_deleted = #{stateVal}
+    </select>
 
 </mapper>

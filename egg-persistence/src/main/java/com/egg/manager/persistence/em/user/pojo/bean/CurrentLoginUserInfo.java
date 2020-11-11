@@ -6,6 +6,8 @@ import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description:
  * @ClassName: CurrentLoginUserInfo
@@ -15,12 +17,9 @@ import lombok.Data;
 @Data
 public class CurrentLoginUserInfo extends UserAccountEntity {
 
-    private DefineGroupEntity belongGroup ;
+    private List<DefineGroupEntity> belongGroupList ;
 
-    private DefineJobEntity belongJob ;
-
-    private DefineTenantEntity belongTenant ;
-
+    private List<DefineJobEntity> belongJobList ;
 
     public static CurrentLoginUserInfo transferFromEntity(UserAccountEntity entity) {
         CurrentLoginUserInfo currentLoginUserInfo = new CurrentLoginUserInfo();

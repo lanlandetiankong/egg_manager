@@ -128,7 +128,7 @@
 
     <update id="clearAllManagerByTenantId">
         UPDATE em_user_tenant
-        SET is_manager = -1
+        SET is_manager = 0
         <if test="loginUser != null">
             ,last_modifyer_id = #{loginUser.fid}
         </if>

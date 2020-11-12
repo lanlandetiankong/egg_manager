@@ -153,7 +153,7 @@
 
     <update id="clearAllRoleByUserId">
         UPDATE em_user_role
-        SET state = -1
+        SET state = 0
         <if test="loginUser != null">
             ,last_modifyer_id = #{loginUser.fid}
         </if>
@@ -163,7 +163,7 @@
 
     <update id="clearAllJobByUserId">
         UPDATE em_user_job
-        SET state = -1
+        SET state = 0
         <if test="loginUser != null">
             ,last_modifyer_id = #{loginUser.fid}
         </if>

@@ -107,7 +107,7 @@
 
     <update id="clearAllPermissionByRoleId">
         UPDATE em_role_permission
-        SET state = -1
+        SET state = 0
         <if test="loginUser != null">
             ,last_modifyer_id = #{loginUser.fid}
         </if>

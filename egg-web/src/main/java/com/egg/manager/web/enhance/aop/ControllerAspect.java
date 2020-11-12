@@ -2,7 +2,7 @@ package com.egg.manager.web.enhance.aop;
 
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.aspect.AspectNotifyTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.pc.web.PcWebLoginLogMgo;
@@ -93,12 +93,12 @@ public class ControllerAspect {
                 controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {
+                    if (result instanceof WebResult) {
                         //如果是封装的结果
-                        MyCommonResult commonResult = (MyCommonResult) result;
-                        if (commonResult.isHasError() == true) {
+                        WebResult webResult = (WebResult) result;
+                        if (webResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebQueryLogMgo.setException(commonResult.getMsg());
+                            pcWebQueryLogMgo.setException(webResult.getMsg());
                         }
                     }
                     pcWebQueryLogMgo.setResult(JSON.toJSONString(result));
@@ -123,12 +123,12 @@ public class ControllerAspect {
                 controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {
+                    if (result instanceof WebResult) {
                         //如果是封装的结果
-                        MyCommonResult commonResult = (MyCommonResult) result;
-                        if (commonResult.isHasError() == true) {
+                        WebResult webResult = (WebResult) result;
+                        if (webResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebOperationLogMgo.setException(commonResult.getMsg());
+                            pcWebOperationLogMgo.setException(webResult.getMsg());
                         }
                     }
                     pcWebOperationLogMgo.setResult(JSON.toJSONString(result));
@@ -152,12 +152,12 @@ public class ControllerAspect {
                 controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
-                    if (result instanceof MyCommonResult) {
+                    if (result instanceof WebResult) {
                         //如果是封装的结果
-                        MyCommonResult commonResult = (MyCommonResult) result;
-                        if (commonResult.isHasError() == true) {
+                        WebResult webResult = (WebResult) result;
+                        if (webResult.isHasError() == true) {
                             isSuccess = false;
-                            pcWebLoginLogMgo.setException(commonResult.getMsg());
+                            pcWebLoginLogMgo.setException(webResult.getMsg());
                         }
                     }
                     pcWebLoginLogMgo.setResult(JSON.toJSONString(result));

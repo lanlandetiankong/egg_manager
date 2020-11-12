@@ -3,7 +3,7 @@ package com.egg.manager.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.define.basic.DefineJobService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
@@ -52,16 +52,16 @@ public class DefineJobController extends BaseController {
 
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryPage")
-    @ApiOperation(value = "分页查询->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryPage")
-    public MyCommonResult<DefineJobVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                 @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
+    public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                               @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineJobVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -79,16 +79,16 @@ public class DefineJobController extends BaseController {
 
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryDtoPage")
-    @ApiOperation(value = "分页查询(dto)->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(dto)->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public MyCommonResult<DefineJobVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
+    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineJobVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -105,14 +105,14 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "根据id查询->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineJob/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefineJobVo> queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineJobVo> result = MyCommonResult.gainQueryResult(DefineJobVo.class);
+    public WebResult queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineJobVo.class);
         try {
             DefineJobEntity defineJobEntity = defineJobMapper.selectById(defineJobId);
-            result.setBean(DefineJobTransfer.transferEntityToVo(defineJobEntity));
+            result.putBean(DefineJobTransfer.transferEntityToVo(defineJobEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -120,16 +120,16 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/createByForm")
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineJobService.dealCreate(loginUserInfo, defineJobVo);
-            result.setCount(addCount);
+            result.putCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -137,16 +137,16 @@ public class DefineJobController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer changeCount = 0;
         try {
             Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = defineJobService.dealUpdate(loginUserInfo, defineJobVo);
-            result.setCount(changeCount);
+            result.putCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -155,19 +155,19 @@ public class DefineJobController extends BaseController {
 
 
     @PcWebOperationLog(fullPath = "/define/defineJob/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
             //批量伪删除
             delCount = defineJobService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.setCount(delCount);
+            result.putCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -176,18 +176,18 @@ public class DefineJobController extends BaseController {
 
 
     @PcWebOperationLog(fullPath = "/define/defineJob/deleteById")
-    @ApiOperation(value = "伪删除->职务定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             delCount = defineJobService.dealLogicDeleteById(loginUserInfo, delId);
-            result.setCount(delCount);
+            result.putCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

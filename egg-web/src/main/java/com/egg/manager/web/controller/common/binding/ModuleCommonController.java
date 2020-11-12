@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.module.DefineModuleTypeEnum;
@@ -30,10 +30,10 @@ import java.util.List;
 public class ModuleCommonController extends BaseController {
 
 
-    @ApiOperation(value = "查询枚举->模块类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->模块类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllModuleTypeEnumList")
-    public MyCommonResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class ModuleCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -50,10 +50,10 @@ public class ModuleCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询枚举->菜单跳转类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->菜单跳转类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
-    public MyCommonResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ModuleCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

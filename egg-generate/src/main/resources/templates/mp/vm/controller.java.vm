@@ -1,10 +1,10 @@
 package ${package.Controller};
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -60,7 +60,7 @@ private ${cfg.baseEntityName}Mapper ${cfg.baseEntityName_firstLow}Mapper;
 private ${cfg.baseEntityName}Service ${cfg.baseEntityName_firstLow}Service;
 
 @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
-@ApiOperation(value = "分页查询(dto)->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "分页查询(dto)->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
         @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -86,14 +86,14 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos
         }
 
 
-@ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
 @PostMapping(value = "/getOneItemById")
 public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
         try{
     ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow}=${cfg.baseEntityName_firstLow}Mapper.selectById(${cfg.baseEntityName_firstLow}Id);
-        result.setBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
+        result.putBean(${cfg.baseEntityName}Transfer.transferEntityToVo(${cfg.baseEntityName_firstLow}));
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
@@ -101,7 +101,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletReque
         }
 
 
-@ApiOperation(value = "新增->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "新增->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
 @PostMapping(value = "/addByForm")
 public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
@@ -113,7 +113,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest re
         }else{
         addCount=${cfg.baseEntityName_firstLow}Service.dealAdd${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser);
         }
-        result.setCount(addCount);
+        result.putCount(addCount);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
@@ -121,7 +121,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest re
         }
 
 
-@ApiOperation(value = "更新->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "更新->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
 @PostMapping(value = "/updateByForm")
 public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
@@ -133,7 +133,7 @@ public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntity
         }else{
         changeCount=${cfg.baseEntityName_firstLow}Service.dealUpdate${cfg.baseEntityName}(${cfg.baseEntityName_firstLow}Vo,loginUser,false);
         }
-        result.setCount(changeCount);
+        result.putCount(changeCount);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
@@ -142,7 +142,7 @@ public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntity
 
 
 @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
-@ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = Long[].class),
 })
@@ -154,7 +154,7 @@ public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,
         if(delIds!=null&&delIds.length>0){
         delCount=${cfg.baseEntityName_firstLow}Service.dealDel${cfg.baseEntityName}ByArr(delIds,loginUser);
         }
-        result.setCount(delCount);
+        result.putCount(delCount);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }
@@ -163,7 +163,7 @@ public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,
 
 
 @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
-@ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = MyCommonResult.class, httpMethod = "POST")
+@ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),
 })
@@ -173,7 +173,7 @@ public MyCommonResult doDelOneById(HttpServletRequest request,String delId,@Curr
         try{
         if(StringUtils.isNotBlank(delId)){
         Integer delCount=${cfg.baseEntityName_firstLow}Service.dealDelOne(delId,loginUser);
-        result.setCount(delCount);
+        result.putCount(delCount);
         }
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);

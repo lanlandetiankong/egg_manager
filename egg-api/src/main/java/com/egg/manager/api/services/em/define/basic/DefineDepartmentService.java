@@ -2,7 +2,7 @@ package com.egg.manager.api.services.em.define.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -32,8 +32,8 @@ public interface DefineDepartmentService extends IService<DefineDepartmentEntity
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
-                                                           List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
 
     /**

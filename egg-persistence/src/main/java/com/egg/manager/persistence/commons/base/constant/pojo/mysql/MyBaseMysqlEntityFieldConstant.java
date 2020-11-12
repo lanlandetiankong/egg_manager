@@ -24,6 +24,10 @@ public interface MyBaseMysqlEntityFieldConstant {
      */
     EggPojoReflexFieldConfig<Short> STATE = new EggPojoReflexFieldConfig("state", Short.class, "state");
     /**
+     * 状态值
+     */
+    EggPojoReflexFieldConfig<Short> IS_DELETED = new EggPojoReflexFieldConfig("isDeleted", Short.class, "is_deleted");
+    /**
      * 创建时间
      */
     EggPojoReflexFieldConfig<Date> CREATE_TIME = new EggPojoReflexFieldConfig("createTime", Date.class, "create_time");

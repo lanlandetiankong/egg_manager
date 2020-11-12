@@ -99,8 +99,8 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo,JoinPoint joinPoint, HttpServletRequest request){
         try {
             EggClazzInfoLogMgo clazzInfoLog = new EggClazzInfoLogMgo();
-            if (logMgo.getStatus() == null) {
-                logMgo.setStatus(BaseStateEnum.ENABLED.getValue());
+            if (logMgo.getState() == null) {
+                logMgo.setState(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
             JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);

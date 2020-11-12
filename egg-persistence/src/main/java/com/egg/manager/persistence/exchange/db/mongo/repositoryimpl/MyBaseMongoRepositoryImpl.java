@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.exchange.db.mongo.repositoryimpl;
 
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
+import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.util.reflex.MyReflexUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
@@ -154,6 +155,24 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     }
 
     @Override
+    public <S extends T> S logicDeleteById(S s) {
+        //验证更新的[文档]不能为空
+        dealVerifyTypeNotNull(s, true);
+        //验证id不能为空
+        dealGetQueryWithId(s.getFid(), true);
+        Query query = dealGetQueryWithId(s.getFid(), true);
+        //MO转化为更新对象(不忽略null字段,忽略fid)
+        Update update = new Update().set(MongoModelFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
+        UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
+        if (result.getModifiedCount() != SingleUpdateMaxSize) {
+            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
+            log.error(errmsg);
+            throw new MyMongoException(errmsg);
+        }
+        return s;
+    }
+
+    @Override
     public <U extends UserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short status, U user) {
         //id迭代器 不能为空
         Query query = dealGetQueryWithIds(ids, true);
@@ -163,6 +182,22 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
+            log.error(errmsg);
+            throw new MyMongoException(errmsg);
+        }
+        return result.getModifiedCount();
+    }
+
+    @Override
+    public <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids,U user) {
+        //id迭代器 不能为空
+        Query query = dealGetQueryWithIds(ids, true);
+        int size = Lists.newArrayList(ids).size();
+        //MO转化为更新对象(不忽略null字段,忽略fid)
+        Update update = new Update().set(MongoModelFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
+        UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
+        if (result.getModifiedCount() != size) {
+            String errmsg = String.format("逻辑删除操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }

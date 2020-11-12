@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
@@ -183,8 +183,8 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
-                                                               List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -194,18 +194,18 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
         List<DefineMenuEntity> defineMenuEntities = iPage.getRecords();
-        result.setResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
+        result.putResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<DefineMenuVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
-                                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.putResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
     }
 

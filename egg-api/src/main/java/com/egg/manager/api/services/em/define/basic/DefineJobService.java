@@ -2,7 +2,7 @@ package com.egg.manager.api.services.em.define.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -31,8 +31,8 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
-                                                       List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 职务定义 dto列表
@@ -44,8 +44,8 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineJobVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
-                                                    List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 职务账号-新增

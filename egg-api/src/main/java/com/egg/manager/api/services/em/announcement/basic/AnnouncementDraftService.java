@@ -2,7 +2,7 @@ package com.egg.manager.api.services.em.announcement.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -47,10 +47,10 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * @param queryFieldBeanList
      * @param paginationBean
      * @param sortBeans
-     * @return MyCommonResult<AnnouncementDraftVo>
+     * @return WebResult
      */
-    MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
-                                                            List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 公告草稿-发布

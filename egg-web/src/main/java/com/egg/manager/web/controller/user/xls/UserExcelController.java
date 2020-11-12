@@ -9,7 +9,7 @@ import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.services.em.user.xls.UserAccountXlsService;
 import com.egg.manager.api.trait.excel.listeners.introduce.user.UserAccountXlsIntroduceListener;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -61,7 +61,7 @@ public class UserExcelController extends BaseController {
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, Long[] checkIds
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
@@ -80,7 +80,7 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
@@ -95,12 +95,12 @@ public class UserExcelController extends BaseController {
     }
 
 
-    @ApiOperation(value = "导入->excel文件", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "导入->excel文件", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/importData")
     @ResponseBody
-    public MyCommonResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
-                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
+                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUserInfo, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccountEntity>());

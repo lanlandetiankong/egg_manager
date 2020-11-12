@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -40,8 +40,8 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
-                                                              List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 权限定义 dto列表
@@ -53,8 +53,8 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
-                                                           List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 权限定义-新增

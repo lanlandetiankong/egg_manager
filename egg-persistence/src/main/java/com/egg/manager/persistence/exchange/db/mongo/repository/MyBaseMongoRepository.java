@@ -79,6 +79,14 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
     <S extends T> S updateStatusById(S s, Short status);
 
     /**
+     * 更新[文档]的Status
+     * @param s
+     * @param <S>
+     * @return
+     */
+    <S extends T> S logicDeleteById(S s);
+
+    /**
      * 批量更新[文档]的Status
      * @param ids   要更新的文档ids
      * @param state 修改值
@@ -86,6 +94,14 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * @return
      */
     <U extends UserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
+
+    /**
+     * 批量伪删除[文档]
+     * @param ids   要伪删除的文档ids
+     * @param user  用户
+     * @return
+     */
+    <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids,U user);
 
 
     /**

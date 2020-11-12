@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.define.DefineJobTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -29,10 +29,10 @@ import java.util.List;
 @RequestMapping("/commonApi/user")
 public class UserCommonController extends BaseController {
 
-    @ApiOperation(value = "查询枚举->用户类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserTypeEnumList")
-    public MyCommonResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -41,22 +41,22 @@ public class UserCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询枚举->用户锁类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->用户锁类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserLockStateEnumList")
-    public MyCommonResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             List<FrontSelectBean> beanList = new ArrayList<>();
             beanList.add(new FrontSelectBean(0, "未锁定"));
             beanList.add(new FrontSelectBean(1, "已锁定"));
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -64,10 +64,10 @@ public class UserCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询枚举->职务类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->职务类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
-    public MyCommonResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class UserCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

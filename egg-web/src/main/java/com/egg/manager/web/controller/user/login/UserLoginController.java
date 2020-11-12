@@ -7,7 +7,7 @@ import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -79,17 +79,17 @@ public class UserLoginController extends BaseController {
 
 
     @PcWebLoginLog(fullPath = "/user/login/loginByForm")
-    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo", value = "要登录用户的相关信息", required = true, dataTypeClass = LoginAccountVo.class),
     })
     @ShiroPass
     @PostMapping(value = "/loginByForm")
-    public MyCommonResult<UserAccountEntity> doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
-                                                                   @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
+    public WebResult doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
+                                           @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccountEntity loginUser
     ) {
-        MyCommonResult<UserAccountEntity> result = MyCommonResult.gainQueryResult(UserAccountEntity.class);
+        WebResult result = WebResult.gainQueryResult(UserAccountEntity.class);
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
@@ -123,7 +123,7 @@ public class UserLoginController extends BaseController {
                 //redis30分钟过期
                 this.dealSetTokenToRedis(loginUser, userAccountToken, result);
                 //返回给前端 jwt jwt值
-                result.setAuthorization(authorization);
+                result.putAuthorization(authorization);
             }
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -138,7 +138,7 @@ public class UserLoginController extends BaseController {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public void dealSetTokenToRedis(UserAccountEntity loginUser, UserAccountToken userAccountToken, MyCommonResult result) throws InvocationTargetException, IllegalAccessException {
+    public void dealSetTokenToRedis(UserAccountEntity loginUser, UserAccountToken userAccountToken, WebResult result) throws InvocationTargetException, IllegalAccessException {
         //将用户 token 分别存入到redis
         Long userAccountId = userAccountToken.getUserAccountId();
         if (userAccountToken != null && userAccountId != null && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {

@@ -9,7 +9,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
 import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -48,8 +48,8 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     private AnnouncementTagMapper announcementTagMapper;
 
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
-                                                                    List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -59,17 +59,17 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = announcementTagMapper.selectPage(page, announcementTagEntityWrapper);
         List<AnnouncementTagEntity> announcementTagEntities = iPage.getRecords();
-        result.setResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTagEntities));
+        result.putResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTagEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
-                                                                 List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
+        result.putResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
         return result;
     }
 
@@ -107,7 +107,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
 
     @Override
-    public MyCommonResult dealResultListToEnums(MyCommonResult result) {
+    public WebResult dealResultListToEnums(WebResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<AnnouncementTagVo> resultList = result.getResultList();
         if (CollectionUtil.isNotEmpty(resultList)) {
@@ -115,7 +115,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
                 enumList.add(new FrontEntitySelectBean<Long>(announcementTagVo.getFid(), announcementTagVo.getName()));
             }
         }
-        result.setEnumList(enumList);
+        result.putEnumList(enumList);
         return result;
     }
 }

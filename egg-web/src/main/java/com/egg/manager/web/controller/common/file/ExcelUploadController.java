@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -41,10 +41,10 @@ public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传/模板->excel", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/模板->excel", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 

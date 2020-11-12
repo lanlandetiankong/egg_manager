@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
@@ -87,8 +87,8 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
-                                                        List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 菜单定义 dto列表
@@ -100,8 +100,8 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineMenuVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineMenuVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
-                                                     List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 菜单定义-新增

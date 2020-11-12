@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.commons.base.constant.define.DefineDepartmentConstant;
@@ -40,12 +40,12 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public MyCommonResult<DefineDepartmentVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineDepartmentVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
-                                                                  List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }
 

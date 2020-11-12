@@ -1,6 +1,6 @@
 package com.egg.manager.web.enhance.advice;
 
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;
@@ -62,7 +62,7 @@ public class MyControllerAdvice {
      */
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public MyCommonResult errorHandle(Exception ex) {
+    public WebResult errorHandle(Exception ex) {
         ex.printStackTrace();
         log.error("接口异常：{}", ex.getMessage());
         return MyResponseHelper.handleRequestFailure(ex, "");
@@ -76,14 +76,14 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
-    public MyCommonResult handleUnauthorized(MyUnauthorizedException e) {
+    public WebResult handleUnauthorized(MyUnauthorizedException e) {
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
-    public MyCommonResult handleShiroException(ShiroException e) {
+    public WebResult handleShiroException(ShiroException e) {
         e.printStackTrace();
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
     }
@@ -91,7 +91,7 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
-    public MyCommonResult handleBusinessException(BusinessException e) {
+    public WebResult handleBusinessException(BusinessException e) {
         if (e instanceof BusinessException) {
             log.error("数据操作失败：" + e.getMessage());
             return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
@@ -103,7 +103,7 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
-    public MyCommonResult handleParamJsonException(Exception e) {
+    public WebResult handleParamJsonException(Exception e) {
         if (e instanceof MyParamJsonException) {
             log.info("参数错误：" + e.getMessage());
             return MyResponseHelper.handleRequestFailure(e, "参数错误");
@@ -120,13 +120,13 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BindException.class)
     @ResponseBody
-    public MyCommonResult handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public WebResult handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         BindException c = (BindException) ex;
         List<ObjectError> errors = c.getBindingResult().getAllErrors();
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:");
         errors.stream().forEach(x -> errorMsg.append(x.getDefaultMessage()));
         log.error(errorMsg.toString());
-        return MyCommonResult.gainErrorResult(errorMsg.toString());
+        return WebResult.gainErrorResult(errorMsg.toString());
     }
 
     /**
@@ -138,7 +138,7 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ServletRequestBindingException.class)
     @ResponseBody
-    public MyCommonResult handleMethodArgumentNotValidException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public WebResult handleMethodArgumentNotValidException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         ServletRequestBindingException extException = (ServletRequestBindingException) ex;
         StringBuffer errorMsg = new StringBuffer("参数异常信息：");
         //参数值为空
@@ -150,7 +150,7 @@ public class MyControllerAdvice {
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
         log.error(errorMsg.toString());
-        return MyCommonResult.gainErrorResult(errorMsg.toString());
+        return WebResult.gainErrorResult(errorMsg.toString());
     }
 
 
@@ -163,11 +163,11 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(LoginFormFieldDeficiencyException.class)
     @ResponseBody
-    public MyCommonResult handleLoginFormFieldDeficiencyException(LoginFormFieldDeficiencyException ex, HttpServletRequest request, HttpServletResponse response) {
+    public WebResult handleLoginFormFieldDeficiencyException(LoginFormFieldDeficiencyException ex, HttpServletRequest request, HttpServletResponse response) {
         LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:" + c.getMessage());
         log.error(errorMsg.toString());
-        return MyCommonResult.gainErrorResult(errorMsg.toString());
+        return WebResult.gainErrorResult(errorMsg.toString());
     }
 
     public Integer getStatusCodeByException(Exception ex) {

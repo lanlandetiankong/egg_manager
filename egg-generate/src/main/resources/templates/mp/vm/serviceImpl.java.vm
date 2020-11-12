@@ -59,7 +59,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         Integer total= ${cfg.baseEntityName_firstLow}Mapper.selectCount(${cfg.baseEntityName_firstLow}QueryWrapper);
         result.myAntdvPaginationBeanSet(paginationBean,total);
         List<${cfg.baseEntityName}> ${cfg.baseEntityName_firstLow}s= ${cfg.baseEntityName_firstLow}Mapper.selectPage(rowBounds,${cfg.baseEntityName_firstLow}QueryWrapper);
-        result.setResultList(${cfg.baseEntityName}Transfer.transferEntityToVoList(${cfg.baseEntityName_firstLow}s));
+        result.putResultList(${cfg.baseEntityName}Transfer.transferEntityToVoList(${cfg.baseEntityName_firstLow}s));
         return result;
         }
 
@@ -70,7 +70,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         Pagination mpPagination=super.dealAntvPageToPagination(paginationBean);
         List<${cfg.baseEntityName}Dto> ${cfg.baseEntityName_firstLow}DtoList= ${cfg.baseEntityName_firstLow}Mapper.selectQueryPage(mpPagination,queryFieldBeanList,sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
-        result.setResultList(${cfg.baseEntityName}Transfer.transferDtoToVoList(${cfg.baseEntityName_firstLow}DtoList));
+        result.putResultList(${cfg.baseEntityName}Transfer.transferDtoToVoList(${cfg.baseEntityName_firstLow}DtoList));
         return result;
         }
 
@@ -112,7 +112,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         @Transactional(rollbackFor=Exception.class)
         @Override
         public Integer dealDel${cfg.baseEntityName}(String delId,UserAccount loginUser)throws Exception{
-    ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build();
+    ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}.builder().fid(delId).state(BaseStateEnum.DISABLED.getValue()).build();
         if(loginUser!=null){
     ${cfg.baseEntityName_firstLow}.setLastModifyerId(loginUser.getFid());
         }

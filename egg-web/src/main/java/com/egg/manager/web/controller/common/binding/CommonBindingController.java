@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.web.controller.BaseController;
@@ -28,10 +28,10 @@ import java.util.List;
 @RequestMapping("/commonApi/binding")
 public class CommonBindingController extends BaseController {
 
-    @ApiOperation(value = "查询枚举->开关", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->开关", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
-    public MyCommonResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -40,7 +40,7 @@ public class CommonBindingController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getName()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

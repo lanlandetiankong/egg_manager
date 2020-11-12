@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.em.forms.mongo.smartform;
 
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +20,5 @@ public interface SmartFormTypeDefinitionMgoService extends MyBaseMgoService<Smar
      * @param list
      * @return
      */
-    MyCommonResult<SmartFormTypeDefinitionMgo> dealResultListToEnums(MyCommonResult<SmartFormTypeDefinitionMgo> result, List<SmartFormTypeDefinitionMgo> list);
+    WebResult dealResultListToEnums(WebResult result, List<SmartFormTypeDefinitionMgo> list);
 }

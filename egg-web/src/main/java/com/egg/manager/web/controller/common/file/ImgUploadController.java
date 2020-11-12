@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -40,10 +40,10 @@ public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
-    @ApiOperation(value = "上传/图片->头像", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "上传/图片->头像", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
-    public MyCommonResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());

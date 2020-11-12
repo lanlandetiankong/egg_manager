@@ -12,6 +12,7 @@ public class MongoModelFieldConstant implements Serializable {
     public static final String FIELD_FID = "fid";
     public static final String FIELD_ORDERNUM = "orderNum";
     public static final String FIELD_STATUS = "status";
+    public static final String FIELD_ISDELETED = "isDeleted";
 
     public static final String FIELD_CREATETIME = "createTime";
     public static final String FIELD_CREATEUSERID = "createUserId";

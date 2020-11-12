@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.log.pc.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.log.basic.pc.web.PcWebOperationLogMgoService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
@@ -46,18 +46,18 @@ public class PcWebOperationLogController extends BaseController {
     private PcWebOperationLogMgoService pcWebOperationLogMgoService;
 
     @PcWebQueryLog(fullPath = "/log/pc/web/operationLog/getDataPage",flag=false)
-    @ApiOperation(value = "分页查询->PcWeb操作接口日志", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->PcWeb操作接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public MyCommonResult<PcWebOperationLogMgo> doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<PcWebOperationLogMgo> result = MyCommonResult.gainQueryResult(PcWebOperationLogMgo.class);
+    public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(PcWebOperationLogMgo.class);
         try {
             //添加状态过滤,时间倒序排序
-            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
+            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);

@@ -11,7 +11,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.services.em.user.basic.UserGroupService;
 import com.egg.manager.api.services.em.user.basic.UserJobService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -85,8 +85,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
-                                                                List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -96,13 +96,13 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
-        result.setResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
+        result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<UserAccountVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
-                                                             List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
         //用户与租户关联 的外表-搜索条件
@@ -127,7 +127,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp, sortBeans, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
+        result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }
 
@@ -282,7 +282,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
                 }
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
@@ -340,7 +340,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
                 }
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行

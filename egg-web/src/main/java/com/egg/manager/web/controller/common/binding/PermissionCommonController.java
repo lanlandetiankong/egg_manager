@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.common.binding;
 
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissionTypeEnum;
@@ -29,10 +29,10 @@ import java.util.List;
 @RequestMapping("/commonApi/permission")
 public class PermissionCommonController extends BaseController {
 
-    @ApiOperation(value = "查询枚举->权限类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
-    public MyCommonResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -41,17 +41,17 @@ public class PermissionCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询枚举->角色类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->角色类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllRoleTypeEnumList")
-    public MyCommonResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class PermissionCommonController extends BaseController {
                     beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
                 }
             }
-            result.setEnumList(beanList);
+            result.putEnumList(beanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -68,10 +68,10 @@ public class PermissionCommonController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询枚举->权限Code前缀类型", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询枚举->权限Code前缀类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
-    public MyCommonResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainEnumResult();
+    public WebResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
+        WebResult result = WebResult.gainEnumResult();
         try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -84,8 +84,8 @@ public class PermissionCommonController extends BaseController {
                     }
                 }
             }
-            result.setEnumList(beanList);
-            result.setEnumDefaultCheckList(defaultCheckList);
+            result.putEnumList(beanList);
+            result.putEnumDefaultCheckList(defaultCheckList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

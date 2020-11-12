@@ -1,7 +1,7 @@
 package com.egg.manager.web.controller.common.component.user;
 
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -43,16 +43,16 @@ public class UserAccountCommonCompController extends BaseController {
 
 
     @PcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
-    @ApiOperation(value = "通用组件?分页查询(dto)->用户账号", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "通用组件?分页查询(dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public MyCommonResult<UserAccountVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<UserAccountVo> result = MyCommonResult.gainQueryResult(UserAccountVo.class);
+    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(UserAccountVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

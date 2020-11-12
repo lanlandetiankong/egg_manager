@@ -11,7 +11,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserRoleService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
@@ -165,8 +165,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
-                                                               List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -176,18 +176,18 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         result.myAntdvPaginationBeanSet(paginationBean, new Long(total));
         IPage iPage = defineRoleMapper.selectPage(page, defineRoleEntityWrapper);
         List<DefineRoleEntity> defineRoleEntities = iPage.getRecords();
-        result.setResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
+        result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<DefineRoleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
-                                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
+        result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
         return result;
     }
 

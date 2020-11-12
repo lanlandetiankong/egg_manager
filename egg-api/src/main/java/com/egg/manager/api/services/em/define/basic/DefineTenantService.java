@@ -2,7 +2,7 @@ package com.egg.manager.api.services.em.define.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -32,8 +32,8 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineTenantVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
-                                                       List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 租户定义-新增
@@ -59,7 +59,7 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
      * @param result
      * @return
      */
-    MyCommonResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, MyCommonResult result);
+    WebResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, WebResult result);
 
     /**
      * 租户设置管理员

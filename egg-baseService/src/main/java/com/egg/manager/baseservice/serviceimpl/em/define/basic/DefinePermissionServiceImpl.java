@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -66,8 +66,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public MyCommonResult<DefinePermissionVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
-                                                                     List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -77,17 +77,17 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = definePermissionMapper.selectPage(page, queryWrapper);
         List<DefinePermissionEntity> definePermissionEntities = iPage.getRecords();
-        result.setResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
+        result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<DefinePermissionVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefinePermissionVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
-                                                                  List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
+        result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result;
     }
 

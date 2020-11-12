@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
@@ -62,7 +62,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, MyCommonResult<V> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
                                                  List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();

@@ -3,7 +3,7 @@ package com.egg.manager.web.controller;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
@@ -61,7 +61,7 @@ public class BaseController {
     }
 
 
-    public <T> void respResultJsonToFront(Logger logger, HttpServletResponse response, MyCommonResult<T> result) {
+    public <T> void respResultJsonToFront(Logger logger, HttpServletResponse response, WebResult result) {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -74,10 +74,10 @@ public class BaseController {
         }
     }
 
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e) {
+    public void dealCommonErrorCatch(Logger logger, WebResult result, Exception e) {
         dealCommonErrorCatch(logger, result, e, this.actionFailMsg, true, true);
     }
-    private void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg) {
+    private void dealCommonErrorCatch(Logger logger, WebResult result, Exception e, String errorMsg) {
         dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
     }
 
@@ -87,8 +87,8 @@ public class BaseController {
      * @param errorMsg 异常信息
      * @param isAppend appendMsg是否追加到 errorMsg 后面
      */
-    public void dealCommonErrorCatch(Logger logger, MyCommonResult result, Exception e, String errorMsg, boolean isAppend, boolean isPrintStackTrace) {
-        result.setHasError(true);
+    public void dealCommonErrorCatch(Logger logger, WebResult result, Exception e, String errorMsg, boolean isAppend, boolean isPrintStackTrace) {
+        result.putHasError(true);
         String errmsg = null;
         if (isAppend) {
             errmsg = (StringUtils.isBlank(errorMsg) ? "" : errorMsg) + e.getMessage();
@@ -100,16 +100,16 @@ public class BaseController {
             e.printStackTrace();
         }
         //清空信息
-        result.setMsg(errmsg);
+        result.putMsg(errmsg);
         if (e instanceof MyAuthenticationExpiredException) {
-            result.setErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
+            result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }
     }
 
 
-    public void dealSetMongoPageResult(MyCommonResult result, MyMongoQueryPageBean pageBean) {
-        result.setResultList(pageBean.getContent());
-        result.setCount(pageBean.getTotal());
+    public void dealSetMongoPageResult(WebResult result, MyMongoQueryPageBean pageBean) {
+        result.putResultList(pageBean.getContent());
+        result.putCount(pageBean.getTotal());
     }
 
 

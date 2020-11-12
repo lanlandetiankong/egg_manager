@@ -2,7 +2,7 @@ package com.egg.manager.api.services.em.announcement.basic;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -32,8 +32,8 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
      * @param sortBeans
      * @return
      */
-    MyCommonResult<AnnouncementTagVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
-                                                             List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 公告标签 dto列表
@@ -45,8 +45,8 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
      * @param sortBeans
      * @return
      */
-    MyCommonResult<AnnouncementTagVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementTagVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
-                                                          List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /***
      * 查询可用的 公告标签 并转为map
@@ -78,5 +78,5 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
      * @param result
      * @return
      */
-    MyCommonResult dealResultListToEnums(MyCommonResult result);
+    WebResult dealResultListToEnums(WebResult result);
 }

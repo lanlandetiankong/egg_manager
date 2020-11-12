@@ -5,7 +5,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.RoleMenuService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
@@ -75,16 +75,16 @@ public class DefineRoleController extends BaseController {
 
 
     @PcWebOperationLog(fullPath = "/define/defineRole/queryPage")
-    @ApiOperation(value = "分页查询->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryPage")
-    public MyCommonResult<DefineRoleVo> queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class);
+    public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                               @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineRoleVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -101,16 +101,16 @@ public class DefineRoleController extends BaseController {
     }
 
     @PcWebOperationLog(fullPath = "/define/defineRole/queryDtoPage")
-    @ApiOperation(value = "分页查询(dto)->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(dto)->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public MyCommonResult<DefineRoleVo> queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class);
+    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineRoleVo.class);
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -127,27 +127,27 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "根据id查询->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "根据id查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public MyCommonResult<DefineRoleVo> queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineRoleVo> result = MyCommonResult.gainQueryResult(DefineRoleVo.class);
+    public WebResult queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineRoleVo.class);
         try {
             DefineRoleEntity defineRoleEntity = defineRoleMapper.selectById(defineRoleId);
-            result.setBean(DefineRoleTransfer.transferEntityToVo(defineRoleEntity));
+            result.putBean(DefineRoleTransfer.transferEntityToVo(defineRoleEntity));
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
         return result;
     }
 
-    @ApiOperation(value = "查询已获授权/角色->权限定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询已获授权/角色->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/gainAllPermissionByRoleId")
-    public MyCommonResult<DefinePermissionEntity> gainAllPermissionByRoleId(HttpServletRequest request, Long defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefinePermissionEntity> result = MyCommonResult.gainQueryResult(DefinePermissionEntity.class);
+    public WebResult gainAllPermissionByRoleId(HttpServletRequest request, Long defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefinePermissionEntity.class);
         try {
             List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
-            result.setResultList(definePermissionEntityList);
+            result.putResultList(definePermissionEntityList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -155,11 +155,11 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "查询已获授权/角色->菜单定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "查询已获授权/角色->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/gainAllMenuByRoleId")
-    public MyCommonResult<DefineMenuEntity> gainAllMenuByRoleId(HttpServletRequest request, Long defineRoleId, Boolean filterParentNode,
-                                                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult<DefineMenuEntity> result = MyCommonResult.gainQueryResult(DefineMenuEntity.class);
+    public WebResult gainAllMenuByRoleId(HttpServletRequest request, Long defineRoleId, Boolean filterParentNode,
+                                         @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainQueryResult(DefineMenuEntity.class);
         try {
             List<DefineMenuEntity> defineMenuEntityList = null;
             if (Boolean.TRUE.equals(filterParentNode)) {
@@ -168,7 +168,7 @@ public class DefineRoleController extends BaseController {
             } else {
                 defineMenuEntityList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
             }
-            result.setResultList(defineMenuEntityList);
+            result.putResultList(defineMenuEntityList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -176,15 +176,15 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "新增->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "新增->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
-    public MyCommonResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer addCount = 0;
         try {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = defineRoleService.dealCreate(loginUserInfo, defineRoleVo);
-            result.setCount(addCount);
+            result.putCount(addCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -192,16 +192,16 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
-    public MyCommonResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer changeCount = 0;
         try {
             Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
             changeCount = defineRoleService.dealUpdate(loginUserInfo, defineRoleVo);
-            result.setCount(changeCount);
+            result.putCount(changeCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -209,19 +209,19 @@ public class DefineRoleController extends BaseController {
     }
 
     @PcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量伪删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public MyCommonResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
             delCount = defineRoleService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.setCount(delCount);
+            result.putCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -229,18 +229,18 @@ public class DefineRoleController extends BaseController {
     }
 
     @PcWebOperationLog(fullPath = "/define/defineRole/deleteById")
-    @ApiOperation(value = "伪删除->角色定义", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "伪删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public MyCommonResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
             Integer delCount = defineRoleService.dealLogicDeleteById(loginUserInfo, delId);
-            result.setCount(delCount);
+            result.putCount(delCount);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -248,14 +248,14 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新授权->角色+权限", notes = "为角色分配权限", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新授权->角色+权限", notes = "为角色分配权限", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantPermissionToRole")
-    public MyCommonResult doGrantPermissionToRole(HttpServletRequest request, Long roleId, Long[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult doGrantPermissionToRole(HttpServletRequest request, Long roleId, Long[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
             Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
-            result.setCount(count);
+            result.putCount(count);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -263,11 +263,11 @@ public class DefineRoleController extends BaseController {
     }
 
 
-    @ApiOperation(value = "更新授权->角色+菜单", notes = "为角色设置可访问菜单", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "更新授权->角色+菜单", notes = "为角色设置可访问菜单", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantMenusToRole")
-    public MyCommonResult doGrantMenusToRole(HttpServletRequest request, Long roleId, Long[] checkIds, Long[] halfCheckIds,
-                                             @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult doGrantMenusToRole(HttpServletRequest request, Long roleId, Long[] checkIds, Long[] halfCheckIds,
+                                        @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
 

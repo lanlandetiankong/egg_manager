@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineModuleService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -42,8 +42,8 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
 
     @Override
-    public MyCommonResult<DefineModuleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleEntity> paginationBean,
-                                                                 List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //解析 搜索条件
         QueryWrapper<DefineModuleEntity> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 分页配置
@@ -53,18 +53,18 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineModuleMapper.selectPage(page, defineModuleEntityWrapper);
         List<DefineModuleEntity> defineModuleEntities = iPage.getRecords();
-        result.setResultList(DefineModuleTransfer.transferEntityToVoList(defineModuleEntities));
+        result.putResultList(DefineModuleTransfer.transferEntityToVoList(defineModuleEntities));
         return result;
     }
 
 
     @Override
-    public MyCommonResult<DefineModuleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineModuleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
-                                                              List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineModuleDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
+        result.putResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
         return result;
     }
 

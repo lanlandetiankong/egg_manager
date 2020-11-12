@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -79,8 +79,8 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
-                                                        List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 角色定义 列表
@@ -92,8 +92,8 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * @param sortBeans
      * @return
      */
-    MyCommonResult<DefineRoleVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineRoleVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
-                                                     List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 角色定义-新增

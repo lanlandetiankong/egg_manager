@@ -2,7 +2,7 @@ package com.egg.manager.web.controller.index.hello.message.email;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
@@ -32,11 +32,11 @@ public class HelloMailController extends BaseController {
     @Reference
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
-    @ApiOperation(value = "测试发送消息", response = MyCommonResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "测试发送消息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
-    public MyCommonResult doGetDefineModuleById(HttpServletRequest request) {
-        MyCommonResult result = MyCommonResult.gainOperationResult();
+    public WebResult doGetDefineModuleById(HttpServletRequest request) {
+        WebResult result = WebResult.gainOperationResult();
         try {
             String[] receiveEmails = new String[]{"2773756340@qq.com"};
             EmailSendRecordMgvo emailDto = EmailSendRecordMgvo.builder().subject("邮件标题123")

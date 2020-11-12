@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineTenantService;
 import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -50,12 +50,12 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public MyCommonResult<DefineTenantVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineTenantVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
-                                                              List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
+        result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
         return result;
     }
 
@@ -80,7 +80,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public MyCommonResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, MyCommonResult result) {
+    public WebResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, WebResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getResultList();
         if (CollectionUtil.isNotEmpty(resultList)) {
@@ -88,7 +88,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                 enumList.add(new FrontEntitySelectBean<Long>(defineTenantVo.getFid(), defineTenantVo.getName()));
             }
         }
-        result.setEnumList(enumList);
+        result.putEnumList(enumList);
         return result;
     }
 

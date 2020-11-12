@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineJobService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -40,8 +40,8 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
 
     @Override
-    public MyCommonResult<DefineJobVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
-                                                              List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -51,17 +51,17 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
         IPage iPage = defineJobMapper.selectPage(page, queryWrapper);
         List<DefineJobEntity> defineJobEntities = iPage.getRecords();
-        result.setResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntities));
+        result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntities));
         return result;
     }
 
     @Override
-    public MyCommonResult<DefineJobVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<DefineJobVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
-                                                           List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         Page<DefineJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.putResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }
 

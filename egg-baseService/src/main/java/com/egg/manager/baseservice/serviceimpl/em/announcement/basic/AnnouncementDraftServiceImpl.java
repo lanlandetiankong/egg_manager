@@ -8,7 +8,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -53,14 +53,14 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public MyCommonResult<AnnouncementDraftVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementDraftVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
-                                                                   List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList, announcementTagMap));
+        result.putResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList, announcementTagMap));
         return result;
     }
 

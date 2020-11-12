@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.user.basic;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
@@ -46,8 +46,8 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
-                                                         List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+                                     List<AntdvSortBean> sortBeans);
 
     /**
      * 分页查询 用户 Dto列表
@@ -59,8 +59,8 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @param sortBeans
      * @return
      */
-    MyCommonResult<UserAccountVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<UserAccountVo> result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
-                                                      List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
+                                  List<AntdvSortBean> sortBeans);
 
     /**
      * 用户账号-新增

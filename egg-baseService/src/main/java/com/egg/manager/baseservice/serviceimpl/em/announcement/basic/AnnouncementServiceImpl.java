@@ -10,7 +10,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
-import com.egg.manager.persistence.commons.base.beans.helper.MyCommonResult;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
@@ -58,8 +58,8 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementEntity> paginationBean,
-                                                                 List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementEntity> paginationBean,
+                                            List<AntdvSortBean> sortBeans) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
@@ -71,20 +71,20 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         List<AnnouncementEntity> announcementEntities = iPage.getRecords();
         //取得 公告标签 map
         Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
-        result.setResultList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
+        result.putResultList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
         return result;
     }
 
     @Override
-    public MyCommonResult<AnnouncementVo> dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, MyCommonResult<AnnouncementVo> result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
-                                                              List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
+                                         List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
         Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
 
         Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
-        result.setResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
+        result.putResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
         return result;
     }
 

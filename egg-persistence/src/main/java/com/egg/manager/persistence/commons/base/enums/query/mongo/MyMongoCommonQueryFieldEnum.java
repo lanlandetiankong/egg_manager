@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.commons.base.enums.query.mongo;
 
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 
 /**
  * @author zhoucj
@@ -11,7 +12,8 @@ public enum MyMongoCommonQueryFieldEnum {
     Status_Eq_Enable("status", MyMongoQueryMatchingEnum.EqualsMatch, "", BaseStateEnum.ENABLED.getValue()),
     Status_Eq_Disabled("status", MyMongoQueryMatchingEnum.EqualsMatch, "", BaseStateEnum.DISABLED.getValue()),
     Status_NotEq_Disabled("status", MyMongoQueryMatchingEnum.NotEqualsMatch, "", BaseStateEnum.DISABLED.getValue()),
-    Status_NotEq_Delete("status", MyMongoQueryMatchingEnum.NotEqualsMatch, "", BaseStateEnum.DELETE.getValue()),
+    IsDeleted_Eq_Yes("is_deleted", MyMongoQueryMatchingEnum.EqualsMatch, "", SwitchStateEnum.Open.getValue()),
+    IsDeleted_Eq_Not("is_deleted", MyMongoQueryMatchingEnum.EqualsMatch, "", SwitchStateEnum.Close.getValue()),
     ;
 
     MyMongoCommonQueryFieldEnum(String fieldName, MyMongoQueryMatchingEnum queryMatchingEnum, String foreignName, Object value) {

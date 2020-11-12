@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
@@ -93,8 +94,9 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
             throw new MyMongoException("不存在的数据!");
         }
         dealUpdateSetLoginUserToMO(loginUser, t);
-        t.setStatus(BaseStateEnum.DELETE.getValue());
-        baseRepository.updateStatusById(t, BaseStateEnum.DELETE.getValue());
+        t.setIsDeleted(SwitchStateEnum.Open.getValue());
+        t.setDeletedTime(new Date());
+        baseRepository.logicDeleteById(t);
         return new Long(++count);
     }
 
@@ -105,8 +107,9 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
             throw new MyMongoException("不存在的数据!");
         }
         dealUpdateSetLoginUserToMO(loginUser, t);
-        t.setStatus(BaseStateEnum.DELETE.getValue());
-        baseRepository.delete(t);
+        t.setIsDeleted(SwitchStateEnum.Open.getValue());
+        t.setDeletedTime(new Date());
+        baseRepository.logicDeleteById(t);
         return new Long(++count);
     }
 
@@ -115,7 +118,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
         if (iterableList == null) {
             throw new MyMongoException("集合为空!");
         }
-        return baseRepository.batchChangeStatusByIds(iterableList, BaseStateEnum.DELETE.getValue(), loginUser);
+        return baseRepository.batchLogicDelete(iterableList,loginUser);
     }
 
     @Override

@@ -251,7 +251,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 }
                 if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
-                    rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                    rolePermissionMapper.batchUpdateStateByRole(roleId, disabledIds, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
                 }
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行

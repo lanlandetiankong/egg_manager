@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.egg.manager.api.config.db.mybatis.plus.EggMpSqlMethod;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlEntityFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
@@ -18,7 +19,7 @@ public class FakeDeleteByIdMethod extends AbstractMethod {
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         EggMpSqlMethod sqlMethod = EggMpSqlMethod.FAKE_DELETE_BY_ID;
-        String sql = String.format(sqlMethod.getSql(),tableInfo.getTableName(),MyBaseMysqlEntityFieldConstant.STATE.getColumnName(),BaseStateEnum.DELETE.getValue(),MyBaseMysqlEntityFieldConstant.FID.getColumnName());
+        String sql = String.format(sqlMethod.getSql(),tableInfo.getTableName(),MyBaseMysqlEntityFieldConstant.IS_DELETED.getColumnName(), SwitchStateEnum.Open.getValue(),MyBaseMysqlEntityFieldConstant.FID.getColumnName());
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
         return addUpdateMappedStatement(mapperClass,modelClass,sqlMethod.getMethod(), sqlSource);
     }

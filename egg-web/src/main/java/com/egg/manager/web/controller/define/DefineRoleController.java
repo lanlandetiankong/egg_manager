@@ -279,7 +279,8 @@ public class DefineRoleController extends BaseController {
 
             //在数据库中 关联分别为 enable、delete 状态
             Set<Long> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
-            Set<Long> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DELETE.getValue());
+            //TODO 是否可能被强制限制
+            Set<Long> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DISABLED.getValue());
             //所有 已经在数据库 有的关联行
             Set<Long> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
 
@@ -305,7 +306,7 @@ public class DefineRoleController extends BaseController {
             if (CollectionUtil.isNotEmpty(updateDelIdSet)) {
                 Iterator<String> delIter = updateDelIdSet.iterator();
                 List delIdList = Lists.newArrayList(delIter);
-                int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
             }
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

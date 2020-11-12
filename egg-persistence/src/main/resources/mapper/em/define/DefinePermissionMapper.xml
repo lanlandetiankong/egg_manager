@@ -121,7 +121,10 @@
         </include>
         FROM em_define_permission dp
         left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
-        WHERE rp.define_role_id = #{roleId} and rp.state = 1 and dp.ensure = 1
+        WHERE rp.define_role_id = #{roleId}
+        and rp.state = 1
+        and rp.is_deleted = 0
+        and dp.ensure = 1
     </select>
 
     <select id="findAllPermissionIdByRoleId" resultType="java.lang.Long">
@@ -133,6 +136,7 @@
             <if test="filterEnable == true">
                 and rp.state = 1
             </if>
+            and rp.is_deleted = 0
         </where>
 
     </select>
@@ -150,6 +154,9 @@
         and dp.state = 1
         and rp.state = 1
         and ur.state = 1
+        and dp.is_deleted = 0
+        and rp.is_deleted = 0
+        and ur.is_deleted = 0
         and dp.ensure = 1
     </select>
 

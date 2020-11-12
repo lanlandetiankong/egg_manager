@@ -97,5 +97,6 @@
         WHERE
         ur.user_account_id = #{userAccountId}
         and ur.state = #{stateVal}
+        and ur.is_deleted = 0
     </select>
 </mapper>

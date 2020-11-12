@@ -8,7 +8,6 @@ package com.egg.manager.persistence.commons.base.enums.base;
 public enum BaseStateEnum {
     ENABLED((short) 1, "启用", "启用"),
     DISABLED((short) 0, "禁用", "禁用"),
-    DELETE((short) -1, "删除", "删除"),
     LOCKED((short) -10, "锁定", "锁定");
 
     BaseStateEnum(Short value, String name, String info) {

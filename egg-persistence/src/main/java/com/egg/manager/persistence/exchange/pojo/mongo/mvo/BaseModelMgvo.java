@@ -1,5 +1,7 @@
 package com.egg.manager.persistence.exchange.pojo.mongo.mvo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import lombok.Data;
 
@@ -50,7 +52,7 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 状态
      */
-    private Short status;
+    private Short state;
     private Integer version;
 
     /**
@@ -87,4 +89,13 @@ public class BaseModelMgvo<K> extends BaseMgvo {
      * 计时器 输出信息
      */
     private String stopWatchPrint ;
+
+    /**
+     * 是否已经删除，0:否 1:是
+     */
+    private short isDeleted;
+    /**
+     * 数据删除时间
+     */
+    private Date deletedTime;
 }

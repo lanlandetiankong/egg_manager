@@ -66,8 +66,8 @@ public class MyBaseModelMgo<K> implements Serializable {
     /**
      * 状态
      */
-    @Field(value = "status")
-    private Short status;
+    @Field(value = "state")
+    private Short state;
 
     @Version
     @Field(value = "version")
@@ -120,4 +120,15 @@ public class MyBaseModelMgo<K> implements Serializable {
      */
     @Field(value = "stopWatchPrint")
     private String stopWatchPrint ;
+
+    /**
+     * 是否已经删除，0:否 1:是
+     */
+    @Field(value = "isDeleted")
+    private short isDeleted;
+    /**
+     * 数据删除时间
+     */
+    @Field(value = "deletedTime")
+    private Date deletedTime;
 }

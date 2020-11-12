@@ -97,6 +97,7 @@
         <if test="tenantState != null">
             AND edt.state = #{tenantState}
         </if>
+        and edt.is_deleted = 0
     </select>
 
 
@@ -120,6 +121,7 @@
             <if test="filterEnable == true">
                 and eut.state = 1
             </if>
+            and eut.is_deleted = 0
         </where>
 
     </select>

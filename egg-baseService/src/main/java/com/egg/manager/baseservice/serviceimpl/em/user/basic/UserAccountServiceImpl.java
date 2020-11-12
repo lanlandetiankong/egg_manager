@@ -282,7 +282,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
-                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                    userRoleMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
                 }
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
@@ -340,7 +340,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
                 if (CollectionUtil.isNotEmpty(disabledIds)) {
                     //批量禁用
-                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DELETE.getValue(), loginUserInfo);
+                    userJobMapper.batchUpdateStateByUserAccountId(userAccountId, disabledIds, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
                 }
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行

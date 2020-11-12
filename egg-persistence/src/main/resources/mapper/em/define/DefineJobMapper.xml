@@ -100,6 +100,7 @@
         WHERE
         uj.user_account_id = #{userAccountId}
         and uj.state = #{stateVal}
+        and uj.is_deleted = 0
     </select>
 
 </mapper>

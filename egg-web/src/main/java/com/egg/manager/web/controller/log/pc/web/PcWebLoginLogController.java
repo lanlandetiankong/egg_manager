@@ -57,7 +57,7 @@ public class PcWebLoginLogController extends BaseController {
         MyCommonResult<PcWebLoginLogMgo> result = MyCommonResult.gainQueryResult(PcWebLoginLogMgo.class);
         try {
             //添加状态过滤,时间倒序排序
-            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.Status_NotEq_Delete)
+            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);

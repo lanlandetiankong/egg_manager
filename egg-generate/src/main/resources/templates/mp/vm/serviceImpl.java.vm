@@ -112,7 +112,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         @Transactional(rollbackFor=Exception.class)
         @Override
         public Integer dealDel${cfg.baseEntityName}(String delId,UserAccount loginUser)throws Exception{
-    ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}.builder().fid(delId).state(BaseStateEnum.DELETE.getValue()).build();
+    ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}.builder().fid(delId).state(BaseStateEnum.DISABLED.getValue()).build();
         if(loginUser!=null){
     ${cfg.baseEntityName_firstLow}.setLastModifyerId(loginUser.getFid());
         }

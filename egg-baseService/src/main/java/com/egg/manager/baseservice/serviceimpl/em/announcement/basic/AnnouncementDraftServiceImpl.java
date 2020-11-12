@@ -114,7 +114,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
             //发布
             announcementMapper.insert(announcementEntity);
         }
-        announcementDraftEntity.setState(BaseStateEnum.DELETE.getValue());
+        announcementDraftEntity.setState(BaseStateEnum.DISABLED.getValue());
         announcementDraftEntity.setIsPublished(BaseStateEnum.ENABLED.getValue());
         if (loginUserInfo != null) {
             announcementDraftEntity.setLastModifyerId(loginUserInfo.getFid());

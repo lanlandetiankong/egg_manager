@@ -121,6 +121,7 @@
         <if test="onlyEnable == true">
             and dm.state = 1
         </if>
+        and dm.is_deleted = 0
         order by level,order_num,create_time desc
     </select>
 
@@ -161,6 +162,7 @@
         <if test="stateVal != null">
             and erm.state = #{stateVal}
         </if>
+        and erm.is_deleted = 0
     </select>
 
     <select id="getUserGrantedMenusByAccountId" resultMap="BaseResultMap">
@@ -177,6 +179,9 @@
         edm.state = 1
         AND erm.state = 1
         AND eur.state = 1
+        and edm.is_deleted = 0
+        and erm.is_deleted = 0
+        and eur.is_deleted = 0
         AND eua.fid = #{userAccountId}
         order by level,order_num,create_time
     </select>
@@ -194,6 +199,7 @@
         <if test="stateVal != null">
             and erm.state = #{stateVal}
         </if>
+        and erm.is_deleted = 0
     </select>
 
 

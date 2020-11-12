@@ -143,7 +143,7 @@ public class UserLoginController extends BaseController {
         Long userAccountId = userAccountToken.getUserAccountId();
         if (userAccountToken != null && userAccountId != null && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
-            Object oldAuthorization = redisHelper.hashGet(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountId);
+            Object oldAuthorization = redisHelper.hashGet(RedisShiroCacheEnum.userAuthorization.getKey(), String.valueOf(userAccountId));
             if (oldAuthorization != null && jwtSsoFlag) {
                 //根据用户id取得 当前用户的 Authorization 值，清理之前的缓存，删除后就类似于[单点登录] ,jwtSsoFlag由application.properties 配置取得
                 String userAuthorization = (String) oldAuthorization;
@@ -159,7 +159,7 @@ public class UserLoginController extends BaseController {
             }
             String authorization = userAccountToken.getAuthorization();
             //设置 用户id指向当前 的 authorization
-            redisHelper.hashTtlPut(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountId, authorization, RedisShiroCacheEnum.userAuthorization.getTtl());
+            redisHelper.hashTtlPut(RedisShiroCacheEnum.userAuthorization.getKey(), String.valueOf(userAccountId), authorization, RedisShiroCacheEnum.userAuthorization.getTtl());
             //设置 authorization 缓存 当前用户的token
             redisHelper.hashTtlPut(RedisShiroCacheEnum.authorization.getKey(), authorization, userAccountToken, RedisShiroCacheEnum.authorization.getTtl());
 

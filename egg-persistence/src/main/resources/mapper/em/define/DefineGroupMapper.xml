@@ -68,7 +68,7 @@
             <property name="base_alias_name" value="dg"/>
         </include>
         FROM em_define_group dg
-        left JOIN em_user_group ug on dg.fid = ug.define_job_id
+        left JOIN em_user_group ug on dg.fid = ug.define_group_id
         WHERE
         ug.user_account_id = #{userAccountId}
         and ug.is_deleted = #{stateVal}

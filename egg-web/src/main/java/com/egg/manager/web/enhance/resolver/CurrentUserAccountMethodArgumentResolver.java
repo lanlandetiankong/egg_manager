@@ -1,6 +1,7 @@
 package com.egg.manager.web.enhance.resolver;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
@@ -57,8 +58,11 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
             if (StringUtils.isNotBlank(authorization)) {
                 Object userTokenObj = redisHelper.hashGet(RedisShiroCacheEnum.authorization.getKey(), authorization);
                 if(userTokenObj != null){
-                    UserAccountToken userToken = (UserAccountToken)userTokenObj;
-                    loginUserInfo = userAccountService.queryDbToCacheable(userToken.getUserAccountId());
+                    String userTokenStr = (String) userTokenObj;
+                    if (StringUtils.isNotBlank(userTokenStr)){
+                        UserAccountToken userToken = JSONObject.parseObject(userTokenStr,UserAccountToken.class);
+                        loginUserInfo = userAccountService.queryDbToCacheable(userToken.getUserAccountId());
+                    }
                 }
             }
         }

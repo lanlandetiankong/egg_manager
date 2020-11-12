@@ -15,10 +15,6 @@ public class Constant implements Serializable {
 
     public static Set<String> METHOD_URL_SET = new HashSet<>();
 
-    /**
-     * 用户注册默认角色
-     */
-    public static final int DEFAULT_REGISTER_ROLE = 5;
 
     public static final int BUFFER_MULTIPLE = 10;
 
@@ -27,22 +23,7 @@ public class Constant implements Serializable {
      */
     public static final Long PASS_TIME = 50000 * 60 * 1000L;
 
-    /**
-     * 根菜单节点
-     */
-    public static final String ROOT_MENU = "0";
 
-    /**
-     * 菜单类型，1：菜单  2：按钮操作
-     */
-    public static final int TYPE_MENU = 1;
-
-    /**
-     * 菜单类型，1：菜单  2：按钮操作
-     */
-    public static final int TYPE_BUTTON = 2;
-
-    public static Boolean isPass = false;
 
     /**
      * 用户名登录
@@ -56,15 +37,6 @@ public class Constant implements Serializable {
      * 邮箱登录
      */
     public static final int LOGIN_EMAIL = 2;
-
-    /**
-     * 启用
-     */
-    public static final int ENABLE = 1;
-    /**
-     * 禁用
-     */
-    public static final int DISABLE = 0;
 
     /**
      * 空json对象

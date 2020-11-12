@@ -2,33 +2,26 @@ package com.egg.manager.web.enhance.runner;
 
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.util.file.PackageScanUtil;
 import com.egg.manager.persistence.commons.util.str.ComUtil;
 import com.egg.manager.persistence.enhance.annotation.shiro.ShiroPass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.JarURLConnection;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 /**
  * @author zhoucj
- * @description
+ * @description 扫描包取得需要进行@ShiroPass的接口列表
  * @date 2020/10/21
  */
 @Slf4j
-@Component
+//@Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
     @Value("${egg.conf.controller.scanPackage}")
@@ -50,7 +43,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     public void handleInitMethodUrlSet(String... args) throws Exception {
         //先扫描Controller包并添加到 Constant.METHOD_URL_SET 中
-        this.doPackageScanner(scanPackagePath);
+        PackageScanUtil.doPackageScanner(scanPackagePath,this.getClass());
         Set<String> urlAndMethodSet = new HashSet<>();
 
         for (String aClassName : Constant.METHOD_URL_SET) {
@@ -125,76 +118,5 @@ public class MyCommandLineRunner implements CommandLineRunner {
             sb.deleteCharAt(sb.length() - 1);
         }
         return sb.toString().replaceAll("/+", Constant.SYMBOL_SLASH) + this.urlDelimiter + requestName;
-    }
-
-
-    private void doPackageScanner(String packageName) {
-        //把所有的.替换成/
-        URL url = this.getClass().getClassLoader().getResource(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH));
-        String jarSuffix = ".jar";
-        // 是否循环迭代
-        if (StringUtils.countMatches(url.getFile(), jarSuffix) > 0) {
-            boolean recursive = true;
-            JarFile jar;
-            // 获取jar
-            try {
-                jar = ((JarURLConnection) url.openConnection())
-                        .getJarFile();
-                // 从此jar包 得到一个枚举类
-                Enumeration<JarEntry> entries = jar.entries();
-                while (entries.hasMoreElements()) {
-                    // 获取jar里的一个实体 可以是目录 和一些jar包里的其他文件 如META-INF等文件
-                    JarEntry entry = entries.nextElement();
-                    String name = entry.getName();
-                    // 如果是以/开头的
-                    if (name.charAt(0) == '/') {
-                        // 获取后面的字符串
-                        name = name.substring(1);
-                    }
-                    // 如果前半部分和定义的包名相同
-                    if (name.startsWith(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH))) {
-                        int idx = name.lastIndexOf('/');
-                        // 如果以Constant.SYMBOL_SLASH结尾 是一个包
-                        if (idx != -1) {
-                            // 获取包名 把Constant.SYMBOL_SLASH替换成"."
-                            packageName = name.substring(0, idx)
-                                    .replace('/', '.');
-                        }
-                        // 如果可以迭代下去 并且是一个包
-                        if ((idx != -1) || recursive) {
-                            // 如果是一个.class文件 而且不是目录
-                            if (name.endsWith(".class")
-                                    && !entry.isDirectory()) {
-                                // 去掉后面的".class" 获取真正的类名
-                                String className = name.substring(
-                                        packageName.length() + 1, name
-                                                .length() - 6);
-                                try {
-                                    // 添加到classes
-                                    Constant.METHOD_URL_SET.add(Class
-                                            .forName(packageName + '.'
-                                                    + className).getName());
-                                } catch (ClassNotFoundException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                }
-                return;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        File dir = new File(url.getFile());
-        for (File file : dir.listFiles()) {
-            if (file.isDirectory()) {
-                //递归读取包
-                doPackageScanner(packageName + "." + file.getName());
-            } else {
-                String className = packageName + "." + file.getName().replace(".class", "");
-                Constant.METHOD_URL_SET.add(className);
-            }
-        }
     }
 }

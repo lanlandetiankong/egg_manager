@@ -49,5 +49,5 @@ public @interface PcWebLoginLog {
      * 操作类型
      * @return
      */
-    String type() default AspectTypeConstant.OPERATION_API ;
+    String type() default AspectTypeConstant.LOGIN_API ;
 }

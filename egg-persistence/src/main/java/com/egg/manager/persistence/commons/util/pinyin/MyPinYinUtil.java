@@ -41,7 +41,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0].charAt(0);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    e.printStackTrace();
+                    log.error("执行异常--->",e);;
                 }
             } else {
                 pinyinStr += newChar[i];
@@ -69,7 +69,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0];
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    e.printStackTrace();
+                    log.error("执行异常--->",e);;
                 }
             } else {
                 pinyinStr += newChar[i];

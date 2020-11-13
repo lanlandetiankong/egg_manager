@@ -84,7 +84,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        e.printStackTrace();
+        log.error("执行异常--->",e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
     }
 

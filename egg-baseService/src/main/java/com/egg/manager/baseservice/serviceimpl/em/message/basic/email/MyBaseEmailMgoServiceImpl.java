@@ -75,7 +75,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
                 fileName = MimeUtility.encodeText(sendFileInfoMgvo.getFileName(), "GB2312", "B");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("执行异常--->",e);
         }
         javaMailSender.send(message);
         //TODO 保存记录到数据库

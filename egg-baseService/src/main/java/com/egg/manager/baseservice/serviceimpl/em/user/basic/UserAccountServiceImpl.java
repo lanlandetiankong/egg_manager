@@ -99,7 +99,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
         result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
@@ -132,7 +132,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             }
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp, sortBeans, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }

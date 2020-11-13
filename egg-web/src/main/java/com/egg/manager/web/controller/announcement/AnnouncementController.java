@@ -68,7 +68,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(AnnouncementVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -94,7 +94,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/queryFilteredPage")
     public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize,
                                        Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(AnnouncementVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //这些查询条件暂时用不到
             String queryObj = null, paginationObj = null, sortObj = null;
@@ -123,7 +123,7 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "根据id查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(AnnouncementVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -143,7 +143,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -161,7 +161,7 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/createFromDraft")
     public WebResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -180,7 +180,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -201,7 +201,7 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 

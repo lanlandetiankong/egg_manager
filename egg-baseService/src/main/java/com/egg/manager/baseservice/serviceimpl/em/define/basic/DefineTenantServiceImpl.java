@@ -58,7 +58,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
         return result;
     }

@@ -44,7 +44,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }

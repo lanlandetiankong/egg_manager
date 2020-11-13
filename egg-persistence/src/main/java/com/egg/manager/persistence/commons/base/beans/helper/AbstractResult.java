@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.base.beans.helper;
 
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
@@ -104,6 +105,19 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         this.put(ENUM_DEFAULT_CHECK_LIST,val);
     }
 
+
+    /**
+     * 设置分页信息
+     * @param paginationBean
+     * @param total
+     * @param
+     */
+    public  void settingPage(AntdvPaginationBean paginationBean, Long total) {
+        if (paginationBean != null) {
+            paginationBean.setTotal(total);
+        }
+        this.put(PAGINATION_BEAN,paginationBean);
+    }
     /**
      * getter
      * @return

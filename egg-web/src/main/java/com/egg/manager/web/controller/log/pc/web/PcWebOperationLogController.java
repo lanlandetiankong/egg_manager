@@ -54,7 +54,7 @@ public class PcWebOperationLogController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(PcWebOperationLogMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)

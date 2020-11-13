@@ -175,7 +175,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, new Long(total));
+        result.settingPage(paginationBean, new Long(total));
         IPage iPage = defineRoleMapper.selectPage(page, defineRoleEntityWrapper);
         List<DefineRoleEntity> defineRoleEntities = iPage.getRecords();
         result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
@@ -188,7 +188,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
         return result;
     }

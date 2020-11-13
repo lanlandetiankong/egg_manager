@@ -93,7 +93,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(UserAccountVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -114,7 +114,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(UserAccountVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             UserAccountEntity account = userAccountMapper.selectById(accountId);
             UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
@@ -141,7 +141,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, Long userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefineRoleVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
@@ -156,7 +156,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedPermission")
     public WebResult gainGrantedPermission(HttpServletRequest request, Long userAccountId,
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefinePermissionVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
             result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
@@ -171,7 +171,7 @@ public class UserAccountController extends BaseController {
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefineJobVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
             result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
@@ -186,10 +186,10 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj",UserAccountVo.class,true);
             Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             addCount = userAccountService.dealCreate(loginUserInfo, userAccountVo);
             result.putCount(addCount);
@@ -204,10 +204,10 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         try {
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj",UserAccountVo.class , true);
             Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             changeCount = userAccountService.dealUpdate(loginUserInfo, userAccountVo);
             result.putCount(changeCount);
@@ -225,7 +225,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -246,7 +246,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -263,7 +263,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public WebResult batchUpdateLockByIds(HttpServletRequest request, Long[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
         try {
             Assert.notEmpty(lockIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -285,7 +285,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public WebResult updateLockById(HttpServletRequest request, Long lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
         try {
             Assert.notNull(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
@@ -305,7 +305,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public WebResult doGrantRoleToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
@@ -322,7 +322,7 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/grantJobToUser")
     public WebResult doGrantJobToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds,
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);

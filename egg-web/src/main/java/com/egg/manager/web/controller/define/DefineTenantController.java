@@ -63,7 +63,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefineTenantVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -84,7 +84,7 @@ public class DefineTenantController extends BaseController {
     @PcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefineTenantVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notBlank(defineTenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(defineTenantId);
@@ -105,7 +105,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/gainEnumSelect")
     public WebResult doGetAllDefineTenantEnums(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefineTenantVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
@@ -125,7 +125,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -142,7 +142,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         try {
             Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -162,7 +162,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccountEntity loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -182,7 +182,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             Integer delCount = defineTenantService.dealLogicDeleteById(loginUserInfo, delId);
@@ -203,7 +203,7 @@ public class DefineTenantController extends BaseController {
     @PostMapping(value = "/setupTenantManager")
     public WebResult doSetupTenantManager(HttpServletRequest request, Long tenantId, Long[] userAccountIdArr,
                                           @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(tenantId, "未知租户id:" + actionFailMsg);
             DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(tenantId);

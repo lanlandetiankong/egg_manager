@@ -32,7 +32,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->权限类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public WebResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->角色类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public WebResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->权限Code前缀类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public WebResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

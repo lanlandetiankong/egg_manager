@@ -31,7 +31,7 @@ public class CommonBindingController extends BaseController {
     @ApiOperation(value = "查询枚举->开关", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
     public WebResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             SwitchStateEnum[] enums = SwitchStateEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

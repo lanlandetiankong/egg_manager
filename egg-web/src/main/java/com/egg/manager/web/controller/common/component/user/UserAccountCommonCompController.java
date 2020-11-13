@@ -52,7 +52,7 @@ public class UserAccountCommonCompController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(UserAccountVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);

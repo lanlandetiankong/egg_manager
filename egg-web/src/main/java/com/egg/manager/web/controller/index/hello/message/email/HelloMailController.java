@@ -36,7 +36,7 @@ public class HelloMailController extends BaseController {
     @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public WebResult doGetDefineModuleById(HttpServletRequest request) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             String[] receiveEmails = new String[]{"2773756340@qq.com"};
             EmailSendRecordMgvo emailDto = EmailSendRecordMgvo.builder().subject("邮件标题123")

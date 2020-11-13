@@ -64,7 +64,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/queryPage")
     public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefinePermissionVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -90,7 +90,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefinePermissionVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -111,7 +111,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebQueryLog(fullPath = "/define/definePermission/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(DefinePermissionVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             DefinePermissionEntity definePermissionEntity = definePermissionMapper.selectById(definePermissionId);
             result.putBean(DefinePermissionTransfer.transferEntityToVo(definePermissionEntity));
@@ -126,7 +126,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/definePermission/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -144,7 +144,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/definePermission/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         try {
             Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -164,7 +164,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchEnsureByIds")
     public WebResult batchEnsureByIds(HttpServletRequest request, Long[] ensureIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(ensureIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -184,7 +184,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -207,7 +207,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

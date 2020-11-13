@@ -90,7 +90,7 @@ public class UserLoginController extends BaseController {
                                            @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccountEntity loginUser
     ) {
-        WebResult result = WebResult.gainQueryResult(UserAccountEntity.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());

@@ -92,7 +92,7 @@
     </select>
 
 
-    <select id="findAllIdByUserAccountId" resultType="java.lang.String">
+    <select id="findAllIdByUserAccountId" resultType="java.lang.Long">
         SELECT edt.fid FROM em_user_department edt
         left JOIN em_user_department eut on edt.fid = eut.define_department_id
         <where>

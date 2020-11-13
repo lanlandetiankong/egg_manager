@@ -222,11 +222,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, Long[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
-            List<String> lockIdList = Lists.newArrayList(lockIds);
+            List<Long> lockIdList = Lists.newArrayList(lockIds);
             //批量设置为 锁定
             lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUserInfo);
         }

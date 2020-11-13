@@ -57,6 +57,6 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
      */
-    List<DefineMenuEntity> getMenusFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
+    List<DefineMenuEntity> getMenusFilterChildrens(@Param("filterId") Long filterId, @Param("onlyEnable") boolean onlyEnable);
 
 }

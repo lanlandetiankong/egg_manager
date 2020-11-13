@@ -100,7 +100,7 @@
         </foreach>
     </update>
 
-    <select id="findAllJobIdByUserAccountId" resultType="java.lang.String">
+    <select id="findAllJobIdByUserAccountId" resultType="java.lang.Long">
         SELECT dr.fid FROM em_define_job dr
         left JOIN em_user_job uj on dr.fid = uj.define_job_id
         <where>

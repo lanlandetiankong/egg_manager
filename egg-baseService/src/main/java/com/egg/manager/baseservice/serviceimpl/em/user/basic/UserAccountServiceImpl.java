@@ -8,6 +8,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.egg.manager.api.exchange.helper.PasswordHelper;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
@@ -144,11 +145,10 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity, true);
-        //盐
-        String salt = IdUtil.simpleUUID() ;
-        String newlyPwd = SecureUtil.md5(userAccountEntity.getPassword() + salt);
-        userAccountEntity.setSalt(salt);
-        userAccountEntity.setPassword(newlyPwd);
+        //密码-操作助手
+        PasswordHelper passwordHelper = new PasswordHelper();
+        //盐&md5密码加密
+        passwordHelper.encryptPassword(userAccountEntity);
         if (null == userAccountVo.getLocked()) {
             //如果没设置值，默认不锁定
             userAccountEntity.setLocked(SwitchStateEnum.Close.getValue());

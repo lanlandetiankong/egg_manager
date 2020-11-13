@@ -26,8 +26,6 @@
         <result property="isDeleted" column="is_deleted"/>
         <result property="deletedTime" column="deleted_time"/>
     </resultMap>
-
-
     <!-- Dto通用查询映射结果 -->
     <resultMap id="DtoResultMap" extends="BaseResultMap"  type="com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto">
         <association column="create_user_id" property="createUser" fetchType="lazy"
@@ -39,57 +37,64 @@
         <association column="fid" property="belongDepartment" fetchType="lazy"
                      select="com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper.selectOneDtoOfUserBelongDepartment"/>
     </resultMap>
-
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_name,account, nick_name, avatar_url,password, phone, email, sex, user_type,remark, state, create_time, update_time,create_user_id,last_modifyer_id
+        fid,user_name,account,nick_name,avatar_url,password,phone,email,sex,user_type_num,user_type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,locked,version,is_deleted,deleted_time
     </sql>
-
     <!--
             通用查询结果列(多表查询用)
             需要参数 base_alias_name 本次查询该表的别名
         -->
     <sql id="Base_Alias_Table_List">
-        ${base_alias_name}.fid,
-        ${base_alias_name}.user_name,
-        ${base_alias_name}.account,
-        ${base_alias_name}.nick_name,
-        ${base_alias_name}.avatar_url,
-        ${base_alias_name}.password,
-        ${base_alias_name}.phone,
-        ${base_alias_name}.email,
-        ${base_alias_name}.sex,
-        ${base_alias_name}.user_type,
-        ${base_alias_name}.remark,
-        ${base_alias_name}.state,
-        ${base_alias_name}.create_time,
-        ${base_alias_name}.update_time,
-        ${base_alias_name}.create_user_id,
-        ${base_alias_name}.last_modifyer_id
+            ${base_alias_name}.fid,
+            ${base_alias_name}.user_name,
+            ${base_alias_name}.account,
+            ${base_alias_name}.nick_name,
+            ${base_alias_name}.avatar_url,
+            ${base_alias_name}.password,
+            ${base_alias_name}.phone,
+            ${base_alias_name}.email,
+            ${base_alias_name}.sex,
+            ${base_alias_name}.user_type_num,
+            ${base_alias_name}.user_type,
+            ${base_alias_name}.state,
+            ${base_alias_name}.remark,
+            ${base_alias_name}.last_modifyer_id,
+            ${base_alias_name}.create_user_id,
+            ${base_alias_name}.create_time,
+            ${base_alias_name}.update_time,
+            ${base_alias_name}.locked,
+            ${base_alias_name}.version,
+            ${base_alias_name}.is_deleted,
+            ${base_alias_name}.deleted_time
     </sql>
-
     <!--
             通用查询结果列(多表查询用)
             需要参数 base_alias_name 本次查询该表的别名
             参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
         -->
     <sql id="Base_Alias_TableColumn_List">
-        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
-        ${base_alias_name}.user_name AS ${base_alias_col_prefix}user_name,
-        ${base_alias_name}.account AS ${base_alias_col_prefix}account,
-        ${base_alias_name}.nick_name AS ${base_alias_col_prefix}nick_name,
-        ${base_alias_name}.avatar_url AS ${base_alias_col_prefix}avatar_url,
-        ${base_alias_name}.password AS ${base_alias_col_prefix}password,
-        ${base_alias_name}.phone AS ${base_alias_col_prefix}phone,
-        ${base_alias_name}.email AS ${base_alias_col_prefix}email,
-        ${base_alias_name}.sex AS ${base_alias_col_prefix}sex,
-        ${base_alias_name}.user_type AS ${base_alias_col_prefix}user_type,
-        ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
-        ${base_alias_name}.state AS ${base_alias_col_prefix}state,
-        ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
-        ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
-        ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
-        ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
+            ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+            ${base_alias_name}.user_name AS ${base_alias_col_prefix}user_name,
+            ${base_alias_name}.account AS ${base_alias_col_prefix}account,
+            ${base_alias_name}.nick_name AS ${base_alias_col_prefix}nick_name,
+            ${base_alias_name}.avatar_url AS ${base_alias_col_prefix}avatar_url,
+            ${base_alias_name}.password AS ${base_alias_col_prefix}password,
+            ${base_alias_name}.phone AS ${base_alias_col_prefix}phone,
+            ${base_alias_name}.email AS ${base_alias_col_prefix}email,
+            ${base_alias_name}.sex AS ${base_alias_col_prefix}sex,
+            ${base_alias_name}.user_type_num AS ${base_alias_col_prefix}user_type_num,
+            ${base_alias_name}.user_type AS ${base_alias_col_prefix}user_type,
+            ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+            ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+            ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id,
+            ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+            ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+            ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+            ${base_alias_name}.locked AS ${base_alias_col_prefix}locked,
+            ${base_alias_name}.version AS ${base_alias_col_prefix}version,
+            ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}is_deleted,
+            ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deleted_time
     </sql>
 
 

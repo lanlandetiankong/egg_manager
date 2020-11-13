@@ -11,6 +11,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.services.em.user.basic.UserGroupService;
 import com.egg.manager.api.services.em.user.basic.UserJobService;
+import com.egg.manager.api.services.em.user.basic.UserRoleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
@@ -73,6 +74,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     private UserJobService userJobService ;
     @Reference
     private UserGroupService userGroupService ;
+    @Reference
+    private UserRoleService userRoleService ;
 
     @Override
     public UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
@@ -259,7 +262,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                userRoleMapper.customBatchInsert(addEntitys);
+                userRoleService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -291,7 +294,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    userRoleMapper.customBatchInsert(addEntitys);
+                    userRoleService.saveBatch(addEntitys);
                 }
             }
         }
@@ -317,7 +320,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                userJobMapper.customBatchInsert(addEntitys);
+                userJobService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -350,7 +353,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    userJobMapper.customBatchInsert(addEntitys);
+                    userJobService.saveBatch(addEntitys);
                 }
             }
         }

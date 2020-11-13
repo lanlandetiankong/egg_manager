@@ -36,13 +36,6 @@ public interface UserDepartmentMapper extends MyEggMapper<UserDepartmentEntity> 
     List<String> findAllIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
     /**
-     * 批量新增 用户-部门 关联
-     * @param list
-     * @return
-     */
-    int customBatchInsert(List<UserDepartmentEntity> list);
-
-    /**
      * 根据用户id 修改指定部门关联 的可用状态
      * @param userAccountId
      * @param departmentIdList

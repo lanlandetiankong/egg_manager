@@ -35,12 +35,6 @@ public interface UserRoleMapper extends MyEggMapper<UserRoleEntity> {
      */
     List<Long> findAllRoleIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
-    /**
-     * 批量新增 用户-角色 关联
-     * @param roleList
-     * @return
-     */
-    int customBatchInsert(List<UserRoleEntity> roleList);
 
     /**
      * 根据用户id 修改指定角色关联 的可用状态

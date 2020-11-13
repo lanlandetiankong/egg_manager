@@ -38,13 +38,6 @@ public interface UserJobMapper extends MyEggMapper<UserJobEntity> {
 
 
     /**
-     * 批量新增 用户-职务 关联
-     * @param jobList
-     * @return
-     */
-    int customBatchInsert(List<UserJobEntity> jobList);
-
-    /**
      * 根据用户id 修改指定职务关联 的可用状态
      * @param userAccountId
      * @param jobIdList

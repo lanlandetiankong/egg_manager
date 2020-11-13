@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineTenantService;
+import com.egg.manager.api.services.em.user.basic.UserTenantService;
 import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
@@ -47,6 +48,9 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     private DefineTenantMapper defineTenantMapper;
     @Autowired
     private UserTenantMapper userTenantMapper;
+
+    @Autowired
+    private UserTenantService userTenantService;
 
 
     @Override
@@ -108,7 +112,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                     addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                userTenantMapper.customBatchInsert(addEntitys);
+                userTenantService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -140,7 +144,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
                         addEntitys.add(UserTenantPojoInitialize.generateInsertIsManagerEntity(tenantId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    userTenantMapper.customBatchInsert(addEntitys);
+                    userTenantService.saveBatch(addEntitys);
                 }
             }
         }

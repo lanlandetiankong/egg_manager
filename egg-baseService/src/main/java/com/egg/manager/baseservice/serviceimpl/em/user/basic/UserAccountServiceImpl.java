@@ -1,6 +1,8 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -142,6 +144,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity, true);
+        //盐
+        String salt = IdUtil.simpleUUID() ;
+        String newlyPwd = SecureUtil.md5(userAccountEntity.getPassword() + salt);
+        userAccountEntity.setSalt(salt);
+        userAccountEntity.setPassword(newlyPwd);
         if (null == userAccountVo.getLocked()) {
             //如果没设置值，默认不锁定
             userAccountEntity.setLocked(SwitchStateEnum.Close.getValue());

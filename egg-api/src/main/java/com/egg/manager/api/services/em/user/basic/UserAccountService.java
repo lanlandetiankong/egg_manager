@@ -163,4 +163,11 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      */
     CurrentLoginUserInfo queryDbToCacheable(Long userAccountId);
+
+    /**
+     * 更新所有用户的密码
+     * @param loginUserInfo 当前登录用户
+     * @return
+     */
+    boolean reflushSecurePwd(CurrentLoginUserInfo loginUserInfo);
 }

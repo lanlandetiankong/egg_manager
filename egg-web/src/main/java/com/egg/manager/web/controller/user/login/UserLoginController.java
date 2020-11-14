@@ -3,6 +3,7 @@ package com.egg.manager.web.controller.user.login;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.helper.PasswordHelper;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
@@ -90,6 +91,7 @@ public class UserLoginController extends BaseController {
                                            @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccountEntity loginUser
     ) {
+        PasswordHelper passwordHelper = new PasswordHelper() ;
         WebResult result = WebResult.okQuery();
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -101,7 +103,8 @@ public class UserLoginController extends BaseController {
             //取得 form的password+数据库的salt 进行md5加密后的值
             String saltedPwd = SecureUtil.md5(loginAccountVo.getPassword()+ (StringUtils.isBlank(userAccountEntity.getSalt()) ? "" : userAccountEntity.getSalt())) ;
             //判断: 数据库存储的md5(密码+salt) == (form的password+数据库salt)的值，匹配才能算验证成功
-            Assert.isTrue(userAccountEntity.getPassword().equals(saltedPwd), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
+            //Assert.isTrue(userAccountEntity.getPassword().equals(saltedPwd), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
+            Assert.isTrue(passwordHelper.isPasswordMatch(loginAccountVo.getPassword(),userAccountEntity));
             if (userAccountEntity.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
                 //账号密码验证通过

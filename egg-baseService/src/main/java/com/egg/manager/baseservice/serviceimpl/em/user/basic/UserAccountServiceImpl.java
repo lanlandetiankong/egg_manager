@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -413,5 +414,18 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         loginUserInfo.setBelongJobList(belongJobs);
         loginUserInfo.setBelongGroupList(belongGroups);
         return loginUserInfo;
+    }
+
+    @Override
+    public boolean reflushSecurePwd(CurrentLoginUserInfo loginUserInfo) {
+        QueryWrapper<UserAccountEntity> query = new QueryWrapper<>();
+        query.isNotNull("password");
+        List<UserAccountEntity> userAccountEntities = userAccountMapper.selectList(query);
+        PasswordHelper passwordHelper = new PasswordHelper() ;
+        for (UserAccountEntity userAccountEntity : userAccountEntities){
+            passwordHelper.encryptPassword(userAccountEntity);
+        }
+        this.updateBatchById(userAccountEntities);
+        return true;
     }
 }

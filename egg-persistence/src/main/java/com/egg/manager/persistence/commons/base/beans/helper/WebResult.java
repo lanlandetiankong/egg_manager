@@ -16,7 +16,6 @@ public class WebResult extends AbstractResult{
      * 只允许通过static构造类
      */
     private WebResult() {
-        this.initResult();
     }
 
     private static WebResult initResult() {

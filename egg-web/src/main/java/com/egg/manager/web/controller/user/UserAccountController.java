@@ -47,6 +47,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -327,6 +328,19 @@ public class UserAccountController extends BaseController {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
             Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);
             result.putCount(grantCount);
+        } catch (Exception e) {
+            this.dealCommonErrorCatch(log, result, e);
+        }
+        return result;
+    }
+
+    @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(fullPath = "/user/userAccount/reflushSecurePwd")
+    @GetMapping(value = "/reflushSecurePwd")
+    public WebResult reflushSecurePwd(HttpServletRequest request,@CurrentLoginUser(required = false) CurrentLoginUserInfo loginUserInfo) {
+        WebResult result = WebResult.okOperation();
+        try {
+            boolean flag = userAccountService.reflushSecurePwd(loginUserInfo);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

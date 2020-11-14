@@ -57,7 +57,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         }
         //取得 总数
         Integer total= ${cfg.baseEntityName_firstLow}Mapper.selectCount(${cfg.baseEntityName_firstLow}QueryWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean,total);
+        result.settingPage(paginationBean,total);
         List<${cfg.baseEntityName}> ${cfg.baseEntityName_firstLow}s= ${cfg.baseEntityName_firstLow}Mapper.selectPage(rowBounds,${cfg.baseEntityName_firstLow}QueryWrapper);
         result.putResultList(${cfg.baseEntityName}Transfer.transferEntityToVoList(${cfg.baseEntityName_firstLow}s));
         return result;
@@ -69,7 +69,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         List<AntdvSortBean>sortBeans){
         Pagination mpPagination=super.dealAntvPageToPagination(paginationBean);
         List<${cfg.baseEntityName}Dto> ${cfg.baseEntityName_firstLow}DtoList= ${cfg.baseEntityName_firstLow}Mapper.selectQueryPage(mpPagination,queryFieldBeanList,sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean,mpPagination.getTotal());
+        result.settingPage(paginationBean,mpPagination.getTotal());
         result.putResultList(${cfg.baseEntityName}Transfer.transferDtoToVoList(${cfg.baseEntityName_firstLow}DtoList));
         return result;
         }

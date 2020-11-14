@@ -10,6 +10,7 @@ import com.egg.manager.persistence.em.announcement.pojo.mapstruct.imap.Announcem
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import com.google.common.base.Joiner;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @description
  * @date 2020/10/20
  */
+@Slf4j
 @Component
 @Named("announcementDraftTransfer")
 public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
@@ -123,7 +125,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                log.error("执行异常--->",e);
             }
         }
     }

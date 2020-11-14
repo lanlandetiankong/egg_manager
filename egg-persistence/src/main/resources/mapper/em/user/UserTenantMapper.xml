@@ -27,67 +27,52 @@
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
                      select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
-
-
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid, user_account_id, define_tenant_id, type,is_manager
-        remark,state, create_time, update_time,create_user_id,last_modifyer_id
+        fid,user_account_id,define_tenant_id,type,is_manager,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
-    <sql id="Base_Insert_Column_List">
-        fid, user_account_id, define_tenant_id, type,is_manager,remark, state, create_time, update_time,create_user_id,last_modifyer_id
-    </sql>
-
-    <sql id="Base_Insert_Item_Column_List">
-        #{item.fid},
-        #{item.userAccountId},
-        #{item.defineTenantId},
-        #{item.type},
-        #{item.isManager},
-        #{item.remark},
-        #{item.state},
-        #{item.createTime},
-        #{item.updateTime},
-        #{item.createUserId},
-        #{item.lastModifyerId}
-    </sql>
-
     <!--
             通用查询结果列(多表查询用)
             需要参数 base_alias_name 本次查询该表的别名
         -->
     <sql id="Base_Alias_Table_List">
-        ${base_alias_name}.fid,
-        ${base_alias_name}.user_account_id,
-        ${base_alias_name}.define_tenant_id,
-        ${base_alias_name}.type,
-        ${base_alias_name}.is_manager,
-        ${base_alias_name}.remark,
-        ${base_alias_name}.state,
-        ${base_alias_name}.create_time,
-        ${base_alias_name}.update_time,
-        ${base_alias_name}.create_user_id,
-        ${base_alias_name}.last_modifyer_id
+            ${base_alias_name}.fid,
+            ${base_alias_name}.user_account_id,
+            ${base_alias_name}.define_tenant_id,
+            ${base_alias_name}.type,
+            ${base_alias_name}.is_manager,
+            ${base_alias_name}.state,
+            ${base_alias_name}.remark,
+            ${base_alias_name}.last_modifyer_id,
+            ${base_alias_name}.create_user_id,
+            ${base_alias_name}.create_time,
+            ${base_alias_name}.update_time,
+            ${base_alias_name}.version,
+            ${base_alias_name}.is_deleted,
+            ${base_alias_name}.deleted_time
     </sql>
-
     <!--
             通用查询结果列(多表查询用)
             需要参数 base_alias_name 本次查询该表的别名
             参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
         -->
     <sql id="Base_Alias_TableColumn_List">
-        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
-        ${base_alias_name}.user_account_id AS ${base_alias_col_prefix}user_account_id,
-        ${base_alias_name}.define_tenant_id AS ${base_alias_col_prefix}define_tenant_id,
-        ${base_alias_name}.type AS ${base_alias_col_prefix}type,
-        ${base_alias_name}.is_manager AS ${base_alias_col_prefix}is_manager,
-        ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
-        ${base_alias_name}.state AS ${base_alias_col_prefix}state,
-        ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
-        ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
-        ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
-        ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id
+            ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+            ${base_alias_name}.user_account_id AS ${base_alias_col_prefix}user_account_id,
+            ${base_alias_name}.define_tenant_id AS ${base_alias_col_prefix}define_tenant_id,
+            ${base_alias_name}.type AS ${base_alias_col_prefix}type,
+            ${base_alias_name}.is_manager AS ${base_alias_col_prefix}is_manager,
+            ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+            ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+            ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id,
+            ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+            ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+            ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+            ${base_alias_name}.version AS ${base_alias_col_prefix}version,
+            ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}is_deleted,
+            ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deleted_time
     </sql>
+
 
     <select id="selectQueryPage" resultMap="DtoResultMap">
         SELECT
@@ -108,7 +93,7 @@
     </select>
 
 
-    <select id="findAllTenantIdByUserAccountId" resultType="java.lang.String">
+    <select id="findAllTenantIdByUserAccountId" resultType="java.lang.Long">
         SELECT edt.fid FROM em_define_tenant edt
         left JOIN em_user_tenant eut on edt.fid = eut.define_tenant_id
         <where>
@@ -119,18 +104,6 @@
             and eut.is_deleted = 0
         </where>
     </select>
-
-    <insert id="customBatchInsert">
-        INSERT INTO em_user_tenant(
-        <include refid="Base_Insert_Column_List"/>
-        )
-        VALUES
-        <foreach collection="list" item="item" index="index" separator=",">
-            (
-            <include refid="Base_Insert_Item_Column_List"/>
-            )
-        </foreach>
-    </insert>
 
     <update id="batchUpdateManagerUserStateByTenantId">
         UPDATE em_user_tenant

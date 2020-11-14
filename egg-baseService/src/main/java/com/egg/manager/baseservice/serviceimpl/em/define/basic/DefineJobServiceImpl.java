@@ -48,7 +48,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         QueryWrapper<DefineJobEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = defineJobMapper.selectCount(queryWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = defineJobMapper.selectPage(page, queryWrapper);
         List<DefineJobEntity> defineJobEntities = iPage.getRecords();
         result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntities));
@@ -60,7 +60,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }

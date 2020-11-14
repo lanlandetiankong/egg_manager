@@ -72,7 +72,7 @@ public class SmartFormDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(SmartFormDefinitionMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
@@ -96,7 +96,7 @@ public class SmartFormDefinitionController extends BaseController {
     })
     @PostMapping(value = "/getDataAll")
     public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(SmartFormDefinitionMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
@@ -116,7 +116,7 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                       @RequestParam(value = "fid", required = true) String fid) {
-        WebResult result = WebResult.gainQueryResult(SmartFormDefinitionMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             SmartFormDefinitionMgo mobj = smartFormDefinitionMgoService.doFindById(loginUserInfo, fid);
@@ -133,7 +133,7 @@ public class SmartFormDefinitionController extends BaseController {
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                  SmartFormDefinitionMgvo smartFormDefinitionMgvo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(smartFormDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -159,7 +159,7 @@ public class SmartFormDefinitionController extends BaseController {
     public WebResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                     @Validated({VerifyGroupOfDefault.class, VerifyGroupOfUpdate.class}) SmartFormDefinitionMongoVerifyO formDefinitionVerifyO,
                                     SmartFormDefinitionMgvo formDefinitionMgvo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(formDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -186,7 +186,7 @@ public class SmartFormDefinitionController extends BaseController {
     })
     @PostMapping(value = "/delOneById")
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = smartFormDefinitionMgoService.doFakeDeleteById(loginUserInfo, delId);
@@ -205,7 +205,7 @@ public class SmartFormDefinitionController extends BaseController {
     })
     @PostMapping(value = "/batchDelByIds")
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

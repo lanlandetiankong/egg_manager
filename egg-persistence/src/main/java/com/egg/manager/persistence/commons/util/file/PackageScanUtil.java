@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.commons.util.file;
 
 import com.egg.manager.persistence.commons.base.constant.Constant;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.jar.JarFile;
  * @Author: zhoucj
  * @Date: 2020/11/12 15:09
  */
+@Slf4j
 public class PackageScanUtil {
 
     public static void doPackageScanner(String packageName,Class clazz) {
@@ -66,7 +68,7 @@ public class PackageScanUtil {
                                             .forName(packageName + '.'
                                                     + className).getName());
                                 } catch (ClassNotFoundException e) {
-                                    e.printStackTrace();
+                                    log.error("执行异常--->",e);
                                 }
                             }
                         }
@@ -74,7 +76,7 @@ public class PackageScanUtil {
                 }
                 return;
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("执行异常--->",e);;
             }
         }
         File dir = new File(url.getFile());

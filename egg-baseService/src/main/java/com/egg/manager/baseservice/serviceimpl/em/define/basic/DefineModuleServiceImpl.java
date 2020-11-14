@@ -50,7 +50,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = defineModuleMapper.selectPage(page, defineModuleEntityWrapper);
         List<DefineModuleEntity> defineModuleEntities = iPage.getRecords();
         result.putResultList(DefineModuleTransfer.transferEntityToVoList(defineModuleEntities));
@@ -63,7 +63,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
         return result;
     }

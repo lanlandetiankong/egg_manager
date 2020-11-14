@@ -10,6 +10,7 @@ import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserAccountPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ import java.io.PrintWriter;
  * @description 代码的执行流程 preHandle->isAccessAllowed->isLoginAttempt->executeLogin
  * @date 2020/10/21
  */
+@Slf4j
 public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
     private UserAccountService userAccountService;
@@ -174,7 +176,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             response.setContentType("application/json; charset=utf-8");
             out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser)));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("执行异常--->",e);
         } finally {
             if (out != null) {
                 out.close();

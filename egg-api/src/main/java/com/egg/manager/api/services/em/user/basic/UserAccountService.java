@@ -92,7 +92,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception;
+    Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, Long[] lockIds, boolean isLock) throws Exception;
 
     /**
      * 用户账号-锁定

@@ -34,7 +34,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEnti
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
      */
-    List<DefineDepartmentEntity> getDepartmentFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
+    List<DefineDepartmentEntity> getDepartmentFilterChildrens(@Param("filterId") Long filterId, @Param("onlyEnable") boolean onlyEnable);
 
     /**
      * 根据用户id查询 所属的部门详情

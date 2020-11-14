@@ -15,14 +15,6 @@ import java.util.List;
  */
 public interface RolePermissionMapper extends MyEggMapper<RolePermissionEntity> {
 
-
-    /**
-     * 批量新增 角色-权限 关联
-     * @param permissionList
-     * @return
-     */
-    int customBatchInsert(List<RolePermissionEntity> permissionList);
-
     /**
      * 根据角色id 修改指定权限 的可用状态
      * @param roleId

@@ -66,7 +66,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(AnnouncementDraftVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
             List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
@@ -93,7 +93,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String draftId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(AnnouncementDraftVo.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
             AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
@@ -112,7 +112,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -131,7 +131,7 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer updateCount = 0;
         try {
             Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -153,7 +153,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -174,7 +174,7 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
@@ -191,7 +191,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementDraft/batchPublishDraft")
     @PostMapping(value = "/batchPublishDraft")
     public WebResult batchPublishDraft(HttpServletRequest request, Long[] draftIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer publishCount = 0;
         try {
             Assert.notEmpty(draftIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -208,7 +208,7 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementDraft/publishDraft")
     @PostMapping(value = "/publishDraft")
     public WebResult publishDraft(HttpServletRequest request, Long draftId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
 

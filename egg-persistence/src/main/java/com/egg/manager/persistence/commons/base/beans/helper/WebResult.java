@@ -2,7 +2,6 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import cn.hutool.http.HttpStatus;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 
 import java.util.HashMap;
 
@@ -14,71 +13,46 @@ import java.util.HashMap;
 public class WebResult extends AbstractResult{
 
     /**
-     * 分页bean
-     */
-    private AntdvPaginationBean paginationBean;
-
-
-    private void initResult(){
-        this.put(HAS_ERROR,false);
-        this.put(HAS_WARNING,false);
-        this.put(CODE,HttpStatus.HTTP_OK);
-        this.put(MORE_ATTRIBUTE,new HashMap<String,Object>());
-        this.put(MSG,BaseRstMsgConstant.ACTION_SUCCESS_MSG);
-    }
-    /**
      * 只允许通过static构造类
      */
     private WebResult() {
         this.initResult();
     }
 
-    private static WebResult gainInitQueryBean(Class tClass) {
+    private static WebResult initResult() {
         WebResult result = new WebResult();
+        result.put(HAS_ERROR,false);
+        result.put(HAS_WARNING,false);
+        result.put(CODE,HttpStatus.HTTP_OK);
+        result.put(MORE_ATTRIBUTE,new HashMap<String,Object>());
+        result.put(MSG,BaseRstMsgConstant.ACTION_SUCCESS_MSG);
         return result;
     }
 
-    public static WebResult gainQueryResult(Class tClass) {
-        WebResult result = gainInitQueryBean(tClass);
+    public static WebResult okQuery() {
+        WebResult result = initResult();
         return result;
     }
 
-    public static WebResult gainEnumResult() {
-        WebResult result = gainInitQueryBean(Object.class);
+    public static WebResult okEnums() {
+        WebResult result = initResult();
         return result;
     }
 
-    public static WebResult gainOperationResult() {
-        WebResult result = gainInitQueryBean(Object.class);
+    public static WebResult okOperation() {
+        WebResult result = initResult();
         return result;
     }
 
-    public static WebResult gainErrorResult(String errorMsg) {
-        WebResult result = gainInitQueryBean(Object.class);
+    public static WebResult error(String errorMsg) {
+        WebResult result = initResult();
         result.put(HAS_ERROR,true);
         result.put(MSG,errorMsg);
         return result;
     }
 
-    public static WebResult gainErrorResult(Class tClass, String errorMsg) {
-        WebResult result = gainInitQueryBean(tClass);
-        result.put(HAS_ERROR,true);
-        result.put(MSG,errorMsg);
-        return result;
-    }
 
-    /**
-     * 设置分页信息
-     * @param paginationBean
-     * @param total
-     * @param 
-     */
-    public  void myAntdvPaginationBeanSet(AntdvPaginationBean paginationBean, Long total) {
-        if (paginationBean != null) {
-            paginationBean.setTotal(total);
-        }
-        this.paginationBean = paginationBean;
-    }
+
 
 
 

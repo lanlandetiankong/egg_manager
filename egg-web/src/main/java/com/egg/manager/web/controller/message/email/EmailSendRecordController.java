@@ -66,7 +66,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainQueryResult(EmailSendRecordMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
             MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
@@ -86,7 +86,7 @@ public class EmailSendRecordController extends BaseController {
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                       @RequestParam(value = "fid", required = true) String fid) {
-        WebResult result = WebResult.gainQueryResult(EmailSendRecordMgo.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
             EmailSendRecordMgo mobj = emailSendRecordMgoService.doFindById(loginUserInfo, fid);
@@ -103,7 +103,7 @@ public class EmailSendRecordController extends BaseController {
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                  @Validated({VerifyGroupOfDefault.class, VerifyGroupOfCreate.class}) EmailSendRecordMongoVerifyO emailSendRecordMongoVerifyO,
                                  EmailSendRecordMgvo emailSendRecordMgvo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         try {
             Assert.notNull(emailSendRecordMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -125,7 +125,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/delOneById")
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
             Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUserInfo, delId);
@@ -144,7 +144,7 @@ public class EmailSendRecordController extends BaseController {
     })
     @PostMapping(value = "/batchDelByIds")
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
         try {
             Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());

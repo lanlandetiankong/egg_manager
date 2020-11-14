@@ -66,7 +66,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         QueryWrapper<AnnouncementEntity> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = announcementMapper.selectPage(page, announcementEntityWrapper);
         List<AnnouncementEntity> announcementEntities = iPage.getRecords();
         //取得 公告标签 map
@@ -83,7 +83,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
 
         Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
         return result;
     }

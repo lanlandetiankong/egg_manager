@@ -32,7 +32,7 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->用户类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserTypeEnumList")
     public WebResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->用户锁类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public WebResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             List<FrontSelectBean> beanList = new ArrayList<>();
             beanList.add(new FrontSelectBean(0, "未锁定"));
@@ -67,7 +67,7 @@ public class UserCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->职务类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public WebResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
-        WebResult result = WebResult.gainEnumResult();
+        WebResult result = WebResult.okEnums();
         try {
             DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
             List<FrontSelectBean> beanList = new ArrayList<>();

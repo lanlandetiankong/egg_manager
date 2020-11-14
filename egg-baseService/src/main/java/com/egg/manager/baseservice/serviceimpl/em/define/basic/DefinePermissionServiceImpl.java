@@ -74,7 +74,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(queryWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = definePermissionMapper.selectPage(page, queryWrapper);
         List<DefinePermissionEntity> definePermissionEntities = iPage.getRecords();
         result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
@@ -86,7 +86,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
                                          List<AntdvSortBean> sortBeans) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result;
     }

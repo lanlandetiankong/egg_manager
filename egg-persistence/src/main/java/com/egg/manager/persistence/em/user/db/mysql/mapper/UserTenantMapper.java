@@ -33,14 +33,8 @@ public interface UserTenantMapper extends MyEggMapper<UserTenantEntity> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<String> findAllTenantIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<Long> findAllTenantIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
 
-    /**
-     * 批量新增 用户-租户 关联
-     * @param tenantList
-     * @return
-     */
-    int customBatchInsert(List<UserTenantEntity> tenantList);
 
     /**
      * 根据用户id 修改指定租户关联 是否管理员 的状态

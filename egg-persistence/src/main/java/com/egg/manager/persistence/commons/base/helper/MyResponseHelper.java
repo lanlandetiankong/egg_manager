@@ -15,27 +15,19 @@ public class MyResponseHelper {
     public MyResponseHelper() {
     }
 
-    public static WebResult handleRequestFailure(Exception e, String msg) {
-        return handleRequestFailure(Object.class, e, msg);
-    }
-
-    public static WebResult handleRequestFailure(PublicResultEnum resultEnum) {
-        return handleRequestFailure(Object.class, resultEnum);
-    }
-
-    public static <T> WebResult handleRequestFailure(Class<T> clazz, Exception e, String msg) {
+    public static <T> WebResult handleRequestFailure(Exception e, String msg) {
         String errorMsg = e.getMessage();
         if (StringUtils.isNotBlank(msg)) {
             errorMsg = msg + " \n " + errorMsg;
         }
-        WebResult result = WebResult.gainErrorResult(clazz, errorMsg);
+        WebResult result = WebResult.error(errorMsg);
         result.putHasError(true);
         result.putCode(HttpStatus.BAD_REQUEST.value());
         return result;
     }
 
-    public static <T> WebResult handleRequestFailure(Class<T> clazz, PublicResultEnum resultEnum) {
-        WebResult result = WebResult.gainErrorResult(clazz, resultEnum.getLabel());
+    public static <T> WebResult handleRequestFailure(PublicResultEnum resultEnum) {
+        WebResult result = WebResult.error(resultEnum.getLabel());
         result.putHasError(true);
         result.putCode(HttpStatus.BAD_REQUEST.value());
         if (PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())) {

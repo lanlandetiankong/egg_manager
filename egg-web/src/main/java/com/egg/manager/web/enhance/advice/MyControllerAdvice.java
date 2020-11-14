@@ -84,7 +84,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        e.printStackTrace();
+        log.error("执行异常--->",e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
     }
 
@@ -126,7 +126,7 @@ public class MyControllerAdvice {
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:");
         errors.stream().forEach(x -> errorMsg.append(x.getDefaultMessage()));
         log.error(errorMsg.toString());
-        return WebResult.gainErrorResult(errorMsg.toString());
+        return WebResult.error(errorMsg.toString());
     }
 
     /**
@@ -150,7 +150,7 @@ public class MyControllerAdvice {
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
         log.error(errorMsg.toString());
-        return WebResult.gainErrorResult(errorMsg.toString());
+        return WebResult.error(errorMsg.toString());
     }
 
 
@@ -167,7 +167,7 @@ public class MyControllerAdvice {
         LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
         StringBuffer errorMsg = new StringBuffer("表单验证错误信息:" + c.getMessage());
         log.error(errorMsg.toString());
-        return WebResult.gainErrorResult(errorMsg.toString());
+        return WebResult.error(errorMsg.toString());
     }
 
     public Integer getStatusCodeByException(Exception ex) {

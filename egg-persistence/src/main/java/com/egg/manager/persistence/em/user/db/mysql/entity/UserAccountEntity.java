@@ -50,7 +50,17 @@ public class UserAccountEntity extends Model<UserAccountEntity> {
      * 密码
      */
     @JsonIgnore
+    @TableField("password")
     private String password;
+    /**
+     * 密码的盐
+     * 真实密码->md5(明文password+salt)
+     * 验证密码->先取得salt,再结合 md5(明文password+salt)去验证是否与数据库的password一致
+     */
+    @JsonIgnore
+    @TableField("salt")
+    private String salt ;
+
     /**
      * 手机号码
      */

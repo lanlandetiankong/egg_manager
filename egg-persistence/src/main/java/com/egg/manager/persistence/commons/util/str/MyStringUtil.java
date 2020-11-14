@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.str;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
  * @description
  * @date 2020/10/21
  */
+@Slf4j
 public class MyStringUtil {
     public static final char UNDERLINE = '_';
 
@@ -71,7 +73,7 @@ public class MyStringUtil {
         try {
             result = URLDecoder.decode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("执行异常--->",e);;
         }
         return result;
     }

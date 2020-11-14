@@ -191,7 +191,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineMenuMapper.selectCount(queryWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
         List<DefineMenuEntity> defineMenuEntities = iPage.getRecords();
         result.putResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
@@ -204,7 +204,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
     }

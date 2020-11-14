@@ -61,7 +61,7 @@ public class UserExcelController extends BaseController {
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
                                      @NotBlank(message = "未知菜单id") String menuId, Long[] checkIds
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
@@ -80,7 +80,7 @@ public class UserExcelController extends BaseController {
     @PostMapping(value = "/exportAllList")
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
             DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
@@ -100,7 +100,7 @@ public class UserExcelController extends BaseController {
     @ResponseBody
     public WebResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
                                 @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
-        WebResult result = WebResult.gainOperationResult();
+        WebResult result = WebResult.okOperation();
         try {
             Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
             Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUserInfo, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccountEntity>());

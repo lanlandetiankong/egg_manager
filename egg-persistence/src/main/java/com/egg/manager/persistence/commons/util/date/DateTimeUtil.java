@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.date;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.text.ParseException;
@@ -13,6 +14,7 @@ import java.util.Locale;
  * @description
  * @date 2020/10/21
  */
+@Slf4j
 public class DateTimeUtil {
     /**
      *  G    Era    标志符            Text    公元
@@ -249,7 +251,7 @@ public class DateTimeUtil {
         try {
             return parseToDate(formatDateTimetoString(getSystemDate(), fmtstr));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("执行异常--->",e);;
             return getSystemDate();
         }
 
@@ -1284,7 +1286,7 @@ public class DateTimeUtil {
         try {
             date = DateTimeUtil.parseToDate(dateStr);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("执行异常--->",e);;
         }
 
         return date;

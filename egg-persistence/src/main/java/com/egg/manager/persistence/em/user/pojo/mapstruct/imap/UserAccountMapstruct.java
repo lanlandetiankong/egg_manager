@@ -29,7 +29,9 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccountEn
      * @param vo
      * @return
      */
-    @Mappings({})
+    @Mappings({
+            @Mapping(target = "salt", ignore = true)
+    })
     UserAccountEntity transferVoToEntity(UserAccountVo vo);
 
     /**
@@ -92,6 +94,7 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccountEn
             @Mapping(target = "createUserId", expression = "java(handleGetLoginUserId(loginUser,false))"),
             @Mapping(target = "lastModifyerId", expression = "java(handleGetLoginUserId(loginUser,false))"),
             @Mapping(target = "version", ignore = true),
+            @Mapping(target = "salt", ignore = true)
     })
     UserAccountEntity xlsInModelToEntity(UserAccountXlsInModel xlsInModel, @Context UserAccountEntity loginUser);
 }

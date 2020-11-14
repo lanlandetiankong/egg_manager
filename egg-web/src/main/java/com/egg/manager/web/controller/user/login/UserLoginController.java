@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.user.login;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
@@ -89,7 +90,7 @@ public class UserLoginController extends BaseController {
                                            @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccountEntity loginUser
     ) {
-        WebResult result = WebResult.gainQueryResult(UserAccountEntity.class);
+        WebResult result = WebResult.okQuery();
         try {
             Assert.notNull(loginAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
             Assert.notEmpty(loginAccountVo.getAccount(), BaseRstMsgConstant.ErrorMsg.emptyLoginAccount());
@@ -97,7 +98,10 @@ public class UserLoginController extends BaseController {
             //取得用户
             UserAccountEntity userAccountEntity = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             Assert.notNull(userAccountEntity, BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
-            Assert.isTrue(userAccountEntity.getPassword().equals(loginAccountVo.getPassword()), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
+            //取得 form的password+数据库的salt 进行md5加密后的值
+            String saltedPwd = SecureUtil.md5(loginAccountVo.getPassword()+ (StringUtils.isBlank(userAccountEntity.getSalt()) ? "" : userAccountEntity.getSalt())) ;
+            //判断: 数据库存储的md5(密码+salt) == (form的password+数据库salt)的值，匹配才能算验证成功
+            Assert.isTrue(userAccountEntity.getPassword().equals(saltedPwd), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
             if (userAccountEntity.getPassword().equals(loginAccountVo.getPassword())) {
                 UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
                 //账号密码验证通过

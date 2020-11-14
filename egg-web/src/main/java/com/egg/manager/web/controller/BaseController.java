@@ -96,8 +96,7 @@ public class BaseController {
             errmsg = errorMsg;
         }
         if (isPrintStackTrace) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
+            logger.error("接口执行异常--->",e);
         }
         //清空信息
         result.putMsg(errmsg);

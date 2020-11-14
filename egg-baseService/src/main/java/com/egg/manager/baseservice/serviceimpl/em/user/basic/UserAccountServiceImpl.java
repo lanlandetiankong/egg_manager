@@ -1,16 +1,20 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.egg.manager.api.exchange.helper.PasswordHelper;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.services.em.user.basic.UserGroupService;
 import com.egg.manager.api.services.em.user.basic.UserJobService;
+import com.egg.manager.api.services.em.user.basic.UserRoleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.define.UserAccountConstant;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
@@ -73,6 +77,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     private UserJobService userJobService ;
     @Reference
     private UserGroupService userGroupService ;
+    @Reference
+    private UserRoleService userRoleService ;
 
     @Override
     public UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
@@ -93,7 +99,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, Long.valueOf(total));
+        result.settingPage(paginationBean, Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
         result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
@@ -126,7 +132,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             }
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp, sortBeans, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }
@@ -139,6 +145,10 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
         userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity, true);
+        //密码-操作助手
+        PasswordHelper passwordHelper = new PasswordHelper();
+        //盐&md5密码加密
+        passwordHelper.encryptPassword(userAccountEntity);
         if (null == userAccountVo.getLocked()) {
             //如果没设置值，默认不锁定
             userAccountEntity.setLocked(SwitchStateEnum.Close.getValue());
@@ -219,11 +229,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, Long[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
-            List<String> lockIdList = Lists.newArrayList(lockIds);
+            List<Long> lockIdList = Lists.newArrayList(lockIds);
             //批量设置为 锁定
             lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUserInfo);
         }
@@ -259,7 +269,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                userRoleMapper.customBatchInsert(addEntitys);
+                userRoleService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -291,7 +301,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    userRoleMapper.customBatchInsert(addEntitys);
+                    userRoleService.saveBatch(addEntitys);
                 }
             }
         }
@@ -317,7 +327,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                userJobMapper.customBatchInsert(addEntitys);
+                userJobService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -350,7 +360,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                         addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    userJobMapper.customBatchInsert(addEntitys);
+                    userJobService.saveBatch(addEntitys);
                 }
             }
         }

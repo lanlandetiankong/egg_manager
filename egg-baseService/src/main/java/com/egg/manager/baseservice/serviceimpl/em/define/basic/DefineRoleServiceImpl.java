@@ -10,6 +10,7 @@ import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
+import com.egg.manager.api.services.em.user.basic.RolePermissionService;
 import com.egg.manager.api.services.em.user.basic.UserRoleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
@@ -72,7 +73,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Reference
     private UserRoleService userRoleService;
-
+    @Reference
+    private RolePermissionService rolePermissionService;
 
     @Override
     public List<DefineRoleEntity> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal) {
@@ -173,7 +175,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
         Integer total = defineRoleMapper.selectCount(defineRoleEntityWrapper);
-        result.myAntdvPaginationBeanSet(paginationBean, new Long(total));
+        result.settingPage(paginationBean, new Long(total));
         IPage iPage = defineRoleMapper.selectPage(page, defineRoleEntityWrapper);
         List<DefineRoleEntity> defineRoleEntities = iPage.getRecords();
         result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
@@ -186,7 +188,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                                          List<AntdvSortBean> sortBeans) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
-        result.myAntdvPaginationBeanSet(paginationBean, mpPagination.getTotal());
+        result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
         return result;
     }
@@ -228,7 +230,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                     addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                 }
                 //批量新增行
-                rolePermissionMapper.customBatchInsert(addEntitys);
+                rolePermissionService.saveBatch(addEntitys);
             } else {
                 List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
                 List<Long> enableIds = new ArrayList<>();
@@ -260,7 +262,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                         addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                     }
                     //批量新增行
-                    rolePermissionMapper.customBatchInsert(addEntitys);
+                    rolePermissionService.saveBatch(addEntitys);
                 }
             }
         }

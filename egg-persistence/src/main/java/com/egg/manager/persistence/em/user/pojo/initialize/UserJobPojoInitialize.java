@@ -23,7 +23,6 @@ public class UserJobPojoInitialize {
     public static UserJobEntity generateSimpleInsertEntity(Long userAccountId, Long defineJobId, UserAccountEntity loginUser) {
         UserJobEntity userJobEntity = new UserJobEntity();
         Date now = new Date();
-        //userJob.setFid(MyUUIDUtil.renderSimpleUuid());
         userJobEntity.setUserAccountId(userAccountId);
         userJobEntity.setDefineJobId(defineJobId);
         userJobEntity.setState(BaseStateEnum.ENABLED.getValue());

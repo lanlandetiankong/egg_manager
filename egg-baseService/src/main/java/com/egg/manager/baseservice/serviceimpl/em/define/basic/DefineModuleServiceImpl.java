@@ -72,7 +72,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineModuleVo defineModuleVo) throws Exception {
         DefineModuleEntity defineModuleEntity = DefineModuleTransfer.transferVoToEntity(defineModuleVo);
-        defineModuleEntity = super.doBeforeCreate(loginUserInfo, defineModuleEntity, true);
+        defineModuleEntity = super.doBeforeCreate(loginUserInfo, defineModuleEntity);
         return defineModuleMapper.insert(defineModuleEntity);
     }
 

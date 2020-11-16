@@ -198,7 +198,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineRoleVo defineRoleVo) throws Exception {
         Date now = new Date();
         DefineRoleEntity defineRoleEntity = DefineRoleTransfer.transferVoToEntity(defineRoleVo);
-        defineRoleEntity = super.doBeforeCreate(loginUserInfo, defineRoleEntity, true);
+        defineRoleEntity = super.doBeforeCreate(loginUserInfo, defineRoleEntity);
         return defineRoleMapper.insert(defineRoleEntity);
     }
 

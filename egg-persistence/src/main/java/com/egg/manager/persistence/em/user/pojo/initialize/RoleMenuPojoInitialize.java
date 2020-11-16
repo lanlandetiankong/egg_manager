@@ -34,7 +34,6 @@ public class RoleMenuPojoInitialize {
     public static RoleMenuEntity generateSimpleInsertEntity(Long defineRoleId, Long defineMenuId, Short stateVal, UserAccountEntity loginUser) {
         RoleMenuEntity roleMenuEntity = new RoleMenuEntity();
         Date now = new Date();
-        //roleMenu.setFid(MyUUIDUtil.renderSimpleUuid());
         roleMenuEntity.setDefineRoleId(defineRoleId);
         roleMenuEntity.setDefineMenuId(defineMenuId);
         roleMenuEntity.setType(1);

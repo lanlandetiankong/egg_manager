@@ -67,7 +67,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, AnnouncementDraftVo announcementDraftVo) throws Exception {
         AnnouncementDraftEntity entity = AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo);
-        entity = super.doBeforeCreate(loginUserInfo, entity, true);
+        entity = super.doBeforeCreate(loginUserInfo, entity);
         Integer addCount = announcementDraftMapper.insert(entity);
         return addCount;
     }

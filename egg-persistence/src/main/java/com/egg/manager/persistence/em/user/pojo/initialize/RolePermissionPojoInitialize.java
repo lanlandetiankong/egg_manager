@@ -23,7 +23,6 @@ public class RolePermissionPojoInitialize {
     public static RolePermissionEntity generateSimpleInsertEntity(Long defineRoleId, Long definePermissionId, UserAccountEntity loginUser) {
         RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
         Date now = new Date();
-        //rolePermission.setFid(MyUUIDUtil.renderSimpleUuid());
         rolePermissionEntity.setDefineRoleId(defineRoleId);
         rolePermissionEntity.setDefinePermissionId(definePermissionId);
         rolePermissionEntity.setType(1);

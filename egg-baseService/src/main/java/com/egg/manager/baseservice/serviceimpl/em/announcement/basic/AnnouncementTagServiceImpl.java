@@ -91,7 +91,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, AnnouncementTagVo announcementTagVo) throws Exception {
         AnnouncementTagEntity announcementTagEntity = AnnouncementTagTransfer.transferVoToEntity(announcementTagVo);
-        super.doBeforeCreate(loginUserInfo, announcementTagEntity, true);
+        super.doBeforeCreate(loginUserInfo, announcementTagEntity);
         return announcementTagMapper.insert(announcementTagEntity);
     }
 

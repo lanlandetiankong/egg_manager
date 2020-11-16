@@ -101,7 +101,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         }
         Date now = new Date();
         DefinePermissionEntity definePermissionEntity = DefinePermissionTransfer.transferVoToEntity(definePermissionVo);
-        definePermissionEntity = super.doBeforeCreate(loginUserInfo, definePermissionEntity, true);
+        definePermissionEntity = super.doBeforeCreate(loginUserInfo, definePermissionEntity);
         definePermissionEntity.setEnsure(BaseStateEnum.DISABLED.getValue());
         return definePermissionMapper.insert(definePermissionEntity);
     }

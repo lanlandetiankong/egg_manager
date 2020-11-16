@@ -219,7 +219,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         }
         Date now = new Date();
         DefineMenuEntity defineMenuEntity = DefineMenuTransfer.transferVoToEntity(defineMenuVo);
-        defineMenuEntity = super.doBeforeCreate(loginUserInfo, defineMenuEntity, true);
+        defineMenuEntity = super.doBeforeCreate(loginUserInfo, defineMenuEntity);
         Long parentId = defineMenuEntity.getParentId();
         //
         if (LongUtils.isBlank(parentId)) {

@@ -1,6 +1,7 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.config.db.SnowflakeConfig;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
@@ -8,7 +9,6 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.file.AntdFileUploadStatusEnum;
 import com.egg.manager.persistence.commons.base.props.upload.UploadProps;
-import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,6 +41,10 @@ public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
+
+    @Autowired
+    private SnowflakeConfig snowflakeConfig ;
+
     @ApiOperation(value = "上传/模板->excel", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
@@ -58,7 +62,7 @@ public class ExcelUploadController extends BaseController {
                 if (lastDotIndex > -1) {
                     fileType = oldFileName.substring(lastDotIndex);
                 }
-                String uuid = MyUUIDUtil.renderSimpleUuid();
+                Long uuid = snowflakeConfig.snowflakeId();
                 String uuidName = uuid + fileType;
                 String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
                 File folder = new File(baseDir);
@@ -72,7 +76,7 @@ public class ExcelUploadController extends BaseController {
 
                 AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
                         .name(oldFileName)
-                        .uid(uuid)
+                        .uid(String.valueOf(uuid))
                         .url(uploadProps.getUrlPrefix() + fileUri)
                         .uri(fileUri)
                         .urlLocation(fileUri)

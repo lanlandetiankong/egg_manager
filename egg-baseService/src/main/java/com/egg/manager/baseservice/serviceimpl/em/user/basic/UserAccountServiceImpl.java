@@ -145,7 +145,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             throw new MyDbException("唯一键[账号]不允许重复！");
         }
         UserAccountEntity userAccountEntity = UserAccountTransfer.transferVoToEntity(userAccountVo);
-        userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity, true);
+        userAccountEntity = super.doBeforeCreate(loginUserInfo, userAccountEntity);
         //密码-操作助手
         PasswordHelper passwordHelper = new PasswordHelper();
         //盐&md5密码加密

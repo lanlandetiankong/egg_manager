@@ -69,7 +69,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineJobVo defineJobVo) throws Exception {
         DefineJobEntity defineJobEntity = DefineJobTransfer.transferVoToEntity(defineJobVo);
-        defineJobEntity = super.doBeforeCreate(loginUserInfo, defineJobEntity, true);
+        defineJobEntity = super.doBeforeCreate(loginUserInfo, defineJobEntity);
         return defineJobMapper.insert(defineJobEntity);
     }
 

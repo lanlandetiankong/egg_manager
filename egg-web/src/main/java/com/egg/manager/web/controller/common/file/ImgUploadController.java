@@ -1,13 +1,13 @@
 package com.egg.manager.web.controller.common.file;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.config.db.SnowflakeConfig;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.props.upload.UploadProps;
-import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +40,10 @@ public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
 
+    @Autowired
+    private SnowflakeConfig snowflakeConfig ;
+
+
     @ApiOperation(value = "上传/图片->头像", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
     public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
@@ -56,7 +60,7 @@ public class ImgUploadController extends BaseController {
                 if (lastDotIndex > -1) {
                     fileType = oldFileName.substring(lastDotIndex);
                 }
-                String uuidName = MyUUIDUtil.renderSimpleUuid() + fileType;
+                String uuidName = snowflakeConfig.snowflakeId() + fileType;
                 String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
                 String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
                 File folder = new File(baseDir);

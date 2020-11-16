@@ -72,7 +72,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param uuidFlag
      * @return
      */
-    T doBeforeCreate(UserAccountEntity loginUser, T t, boolean uuidFlag);
+    T doBeforeCreate(UserAccountEntity loginUser, T t);
 
     /**
      * 更新Entity之前调用

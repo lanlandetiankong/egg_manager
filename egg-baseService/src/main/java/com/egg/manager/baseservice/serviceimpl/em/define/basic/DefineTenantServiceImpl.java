@@ -67,7 +67,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineTenantVo defineTenantVo) throws Exception {
         DefineTenantEntity defineTenantEntity = DefineTenantTransfer.transferVoToEntity(defineTenantVo);
-        defineTenantEntity = super.doBeforeCreate(loginUserInfo, defineTenantEntity, true);
+        defineTenantEntity = super.doBeforeCreate(loginUserInfo, defineTenantEntity);
         Integer addCount = defineTenantMapper.insert(defineTenantEntity);
         return addCount;
     }

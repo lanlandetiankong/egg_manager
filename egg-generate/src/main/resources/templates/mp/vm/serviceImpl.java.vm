@@ -80,7 +80,6 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         public Integer dealAdd${cfg.baseEntityName}(${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,UserAccount loginUser)throws Exception{
         Date now=new Date();
     ${cfg.baseEntityName} ${cfg.baseEntityName_firstLow} = ${cfg.baseEntityName}Transfer.transferVoToEntity(${cfg.baseEntityName_firstLow}Vo);
-    ${cfg.baseEntityName_firstLow}.setFid(MyUUIDUtil.renderSimpleUuid());
     ${cfg.baseEntityName_firstLow}.setState(BaseStateEnum.ENABLED.getValue());
     ${cfg.baseEntityName_firstLow}.setCreateTime(now);
     ${cfg.baseEntityName_firstLow}.setUpdateTime(now);

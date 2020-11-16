@@ -90,7 +90,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineDepartmentVo defineDepartmentVo) throws Exception {
         DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
-        defineDepartmentEntity = super.doBeforeCreate(loginUserInfo, defineDepartmentEntity, true);
+        defineDepartmentEntity = super.doBeforeCreate(loginUserInfo, defineDepartmentEntity);
         Long parentId = defineDepartmentEntity.getParentId();
         if (LongUtils.isNotBlank(parentId)) {
             DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);

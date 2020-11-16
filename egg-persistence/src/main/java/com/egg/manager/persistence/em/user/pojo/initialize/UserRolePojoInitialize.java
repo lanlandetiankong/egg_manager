@@ -23,7 +23,6 @@ public class UserRolePojoInitialize {
     public static UserRoleEntity generateSimpleInsertEntity(Long userAccountId, Long defineRoleId, UserAccountEntity loginUser) {
         UserRoleEntity userRoleEntity = new UserRoleEntity();
         Date now = new Date();
-        //userRole.setFid(MyUUIDUtil.renderSimpleUuid());
         userRoleEntity.setUserAccountId(userAccountId);
         userRoleEntity.setDefineRoleId(defineRoleId);
         userRoleEntity.setType(1);

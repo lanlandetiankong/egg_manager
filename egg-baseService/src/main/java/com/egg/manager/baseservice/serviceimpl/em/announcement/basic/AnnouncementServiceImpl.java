@@ -91,7 +91,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     @Override
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, AnnouncementVo announcementVo) throws Exception {
         AnnouncementEntity announcementEntity = AnnouncementTransfer.transferVoToEntity(announcementVo);
-        announcementEntity = super.doBeforeCreate(loginUserInfo, announcementEntity, true);
+        announcementEntity = super.doBeforeCreate(loginUserInfo, announcementEntity);
         return announcementMapper.insert(announcementEntity);
     }
 
@@ -103,7 +103,6 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         Long draftId = announcementDraftVo.getFid();
         //发布公告
         AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUserInfo, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
-        //id->announcement.setFid(MyUUIDUtil.renderSimpleUuid());
         announcementEntity.setState(BaseStateEnum.ENABLED.getValue());
         announcementEntity.setCreateTime(now);
         announcementEntity.setUpdateTime(now);

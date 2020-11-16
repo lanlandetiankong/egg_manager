@@ -22,9 +22,9 @@ public class MySqlDocsGenerator {
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test");
+        hikariConfig.setJdbcUrl("jdbc:mysql://47.99.160.215:3306/egg_manager?useUnicode=true&characterEncoding=utf8&useSSL=false");
         hikariConfig.setUsername("root");
-        hikariConfig.setPassword("root");
+        hikariConfig.setPassword("egg_root");
         //设置可以获取tables remarks信息
         hikariConfig.addDataSourceProperty("useInformationSchema", "true");
         hikariConfig.setMinimumIdle(2);

@@ -1,9 +1,13 @@
 package com.egg.manager.persistence.commons.base.beans.helper;
 
+import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,23 +32,6 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
             return ifNullObj ;
         }
         return (T) o ;
-    }
-    /**
-     * 添加 更多参数
-     * @param key
-     * @param value
-     */
-    public void addMoreAttribute(String key, Object value) {
-        Object obj = this.get(MORE_ATTRIBUTE) ;
-        if(obj == null || (obj instanceof Map == false)){
-            Map<String,Object> map = Maps.newHashMap();
-            map.put(key,value);
-            this.put(MORE_ATTRIBUTE,map);
-        }   else {
-            Map<String,Object> map = (Map) obj ;
-            map.put(key,value) ;
-            this.put(MORE_ATTRIBUTE,map);
-        }
     }
 
     /**
@@ -103,6 +90,25 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
     }
     public void putEnumDefaultCheckList(List val){
         this.put(ENUM_DEFAULT_CHECK_LIST,val);
+    }
+
+    public void putPermissionSet(Collection collection){
+        this.put(KEY_PERMISSION_SET,collection);
+    }
+    public void putRouterUrlSet(Collection collection){
+        this.put(KEY_ROUTER_URL_SET,collection);
+    }
+
+    public void putAccountToken(UserAccountToken token){
+        this.put(KEY_ACCOUNTTOKEN,token);
+    }
+
+    public void putFileUploaderBeanList(List<AntdFileUploadBean> uploadBeanList){
+        this.put(KEY_FILEUPLOAD_BEANLIST,uploadBeanList);
+    }
+
+    public void putFileResBean(FileResBean fileResBean){
+        this.put(KEY_FILERES_BEAN,fileResBean);
     }
 
 

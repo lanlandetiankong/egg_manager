@@ -4,7 +4,6 @@ import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.config.db.SnowflakeConfig;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.props.upload.UploadProps;
@@ -79,7 +78,7 @@ public class ImgUploadController extends BaseController {
                         .filePrefix(uploadProps.getUrlPrefix() + File.separator)
                         .fileUri(fileUri)
                         .build();
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILERES_BEAN, fileResBean);
+                result.putFileResBean(fileResBean);
             } catch (IOException e) {
                 throw e;
             }

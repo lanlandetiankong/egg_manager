@@ -73,6 +73,25 @@ public interface BaseResultConstant extends Serializable {
     String PAGINATION_BEAN = "paginationBean";
 
 
-
+    /**
+     * 权限-Set集合
+     */
+    String KEY_PERMISSION_SET = "permissionSet";
+    /**
+     * 可访问的路由地址-Set集合
+     */
+    String KEY_ROUTER_URL_SET = "routerUrlSet";
+    /**
+     * 文件信息-bean
+     */
+    String KEY_FILERES_BEAN = "fileResBean";
+    /**
+     * 文件上传-beanList
+     */
+    String KEY_FILEUPLOAD_BEANLIST = "fileUploaderBeanList";
+    /**
+     * 账号token
+     */
+    String KEY_ACCOUNTTOKEN = "accountToken";
 
 }

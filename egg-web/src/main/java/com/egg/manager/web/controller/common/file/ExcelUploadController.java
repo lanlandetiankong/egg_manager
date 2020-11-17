@@ -4,7 +4,6 @@ import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.config.db.SnowflakeConfig;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.file.AntdFileUploadStatusEnum;
@@ -85,7 +84,7 @@ public class ExcelUploadController extends BaseController {
                         .build();
                 uploadBeanList.add(uploadBean);
             }
-            result.addMoreAttribute(MyRstMoreAttrKey.KEY_FILEUPLOAD_BEANLIST, uploadBeanList);
+            result.putFileUploaderBeanList(uploadBeanList);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

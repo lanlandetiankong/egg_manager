@@ -10,7 +10,6 @@ import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
@@ -107,7 +106,7 @@ public class UserLoginController extends BaseController {
             Assert.isTrue(passwordHelper.isPasswordMatch(loginAccountVo.getPassword(),userAccountEntity));
             UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
             //账号密码验证通过
-            result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN, userAccountToken);
+            result.putAccountToken(userAccountToken);
             //用户登录信息验证成功，在shiro进行一些登录处理
             //添加用户认证信息
             Subject subject = SecurityUtils.getSubject();
@@ -175,8 +174,8 @@ public class UserLoginController extends BaseController {
             defineRoleService.queryDbToCacheable(userAccountId);
             Set<String> routerUrlSet = defineMenuService.dealGetUserVisitAbleUrl(userAccountId);
             if (result != null) {
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ROUTER_URL_SET, routerUrlSet);
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_PERMISSION_SET, permissionSet);
+                result.putRouterUrlSet(routerUrlSet);
+                result.putPermissionSet(permissionSet);
             }
         } else {
             log.error("未能成功缓存用户信息到Redis");

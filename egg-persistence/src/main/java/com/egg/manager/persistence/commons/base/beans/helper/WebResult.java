@@ -49,9 +49,15 @@ public class WebResult extends AbstractResult{
         result.put(MSG,errorMsg);
         return result;
     }
+    public WebResult toError(){
+        return toError(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
+    }
 
-
-
+    public WebResult toError(String msg){
+        this.putHasError(true);
+        this.putMsg(msg);
+        return this ;
+    }
 
 
 

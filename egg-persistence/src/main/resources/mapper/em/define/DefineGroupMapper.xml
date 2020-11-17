@@ -41,7 +41,7 @@
             ${base_alias_name}.update_time,
             ${base_alias_name}.version,
             ${base_alias_name}.is_deleted,
-            ${base_alias_name}.deleted_time,
+            ${base_alias_name}.deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)

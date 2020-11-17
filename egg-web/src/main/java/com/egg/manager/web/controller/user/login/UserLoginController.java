@@ -105,33 +105,31 @@ public class UserLoginController extends BaseController {
             //判断: 数据库存储的md5(密码+salt) == (form的password+数据库salt)的值，匹配才能算验证成功
             //Assert.isTrue(userAccountEntity.getPassword().equals(saltedPwd), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
             Assert.isTrue(passwordHelper.isPasswordMatch(loginAccountVo.getPassword(),userAccountEntity));
-            if (userAccountEntity.getPassword().equals(loginAccountVo.getPassword())) {
-                UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
-                //账号密码验证通过
-                result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN, userAccountToken);
-                //用户登录信息验证成功，在shiro进行一些登录处理
-                //添加用户认证信息
-                Subject subject = SecurityUtils.getSubject();
-                String authorization = JwtUtil.sign(userAccountEntity.getFid());
-                JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
-                //进行验证，这里可以捕获异常，然后返回对应信息
-                subject.login(jwtShiroToken);
-                //所属租户
-                DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccountEntity.getFid());
-                if (defineTenantDto != null) {
-                    userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
-                }
-                //所属部门
-                DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccountEntity.getFid());
-                if (defineDepartmentDto != null) {
-                    userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
-                }
-                userAccountToken.setAuthorization(authorization);
-                //redis30分钟过期
-                this.dealSetTokenToRedis(loginUser, userAccountToken, result);
-                //返回给前端 jwt jwt值
-                result.putAuthorization(authorization);
+            UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
+            //账号密码验证通过
+            result.addMoreAttribute(MyRstMoreAttrKey.KEY_ACCOUNTTOKEN, userAccountToken);
+            //用户登录信息验证成功，在shiro进行一些登录处理
+            //添加用户认证信息
+            Subject subject = SecurityUtils.getSubject();
+            String authorization = JwtUtil.sign(userAccountEntity.getFid());
+            JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
+            //进行验证，这里可以捕获异常，然后返回对应信息
+            subject.login(jwtShiroToken);
+            //所属租户
+            DefineTenantDto defineTenantDto = defineTenantMapper.selectOneDtoOfUserBelongTenant(userAccountEntity.getFid());
+            if (defineTenantDto != null) {
+                userAccountToken.setUserBelongTenantId(defineTenantDto.getFid());
             }
+            //所属部门
+            DefineDepartmentDto defineDepartmentDto = defineDepartmentMapper.selectOneDtoOfUserBelongDepartment(userAccountEntity.getFid());
+            if (defineDepartmentDto != null) {
+                userAccountToken.setUserBelongTenantId(defineDepartmentDto.getFid());
+            }
+            userAccountToken.setAuthorization(authorization);
+            //redis30分钟过期
+            this.dealSetTokenToRedis(loginUser, userAccountToken, result);
+            //返回给前端 jwt jwt值
+            result.putAuthorization(authorization);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

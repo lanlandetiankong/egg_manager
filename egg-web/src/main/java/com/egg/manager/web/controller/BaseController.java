@@ -70,7 +70,7 @@ public class BaseController {
             writer = response.getWriter();
             writer.write(JSONObject.toJSONString(result));
         } catch (IOException e) {
-            logger.error(e.getCause().getMessage());
+            logger.error("",e);
         }
     }
 

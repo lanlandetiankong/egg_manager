@@ -928,10 +928,10 @@ public class FileUtil {
                 buf = new byte[1024];
             }
         } catch (FileNotFoundException e) {
-            log.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error("filePath:"+file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            log.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error("filePath:"+file.getPath(), e);
             throw e;
         } finally {
             try {
@@ -964,10 +964,10 @@ public class FileUtil {
 
             out.write(content.getBytes("utf-8"));
         } catch (FileNotFoundException e) {
-            log.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error("filePath:"+file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            log.error(e.getMessage() + ";" + file.getPath(), e);
+            log.error("filePath:"+file.getPath(), e);
             throw e;
         } finally {
             try {

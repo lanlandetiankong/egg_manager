@@ -176,7 +176,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             logMgo.setCreateTime(now);
             logMgo.setLastModifiedDate(now);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/Transfer:",e);
         }
         return logMgo ;
     }
@@ -194,7 +194,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 logMgo.setAnnotationOperationType(queryLogAnno.type());
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/Transfer:",e);
         }
     }
 
@@ -212,7 +212,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 logMgo.setAnnotationOperationType(operationLogAnno.type());
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/Transfer:",e);
         }
     }
 
@@ -229,7 +229,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                 logMgo.setAnnotationOperationType(loginLogAnno.type());
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/Transfer:",e);
         }
     }
 
@@ -247,7 +247,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             Class[] parameterTypes = ((MethodSignature) signature).getMethod().getParameterTypes();
             method = signature.getDeclaringType().getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/方法未找到:",e);
         }
         return method;
     }
@@ -266,7 +266,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             Class[] parameterTypes = ((MethodSignature) signature).getMethod().getParameterTypes();
             method = signature.getDeclaringType().getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
-            log.error(e.getMessage());
+            log.error("Aop接口异常/方法未找到:",e);
         }
         return method;
     }

@@ -36,5 +36,5 @@ public interface AnnouncementDraftMapper extends MyEggMapper<AnnouncementDraftEn
      * @param loginUser
      * @return
      */
-    int batchPublishByIds(@Param(EggMpSqlConst.PARAMOF_IDS) List<Long> ids, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
+    int batchPublishByIds(@Param(EggMpSqlConst.PARAMOF_IDS) List<String> ids, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

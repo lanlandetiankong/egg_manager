@@ -91,7 +91,7 @@
         </include>
     </select>
 
-    <select id="findAllRoleIdByUserAccountId" resultType="java.lang.Long">
+    <select id="findAllRoleIdByUserAccountId" resultType="java.lang.String">
         SELECT dr.fid FROM em_define_role dr
         left JOIN em_user_role ur on dr.fid = ur.define_role_id
         <where>

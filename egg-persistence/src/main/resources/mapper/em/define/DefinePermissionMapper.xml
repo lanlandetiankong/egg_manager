@@ -115,7 +115,7 @@
         WHERE define_role_id = #{roleId}
     </update>
 
-    <select id="findAllPermissionByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="findAllPermissionByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Alias_Table_List">
             <property name="base_alias_name" value="dp"/>

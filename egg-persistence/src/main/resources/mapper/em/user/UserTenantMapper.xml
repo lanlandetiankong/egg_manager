@@ -93,7 +93,7 @@
     </select>
 
 
-    <select id="findAllTenantIdByUserAccountId" resultType="java.lang.Long">
+    <select id="findAllTenantIdByUserAccountId" resultType="java.lang.String">
         SELECT edt.fid FROM em_define_tenant edt
         left JOIN em_user_tenant eut on edt.fid = eut.define_tenant_id
         <where>

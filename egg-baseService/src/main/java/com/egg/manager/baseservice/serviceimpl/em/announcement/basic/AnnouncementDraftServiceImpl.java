@@ -56,7 +56,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
                                          List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
         result.settingPage(paginationBean, mpPagination.getTotal());
@@ -91,11 +91,11 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
     }
 
     @Override
-    public Integer dealBatchPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long[] draftIds) throws Exception {
+    public Integer dealBatchPublishByDraft(CurrentLoginUserInfo loginUserInfo, String[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {
             //批量伪删除
-            for (Long draftId : draftIds) {
+            for (String draftId : draftIds) {
                 Integer addCount = this.dealPublishByDraft(loginUserInfo, draftId, true);
                 if (addCount != null) {
                     delCount += addCount;
@@ -107,7 +107,7 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public Integer dealPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long draftId, boolean insertFlag) throws Exception {
+    public Integer dealPublishByDraft(CurrentLoginUserInfo loginUserInfo, String draftId, boolean insertFlag) throws Exception {
         AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
         AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUserInfo, announcementDraftEntity);
         if (announcementEntity != null && insertFlag == true) {

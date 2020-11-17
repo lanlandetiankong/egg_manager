@@ -48,7 +48,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    AnnouncementVo transferEntityToVo(AnnouncementEntity entity, @Context Map<Long, AnnouncementTagEntity> announcementTagMap);
+    AnnouncementVo transferEntityToVo(AnnouncementEntity entity, @Context Map<String, AnnouncementTagEntity> announcementTagMap);
 
     /**
      * dto转vo
@@ -62,7 +62,7 @@ public interface AnnouncementMapstruct extends MyBaseMysqlMapstruct<Announcement
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<Long, AnnouncementTagEntity> announcementTagMap);
+    AnnouncementVo transferDtoToVo(AnnouncementDto dto, @Context Map<String, AnnouncementTagEntity> announcementTagMap);
 
     /**
      * 公告草稿转公告(entity->entity)

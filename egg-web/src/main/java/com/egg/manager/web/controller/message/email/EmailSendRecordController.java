@@ -140,7 +140,7 @@ public class EmailSendRecordController extends BaseController {
     @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量伪删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelByIds")
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {

@@ -141,7 +141,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
-    public WebResult gainGrantedRole(HttpServletRequest request, Long userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         try {
             List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
@@ -155,7 +155,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
-    public WebResult gainGrantedPermission(HttpServletRequest request, Long userAccountId,
+    public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         try {
@@ -171,7 +171,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
-    public WebResult gainGrantedJob(HttpServletRequest request, Long userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         try {
             List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
@@ -222,7 +222,7 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -263,7 +263,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
-    public WebResult batchUpdateLockByIds(HttpServletRequest request, Long[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
         try {
@@ -285,7 +285,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
-    public WebResult updateLockById(HttpServletRequest request, Long lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
         try {
@@ -305,7 +305,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
-    public WebResult doGrantRoleToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         try {
             Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
@@ -321,7 +321,7 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
-    public WebResult doGrantJobToUser(HttpServletRequest request, Long userAccountId, Long[] checkIds,
+    public WebResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         try {

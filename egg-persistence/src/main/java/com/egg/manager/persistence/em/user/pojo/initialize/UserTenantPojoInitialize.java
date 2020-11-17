@@ -22,7 +22,7 @@ public class UserTenantPojoInitialize {
      * @param loginUser      当前登录用户
      * @return
      */
-    public static UserTenantEntity generateSimpleInsertEntity(Long userAccountId, Long defineTenantId, UserAccountEntity loginUser) {
+    public static UserTenantEntity generateSimpleInsertEntity(String userAccountId, String defineTenantId, UserAccountEntity loginUser) {
         UserTenantEntity userTenantEntity = new UserTenantEntity();
         Date now = new Date();
         userTenantEntity.setUserAccountId(userAccountId);
@@ -46,7 +46,7 @@ public class UserTenantPojoInitialize {
      * @param loginUser      当前登录用户
      * @return
      */
-    public static UserTenantEntity generateInsertIsManagerEntity(Long userAccountId, Long defineTenantId, UserAccountEntity loginUser) {
+    public static UserTenantEntity generateInsertIsManagerEntity(String userAccountId, String defineTenantId, UserAccountEntity loginUser) {
         UserTenantEntity userTenantEntity = new UserTenantEntity();
         Date now = new Date();
         userTenantEntity.setUserAccountId(userAccountId);

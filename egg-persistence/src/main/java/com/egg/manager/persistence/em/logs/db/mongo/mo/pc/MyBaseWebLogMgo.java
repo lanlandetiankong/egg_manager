@@ -19,7 +19,7 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      * 登录的用户id
      */
     @Field(value = "userAccountId")
-    private Long userAccountId;
+    private String userAccountId;
     /**
      * 登录的用户名称
      */

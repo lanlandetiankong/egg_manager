@@ -162,7 +162,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         Integer addCount = userAccountMapper.insert(userAccountEntity);
         //关联 租户
-        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
+        if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
             UserTenantEntity userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUserInfo);
             userTenantMapper.insert(userTenantEntity);
         } else {
@@ -170,7 +170,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
 
         //关联 部门
-        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
+        if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
             UserDepartmentEntity userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUserInfo);
             userDepartmentMapper.insert(userDepartmentEntity);
         } else {
@@ -193,7 +193,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         userAccountEntity = super.doBeforeUpdate(loginUserInfo, userAccountEntity);
         changeCount = userAccountMapper.updateById(userAccountEntity);
         //关联 租户
-        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
+        if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
             QueryWrapper<UserTenantEntity> tenantQueryWrapper = new QueryWrapper<UserTenantEntity>();
             tenantQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
                     .eq("state", BaseStateEnum.ENABLED.getValue());
@@ -209,7 +209,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             throw new BusinessException("关联用户与租户失败！更新用户失败！");
         }
         //关联 部门
-        if (LongUtils.isNotBlank(userAccountEntity.getFid()) && LongUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
+        if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
             QueryWrapper<UserDepartmentEntity> departmentQueryWrapper = new QueryWrapper<UserDepartmentEntity>();
             departmentQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
                     .eq("state", BaseStateEnum.ENABLED.getValue());
@@ -230,11 +230,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, Long[] lockIds, boolean isLock) throws Exception {
+    public Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception {
         int lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         Integer lockCount = 0;
         if (lockIds != null && lockIds.length > 0) {
-            List<Long> lockIdList = Lists.newArrayList(lockIds);
+            List<String> lockIdList = Lists.newArrayList(lockIds);
             //批量设置为 锁定
             lockCount = userAccountMapper.batchLockUserByIds(lockIdList, lockState, loginUserInfo);
         }
@@ -243,7 +243,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealRenewLock(CurrentLoginUserInfo loginUserInfo, Long lockId, boolean isLock) throws Exception {
+    public Integer dealRenewLock(CurrentLoginUserInfo loginUserInfo, String lockId, boolean isLock) throws Exception {
         Short lockState = isLock ? SwitchStateEnum.Open.getValue() : SwitchStateEnum.Close.getValue();
         UserAccountEntity userAccountEntity = UserAccountEntity.builder().fid(lockId).locked(lockState).build();
         if (loginUserInfo != null) {
@@ -254,30 +254,30 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public Integer dealGrantRoleToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantRoleToUser(CurrentLoginUserInfo loginUserInfo, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
-        Long loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
+        String loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
             changeCount = userAccountMapper.clearAllRoleByUserId(userAccountId, loginUserInfo);
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的角色id 集合
-            List<Long> oldCheckRoleIds = userRoleMapper.findAllRoleIdByUserAccountId(userAccountId, false);
+            List<String> oldCheckRoleIds = userRoleMapper.findAllRoleIdByUserAccountId(userAccountId, false);
             if (CollectionUtil.isEmpty(oldCheckRoleIds)) {
                 List<UserRoleEntity> addEntitys = new ArrayList<>();
-                for (Long checkId : checkIds) {
+                for (String checkId : checkIds) {
                     addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 userRoleService.saveBatch(addEntitys);
             } else {
-                List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
-                List<Long> enableIds = new ArrayList<>();
-                List<Long> disabledIds = new ArrayList<>();
-                Iterator<Long> oldCheckIter = oldCheckRoleIds.iterator();
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
+                List<String> enableIds = new ArrayList<>();
+                List<String> disabledIds = new ArrayList<>();
+                Iterator<String> oldCheckIter = oldCheckRoleIds.iterator();
                 while (oldCheckIter.hasNext()) {
-                    Long oldCheckId = oldCheckIter.next();
+                    String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
                     if (isOldRow) {
                         //原本有的数据行
@@ -298,7 +298,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     List<UserRoleEntity> addEntitys = new ArrayList<>();
-                    for (Long checkId : checkIdList) {
+                    for (String checkId : checkIdList) {
                         addEntitys.add(UserRolePojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
@@ -312,30 +312,30 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public Integer dealGrantJobToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception {
+    public Integer dealGrantJobToUser(CurrentLoginUserInfo loginUserInfo, String userAccountId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
-        Long loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
+        String loginUserId = loginUserInfo != null ? loginUserInfo.getFid() : null;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
             changeCount = userAccountMapper.clearAllJobByUserId(userAccountId, loginUserInfo);
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的职务id 集合
-            List<Long> oldCheckJobIds = userJobMapper.findAllJobIdByUserAccountId(userAccountId, false);
+            List<String> oldCheckJobIds = userJobMapper.findAllJobIdByUserAccountId(userAccountId, false);
             if (CollectionUtil.isEmpty(oldCheckJobIds)) {
                 List<UserJobEntity> addEntitys = new ArrayList<>();
-                for (Long checkId : checkIds) {
+                for (String checkId : checkIds) {
                     addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 userJobService.saveBatch(addEntitys);
             } else {
-                List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
-                List<Long> enableIds = new ArrayList<>();
-                List<Long> disabledIds = new ArrayList<>();
-                Iterator<Long> oldCheckIter = oldCheckJobIds.iterator();
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
+                List<String> enableIds = new ArrayList<>();
+                List<String> disabledIds = new ArrayList<>();
+                Iterator<String> oldCheckIter = oldCheckJobIds.iterator();
                 while (oldCheckIter.hasNext()) {
-                    Long oldCheckId = oldCheckIter.next();
+                    String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
                     if (isOldRow) {
                         //原本有的数据行
@@ -357,7 +357,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                     //有新勾选的权限，需要新增行
                     //批量新增行
                     List<UserJobEntity> addEntitys = new ArrayList<>();
-                    for (Long checkId : checkIdList) {
+                    for (String checkId : checkIdList) {
                         addEntitys.add(UserJobPojoInitialize.generateSimpleInsertEntity(userAccountId, checkId, loginUserInfo));
                     }
                     //批量新增行
@@ -378,7 +378,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
+    public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, String[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         wrapper.in(checkIds != null,"fid", checkIds);
         return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
@@ -401,7 +401,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
     @Override
     @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ACCOUNT,key = "#userAccountId",condition = "#userAccountId!=null")
-    public CurrentLoginUserInfo queryDbToCacheable(Long userAccountId) {
+    public CurrentLoginUserInfo queryDbToCacheable(String userAccountId) {
         if(userAccountId == null){
             return null ;
         }

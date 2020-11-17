@@ -29,7 +29,7 @@ public class UserGroupServiceImpl extends MyBaseMysqlServiceImpl<UserGroupMapper
 
 
     @Override
-    public List<DefineGroupEntity> queryAllUserBelong(Long userAccountId) {
+    public List<DefineGroupEntity> queryAllUserBelong(String userAccountId) {
         List<DefineGroupEntity> allJobByUserAcccountId = defineGroupMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         return allJobByUserAcccountId ;
     }

@@ -51,7 +51,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String authorization = httpServletRequest.getHeader("authorization");
-        Long userAccountId = JwtUtil.getUserAccountId(authorization);
+        String userAccountId = JwtUtil.getUserAccountId(authorization);
         JwtShiroToken jwtShiroToken = new JwtShiroToken(authorization);
         // 触发 Relam.doGetAuthenticationInfo
         getSubject(request, response).login(jwtShiroToken);
@@ -161,7 +161,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class);
         }
         //取得用户id
-        Long userId = JwtUtil.getUserAccountId(token.getPrincipal().toString());
+        String userId = JwtUtil.getUserAccountId(token.getPrincipal().toString());
         UserAccountEntity userAccountEntity = userAccountService.getById(userId);
         if (userAccountEntity != null) {
             request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccountEntity));

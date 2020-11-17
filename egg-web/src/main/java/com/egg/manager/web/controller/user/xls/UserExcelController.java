@@ -59,7 +59,7 @@ public class UserExcelController extends BaseController {
     @ApiOperation(value = "导出/所选->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/exportCheckList")
     public void dealExportCheckLists(HttpServletRequest request, HttpServletResponse response,
-                                     @NotBlank(message = "未知菜单id") String menuId, Long[] checkIds
+                                     @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         try {

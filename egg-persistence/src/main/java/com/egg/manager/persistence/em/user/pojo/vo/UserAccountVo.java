@@ -79,7 +79,7 @@ public class UserAccountVo extends MyBaseMysqlVo {
     /**
      * 所属租户id
      */
-    private Long belongTenantId;
+    private String belongTenantId;
     /**
      * 所属租户-vo
      */
@@ -88,7 +88,7 @@ public class UserAccountVo extends MyBaseMysqlVo {
     /**
      * 所属部门-id
      */
-    private Long belongDepartmentId;
+    private String belongDepartmentId;
     /**
      * 所属部门-vo
      */

@@ -23,7 +23,7 @@ import java.util.Date;
 public class DefineJobEntity extends Model<DefineJobEntity> {
 
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
-    private Long fid;
+    private String fid;
     /**
      * 名称
      */
@@ -64,12 +64,12 @@ public class DefineJobEntity extends Model<DefineJobEntity> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private Long createUserId;
+    private String createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private Long lastModifyerId;
+    private String lastModifyerId;
     /**
      * 版本号
      */

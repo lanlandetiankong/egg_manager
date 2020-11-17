@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class MyBaseMysqlDto implements Serializable {
 
-    private Long fid;
+    private String fid;
 
     /**
      * 备注
@@ -35,11 +35,11 @@ public class MyBaseMysqlDto implements Serializable {
     /**
      * 创建用户id
      */
-    private Long createUserId;
+    private String createUserId;
     /**
      * 最后修改用户id
      */
-    private Long lastModifyerId;
+    private String lastModifyerId;
     /**
      * 创建人-vo
      */

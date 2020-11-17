@@ -22,17 +22,17 @@ import java.util.Date;
 @TableName("em_user_job")
 public class UserJobEntity extends Model<UserJobEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
-    private Long fid;
+    private String fid;
     /**
      * 账号id
      */
     @TableField(value = "user_account_id")
-    private Long userAccountId;
+    private String userAccountId;
     /**
      * 职务id
      */
     @TableField(value = "define_job_id")
-    private Long defineJobId;
+    private String defineJobId;
 
 
     /**
@@ -59,12 +59,12 @@ public class UserJobEntity extends Model<UserJobEntity> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private Long createUserId;
+    private String createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private Long lastModifyerId;
+    private String lastModifyerId;
     /**
      * 版本号
      */

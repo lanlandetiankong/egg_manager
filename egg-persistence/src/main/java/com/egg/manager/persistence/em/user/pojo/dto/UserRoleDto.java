@@ -19,7 +19,7 @@ public class UserRoleDto extends MyBaseMysqlDto {
     /**
      * 账号id
      */
-    private Long userAccountId;
+    private String userAccountId;
     /**
      * 角色id
      */

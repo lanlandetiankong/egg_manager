@@ -34,7 +34,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEnti
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
      */
-    List<DefineDepartmentEntity> getDepartmentFilterChildrens(@Param("filterId") Long filterId, @Param("onlyEnable") boolean onlyEnable);
+    List<DefineDepartmentEntity> getDepartmentFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
 
     /**
      * 根据用户id查询 所属的部门详情
@@ -42,12 +42,12 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEnti
      * @param departmentState
      * @return
      */
-    DefineDepartmentEntity selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("departmentState") Short departmentState);
+    DefineDepartmentEntity selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentState") Short departmentState);
 
     /**
      * 根据用户id查询 所属的部门详情-dto
      * @param userAccountId
      * @return
      */
-    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
+    DefineDepartmentDto selectOneDtoOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 }

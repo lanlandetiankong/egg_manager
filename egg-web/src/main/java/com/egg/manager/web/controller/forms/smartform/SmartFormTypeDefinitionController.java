@@ -188,7 +188,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelByIds")
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {

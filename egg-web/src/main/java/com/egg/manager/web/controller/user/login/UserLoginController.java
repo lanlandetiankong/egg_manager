@@ -144,7 +144,7 @@ public class UserLoginController extends BaseController {
      */
     public void dealSetTokenToRedis(UserAccountEntity loginUser, UserAccountToken userAccountToken, WebResult result) throws InvocationTargetException, IllegalAccessException {
         //将用户 token 分别存入到redis
-        Long userAccountId = userAccountToken.getUserAccountId();
+        String userAccountId = userAccountToken.getUserAccountId();
         if (userAccountToken != null && userAccountId != null && StringUtils.isNotBlank(userAccountToken.getAuthorization())) {
             //通过当前用户id 取得原先的 authorization(如果在ttl期间重新登录的话
             Object oldAuthorization = redisHelper.hashGet(RedisShiroCacheEnum.userAuthorization.getKey(), String.valueOf(userAccountId));

@@ -19,6 +19,7 @@ import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTrans
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +52,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodes(CurrentLoginUserInfo loginUserInfo, Long rootId, List<DefineDepartmentEntity> allDepartments) {
+    public List<CommonTreeSelect> getTreeSelectChildNodes(CurrentLoginUserInfo loginUserInfo, String rootId, List<DefineDepartmentEntity> allDepartments) {
         if (allDepartments == null || allDepartments.size() == 0) {
             return null;
         }
@@ -59,7 +60,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
         for (DefineDepartmentEntity defineDepartmentEntity : allDepartments) {
-            if (LongUtils.isNotBlank(defineDepartmentEntity.getParentId())) {
+            if (StringUtils.isNotBlank(defineDepartmentEntity.getParentId())) {
                 if (rootId != null) {
                     if (rootId.equals(defineDepartmentEntity.getParentId())) {
                         tree = new CommonTreeSelect();
@@ -78,7 +79,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     }
 
     @Override
-    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(CurrentLoginUserInfo loginUserInfo, Long rootId, List<DefineDepartmentEntity> allDefineDepartmentEntities) {
+    public List<CommonTreeSelect> getTreeSelectChildNodesWithRoot(CurrentLoginUserInfo loginUserInfo, String rootId, List<DefineDepartmentEntity> allDefineDepartmentEntities) {
         List<CommonTreeSelect> childList = this.getTreeSelectChildNodes(loginUserInfo, rootId, allDefineDepartmentEntities);
         CommonTreeSelect rootItem = CommonTreeSelect.builder().key(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).title("部门首层项").value(DefineDepartmentConstant.ROOT_DEPARTMENT_ID).children(childList).build();
         List<CommonTreeSelect> treeSelectListWithRoot = new ArrayList<CommonTreeSelect>();
@@ -91,8 +92,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
     public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, DefineDepartmentVo defineDepartmentVo) throws Exception {
         DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartmentEntity = super.doBeforeCreate(loginUserInfo, defineDepartmentEntity);
-        Long parentId = defineDepartmentEntity.getParentId();
-        if (LongUtils.isNotBlank(parentId)) {
+        String parentId = defineDepartmentEntity.getParentId();
+        if (StringUtils.isNotBlank(parentId)) {
             DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {
@@ -116,8 +117,8 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         Integer changeCount = 0;
         DefineDepartmentEntity defineDepartmentEntity = DefineDepartmentTransfer.transferVoToEntity(defineDepartmentVo);
         defineDepartmentEntity = super.doBeforeUpdate(loginUserInfo, defineDepartmentEntity);
-        Long parentId = defineDepartmentEntity.getParentId();
-        if (LongUtils.isNotBlank(parentId)) {
+        String parentId = defineDepartmentEntity.getParentId();
+        if (StringUtils.isNotBlank(parentId)) {
             DefineDepartmentEntity parentDepartment = defineDepartmentMapper.selectById(parentId);
             Integer parentLevel = null;
             if (parentDepartment != null) {

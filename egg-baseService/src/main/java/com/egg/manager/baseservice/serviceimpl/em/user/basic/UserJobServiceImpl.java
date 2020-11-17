@@ -31,7 +31,7 @@ public class UserJobServiceImpl extends MyBaseMysqlServiceImpl<UserJobMapper, Us
 
 
     @Override
-    public List<DefineJobEntity> queryAllUserBelong(Long userAccountId) {
+    public List<DefineJobEntity> queryAllUserBelong(String userAccountId) {
         List<DefineJobEntity> allJobByUserAcccountId = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         return allJobByUserAcccountId ;
     }

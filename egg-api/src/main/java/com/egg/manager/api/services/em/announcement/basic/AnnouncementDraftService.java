@@ -59,7 +59,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * @return
      * @throws Exception
      */
-    Integer dealBatchPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long[] draftIds) throws Exception;
+    Integer dealBatchPublishByDraft(CurrentLoginUserInfo loginUserInfo, String[] draftIds) throws Exception;
 
     /**
      * 公告草稿-发布
@@ -69,6 +69,6 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * @return
      * @throws Exception
      */
-    Integer dealPublishByDraft(CurrentLoginUserInfo loginUserInfo, Long draftId, boolean insertFlag) throws Exception;
+    Integer dealPublishByDraft(CurrentLoginUserInfo loginUserInfo, String draftId, boolean insertFlag) throws Exception;
 
 }

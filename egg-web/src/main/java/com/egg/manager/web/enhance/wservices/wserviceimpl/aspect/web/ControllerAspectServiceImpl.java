@@ -153,7 +153,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     //取得当前登录的用户
                     CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
                     requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
-                    Long userAccountId = userAccountToken.getUserAccountId();
+                    String userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);
                     logMgo.setCreateUserId(userAccountId);
                     logMgo.setLastModifyerId(userAccountId);

@@ -10,9 +10,9 @@ import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineDepartmentMapstruct;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
@@ -75,7 +75,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param required    当userAccount为null时是否抛出异常
      * @return
      */
-    default Long handleGetLoginUserId(UserAccountEntity userAccountEntity, boolean required) {
+    default String handleGetLoginUserId(UserAccountEntity userAccountEntity, boolean required) {
         if (userAccountEntity == null) {
             if (required) {
                 throw new MyRuntimeBusinessException("无法取得当前用户信息！");

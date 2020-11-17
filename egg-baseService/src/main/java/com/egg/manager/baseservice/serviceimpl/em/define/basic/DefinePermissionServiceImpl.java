@@ -129,10 +129,10 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public Integer dealBatchEnsure(CurrentLoginUserInfo loginUserInfo, Long[] ensureIds) {
+    public Integer dealBatchEnsure(CurrentLoginUserInfo loginUserInfo, String[] ensureIds) {
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
-            List<Long> delIdList = Lists.newArrayList(ensureIds);
+            List<String> delIdList = Lists.newArrayList(ensureIds);
             //批量伪删除
             delCount = definePermissionMapper.batchEnsureByIds(delIdList, loginUserInfo);
         }
@@ -140,8 +140,8 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public List<DefinePermissionEntity> dealGetListByAccountFromDb(Long userAccountId) {
-        if (LongUtils.isBlank(userAccountId)) {
+    public List<DefinePermissionEntity> dealGetListByAccountFromDb(String userAccountId) {
+        if (StringUtils.isBlank(userAccountId)) {
             return null;
         }
         UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
@@ -156,7 +156,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     @Cacheable(value = RedisShiroKeyConstant.KEY_USER_PERMISSION,key = "#userAccountId",condition = "#userAccountId!=null")
-    public Set<String> queryDbToCacheable(Long userAccountId) {
+    public Set<String> queryDbToCacheable(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefinePermissionEntity> definePermissionEntities = this.dealGetListByAccountFromDb(userAccountId);
         if (CollectionUtil.isNotEmpty(definePermissionEntities)) {

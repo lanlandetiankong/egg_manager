@@ -81,21 +81,21 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
      * @return
      * @throws Exception
      */
-    Integer dealBatchEnsure(CurrentLoginUserInfo loginUserInfo, Long[] ensureIds);
+    Integer dealBatchEnsure(CurrentLoginUserInfo loginUserInfo, String[] ensureIds);
 
     /**
      * 取得用户 所拥有的 权限定义-List集合
      * @param userAccountId
      * @return
      */
-    List<DefinePermissionEntity> dealGetListByAccountFromDb(Long userAccountId);
+    List<DefinePermissionEntity> dealGetListByAccountFromDb(String userAccountId);
 
     /**
      * 取得用户 所拥有的 权限code-Set集合
      * @param userAccountId
      * @return
      */
-    Set<String> queryDbToCacheable(Long userAccountId);
+    Set<String> queryDbToCacheable(String userAccountId);
 
 
     /**

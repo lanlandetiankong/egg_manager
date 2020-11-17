@@ -77,8 +77,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     private RolePermissionService rolePermissionService;
 
     @Override
-    public List<DefineRoleEntity> dealGetRolesByAccountFromDb(Long userAccountId, Short stateVal) {
-        if (LongUtils.isBlank(userAccountId)) {
+    public List<DefineRoleEntity> dealGetRolesByAccountFromDb(String userAccountId, Short stateVal) {
+        if (StringUtils.isBlank(userAccountId)) {
             return null;
         }
         UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
@@ -93,7 +93,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Override
     @Cacheable(value= RedisShiroKeyConstant.KEY_USER_ROLE,key="#userAccountId",condition = "#userAccountId!=null")
-    public Set<String> queryDbToCacheable(Long userAccountId) {
+    public Set<String> queryDbToCacheable(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefineRoleEntity> defineRoleEntities = this.dealGetRolesByAccountFromDb(userAccountId, BaseStateEnum.ENABLED.getValue());
         if (CollectionUtil.isNotEmpty(defineRoleEntities)) {
@@ -109,8 +109,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public List<DefineMenuEntity> dealGetMenusByRoleIdFromDb(Long roleId, Short stateVal) {
-        if (LongUtils.isBlank(roleId)) {
+    public List<DefineMenuEntity> dealGetMenusByRoleIdFromDb(String roleId, Short stateVal) {
+        if (StringUtils.isBlank(roleId)) {
             return null;
         } else {
             return defineMenuMapper.findAllMenuByRoleId(roleId, stateVal);
@@ -129,13 +129,13 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Set<Long> dealGetMenuIdSetByRoleIdFromDb(Long roleId, Short stateVal) {
-        Set<Long> idSet = Sets.newHashSet();
+    public Set<String> dealGetMenuIdSetByRoleIdFromDb(String roleId, Short stateVal) {
+        Set<String> idSet = Sets.newHashSet();
         List<DefineMenuEntity> defineMenuEntityList = this.dealGetMenusByRoleIdFromDb(roleId, stateVal);
         if (CollectionUtil.isNotEmpty(defineMenuEntityList)) {
             for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
-                Long menuFid = defineMenuEntity.getFid();
-                if (LongUtils.isNotBlank(menuFid)) {
+                String menuFid = defineMenuEntity.getFid();
+                if (StringUtils.isNotBlank(menuFid)) {
                     idSet.add(menuFid);
                 }
             }
@@ -151,9 +151,9 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         if (CollectionUtil.isEmpty(userRoleEntities)) {
             return defineRoleEntities;
         } else {
-            Set<Long> roleIds = new HashSet<Long>();
+            Set<String> roleIds = new HashSet<String>();
             for (UserRoleEntity userRoleEntity : userRoleEntities) {
-                if (LongUtils.isNotBlank(userRoleEntity.getDefineRoleId())) {
+                if (StringUtils.isNotBlank(userRoleEntity.getDefineRoleId())) {
                     roleIds.add(userRoleEntity.getDefineRoleId());
                 }
             }
@@ -215,7 +215,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public Integer dealGrantPermissionToRole(CurrentLoginUserInfo loginUserInfo, Long roleId, Long[] checkIds) throws Exception {
+    public Integer dealGrantPermissionToRole(CurrentLoginUserInfo loginUserInfo, String roleId, String[] checkIds) throws Exception {
         Integer changeCount = 0;
         if (checkIds == null || checkIds.length == 0) {
             //清空所有权限
@@ -223,21 +223,21 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         } else {
             changeCount = checkIds.length;
             //取得曾勾选的权限id 集合
-            List<Long> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId, false);
+            List<String> oldCheckPermIds = definePermissionMapper.findAllPermissionIdByRoleId(roleId, false);
             if (CollectionUtil.isEmpty(oldCheckPermIds)) {
                 List<RolePermissionEntity> addEntitys = new ArrayList<>();
-                for (Long checkId : checkIds) {
+                for (String checkId : checkIds) {
                     addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                 }
                 //批量新增行
                 rolePermissionService.saveBatch(addEntitys);
             } else {
-                List<Long> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
-                List<Long> enableIds = new ArrayList<>();
-                List<Long> disabledIds = new ArrayList<>();
-                Iterator<Long> oldCheckIter = oldCheckPermIds.iterator();
+                List<String> checkIdList = new ArrayList<>(Lists.newArrayList(checkIds));
+                List<String> enableIds = new ArrayList<>();
+                List<String> disabledIds = new ArrayList<>();
+                Iterator<String> oldCheckIter = oldCheckPermIds.iterator();
                 while (oldCheckIter.hasNext()) {
-                    Long oldCheckId = oldCheckIter.next();
+                    String oldCheckId = oldCheckIter.next();
                     boolean isOldRow = checkIdList.contains(oldCheckId);
                     if (isOldRow) {
                         //原本有的数据行
@@ -258,7 +258,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 if (CollectionUtil.isNotEmpty(checkIdList)) {
                     //有新勾选的权限，需要新增行
                     List<RolePermissionEntity> addEntitys = new ArrayList<>();
-                    for (Long checkId : checkIdList) {
+                    for (String checkId : checkIdList) {
                         addEntitys.add(RolePermissionPojoInitialize.generateSimpleInsertEntity(roleId, checkId, loginUserInfo));
                     }
                     //批量新增行

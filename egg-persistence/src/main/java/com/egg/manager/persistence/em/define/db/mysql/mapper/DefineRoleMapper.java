@@ -32,6 +32,6 @@ public interface DefineRoleMapper extends MyEggMapper<DefineRoleEntity> {
      * @param stateVal      指定state的值
      * @return
      */
-    List<DefineRoleEntity> findAllRoleByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("stateVal") Short stateVal);
+    List<DefineRoleEntity> findAllRoleByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("stateVal") Short stateVal);
 
 }

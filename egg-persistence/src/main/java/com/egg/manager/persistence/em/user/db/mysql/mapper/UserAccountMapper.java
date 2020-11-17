@@ -47,7 +47,7 @@ public interface UserAccountMapper extends MyEggMapper<UserAccountEntity> {
      * @param loginUser
      * @return
      */
-    int batchLockUserByIds(@Param("lockIds") List<Long> lockIds, @Param("lockState") int lockState, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
+    int batchLockUserByIds(@Param("lockIds") List<String> lockIds, @Param("lockState") int lockState, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
     /**
      * 批量伪删除 指定用户的所有角色关联
@@ -55,7 +55,7 @@ public interface UserAccountMapper extends MyEggMapper<UserAccountEntity> {
      * @param loginUser
      * @return
      */
-    int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
+    int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 
     /**
      * 批量伪删除 指定用户的所有职务关联
@@ -63,5 +63,5 @@ public interface UserAccountMapper extends MyEggMapper<UserAccountEntity> {
      * @param loginUser
      * @return
      */
-    int clearAllJobByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
+    int clearAllJobByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

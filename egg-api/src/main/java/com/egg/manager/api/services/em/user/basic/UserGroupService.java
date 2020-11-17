@@ -21,5 +21,5 @@ public interface UserGroupService extends IService<UserGroupEntity>, MyBaseMysql
      * @param userAccountId
      * @return
      */
-    List<DefineGroupEntity> queryAllUserBelong(Long userAccountId);
+    List<DefineGroupEntity> queryAllUserBelong(String userAccountId);
 }

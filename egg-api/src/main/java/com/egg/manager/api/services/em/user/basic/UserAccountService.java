@@ -92,7 +92,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, Long[] lockIds, boolean isLock) throws Exception;
+    Integer dealBatchRenewLock(CurrentLoginUserInfo loginUserInfo, String[] lockIds, boolean isLock) throws Exception;
 
     /**
      * 用户账号-锁定
@@ -103,7 +103,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealRenewLock(CurrentLoginUserInfo loginUserInfo, Long lockId, boolean isLock) throws Exception;
+    Integer dealRenewLock(CurrentLoginUserInfo loginUserInfo, String lockId, boolean isLock) throws Exception;
 
 
     /**
@@ -115,7 +115,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealGrantRoleToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception;
+    Integer dealGrantRoleToUser(CurrentLoginUserInfo loginUserInfo, String userAccountId, String[] checkIds) throws Exception;
 
     /**
      * 用户分配职务
@@ -126,7 +126,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @return
      * @throws Exception
      */
-    Integer dealGrantJobToUser(CurrentLoginUserInfo loginUserInfo, Long userAccountId, Long[] checkIds) throws Exception;
+    Integer dealGrantJobToUser(CurrentLoginUserInfo loginUserInfo, String userAccountId, String[] checkIds) throws Exception;
 
 
     /**
@@ -145,7 +145,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @param wrapper
      * @return
      */
-    List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, Long[] checkIds, QueryWrapper<UserAccountEntity> wrapper);
+    List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, String[] checkIds, QueryWrapper<UserAccountEntity> wrapper);
 
 
     /**
@@ -162,7 +162,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * @param userAccountId 用户id
      * @return
      */
-    CurrentLoginUserInfo queryDbToCacheable(Long userAccountId);
+    CurrentLoginUserInfo queryDbToCacheable(String userAccountId);
 
     /**
      * 更新所有用户的密码

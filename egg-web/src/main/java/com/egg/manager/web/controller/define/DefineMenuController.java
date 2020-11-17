@@ -84,7 +84,7 @@ public class DefineMenuController extends BaseController {
     @PcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineMenu/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->菜单定义", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
-    public WebResult queryFilteredTreeSelect(Long filterId) {
+    public WebResult queryFilteredTreeSelect(String filterId) {
         WebResult result = WebResult.okQuery();
         List<DefineMenuEntity> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
@@ -214,7 +214,7 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "批量伪删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {

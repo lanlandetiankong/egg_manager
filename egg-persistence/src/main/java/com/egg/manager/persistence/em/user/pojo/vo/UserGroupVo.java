@@ -22,7 +22,7 @@ public class UserGroupVo extends MyBaseMysqlVo {
     /**
      * 账号id
      */
-    private Long userAccountId;
+    private String userAccountId;
     /**
      * 类型
      */

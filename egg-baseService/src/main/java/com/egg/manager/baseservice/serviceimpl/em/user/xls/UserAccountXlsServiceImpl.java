@@ -32,7 +32,7 @@ public class UserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements U
     private UserAccountService userAccountService;
 
     @Override
-    public void dealCheckExportSingleWithTemplate2Web(CurrentLoginUserInfo loginUserInfo, HttpServletResponse response, DefineMenuEntity defineMenuEntity, AntdFileUploadBean fileUploadBean, Long[] checkIds) throws Exception {
+    public void dealCheckExportSingleWithTemplate2Web(CurrentLoginUserInfo loginUserInfo, HttpServletResponse response, DefineMenuEntity defineMenuEntity, AntdFileUploadBean fileUploadBean, String[] checkIds) throws Exception {
         if (checkIds == null || checkIds.length == 0) {
             throw new BusinessException("请选择至少一条要导出的数据！");
         }

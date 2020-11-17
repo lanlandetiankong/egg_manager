@@ -22,5 +22,5 @@ public interface UserJobService extends IService<UserJobEntity>, MyBaseMysqlServ
      * @param userAccountId
      * @return
      */
-    List<DefineJobEntity> queryAllUserBelong(Long userAccountId);
+    List<DefineJobEntity> queryAllUserBelong(String userAccountId);
 }

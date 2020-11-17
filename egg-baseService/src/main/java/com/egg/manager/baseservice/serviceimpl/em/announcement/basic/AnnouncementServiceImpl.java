@@ -70,7 +70,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         IPage iPage = announcementMapper.selectPage(page, announcementEntityWrapper);
         List<AnnouncementEntity> announcementEntities = iPage.getRecords();
         //取得 公告标签 map
-        Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         result.putResultList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
         return result;
     }
@@ -79,7 +79,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDto> paginationBean,
                                          List<AntdvSortBean> sortBeans) {
         //取得 公告标签 map
-        Map<Long, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+        Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
 
         Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
@@ -100,7 +100,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
     public Integer dealCreateFromDraft(CurrentLoginUserInfo loginUserInfo, AnnouncementDraftVo announcementDraftVo) throws Exception {
         Date now = new Date();
         //公告草稿id
-        Long draftId = announcementDraftVo.getFid();
+        String draftId = announcementDraftVo.getFid();
         //发布公告
         AnnouncementEntity announcementEntity = AnnouncementTransfer.transferFromDraft(loginUserInfo, AnnouncementDraftTransfer.transferVoToEntity(announcementDraftVo));
         announcementEntity.setState(BaseStateEnum.ENABLED.getValue());

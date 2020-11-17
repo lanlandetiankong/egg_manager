@@ -33,7 +33,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
      * @param state
      * @return
      */
-    List<DefineMenuEntity> findAllMenuByRoleId(@Param("roleId") Long roleId, @Param("stateVal") Short state);
+    List<DefineMenuEntity> findAllMenuByRoleId(@Param("roleId") String roleId, @Param("stateVal") Short state);
 
     /**
      * 取得角色拥有的所有[菜单]集合(忽略 有子节点的菜单节点)
@@ -41,7 +41,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
      * @param state
      * @return
      */
-    List<DefineMenuEntity> findAllMenuByRoleIdFilterParentNode(@Param("roleId") Long roleId, @Param("stateVal") Short state);
+    List<DefineMenuEntity> findAllMenuByRoleIdFilterParentNode(@Param("roleId") String roleId, @Param("stateVal") Short state);
 
 
     /**
@@ -49,7 +49,7 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
      * @param userAccountId
      * @return
      */
-    List<DefineMenuEntity> getUserGrantedMenusByAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId);
+    List<DefineMenuEntity> getUserGrantedMenusByAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 
     /**
      * 查询菜单(过滤指定节点下的所有节点
@@ -57,6 +57,6 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
      * @param onlyEnable 是否只查询 状态为 可用 的数据
      * @return
      */
-    List<DefineMenuEntity> getMenusFilterChildrens(@Param("filterId") Long filterId, @Param("onlyEnable") boolean onlyEnable);
+    List<DefineMenuEntity> getMenusFilterChildrens(@Param("filterId") String filterId, @Param("onlyEnable") boolean onlyEnable);
 
 }

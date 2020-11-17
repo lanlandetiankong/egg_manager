@@ -23,6 +23,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
@@ -148,8 +149,8 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     public UserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException {
         UserAccountEntity userAccountEntity = null;
         if (userAccountToken != null) {
-            Long userAccountId = userAccountToken.getUserAccountId();
-            if (LongUtils.isNotBlank(userAccountId)) {
+            String userAccountId = userAccountToken.getUserAccountId();
+            if (StringUtils.isNotBlank(userAccountId)) {
                 userAccountEntity = userAccountMapper.selectById(userAccountId);
             }
         }
@@ -172,7 +173,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
     @Override
     public boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity) {
-        if (userAccountEntity == null || LongUtils.isBlank(userAccountEntity.getFid())) {
+        if (userAccountEntity == null || StringUtils.isBlank(userAccountEntity.getFid())) {
             return true;
         }
         return false;

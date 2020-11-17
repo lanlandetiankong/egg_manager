@@ -158,7 +158,7 @@ public class DefineTenantController extends BaseController {
     @PcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccountEntity loginUserInfo) {
@@ -201,7 +201,7 @@ public class DefineTenantController extends BaseController {
             @ApiImplicitParam(name = "userAccountIdArr", value = "要设置为管理员的用户id-数组", required = true, dataTypeClass = String.class, allowMultiple = true),
     })
     @PostMapping(value = "/setupTenantManager")
-    public WebResult doSetupTenantManager(HttpServletRequest request, Long tenantId, Long[] userAccountIdArr,
+    public WebResult doSetupTenantManager(HttpServletRequest request, String tenantId, String[] userAccountIdArr,
                                           @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         try {

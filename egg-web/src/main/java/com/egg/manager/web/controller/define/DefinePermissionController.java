@@ -160,10 +160,10 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/definePermission/batchEnsureByIds")
     @ApiOperation(value = "更新/批量启用->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要启用的权限定义id数组", required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = "要启用的权限定义id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchEnsureByIds")
-    public WebResult batchEnsureByIds(HttpServletRequest request, Long[] ensureIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchEnsureByIds(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         try {
@@ -203,7 +203,7 @@ public class DefinePermissionController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/definePermission/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = Long[].class),
+            @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {

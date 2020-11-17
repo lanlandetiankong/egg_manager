@@ -21,6 +21,6 @@ public interface DefineGroupMapper extends MyEggMapper<DefineGroupEntity> {
      * @param stateVal      状态值
      * @return
      */
-    List<DefineGroupEntity> findAllByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("stateVal") Short stateVal);
+    List<DefineGroupEntity> findAllByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("stateVal") Short stateVal);
 
 }

@@ -20,7 +20,7 @@ public class RolePermissionPojoInitialize {
      * @param loginUser
      * @return
      */
-    public static RolePermissionEntity generateSimpleInsertEntity(Long defineRoleId, Long definePermissionId, UserAccountEntity loginUser) {
+    public static RolePermissionEntity generateSimpleInsertEntity(String defineRoleId, String definePermissionId, UserAccountEntity loginUser) {
         RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
         Date now = new Date();
         rolePermissionEntity.setDefineRoleId(defineRoleId);

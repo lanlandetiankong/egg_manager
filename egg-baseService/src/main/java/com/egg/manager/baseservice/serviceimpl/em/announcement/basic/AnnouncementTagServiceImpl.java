@@ -74,8 +74,8 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
     @Override
-    public Map<Long, AnnouncementTagEntity> dealGetAllToMap() {
-        Map<Long, AnnouncementTagEntity> map = Maps.newHashMap();
+    public Map<String, AnnouncementTagEntity> dealGetAllToMap() {
+        Map<String, AnnouncementTagEntity> map = Maps.newHashMap();
         QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = new QueryWrapper<AnnouncementTagEntity>();
         announcementTagEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         List<AnnouncementTagEntity> announcementTagEntities = announcementTagMapper.selectList(announcementTagEntityWrapper);
@@ -112,7 +112,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         List<AnnouncementTagVo> resultList = result.getResultList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (AnnouncementTagVo announcementTagVo : resultList) {
-                enumList.add(new FrontEntitySelectBean<Long>(announcementTagVo.getFid(), announcementTagVo.getName()));
+                enumList.add(new FrontEntitySelectBean<String>(announcementTagVo.getFid(), announcementTagVo.getName()));
             }
         }
         result.putEnumList(enumList);

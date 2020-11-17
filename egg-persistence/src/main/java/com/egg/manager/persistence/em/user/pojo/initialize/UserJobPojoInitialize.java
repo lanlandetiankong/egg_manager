@@ -20,7 +20,7 @@ public class UserJobPojoInitialize {
      * @param loginUser     当前登录用户
      * @return
      */
-    public static UserJobEntity generateSimpleInsertEntity(Long userAccountId, Long defineJobId, UserAccountEntity loginUser) {
+    public static UserJobEntity generateSimpleInsertEntity(String userAccountId, String defineJobId, UserAccountEntity loginUser) {
         UserJobEntity userJobEntity = new UserJobEntity();
         Date now = new Date();
         userJobEntity.setUserAccountId(userAccountId);

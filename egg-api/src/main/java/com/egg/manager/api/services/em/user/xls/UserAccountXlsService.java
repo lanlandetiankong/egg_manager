@@ -23,7 +23,7 @@ public interface UserAccountXlsService extends MyXlsBaseService {
      * @param checkIds
      * @throws Exception
      */
-    void dealCheckExportSingleWithTemplate2Web(CurrentLoginUserInfo loginUserInfo, HttpServletResponse response, DefineMenuEntity defineMenuEntity, AntdFileUploadBean fileUploadBean, Long[] checkIds) throws Exception;
+    void dealCheckExportSingleWithTemplate2Web(CurrentLoginUserInfo loginUserInfo, HttpServletResponse response, DefineMenuEntity defineMenuEntity, AntdFileUploadBean fileUploadBean, String[] checkIds) throws Exception;
 
     /**
      * 导出所有 用户账号 到excel

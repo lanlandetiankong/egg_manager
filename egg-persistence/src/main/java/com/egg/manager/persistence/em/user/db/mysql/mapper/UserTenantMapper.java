@@ -33,7 +33,7 @@ public interface UserTenantMapper extends MyEggMapper<UserTenantEntity> {
      * @param filterEnable  是否只查询状态为可用的
      * @return
      */
-    List<Long> findAllTenantIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) Long userAccountId, @Param("filterEnable") boolean filterEnable);
+    List<String> findAllTenantIdByUserAccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("filterEnable") boolean filterEnable);
 
 
     /**
@@ -44,6 +44,6 @@ public interface UserTenantMapper extends MyEggMapper<UserTenantEntity> {
      * @param loginUser
      * @return
      */
-    int batchUpdateManagerUserStateByTenantId(@Param("tenantId") Long tenantId, @Param("userAccountIdList") List<Long> userAccountIdList, @Param("stateVal") Short stateVal
+    int batchUpdateManagerUserStateByTenantId(@Param("tenantId") String tenantId, @Param("userAccountIdList") List<String> userAccountIdList, @Param("stateVal") Short stateVal
             , @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) UserAccountEntity loginUser);
 }

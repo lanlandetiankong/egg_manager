@@ -22,17 +22,17 @@ import java.util.Date;
 @TableName("em_role_permission")
 public class RolePermissionEntity extends Model<RolePermissionEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")
-    private Long fid;
+    private String fid;
     /**
      * 角色id
      */
     @TableField("define_role_id")
-    private Long defineRoleId;
+    private String defineRoleId;
     /**
      * 权限id
      */
     @TableField("define_permission_id")
-    private Long definePermissionId;
+    private String definePermissionId;
     /**
      * 类型
      */
@@ -64,12 +64,12 @@ public class RolePermissionEntity extends Model<RolePermissionEntity> {
      * 创建用户id
      */
     @TableField(value = "create_user_id")
-    private Long createUserId;
+    private String createUserId;
     /**
      * 最后修改用户id
      */
     @TableField(value = "last_modifyer_id")
-    private Long lastModifyerId;
+    private String lastModifyerId;
     /**
      * 版本号
      */

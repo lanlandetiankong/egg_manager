@@ -21,7 +21,7 @@ public class UserDepartmentPojoInitialize {
      * @param loginUser          当前登录用户
      * @return
      */
-    public static UserDepartmentEntity generateSimpleInsertEntity(Long userAccountId, Long defineDepartmentId, UserAccountEntity loginUser) {
+    public static UserDepartmentEntity generateSimpleInsertEntity(String userAccountId, String defineDepartmentId, UserAccountEntity loginUser) {
         UserDepartmentEntity userDepartmentEntity = new UserDepartmentEntity();
         Date now = new Date();
         userDepartmentEntity.setUserAccountId(userAccountId);

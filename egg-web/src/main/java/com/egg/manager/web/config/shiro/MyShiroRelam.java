@@ -73,7 +73,7 @@ public class MyShiroRelam extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //当前登录用户id
         String authorization = principalCollection.toString();
-        Long userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
+        String userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
         if(StringUtils.isBlank(authorization) || userAccountId == null){
             return simpleAuthorizationInfo;
         }
@@ -98,7 +98,7 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        Long userAccountId = JwtUtil.getUserAccountId(token);
+        String userAccountId = JwtUtil.getUserAccountId(token);
         if (userAccountId == null) {
             throw new UnauthorizedException("token invalid");
         }

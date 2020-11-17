@@ -144,7 +144,7 @@ public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntity
 @PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
 @ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
-        @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = Long[].class),
+        @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
 })
 @PostMapping(value = "/batchDelByIds")
 public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){

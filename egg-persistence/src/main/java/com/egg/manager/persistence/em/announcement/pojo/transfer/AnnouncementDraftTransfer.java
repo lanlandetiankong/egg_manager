@@ -49,7 +49,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param entity
      * @return
      */
-    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraftEntity entity, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+    public static AnnouncementDraftVo transferEntityToVo(AnnouncementDraftEntity entity, Map<String, AnnouncementTagEntity> announcementTagMap) {
         if (entity == null) {
             return null;
         }
@@ -63,7 +63,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param dto
      * @return
      */
-    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+    public static AnnouncementDraftVo transferDtoToVo(AnnouncementDraftDto dto, Map<String, AnnouncementTagEntity> announcementTagMap) {
         if (dto == null) {
             return null;
         }
@@ -74,7 +74,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraftEntity> announcementDraftEntities, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+    public static List<AnnouncementDraftVo> transferEntityToVoList(List<AnnouncementDraftEntity> announcementDraftEntities, Map<String, AnnouncementTagEntity> announcementTagMap) {
         if (announcementDraftEntities == null) {
             return null;
         } else {
@@ -87,7 +87,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
     }
 
 
-    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+    public static List<AnnouncementDraftVo> transferDtoToVoList(List<AnnouncementDraftDto> announcementDraftDtos, Map<String, AnnouncementTagEntity> announcementTagMap) {
         if (announcementDraftDtos == null) {
             return null;
         } else {
@@ -106,7 +106,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
      * @param vo
      * @param announcementTagMap
      */
-    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<Long, AnnouncementTagEntity> announcementTagMap) {
+    private static void doSetTagInfoToVo(String tagIds, AnnouncementDraftVo vo, Map<String, AnnouncementTagEntity> announcementTagMap) {
         if (StringUtils.isNotBlank(tagIds)) {
             try {
                 List<String> tagList = JSONArray.parseArray(tagIds, String.class);

@@ -39,7 +39,7 @@ public class EggShiroUtil {
      * 取得挡墙登录用户id
      * @param isRequired 是否必要，当true且userAccount为null时抛出异常
      */
-    public static Long gainCurrentUserId(boolean isRequired) {
+    public static String gainCurrentUserId(boolean isRequired) {
         UserAccountEntity user = gainCurrentUser(isRequired);
         if(user == null && isRequired){
             throw new MyAuthenticationExpiredException();

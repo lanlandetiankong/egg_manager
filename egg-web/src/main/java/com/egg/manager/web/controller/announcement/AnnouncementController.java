@@ -69,23 +69,19 @@ public class AnnouncementController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
-            if (Boolean.TRUE.equals(onlySelf)) {
-                //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
-            }
-            //取得 分页配置
-            AntdvPaginationBean<AnnouncementDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
-            //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        //解析 搜索条件
+        List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+        if (Boolean.TRUE.equals(onlySelf)) {
+            //只查询自己发布的公告
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
         }
-        return result;
+        //取得 分页配置
+        AntdvPaginationBean<AnnouncementDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
+        //取得 排序配置
+        List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        return result ;
     }
 
 
@@ -95,26 +91,22 @@ public class AnnouncementController extends BaseController {
     public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize,
                                        Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //这些查询条件暂时用不到
-            String queryObj = null, paginationObj = null, sortObj = null;
-            //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
-            if (Boolean.TRUE.equals(onlySelf)) {
-                //只查询自己发布的公告
-                queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
-            }
-            //取得 分页配置
-            AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
-            //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            //按创建时间 倒序
-            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
-            result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        //这些查询条件暂时用不到
+        String queryObj = null, paginationObj = null, sortObj = null;
+        //解析 搜索条件
+        List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+        if (Boolean.TRUE.equals(onlySelf)) {
+            //只查询自己发布的公告
+            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
         }
+        //取得 分页配置
+        AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
+        //取得 排序配置
+        List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+        //按创建时间 倒序
+        sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
+        announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         return result;
     }
 

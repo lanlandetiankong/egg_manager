@@ -3,7 +3,6 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 import cn.hutool.http.HttpStatus;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 
-import java.util.HashMap;
 
 /**
  * @author zhoucj
@@ -15,16 +14,16 @@ public class WebResult extends AbstractResult{
     /**
      * 只允许通过static构造类
      */
-    private WebResult() {
+    public WebResult() {
     }
 
     private static WebResult initResult() {
         WebResult result = new WebResult();
-        result.put(HAS_ERROR,false);
-        result.put(HAS_WARNING,false);
-        result.put(CODE,HttpStatus.HTTP_OK);
-        result.put(MORE_ATTRIBUTE,new HashMap<String,Object>());
-        result.put(MSG,BaseRstMsgConstant.ACTION_SUCCESS_MSG);
+        result.putHasError(false);
+        result.putHasWarning(false);
+        result.putCode(HttpStatus.HTTP_OK);
+        result.putMsg(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
+        result.putErrorMsg(null);
         return result;
     }
 
@@ -45,17 +44,19 @@ public class WebResult extends AbstractResult{
 
     public static WebResult error(String errorMsg) {
         WebResult result = initResult();
-        result.put(HAS_ERROR,true);
-        result.put(MSG,errorMsg);
+        result.putHasError(true);
+        result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
+        result.putErrorMsg(errorMsg);
+        result.putCode(HttpStatus.HTTP_INTERNAL_ERROR);
         return result;
     }
     public WebResult toError(){
-        return toError(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
+        return toError(BaseRstMsgConstant.ACTION_FAIL_MSG);
     }
 
     public WebResult toError(String msg){
         this.putHasError(true);
-        this.putMsg(msg);
+        this.putErrorMsg(msg);
         return this ;
     }
 

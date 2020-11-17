@@ -21,15 +21,11 @@ public class MyResponseHelper {
             errorMsg = msg + " \n " + errorMsg;
         }
         WebResult result = WebResult.error(errorMsg);
-        result.putHasError(true);
-        result.putCode(HttpStatus.BAD_REQUEST.value());
         return result;
     }
 
     public static <T> WebResult handleRequestFailure(PublicResultEnum resultEnum) {
         WebResult result = WebResult.error(resultEnum.getLabel());
-        result.putHasError(true);
-        result.putCode(HttpStatus.BAD_REQUEST.value());
         if (PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())) {
             result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }

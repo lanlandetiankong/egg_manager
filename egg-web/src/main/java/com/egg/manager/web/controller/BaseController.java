@@ -99,7 +99,7 @@ public class BaseController {
             logger.error("接口执行异常--->",e);
         }
         //清空信息
-        result.putMsg(errmsg);
+        result.putErrorMsg(errmsg);
         if (e instanceof MyAuthenticationExpiredException) {
             result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         }

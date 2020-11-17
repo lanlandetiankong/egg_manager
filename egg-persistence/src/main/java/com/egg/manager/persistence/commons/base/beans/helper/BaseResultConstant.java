@@ -21,9 +21,10 @@ public interface BaseResultConstant extends Serializable {
      */
     String CODE = "code";
     /**
-     * 更多参数,配置 com.egg.manager.persistence.commons.base.beans.helper.MyRstMoreAttrKey
+     * 错误信息，前端不建议展示
      */
-    String MORE_ATTRIBUTE = "moreAttribute";
+    String ERROR_MSG = "errorMsg";
+
     /**
      * 提示信息、错误信息等，用于展示
      */

@@ -4,7 +4,6 @@ import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
@@ -73,6 +72,9 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
     public void putErrorActionType(String val){
         this.put(ERROR_ACTION_TYPE,val);
     }
+    public void putErrorMsg(String val){
+        this.put(ERROR_MSG,val);
+    }
     public void putMsg(String val){
         this.put(MSG,val);
     }
@@ -133,6 +135,9 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
     }
     public String getMsg(){
         return (String)this.get(MSG);
+    }
+    public String getErrorMsg(){
+        return (String)this.get(ERROR_MSG);
     }
     public List getResultList(){
         return (List)this.get(RESULT_LIST);

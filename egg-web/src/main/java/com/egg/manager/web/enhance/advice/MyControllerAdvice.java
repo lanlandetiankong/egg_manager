@@ -5,7 +5,6 @@ import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
-import com.egg.manager.persistence.commons.base.exception.form.LoginFormFieldDeficiencyException;
 import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
@@ -63,8 +62,7 @@ public class MyControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public WebResult errorHandle(Exception ex) {
-        ex.printStackTrace();
-        log.error("接口异常：{}", ex.getMessage());
+        log.error("接口异常：{}", ex);
         return MyResponseHelper.handleRequestFailure(ex, "");
     }
 
@@ -77,6 +75,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
+        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.UnauthorizedLoginUser.getLabel()),e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
     }
 
@@ -84,7 +83,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        log.error("执行异常--->",e);
+        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.NoPermissionOfUser.getLabel()),e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
     }
 
@@ -92,11 +91,8 @@ public class MyControllerAdvice {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public WebResult handleBusinessException(BusinessException e) {
-        if (e instanceof BusinessException) {
-            log.error("数据操作失败：" + e.getMessage());
-            return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
-        }
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.Error);
+        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.ErrorOfDb.getLabel()),e);
+        return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
     }
 
 
@@ -104,10 +100,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
     public WebResult handleParamJsonException(Exception e) {
-        if (e instanceof MyParamJsonException) {
-            log.info("参数错误：" + e.getMessage());
-            return MyResponseHelper.handleRequestFailure(e, "参数错误");
-        }
+        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.ErrorOfParam.getLabel()),e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
     }
 
@@ -149,26 +142,11 @@ public class MyControllerAdvice {
             MissingMatrixVariableException exception = (MissingMatrixVariableException) extException;
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
-        log.error(errorMsg.toString());
+        log.error(errorMsg.toString(),extException);
         return WebResult.error(errorMsg.toString());
     }
 
 
-    /**
-     * 登录表单字段缺失异常-处理
-     * @param ex
-     * @param request
-     * @param response
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(LoginFormFieldDeficiencyException.class)
-    @ResponseBody
-    public WebResult handleLoginFormFieldDeficiencyException(LoginFormFieldDeficiencyException ex, HttpServletRequest request, HttpServletResponse response) {
-        LoginFormFieldDeficiencyException c = (LoginFormFieldDeficiencyException) ex;
-        StringBuffer errorMsg = new StringBuffer("表单验证错误信息:" + c.getMessage());
-        log.error(errorMsg.toString());
-        return WebResult.error(errorMsg.toString());
-    }
 
     public Integer getStatusCodeByException(Exception ex) {
         Integer statusCode = null;

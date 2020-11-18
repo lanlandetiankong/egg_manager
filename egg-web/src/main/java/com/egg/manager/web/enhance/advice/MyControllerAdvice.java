@@ -75,7 +75,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
-        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.UnauthorizedLoginUser.getLabel()),e);
+        log.error(String.format("执行异常(%d)--->",PublicResultEnum.UnauthorizedLoginUser.getLabel()),e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
     }
 

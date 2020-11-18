@@ -25,11 +25,7 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      */
     @Field(value = "userNickName")
     private String userNickName;
-    /**
-     * 登录的用户
-     */
-    @Field(value = "loginUser")
-    private UserAccountEntity loginUser;
+
     /**
      * 注解操作类型
      */

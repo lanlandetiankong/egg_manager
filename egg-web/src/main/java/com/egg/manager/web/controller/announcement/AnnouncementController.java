@@ -106,7 +106,7 @@ public class AnnouncementController extends BaseController {
         List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
         //按创建时间 倒序
         sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
-        announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
         return result;
     }
 

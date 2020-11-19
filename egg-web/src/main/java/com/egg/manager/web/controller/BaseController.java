@@ -37,8 +37,6 @@ import java.util.Map;
  */
 @Slf4j
 public class BaseController {
-    public final String actionSuccessMsg = "操作成功！";
-    public final String actionFailMsg = "操作失败！";
 
     public <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws MyRuntimeBusinessException {
         String queryJson = request.getParameter(paramKey);
@@ -54,7 +52,7 @@ public class BaseController {
         return bean;
     }
 
-    public <T> void respResultJsonToFront(Logger logger, HttpServletResponse response, WebResult result) {
+    public <T> void handleRespJsonToFront(Logger logger, HttpServletResponse response, WebResult result) {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -67,38 +65,7 @@ public class BaseController {
         }
     }
 
-    public void dealCommonErrorCatch(Logger logger, WebResult result, Exception e) {
-        dealCommonErrorCatch(logger, result, e, this.actionFailMsg, true, true);
-    }
 
-    private void dealCommonErrorCatch(Logger logger, WebResult result, Exception e, String errorMsg) {
-        dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
-    }
-
-    /**
-     * @param result
-     * @param e
-     * @param errorMsg 异常信息
-     * @param isAppend appendMsg是否追加到 errorMsg 后面
-     */
-    public void dealCommonErrorCatch(Logger logger, WebResult result, Exception e, String errorMsg, boolean isAppend, boolean isPrintStackTrace) {
-        result.putHasError(true);
-        String errmsg = null;
-        if (isAppend) {
-            errmsg = (StringUtils.isBlank(errorMsg) ? "" : errorMsg) + e.getMessage();
-        } else {
-            errmsg = errorMsg;
-        }
-        if (isPrintStackTrace) {
-            logger.error("接口执行异常--->", e);
-        }
-        //清空信息
-        result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
-        result.putErrorMsg(errmsg);
-        if (e instanceof MyAuthenticationExpiredException) {
-            result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
-        }
-    }
 
     public void dealSetMongoPageResult(WebResult result, MongoQueryPageBean pageBean) {
         result.putResultList(pageBean.getContent());

@@ -66,7 +66,7 @@ public class UserExcelController extends BaseController {
         }
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean, checkIds);
-        this.respResultJsonToFront(log, response, result);
+        super.handleRespJsonToFront(log, response, result);
     }
 
     @ApiOperation(value = "导出/全部->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)
@@ -76,7 +76,7 @@ public class UserExcelController extends BaseController {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
-        Assert.notNull(defineMenuEntity, "无效菜单:" + actionFailMsg);
+        Assert.notNull(defineMenuEntity, "无效菜单:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
         //菜单模板配置
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean);

@@ -13,6 +13,7 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
+import com.egg.manager.persistence.commons.base.exception.login.MyLoginFailureException;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
@@ -123,7 +124,7 @@ public class UserLoginController extends BaseController {
             //返回给前端 jwt jwt值
             result.putAuthorization(authorization);
         } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            throw new MyLoginFailureException();
         }
         return result;
     }

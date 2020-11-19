@@ -208,7 +208,7 @@ public class DefineRoleController extends BaseController {
     public WebResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
+        Assert.notNull(roleId, "未知角色id:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
         Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
         result.putCount(count);
         return result;
@@ -219,7 +219,7 @@ public class DefineRoleController extends BaseController {
     public WebResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
                                         @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
+        Assert.notNull(roleId, "未知角色id:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
         //取得前端所有 勾选的值
         checkIds = checkIds != null ? checkIds : new String[]{};
         halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};

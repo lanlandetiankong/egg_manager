@@ -161,7 +161,7 @@ public class DefinePermissionController extends BaseController {
         result.putCount(delCount);
         if (new Integer(0).equals(delCount)) {
             //如果删除的是 [已启用的]，则抛出异常
-            throw new MyRuntimeBusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
+            throw new MyRuntimeBusinessException("删除权限定义:" + BaseRstMsgConstant.ACTION_FAIL_MSG + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
         }
         return result;
     }

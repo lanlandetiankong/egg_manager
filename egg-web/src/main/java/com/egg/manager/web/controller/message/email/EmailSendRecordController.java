@@ -67,17 +67,15 @@ public class EmailSendRecordController extends BaseController {
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //添加状态过滤,时间倒序排序
-            MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
-                    .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
-                    .getRefreshedSelf();
-            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-            MongoQueryPageBean<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //添加状态过滤,时间倒序排序
+        MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
+                .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
+                .getRefreshedSelf();
+        mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
+        MongoQueryPageBean<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
+        dealSetMongoPageResult(result, pageBean);
+
         return result;
     }
 
@@ -87,13 +85,11 @@ public class EmailSendRecordController extends BaseController {
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                       @RequestParam(value = "fid", required = true) String fid) {
         WebResult result = WebResult.okQuery();
-        try {
-            Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
-            EmailSendRecordMgo mobj = emailSendRecordMgoService.doFindById(loginUserInfo, fid);
-            result.putBean(mobj);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
+        EmailSendRecordMgo mobj = emailSendRecordMgoService.doFindById(loginUserInfo, fid);
+        result.putBean(mobj);
+
         return result;
     }
 
@@ -105,15 +101,13 @@ public class EmailSendRecordController extends BaseController {
                                  EmailSendRecordMgvo emailSendRecordMgvo) {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(emailSendRecordMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMgvoToMgo(emailSendRecordMgvo);
-            EmailSendRecordMgo newMgo = emailSendRecordMgoService.doInsert(loginUserInfo, emailSendRecordMgo);
-            addCount += (newMgo != null) ? 1 : 0;
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(emailSendRecordMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        EmailSendRecordMgo emailSendRecordMgo = EmailSendRecordMapstruct.INSTANCE.translateMgvoToMgo(emailSendRecordMgvo);
+        EmailSendRecordMgo newMgo = emailSendRecordMgoService.doInsert(loginUserInfo, emailSendRecordMgo);
+        addCount += (newMgo != null) ? 1 : 0;
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -126,13 +120,11 @@ public class EmailSendRecordController extends BaseController {
     @PostMapping(value = "/delOneById")
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -146,13 +138,11 @@ public class EmailSendRecordController extends BaseController {
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = emailSendRecordMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        delCount = emailSendRecordMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
+        result.putCount(delCount);
+
         return result;
     }
 

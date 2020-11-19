@@ -92,18 +92,16 @@ public class UserAccountController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<UserAccountDto> vpage = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<UserAccountDto> vpage = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -113,25 +111,23 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            UserAccountEntity account = userAccountMapper.selectById(accountId);
-            UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
-            //取得 所属的 租户定义
-            DefineTenantEntity belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
-            if (belongTenant != null) {
-                userAccountVo.setBelongTenantId(belongTenant.getFid());
-                userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
-            }
-            //取得 所属的 部门定义
-            DefineDepartmentEntity belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
-            if (belongDepartment != null) {
-                userAccountVo.setBelongDepartmentId(belongDepartment.getFid());
-                userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
-            }
-            result.putBean(userAccountVo);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+
+        UserAccountEntity account = userAccountMapper.selectById(accountId);
+        UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
+        //取得 所属的 租户定义
+        DefineTenantEntity belongTenant = defineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
+        if (belongTenant != null) {
+            userAccountVo.setBelongTenantId(belongTenant.getFid());
+            userAccountVo.setBelongTenant(DefineTenantTransfer.transferEntityToVo(belongTenant));
         }
+        //取得 所属的 部门定义
+        DefineDepartmentEntity belongDepartment = defineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
+        if (belongDepartment != null) {
+            userAccountVo.setBelongDepartmentId(belongDepartment.getFid());
+            userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
+        }
+        result.putBean(userAccountVo);
+
         return result;
     }
 
@@ -140,12 +136,10 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-            result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+        result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
+
         return result;
     }
 
@@ -155,12 +149,10 @@ public class UserAccountController extends BaseController {
     public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-            result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
+        result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
+
         return result;
     }
 
@@ -170,12 +162,10 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-            result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+        result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
+
         return result;
     }
 
@@ -183,17 +173,16 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "新增->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj",UserAccountVo.class,true);
-            Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = userAccountService.dealCreate(loginUserInfo, userAccountVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+        Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = userAccountService.dealCreate(loginUserInfo, userAccountVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -201,17 +190,16 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj",UserAccountVo.class , true);
-            Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = userAccountService.dealUpdate(loginUserInfo, userAccountVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
+        Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = userAccountService.dealUpdate(loginUserInfo, userAccountVo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -222,17 +210,16 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            //批量伪删除
-            delCount = userAccountService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        //批量伪删除
+        delCount = userAccountService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -243,16 +230,15 @@ public class UserAccountController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            delCount = userAccountService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        delCount = userAccountService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -260,21 +246,20 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
-    public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
-        try {
-            Assert.notEmpty(lockIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            //操作类型为锁定？如果没传递值默认锁定
-            lockFlag = lockFlag != null ? lockFlag : true;
-            String lockMsg = lockFlag ? "锁定" : "解锁";
-            //批量伪删除
-            lockCount = userAccountService.dealBatchRenewLock(loginUserInfo, lockIds, lockFlag);
-            result.putCount(lockCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(lockIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+
+        //操作类型为锁定？如果没传递值默认锁定
+        lockFlag = lockFlag != null ? lockFlag : true;
+        String lockMsg = lockFlag ? "锁定" : "解锁";
+        //批量伪删除
+        lockCount = userAccountService.dealBatchRenewLock(loginUserInfo, lockIds, lockFlag);
+        result.putCount(lockCount);
+
         return result;
     }
 
@@ -282,19 +267,18 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "更新/修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
-    public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
-        try {
-            Assert.notNull(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            //操作类型为锁定？如果没传递值默认锁定
-            lockFlag = lockFlag != null ? lockFlag : true;
-            String lockMsg = lockFlag ? "锁定" : "解锁";
-            lockCount = userAccountService.dealRenewLock(loginUserInfo, lockId, lockFlag);
-            result.putCount(lockCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        //操作类型为锁定？如果没传递值默认锁定
+        lockFlag = lockFlag != null ? lockFlag : true;
+        String lockMsg = lockFlag ? "锁定" : "解锁";
+        lockCount = userAccountService.dealRenewLock(loginUserInfo, lockId, lockFlag);
+        result.putCount(lockCount);
+
         return result;
     }
 
@@ -302,15 +286,14 @@ public class UserAccountController extends BaseController {
     @ApiOperation(value = "授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
-    public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
-            Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
-            result.putCount(grantCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
+        Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
+        result.putCount(grantCount);
+
         return result;
     }
 
@@ -319,28 +302,25 @@ public class UserAccountController extends BaseController {
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public WebResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
-                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
-            Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);
-            result.putCount(grantCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
+        Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);
+        result.putCount(grantCount);
+
         return result;
     }
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/reflushSecurePwd")
     @GetMapping(value = "/reflushSecurePwd")
-    public WebResult reflushSecurePwd(HttpServletRequest request,@CurrentLoginUser(required = false) CurrentLoginUserInfo loginUserInfo) {
+    public WebResult reflushSecurePwd(HttpServletRequest request, @CurrentLoginUser(required = false) CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-        try {
-            boolean flag = userAccountService.reflushSecurePwd(loginUserInfo);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        boolean flag = userAccountService.reflushSecurePwd(loginUserInfo);
+
         return result;
     }
 }

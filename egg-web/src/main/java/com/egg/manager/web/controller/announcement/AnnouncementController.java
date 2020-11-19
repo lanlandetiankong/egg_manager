@@ -82,7 +82,7 @@ public class AnnouncementController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        return result ;
+        return result;
     }
 
 
@@ -117,16 +117,14 @@ public class AnnouncementController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            AnnouncementEntity announcementEntity = announcementMapper.selectById(announcementId);
-            //取得 公告标签 map
-            Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
-            result.putBean(AnnouncementTransfer.transferEntityToVo(announcementEntity, announcementTagMap));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        AnnouncementEntity announcementEntity = announcementMapper.selectById(announcementId);
+        //取得 公告标签 map
+        Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
+        result.putBean(AnnouncementTransfer.transferEntityToVo(announcementEntity, announcementTagMap));
+
         return result;
     }
 
@@ -135,16 +133,15 @@ public class AnnouncementController extends BaseController {
     @ApiOperation(value = "新增->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreate(loginUserInfo, announcementVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = announcementService.dealCreate(loginUserInfo, announcementVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -153,16 +150,15 @@ public class AnnouncementController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcement/createFromDraft")
     @PostMapping(value = "/createFromDraft")
     public WebResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
-                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementService.dealCreateFromDraft(loginUserInfo, announcementDraftVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = announcementService.dealCreateFromDraft(loginUserInfo, announcementDraftVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -172,17 +168,16 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = announcementService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+
+        delCount = announcementService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -193,16 +188,15 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = announcementService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        Integer delCount = announcementService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 

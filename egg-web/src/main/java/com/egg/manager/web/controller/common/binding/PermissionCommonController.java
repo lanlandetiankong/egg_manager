@@ -33,18 +33,16 @@ public class PermissionCommonController extends BaseController {
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public WebResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefinePermissionTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefinePermissionTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 
@@ -52,18 +50,16 @@ public class PermissionCommonController extends BaseController {
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public WebResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefineRoleTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefineRoleTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 
@@ -72,23 +68,21 @@ public class PermissionCommonController extends BaseController {
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public WebResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            List<String> defaultCheckList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefinePermissionCodePrefixEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                    if (enumObj.isDefaultCheck()) {
-                        defaultCheckList.add(enumObj.getValue());
-                    }
+
+        DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        List<String> defaultCheckList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefinePermissionCodePrefixEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
+                if (enumObj.isDefaultCheck()) {
+                    defaultCheckList.add(enumObj.getValue());
                 }
             }
-            result.putEnumList(beanList);
-            result.putEnumDefaultCheckList(defaultCheckList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+        result.putEnumDefaultCheckList(defaultCheckList);
+
         return result;
     }
 

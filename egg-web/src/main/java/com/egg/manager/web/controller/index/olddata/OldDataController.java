@@ -28,7 +28,7 @@ import java.util.List;
 public class OldDataController extends BaseController {
 
     @Autowired
-    private UserAccountMapper userAccountMapper ;
+    private UserAccountMapper userAccountMapper;
 
     @PcWebQueryLog(fullPath = "/index/olddata/restore", flag = false)
     @GetMapping(value = "/testEnv")
@@ -40,15 +40,15 @@ public class OldDataController extends BaseController {
     }
 
     public void runRestore(JSONArray jsonArray) {
-        List<UserAccountEntity> list = new ArrayList<>() ;
-        int count = 0 ;
-        for(int i=0;i<jsonArray.size();i++){
+        List<UserAccountEntity> list = new ArrayList<>();
+        int count = 0;
+        for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject.put("create_user_id",null);
-            jsonObject.put("last_modifyer_id",null);
-            jsonObject.put("create_time",null);
-            jsonObject.put("update_time",null);
-            jsonObject.put("fid",null);
+            jsonObject.put("create_user_id", null);
+            jsonObject.put("last_modifyer_id", null);
+            jsonObject.put("create_time", null);
+            jsonObject.put("update_time", null);
+            jsonObject.put("fid", null);
             UserAccountEntity obj = jsonArray.getObject(i, UserAccountEntity.class);
             list.add(obj);
             count += userAccountMapper.insert(obj);

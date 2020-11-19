@@ -40,11 +40,7 @@ public class HelloController extends BaseController {
     @ApiOperation(value = "测试当前开发环境", response = WebResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
-        try {
-            return "You run in a " + avtiveEnv + " environment";
-        } catch (Exception e) {
-        }
-        return "Error";
+        return "You run in a " + avtiveEnv + " environment";
     }
 
     @PcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)

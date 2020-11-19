@@ -64,17 +64,15 @@ public class AnnouncementTagController extends BaseController {
     public WebResult gainEnumSelect(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = new ArrayList<QueryField>();
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, null, sortMap);
-            result = announcementTagService.dealResultListToEnums(result);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = new ArrayList<QueryField>();
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, null, sortMap);
+        result = announcementTagService.dealResultListToEnums(result);
+
         return result;
     }
 
@@ -84,18 +82,16 @@ public class AnnouncementTagController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<AnnouncementTagDto> vpage = this.parsePaginationJsonToBean(paginationObj, AnnouncementTagDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<AnnouncementTagDto> vpage = this.parsePaginationJsonToBean(paginationObj, AnnouncementTagDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -105,13 +101,11 @@ public class AnnouncementTagController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String announcementTagId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            AnnouncementTagEntity announcementTagEntity = announcementTagMapper.selectById(announcementTagId);
-            result.putBean(AnnouncementTagTransfer.transferEntityToVo(announcementTagEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        AnnouncementTagEntity announcementTagEntity = announcementTagMapper.selectById(announcementTagId);
+        result.putBean(AnnouncementTagTransfer.transferEntityToVo(announcementTagEntity));
+
         return result;
     }
 
@@ -120,16 +114,15 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementTag/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = announcementTagService.dealCreate(loginUserInfo, announcementTagVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = announcementTagService.dealCreate(loginUserInfo, announcementTagVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -138,17 +131,16 @@ public class AnnouncementTagController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementTag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, AnnouncementTagVo announcementTagVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = announcementTagService.dealUpdate(loginUserInfo, announcementTagVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+
+        changeCount = announcementTagService.dealUpdate(loginUserInfo, announcementTagVo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -160,17 +152,16 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
-                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = announcementTagService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+
+        delCount = announcementTagService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -182,16 +173,15 @@ public class AnnouncementTagController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId,
-                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = announcementTagService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        Integer delCount = announcementTagService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 

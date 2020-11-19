@@ -52,18 +52,16 @@ public class UserAccountCommonCompController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<UserAccountDto> vpage = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<UserAccountDto> vpage = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 

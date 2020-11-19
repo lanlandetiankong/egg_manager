@@ -40,51 +40,44 @@ public class ImgUploadController extends BaseController {
     private UploadProps uploadProps;
 
     @Autowired
-    private SnowflakeConfig snowflakeConfig ;
+    private SnowflakeConfig snowflakeConfig;
 
 
     @ApiOperation(value = "上传/图片->头像", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
-    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
+    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) throws Exception{
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
-            Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
-            try {
-                byte[] fileBytes = file.getBytes();
-                String oldFileName = file.getOriginalFilename();
-                int lastDotIndex = oldFileName.lastIndexOf(".");
-                String fileType = "";
-                if (lastDotIndex > -1) {
-                    fileType = oldFileName.substring(lastDotIndex);
-                }
-                String uuidName = snowflakeConfig.snowflakeId() + fileType;
-                String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
-                String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
-                File folder = new File(baseDir);
-                if (folder.exists() == false) {
-                    folder.mkdirs();
-                }
-                //最终的存储路径
-                String fileLocation = baseDir + File.separator + uuidName;
-                Path path = Paths.get(fileLocation);
-                Files.write(path, fileBytes);
+        Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
+        Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
-                FileResBean fileResBean = FileResBean.builder()
-                        .fileName(uuidName)
-                        .fileLocation(fileLocation)
-                        .fileOldName(oldFileName)
-                        .filePrefix(uploadProps.getUrlPrefix() + File.separator)
-                        .fileUri(fileUri)
-                        .build();
-                result.putFileResBean(fileResBean);
-            } catch (IOException e) {
-                throw e;
-            }
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+
+        byte[] fileBytes = file.getBytes();
+        String oldFileName = file.getOriginalFilename();
+        int lastDotIndex = oldFileName.lastIndexOf(".");
+        String fileType = "";
+        if (lastDotIndex > -1) {
+            fileType = oldFileName.substring(lastDotIndex);
         }
+        String uuidName = snowflakeConfig.snowflakeId() + fileType;
+        String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfImg();
+        String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfImg() + File.separator + uuidName;
+        File folder = new File(baseDir);
+        if (folder.exists() == false) {
+            folder.mkdirs();
+        }
+        //最终的存储路径
+        String fileLocation = baseDir + File.separator + uuidName;
+        Path path = Paths.get(fileLocation);
+        Files.write(path, fileBytes);
+        FileResBean fileResBean = FileResBean.builder()
+                .fileName(uuidName)
+                .fileLocation(fileLocation)
+                .fileOldName(oldFileName)
+                .filePrefix(uploadProps.getUrlPrefix() + File.separator)
+                .fileUri(fileUri)
+                .build();
+        result.putFileResBean(fileResBean);
         return result;
     }
 

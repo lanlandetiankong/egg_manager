@@ -79,12 +79,8 @@ public class DefineModuleController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            DefineModuleEntity defineModuleEntity = defineModuleMapper.selectById(defineModuleId);
-            result.putBean(DefineModuleTransfer.transferEntityToVo(defineModuleEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        DefineModuleEntity defineModuleEntity = defineModuleMapper.selectById(defineModuleId);
+        result.putBean(DefineModuleTransfer.transferEntityToVo(defineModuleEntity));
         return result;
     }
 
@@ -92,16 +88,13 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "新增->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = defineModuleService.dealCreate(loginUserInfo, defineModuleVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = defineModuleService.dealCreate(loginUserInfo, defineModuleVo);
+        result.putCount(addCount);
         return result;
     }
 
@@ -109,16 +102,13 @@ public class DefineModuleController extends BaseController {
     @ApiOperation(value = "更新->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineModuleService.dealUpdate(loginUserInfo, defineModuleVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = defineModuleService.dealUpdate(loginUserInfo, defineModuleVo);
+        result.putCount(changeCount);
         return result;
     }
 
@@ -129,16 +119,13 @@ public class DefineModuleController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineModuleService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        delCount = defineModuleService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
         return result;
     }
 
@@ -149,15 +136,12 @@ public class DefineModuleController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineModuleService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        Integer delCount = defineModuleService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
         return result;
     }
 

@@ -19,7 +19,6 @@ import java.util.List;
 
 /**
  * 阿里云OSS测试接口
- *
  * @author jason
  */
 @Slf4j
@@ -36,8 +35,9 @@ public class OssTestController {
      */
     @GetMapping("/uploadFile")
     public AliyunOssResult uploadFile() {
-        return AliyunOSSUtil.uploadFile(new File(this.getClass().getResource("/").getPath()+ "/config/others/banner.txt"), "png/banner.txt");
+        return AliyunOSSUtil.uploadFile(new File(this.getClass().getResource("/").getPath() + "/config/others/banner.txt"), "png/banner.txt");
     }
+
     /**
      * 上传文件-指定目录
      */

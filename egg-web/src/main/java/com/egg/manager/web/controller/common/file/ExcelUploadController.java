@@ -42,52 +42,51 @@ public class ExcelUploadController extends BaseController {
 
 
     @Autowired
-    private SnowflakeConfig snowflakeConfig ;
+    private SnowflakeConfig snowflakeConfig;
 
     @ApiOperation(value = "上传/模板->excel", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
-    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder) {
+    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder)
+        throws Exception{
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
-            String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
-            List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();
-            for (MultipartFile file : fileArr) {
-                byte[] fileBytes = file.getBytes();
-                String oldFileName = file.getOriginalFilename();
-                int lastDotIndex = oldFileName.lastIndexOf(".");
-                String fileType = "";
-                if (lastDotIndex > -1) {
-                    fileType = oldFileName.substring(lastDotIndex);
-                }
-                Long uuid = snowflakeConfig.snowflakeId();
-                String uuidName = uuid + fileType;
-                String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
-                File folder = new File(baseDir);
-                if (folder.exists() == false) {
-                    folder.mkdirs();
-                }
-                //最终的存储路径
-                String fileLocation = baseDir + File.separator + uuidName;
-                Path path = Paths.get(fileLocation);
-                Files.write(path, fileBytes);
+        Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
 
-                AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
-                        .name(oldFileName)
-                        .uid(String.valueOf(uuid))
-                        .url(uploadProps.getUrlPrefix() + fileUri)
-                        .uri(fileUri)
-                        .urlLocation(fileUri)
-                        .status(AntdFileUploadStatusEnum.Done.getValue())
-                        .response("文件上传成功！")
-                        .build();
-                uploadBeanList.add(uploadBean);
+        String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
+        List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();
+        for (MultipartFile file : fileArr) {
+            byte[] fileBytes = file.getBytes();
+            String oldFileName = file.getOriginalFilename();
+            int lastDotIndex = oldFileName.lastIndexOf(".");
+            String fileType = "";
+            if (lastDotIndex > -1) {
+                fileType = oldFileName.substring(lastDotIndex);
             }
-            result.putFileUploaderBeanList(uploadBeanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            Long uuid = snowflakeConfig.snowflakeId();
+            String uuidName = uuid + fileType;
+            String fileUri = File.separator + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder + File.separator + uuidName;
+            File folder = new File(baseDir);
+            if (folder.exists() == false) {
+                folder.mkdirs();
+            }
+            //最终的存储路径
+            String fileLocation = baseDir + File.separator + uuidName;
+            Path path = Paths.get(fileLocation);
+            Files.write(path, fileBytes);
+
+            AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
+                    .name(oldFileName)
+                    .uid(String.valueOf(uuid))
+                    .url(uploadProps.getUrlPrefix() + fileUri)
+                    .uri(fileUri)
+                    .urlLocation(fileUri)
+                    .status(AntdFileUploadStatusEnum.Done.getValue())
+                    .response("文件上传成功！")
+                    .build();
+            uploadBeanList.add(uploadBean);
         }
+        result.putFileUploaderBeanList(uploadBeanList);
+
         return result;
     }
 }

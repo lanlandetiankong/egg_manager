@@ -34,18 +34,16 @@ public class ModuleCommonController extends BaseController {
     @PostMapping(value = "/getAllModuleTypeEnumList")
     public WebResult doGetAllModuleTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefineModuleTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        DefineModuleTypeEnum[] enums = DefineModuleTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefineModuleTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 
@@ -54,18 +52,16 @@ public class ModuleCommonController extends BaseController {
     @PostMapping(value = "/getAllMenuUrlJumpTypeEnumList")
     public WebResult doGetAllMenuTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefineMenuUrlJumpTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        DefineMenuUrlJumpTypeEnum[] enums = DefineMenuUrlJumpTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefineMenuUrlJumpTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 

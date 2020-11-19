@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.persistence.commons.base.exception.BusinessException;
+import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.commons.base.helper.ErrorActionEnum;
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
@@ -48,7 +48,7 @@ public class BaseController {
 
 
 
-    public <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws BusinessException {
+    public <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws MyRuntimeBusinessException {
         String queryJson = request.getParameter(paramKey);
         T bean = null;
         if (StringUtils.isNotBlank(queryJson)) {
@@ -58,7 +58,7 @@ public class BaseController {
             }
         }
         if (bean == null && isRequired) {
-            throw new BusinessException("未取得有效的值：" + paramKey);
+            throw new MyRuntimeBusinessException("未取得有效的值：" + paramKey);
         }
         return bean;
     }
@@ -69,7 +69,7 @@ public class BaseController {
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         PrintWriter writer = null;
-        try {
+        try{
             writer = response.getWriter();
             writer.write(JSONObject.toJSONString(result));
         } catch (IOException e) {

@@ -33,18 +33,16 @@ public class UserCommonController extends BaseController {
     @PostMapping(value = "/getAllUserTypeEnumList")
     public WebResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (UserAccountBaseTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (UserAccountBaseTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 
@@ -52,14 +50,12 @@ public class UserCommonController extends BaseController {
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public WebResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            beanList.add(new FrontSelectBean(0, "未锁定"));
-            beanList.add(new FrontSelectBean(1, "已锁定"));
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        beanList.add(new FrontSelectBean(0, "未锁定"));
+        beanList.add(new FrontSelectBean(1, "已锁定"));
+        result.putEnumList(beanList);
+
         return result;
     }
 
@@ -68,18 +64,16 @@ public class UserCommonController extends BaseController {
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public WebResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (DefineJobTypeEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
-                }
+
+        DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (DefineJobTypeEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
+
         return result;
     }
 }

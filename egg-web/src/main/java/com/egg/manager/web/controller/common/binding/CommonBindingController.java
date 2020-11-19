@@ -28,24 +28,21 @@ import java.util.List;
 @RequestMapping("/commonApi/binding")
 public class CommonBindingController extends BaseController {
 
+
     @ApiOperation(value = "查询枚举->开关", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
     public WebResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-        try {
-            SwitchStateEnum[] enums = SwitchStateEnum.values();
-            List<FrontSelectBean> beanList = new ArrayList<>();
-            if (enums != null && enums.length > 0) {
-                for (SwitchStateEnum enumObj : enums) {
-                    beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getName()));
-                }
+
+        SwitchStateEnum[] enums = SwitchStateEnum.values();
+        List<FrontSelectBean> beanList = new ArrayList<>();
+        if (enums != null && enums.length > 0) {
+            for (SwitchStateEnum enumObj : enums) {
+                beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getName()));
             }
-            result.putEnumList(beanList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
         }
+        result.putEnumList(beanList);
         return result;
     }
-
 
 }

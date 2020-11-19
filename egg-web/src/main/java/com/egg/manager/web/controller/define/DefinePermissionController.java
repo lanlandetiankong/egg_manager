@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.commons.base.exception.BusinessException;
+import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
@@ -63,21 +63,18 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryPage")
-    public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+        throws Exception {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            queryFieldList.add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
-            //取得 分页配置
-            AntdvPage<DefinePermissionEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        queryFieldList.add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
+        //取得 分页配置
+        AntdvPage<DefinePermissionEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
         return result;
     }
 
@@ -91,18 +88,16 @@ public class DefinePermissionController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefinePermissionDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefinePermissionDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -112,12 +107,10 @@ public class DefinePermissionController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            DefinePermissionEntity definePermissionEntity = definePermissionMapper.selectById(definePermissionId);
-            result.putBean(DefinePermissionTransfer.transferEntityToVo(definePermissionEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        DefinePermissionEntity definePermissionEntity = definePermissionMapper.selectById(definePermissionId);
+        result.putBean(DefinePermissionTransfer.transferEntityToVo(definePermissionEntity));
+
         return result;
     }
 
@@ -125,17 +118,16 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "新增->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            addCount = definePermissionService.dealCreate(loginUserInfo, definePermissionVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+
+        addCount = definePermissionService.dealCreate(loginUserInfo, definePermissionVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -143,16 +135,15 @@ public class DefinePermissionController extends BaseController {
     @ApiOperation(value = "更新->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = definePermissionService.dealUpdate(loginUserInfo, definePermissionVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = definePermissionService.dealUpdate(loginUserInfo, definePermissionVo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -166,13 +157,11 @@ public class DefinePermissionController extends BaseController {
     public WebResult batchEnsureByIds(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(ensureIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = definePermissionService.dealBatchEnsure(loginUserInfo, ensureIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notEmpty(ensureIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        delCount = definePermissionService.dealBatchEnsure(loginUserInfo, ensureIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -183,19 +172,17 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = definePermissionService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-            if (new Integer(0).equals(delCount)) {
-                //如果删除的是 [已启用的]，则抛出异常
-                throw new BusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
-            }
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        Integer delCount = definePermissionService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+        if (new Integer(0).equals(delCount)) {
+            //如果删除的是 [已启用的]，则抛出异常
+            throw new MyRuntimeBusinessException("删除权限定义:" + actionFailMsg + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
         }
         return result;
     }
@@ -206,20 +193,19 @@ public class DefinePermissionController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = definePermissionService.dealBatchLogicDelete(loginUserInfo, delIds);
-            if (delIds.length > delCount) {
-                result.putErrorMsg("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
-            }
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+
+        delCount = definePermissionService.dealBatchLogicDelete(loginUserInfo, delIds);
+        if (delIds.length > delCount) {
+            result.putErrorMsg("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
         }
+        result.putCount(delCount);
+
         return result;
     }
 }

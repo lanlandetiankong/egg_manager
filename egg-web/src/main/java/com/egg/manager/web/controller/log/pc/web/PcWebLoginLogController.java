@@ -45,7 +45,7 @@ public class PcWebLoginLogController extends BaseController {
     @Reference
     private PcWebLoginLogMgoService pcWebLoginLogMgoService;
 
-    @PcWebQueryLog(fullPath = "/log/pc/web/loginLog/getDataPage",flag=false)
+    @PcWebQueryLog(fullPath = "/log/pc/web/loginLog/getDataPage", flag = false)
     @ApiOperation(value = "分页查询->PcWeb登录接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -55,17 +55,15 @@ public class PcWebLoginLogController extends BaseController {
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //添加状态过滤,时间倒序排序
-            MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
-                    .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
-                    .getRefreshedSelf();
-            mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-            MongoQueryPageBean<PcWebLoginLogMgo> pageBean = pcWebLoginLogMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-            dealSetMongoPageResult(result, pageBean);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //添加状态过滤,时间倒序排序
+        MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
+                .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
+                .getRefreshedSelf();
+        mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
+        MongoQueryPageBean<PcWebLoginLogMgo> pageBean = pcWebLoginLogMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
+        dealSetMongoPageResult(result, pageBean);
+
         return result;
     }
 }

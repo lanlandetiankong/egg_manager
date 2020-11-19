@@ -62,18 +62,16 @@ public class DefineJobController extends BaseController {
     public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefineJobEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefineJobEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -89,18 +87,16 @@ public class DefineJobController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefineJobDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefineJobDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -110,12 +106,10 @@ public class DefineJobController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            DefineJobEntity defineJobEntity = defineJobMapper.selectById(defineJobId);
-            result.putBean(DefineJobTransfer.transferEntityToVo(defineJobEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        DefineJobEntity defineJobEntity = defineJobMapper.selectById(defineJobId);
+        result.putBean(DefineJobTransfer.transferEntityToVo(defineJobEntity));
+
         return result;
     }
 
@@ -123,16 +117,15 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "新增->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = defineJobService.dealCreate(loginUserInfo, defineJobVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = defineJobService.dealCreate(loginUserInfo, defineJobVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -140,16 +133,15 @@ public class DefineJobController extends BaseController {
     @ApiOperation(value = "更新->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineJobService.dealUpdate(loginUserInfo, defineJobVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = defineJobService.dealUpdate(loginUserInfo, defineJobVo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -160,17 +152,16 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            //批量伪删除
-            delCount = defineJobService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        //批量伪删除
+        delCount = defineJobService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -181,16 +172,15 @@ public class DefineJobController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            delCount = defineJobService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        delCount = defineJobService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 

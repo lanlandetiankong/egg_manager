@@ -134,14 +134,12 @@ public class DefineMenuController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineMenuId) {
         WebResult result = WebResult.okQuery();
-        try {
-            Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineMenuEntity entity = defineMenuMapper.selectById(defineMenuId);
-            result.putBean(DefineMenuTransfer.transferEntityToVo(entity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        DefineMenuEntity entity = defineMenuMapper.selectById(defineMenuId);
+        result.putBean(DefineMenuTransfer.transferEntityToVo(entity));
+
         return result;
     }
 
@@ -149,17 +147,16 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "新增->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            addCount = defineMenuService.dealCreate(loginUserInfo, vo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+
+        addCount = defineMenuService.dealCreate(loginUserInfo, vo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -167,17 +164,16 @@ public class DefineMenuController extends BaseController {
     @ApiOperation(value = "更新->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            changeCount = defineMenuService.dealUpdate(loginUserInfo, vo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+
+        changeCount = defineMenuService.dealUpdate(loginUserInfo, vo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -188,22 +184,20 @@ public class DefineMenuController extends BaseController {
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     public WebResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineMenuEntity entity = defineMenuMapper.selectById(menuId);
-            if (fileUploadBean != null) {
-                entity.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
-            } else {
-                entity.setExcelModelConf(null);
-            }
-            entity.setLastModifyerId(loginUserInfo.getFid());
-            entity.setUpdateTime(new Date());
-            Integer changeCount = defineMenuMapper.updateById(entity);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        DefineMenuEntity entity = defineMenuMapper.selectById(menuId);
+        if (fileUploadBean != null) {
+            entity.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
+        } else {
+            entity.setExcelModelConf(null);
         }
+        entity.setLastModifyerId(loginUserInfo.getFid());
+        entity.setUpdateTime(new Date());
+        Integer changeCount = defineMenuMapper.updateById(entity);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -213,17 +207,16 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
 
-            delCount = defineMenuService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+
+        delCount = defineMenuService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -234,16 +227,15 @@ public class DefineMenuController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            Integer delCount = defineMenuService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        Integer delCount = defineMenuService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 

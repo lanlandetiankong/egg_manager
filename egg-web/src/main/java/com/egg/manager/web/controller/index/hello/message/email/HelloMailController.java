@@ -37,16 +37,14 @@ public class HelloMailController extends BaseController {
     @PostMapping(value = "/sendMail")
     public WebResult doGetDefineModuleById(HttpServletRequest request) {
         WebResult result = WebResult.okOperation();
-        try {
-            String[] receiveEmails = new String[]{"2773756340@qq.com"};
-            EmailSendRecordMgvo emailDto = EmailSendRecordMgvo.builder().subject("邮件标题123")
-                    .content("邮件内容123")
-                    .receiveUserInfoList(Lists.newArrayList(EmailReceiveUserInfoMgvo.builder().emailAddress("2773756340@qq.com").build()))
-                    .build();
-            myBaseEmailMgoService.sendSimpleEmail(emailDto);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        String[] receiveEmails = new String[]{"2773756340@qq.com"};
+        EmailSendRecordMgvo emailDto = EmailSendRecordMgvo.builder().subject("邮件标题123")
+                .content("邮件内容123")
+                .receiveUserInfoList(Lists.newArrayList(EmailReceiveUserInfoMgvo.builder().emailAddress("2773756340@qq.com").build()))
+                .build();
+        myBaseEmailMgoService.sendSimpleEmail(emailDto);
+
         return result;
     }
 }

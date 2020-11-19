@@ -85,18 +85,14 @@ public class DefineRoleController extends BaseController {
     public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefineRoleEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleEntity.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineRoleService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefineRoleEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleEntity.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineRoleService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
         return result;
     }
 
@@ -111,18 +107,14 @@ public class DefineRoleController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefineRoleDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineRoleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefineRoleDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineRoleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         return result;
     }
 
@@ -132,12 +124,8 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            DefineRoleEntity defineRoleEntity = defineRoleMapper.selectById(defineRoleId);
-            result.putBean(DefineRoleTransfer.transferEntityToVo(defineRoleEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        DefineRoleEntity defineRoleEntity = defineRoleMapper.selectById(defineRoleId);
+        result.putBean(DefineRoleTransfer.transferEntityToVo(defineRoleEntity));
         return result;
     }
 
@@ -145,12 +133,8 @@ public class DefineRoleController extends BaseController {
     @PostMapping(value = "/gainAllPermissionByRoleId")
     public WebResult gainAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
-            result.putResultList(definePermissionEntityList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
+        result.putResultList(definePermissionEntityList);
         return result;
     }
 
@@ -160,51 +144,40 @@ public class DefineRoleController extends BaseController {
     public WebResult gainAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
                                          @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefineMenuEntity> defineMenuEntityList = null;
-            if (Boolean.TRUE.equals(filterParentNode)) {
-                //是否过滤掉 有子节点的 [菜单节点]
-                defineMenuEntityList = defineMenuMapper.findAllMenuByRoleIdFilterParentNode(defineRoleId, BaseStateEnum.ENABLED.getValue());
-            } else {
-                defineMenuEntityList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
-            }
-            result.putResultList(defineMenuEntityList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+        List<DefineMenuEntity> defineMenuEntityList = null;
+        if (Boolean.TRUE.equals(filterParentNode)) {
+            //是否过滤掉 有子节点的 [菜单节点]
+            defineMenuEntityList = defineMenuMapper.findAllMenuByRoleIdFilterParentNode(defineRoleId, BaseStateEnum.ENABLED.getValue());
+        } else {
+            defineMenuEntityList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
         }
+        result.putResultList(defineMenuEntityList);
         return result;
     }
 
 
     @ApiOperation(value = "新增->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            addCount = defineRoleService.dealCreate(loginUserInfo, defineRoleVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = defineRoleService.dealCreate(loginUserInfo, defineRoleVo);
+        result.putCount(addCount);
         return result;
     }
 
 
     @ApiOperation(value = "更新->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
-            changeCount = defineRoleService.dealUpdate(loginUserInfo, defineRoleVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = defineRoleService.dealUpdate(loginUserInfo, defineRoleVo);
+        result.putCount(changeCount);
         return result;
     }
 
@@ -214,17 +187,13 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
-            delCount = defineRoleService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        delCount = defineRoleService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
         return result;
     }
 
@@ -234,31 +203,24 @@ public class DefineRoleController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
-            Integer delCount = defineRoleService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        Integer delCount = defineRoleService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
         return result;
     }
 
 
     @ApiOperation(value = "更新授权->角色+权限", notes = "为角色分配权限", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantPermissionToRole")
-    public WebResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
-            Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
-            result.putCount(count);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
+        Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
+        result.putCount(count);
         return result;
     }
 
@@ -268,49 +230,42 @@ public class DefineRoleController extends BaseController {
     public WebResult doGrantMenusToRole(HttpServletRequest request, String roleId, String[] checkIds, String[] halfCheckIds,
                                         @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
-
-            //取得前端所有 勾选的值
-            checkIds = checkIds != null ? checkIds : new String[]{};
-            halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};
-            Set<String> checkIdAll = Sets.newHashSet(checkIds);
-            checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
-
-            //在数据库中 关联分别为 enable、delete 状态
-            Set<String> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
-            //TODO 是否可能被强制限制
-            Set<String> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DISABLED.getValue());
-            //所有 已经在数据库 有的关联行
-            Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
-
-            //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
-            Sets.SetView addSetView = Sets.difference(checkIdAll, oldEnableCheckIdSet);
-            Sets.SetView updateEnableIdSet = Sets.difference(checkIdAll, oldDelCheckIdSet);
-            Sets.SetView updateDelIdSet = Sets.difference(oldCheckIdAll, checkIdAll);
-
-            if (CollectionUtil.isNotEmpty(addSetView)) {
-                List<RoleMenuEntity> addRoleMenuEntityList = Lists.newArrayList();
-                Iterator<String> addIter = addSetView.iterator();
-                while (addIter.hasNext()) {
-                    String diffNext = addIter.next();
-                    addRoleMenuEntityList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUserInfo));
-                }
-                boolean flag = roleMenuService.saveBatch(addRoleMenuEntityList);
+        Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
+        //取得前端所有 勾选的值
+        checkIds = checkIds != null ? checkIds : new String[]{};
+        halfCheckIds = halfCheckIds != null ? halfCheckIds : new String[]{};
+        Set<String> checkIdAll = Sets.newHashSet(checkIds);
+        checkIdAll.addAll(Lists.newArrayList(halfCheckIds));
+        //在数据库中 关联分别为 enable、delete 状态
+        Set<String> oldEnableCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.ENABLED.getValue());
+        //TODO 是否可能被强制限制
+        Set<String> oldDelCheckIdSet = defineRoleService.dealGetMenuIdSetByRoleIdFromDb(roleId, BaseStateEnum.DISABLED.getValue());
+        //所有 已经在数据库 有的关联行
+        Set<String> oldCheckIdAll = Sets.union(oldEnableCheckIdSet, oldDelCheckIdSet);
+        //分别为 待添加数据行、待更新为 可用状态、待更新为 删除状态的 Set集合
+        Sets.SetView addSetView = Sets.difference(checkIdAll, oldEnableCheckIdSet);
+        Sets.SetView updateEnableIdSet = Sets.difference(checkIdAll, oldDelCheckIdSet);
+        Sets.SetView updateDelIdSet = Sets.difference(oldCheckIdAll, checkIdAll);
+        if (CollectionUtil.isNotEmpty(addSetView)) {
+            List<RoleMenuEntity> addRoleMenuEntityList = Lists.newArrayList();
+            Iterator<String> addIter = addSetView.iterator();
+            while (addIter.hasNext()) {
+                String diffNext = addIter.next();
+                addRoleMenuEntityList.add(RoleMenuPojoInitialize.generateSimpleInsertEntity(roleId, diffNext, BaseStateEnum.ENABLED.getValue(), loginUserInfo));
             }
-            if (CollectionUtil.isNotEmpty(updateEnableIdSet)) {
-                Iterator<String> enableIter = updateEnableIdSet.iterator();
-                List enableIdList = Lists.newArrayList(enableIter);
-                int count = roleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
-            }
-            if (CollectionUtil.isNotEmpty(updateDelIdSet)) {
-                Iterator<String> delIter = updateDelIdSet.iterator();
-                List delIdList = Lists.newArrayList(delIter);
-                int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
-            }
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
+            boolean flag = roleMenuService.saveBatch(addRoleMenuEntityList);
         }
+        if (CollectionUtil.isNotEmpty(updateEnableIdSet)) {
+            Iterator<String> enableIter = updateEnableIdSet.iterator();
+            List enableIdList = Lists.newArrayList(enableIter);
+            int count = roleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
+        }
+        if (CollectionUtil.isNotEmpty(updateDelIdSet)) {
+            Iterator<String> delIter = updateDelIdSet.iterator();
+            List delIdList = Lists.newArrayList(delIter);
+            int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
+        }
+
         return result;
     }
 }

@@ -65,18 +65,16 @@ public class DefineDepartmentController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPage<DefineDepartmentDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
-            //取得 排序配置
-            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPage<DefineDepartmentDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+
         return result;
     }
 
@@ -86,14 +84,12 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            Assert.notBlank(defineDepartmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
 
-            DefineDepartmentEntity defineDepartmentEntity = defineDepartmentService.getById(defineDepartmentId);
-            result.putBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartmentEntity));
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notBlank(defineDepartmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
+
+        DefineDepartmentEntity defineDepartmentEntity = defineDepartmentService.getById(defineDepartmentId);
+        result.putBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartmentEntity));
+
         return result;
     }
 
@@ -102,19 +98,17 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(@CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //筛选与排序
-            QueryWrapper<DefineDepartmentEntity> queryWrapper = new QueryWrapper<DefineDepartmentEntity>();
-            queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-            queryWrapper.orderBy(true, true, "level");
-            queryWrapper.orderBy(true, true, "order_num");
-            queryWrapper.orderBy(true, true, "create_time");
-            List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
-            List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
-            result.putResultList(treeList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        //筛选与排序
+        QueryWrapper<DefineDepartmentEntity> queryWrapper = new QueryWrapper<DefineDepartmentEntity>();
+        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.orderBy(true, true, "level");
+        queryWrapper.orderBy(true, true, "order_num");
+        queryWrapper.orderBy(true, true, "create_time");
+        List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
+        result.putResultList(treeList);
+
         return result;
     }
 
@@ -123,13 +117,11 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            List<DefineDepartmentEntity> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
-            List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
-            result.putResultList(treeList);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        List<DefineDepartmentEntity> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
+        List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
+        result.putResultList(treeList);
+
         return result;
     }
 
@@ -137,17 +129,16 @@ public class DefineDepartmentController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineDepartment/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        try {
-            Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
 
-            addCount = defineDepartmentService.dealCreate(loginUserInfo, defineDepartmentVo);
-            result.putCount(addCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+
+        addCount = defineDepartmentService.dealCreate(loginUserInfo, defineDepartmentVo);
+        result.putCount(addCount);
+
         return result;
     }
 
@@ -156,16 +147,15 @@ public class DefineDepartmentController extends BaseController {
     @PcWebOperationLog(fullPath = "/define/defineDepartment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        try {
-            Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-            changeCount = defineDepartmentService.dealUpdate(loginUserInfo, defineDepartmentVo);
-            result.putCount(changeCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = defineDepartmentService.dealUpdate(loginUserInfo, defineDepartmentVo);
+        result.putCount(changeCount);
+
         return result;
     }
 
@@ -176,16 +166,15 @@ public class DefineDepartmentController extends BaseController {
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDeleteByIds")
-    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-        try {
-            Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-            delCount = defineDepartmentService.dealBatchLogicDelete(loginUserInfo, delIds);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+        delCount = defineDepartmentService.dealBatchLogicDelete(loginUserInfo, delIds);
+        result.putCount(delCount);
+
         return result;
     }
 
@@ -196,15 +185,14 @@ public class DefineDepartmentController extends BaseController {
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/deleteById")
-    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+            throws Exception  {
         WebResult result = WebResult.okOperation();
-        try {
-            Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-            Integer delCount = defineDepartmentService.dealLogicDeleteById(loginUserInfo, delId);
-            result.putCount(delCount);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+
+        Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        Integer delCount = defineDepartmentService.dealLogicDeleteById(loginUserInfo, delId);
+        result.putCount(delCount);
+
         return result;
     }
 

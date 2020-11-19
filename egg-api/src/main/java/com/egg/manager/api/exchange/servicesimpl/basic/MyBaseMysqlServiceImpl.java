@@ -12,7 +12,7 @@ import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlE
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.util.reflex.EggReflexUtil;
@@ -61,7 +61,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean paginationBean,
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPage vpage,
                                                  AntdvSortMap sortMap) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
@@ -161,11 +161,11 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public Page dealAntvPageToPagination(AntdvPaginationBean paginationBean) {
+    public Page dealAntvPageToPagination(AntdvPage vpage) {
         Page pagination = new Page();
-        if (paginationBean != null) {
-            pagination.setCurrent(paginationBean.getCurrent());
-            pagination.setSize(paginationBean.getPageSize());
+        if (vpage != null) {
+            pagination.setCurrent(vpage.getCurrent());
+            pagination.setSize(vpage.getPageSize());
         }
         return pagination;
     }

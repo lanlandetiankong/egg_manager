@@ -11,7 +11,7 @@ import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
@@ -71,10 +71,10 @@ public class DefinePermissionController extends BaseController {
             queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             queryFieldList.add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefinePermissionEntity> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
+            AntdvPage<DefinePermissionEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -96,10 +96,10 @@ public class DefinePermissionController extends BaseController {
             List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefinePermissionDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefinePermissionDto.class);
+            AntdvPage<DefinePermissionDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionDto.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

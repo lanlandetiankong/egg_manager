@@ -178,25 +178,25 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      */
     public static MongoQueryPageBean getPageBeanFromRequest(HttpServletRequest request) {
         String paginationJson = request.getParameter(PARAMETER_PAGINATION_OBJ);
-        MongoQueryPageBean paginationBean = null;
+        MongoQueryPageBean vpage = null;
         if (StringUtils.isNotBlank(paginationJson)) {
-            paginationBean = JSONObject.parseObject(paginationJson, MongoQueryPageBean.class);
+            vpage = JSONObject.parseObject(paginationJson, MongoQueryPageBean.class);
         } else {
-            paginationBean = MongoQueryPageBean.gainDefaultPaginationBean();
+            vpage = MongoQueryPageBean.gainDefaultPaginationBean();
         }
-        dealInitPageBean(paginationBean);
-        return paginationBean;
+        dealInitPageBean(vpage);
+        return vpage;
     }
 
     /**
      * 封装的分页bean ==>> mongodb 使用的分页对象
      * note: QPageRequest对象不可作为dubbo传输对象
-     * @param paginationBean
+     * @param vpage
      * @return
      */
-    public static QPageRequest getMgPageFromBean(MongoQueryPageBean paginationBean) {
-        paginationBean = paginationBean != null ? paginationBean : MongoQueryPageBean.gainDefaultPaginationBean();
-        return QPageRequest.of(paginationBean.getCurrent(), paginationBean.getPageSize());
+    public static QPageRequest getMgPageFromBean(MongoQueryPageBean vpage) {
+        vpage = vpage != null ? vpage : MongoQueryPageBean.gainDefaultPaginationBean();
+        return QPageRequest.of(vpage.getCurrent(), vpage.getPageSize());
     }
 
 
@@ -215,22 +215,22 @@ public class MongoQueryBean<T> extends BaseQueryBean {
 
     /**
      * MongoQueryPageBean 数据初始化
-     * @param paginationBean
+     * @param vpage
      * @return
      */
-    private static MongoQueryPageBean dealInitPageBean(MongoQueryPageBean paginationBean) {
-        if (paginationBean == null) {
+    private static MongoQueryPageBean dealInitPageBean(MongoQueryPageBean vpage) {
+        if (vpage == null) {
             return new MongoQueryPageBean(DEFAULT_PAGE, DEFAULT_SIZE);
         }
-        if (paginationBean.getCurrent() == null || paginationBean.getCurrent() < 0) {
-            paginationBean.setCurrent(DEFAULT_PAGE);
-        } else if (paginationBean.getCurrent() > 0) {
-            paginationBean.setCurrent(paginationBean.getCurrent() - 1);
+        if (vpage.getCurrent() == null || vpage.getCurrent() < 0) {
+            vpage.setCurrent(DEFAULT_PAGE);
+        } else if (vpage.getCurrent() > 0) {
+            vpage.setCurrent(vpage.getCurrent() - 1);
         }
-        if (paginationBean.getPageSize() == null || paginationBean.getPageSize() <= 0) {
-            paginationBean.setPageSize(DEFAULT_SIZE);
+        if (vpage.getPageSize() == null || vpage.getPageSize() <= 0) {
+            vpage.setPageSize(DEFAULT_SIZE);
         }
-        return paginationBean;
+        return vpage;
     }
 
     /**

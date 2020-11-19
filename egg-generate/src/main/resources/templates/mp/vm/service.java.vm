@@ -21,18 +21,18 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
          * 分页查询 ${cfg.moduleName_Cn}列表
          * @param result
          * @param queryFieldList
-         * @param paginationBean
+         * @param vpage
          */
-        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean paginationBean,
+        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean vpage,
         List<AntdvSortBean> sortMap);
 
         /**
          * 分页查询 ${cfg.moduleName_Cn} Dto列表
          * @param result
          * @param queryFieldList
-         * @param paginationBean
+         * @param vpage
          */
-        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean paginationBean,
+        MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean vpage,
         List<AntdvSortBean> sortMap);
 
 

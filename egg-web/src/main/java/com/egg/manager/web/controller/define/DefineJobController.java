@@ -8,7 +8,7 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
@@ -67,10 +67,10 @@ public class DefineJobController extends BaseController {
             List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineJobEntity> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
+            AntdvPage<DefineJobEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -94,10 +94,10 @@ public class DefineJobController extends BaseController {
             List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineJobDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
+            AntdvPage<DefineJobDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

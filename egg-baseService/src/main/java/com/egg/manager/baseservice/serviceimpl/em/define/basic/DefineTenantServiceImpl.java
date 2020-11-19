@@ -10,7 +10,7 @@ import com.egg.manager.api.services.em.user.basic.UserTenantService;
 import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
@@ -54,11 +54,11 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineTenantDto> vpage,
                                          AntdvSortMap sortMap) {
-        Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(vpage);
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
-        result.settingPage(paginationBean, mpPagination.getTotal());
+        result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
         return result;
     }

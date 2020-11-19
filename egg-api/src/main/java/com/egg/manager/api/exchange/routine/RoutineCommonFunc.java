@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -28,13 +28,13 @@ import java.util.*;
 public class RoutineCommonFunc {
     /**
      * 取得分页 配置 -> mybatis-plus
-     * @param paginationBean
+     * @param vpage
      * @return
      */
-    public <T> Page<T> parsePaginationToRowBounds(AntdvPaginationBean<T> paginationBean) {
-        if (paginationBean != null) {
-            Integer current = paginationBean.getCurrent();
-            Integer pageSize = paginationBean.getPageSize();
+    public <T> Page<T> parsePaginationToRowBounds(AntdvPage<T> vpage) {
+        if (vpage != null) {
+            Integer current = vpage.getCurrent();
+            Integer pageSize = vpage.getPageSize();
             current = current != null ? current : 1;
             pageSize = pageSize != null ? pageSize : 0;
             int offset = (current - 1) * pageSize;

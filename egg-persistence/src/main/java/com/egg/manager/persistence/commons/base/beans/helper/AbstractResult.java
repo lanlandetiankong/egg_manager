@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 
@@ -116,15 +116,15 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
 
     /**
      * 设置分页信息
-     * @param paginationBean
+     * @param vpage
      * @param total
      * @param
      */
-    public  void settingPage(AntdvPaginationBean paginationBean, Long total) {
-        if (paginationBean != null) {
-            paginationBean.setTotal(total);
+    public  void settingPage(AntdvPage vpage, Long total) {
+        if (vpage != null) {
+            vpage.setTotal(total);
         }
-        this.put(PAGINATION_BEAN,paginationBean);
+        this.put(PAGINATION_BEAN,vpage);
     }
     /**
      * getter

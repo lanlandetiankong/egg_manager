@@ -71,7 +71,7 @@ public interface BaseResultConstant extends Serializable {
     /**
      * 分页bean
      */
-    String PAGINATION_BEAN = "paginationBean";
+    String PAGINATION_BEAN = "vpage";
 
 
     /**

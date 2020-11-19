@@ -4,14 +4,14 @@ import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * @author zhoucj
  * @description
  * @date 2020/10/21
  */
-public class AntdvSortMap extends HashMap<String,Boolean> implements ISortAble<AntdvSortMap>, Serializable {
+public class AntdvSortMap extends LinkedHashMap<String,Boolean> implements ISortAble<AntdvSortMap>, Serializable {
 
 
     public AntdvSortMap() {

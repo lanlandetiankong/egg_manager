@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.define.basic;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
@@ -27,11 +27,11 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
      * @param loginUserInfo              当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineJobEntity> paginationBean,
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineJobEntity> vpage,
                                      AntdvSortMap sortMap);
 
     /**
@@ -40,11 +40,11 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
      * @param loginUserInfo              当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineJobDto> paginationBean,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineJobDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

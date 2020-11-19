@@ -11,7 +11,7 @@ import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.commons.base.helper.ErrorActionEnum;
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
@@ -168,14 +168,14 @@ public class BaseController {
      * @param paginationJson
      * @return
      */
-    public <T> AntdvPaginationBean<T> parsePaginationJsonToBean(String paginationJson, Class<T> clazz) {
-        AntdvPaginationBean<T> paginationBean = null;
+    public <T> AntdvPage<T> parsePaginationJsonToBean(String paginationJson, Class<T> clazz) {
+        AntdvPage<T> vpage = null;
         if (StringUtils.isNotBlank(paginationJson)) {
-            paginationBean = JSONObject.parseObject(paginationJson, AntdvPaginationBean.class);
+            vpage = JSONObject.parseObject(paginationJson, AntdvPage.class);
         } else {
-            paginationBean = AntdvPaginationBean.gainDefaultPaginationBean(clazz);
+            vpage = AntdvPage.gainDefaultPaginationBean(clazz);
         }
-        return paginationBean;
+        return vpage;
     }
 
 

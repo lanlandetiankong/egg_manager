@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
@@ -50,11 +50,11 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param loginUser              当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean paginationBean,
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPage vpage,
                                           AntdvSortMap sortMap);
 
     /**
@@ -107,10 +107,10 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
 
     /**
      * 取得 mybatisplus-分页查询Pagination
-     * @param paginationBean 分页bean
+     * @param vpage 分页bean
      * @return
      */
-    Page dealAntvPageToPagination(AntdvPaginationBean paginationBean);
+    Page dealAntvPageToPagination(AntdvPage vpage);
 
 
     /**

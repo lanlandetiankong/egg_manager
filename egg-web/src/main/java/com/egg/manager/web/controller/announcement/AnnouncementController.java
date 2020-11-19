@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
@@ -78,10 +78,10 @@ public class AnnouncementController extends BaseController {
             queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
         }
         //取得 分页配置
-        AntdvPaginationBean<AnnouncementDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
+        AntdvPage<AnnouncementDto> vpage = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         return result ;
     }
 
@@ -102,12 +102,12 @@ public class AnnouncementController extends BaseController {
             queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
         }
         //取得 分页配置
-        AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
+        AntdvPage vpage = AntdvPage.gainLimitPaginationBean(limitSize);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         //按创建时间 倒序
         sortMap.putDesc(ISortAble.KEY_CREATE_TIME);
-        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
         return result;
     }
 

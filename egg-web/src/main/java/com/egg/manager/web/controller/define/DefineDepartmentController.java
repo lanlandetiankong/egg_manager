@@ -11,7 +11,7 @@ import com.egg.manager.persistence.commons.base.constant.define.DefineDepartment
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
@@ -70,10 +70,10 @@ public class DefineDepartmentController extends BaseController {
             List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
             queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
-            AntdvPaginationBean<DefineDepartmentDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
+            AntdvPage<DefineDepartmentDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

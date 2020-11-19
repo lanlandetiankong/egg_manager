@@ -3,7 +3,7 @@ package com.egg.manager.api.services.em.announcement.basic;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
@@ -45,11 +45,11 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<AnnouncementDraftDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

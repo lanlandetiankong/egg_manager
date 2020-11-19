@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
@@ -83,11 +83,11 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineMenuEntity> vpage,
                                      AntdvSortMap sortMap);
 
     /**
@@ -96,11 +96,11 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage<DefineMenuDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

@@ -41,12 +41,12 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 
         @Override
-        public MyCommonResult<${cfg.baseEntityName}Vo>dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo>result,List<QueryFormFieldBean>queryFormFieldBeanList,AntdvPaginationBean paginationBean,
+        public MyCommonResult<${cfg.baseEntityName}Vo>dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo>result,List<QueryFormFieldBean>queryFormFieldBeanList,AntdvPaginationBean vpage,
         List<AntdvSortBean>sortMap){
         //解析 搜索条件
         QueryWrapper<${cfg.baseEntityName}> ${cfg.baseEntityName_firstLow}QueryWrapper=new QueryWrapper<${cfg.baseEntityName}>();
         //取得 分页配置
-        RowBounds rowBounds=routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        RowBounds rowBounds=routineCommonFunc.parsePaginationToRowBounds(vpage);
         //调用方法将查询条件设置到 ${cfg.baseEntityName_firstLow}QueryWrapper
         super.dealSetConditionsMapToEntityWrapper(${cfg.baseEntityName_firstLow}QueryWrapper,queryFormFieldBeanList);
         //添加排序
@@ -57,7 +57,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         }
         //取得 总数
         Integer total= ${cfg.baseEntityName_firstLow}Mapper.selectCount(${cfg.baseEntityName_firstLow}QueryWrapper);
-        result.settingPage(paginationBean,total);
+        result.settingPage(vpage,total);
         List<${cfg.baseEntityName}> ${cfg.baseEntityName_firstLow}s= ${cfg.baseEntityName_firstLow}Mapper.selectPage(rowBounds,${cfg.baseEntityName_firstLow}QueryWrapper);
         result.putResultList(${cfg.baseEntityName}Transfer.transferEntityToVoList(${cfg.baseEntityName_firstLow}s));
         return result;
@@ -65,11 +65,11 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 
         @Override
-        public MyCommonResult<${cfg.baseEntityName}Vo>dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo>result,List<QueryFormFieldBean>queryFieldBeanList,AntdvPaginationBean paginationBean,
+        public MyCommonResult<${cfg.baseEntityName}Vo>dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo>result,List<QueryFormFieldBean>queryFieldBeanList,AntdvPaginationBean vpage,
         List<AntdvSortBean>sortMap){
-        Pagination mpPagination=super.dealAntvPageToPagination(paginationBean);
+        Pagination mpPagination=super.dealAntvPageToPagination(vpage);
         List<${cfg.baseEntityName}Dto> ${cfg.baseEntityName_firstLow}DtoList= ${cfg.baseEntityName_firstLow}Mapper.selectQueryPage(mpPagination,queryFieldBeanList,sortMap);
-        result.settingPage(paginationBean,mpPagination.getTotal());
+        result.settingPage(vpage,mpPagination.getTotal());
         result.putResultList(${cfg.baseEntityName}Transfer.transferDtoToVoList(${cfg.baseEntityName_firstLow}DtoList));
         return result;
         }

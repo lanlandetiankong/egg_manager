@@ -22,7 +22,7 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
@@ -88,15 +88,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountEntity> vpage,
                                             AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, vpage, sortMap);
         //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
-        result.settingPage(paginationBean, Long.valueOf(total));
+        result.settingPage(vpage, Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
         result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
@@ -104,9 +104,9 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountDto> paginationBean,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountDto> vpage,
                                          AntdvSortMap sortMap) {
-        Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
+        Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(vpage);
         List<QueryField> queryFieldListTemp = new ArrayList<QueryField>();
         //用户与租户关联 的外表-搜索条件
         List<QueryField> queryTenantFieldBeanList = new ArrayList<QueryField>();
@@ -129,7 +129,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
             }
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, sortMap, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.settingPage(paginationBean, mpPagination.getTotal());
+        result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }

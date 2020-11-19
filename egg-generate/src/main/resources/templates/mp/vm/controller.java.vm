@@ -75,10 +75,10 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos
         List<QueryFormFieldBean> queryFieldBeanList=this.parseQueryJsonToBeanList(queryObj);
         queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state",BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
-        AntdvPaginationBean paginationBean=parsePaginationJsonToBean(paginationObj);
+        AntdvPaginationBean vpage=parsePaginationJsonToBean(paginationObj);
         //取得 排序配置
         List<AntdvSortBean> sortMap=parseSortJsonToBean(sortObj,true);
-        result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortMap);
+        result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,vpage,sortMap);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }

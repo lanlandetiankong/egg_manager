@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
@@ -75,11 +75,11 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineRoleEntity> paginationBean,
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineRoleEntity> vpage,
                                      AntdvSortMap sortMap);
 
     /**
@@ -88,11 +88,11 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * @param loginUserInfo          当前登录用户
      * @param result
      * @param queryFieldList
-     * @param paginationBean
+     * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineRoleDto> paginationBean,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineRoleDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

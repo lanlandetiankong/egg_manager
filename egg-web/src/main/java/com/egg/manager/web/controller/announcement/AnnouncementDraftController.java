@@ -9,7 +9,7 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
@@ -77,10 +77,10 @@ public class AnnouncementDraftController extends BaseController {
                 queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
             }
             //取得 分页配置
-            AntdvPaginationBean<AnnouncementDraftDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDraftDto.class);
+            AntdvPage<AnnouncementDraftDto> vpage = this.parsePaginationJsonToBean(paginationObj, AnnouncementDraftDto.class);
             //取得 排序配置
             AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-            result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
+            result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

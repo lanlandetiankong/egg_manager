@@ -75,7 +75,7 @@ public class SmartFormDefinitionController extends BaseController {
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-        dealSetMongoPageResult(result, pageBean);
+        dealResultPutPage(result, pageBean);
         return result;
     }
 
@@ -95,7 +95,7 @@ public class SmartFormDefinitionController extends BaseController {
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-        dealSetMongoPageResult(result, pageBean);
+        dealResultPutPage(result, pageBean);
         return result;
     }
 

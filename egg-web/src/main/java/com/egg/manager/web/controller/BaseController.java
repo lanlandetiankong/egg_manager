@@ -67,7 +67,7 @@ public class BaseController {
 
 
 
-    public void dealSetMongoPageResult(WebResult result, MongoQueryPageBean pageBean) {
+    public void dealResultPutPage(WebResult result, MongoQueryPageBean pageBean) {
         result.putResultList(pageBean.getContent());
         result.putCount(pageBean.getTotal());
     }

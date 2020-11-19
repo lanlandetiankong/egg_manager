@@ -20,11 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/role/roleMenus")
 public class RoleMenuController extends BaseController {
-
     @Autowired
     private DefineMenuMapper defineMenuMapper;
     @Reference
     private DefineMenuService defineMenuService;
-
-
 }

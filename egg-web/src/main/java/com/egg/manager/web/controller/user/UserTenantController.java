@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * @author zhoucj
  * @description
@@ -25,5 +24,4 @@ public class UserTenantController extends BaseController {
     private UserTenantMapper userTenantMapper;
     @Reference
     private UserTenantService userTenantService;
-
 }

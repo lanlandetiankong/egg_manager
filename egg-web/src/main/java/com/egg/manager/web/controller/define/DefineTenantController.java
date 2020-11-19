@@ -12,12 +12,12 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineTenantTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -47,12 +47,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/organization/defineTenant")
 public class DefineTenantController extends BaseController {
-
     @Autowired
     private DefineTenantMapper defineTenantMapper;
     @Reference
     private DefineTenantService defineTenantService;
-
 
     @PcWebQueryLog(fullPath = "/organization/defineTenant/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -75,7 +73,6 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "根据id查询->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
     @PostMapping(value = "/queryOneById")
@@ -86,7 +83,6 @@ public class DefineTenantController extends BaseController {
         result.putBean(DefineTenantTransfer.transferEntityToVo(defineTenantEntity));
         return result;
     }
-
 
     @PcWebQueryLog(fullPath = "/organization/defineTenant/gainEnumSelect")
     @ApiOperation(value = "查询枚举下拉->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -108,7 +104,6 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "新增->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
     @PostMapping(value = "/createByForm")
@@ -122,12 +117,11 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "更新->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         Assert.notNull(defineTenantVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -136,7 +130,6 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-
     @PcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
@@ -144,7 +137,7 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser(required = false) UserAccountEntity loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -153,7 +146,6 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-
     @PcWebOperationLog(fullPath = "/organization/defineTenant/deleteById")
     @ApiOperation(value = "伪删除->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
@@ -161,14 +153,13 @@ public class DefineTenantController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         Integer delCount = defineTenantService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/organization/defineTenant/setupTenantManager")
     @ApiOperation(value = "更新->租户定义/设置管理员", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -179,7 +170,7 @@ public class DefineTenantController extends BaseController {
     @PostMapping(value = "/setupTenantManager")
     public WebResult doSetupTenantManager(HttpServletRequest request, String tenantId, String[] userAccountIdArr,
                                           @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notNull(tenantId, "未知租户id:" + actionFailMsg);
         DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(tenantId);
@@ -188,5 +179,4 @@ public class DefineTenantController extends BaseController {
         result.putCount(count);
         return result;
     }
-
 }

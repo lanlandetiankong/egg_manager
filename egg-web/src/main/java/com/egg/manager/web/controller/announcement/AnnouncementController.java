@@ -49,15 +49,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/announcement")
 public class AnnouncementController extends BaseController {
-
-
     @Autowired
     private AnnouncementMapper announcementMapper;
     @Reference
     private AnnouncementService announcementService;
     @Reference
     private AnnouncementTagService announcementTagService;
-
 
     @PcWebQueryLog(fullPath = "/announcement/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -85,7 +82,6 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "筛选查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
@@ -111,23 +107,18 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-
     @PcWebQueryLog(fullPath = "/announcement/queryOneById")
     @ApiOperation(value = "根据id查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         AnnouncementEntity announcementEntity = announcementMapper.selectById(announcementId);
         //取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         result.putBean(AnnouncementTransfer.transferEntityToVo(announcementEntity, announcementTagMap));
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/announcement/createByForm")
     @ApiOperation(value = "新增->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -137,14 +128,11 @@ public class AnnouncementController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(announcementVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         addCount = announcementService.dealCreate(loginUserInfo, announcementVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "发布->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcement/createFromDraft")
@@ -154,11 +142,9 @@ public class AnnouncementController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         addCount = announcementService.dealCreateFromDraft(loginUserInfo, announcementDraftVo);
         result.putCount(addCount);
-
         return result;
     }
 
@@ -169,18 +155,14 @@ public class AnnouncementController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
         delCount = announcementService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "伪删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcement/deleteById")
@@ -191,14 +173,9 @@ public class AnnouncementController extends BaseController {
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         Integer delCount = announcementService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
-
 }

@@ -46,7 +46,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-
 /**
  * @author zhoucj
  * @description
@@ -57,7 +56,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("/define/defineRole")
 public class DefineRoleController extends BaseController {
-
     @Autowired
     private DefineMenuMapper defineMenuMapper;
     @Autowired
@@ -66,13 +64,10 @@ public class DefineRoleController extends BaseController {
     private DefinePermissionMapper definePermissionMapper;
     @Autowired
     private DefineRoleMapper defineRoleMapper;
-
     @Reference
     private RoleMenuService roleMenuService;
-
     @Reference
     private DefineRoleService defineRoleService;
-
 
     @PcWebOperationLog(fullPath = "/define/defineRole/queryPage")
     @ApiOperation(value = "分页查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -118,7 +113,6 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "根据id查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
     @PostMapping(value = "/queryOneById")
@@ -138,7 +132,6 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "查询已获授权/角色->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/gainAllMenuByRoleId")
     public WebResult gainAllMenuByRoleId(HttpServletRequest request, String defineRoleId, Boolean filterParentNode,
@@ -155,11 +148,10 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "新增->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -168,11 +160,10 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "更新->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineRoleVo defineRoleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         Assert.notNull(defineRoleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -188,7 +179,7 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -204,7 +195,7 @@ public class DefineRoleController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         Integer delCount = defineRoleService.dealLogicDeleteById(loginUserInfo, delId);
@@ -212,18 +203,16 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "更新授权->角色+权限", notes = "为角色分配权限", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantPermissionToRole")
     public WebResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notNull(roleId, "未知角色id:" + actionFailMsg);
         Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
         result.putCount(count);
         return result;
     }
-
 
     @ApiOperation(value = "更新授权->角色+菜单", notes = "为角色设置可访问菜单", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/grantMenusToRole")
@@ -265,7 +254,6 @@ public class DefineRoleController extends BaseController {
             List delIdList = Lists.newArrayList(delIter);
             int count = roleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
         }
-
         return result;
     }
 }

@@ -26,7 +26,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/index/olddata")
 public class OldDataController extends BaseController {
-
     @Autowired
     private UserAccountMapper userAccountMapper;
 
@@ -55,6 +54,4 @@ public class OldDataController extends BaseController {
         }
         System.out.println();
     }
-
-
 }

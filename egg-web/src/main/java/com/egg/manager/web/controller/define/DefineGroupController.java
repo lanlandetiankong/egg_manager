@@ -15,6 +15,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/define/defineGroup")
 public class DefineGroupController {
-
-
 }

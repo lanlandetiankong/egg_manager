@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,23 +34,17 @@ import java.nio.file.Paths;
 @RestController
 @RequestMapping(value = "/commomApi/file/imgUpload")
 public class ImgUploadController extends BaseController {
-
     @Autowired
     private UploadProps uploadProps;
-
     @Autowired
     private SnowflakeConfig snowflakeConfig;
 
-
     @ApiOperation(value = "上传/图片->头像", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/headImgUpload")
-    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) throws Exception{
+    public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notNull(file, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
         Assert.isFalse(file.isEmpty(), BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
-
-
         byte[] fileBytes = file.getBytes();
         String oldFileName = file.getOriginalFilename();
         int lastDotIndex = oldFileName.lastIndexOf(".");
@@ -80,6 +73,4 @@ public class ImgUploadController extends BaseController {
         result.putFileResBean(fileResBean);
         return result;
     }
-
-
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * @author zhoucj
  * @description
@@ -21,11 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user/userJob")
 public class UserJobController extends BaseController {
-
     @Autowired
     private UserJobMapper userJobMapper;
     @Reference
     private UserJobService userJobService;
-
-
 }

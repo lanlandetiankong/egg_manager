@@ -25,7 +25,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/oss")
 public class OssTestController {
-
     /**
      * 测试-上传
      * -自定义文件

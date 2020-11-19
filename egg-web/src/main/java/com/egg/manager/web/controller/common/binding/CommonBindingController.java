@@ -27,13 +27,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/commonApi/binding")
 public class CommonBindingController extends BaseController {
-
-
     @ApiOperation(value = "查询枚举->开关", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")
     public WebResult doGetSwitchEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-
         SwitchStateEnum[] enums = SwitchStateEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         if (enums != null && enums.length > 0) {
@@ -44,5 +41,4 @@ public class CommonBindingController extends BaseController {
         result.putEnumList(beanList);
         return result;
     }
-
 }

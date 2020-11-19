@@ -28,12 +28,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/commonApi/user")
 public class UserCommonController extends BaseController {
-
     @ApiOperation(value = "查询枚举->用户类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllUserTypeEnumList")
     public WebResult doGetAllUserTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-
         UserAccountBaseTypeEnum[] enums = UserAccountBaseTypeEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         if (enums != null && enums.length > 0) {
@@ -42,7 +40,6 @@ public class UserCommonController extends BaseController {
             }
         }
         result.putEnumList(beanList);
-
         return result;
     }
 
@@ -50,21 +47,17 @@ public class UserCommonController extends BaseController {
     @PostMapping(value = "/getAllUserLockStateEnumList")
     public WebResult doGetAllUserLockStateEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-
         List<FrontSelectBean> beanList = new ArrayList<>();
         beanList.add(new FrontSelectBean(0, "未锁定"));
         beanList.add(new FrontSelectBean(1, "已锁定"));
         result.putEnumList(beanList);
-
         return result;
     }
-
 
     @ApiOperation(value = "查询枚举->职务类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllDefineJobTypeEnumList")
     public WebResult doGetAllDefineJobTypeEnumList(HttpServletRequest request, HttpServletResponse response) {
         WebResult result = WebResult.okEnums();
-
         DefineJobTypeEnum[] enums = DefineJobTypeEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         if (enums != null && enums.length > 0) {
@@ -73,7 +66,6 @@ public class UserCommonController extends BaseController {
             }
         }
         result.putEnumList(beanList);
-
         return result;
     }
 }

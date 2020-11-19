@@ -45,13 +45,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/announcementTag")
 public class AnnouncementTagController extends BaseController {
-
     @Autowired
     private AnnouncementTagMapper announcementTagMapper;
-
     @Reference
     private AnnouncementTagService announcementTagService;
-
 
     @PcWebQueryLog(fullPath = "/announcementTag/gainEnumSelect")
     @ApiOperation(value = "分页查询->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -64,15 +61,13 @@ public class AnnouncementTagController extends BaseController {
     public WebResult gainEnumSelect(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = new ArrayList<QueryField>();
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, null, sortMap);
         result = announcementTagService.dealResultListToEnums(result);
-
         return result;
     }
 
@@ -82,8 +77,7 @@ public class AnnouncementTagController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -91,7 +85,6 @@ public class AnnouncementTagController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
 
@@ -101,14 +94,11 @@ public class AnnouncementTagController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String announcementTagId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         Assert.notBlank(announcementTagId, BaseRstMsgConstant.ErrorMsg.unknowId());
         AnnouncementTagEntity announcementTagEntity = announcementTagMapper.selectById(announcementTagId);
         result.putBean(AnnouncementTagTransfer.transferEntityToVo(announcementTagEntity));
-
         return result;
     }
-
 
     @ApiOperation(value = "新增->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementTag/createByForm")
@@ -118,14 +108,11 @@ public class AnnouncementTagController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         addCount = announcementTagService.dealCreate(loginUserInfo, announcementTagVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementTag/updateByForm")
@@ -135,15 +122,11 @@ public class AnnouncementTagController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-
         Assert.notNull(announcementTagVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
         changeCount = announcementTagService.dealUpdate(loginUserInfo, announcementTagVo);
         result.putCount(changeCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/announcementTag/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -153,18 +136,14 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
         delCount = announcementTagService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/announcementTag/deleteById")
     @ApiOperation(value = "伪删除->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -174,15 +153,11 @@ public class AnnouncementTagController extends BaseController {
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId,
                                 @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         Integer delCount = announcementTagService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 }

@@ -38,13 +38,10 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/log/pc/web/queryLog")
 public class PcWebQueryLogController extends BaseController {
-
     @Autowired
     private PcWebQueryLogRepository pcWebQueryLogRepository;
-
     @Reference
     private PcWebQueryLogMgoService pcWebQueryLogMgoService;
-
 
     @PcWebQueryLog(fullPath = "/log/pc/web/queryLog/getDataPage", flag = false)
     @ApiOperation(value = "分页查询->PcWeb查询接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -56,15 +53,13 @@ public class PcWebQueryLogController extends BaseController {
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //添加状态过滤,时间倒序排序
+//添加状态过滤,时间倒序排序
         MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                 .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<PcWebQueryLogMgo> pageBean = pcWebQueryLogMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
         dealSetMongoPageResult(result, pageBean);
-
         return result;
     }
 }

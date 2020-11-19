@@ -37,7 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author zhoucj
  * @description
@@ -48,7 +47,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/announcementDraft")
 public class AnnouncementDraftController extends BaseController {
-
     @Autowired
     private AnnouncementDraftMapper announcementDraftMapper;
     @Reference
@@ -67,8 +65,7 @@ public class AnnouncementDraftController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         queryFieldList.add(QueryField.gainNotEq("is_published", BaseStateEnum.ENABLED.getValue()));
@@ -81,10 +78,8 @@ public class AnnouncementDraftController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @ApiOperation(value = "根据id查询->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcementDraft/queryOneById")
@@ -92,14 +87,11 @@ public class AnnouncementDraftController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String draftId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
         AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
-
-        //取得 公告标签 map
+//取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         result.putBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraftEntity, announcementTagMap));
-
         return result;
     }
 
@@ -111,13 +103,10 @@ public class AnnouncementDraftController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
         announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
         addCount = announcementDraftService.dealCreate(loginUserInfo, announcementDraftVo);
         result.putCount(addCount);
-
         return result;
     }
 
@@ -126,19 +115,15 @@ public class AnnouncementDraftController extends BaseController {
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer updateCount = 0;
-
         Assert.notNull(announcementDraftVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
         announcementDraftVo.setIsPublished(BaseStateEnum.DISABLED.getValue());
         updateCount = announcementDraftService.dealUpdate(loginUserInfo, announcementDraftVo);
         result.putCount(updateCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/announcementDraft/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -147,18 +132,14 @@ public class AnnouncementDraftController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
         delCount = announcementDraftService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/announcementDraft/deleteById")
     @ApiOperation(value = "伪删除->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -169,29 +150,22 @@ public class AnnouncementDraftController extends BaseController {
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         Integer delCount = announcementDraftService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "批量发布->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/announcementDraft/batchPublishDraft")
     @PostMapping(value = "/batchPublishDraft")
     public WebResult batchPublishDraft(HttpServletRequest request, String[] draftIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer publishCount = 0;
-
         Assert.notEmpty(draftIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
         publishCount = announcementDraftService.dealBatchPublishByDraft(loginUserInfo, draftIds);
         result.putCount(publishCount);
-
         return result;
     }
 
@@ -199,14 +173,11 @@ public class AnnouncementDraftController extends BaseController {
     @PcWebOperationLog(fullPath = "/announcementDraft/publishDraft")
     @PostMapping(value = "/publishDraft")
     public WebResult publishDraft(HttpServletRequest request, String draftId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notNull(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         Integer publishCount = announcementDraftService.dealPublishByDraft(loginUserInfo, draftId, true);
         result.putCount(publishCount);
-
         return result;
     }
 }

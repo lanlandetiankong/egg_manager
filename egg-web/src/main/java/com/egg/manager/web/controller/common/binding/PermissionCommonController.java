@@ -28,12 +28,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/commonApi/permission")
 public class PermissionCommonController extends BaseController {
-
     @ApiOperation(value = "查询枚举->权限类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")
     public WebResult doGetAllPermissionTypeEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-
         DefinePermissionTypeEnum[] enums = DefinePermissionTypeEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         if (enums != null && enums.length > 0) {
@@ -42,7 +40,6 @@ public class PermissionCommonController extends BaseController {
             }
         }
         result.putEnumList(beanList);
-
         return result;
     }
 
@@ -50,7 +47,6 @@ public class PermissionCommonController extends BaseController {
     @PostMapping(value = "/getAllRoleTypeEnumList")
     public WebResult doGetAllRoleTypeEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-
         DefineRoleTypeEnum[] enums = DefineRoleTypeEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         if (enums != null && enums.length > 0) {
@@ -59,16 +55,13 @@ public class PermissionCommonController extends BaseController {
             }
         }
         result.putEnumList(beanList);
-
         return result;
     }
-
 
     @ApiOperation(value = "查询枚举->权限Code前缀类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionCodePrefixEnumList")
     public WebResult doGetAllPermissionCodePrefixEnumList(HttpServletRequest request) {
         WebResult result = WebResult.okEnums();
-
         DefinePermissionCodePrefixEnum[] enums = DefinePermissionCodePrefixEnum.values();
         List<FrontSelectBean> beanList = new ArrayList<>();
         List<String> defaultCheckList = new ArrayList<>();
@@ -82,8 +75,6 @@ public class PermissionCommonController extends BaseController {
         }
         result.putEnumList(beanList);
         result.putEnumDefaultCheckList(defaultCheckList);
-
         return result;
     }
-
 }

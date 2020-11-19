@@ -47,12 +47,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/define/defineDepartment")
 public class DefineDepartmentController extends BaseController {
-
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
     @Reference
     private DefineDepartmentService defineDepartmentService;
-
 
     @PcWebQueryLog(fullPath = "/define/defineDepartment/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -65,8 +63,7 @@ public class DefineDepartmentController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -74,22 +71,17 @@ public class DefineDepartmentController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @ApiOperation(value = "根据id查询->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineDepartment/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         Assert.notBlank(defineDepartmentId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         DefineDepartmentEntity defineDepartmentEntity = defineDepartmentService.getById(defineDepartmentId);
         result.putBean(DefineDepartmentTransfer.transferEntityToVo(defineDepartmentEntity));
-
         return result;
     }
 
@@ -98,8 +90,7 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(@CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //筛选与排序
+//筛选与排序
         QueryWrapper<DefineDepartmentEntity> queryWrapper = new QueryWrapper<DefineDepartmentEntity>();
         queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
@@ -108,7 +99,6 @@ public class DefineDepartmentController extends BaseController {
         List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
         result.putResultList(treeList);
-
         return result;
     }
 
@@ -117,11 +107,9 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         List<DefineDepartmentEntity> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
         result.putResultList(treeList);
-
         return result;
     }
 
@@ -130,35 +118,28 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
         addCount = defineDepartmentService.dealCreate(loginUserInfo, defineDepartmentVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineDepartment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineDepartmentVo defineDepartmentVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-
         Assert.notNull(defineDepartmentVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         changeCount = defineDepartmentService.dealUpdate(loginUserInfo, defineDepartmentVo);
         result.putCount(changeCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/defineDepartment/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -167,17 +148,14 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
         delCount = defineDepartmentService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/defineDepartment/deleteById")
     @ApiOperation(value = "伪删除->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -186,14 +164,11 @@ public class DefineDepartmentController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         Integer delCount = defineDepartmentService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 }

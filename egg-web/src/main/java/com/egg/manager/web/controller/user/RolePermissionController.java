@@ -15,5 +15,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/role/role_permission")
 public class RolePermissionController {
-
 }

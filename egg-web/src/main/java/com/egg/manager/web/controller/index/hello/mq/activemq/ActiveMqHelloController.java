@@ -27,7 +27,6 @@ import javax.jms.Topic;
 @RestController
 @RequestMapping("/index/hello/mq/activemq")
 public class ActiveMqHelloController extends BaseController {
-
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
     @Autowired
@@ -59,5 +58,4 @@ public class ActiveMqHelloController extends BaseController {
     private void sendMessage(Destination destination, final String message) {
         jmsMessagingTemplate.convertAndSend(destination, message);
     }
-
 }

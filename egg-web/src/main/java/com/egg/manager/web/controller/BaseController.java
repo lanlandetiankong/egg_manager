@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author zhoucj
  * @description
@@ -41,20 +40,12 @@ public class BaseController {
     public final String actionSuccessMsg = "操作成功！";
     public final String actionFailMsg = "操作失败！";
 
-
-
-
-
-
-
-
     public <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws MyRuntimeBusinessException {
         String queryJson = request.getParameter(paramKey);
         T bean = null;
         if (StringUtils.isNotBlank(queryJson)) {
             if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_OBJECT.equals(queryJson) == false)) {
                 bean = JSONObject.parseObject(queryJson, clazz);
-
             }
         }
         if (bean == null && isRequired) {
@@ -63,23 +54,23 @@ public class BaseController {
         return bean;
     }
 
-
     public <T> void respResultJsonToFront(Logger logger, HttpServletResponse response, WebResult result) {
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         PrintWriter writer = null;
-        try{
+        try {
             writer = response.getWriter();
             writer.write(JSONObject.toJSONString(result));
         } catch (IOException e) {
-            logger.error("",e);
+            logger.error("", e);
         }
     }
 
     public void dealCommonErrorCatch(Logger logger, WebResult result, Exception e) {
         dealCommonErrorCatch(logger, result, e, this.actionFailMsg, true, true);
     }
+
     private void dealCommonErrorCatch(Logger logger, WebResult result, Exception e, String errorMsg) {
         dealCommonErrorCatch(logger, result, e, errorMsg, true, true);
     }
@@ -99,7 +90,7 @@ public class BaseController {
             errmsg = errorMsg;
         }
         if (isPrintStackTrace) {
-            logger.error("接口执行异常--->",e);
+            logger.error("接口执行异常--->", e);
         }
         //清空信息
         result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
@@ -109,12 +100,10 @@ public class BaseController {
         }
     }
 
-
     public void dealSetMongoPageResult(WebResult result, MongoQueryPageBean pageBean) {
         result.putResultList(pageBean.getContent());
         result.putCount(pageBean.getTotal());
     }
-
 
     /**
      * 解析 搜索条件 map
@@ -140,7 +129,6 @@ public class BaseController {
         return map;
     }
 
-
     /**
      * 解析 搜索条件 map
      * @param queryJson
@@ -162,7 +150,6 @@ public class BaseController {
         return fieldBeanList;
     }
 
-
     /**
      * 取得分页 bean
      * @param paginationJson
@@ -178,16 +165,15 @@ public class BaseController {
         return vpage;
     }
 
-
     /**
      * 取得排序 bean
      * @param sortObj
      * @return
      */
     public AntdvSortMap parseSortJsonToBean(String sortObj, boolean addCreateTimeDesc) {
-        AntdvSortMap sortMap = new AntdvSortMap() ;
+        AntdvSortMap sortMap = new AntdvSortMap();
         if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
-            Map<String,Boolean> map = JSON.parseObject(sortObj,Map.class);
+            Map<String, Boolean> map = JSON.parseObject(sortObj, Map.class);
             if (CollectionUtil.isNotEmpty(map)) {
                 sortMap.putAll(map);
             }

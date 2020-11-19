@@ -47,13 +47,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/define/definePermission")
 public class DefinePermissionController extends BaseController {
-
     @Autowired
     private DefinePermissionMapper definePermissionMapper;
-
     @Reference
     private DefinePermissionService definePermissionService;
-
 
     @PcWebQueryLog(fullPath = "/define/definePermission/queryPage")
     @ApiOperation(value = "分页查询->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -64,7 +61,7 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/queryPage")
     public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-        throws Exception {
+            throws Exception {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
@@ -88,8 +85,7 @@ public class DefinePermissionController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -97,23 +93,18 @@ public class DefinePermissionController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @ApiOperation(value = "根据id查询->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/definePermission/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         DefinePermissionEntity definePermissionEntity = definePermissionMapper.selectById(definePermissionId);
         result.putBean(DefinePermissionTransfer.transferEntityToVo(definePermissionEntity));
-
         return result;
     }
-
 
     @ApiOperation(value = "新增->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/createByForm")
@@ -122,31 +113,24 @@ public class DefinePermissionController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-
         addCount = definePermissionService.dealCreate(loginUserInfo, definePermissionVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/definePermission/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefinePermissionVo definePermissionVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-
         Assert.notNull(definePermissionVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         changeCount = definePermissionService.dealUpdate(loginUserInfo, definePermissionVo);
         result.putCount(changeCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/definePermission/batchEnsureByIds")
     @ApiOperation(value = "更新/批量启用->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -157,14 +141,11 @@ public class DefinePermissionController extends BaseController {
     public WebResult batchEnsureByIds(HttpServletRequest request, String[] ensureIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(ensureIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
         delCount = definePermissionService.dealBatchEnsure(loginUserInfo, ensureIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/definePermission/deleteById")
     @ApiOperation(value = "伪删除->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -173,11 +154,9 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-
         Integer delCount = definePermissionService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
         if (new Integer(0).equals(delCount)) {
@@ -194,18 +173,15 @@ public class DefinePermissionController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
         delCount = definePermissionService.dealBatchLogicDelete(loginUserInfo, delIds);
         if (delIds.length > delCount) {
             result.putErrorMsg("由于部分权限已经确认启用后无法删除！预计删除" + delIds.length + "条数据，实际删除" + delCount + "条数据。");
         }
         result.putCount(delCount);
-
         return result;
     }
 }

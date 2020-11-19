@@ -15,11 +15,11 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
-import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import com.egg.manager.persistence.em.user.pojo.verification.login.LoginAccountVerifyO;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
@@ -55,28 +55,22 @@ import java.util.Set;
 @RestController
 @RequestMapping("user/login")
 public class UserLoginController extends BaseController {
-
-
     @Value("${egg.conf.jwt.sso:true}")
     private boolean jwtSsoFlag;
     @Reference
     private RedisHelper redisHelper;
-
     @Autowired
     private DefineTenantMapper defineTenantMapper;
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
     @Autowired
     private UserAccountService userAccountService;
-
-
     @Reference
     public DefineRoleService defineRoleService;
     @Reference
     public DefinePermissionService definePermissionService;
     @Reference
     public DefineMenuService defineMenuService;
-
 
     @PcWebLoginLog(fullPath = "/user/login/loginByForm")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -88,7 +82,7 @@ public class UserLoginController extends BaseController {
     public WebResult doLoginCheckByAccount(HttpServletRequest request, LoginAccountVo loginAccountVo,
                                            @Validated({VerifyGroupOfDefault.class}) LoginAccountVerifyO loginAccountVerifyO
             , @CurrentLoginUser(required = false) UserAccountEntity loginUser
-    ) throws Exception{
+    ) throws Exception {
         PasswordHelper passwordHelper = new PasswordHelper();
         WebResult result = WebResult.okQuery();
         try {
@@ -99,10 +93,10 @@ public class UserLoginController extends BaseController {
             UserAccountEntity userAccountEntity = userAccountService.dealGetEntityByDTO(LoginAccountVo.transferToLoginAccountDTO(loginAccountVo));
             Assert.notNull(userAccountEntity, BaseRstMsgConstant.ErrorMsg.nullLoginAccount());
             //取得 form的password+数据库的salt 进行md5加密后的值
-            String saltedPwd = SecureUtil.md5(loginAccountVo.getPassword()+ (StringUtils.isBlank(userAccountEntity.getSalt()) ? "" : userAccountEntity.getSalt())) ;
+            String saltedPwd = SecureUtil.md5(loginAccountVo.getPassword() + (StringUtils.isBlank(userAccountEntity.getSalt()) ? "" : userAccountEntity.getSalt()));
             //判断: 数据库存储的md5(密码+salt) == (form的password+数据库salt)的值，匹配才能算验证成功
             //Assert.isTrue(userAccountEntity.getPassword().equals(saltedPwd), BaseRstMsgConstant.ErrorMsg.notMatchaccountPassword());
-            Assert.isTrue(passwordHelper.isPasswordMatch(loginAccountVo.getPassword(),userAccountEntity));
+            Assert.isTrue(passwordHelper.isPasswordMatch(loginAccountVo.getPassword(), userAccountEntity));
             UserAccountToken userAccountToken = UserAccountToken.gainByUserAccount(userAccountEntity);
             //账号密码验证通过
             result.putAccountToken(userAccountToken);
@@ -153,7 +147,6 @@ public class UserLoginController extends BaseController {
                 redisHelper.hashRemove(RedisShiroCacheEnum.userAuthorization.getKey(), userAuthorization);
                 //清除 authorization 缓存
                 redisHelper.hashRemove(RedisShiroCacheEnum.authorization.getKey(), userAuthorization);
-
                 redisHelper.hashRemove(RedisShiroCacheEnum.userAccount.getKey(), userAuthorization);
                 redisHelper.hashRemove(RedisShiroCacheEnum.userPermissions.getKey(), userAuthorization);
                 redisHelper.hashRemove(RedisShiroCacheEnum.userRoles.getKey(), userAuthorization);
@@ -165,8 +158,7 @@ public class UserLoginController extends BaseController {
             redisHelper.hashTtlPut(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountId, authorization, RedisShiroCacheEnum.userAuthorization.getTtl());
             //设置 authorization 缓存 当前用户的token
             redisHelper.hashTtlPut(RedisShiroCacheEnum.authorization.getKey(), authorization, userAccountToken, RedisShiroCacheEnum.authorization.getTtl());
-
-            //设置到缓存,hashKey 都是 authorization
+//设置到缓存,hashKey 都是 authorization
             userAccountService.queryDbToCacheable(userAccountId);
             Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountId);
             defineRoleService.queryDbToCacheable(userAccountId);

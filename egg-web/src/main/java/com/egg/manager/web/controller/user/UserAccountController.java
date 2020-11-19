@@ -11,25 +11,13 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper;
-import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTransfer;
-import com.egg.manager.persistence.em.define.pojo.transfer.DefineJobTransfer;
-import com.egg.manager.persistence.em.define.pojo.transfer.DefinePermissionTransfer;
-import com.egg.manager.persistence.em.define.pojo.transfer.DefineRoleTransfer;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.*;
+import com.egg.manager.persistence.em.define.db.mysql.mapper.*;
+import com.egg.manager.persistence.em.define.pojo.transfer.*;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
-import com.egg.manager.persistence.em.define.pojo.transfer.DefineTenantTransfer;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
@@ -62,7 +50,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/userAccount")
 public class UserAccountController extends BaseController {
-
     @Autowired
     private UserAccountMapper userAccountMapper;
     @Autowired
@@ -75,10 +62,8 @@ public class UserAccountController extends BaseController {
     private DefineTenantMapper defineTenantMapper;
     @Autowired
     private DefineDepartmentMapper defineDepartmentMapper;
-
     @Autowired
     private UserAccountService userAccountService;
-
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     @PcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
@@ -92,8 +77,7 @@ public class UserAccountController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -101,17 +85,14 @@ public class UserAccountController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @ApiOperation(value = "根据id查询->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         UserAccountEntity account = userAccountMapper.selectById(accountId);
         UserAccountVo userAccountVo = UserAccountTransfer.transferEntityToVo(account);
         //取得 所属的 租户定义
@@ -127,7 +108,6 @@ public class UserAccountController extends BaseController {
             userAccountVo.setBelongDepartment(DefineDepartmentTransfer.transferEntityToVo(belongDepartment));
         }
         result.putBean(userAccountVo);
-
         return result;
     }
 
@@ -136,10 +116,8 @@ public class UserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
-
         return result;
     }
 
@@ -149,26 +127,20 @@ public class UserAccountController extends BaseController {
     public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
         result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
-
         return result;
     }
-
 
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
-
         return result;
     }
-
 
     @ApiOperation(value = "新增->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
@@ -177,32 +149,26 @@ public class UserAccountController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
         Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         addCount = userAccountService.dealCreate(loginUserInfo, userAccountVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-
         UserAccountVo userAccountVo = this.getBeanFromRequest(request, "formObj", UserAccountVo.class, true);
         Assert.notNull(userAccountVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         changeCount = userAccountService.dealUpdate(loginUserInfo, userAccountVo);
         result.putCount(changeCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -214,15 +180,12 @@ public class UserAccountController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
         //批量伪删除
         delCount = userAccountService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/user/userAccount/deleteById")
     @ApiOperation(value = "伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -231,85 +194,70 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         delCount = userAccountService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
-
         Assert.notEmpty(lockIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-
-        //操作类型为锁定？如果没传递值默认锁定
+//操作类型为锁定？如果没传递值默认锁定
         lockFlag = lockFlag != null ? lockFlag : true;
         String lockMsg = lockFlag ? "锁定" : "解锁";
         //批量伪删除
         lockCount = userAccountService.dealBatchRenewLock(loginUserInfo, lockIds, lockFlag);
         result.putCount(lockCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新/修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer lockCount = 0;
-
         Assert.notNull(lockId, BaseRstMsgConstant.ErrorMsg.unknowId());
         //操作类型为锁定？如果没传递值默认锁定
         lockFlag = lockFlag != null ? lockFlag : true;
         String lockMsg = lockFlag ? "锁定" : "解锁";
         lockCount = userAccountService.dealRenewLock(loginUserInfo, lockId, lockFlag);
         result.putCount(lockCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
         Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
         result.putCount(grantCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public WebResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notNull(userAccountId, "未知用户id:" + actionFailMsg);
         Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);
         result.putCount(grantCount);
-
         return result;
     }
 
@@ -318,9 +266,7 @@ public class UserAccountController extends BaseController {
     @GetMapping(value = "/reflushSecurePwd")
     public WebResult reflushSecurePwd(HttpServletRequest request, @CurrentLoginUser(required = false) CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-
         boolean flag = userAccountService.reflushSecurePwd(loginUserInfo);
-
         return result;
     }
 }

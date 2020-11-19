@@ -49,12 +49,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/forms/smartForm/formTypeDefinition")
 public class SmartFormTypeDefinitionController extends BaseController {
-
     @Reference
     private SmartFormTypeDefinitionMgoService smartFormTypeDefinitionMgoService;
     @Reference
     private SmartFormDefinitionMgoService smartFormDefinitionMgoService;
-
 
     @PcWebQueryLog(fullPath = "/forms/smartForm/formTypeDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -66,15 +64,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //添加状态过滤,时间倒序排序
+//添加状态过滤,时间倒序排序
         MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                 .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
         dealSetMongoPageResult(result, pageBean);
-
         return result;
     }
 
@@ -88,15 +84,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/getDataAll")
     public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //添加状态过滤,时间倒序排序
+//添加状态过滤,时间倒序排序
         MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                 .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, mongoQueryBuffer);
         result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);
-
         return result;
     }
 
@@ -106,13 +100,10 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
                                       @RequestParam(value = "fid", required = true) String fid) {
         WebResult result = WebResult.okQuery();
-
         Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
         SmartFormTypeDefinitionMgo mobj = smartFormTypeDefinitionMgoService.doFindById(loginUserInfo, fid);
         result.putBean(mobj);
-
         return result;
-
     }
 
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/addByForm")
@@ -123,15 +114,12 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                  SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doInsert(loginUserInfo, formTypeDefinitionMgo);
         addCount += (newMgo != null) ? 1 : 0;
         result.putCount(addCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/updateByForm")
     @ApiOperation(value = "更新->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -141,7 +129,6 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                     SmartFormTypeDefinitionMgo formTypeDefinitionMgo) {
         WebResult result = WebResult.okOperation();
         Integer count = 0;
-
         Assert.notNull(formTypeDefinitionMgo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         SmartFormTypeDefinitionMgo newMgo = smartFormTypeDefinitionMgoService.doUpdateById(loginUserInfo, formTypeDefinitionMgo);
         //更新了一条数据
@@ -151,10 +138,8 @@ public class SmartFormTypeDefinitionController extends BaseController {
             smartFormDefinitionMgoService.updateFormTypeByTypeId(loginUserInfo, newMgo);
         }
         result.putCount(count);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
     @ApiOperation(value = "伪删除->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -164,14 +149,11 @@ public class SmartFormTypeDefinitionController extends BaseController {
     @PostMapping(value = "/delOneById")
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
-
         Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         Long delCount = smartFormTypeDefinitionMgoService.doFakeDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -182,13 +164,9 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
         delCount = smartFormTypeDefinitionMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
         result.putCount(delCount);
-
         return result;
     }
-
-
 }

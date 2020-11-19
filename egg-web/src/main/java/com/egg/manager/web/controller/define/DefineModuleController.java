@@ -44,12 +44,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/module/define_module")
 public class DefineModuleController extends BaseController {
-
     @Autowired
     private DefineModuleMapper defineModuleMapper;
     @Reference
     private DefineModuleService defineModuleService;
-
 
     @PcWebQueryLog(fullPath = "/module/define_module/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -73,7 +71,6 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "根据id查询->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/module/define_module/queryOneById")
     @PostMapping(value = "/queryOneById")
@@ -84,12 +81,11 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "新增->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -98,12 +94,11 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-
     @ApiOperation(value = "更新->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
         Assert.notNull(defineModuleVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
@@ -112,7 +107,6 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-
     @PcWebOperationLog(fullPath = "/module/define_module/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
@@ -120,7 +114,7 @@ public class DefineModuleController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
@@ -128,7 +122,6 @@ public class DefineModuleController extends BaseController {
         result.putCount(delCount);
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/module/define_module/deleteById")
     @ApiOperation(value = "伪删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -144,5 +137,4 @@ public class DefineModuleController extends BaseController {
         result.putCount(delCount);
         return result;
     }
-
 }

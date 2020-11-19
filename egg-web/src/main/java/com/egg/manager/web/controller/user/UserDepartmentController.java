@@ -20,12 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user/userDepartment")
 public class UserDepartmentController extends BaseController {
-
-
     @Autowired
     private UserDepartmentMapper userDepartmentMapper;
     @Reference
     private UserDepartmentService userDepartmentService;
-
-
 }

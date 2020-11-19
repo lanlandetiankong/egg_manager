@@ -26,12 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/index/hello")
 public class HelloController extends BaseController {
-
     @Value("${spring.profiles.active}")
     private String avtiveEnv;
     @Reference
     private HelloService helloService;
-
     @Reference
     private MessageHelloService messageHelloService;
     private CommonMenuTree commonMenuTree;
@@ -65,5 +63,4 @@ public class HelloController extends BaseController {
         String port = messageHelloService.loadServiceBalancePort();
         log.info("for message  debug..." + port);
     }
-
 }

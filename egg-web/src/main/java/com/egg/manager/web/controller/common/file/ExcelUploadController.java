@@ -39,19 +39,15 @@ import java.util.List;
 public class ExcelUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;
-
-
     @Autowired
     private SnowflakeConfig snowflakeConfig;
 
     @ApiOperation(value = "上传/模板->excel", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/excelModelUpload")
     public WebResult doAddUserAccount(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr, @RequestParam(value = "prefixFolder", defaultValue = "") String prefixFolder)
-        throws Exception{
+            throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
-
         String baseDir = uploadProps.getLocationPrefix() + uploadProps.getProjectName() + uploadProps.getLocationOfExcel() + prefixFolder;
         List<AntdFileUploadBean> uploadBeanList = new ArrayList<>();
         for (MultipartFile file : fileArr) {
@@ -73,7 +69,6 @@ public class ExcelUploadController extends BaseController {
             String fileLocation = baseDir + File.separator + uuidName;
             Path path = Paths.get(fileLocation);
             Files.write(path, fileBytes);
-
             AntdFileUploadBean uploadBean = AntdFileUploadBean.builder()
                     .name(oldFileName)
                     .uid(String.valueOf(uuid))
@@ -86,7 +81,6 @@ public class ExcelUploadController extends BaseController {
             uploadBeanList.add(uploadBean);
         }
         result.putFileUploaderBeanList(uploadBeanList);
-
         return result;
     }
 }

@@ -36,7 +36,6 @@ import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.util.Set;
 
-
 /**
  * @author zhoucj
  * @description
@@ -47,8 +46,6 @@ import java.util.Set;
 @Controller
 @RequestMapping("/excel/userAccount")
 public class UserExcelController extends BaseController {
-
-
     @Reference
     private DefineMenuService defineMenuService;
     @Reference
@@ -62,7 +59,6 @@ public class UserExcelController extends BaseController {
                                      @NotBlank(message = "未知菜单id") String menuId, String[] checkIds
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
         if (defineMenuEntity == null) {
@@ -78,24 +74,20 @@ public class UserExcelController extends BaseController {
     public void dealGetAllUserAccountList(HttpServletRequest request, HttpServletResponse response, String menuId
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
         Assert.notNull(defineMenuEntity, "无效菜单:" + actionFailMsg);
         //菜单模板配置
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean);
-
     }
-
 
     @ApiOperation(value = "导入->excel文件", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/importData")
     @ResponseBody
     public WebResult importData(HttpServletRequest request, @RequestParam(value = "files") MultipartFile[] fileArr,
-                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) throws Exception{
+                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) throws Exception {
         WebResult result = WebResult.okOperation();
-
         Assert.notEmpty(fileArr, BaseRstMsgConstant.ErrorMsg.emptyUploadFile());
         Set<String> accountExistSet = userAccountService.dealGetExistAccountSet(loginUserInfo, BaseStateEnum.ENABLED.getValue(), new QueryWrapper<UserAccountEntity>());
         for (MultipartFile file : fileArr) {
@@ -105,9 +97,6 @@ public class UserExcelController extends BaseController {
                     .headRowNumber(1)
                     .doRead();
         }
-
         return result;
     }
-
-
 }

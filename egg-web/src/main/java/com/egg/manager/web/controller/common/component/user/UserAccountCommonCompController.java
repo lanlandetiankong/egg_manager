@@ -36,10 +36,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/commmon/component/user/userAccount")
 public class UserAccountCommonCompController extends BaseController {
-
     @Autowired
     private UserAccountService userAccountService;
-
 
     @PcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -52,8 +50,7 @@ public class UserAccountCommonCompController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -61,8 +58,6 @@ public class UserAccountCommonCompController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 }

@@ -44,12 +44,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/define/defineJob")
 public class DefineJobController extends BaseController {
-
     @Autowired
     private DefineJobMapper defineJobMapper;
     @Reference
     private DefineJobService defineJobService;
-
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryPage")
     @ApiOperation(value = "分页查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -62,8 +60,7 @@ public class DefineJobController extends BaseController {
     public WebResult queryPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -71,10 +68,8 @@ public class DefineJobController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @PcWebQueryLog(fullPath = "/define/defineJob/queryDtoPage")
     @ApiOperation(value = "分页查询(dto)->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -87,8 +82,7 @@ public class DefineJobController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
-        //解析 搜索条件
+//解析 搜索条件
         List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
         queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
@@ -96,55 +90,44 @@ public class DefineJobController extends BaseController {
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
-
         return result;
     }
-
 
     @ApiOperation(value = "根据id查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/define/defineJob/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-
         DefineJobEntity defineJobEntity = defineJobMapper.selectById(defineJobId);
         result.putBean(DefineJobTransfer.transferEntityToVo(defineJobEntity));
-
         return result;
     }
-
 
     @ApiOperation(value = "新增->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-
         Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         addCount = defineJobService.dealCreate(loginUserInfo, defineJobVo);
         result.putCount(addCount);
-
         return result;
     }
-
 
     @ApiOperation(value = "更新->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebOperationLog(fullPath = "/define/defineJob/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineJobVo defineJobVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-
         Assert.notNull(defineJobVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         changeCount = defineJobService.dealUpdate(loginUserInfo, defineJobVo);
         result.putCount(changeCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/defineJob/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -153,18 +136,15 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
         //批量伪删除
         delCount = defineJobService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
-
         return result;
     }
-
 
     @PcWebOperationLog(fullPath = "/define/defineJob/deleteById")
     @ApiOperation(value = "伪删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -173,15 +153,12 @@ public class DefineJobController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
-            throws Exception  {
+            throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
-
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
         delCount = defineJobService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
-
         return result;
     }
-
 }

@@ -9,9 +9,10 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
@@ -70,17 +71,17 @@ public class AnnouncementController extends BaseController {
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
+            queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
         }
         //取得 分页配置
         AntdvPaginationBean<AnnouncementDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
         //取得 排序配置
-        List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         return result ;
     }
 
@@ -94,19 +95,19 @@ public class AnnouncementController extends BaseController {
         //这些查询条件暂时用不到
         String queryObj = null, paginationObj = null, sortObj = null;
         //解析 搜索条件
-        List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("create_user_id", loginUserInfo.getFid()));
+            queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
         }
         //取得 分页配置
         AntdvPaginationBean paginationBean = AntdvPaginationBean.gainLimitPaginationBean(limitSize);
         //取得 排序配置
-        List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         //按创建时间 倒序
-        sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
-        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        sortMap.putDesc(ISortAble.KEY_CREATE_TIME);
+        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         return result;
     }
 

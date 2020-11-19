@@ -12,8 +12,8 @@ import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBea
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
@@ -48,12 +48,12 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     private AnnouncementTagMapper announcementTagMapper;
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
+                                            AntdvSortMap sortMap) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         //取得 总数
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.settingPage(paginationBean, Long.valueOf(total));
@@ -64,10 +64,10 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
         return result;

@@ -9,8 +9,8 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
@@ -66,11 +66,11 @@ public class AnnouncementTagController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = new ArrayList<QueryField>();
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldBeanList, null, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, null, sortMap);
             result = announcementTagService.dealResultListToEnums(result);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -86,13 +86,13 @@ public class AnnouncementTagController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean<AnnouncementTagDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, AnnouncementTagDto.class);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -5,7 +5,7 @@
 
     <!--
         [Common]分页搜索-where 语句拼接
-        必须采用QueryFormFieldBean作为搜索字段集合传入，且别名必须为 queryFieldList
+        必须采用QueryFieldBean作为搜索字段集合传入，且别名必须为 queryFieldList
         需另外在sql中传入  ${table_name_alias} 为要检索的主表在本次分页查询搜索的别名
     -->
     <sql id="Default_Common_QueryPage_Where_Sql">
@@ -29,19 +29,19 @@
 
     <!--
         [Common]分页搜索-sort 语句拼接
-        必须采用 AntdvSortBean 作为搜索字段集合传入，且别名必须为 sortFieldList
+        必须采用 AntdvSortMap 作为搜索字段集合传入，且别名必须为 sortMap
         需另外在sql中传入  ${table_name_alias} 为要检索的主表在本次分页查询搜索的别名
     -->
     <sql id="Default_Common_QueryPage_Sort_Sql">
-        <if test="sortFieldList != null and sortFieldList.size()>0">
+        <if test="sortMap != null and sortMap.size()>0">
             ORDER BY
-            <foreach collection="sortFieldList" index="index" item="item" separator=",">
-                ${table_name_alias}.${item.field}
+            <foreach collection="sortMap.keys" index="index" item="item" separator=",">
+                ${table_name_alias}.${item}
                 <choose>
-                    <when test="item.ascFlag == true">
+                    <when test="sortMap[item] == true">
                         asc
                     </when>
-                    <when test="item.ascFlag == false">
+                    <when test="sortMap[item] == false">
                         desc
                     </when>
                 </choose>

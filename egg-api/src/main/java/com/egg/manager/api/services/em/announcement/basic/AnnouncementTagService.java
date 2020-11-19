@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;
@@ -27,26 +27,26 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
      * 分页查询 公告标签 列表
      * @param loginUserInfo          当前登录用户
      * @param result
-     * @param queryFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
-                                     List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementTagEntity> paginationBean,
+                                     AntdvSortMap sortMap);
 
     /**
      * 分页查询 公告标签 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo          当前登录用户
      * @param result
-     * @param queryFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
-                                  List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementTagDto> paginationBean,
+                                  AntdvSortMap sortMap);
 
     /***
      * 查询可用的 公告标签 并转为map

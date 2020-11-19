@@ -14,7 +14,7 @@ public interface EggMpSqlConst {
     /**
      * 参数KEY：排序
      */
-    String PARAMOF_SORT_FIELD_LIST = "sortFieldList" ;
+    String PARAMOF_SORT_MAP = "sortMap" ;
     /**
      * 参数KEY：查询字段
      */

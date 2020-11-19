@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.commons.base.pagination.antdv;
 
-import com.egg.manager.persistence.commons.base.pagination.MyBasePagination;
+import com.egg.manager.persistence.commons.base.pagination.IBasePagination;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class AntdvPaginationBean<T> extends MyBasePagination {
+public class AntdvPaginationBean<T> extends IBasePagination {
     /**
      * 当前页数
      */

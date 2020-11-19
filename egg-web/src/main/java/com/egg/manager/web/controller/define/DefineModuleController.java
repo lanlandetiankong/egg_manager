@@ -9,8 +9,8 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
@@ -63,13 +63,13 @@ public class DefineModuleController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPaginationBean<DefineModuleDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineModuleDto.class);
         //取得 排序配置
-        List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-        defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         return result;
     }
 

@@ -9,8 +9,8 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineJobService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
@@ -40,12 +40,12 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<DefineJobEntity> paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineJobEntity> paginationBean,
+                                            AntdvSortMap sortMap) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //解析 搜索条件
-        QueryWrapper<DefineJobEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineJobEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         //取得 总数
         Integer total = defineJobMapper.selectCount(queryWrapper);
         result.settingPage(paginationBean, Long.valueOf(total));
@@ -56,10 +56,10 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineJobDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineJobDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<DefineJobDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;

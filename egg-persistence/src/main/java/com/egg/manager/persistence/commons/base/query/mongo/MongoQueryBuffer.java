@@ -2,8 +2,8 @@ package com.egg.manager.persistence.commons.base.query.mongo;
 
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
-import com.egg.manager.persistence.commons.base.query.MyBaseQueryBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.google.common.collect.Sets;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
@@ -17,20 +17,20 @@ import java.util.*;
  * @date 2020/10/20
  */
 @Data
-public class MyMongoQueryBuffer extends MyBaseQueryBean {
+public class MongoQueryBuffer extends BaseQueryBean {
 
     /**
      * (除HttpServletRequest取得外)添加的查询字段
      */
-    private List<QueryFormFieldBean> queryFormFieldBeanList = new ArrayList<>();
+    private List<QueryField> queryFieldList = new ArrayList<>();
     /**
      * 添加到 HttpServletRequest取得的排序字段前
      */
-    private List<MyMongoSortBean> frontSortList = new ArrayList<>();
+    private List<MongoSortBean> frontSortList = new ArrayList<>();
     /**
      * 追加到 HttpServletRequest取得的排序字段后
      */
-    private List<MyMongoSortBean> behindSortList = new ArrayList<>();
+    private List<MongoSortBean> behindSortList = new ArrayList<>();
     /**
      * 可查询过滤字段白名单
      */
@@ -47,72 +47,72 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
     /**
      * 分页bean
      */
-    private MyMongoQueryPageBean pageBean = null;
+    private MongoQueryPageBean pageBean = null;
 
-    public MyMongoQueryBuffer() {
+    public MongoQueryBuffer() {
     }
 
     /**
      * 批量添加 MyMongoCommonQueryFieldEnum 定义的项
      * @param enums
      */
-    public MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum... enums) {
+    public MongoQueryBuffer(MyMongoCommonQueryFieldEnum... enums) {
         if (enums != null && enums.length > 0) {
-            List<QueryFormFieldBean> queryFormFieldBeans = QueryFormFieldBean.handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(enums);
-            this.queryFormFieldBeanList.addAll(queryFormFieldBeans);
+            List<QueryField> queryFields = QueryField.handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(enums);
+            this.queryFieldList.addAll(queryFields);
         }
     }
 
     /**
-     * 添加 QueryFormFieldBean 到集合
+     * 添加 QueryField 到集合
      * @param fieldBean
      */
-    public void addQueryFieldItem(QueryFormFieldBean fieldBean) {
+    public void addQueryFieldItem(QueryField fieldBean) {
         if (fieldBean != null) {
-            this.queryFormFieldBeanList.add(fieldBean);
+            this.queryFieldList.add(fieldBean);
         }
     }
 
-    public MyMongoQueryBuffer addFrontSortItem(MyMongoCommonSortFieldEnum... commonSortFieldEnumArr) {
+    public MongoQueryBuffer addFrontSortItem(MyMongoCommonSortFieldEnum... commonSortFieldEnumArr) {
         if (commonSortFieldEnumArr != null && commonSortFieldEnumArr.length > 0) {
             for (MyMongoCommonSortFieldEnum sortFieldEnum : commonSortFieldEnumArr) {
-                this.frontSortList.add(0, new MyMongoSortBean(sortFieldEnum.getFieldName(), sortFieldEnum.getAscFlag()));
+                this.frontSortList.add(0, new MongoSortBean(sortFieldEnum.getFieldName(), sortFieldEnum.getAscFlag()));
             }
         }
         return this;
     }
 
-    public MyMongoQueryBuffer addBehindSortItem(MyMongoCommonSortFieldEnum... commonSortFieldEnumArr) {
+    public MongoQueryBuffer addBehindSortItem(MyMongoCommonSortFieldEnum... commonSortFieldEnumArr) {
         if (commonSortFieldEnumArr != null && commonSortFieldEnumArr.length > 0) {
             for (MyMongoCommonSortFieldEnum sortFieldEnum : commonSortFieldEnumArr) {
-                this.behindSortList.add(new MyMongoSortBean(sortFieldEnum.getFieldName(), sortFieldEnum.getAscFlag()));
+                this.behindSortList.add(new MongoSortBean(sortFieldEnum.getFieldName(), sortFieldEnum.getAscFlag()));
             }
         }
         return this;
     }
 
-    public MyMongoQueryBuffer addFrontSortItem(MyMongoSortBean mongoSortBean) {
+    public MongoQueryBuffer addFrontSortItem(MongoSortBean mongoSortBean) {
         if (mongoSortBean != null) {
             this.frontSortList.add(mongoSortBean);
         }
         return this;
     }
 
-    public MyMongoQueryBuffer addFrontSortItem(List<MyMongoSortBean> mongoSortBeans) {
+    public MongoQueryBuffer addFrontSortItem(List<MongoSortBean> mongoSortBeans) {
         if (CollectionUtils.isNotEmpty(mongoSortBeans)) {
             this.frontSortList.addAll(mongoSortBeans);
         }
         return this;
     }
 
-    public MyMongoQueryBuffer addBehindSortItem(MyMongoSortBean mongoSortBean) {
+    public MongoQueryBuffer addBehindSortItem(MongoSortBean mongoSortBean) {
         if (mongoSortBean != null) {
             this.behindSortList.add(mongoSortBean);
         }
         return this;
     }
 
-    public MyMongoQueryBuffer addBlackQueryFieldItem(String... fieldNameArr) {
+    public MongoQueryBuffer addBlackQueryFieldItem(String... fieldNameArr) {
         if (fieldNameArr != null && fieldNameArr.length > 0) {
             for (String fieldName : fieldNameArr) {
                 if (StringUtils.isNotBlank(fieldName)) {
@@ -123,7 +123,7 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
         return this;
     }
 
-    public MyMongoQueryBuffer addWhiteQueryFieldItem(String... fieldNameArr) {
+    public MongoQueryBuffer addWhiteQueryFieldItem(String... fieldNameArr) {
         if (fieldNameArr != null && fieldNameArr.length > 0) {
             for (String fieldName : fieldNameArr) {
                 if (StringUtils.isNotBlank(fieldName)) {
@@ -138,7 +138,7 @@ public class MyMongoQueryBuffer extends MyBaseQueryBean {
      * 取得经过处理后的自身
      * @return
      */
-    public MyMongoQueryBuffer getRefreshedSelf() {
+    public MongoQueryBuffer getRefreshedSelf() {
         if (CollectionUtils.isNotEmpty(this.whiteQueryFieldSets) && CollectionUtils.isNotEmpty(this.blackQueryFieldSets)) {
             //取得黑名单与白名单的交集
             Sets.SetView<String> intersection = Sets.intersection(this.whiteQueryFieldSets, this.blackQueryFieldSets);

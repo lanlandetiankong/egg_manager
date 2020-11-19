@@ -77,8 +77,8 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos
         //取得 分页配置
         AntdvPaginationBean paginationBean=parsePaginationJsonToBean(paginationObj);
         //取得 排序配置
-        List<AntdvSortBean> sortBeans=parseSortJsonToBean(sortObj,true);
-        result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortBeans);
+        List<AntdvSortBean> sortMap=parseSortJsonToBean(sortObj,true);
+        result=${cfg.baseEntityName_firstLow}Service.dealGet${cfg.baseEntityName}DtoPages(result,queryFieldBeanList,paginationBean,sortMap);
         }catch(Exception e){
         this.dealCommonErrorCatch(log,result,e);
         }

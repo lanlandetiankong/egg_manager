@@ -11,8 +11,8 @@ import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBea
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
@@ -54,10 +54,10 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineTenantDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineTenantDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
         return result;

@@ -9,8 +9,8 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
@@ -66,13 +66,13 @@ public class DefineTenantController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean<DefineTenantDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineTenantDto.class);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }
@@ -108,11 +108,11 @@ public class DefineTenantController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = new ArrayList<QueryFormFieldBean>();
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = new ArrayList<QueryField>();
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, null, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, null, sortMap);
             result = defineTenantService.dealResultListToEnums(loginUserInfo, result);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);

@@ -15,8 +15,8 @@ import com.egg.manager.persistence.commons.base.constant.shiro.ShiroRoleConstant
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -117,18 +117,14 @@ public class DefineMenuController extends BaseController {
                                   String queryObj, String paginationObj, String sortObj,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        try {
-            //解析 搜索条件
-            List<QueryFormFieldBean> queryFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
-            //取得 分页配置
-            AntdvPaginationBean<DefineMenuDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineMenuDto.class);
-            //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = defineMenuService.dealQueryPageByDtos(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
-        } catch (Exception e) {
-            this.dealCommonErrorCatch(log, result, e);
-        }
+        //解析 搜索条件
+        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //取得 分页配置
+        AntdvPaginationBean<DefineMenuDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, DefineMenuDto.class);
+        //取得 排序配置
+        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        result = defineMenuService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         return result;
     }
 

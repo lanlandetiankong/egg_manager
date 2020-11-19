@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserTenantEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserTenantDto;
@@ -21,11 +21,11 @@ public interface UserTenantMapper extends MyEggMapper<UserTenantEntity> {
     /**
      * [分页搜索查询] - 用户&租户
      * @param page
-     * @param queryFieldBeanList
-     * @param sortBeans
+     * @param queryFieldList
+     * @param sortMap
      * @return
      */
-    List<UserTenantDto> selectQueryPage(Page<UserTenantDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
+    List<UserTenantDto> selectQueryPage(Page<UserTenantDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryField> queryFieldList, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
 
     /**
      * 取得用户拥有的所有租户id集合

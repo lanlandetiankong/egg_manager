@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoQueryMatchingEnum;
-import com.egg.manager.persistence.commons.base.query.MyBaseQueryBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,11 @@ import java.util.regex.Pattern;
 
 /**
  * @author zhoucj
- * @description MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 MyMongoQueryBuffer 中
+ * @description MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 MongoQueryBuffer 中
  * @date 2020/10/20
  */
 @Slf4j
-public class MongoQueryBean<T> extends MyBaseQueryBean {
+public class MongoQueryBean<T> extends BaseQueryBean {
     /**
      * 条件集合
      */
@@ -41,7 +41,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
     /**
      * 分页查询bean
      */
-    private MyMongoQueryPageBean pageBean;
+    private MongoQueryPageBean pageBean;
     /**
      * 排序Sort
      */
@@ -55,7 +55,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
     public MongoQueryBean() {
     }
 
-    public MongoQueryBean(List<Criteria> criterias, MyMongoQueryPageBean pageBean, Sort sort) {
+    public MongoQueryBean(List<Criteria> criterias, MongoQueryPageBean pageBean, Sort sort) {
         if (CollectionUtils.isNotEmpty(criterias)) {
             this.criteriaList.addAll(criterias);
         }
@@ -64,7 +64,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         this.sort = sort;
     }
 
-    public MongoQueryBean(List<Criteria> criterias, MyMongoQueryPageBean pageBean, Sort sort, List<T> data) {
+    public MongoQueryBean(List<Criteria> criterias, MongoQueryPageBean pageBean, Sort sort, List<T> data) {
         if (CollectionUtils.isNotEmpty(criterias)) {
             this.criteriaList.addAll(criterias);
         }
@@ -88,23 +88,23 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
     public static final String MOFIELD_ORDER_NUM = "orderNum";
 
 
-    public static MyMongoQueryBuffer getMongoQueryBeanFromRequest(HttpServletRequest request, MyMongoQueryBuffer queryBuffer) {
+    public static MongoQueryBuffer getMongoQueryBeanFromRequest(HttpServletRequest request, MongoQueryBuffer queryBuffer) {
         //查询字段
         List<Criteria> criterias = new ArrayList<>();
         criterias.addAll(getMgQueryFilterFromRequest(request, queryBuffer));
         //分页
-        MyMongoQueryPageBean pageBean = getPageBeanFromRequest(request);
-        List<MyMongoSortBean> sortBeans = getSortBeansFromRequest(request);
-        List<MyMongoSortBean> frontSortList = queryBuffer.getFrontSortList();
+        MongoQueryPageBean pageBean = getPageBeanFromRequest(request);
+        List<MongoSortBean> sortMap = getSortBeansFromRequest(request);
+        List<MongoSortBean> frontSortList = queryBuffer.getFrontSortList();
         if (CollectionUtils.isNotEmpty(frontSortList)) {
-            sortBeans.addAll(0, frontSortList);
+            sortMap.addAll(0, frontSortList);
         }
-        List<MyMongoSortBean> behindSortList = queryBuffer.getBehindSortList();
+        List<MongoSortBean> behindSortList = queryBuffer.getBehindSortList();
         if (CollectionUtils.isNotEmpty(behindSortList)) {
-            sortBeans.addAll(behindSortList);
+            sortMap.addAll(behindSortList);
         }
         queryBuffer.setPageBean(pageBean);
-        queryBuffer.addFrontSortItem(sortBeans);
+        queryBuffer.addFrontSortItem(sortMap);
         return queryBuffer;
     }
 
@@ -115,7 +115,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param queryBuffer 查询配置
      * @return
      */
-    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, MyMongoQueryBuffer queryBuffer) {
+    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, MongoQueryBuffer queryBuffer) {
         boolean isWhiteList = Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag());
         Set<String> enableFields = (Boolean.FALSE.equals(queryBuffer.getWhiteSetsFlag())) ? enableFields = queryBuffer.getBlackQueryFieldSets() : queryBuffer.getWhiteQueryFieldSets();
         List<Criteria> criterias = new ArrayList<>();
@@ -123,18 +123,18 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         if (StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)) {
             return criterias;
         } else {
-            List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryFormFieldBean.class);
+            List<QueryField> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryField.class);
             if (CollectionUtils.isNotEmpty(fieldBeansTemp)) {
                 //如果黑名单/白名单 为空，则将所有查询字段设置到Query
                 if (CollectionUtils.isEmpty(enableFields)) {
-                    for (QueryFormFieldBean fieldBean : fieldBeansTemp) {
+                    for (QueryField fieldBean : fieldBeansTemp) {
                         //将查询条件设置到Query
                         dealQueryFormFieldBeanToQuery(criterias, fieldBean);
                         queryBuffer.addQueryFieldItem(fieldBean);
                     }
                 } else {
-                    Set<QueryFormFieldBean> filtedFields = Sets.newHashSet();
-                    for (QueryFormFieldBean fieldBean : fieldBeansTemp) {
+                    Set<QueryField> filtedFields = Sets.newHashSet();
+                    for (QueryField fieldBean : fieldBeansTemp) {
                         if (enableFields.contains(fieldBean.getFieldName()) == isWhiteList) {
                             //将查询条件设置到Query
                             dealQueryFormFieldBeanToQuery(criterias, fieldBean);
@@ -156,7 +156,7 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param fieldBean
      * @return
      */
-    public static void dealQueryFormFieldBeanToQuery(List<Criteria> criteriaList, QueryFormFieldBean fieldBean) {
+    public static void dealQueryFormFieldBeanToQuery(List<Criteria> criteriaList, QueryField fieldBean) {
         if (MyMongoQueryMatchingEnum.EqualsMatch.equalsValue(fieldBean.getMatching())) {
             //字符串相等查询
             criteriaList.add(Criteria.where(fieldBean.getFieldName()).is(fieldBean.getValue()));
@@ -176,13 +176,13 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param request
      * @return
      */
-    public static MyMongoQueryPageBean getPageBeanFromRequest(HttpServletRequest request) {
+    public static MongoQueryPageBean getPageBeanFromRequest(HttpServletRequest request) {
         String paginationJson = request.getParameter(PARAMETER_PAGINATION_OBJ);
-        MyMongoQueryPageBean paginationBean = null;
+        MongoQueryPageBean paginationBean = null;
         if (StringUtils.isNotBlank(paginationJson)) {
-            paginationBean = JSONObject.parseObject(paginationJson, MyMongoQueryPageBean.class);
+            paginationBean = JSONObject.parseObject(paginationJson, MongoQueryPageBean.class);
         } else {
-            paginationBean = MyMongoQueryPageBean.gainDefaultPaginationBean();
+            paginationBean = MongoQueryPageBean.gainDefaultPaginationBean();
         }
         dealInitPageBean(paginationBean);
         return paginationBean;
@@ -194,8 +194,8 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param paginationBean
      * @return
      */
-    public static QPageRequest getMgPageFromBean(MyMongoQueryPageBean paginationBean) {
-        paginationBean = paginationBean != null ? paginationBean : MyMongoQueryPageBean.gainDefaultPaginationBean();
+    public static QPageRequest getMgPageFromBean(MongoQueryPageBean paginationBean) {
+        paginationBean = paginationBean != null ? paginationBean : MongoQueryPageBean.gainDefaultPaginationBean();
         return QPageRequest.of(paginationBean.getCurrent(), paginationBean.getPageSize());
     }
 
@@ -205,8 +205,8 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param page
      * @return
      */
-    public static <T> MyMongoQueryPageBean<T> getPageBeanFromPage(Page<T> page) {
-        MyMongoQueryPageBean<T> pageBean = new MyMongoQueryPageBean<T>();
+    public static <T> MongoQueryPageBean<T> getPageBeanFromPage(Page<T> page) {
+        MongoQueryPageBean<T> pageBean = new MongoQueryPageBean<T>();
         pageBean.setContent(page.getContent());
         pageBean.setTotal(page.getTotalElements());
         return pageBean;
@@ -214,13 +214,13 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
 
 
     /**
-     * MyMongoQueryPageBean 数据初始化
+     * MongoQueryPageBean 数据初始化
      * @param paginationBean
      * @return
      */
-    private static MyMongoQueryPageBean dealInitPageBean(MyMongoQueryPageBean paginationBean) {
+    private static MongoQueryPageBean dealInitPageBean(MongoQueryPageBean paginationBean) {
         if (paginationBean == null) {
-            return new MyMongoQueryPageBean(DEFAULT_PAGE, DEFAULT_SIZE);
+            return new MongoQueryPageBean(DEFAULT_PAGE, DEFAULT_SIZE);
         }
         if (paginationBean.getCurrent() == null || paginationBean.getCurrent() < 0) {
             paginationBean.setCurrent(DEFAULT_PAGE);
@@ -238,37 +238,37 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
      * @param request
      * @return
      */
-    public static List<MyMongoSortBean> getSortBeansFromRequest(HttpServletRequest request) {
+    public static List<MongoSortBean> getSortBeansFromRequest(HttpServletRequest request) {
         String sortObj = request.getParameter(PARAMETER_SORT_OBJ);
-        List<MyMongoSortBean> sortBeans = new ArrayList<>();
+        List<MongoSortBean> sortMap = new ArrayList<>();
         if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
-            MyMongoSortBean antdvSortBean = JSONObject.parseObject(sortObj, MyMongoSortBean.class);
+            MongoSortBean antdvSortBean = JSONObject.parseObject(sortObj, MongoSortBean.class);
             if (antdvSortBean != null) {
                 String fieldName = MyStringUtil.camelToUnderline(antdvSortBean.getField(), false);
                 antdvSortBean.setField(fieldName);
-                sortBeans.add(antdvSortBean);
+                sortMap.add(antdvSortBean);
             }
         }
-        return sortBeans;
+        return sortMap;
     }
 
 
-    public MongoQueryBean<T> appendQueryFieldsToQuery(MyMongoQueryBuffer queryFieldBuffer) {
-        if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFormFieldBeanList())) {
+    public MongoQueryBean<T> appendQueryFieldsToQuery(MongoQueryBuffer queryFieldBuffer) {
+        if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFieldList())) {
             return this;
         }
-        List<QueryFormFieldBean> queryFormFieldBeanList = queryFieldBuffer.getQueryFormFieldBeanList();
-        for (QueryFormFieldBean fieldBean : queryFormFieldBeanList) {
+        List<QueryField> queryFieldList = queryFieldBuffer.getQueryFieldList();
+        for (QueryField fieldBean : queryFieldList) {
             MongoQueryBean.dealQueryFormFieldBeanToQuery(this.criteriaList, fieldBean);
         }
         return this;
     }
 
 
-    public static List<Sort.Order> dealSortBeanToOrder(List<MyMongoSortBean> sortBeans) {
+    public static List<Sort.Order> dealSortBeanToOrder(List<MongoSortBean> sortMap) {
         List<Sort.Order> sortOrders = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(sortBeans)) {
-            for (MyMongoSortBean sortBean : sortBeans) {
+        if (CollectionUtils.isNotEmpty(sortMap)) {
+            for (MongoSortBean sortBean : sortMap) {
                 if (sortBean.getOrderIsAsc()) {
                     sortOrders.add(Sort.Order.asc(sortBean.getField()));
                 } else {
@@ -303,11 +303,11 @@ public class MongoQueryBean<T> extends MyBaseQueryBean {
         return pageRequest;
     }
 
-    public MyMongoQueryPageBean getPageBean() {
+    public MongoQueryPageBean getPageBean() {
         return pageBean;
     }
 
-    public void setPageBean(MyMongoQueryPageBean pageBean) {
+    public void setPageBean(MongoQueryPageBean pageBean) {
         this.pageBean = pageBean;
     }
 

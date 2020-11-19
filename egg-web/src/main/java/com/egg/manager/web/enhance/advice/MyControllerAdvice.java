@@ -62,7 +62,7 @@ public class MyControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public WebResult errorHandle(Exception ex) {
-        log.error("接口异常：{}", ex);
+        log.error("全局异常：", ex);
         return MyResponseHelper.handleRequestFailure(ex, "");
     }
 
@@ -99,7 +99,7 @@ public class MyControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
-    public WebResult handleParamJsonException(Exception e) {
+    public WebResult handleParamJsonException(MyParamJsonException e) {
         log.error(String.format("执行异常(%d)--->"+PublicResultEnum.ErrorOfParam.getLabel()),e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
     }

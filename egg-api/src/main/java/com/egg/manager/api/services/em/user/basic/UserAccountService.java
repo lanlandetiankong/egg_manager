@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
@@ -41,26 +41,26 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * 分页查询 用户列表
      * @param loginUserInfo              当前登录用户
      * @param result
-     * @param queryFormFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
-                                     List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+                                     AntdvSortMap sortMap);
 
     /**
      * 分页查询 用户 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo              当前登录用户
      * @param result
-     * @param queryFormFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
-                                  List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountDto> paginationBean,
+                                  AntdvSortMap sortMap);
 
     /**
      * 用户账号-新增

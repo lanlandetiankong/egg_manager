@@ -13,9 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.util.LongUtils;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.util.reflex.EggReflexUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
@@ -62,16 +61,16 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                                 List<AntdvSortBean> sortBeans) {
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean paginationBean,
+                                                 AntdvSortMap sortMap) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
         //调用方法将查询条件设置到userAccountEntityWrapper
-        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFormFieldBeanList);
+        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFieldList);
         //添加排序
-        if (CollectionUtil.isNotEmpty(sortBeans)) {
-            for (AntdvSortBean sortBean : sortBeans) {
-                entityWrapper.orderBy(true, sortBean.getOrderIsAsc(), sortBean.getField());
+        if (CollectionUtil.isNotEmpty(sortMap)) {
+            for (String fieldKey : sortMap.keySet()) {
+                entityWrapper.orderBy(true, sortMap.getVal(fieldKey), fieldKey);
             }
         }
         return entityWrapper;
@@ -79,20 +78,20 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
 
     @Override
-    public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList) {
-        if (CollectionUtil.isNotEmpty(queryFieldBeanList)) {
-            for (QueryFormFieldBean queryFormFieldBean : queryFieldBeanList) {
-                Object fieldValue = queryFormFieldBean.getValue();
+    public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryField> queryFieldList) {
+        if (CollectionUtil.isNotEmpty(queryFieldList)) {
+            for (QueryField queryField : queryFieldList) {
+                Object fieldValue = queryField.getValue();
                 if (fieldValue == null) {
                     continue;
                 } else {
-                    if ("equals".equals(queryFormFieldBean.getMatching())) {
-                        queryWrapper.eq(queryFormFieldBean.getFieldName(), fieldValue);
-                    } else if ("like".equals(queryFormFieldBean.getMatching())) {
+                    if ("equals".equals(queryField.getMatching())) {
+                        queryWrapper.eq(queryField.getFieldName(), fieldValue);
+                    } else if ("like".equals(queryField.getMatching())) {
                         String fieldValueStr = String.valueOf(fieldValue);
-                        queryWrapper.like(queryFormFieldBean.getFieldName(), fieldValueStr);
-                    } else if ("notEquals".equals(queryFormFieldBean.getMatching())) {
-                        queryWrapper.ne(queryFormFieldBean.getFieldName(), fieldValue);
+                        queryWrapper.like(queryField.getFieldName(), fieldValueStr);
+                    } else if ("notEquals".equals(queryField.getMatching())) {
+                        queryWrapper.ne(queryField.getFieldName(), fieldValue);
                     }
                 }
             }

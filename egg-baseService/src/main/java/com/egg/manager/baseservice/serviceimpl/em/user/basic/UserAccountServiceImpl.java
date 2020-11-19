@@ -1,11 +1,8 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,9 +23,8 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.util.LongUtils;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.*;
@@ -92,10 +88,10 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean<UserAccountEntity> paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountEntity> paginationBean,
+                                            AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -108,31 +104,31 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<UserAccountDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<UserAccountDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<QueryFormFieldBean> queryFieldBeanListTemp = new ArrayList<QueryFormFieldBean>();
+        List<QueryField> queryFieldListTemp = new ArrayList<QueryField>();
         //用户与租户关联 的外表-搜索条件
-        List<QueryFormFieldBean> queryTenantFieldBeanList = new ArrayList<QueryFormFieldBean>();
+        List<QueryField> queryTenantFieldBeanList = new ArrayList<QueryField>();
         //用户与部门关联 的外表-搜索条件
-        List<QueryFormFieldBean> queryDepartmentFieldBeanList = new ArrayList<QueryFormFieldBean>();
-        for (QueryFormFieldBean queryFormFieldBean : queryFieldBeanList) {
+        List<QueryField> queryDepartmentFieldBeanList = new ArrayList<QueryField>();
+        for (QueryField queryField : queryFieldList) {
             //外部关联名，条件需单独识别
-            String foreignName = queryFormFieldBean.getForeignName();
+            String foreignName = queryField.getForeignName();
             if (StringUtils.isBlank(foreignName)) {
-                queryFieldBeanListTemp.add(queryFormFieldBean);
+                queryFieldListTemp.add(queryField);
             } else {
                 //foreignName匹配一致的会被认定为 指定表的 搜索条件
                 if (FOREIGN_NAME_OF_USER_TENANT.equals(foreignName)) {
                     //筛选-所属租户
-                    queryTenantFieldBeanList.add(queryFormFieldBean);
+                    queryTenantFieldBeanList.add(queryField);
                 } else if (FOREIGN_NAME_OF_USER_DEPARTMENT.equals(foreignName)) {
                     //筛选-所属部门
-                    queryDepartmentFieldBeanList.add(queryFormFieldBean);
+                    queryDepartmentFieldBeanList.add(queryField);
                 }
             }
         }
-        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldBeanListTemp, sortBeans, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, sortMap, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;

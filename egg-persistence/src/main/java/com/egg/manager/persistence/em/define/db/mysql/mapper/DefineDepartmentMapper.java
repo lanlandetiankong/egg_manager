@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
@@ -22,11 +22,11 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEnti
     /**
      * [分页搜索查询] - 部门定义
      * @param page
-     * @param queryFieldBeanList
-     * @param sortBeans
+     * @param queryFieldList
+     * @param sortMap
      * @return
      */
-    List<DefineDepartmentDto> selectQueryPage(Page<DefineDepartmentDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
+    List<DefineDepartmentDto> selectQueryPage(Page<DefineDepartmentDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryField> queryFieldList, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
 
     /**
      * 查询部门(过滤指定节点下的所有节点

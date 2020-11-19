@@ -11,8 +11,8 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryBuffer;
-import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormTypeDefinitionMongoVerifyO;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
@@ -68,11 +68,11 @@ public class SmartFormTypeDefinitionController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
-            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
+            MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-            MyMongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
+            MongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
             dealSetMongoPageResult(result, pageBean);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
@@ -92,7 +92,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //添加状态过滤,时间倒序排序
-            MyMongoQueryBuffer mongoQueryBuffer = new MyMongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
+            MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                     .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                     .getRefreshedSelf();
             mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);

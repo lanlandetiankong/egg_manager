@@ -20,9 +20,8 @@ import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTy
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.util.LongUtils;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -183,10 +182,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
-                                            List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineMenuEntity> paginationBean,
+                                            AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldBeanList, paginationBean, sortBeans);
+        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(paginationBean);
         //取得 总数
@@ -200,10 +199,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineMenuDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineMenuDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;

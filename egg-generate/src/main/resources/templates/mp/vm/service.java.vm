@@ -20,20 +20,20 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
         /**
          * 分页查询 ${cfg.moduleName_Cn}列表
          * @param result
-         * @param queryFormFieldBeanList
+         * @param queryFieldList
          * @param paginationBean
          */
         MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}Pages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean paginationBean,
-        List<AntdvSortBean> sortBeans);
+        List<AntdvSortBean> sortMap);
 
         /**
          * 分页查询 ${cfg.moduleName_Cn} Dto列表
          * @param result
-         * @param queryFormFieldBeanList
+         * @param queryFieldList
          * @param paginationBean
          */
         MyCommonResult<${cfg.baseEntityName}Vo> dealGet${cfg.baseEntityName}DtoPages(MyCommonResult<${cfg.baseEntityName}Vo> result,List<QueryFormFieldBean> queryFormFieldBeanList,AntdvPaginationBean paginationBean,
-        List<AntdvSortBean> sortBeans);
+        List<AntdvSortBean> sortMap);
 
 
         /**

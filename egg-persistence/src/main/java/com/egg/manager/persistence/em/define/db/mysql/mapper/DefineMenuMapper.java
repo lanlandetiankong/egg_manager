@@ -2,8 +2,8 @@ package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
@@ -21,11 +21,11 @@ public interface DefineMenuMapper extends MyEggMapper<DefineMenuEntity> {
     /**
      * [分页搜索查询] - 菜单定义
      * @param page
-     * @param queryFieldBeanList
-     * @param sortBeans
+     * @param queryFieldList
+     * @param sortMap
      * @return
      */
-    List<DefineMenuDto> selectQueryPage(Page<DefineMenuDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryFormFieldBean> queryFieldBeanList, @Param(EggMpSqlConst.PARAMOF_SORT_FIELD_LIST) List<AntdvSortBean> sortBeans);
+    List<DefineMenuDto> selectQueryPage(Page<DefineMenuDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryField> queryFieldList, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
 
     /**
      * 取得角色拥有的所有[菜单]集合

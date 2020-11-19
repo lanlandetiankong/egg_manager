@@ -6,8 +6,8 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
@@ -35,26 +35,26 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
      * 分页查询 权限定义 列表
      * @param loginUserInfo          当前登录用户
      * @param result
-     * @param queryFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
-                                     List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefinePermissionEntity> paginationBean,
+                                     AntdvSortMap sortMap);
 
     /**
      * 分页查询 权限定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo          当前登录用户
      * @param result
-     * @param queryFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
-                                  List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefinePermissionDto> paginationBean,
+                                  AntdvSortMap sortMap);
 
     /**
      * 权限定义-新增

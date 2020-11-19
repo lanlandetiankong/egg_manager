@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
@@ -49,20 +49,20 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * 取得前端传递的分页配置
      * @param loginUser              当前登录用户
      * @param result
-     * @param queryFormFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryFormFieldBean> queryFormFieldBeanList, AntdvPaginationBean paginationBean,
-                                          List<AntdvSortBean> sortBeans);
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean paginationBean,
+                                          AntdvSortMap sortMap);
 
     /**
      * 将条件封装类集合设置到QueryWrapper
      * @param queryWrapper
-     * @param queryFieldBeanList
+     * @param queryFieldList
      */
-    void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryFormFieldBean> queryFieldBeanList);
+    void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryField> queryFieldList);
 
 
     /**

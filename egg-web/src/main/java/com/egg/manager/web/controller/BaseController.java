@@ -1,17 +1,20 @@
 package com.egg.manager.web.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.Constant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
 import com.egg.manager.persistence.commons.base.helper.ErrorActionEnum;
+import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MyMongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +102,7 @@ public class BaseController {
             logger.error("接口执行异常--->",e);
         }
         //清空信息
+        result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
         result.putErrorMsg(errmsg);
         if (e instanceof MyAuthenticationExpiredException) {
             result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
@@ -106,7 +110,7 @@ public class BaseController {
     }
 
 
-    public void dealSetMongoPageResult(WebResult result, MyMongoQueryPageBean pageBean) {
+    public void dealSetMongoPageResult(WebResult result, MongoQueryPageBean pageBean) {
         result.putResultList(pageBean.getContent());
         result.putCount(pageBean.getTotal());
     }
@@ -142,12 +146,12 @@ public class BaseController {
      * @param queryJson
      * @return
      */
-    public List<QueryFormFieldBean> parseQueryJsonToBeanList(String queryJson) {
-        List<QueryFormFieldBean> fieldBeanList = new ArrayList<>();
+    public List<QueryField> parseQueryJsonToBeanList(String queryJson) {
+        List<QueryField> fieldBeanList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_ARRAY.equals(queryJson) == false)) {
-            List<QueryFormFieldBean> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryFormFieldBean.class);
+            List<QueryField> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryField.class);
             if (CollectionUtil.isNotEmpty(fieldBeansTemp)) {
-                for (QueryFormFieldBean fieldBean : fieldBeansTemp) {
+                for (QueryField fieldBean : fieldBeansTemp) {
                     //驼峰参数 转 下划线 参数 风格
                     String fieldName = MyStringUtil.camelToUnderline(fieldBean.getFieldName(), false);
                     fieldBean.setFieldName(fieldName);
@@ -180,20 +184,18 @@ public class BaseController {
      * @param sortObj
      * @return
      */
-    public List<AntdvSortBean> parseSortJsonToBean(String sortObj, boolean addCreateTimeDesc) {
-        List<AntdvSortBean> sortBeans = new ArrayList<>();
+    public AntdvSortMap parseSortJsonToBean(String sortObj, boolean addCreateTimeDesc) {
+        AntdvSortMap sortMap = new AntdvSortMap() ;
         if (StringUtils.isNotBlank(sortObj) && Constant.JSON_EMPTY_OBJECT.equals(sortObj) == false) {
-            AntdvSortBean antdvSortBean = JSONObject.parseObject(sortObj, AntdvSortBean.class);
-            if (antdvSortBean != null) {
-                String fieldName = MyStringUtil.camelToUnderline(antdvSortBean.getField(), false);
-                antdvSortBean.setField(fieldName);
-                sortBeans.add(antdvSortBean);
+            Map<String,Boolean> map = JSON.parseObject(sortObj,Map.class);
+            if (CollectionUtil.isNotEmpty(map)) {
+                sortMap.putAll(map);
             }
         }
         if (addCreateTimeDesc == true) {
             //添加日期排序
-            sortBeans.add(AntdvSortBean.gainCreateTimeDescBean());
+            sortMap.putDesc(ISortAble.KEY_CREATE_TIME);
         }
-        return sortBeans;
+        return sortMap;
     }
 }

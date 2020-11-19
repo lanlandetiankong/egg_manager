@@ -9,8 +9,8 @@ import com.egg.manager.persistence.commons.base.constant.shiro.ShiroRoleConstant
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
@@ -23,9 +23,6 @@ import com.egg.manager.persistence.em.define.pojo.transfer.DefineDepartmentTrans
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineJobTransfer;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefinePermissionTransfer;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineRoleTransfer;
-import com.egg.manager.persistence.em.define.pojo.vo.DefineJobVo;
-import com.egg.manager.persistence.em.define.pojo.vo.DefinePermissionVo;
-import com.egg.manager.persistence.em.define.pojo.vo.DefineRoleVo;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
@@ -97,13 +94,13 @@ public class UserAccountController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean<UserAccountDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
@@ -44,13 +44,13 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo          当前登录用户
      * @param result
-     * @param queryFieldBeanList
+     * @param queryFieldList
      * @param paginationBean
-     * @param sortBeans
+     * @param sortMap
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
-                                  List<AntdvSortBean> sortBeans);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<AnnouncementDraftDto> paginationBean,
+                                  AntdvSortMap sortMap);
 
     /**
      * 公告草稿-发布

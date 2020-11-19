@@ -6,11 +6,10 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
-import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
@@ -55,13 +54,13 @@ public class UserAccountCommonCompController extends BaseController {
         WebResult result = WebResult.okQuery();
         try {
             //解析 搜索条件
-            List<QueryFormFieldBean> queryFormFieldBeanList = this.parseQueryJsonToBeanList(queryObj);
-            queryFormFieldBeanList.add(QueryFormFieldBean.dealGetEqualsBean("state", BaseStateEnum.ENABLED.getValue()));
+            List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
+            queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
             //取得 分页配置
             AntdvPaginationBean<UserAccountDto> paginationBean = this.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
             //取得 排序配置
-            List<AntdvSortBean> sortBeans = parseSortJsonToBean(sortObj, true);
-            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFormFieldBeanList, paginationBean, sortBeans);
+            AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+            result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, paginationBean, sortMap);
         } catch (Exception e) {
             this.dealCommonErrorCatch(log, result, e);
         }

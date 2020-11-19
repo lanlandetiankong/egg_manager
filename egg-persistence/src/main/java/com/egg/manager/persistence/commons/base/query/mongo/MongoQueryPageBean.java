@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.commons.base.query.mongo;
 
-import com.egg.manager.persistence.commons.base.query.MyBaseQueryBean;
+import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import lombok.Data;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Data
-public class MyMongoQueryPageBean<T> extends MyBaseQueryBean {
+public class MongoQueryPageBean<T> extends BaseQueryBean {
     /**
      * 当前页
      */
@@ -29,30 +29,30 @@ public class MyMongoQueryPageBean<T> extends MyBaseQueryBean {
      */
     private List<T> content;
 
-    public MyMongoQueryPageBean() {
+    public MongoQueryPageBean() {
     }
 
-    public MyMongoQueryPageBean(Integer current, Integer pageSize) {
+    public MongoQueryPageBean(Integer current, Integer pageSize) {
         this.current = current;
         this.pageSize = pageSize;
     }
 
-    public MyMongoQueryPageBean(Integer current, Integer pageSize, int total) {
+    public MongoQueryPageBean(Integer current, Integer pageSize, int total) {
         this.current = current;
         this.pageSize = pageSize;
         this.total = total;
     }
 
-    public static MyMongoQueryPageBean gainLimitPaginationBean(Integer pageSize) {
-        return new MyMongoQueryPageBean(1, pageSize, 0);
+    public static MongoQueryPageBean gainLimitPaginationBean(Integer pageSize) {
+        return new MongoQueryPageBean(1, pageSize, 0);
     }
 
     /**
      * 默认分页
      * @return
      */
-    public static MyMongoQueryPageBean gainDefaultPaginationBean() {
-        return new MyMongoQueryPageBean(1, 10, 0);
+    public static MongoQueryPageBean gainDefaultPaginationBean() {
+        return new MongoQueryPageBean(1, 10, 0);
     }
 
 

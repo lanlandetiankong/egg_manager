@@ -9,9 +9,8 @@ import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSele
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.commons.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPaginationBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortBean;
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
-import com.egg.manager.persistence.commons.util.LongUtils;
+import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
@@ -41,10 +40,10 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryFormFieldBean> queryFieldBeanList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
-                                         List<AntdvSortBean> sortBeans) {
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPaginationBean<DefineDepartmentDto> paginationBean,
+                                         AntdvSortMap sortMap) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(paginationBean);
-        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldBeanList, sortBeans);
+        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
         result.settingPage(paginationBean, mpPagination.getTotal());
         result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;

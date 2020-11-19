@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.commons.base.enums.query.mysql;
 
-import com.egg.manager.persistence.commons.base.query.form.QueryFormFieldBean;
+import com.egg.manager.persistence.commons.base.query.form.QueryField;
 
 /**
  * @author zhoucj
@@ -21,8 +21,8 @@ public enum MyQueryMatchingEnum {
         this.label = label;
     }
 
-    public void dealSetToQueryFormFieldBean(QueryFormFieldBean bean) {
-        bean = bean != null ? bean : new QueryFormFieldBean();
+    public void dealSetToQueryFormFieldBean(QueryField bean) {
+        bean = bean != null ? bean : new QueryField();
         bean.setMatching(this.getValue());
         bean.setSqlMatching(this.getSqlMatchingValue());
     }

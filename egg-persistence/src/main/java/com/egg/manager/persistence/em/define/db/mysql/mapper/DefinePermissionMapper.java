@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.define.db.mysql.mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
@@ -22,11 +22,11 @@ public interface DefinePermissionMapper extends MyEggMapper<DefinePermissionEnti
     /**
      * [分页搜索查询] - 权限定义
      * @param page
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param sortMap
      * @return
      */
-    List<DefinePermissionDto> selectQueryPage(Page<DefinePermissionDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryField> queryFieldList, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
+    List<DefinePermissionDto> selectQueryPage(Page<DefinePermissionDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) QueryFieldArr queryFieldArr, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
 
     /**
      * 批量 启用

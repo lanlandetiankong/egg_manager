@@ -24,7 +24,9 @@ import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.*;
@@ -82,16 +84,16 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         QueryWrapper<UserAccountEntity> wrapper = new QueryWrapper<UserAccountEntity>();
         wrapper.setEntity(new UserAccountEntity());
         wrapper.eq("account", loginAccountDTO.getAccount())
-                .eq("state", UserAccountStateEnum.ENABLED.getValue());
+                .eq(FieldConst.COL_STATE, UserAccountStateEnum.ENABLED.getValue());
         return userAccountMapper.selectOne(wrapper);
     }
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountEntity> vpage,
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountEntity> vpage,
                                             AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
         //取得 总数
@@ -104,15 +106,15 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountDto> vpage,
                                          AntdvSortMap sortMap) {
         Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<QueryField> queryFieldListTemp = new ArrayList<QueryField>();
+        QueryFieldArr queryFieldListTemp = new QueryFieldArr();
         //用户与租户关联 的外表-搜索条件
-        List<QueryField> queryTenantFieldBeanList = new ArrayList<QueryField>();
+        QueryFieldArr queryTenantFieldBeanList = new QueryFieldArr();
         //用户与部门关联 的外表-搜索条件
-        List<QueryField> queryDepartmentFieldBeanList = new ArrayList<QueryField>();
-        for (QueryField queryField : queryFieldList) {
+        QueryFieldArr queryDepartmentFieldBeanList = new QueryFieldArr();
+        for (QueryField queryField : queryFieldArr) {
             //外部关联名，条件需单独识别
             String foreignName = queryField.getForeignName();
             if (StringUtils.isBlank(foreignName)) {
@@ -179,7 +181,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     @Override
     public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, UserAccountVo userAccountVo) throws Exception {
         QueryWrapper<UserAccountEntity> uniWrapper = new QueryWrapper<UserAccountEntity>()
-                .ne("fid", userAccountVo.getFid());
+                .ne(FieldConst.COL_FID, userAccountVo.getFid());
         if (dealCheckDuplicateKey(userAccountVo, uniWrapper)) {
             //已有重复键值
             throw new MyDbException("唯一键[账号]不允许重复！");
@@ -192,7 +194,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongTenantId())) {
             QueryWrapper<UserTenantEntity> tenantQueryWrapper = new QueryWrapper<UserTenantEntity>();
             tenantQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
-                    .eq("state", BaseStateEnum.ENABLED.getValue());
+                    .eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
             UserTenantEntity userTenantEntity = userTenantMapper.selectOne(tenantQueryWrapper);
             if (userTenantEntity == null) {
                 userTenantEntity = UserTenantPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongTenantId(), loginUserInfo);
@@ -208,7 +210,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         if (StringUtils.isNotBlank(userAccountEntity.getFid()) && StringUtils.isNotBlank(userAccountVo.getBelongDepartmentId())) {
             QueryWrapper<UserDepartmentEntity> departmentQueryWrapper = new QueryWrapper<UserDepartmentEntity>();
             departmentQueryWrapper.eq("user_account_id", userAccountEntity.getFid())
-                    .eq("state", BaseStateEnum.ENABLED.getValue());
+                    .eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
             UserDepartmentEntity userDepartmentEntity = userDepartmentMapper.selectOne(departmentQueryWrapper);
             if (userDepartmentEntity == null) {
                 userDepartmentEntity = UserDepartmentPojoInitialize.generateSimpleInsertEntity(userAccountEntity.getFid(), userAccountVo.getBelongDepartmentId(), loginUserInfo);
@@ -368,14 +370,14 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public boolean dealCheckDuplicateKey(UserAccountVo userAccountVo, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         wrapper.eq("account", userAccountVo.getAccount());
-        wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        wrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         return userAccountMapper.selectCount(wrapper) > 0;
     }
 
     @Override
     public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, String[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        wrapper.in(checkIds != null, "fid", checkIds);
+        wrapper.in(checkIds != null, FieldConst.COL_FID, checkIds);
         return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
     }
 
@@ -384,7 +386,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Set<String> dealGetExistAccountSet(CurrentLoginUserInfo loginUserInfo, Short state, QueryWrapper<UserAccountEntity> wrapper) {
         Set<String> accountSet = new HashSet<>();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        wrapper.eq(state != null, "state", state);
+        wrapper.eq(state != null, FieldConst.COL_STATE, state);
         List<UserAccountEntity> userAccountEntityList = userAccountMapper.selectList(wrapper);
         if (CollectionUtil.isNotEmpty(userAccountEntityList)) {
             for (UserAccountEntity user : userAccountEntityList) {

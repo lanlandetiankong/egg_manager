@@ -2,7 +2,7 @@ package com.egg.manager.api.exchange.servicesimpl.mongodb;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
-import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
+import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
@@ -75,7 +75,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
         Document document = updateBean.getDocument();
         Update update = Update.fromDocument(document);
         //如果已经在update指定了最后更新时间，则不再往update添加最后更新时间、最后更新人等信息
-        if (document.containsKey(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE) == false) {
+        if (document.containsKey(MongoFieldConstant.FIELD_LASTMODIFIEDDATE) == false) {
             dealSetModifyInfoToUpdate(loginUser, update);
         }
         return baseRepository.batchUpdate(query, update);
@@ -245,9 +245,9 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     private void dealSetModifyInfoToUpdate(UserAccountEntity loginUser, Update update) {
         if (loginUser != null) {
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFYERNICKNAME, loginUser.getNickName());
-            update.set(MongoModelFieldConstant.FIELD_LASTMODIFIEDDATE, new Date());
+            update.set(MongoFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
+            update.set(MongoFieldConstant.FIELD_LASTMODIFYERNICKNAME, loginUser.getNickName());
+            update.set(MongoFieldConstant.FIELD_LASTMODIFIEDDATE, new Date());
         }
     }
 

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.base.constant.pojo.mysql;
 
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.util.reflex.config.EggPojoReflexFieldConfig;
 
 import java.util.Date;
@@ -14,39 +15,39 @@ public interface MyBaseMysqlEntityFieldConstant {
     /**
      * fid，即id
      */
-    EggPojoReflexFieldConfig<String> FID = new EggPojoReflexFieldConfig("fid", String.class, "fid");
+    EggPojoReflexFieldConfig<String> FID = new EggPojoReflexFieldConfig(FieldConst.FIELD_FID, String.class, FieldConst.COL_FID);
     /**
      * 备注
      */
-    EggPojoReflexFieldConfig<String> REMARK = new EggPojoReflexFieldConfig("remark", String.class, "remark");
+    EggPojoReflexFieldConfig<String> REMARK = new EggPojoReflexFieldConfig(FieldConst.FIELD_REMARK, String.class, FieldConst.COL_REMARK);
     /**
      * 状态值
      */
-    EggPojoReflexFieldConfig<Short> STATE = new EggPojoReflexFieldConfig("state", Short.class, "state");
+    EggPojoReflexFieldConfig<Short> STATE = new EggPojoReflexFieldConfig(FieldConst.FIELD_STATE, Short.class, FieldConst.COL_STATE);
     /**
      * 状态值
      */
-    EggPojoReflexFieldConfig<Short> IS_DELETED = new EggPojoReflexFieldConfig("isDeleted", Short.class, "is_deleted");
+    EggPojoReflexFieldConfig<Short> IS_DELETED = new EggPojoReflexFieldConfig(FieldConst.FIELD_IS_DELETED, Short.class, FieldConst.COL_IS_DELETED);
     /**
      * 创建时间
      */
-    EggPojoReflexFieldConfig<Date> CREATE_TIME = new EggPojoReflexFieldConfig("createTime", Date.class, "create_time");
+    EggPojoReflexFieldConfig<Date> CREATE_TIME = new EggPojoReflexFieldConfig(FieldConst.FIELD_CREATE_TIME, Date.class, FieldConst.COL_CREATE_TIME);
     /**
      * 更新时间
      */
-    EggPojoReflexFieldConfig<Date> UPDATE_TIME = new EggPojoReflexFieldConfig("updateTime", Date.class, "update_time");
+    EggPojoReflexFieldConfig<Date> UPDATE_TIME = new EggPojoReflexFieldConfig(FieldConst.FIELD_UPDATE_TIME, Date.class, FieldConst.COL_UPDATE_TIME);
     /**
      * 创建人id
      */
-    EggPojoReflexFieldConfig<String> CREATE_USER_ID = new EggPojoReflexFieldConfig("createUserId", String.class, "create_user_id");
+    EggPojoReflexFieldConfig<String> CREATE_USER_ID = new EggPojoReflexFieldConfig(FieldConst.FIELD_CREATE_USER_ID, String.class, FieldConst.COL_CREATE_USER_ID);
     /**
      * 最后更新人id
      */
-    EggPojoReflexFieldConfig<String> LAST_MODIFYER_ID = new EggPojoReflexFieldConfig("lastModifyerId", String.class, "last_modifyer_id");
+    EggPojoReflexFieldConfig<String> LAST_MODIFYER_ID = new EggPojoReflexFieldConfig(FieldConst.FIELD_LAST_MODIFYER_ID, String.class, FieldConst.COL_LAST_MODIFYER_ID);
     /**
      * 版本号
      */
-    EggPojoReflexFieldConfig<Integer> VERSION = new EggPojoReflexFieldConfig("version", Integer.class, "version");
+    EggPojoReflexFieldConfig<Integer> VERSION = new EggPojoReflexFieldConfig(FieldConst.FIELD_VERSION, Integer.class, FieldConst.COL_VERSION);
 
 
 }

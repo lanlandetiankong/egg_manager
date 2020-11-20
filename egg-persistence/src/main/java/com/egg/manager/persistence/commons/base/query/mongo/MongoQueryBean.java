@@ -7,6 +7,7 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoQueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Sets;
 import lombok.EqualsAndHashCode;
@@ -125,7 +126,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         if (StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)) {
             return criterias;
         } else {
-            List<QueryField> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryField.class);
+            QueryFieldArr fieldBeansTemp = QueryFieldArr.parseFromJson(queryJson);
             if (CollectionUtils.isNotEmpty(fieldBeansTemp)) {
                 //如果黑名单/白名单 为空，则将所有查询字段设置到Query
                 if (CollectionUtils.isEmpty(enableFields)) {
@@ -256,11 +257,11 @@ public class MongoQueryBean<T> extends BaseQueryBean {
 
 
     public MongoQueryBean<T> appendQueryFieldsToQuery(MongoQueryBuffer queryFieldBuffer) {
-        if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFieldList())) {
+        if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQueryFieldArr())) {
             return this;
         }
-        List<QueryField> queryFieldList = queryFieldBuffer.getQueryFieldList();
-        for (QueryField fieldBean : queryFieldList) {
+        QueryFieldArr queryFieldArr = queryFieldBuffer.getQueryFieldArr();
+        for (QueryField fieldBean : queryFieldArr) {
             MongoQueryBean.dealQueryFormFieldBeanToQuery(this.criteriaList, fieldBean);
         }
         return this;

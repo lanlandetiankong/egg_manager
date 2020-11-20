@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.user.db.mysql.mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
@@ -28,16 +28,16 @@ public interface UserAccountMapper extends MyEggMapper<UserAccountEntity> {
     /**
      * 分页搜索查询
      * @param page
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param sortMap
      * @param queryTenantFieldBeanList
      * @param queryDepartmentFieldBeanList
      * @return
      */
-    List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) List<QueryField> queryFieldList,
+    List<UserAccountDto> selectQueryPage(Page<UserAccountDto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) QueryFieldArr queryFieldArr,
                                          @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap,
-                                         @Param("queryTenantFieldBeanList") List<QueryField> queryTenantFieldBeanList,
-                                         @Param("queryDepartmentFieldBeanList") List<QueryField> queryDepartmentFieldBeanList
+                                         @Param("queryTenantFieldBeanList") QueryFieldArr queryTenantFieldBeanList,
+                                         @Param("queryDepartmentFieldBeanList") QueryFieldArr queryDepartmentFieldBeanList
     );
 
     /**

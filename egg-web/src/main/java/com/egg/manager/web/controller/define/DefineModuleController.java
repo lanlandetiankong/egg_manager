@@ -10,7 +10,9 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
@@ -32,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author zhoucj
@@ -61,13 +62,13 @@ public class DefineModuleController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPage<DefineModuleDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineModuleDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 

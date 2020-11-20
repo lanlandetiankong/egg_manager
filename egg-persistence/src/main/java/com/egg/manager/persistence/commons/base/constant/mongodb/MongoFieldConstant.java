@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @description
  * @date 2020/10/20
  */
-public class MongoModelFieldConstant implements Serializable {
+public class MongoFieldConstant implements Serializable {
 
     public static final String FIELD_FID = "fid";
     public static final String FIELD_ORDERNUM = "orderNum";

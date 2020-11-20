@@ -1,5 +1,7 @@
 package com.egg.manager.persistence.commons.base.constant.pojo.mysql;
 
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+
 /**
  * @Description:
  * @ClassName: EggMpSqlConst
@@ -18,7 +20,7 @@ public interface EggMpSqlConst {
     /**
      * 参数KEY：查询字段
      */
-    String PARAMOF_QUERY_FIELD_LIST = "queryFieldList";
+    String PARAMOF_QUERY_FIELD_LIST = "queryFieldArr";
 
     /**
      * 参数KEY：id集合
@@ -33,11 +35,11 @@ public interface EggMpSqlConst {
     /**
      * 字段-最后修改人id
      */
-    String COLUMN_LAST_MODIFYER_ID = "last_modifyer_id";
+    String COLUMN_LAST_MODIFYER_ID = FieldConst.COL_LAST_MODIFYER_ID;
     /**
      * 字段-更新时间
      */
-    String COLUMN_UPDATE_TIME = "update_time";
+    String COLUMN_UPDATE_TIME = FieldConst.COL_UPDATE_TIME;
     /**
      * 数据被删除时间
      */
@@ -45,11 +47,11 @@ public interface EggMpSqlConst {
     /**
      * 字段-fid
      */
-    String COLUMN_FID = "fid";
+    String COLUMN_FID = FieldConst.COL_FID;
     /**
      *
      */
-    String COLUMN_USER_ACCOUNT_ID = "fid";
+    String COLUMN_USER_ACCOUNT_ID = FieldConst.COL_FID;
 
     /**
      * MYSQL-时间函数

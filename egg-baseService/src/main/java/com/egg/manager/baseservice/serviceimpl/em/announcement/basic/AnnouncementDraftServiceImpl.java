@@ -12,7 +12,7 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
@@ -53,12 +53,12 @@ public class AnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<Announc
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<AnnouncementDraftDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<AnnouncementDraftDto> vpage,
                                          AntdvSortMap sortMap) {
         //取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         Page<AnnouncementDraftDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
+        List<AnnouncementDraftDto> announcementDraftDtoList = announcementDraftMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
         result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(AnnouncementDraftTransfer.transferDtoToVoList(announcementDraftDtoList, announcementTagMap));
         return result;

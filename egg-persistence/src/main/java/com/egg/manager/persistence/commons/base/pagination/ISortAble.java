@@ -7,7 +7,6 @@ package com.egg.manager.persistence.commons.base.pagination;
  */
 public interface ISortAble<T> {
 
-    String KEY_CREATE_TIME = "create_time";
     String KEY_ORDER = "order";
 
 

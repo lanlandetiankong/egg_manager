@@ -1,13 +1,7 @@
 package com.egg.manager.persistence.commons.base.query.form;
 
-import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
-import com.google.common.collect.Lists;
 import lombok.*;
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author zhoucj
@@ -40,47 +34,5 @@ public class QueryField extends BaseQueryBean {
      * 匹配的值
      */
     private Object value;
-
-
-    /**
-     * 通用查询字段 转QueryFormFieldBean集合
-     * @param fieldEnum
-     * @return
-     */
-    public static QueryField handleInitFromEnum(MyMongoCommonQueryFieldEnum fieldEnum) {
-        if (fieldEnum == null) {
-            return null;
-        }
-        return QueryField.builder().fieldName(fieldEnum.getFieldName())
-                .foreignName(fieldEnum.getForeignName())
-                .matching(fieldEnum.getMatching())
-                .sqlMatching(fieldEnum.getSqlMatching())
-                .value(fieldEnum.getValue())
-                .build();
-    }
-
-    public static List<QueryField> handleBatchInitFromEnum(MyMongoCommonQueryFieldEnum... fieldEnum) {
-        List list = new ArrayList<QueryField>();
-        if (fieldEnum == null || fieldEnum.length == 0) {
-            return list;
-        }
-        return handleBatchInitFromEnum(Lists.newArrayList(fieldEnum));
-    }
-
-    /**
-     * 批量-通用查询字段 转QueryFormFieldBean集合
-     * @param queryFieldEnumList
-     * @return
-     */
-    public static List<QueryField> handleBatchInitFromEnum(List<MyMongoCommonQueryFieldEnum> queryFieldEnumList) {
-        List list = new ArrayList<QueryField>();
-        if (CollectionUtils.isEmpty(queryFieldEnumList)) {
-            return list;
-        }
-        for (MyMongoCommonQueryFieldEnum queryFieldEnum : queryFieldEnumList) {
-            list.add(handleInitFromEnum(queryFieldEnum));
-        }
-        return list;
-    }
 
 }

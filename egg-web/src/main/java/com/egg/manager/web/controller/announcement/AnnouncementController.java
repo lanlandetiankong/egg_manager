@@ -12,7 +12,9 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
@@ -36,7 +38,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -68,17 +69,17 @@ public class AnnouncementController extends BaseController {
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
+            queryFieldArr.add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
         }
         //取得 分页配置
         AntdvPage<AnnouncementDto> vpage = this.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 
@@ -91,19 +92,19 @@ public class AnnouncementController extends BaseController {
         //这些查询条件暂时用不到
         String queryObj = null, paginationObj = null, sortObj = null;
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
+            queryFieldArr.add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
         }
         //取得 分页配置
         AntdvPage vpage = AntdvPage.gainPageWithSize(limitSize);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         //按创建时间 倒序
-        sortMap.putDesc(ISortAble.KEY_CREATE_TIME);
-        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        sortMap.putDesc(FieldConst.COL_CREATE_TIME);
+        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 

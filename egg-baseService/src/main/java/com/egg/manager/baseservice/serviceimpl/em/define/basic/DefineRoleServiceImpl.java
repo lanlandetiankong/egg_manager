@@ -18,7 +18,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
@@ -121,8 +122,8 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     public List<DefineRoleEntity> queryAllEnableList(QueryWrapper<DefineRoleEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefineRoleEntity>();
         //筛选与排序
-        wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy(true, false, "create_time");
+        wrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+        wrapper.orderBy(true, false, FieldConst.COL_CREATE_TIME);
         return defineRoleMapper.selectList(wrapper);
     }
 
@@ -157,7 +158,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
                 }
             }
             QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = new QueryWrapper<DefineRoleEntity>();
-            defineRoleEntityWrapper.eq("state", BaseStateEnum.ENABLED.getValue())
+            defineRoleEntityWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue())
                     .in(true, "define_role_id", roleIds);
             defineRoleEntities = defineRoleMapper.selectList(defineRoleEntityWrapper);
         }
@@ -166,10 +167,10 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineRoleEntity> vpage,
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineRoleEntity> vpage,
                                             AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
         //取得 总数
@@ -183,10 +184,10 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineRoleDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineRoleDto> vpage,
                                          AntdvSortMap sortMap) {
         Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
+        List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
         result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
         return result;

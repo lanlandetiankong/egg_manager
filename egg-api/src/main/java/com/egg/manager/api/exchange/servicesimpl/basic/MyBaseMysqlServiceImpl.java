@@ -15,6 +15,7 @@ import com.egg.manager.persistence.commons.base.exception.login.MyAuthentication
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.reflex.EggReflexUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
@@ -61,12 +62,12 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPage vpage,
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryFieldArr queryFieldArr, AntdvPage vpage,
                                                  AntdvSortMap sortMap) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
         //调用方法将查询条件设置到userAccountEntityWrapper
-        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFieldList);
+        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFieldArr);
         //添加排序
         if (CollectionUtil.isNotEmpty(sortMap)) {
             for (String fieldKey : sortMap.keySet()) {
@@ -78,9 +79,9 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
 
     @Override
-    public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryField> queryFieldList) {
-        if (CollectionUtil.isNotEmpty(queryFieldList)) {
-            for (QueryField queryField : queryFieldList) {
+    public void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, QueryFieldArr queryFieldArr) {
+        if (CollectionUtil.isNotEmpty(queryFieldArr)) {
+            for (QueryField queryField : queryFieldArr) {
                 Object fieldValue = queryField.getValue();
                 if (fieldValue == null) {
                     continue;

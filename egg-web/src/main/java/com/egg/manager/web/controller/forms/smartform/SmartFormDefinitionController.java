@@ -10,6 +10,7 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
@@ -103,7 +104,7 @@ public class SmartFormDefinitionController extends BaseController {
     @ApiOperation(value = "根据id查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
-                                      @RequestParam(value = "fid", required = true) String fid) {
+                                      @RequestParam(value = FieldConst.FIELD_FID, required = true) String fid) {
         WebResult result = WebResult.okQuery();
         Assert.notNull(fid, BaseRstMsgConstant.ErrorMsg.unknowId());
         SmartFormDefinitionMgo mobj = smartFormDefinitionMgoService.doFindById(loginUserInfo, fid);

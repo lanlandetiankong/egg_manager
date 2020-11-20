@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.exchange.db.mongo.mo;
 
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -66,11 +67,11 @@ public class MyBaseModelMgo<K> implements Serializable {
     /**
      * 状态
      */
-    @Field(value = "state")
+    @Field(value = FieldConst.COL_STATE)
     private Short state;
 
     @Version
-    @Field(value = "version")
+    @Field(value = FieldConst.COL_VERSION)
     private Integer version;
 
     /**
@@ -108,7 +109,7 @@ public class MyBaseModelMgo<K> implements Serializable {
     /**
      * 备注信息
      */
-    @Field(value = "remark")
+    @Field(value = FieldConst.COL_REMARK)
     private String remark;
     /**
      * 方法总花费时间

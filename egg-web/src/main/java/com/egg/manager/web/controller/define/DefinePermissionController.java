@@ -13,7 +13,9 @@ import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
@@ -35,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author zhoucj
@@ -64,14 +65,14 @@ public class DefinePermissionController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
-        queryFieldList.add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryFieldArr.add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
         //取得 分页配置
         AntdvPage<DefinePermissionEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionEntity.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 
@@ -85,14 +86,14 @@ public class DefinePermissionController extends BaseController {
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-//解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //解析 搜索条件
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPage<DefinePermissionDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefinePermissionDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 

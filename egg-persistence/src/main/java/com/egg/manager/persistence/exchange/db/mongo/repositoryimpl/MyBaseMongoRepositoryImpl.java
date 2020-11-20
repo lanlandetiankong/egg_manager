@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.exchange.db.mongo.repositoryimpl;
 
-import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
+import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.util.reflex.MyReflexUtil;
@@ -103,7 +103,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
+        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
@@ -120,7 +120,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         int idSize = Lists.newArrayList(ids).size();
         Query query = dealGetQueryWithIds(ids, true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoModelFieldConstant.FIELD_FID);
+        Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != idSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", idSize, result.getModifiedCount());
@@ -144,7 +144,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().set(MongoModelFieldConstant.FIELD_STATUS, status);
+        Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
@@ -162,7 +162,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         dealGetQueryWithId(s.getFid(), true);
         Query query = dealGetQueryWithId(s.getFid(), true);
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().set(MongoModelFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
+        Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != SingleUpdateMaxSize) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
@@ -178,7 +178,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Query query = dealGetQueryWithIds(ids, true);
         int size = Lists.newArrayList(ids).size();
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().set(MongoModelFieldConstant.FIELD_STATUS, status);
+        Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
             String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
@@ -194,7 +194,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Query query = dealGetQueryWithIds(ids, true);
         int size = Lists.newArrayList(ids).size();
         //MO转化为更新对象(不忽略null字段,忽略fid)
-        Update update = new Update().set(MongoModelFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
+        Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
             String errmsg = String.format("逻辑删除操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
@@ -402,7 +402,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
      */
     private Query dealGetQueryWithId(ID id, boolean exceptionAble) {
         dealVerifyIdBlank(id, exceptionAble);
-        Criteria criteria = new Criteria(MongoModelFieldConstant.FIELD_FID).is(id);
+        Criteria criteria = new Criteria(MongoFieldConstant.FIELD_FID).is(id);
         return new Query().addCriteria(criteria);
     }
 
@@ -414,7 +414,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
      */
     private Query dealGetQueryWithIds(Iterable<ID> idIters, boolean exceptionAble) {
         List<ID> ids = dealGetListFromIterable(idIters, exceptionAble);
-        Criteria idInCriteria = new Criteria(MongoModelFieldConstant.FIELD_FID).in(ids);
+        Criteria idInCriteria = new Criteria(MongoFieldConstant.FIELD_FID).in(ids);
         return new Query().addCriteria(idInCriteria);
     }
 
@@ -437,7 +437,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
                 }
             }
         }
-        Criteria criteria = new Criteria(MongoModelFieldConstant.FIELD_FID).in(idList);
+        Criteria criteria = new Criteria(MongoFieldConstant.FIELD_FID).in(idList);
         return new Query().addCriteria(criteria);
     }
 }

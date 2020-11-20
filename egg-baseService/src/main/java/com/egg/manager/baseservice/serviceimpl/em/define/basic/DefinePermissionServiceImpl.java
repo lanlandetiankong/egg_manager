@@ -17,7 +17,8 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
@@ -59,18 +60,18 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     public List<DefinePermissionEntity> getAllEnableList(QueryWrapper<DefinePermissionEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<DefinePermissionEntity>();
         //筛选与排序
-        wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
-        wrapper.orderBy(true, false, "create_time");
+        wrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+        wrapper.orderBy(true, false, FieldConst.COL_CREATE_TIME);
         return definePermissionMapper.selectList(wrapper);
     }
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefinePermissionEntity> vpage,
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefinePermissionEntity> vpage,
                                             AntdvSortMap sortMap) {
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
         //解析 搜索条件
-        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(queryWrapper);
         result.settingPage(vpage, Long.valueOf(total));
@@ -81,10 +82,10 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefinePermissionDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefinePermissionDto> vpage,
                                          AntdvSortMap sortMap) {
         Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
+        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
         result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result;
@@ -109,7 +110,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     @Override
     public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefinePermissionVo definePermissionVo) throws Exception {
         QueryWrapper<DefinePermissionEntity> uniWrapper = new QueryWrapper<DefinePermissionEntity>()
-                .ne("fid", definePermissionVo.getFid());
+                .ne(FieldConst.COL_FID, definePermissionVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(definePermissionVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
@@ -175,7 +176,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
         wrapper.eq("code", definePermissionVo.getCode());
-        wrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        wrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         boolean successFlag = definePermissionMapper.selectCount(wrapper) == 0;
         if (successFlag == false) {
             verifyBean.setErrorMsg("唯一键[编码]不允许重复！");

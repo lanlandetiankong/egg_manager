@@ -10,7 +10,9 @@ import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessExcep
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -91,10 +92,10 @@ public class BaseController {
      * @param queryJson
      * @return
      */
-    public List<QueryField> parseQueryJsonToBeanList(String queryJson) {
-        List<QueryField> fieldBeanList = new ArrayList<>();
+    public QueryFieldArr parseQueryJsonToBeanList(String queryJson) {
+        QueryFieldArr fieldBeanList = new QueryFieldArr();
         if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_ARRAY.equals(queryJson) == false)) {
-            List<QueryField> fieldBeansTemp = JSONArray.parseArray(queryJson, QueryField.class);
+            QueryFieldArr fieldBeansTemp = QueryFieldArr.parseFromJson(queryJson);
             if (CollectionUtil.isNotEmpty(fieldBeansTemp)) {
                 for (QueryField fieldBean : fieldBeansTemp) {
                     //驼峰参数 转 下划线 参数 风格
@@ -137,7 +138,7 @@ public class BaseController {
         }
         if (addCreateTimeDesc == true) {
             //添加日期排序
-            sortMap.putDesc(ISortAble.KEY_CREATE_TIME);
+            sortMap.putDesc(FieldConst.COL_CREATE_TIME);
         }
         return sortMap;
     }

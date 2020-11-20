@@ -5,14 +5,12 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementDraftDto;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-
-import java.util.List;
 
 /**
  * @author zhoucj
@@ -44,12 +42,12 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo  当前登录用户
      * @param result
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param vpage
      * @param sortMap
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<AnnouncementDraftDto> vpage,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<AnnouncementDraftDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

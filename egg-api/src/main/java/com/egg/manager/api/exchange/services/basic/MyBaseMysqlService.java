@@ -7,14 +7,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 
 /**
@@ -48,27 +47,26 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * 取得前端传递的分页配置
      * @param loginUser      当前登录用户
      * @param result
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param vpage
      * @param sortMap
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, List<QueryField> queryFieldList, AntdvPage vpage,
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryFieldArr queryFieldArr, AntdvPage vpage,
                                           AntdvSortMap sortMap);
 
     /**
      * 将条件封装类集合设置到QueryWrapper
      * @param queryWrapper
-     * @param queryFieldList
+     * @param queryFieldArr
      */
-    void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, List<QueryField> queryFieldList);
+    void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, QueryFieldArr queryFieldArr);
 
 
     /**
      * 更新Entity之前调用
      * @param loginUser 当前登录用户
      * @param t
-     * @param uuidFlag
      * @return
      */
     T doBeforeCreate(UserAccountEntity loginUser, T t);

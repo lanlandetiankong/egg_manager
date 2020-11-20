@@ -13,6 +13,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserRoleService;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserRoleEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserRoleMapper;
@@ -62,9 +63,9 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
             return null;
         }
         QueryWrapper<UserRoleEntity> userRoleEm = new QueryWrapper<UserRoleEntity>();
-        userRoleEm.eq("state", BaseStateEnum.ENABLED.getValue())
+        userRoleEm.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue())
                 .eq("user_account_id", userAccountEntity.getFid());
-        userRoleEm.orderBy(true, false, "update_time");
+        userRoleEm.orderBy(true, false, FieldConst.COL_UPDATE_TIME);
         List<UserRoleEntity> userRoleEntityList = userRoleMapper.selectList(userRoleEm);
         return userRoleEntityList;
     }

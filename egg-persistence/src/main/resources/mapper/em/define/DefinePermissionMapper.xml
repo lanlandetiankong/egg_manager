@@ -128,7 +128,7 @@
         and dp.ensure = 1
     </select>
 
-    <select id="findAllPermissionIdByRoleId" resultType="java.lang.Long">
+    <select id="findAllPermissionIdByRoleId" resultType="java.lang.String">
         SELECT dp.fid FROM em_define_permission dp
         left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
         <where>

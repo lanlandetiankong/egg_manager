@@ -12,7 +12,9 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
@@ -81,13 +83,13 @@ public class DefineRoleController extends BaseController {
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPage<DefineRoleEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleEntity.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        result = defineRoleService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        result = defineRoleService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 
@@ -103,13 +105,13 @@ public class DefineRoleController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPage<DefineRoleDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineRoleDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        result = defineRoleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        result = defineRoleService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 

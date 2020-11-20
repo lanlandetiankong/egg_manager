@@ -13,7 +13,9 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
@@ -63,14 +65,14 @@ public class DefineDepartmentController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj
             , @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-//解析 搜索条件
-        List<QueryField> queryFieldList = this.parseQueryJsonToBeanList(queryObj);
-        queryFieldList.add(QueryField.gainEq("state", BaseStateEnum.ENABLED.getValue()));
+        //解析 搜索条件
+        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
         AntdvPage<DefineDepartmentDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineDepartmentDto.class);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
-        result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
 
@@ -90,12 +92,12 @@ public class DefineDepartmentController extends BaseController {
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(@CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-//筛选与排序
+        //筛选与排序
         QueryWrapper<DefineDepartmentEntity> queryWrapper = new QueryWrapper<DefineDepartmentEntity>();
-        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
         queryWrapper.orderBy(true, true, "order_num");
-        queryWrapper.orderBy(true, true, "create_time");
+        queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
         List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
         result.putResultList(treeList);

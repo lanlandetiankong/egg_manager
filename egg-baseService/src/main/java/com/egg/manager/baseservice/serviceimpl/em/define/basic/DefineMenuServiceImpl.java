@@ -21,7 +21,8 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -107,10 +108,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     public List<DefineMenuEntity> getAllEnableList() {
         QueryWrapper<DefineMenuEntity> queryWrapper = new QueryWrapper<DefineMenuEntity>();
         //筛选与排序
-        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
         queryWrapper.orderBy(true, true, "order_num");
-        queryWrapper.orderBy(true, true, "create_time");
+        queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
         return defineMenuMapper.selectList(queryWrapper);
     }
 
@@ -181,10 +182,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineMenuEntity> vpage,
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineMenuEntity> vpage,
                                             AntdvSortMap sortMap) {
         //解析 搜索条件
-        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldList, vpage, sortMap);
+        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
         //取得 总数
@@ -198,10 +199,10 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineMenuDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineMenuDto> vpage,
                                          AntdvSortMap sortMap) {
         Page<DefineMenuDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
+        List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
         result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
@@ -246,7 +247,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     @Override
     public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, DefineMenuVo defineMenuVo) throws Exception {
         QueryWrapper<DefineMenuEntity> uniWrapper = new QueryWrapper<DefineMenuEntity>()
-                .ne("fid", defineMenuVo.getFid());
+                .ne(FieldConst.COL_FID, defineMenuVo.getFid());
         MyVerifyDuplicateBean verifyDuplicateBean = dealCheckDuplicateKey(loginUserInfo, defineMenuVo, uniWrapper);
         if (verifyDuplicateBean.isSuccessFlag() == false) {
             //已有重复键值
@@ -281,7 +282,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         MyVerifyDuplicateBean verifyBean = new MyVerifyDuplicateBean();
         queryWrapper = queryWrapper != null ? queryWrapper : new QueryWrapper<>();
         queryWrapper.eq("router_url", defineMenuVo.getRouterUrl());
-        queryWrapper.eq("state", BaseStateEnum.ENABLED.getValue());
+        queryWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         boolean successFlag = defineMenuMapper.selectCount(queryWrapper) == 0;
         if (successFlag == false) {
             verifyBean.setErrorMsg("唯一键[路由]不允许重复！");

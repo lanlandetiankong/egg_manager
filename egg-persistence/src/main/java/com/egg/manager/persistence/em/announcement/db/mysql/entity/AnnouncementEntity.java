@@ -2,6 +2,7 @@ package com.egg.manager.persistence.em.announcement.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.*;
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import java.util.Date;
 @TableName("em_announcement")
 public class AnnouncementEntity extends Model<AnnouncementEntity> {
 
-    @TableId(type = IdType.ASSIGN_ID, value = "fid")
+    @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
 
     /**
@@ -56,44 +57,44 @@ public class AnnouncementEntity extends Model<AnnouncementEntity> {
     /**
      * 备注
      */
-    @TableField("remark")
+    @TableField(FieldConst.COL_REMARK)
     private String remark;
     /**
      * 状态
      */
-    @TableField(value = "state", fill = FieldFill.INSERT)
+    @TableField(value = FieldConst.COL_STATE, fill = FieldFill.INSERT)
     private Short state;
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField(value = FieldConst.COL_CREATE_TIME, fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 修改时间
      */
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = FieldConst.COL_UPDATE_TIME, fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 创建用户id
      */
-    @TableField(value = "create_user_id")
+    @TableField(value = FieldConst.COL_CREATE_USER_ID)
     private String createUserId;
     /**
      * 最后修改用户id
      */
-    @TableField(value = "last_modifyer_id")
+    @TableField(value = FieldConst.COL_LAST_MODIFYER_ID)
     private String lastModifyerId;
     /**
      * 版本号
      */
     @Version
-    @TableField(value = "version")
+    @TableField(value = FieldConst.COL_VERSION)
     private Integer version;
     /**
      * 是否已经删除，0:否 1:是
      */
     @TableLogic
-    @TableField(value = "is_deleted")
+    @TableField(value = FieldConst.COL_IS_DELETED)
     private short isDeleted;
     /**
      * 数据删除时间

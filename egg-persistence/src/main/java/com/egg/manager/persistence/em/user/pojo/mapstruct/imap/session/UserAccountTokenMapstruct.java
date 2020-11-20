@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session;
 
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.mapstruct.Mapper;
@@ -25,7 +26,7 @@ public interface UserAccountTokenMapstruct {
      * @return
      */
     @Mappings({
-            @Mapping(target = "userAccountId", source = "fid"),
+            @Mapping(target = "userAccountId", source = FieldConst.COL_FID),
             @Mapping(target = "userBelongTenantId", ignore = true),
             @Mapping(target = "token", ignore = true),
             @Mapping(target = "authorization", ignore = true)

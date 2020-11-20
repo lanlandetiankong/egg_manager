@@ -6,7 +6,7 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
@@ -41,12 +41,12 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * 分页查询 用户列表
      * @param loginUserInfo  当前登录用户
      * @param result
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountEntity> vpage,
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountEntity> vpage,
                                      AntdvSortMap sortMap);
 
     /**
@@ -54,12 +54,12 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo  当前登录用户
      * @param result
-     * @param queryFieldList
+     * @param queryFieldArr
      * @param vpage
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<UserAccountDto> vpage,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

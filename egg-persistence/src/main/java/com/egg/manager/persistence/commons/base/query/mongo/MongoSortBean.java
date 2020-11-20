@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.commons.base.query.mongo;
 
 import com.egg.manager.persistence.commons.base.pagination.BasePagination;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -35,7 +36,7 @@ public class MongoSortBean extends BasePagination {
 
 
     public static MongoSortBean gainCreateTimeDescBean() {
-        return new MongoSortBean("create_time", false);
+        return new MongoSortBean(FieldConst.COL_CREATE_TIME, false);
     }
 
     public static MongoSortBean gainOrderSortBean(boolean ascFlag) {       //排序字段

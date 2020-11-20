@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSele
 import com.egg.manager.persistence.commons.base.constant.define.DefineDepartmentConstant;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
@@ -40,10 +40,10 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, List<QueryField> queryFieldList, AntdvPage<DefineDepartmentDto> vpage,
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineDepartmentDto> vpage,
                                          AntdvSortMap sortMap) {
         Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldList, sortMap);
+        List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
         result.settingPage(vpage, mpPagination.getTotal());
         result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;

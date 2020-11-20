@@ -2,6 +2,7 @@ package com.egg.manager.web.controller.index.olddata;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
@@ -43,11 +44,11 @@ public class OldDataController extends BaseController {
         int count = 0;
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            jsonObject.put("create_user_id", null);
-            jsonObject.put("last_modifyer_id", null);
-            jsonObject.put("create_time", null);
-            jsonObject.put("update_time", null);
-            jsonObject.put("fid", null);
+            jsonObject.put(FieldConst.COL_CREATE_USER_ID, null);
+            jsonObject.put(FieldConst.COL_LAST_MODIFYER_ID, null);
+            jsonObject.put(FieldConst.COL_CREATE_TIME, null);
+            jsonObject.put(FieldConst.COL_UPDATE_TIME, null);
+            jsonObject.put(FieldConst.COL_FID, null);
             UserAccountEntity obj = jsonArray.getObject(i, UserAccountEntity.class);
             list.add(obj);
             count += userAccountMapper.insert(obj);

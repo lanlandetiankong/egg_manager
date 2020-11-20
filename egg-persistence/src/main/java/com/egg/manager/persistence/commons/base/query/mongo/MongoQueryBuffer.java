@@ -4,6 +4,7 @@ import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQ
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.google.common.collect.Sets;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ public class MongoQueryBuffer extends BaseQueryBean {
     /**
      * (除HttpServletRequest取得外)添加的查询字段
      */
-    private List<QueryField> queryFieldList = new ArrayList<>();
+    private QueryFieldArr queryFieldArr = new QueryFieldArr();
     /**
      * 添加到 HttpServletRequest取得的排序字段前
      */
@@ -60,8 +61,8 @@ public class MongoQueryBuffer extends BaseQueryBean {
      */
     public MongoQueryBuffer(MyMongoCommonQueryFieldEnum... enums) {
         if (enums != null && enums.length > 0) {
-            List<QueryField> queryFields = QueryField.handleBatchInitFromEnum(enums);
-            this.queryFieldList.addAll(queryFields);
+            QueryFieldArr queryFields = new QueryFieldArr(enums);
+            this.queryFieldArr.addAll(queryFields);
         }
     }
 
@@ -71,7 +72,7 @@ public class MongoQueryBuffer extends BaseQueryBean {
      */
     public void addQueryFieldItem(QueryField fieldBean) {
         if (fieldBean != null) {
-            this.queryFieldList.add(fieldBean);
+            this.queryFieldArr.add(fieldBean);
         }
     }
 

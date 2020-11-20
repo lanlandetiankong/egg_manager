@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.exchange.db.mongo.mo.http.ua;
 
 import cn.hutool.http.useragent.*;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -53,7 +54,7 @@ public class EggUserAgentMgo implements Serializable {
     /**
      *
      */
-    @Field(value = "version")
+    @Field(value = FieldConst.COL_VERSION)
     private String version;
 
     public EggUserAgentMgo() {

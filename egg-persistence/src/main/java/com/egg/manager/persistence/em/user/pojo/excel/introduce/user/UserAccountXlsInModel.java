@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.egg.manager.persistence.em.user.pojo.excel.MyBaseXls;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class UserAccountXlsInModel extends MyBaseXls {
     @ExcelIgnore
     private String fid;

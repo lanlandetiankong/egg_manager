@@ -6,15 +6,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.Constant;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
-import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.commons.base.helper.ErrorActionEnum;
 import com.egg.manager.persistence.commons.base.pagination.ISortAble;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -65,12 +61,6 @@ public class BaseController {
         }
     }
 
-
-
-    public void dealResultPutPage(WebResult result, MongoQueryPageBean pageBean) {
-        result.putResultList(pageBean.getContent());
-        result.putCount(pageBean.getTotal());
-    }
 
     /**
      * 解析 搜索条件 map
@@ -127,7 +117,7 @@ public class BaseController {
         if (StringUtils.isNotBlank(paginationJson)) {
             vpage = JSONObject.parseObject(paginationJson, AntdvPage.class);
         } else {
-            vpage = AntdvPage.gainDefaultPaginationBean(clazz);
+            vpage = AntdvPage.gainDefault(clazz);
         }
         return vpage;
     }

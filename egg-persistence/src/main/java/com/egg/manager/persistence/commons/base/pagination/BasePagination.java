@@ -7,6 +7,6 @@ import java.io.Serializable;
  * @description
  * @date 2020/10/20
  */
-public class IBasePagination implements Serializable {
+public class BasePagination implements Serializable {
 
 }

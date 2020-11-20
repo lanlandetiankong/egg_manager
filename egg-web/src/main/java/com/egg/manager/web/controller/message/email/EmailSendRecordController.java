@@ -71,7 +71,7 @@ public class EmailSendRecordController extends BaseController {
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-        dealResultPutPage(result, pageBean);
+        result.putPage(pageBean);
         return result;
     }
 

@@ -4,6 +4,7 @@ import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import com.egg.manager.persistence.exchange.bean.webvo.verification.WebVoBaseVerifyO;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
  * @date 2020/10/20
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class LoginAccountVerifyO extends WebVoBaseVerifyO<LoginAccountVo> {
     /**
      * 账号

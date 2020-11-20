@@ -5,6 +5,7 @@ import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 
@@ -14,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  *@create: 2020-10-21 14:59
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
     /**
      * 登录的用户id

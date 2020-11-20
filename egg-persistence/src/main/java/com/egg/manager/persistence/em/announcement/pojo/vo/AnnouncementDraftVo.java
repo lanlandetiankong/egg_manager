@@ -3,6 +3,7 @@ package com.egg.manager.persistence.em.announcement.pojo.vo;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class AnnouncementDraftVo extends MyBaseMysqlVo {
 
     /**

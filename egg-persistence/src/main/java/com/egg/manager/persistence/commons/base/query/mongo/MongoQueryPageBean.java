@@ -2,6 +2,7 @@ package com.egg.manager.persistence.commons.base.query.mongo;
 
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class MongoQueryPageBean<T> extends BaseQueryBean {
     /**
      * 当前页

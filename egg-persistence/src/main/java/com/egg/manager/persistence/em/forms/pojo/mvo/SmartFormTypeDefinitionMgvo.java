@@ -1,10 +1,7 @@
 package com.egg.manager.persistence.em.forms.pojo.mvo;
 
 import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author zhoucj
@@ -15,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class SmartFormTypeDefinitionMgvo extends BaseModelMgvo<String> {
     /**
      * 类型名

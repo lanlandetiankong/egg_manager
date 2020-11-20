@@ -4,6 +4,8 @@ import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -11,7 +13,9 @@ import org.mapstruct.factory.Mappers;
  * @description
  * @date 2020/10/20
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR
+)
 public interface UserAccountTokenMapstruct {
     UserAccountTokenMapstruct INSTANCE = Mappers.getMapper(UserAccountTokenMapstruct.class);
 
@@ -20,8 +24,13 @@ public interface UserAccountTokenMapstruct {
      * @param userAccountEntity
      * @return
      */
-    @Mapping(source = "fid", target = "userAccountId")
-    UserAccountToken userAccount_CopyTo_UserAccountToken(UserAccountEntity userAccountEntity);
+    @Mappings({
+            @Mapping(target = "userAccountId", source = "fid"),
+            @Mapping(target = "userBelongTenantId", ignore = true),
+            @Mapping(target = "token", ignore = true),
+            @Mapping(target = "authorization", ignore = true)
+    })
+    UserAccountToken translateEntityToToken(UserAccountEntity userAccountEntity);
 
 
 }

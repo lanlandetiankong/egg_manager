@@ -60,6 +60,7 @@ public class EmailSendRecordMgo extends MyBaseModelMgo<String> {
     /**
      * 是否发送成功？
      */
+    @Builder.Default
     private Boolean successFlag = true;
 
 

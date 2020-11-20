@@ -1,8 +1,9 @@
 package com.egg.manager.persistence.commons.base.pagination.antdv;
 
-import com.egg.manager.persistence.commons.base.pagination.IBasePagination;
+import com.egg.manager.persistence.commons.base.pagination.BasePagination;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author zhoucj
@@ -11,7 +12,8 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class AntdvPage<T> extends IBasePagination {
+@EqualsAndHashCode(callSuper=true)
+public class AntdvPage<T> extends BasePagination {
     /**
      * 当前页数
      */
@@ -38,7 +40,7 @@ public class AntdvPage<T> extends IBasePagination {
         this.total = total;
     }
 
-    public static AntdvPage gainLimitPaginationBean(Integer pageSize) {
+    public static AntdvPage gainPageWithSize(Integer pageSize) {
         return new AntdvPage(1, pageSize, 0L);
     }
 
@@ -46,7 +48,7 @@ public class AntdvPage<T> extends IBasePagination {
      * 默认分页
      * @return
      */
-    public static <T> AntdvPage<T> gainDefaultPaginationBean(Class<T> clazz) {
+    public static <T> AntdvPage<T> gainDefault(Class<T> clazz) {
         return new AntdvPage<T>(1, 10, 0L);
     }
 }

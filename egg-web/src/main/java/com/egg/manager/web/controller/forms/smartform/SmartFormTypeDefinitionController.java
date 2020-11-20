@@ -70,7 +70,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-        dealResultPutPage(result, pageBean);
+        result.putPage(pageBean);
         return result;
     }
 

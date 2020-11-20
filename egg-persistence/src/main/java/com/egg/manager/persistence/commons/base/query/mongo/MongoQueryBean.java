@@ -9,6 +9,7 @@ import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Sets;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,7 @@ import java.util.regex.Pattern;
  * @date 2020/10/20
  */
 @Slf4j
+@EqualsAndHashCode(callSuper=true)
 public class MongoQueryBean<T> extends BaseQueryBean {
     /**
      * 条件集合

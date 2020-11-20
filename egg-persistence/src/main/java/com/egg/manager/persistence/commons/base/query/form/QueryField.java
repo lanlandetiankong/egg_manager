@@ -3,10 +3,7 @@ package com.egg.manager.persistence.commons.base.query.form;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class QueryField extends BaseQueryBean {
     /**
      * 字段名
@@ -52,7 +50,7 @@ public class QueryField extends BaseQueryBean {
      * @param fieldEnum
      * @return
      */
-    public static QueryField handle_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum fieldEnum) {
+    public static QueryField handleInitFromEnum(MyMongoCommonQueryFieldEnum fieldEnum) {
         if (fieldEnum == null) {
             return null;
         }
@@ -64,12 +62,12 @@ public class QueryField extends BaseQueryBean {
                 .build();
     }
 
-    public static List<QueryField> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(MyMongoCommonQueryFieldEnum... fieldEnum) {
+    public static List<QueryField> handleBatchInitFromEnum(MyMongoCommonQueryFieldEnum... fieldEnum) {
         List list = new ArrayList<QueryField>();
         if (fieldEnum == null || fieldEnum.length == 0) {
             return list;
         }
-        return handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(Lists.newArrayList(fieldEnum));
+        return handleBatchInitFromEnum(Lists.newArrayList(fieldEnum));
     }
 
     /**
@@ -77,13 +75,13 @@ public class QueryField extends BaseQueryBean {
      * @param queryFieldEnumList
      * @return
      */
-    public static List<QueryField> handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(List<MyMongoCommonQueryFieldEnum> queryFieldEnumList) {
+    public static List<QueryField> handleBatchInitFromEnum(List<MyMongoCommonQueryFieldEnum> queryFieldEnumList) {
         List list = new ArrayList<QueryField>();
         if (CollectionUtils.isEmpty(queryFieldEnumList)) {
             return list;
         }
         for (MyMongoCommonQueryFieldEnum queryFieldEnum : queryFieldEnumList) {
-            list.add(handle_MyMongoCommonQueryFieldEnum_CopyTo_Self(queryFieldEnum));
+            list.add(handleInitFromEnum(queryFieldEnum));
         }
         return list;
     }

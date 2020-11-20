@@ -3,6 +3,7 @@ package com.egg.manager.persistence.em.user.pojo.vo;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class RoleMenuVo extends MyBaseMysqlVo {
 
     /**

@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @date 2020/10/20
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Document(collection = "em_pc_web_operation_log")
+@EqualsAndHashCode(callSuper=true)
 public class PcWebOperationLogMgo extends MyBaseWebLogMgo<String> {
 
     private static final long serialVersionUID = 1L;

@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper=true)
 @Document(collection = "smart_form_field_definition")
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")

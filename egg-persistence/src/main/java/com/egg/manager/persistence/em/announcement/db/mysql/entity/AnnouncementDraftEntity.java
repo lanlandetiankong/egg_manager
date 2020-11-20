@@ -2,10 +2,7 @@ package com.egg.manager.persistence.em.announcement.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 @TableName("em_announcement_draft")
 public class AnnouncementDraftEntity extends Model<AnnouncementDraftEntity> {
 

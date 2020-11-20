@@ -15,10 +15,10 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@Builder
+@EqualsAndHashCode(callSuper=true)
 public class DefineMenuDto extends MyBaseMysqlDto {
     /**
      * 上级id

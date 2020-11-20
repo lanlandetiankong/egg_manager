@@ -6,6 +6,7 @@ import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.google.common.collect.Sets;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,6 +18,7 @@ import java.util.*;
  * @date 2020/10/20
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class MongoQueryBuffer extends BaseQueryBean {
 
     /**
@@ -58,7 +60,7 @@ public class MongoQueryBuffer extends BaseQueryBean {
      */
     public MongoQueryBuffer(MyMongoCommonQueryFieldEnum... enums) {
         if (enums != null && enums.length > 0) {
-            List<QueryField> queryFields = QueryField.handleBatch_MyMongoCommonQueryFieldEnum_CopyTo_Self(enums);
+            List<QueryField> queryFields = QueryField.handleBatchInitFromEnum(enums);
             this.queryFieldList.addAll(queryFields);
         }
     }

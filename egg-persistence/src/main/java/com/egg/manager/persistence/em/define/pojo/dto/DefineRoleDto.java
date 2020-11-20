@@ -2,10 +2,7 @@ package com.egg.manager.persistence.em.define.pojo.dto;
 
 
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author zhoucj
@@ -16,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class DefineRoleDto extends MyBaseMysqlDto {
     /**
      * 名称

@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,6 +19,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 @TableName("em_user_account")
 public class UserAccountEntity extends Model<UserAccountEntity> {
     @TableId(type=IdType.ASSIGN_ID,value = "fid")

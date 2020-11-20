@@ -2,6 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import cn.hutool.http.HttpStatus;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
 
 
 /**
@@ -57,6 +58,12 @@ public class WebResult extends AbstractResult{
     public WebResult toError(String msg){
         this.putHasError(true);
         this.putErrorMsg(msg);
+        return this ;
+    }
+
+    public WebResult putPage(MongoQueryPageBean pageBean){
+        this.putResultList(pageBean.getContent());
+        this.putCount(pageBean.getTotal());
         return this ;
     }
 

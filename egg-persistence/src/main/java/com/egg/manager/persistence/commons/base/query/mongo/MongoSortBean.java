@@ -1,7 +1,8 @@
 package com.egg.manager.persistence.commons.base.query.mongo;
 
-import com.egg.manager.persistence.commons.base.pagination.IBasePagination;
+import com.egg.manager.persistence.commons.base.pagination.BasePagination;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author zhoucj
@@ -9,7 +10,8 @@ import lombok.Data;
  * @date 2020/10/20
  */
 @Data
-public class MongoSortBean extends IBasePagination {
+@EqualsAndHashCode(callSuper=true)
+public class MongoSortBean extends BasePagination {
     /**
      * 字段名
      */

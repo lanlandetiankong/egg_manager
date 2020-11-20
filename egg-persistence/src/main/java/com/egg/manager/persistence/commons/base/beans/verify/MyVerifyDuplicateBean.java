@@ -17,7 +17,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MyVerifyDuplicateBean<T> implements Serializable {
     /**
      * 是否成功

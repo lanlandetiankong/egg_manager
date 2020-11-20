@@ -1,10 +1,7 @@
 package com.egg.manager.persistence.em.announcement.pojo.dto;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class AnnouncementDto extends MyBaseMysqlDto {
 
     /**

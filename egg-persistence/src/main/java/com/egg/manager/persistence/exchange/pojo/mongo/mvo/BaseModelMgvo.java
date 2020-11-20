@@ -1,9 +1,8 @@
 package com.egg.manager.persistence.exchange.pojo.mongo.mvo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -13,6 +12,7 @@ import java.util.Date;
  * @date 2020/10/20
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class BaseModelMgvo<K> extends BaseMgvo {
     private K fid;
 

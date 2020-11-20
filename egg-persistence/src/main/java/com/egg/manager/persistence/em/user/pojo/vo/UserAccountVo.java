@@ -9,6 +9,7 @@ import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class UserAccountVo extends MyBaseMysqlVo {
     /**
      * 用户名

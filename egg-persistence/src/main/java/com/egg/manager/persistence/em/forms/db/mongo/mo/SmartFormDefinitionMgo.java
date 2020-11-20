@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper=true)
 @Document(collection = "smart_form_definition")
 @CompoundIndexes({
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")

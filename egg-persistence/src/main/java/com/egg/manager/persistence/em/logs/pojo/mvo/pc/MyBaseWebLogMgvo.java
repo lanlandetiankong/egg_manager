@@ -5,6 +5,7 @@ import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *@description
@@ -12,6 +13,7 @@ import lombok.Data;
  *@create: 2020-10-21 14:59
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
     /**
      * 登录的用户id

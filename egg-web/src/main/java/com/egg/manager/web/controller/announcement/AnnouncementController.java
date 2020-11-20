@@ -98,7 +98,7 @@ public class AnnouncementController extends BaseController {
             queryFieldList.add(QueryField.gainEq("create_user_id", loginUserInfo.getFid()));
         }
         //取得 分页配置
-        AntdvPage vpage = AntdvPage.gainLimitPaginationBean(limitSize);
+        AntdvPage vpage = AntdvPage.gainPageWithSize(limitSize);
         //取得 排序配置
         AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
         //按创建时间 倒序

@@ -8,6 +8,7 @@ import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 @Data
 @Builder
+@EqualsAndHashCode(callSuper=true)
 public class EmailSendRecordMgvo extends BaseModelMgvo<Long> {
 
     /**

@@ -59,7 +59,7 @@ public class PcWebLoginLogController extends BaseController {
                 .getRefreshedSelf();
         mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
         MongoQueryPageBean<PcWebLoginLogMgo> pageBean = pcWebLoginLogMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
-        dealResultPutPage(result, pageBean);
+        result.putPage(pageBean);
         return result;
     }
 }

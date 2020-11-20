@@ -5,6 +5,7 @@ import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @Date: 2020/11/11 14:11
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class CurrentLoginUserInfo extends UserAccountEntity {
 
     private List<DefineGroupEntity> belongGroupList ;

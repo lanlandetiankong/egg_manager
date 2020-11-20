@@ -8,10 +8,7 @@ import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author zhoucj
@@ -22,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class UserAccountDto extends MyBaseMysqlDto {
     /**
      * 用户名

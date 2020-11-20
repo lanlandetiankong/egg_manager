@@ -5,10 +5,7 @@ import com.egg.manager.persistence.commons.base.beans.tree.MyBaseTree;
 import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.google.common.collect.Maps;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +19,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class CommonMenuTree extends MyBaseTree {
     /**
      * 菜单id

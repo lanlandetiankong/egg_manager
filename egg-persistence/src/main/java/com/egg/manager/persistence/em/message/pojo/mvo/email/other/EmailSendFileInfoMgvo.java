@@ -1,10 +1,7 @@
 package com.egg.manager.persistence.em.message.pojo.mvo.email.other;
 
 import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseMgvo;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 /**
@@ -16,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper=true)
 public class EmailSendFileInfoMgvo extends BaseMgvo {
 
     /**

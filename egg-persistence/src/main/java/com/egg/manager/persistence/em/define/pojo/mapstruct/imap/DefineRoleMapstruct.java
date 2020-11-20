@@ -49,6 +49,7 @@ public interface DefineRoleMapstruct extends MyBaseMysqlMapstruct<DefineRoleEnti
      * @return
      */
     @Mappings({
+            @Mapping(target = "typeStr", expression = "java(handleDefineRoleTypeGetLabel(dto.getType()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })

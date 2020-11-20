@@ -53,6 +53,8 @@ public interface DefinePermissionMapstruct extends MyBaseMysqlMapstruct<DefinePe
      * @return
      */
     @Mappings({
+            @Mapping(target = "ensureStr", expression = "java(handleSwitchStateGetName(dto.getEnsure()))"),
+            @Mapping(target = "typeStr", expression = "java(handleDefinePermissionTypeGetLabel(dto.getType()))"),
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })

@@ -17,10 +17,10 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @TableName("em_define_menu")
 public class DefineMenuEntity extends Model<DefineMenuEntity> {
-    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    @TableId(type = IdType.ASSIGN_ID, value = "fid")
     private String fid;
     /**
      * 上级id

@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class LoginAccountVo extends MyBaseWebVo {
     /**
      * 账号

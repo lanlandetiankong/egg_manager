@@ -5,8 +5,8 @@ import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlCons
 import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
+import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import org.apache.ibatis.annotations.Param;
 

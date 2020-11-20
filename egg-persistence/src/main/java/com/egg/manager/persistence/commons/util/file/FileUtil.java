@@ -17,6 +17,7 @@ import javax.imageio.stream.ImageInputStream;
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -80,7 +81,7 @@ public class FileUtil {
             }
 
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
             return false;
         } finally {
             try {
@@ -88,7 +89,7 @@ public class FileUtil {
                     zipFile.close();
                 }
             } catch (IOException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
         }
         return false;
@@ -146,10 +147,10 @@ public class FileUtil {
                     }
                 }
             } catch (FileNotFoundException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
                 throw new RuntimeException(e);
             } catch (IOException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
                 throw new RuntimeException(e);
             } finally {
                 //关闭流
@@ -164,7 +165,7 @@ public class FileUtil {
                         bufferedOutputStream.close();
                     }
                 } catch (IOException e) {
-                    log.error("执行异常--->",e);;
+                    log.error("执行异常--->", e);
                 }
             }
         }
@@ -212,14 +213,14 @@ public class FileUtil {
                 os.write(bs, 0, len);
             }
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
         } finally {
             // 完毕，关闭所有链接
             try {
                 os.close();
                 inputStream.close();
             } catch (IOException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
         }
     }
@@ -397,7 +398,7 @@ public class FileUtil {
                     continue;
                 } else {
                     // 读写文件
-                    is = zipFile.getInputStream((ZipEntry) zipEnt);
+                    is = zipFile.getInputStream(zipEnt);
                     bis = new BufferedInputStream(is);
                     gbkPath = zipEnt.getName();
                     strtemp = strPath + File.separator + gbkPath;
@@ -426,7 +427,7 @@ public class FileUtil {
             zipFile.close();
             return true;
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
             return false;
         } finally {
             try {
@@ -437,7 +438,7 @@ public class FileUtil {
                     bis.close();
                 }
             } catch (IOException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
         }
     }
@@ -773,11 +774,7 @@ public class FileUtil {
             return false;
         }
         // 删除当前目录
-        if (dirFile.delete()) {
-            return true;
-        } else {
-            return false;
-        }
+        return dirFile.delete();
     }
 
     /**
@@ -814,14 +811,14 @@ public class FileUtil {
                 out.write(buf, 0, len);
             }
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
         } finally {
             try {
                 if (in != null) {
                     in.close();
                 }
             } catch (Exception e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             } finally {
                 try {
                     if (out != null) {
@@ -844,7 +841,7 @@ public class FileUtil {
         int pos = 0;
         pos = filePathName.lastIndexOf('.');
         if (pos != -1) {
-            return filePathName.substring(pos + 1, filePathName.length());
+            return filePathName.substring(pos + 1);
         } else {
             return "";
         }
@@ -896,7 +893,7 @@ public class FileUtil {
             is.close();
             flag = true;
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
         }
         return flag;
     }
@@ -924,14 +921,14 @@ public class FileUtil {
             byte[] buf = new byte[1024];
             int len = -1;
             while ((len = in.read(buf)) > 0) {
-                returnStr += new String(buf, "utf-8");
+                returnStr += new String(buf, StandardCharsets.UTF_8);
                 buf = new byte[1024];
             }
         } catch (FileNotFoundException e) {
-            log.error("filePath:"+file.getPath(), e);
+            log.error("filePath:" + file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            log.error("filePath:"+file.getPath(), e);
+            log.error("filePath:" + file.getPath(), e);
             throw e;
         } finally {
             try {
@@ -939,7 +936,7 @@ public class FileUtil {
                     in.close();
                 }
             } catch (Exception e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
 
         }
@@ -962,12 +959,12 @@ public class FileUtil {
 
             out = new FileOutputStream(file);
 
-            out.write(content.getBytes("utf-8"));
+            out.write(content.getBytes(StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
-            log.error("filePath:"+file.getPath(), e);
+            log.error("filePath:" + file.getPath(), e);
             throw e;
         } catch (IOException e) {
-            log.error("filePath:"+file.getPath(), e);
+            log.error("filePath:" + file.getPath(), e);
             throw e;
         } finally {
             try {
@@ -975,7 +972,7 @@ public class FileUtil {
                     out.close();
                 }
             } catch (Exception e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
 
         }

@@ -97,11 +97,11 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
 
     /**
      * 批量伪删除[文档]
-     * @param ids   要伪删除的文档ids
-     * @param user  用户
+     * @param ids  要伪删除的文档ids
+     * @param user 用户
      * @return
      */
-    <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids,U user);
+    <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids, U user);
 
 
     /**

@@ -60,24 +60,24 @@ public class EggUserAgentMgo implements Serializable {
     }
 
     public EggUserAgentMgo(UserAgent userAgent, String reqUserAgent) {
-        if(userAgent == null){
-            return ;
+        if (userAgent == null) {
+            return;
         }
         OS os = userAgent.getOs();
-        if(os != null){
+        if (os != null) {
             this.osName = os.getName();
         }
         Engine engine = userAgent.getEngine();
-        if(engine != null){
+        if (engine != null) {
             this.engineName = engine.getName();
         }
         this.engineVersion = userAgent.getEngineVersion();
         Platform platform = userAgent.getPlatform();
-        if(platform != null){
+        if (platform != null) {
             this.platformName = platform.getName();
         }
         Browser browser = userAgent.getBrowser();
-        if(browser != null){
+        if (browser != null) {
             this.browserVersion = browser.getVersion(reqUserAgent);
             this.browserName = browser.getName();
             this.browserIsMobile = browser.isMobile();

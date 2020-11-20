@@ -25,7 +25,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @return JSONObject
      */
-    JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint,HttpServletRequest request);
+    JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint, HttpServletRequest request);
 
     /**
      * 设置一些值到 PcWebQueryLogMgo
@@ -41,7 +41,7 @@ public interface ControllerAspectService {
      * @param joinPoint
      * @param request
      */
-    void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request,PcWebOperationLog operationLogAnno);
+    void dealSetValToOperationLog(PcWebOperationLogMgo pcWebOperationLogMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebOperationLog operationLogAnno);
 
 
     /**

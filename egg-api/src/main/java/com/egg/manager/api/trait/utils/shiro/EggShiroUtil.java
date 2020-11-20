@@ -8,8 +8,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 /**
- * @description  shiro 工具类
  * @author zhoucj
+ * @description shiro 工具类
  * @date 2020/10/27
  */
 public class EggShiroUtil {
@@ -28,7 +28,7 @@ public class EggShiroUtil {
      */
     public static UserAccountEntity gainCurrentUser(boolean isRequired) {
         UserAccountEntity user = (UserAccountEntity) SecurityUtils.getSubject().getPrincipal();
-        if(user == null && isRequired){
+        if (user == null && isRequired) {
             throw new MyAuthenticationExpiredException();
         }
         return user;
@@ -41,10 +41,10 @@ public class EggShiroUtil {
      */
     public static String gainCurrentUserId(boolean isRequired) {
         UserAccountEntity user = gainCurrentUser(isRequired);
-        if(user == null && isRequired){
+        if (user == null && isRequired) {
             throw new MyAuthenticationExpiredException();
         }
-        if(user.getFid() != null && isRequired){
+        if (user.getFid() != null && isRequired) {
             throw new MyAuthenticationExpiredException();
         }
         return user.getFid();
@@ -52,30 +52,28 @@ public class EggShiroUtil {
 
     /**
      * 验证当前用户是否属于该角色？
-     *
      * @param roleName 角色名
      * @return 属于该角色：true，否则false
      */
     public static boolean hasRole(String roleName) {
         Subject subject = getSubject();
-        if(subject == null){
-            return false ;
+        if (subject == null) {
+            return false;
         }
-        if(StringUtils.isBlank(roleName)){
-            return false ;
+        if (StringUtils.isBlank(roleName)) {
+            return false;
         }
         return subject.hasRole(roleName);
     }
 
     /**
      * 验证当前用户是否属于以下所有角色。
-     *
      * @param roleNames 角色列表
      * @return 属于:true,否则false
      */
-    public static boolean hasAllRoles(String ... roleNames) {
-        if(roleNames == null || roleNames.length == 0){
-            return false ;
+    public static boolean hasAllRoles(String... roleNames) {
+        if (roleNames == null || roleNames.length == 0) {
+            return false;
         }
         boolean hasAllRole = getSubject().hasAllRoles(Lists.newArrayList(roleNames));
         return hasAllRole;
@@ -83,17 +81,16 @@ public class EggShiroUtil {
 
     /**
      * 验证当前用户是否拥有指定权限
-     *
      * @param permission 权限名
      * @return 拥有权限：true，否则false
      */
     public static boolean hasPermission(String permission) {
         Subject subject = getSubject();
-        if(subject == null){
-            return false ;
+        if (subject == null) {
+            return false;
         }
-        if(StringUtils.isBlank(permission)){
-            return false ;
+        if (StringUtils.isBlank(permission)) {
+            return false;
         }
         return subject.isPermitted(permission);
     }
@@ -101,17 +98,16 @@ public class EggShiroUtil {
 
     /**
      * 验证当前用户是否拥有所有指定权限
-     *
      * @param permissions 权限名 数组
      * @return 拥有权限：true，否则false
      */
-    public static boolean hasPermission(String ... permissions) {
+    public static boolean hasPermission(String... permissions) {
         Subject subject = getSubject();
-        if(subject == null){
-            return false ;
+        if (subject == null) {
+            return false;
         }
-        if(permissions == null || permissions.length == 0){
-            return false ;
+        if (permissions == null || permissions.length == 0) {
+            return false;
         }
         return subject.isPermittedAll(permissions);
     }

@@ -19,7 +19,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class UserAccountDto extends MyBaseMysqlDto {
     /**
      * 用户名

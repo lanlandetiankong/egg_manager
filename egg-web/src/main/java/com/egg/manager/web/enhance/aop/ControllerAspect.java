@@ -15,7 +15,6 @@ import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.web.enhance.wservices.wservice.aspect.web.ControllerAspectService;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,34 +62,34 @@ public class ControllerAspect {
     @Around(value = "aspect()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         //方法返回值
-        Object result = null ;
-        boolean defaultFlag = true ;
+        Object result = null;
+        boolean defaultFlag = true;
         //计时器
         StopWatch watch = new StopWatch();
         watch.start();
-        if(defaultFlag){
+        if (defaultFlag) {
             //调用目标方法，如果没调用这个则表示拦截实际的方法调用。
             result = joinPoint.proceed();
-        }   else {
-            return null ;
+        } else {
+            return null;
         }
         watch.stop();
-        boolean printWatchFlag = false ;
+        boolean printWatchFlag = false;
         //通知类型
-        final String aspectNotifyType = AspectNotifyTypeEnum.Around.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.Around.getValue();
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(PcWebQueryLog.class)) {
             PcWebQueryLog queryLogAnno = method.getAnnotation(PcWebQueryLog.class);
             //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
-            printWatchFlag = ifNullGetOther(printWatchFlag,queryLogAnno.printWatchFlag());
+            printWatchFlag = ifNullGetOther(printWatchFlag, queryLogAnno.printWatchFlag());
             if (queryLogAnno.flag() == true) {
                 PcWebQueryLogMgo pcWebQueryLogMgo = new PcWebQueryLogMgo();
                 //当前log的通知方式是 Before
                 pcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request, queryLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -114,13 +113,13 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebOperationLog.class)) {
             PcWebOperationLog operationLogAnno = method.getAnnotation(PcWebOperationLog.class);
             //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
-            printWatchFlag = ifNullGetOther(printWatchFlag,operationLogAnno.printWatchFlag());
+            printWatchFlag = ifNullGetOther(printWatchFlag, operationLogAnno.printWatchFlag());
             if (operationLogAnno.flag() == true) {
                 PcWebOperationLogMgo pcWebOperationLogMgo = new PcWebOperationLogMgo();
                 //当前log的通知方式是 Before
                 pcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request, operationLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -143,13 +142,13 @@ public class ControllerAspect {
         if (method.isAnnotationPresent(PcWebLoginLog.class)) {
             PcWebLoginLog loginLogAnno = method.getAnnotation(PcWebLoginLog.class);
             //如果为false才接受其他注解的值，只要其中一个@Log为true都可以
-            printWatchFlag = ifNullGetOther(printWatchFlag,loginLogAnno.printWatchFlag());
+            printWatchFlag = ifNullGetOther(printWatchFlag, loginLogAnno.printWatchFlag());
             if (loginLogAnno.flag() == true) {
                 PcWebLoginLogMgo pcWebLoginLogMgo = new PcWebLoginLogMgo();
                 //当前log的通知方式是 Before
                 pcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request, loginLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -169,17 +168,17 @@ public class ControllerAspect {
             }
         }
         //上方设置该接口可以打印日志计时器记录时才打印。
-        if(printWatchFlag){
+        if (printWatchFlag) {
             log.info(watch.prettyPrint());
         }
-        return result ;
+        return result;
     }
 
 
     @AfterThrowing(value = "aspect()", throwing = "exception")
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
         //通知类型
-        final String aspectNotifyType = AspectNotifyTypeEnum.AfterThrowing.getValue() ;
+        final String aspectNotifyType = AspectNotifyTypeEnum.AfterThrowing.getValue();
         Method method = controllerAspectService.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
@@ -190,7 +189,7 @@ public class ControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 pcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request,queryLogAnno);
+                controllerAspectService.dealSetValToQueryLog(pcWebQueryLogMgo, joinPoint, request, queryLogAnno);
                 //请求失败
                 pcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -207,7 +206,7 @@ public class ControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 pcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request,operationLogAnno);
+                controllerAspectService.dealSetValToOperationLog(pcWebOperationLogMgo, joinPoint, request, operationLogAnno);
                 //请求失败
                 pcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -224,7 +223,7 @@ public class ControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 pcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request,loginLogAnno);
+                controllerAspectService.dealSetValToLoginLog(pcWebLoginLogMgo, joinPoint, request, loginLogAnno);
                 //请求失败
                 pcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -255,7 +254,7 @@ public class ControllerAspect {
     }
 
 
-    private boolean ifNullGetOther(boolean value,boolean other){
+    private boolean ifNullGetOther(boolean value, boolean other) {
         return value ? value : other;
     }
 

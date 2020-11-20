@@ -53,8 +53,6 @@ public class EggClazzInfoLogMgo {
     private String aspectKind;
 
 
-
-
     /**
      * 操作
      */
@@ -66,7 +64,6 @@ public class EggClazzInfoLogMgo {
      */
     @Field(value = "logDescription")
     private String logDescription;
-
 
 
 }

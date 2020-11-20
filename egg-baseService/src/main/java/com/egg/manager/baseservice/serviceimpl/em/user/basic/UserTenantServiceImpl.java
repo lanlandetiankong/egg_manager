@@ -21,5 +21,4 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserTenantServiceImpl extends MyBaseMysqlServiceImpl<UserTenantMapper, UserTenantEntity, UserTenantVo> implements UserTenantService {
 
 
-
 }

@@ -82,7 +82,4 @@ public class UserRoleServiceImpl extends MyBaseMysqlServiceImpl<UserRoleMapper, 
     }
 
 
-
-
-
 }

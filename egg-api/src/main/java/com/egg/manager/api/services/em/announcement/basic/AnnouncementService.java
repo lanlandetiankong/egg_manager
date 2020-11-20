@@ -25,7 +25,7 @@ public interface AnnouncementService extends IService<AnnouncementEntity>, MyBas
 
     /**
      * 新增公告
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param announcementVo
      * @return
      * @throws Exception
@@ -34,7 +34,7 @@ public interface AnnouncementService extends IService<AnnouncementEntity>, MyBas
 
     /**
      * 公告草稿发布
-     * @param loginUserInfo           当前登录用户
+     * @param loginUserInfo       当前登录用户
      * @param announcementDraftVo
      * @return
      * @throws Exception
@@ -43,7 +43,7 @@ public interface AnnouncementService extends IService<AnnouncementEntity>, MyBas
 
     /**
      * 分页查询 公告 列表
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -56,7 +56,7 @@ public interface AnnouncementService extends IService<AnnouncementEntity>, MyBas
     /**
      * 分页查询 公告 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage

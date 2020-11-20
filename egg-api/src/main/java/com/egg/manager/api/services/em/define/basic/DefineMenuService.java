@@ -80,7 +80,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
 
     /**
      * 分页查询 菜单定义 列表
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -93,7 +93,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
     /**
      * 分页查询 菜单定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -105,7 +105,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
 
     /**
      * 菜单定义-新增
-     * @param loginUserInfo    当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineMenuVo
      * @return
      * @throws Exception
@@ -114,7 +114,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
 
     /**
      * 菜单定义-更新
-     * @param loginUserInfo    当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineMenuVo
      * @return
      * @throws Exception
@@ -123,7 +123,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
 
     /**
      * 验证 数据库 中的唯一冲突
-     * @param loginUserInfo         当前登录用户
+     * @param loginUserInfo     当前登录用户
      * @param defineMenuVo
      * @param defineMenuWrapper
      * @return

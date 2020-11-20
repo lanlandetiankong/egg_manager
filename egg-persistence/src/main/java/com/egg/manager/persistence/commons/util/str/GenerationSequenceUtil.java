@@ -93,7 +93,7 @@ public class GenerationSequenceUtil {
             // 进程号 --> 当前运行的 jvm 进程号的 hashcode 值
             int processIdentifier = createProcessIdentifier();
             String mp = Integer.toString(Math.abs((machineIdentifier + "" + processIdentifier).hashCode()));
-            MP = (mp.length() > MP_LEN) ? mp.substring(mp.length() - MP_LEN, mp.length()) : mp;
+            MP = (mp.length() > MP_LEN) ? mp.substring(mp.length() - MP_LEN) : mp;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -5,11 +5,11 @@ import com.egg.manager.persistence.commons.base.constant.aspect.AspectTypeConsta
 import java.lang.annotation.*;
 
 /**
+ * @author zhoucj
  * @description 登录 日志记录到数据库 注解
  * aop 对controller 切面 记录
  * 1、当action为空时，会改为取用@ApiOperation的value
  * 2、当description为空时，会改为取用@ApiOperation的notes
- * @author zhoucj
  * @date 2020/10/21
  */
 @Target({ElementType.METHOD})
@@ -40,14 +40,16 @@ public @interface PcWebLoginLog {
      * @return
      */
     boolean flag() default true;
+
     /**
      * 是否打印出 计时器日志
      * @return
      */
     boolean printWatchFlag() default false;
+
     /**
      * 操作类型
      * @return
      */
-    String type() default AspectTypeConstant.LOGIN_API ;
+    String type() default AspectTypeConstant.LOGIN_API;
 }

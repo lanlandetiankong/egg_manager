@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  * @date 2020/10/20
  */
 @Slf4j
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class MongoQueryBean<T> extends BaseQueryBean {
     /**
      * 条件集合

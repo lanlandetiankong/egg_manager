@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 阿里云OSS上传结果集
- *
  * @author jason
  */
 @Data

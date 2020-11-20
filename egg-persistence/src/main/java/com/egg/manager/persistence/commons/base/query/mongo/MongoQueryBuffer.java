@@ -18,7 +18,7 @@ import java.util.*;
  * @date 2020/10/20
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class MongoQueryBuffer extends BaseQueryBean {
 
     /**

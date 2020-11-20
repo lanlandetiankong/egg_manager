@@ -2,7 +2,6 @@ package com.egg.manager.persistence.em.user.pojo.bean;
 
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,12 +15,12 @@ import java.util.List;
  * @Date: 2020/11/11 14:11
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class CurrentLoginUserInfo extends UserAccountEntity {
 
-    private List<DefineGroupEntity> belongGroupList ;
+    private List<DefineGroupEntity> belongGroupList;
 
-    private List<DefineJobEntity> belongJobList ;
+    private List<DefineJobEntity> belongJobList;
 
     public static CurrentLoginUserInfo transferFromEntity(UserAccountEntity entity) {
         CurrentLoginUserInfo currentLoginUserInfo = new CurrentLoginUserInfo();
@@ -51,7 +50,6 @@ public class CurrentLoginUserInfo extends UserAccountEntity {
         //currentLoginUserInfo.setBelongTenant();
         return currentLoginUserInfo;
     }
-
 
 
 }

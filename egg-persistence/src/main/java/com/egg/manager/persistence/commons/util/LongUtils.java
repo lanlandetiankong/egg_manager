@@ -10,10 +10,10 @@ public class LongUtils {
 
 
     public static boolean isNotBlank(Long val) {
-        return val != null ;
+        return val != null;
     }
 
     public static boolean isBlank(Long val) {
-        return val == null ;
+        return val == null;
     }
 }

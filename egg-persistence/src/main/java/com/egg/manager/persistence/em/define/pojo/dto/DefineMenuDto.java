@@ -5,7 +5,6 @@ import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTy
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class DefineMenuDto extends MyBaseMysqlDto {
     /**
      * 上级id

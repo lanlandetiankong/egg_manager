@@ -5,7 +5,6 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserJobEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserJobMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.vo.UserJobVo;
 
 import java.util.List;

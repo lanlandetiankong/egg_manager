@@ -24,7 +24,7 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
 
     /**
      * 分页查询 职务定义 列表
-     * @param loginUserInfo              当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -37,7 +37,7 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
     /**
      * 分页查询 职务定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo              当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -49,7 +49,7 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
 
     /**
      * 职务账号-新增
-     * @param loginUserInfo   当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineJobVo
      * @return
      * @throws Exception
@@ -58,7 +58,7 @@ public interface DefineJobService extends IService<DefineJobEntity>, MyBaseMysql
 
     /**
      * 职务账号-更新
-     * @param loginUserInfo   当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineJobVo
      * @return
      * @throws Exception

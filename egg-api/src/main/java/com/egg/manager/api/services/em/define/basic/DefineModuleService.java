@@ -24,7 +24,7 @@ public interface DefineModuleService extends IService<DefineModuleEntity>, MyBas
 
     /**
      * 分页查询 模块
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -37,7 +37,7 @@ public interface DefineModuleService extends IService<DefineModuleEntity>, MyBas
     /**
      * 分页查询 模块 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -49,7 +49,7 @@ public interface DefineModuleService extends IService<DefineModuleEntity>, MyBas
 
     /**
      * 模块定义-新增
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param defineModuleVo
      * @return
      * @throws Exception
@@ -58,7 +58,7 @@ public interface DefineModuleService extends IService<DefineModuleEntity>, MyBas
 
     /**
      * 模块定义-更新
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param defineModuleVo
      * @return
      * @throws Exception

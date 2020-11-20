@@ -251,7 +251,7 @@ public class DateTimeUtil {
         try {
             return parseToDate(formatDateTimetoString(getSystemDate(), fmtstr));
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
             return getSystemDate();
         }
 
@@ -900,7 +900,7 @@ public class DateTimeUtil {
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);
-        long milliseconds = (long) Math.round(Math.abs(times) * qv);
+        long milliseconds = Math.round(Math.abs(times) * qv);
         if (times > 0) {
             for (; milliseconds > 0; milliseconds -= Integer.MAX_VALUE) {
                 if (milliseconds > Integer.MAX_VALUE) {
@@ -1286,7 +1286,7 @@ public class DateTimeUtil {
         try {
             date = DateTimeUtil.parseToDate(dateStr);
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
         }
 
         return date;
@@ -1492,12 +1492,12 @@ public class DateTimeUtil {
             // 时
             double hours = DateTimeUtil.getHoursOfTwoDate(currDate, date);
             if (hours < 24 && hours >= 1) {
-                timeStr = String.valueOf((int) hours) + "小时前";
+                timeStr = (int) hours + "小时前";
             } else {
                 // 分
                 double minutes = DateTimeUtil.getMinutesOfTwoDate(currDate, date);
                 if (minutes < 60 && minutes >= 1) {
-                    timeStr = String.valueOf((int) minutes) + "分钟前";
+                    timeStr = (int) minutes + "分钟前";
                 } else {
                     // 秒
                     double seconds = DateTimeUtil.getSecondsOfTwoDate(currDate, date);

@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class SmartFormRecordMgvo extends BaseModelMgvo<String> {
     /**
      * 表单定义

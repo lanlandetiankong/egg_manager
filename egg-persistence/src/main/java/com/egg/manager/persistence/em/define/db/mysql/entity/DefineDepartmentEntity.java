@@ -16,10 +16,10 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @TableName("em_define_department")
 public class DefineDepartmentEntity extends Model<DefineDepartmentEntity> {
-    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    @TableId(type = IdType.ASSIGN_ID, value = "fid")
     private String fid;
     /**
      * 名称

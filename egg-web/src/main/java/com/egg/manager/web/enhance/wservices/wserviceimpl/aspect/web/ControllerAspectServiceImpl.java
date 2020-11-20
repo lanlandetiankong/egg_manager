@@ -62,13 +62,13 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
      * @return JSONObject
      */
     @Override
-    public JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint,HttpServletRequest request) {
+    public JSONObject dealGetMethodArgsArrayFromJoinPoint(JoinPoint joinPoint, HttpServletRequest request) {
         JSONObject argJsonObj = new JSONObject();
         //先从request取得传递的参数
         Map<String, String[]> parameterMap = request.getParameterMap();
-        if(CollectionUtil.isNotEmpty(parameterMap)){
+        if (CollectionUtil.isNotEmpty(parameterMap)) {
             Set<String> strings = parameterMap.keySet();
-            for(String key : strings){
+            for (String key : strings) {
                 argJsonObj.put(key, parameterMap.get(key));
             }
         }
@@ -90,20 +90,20 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
 
     /**
      * 设置基本log的基本属性
-     * @param logMgo 要处理的类必须继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
+     * @param logMgo    要处理的类必须继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
      * @param joinPoint 切面
-     * @param request http请求
-     * @param <T>  继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo的类
+     * @param request   http请求
+     * @param <T>       继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo的类
      * @return logMgo
      */
-    protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo,JoinPoint joinPoint, HttpServletRequest request){
+    protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo, JoinPoint joinPoint, HttpServletRequest request) {
         try {
             EggClazzInfoLogMgo clazzInfoLog = new EggClazzInfoLogMgo();
             if (logMgo.getState() == null) {
                 logMgo.setState(BaseStateEnum.ENABLED.getValue());
             }
             //请求方法的参数
-            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint,request);
+            JSONObject argJsonObj = this.dealGetMethodArgsArrayFromJoinPoint(joinPoint, request);
             clazzInfoLog.setActionArgs(argJsonObj.toJSONString());
 
             Signature signature = joinPoint.getSignature();
@@ -127,24 +127,24 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             if (request != null) {
                 //获取UserAgent相关信息
                 String reqUserAgent = request.getHeader("User-Agent");
-                if(StringUtils.isNotBlank(reqUserAgent)){
-                    EggUserAgentMgo eggUserAgent = new EggUserAgentMgo(UserAgentUtil.parse(reqUserAgent),reqUserAgent);
+                if (StringUtils.isNotBlank(reqUserAgent)) {
+                    EggUserAgentMgo eggUserAgent = new EggUserAgentMgo(UserAgentUtil.parse(reqUserAgent), reqUserAgent);
                     logMgo.setUserAgent(eggUserAgent);
                 }
                 EggRequestInfo requestInfo = new EggRequestInfo();
                 //请求路径
-                if(HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())){
-                    String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString() ;
+                if (HttpMethodConstant.GET.equalsIgnoreCase(request.getMethod())) {
+                    String queryString = (StringUtils.isBlank(request.getQueryString())) ? "" : request.getQueryString();
                     requestInfo.setRequestUri(request.getRequestURI() + queryString);
                     requestInfo.setRequestUrl(request.getRequestURL().toString() + queryString);
-                }   else {
+                } else {
                     requestInfo.setRequestUri(request.getRequestURI());
                     requestInfo.setRequestUrl(request.getRequestURL().toString());
                 }
                 requestInfo.setReqMethod(request.getMethod());
                 //请求的sessionid
                 HttpSession session = request.getSession();
-                if(session != null){
+                if (session != null) {
                     requestInfo.setSessionId(session.getId());
                 }
                 //取得 请求头的token信息
@@ -158,7 +158,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     logMgo.setCreateUserId(userAccountId);
                     logMgo.setLastModifyerId(userAccountId);
                     //记录当前登录用户信息
-                    if(loginUserInfo != null){
+                    if (loginUserInfo != null) {
                         logMgo.setUserNickName(loginUserInfo.getNickName());
                     }
                 }
@@ -175,9 +175,9 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             logMgo.setCreateTime(now);
             logMgo.setLastModifiedDate(now);
         } catch (Exception e) {
-            log.error("Aop接口异常/Transfer:",e);
+            log.error("Aop接口异常/Transfer:", e);
         }
-        return logMgo ;
+        return logMgo;
     }
 
     /**
@@ -186,14 +186,14 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
      * @return JSONObject
      */
     @Override
-    public void dealSetValToQueryLog(PcWebQueryLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request,PcWebQueryLog queryLogAnno) {
+    public void dealSetValToQueryLog(PcWebQueryLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebQueryLog queryLogAnno) {
         try {
-            logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
-            if(queryLogAnno != null){
+            logMgo = this.dealSetValToBaseLogMgo(logMgo, joinPoint, request);
+            if (queryLogAnno != null) {
                 logMgo.setAnnotationOperationType(queryLogAnno.type());
             }
         } catch (Exception e) {
-            log.error("Aop接口异常/Transfer:",e);
+            log.error("Aop接口异常/Transfer:", e);
         }
     }
 
@@ -206,12 +206,12 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToOperationLog(PcWebOperationLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebOperationLog operationLogAnno) {
         try {
-            logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
-            if(operationLogAnno != null){
+            logMgo = this.dealSetValToBaseLogMgo(logMgo, joinPoint, request);
+            if (operationLogAnno != null) {
                 logMgo.setAnnotationOperationType(operationLogAnno.type());
             }
         } catch (Exception e) {
-            log.error("Aop接口异常/Transfer:",e);
+            log.error("Aop接口异常/Transfer:", e);
         }
     }
 
@@ -223,12 +223,12 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
     @Override
     public void dealSetValToLoginLog(PcWebLoginLogMgo logMgo, JoinPoint joinPoint, HttpServletRequest request, PcWebLoginLog loginLogAnno) {
         try {
-            logMgo = this.dealSetValToBaseLogMgo(logMgo,joinPoint,request);
-            if(loginLogAnno != null){
+            logMgo = this.dealSetValToBaseLogMgo(logMgo, joinPoint, request);
+            if (loginLogAnno != null) {
                 logMgo.setAnnotationOperationType(loginLogAnno.type());
             }
         } catch (Exception e) {
-            log.error("Aop接口异常/Transfer:",e);
+            log.error("Aop接口异常/Transfer:", e);
         }
     }
 
@@ -246,7 +246,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             Class[] parameterTypes = ((MethodSignature) signature).getMethod().getParameterTypes();
             method = signature.getDeclaringType().getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
-            log.error("Aop接口异常/方法未找到:",e);
+            log.error("Aop接口异常/方法未找到:", e);
         }
         return method;
     }
@@ -265,7 +265,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
             Class[] parameterTypes = ((MethodSignature) signature).getMethod().getParameterTypes();
             method = signature.getDeclaringType().getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
-            log.error("Aop接口异常/方法未找到:",e);
+            log.error("Aop接口异常/方法未找到:", e);
         }
         return method;
     }

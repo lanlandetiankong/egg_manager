@@ -16,11 +16,11 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @TableName("em_define_group")
 public class DefineGroupEntity extends Model<DefineGroupEntity> {
 
-    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    @TableId(type = IdType.ASSIGN_ID, value = "fid")
     private String fid;
     /**
      * 名称

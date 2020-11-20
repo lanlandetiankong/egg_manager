@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
- * @description: 雪花算法 配置
  * @author zhoucj
+ * @description: 雪花算法 配置
  * @date 2020/11/16
  */
 @Component
@@ -20,16 +20,19 @@ public class SnowflakeConfig {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private long workerId = 0;//为终端ID
     private long datacenterId = 1;//数据中心ID
-    private Snowflake snowflake = IdUtil.createSnowflake(workerId,datacenterId);
+    private Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
+
     @PostConstruct
-    public void init(){
+    public void init() {
         workerId = NetUtil.ipv4ToLong(NetUtil.getLocalhostStr());
-        log.debug("当前机器的workId:{}",workerId);
+        log.debug("当前机器的workId:{}", workerId);
     }
-    public synchronized long snowflakeId(){
+
+    public synchronized long snowflakeId() {
         return snowflake.nextId();
     }
-    public synchronized long snowflakeId(long workerId,long datacenterId){
+
+    public synchronized long snowflakeId(long workerId, long datacenterId) {
         Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
         return snowflake.nextId();
     }

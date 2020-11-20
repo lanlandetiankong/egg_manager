@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Data
 @Builder
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class EmailSendRecordMgvo extends BaseModelMgvo<Long> {
 
     /**

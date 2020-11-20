@@ -107,7 +107,6 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
         }
 
 
-
         @Transactional(rollbackFor=Exception.class)
         @Override
         public Integer dealDel${cfg.baseEntityName}(String delId,UserAccount loginUser)throws Exception{

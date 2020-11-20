@@ -33,7 +33,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
 
     /**
      * 分页查询 权限定义 列表
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -46,7 +46,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
     /**
      * 分页查询 权限定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -58,7 +58,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
 
     /**
      * 权限定义-新增
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo      当前登录用户
      * @param definePermissionVo
      * @return
      * @throws Exception
@@ -67,7 +67,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
 
     /**
      * 权限定义-更新
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo      当前登录用户
      * @param definePermissionVo
      * @return
      * @throws Exception
@@ -77,7 +77,7 @@ public interface DefinePermissionService extends IService<DefinePermissionEntity
     /**
      * 权限定义-启用
      * @param loginUserInfo 当前登录用户
-     * @param ensureIds 要启用的权限id 集合
+     * @param ensureIds     要启用的权限id 集合
      * @return
      * @throws Exception
      */

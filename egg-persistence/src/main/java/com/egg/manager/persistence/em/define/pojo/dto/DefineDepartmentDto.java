@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class DefineDepartmentDto extends MyBaseMysqlDto {
     /**
      * 名称

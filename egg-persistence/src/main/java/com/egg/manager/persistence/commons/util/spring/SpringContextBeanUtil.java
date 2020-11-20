@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * @description 获取spring上下文
  * @author zhoucj
+ * @description 获取spring上下文
  * @date 2020/10/20
  */
 @Component
@@ -25,7 +25,7 @@ public class SpringContextBeanUtil implements ApplicationContextAware {
     }
 
     public static <T> T getBean(Class<T> clazz) {
-        return (T) context.getBean(clazz);
+        return context.getBean(clazz);
     }
 
 }

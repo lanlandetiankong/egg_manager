@@ -58,7 +58,7 @@ public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
                 T domainJson = (T) mapper.writeValueAsString(domain);
                 hashOperations.put(key, hashKey, domainJson);
             } catch (JsonProcessingException e) {
-                log.error("Redis 添加元素->",e);
+                log.error("Redis 添加元素->", e);
             }
         }
 

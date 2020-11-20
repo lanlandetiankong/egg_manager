@@ -26,7 +26,7 @@ public class MyBaseModelMgo<K> implements Serializable {
      * 切面类的class相关信息
      */
     @Field(value = "clazzInfo")
-    private EggClazzInfoLogMgo clazzInfo ;
+    private EggClazzInfoLogMgo clazzInfo;
 
 
     /**
@@ -114,12 +114,12 @@ public class MyBaseModelMgo<K> implements Serializable {
      * 方法总花费时间
      */
     @Field(value = "totalSpendTime")
-    private Long totalSpendTime ;
+    private Long totalSpendTime;
     /**
      * 计时器 输出信息
      */
     @Field(value = "stopWatchPrint")
-    private String stopWatchPrint ;
+    private String stopWatchPrint;
 
     /**
      * 是否已经删除，0:否 1:是

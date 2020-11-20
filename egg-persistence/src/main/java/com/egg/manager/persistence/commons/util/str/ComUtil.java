@@ -50,50 +50,29 @@ public class ComUtil {
         } else {
             length = ((Object[]) array).length;
         }
-        if (length == 0) {
-            return true;
-        }
-        return false;
+        return length == 0;
     }
 
 
     public static boolean isEmpty(Date aDate) {
-        if (aDate == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return aDate == null;
     }
 
     public static boolean isEmpty(Long aLong) {
-        if (aLong == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return aLong == null;
     }
 
 
     public static boolean isEmpty(Map m) {
-        if (m == null || m.size() == 0) {
-            return true;
-        }
-        return false;
+        return m == null || m.size() == 0;
     }
 
     public static boolean isEmpty(Collection c) {
-        if (c == null || c.size() == 0) {
-            return true;
-        }
-        return false;
+        return c == null || c.size() == 0;
     }
 
     public static boolean isEmpty(String aStr) {
-        if (aStr == null || aStr.trim().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return aStr == null || aStr.trim().isEmpty();
     }
 
 
@@ -106,11 +85,7 @@ public class ComUtil {
     }
 
     public static boolean isNull(Object oStr) {
-        if (oStr == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return oStr == null;
     }
 
 

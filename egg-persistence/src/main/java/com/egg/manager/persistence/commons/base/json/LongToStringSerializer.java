@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 
 /**
- * @description:
  * @author zhoucj
+ * @description:
  * @date 2020/11/17
  */
 public class LongToStringSerializer implements ObjectSerializer {

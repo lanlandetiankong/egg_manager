@@ -72,7 +72,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
 
     /**
      * 分页查询 角色定义 列表
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -85,7 +85,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
     /**
      * 分页查询 角色定义 列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -97,7 +97,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
 
     /**
      * 角色定义-新增
-     * @param loginUserInfo    当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineRoleVo
      * @return
      * @throws Exception
@@ -106,7 +106,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
 
     /**
      * 角色定义-更新
-     * @param loginUserInfo    当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param defineRoleVo
      * @return
      * @throws Exception
@@ -116,8 +116,8 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
     /**
      * 角色授权
      * @param loginUserInfo 当前登录用户
-     * @param roleId    要授权的角色id
-     * @param checkIds  权限id集合
+     * @param roleId        要授权的角色id
+     * @param checkIds      权限id集合
      * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception

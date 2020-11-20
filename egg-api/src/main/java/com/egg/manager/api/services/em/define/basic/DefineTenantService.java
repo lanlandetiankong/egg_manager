@@ -8,9 +8,9 @@ import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
     /**
      * 分页查询 租户
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -37,7 +37,7 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
 
     /**
      * 租户定义-新增
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param defineTenantVo
      * @return
      * @throws Exception
@@ -46,7 +46,7 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
 
     /**
      * 租户定义-更新
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param defineTenantVo
      * @return
      * @throws Exception
@@ -64,8 +64,8 @@ public interface DefineTenantService extends IService<DefineTenantEntity>, MyBas
     /**
      * 租户设置管理员
      * @param loginUserInfo 当前登录用户
-     * @param tenantId  租户id
-     * @param checkIds  要设置的管理员id
+     * @param tenantId      租户id
+     * @param checkIds      要设置的管理员id
      * @return
      * @throws Exception
      */

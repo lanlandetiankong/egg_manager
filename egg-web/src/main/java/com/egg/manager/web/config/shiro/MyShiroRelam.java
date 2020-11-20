@@ -51,7 +51,7 @@ public class MyShiroRelam extends AuthorizingRealm {
         return token instanceof JwtShiroToken;
     }
 
-    public void initReference(){
+    public void initReference() {
         if (defineRoleService == null) {
             this.defineRoleService = SpringContextBeanUtil.getBean(DefineRoleService.class);
         }
@@ -74,11 +74,11 @@ public class MyShiroRelam extends AuthorizingRealm {
         //当前登录用户id
         String authorization = principalCollection.toString();
         String userAccountId = JwtUtil.getUserAccountId(principalCollection.toString());
-        if(StringUtils.isBlank(authorization) || userAccountId == null){
+        if (StringUtils.isBlank(authorization) || userAccountId == null) {
             return simpleAuthorizationInfo;
         }
         CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountId);
-        if(loginUserInfo == null){
+        if (loginUserInfo == null) {
             return simpleAuthorizationInfo;
         }
         //取得 当前用户 有用的 角色、权限

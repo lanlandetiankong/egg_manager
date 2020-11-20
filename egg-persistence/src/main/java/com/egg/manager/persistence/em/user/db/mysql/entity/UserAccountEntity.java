@@ -19,10 +19,10 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @TableName("em_user_account")
 public class UserAccountEntity extends Model<UserAccountEntity> {
-    @TableId(type=IdType.ASSIGN_ID,value = "fid")
+    @TableId(type = IdType.ASSIGN_ID, value = "fid")
     private String fid;
     /**
      * 用户名
@@ -57,7 +57,7 @@ public class UserAccountEntity extends Model<UserAccountEntity> {
      */
     @JsonIgnore
     @TableField("salt")
-    private String salt ;
+    private String salt;
 
     /**
      * 手机号码

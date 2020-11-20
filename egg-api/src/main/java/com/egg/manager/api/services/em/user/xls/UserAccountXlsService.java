@@ -16,7 +16,7 @@ public interface UserAccountXlsService extends MyXlsBaseService {
 
     /**
      * 根据模板导出已选数据文件
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param response
      * @param defineMenuEntity
      * @param fileUploadBean
@@ -27,7 +27,7 @@ public interface UserAccountXlsService extends MyXlsBaseService {
 
     /**
      * 导出所有 用户账号 到excel
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param response
      * @param defineMenuEntity
      * @param fileUploadBean

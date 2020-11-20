@@ -19,7 +19,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class UserAccountXlsInModel extends MyBaseXls {
     @ExcelIgnore
     private String fid;

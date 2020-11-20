@@ -5,9 +5,10 @@ import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoModelFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
-import com.egg.manager.persistence.commons.base.query.mongo.*;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.repository.MyBaseMongoRepository;
@@ -116,7 +117,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
         if (iterableList == null) {
             throw new MyMongoException("集合为空!");
         }
-        return baseRepository.batchLogicDelete(iterableList,loginUser);
+        return baseRepository.batchLogicDelete(iterableList, loginUser);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
     @Override
     public Integer dealLogicDeleteById(UserAccountEntity loginUser, String delId) throws Exception {
-        Integer count = baseMapper.deleteByIdWithModifyFill(delId,loginUser);
+        Integer count = baseMapper.deleteByIdWithModifyFill(delId, loginUser);
         return count;
     }
 
@@ -55,7 +55,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
             //批量伪删除
-            delCount = baseMapper.batchDeleteByIdsWithModifyFill(delIdList,loginUser);
+            delCount = baseMapper.batchDeleteByIdsWithModifyFill(delIdList, loginUser);
         }
         return delCount;
     }
@@ -177,7 +177,6 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
         }
         return false;
     }
-
 
 
 }

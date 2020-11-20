@@ -10,8 +10,8 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 /**
- * @description 根据ids更新状态为 逻辑删除，并存储相应的更新信息
  * @author zhoucj
+ * @description 根据ids更新状态为 逻辑删除，并存储相应的更新信息
  * @date 2020/10/27
  */
 @Slf4j
@@ -23,9 +23,9 @@ public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
         String sql;
         SqlMethod sqlMethod = SqlMethod.LOGIC_DELETE_BATCH_BY_IDS;
         if (tableInfo.isWithLogicDelete()) {
-            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) + getLoginUserSetSql(tableInfo,true) ;
+            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) + getLoginUserSetSql(tableInfo, true);
             //逻辑值
-            String additional = tableInfo.getLogicDeleteSql(true, true) ;
+            String additional = tableInfo.getLogicDeleteSql(true, true);
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                     tableInfo.getKeyColumn(),
                     SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
@@ -46,16 +46,16 @@ public class LogicBatchDeleteWithModifyFillMethod extends AbstractMethod {
         return "batchDeleteByIdsWithModifyFill";
     }
 
-    public String getLoginUserSetSql(TableInfo tableInfo,boolean notFisrt) {
-        if(tableInfo == null){
-            return "" ;
+    public String getLoginUserSetSql(TableInfo tableInfo, boolean notFisrt) {
+        if (tableInfo == null) {
+            return "";
         }
         String dot = notFisrt ? "," : "";
-        String partenSql = "<if test=\"%s != null\"> "+dot+" %s=#{%s},%s=%s</if>";
+        String partenSql = "<if test=\"%s != null\"> " + dot + " %s=#{%s},%s=%s</if>";
         //eg: loginUser.fid
-        String loginUserIdKey = EggMpSqlConst.PARAMOF_LOGIN_USER +DOT+EggMpSqlConst.COLUMN_FID;
-        return String.format(partenSql, EggMpSqlConst.PARAMOF_LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
-                        EggMpSqlConst.COLUMN_DELETE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
+        String loginUserIdKey = EggMpSqlConst.PARAMOF_LOGIN_USER + DOT + EggMpSqlConst.COLUMN_FID;
+        return String.format(partenSql, EggMpSqlConst.PARAMOF_LOGIN_USER, EggMpSqlConst.COLUMN_LAST_MODIFYER_ID, loginUserIdKey,
+                EggMpSqlConst.COLUMN_DELETE_TIME, EggMpSqlConst.MYSQL_DATE_FUNC_NOW);
     }
 
 }

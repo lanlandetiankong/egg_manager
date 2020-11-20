@@ -53,5 +53,5 @@ public @interface PcWebQueryLog {
      * 操作类型
      * @return
      */
-    String type() default AspectTypeConstant.QUERY_API ;
+    String type() default AspectTypeConstant.QUERY_API;
 }

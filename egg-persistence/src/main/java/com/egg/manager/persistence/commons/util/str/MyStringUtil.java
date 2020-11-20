@@ -73,7 +73,7 @@ public class MyStringUtil {
         try {
             result = URLDecoder.decode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
         }
         return result;
     }

@@ -19,7 +19,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class CommonMenuTree extends MyBaseTree {
     /**
      * 菜单id

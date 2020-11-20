@@ -25,7 +25,6 @@ import java.util.List;
 
 /**
  * 阿里云OSS工具类
- *
  * @author jason
  */
 @Slf4j
@@ -55,7 +54,6 @@ public class AliyunOSSUtil {
 
     /**
      * 上传文件-自定义路径
-     *
      * @param file     上传文件
      * @param fileName 上传至OSS的文件完整路径，例：cf/abc.png
      *                 上传至根目录，例：abc.png
@@ -73,7 +71,6 @@ public class AliyunOSSUtil {
 
     /**
      * 上传文件-自定义路径
-     *
      * @param file     上传文件
      * @param fileName 上传至OSS的文件完整路径，例：cf/abc.png
      *                 上传至根目录，例：abc.png
@@ -85,7 +82,7 @@ public class AliyunOSSUtil {
         try {
             inputStream = file.getInputStream();
         } catch (IOException e) {
-            log.error("执行异常--->",e);
+            log.error("执行异常--->", e);
             return new AliyunOssResult(false, null, null, e.getMessage());
         }
         // 获取文件类型
@@ -97,7 +94,6 @@ public class AliyunOSSUtil {
 
     /**
      * 上传文件-自定义路径
-     *
      * @param inputStream 上传文件流
      * @param fileType    文件类型，例：png
      * @param fileName    上传至OSS的文件完整路径，例：cf/abc.png
@@ -118,7 +114,8 @@ public class AliyunOSSUtil {
         try {
             fileSize = inputStream.available();
         } catch (IOException e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
+            ;
         }
         if (fileSize <= 0 || fileSize > maxSize) {
             return new AliyunOssResult(false, null, null, "文件超过最大限制");
@@ -130,7 +127,6 @@ public class AliyunOSSUtil {
 
     /**
      * 上传文件
-     *
      * @param input
      * @param fileType
      * @param fileName
@@ -153,14 +149,14 @@ public class AliyunOSSUtil {
             //获取上传成功的文件地址
             return new AliyunOssResult(true, fileName, getOssUrl(fileName), "上传成功");
         } catch (OSSException | ClientException e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
+            ;
             return new AliyunOssResult(false, fileName, null, e.getMessage());
         }
     }
 
     /**
      * 根据文件名生成文件的访问地址（带过期时间）
-     *
      * @param fileName
      * @return
      */
@@ -177,7 +173,6 @@ public class AliyunOSSUtil {
 
     /**
      * 通过文件名下载文件
-     *
      * @param fileName      要下载的文件名（OSS服务器上的）
      *                      例如：4DB049D0604047989183CB68D76E969D.jpg
      * @param localFileName 本地要创建的文件名（下载到本地的）
@@ -191,7 +186,6 @@ public class AliyunOSSUtil {
 
     /**
      * 通过文件名获取文件流
-     *
      * @param fileName 要下载的文件名（OSS服务器上的）
      *                 例如：4DB049D0604047989183CB68D76E969D.jpg
      */
@@ -203,7 +197,6 @@ public class AliyunOSSUtil {
 
     /**
      * 通过文件名获取byte[]
-     *
      * @param fileName 要下载的文件名（OSS服务器上的）
      *                 例如：4DB049D0604047989183CB68D76E969D.jpg
      */
@@ -215,7 +208,6 @@ public class AliyunOSSUtil {
 
     /**
      * 根据文件名删除文件
-     *
      * @param fileName 需要删除的文件名
      * @return boolean 是否删除成功
      * 例如：4DB049D0604047989183CB68D76E969D.jpg
@@ -227,7 +219,8 @@ public class AliyunOSSUtil {
             GenericRequest request = new DeleteObjectsRequest(AliyunOssConfig.JAVA_BUCKET_NAME).withKey(fileName);
             ossClient.deleteObject(request);
         } catch (Exception e) {
-            log.error("执行异常--->",e);;
+            log.error("执行异常--->", e);
+            ;
             return false;
         }
         return true;

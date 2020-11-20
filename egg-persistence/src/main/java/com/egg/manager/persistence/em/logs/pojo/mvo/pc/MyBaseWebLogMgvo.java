@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- *@description
- *@author: zhoucj
- *@create: 2020-10-21 14:59
+ * @description
+ * @author: zhoucj
+ * @create: 2020-10-21 14:59
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
     /**
      * 登录的用户id
@@ -34,7 +34,7 @@ public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
     /**
      * 请求的Request信息
      */
-    private EggRequestInfo requestInfo ;
+    private EggRequestInfo requestInfo;
     /**
      * userAgent信息
      */

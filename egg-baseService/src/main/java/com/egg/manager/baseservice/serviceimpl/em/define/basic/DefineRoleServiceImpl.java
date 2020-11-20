@@ -91,7 +91,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
 
     @Override
-    @Cacheable(value= RedisShiroKeyConstant.KEY_USER_ROLE,key="#userAccountId",condition = "#userAccountId!=null")
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ROLE, key = "#userAccountId", condition = "#userAccountId!=null")
     public Set<String> queryDbToCacheable(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefineRoleEntity> defineRoleEntities = this.dealGetRolesByAccountFromDb(userAccountId, BaseStateEnum.ENABLED.getValue());
@@ -210,7 +210,6 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         changeCount = defineRoleMapper.updateById(defineRoleEntity);
         return changeCount;
     }
-
 
 
     @Override

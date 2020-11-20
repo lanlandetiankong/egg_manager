@@ -189,7 +189,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     }
 
     @Override
-    public <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids,U user) {
+    public <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids, U user) {
         //id迭代器 不能为空
         Query query = dealGetQueryWithIds(ids, true);
         int size = Lists.newArrayList(ids).size();

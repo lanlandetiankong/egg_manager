@@ -41,14 +41,16 @@ public @interface PcWebOperationLog {
      * @return
      */
     boolean flag() default true;
+
     /**
      * 是否打印出 计时器日志
      * @return
      */
     boolean printWatchFlag() default false;
+
     /**
      * 操作类型
      * @return
      */
-    String type() default AspectTypeConstant.OPERATION_API ;
+    String type() default AspectTypeConstant.OPERATION_API;
 }

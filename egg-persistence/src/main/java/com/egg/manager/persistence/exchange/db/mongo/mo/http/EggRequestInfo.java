@@ -15,13 +15,13 @@ public class EggRequestInfo {
      * http请求方式
      */
     @Field(value = "reqMethod")
-    private String reqMethod ;
+    private String reqMethod;
 
     /**
      * session id
      */
     @Field(value = "sessionId")
-    private String sessionId ;
+    private String sessionId;
     /**
      * 发起请求的token ->json(从request取得)
      */

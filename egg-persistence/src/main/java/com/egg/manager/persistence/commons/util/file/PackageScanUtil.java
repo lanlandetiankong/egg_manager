@@ -21,7 +21,7 @@ import java.util.jar.JarFile;
 @Slf4j
 public class PackageScanUtil {
 
-    public static void doPackageScanner(String packageName,Class clazz) {
+    public static void doPackageScanner(String packageName, Class clazz) {
         //把所有的.替换成/
         URL url = clazz.getClassLoader().getResource(packageName.replaceAll("\\.", Constant.SYMBOL_SLASH));
         String jarSuffix = ".jar";
@@ -68,7 +68,7 @@ public class PackageScanUtil {
                                             .forName(packageName + '.'
                                                     + className).getName());
                                 } catch (ClassNotFoundException e) {
-                                    log.error("执行异常--->",e);
+                                    log.error("执行异常--->", e);
                                 }
                             }
                         }
@@ -76,14 +76,14 @@ public class PackageScanUtil {
                 }
                 return;
             } catch (IOException e) {
-                log.error("执行异常--->",e);;
+                log.error("执行异常--->", e);
             }
         }
         File dir = new File(url.getFile());
         for (File file : dir.listFiles()) {
             if (file.isDirectory()) {
                 //递归读取包
-                doPackageScanner(packageName + "." + file.getName(),clazz);
+                doPackageScanner(packageName + "." + file.getName(), clazz);
             } else {
                 String className = packageName + "." + file.getName().replace(".class", "");
                 Constant.METHOD_URL_SET.add(className);

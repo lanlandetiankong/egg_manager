@@ -21,8 +21,4 @@ public interface AspectTypeConstant {
     String LOGIN_API = "LoginApi";
 
 
-
-
-
-
 }

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Builder
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class AntdvPage<T> extends BasePagination {
     /**
      * 当前页数
@@ -31,7 +31,7 @@ public class AntdvPage<T> extends BasePagination {
     }
 
     public AntdvPage(Integer current, Integer pageSize) {
-        this(current,pageSize,0L);
+        this(current, pageSize, 0L);
     }
 
     public AntdvPage(Integer current, Integer pageSize, Long total) {

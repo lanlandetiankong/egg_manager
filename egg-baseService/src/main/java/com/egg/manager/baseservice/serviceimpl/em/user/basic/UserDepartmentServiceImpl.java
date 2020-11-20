@@ -21,7 +21,4 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDepartmentServiceImpl extends MyBaseMysqlServiceImpl<UserDepartmentMapper, UserDepartmentEntity, UserDepartmentVo> implements UserDepartmentService {
 
 
-
-
-
 }

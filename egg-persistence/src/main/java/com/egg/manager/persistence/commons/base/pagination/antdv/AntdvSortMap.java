@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
  * @description
  * @date 2020/10/21
  */
-public class AntdvSortMap extends LinkedHashMap<String,Boolean> implements ISortAble<AntdvSortMap>, Serializable {
+public class AntdvSortMap extends LinkedHashMap<String, Boolean> implements ISortAble<AntdvSortMap>, Serializable {
 
 
     public AntdvSortMap() {
@@ -20,19 +20,19 @@ public class AntdvSortMap extends LinkedHashMap<String,Boolean> implements ISort
     public boolean getOrderIsAsc() {
         //return Boolean.TRUE.equals(this.ascFlag);
         //todo
-        return false ;
+        return false;
     }
 
     @Override
     public AntdvSortMap putDesc(String key) {
-         this.put(key,false);
-         return this ;
+        this.put(key, false);
+        return this;
     }
 
     @Override
     public AntdvSortMap putAsc(String key) {
-        this.put(key,true);
-        return this ;
+        this.put(key, true);
+        return this;
     }
 
     @Override
@@ -47,21 +47,20 @@ public class AntdvSortMap extends LinkedHashMap<String,Boolean> implements ISort
 
     @Override
     public boolean getVal(String key) {
-        if(StringUtils.isBlank(key)){
-            return false ;
+        if (StringUtils.isBlank(key)) {
+            return false;
         }
         boolean exist = this.containsKey(key);
-        if(!exist){
-            return false ;
+        if (!exist) {
+            return false;
         }
         Boolean val = this.get(key);
-        if(val == null){
+        if (val == null) {
             //如果value为null，将强制设置为 正序
-            this.put(key,true) ;
+            this.put(key, true);
         }
         return this.get(key);
     }
-
 
 
 }

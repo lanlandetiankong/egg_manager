@@ -87,8 +87,8 @@ public class MyReflexUtil {
         try {
             String e = fieldName.substring(0, 1).toUpperCase();
             String getter = "get" + e + fieldName.substring(1);
-            Method method = o.getClass().getMethod(getter, new Class[0]);
-            return method.invoke(o, new Object[0]);
+            Method method = o.getClass().getMethod(getter);
+            return method.invoke(o);
         } catch (Exception var6) {
             return null;
         }

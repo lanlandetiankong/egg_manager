@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @description 根据ids更新状态为删除状态
  * @author zhoucj
+ * @description 根据ids更新状态为删除状态
  * @date 2020/10/27
  */
 @Slf4j
@@ -37,14 +37,14 @@ public class LogicBatchDeleteWithEntityMethod extends AbstractMethod {
                 String sqlSet = "SET " + fieldInfos.stream().map(i -> getNotNullSetSql(i)).collect(Collectors.joining(EMPTY))
                         + tableInfo.getLogicDeleteSql(false, false);
                 //逻辑值 && 版本号
-                String additional = tableInfo.getLogicDeleteSql(true, true)+optlockVersion(tableInfo);
+                String additional = tableInfo.getLogicDeleteSql(true, true) + optlockVersion(tableInfo);
                 sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                         tableInfo.getKeyColumn(),
                         SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
                         additional);
             } else {
                 //逻辑值 && 版本号
-                String additional = tableInfo.getLogicDeleteSql(true, true)+optlockVersion(tableInfo);
+                String additional = tableInfo.getLogicDeleteSql(true, true) + optlockVersion(tableInfo);
                 sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlLogicSet(tableInfo),
                         tableInfo.getKeyColumn(),
                         SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
@@ -62,17 +62,17 @@ public class LogicBatchDeleteWithEntityMethod extends AbstractMethod {
     }
 
     @Override
-    public String getMethod(SqlMethod sqlMethod){
+    public String getMethod(SqlMethod sqlMethod) {
         return "batchDeleteByIdsWithEntity";
     }
 
     public String getNotNullSetSql(TableFieldInfo fieldInfo) {
-        if(fieldInfo == null){
-            return "" ;
+        if (fieldInfo == null) {
+            return "";
         }
         String partenSql = "<if test=\"%s!= null\"> \n %s \n </if>";
-        String propertyName = ENTITY_DOT+fieldInfo.getProperty();
-        return String.format(partenSql,propertyName,fieldInfo.getSqlSet(ENTITY_DOT)) ;
+        String propertyName = ENTITY_DOT + fieldInfo.getProperty();
+        return String.format(partenSql, propertyName, fieldInfo.getSqlSet(ENTITY_DOT));
     }
 
 }

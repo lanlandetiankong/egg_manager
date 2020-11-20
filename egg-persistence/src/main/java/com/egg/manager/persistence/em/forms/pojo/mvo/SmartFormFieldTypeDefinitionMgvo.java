@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class SmartFormFieldTypeDefinitionMgvo extends BaseModelMgvo<String> {
     /**
      * 字段类型值

@@ -43,7 +43,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     public void handleInitMethodUrlSet(String... args) throws Exception {
         //先扫描Controller包并添加到 Constant.METHOD_URL_SET 中
-        PackageScanUtil.doPackageScanner(scanPackagePath,this.getClass());
+        PackageScanUtil.doPackageScanner(scanPackagePath, this.getClass());
         Set<String> urlAndMethodSet = new HashSet<>();
 
         for (String aClassName : Constant.METHOD_URL_SET) {
@@ -101,12 +101,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         sb.append(this.projectName);
         if (!ComUtil.isEmpty(classUrl)) {
             for (String url : classUrl) {
-                if(StringUtils.isBlank(url)){
+                if (StringUtils.isBlank(url)) {
                     continue;
                 }
-                if(url.trim().indexOf("/") != -1){
-                    sb.append("/"+url + Constant.SYMBOL_SLASH);
-                }   else {
+                if (url.trim().indexOf("/") != -1) {
+                    sb.append("/" + url + Constant.SYMBOL_SLASH);
+                } else {
                     sb.append(url + Constant.SYMBOL_SLASH);
                 }
             }

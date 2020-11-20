@@ -24,7 +24,6 @@ public class Constant implements Serializable {
     public static final Long PASS_TIME = 50000 * 60 * 1000L;
 
 
-
     /**
      * 用户名登录
      */

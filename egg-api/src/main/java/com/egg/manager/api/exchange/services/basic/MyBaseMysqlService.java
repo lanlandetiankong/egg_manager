@@ -44,10 +44,9 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
     Integer dealBatchLogicDelete(UserAccountEntity loginUser, String[] delIds) throws Exception;
 
 
-
     /**
      * 取得前端传递的分页配置
-     * @param loginUser              当前登录用户
+     * @param loginUser      当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage

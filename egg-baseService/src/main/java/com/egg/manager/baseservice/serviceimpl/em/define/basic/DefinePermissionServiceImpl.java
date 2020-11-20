@@ -154,7 +154,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
 
     @Override
-    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_PERMISSION,key = "#userAccountId",condition = "#userAccountId!=null")
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_PERMISSION, key = "#userAccountId", condition = "#userAccountId!=null")
     public Set<String> queryDbToCacheable(String userAccountId) {
         Set<String> codeSet = Sets.newHashSet();
         List<DefinePermissionEntity> definePermissionEntities = this.dealGetListByAccountFromDb(userAccountId);

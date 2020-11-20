@@ -71,11 +71,11 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     private UserDepartmentMapper userDepartmentMapper;
 
     @Reference
-    private UserJobService userJobService ;
+    private UserJobService userJobService;
     @Reference
-    private UserGroupService userGroupService ;
+    private UserGroupService userGroupService;
     @Reference
-    private UserRoleService userRoleService ;
+    private UserRoleService userRoleService;
 
     @Override
     public UserAccountEntity dealGetEntityByDTO(LoginAccountDTO loginAccountDTO) {
@@ -222,7 +222,6 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         return changeCount;
     }
-
 
 
     @Override
@@ -376,7 +375,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     @Override
     public List<UserAccountXlsOutModel> dealGetExportXlsModelList(CurrentLoginUserInfo loginUserInfo, String[] checkIds, QueryWrapper<UserAccountEntity> wrapper) {
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        wrapper.in(checkIds != null,"fid", checkIds);
+        wrapper.in(checkIds != null, "fid", checkIds);
         return UserAccountTransfer.entityListToXlsOutModels(userAccountMapper.selectList(wrapper));
     }
 
@@ -385,7 +384,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     public Set<String> dealGetExistAccountSet(CurrentLoginUserInfo loginUserInfo, Short state, QueryWrapper<UserAccountEntity> wrapper) {
         Set<String> accountSet = new HashSet<>();
         wrapper = wrapper != null ? wrapper : new QueryWrapper<>();
-        wrapper.eq(state != null,"state", state);
+        wrapper.eq(state != null, "state", state);
         List<UserAccountEntity> userAccountEntityList = userAccountMapper.selectList(wrapper);
         if (CollectionUtil.isNotEmpty(userAccountEntityList)) {
             for (UserAccountEntity user : userAccountEntityList) {
@@ -396,10 +395,10 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ACCOUNT,key = "#userAccountId",condition = "#userAccountId!=null")
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_ACCOUNT, key = "#userAccountId", condition = "#userAccountId!=null")
     public CurrentLoginUserInfo queryDbToCacheable(String userAccountId) {
-        if(userAccountId == null){
-            return null ;
+        if (userAccountId == null) {
+            return null;
         }
         //用户信息
         UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
@@ -417,8 +416,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         QueryWrapper<UserAccountEntity> query = new QueryWrapper<>();
         query.isNotNull("password");
         List<UserAccountEntity> userAccountEntities = userAccountMapper.selectList(query);
-        PasswordHelper passwordHelper = new PasswordHelper() ;
-        for (UserAccountEntity userAccountEntity : userAccountEntities){
+        PasswordHelper passwordHelper = new PasswordHelper();
+        for (UserAccountEntity userAccountEntity : userAccountEntities) {
             passwordHelper.encryptPassword(userAccountEntity);
         }
         this.updateBatchById(userAccountEntities);

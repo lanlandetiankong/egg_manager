@@ -37,7 +37,7 @@ public class MyJvmPropUtil {
         for (String arg : argus) {
             if (StringUtils.isNotBlank(arg)) {
                 if (arg.indexOf("-D" + key) >= 0) {
-                    return arg.substring(key.length() + 3, arg.length()).trim();
+                    return arg.substring(key.length() + 3).trim();
                 }
             }
         }

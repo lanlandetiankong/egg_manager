@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/10/20
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class MongoQueryPageBean<T> extends BaseQueryBean {
     /**
      * 当前页

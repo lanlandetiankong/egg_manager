@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2020/10/20
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class BaseModelMgvo<K> extends BaseMgvo {
     private K fid;
 
@@ -20,7 +20,7 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 切面类的class相关信息
      */
-    private EggClazzInfoLogMgo clazzInfo ;
+    private EggClazzInfoLogMgo clazzInfo;
 
     /**
      * 返回结果-json
@@ -84,11 +84,11 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 方法总花费时间
      */
-    private Long totalSpendTime ;
+    private Long totalSpendTime;
     /**
      * 计时器 输出信息
      */
-    private String stopWatchPrint ;
+    private String stopWatchPrint;
 
     /**
      * 是否已经删除，0:否 1:是

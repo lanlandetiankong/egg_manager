@@ -72,14 +72,13 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
     }
 
 
-
     @Override
-    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL,key = "#userAccountId",condition = "#userAccountId!=null")
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL, key = "#userAccountId", condition = "#userAccountId!=null")
     public Set<String> dealGetUserVisitAbleUrl(String userAccountId) {
         Set<String> urlSets = new HashSet<>();
         List<DefineMenuEntity> defineMenuEntityList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
-        if(CollectionUtil.isEmpty(defineMenuEntityList)){
-            return urlSets ;
+        if (CollectionUtil.isEmpty(defineMenuEntityList)) {
+            return urlSets;
         }
         for (DefineMenuEntity defineMenuEntity : defineMenuEntityList) {
             if (defineMenuEntity == null) {
@@ -97,7 +96,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS,key = "#userAccountId",condition = "#userAccountId!=null")
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS, key = "#userAccountId", condition = "#userAccountId!=null")
     public List<CommonMenuTree> queryDbToCacheable(String userAccountId) {
         List<DefineMenuEntity> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);

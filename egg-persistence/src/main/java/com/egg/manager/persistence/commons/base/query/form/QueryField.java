@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class QueryField extends BaseQueryBean {
     /**
      * 字段名
@@ -40,9 +40,6 @@ public class QueryField extends BaseQueryBean {
      * 匹配的值
      */
     private Object value;
-
-
-
 
 
     /**

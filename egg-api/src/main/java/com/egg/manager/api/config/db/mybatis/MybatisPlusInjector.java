@@ -11,8 +11,8 @@ import com.egg.manager.api.config.db.mybatis.plus.methods.LogicDeleteByIdWithMod
 import java.util.List;
 
 /**
- * @description  mybatisplus 增强方法注入器
  * @author zhoucj
+ * @description mybatisplus 增强方法注入器
  * @date 2020/10/26
  */
 public class MybatisPlusInjector extends DefaultSqlInjector {

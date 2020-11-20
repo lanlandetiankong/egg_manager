@@ -27,7 +27,7 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
     @Reference
     private UserAccountService userAccountService;
     @Reference
-    private RedisHelper redisHelper ;
+    private RedisHelper redisHelper;
 
     /**
      * 判断:
@@ -57,10 +57,10 @@ public class CurrentUserAccountMethodArgumentResolver implements HandlerMethodAr
             String authorization = nativeWebRequest.getHeader("authorization");
             if (StringUtils.isNotBlank(authorization)) {
                 Object userTokenObj = redisHelper.hashGet(RedisShiroCacheEnum.authorization.getKey(), authorization);
-                if(userTokenObj != null){
+                if (userTokenObj != null) {
                     String userTokenStr = (String) userTokenObj;
-                    if (StringUtils.isNotBlank(userTokenStr)){
-                        UserAccountToken userToken = JSONObject.parseObject(userTokenStr,UserAccountToken.class);
+                    if (StringUtils.isNotBlank(userTokenStr)) {
+                        UserAccountToken userToken = JSONObject.parseObject(userTokenStr, UserAccountToken.class);
                         loginUserInfo = userAccountService.queryDbToCacheable(userToken.getUserAccountId());
                     }
                 }

@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @description
  * @author zhoucj
+ * @description
  * @date 2020/10/27
  */
 @Slf4j
@@ -39,7 +39,7 @@ public class LogicDeleteWithFillMethod extends AbstractMethod {
                 sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                         tableInfo.getKeyColumn(), tableInfo.getKeyProperty(),
                         tableInfo.getLogicDeleteSql(true, true));
-            }   else {
+            } else {
                 //更新的字段:逻辑值
                 sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlLogicSet(tableInfo),
                         tableInfo.getKeyColumn(), tableInfo.getKeyProperty(),

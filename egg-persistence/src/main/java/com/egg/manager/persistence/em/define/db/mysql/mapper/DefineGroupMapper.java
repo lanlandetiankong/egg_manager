@@ -2,7 +2,6 @@ package com.egg.manager.persistence.em.define.db.mysql.mapper;
 
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import org.apache.ibatis.annotations.Param;
 

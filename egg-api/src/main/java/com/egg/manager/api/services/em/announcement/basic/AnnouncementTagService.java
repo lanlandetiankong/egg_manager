@@ -25,7 +25,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
 
     /**
      * 分页查询 公告标签 列表
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -38,7 +38,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
     /**
      * 分页查询 公告标签 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -56,7 +56,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
 
     /**
      * 公告标签-新增
-     * @param loginUserInfo         当前登录用户
+     * @param loginUserInfo     当前登录用户
      * @param announcementTagVo
      * @return
      * @throws Exception
@@ -66,7 +66,7 @@ public interface AnnouncementTagService extends IService<AnnouncementTagEntity>,
 
     /**
      * 公告标签-更新
-     * @param loginUserInfo         当前登录用户
+     * @param loginUserInfo     当前登录用户
      * @param announcementTagVo
      * @return
      * @throws Exception

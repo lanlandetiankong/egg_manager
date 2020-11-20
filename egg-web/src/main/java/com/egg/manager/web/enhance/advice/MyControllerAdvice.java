@@ -75,7 +75,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
-        log.error(String.format("执行异常(%d)--->",PublicResultEnum.UnauthorizedLoginUser.getLabel()),e);
+        log.error(String.format("执行异常(%d)--->", PublicResultEnum.UnauthorizedLoginUser.getLabel()), e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
     }
 
@@ -83,7 +83,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.NoPermissionOfUser.getLabel()),e);
+        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.NoPermissionOfUser.getLabel()), e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
     }
 
@@ -91,7 +91,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public WebResult handleBusinessException(BusinessException e) {
-        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.ErrorOfDb.getLabel()),e);
+        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.ErrorOfDb.getLabel()), e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
     }
 
@@ -100,7 +100,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
     public WebResult handleParamJsonException(MyParamJsonException e) {
-        log.error(String.format("执行异常(%d)--->"+PublicResultEnum.ErrorOfParam.getLabel()),e);
+        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.ErrorOfParam.getLabel()), e);
         return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
     }
 
@@ -142,10 +142,9 @@ public class MyControllerAdvice {
             MissingMatrixVariableException exception = (MissingMatrixVariableException) extException;
             errorMsg.append("Missing matrix variable '" + exception.getVariableName() + "' for method parameter of type " + exception.getParameter().getNestedParameterType().getSimpleName());
         }
-        log.error(errorMsg.toString(),extException);
+        log.error(errorMsg.toString(), extException);
         return WebResult.error(errorMsg.toString());
     }
-
 
 
     public Integer getStatusCodeByException(Exception ex) {

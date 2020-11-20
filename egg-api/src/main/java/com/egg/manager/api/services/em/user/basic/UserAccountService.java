@@ -39,7 +39,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 分页查询 用户列表
-     * @param loginUserInfo              当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -52,7 +52,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
     /**
      * 分页查询 用户 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo              当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -64,9 +64,9 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 用户账号-新增
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param userAccountVo
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
      */
@@ -74,10 +74,10 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 用户账号-更新
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param userAccountVo
-     * @param loginUserInfo     当前登录用户
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
      */
@@ -86,8 +86,8 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
     /**
      * 用户账号-锁定
      * @param loginUserInfo 当前登录用户
-     * @param lockIds   要锁定的用户账号id 集合
-     * @param isLock    是否锁定
+     * @param lockIds       要锁定的用户账号id 集合
+     * @param isLock        是否锁定
      * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
@@ -97,8 +97,8 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
     /**
      * 用户账号-锁定
      * @param loginUserInfo 当前登录用户
-     * @param lockId    要锁定的用户账号id
-     * @param isLock    是否锁定
+     * @param lockId        要锁定的用户账号id
+     * @param isLock        是否锁定
      * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
@@ -108,10 +108,10 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 用户分配角色
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param userAccountId 用户id
      * @param checkIds      角色id集合
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
      */
@@ -119,10 +119,10 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 用户分配职务
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param userAccountId 用户id
      * @param checkIds      职务id集合
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @return
      * @throws Exception
      */

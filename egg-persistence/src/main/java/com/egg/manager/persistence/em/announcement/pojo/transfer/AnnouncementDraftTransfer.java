@@ -125,7 +125,7 @@ public class AnnouncementDraftTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                log.error("执行异常--->",e);
+                log.error("执行异常--->", e);
             }
         }
     }

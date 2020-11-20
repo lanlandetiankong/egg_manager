@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
  * @description 通用的返回结果模型
  * @date 2020/10/20
  */
-public class WebResult extends AbstractResult{
+public class WebResult extends AbstractResult {
 
     /**
      * 只允许通过static构造类
@@ -51,22 +51,22 @@ public class WebResult extends AbstractResult{
         result.putCode(HttpStatus.HTTP_INTERNAL_ERROR);
         return result;
     }
-    public WebResult toError(){
+
+    public WebResult toError() {
         return toError(BaseRstMsgConstant.ACTION_FAIL_MSG);
     }
 
-    public WebResult toError(String msg){
+    public WebResult toError(String msg) {
         this.putHasError(true);
         this.putErrorMsg(msg);
-        return this ;
+        return this;
     }
 
-    public WebResult putPage(MongoQueryPageBean pageBean){
+    public WebResult putPage(MongoQueryPageBean pageBean) {
         this.putResultList(pageBean.getContent());
         this.putCount(pageBean.getTotal());
-        return this ;
+        return this;
     }
-
 
 
 }

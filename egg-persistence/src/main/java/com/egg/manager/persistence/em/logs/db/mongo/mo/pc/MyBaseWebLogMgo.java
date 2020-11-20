@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.em.logs.db.mongo.mo.pc;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
@@ -10,13 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 
 /**
- *@description
- *@author: zhoucj
- *@create: 2020-10-21 14:59
+ * @description
+ * @author: zhoucj
+ * @create: 2020-10-21 14:59
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
-public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
+@EqualsAndHashCode(callSuper = true)
+public class MyBaseWebLogMgo<K> extends MyBaseModelMgo<K> {
     /**
      * 登录的用户id
      */
@@ -42,7 +41,7 @@ public class MyBaseWebLogMgo <K> extends MyBaseModelMgo<K> {
      * 请求的Request信息
      */
     @Field(value = "requestInfo")
-    private EggRequestInfo requestInfo ;
+    private EggRequestInfo requestInfo;
     /**
      * userAgent信息
      */

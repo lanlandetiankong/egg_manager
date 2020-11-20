@@ -23,7 +23,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
 
     /**
      * 新增公告草稿
-     * @param loginUserInfo           当前登录用户
+     * @param loginUserInfo       当前登录用户
      * @param announcementDraftVo
      * @return Integer
      * @throws Exception
@@ -32,7 +32,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
 
     /**
      * 更新公告草稿
-     * @param loginUserInfo           当前登录用户
+     * @param loginUserInfo       当前登录用户
      * @param announcementDraftVo
      * @return Integer
      * @throws Exception
@@ -42,7 +42,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
     /**
      * 分页查询 公告草稿 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo          当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param result
      * @param queryFieldList
      * @param vpage
@@ -55,7 +55,7 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
     /**
      * 公告草稿-发布
      * @param loginUserInfo 当前登录用户
-     * @param draftIds  要发布的公告草稿id 集合
+     * @param draftIds      要发布的公告草稿id 集合
      * @return
      * @throws Exception
      */
@@ -63,8 +63,8 @@ public interface AnnouncementDraftService extends IService<AnnouncementDraftEnti
 
     /**
      * 公告草稿-发布
-     * @param loginUserInfo  当前登录用户
-     * @param draftId    要发布的公告草稿id
+     * @param loginUserInfo 当前登录用户
+     * @param draftId       要发布的公告草稿id
      * @param insertFlag
      * @return
      * @throws Exception

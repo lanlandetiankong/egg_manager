@@ -12,14 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Document(collection = "em_pc_web_query_log")
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class PcWebQueryLogMgo extends MyBaseWebLogMgo<String> {
 
     private static final long serialVersionUID = 1L;
-
-
-
-
 
 
 }

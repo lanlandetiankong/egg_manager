@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  * @date 2020/10/20
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class LoginAccountVerifyO extends WebVoBaseVerifyO<LoginAccountVo> {
     /**
      * 账号

@@ -180,10 +180,7 @@ public class SmsSendUtil {
 
     public static boolean isCaptchaPassTime(Long sendTime) {
         long now = System.currentTimeMillis();
-        if (now - sendTime > Constant.PASS_TIME) {
-            return true;
-        }
-        return false;
+        return now - sendTime > Constant.PASS_TIME;
     }
 
     public static void main(String[] args) throws BusinessException {

@@ -34,11 +34,11 @@ import ${superControllerClassPackage};
  */
 @Slf4j
 @Api(value = "API ==>>  ${table.controllerName} ", description = "${cfg.moduleName_Cn}接口")
-    #if(${restControllerStyle})
-    @RestController
-    #else
-    @Controller
-    #end
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
 //@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end
 /#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
 @RequestMapping("${cfg.baseReqUrl}")

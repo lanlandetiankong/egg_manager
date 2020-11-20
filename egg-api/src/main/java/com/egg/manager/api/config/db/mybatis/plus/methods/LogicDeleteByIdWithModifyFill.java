@@ -20,7 +20,7 @@ public class LogicDeleteByIdWithModifyFill extends AbstractMethod {
         String sql;
         SqlMethod sqlMethod = SqlMethod.LOGIC_DELETE_BY_ID;
         if (tableInfo.isWithLogicDelete()) {
-            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) +getLoginUserSetSql(tableInfo,true) ;
+            String sqlSet = "SET " + tableInfo.getLogicDeleteSql(false, false) + getLoginUserSetSql(tableInfo, true);
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlSet,
                     tableInfo.getKeyColumn(), tableInfo.getKeyProperty(),
                     tableInfo.getLogicDeleteSql(true, true));
@@ -43,15 +43,15 @@ public class LogicDeleteByIdWithModifyFill extends AbstractMethod {
     }
 
 
-    public String getLoginUserSetSql(TableInfo tableInfo,boolean notFisrt) {
-        if(tableInfo == null){
-            return "" ;
+    public String getLoginUserSetSql(TableInfo tableInfo, boolean notFisrt) {
+        if (tableInfo == null) {
+            return "";
         }
         String dot = notFisrt ? "," : "";
-        String partenSql = "<if test=\"%s != null\"> "+dot+" %s=#{%s},%s=%s</if>";
+        String partenSql = "<if test=\"%s != null\"> " + dot + " %s=#{%s},%s=%s</if>";
         //eg: loginUser.fid
-        String loginUserIdKey = EggMpSqlConst.PARAMOF_LOGIN_USER +DOT+EggMpSqlConst.COLUMN_FID;
-        return String.format(partenSql, EggMpSqlConst.PARAMOF_LOGIN_USER,EggMpSqlConst.COLUMN_LAST_MODIFYER_ID,loginUserIdKey,
-                EggMpSqlConst.COLUMN_DELETE_TIME,EggMpSqlConst.MYSQL_DATE_FUNC_NOW) ;
+        String loginUserIdKey = EggMpSqlConst.PARAMOF_LOGIN_USER + DOT + EggMpSqlConst.COLUMN_FID;
+        return String.format(partenSql, EggMpSqlConst.PARAMOF_LOGIN_USER, EggMpSqlConst.COLUMN_LAST_MODIFYER_ID, loginUserIdKey,
+                EggMpSqlConst.COLUMN_DELETE_TIME, EggMpSqlConst.MYSQL_DATE_FUNC_NOW);
     }
 }

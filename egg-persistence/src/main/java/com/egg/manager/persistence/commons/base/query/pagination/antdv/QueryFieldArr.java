@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.commons.base.query.form;
+package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;

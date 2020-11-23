@@ -8,11 +8,12 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
-import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.*;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.*;
@@ -25,6 +26,7 @@ import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -78,6 +80,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+                                  @QueryPage QueryPageBean queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件

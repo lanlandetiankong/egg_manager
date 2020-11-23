@@ -14,7 +14,7 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementTagMapper;
 import com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto;

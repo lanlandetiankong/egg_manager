@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.commons.base.query.form;
+package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import lombok.*;

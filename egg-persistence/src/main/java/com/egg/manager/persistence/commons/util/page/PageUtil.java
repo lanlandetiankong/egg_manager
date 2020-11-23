@@ -8,8 +8,8 @@ import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessExcep
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
-import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.str.MyStringUtil;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Description: 分页工具
- * @ClassName: PageUtil
- * @Author: zhoucj
- * @Date: 2020/11/23 11:20
+ * @description: 分页工具
+ * @author zhoucj
+ * @date 2020/11/23
  */
 public class PageUtil {
     public static <T> T getBeanFromRequest(HttpServletRequest request, String paramKey, Class<T> clazz, boolean isRequired) throws MyRuntimeBusinessException {

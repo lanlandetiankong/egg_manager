@@ -6,7 +6,7 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineRoleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineRoleMapper;

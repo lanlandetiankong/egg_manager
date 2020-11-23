@@ -3,7 +3,7 @@ package com.egg.manager.persistence.em.define.db.mysql.mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;

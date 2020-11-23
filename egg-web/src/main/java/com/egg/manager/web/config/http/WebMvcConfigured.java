@@ -2,6 +2,7 @@ package com.egg.manager.web.config.http;
 
 import com.egg.manager.persistence.commons.base.props.build.deploy.DeployConfProps;
 import com.egg.manager.web.enhance.resolver.CurrentUserAccountMethodArgumentResolver;
+import com.egg.manager.web.enhance.resolver.PageBeanMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,12 +28,18 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport {
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         //方法注入增强 Resolver
         argumentResolvers.add(getCurrentUserAccountMethodArgumentResolver());
+        argumentResolvers.add(getPageBeanMethodArgumentResolver());
         super.addArgumentResolvers(argumentResolvers);
     }
 
     @Bean
     public CurrentUserAccountMethodArgumentResolver getCurrentUserAccountMethodArgumentResolver() {
         return new CurrentUserAccountMethodArgumentResolver();
+    }
+
+    @Bean
+    public PageBeanMethodArgumentResolver getPageBeanMethodArgumentResolver() {
+        return new PageBeanMethodArgumentResolver();
     }
 
 

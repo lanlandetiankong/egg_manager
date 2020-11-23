@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.base.query;
 
 import com.egg.manager.persistence.commons.base.enums.query.mysql.MyQueryMatchingEnum;
-import com.egg.manager.persistence.commons.base.query.form.QueryField;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 
 import java.io.Serializable;
 

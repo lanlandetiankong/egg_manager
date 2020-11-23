@@ -12,8 +12,8 @@ import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlE
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.commons.util.reflex.EggReflexUtil;

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 

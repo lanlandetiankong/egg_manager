@@ -7,8 +7,8 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
@@ -100,7 +100,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * @param sortMap
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage<DefineMenuDto> vpage,
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage<DefineMenuDto> vpage,
                                   AntdvSortMap sortMap);
 
     /**

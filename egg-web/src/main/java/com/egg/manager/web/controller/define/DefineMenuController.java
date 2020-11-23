@@ -14,11 +14,12 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -116,12 +117,12 @@ public class DefineMenuController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
         queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
-        AntdvPage<DefineMenuDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineMenuDto.class);
+        AntdvPage<DefineMenuDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, DefineMenuDto.class);
         //取得 排序配置
-        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
         result = defineMenuService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }

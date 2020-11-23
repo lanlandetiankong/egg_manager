@@ -66,7 +66,7 @@ public class UserExcelController extends BaseController {
         }
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean, checkIds);
-        super.handleRespJsonToFront(log, response, result);
+        super.handleRespJsonToFront(response, result);
     }
 
     @ApiOperation(value = "导出/全部->excel文件", response = File.class, httpMethod = HttpMethodConstant.POST)

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.commons.base.pagination;
+package com.egg.manager.persistence.commons.base.query.pagination;
 
 import java.io.Serializable;
 

@@ -22,8 +22,8 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;

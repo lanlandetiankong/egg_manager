@@ -8,11 +8,12 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
@@ -35,7 +36,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
 /**
  * \* note:
@@ -64,12 +64,12 @@ public class DefineTenantController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
         queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
-        AntdvPage<DefineTenantDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineTenantDto.class);
+        AntdvPage<DefineTenantDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, DefineTenantDto.class);
         //取得 排序配置
-        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
         result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
@@ -99,7 +99,7 @@ public class DefineTenantController extends BaseController {
         QueryFieldArr queryFieldArr = new QueryFieldArr();
         queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 排序配置
-        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
         result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, null, sortMap);
         result = defineTenantService.dealResultListToEnums(loginUserInfo, result);
         return result;

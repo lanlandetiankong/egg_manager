@@ -1,6 +1,6 @@
-package com.egg.manager.persistence.commons.base.pagination.antdv;
+package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
-import com.egg.manager.persistence.commons.base.pagination.BasePagination;
+import com.egg.manager.persistence.commons.base.query.pagination.BasePagination;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

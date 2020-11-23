@@ -1,6 +1,6 @@
-package com.egg.manager.persistence.commons.base.pagination.antdv;
+package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
-import com.egg.manager.persistence.commons.base.pagination.ISortAble;
+import com.egg.manager.persistence.commons.base.query.pagination.ISortAble;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;

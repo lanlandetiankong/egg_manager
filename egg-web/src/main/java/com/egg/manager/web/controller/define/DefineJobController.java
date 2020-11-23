@@ -8,11 +8,12 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.form.QueryField;
 import com.egg.manager.persistence.commons.base.query.form.QueryFieldArr;
+import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineJobEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineJobMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineJobDto;
@@ -62,12 +63,12 @@ public class DefineJobController extends BaseController {
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件
-        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
         queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
-        AntdvPage<DefineJobEntity> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
+        AntdvPage<DefineJobEntity> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, DefineJobEntity.class);
         //取得 排序配置
-        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
         result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }
@@ -84,12 +85,12 @@ public class DefineJobController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
 //解析 搜索条件
-        QueryFieldArr queryFieldArr = this.parseQueryJsonToBeanList(queryObj);
+        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
         queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         //取得 分页配置
-        AntdvPage<DefineJobDto> vpage = this.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
+        AntdvPage<DefineJobDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, DefineJobDto.class);
         //取得 排序配置
-        AntdvSortMap sortMap = parseSortJsonToBean(sortObj, true);
+        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
         result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
         return result;
     }

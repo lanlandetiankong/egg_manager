@@ -8,9 +8,6 @@ import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -83,22 +80,17 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * 分页查询 菜单定义 列表
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPage 查询分页配置
      * @return
      */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineMenuEntity> vpage,
-                                     AntdvSortMap sortMap);
+    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPage);
 
     /**
      * 分页查询 菜单定义 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPageBean 查询分页配置
      * @return
      */
     WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineMenuDto> queryPageBean);

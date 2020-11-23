@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
@@ -47,18 +47,15 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * 取得前端传递的分页配置
      * @param loginUser     当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPage 查询分页配置
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryFieldArr queryFieldArr, AntdvPage vpage,
-                                          AntdvSortMap sortMap);
+    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryPageBean queryPage);
 
     /**
      * 将条件封装类集合设置到QueryWrapper
      * @param queryWrapper
-     * @param queryFieldArr
+     * @param queryFieldArr 条件集合
      */
     void dealSetConditionsMapToEntityWrapper(QueryWrapper queryWrapper, QueryFieldArr queryFieldArr);
 

@@ -1,17 +1,12 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineModuleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
@@ -40,23 +35,6 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
     @Autowired
     private DefineModuleMapper defineModuleMapper;
-
-
-    @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineModuleEntity> vpage,
-                                            AntdvSortMap sortMap) {
-        //解析 搜索条件
-        QueryWrapper<DefineModuleEntity> defineModuleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
-        //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
-        //取得 总数
-        Integer total = defineModuleMapper.selectCount(defineModuleEntityWrapper);
-        result.settingPage(vpage, Long.valueOf(total));
-        IPage iPage = defineModuleMapper.selectPage(page, defineModuleEntityWrapper);
-        List<DefineModuleEntity> defineModuleEntities = iPage.getRecords();
-        result.putResultList(DefineModuleTransfer.transferEntityToVoList(defineModuleEntities));
-        return result;
-    }
 
 
     @Override

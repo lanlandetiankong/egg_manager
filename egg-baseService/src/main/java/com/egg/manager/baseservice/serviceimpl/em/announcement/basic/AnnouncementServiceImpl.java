@@ -60,7 +60,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //解析 搜索条件
-        QueryWrapper<AnnouncementEntity> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
+        QueryWrapper<AnnouncementEntity> announcementEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean);
         //取得 总数
         Integer total = announcementMapper.selectCount(announcementEntityWrapper);
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));

@@ -24,8 +24,6 @@ import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
@@ -91,15 +89,14 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountEntity> vpage,
-                                            AntdvSortMap sortMap) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<UserAccountEntity> queryPage) {
         //解析 搜索条件
-        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        QueryWrapper<UserAccountEntity> userAccountEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPage);
         //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(queryPage.getPageConf());
         //取得 总数
         Integer total = userAccountMapper.selectCount(userAccountEntityWrapper);
-        result.settingPage(vpage, Long.valueOf(total));
+        result.settingPage(queryPage.getPageConf(), Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
         result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));

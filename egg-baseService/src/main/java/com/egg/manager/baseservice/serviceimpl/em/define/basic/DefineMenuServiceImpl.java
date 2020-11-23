@@ -21,9 +21,6 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineMenuMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
@@ -183,15 +180,14 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
 
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineMenuEntity> vpage,
-                                            AntdvSortMap sortMap) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPage) {
         //解析 搜索条件
-        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        QueryWrapper<DefineMenuEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPage);
         //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(queryPage.getPageConf());
         //取得 总数
         Integer total = defineMenuMapper.selectCount(queryWrapper);
-        result.settingPage(vpage, Long.valueOf(total));
+        result.settingPage(queryPage.getPageConf(), Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
         List<DefineMenuEntity> defineMenuEntities = iPage.getRecords();
         result.putResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));

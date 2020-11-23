@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineModuleEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineModuleMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
@@ -20,27 +17,12 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
  */
 public interface DefineModuleService extends IService<DefineModuleEntity>, MyBaseMysqlService<DefineModuleEntity, DefineModuleMapper, DefineModuleVo> {
 
-
-    /**
-     * 分页查询 模块
-     * @param loginUserInfo 当前登录用户
-     * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
-     * @return
-     */
-    WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineModuleEntity> vpage,
-                                     AntdvSortMap sortMap);
-
     /**
      * 分页查询 模块 dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPageBean 查询分页配置
      * @return
      */
     WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineModuleDto> queryPageBean);

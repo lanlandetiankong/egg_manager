@@ -12,6 +12,7 @@ import com.egg.manager.persistence.commons.base.constant.pojo.mysql.MyBaseMysqlE
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.login.MyAuthenticationExpiredException;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
@@ -62,13 +63,13 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryFieldArr queryFieldArr, AntdvPage vpage,
-                                                 AntdvSortMap sortMap) {
+    public QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryPageBean queryPage) {
         //解析 搜索条件
         QueryWrapper<T> entityWrapper = new QueryWrapper<T>();
         //调用方法将查询条件设置到userAccountEntityWrapper
-        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryFieldArr);
+        this.dealSetConditionsMapToEntityWrapper(entityWrapper, queryPage.getQuery());
         //添加排序
+        AntdvSortMap sortMap = queryPage.getSortMap();
         if (CollectionUtil.isNotEmpty(sortMap)) {
             for (String fieldKey : sortMap.keySet()) {
                 entityWrapper.orderBy(true, sortMap.getVal(fieldKey), fieldKey);

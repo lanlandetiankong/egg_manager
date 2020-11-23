@@ -42,7 +42,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //解析 搜索条件
-        QueryWrapper<DefineJobEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
+        QueryWrapper<DefineJobEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean);
         //取得 总数
         Integer total = defineJobMapper.selectCount(queryWrapper);
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));

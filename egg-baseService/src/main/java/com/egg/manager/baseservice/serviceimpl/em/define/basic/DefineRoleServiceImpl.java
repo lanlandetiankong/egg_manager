@@ -167,7 +167,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
     @Override
     public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
         //解析 搜索条件
-        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
+        QueryWrapper<DefineRoleEntity> defineRoleEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean);
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //取得 总数

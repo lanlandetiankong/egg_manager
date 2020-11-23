@@ -51,7 +51,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //解析 搜索条件
-        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
+        QueryWrapper<AnnouncementTagEntity> announcementTagEntityWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean);
         //取得 总数
         Integer total = announcementTagMapper.selectCount(announcementTagEntityWrapper);
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));
@@ -62,10 +62,10 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<AnnouncementTagDto> queryPageBean) {
-        Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
-        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<AnnouncementTagDto> queryPage) {
+        Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(queryPage.getPageConf());
+        List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
+        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
         result.putResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
         return result;
     }

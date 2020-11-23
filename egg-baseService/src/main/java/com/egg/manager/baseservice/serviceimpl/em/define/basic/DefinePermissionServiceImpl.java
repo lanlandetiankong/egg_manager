@@ -68,7 +68,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         //取得 分页配置
         Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //解析 搜索条件
-        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
+        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean);
         //取得 总数
         Integer total = definePermissionMapper.selectCount(queryWrapper);
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));

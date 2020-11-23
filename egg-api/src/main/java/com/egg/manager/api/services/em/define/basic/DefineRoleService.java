@@ -71,9 +71,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * 分页查询 角色定义 列表
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPageBean 查询分页配置
      * @return
      */
     WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean);
@@ -83,9 +81,7 @@ public interface DefineRoleService extends IService<DefineRoleEntity>, MyBaseMys
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPageBean 查询分页配置
      * @return
      */
     WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean);

@@ -60,7 +60,7 @@ public class DefineJobController extends BaseController {
     public WebResult queryPage(HttpServletRequest request, @QueryPage(tClass = DefineJobEntity.class) QueryPageBean<DefineJobEntity> queryPageBean,
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineJobService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         return result;
     }
@@ -76,7 +76,7 @@ public class DefineJobController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefineJobDto.class) QueryPageBean<DefineJobDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineJobService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

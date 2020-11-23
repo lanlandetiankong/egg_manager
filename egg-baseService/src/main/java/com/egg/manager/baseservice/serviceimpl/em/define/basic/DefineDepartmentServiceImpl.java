@@ -39,7 +39,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineDepartmentDto> queryPageBean) {
-        Page<DefineDepartmentDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefineDepartmentDto> mpPagination = queryPageBean.toMpPage();
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));

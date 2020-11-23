@@ -113,7 +113,7 @@ public class DefineMenuController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefineMenuDto.class) QueryPageBean<DefineMenuDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineMenuService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

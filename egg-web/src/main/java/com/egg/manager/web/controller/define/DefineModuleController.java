@@ -60,7 +60,7 @@ public class DefineModuleController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefineModuleDto.class) QueryPageBean<DefineModuleDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

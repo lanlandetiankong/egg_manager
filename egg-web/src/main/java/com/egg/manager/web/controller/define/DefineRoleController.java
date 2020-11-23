@@ -81,7 +81,7 @@ public class DefineRoleController extends BaseController {
     public WebResult queryPage(HttpServletRequest request, @QueryPage(tClass = UserAccountDto.class) QueryPageBean<UserAccountDto> queryPageBean,
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineRoleService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         return result;
     }
@@ -97,7 +97,7 @@ public class DefineRoleController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = UserAccountDto.class) QueryPageBean<UserAccountDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineRoleService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

@@ -53,7 +53,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineTenantDto> queryPageBean) {
-        Page<DefineTenantDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefineTenantDto> mpPagination = queryPageBean.toMpPage();
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));

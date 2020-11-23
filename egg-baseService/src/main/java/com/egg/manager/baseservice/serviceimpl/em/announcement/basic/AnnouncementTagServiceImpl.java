@@ -63,7 +63,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<AnnouncementTagDto> queryPage) {
-        Page<AnnouncementTagDto> mpPagination = super.dealAntvPageToPagination(queryPage.getPageConf());
+        Page<AnnouncementTagDto> mpPagination = queryPage.toMpPage();
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
         result.putResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));

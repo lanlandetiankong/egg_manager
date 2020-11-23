@@ -39,7 +39,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineModuleDto> queryPageBean) {
-        Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefineModuleDto> mpPagination = queryPageBean.toMpPage();
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));

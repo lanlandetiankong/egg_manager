@@ -62,7 +62,7 @@ public class DefineTenantController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefineTenantDto.class) QueryPageBean<DefineTenantDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
@@ -89,7 +89,7 @@ public class DefineTenantController extends BaseController {
     public WebResult doGetAllDefineTenantEnums(HttpServletRequest request, @QueryPage(tClass = DefineTenantDto.class) QueryPageBean<DefineTenantDto> queryPageBean,
                                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineTenantService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         result = defineTenantService.dealResultListToEnums(loginUserInfo, result);
         return result;

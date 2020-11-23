@@ -66,10 +66,10 @@ public class AnnouncementController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = AnnouncementDto.class) QueryPageBean<AnnouncementDto> queryPageBean,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
+            queryPageBean.operateQuery().addEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
         }
         announcementService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
@@ -81,10 +81,10 @@ public class AnnouncementController extends BaseController {
     public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize, @QueryPage(tClass = AnnouncementDto.class) QueryPageBean<AnnouncementDto> queryPageBean,
                                        Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
+            queryPageBean.operateQuery().addEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
         }
         queryPageBean.operatePageConf().setPageSize(limitSize);
         result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);

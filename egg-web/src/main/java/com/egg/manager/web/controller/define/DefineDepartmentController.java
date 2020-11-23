@@ -64,7 +64,7 @@ public class DefineDepartmentController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefineDepartmentDto.class) QueryPageBean<DefineDepartmentDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = defineDepartmentService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

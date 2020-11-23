@@ -105,7 +105,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<UserAccountDto> queryPage) {
-        Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(queryPage.getPageConf());
+        Page<UserAccountDto> mpPagination = queryPage.toMpPage();
         QueryFieldArr queryFieldListTemp = new QueryFieldArr();
         //用户与租户关联 的外表-搜索条件
         QueryFieldArr queryTenantFieldBeanList = new QueryFieldArr();

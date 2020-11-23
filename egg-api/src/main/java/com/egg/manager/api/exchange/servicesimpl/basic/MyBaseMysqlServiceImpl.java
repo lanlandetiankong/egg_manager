@@ -163,16 +163,6 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
     }
 
     @Override
-    public Page dealAntvPageToPagination(AntdvPage vpage) {
-        Page pagination = new Page();
-        if (vpage != null) {
-            pagination.setCurrent(vpage.getCurrent());
-            pagination.setSize(vpage.getPageSize());
-        }
-        return pagination;
-    }
-
-    @Override
     public boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity) {
         if (userAccountEntity == null || StringUtils.isBlank(userAccountEntity.getFid())) {
             return true;

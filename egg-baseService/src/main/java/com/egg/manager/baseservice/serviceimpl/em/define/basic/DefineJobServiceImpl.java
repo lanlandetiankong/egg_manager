@@ -54,7 +54,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineJobDto> queryPageBean) {
-        Page<DefineJobDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefineJobDto> mpPagination = queryPageBean.toMpPage();
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));

@@ -98,15 +98,6 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      */
     UserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
 
-
-    /**
-     * 取得 mybatisplus-分页查询Pagination
-     * @param vpage 分页bean
-     * @return
-     */
-    Page dealAntvPageToPagination(AntdvPage vpage);
-
-
     /**
      * 判断UserAccount是否为空
      * @param userAccountEntity

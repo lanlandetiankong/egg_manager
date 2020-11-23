@@ -64,8 +64,8 @@ public class DefinePermissionController extends BaseController {
                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
-        queryPageBean.operateQuery().add(QueryField.gainEq("ensure", SwitchStateEnum.Open.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+        queryPageBean.operateQuery().addEq("ensure", SwitchStateEnum.Open.getValue());
         result = definePermissionService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         return result;
     }
@@ -81,7 +81,7 @@ public class DefinePermissionController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = DefinePermissionDto.class) QueryPageBean<DefinePermissionDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = definePermissionService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

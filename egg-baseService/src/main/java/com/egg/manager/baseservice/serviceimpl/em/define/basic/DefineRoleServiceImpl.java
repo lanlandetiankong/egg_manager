@@ -182,7 +182,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
-        Page<DefineRoleDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefineRoleDto> mpPagination = queryPageBean.toMpPage();
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));

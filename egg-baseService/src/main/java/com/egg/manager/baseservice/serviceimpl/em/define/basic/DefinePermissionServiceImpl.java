@@ -80,7 +80,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
-        Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<DefinePermissionDto> mpPagination = queryPageBean.toMpPage();
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));

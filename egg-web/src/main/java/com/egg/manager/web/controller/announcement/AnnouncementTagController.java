@@ -60,7 +60,7 @@ public class AnnouncementTagController extends BaseController {
     public WebResult gainEnumSelect(HttpServletRequest request, @QueryPage() QueryPageBean queryPageBean,
                                     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = announcementTagService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         result = announcementTagService.dealResultListToEnums(result);
         return result;
@@ -72,7 +72,7 @@ public class AnnouncementTagController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = AnnouncementTagDto.class) QueryPageBean<AnnouncementTagDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

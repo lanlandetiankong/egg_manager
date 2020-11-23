@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.commons.base.query.pagination;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
@@ -126,6 +127,20 @@ public class QueryPageBean<T> implements Serializable {
      */
     public QueryFieldArr getQuery(){
         return this.query != null ? this.query : this.initQuery().query ;
+    }
+
+
+    /**
+     * 扩展 - 转化为mybatisplus的Page
+     */
+    public Page toMpPage() {
+        Page pagination = new Page();
+        AntdvPage pageConf = this.getPageConf();
+        if (pageConf != null) {
+            pagination.setCurrent(pageConf.getCurrent());
+            pagination.setSize(pageConf.getPageSize());
+        }
+        return pagination;
     }
 
 

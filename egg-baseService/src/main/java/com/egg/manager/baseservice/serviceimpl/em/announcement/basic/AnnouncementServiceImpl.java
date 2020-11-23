@@ -77,7 +77,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         //取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
 
-        Page<AnnouncementDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        Page<AnnouncementDto> mpPagination = queryPageBean.toMpPage();
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));

@@ -2,6 +2,7 @@ package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
+import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.google.common.collect.Lists;
@@ -33,6 +34,17 @@ public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
     }
 
 
+    public QueryFieldArr addEq(String fieldName, Object value){
+        QueryField item = QueryField.gainEq(fieldName,value);
+        this.add(item);
+        return this ;
+    }
+
+    public QueryFieldArr addNotEq(String fieldName, Object value){
+        QueryField item = QueryField.gainNotEq(fieldName,value);
+        this.add(item);
+        return this ;
+    }
 
     public QueryFieldArr addByEnum(MyMongoCommonQueryFieldEnum fieldEnum){
         if (fieldEnum == null) {
@@ -90,6 +102,9 @@ public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
         List<QueryField> queryFields = JSONArray.parseArray(json, QueryField.class);
         return new QueryFieldArr().addBatch(queryFields);
     }
+
+
+
 
 
 }

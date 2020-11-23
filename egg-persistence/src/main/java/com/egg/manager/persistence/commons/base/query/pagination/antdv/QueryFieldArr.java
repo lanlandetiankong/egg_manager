@@ -33,14 +33,51 @@ public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
         this.addBatchByEnum(fieldEnums);
     }
 
-
+    /**
+     * 添加 字段相等条件
+     * @param fieldName db字段名
+     * @param value 匹配的值
+     * @return
+     */
     public QueryFieldArr addEq(String fieldName, Object value){
+        return addEq(true,fieldName,value) ;
+    }
+    /**
+     * 添加 字段相等条件
+     * @param flag 是否添加
+     * @param fieldName db字段名
+     * @param value 匹配的值
+     * @return
+     */
+    public QueryFieldArr addEq(Boolean flag,String fieldName, Object value){
+        if(!Boolean.TRUE.equals(flag)){
+            return this ;
+        }
         QueryField item = QueryField.gainEq(fieldName,value);
         this.add(item);
         return this ;
     }
-
+    /**
+     * 添加 字段不相等条件
+     * @param fieldName db字段名
+     * @param value 匹配的值
+     * @return
+     */
     public QueryFieldArr addNotEq(String fieldName, Object value){
+        return addNotEq(true,fieldName,value) ;
+    }
+
+    /**
+     * 添加 字段不相等条件
+     * @param flag 是否添加
+     * @param fieldName db字段名
+     * @param value 匹配的值
+     * @return
+     */
+    public QueryFieldArr addNotEq(Boolean flag,String fieldName, Object value){
+        if(!Boolean.TRUE.equals(flag)){
+            return this ;
+        }
         QueryField item = QueryField.gainNotEq(fieldName,value);
         this.add(item);
         return this ;

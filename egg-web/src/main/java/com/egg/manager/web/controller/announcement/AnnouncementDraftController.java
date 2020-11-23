@@ -67,10 +67,8 @@ public class AnnouncementDraftController extends BaseController {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryPageBean.operateQuery().addNotEq("is_published", BaseStateEnum.ENABLED.getValue());
-        if (Boolean.TRUE.equals(onlySelf)) {
-            //只查询自己发布的公告
-            queryPageBean.operateQuery().addEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
-        }
+        //只查询自己发布的公告
+        queryPageBean.operateQuery().addEq(onlySelf,FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
         result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

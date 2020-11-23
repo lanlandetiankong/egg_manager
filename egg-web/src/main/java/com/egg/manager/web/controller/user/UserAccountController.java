@@ -80,7 +80,7 @@ public class UserAccountController extends BaseController {
     })
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
-                                  @QueryPage QueryPageBean queryPageBean,
+                                  @QueryPage(tClass = UserAccountDto.class) QueryPageBean queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //解析 搜索条件

@@ -62,7 +62,7 @@ public class PageBeanMethodArgumentResolver implements HandlerMethodArgumentReso
         AntdvPage antdvPage = PageUtil.parsePaginationJsonToBean(pageJson, queryPageAnno.tClass());
         QueryFieldArr queryFields = PageUtil.parseQueryJsonToBeanList(queryJson);
         AntdvSortMap antdvSortMap = PageUtil.parseSortJsonToBean(sortJson,queryPageAnno.withCreateTimeDesc());
-        QueryPageBean queryPageBean = new QueryPageBean(antdvPage, queryFields, antdvSortMap);
+        QueryPageBean queryPageBean = new QueryPageBean(antdvPage, queryFields, antdvSortMap).nullToInit();
         return queryPageBean ;
     }
 }

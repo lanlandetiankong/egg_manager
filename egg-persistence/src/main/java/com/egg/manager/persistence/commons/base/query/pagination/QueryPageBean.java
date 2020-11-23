@@ -73,10 +73,11 @@ public class QueryPageBean<T> {
     /**
      * null转初始化
      */
-    private void nullToInit(){
+    public QueryPageBean nullToInit(){
         this.pageConf = (this.pageConf != null) ? pageConf : this.initPageConf().pageConf ;
         this.sortMap = (this.sortMap != null) ? sortMap : this.initSortMap().sortMap ;
         this.query = (this.query != null) ? query : this.initQuery().query ;
+        return this ;
     }
 
     /**

@@ -1,8 +1,14 @@
 package com.egg.manager.web.config.shiro;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.services.em.define.basic.DefineMenuService;
+import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
+import com.egg.manager.api.services.em.define.basic.DefineRoleService;
+import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -23,6 +29,15 @@ import java.util.Map;
 @Configuration
 public class MyShiroConfig {
 
+    @Reference
+    private DefineRoleService defineRoleService;
+    @Reference
+    private DefinePermissionService definePermissionService;
+    @Reference
+    private DefineMenuService defineMenuService;
+    @Reference
+    private UserAccountService userAccountService;
+
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
@@ -39,7 +54,7 @@ public class MyShiroConfig {
     public DefaultWebSecurityManager getManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         //使用自定义relam
-        manager.setRealm(new MyShiroRelam());
+        manager.setRealm(new MyShiroRelam(defineRoleService,definePermissionService,defineMenuService,userAccountService));
         /*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
@@ -90,4 +105,10 @@ public class MyShiroConfig {
     }
 
 
+
+    @Bean
+    public Realm realm() {
+        MyShiroRelam userRealm = new MyShiroRelam(defineRoleService,definePermissionService,defineMenuService,userAccountService);
+        return userRealm;
+    }
 }

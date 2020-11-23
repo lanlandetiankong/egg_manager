@@ -31,13 +31,21 @@ import java.util.Set;
 public class MyShiroRelam extends AuthorizingRealm {
 
     @Reference
-    public DefineRoleService defineRoleService;
+    private DefineRoleService defineRoleService;
     @Reference
-    public DefinePermissionService definePermissionService;
+    private DefinePermissionService definePermissionService;
     @Reference
-    public DefineMenuService defineMenuService;
+    private DefineMenuService defineMenuService;
     @Reference
-    public UserAccountService userAccountService;
+    private UserAccountService userAccountService;
+
+    public MyShiroRelam(DefineRoleService defineRoleService,DefinePermissionService definePermissionService,
+                        DefineMenuService defineMenuService,UserAccountService userAccountService){
+        this.defineRoleService = defineRoleService ;
+        this.definePermissionService = definePermissionService ;
+        this.defineMenuService = defineMenuService ;
+        this.userAccountService = userAccountService ;
+    }
 
 
     /**

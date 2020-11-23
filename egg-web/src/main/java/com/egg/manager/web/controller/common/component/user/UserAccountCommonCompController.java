@@ -5,15 +5,13 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -49,17 +47,11 @@ public class UserAccountCommonCompController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = UserAccountDto.class) QueryPageBean<UserAccountDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        //解析 搜索条件
-        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
-        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
-        //取得 分页配置
-        AntdvPage<UserAccountDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, UserAccountDto.class);
-        //取得 排序配置
-        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
-        result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 }

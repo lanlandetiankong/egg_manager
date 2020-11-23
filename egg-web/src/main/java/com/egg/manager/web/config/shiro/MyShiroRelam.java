@@ -39,12 +39,12 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Reference
     private UserAccountService userAccountService;
 
-    public MyShiroRelam(DefineRoleService defineRoleService,DefinePermissionService definePermissionService,
-                        DefineMenuService defineMenuService,UserAccountService userAccountService){
-        this.defineRoleService = defineRoleService ;
-        this.definePermissionService = definePermissionService ;
-        this.defineMenuService = defineMenuService ;
-        this.userAccountService = userAccountService ;
+    public MyShiroRelam(DefineRoleService defineRoleService, DefinePermissionService definePermissionService,
+                        DefineMenuService defineMenuService, UserAccountService userAccountService) {
+        this.defineRoleService = defineRoleService;
+        this.definePermissionService = definePermissionService;
+        this.defineMenuService = defineMenuService;
+        this.userAccountService = userAccountService;
     }
 
 

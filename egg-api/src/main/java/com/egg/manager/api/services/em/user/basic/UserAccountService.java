@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
@@ -39,7 +40,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
 
     /**
      * 分页查询 用户列表
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param result
      * @param queryFieldArr
      * @param vpage
@@ -52,15 +53,12 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
     /**
      * 分页查询 用户 Dto列表
      * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryFieldArr
-     * @param vpage
-     * @param sortMap
+     * @param queryPage
      * @return
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountDto> vpage,
-                                  AntdvSortMap sortMap);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<UserAccountDto> queryPage);
 
     /**
      * 用户账号-新增

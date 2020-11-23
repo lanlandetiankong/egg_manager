@@ -15,10 +15,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefinePermissionEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefinePermissionMapper;
 import com.egg.manager.persistence.em.define.pojo.dto.DefinePermissionDto;
@@ -66,15 +64,14 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefinePermissionEntity> vpage,
-                                            AntdvSortMap sortMap) {
+    public WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
         //取得 分页配置
-        Page page = routineCommonFunc.parsePaginationToRowBounds(vpage);
+        Page page = routineCommonFunc.parsePaginationToRowBounds(queryPageBean.getPageConf());
         //解析 搜索条件
-        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        QueryWrapper<DefinePermissionEntity> queryWrapper = super.doGetPageQueryWrapper(loginUserInfo, result, queryPageBean.getQuery(), queryPageBean.getPageConf(), queryPageBean.getSortMap());
         //取得 总数
         Integer total = definePermissionMapper.selectCount(queryWrapper);
-        result.settingPage(vpage, Long.valueOf(total));
+        result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));
         IPage iPage = definePermissionMapper.selectPage(page, queryWrapper);
         List<DefinePermissionEntity> definePermissionEntities = iPage.getRecords();
         result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
@@ -82,11 +79,10 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefinePermissionDto> vpage,
-                                         AntdvSortMap sortMap) {
-        Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
-        result.settingPage(vpage, mpPagination.getTotal());
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
+        Page<DefinePermissionDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
+        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result;
     }

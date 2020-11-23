@@ -9,12 +9,9 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementDraftMapper;
@@ -24,6 +21,7 @@ import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -64,22 +62,16 @@ public class AnnouncementDraftController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = AnnouncementDraftDto.class) QueryPageBean<AnnouncementDraftDto> queryPageBean,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        //解析 搜索条件
-        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
-        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
-        queryFieldArr.add(QueryField.gainNotEq("is_published", BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().add(QueryField.gainNotEq("is_published", BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldArr.add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
+            queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
         }
-        //取得 分页配置
-        AntdvPage<AnnouncementDraftDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, AnnouncementDraftDto.class);
-        //取得 排序配置
-        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
-        result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        result = announcementDraftService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 
@@ -91,7 +83,7 @@ public class AnnouncementDraftController extends BaseController {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
         AnnouncementDraftEntity announcementDraftEntity = announcementDraftMapper.selectById(draftId);
-//取得 公告标签 map
+        //取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
         result.putBean(AnnouncementDraftTransfer.transferEntityToVo(announcementDraftEntity, announcementTagMap));
         return result;

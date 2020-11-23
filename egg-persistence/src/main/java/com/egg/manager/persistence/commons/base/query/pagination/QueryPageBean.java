@@ -6,13 +6,15 @@ import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * @description: 
  * @author zhoucj
  * @date 2020/11/23
  */
 @Builder
-public class QueryPageBean<T> {
+public class QueryPageBean<T> implements Serializable {
     /**
      * 分页 配置
      */

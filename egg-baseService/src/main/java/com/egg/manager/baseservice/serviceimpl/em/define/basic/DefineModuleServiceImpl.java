@@ -8,6 +8,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineModuleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
@@ -59,11 +60,10 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<DefineModuleDto> vpage,
-                                         AntdvSortMap sortMap) {
-        Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(vpage);
-        List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryFieldArr, sortMap);
-        result.settingPage(vpage, mpPagination.getTotal());
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<DefineModuleDto> queryPageBean) {
+        Page<DefineModuleDto> mpPagination = super.dealAntvPageToPagination(queryPageBean.getPageConf());
+        List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
+        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
         result.putResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
         return result;
     }

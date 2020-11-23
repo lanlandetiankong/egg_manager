@@ -54,7 +54,7 @@ public class MyShiroConfig {
     public DefaultWebSecurityManager getManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         //使用自定义relam
-        manager.setRealm(new MyShiroRelam(defineRoleService,definePermissionService,defineMenuService,userAccountService));
+        manager.setRealm(new MyShiroRelam(defineRoleService, definePermissionService, defineMenuService, userAccountService));
         /*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
@@ -105,10 +105,9 @@ public class MyShiroConfig {
     }
 
 
-
     @Bean
     public Realm realm() {
-        MyShiroRelam userRealm = new MyShiroRelam(defineRoleService,definePermissionService,defineMenuService,userAccountService);
+        MyShiroRelam userRealm = new MyShiroRelam(defineRoleService, definePermissionService, defineMenuService, userAccountService);
         return userRealm;
     }
 }

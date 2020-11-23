@@ -3,7 +3,6 @@ package com.egg.manager.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +34,6 @@ public class BaseController {
             log.error("", e);
         }
     }
-
-
-
 
 
 }

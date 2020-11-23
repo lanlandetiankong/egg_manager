@@ -1,6 +1,5 @@
 package com.egg.manager.web.enhance.resolver;
 
-import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
@@ -61,8 +59,8 @@ public class PageBeanMethodArgumentResolver implements HandlerMethodArgumentReso
         //解析json转为bean
         AntdvPage antdvPage = PageUtil.parsePaginationJsonToBean(pageJson, queryPageAnno.tClass());
         QueryFieldArr queryFields = PageUtil.parseQueryJsonToBeanList(queryJson);
-        AntdvSortMap antdvSortMap = PageUtil.parseSortJsonToBean(sortJson,queryPageAnno.withCreateTimeDesc());
+        AntdvSortMap antdvSortMap = PageUtil.parseSortJsonToBean(sortJson, queryPageAnno.withCreateTimeDesc());
         QueryPageBean queryPageBean = new QueryPageBean(antdvPage, queryFields, antdvSortMap).nullToInit();
-        return queryPageBean ;
+        return queryPageBean;
     }
 }

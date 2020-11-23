@@ -22,9 +22,10 @@ import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEn
 import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
@@ -106,15 +107,14 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
     }
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryFieldArr queryFieldArr, AntdvPage<UserAccountDto> vpage,
-                                         AntdvSortMap sortMap) {
-        Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(vpage);
+    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<UserAccountDto> queryPage) {
+        Page<UserAccountDto> mpPagination = super.dealAntvPageToPagination(queryPage.getPageConf());
         QueryFieldArr queryFieldListTemp = new QueryFieldArr();
         //用户与租户关联 的外表-搜索条件
         QueryFieldArr queryTenantFieldBeanList = new QueryFieldArr();
         //用户与部门关联 的外表-搜索条件
         QueryFieldArr queryDepartmentFieldBeanList = new QueryFieldArr();
-        for (QueryField queryField : queryFieldArr) {
+        for (QueryField queryField : queryPage.getQuery()) {
             //外部关联名，条件需单独识别
             String foreignName = queryField.getForeignName();
             if (StringUtils.isBlank(foreignName)) {
@@ -130,8 +130,8 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
                 }
             }
         }
-        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, sortMap, queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.settingPage(vpage, mpPagination.getTotal());
+        List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, queryPage.getSortMap(), queryTenantFieldBeanList, queryDepartmentFieldBeanList);
+        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
         result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }

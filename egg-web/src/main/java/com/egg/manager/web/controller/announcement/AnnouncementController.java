@@ -9,12 +9,9 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.commons.util.page.PageUtil;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.AnnouncementTagEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.mapper.AnnouncementMapper;
@@ -25,6 +22,7 @@ import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.web.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -65,46 +63,31 @@ public class AnnouncementController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public WebResult queryDtoPage(HttpServletRequest request, String queryObj, String paginationObj, String sortObj,
+    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = AnnouncementDto.class) QueryPageBean<AnnouncementDto> queryPageBean,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        //解析 搜索条件
-        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
-        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldArr.add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
+            queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
         }
-        //取得 分页配置
-        AntdvPage<AnnouncementDto> vpage = PageUtil.parsePaginationJsonToBean(paginationObj, AnnouncementDto.class);
-        //取得 排序配置
-        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
-        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 
     @ApiOperation(value = "筛选查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
-    public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize,
+    public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize, @QueryPage(tClass = AnnouncementDto.class) QueryPageBean<AnnouncementDto> queryPageBean,
                                        Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        //这些查询条件暂时用不到
-        String queryObj = null, paginationObj = null, sortObj = null;
-        //解析 搜索条件
-        QueryFieldArr queryFieldArr = PageUtil.parseQueryJsonToBeanList(queryObj);
-        queryFieldArr.add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
+        queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue()));
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
-            queryFieldArr.add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
+            queryPageBean.operateQuery().add(QueryField.gainEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid()));
         }
-        //取得 分页配置
-        AntdvPage vpage = AntdvPage.gainPageWithSize(limitSize);
-        //取得 排序配置
-        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortObj, true);
-        //按创建时间 倒序
-        sortMap.putDesc(FieldConst.COL_CREATE_TIME);
-        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryFieldArr, vpage, sortMap);
+        queryPageBean.operatePageConf().setPageSize(limitSize);
+        result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         return result;
     }
 

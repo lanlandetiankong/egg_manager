@@ -5,9 +5,9 @@ import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
@@ -67,7 +67,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doBatchUpdate(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean) {
+    public Long doBatchUpdate(UserAccountEntity loginUser, MongoQueryPage queryBuffer, MyMongoUpdateBean<T> updateBean) {
         Assert.notNull(updateBean, "updateBean不能为空！");
         Assert.notNull(updateBean.getDocument(), "document不能为空！");
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
@@ -145,7 +145,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer, Sort sort) {
+    public List<T> doFindAll(UserAccountEntity loginUser, MongoQueryPage queryBuffer, Sort sort) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return doFindAll(loginUser, query, sort);
@@ -167,7 +167,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer) {
+    public List<T> doFindAll(UserAccountEntity loginUser, MongoQueryPage queryBuffer) {
         return this.doFindAll(loginUser, queryBuffer, null);
     }
 
@@ -189,7 +189,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public T doFindOne(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer) {
+    public T doFindOne(UserAccountEntity loginUser, MongoQueryPage queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.findOne(query).get();
@@ -202,14 +202,14 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public long doCount(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer) {
+    public long doCount(UserAccountEntity loginUser, MongoQueryPage queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.count(query);
     }
 
     @Override
-    public boolean doExists(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer) {
+    public boolean doExists(UserAccountEntity loginUser, MongoQueryPage queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.exists(query);
@@ -222,16 +222,16 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public MongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer) {
+    public MongoQryPage<T> doFindPage(UserAccountEntity loginUser, MongoQueryPage queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
-        QPageRequest mPageFromBean = MongoQueryBean.<T>getMgPageFromBean(queryBuffer.getPageBean());
+        QPageRequest mPageFromBean = MongoQueryBean.<T>getMgPageFromBean(queryBuffer.getPageConf());
         Page<T> page = baseRepository.findPage(query, mPageFromBean);
         return MongoQueryBean.getPageBeanFromPage(page);
     }
 
     @Override
-    public MongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MongoQueryPageBean<T> pageBean) {
+    public MongoQryPage<T> doFindPage(UserAccountEntity loginUser, MongoQryPage<T> pageBean) {
         return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMgPageFromBean(pageBean)));
     }
 

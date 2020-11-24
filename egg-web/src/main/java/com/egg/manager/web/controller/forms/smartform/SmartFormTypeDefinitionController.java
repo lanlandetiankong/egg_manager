@@ -6,14 +6,14 @@ import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinition
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
-import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonQueryFieldEnum;
-import com.egg.manager.persistence.commons.base.enums.query.mongo.MyMongoCommonSortFieldEnum;
+import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPage;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormTypeDefinitionMongoVerifyO;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
@@ -66,11 +66,11 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
-                .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
-                .getRefreshedSelf();
-        mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-        MongoQueryPageBean<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryBuffer);
+        MongoQueryPage mongoQueryPage = new MongoQueryPage();
+        mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
+        mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
+        MongoQryPage<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
         result.putPage(pageBean);
         return result;
     }
@@ -86,11 +86,11 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
-                .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
-                .getRefreshedSelf();
-        mongoQueryBuffer = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryBuffer);
-        List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, mongoQueryBuffer);
+        MongoQueryPage mongoQueryPage = new MongoQueryPage();
+        mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
+        mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
+        List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, mongoQueryPage);
         result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);
         return result;
     }

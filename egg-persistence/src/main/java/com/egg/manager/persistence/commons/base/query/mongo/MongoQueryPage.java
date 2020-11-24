@@ -1,40 +1,32 @@
-package com.egg.manager.persistence.commons.base.query.pagination;
+package com.egg.manager.persistence.commons.base.query.mongo;
 
-
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
+import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import lombok.Builder;
-
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
- * @description: 
  * @author zhoucj
- * @date 2020/11/23
+ * @description数据库查询字段，用作dubbo各个service之间的传输对象
+ * @date 2020/10/20
  */
-@Builder
-public class QueryPageBean<T> implements Serializable {
-    /**
-     * 分页 配置
-     */
-    private AntdvPage pageConf ;
+@EqualsAndHashCode(callSuper = true)
+public class MongoQueryPage extends BaseQueryBean {
 
     /**
-     * 查询条件 配置
+     * (除HttpServletRequest取得外)添加的查询字段
      */
     private QueryFieldArr query ;
     /**
-     * 排序 配置
+     * 添加到 HttpServletRequest取得的排序字段前
      */
     private AntdvSortMap sortMap ;
-
-
     /**
-     * 无参构造-初始化
+     * 分页bean
      */
-    public QueryPageBean() {
+    private MongoQryPage pageConf;
+
+    public MongoQueryPage() {
         this.initPageConf();
         this.initSortMap();
         this.initQuery();
@@ -42,7 +34,7 @@ public class QueryPageBean<T> implements Serializable {
     /**
      * 全参构造-初始化
      */
-    public QueryPageBean(AntdvPage pageConf,QueryFieldArr query,AntdvSortMap sortMap) {
+    public MongoQueryPage(MongoQryPage pageConf,QueryFieldArr query,AntdvSortMap sortMap) {
         this.pageConf = pageConf;
         this.sortMap = sortMap;
         this.query = query;
@@ -52,15 +44,15 @@ public class QueryPageBean<T> implements Serializable {
      * 分页配置-初始化
      * @return
      */
-    private QueryPageBean initPageConf(){
-        this.pageConf =  AntdvPage.gainDefault(Object.class);
+    private MongoQueryPage initPageConf(){
+        this.pageConf =  MongoQryPage.gainDefault();
         return this;
     }
     /**
      * 排序配置-初始化
      * @return
      */
-    private QueryPageBean initSortMap(){
+    private MongoQueryPage initSortMap(){
         this.sortMap =  new AntdvSortMap();
         return this;
     }
@@ -68,7 +60,7 @@ public class QueryPageBean<T> implements Serializable {
      * 查询配置-初始化
      * @return
      */
-    private QueryPageBean initQuery(){
+    private MongoQueryPage initQuery(){
         this.query = new QueryFieldArr();
         return this;
     }
@@ -76,19 +68,21 @@ public class QueryPageBean<T> implements Serializable {
     /**
      * null转初始化
      */
-    public QueryPageBean nullToInit(){
+    public MongoQueryPage nullToInit(){
         this.pageConf = (this.pageConf != null) ? pageConf : this.initPageConf().pageConf ;
         this.sortMap = (this.sortMap != null) ? sortMap : this.initSortMap().sortMap ;
         this.query = (this.query != null) ? query : this.initQuery().query ;
         return this ;
     }
 
+
+
     /**
-     * 操作 分页配置(没有Setter，要操作必须通过operate进行操作)
+     * 操作 排序Map(没有Setter，要操作必须通过operate进行操作)
      * @return
      */
-    public AntdvPage operatePageConf(){
-        return this.pageConf ;
+    public QueryFieldArr operateQuery(){
+        return this.query;
     }
 
     /**
@@ -98,20 +92,21 @@ public class QueryPageBean<T> implements Serializable {
     public AntdvSortMap operateSortMap(){
         return this.sortMap ;
     }
-
     /**
-     * 操作 查询过滤(没有Setter，要操作必须通过operate进行操作)
+     * 操作 分页配置(没有Setter，要操作必须通过operate进行操作)
      * @return
      */
-    public QueryFieldArr operateQuery(){
-        return this.query ;
+    public MongoQryPage operatePageConf(){
+        return this.pageConf;
     }
+
+
 
     /**
      * getter-pageConf
      * @return
      */
-    public AntdvPage getPageConf(){
+    public MongoQryPage getPageConf(){
         return this.pageConf != null ? this.pageConf : this.initPageConf().pageConf ;
     }
     /**
@@ -129,19 +124,13 @@ public class QueryPageBean<T> implements Serializable {
         return this.query != null ? this.query : this.initQuery().query ;
     }
 
-
     /**
-     * 扩展 - 转化为mybatisplus的Page
+     * getter-query
+     * @return
      */
-    public Page toMpPage() {
-        Page pagination = new Page();
-        AntdvPage pageConf = this.getPageConf();
-        if (pageConf != null) {
-            pagination.setCurrent(pageConf.getCurrent());
-            pagination.setSize(pageConf.getPageSize());
-        }
-        return pagination;
+    public MongoQueryPage setPageConf(MongoQryPage pageConf){
+        this.pageConf = (this.pageConf != null) ? pageConf : this.initPageConf().pageConf ;
+        return this ;
     }
-
 
 }

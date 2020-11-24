@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.commons.base.query;
 
-import com.egg.manager.persistence.commons.base.enums.query.mysql.MyQueryMatchingEnum;
+import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 
 import java.io.Serializable;
@@ -17,7 +17,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
         return bean;
     }
 
@@ -26,7 +26,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
         return bean;
     }
 
@@ -35,7 +35,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
         return bean;
     }
 
@@ -44,7 +44,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.EqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean;
     }
@@ -54,7 +54,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.NotEqualsMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean;
     }
@@ -64,7 +64,7 @@ public class BaseQueryBean implements Serializable {
         bean.setFieldName(fieldName);
         bean.setValue(value);
         //枚举值参数设置到bean
-        MyQueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
+        QueryMatchingEnum.LikeMatch.dealSetToQueryFormFieldBean(bean);
         bean.setForeignName(foreignName);
         return bean;
     }

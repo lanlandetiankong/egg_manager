@@ -1,8 +1,8 @@
 package com.egg.manager.api.exchange.services.mongo;
 
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBuffer;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPageBean;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
+import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
@@ -59,7 +59,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param updateBean
      * @return
      */
-    Long doBatchUpdate(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer, MyMongoUpdateBean<T> updateBean);
+    Long doBatchUpdate(UserAccountEntity loginUser, MongoQueryPage queryBuffer, MyMongoUpdateBean<T> updateBean);
 
     /**
      * 根据id-伪删除
@@ -156,7 +156,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    List<T> doFindAll(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer);
+    List<T> doFindAll(UserAccountEntity loginUser, MongoQueryPage queryBuffer);
 
     /**
      * 根据查询条件查询记录并排序
@@ -165,7 +165,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param sort
      * @return
      */
-    List<T> doFindAll(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer, Sort sort);
+    List<T> doFindAll(UserAccountEntity loginUser, MongoQueryPage queryBuffer, Sort sort);
 
     /**
      * 分页查询
@@ -173,7 +173,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param pageBean
      * @return
      */
-    MongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MongoQueryPageBean<T> pageBean);
+    MongoQryPage<T> doFindPage(UserAccountEntity loginUser, MongoQryPage<T> pageBean);
 
     /**
      * 根据封装的MongoQueryBean进行分页查询
@@ -181,7 +181,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    MongoQueryPageBean<T> doFindPage(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer);
+    MongoQryPage<T> doFindPage(UserAccountEntity loginUser, MongoQueryPage queryBuffer);
 
     /**
      * 根据条件查询首个项
@@ -189,7 +189,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    T doFindOne(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer);
+    T doFindOne(UserAccountEntity loginUser, MongoQueryPage queryBuffer);
 
 
     /**
@@ -205,7 +205,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    long doCount(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer);
+    long doCount(UserAccountEntity loginUser, MongoQueryPage queryBuffer);
 
     /**
      * 根据条件，判断是否有项存在
@@ -213,7 +213,7 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
      * @param queryBuffer
      * @return
      */
-    boolean doExists(UserAccountEntity loginUser, MongoQueryBuffer queryBuffer);
+    boolean doExists(UserAccountEntity loginUser, MongoQueryPage queryBuffer);
 
     /**
      * 判断id是否有对应项

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.commons.base.enums.query.mongo;
+package com.egg.manager.persistence.commons.base.enums.query;
 
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 
@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFiel
  * @description
  * @date 2020/10/20
  */
-public enum MyMongoQueryMatchingEnum {
+public enum QueryMatchingEnum {
     EqualsMatch("equals", "=", "相等查询"),
     NotEqualsMatch("notEquals", "!=", "字符串非等查询"),
     LikeMatch("like", "like", "字符串通配查询"),
@@ -15,29 +15,25 @@ public enum MyMongoQueryMatchingEnum {
 
     ;
 
-    MyMongoQueryMatchingEnum(String value, String sqlMatchingValue, String label) {
+    QueryMatchingEnum(String value, String sqlMatchingValue, String label) {
         this.value = value;
         this.sqlMatchingValue = sqlMatchingValue;
         this.label = label;
     }
 
-    /**
-     * 将枚举的参数设置到QueryFormFieldBean
-     * @param bean
-     */
     public void dealSetToQueryFormFieldBean(QueryField bean) {
         bean = bean != null ? bean : new QueryField();
         bean.setMatching(this.getValue());
         bean.setSqlMatching(this.getSqlMatchingValue());
     }
 
-    public boolean equalsValue(String value) {
-        return this.value.equals(value);
-    }
-
     private String value;
     private String sqlMatchingValue;
     private String label;
+
+    public boolean equalsValue(String value) {
+        return this.value.equals(value);
+    }
 
 
     public String getValue() {

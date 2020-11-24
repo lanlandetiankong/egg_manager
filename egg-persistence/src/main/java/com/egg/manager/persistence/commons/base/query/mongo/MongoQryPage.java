@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class MongoQueryPageBean<T> extends BaseQueryBean {
+public class MongoQryPage<T> extends BaseQueryBean {
     /**
      * 当前页
      */
@@ -31,30 +31,30 @@ public class MongoQueryPageBean<T> extends BaseQueryBean {
      */
     private List<T> content;
 
-    public MongoQueryPageBean() {
+    public MongoQryPage() {
     }
 
-    public MongoQueryPageBean(Integer current, Integer pageSize) {
+    public MongoQryPage(Integer current, Integer pageSize) {
         this.current = current;
         this.pageSize = pageSize;
     }
 
-    public MongoQueryPageBean(Integer current, Integer pageSize, int total) {
+    public MongoQryPage(Integer current, Integer pageSize, int total) {
         this.current = current;
         this.pageSize = pageSize;
         this.total = total;
     }
 
-    public static MongoQueryPageBean gainLimitPaginationBean(Integer pageSize) {
-        return new MongoQueryPageBean(1, pageSize, 0);
+    public static MongoQryPage gainLimitPaginationBean(Integer pageSize) {
+        return new MongoQryPage(1, pageSize, 0);
     }
 
     /**
      * 默认分页
      * @return
      */
-    public static MongoQueryPageBean gainDefaultPaginationBean() {
-        return new MongoQueryPageBean(1, 10, 0);
+    public static MongoQryPage gainDefault() {
+        return new MongoQryPage(1, 10, 0);
     }
 
 

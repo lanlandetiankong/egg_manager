@@ -30,7 +30,6 @@ public class QueryPageBean<T> implements Serializable {
      */
     private AntdvSortMap sortMap ;
 
-
     /**
      * 无参构造-初始化
      */
@@ -129,6 +128,14 @@ public class QueryPageBean<T> implements Serializable {
         return this.query != null ? this.query : this.initQuery().query ;
     }
 
+    /**
+     * getter-pageConf
+     * @return
+     */
+    public QueryPageBean setPageConf(AntdvPage pageConf){
+        this.pageConf = pageConf != null ? this.pageConf : this.initPageConf().pageConf ;
+        return this;
+    }
 
     /**
      * 扩展 - 转化为mybatisplus的Page

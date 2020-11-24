@@ -11,9 +11,9 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPage;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormTypeDefinitionRepository;
@@ -71,11 +71,11 @@ public class SmartFormDefinitionController extends BaseController {
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        MongoQueryPage mongoQueryPage = new MongoQueryPage();
+        QueryPageBean mongoQueryPage = new QueryPageBean();
         mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED,SwitchStateEnum.Close.getValue());
         mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
-        MongoQryPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
+        AntdvPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
         result.putPage(pageBean);
         return result;
     }
@@ -91,11 +91,11 @@ public class SmartFormDefinitionController extends BaseController {
     public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        MongoQueryPage mongoQueryPage = new MongoQueryPage();
+        QueryPageBean mongoQueryPage = new QueryPageBean();
         mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED,SwitchStateEnum.Close.getValue());
         mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
-        MongoQryPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
+        AntdvPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
         result.putPage(pageBean);
         return result;
     }

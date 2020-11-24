@@ -5,6 +5,8 @@ import com.egg.manager.persistence.commons.base.constant.Constant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
@@ -25,7 +27,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author zhoucj
- * @description MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 MongoQueryPage 中
+ * @description MongoDb 查询的封装bean，但不可用作Dubbo的传输对象，调用 MongoQueryBean.getMongoQueryBeanFromRequest(request,mongoQueryBuffer) 可以将request的查询条件设置到 QueryPageBean 中
  * @date 2020/10/20
  */
 @Slf4j
@@ -42,7 +44,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     /**
      * 分页查询bean
      */
-    private MongoQryPage pageBean;
+    private AntdvPage pageBean;
     /**
      * 排序Sort
      */
@@ -56,7 +58,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     public MongoQueryBean() {
     }
 
-    public MongoQueryBean(List<Criteria> criterias, MongoQryPage pageBean, Sort sort) {
+    public MongoQueryBean(List<Criteria> criterias, AntdvPage pageBean, Sort sort) {
         if (CollectionUtils.isNotEmpty(criterias)) {
             this.criteriaList.addAll(criterias);
         }
@@ -65,7 +67,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         this.sort = sort;
     }
 
-    public MongoQueryBean(List<Criteria> criterias, MongoQryPage pageBean, Sort sort, List<T> data) {
+    public MongoQueryBean(List<Criteria> criterias, AntdvPage pageBean, Sort sort, List<T> data) {
         if (CollectionUtils.isNotEmpty(criterias)) {
             this.criteriaList.addAll(criterias);
         }
@@ -89,12 +91,12 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     public static final String MOFIELD_ORDER_NUM = "orderNum";
 
 
-    public static MongoQueryPage getMongoQueryBeanFromRequest(HttpServletRequest request, MongoQueryPage queryBuffer) {
+    public static QueryPageBean getMongoQueryBeanFromRequest(HttpServletRequest request, QueryPageBean queryBuffer) {
         //查询字段
         List<Criteria> criterias = new ArrayList<>();
         criterias.addAll(getMgQueryFilterFromRequest(request, queryBuffer));
         //分页
-        MongoQryPage pageBean = getPageBeanFromRequest(request);
+        AntdvPage pageBean = getPageBeanFromRequest(request);
         //排序-json
         String sortJson = request.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ);
         AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortJson, false);
@@ -110,7 +112,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @param queryBuffer 查询配置
      * @return
      */
-    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, MongoQueryPage queryBuffer) {
+    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, QueryPageBean queryBuffer) {
         List<Criteria> criterias = new ArrayList<>();
         String queryJson = request.getParameter(PARAMETER_QUERY_OBJ);
         if (StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)) {
@@ -155,13 +157,13 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @param request
      * @return
      */
-    public static MongoQryPage getPageBeanFromRequest(HttpServletRequest request) {
+    public static AntdvPage getPageBeanFromRequest(HttpServletRequest request) {
         String paginationJson = request.getParameter(PARAMETER_PAGINATION_OBJ);
-        MongoQryPage vpage = null;
+        AntdvPage vpage = null;
         if (StringUtils.isNotBlank(paginationJson)) {
-            vpage = JSONObject.parseObject(paginationJson, MongoQryPage.class);
+            vpage = JSONObject.parseObject(paginationJson, AntdvPage.class);
         } else {
-            vpage = MongoQryPage.gainDefault();
+            vpage = AntdvPage.gainDefault(Object.class);
         }
         dealInitPageBean(vpage);
         return vpage;
@@ -173,8 +175,8 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @param vpage
      * @return
      */
-    public static QPageRequest getMgPageFromBean(MongoQryPage vpage) {
-        vpage = vpage != null ? vpage : MongoQryPage.gainDefault();
+    public static QPageRequest getMgPageFromBean(AntdvPage vpage) {
+        vpage = vpage != null ? vpage : AntdvPage.gainDefault(Object.class);
         return QPageRequest.of(vpage.getCurrent(), vpage.getPageSize());
     }
 
@@ -184,8 +186,8 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @param page
      * @return
      */
-    public static <T> MongoQryPage<T> getPageBeanFromPage(Page<T> page) {
-        MongoQryPage<T> pageBean = new MongoQryPage<T>();
+    public static <T> AntdvPage<T> getPageBeanFromPage(Page<T> page) {
+        AntdvPage<T> pageBean = new AntdvPage<T>();
         pageBean.setContent(page.getContent());
         pageBean.setTotal(page.getTotalElements());
         return pageBean;
@@ -193,13 +195,13 @@ public class MongoQueryBean<T> extends BaseQueryBean {
 
 
     /**
-     * MongoQryPage 数据初始化
+     * AntdvPage 数据初始化
      * @param vpage
      * @return
      */
-    private static MongoQryPage dealInitPageBean(MongoQryPage vpage) {
+    private static AntdvPage dealInitPageBean(AntdvPage vpage) {
         if (vpage == null) {
-            return new MongoQryPage(DEFAULT_PAGE, DEFAULT_SIZE);
+            return new AntdvPage(DEFAULT_PAGE, DEFAULT_SIZE);
         }
         if (vpage.getCurrent() == null || vpage.getCurrent() < 0) {
             vpage.setCurrent(DEFAULT_PAGE);
@@ -215,7 +217,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
 
 
 
-    public MongoQueryBean<T> appendQueryFieldsToQuery(MongoQueryPage queryFieldBuffer) {
+    public MongoQueryBean<T> appendQueryFieldsToQuery(QueryPageBean queryFieldBuffer) {
         if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQuery())) {
             return this;
         }
@@ -266,11 +268,11 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         return pageRequest;
     }
 
-    public MongoQryPage getPageBean() {
+    public AntdvPage getPageBean() {
         return pageBean;
     }
 
-    public void setPageBean(MongoQryPage pageBean) {
+    public void setPageBean(AntdvPage pageBean) {
         this.pageBean = pageBean;
     }
 

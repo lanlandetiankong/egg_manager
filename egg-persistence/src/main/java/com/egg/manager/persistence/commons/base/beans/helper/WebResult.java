@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import cn.hutool.http.HttpStatus;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 
 
 /**
@@ -62,7 +62,7 @@ public class WebResult extends AbstractResult {
         return this;
     }
 
-    public WebResult putPage(MongoQryPage pageBean) {
+    public WebResult putPage(AntdvPage pageBean) {
         this.putResultList(pageBean.getContent());
         this.putCount(pageBean.getTotal());
         return this;

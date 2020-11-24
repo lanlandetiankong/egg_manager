@@ -10,9 +10,9 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQryPage;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryPage;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
 import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
 import com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email.EmailSendRecordMapstruct;
@@ -67,11 +67,11 @@ public class EmailSendRecordController extends BaseController {
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        MongoQueryPage mongoQueryPage = new MongoQueryPage();
+        QueryPageBean mongoQueryPage = new QueryPageBean();
         mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
         mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
-        MongoQryPage<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUserInfo, mongoQueryPage);
+        AntdvPage<EmailSendRecordMgo> pageBean = emailSendRecordMgoService.doFindPage(loginUserInfo, mongoQueryPage);
         result.putPage(pageBean);
         return result;
     }

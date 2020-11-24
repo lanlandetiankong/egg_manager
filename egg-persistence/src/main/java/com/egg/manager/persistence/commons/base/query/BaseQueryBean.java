@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.base.query;
 
+import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 
@@ -11,6 +12,13 @@ import java.io.Serializable;
  * @date 2020/10/20
  */
 public class BaseQueryBean implements Serializable {
+    public final static int DEFAULT_PAGE = 0;
+    public final static int DEFAULT_SIZE = 10;
+    public final static String PARAMETER_PAGINATION_OBJ = WebApiConstant.FIELDNAME_PAGINATION_OBJ;
+    public final static String PARAMETER_QUERY_OBJ = WebApiConstant.FIELDNAME_QUERY_OBJ;
+    public final static String PARAMETER_SORT_OBJ = WebApiConstant.FIELDNAME_SORT_OBJ;
+
+
     public static QueryField gainEq(String fieldName, Object value) {
         QueryField bean = new QueryField();
 

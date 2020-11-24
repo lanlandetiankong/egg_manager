@@ -55,4 +55,5 @@ public class AntdvPage<T> extends BasePagination {
     public static <T> AntdvPage<T> gainDefault(Class<T> clazz) {
         return new AntdvPage<T>(1, 10, 0L,null);
     }
+
 }

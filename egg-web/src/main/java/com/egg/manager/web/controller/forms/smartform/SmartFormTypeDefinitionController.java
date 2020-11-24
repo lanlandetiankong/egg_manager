@@ -11,7 +11,6 @@ import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
@@ -19,6 +18,7 @@ import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFor
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
@@ -63,14 +63,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = "排序对象 ->> json格式", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult doGetDataPage(HttpServletRequest request,@QueryPage(tClass = SmartFormTypeDefinitionMgo.class) QueryPageBean<SmartFormTypeDefinitionMgo> queryPageBean,
+                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        QueryPageBean mongoQueryPage = new QueryPageBean();
-        mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
-        mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
-        mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
-        AntdvPage<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, mongoQueryPage);
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
+        AntdvPage<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
         return result;
     }
@@ -83,14 +82,13 @@ public class SmartFormTypeDefinitionController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataAll")
-    public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult doGetDataAll(HttpServletRequest request,@QueryPage(tClass = SmartFormTypeDefinitionMgo.class) QueryPageBean<SmartFormTypeDefinitionMgo> queryPageBean,
+                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        QueryPageBean mongoQueryPage = new QueryPageBean();
-        mongoQueryPage.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
-        mongoQueryPage.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
-        mongoQueryPage = MongoQueryBean.getMongoQueryBeanFromRequest(request, mongoQueryPage);
-        List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, mongoQueryPage);
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
+        List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, queryPageBean);
         result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);
         return result;
     }

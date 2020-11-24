@@ -1,6 +1,5 @@
 package com.egg.manager.web.enhance.resolver;
 
-import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
@@ -48,18 +47,12 @@ public class PageBeanMethodArgumentResolver implements HandlerMethodArgumentReso
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
         HttpServletRequest httpServletRequest = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
-        //分页-json
-        String pageJson = httpServletRequest.getParameter(WebApiConstant.FIELDNAME_PAGINATION_OBJ);
-        //查询-json
-        String queryJson = httpServletRequest.getParameter(WebApiConstant.FIELDNAME_QUERY_OBJ);
-        //排序-json
-        String sortJson = httpServletRequest.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ);
         //方法的参数注解
         QueryPage queryPageAnno = methodParameter.getParameterAnnotation(QueryPage.class);
         //解析json转为bean
-        AntdvPage antdvPage = PageUtil.parsePaginationJsonToBean(pageJson, queryPageAnno.tClass());
-        QueryFieldArr queryFields = PageUtil.parseQueryJsonToBeanList(queryJson);
-        AntdvSortMap antdvSortMap = PageUtil.parseSortJsonToBean(sortJson, queryPageAnno.withCreateTimeDesc());
+        AntdvPage antdvPage = PageUtil.parsePaginationJsonToBean(httpServletRequest, queryPageAnno.tClass());
+        QueryFieldArr queryFields = PageUtil.parseQueryJsonToBeanList(httpServletRequest);
+        AntdvSortMap antdvSortMap = PageUtil.parseSortJsonToBean(httpServletRequest, queryPageAnno.withCreateTimeDesc());
         QueryPageBean queryPageBean = new QueryPageBean(antdvPage, queryFields, antdvSortMap).nullToInit();
         return queryPageBean;
     }

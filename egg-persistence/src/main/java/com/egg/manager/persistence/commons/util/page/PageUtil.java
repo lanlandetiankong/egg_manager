@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.persistence.commons.base.constant.Constant;
+import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
@@ -37,7 +38,14 @@ public class PageUtil {
         return bean;
     }
 
-
+    /**
+     * 解析 搜索条件 map
+     * @param request
+     * @return
+     */
+    public static QueryFieldArr parseQueryJsonToBeanList(HttpServletRequest request) {
+        return parseQueryJsonToBeanList(request.getParameter(WebApiConstant.FIELDNAME_QUERY_OBJ));
+    }
     /**
      * 解析 搜索条件 map
      * @param queryJson
@@ -59,6 +67,9 @@ public class PageUtil {
         return fieldBeanList;
     }
 
+    public static <T> AntdvPage<T> parsePaginationJsonToBean(HttpServletRequest request,Class<T> clazz) {
+        return parsePaginationJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_PAGINATION_OBJ),clazz);
+    }
     /**
      * 取得分页 bean
      * @param paginationJson
@@ -74,6 +85,9 @@ public class PageUtil {
         return vpage;
     }
 
+    public static AntdvSortMap parseSortJsonToBean(HttpServletRequest request,boolean addCreateTimeDesc) {
+        return parseSortJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ),addCreateTimeDesc);
+    }
     /**
      * 取得排序 bean
      * @param sortObj

@@ -1,8 +1,6 @@
 package com.egg.manager.persistence.commons.base.query.mongo;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.commons.base.constant.Constant;
-import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
@@ -10,17 +8,14 @@ import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.commons.util.page.PageUtil;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.querydsl.QPageRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -77,60 +72,6 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         this.data = data;
     }
 
-
-    public final static int DEFAULT_PAGE = 0;
-    public final static int DEFAULT_SIZE = 10;
-    public final static String PARAMETER_PAGINATION_OBJ = WebApiConstant.FIELDNAME_PAGINATION_OBJ;
-    public final static String PARAMETER_QUERY_OBJ = WebApiConstant.FIELDNAME_QUERY_OBJ;
-    public final static String PARAMETER_SORT_OBJ = WebApiConstant.FIELDNAME_SORT_OBJ;
-    public static final String ORDER_ASC = "ascend";
-    public static final String ORDER_DESC = "descend";
-
-
-    public static final String MOFIELD_CREATE_TIME = "createTime";
-    public static final String MOFIELD_ORDER_NUM = "orderNum";
-
-
-    public static QueryPageBean getMongoQueryBeanFromRequest(HttpServletRequest request, QueryPageBean queryBuffer) {
-        //查询字段
-        List<Criteria> criterias = new ArrayList<>();
-        criterias.addAll(getMgQueryFilterFromRequest(request, queryBuffer));
-        //分页
-        AntdvPage pageBean = getPageBeanFromRequest(request);
-        //排序-json
-        String sortJson = request.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ);
-        AntdvSortMap sortMap = PageUtil.parseSortJsonToBean(sortJson, false);
-        queryBuffer.setPageConf(pageBean);
-        queryBuffer.operateSortMap().putAll(sortMap);
-        return queryBuffer;
-    }
-
-
-    /**
-     * 从HttpServletRequest取得Query(携带过滤可查询字段)
-     * @param request
-     * @param queryBuffer 查询配置
-     * @return
-     */
-    public static List<Criteria> getMgQueryFilterFromRequest(HttpServletRequest request, QueryPageBean queryBuffer) {
-        List<Criteria> criterias = new ArrayList<>();
-        String queryJson = request.getParameter(PARAMETER_QUERY_OBJ);
-        if (StringUtils.isBlank(queryJson) || Constant.JSON_EMPTY_ARRAY.equals(queryJson)) {
-            return criterias;
-        } else {
-            QueryFieldArr fieldBeansTemp = QueryFieldArr.parseFromJson(queryJson);
-            if (CollectionUtils.isNotEmpty(fieldBeansTemp)) {
-                //如果黑名单/白名单 为空，则将所有查询字段设置到Query
-                for (QueryField fieldBean : fieldBeansTemp) {
-                    //将查询条件设置到Query
-                    dealQueryFormFieldBeanToQuery(criterias, fieldBean);
-                    queryBuffer.operateQuery().add(fieldBean);
-                }
-            }
-        }
-        return criterias;
-    }
-
     /**
      * 将QueryFormFieldBean 设置到Mongo Query
      * @param criteriaList
@@ -138,6 +79,9 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @return
      */
     public static void dealQueryFormFieldBeanToQuery(List<Criteria> criteriaList, QueryField fieldBean) {
+        if(fieldBean == null){
+            return ;
+        }
         if (QueryMatchingEnum.EqualsMatch.equalsValue(fieldBean.getMatching())) {
             //字符串相等查询
             criteriaList.add(Criteria.where(fieldBean.getFieldName()).is(fieldBean.getValue()));
@@ -149,24 +93,9 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         } else if (QueryMatchingEnum.NotEqualsMatch.equalsValue(fieldBean.getMatching())) {
             //字符串非等查询
             criteriaList.add(Criteria.where(fieldBean.getFieldName()).ne(fieldBean.getValue()));
+        }   else {
+            log.warn("未被匹配的查询条件->{}",JSONObject.toJSONString(fieldBean));
         }
-    }
-
-    /**
-     * 从HttpServletRequest取得Mongo分页
-     * @param request
-     * @return
-     */
-    public static AntdvPage getPageBeanFromRequest(HttpServletRequest request) {
-        String paginationJson = request.getParameter(PARAMETER_PAGINATION_OBJ);
-        AntdvPage vpage = null;
-        if (StringUtils.isNotBlank(paginationJson)) {
-            vpage = JSONObject.parseObject(paginationJson, AntdvPage.class);
-        } else {
-            vpage = AntdvPage.gainDefault(Object.class);
-        }
-        dealInitPageBean(vpage);
-        return vpage;
     }
 
     /**
@@ -194,25 +123,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     }
 
 
-    /**
-     * AntdvPage 数据初始化
-     * @param vpage
-     * @return
-     */
-    private static AntdvPage dealInitPageBean(AntdvPage vpage) {
-        if (vpage == null) {
-            return new AntdvPage(DEFAULT_PAGE, DEFAULT_SIZE);
-        }
-        if (vpage.getCurrent() == null || vpage.getCurrent() < 0) {
-            vpage.setCurrent(DEFAULT_PAGE);
-        } else if (vpage.getCurrent() > 0) {
-            vpage.setCurrent(vpage.getCurrent() - 1);
-        }
-        if (vpage.getPageSize() == null || vpage.getPageSize() <= 0) {
-            vpage.setPageSize(DEFAULT_SIZE);
-        }
-        return vpage;
-    }
+
 
 
 

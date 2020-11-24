@@ -238,7 +238,7 @@ public class UserAccountController extends BaseController {
     public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(userAccountId, "未知用户id:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
+        Assert.notNull(userAccountId,BaseRstMsgConstant.ErrorMsg.unknowUserId());
         Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
         result.putCount(grantCount);
         return result;
@@ -251,7 +251,7 @@ public class UserAccountController extends BaseController {
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(userAccountId, "未知用户id:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
+        Assert.notNull(userAccountId, BaseRstMsgConstant.ErrorMsg.unknowUserId());
         Integer grantCount = userAccountService.dealGrantJobToUser(loginUserInfo, userAccountId, checkIds);
         result.putCount(grantCount);
         return result;

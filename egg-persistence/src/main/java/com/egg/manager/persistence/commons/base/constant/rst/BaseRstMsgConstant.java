@@ -14,6 +14,9 @@ public class BaseRstMsgConstant {
     private final static String NOT_MATCH_ACCOUNT_PASSWORD = "账号密码不匹配!";
     private final static String EMPTY_FORM = "提交的form为空!";
     private final static String UNKNOW_ID = "未知id!";
+    private final static String UNKNOW_USER_ID = "未知用户id!";
+    private final static String UNKNOW_TENANT_ID = "未知租户id!";
+    private final static String INVALID_OBJECT = "无效对象!";
     private final static String UNKNOW_ID_COLLECTION = "未知id集合!";
     private final static String USER_IS_LOGIN_OUT = "用户未登录!";
     private final static String EMPTY_UPLOAD_FILE = "上传的文件为空!";
@@ -41,6 +44,15 @@ public class BaseRstMsgConstant {
 
         public static String unknowId() {
             return UNKNOW_ID + ACTION_FAIL_MSG;
+        }
+        public static String unknowUserId() {
+            return UNKNOW_USER_ID + ACTION_FAIL_MSG;
+        }
+        public static String unknowTenantId() {
+            return UNKNOW_TENANT_ID + ACTION_FAIL_MSG;
+        }
+        public static String invalidObject() {
+            return INVALID_OBJECT + ACTION_FAIL_MSG;
         }
 
         public static String unknowIdCollection() {

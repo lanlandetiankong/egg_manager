@@ -163,9 +163,9 @@ public class DefineTenantController extends BaseController {
                                           @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(tenantId, "未知租户id:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
+        Assert.notNull(tenantId,  BaseRstMsgConstant.ErrorMsg.unknowTenantId());
         DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(tenantId);
-        Assert.notNull(defineTenantEntity, "租户不存在:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
+        Assert.notNull(defineTenantEntity, BaseRstMsgConstant.ErrorMsg.invalidObject());
         int count = defineTenantService.dealTenantSetupManager(loginUserInfo, tenantId, userAccountIdArr);
         result.putCount(count);
         return result;

@@ -76,7 +76,7 @@ public class UserExcelController extends BaseController {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
-        Assert.notNull(defineMenuEntity, "无效菜单:" + BaseRstMsgConstant.ACTION_FAIL_MSG);
+        Assert.notNull(defineMenuEntity,  BaseRstMsgConstant.ErrorMsg.invalidObject());
         //菜单模板配置
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean);

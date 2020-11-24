@@ -61,7 +61,7 @@ public class DefineModuleController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
-        defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+        result = defineModuleService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 

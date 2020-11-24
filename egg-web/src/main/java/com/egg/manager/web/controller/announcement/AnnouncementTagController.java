@@ -73,7 +73,7 @@ public class AnnouncementTagController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
-        announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+        result = announcementTagService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 

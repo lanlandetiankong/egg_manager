@@ -159,7 +159,7 @@ public class UserLoginController extends BaseController {
             redisHelper.hashTtlPut(RedisShiroCacheEnum.userAuthorization.getKey(), userAccountId, authorization, RedisShiroCacheEnum.userAuthorization.getTtl());
             //设置 authorization 缓存 当前用户的token
             redisHelper.hashTtlPut(RedisShiroCacheEnum.authorization.getKey(), authorization, userAccountToken, RedisShiroCacheEnum.authorization.getTtl());
-//设置到缓存,hashKey 都是 authorization
+            //设置到缓存,hashKey 都是 authorization
             userAccountService.queryDbToCacheable(userAccountId);
             Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountId);
             defineRoleService.queryDbToCacheable(userAccountId);

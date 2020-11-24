@@ -70,7 +70,7 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-//添加状态过滤,时间倒序排序
+        //添加状态过滤,时间倒序排序
         MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                 .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                 .getRefreshedSelf();
@@ -90,7 +90,7 @@ public class SmartFormDefinitionController extends BaseController {
     @PostMapping(value = "/getDataAll")
     public WebResult doGetDataAll(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-//添加状态过滤,时间倒序排序
+        //添加状态过滤,时间倒序排序
         MongoQueryBuffer mongoQueryBuffer = new MongoQueryBuffer(MyMongoCommonQueryFieldEnum.IsDeleted_Eq_Not)
                 .addBehindSortItem(MyMongoCommonSortFieldEnum.CreateTime_Desc)
                 .getRefreshedSelf();

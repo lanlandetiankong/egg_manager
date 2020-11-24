@@ -71,7 +71,7 @@ public class AnnouncementController extends BaseController {
             //只查询自己发布的公告
             queryPageBean.operateQuery().addEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
         }
-        announcementService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+        result = announcementService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 

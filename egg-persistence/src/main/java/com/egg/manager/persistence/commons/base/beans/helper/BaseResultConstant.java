@@ -11,11 +11,11 @@ public interface BaseResultConstant extends Serializable {
     /**
      * 是否有操作异常
      */
-    String HAS_ERROR = "hasError";
+    String SUCCESS = "success";
     /**
      * 是否有警告信息
      */
-    String HAS_WARNING = "hasWarning";
+    String WARNING = "warning";
     /**
      * 状态
      */
@@ -46,11 +46,11 @@ public interface BaseResultConstant extends Serializable {
     /**
      * 树集合
      */
-    String RESULT_LIST = "resultList";
+    String GRID_LIST = "gridList";
     /**
      * 存储 一些自定义属性的map集合
      */
-    String RESULT_MAP = "resultMap";
+    String DATA_MAP = "dataMap";
     /**
      * 枚举 列表
      */
@@ -72,7 +72,6 @@ public interface BaseResultConstant extends Serializable {
      * 分页bean
      */
     String PAGINATION_BEAN = "vpage";
-
 
     /**
      * 权限-Set集合

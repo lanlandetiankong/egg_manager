@@ -190,7 +190,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         result.settingPage(queryPage.getPageConf(), Long.valueOf(total));
         IPage iPage = defineMenuMapper.selectPage(page, queryWrapper);
         List<DefineMenuEntity> defineMenuEntities = iPage.getRecords();
-        result.putResultList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
+        result.putGridList(DefineMenuTransfer.transferEntityToVoList(defineMenuEntities));
         return result;
     }
 
@@ -200,7 +200,7 @@ public class DefineMenuServiceImpl extends MyBaseMysqlServiceImpl<DefineMenuMapp
         Page<DefineMenuDto> mpPagination = queryPageBean.toMpPage();
         List<DefineMenuDto> defineMenuDtoList = defineMenuMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
+        result.putGridList(DefineMenuTransfer.transferDtoToVoList(defineMenuDtoList));
         return result;
     }
 

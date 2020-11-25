@@ -56,7 +56,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
         Page<DefineTenantDto> mpPagination = queryPageBean.toMpPage();
         List<DefineTenantDto> defineTenantDtoList = defineTenantMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
+        result.putGridList(DefineTenantTransfer.transferDtoToVoList(defineTenantDtoList));
         return result;
     }
 
@@ -83,7 +83,7 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
     @Override
     public WebResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, WebResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        List<DefineTenantVo> resultList = result.getResultList();
+        List<DefineTenantVo> resultList = result.getGridList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (DefineTenantVo defineTenantVo : resultList) {
                 enumList.add(new FrontEntitySelectBean<String>(defineTenantVo.getFid(), defineTenantVo.getName()));

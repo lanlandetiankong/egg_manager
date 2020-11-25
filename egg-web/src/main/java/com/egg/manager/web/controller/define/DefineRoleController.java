@@ -116,7 +116,7 @@ public class DefineRoleController extends BaseController {
     public WebResult gainAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByRoleId(defineRoleId);
-        result.putResultList(definePermissionEntityList);
+        result.putGridList(definePermissionEntityList);
         return result;
     }
 
@@ -132,7 +132,7 @@ public class DefineRoleController extends BaseController {
         } else {
             defineMenuEntityList = defineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
         }
-        result.putResultList(defineMenuEntityList);
+        result.putGridList(defineMenuEntityList);
         return result;
     }
 

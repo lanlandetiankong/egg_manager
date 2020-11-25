@@ -57,7 +57,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));
         IPage iPage = announcementTagMapper.selectPage(page, announcementTagEntityWrapper);
         List<AnnouncementTagEntity> announcementTagEntities = iPage.getRecords();
-        result.putResultList(AnnouncementTagTransfer.transferEntityToVoList(announcementTagEntities));
+        result.putGridList(AnnouncementTagTransfer.transferEntityToVoList(announcementTagEntities));
         return result;
     }
 
@@ -66,7 +66,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
         Page<AnnouncementTagDto> mpPagination = queryPage.toMpPage();
         List<AnnouncementTagDto> announcementTagDtoList = announcementTagMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
-        result.putResultList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
+        result.putGridList(AnnouncementTagTransfer.transferDtoToVoList(announcementTagDtoList));
         return result;
     }
 
@@ -106,7 +106,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
     @Override
     public WebResult dealResultListToEnums(WebResult result) {
         List<FrontEntitySelectBean> enumList = new ArrayList<>();
-        List<AnnouncementTagVo> resultList = result.getResultList();
+        List<AnnouncementTagVo> resultList = result.getGridList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (AnnouncementTagVo announcementTagVo : resultList) {
                 enumList.add(new FrontEntitySelectBean<String>(announcementTagVo.getFid(), announcementTagVo.getName()));

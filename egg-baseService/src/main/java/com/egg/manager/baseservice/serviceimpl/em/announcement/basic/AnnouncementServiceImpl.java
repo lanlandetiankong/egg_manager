@@ -68,7 +68,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         List<AnnouncementEntity> announcementEntities = iPage.getRecords();
         //取得 公告标签 map
         Map<String, AnnouncementTagEntity> announcementTagMap = announcementTagService.dealGetAllToMap();
-        result.putResultList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
+        result.putGridList(AnnouncementTransfer.transferEntityToVoList(announcementEntities, announcementTagMap));
         return result;
     }
 
@@ -80,7 +80,7 @@ public class AnnouncementServiceImpl extends MyBaseMysqlServiceImpl<Announcement
         Page<AnnouncementDto> mpPagination = queryPageBean.toMpPage();
         List<AnnouncementDto> announcementDtoList = announcementMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
+        result.putGridList(AnnouncementTransfer.transferDtoToVoList(announcementDtoList, announcementTagMap));
         return result;
     }
 

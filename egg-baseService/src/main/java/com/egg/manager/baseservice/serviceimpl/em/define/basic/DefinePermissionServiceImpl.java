@@ -74,7 +74,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));
         IPage iPage = definePermissionMapper.selectPage(page, queryWrapper);
         List<DefinePermissionEntity> definePermissionEntities = iPage.getRecords();
-        result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
+        result.putGridList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntities));
         return result;
     }
 
@@ -83,7 +83,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
         Page<DefinePermissionDto> mpPagination = queryPageBean.toMpPage();
         List<DefinePermissionDto> definePermissionDtos = definePermissionMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
+        result.putGridList(DefinePermissionTransfer.transferDtoToVoList(definePermissionDtos));
         return result;
     }
 

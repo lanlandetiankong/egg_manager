@@ -42,7 +42,7 @@ public class DefineModuleServiceImpl extends MyBaseMysqlServiceImpl<DefineModule
         Page<DefineModuleDto> mpPagination = queryPageBean.toMpPage();
         List<DefineModuleDto> defineModuleDtoList = defineModuleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
+        result.putGridList(DefineModuleTransfer.transferDtoToVoList(defineModuleDtoList));
         return result;
     }
 

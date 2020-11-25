@@ -175,7 +175,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         result.settingPage(queryPageBean.getPageConf(), new Long(total));
         IPage iPage = defineRoleMapper.selectPage(page, defineRoleEntityWrapper);
         List<DefineRoleEntity> defineRoleEntities = iPage.getRecords();
-        result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
+        result.putGridList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntities));
         return result;
     }
 
@@ -185,7 +185,7 @@ public class DefineRoleServiceImpl extends MyBaseMysqlServiceImpl<DefineRoleMapp
         Page<DefineRoleDto> mpPagination = queryPageBean.toMpPage();
         List<DefineRoleDto> defineRoleDtoList = defineRoleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
+        result.putGridList(DefineRoleTransfer.transferDtoToVoList(defineRoleDtoList));
         return result;
     }
 

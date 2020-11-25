@@ -42,7 +42,7 @@ public class DefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<DefineDe
         Page<DefineDepartmentDto> mpPagination = queryPageBean.toMpPage();
         List<DefineDepartmentDto> defineDepartmentDtoList = defineDepartmentMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.putGridList(DefineDepartmentTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }
 

@@ -95,7 +95,7 @@ public class ControllerAspect {
                     if (result instanceof WebResult) {
                         //如果是封装的结果
                         WebResult webResult = (WebResult) result;
-                        if (webResult.isHasError() == true) {
+                        if (webResult.isSuccess() == false) {
                             isSuccess = false;
                             pcWebQueryLogMgo.setException(webResult.getMsg());
                         }
@@ -125,7 +125,7 @@ public class ControllerAspect {
                     if (result instanceof WebResult) {
                         //如果是封装的结果
                         WebResult webResult = (WebResult) result;
-                        if (webResult.isHasError() == true) {
+                        if (webResult.isSuccess() == false) {
                             isSuccess = false;
                             pcWebOperationLogMgo.setException(webResult.getMsg());
                         }
@@ -154,7 +154,7 @@ public class ControllerAspect {
                     if (result instanceof WebResult) {
                         //如果是封装的结果
                         WebResult webResult = (WebResult) result;
-                        if (webResult.isHasError() == true) {
+                        if (webResult.isSuccess() == false) {
                             isSuccess = false;
                             pcWebLoginLogMgo.setException(webResult.getMsg());
                         }

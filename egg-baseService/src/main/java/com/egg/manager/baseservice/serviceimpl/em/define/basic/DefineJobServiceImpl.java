@@ -48,7 +48,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         result.settingPage(queryPageBean.getPageConf(), Long.valueOf(total));
         IPage iPage = defineJobMapper.selectPage(page, queryWrapper);
         List<DefineJobEntity> defineJobEntities = iPage.getRecords();
-        result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntities));
+        result.putGridList(DefineJobTransfer.transferEntityToVoList(defineJobEntities));
         return result;
     }
 
@@ -57,7 +57,7 @@ public class DefineJobServiceImpl extends MyBaseMysqlServiceImpl<DefineJobMapper
         Page<DefineJobDto> mpPagination = queryPageBean.toMpPage();
         List<DefineJobDto> defineDepartmentDtoList = defineJobMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
         result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
-        result.putResultList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
+        result.putGridList(DefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }
 

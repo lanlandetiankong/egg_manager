@@ -112,7 +112,7 @@ public class UserAccountController extends BaseController {
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<DefineRoleEntity> defineRoleEntityList = defineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-        result.putResultList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
+        result.putGridList(DefineRoleTransfer.transferEntityToVoList(defineRoleEntityList));
         return result;
     }
 
@@ -123,7 +123,7 @@ public class UserAccountController extends BaseController {
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<DefinePermissionEntity> definePermissionEntityList = definePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
-        result.putResultList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
+        result.putGridList(DefinePermissionTransfer.transferEntityToVoList(definePermissionEntityList));
         return result;
     }
 
@@ -133,7 +133,7 @@ public class UserAccountController extends BaseController {
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<DefineJobEntity> defineJobEntityList = defineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
-        result.putResultList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
+        result.putGridList(DefineJobTransfer.transferEntityToVoList(defineJobEntityList));
         return result;
     }
 

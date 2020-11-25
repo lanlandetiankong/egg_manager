@@ -74,7 +74,7 @@ public class DefineMenuController extends BaseController {
         } else {
             treeList = defineMenuService.getTreeSelectChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         }
-        result.putResultList(treeList);
+        result.putGridList(treeList);
         return result;
     }
 
@@ -85,7 +85,7 @@ public class DefineMenuController extends BaseController {
         WebResult result = WebResult.okQuery();
         List<DefineMenuEntity> allMenus = defineMenuMapper.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
-        result.putResultList(treeList);
+        result.putGridList(treeList);
         return result;
     }
 
@@ -95,9 +95,9 @@ public class DefineMenuController extends BaseController {
     public WebResult doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<CommonMenuTree> treeList = defineMenuService.queryDbToCacheable(loginUserInfo.getFid());
-        result.putResultList(treeList);
+        result.putGridList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
-        result.putResultMap(urlMap);
+        result.putDataMap(urlMap);
         return result;
     }
 

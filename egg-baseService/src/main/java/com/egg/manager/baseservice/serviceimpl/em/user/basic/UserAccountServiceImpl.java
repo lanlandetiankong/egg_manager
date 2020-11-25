@@ -99,7 +99,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         result.settingPage(queryPage.getPageConf(), Long.valueOf(total));
         IPage iPage = userAccountMapper.selectPage(page, userAccountEntityWrapper);
         List<UserAccountEntity> userAccountEntities = iPage.getRecords();
-        result.putResultList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
+        result.putGridList(UserAccountTransfer.transferEntityToVoList(userAccountEntities));
         return result;
     }
 
@@ -129,7 +129,7 @@ public class UserAccountServiceImpl extends MyBaseMysqlServiceImpl<UserAccountMa
         }
         List<UserAccountDto> userAccountDtoList = userAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, queryPage.getSortMap(), queryTenantFieldBeanList, queryDepartmentFieldBeanList);
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
-        result.putResultList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
+        result.putGridList(UserAccountTransfer.transferDtoToVoList(userAccountDtoList));
         return result;
     }
 

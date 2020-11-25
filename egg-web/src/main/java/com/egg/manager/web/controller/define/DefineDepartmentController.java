@@ -92,7 +92,7 @@ public class DefineDepartmentController extends BaseController {
         queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
         List<DefineDepartmentEntity> allDepartments = defineDepartmentMapper.selectList(queryWrapper);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
-        result.putResultList(treeList);
+        result.putGridList(treeList);
         return result;
     }
 
@@ -103,7 +103,7 @@ public class DefineDepartmentController extends BaseController {
         WebResult result = WebResult.okQuery();
         List<DefineDepartmentEntity> allDepartment = defineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = defineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
-        result.putResultList(treeList);
+        result.putGridList(treeList);
         return result;
     }
 

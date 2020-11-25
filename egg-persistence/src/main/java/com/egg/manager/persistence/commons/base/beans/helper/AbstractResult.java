@@ -43,13 +43,13 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
     }
 
 
-    public void putHasError(Boolean val) {
-        this.put(HAS_ERROR, val);
+    public void putSuccess(Boolean val) {
+        this.put(SUCCESS, val);
     }
 
 
     public void putHasWarning(Boolean val) {
-        this.put(HAS_WARNING, val);
+        this.put(WARNING, val);
     }
 
 
@@ -82,16 +82,16 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         this.put(MSG, val);
     }
 
-    public void putResultList(List val) {
-        this.put(RESULT_LIST, val);
+    public void putGridList(List val) {
+        this.put(GRID_LIST, val);
     }
 
     public void putAuthorization(String val) {
         this.put(AUTHORIZATION, val);
     }
 
-    public void putResultMap(Map val) {
-        this.put(RESULT_MAP, val);
+    public void putDataMap(Map val) {
+        this.put(DATA_MAP, val);
     }
 
     public void putEnumList(List val) {
@@ -140,8 +140,8 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
      * getter
      * @return
      */
-    public boolean isHasError() {
-        return (Boolean) this.get(HAS_ERROR);
+    public boolean isSuccess() {
+        return (Boolean) this.get(SUCCESS);
     }
 
     public String getMsg() {
@@ -152,8 +152,8 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         return (String) this.get(ERROR_MSG);
     }
 
-    public List getResultList() {
-        return (List) this.get(RESULT_LIST);
+    public List getGridList() {
+        return (List) this.get(GRID_LIST);
     }
 
 

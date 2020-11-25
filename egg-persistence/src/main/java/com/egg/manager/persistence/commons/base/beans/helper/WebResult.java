@@ -20,7 +20,7 @@ public class WebResult extends AbstractResult {
 
     private static WebResult initResult() {
         WebResult result = new WebResult();
-        result.putHasError(false);
+        result.putSuccess(true);
         result.putHasWarning(false);
         result.putCode(HttpStatus.HTTP_OK);
         result.putMsg(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
@@ -45,7 +45,7 @@ public class WebResult extends AbstractResult {
 
     public static WebResult error(String errorMsg) {
         WebResult result = initResult();
-        result.putHasError(true);
+        result.putSuccess(false);
         result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
         result.putErrorMsg(errorMsg);
         result.putCode(HttpStatus.HTTP_INTERNAL_ERROR);
@@ -57,13 +57,13 @@ public class WebResult extends AbstractResult {
     }
 
     public WebResult toError(String msg) {
-        this.putHasError(true);
+        this.putSuccess(false);
         this.putErrorMsg(msg);
         return this;
     }
 
     public WebResult putPage(AntdvPage pageBean) {
-        this.putResultList(pageBean.getContent());
+        this.putGridList(pageBean.getContent());
         this.putCount(pageBean.getTotal());
         return this;
     }

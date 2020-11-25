@@ -54,11 +54,7 @@ public interface BaseResultConstant extends Serializable {
     /**
      * 枚举 列表
      */
-    String ENUM_LIST = "enumList";
-    /**
-     * 枚举数据默认勾选-List
-     */
-    String ENUM_DEFAULT_CHECK_LIST = "enumDefaultCheckList";
+    String ENUM_DATA = "enumData";
     /**
      * 前端接收到异常后的操作标识，需与前端一致(axios拦截器设置必须hasError为true才会处理到这个
      */

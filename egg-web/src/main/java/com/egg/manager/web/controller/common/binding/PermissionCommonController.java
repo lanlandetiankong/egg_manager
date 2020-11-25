@@ -39,7 +39,7 @@ public class PermissionCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 
@@ -54,7 +54,7 @@ public class PermissionCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 
@@ -73,8 +73,7 @@ public class PermissionCommonController extends BaseController {
                 }
             }
         }
-        result.putEnumList(beanList);
-        result.putEnumDefaultCheckList(defaultCheckList);
+        result.putEnumData(beanList,defaultCheckList);
         return result;
     }
 }

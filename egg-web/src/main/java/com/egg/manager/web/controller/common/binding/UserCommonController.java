@@ -39,7 +39,7 @@ public class UserCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 
@@ -50,7 +50,7 @@ public class UserCommonController extends BaseController {
         List<FrontSelectBean> beanList = new ArrayList<>();
         beanList.add(new FrontSelectBean(0, "未锁定"));
         beanList.add(new FrontSelectBean(1, "已锁定"));
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 
@@ -65,7 +65,7 @@ public class UserCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 }

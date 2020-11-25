@@ -38,7 +38,7 @@ public class CommonBindingController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getName()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 }

@@ -31,7 +31,7 @@ public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<
                 enumList.add(new FrontEntitySelectBean<String>(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
             }
         }
-        result.putEnumList(enumList);
+        result.putEnumData(enumList);
         return result;
     }
 }

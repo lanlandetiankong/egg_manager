@@ -39,7 +39,7 @@ public class ModuleCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 
@@ -54,7 +54,7 @@ public class ModuleCommonController extends BaseController {
                 beanList.add(new FrontSelectBean(enumObj.getValue(), enumObj.getLabel()));
             }
         }
-        result.putEnumList(beanList);
+        result.putEnumData(beanList);
         return result;
     }
 }

@@ -6,10 +6,7 @@ import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description:
@@ -94,13 +91,17 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         this.put(DATA_MAP, val);
     }
 
-    public void putEnumList(List val) {
-        this.put(ENUM_LIST, val);
+    public void putEnumData(List val) {
+        val = val == null ? val : new ArrayList() ;
+        this.put(ENUM_DATA, EnumRstBean.builder().list(val));
     }
 
-    public void putEnumDefaultCheckList(List val) {
-        this.put(ENUM_DEFAULT_CHECK_LIST, val);
+    public void putEnumData(List val,List checkeds) {
+        val = val == null ? val : new ArrayList() ;
+        checkeds = checkeds == null ? checkeds : new ArrayList() ;
+        this.put(ENUM_DATA, EnumRstBean.builder().list(val).checkeds(checkeds));
     }
+
 
     public void putPermissionSet(Collection collection) {
         this.put(KEY_PERMISSION_SET, collection);

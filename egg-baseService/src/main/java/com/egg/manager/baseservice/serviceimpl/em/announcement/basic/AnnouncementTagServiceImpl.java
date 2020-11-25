@@ -112,7 +112,7 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
                 enumList.add(new FrontEntitySelectBean<String>(announcementTagVo.getFid(), announcementTagVo.getName()));
             }
         }
-        result.putEnumList(enumList);
+        result.putEnumData(enumList);
         return result;
     }
 }

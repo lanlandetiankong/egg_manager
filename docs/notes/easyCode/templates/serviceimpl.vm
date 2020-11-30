@@ -1,0 +1,80 @@
+##导入宏定义
+$!define
+
+##设置表后缀（宏定义）
+#setTableSuffix("ServiceImpl")
+
+##保存文件（宏定义）
+#save("/service/impl", "ServiceImpl.java")
+
+##包路径（宏定义）
+#setPackageSuffix("serviceimpl")
+
+
+import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
+import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-ServiceImpl
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
+@Service(interfaceClass = ${tableInfo.name}Service.class)
+public class $!{tableName} extends MyBaseMysqlServiceImpl<$!{tableInfo.name}Mapper, $!{tableInfo.name}Entity, $!{tableInfo.name}Vo>
+implements $!{tableInfo.name}Service{
+
+@Autowired
+private $!{tableInfo.name}Mapper ${tool.firstLowerCase($!{tableInfo.name})}Mapper;
+
+
+@Override
+public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<$!{tableInfo.name}Dto> queryPage) {
+    Page<$!{tableInfo.name}Dto> mpPagination = queryPage.toMpPage();
+        List<$!{tableInfo.name}Dto> dtoList = ${tool.firstLowerCase($!{tableInfo.name})}Mapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
+            result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+            result.putGridList($!{tableInfo.name}Transfer.transferDtoToVoList(dtoList));
+            return result;
+            }
+
+            @Override
+            public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo) throws Exception {
+            $!{tableInfo.name}Entity ${tool.firstLowerCase($!{tableInfo.name})}Entity = $!{tableInfo.name}Transfer.transferVoToEntity(${tool.firstLowerCase($!{tableInfo.name})}Vo);
+            super.doBeforeCreate(loginUserInfo, ${tool.firstLowerCase($!{tableInfo.name})}Entity);
+            return ${tool.firstLowerCase($!{tableInfo.name})}Mapper.insert(${tool.firstLowerCase($!{tableInfo.name})}Entity);
+            }
+
+
+            @Override
+            public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo) throws Exception {
+            Integer changeCount = 0;
+            $!{tableInfo.name}Entity ${tool.firstLowerCase($!{tableInfo.name})}Entity = $!{tableInfo.name}Transfer.transferVoToEntity(${tool.firstLowerCase($!{tableInfo.name})}Vo);
+            ${tool.firstLowerCase($!{tableInfo.name})}Entity = super.doBeforeUpdate(loginUserInfo, ${tool.firstLowerCase($!{tableInfo.name})}Entity);
+            changeCount = ${tool.firstLowerCase($!{tableInfo.name})}Mapper.updateById(${tool.firstLowerCase($!{tableInfo.name})}Entity);
+            return changeCount;
+            }
+
+
+
+
+            }

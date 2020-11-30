@@ -1,0 +1,94 @@
+##导入宏定义
+$!define
+
+##保存文件（宏定义）
+#save("/transfer", "Transfer.java")
+
+##设置表后缀（宏定义）
+
+##包路径（宏定义）
+#setPackageSuffix("transfer")
+
+
+
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Transfer
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Component
+@Named("$!{tool.firstLowerCase($!{tableInfo.name})}Transfer")
+public class $!{tableInfo.name}Transfer extends BaseMysqlTransfer {
+static $!{tableInfo.name}Mapstruct $!{tool.firstLowerCase($!{tableInfo.name})}Mapstruct = $!{tableInfo.name}Mapstruct.INSTANCE;
+
+/**
+* vo转entity
+* @param vo
+* @return
+*/
+public static $!{tableInfo.name}Entity transferVoToEntity($!{tableInfo.name}Vo vo) {
+if (vo == null) {
+return null;
+}
+$!{tableInfo.name}Entity entity = $!{tool.firstLowerCase($!{tableInfo.name})}Mapstruct.transferVoToEntity(vo);
+return entity;
+}
+
+/**
+* entity转vo
+* @param entity
+* @return
+*/
+public static $!{tableInfo.name}Vo transferEntityToVo($!{tableInfo.name}Entity entity) {
+if (entity == null) {
+return null;
+}
+$!{tableInfo.name}Vo vo = $!{tool.firstLowerCase($!{tableInfo.name})}Mapstruct.transferEntityToVo(entity);
+return vo;
+}
+
+/**
+* dto转vo
+* @param dto
+* @return
+*/
+public static $!{tableInfo.name}Vo transferDtoToVo($!{tableInfo.name}Dto dto) {
+if (dto == null) {
+return null;
+}
+$!{tableInfo.name}Vo vo = $!{tool.firstLowerCase($!{tableInfo.name})}Mapstruct.transferDtoToVo(dto);
+return vo;
+}
+
+public static List<$!{tableInfo.name}Vo> transferEntityToVoList(List<$!{tableInfo.name}Entity> $!{tool.firstLowerCase($!{tableInfo.name})}Entities) {
+    if ($!{tool.firstLowerCase($!{tableInfo.name})}Entities == null) {
+    return null;
+    } else {
+    List<$!{tableInfo.name}Vo> list = new ArrayList<>();
+        for ($!{tableInfo.name}Entity $!{tool.firstLowerCase($!{tableInfo.name})}Entity : $!{tool.firstLowerCase($!{tableInfo.name})}Entities) {
+        list.add(transferEntityToVo($!{tool.firstLowerCase($!{tableInfo.name})}Entity));
+        }
+        return list;
+        }
+        }
+
+        public static List<$!{tableInfo.name}Vo> transferDtoToVoList(List<$!{tableInfo.name}Dto> $!{tool.firstLowerCase($!{tableInfo.name})}Dtos) {
+            if ($!{tool.firstLowerCase($!{tableInfo.name})}Dtos == null) {
+            return null;
+            } else {
+            List<$!{tableInfo.name}Vo> list = new ArrayList<>();
+                for ($!{tableInfo.name}Dto $!{tool.firstLowerCase($!{tableInfo.name})}Dto : $!{tool.firstLowerCase($!{tableInfo.name})}Dtos) {
+                list.add(transferDtoToVo($!{tool.firstLowerCase($!{tableInfo.name})}Dto));
+                }
+                return list;
+                }
+                }
+
+                }

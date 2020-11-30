@@ -1,0 +1,55 @@
+##导入宏定义
+$!define
+
+##设置表后缀（宏定义）
+#setTableSuffix("Service")
+
+##保存文件（宏定义）
+#save("/service", "Service.java")
+
+##包路径（宏定义）
+#setPackageSuffix("service")
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Service
+* @date $time.currTime('yyyy-MM-dd')
+*/
+public interface $!{tableName} extends MyBaseMysqlService<$!{tableInfo.name}Entity, $!{tableInfo.name}Mapper, $!{tableInfo.name}Vo>{
+
+/**
+* 分页查询-$!{tableInfo.comment} -dto列表
+* (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+* @param loginUserInfo 当前登录用户
+* @param result
+* @param queryPageBean 查询分页配置
+* @return WebResult
+*/
+WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<$!{tableInfo.name}Dto> queryPageBean);
+
+
+    /**
+    * 新增-$!{tableInfo.comment}
+    * @param loginUserInfo       当前登录用户
+    * @param ${tool.firstLowerCase($!{tableInfo.name})}Vo
+    * @return Integer
+    * @throws Exception
+    */
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo) throws Exception;
+
+    /**
+    * 更新${tableInfo.comment}
+    * @param loginUserInfo       当前登录用户
+    * @param ${tool.firstLowerCase($!{tableInfo.name})}Vo
+    * @return Integer
+    * @throws Exception
+    */
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo) throws Exception;
+
+
+    }

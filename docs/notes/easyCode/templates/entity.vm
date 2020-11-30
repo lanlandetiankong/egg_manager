@@ -1,0 +1,53 @@
+##导入宏定义
+$!define
+
+##保存文件（宏定义）
+#save("/entity", "Entity.java")
+
+##设置表后缀（宏定义）
+#setTableSuffix("Entity")
+
+##包路径（宏定义）
+#setPackageSuffix("entity")
+
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Entity
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("${tableInfo.obj.name}")
+public class $!{tableInfo.name}Entity extends Model<$!{tableInfo.name}Entity> {
+    @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
+    private String fid ;
+    #foreach($column in $tableInfo.otherColumn)
+        #if(${column.comment})
+            /**
+            * ${column.comment}
+            */
+        #end
+        @TableField("${column.obj.name}")
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+
+
+    #foreach($column in $tableInfo.pkColumn)
+        @Override
+        protected Serializable pkVal() {
+        return this.$!{column.name};
+        }
+        #break
+    #end
+    }

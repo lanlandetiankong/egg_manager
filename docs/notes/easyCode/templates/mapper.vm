@@ -1,0 +1,37 @@
+##导入宏定义
+$!define
+
+##设置表后缀（宏定义）
+#setTableSuffix("Mapper")
+
+##保存文件（宏定义）
+#save("/dao", "Mapper.java")
+
+##包路径（宏定义）
+#setPackageSuffix("dao")
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
+import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Dao
+* @date $time.currTime('yyyy-MM-dd')
+*/
+public interface $!{tableName} extends MyEggMapper<${tableInfo.name}Entity>  {
+
+    /**
+    * [分页搜索查询]-${tableInfo.comment}
+    * @param page
+    * @param queryFieldArr
+    * @param sortMap
+    * @return
+    */
+    List<${tableInfo.name}Dto> selectQueryPage(Page<${tableInfo.name}Dto> page, @Param(EggMpSqlConst.PARAMOF_QUERY_FIELD_LIST) QueryFieldArr queryFieldArr, @Param(EggMpSqlConst.PARAMOF_SORT_MAP) AntdvSortMap sortMap);
+        }

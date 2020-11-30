@@ -1,0 +1,146 @@
+##导入宏定义
+$!define
+
+##设置表后缀（宏定义）
+#setTableSuffix("Controller")
+
+##保存文件（宏定义）
+#save("/controller", "Controller.java")
+
+##包路径（宏定义）
+#setPackageSuffix("controller")
+
+##定义服务名
+#set($serviceName = $!tool.append($!tool.firstLowerCase($!tableInfo.name), "Service"))
+
+##定义实体对象名
+#set($entityName = $!tool.firstLowerCase($!tableInfo.name))
+
+import cn.hutool.core.lang.Assert;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
+import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
+import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.query.FieldConst;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
+import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.api.exchange.BaseController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Api
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Slf4j
+@Api(value = "API-${tableInfo.comment}")
+@RestController
+@RequestMapping("/${tool.firstLowerCase($!{tableInfo.name})}")
+public class $!{tableName} extends BaseController {
+
+@Autowired
+private $!{tableInfo.name}Mapper ${tool.firstLowerCase($!{tableInfo.name})}Mapper;
+@Reference
+private $!{tableInfo.name}Service ${tool.firstLowerCase($!{tableInfo.name})}Service;
+
+
+@ApiOperation(value = "分页查询(dto)->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+@PcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryDtoPage")
+@PostMapping(value = "/queryDtoPage")
+public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!{tableInfo.name}Dto.class) QueryPageBean<$!{tableInfo.name}Dto> queryPageBean,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    WebResult result = WebResult.okQuery();
+    queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+    result = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+    return result;
+    }
+
+    @ApiOperation(value = "根据id查询->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryOneById")
+    @PostMapping(value = "/queryOneById")
+    public WebResult queryOneById(HttpServletRequest request, String $!{tool.firstLowerCase($!{tableInfo.name})}Id,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    WebResult result = WebResult.okQuery();
+    Assert.notBlank(${tool.firstLowerCase($!{tableInfo.name})}Id, BaseRstMsgConstant.ErrorMsg.unknowId());
+    $!{tableInfo.name}Entity ${tool.firstLowerCase($!{tableInfo.name})}Entity = ${tool.firstLowerCase($!{tableInfo.name})}Mapper.selectById(${tool.firstLowerCase($!{tableInfo.name})}Id);
+    result.putBean($!{tableInfo.name}Transfer.transferEntityToVo(${tool.firstLowerCase($!{tableInfo.name})}Entity));
+    return result;
+    }
+
+    @ApiOperation(value = "新增->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/createByForm")
+    @PostMapping(value = "/createByForm")
+    public WebResult createByForm(HttpServletRequest request, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+    throws Exception {
+    WebResult result = WebResult.okOperation();
+    Integer addCount = 0;
+    Assert.notNull(${tool.firstLowerCase($!{tableInfo.name})}Vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+    addCount = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealCreate(loginUserInfo, ${tool.firstLowerCase($!{tableInfo.name})}Vo);
+    result.putCount(addCount);
+    return result;
+    }
+
+    @ApiOperation(value = "更新->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/updateByForm")
+    @PostMapping(value = "/updateByForm")
+    public WebResult updateByForm(HttpServletRequest request, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+    throws Exception {
+    WebResult result = WebResult.okOperation();
+    Integer changeCount = 0;
+    Assert.notNull(${tool.firstLowerCase($!{tableInfo.name})}Vo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+    changeCount = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealUpdate(loginUserInfo, ${tool.firstLowerCase($!{tableInfo.name})}Vo);
+    result.putCount(changeCount);
+    return result;
+    }
+
+    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiImplicitParams({
+    @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
+    })
+    @PostMapping(value = "/batchDeleteByIds")
+    public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+    throws Exception {
+    WebResult result = WebResult.okOperation();
+    Integer delCount = 0;
+    Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
+    delCount = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealBatchLogicDelete(loginUserInfo, delIds);
+    result.putCount(delCount);
+    return result;
+    }
+
+    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/deleteById")
+    @ApiOperation(value = "伪删除->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiImplicitParams({
+    @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
+    })
+    @PostMapping(value = "/deleteById")
+    public WebResult deleteById(HttpServletRequest request, String delId,
+    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+    throws Exception {
+    WebResult result = WebResult.okOperation();
+    Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
+    Integer delCount = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealLogicDeleteById(loginUserInfo, delId);
+    result.putCount(delCount);
+    return result;
+    }
+    }

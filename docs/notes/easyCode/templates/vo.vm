@@ -1,0 +1,40 @@
+##导入宏定义
+$!define
+
+##保存文件（宏定义）
+#save("/vo", "Vo.java")
+
+##设置表后缀（宏定义）
+#setTableSuffix("Vo")
+
+##包路径（宏定义）
+#setPackageSuffix("vo")
+
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Vo
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class $!{tableInfo.name}Vo extends extends MyBaseMysqlVo {
+private String fid ;
+#foreach($column in $tableInfo.otherColumn)
+    #if(${column.comment})
+    /**
+    * ${column.comment}
+    */
+    #end
+private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+#end
+
+
+}

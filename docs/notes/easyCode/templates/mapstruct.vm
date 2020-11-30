@@ -1,0 +1,62 @@
+##导入宏定义
+$!define
+
+##保存文件（宏定义）
+#save("/mapstruct", "Mapstruct.java")
+
+##设置表后缀（宏定义）
+
+##包路径（宏定义）
+#setPackageSuffix("mapstruct")
+
+import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
+
+/**
+* @author zhoucj
+* @description
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Mapper(componentModel = "spring",
+unmappedTargetPolicy = ReportingPolicy.ERROR,
+uses = {$!{tableInfo.name}Conversion.class}
+)
+public interface $!{tableInfo.name}Mapstruct extends MyBaseMysqlMapstruct<$!{tableInfo.name}Entity, $!{tableInfo.name}Vo, $!{tableInfo.name}Dto> {
+$!{tableInfo.name}Mapstruct INSTANCE = Mappers.getMapper($!{tableInfo.name}Mapstruct.class);
+
+/**
+* vo转entity
+* @param vo
+* @return
+*/
+@Mappings({})
+$!{tableInfo.name}Entity transferVoToEntity($!{tableInfo.name}Vo vo);
+
+/**
+* entity转vo
+* @param entity
+* @return
+*/
+@Mappings({
+@Mapping(target = "createUser", ignore = true),
+@Mapping(target = "lastModifyer", ignore = true)
+})
+$!{tableInfo.name}Vo transferEntityToVo($!{tableInfo.name}Entity entity);
+
+/**
+* dto转vo
+* @param dto
+* @return
+*/
+@Mappings({
+@Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
+@Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
+})
+$!{tableInfo.name}Vo transferDtoToVo($!{tableInfo.name}Dto dto);
+
+
+}

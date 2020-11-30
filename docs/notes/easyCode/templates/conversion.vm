@@ -1,0 +1,25 @@
+##导入宏定义
+$!define
+
+##保存文件（宏定义）
+#save("/conversion", "Conversion.java")
+
+##设置表后缀（宏定义）
+
+##包路径（宏定义）
+#setPackageSuffix("conversion")
+
+import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
+import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
+
+/**
+* @author zhoucj
+* @description ${tableInfo.comment}-Conversion
+* @date $time.currTime('yyyy-MM-dd')
+*/
+@Component
+@Named("$!{tool.firstLowerCase($!{tableInfo.name})}Conversion")
+public class $!{tableInfo.name}Conversion extends MyBaseMysqlConversion {
+
+}

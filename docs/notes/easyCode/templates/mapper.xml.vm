@@ -1,0 +1,81 @@
+##导入宏定义
+    $!define
+##保存文件（宏定义）
+    #save("/mapper", "Mapper.xml")
+##设置表后缀（宏定义）
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.$!{tableInfo.name}Mapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="$!{tableInfo.name}Entity">
+        #foreach($column in $tableInfo.pkColumn)
+            <id property="$!{column.name}" column="$!{column.name}"/>
+            #break #end
+        #foreach($column in $tableInfo.otherColumn)
+            <result property="$!{column.name}" column="${column.obj.name}"/>
+        #end
+    </resultMap>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="DtoResultMap" type="$!{tableInfo.name}Dto" extends="BaseResultMap">
+        #foreach($column in $tableInfo.pkColumn)
+            <id property="$!{column.name}" column="$!{column.name}"/>
+            #break
+        #end
+        #foreach($column in $tableInfo.otherColumn)
+            <result property="$!{column.name}" column="${column.obj.name}"/>
+        #end
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid,#foreach($column in $tableInfo.otherColumn)${column.obj.name},#end
+
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+        ${base_alias_name}.fid,
+#foreach($column in $tableInfo.otherColumn)
+        ${base_alias_name}.${column.obj.name},
+#end
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+        ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+    #foreach($column in $tableInfo.otherColumn)
+        ${base_alias_name}.${column.obj.name} AS ${base_alias_col_prefix}$!{column.name},
+    #end
+</sql>
+
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="oat"/>
+        </include>
+        FROM ${tableInfo.obj.name} oat
+        <where>
+            <include
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="oat"/>
+            </include>
+        </where>
+        <include
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="oat"/>
+        </include>
+    </select>
+</mapper>

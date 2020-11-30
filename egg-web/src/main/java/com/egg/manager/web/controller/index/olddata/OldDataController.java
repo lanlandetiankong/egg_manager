@@ -6,7 +6,7 @@ import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

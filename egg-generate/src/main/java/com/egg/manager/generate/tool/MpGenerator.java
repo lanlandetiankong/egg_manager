@@ -96,7 +96,7 @@ public class MpGenerator {
         // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
         // 自定义 service 实现类父类
         // strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
-        // 自定义 controller 父类
+        // 自定义 com.oolong.blog.web.controller 父类
         // strategy.setSuperControllerClass("com.baomidou.demo.TestController");
         // 【实体】是否生成字段常量（默认 false）
         // public static final String ID = "test_id";
@@ -108,7 +108,7 @@ public class MpGenerator {
         strategy.setEntityLombokModel(true);
         //rest风格
         strategy.setRestControllerStyle(true);
-        strategy.setSuperControllerClass("com.egg.manager.web.controller.BaseController");
+        strategy.setSuperControllerClass("com.egg.manager.web.com.oolong.blog.web.controller.BaseController");
         mpg.setStrategy(strategy);
 
         // 包配置

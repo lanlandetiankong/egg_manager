@@ -73,7 +73,7 @@ public class DefineMenuDto extends MyBaseMysqlDto {
     private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();
 
     /**
-     * 上级菜单-dto
+     * 上级菜单-com.egg.manager.persistence.obl.article.pojo.dto
      */
     private DefineMenuDto parentMenuDto;
 

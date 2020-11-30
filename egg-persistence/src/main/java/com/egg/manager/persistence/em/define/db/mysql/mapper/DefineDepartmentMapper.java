@@ -45,7 +45,7 @@ public interface DefineDepartmentMapper extends MyEggMapper<DefineDepartmentEnti
     DefineDepartmentEntity selectOneOfUserBelongDepartment(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("departmentState") Short departmentState);
 
     /**
-     * 根据用户id查询 所属的部门详情-dto
+     * 根据用户id查询 所属的部门详情-com.egg.manager.persistence.obl.article.pojo.dto
      * @param userAccountId
      * @return
      */

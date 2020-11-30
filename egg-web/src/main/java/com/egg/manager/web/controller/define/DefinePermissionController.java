@@ -23,7 +23,7 @@ import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationL
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -70,7 +70,7 @@ public class DefinePermissionController extends BaseController {
     }
 
     @PcWebQueryLog(fullPath = "/define/definePermission/queryDtoPage")
-    @ApiOperation(value = "分页查询(dto)->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),

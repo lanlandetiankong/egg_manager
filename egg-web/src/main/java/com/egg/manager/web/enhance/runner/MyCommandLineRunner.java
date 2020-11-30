@@ -24,7 +24,7 @@ import java.util.Set;
 //@Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
-    @Value("${egg.conf.controller.scanPackage}")
+    @Value("${egg.conf.com.oolong.blog.web.controller.scanPackage}")
     private String scanPackagePath;
     @Value("${egg.conf.project.name}")
     private String projectName;

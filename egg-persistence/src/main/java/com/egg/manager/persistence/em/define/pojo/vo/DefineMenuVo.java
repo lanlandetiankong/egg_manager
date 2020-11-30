@@ -64,7 +64,7 @@ public class DefineMenuVo extends MyBaseMysqlVo {
     private String excelModelConf;
 
     /**
-     * 上级菜单-vo
+     * 上级菜单-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private DefineMenuVo parentMenu;
     /**

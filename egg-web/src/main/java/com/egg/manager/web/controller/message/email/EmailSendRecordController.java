@@ -24,7 +24,7 @@ import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

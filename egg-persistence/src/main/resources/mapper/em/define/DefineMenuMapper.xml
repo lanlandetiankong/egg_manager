@@ -26,10 +26,10 @@
         <result property="deletedTime" column="deleted_time"/>
     </resultMap>
 
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.com.egg.manager.persistence.obl.article.pojo.dto.DefineMenuDto" extends="BaseResultMap">
         <association column="parent_id" property="parentMenuDto"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto">
+                     javaType="com.egg.manager.persistence.em.define.pojo.com.egg.manager.persistence.obl.article.pojo.dto.DefineMenuDto">
             <id column="fid" property="fid"/>
             <result property="parentId" column="parent_id"/>
             <result property="menuName" column="menu_name"/>

@@ -38,7 +38,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .globalOperationParameters(aParameters)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.egg.manager.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.egg.manager.web.com.oolong.blog.web.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

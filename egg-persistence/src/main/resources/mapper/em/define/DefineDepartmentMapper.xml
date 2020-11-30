@@ -23,11 +23,11 @@
     </resultMap>
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto"
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.com.egg.manager.persistence.obl.article.pojo.dto.DefineDepartmentDto"
                extends="BaseResultMap">
         <association column="parent_id" property="parentDepartment"
                      columnPrefix="parent_"
-                     javaType="com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto">
+                     javaType="com.egg.manager.persistence.em.define.pojo.com.egg.manager.persistence.obl.article.pojo.dto.DefineDepartmentDto">
             <id column="fid" property="fid"/>
             <result column="name" property="name"/>
             <result column="code" property="code"/>

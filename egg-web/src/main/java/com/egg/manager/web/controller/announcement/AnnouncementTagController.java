@@ -20,7 +20,7 @@ import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationL
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -65,7 +65,7 @@ public class AnnouncementTagController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "分页查询(dto)->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PcWebQueryLog(fullPath = "/announcementTag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = AnnouncementTagDto.class) QueryPageBean<AnnouncementTagDto> queryPageBean,

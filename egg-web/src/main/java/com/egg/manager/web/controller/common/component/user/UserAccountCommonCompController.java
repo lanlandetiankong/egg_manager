@@ -12,7 +12,7 @@ import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -39,7 +39,7 @@ public class UserAccountCommonCompController extends BaseController {
     private UserAccountService userAccountService;
 
     @PcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
-    @ApiOperation(value = "通用组件?分页查询(dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "通用组件?分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),

@@ -22,7 +22,7 @@ public interface DefineDepartmentService extends IService<DefineDepartmentEntity
 
     /**
      * 分页查询 部门 dto列表
-     * (查询的是 dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * (查询的是 com.egg.manager.persistence.obl.article.pojo.dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param queryPageBean 查询分页配置
      * @return

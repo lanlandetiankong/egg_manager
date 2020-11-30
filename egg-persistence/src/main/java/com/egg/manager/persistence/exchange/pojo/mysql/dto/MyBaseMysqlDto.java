@@ -41,11 +41,11 @@ public class MyBaseMysqlDto implements Serializable {
      */
     private String lastModifyerId;
     /**
-     * 创建人-vo
+     * 创建人-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private UserAccountEntity createUser;
     /**
-     * 最后更新人-vo
+     * 最后更新人-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private UserAccountEntity lastModifyer;
     /**

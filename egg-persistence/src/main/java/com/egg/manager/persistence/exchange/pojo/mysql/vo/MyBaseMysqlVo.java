@@ -40,11 +40,11 @@ public class MyBaseMysqlVo implements Serializable {
      */
     private String lastModifyerId;
     /**
-     * 创建人-vo
+     * 创建人-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private UserAccountVo createUser;
     /**
-     * 最后更新人-vo
+     * 最后更新人-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private UserAccountVo lastModifyer;
 

@@ -42,7 +42,7 @@ public class DefineDepartmentVo extends MyBaseMysqlVo {
     private String description;
 
     /**
-     * 上级部门-vo
+     * 上级部门-com.egg.manager.persistence.obl.article.pojo.vo
      */
     private DefineDepartmentVo parentDepartment;
 

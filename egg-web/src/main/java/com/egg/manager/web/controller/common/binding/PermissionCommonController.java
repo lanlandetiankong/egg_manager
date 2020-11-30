@@ -6,7 +6,7 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissionCodePrefixEnum;
 import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissionTypeEnum;
 import com.egg.manager.persistence.commons.base.enums.role.DefineRoleTypeEnum;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

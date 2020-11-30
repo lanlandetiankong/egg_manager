@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethod
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.web.controller.BaseController;
+import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

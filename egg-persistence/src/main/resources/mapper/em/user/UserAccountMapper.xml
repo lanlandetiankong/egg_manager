@@ -13,6 +13,7 @@
         <result property="phone" column="phone"/>
         <result property="email" column="email"/>
         <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
         <result property="userTypeNum" column="user_type_num"/>
         <result property="userType" column="user_type"/>
         <result property="state" column="state"/>
@@ -39,7 +40,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,user_name,account,nick_name,avatar_url,password,phone,email,sex,user_type_num,user_type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,locked,version,is_deleted,deleted_time
+        fid,user_name,account,nick_name,avatar_url,password,phone,email,sex,address,user_type_num,user_type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,locked,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -55,6 +56,7 @@
             ${base_alias_name}.phone,
             ${base_alias_name}.email,
             ${base_alias_name}.sex,
+            ${base_alias_name}.address,
             ${base_alias_name}.user_type_num,
             ${base_alias_name}.user_type,
             ${base_alias_name}.state,
@@ -83,6 +85,7 @@
             ${base_alias_name}.phone AS ${base_alias_col_prefix}phone,
             ${base_alias_name}.email AS ${base_alias_col_prefix}email,
             ${base_alias_name}.sex AS ${base_alias_col_prefix}sex,
+            ${base_alias_name}.address AS ${base_alias_col_prefix}address,
             ${base_alias_name}.user_type_num AS ${base_alias_col_prefix}user_type_num,
             ${base_alias_name}.user_type AS ${base_alias_col_prefix}user_type,
             ${base_alias_name}.state AS ${base_alias_col_prefix}state,

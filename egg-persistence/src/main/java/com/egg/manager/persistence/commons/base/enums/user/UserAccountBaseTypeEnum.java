@@ -11,6 +11,7 @@ public enum UserAccountBaseTypeEnum {
     SuperRoot(100, "超级管理员", "超级管理员", true),
     Vip(110, "会员", "会员", true),
     SuperVip(190, "超级会员", "超级会员", true),
+    GeneratedUser(-20, "随机生成用户", "随机生成用户", true),
     Visitor(-10, "游客", "游客", false);
 
     UserAccountBaseTypeEnum(Integer value, String name, String label, boolean listAble) {

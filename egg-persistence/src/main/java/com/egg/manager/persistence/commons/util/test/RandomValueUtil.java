@@ -17,6 +17,10 @@ public class RandomValueUtil {
         return (int) (Math.random() * (end - start + 1) + start);
     }
 
+    public static short getShortNum(int start, int end) {
+        return (short) (Math.random() * (end - start + 1) + start);
+    }
+
     /**
      * 返回Email
      * @param lMin 最小长度
@@ -80,7 +84,7 @@ public class RandomValueUtil {
      * 返回地址
      * @return
      */
-    private static String getRoad() {
+    public static String getRoad() {
         int index = getNum(0, road.length - 1);
         String first = road[index];
         String second = getNum(11, 150) + "号";

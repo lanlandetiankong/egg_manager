@@ -21,7 +21,7 @@ public class MySqlDocsGenerator {
     public static String PROJ_VERSION = "2.0.5-SNAPSHOT";
 
     public static void main(String[] args) {
-        generateOblDoc();
+        generateEmDoc();
     }
 
     public static void generateEmDoc() {

@@ -76,6 +76,12 @@ public class UserAccountEntity extends Model<UserAccountEntity> {
      */
     @TableField("sex")
     private Short sex;
+
+    /**
+     * 地址
+     */
+    @TableField("address")
+    private String address;
     /**
      * 用户类型
      * @see UserAccountBaseTypeEnum

@@ -108,7 +108,7 @@ public class MpGenerator {
         strategy.setEntityLombokModel(true);
         //rest风格
         strategy.setRestControllerStyle(true);
-        strategy.setSuperControllerClass("com.egg.manager.web.com.oolong.blog.web.controller.BaseController");
+        strategy.setSuperControllerClass("com.egg.manager.em.web.controller.BaseController");
         mpg.setStrategy(strategy);
 
         // 包配置

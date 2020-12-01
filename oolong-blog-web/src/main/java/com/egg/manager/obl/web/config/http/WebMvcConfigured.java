@@ -47,7 +47,7 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/egg_manager/**")
+        registry.addMapping("/oolong_blog/**")
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .maxAge(1800)

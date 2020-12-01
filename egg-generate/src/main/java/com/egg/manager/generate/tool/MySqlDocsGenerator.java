@@ -18,11 +18,28 @@ import java.util.ArrayList;
  * @date 2020/10/21
  */
 public class MySqlDocsGenerator {
+    public static String PROJ_VERSION = "2.0.5-SNAPSHOT";
+
     public static void main(String[] args) {
+        generateOblDoc();
+    }
+
+    public static void generateEmDoc() {
+        String url = "jdbc:mysql://47.99.160.215:3306/egg_manager?useUnicode=true&characterEncoding=utf8&useSSL=false" ;
+        String projName = "EggManager" ;
+        generateDoc(url,projName);
+    }
+    public static void generateOblDoc() {
+        String url = "jdbc:mysql://47.99.160.215:3306/oolong_blog?useUnicode=true&characterEncoding=utf8&useSSL=false" ;
+        String projName = "OolongBlog" ;
+        generateDoc(url,projName);
+    }
+
+    public static void generateDoc(String url,String projName) {
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test");
+        hikariConfig.setJdbcUrl(url);
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("root");
         //设置可以获取tables remarks信息
@@ -33,7 +50,7 @@ public class MySqlDocsGenerator {
         //生成配置
         EngineConfig engineConfig = EngineConfig.builder()
                 //生成文件路径
-                .fileOutputDir("/Docs/MySqlDocs/EggManager")
+                .fileOutputDir("/Docs/MySqlDocs/"+projName)
                 //打开目录
                 .openOutputDir(true)
                 //文件类型
@@ -60,9 +77,9 @@ public class MySqlDocsGenerator {
         //配置
         Configuration config = Configuration.builder()
                 //版本
-                .version("1.0.0")
+                .version(PROJ_VERSION)
                 //描述
-                .description("数据库设计文档生成")
+                .description("数据库设计文档")
                 //数据源
                 .dataSource(dataSource)
                 //生成配置

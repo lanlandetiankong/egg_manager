@@ -20,7 +20,7 @@
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" extends="BaseResultMap" type="com.egg.manager.persistence.em.define.pojo.com.egg.manager.persistence.obl.article.pojo.dto.DefineTenantDto">
+    <resultMap id="DtoResultMap" extends="BaseResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto">
         <association column="create_user_id" property="createUser" fetchType="lazy"
                      select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"

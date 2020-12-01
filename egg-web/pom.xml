@@ -116,18 +116,11 @@
         <defaultGoal>compile</defaultGoal>
         <resources>
             <resource>
-                <directory>src/main/resources/configResources</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>config/**/*</include>
                     <include>application.properties</include>
                     <include>application-${profiles.active}.properties</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/envResources</directory>
-                <includes>
-                    <include>${profiles.active}/**/*</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>

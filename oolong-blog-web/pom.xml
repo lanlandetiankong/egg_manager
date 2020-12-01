@@ -116,18 +116,11 @@
         <defaultGoal>compile</defaultGoal>
         <resources>
             <resource>
-                <directory>src/main/resources/configResources</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>config/**/*</include>
                     <include>application.properties</include>
                     <include>application-${profiles.active}.properties</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/envResources</directory>
-                <includes>
-                    <include>${profiles.active}/**/*</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -180,7 +173,7 @@
                 <version>1.5.1.RELEASE</version>
                 <configuration>
                     <!-- 工程主入口-->
-                    <mainClass>com.egg.manager.EggManagerWebApplication</mainClass>
+                    <mainClass>com.egg.manager.OolongBlogWebApplication</mainClass>
                     <layout>ZIP</layout>
                     <includes>
                         <include>

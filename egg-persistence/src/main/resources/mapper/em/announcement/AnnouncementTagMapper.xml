@@ -21,7 +21,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.announcement.pojo.com.egg.manager.persistence.obl.article.pojo.dto.AnnouncementTagDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.announcement.pojo.dto.AnnouncementTagDto" extends="BaseResultMap">
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>

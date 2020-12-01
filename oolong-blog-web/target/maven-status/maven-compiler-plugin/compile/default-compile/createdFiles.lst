@@ -1,0 +1,8 @@
+com\egg\manager\obl\web\controller\blconf\OblBlogMenuConfController.class
+com\egg\manager\obl\web\controller\article\OblArticleCategoryController.class
+com\egg\manager\obl\web\controller\article\OblArticleTagController.class
+com\egg\manager\obl\web\controller\article\OblArticleCategoryRelatedController.class
+com\egg\manager\obl\web\controller\article\OblArticleCommentController.class
+com\egg\manager\obl\web\controller\article\OblArticleTagRelatedController.class
+com\egg\manager\OolongBlogWebApplication.class
+com\egg\manager\obl\web\controller\blconf\OblBlogNoticeController.class

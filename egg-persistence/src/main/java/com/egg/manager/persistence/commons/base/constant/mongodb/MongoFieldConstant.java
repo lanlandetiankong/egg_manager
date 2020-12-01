@@ -16,9 +16,9 @@ public class MongoFieldConstant implements Serializable {
 
     public static final String FIELD_CREATETIME = "createTime";
     public static final String FIELD_CREATEUSERID = "createUserId";
-    public static final String FIELD_CREATEUSERNNICKNAME = "createUserNickName";
+    public static final String FIELD_CREATEUSER_NAME = "createUserName";
     public static final String FIELD_LASTMODIFYERID = "lastModifyerId";
-    public static final String FIELD_LASTMODIFYERNICKNAME = "lastModifyerNickName";
+    public static final String FIELD_LASTMODIFYER_NAME = "lastModifyerName";
     public static final String FIELD_LASTMODIFIEDDATE = "lastModifiedDate";
 
 }

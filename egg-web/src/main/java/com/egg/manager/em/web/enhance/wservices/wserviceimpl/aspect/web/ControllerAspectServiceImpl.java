@@ -159,7 +159,7 @@ public class ControllerAspectServiceImpl implements ControllerAspectService {
                     logMgo.setLastModifyerId(userAccountId);
                     //记录当前登录用户信息
                     if (loginUserInfo != null) {
-                        logMgo.setUserNickName(loginUserInfo.getNickName());
+                        logMgo.setUserName(loginUserInfo.getUserName());
                     }
                 }
                 //取得 请求头bean

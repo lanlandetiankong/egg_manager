@@ -65,6 +65,10 @@ public class UserAccountXlsInModel extends MyBaseXls {
     @ExcelProperty(index = 4)
     private String sexStr;
     /**
+     * 地址
+     */
+    private String address;
+    /**
      * 用户类型_名称
      */
     @ExcelIgnore

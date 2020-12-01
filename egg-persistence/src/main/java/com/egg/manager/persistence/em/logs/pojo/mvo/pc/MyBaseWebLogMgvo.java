@@ -22,7 +22,7 @@ public class MyBaseWebLogMgvo<K> extends BaseModelMgvo<K> {
     /**
      * 登录的用户名称
      */
-    private String userNickName;
+    private String userName;
     /**
      * 登录的用户
      */

@@ -62,7 +62,7 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 创建人名称
      */
-    private String createUserNickName;
+    private String createUserName;
     /**
      * 创建时间
      */
@@ -74,7 +74,7 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 最后更新用户名称
      */
-    private String lastModifyerNickName;
+    private String lastModifyerName;
     /**
      * 最后更新时间
      */

@@ -26,6 +26,7 @@ import java.util.List;
 @Api(value = "API-测试接口")
 @RestController
 @RequestMapping("/index/olddata")
+@Deprecated
 public class OldDataController extends BaseController {
     @Autowired
     private UserAccountMapper userAccountMapper;

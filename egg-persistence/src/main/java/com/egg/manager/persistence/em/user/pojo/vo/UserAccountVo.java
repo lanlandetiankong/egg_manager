@@ -57,6 +57,10 @@ public class UserAccountVo extends MyBaseMysqlVo {
      */
     private Short sex;
     /**
+     * 地址
+     */
+    private String address;
+    /**
      * 用户类型
      * @see UserAccountBaseTypeEnum
      */

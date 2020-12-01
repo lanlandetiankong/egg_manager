@@ -82,8 +82,8 @@ public class MyBaseModelMgo<K> implements Serializable {
     /**
      * 创建人名称
      */
-    @Field(value = "createUserNickName")
-    private String createUserNickName;
+    @Field(value = "createUserName")
+    private String createUserName;
     /**
      * 创建时间
      */
@@ -98,8 +98,8 @@ public class MyBaseModelMgo<K> implements Serializable {
     /**
      * 最后更新用户名称
      */
-    @Field(value = "lastModifyerNickName")
-    private String lastModifyerNickName;
+    @Field(value = "lastModifyerName")
+    private String lastModifyerName;
     /**
      * 最后更新时间
      */

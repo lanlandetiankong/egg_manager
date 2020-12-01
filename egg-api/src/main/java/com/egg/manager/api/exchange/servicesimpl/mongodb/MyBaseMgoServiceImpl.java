@@ -239,14 +239,14 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     private void dealUpdateSetLoginUserToMO(UserAccountEntity loginUser, T t) {
         if (t != null && loginUser != null) {
             t.setLastModifyerId(loginUser.getFid());
-            t.setLastModifyerNickName(loginUser.getNickName());
+            t.setLastModifyerName(loginUser.getUserName());
         }
     }
 
     private void dealSetModifyInfoToUpdate(UserAccountEntity loginUser, Update update) {
         if (loginUser != null) {
             update.set(MongoFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
-            update.set(MongoFieldConstant.FIELD_LASTMODIFYERNICKNAME, loginUser.getNickName());
+            update.set(MongoFieldConstant.FIELD_LASTMODIFYER_NAME, loginUser.getUserName());
             update.set(MongoFieldConstant.FIELD_LASTMODIFIEDDATE, new Date());
         }
     }
@@ -259,9 +259,9 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     private void dealCreateSetLoginUserToMO(UserAccountEntity loginUser, T t) {
         if (t != null && loginUser != null) {
             t.setCreateUserId(loginUser.getFid());
-            t.setCreateUserNickName(loginUser.getNickName());
+            t.setCreateUserName(loginUser.getUserName());
             t.setLastModifyerId(loginUser.getFid());
-            t.setLastModifyerNickName(loginUser.getNickName());
+            t.setLastModifyerName(loginUser.getUserName());
         }
     }
 

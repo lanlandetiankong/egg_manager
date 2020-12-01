@@ -24,8 +24,8 @@ public class MyBaseWebLogMgo<K> extends MyBaseModelMgo<K> {
     /**
      * 登录的用户名称
      */
-    @Field(value = "userNickName")
-    private String userNickName;
+    @Field(value = "userName")
+    private String userName;
 
     /**
      * 注解操作类型

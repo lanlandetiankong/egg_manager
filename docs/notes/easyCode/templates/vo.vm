@@ -21,11 +21,10 @@ import java.util.Date;
 * @date $time.currTime('yyyy-MM-dd')
 */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class $!{tableInfo.name}Vo extends extends MyBaseMysqlVo {
+public class $!{tableInfo.name}Vo extends MyBaseMysqlVo {
 private String fid ;
 #foreach($column in $tableInfo.otherColumn)
     #if(${column.comment})

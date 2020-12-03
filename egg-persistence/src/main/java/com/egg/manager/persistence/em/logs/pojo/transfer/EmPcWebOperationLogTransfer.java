@@ -1,12 +1,12 @@
-package com.egg.manager.persistence.em.logs.pojo.transfer.pc.web;
+package com.egg.manager.persistence.em.logs.pojo.transfer;
 
-import com.egg.manager.persistence.em.logs.pojo.mapstruct.imap.pc.web.EmPcWebOperationLogMapstruct;
+import com.egg.manager.persistence.em.logs.pojo.mapstruct.imap.EmPcWebOperationLogMapstruct;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
 /**
  * @author zhoucj
- * @description操作日志表
+ * @description 操作日志表-Transfer
  * @date 2020/10/20
  */
 @Component

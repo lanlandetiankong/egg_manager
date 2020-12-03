@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description 表单定义-dao
+ * @description OolongBlog-操作日志表-Repository
  * @date 2020/10/21
  */
 @Repository

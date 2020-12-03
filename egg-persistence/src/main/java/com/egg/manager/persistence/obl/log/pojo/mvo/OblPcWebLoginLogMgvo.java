@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author zhoucj
- * @description 登录日志表 - MongoDB
+ * @description OolongBlog-登录日志表-Mgvo
  * @date 2020/10/20
  */
 @Data

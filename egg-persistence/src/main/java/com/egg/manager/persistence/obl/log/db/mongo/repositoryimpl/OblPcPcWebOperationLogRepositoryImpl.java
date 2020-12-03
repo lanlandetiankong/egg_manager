@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author zhoucj
- * @description 操作日志表 - MongoDB
+ * @description OolongBlog-操作日志表-RepositoryImpl
  * @date 2020/10/21
  */
 @Repository

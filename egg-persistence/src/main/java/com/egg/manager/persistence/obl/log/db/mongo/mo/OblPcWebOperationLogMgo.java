@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author zhoucj
- * @description OolongBlog-操作日志表
+ * @description OolongBlog-操作日志表-Mgo
  * @date 2020/10/20
  */
 @Data

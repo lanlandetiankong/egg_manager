@@ -1,8 +1,8 @@
-package com.egg.manager.em.web.controller.log;
+package com.egg.manager.obl.web.controller.log;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.em.log.mongo.PcWebOperationLogMgoService;
+import com.egg.manager.api.services.obl.log.mongo.OblPcWebQueryLogMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
@@ -10,12 +10,12 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.repository.EmPcWebOperationLogRepository;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.obl.log.db.mongo.mo.OblPcWebQueryLogMgo;
+import com.egg.manager.persistence.obl.log.db.mongo.repository.OblPcWebQueryLogRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,34 +30,34 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zhoucj
- * @description 操作接口日志
+ * @description 查询日志
  * @date 2020/10/21
  */
 @Slf4j
-@Api(value = "API-PcWeb操作接口日志")
+@Api(value = "API-OolongBlog_PcWeb查询日志")
 @RestController
-@RequestMapping("/log/pc/web/operationLog")
-public class PcWebOperationLogController extends BaseController {
+@RequestMapping("/log/obl/pc/web/queryLog")
+public class OblPcWebQueryLogController extends BaseController {
     @Autowired
-    private EmPcWebOperationLogRepository pcWebOperationLogRepository;
+    private OblPcWebQueryLogRepository pcWebQueryLogRepository;
     @Reference
-    private PcWebOperationLogMgoService pcWebOperationLogMgoService;
+    private OblPcWebQueryLogMgoService pcWebQueryLogMgoService;
 
-    @EmPcWebQueryLog(fullPath = "/log/pc/web/operationLog/getDataPage", flag = false)
-    @ApiOperation(value = "分页查询->PcWeb操作接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @OblPcWebQueryLog(fullPath = "/log/obl/pc/web/queryLog/getDataPage", flag = false)
+    @ApiOperation(value = "分页查询->PcWeb查询接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = EmPcWebOperationLogMgo.class) QueryPageBean<EmPcWebOperationLogMgo> queryPageBean,
+    public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = OblPcWebQueryLogMgo.class) QueryPageBean<OblPcWebQueryLogMgo> queryPageBean,
                                    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
         queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
-        AntdvPage<EmPcWebOperationLogMgo> pageBean = pcWebOperationLogMgoService.doFindPage(loginUserInfo, queryPageBean);
+        AntdvPage<OblPcWebQueryLogMgo> pageBean = pcWebQueryLogMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
         return result;
     }

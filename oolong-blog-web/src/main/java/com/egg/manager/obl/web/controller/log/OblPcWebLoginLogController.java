@@ -1,8 +1,8 @@
-package com.egg.manager.em.web.controller.log;
+package com.egg.manager.obl.web.controller.log;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.em.log.mongo.PcWebLoginLogMgoService;
+import com.egg.manager.api.services.obl.log.mongo.OblPcWebLoginLogMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
@@ -10,12 +10,12 @@ import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.repository.EmPcWebLoginLogRepository;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.obl.log.db.mongo.mo.OblPcWebLoginLogMgo;
+import com.egg.manager.persistence.obl.log.db.mongo.repository.OblPcWebLoginLogRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,16 +34,16 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2020/10/21
  */
 @Slf4j
-@Api(value = "API-PcWeb登录接口日志")
+@Api(value = "API-OolongBlog_PcWeb登录接口日志")
 @RestController
-@RequestMapping("/log/pc/web/loginLog")
-public class PcWebLoginLogController extends BaseController {
+@RequestMapping("/log/obl/pc/web/loginLog")
+public class OblPcWebLoginLogController extends BaseController {
     @Autowired
-    private EmPcWebLoginLogRepository pcWebLoginLogRepository;
+    private OblPcWebLoginLogRepository oblPcWebLoginLogRepository;
     @Reference
-    private PcWebLoginLogMgoService pcWebLoginLogMgoService;
+    private OblPcWebLoginLogMgoService oblPcWebLoginLogMgoService;
 
-    @EmPcWebQueryLog(fullPath = "/log/pc/web/loginLog/getDataPage", flag = false)
+    @OblPcWebQueryLog(fullPath = "/log/obl/pc/web/loginLog/getDataPage", flag = false)
     @ApiOperation(value = "分页查询->PcWeb登录接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -51,13 +51,13 @@ public class PcWebLoginLogController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/getDataPage")
-    public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = EmPcWebLoginLogMgo.class) QueryPageBean<EmPcWebLoginLogMgo> queryPageBean,
+    public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = OblPcWebLoginLogMgo.class) QueryPageBean<OblPcWebLoginLogMgo> queryPageBean,
                                    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
         queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
-        AntdvPage<EmPcWebLoginLogMgo> pageBean = pcWebLoginLogMgoService.doFindPage(loginUserInfo, queryPageBean);
+        AntdvPage<OblPcWebLoginLogMgo> pageBean = oblPcWebLoginLogMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
         return result;
     }

@@ -34,7 +34,7 @@
 
 
     <dubbo:service protocol="dubbo" ref="pcWebOperationLogMgoService"
-                   interface="com.egg.manager.api.services.em.log.mongo.PcWebOperationLogMgoService"/>
+                   interface="com.egg.manager.api.services.em.log.mongo.EmPcWebOperationLogMgoService"/>
     <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
 
 

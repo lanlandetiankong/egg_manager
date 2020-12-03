@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class HttpMessageConverterConfig {
         };
 
         fastJsonConfig.setSerializerFeatures(serializerFeatures);
-        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
+        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
         //日期格式化
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);

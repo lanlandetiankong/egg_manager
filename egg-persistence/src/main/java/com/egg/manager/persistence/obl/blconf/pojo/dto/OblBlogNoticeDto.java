@@ -1,7 +1,10 @@
 package com.egg.manager.persistence.obl.blconf.pojo.dto;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj

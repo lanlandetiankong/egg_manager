@@ -3,6 +3,7 @@ package com.egg.manager.em.web.controller.define;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.RoleMenuService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
@@ -25,10 +26,9 @@ import com.egg.manager.persistence.em.user.db.mysql.mapper.RoleMenuMapper;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.initialize.RoleMenuPojoInitialize;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
@@ -69,7 +69,7 @@ public class DefineRoleController extends BaseController {
     @Reference
     private DefineRoleService defineRoleService;
 
-    @PcWebOperationLog(fullPath = "/define/defineRole/queryPage")
+    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryPage")
     @ApiOperation(value = "分页查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -85,7 +85,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/defineRole/queryDtoPage")
+    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -102,7 +102,7 @@ public class DefineRoleController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
+    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -160,7 +160,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -176,7 +176,7 @@ public class DefineRoleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/defineRole/deleteById")
+    @EmPcWebOperationLog(fullPath = "/define/defineRole/deleteById")
     @ApiOperation(value = "伪删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -196,7 +196,7 @@ public class DefineRoleController extends BaseController {
     public WebResult doGrantPermissionToRole(HttpServletRequest request, String roleId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(roleId,BaseRstMsgConstant.ErrorMsg.unknowId());
+        Assert.notNull(roleId, BaseRstMsgConstant.ErrorMsg.unknowId());
         Integer count = defineRoleService.dealGrantPermissionToRole(loginUserInfo, roleId, checkIds);
         result.putCount(count);
         return result;

@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCommentEntity;
@@ -52,7 +52,7 @@ public class OblArticleCommentController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleComment/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblArticleComment/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCommentDto.class) QueryPageBean<OblArticleCommentDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleComment/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblArticleComment/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCommentId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleComment/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleComment/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCommentVo oblArticleCommentVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleComment/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleComment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCommentVo oblArticleCommentVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblArticleCommentController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleComment/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblArticleComment/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblArticleCommentController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleComment/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblArticleComment/deleteById")
     @ApiOperation(value = "伪删除->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

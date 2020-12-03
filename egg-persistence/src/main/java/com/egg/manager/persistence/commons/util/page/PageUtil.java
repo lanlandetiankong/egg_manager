@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @description: 分页工具
  * @author zhoucj
+ * @description: 分页工具
  * @date 2020/11/23
  */
 public class PageUtil {
@@ -46,6 +46,7 @@ public class PageUtil {
     public static QueryFieldArr parseQueryJsonToBeanList(HttpServletRequest request) {
         return parseQueryJsonToBeanList(request.getParameter(WebApiConstant.FIELDNAME_QUERY_OBJ));
     }
+
     /**
      * 解析 搜索条件 map
      * @param queryJson
@@ -67,9 +68,10 @@ public class PageUtil {
         return fieldBeanList;
     }
 
-    public static <T> AntdvPage<T> parsePaginationJsonToBean(HttpServletRequest request,Class<T> clazz) {
-        return parsePaginationJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_PAGINATION_OBJ),clazz);
+    public static <T> AntdvPage<T> parsePaginationJsonToBean(HttpServletRequest request, Class<T> clazz) {
+        return parsePaginationJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_PAGINATION_OBJ), clazz);
     }
+
     /**
      * 取得分页 bean
      * @param paginationJson
@@ -85,9 +87,10 @@ public class PageUtil {
         return vpage;
     }
 
-    public static AntdvSortMap parseSortJsonToBean(HttpServletRequest request,boolean addCreateTimeDesc) {
-        return parseSortJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ),addCreateTimeDesc);
+    public static AntdvSortMap parseSortJsonToBean(HttpServletRequest request, boolean addCreateTimeDesc) {
+        return parseSortJsonToBean(request.getParameter(WebApiConstant.FIELDNAME_SORT_OBJ), addCreateTimeDesc);
     }
+
     /**
      * 取得排序 bean
      * @param sortObj

@@ -1,5 +1,6 @@
 package com.egg.manager.em.web.controller.common.component.user;
 
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -9,10 +10,9 @@ import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -38,7 +38,7 @@ public class UserAccountCommonCompController extends BaseController {
     @Autowired
     private UserAccountService userAccountService;
 
-    @PcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
+    @EmPcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

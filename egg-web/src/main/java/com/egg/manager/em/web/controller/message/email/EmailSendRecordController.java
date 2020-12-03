@@ -2,6 +2,7 @@ package com.egg.manager.em.web.controller.message.email;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.message.basic.email.EmailSendRecordMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -18,13 +19,12 @@ import com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email.EmailSen
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.verification.email.EmailSendRecordMongoVerifyO;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
-import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -56,7 +56,7 @@ public class EmailSendRecordController extends BaseController {
     @Reference
     private EmailSendRecordMgoService emailSendRecordMgoService;
 
-    @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getDataPage")
+    @EmPcWebQueryLog(fullPath = "/message/email/emailSendRecord/getDataPage")
     @ApiOperation(value = "分页查询->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -75,7 +75,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
+    @EmPcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
@@ -87,7 +87,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
+    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
@@ -103,7 +103,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
+    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
     @ApiOperation(value = "伪删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
@@ -117,7 +117,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
+    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量伪删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),

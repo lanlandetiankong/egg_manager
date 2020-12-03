@@ -7,15 +7,16 @@ package com.egg.manager.persistence.commons.base.enums.article;
  * @Date: 2020/12/2 9:15
  */
 public enum ArticleLikeEnum {
-    Like((short)1,"点赞"),
-    Dislike((short)2,"踩低")
-    ;
+    Like((short) 1, "点赞"),
+    Dislike((short) 2, "踩低");
+
     ArticleLikeEnum(short value, String name) {
         this.value = value;
         this.name = name;
     }
-    private short value ;
-    private String name ;
+
+    private short value;
+    private String name;
 
 
     public short getValue() {

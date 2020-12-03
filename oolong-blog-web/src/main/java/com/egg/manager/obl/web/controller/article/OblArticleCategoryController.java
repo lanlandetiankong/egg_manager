@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryEntity;
@@ -52,7 +52,7 @@ public class OblArticleCategoryController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleCategory/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblArticleCategory/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCategoryDto.class) QueryPageBean<OblArticleCategoryDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleCategory/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblArticleCategory/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCategoryId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleCategory/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategory/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCategoryVo oblArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleCategory/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategory/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCategoryVo oblArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblArticleCategoryController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleCategory/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategory/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblArticleCategoryController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleCategory/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategory/deleteById")
     @ApiOperation(value = "伪删除->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

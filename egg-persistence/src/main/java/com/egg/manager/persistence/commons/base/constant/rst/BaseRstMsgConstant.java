@@ -45,12 +45,15 @@ public class BaseRstMsgConstant {
         public static String unknowId() {
             return UNKNOW_ID + ACTION_FAIL_MSG;
         }
+
         public static String unknowUserId() {
             return UNKNOW_USER_ID + ACTION_FAIL_MSG;
         }
+
         public static String unknowTenantId() {
             return UNKNOW_TENANT_ID + ACTION_FAIL_MSG;
         }
+
         public static String invalidObject() {
             return INVALID_OBJECT + ACTION_FAIL_MSG;
         }

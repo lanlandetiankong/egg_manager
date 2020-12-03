@@ -7,7 +7,7 @@ import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -30,19 +30,18 @@ import java.util.ArrayList;
 public class UserToolController extends BaseController {
 
     @Reference
-    private UserAccountService userAccountService ;
+    private UserAccountService userAccountService;
 
 
-    @PcWebQueryLog(fullPath = "/index/usertool/batchGenerate", flag = false)
+    @EmPcWebQueryLog(fullPath = "/index/usertool/batchGenerate", flag = false)
     @ApiOperation(value = "批量生成测试用户", response = WebResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/batchGenerate")
     public String doGetAllDefineDepartmentDtos() {
         //随机生成100个用户
         ArrayList<UserAccountEntity> userAccountEntities = UserGenerateHelper.batchGenerateUser(100);
         userAccountService.saveBatch(userAccountEntities);
-        return "ok" ;
+        return "ok";
     }
-
 
 
 }

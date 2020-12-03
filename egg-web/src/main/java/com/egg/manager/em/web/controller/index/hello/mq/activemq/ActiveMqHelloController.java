@@ -1,8 +1,8 @@
 package com.egg.manager.em.web.controller.index.hello.mq.activemq;
 
-import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
 import com.egg.manager.api.exchange.BaseController;
+import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class ActiveMqHelloController extends BaseController {
     @Autowired
     private Topic topic;
 
-    @PcWebOperationLog(fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
+    @EmPcWebOperationLog(fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
@@ -42,7 +42,7 @@ public class ActiveMqHelloController extends BaseController {
         return "success";
     }
 
-    @PcWebOperationLog(fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
+    @EmPcWebOperationLog(fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {

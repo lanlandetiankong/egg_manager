@@ -4,6 +4,7 @@ package com.egg.manager.obl.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
+import com.egg.manager.api.services.obl.user.OblUserCalculateInfoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -12,14 +13,13 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserCalculateInfoEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserCalculateInfoMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserCalculateInfoDto;
-import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserCalculateInfoEntity;
-import com.egg.manager.api.services.obl.user.OblUserCalculateInfoService;
 import com.egg.manager.persistence.obl.user.pojo.transfer.OblUserCalculateInfoTransfer;
 import com.egg.manager.persistence.obl.user.pojo.vo.OblUserCalculateInfoVo;
 import io.swagger.annotations.Api;
@@ -52,7 +52,7 @@ public class OblUserCalculateInfoController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserCalculateInfoDto.class) QueryPageBean<OblUserCalculateInfoDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserCalculateInfoId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblUserCalculateInfo/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserCalculateInfoVo oblUserCalculateInfoVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblUserCalculateInfo/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserCalculateInfoVo oblUserCalculateInfoVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblUserCalculateInfoController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblUserCalculateInfo/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblUserCalculateInfoController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblUserCalculateInfo/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/deleteById")
     @ApiOperation(value = "伪删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

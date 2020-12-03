@@ -79,8 +79,8 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @return
      */
     public static void dealQueryFormFieldBeanToQuery(List<Criteria> criteriaList, QueryField fieldBean) {
-        if(fieldBean == null){
-            return ;
+        if (fieldBean == null) {
+            return;
         }
         if (QueryMatchingEnum.EqualsMatch.equalsValue(fieldBean.getMatching())) {
             //字符串相等查询
@@ -93,8 +93,8 @@ public class MongoQueryBean<T> extends BaseQueryBean {
         } else if (QueryMatchingEnum.NotEqualsMatch.equalsValue(fieldBean.getMatching())) {
             //字符串非等查询
             criteriaList.add(Criteria.where(fieldBean.getFieldName()).ne(fieldBean.getValue()));
-        }   else {
-            log.warn("未被匹配的查询条件->{}",JSONObject.toJSONString(fieldBean));
+        } else {
+            log.warn("未被匹配的查询条件->{}", JSONObject.toJSONString(fieldBean));
         }
     }
 
@@ -123,11 +123,6 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     }
 
 
-
-
-
-
-
     public MongoQueryBean<T> appendQueryFieldsToQuery(QueryPageBean queryFieldBuffer) {
         if (queryFieldBuffer == null || CollectionUtils.isEmpty(queryFieldBuffer.getQuery())) {
             return this;
@@ -143,7 +138,7 @@ public class MongoQueryBean<T> extends BaseQueryBean {
     public static List<Sort.Order> dealSortBeanToOrder(AntdvSortMap sortMap) {
         List<Sort.Order> sortOrders = new ArrayList<>();
         if (sortMap == null || sortMap.isEmpty()) {
-            return sortOrders ;
+            return sortOrders;
         }
         for (String columnName : sortMap.keySet()) {
             if (Boolean.TRUE.equals(sortMap.get(columnName))) {

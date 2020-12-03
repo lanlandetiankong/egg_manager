@@ -43,7 +43,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
 
     /**
      * 取得前端传递的分页配置
-     * @param loginUser     当前登录用户
+     * @param loginUser 当前登录用户
      * @param result
      * @param queryPage 查询分页配置
      * @return

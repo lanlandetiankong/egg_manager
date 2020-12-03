@@ -1,8 +1,8 @@
 package com.egg.manager.em.web.config.http;
 
-import com.egg.manager.persistence.commons.base.props.build.deploy.DeployConfProps;
 import com.egg.manager.em.web.enhance.resolver.CurrentUserAccountMethodArgumentResolver;
 import com.egg.manager.em.web.enhance.resolver.PageBeanMethodArgumentResolver;
+import com.egg.manager.persistence.commons.base.props.build.deploy.DeployConfProps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.obl.blconf.db.mysql.entity.OblBlogMenuConfEntity;
@@ -52,7 +52,7 @@ public class OblBlogMenuConfController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblBlogMenuConf/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblBlogMenuConf/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblBlogMenuConfDto.class) QueryPageBean<OblBlogMenuConfDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblBlogMenuConf/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblBlogMenuConf/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblBlogMenuConfId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "新增->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblBlogMenuConf/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblBlogMenuConfVo oblBlogMenuConfVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "更新->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblBlogMenuConf/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblBlogMenuConfVo oblBlogMenuConfVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblBlogMenuConfController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblBlogMenuConf/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblBlogMenuConfController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblBlogMenuConf/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/deleteById")
     @ApiOperation(value = "伪删除->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

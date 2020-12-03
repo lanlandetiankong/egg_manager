@@ -1,9 +1,10 @@
 package com.egg.manager.persistence.obl.article.pojo.dto;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj
@@ -28,7 +29,6 @@ public class OblContentLikeLogDto extends MyBaseMysqlDto {
      * 操作用户id
      */
     private String operateUserId;
-
 
 
 }

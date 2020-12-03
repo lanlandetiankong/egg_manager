@@ -80,7 +80,7 @@ public interface DefineMenuService extends IService<DefineMenuEntity>, MyBaseMys
      * 分页查询 菜单定义 列表
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryPage 查询分页配置
+     * @param queryPage     查询分页配置
      * @return
      */
     WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean queryPage);

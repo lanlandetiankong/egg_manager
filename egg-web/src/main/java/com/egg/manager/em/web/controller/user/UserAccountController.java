@@ -1,6 +1,7 @@
 package com.egg.manager.em.web.controller.user;
 
 import cn.hutool.core.lang.Assert;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -20,11 +21,10 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -67,7 +67,7 @@ public class UserAccountController extends BaseController {
     private UserAccountService userAccountService;
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
-    @PcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -84,7 +84,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -107,7 +107,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
+    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -117,7 +117,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
+    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
     public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -128,7 +128,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
+    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -138,7 +138,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/createByForm")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -152,7 +152,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -165,7 +165,7 @@ public class UserAccountController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -182,7 +182,7 @@ public class UserAccountController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/user/userAccount/deleteById")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/deleteById")
     @ApiOperation(value = "伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -199,7 +199,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -216,7 +216,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新/修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -232,19 +232,19 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(userAccountId,BaseRstMsgConstant.ErrorMsg.unknowUserId());
+        Assert.notNull(userAccountId, BaseRstMsgConstant.ErrorMsg.unknowUserId());
         Integer grantCount = userAccountService.dealGrantRoleToUser(loginUserInfo, userAccountId, checkIds);
         result.putCount(grantCount);
         return result;
     }
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public WebResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                       @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -257,7 +257,7 @@ public class UserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/user/userAccount/reflushSecurePwd")
+    @EmPcWebOperationLog(fullPath = "/user/userAccount/reflushSecurePwd")
     @GetMapping(value = "/reflushSecurePwd")
     public WebResult reflushSecurePwd(HttpServletRequest request, @CurrentLoginUser(required = false) CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();

@@ -3,12 +3,14 @@ package com.egg.manager.em.web.controller.user.login;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.exchange.helper.PasswordHelper;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.em.web.config.shiro.JwtShiroToken;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -23,12 +25,10 @@ import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.em.user.pojo.dto.login.LoginAccountVo;
 import com.egg.manager.persistence.em.user.pojo.verification.login.LoginAccountVerifyO;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebLoginLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.shiro.ShiroPass;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
-import com.egg.manager.em.web.config.shiro.JwtShiroToken;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -73,7 +73,7 @@ public class UserLoginController extends BaseController {
     @Reference
     public DefineMenuService defineMenuService;
 
-    @PcWebLoginLog(fullPath = "/user/login/loginByForm")
+    @EmPcWebLoginLog(fullPath = "/user/login/loginByForm")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo", value = "要登录用户的相关信息", required = true, dataTypeClass = LoginAccountVo.class),

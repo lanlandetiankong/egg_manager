@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserDefCollectCategoryEntity;
@@ -52,7 +52,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.user.pojo.dto)->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserDefCollectCategoryDto.class) QueryPageBean<OblUserDefCollectCategoryDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserDefCollectCategoryId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblUserDefCollectCategory/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblUserDefCollectCategory/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblUserDefCollectCategory/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblUserDefCollectCategory/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/deleteById")
     @ApiOperation(value = "伪删除->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

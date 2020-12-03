@@ -21,56 +21,59 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
 
-    public QueryFieldArr(){}
+    public QueryFieldArr() {
+    }
 
     /**
      * 添加 字段相等条件
      * @param fieldName db字段名
-     * @param value 匹配的值
+     * @param value     匹配的值
      * @return
      */
-    public QueryFieldArr addEq(String fieldName, Object value){
-        return addEq(true,fieldName,value) ;
+    public QueryFieldArr addEq(String fieldName, Object value) {
+        return addEq(true, fieldName, value);
     }
+
     /**
      * 添加 字段相等条件
-     * @param flag 是否添加
+     * @param flag      是否添加
      * @param fieldName db字段名
-     * @param value 匹配的值
+     * @param value     匹配的值
      * @return
      */
-    public QueryFieldArr addEq(Boolean flag,String fieldName, Object value){
-        if(!Boolean.TRUE.equals(flag)){
-            return this ;
+    public QueryFieldArr addEq(Boolean flag, String fieldName, Object value) {
+        if (!Boolean.TRUE.equals(flag)) {
+            return this;
         }
-        QueryField item = QueryField.gainEq(fieldName,value);
+        QueryField item = QueryField.gainEq(fieldName, value);
         this.add(item);
-        return this ;
-    }
-    /**
-     * 添加 字段不相等条件
-     * @param fieldName db字段名
-     * @param value 匹配的值
-     * @return
-     */
-    public QueryFieldArr addNotEq(String fieldName, Object value){
-        return addNotEq(true,fieldName,value) ;
+        return this;
     }
 
     /**
      * 添加 字段不相等条件
-     * @param flag 是否添加
      * @param fieldName db字段名
-     * @param value 匹配的值
+     * @param value     匹配的值
      * @return
      */
-    public QueryFieldArr addNotEq(Boolean flag,String fieldName, Object value){
-        if(!Boolean.TRUE.equals(flag)){
-            return this ;
+    public QueryFieldArr addNotEq(String fieldName, Object value) {
+        return addNotEq(true, fieldName, value);
+    }
+
+    /**
+     * 添加 字段不相等条件
+     * @param flag      是否添加
+     * @param fieldName db字段名
+     * @param value     匹配的值
+     * @return
+     */
+    public QueryFieldArr addNotEq(Boolean flag, String fieldName, Object value) {
+        if (!Boolean.TRUE.equals(flag)) {
+            return this;
         }
-        QueryField item = QueryField.gainNotEq(fieldName,value);
+        QueryField item = QueryField.gainNotEq(fieldName, value);
         this.add(item);
-        return this ;
+        return this;
     }
 
     public QueryFieldArr addBatch(List<QueryField> fields) {
@@ -87,15 +90,12 @@ public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
      * @return
      */
     public static QueryFieldArr parseFromJson(String json) {
-        if(StringUtils.isBlank(json)){
-            return new QueryFieldArr() ;
+        if (StringUtils.isBlank(json)) {
+            return new QueryFieldArr();
         }
         List<QueryField> queryFields = JSONArray.parseArray(json, QueryField.class);
         return new QueryFieldArr().addBatch(queryFields);
     }
-
-
-
 
 
 }

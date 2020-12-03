@@ -13,8 +13,8 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryRelatedEntity;
@@ -52,7 +52,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleCategoryRelated/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblArticleCategoryRelated/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCategoryRelatedDto.class) QueryPageBean<OblArticleCategoryRelatedDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleCategoryRelated/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblArticleCategoryRelated/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCategoryRelatedId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleCategoryRelated/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategoryRelated/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleCategoryRelated/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategoryRelated/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleCategoryRelated/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategoryRelated/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleCategoryRelated/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblArticleCategoryRelated/deleteById")
     @ApiOperation(value = "伪删除->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

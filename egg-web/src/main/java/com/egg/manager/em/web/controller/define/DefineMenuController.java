@@ -3,6 +3,7 @@ package com.egg.manager.em.web.controller.define;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
@@ -22,11 +23,10 @@ import com.egg.manager.persistence.em.define.pojo.dto.DefineMenuDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineMenuTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineMenuVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -61,7 +61,7 @@ public class DefineMenuController extends BaseController {
     @Reference
     private DefineMenuService defineMenuService;
 
-    @PcWebQueryLog(fullPath = "/define/defineMenu/queryTreeSelect")
+    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryTreeSelect")
     @ApiOperation(value = "查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(Boolean withRoot) {
@@ -78,7 +78,7 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineMenu/queryFilteredTreeSelect")
+    @EmPcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineMenu/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->菜单定义", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId) {
@@ -90,7 +90,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/define/defineMenu/user/gainGrantTree")
+    @EmPcWebQueryLog(fullPath = "/define/defineMenu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
     public WebResult doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -101,7 +101,7 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/define/defineMenu/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -118,7 +118,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/define/defineMenu/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineMenuId) {
         WebResult result = WebResult.okQuery();
@@ -129,7 +129,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "新增->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
+    @EmPcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -142,7 +142,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "更新->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineMenuVo vo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -155,7 +155,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "更新->菜单定义/excel模板", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/defineMenu/updateExcelModel")
+    @EmPcWebOperationLog(fullPath = "/define/defineMenu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     public WebResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -175,7 +175,7 @@ public class DefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "批量伪删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
     })
@@ -190,7 +190,7 @@ public class DefineMenuController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/define/defineMenu/deleteById")
+    @EmPcWebOperationLog(fullPath = "/define/defineMenu/deleteById")
     @ApiOperation(value = "伪删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

@@ -2,6 +2,7 @@ package com.egg.manager.em.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.DefineModuleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -16,11 +17,10 @@ import com.egg.manager.persistence.em.define.pojo.dto.DefineModuleDto;
 import com.egg.manager.persistence.em.define.pojo.transfer.DefineModuleTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineModuleVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -48,7 +48,7 @@ public class DefineModuleController extends BaseController {
     @Reference
     private DefineModuleService defineModuleService;
 
-    @PcWebQueryLog(fullPath = "/module/define_module/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/module/define_module/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -65,7 +65,7 @@ public class DefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/module/define_module/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/module/define_module/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -75,7 +75,7 @@ public class DefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "新增->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/module/define_module/createByForm")
+    @EmPcWebOperationLog(fullPath = "/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -88,7 +88,7 @@ public class DefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "更新->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/module/define_module/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineModuleVo defineModuleVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -100,7 +100,7 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/module/define_module/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/module/define_module/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -116,7 +116,7 @@ public class DefineModuleController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/module/define_module/deleteById")
+    @EmPcWebOperationLog(fullPath = "/module/define_module/deleteById")
     @ApiOperation(value = "伪删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

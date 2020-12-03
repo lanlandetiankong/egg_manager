@@ -7,7 +7,6 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.OblArticleTagService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTagTransfer;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleTagEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleTagMapper;

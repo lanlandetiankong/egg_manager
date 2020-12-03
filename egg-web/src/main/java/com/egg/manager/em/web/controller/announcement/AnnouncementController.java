@@ -2,6 +2,7 @@ package com.egg.manager.em.web.controller.announcement;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementService;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
@@ -19,11 +20,10 @@ import com.egg.manager.persistence.em.announcement.pojo.transfer.AnnouncementTra
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementDraftVo;
 import com.egg.manager.persistence.em.announcement.pojo.vo.AnnouncementVo;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -54,7 +54,7 @@ public class AnnouncementController extends BaseController {
     @Reference
     private AnnouncementTagService announcementTagService;
 
-    @PcWebQueryLog(fullPath = "/announcement/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/announcement/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -75,20 +75,20 @@ public class AnnouncementController extends BaseController {
     }
 
     @ApiOperation(value = "筛选查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
+    @EmPcWebQueryLog(fullPath = "/announcement/queryFilteredPage")
     @PostMapping(value = "/queryFilteredPage")
     public WebResult queryFilteredPage(HttpServletRequest request, Integer limitSize, @QueryPage(tClass = AnnouncementDto.class) QueryPageBean<AnnouncementDto> queryPageBean,
                                        Boolean onlySelf, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         //只查询自己发布的公告
-        queryPageBean.operateQuery().addEq(onlySelf,FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
+        queryPageBean.operateQuery().addEq(onlySelf, FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());
         queryPageBean.operatePageConf().setPageSize(limitSize);
         result = announcementService.dealQueryPageByEntitys(loginUserInfo, result, queryPageBean);
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/announcement/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/announcement/queryOneById")
     @ApiOperation(value = "根据id查询->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -101,7 +101,7 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/announcement/createByForm")
+    @EmPcWebOperationLog(fullPath = "/announcement/createByForm")
     @ApiOperation(value = "新增->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, AnnouncementVo announcementVo,
@@ -116,7 +116,7 @@ public class AnnouncementController extends BaseController {
     }
 
     @ApiOperation(value = "发布->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/announcement/createFromDraft")
+    @EmPcWebOperationLog(fullPath = "/announcement/createFromDraft")
     @PostMapping(value = "/createFromDraft")
     public WebResult createFromDraft(HttpServletRequest request, AnnouncementDraftVo announcementDraftVo,
                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -129,7 +129,7 @@ public class AnnouncementController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/announcement/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/announcement/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -146,7 +146,7 @@ public class AnnouncementController extends BaseController {
     }
 
     @ApiOperation(value = "伪删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/announcement/deleteById")
+    @EmPcWebOperationLog(fullPath = "/announcement/deleteById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })

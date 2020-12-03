@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Builder
-public class EnumRstBean<T,K> implements Serializable {
+public class EnumRstBean<T, K> implements Serializable {
     /**
      * 集合
      */
@@ -22,7 +22,7 @@ public class EnumRstBean<T,K> implements Serializable {
     /**
      * 枚举数据默认勾选
      */
-    private List<K> checkeds ;
+    private List<K> checkeds;
 
 
 }

@@ -12,7 +12,7 @@ public enum EggMpSqlMethod {
     private final String desc;
     private final String sql;
 
-    private EggMpSqlMethod(String method, String desc, String sql) {
+    EggMpSqlMethod(String method, String desc, String sql) {
         this.method = method;
         this.desc = desc;
         this.sql = sql;

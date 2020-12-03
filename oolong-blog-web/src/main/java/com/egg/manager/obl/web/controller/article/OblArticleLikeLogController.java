@@ -4,6 +4,7 @@ package com.egg.manager.obl.web.controller.article;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
+import com.egg.manager.api.services.obl.article.OblArticleLikeLogService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
@@ -12,13 +13,15 @@ import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
+import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeLogEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeLogMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeLogDto;
-import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeLogEntity;
+import com.egg.manager.persistence.obl.article.pojo.transfer.OblArticleLikeLogTransfer;
+import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeLogVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -28,9 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.egg.manager.api.services.obl.article.OblArticleLikeLogService;
-import com.egg.manager.persistence.obl.article.pojo.transfer.OblArticleLikeLogTransfer;
-import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeLogVo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,7 +52,7 @@ public class OblArticleLikeLogController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleLikeLog/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblArticleLikeLog/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleLikeLogDto.class) QueryPageBean<OblArticleLikeLogDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblArticleLikeLogController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/oblArticleLikeLog/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblArticleLikeLog/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleLikeLogId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblArticleLikeLogController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleLikeLog/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleLikeLogVo oblArticleLikeLogVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblArticleLikeLogController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/oblArticleLikeLog/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleLikeLogVo oblArticleLikeLogVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblArticleLikeLogController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleLikeLog/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblArticleLikeLogController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/oblArticleLikeLog/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/deleteById")
     @ApiOperation(value = "伪删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

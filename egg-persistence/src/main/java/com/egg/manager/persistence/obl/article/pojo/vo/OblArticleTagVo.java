@@ -1,9 +1,10 @@
 package com.egg.manager.persistence.obl.article.pojo.vo;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj

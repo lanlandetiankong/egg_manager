@@ -2,8 +2,8 @@ package com.egg.manager.persistence.obl.article.pojo.mapstruct.imap;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryRelatedEntity;
-import com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion.OblArticleCategoryRelatedConversion;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCategoryRelatedDto;
+import com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion.OblArticleCategoryRelatedConversion;
 import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleCategoryRelatedVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

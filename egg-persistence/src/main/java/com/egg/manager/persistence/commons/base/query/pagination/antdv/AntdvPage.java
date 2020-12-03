@@ -35,17 +35,17 @@ public class AntdvPage<T> extends BasePagination {
     }
 
     public AntdvPage(Integer current, Integer pageSize) {
-        this(current, pageSize, 0L,null);
+        this(current, pageSize, 0L, null);
     }
 
-    public AntdvPage(Integer current, Integer pageSize, Long total,List<T> list) {
+    public AntdvPage(Integer current, Integer pageSize, Long total, List<T> list) {
         this.current = current;
         this.pageSize = pageSize;
         this.total = total;
     }
 
     public static AntdvPage gainPageWithSize(Integer pageSize) {
-        return new AntdvPage(1, pageSize, 0L,null);
+        return new AntdvPage(1, pageSize, 0L, null);
     }
 
     /**
@@ -53,7 +53,7 @@ public class AntdvPage<T> extends BasePagination {
      * @return
      */
     public static <T> AntdvPage<T> gainDefault(Class<T> clazz) {
-        return new AntdvPage<T>(1, 10, 0L,null);
+        return new AntdvPage<T>(1, 10, 0L, null);
     }
 
 }

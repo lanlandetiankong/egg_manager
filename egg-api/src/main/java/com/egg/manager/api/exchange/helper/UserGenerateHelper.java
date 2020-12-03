@@ -22,11 +22,11 @@ public class UserGenerateHelper {
     public static UserAccountEntity generateUser() {
         UserAccountEntity userAccountEntity = UserAccountEntity.builder()
                 .userName(RandomValueUtil.getChineseName())
-                .email(RandomValueUtil.getEmail(1,9))
+                .email(RandomValueUtil.getEmail(1, 9))
                 .phone(RandomValueUtil.getTel())
                 .address(RandomValueUtil.getRoad())
-                .sex(RandomValueUtil.getShortNum(0,1))
-                .locked((short)0)
+                .sex(RandomValueUtil.getShortNum(0, 1))
+                .locked((short) 0)
                 .userType(UserAccountBaseTypeEnum.GeneratedUser.getValue()).build();
         //密码及盐
         passwordHelper.encryptPassword(userAccountEntity);
@@ -40,12 +40,12 @@ public class UserGenerateHelper {
      */
     public static ArrayList<UserAccountEntity> batchGenerateUser(int size) {
         ArrayList<UserAccountEntity> list = new ArrayList<>();
-        if(size <= 0){
+        if (size <= 0) {
             return list;
         }
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             list.add(generateUser());
         }
-        return list ;
+        return list;
     }
 }

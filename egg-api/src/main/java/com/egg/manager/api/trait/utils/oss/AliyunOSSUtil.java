@@ -115,7 +115,6 @@ public class AliyunOSSUtil {
             fileSize = inputStream.available();
         } catch (IOException e) {
             log.error("执行异常--->", e);
-            ;
         }
         if (fileSize <= 0 || fileSize > maxSize) {
             return new AliyunOssResult(false, null, null, "文件超过最大限制");
@@ -150,7 +149,6 @@ public class AliyunOSSUtil {
             return new AliyunOssResult(true, fileName, getOssUrl(fileName), "上传成功");
         } catch (OSSException | ClientException e) {
             log.error("执行异常--->", e);
-            ;
             return new AliyunOssResult(false, fileName, null, e.getMessage());
         }
     }
@@ -220,7 +218,6 @@ public class AliyunOSSUtil {
             ossClient.deleteObject(request);
         } catch (Exception e) {
             log.error("执行异常--->", e);
-            ;
             return false;
         }
         return true;

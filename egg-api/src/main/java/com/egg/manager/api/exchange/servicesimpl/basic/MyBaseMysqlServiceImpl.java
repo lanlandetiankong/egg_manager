@@ -162,10 +162,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
 
     @Override
     public boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity) {
-        if (userAccountEntity == null || StringUtils.isBlank(userAccountEntity.getFid())) {
-            return true;
-        }
-        return false;
+        return userAccountEntity == null || StringUtils.isBlank(userAccountEntity.getFid());
     }
 
 

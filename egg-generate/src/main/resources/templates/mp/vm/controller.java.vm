@@ -2,8 +2,8 @@ package ${package.Controller};
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.commons.base.constant.web.api.WebApiConstant;
 import io.swagger.annotations.Api;
@@ -59,7 +59,7 @@ private ${cfg.baseEntityName}Mapper ${cfg.baseEntityName_firstLow}Mapper;
 @Reference
 private ${cfg.baseEntityName}Service ${cfg.baseEntityName_firstLow}Service;
 
-@PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
+@EmPcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getAllDtos")
 @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -87,7 +87,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetAll${cfg.baseEntityName}Dtos
 
 
 @ApiOperation(value = "根据id查询->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
-@PcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
+@EmPcWebQueryLog(fullPath = "${cfg.baseReqUrl}/getOneItemById")
 @PostMapping(value = "/getOneItemById")
 public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletRequest request,String ${cfg.baseEntityName_firstLow}Id,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
@@ -102,7 +102,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doGetOneItemById(HttpServletReque
 
 
 @ApiOperation(value = "新增->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
-@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
+@EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/addByForm")
 @PostMapping(value = "/addByForm")
 public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
         MyCommonResult<${cfg.baseEntityName}Vo> result=new MyCommonResult<${cfg.baseEntityName}Vo>();
@@ -122,7 +122,7 @@ public MyCommonResult<${cfg.baseEntityName}Vo> doAddByForm(HttpServletRequest re
 
 
 @ApiOperation(value = "更新->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
-@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
+@EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/updateByForm")
 @PostMapping(value = "/updateByForm")
 public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntityName}Vo ${cfg.baseEntityName_firstLow}Vo,@CurrentLoginUser CurrentLoginUserInfo loginUserInfo){
         MyCommonResult result=new MyCommonResult();
@@ -141,7 +141,7 @@ public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntity
         }
 
 
-@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
+@EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
 @ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
@@ -162,7 +162,7 @@ public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,
         }
 
 
-@PcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
+@EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
 @ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),

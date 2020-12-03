@@ -1,13 +1,13 @@
 package com.egg.manager.em.web.controller.index.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.hello.basic.HelloService;
 import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.api.exchange.BaseController;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,21 +34,21 @@ public class HelloController extends BaseController {
     private MessageHelloService messageHelloService;
     private CommonMenuTree commonMenuTree;
 
-    @PcWebQueryLog(fullPath = "/index/hello/testEnv", flag = false)
+    @EmPcWebQueryLog(fullPath = "/index/hello/testEnv", flag = false)
     @ApiOperation(value = "测试当前开发环境", response = WebResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
         return "You run in a " + avtiveEnv + " environment";
     }
 
-    @PcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)
+    @EmPcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)
     @ApiOperation(value = "测试当前开发环境", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/sayHello")
     public void sayHello() {
         helloService.sayHello();
     }
 
-    @PcWebQueryLog(fullPath = "/index/hello/loadBalanceTest", flag = false)
+    @EmPcWebQueryLog(fullPath = "/index/hello/loadBalanceTest", flag = false)
     @ApiOperation(value = "测试dubbo负载均衡", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
@@ -56,7 +56,7 @@ public class HelloController extends BaseController {
         log.info("for debug..." + port);
     }
 
-    @PcWebQueryLog(fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
+    @EmPcWebQueryLog(fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
     @ApiOperation(value = "测试dubbo负载均衡-相互调用", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {

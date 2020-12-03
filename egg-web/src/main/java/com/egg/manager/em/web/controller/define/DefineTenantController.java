@@ -2,6 +2,7 @@ package com.egg.manager.em.web.controller.define;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.DefineTenantService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -17,11 +18,10 @@ import com.egg.manager.persistence.em.define.pojo.transfer.DefineTenantTransfer;
 import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -50,7 +50,7 @@ public class DefineTenantController extends BaseController {
     @Reference
     private DefineTenantService defineTenantService;
 
-    @PcWebQueryLog(fullPath = "/organization/defineTenant/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/organization/defineTenant/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -67,7 +67,7 @@ public class DefineTenantController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/organization/defineTenant/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -77,7 +77,7 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/organization/defineTenant/gainEnumSelect")
+    @EmPcWebQueryLog(fullPath = "/organization/defineTenant/gainEnumSelect")
     @ApiOperation(value = "查询枚举下拉->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -95,7 +95,7 @@ public class DefineTenantController extends BaseController {
     }
 
     @ApiOperation(value = "新增->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
+    @EmPcWebOperationLog(fullPath = "/organization/defineTenant/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -108,7 +108,7 @@ public class DefineTenantController extends BaseController {
     }
 
     @ApiOperation(value = "更新->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/organization/defineTenant/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, DefineTenantVo defineTenantVo, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
@@ -120,7 +120,7 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/organization/defineTenant/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -136,7 +136,7 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/organization/defineTenant/deleteById")
+    @EmPcWebOperationLog(fullPath = "/organization/defineTenant/deleteById")
     @ApiOperation(value = "伪删除->租户定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String.class),
@@ -151,7 +151,7 @@ public class DefineTenantController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/organization/defineTenant/setupTenantManager")
+    @EmPcWebOperationLog(fullPath = "/organization/defineTenant/setupTenantManager")
     @ApiOperation(value = "更新->租户定义/设置管理员", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tenantId", value = "要配置的租户定义id", required = true, dataTypeClass = String.class),
@@ -162,7 +162,7 @@ public class DefineTenantController extends BaseController {
                                           @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
-        Assert.notNull(tenantId,  BaseRstMsgConstant.ErrorMsg.unknowTenantId());
+        Assert.notNull(tenantId, BaseRstMsgConstant.ErrorMsg.unknowTenantId());
         DefineTenantEntity defineTenantEntity = defineTenantMapper.selectById(tenantId);
         Assert.notNull(defineTenantEntity, BaseRstMsgConstant.ErrorMsg.invalidObject());
         int count = defineTenantService.dealTenantSetupManager(loginUserInfo, tenantId, userAccountIdArr);

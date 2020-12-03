@@ -225,7 +225,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     public AntdvPage<T> doFindPage(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
-        QPageRequest mPageFromBean = MongoQueryBean.<T>getMgPageFromBean(queryBuffer.getPageConf());
+        QPageRequest mPageFromBean = MongoQueryBean.getMgPageFromBean(queryBuffer.getPageConf());
         Page<T> page = baseRepository.findPage(query, mPageFromBean);
         return MongoQueryBean.getPageBeanFromPage(page);
     }

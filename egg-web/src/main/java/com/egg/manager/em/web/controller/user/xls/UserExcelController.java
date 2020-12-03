@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.DefineMenuService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.api.services.em.user.xls.UserAccountXlsService;
@@ -19,7 +20,6 @@ import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +76,7 @@ public class UserExcelController extends BaseController {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         DefineMenuEntity defineMenuEntity = defineMenuService.getById(menuId);
-        Assert.notNull(defineMenuEntity,  BaseRstMsgConstant.ErrorMsg.invalidObject());
+        Assert.notNull(defineMenuEntity, BaseRstMsgConstant.ErrorMsg.invalidObject());
         //菜单模板配置
         AntdFileUploadBean fileUploadBean = userAccountXlsService.dealVerifyMenuExportAble(defineMenuEntity);
         userAccountXlsService.dealAllExportSingleWithTemplate2Web(loginUserInfo, response, defineMenuEntity, fileUploadBean);

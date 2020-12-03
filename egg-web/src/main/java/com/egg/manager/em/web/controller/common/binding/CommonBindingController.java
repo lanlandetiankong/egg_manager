@@ -1,10 +1,10 @@
 package com.egg.manager.em.web.controller.common.binding;
 
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.api.exchange.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

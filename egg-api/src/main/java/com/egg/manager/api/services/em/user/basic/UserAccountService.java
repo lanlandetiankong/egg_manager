@@ -39,7 +39,7 @@ public interface UserAccountService extends IService<UserAccountEntity>, MyBaseM
      * 分页查询 用户列表
      * @param loginUserInfo 当前登录用户
      * @param result
-     * @param queryPage 查询分页配置
+     * @param queryPage     查询分页配置
      * @return
      */
     WebResult dealQueryPageByEntitys(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<UserAccountEntity> queryPage);

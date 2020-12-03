@@ -10,8 +10,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.jms.annotation.EnableJms;
 
 /**
- * @description: Springboot启动类
  * @author zhoucj
+ * @description: Springboot启动类
  * @date 2020/11/30
  */
 @SpringBootApplication

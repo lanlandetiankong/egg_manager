@@ -2,6 +2,7 @@ package com.egg.manager.em.web.controller.forms.smartform;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
@@ -20,14 +21,13 @@ import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormDefinit
 import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormDefinitionMgvo;
 import com.egg.manager.persistence.em.forms.pojo.verification.smartform.SmartFormDefinitionMongoVerifyO;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfCreate;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfDefault;
 import com.egg.manager.persistence.exchange.verification.igroup.VerifyGroupOfUpdate;
-import com.egg.manager.api.exchange.BaseController;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -60,7 +60,7 @@ public class SmartFormDefinitionController extends BaseController {
     @Reference
     private SmartFormDefinitionMgoService smartFormDefinitionMgoService;
 
-    @PcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataPage")
+    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -72,14 +72,14 @@ public class SmartFormDefinitionController extends BaseController {
                                    @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED,SwitchStateEnum.Close.getValue());
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         AntdvPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataAll")
+    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -91,14 +91,14 @@ public class SmartFormDefinitionController extends BaseController {
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED,SwitchStateEnum.Close.getValue());
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         AntdvPage<SmartFormDefinitionMgo> pageBean = smartFormDefinitionMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
         return result;
     }
 
-    @PcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getOneItemById")
+    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
@@ -110,7 +110,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/addByForm")
+    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/addByForm")
     @ApiOperation(value = "新增->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
@@ -131,7 +131,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/updateByForm")
     @ApiOperation(value = "更新->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
     public WebResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginUserInfo loginUserInfo,
@@ -152,7 +152,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/delOneById")
+    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/delOneById")
     @ApiOperation(value = "伪删除->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -166,7 +166,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @PcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/batchDelByIds")
+    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),

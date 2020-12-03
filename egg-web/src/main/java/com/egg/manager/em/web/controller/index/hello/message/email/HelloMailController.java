@@ -1,13 +1,13 @@
 package com.egg.manager.em.web.controller.index.hello.message.email;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
-import com.egg.manager.persistence.enhance.annotation.log.pc.web.PcWebQueryLog;
-import com.egg.manager.api.exchange.BaseController;
+import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class HelloMailController extends BaseController {
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
     @ApiOperation(value = "测试发送消息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/message/email/hello/sendMail")
+    @EmPcWebQueryLog(fullPath = "/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public WebResult doGetDefineModuleById(HttpServletRequest request) {
         WebResult result = WebResult.okOperation();

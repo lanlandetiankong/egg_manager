@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.oolong</groupId>
-    <artifactId>blog</artifactId>
+    <artifactId>oolong-blog-web</artifactId>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -112,7 +112,7 @@
 
 
     <build>
-        <finalName>EggManager-Web</finalName>
+        <finalName>OolongBlog-Web</finalName>
         <defaultGoal>compile</defaultGoal>
         <resources>
             <resource>

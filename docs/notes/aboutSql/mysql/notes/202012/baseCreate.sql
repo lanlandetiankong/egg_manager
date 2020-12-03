@@ -9,6 +9,6 @@ CREATE TABLE `obl_` (
   `last_modifyer_id` char(19) DEFAULT NULL COMMENT '最后修改人id',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `is_deleted` tinyint(4) DEFAULT NULL COMMENT '是否已删除?0:否1:是',
-  `deleted_time` int(11) DEFAULT NULL COMMENT '数据删除时间',
+  `deleted_time` datetime DEFAULT NULL COMMENT '数据删除时间',
   PRIMARY KEY (`fid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='xxx表';

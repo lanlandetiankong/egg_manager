@@ -2,12 +2,12 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/transfer", "Transfer.java")
+#save("/easycode/generate/transfer", "Transfer.java")
 
 ##设置表后缀（宏定义）
 
 ##包路径（宏定义）
-#setPackageSuffix("transfer")
+#setPackageSuffix("easycode.generate.transfer")
 
 
 

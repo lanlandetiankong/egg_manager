@@ -1,7 +1,7 @@
 ##导入宏定义
     $!define
 ##保存文件（宏定义）
-    #save("/mapper", "Mapper.xml")
+    #save("/easycode/generate/mapper", "Mapper.xml")
 ##设置表后缀（宏定义）
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">

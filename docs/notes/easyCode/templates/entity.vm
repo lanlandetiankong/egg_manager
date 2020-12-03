@@ -2,13 +2,13 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/entity", "Entity.java")
+#save("/easycode/generate/entity", "Entity.java")
 
 ##设置表后缀（宏定义）
 #setTableSuffix("Entity")
 
 ##包路径（宏定义）
-#setPackageSuffix("entity")
+#setPackageSuffix("easycode.generate.entity")
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

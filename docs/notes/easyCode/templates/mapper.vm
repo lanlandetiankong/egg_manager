@@ -5,10 +5,10 @@ $!define
 #setTableSuffix("Mapper")
 
 ##保存文件（宏定义）
-#save("/dao", "Mapper.java")
+#save("/easycode/generate/dao", "Mapper.java")
 
 ##包路径（宏定义）
-#setPackageSuffix("dao")
+#setPackageSuffix("easycode.generate.dao")
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;

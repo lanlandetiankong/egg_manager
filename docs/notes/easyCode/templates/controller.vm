@@ -5,10 +5,10 @@ $!define
 #setTableSuffix("Controller")
 
 ##保存文件（宏定义）
-#save("/controller", "Controller.java")
+#save("/easycode/generate/controller", "Controller.java")
 
 ##包路径（宏定义）
-#setPackageSuffix("controller")
+#setPackageSuffix("easycode.generate.controller")
 
 ##定义服务名
 #set($serviceName = $!tool.append($!tool.firstLowerCase($!tableInfo.name), "Service"))

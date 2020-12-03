@@ -2,12 +2,12 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/mapstruct", "Mapstruct.java")
+#save("/easycode/generate/mapstruct", "Mapstruct.java")
 
 ##设置表后缀（宏定义）
 
 ##包路径（宏定义）
-#setPackageSuffix("mapstruct")
+#setPackageSuffix("easycode.generate.mapstruct")
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import org.mapstruct.Mapper;
@@ -18,7 +18,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
 * @author zhoucj
-* @description
+* @description ${tableInfo.comment}-Mapstruct
 * @date $time.currTime('yyyy-MM-dd')
 */
 @Mapper(componentModel = "spring",

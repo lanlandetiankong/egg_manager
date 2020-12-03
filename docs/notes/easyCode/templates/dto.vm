@@ -2,13 +2,13 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/dto", "Dto.java")
+#save("/easycode/generate/dto", "Dto.java")
 
 ##设置表后缀（宏定义）
 #setTableSuffix("Dto")
 
 ##包路径（宏定义）
-#setPackageSuffix("dto")
+#setPackageSuffix("easycode.generate.dto")
 
 import lombok.*;
 

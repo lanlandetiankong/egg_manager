@@ -2,13 +2,13 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/vo", "Vo.java")
+#save("/easycode/generate/vo", "Vo.java")
 
 ##设置表后缀（宏定义）
 #setTableSuffix("Vo")
 
 ##包路径（宏定义）
-#setPackageSuffix("vo")
+#setPackageSuffix("easycode.generate.vo")
 
 import lombok.*;
 

@@ -5,10 +5,10 @@ $!define
 #setTableSuffix("Service")
 
 ##保存文件（宏定义）
-#save("/service", "Service.java")
+#save("/easycode/generate/service", "Service.java")
 
 ##包路径（宏定义）
-#setPackageSuffix("service")
+#setPackageSuffix("easycode.generate.service")
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;

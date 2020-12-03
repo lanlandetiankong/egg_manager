@@ -58,6 +58,16 @@ public class OblArticleEntity extends Model<OblArticleEntity> {
      */
     @TableField("like_count")
     private Integer likeCount;
+    /**
+     * 被收藏数
+     */
+    @TableField("collect_count")
+    private Integer collectCount;
+    /**
+     * 审核状态
+     */
+    @TableField("audit_state")
+    private Short auditState;
 
 
     /**

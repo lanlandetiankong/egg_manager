@@ -11,6 +11,8 @@
         <result property="viewCount" column="view_count"/>
         <result property="commentCount" column="comment_count"/>
         <result property="likeCount" column="like_count"/>
+        <result property="collectCount" column="collect_count"/>
+        <result property="auditState" column="audit_state"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -33,6 +35,8 @@
         <result property="viewCount" column="view_count"/>
         <result property="commentCount" column="comment_count"/>
         <result property="likeCount" column="like_count"/>
+        <result property="collectCount" column="collect_count"/>
+        <result property="auditState" column="audit_state"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -50,7 +54,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,title,content,summary,view_count,comment_count,like_count,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time
+        fid,title,content,summary,view_count,comment_count,like_count,collect_count,audit_state,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -64,6 +68,8 @@
         ${base_alias_name}.view_count,
         ${base_alias_name}.comment_count,
         ${base_alias_name}.like_count,
+        ${base_alias_name}.collect_count,
+        ${base_alias_name}.audit_state,
         ${base_alias_name}.state,
         ${base_alias_name}.remark,
         ${base_alias_name}.version,
@@ -87,6 +93,8 @@
         ${base_alias_name}.view_count AS ${base_alias_col_prefix}viewCount,
         ${base_alias_name}.comment_count AS ${base_alias_col_prefix}commentCount,
         ${base_alias_name}.like_count AS ${base_alias_col_prefix}likeCount,
+        ${base_alias_name}.collect_count AS ${base_alias_col_prefix}collectCount,
+        ${base_alias_name}.audit_state AS ${base_alias_col_prefix}auditState,
         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
         ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
         ${base_alias_name}.version AS ${base_alias_col_prefix}version,

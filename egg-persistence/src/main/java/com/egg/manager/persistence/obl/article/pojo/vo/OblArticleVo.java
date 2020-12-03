@@ -44,5 +44,13 @@ public class OblArticleVo extends MyBaseMysqlVo {
      * 文章点赞数
      */
     private Integer likeCount;
+    /**
+     * 被收藏数
+     */
+    private Integer collectCount;
+    /**
+     * 审核状态
+     */
+    private Short auditState;
 
 }

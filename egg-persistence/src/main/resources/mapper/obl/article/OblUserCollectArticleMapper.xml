@@ -41,7 +41,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,user_id,article_id,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time,        
+        fid,user_id,article_id,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -59,7 +59,7 @@
         ${base_alias_name}.last_modifyer_id,
         ${base_alias_name}.update_time,
         ${base_alias_name}.is_deleted,
-        ${base_alias_name}.deleted_time,
+        ${base_alias_name}.deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -78,7 +78,7 @@
         ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}lastModifyerId,
         ${base_alias_name}.update_time AS ${base_alias_col_prefix}updateTime,
         ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}isDeleted,
-        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime,
+        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime
     </sql>
 
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserCollectArticleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="OblUserCollectArticleEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserCollectArticleEntity">
         <id property="fid" column="fid"/>
         <result property="userId" column="user_id"/>
         <result property="articleId" column="article_id"/>
@@ -20,7 +20,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="OblUserCollectArticleDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.article.pojo.dto.OblUserCollectArticleDto" extends="BaseResultMap">
         <id property="fid" column="fid"/>
         <result property="userId" column="user_id"/>
         <result property="articleId" column="article_id"/>

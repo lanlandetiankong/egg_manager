@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserAttentionPersonMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="OblUserAttentionPersonEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserAttentionPersonEntity">
         <id property="fid" column="fid"/>
         <result property="userId" column="user_id"/>
         <result property="followedUserId" column="followed_user_id"/>
@@ -20,7 +20,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="OblUserAttentionPersonDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.user.pojo.dto.OblUserAttentionPersonDto" extends="BaseResultMap">
         <id property="fid" column="fid"/>
         <result property="userId" column="user_id"/>
         <result property="followedUserId" column="followed_user_id"/>

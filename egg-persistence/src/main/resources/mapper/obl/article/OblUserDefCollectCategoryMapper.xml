@@ -3,7 +3,7 @@
 <mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserDefCollectCategoryMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="OblUserDefCollectCategoryEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserDefCollectCategoryEntity">
         <id property="fid" column="fid"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
@@ -21,7 +21,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="OblUserDefCollectCategoryDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.article.pojo.dto.OblUserDefCollectCategoryDto" extends="BaseResultMap">
         <id property="fid" column="fid"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>

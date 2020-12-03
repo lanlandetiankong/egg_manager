@@ -5,7 +5,7 @@ $!define
 #setTableSuffix("ServiceImpl")
 
 ##保存文件（宏定义）
-#save("/easycode/generate/service/impl", "ServiceImpl.java")
+#save("/easycode/generate/serviceimpl", "ServiceImpl.java")
 
 ##包路径（宏定义）
 #setPackageSuffix("easycode.generate.serviceimpl")

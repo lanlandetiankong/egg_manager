@@ -2,12 +2,12 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/easycode/generate/mapstruct", "Mapstruct.java")
+#save("/easycode/generate/mapstruct/imap", "Mapstruct.java")
 
 ##设置表后缀（宏定义）
 
 ##包路径（宏定义）
-#setPackageSuffix("easycode.generate.mapstruct")
+#setPackageSuffix("easycode.generate.mapstruct.imap")
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
 import org.mapstruct.Mapper;

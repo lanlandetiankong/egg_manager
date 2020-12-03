@@ -2,12 +2,12 @@
 $!define
 
 ##保存文件（宏定义）
-#save("/easycode/generate/conversion", "Conversion.java")
+#save("/easycode/generate/mapstruct/conversion", "Conversion.java")
 
 ##设置表后缀（宏定义）
 
 ##包路径（宏定义）
-#setPackageSuffix("easycode.generate.conversion")
+#setPackageSuffix("easycode.generate.mapstruct.conversion")
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
 import org.mapstruct.Named;

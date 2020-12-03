@@ -1,10 +1,10 @@
-package com.egg.manager.baseservice.serviceimpl.obl.article;
+package com.egg.manager.baseservice.serviceimpl.obl.article.basic;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
-import com.egg.manager.api.services.obl.article.OblUserCollectArticleService;
+import com.egg.manager.api.services.obl.article.basic.OblUserCollectArticleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;

@@ -4,7 +4,7 @@ package com.egg.manager.obl.web.controller.user;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.obl.user.OblUserCalculateInfoService;
+import com.egg.manager.api.services.obl.user.basic.OblUserCalculateInfoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;

@@ -1,7 +1,7 @@
-package com.egg.manager.baseservice.serviceimpl.em.log.mongo.pc.web;
+package com.egg.manager.baseservice.serviceimpl.em.log.mongo;
 
 import com.egg.manager.api.exchange.servicesimpl.mongodb.MyBaseMgoServiceImpl;
-import com.egg.manager.api.services.em.log.basic.pc.web.PcWebQueryLogMgoService;
+import com.egg.manager.api.services.em.log.mongo.PcWebQueryLogMgoService;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.repository.EmPcWebQueryLogRepository;
 import lombok.extern.slf4j.Slf4j;

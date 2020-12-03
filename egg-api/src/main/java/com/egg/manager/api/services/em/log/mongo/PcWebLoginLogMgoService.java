@@ -1,4 +1,4 @@
-package com.egg.manager.api.services.em.log.basic.pc.web;
+package com.egg.manager.api.services.em.log.mongo;
 
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;

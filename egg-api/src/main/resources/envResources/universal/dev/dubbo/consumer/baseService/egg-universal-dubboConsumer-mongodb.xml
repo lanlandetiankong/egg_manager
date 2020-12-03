@@ -30,10 +30,10 @@
 
     <!--                                    dir-start:com.egg.manager.api.services.em.log                                                              -->
     <dubbo:reference id="pcWebOperationLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebOperationLogMgoService"/>
+                     interface="com.egg.manager.api.services.em.log.mongo.PcWebOperationLogMgoService"/>
     <dubbo:reference id="pcWebLoginLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebLoginLogMgoService"/>
+                     interface="com.egg.manager.api.services.em.log.mongo.PcWebLoginLogMgoService"/>
     <dubbo:reference id="pcWebQueryLogMgoService" check="false"
-                     interface="com.egg.manager.api.services.em.log.basic.pc.web.PcWebQueryLogMgoService"/>
+                     interface="com.egg.manager.api.services.em.log.mongo.PcWebQueryLogMgoService"/>
     <!--                                    dir-end:com.egg.manager.api.services.em.log                                                              -->
 </beans>

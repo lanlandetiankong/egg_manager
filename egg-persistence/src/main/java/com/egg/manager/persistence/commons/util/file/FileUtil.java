@@ -27,7 +27,7 @@ import java.util.*;
 public class FileUtil {
 
     public static final int FILE_SIZE = 1000000;
-    private static ResourceBundle bundle = ResourceBundle.getBundle("configResources.config/constant");
+    private static ResourceBundle bundle = ResourceBundle.getBundle("config/constant");
     public static String fileUploadPath = bundle.getString("file-upload.dir");
 
     /**

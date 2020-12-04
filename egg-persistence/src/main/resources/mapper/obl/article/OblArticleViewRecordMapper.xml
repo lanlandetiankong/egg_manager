@@ -1,21 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserCalculateInfoMapper">
+<mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleViewRecordMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserCalculateInfoEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleViewRecordEntity">
         <id property="fid" column="fid"/>
-        <result property="userId" column="user_id"/>
-        <result property="totalArticle" column="total_article"/>
-        <result property="totalAuditedArticle" column="total_audited_article"/>
-        <result property="totalArticleBeCollect" column="total_article_be_collect"/>
-        <result property="totalArticleRecommendTimes" column="total_article_recommend_times"/>
-        <result property="totalArticleBeLike" column="total_article_be_like"/>
-        <result property="totalArticleBeDislike" column="total_article_be_dislike"/>
-        <result property="totalArticleComment" column="total_article_comment"/>
-        <result property="totalArticleViewed" column="total_article_viewed"/>
-        <result property="totalArticleOriginalType" column="total_article_original_type"/>
-        <result property="totalArticleReprintType" column="total_article_reprint_type"/>
+        <result property="articleId" column="article_id"/>
+        <result property="viewUserId" column="view_user_id"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -29,19 +20,10 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.user.pojo.dto.OblUserCalculateInfoDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.article.pojo.dto.OblArticleViewRecordDto" extends="BaseResultMap">
         <id property="fid" column="fid"/>
-        <result property="userId" column="user_id"/>
-        <result property="totalArticle" column="total_article"/>
-        <result property="totalAuditedArticle" column="total_audited_article"/>
-        <result property="totalArticleBeCollect" column="total_article_be_collect"/>
-        <result property="totalArticleRecommendTimes" column="total_article_recommend_times"/>
-        <result property="totalArticleBeLike" column="total_article_be_like"/>
-        <result property="totalArticleBeDislike" column="total_article_be_dislike"/>
-        <result property="totalArticleComment" column="total_article_comment"/>
-        <result property="totalArticleViewed" column="total_article_viewed"/>
-        <result property="totalArticleOriginalType" column="total_article_original_type"/>
-        <result property="totalArticleReprintType" column="total_article_reprint_type"/>
+        <result property="articleId" column="article_id"/>
+        <result property="viewUserId" column="view_user_id"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -59,7 +41,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,user_id,total_article,total_audited_article,total_article_be_collect,total_article_recommend_times,total_article_be_like,total_article_be_dislike,total_article_comment,total_article_original_type,total_article_reprint_type,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time,        
+        fid,article_id,view_user_id,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time,        
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -67,16 +49,8 @@
         -->
     <sql id="Base_Alias_Table_List">
         ${base_alias_name}.fid,
-        ${base_alias_name}.user_id,
-        ${base_alias_name}.total_article,
-        ${base_alias_name}.total_audited_article,
-        ${base_alias_name}.total_article_be_collect,
-        ${base_alias_name}.total_article_recommend_times,
-        ${base_alias_name}.total_article_be_like,
-        ${base_alias_name}.total_article_be_dislike,
-        ${base_alias_name}.total_article_comment,
-        ${base_alias_name}.total_article_original_type,
-        ${base_alias_name}.total_article_reprint_type,
+        ${base_alias_name}.article_id,
+        ${base_alias_name}.view_user_id,
         ${base_alias_name}.state,
         ${base_alias_name}.remark,
         ${base_alias_name}.version,
@@ -94,17 +68,8 @@
         -->
     <sql id="Base_Alias_TableColumn_List">
         ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
-        ${base_alias_name}.user_id AS ${base_alias_col_prefix}userId,
-        ${base_alias_name}.total_article AS ${base_alias_col_prefix}totalArticle,
-        ${base_alias_name}.total_audited_article AS ${base_alias_col_prefix}totalAuditedArticle,
-        ${base_alias_name}.total_article_be_collect AS ${base_alias_col_prefix}totalArticleBeCollect,
-        ${base_alias_name}.total_article_recommend_times AS ${base_alias_col_prefix}totalArticleRecommendTimes,
-        ${base_alias_name}.total_article_be_like AS ${base_alias_col_prefix}totalArticleBeLike,
-        ${base_alias_name}.total_article_be_dislike AS ${base_alias_col_prefix}totalArticleBeDislike,
-        ${base_alias_name}.total_article_comment AS ${base_alias_col_prefix}totalArticleComment,
-        ${base_alias_name}.total_article_viewed AS ${base_alias_col_prefix}totalArticleViewed,
-        ${base_alias_name}.total_article_original_type AS ${base_alias_col_prefix}totalArticleOriginalType,
-        ${base_alias_name}.total_article_reprint_type AS ${base_alias_col_prefix}totalArticleReprintType,
+        ${base_alias_name}.article_id AS ${base_alias_col_prefix}articleId,
+        ${base_alias_name}.view_user_id AS ${base_alias_col_prefix}viewUserId,
         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
         ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
         ${base_alias_name}.version AS ${base_alias_col_prefix}version,
@@ -122,7 +87,7 @@
         <include refid="Base_Alias_Table_List">
             <property name="base_alias_name" value="oat"/>
         </include>
-        FROM obl_user_calculate_info oat
+        FROM obl_article_view_record oat
         <where>
             <include
                     refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">

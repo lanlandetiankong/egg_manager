@@ -50,6 +50,10 @@ public class OblUserCalculateInfoDto extends MyBaseMysqlDto {
      */
     private Integer totalArticleComment;
     /**
+     * 文章总被查看次数
+     */
+    private Integer totalArticleViewed;
+    /**
      * 文章原创数量
      */
     private Integer totalArticleOriginalType;

@@ -1,4 +1,4 @@
-package com.egg.manager.persistence.obl.user.db.mysql.entity;
+﻿package com.egg.manager.persistence.obl.article.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,73 +16,29 @@ import java.util.Date;
 
 /**
  * @author zhoucj
- * @description 用户的计算信息-Entity
- * @date 2020-12-03
+ * @description 文章查看记录-Entity
+ * @date 2020-12-04
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@TableName("obl_user_calculate_info")
-public class OblUserCalculateInfoEntity extends Model<OblUserCalculateInfoEntity> {
-    private static final long serialVersionUID = -493288566368349898L;
+@TableName("obl_article_view_record")
+public class OblArticleViewRecordEntity extends Model<OblArticleViewRecordEntity> {
+    private static final long serialVersionUID = -69378490735422967L;
+
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**
-     * 用户id
+     * 文章id
      */
-    @TableField("user_id")
-    private String userId;
+    @TableField("article_id")
+    private String articleId;
     /**
-     * 文章总数
+     * 查看人id
      */
-    @TableField("total_article")
-    private Integer totalArticle;
-    /**
-     * 已审核文章总数
-     */
-    @TableField("total_audited_article")
-    private String totalAuditedArticle;
-    /**
-     * 文章被收藏总次数
-     */
-    @TableField("total_article_be_collect")
-    private Integer totalArticleBeCollect;
-    /**
-     * 文章上推荐总次数
-     */
-    @TableField("total_article_recommend_times")
-    private Integer totalArticleRecommendTimes;
-    /**
-     * 文章被点赞总次数
-     */
-    @TableField("total_article_be_like")
-    private Integer totalArticleBeLike;
-    /**
-     * 文章被踩低总次数
-     */
-    @TableField("total_article_be_dislike")
-    private Integer totalArticleBeDislike;
-    /**
-     * 文章总被评论数
-     */
-    @TableField("total_article_comment")
-    private Integer totalArticleComment;
-    /**
-     * 文章总被查看次数
-     */
-    @TableField("total_article_viewed")
-    private Integer totalArticleViewed;
-    /**
-     * 原创类文章数量
-     */
-    @TableField("total_article_original_type")
-    private Integer totalArticleOriginalType;
-    /**
-     * 转载类文章数量
-     */
-    @TableField("total_article_reprint_type")
-    private Integer totalArticleReprintType;
+    @TableField("view_user_id")
+    private String viewUserId;
     /**
      * 状态值
      */

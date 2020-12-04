@@ -41,7 +41,7 @@ public class MySqlDocsGenerator {
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         hikariConfig.setJdbcUrl(url);
         hikariConfig.setUsername("root");
-        hikariConfig.setPassword("egg_root");
+        hikariConfig.setPassword("root");
         //设置可以获取tables remarks信息
         hikariConfig.addDataSourceProperty("useInformationSchema", "true");
         hikariConfig.setMinimumIdle(2);

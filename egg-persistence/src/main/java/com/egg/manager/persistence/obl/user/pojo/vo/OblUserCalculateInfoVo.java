@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.obl.user.pojo.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +50,10 @@ public class OblUserCalculateInfoVo extends MyBaseMysqlVo {
      * 文章总被评论数
      */
     private Integer totalArticleComment;
+    /**
+     * 文章总被查看次数
+     */
+    private Integer totalArticleViewed;
     /**
      * 文章原创数量
      */

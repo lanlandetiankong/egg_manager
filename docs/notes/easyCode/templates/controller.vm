@@ -61,8 +61,8 @@ private $!{tableInfo.name}Service ${tool.firstLowerCase($!{tableInfo.name})}Serv
 
 
 @ApiOperation(value = "分页查询(dto)->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-@PcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryDtoPage")
-@PostMapping(value = "/queryDtoPage")
+@OblPcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryDtoPage")
+@OblPostMapping(value = "/queryDtoPage")
 public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!{tableInfo.name}Dto.class) QueryPageBean<$!{tableInfo.name}Dto> queryPageBean,
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
     WebResult result = WebResult.okQuery();
@@ -72,7 +72,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     }
 
     @ApiOperation(value = "根据id查询->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryOneById")
+    @OblPcWebQueryLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String $!{tool.firstLowerCase($!{tableInfo.name})}Id,
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
@@ -84,7 +84,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     }
 
     @ApiOperation(value = "新增->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/createByForm")
+    @OblPcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo,
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -98,7 +98,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     }
 
     @ApiOperation(value = "更新->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, $!{tableInfo.name}Vo ${tool.firstLowerCase($!{tableInfo.name})}Vo,
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
@@ -111,7 +111,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     return result;
     }
 
-    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/batchDeleteByIds")
     @ApiOperation(value = "批量伪删除->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
     @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -128,7 +128,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     return result;
     }
 
-    @PcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/deleteById")
+    @OblPcWebOperationLog(fullPath = "/${tool.firstLowerCase($!{tableInfo.name})}/deleteById")
     @ApiOperation(value = "伪删除->${tableInfo.comment}", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
     @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

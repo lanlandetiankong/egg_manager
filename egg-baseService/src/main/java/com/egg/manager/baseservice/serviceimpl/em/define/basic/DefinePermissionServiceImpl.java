@@ -141,7 +141,7 @@ public class DefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<DefinePe
             return null;
         }
         UserAccountEntity userAccountEntity = userAccountMapper.selectById(userAccountId);
-        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccountEntity.getUserTypeNum())) {
+        if (UserAccountBaseTypeEnum.SuperRoot.getValue().equals(userAccountEntity.getUserType())) {
             //如果是[超级管理员]的话可以访问全部菜单
             return getAllEnableList(null);
         } else {

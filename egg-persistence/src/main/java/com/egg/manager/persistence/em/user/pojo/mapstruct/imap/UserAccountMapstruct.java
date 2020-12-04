@@ -87,7 +87,6 @@ public interface UserAccountMapstruct extends MyBaseMysqlMapstruct<UserAccountEn
     @Mappings({
             @Mapping(target = "sex", expression = "java(handleUserSexGetValue(xlsInModel.getSexStr()))"),
             @Mapping(target = "userType", expression = "java(handleGetUserAccountDefaultUserType())"),
-            @Mapping(target = "userTypeNum", expression = "java(handleGetUserAccountDefaultUserTypeNum())"),
             @Mapping(target = FieldConst.FIELD_STATE, expression = "java(handleGetUserAccountDefaultState())"),
             @Mapping(target = "locked", expression = "java(handleGetUserAccountDefaultLocked())"),
             @Mapping(target = "createTime", expression = "java(handleGetNowDate())"),

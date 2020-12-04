@@ -30,14 +30,6 @@ public interface MyBaseMysqlConstantMapstruct<E, V extends MyBaseMysqlVo, D exte
     }
 
     /**
-     * 用户账号 默认 用户类型num
-     * @return
-     */
-    default Integer handleGetUserAccountDefaultUserTypeNum() {
-        return UserAccountBaseTypeEnum.SimpleUser.getValue();
-    }
-
-    /**
      * 用户账号 默认 状态值
      * @return
      */

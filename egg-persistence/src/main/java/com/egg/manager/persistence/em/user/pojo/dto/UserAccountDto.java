@@ -66,10 +66,6 @@ public class UserAccountDto extends MyBaseMysqlDto {
      */
     private Integer userType;
     /**
-     * 用户类型 数值
-     */
-    private Integer userTypeNum;
-    /**
      * 用户类型_名称
      */
     private String userTypeStr;

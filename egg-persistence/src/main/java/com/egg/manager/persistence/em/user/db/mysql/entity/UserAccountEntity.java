@@ -90,11 +90,6 @@ public class UserAccountEntity extends Model<UserAccountEntity> {
     @TableField("user_type")
     private Integer userType;
     /**
-     * 用户类型 数值
-     */
-    @TableField("user_type_num")
-    private Integer userTypeNum;
-    /**
      * 是否锁定账号
      */
     @TableField("locked")

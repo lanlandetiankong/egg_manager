@@ -35,7 +35,6 @@ public class CurrentLoginUserInfo extends UserAccountEntity {
         currentLoginUserInfo.setEmail(entity.getEmail());
         currentLoginUserInfo.setSex(entity.getSex());
         currentLoginUserInfo.setUserType(entity.getUserType());
-        currentLoginUserInfo.setUserTypeNum(entity.getUserTypeNum());
         currentLoginUserInfo.setLocked(entity.getLocked());
         currentLoginUserInfo.setRemark(entity.getRemark());
         currentLoginUserInfo.setState(entity.getState());

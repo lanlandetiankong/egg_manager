@@ -1,4 +1,4 @@
-﻿package com.egg.manager.api.services.obl.article.basic;
+package com.egg.manager.api.services.obl.article.basic;
 
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;

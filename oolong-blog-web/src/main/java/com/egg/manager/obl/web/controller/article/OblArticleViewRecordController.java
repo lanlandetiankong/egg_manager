@@ -1,4 +1,4 @@
-﻿package com.egg.manager.obl.web.controller.article;
+package com.egg.manager.obl.web.controller.article;
 
 
 import cn.hutool.core.lang.Assert;

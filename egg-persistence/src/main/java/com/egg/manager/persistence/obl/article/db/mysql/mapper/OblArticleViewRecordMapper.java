@@ -1,4 +1,4 @@
-﻿package com.egg.manager.persistence.obl.article.db.mysql.mapper;
+package com.egg.manager.persistence.obl.article.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.constant.db.mysql.EggMpSqlConst;

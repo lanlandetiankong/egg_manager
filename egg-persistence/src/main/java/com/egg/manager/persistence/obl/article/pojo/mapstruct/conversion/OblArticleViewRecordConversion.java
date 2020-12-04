@@ -1,4 +1,4 @@
-﻿package com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion;
+package com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
 import org.mapstruct.Named;

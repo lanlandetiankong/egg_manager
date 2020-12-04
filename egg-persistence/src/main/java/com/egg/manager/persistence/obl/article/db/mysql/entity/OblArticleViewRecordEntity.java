@@ -1,4 +1,4 @@
-﻿package com.egg.manager.persistence.obl.article.db.mysql.entity;
+package com.egg.manager.persistence.obl.article.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

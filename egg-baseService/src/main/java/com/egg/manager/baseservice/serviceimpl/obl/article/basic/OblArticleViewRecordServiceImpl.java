@@ -1,4 +1,4 @@
-锘縫ackage com.egg.manager.baseservice.serviceimpl.obl.article.basic;
+package com.egg.manager.baseservice.serviceimpl.obl.article.basic;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * @author zhoucj
- * @description 鏂囩珷鏌ョ湅璁板綍-ServiceImpl
+ * @description 文章查看记录-ServiceImpl
  * @date 2020-12-04
  */
 @Slf4j

@@ -1,4 +1,4 @@
-﻿package com.egg.manager.persistence.obl.article.pojo.transfer;
+package com.egg.manager.persistence.obl.article.pojo.transfer;
 
 
 import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;

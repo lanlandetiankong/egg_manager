@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.obl.article.pojo.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,4 +54,8 @@ public class OblArticleDto extends MyBaseMysqlDto {
      * 审核状态
      */
     private Short auditState;
+    /**
+     * 是否已发布?0:否1是
+     */
+    private Short isPublished;
 }

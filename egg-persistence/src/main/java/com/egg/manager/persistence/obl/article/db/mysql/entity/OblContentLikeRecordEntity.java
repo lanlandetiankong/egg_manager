@@ -24,7 +24,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @TableName("obl_content_like_log")
-public class OblContentLikeLogEntity extends Model<OblContentLikeLogEntity> {
+public class OblContentLikeRecordEntity extends Model<OblContentLikeRecordEntity> {
     private static final long serialVersionUID = 8576518581661383351L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;

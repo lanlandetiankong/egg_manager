@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date 2020-12-02
  */
 @Component
-@Named("oblArticleLikeLogConversion")
-public class OblArticleLikeLogConversion extends MyBaseMysqlConversion {
+@Named("oblArticleLikeRecordConversion")
+public class OblArticleLikeRecordConversion extends MyBaseMysqlConversion {
 
 }

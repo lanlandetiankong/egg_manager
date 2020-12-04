@@ -71,6 +71,12 @@ public class OblArticleEntity extends Model<OblArticleEntity> {
     @TableField("audit_state")
     private Short auditState;
 
+    /**
+     * 是否已发布?0:否1是
+     */
+    @TableField("is_published")
+    private Short isPublished;
+
 
     /**
      * 备注

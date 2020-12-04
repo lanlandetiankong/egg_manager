@@ -4,17 +4,17 @@ import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeLogEntity;
-import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeLogMapper;
-import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeLogDto;
-import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeLogVo;
+import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeRecordEntity;
+import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeRecordMapper;
+import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeRecordDto;
+import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeRecordVo;
 
 /**
  * @author zhoucj
  * @description 文章点赞表-Service
  * @date 2020-12-02
  */
-public interface OblArticleLikeLogService extends MyBaseMysqlService<OblArticleLikeLogEntity, OblArticleLikeLogMapper, OblArticleLikeLogVo> {
+public interface OblArticleLikeRecordService extends MyBaseMysqlService<OblArticleLikeRecordEntity, OblArticleLikeRecordMapper, OblArticleLikeRecordVo> {
 
     /**
      * 分页查询-文章点赞表 -dto列表
@@ -24,26 +24,26 @@ public interface OblArticleLikeLogService extends MyBaseMysqlService<OblArticleL
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleLikeLogDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleLikeRecordDto> queryPageBean);
 
 
     /**
      * 新增-文章点赞表
      * @param loginUserInfo       当前登录用户
-     * @param oblArticleLikeLogVo
+     * @param oblArticleLikeRecordVo
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeLogVo oblArticleLikeLogVo) throws Exception;
+    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception;
 
     /**
      * 更新文章点赞表
      * @param loginUserInfo       当前登录用户
-     * @param oblArticleLikeLogVo
+     * @param oblArticleLikeRecordVo
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeLogVo oblArticleLikeLogVo) throws Exception;
+    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception;
 
 
 }

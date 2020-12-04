@@ -53,5 +53,8 @@ public class OblArticleVo extends MyBaseMysqlVo {
      * 审核状态
      */
     private Short auditState;
-
+    /**
+     * 是否已发布?0:否1是
+     */
+    private Short isPublished;
 }

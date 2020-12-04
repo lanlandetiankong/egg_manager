@@ -4,7 +4,7 @@ package com.egg.manager.obl.web.controller.article;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.obl.article.basic.OblArticleLikeLogService;
+import com.egg.manager.api.services.obl.article.basic.OblContentLikeRecordService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
@@ -17,11 +17,11 @@ import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
-import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeLogEntity;
-import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeLogMapper;
-import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeLogDto;
-import com.egg.manager.persistence.obl.article.pojo.transfer.OblArticleLikeLogTransfer;
-import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeLogVo;
+import com.egg.manager.persistence.obl.article.db.mysql.entity.OblContentLikeRecordEntity;
+import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblContentLikeRecordMapper;
+import com.egg.manager.persistence.obl.article.pojo.dto.OblContentLikeRecordDto;
+import com.egg.manager.persistence.obl.article.pojo.transfer.OblContentLikeRecordTransfer;
+import com.egg.manager.persistence.obl.article.pojo.vo.OblContentLikeRecordVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -36,74 +36,74 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zhoucj
- * @description 文章点赞表-Api
+ * @description 评论点赞表-Api
  * @date 2020-12-02
  */
 @Slf4j
-@Api(value = "API-文章点赞表")
+@Api(value = "API-评论点赞表")
 @RestController
-@RequestMapping("/oblArticleLikeLog")
-public class OblArticleLikeLogController extends BaseController {
+@RequestMapping("/oblContentLikeRecord")
+public class OblContentLikeRecordController extends BaseController {
 
     @Autowired
-    private OblArticleLikeLogMapper oblArticleLikeLogMapper;
+    private OblContentLikeRecordMapper oblContentLikeRecordMapper;
     @Reference
-    private OblArticleLikeLogService oblArticleLikeLogService;
+    private OblContentLikeRecordService oblContentLikeRecordService;
 
 
-    @ApiOperation(value = "分页查询(dto)->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleLikeLog/queryDtoPage")
+    @ApiOperation(value = "分页查询(dto)->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @EmPcWebQueryLog(fullPath = "/oblContentLikeRecord/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
-    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleLikeLogDto.class) QueryPageBean<OblArticleLikeLogDto> queryPageBean,
+    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblContentLikeRecordDto.class) QueryPageBean<OblContentLikeRecordDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
-        result = oblArticleLikeLogService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+        result = oblContentLikeRecordService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 
-    @ApiOperation(value = "根据id查询->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleLikeLog/queryOneById")
+    @ApiOperation(value = "根据id查询->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @EmPcWebQueryLog(fullPath = "/oblContentLikeRecord/queryOneById")
     @PostMapping(value = "/queryOneById")
-    public WebResult queryOneById(HttpServletRequest request, String oblArticleLikeLogId,
+    public WebResult queryOneById(HttpServletRequest request, String oblContentLikeRecordId,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        Assert.notBlank(oblArticleLikeLogId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        OblArticleLikeLogEntity oblArticleLikeLogEntity = oblArticleLikeLogMapper.selectById(oblArticleLikeLogId);
-        result.putBean(OblArticleLikeLogTransfer.transferEntityToVo(oblArticleLikeLogEntity));
+        Assert.notBlank(oblContentLikeRecordId, BaseRstMsgConstant.ErrorMsg.unknowId());
+        OblContentLikeRecordEntity oblContentLikeRecordEntity = oblContentLikeRecordMapper.selectById(oblContentLikeRecordId);
+        result.putBean(OblContentLikeRecordTransfer.transferEntityToVo(oblContentLikeRecordEntity));
         return result;
     }
 
-    @ApiOperation(value = "新增->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/createByForm")
+    @ApiOperation(value = "新增->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/createByForm")
     @PostMapping(value = "/createByForm")
-    public WebResult createByForm(HttpServletRequest request, OblArticleLikeLogVo oblArticleLikeLogVo,
+    public WebResult createByForm(HttpServletRequest request, OblContentLikeRecordVo oblContentLikeRecordVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
-        Assert.notNull(oblArticleLikeLogVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-        addCount = oblArticleLikeLogService.dealCreate(loginUserInfo, oblArticleLikeLogVo);
+        Assert.notNull(oblContentLikeRecordVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        addCount = oblContentLikeRecordService.dealCreate(loginUserInfo, oblContentLikeRecordVo);
         result.putCount(addCount);
         return result;
     }
 
-    @ApiOperation(value = "更新->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/updateByForm")
+    @ApiOperation(value = "更新->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/updateByForm")
     @PostMapping(value = "/updateByForm")
-    public WebResult updateByForm(HttpServletRequest request, OblArticleLikeLogVo oblArticleLikeLogVo,
+    public WebResult updateByForm(HttpServletRequest request, OblContentLikeRecordVo oblContentLikeRecordVo,
                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
-        Assert.notNull(oblArticleLikeLogVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-        changeCount = oblArticleLikeLogService.dealUpdate(loginUserInfo, oblArticleLikeLogVo);
+        Assert.notNull(oblContentLikeRecordVo, BaseRstMsgConstant.ErrorMsg.emptyForm());
+        changeCount = oblContentLikeRecordService.dealUpdate(loginUserInfo, oblContentLikeRecordVo);
         result.putCount(changeCount);
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/batchDeleteByIds")
+    @ApiOperation(value = "批量伪删除->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -114,13 +114,13 @@ public class OblArticleLikeLogController extends BaseController {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-        delCount = oblArticleLikeLogService.dealBatchLogicDelete(loginUserInfo, delIds);
+        delCount = oblContentLikeRecordService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeLog/deleteById")
-    @ApiOperation(value = "伪删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/deleteById")
+    @ApiOperation(value = "伪删除->评论点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
@@ -130,7 +130,7 @@ public class OblArticleLikeLogController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        Integer delCount = oblArticleLikeLogService.dealLogicDeleteById(loginUserInfo, delId);
+        Integer delCount = oblContentLikeRecordService.dealLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
         return result;
     }

@@ -13,14 +13,14 @@
                    interface="com.egg.manager.api.services.obl.article.basic.OblArticleCategoryService"/>
     <dubbo:service protocol="dubbo" ref="oblArticleCommentService"
                    interface="com.egg.manager.api.services.obl.article.basic.OblArticleCommentService"/>
-    <dubbo:service protocol="dubbo" ref="oblArticleLikeLogService"
-                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleLikeLogService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleLikeRecordService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleLikeRecordService"/>
     <dubbo:service protocol="dubbo" ref="oblArticleTagRelatedService"
                    interface="com.egg.manager.api.services.obl.article.basic.OblArticleTagRelatedService"/>
     <dubbo:service protocol="dubbo" ref="oblArticleTagService"
                    interface="com.egg.manager.api.services.obl.article.basic.OblArticleTagService"/>
-    <dubbo:service protocol="dubbo" ref="oblContentLikeLogService"
-                   interface="com.egg.manager.api.services.obl.article.basic.OblContentLikeLogService"/>
+    <dubbo:service protocol="dubbo" ref="oblContentLikeRecordService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblContentLikeRecordService"/>
     <dubbo:service protocol="dubbo" ref="oblUserAttentionArticleCategoryService"
                    interface="com.egg.manager.api.services.obl.article.basic.OblUserAttentionArticleCategoryService"/>
     <dubbo:service protocol="dubbo" ref="oblUserCollectArticleService"

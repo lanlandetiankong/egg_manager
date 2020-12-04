@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblContentLikeLogMapper">
+<mapper namespace="com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeRecordMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.article.db.mysql.entity.OblContentLikeLogEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeRecordEntity">
         <id property="fid" column="fid"/>
-        <result property="refArticleId" column="ref_article_id"/>
-        <result property="refCommentId" column="ref_comment_id"/>
+        <result property="articleId" column="article_id"/>
         <result property="operateUserId" column="operate_user_id"/>
+        <result property="attitude" column="attitude"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -21,11 +21,11 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.article.pojo.dto.OblContentLikeLogDto" extends="BaseResultMap">
+    <resultMap id="DtoResultMap" type="com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeRecordDto" extends="BaseResultMap">
         <id property="fid" column="fid"/>
-        <result property="refArticleId" column="ref_article_id"/>
-        <result property="refCommentId" column="ref_comment_id"/>
+        <result property="articleId" column="article_id"/>
         <result property="operateUserId" column="operate_user_id"/>
+        <result property="attitude" column="attitude"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="version" column="version"/>
@@ -43,7 +43,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,ref_article_id,ref_comment_id,operate_user_id,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time
+        fid,article_id,operate_user_id,attitude,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -51,9 +51,9 @@
         -->
     <sql id="Base_Alias_Table_List">
         ${base_alias_name}.fid,
-        ${base_alias_name}.ref_article_id,
-        ${base_alias_name}.ref_comment_id,
+        ${base_alias_name}.article_id,
         ${base_alias_name}.operate_user_id,
+        ${base_alias_name}.attitude,
         ${base_alias_name}.state,
         ${base_alias_name}.remark,
         ${base_alias_name}.version,
@@ -71,9 +71,9 @@
         -->
     <sql id="Base_Alias_TableColumn_List">
         ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
-        ${base_alias_name}.ref_article_id AS ${base_alias_col_prefix}articleId,
-        ${base_alias_name}.ref_comment_id AS ${base_alias_col_prefix}refCommentId,
+        ${base_alias_name}.article_id AS ${base_alias_col_prefix}articleId,
         ${base_alias_name}.operate_user_id AS ${base_alias_col_prefix}operateUserId,
+        ${base_alias_name}.attitude AS ${base_alias_col_prefix}attitude,
         ${base_alias_name}.state AS ${base_alias_col_prefix}state,
         ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
         ${base_alias_name}.version AS ${base_alias_col_prefix}version,
@@ -91,7 +91,7 @@
         <include refid="Base_Alias_Table_List">
             <property name="base_alias_name" value="oat"/>
         </include>
-        FROM obl_content_like_log oat
+        FROM obl_article_like_record oat
         <where>
             <include
                     refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">

@@ -1,10 +1,10 @@
 package com.egg.manager.persistence.obl.article.pojo.mapstruct.imap;
 
 import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental.MyBaseMysqlMapstruct;
-import com.egg.manager.persistence.obl.article.db.mysql.entity.OblContentLikeLogEntity;
-import com.egg.manager.persistence.obl.article.pojo.dto.OblContentLikeLogDto;
-import com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion.OblContentLikeLogConversion;
-import com.egg.manager.persistence.obl.article.pojo.vo.OblContentLikeLogVo;
+import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeRecordEntity;
+import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeRecordDto;
+import com.egg.manager.persistence.obl.article.pojo.mapstruct.conversion.OblArticleLikeRecordConversion;
+import com.egg.manager.persistence.obl.article.pojo.vo.OblArticleLikeRecordVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -18,10 +18,10 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
-        uses = {OblContentLikeLogConversion.class}
+        uses = {OblArticleLikeRecordConversion.class}
 )
-public interface OblContentLikeLogMapstruct extends MyBaseMysqlMapstruct<OblContentLikeLogEntity, OblContentLikeLogVo, OblContentLikeLogDto> {
-    OblContentLikeLogMapstruct INSTANCE = Mappers.getMapper(OblContentLikeLogMapstruct.class);
+public interface OblArticleLikeRecordMapstruct extends MyBaseMysqlMapstruct<OblArticleLikeRecordEntity, OblArticleLikeRecordVo, OblArticleLikeRecordDto> {
+    OblArticleLikeRecordMapstruct INSTANCE = Mappers.getMapper(OblArticleLikeRecordMapstruct.class);
 
     /**
      * vo转entity
@@ -29,7 +29,7 @@ public interface OblContentLikeLogMapstruct extends MyBaseMysqlMapstruct<OblCont
      * @return
      */
     @Mappings({})
-    OblContentLikeLogEntity transferVoToEntity(OblContentLikeLogVo vo);
+    OblArticleLikeRecordEntity transferVoToEntity(OblArticleLikeRecordVo vo);
 
     /**
      * entity转vo
@@ -40,7 +40,7 @@ public interface OblContentLikeLogMapstruct extends MyBaseMysqlMapstruct<OblCont
             @Mapping(target = "createUser", ignore = true),
             @Mapping(target = "lastModifyer", ignore = true)
     })
-    OblContentLikeLogVo transferEntityToVo(OblContentLikeLogEntity entity);
+    OblArticleLikeRecordVo transferEntityToVo(OblArticleLikeRecordEntity entity);
 
     /**
      * dto转vo
@@ -51,7 +51,7 @@ public interface OblContentLikeLogMapstruct extends MyBaseMysqlMapstruct<OblCont
             @Mapping(target = "createUser", expression = "java(translateCreateUserEntityToVo(dto.getLastModifyer()))"),
             @Mapping(target = "lastModifyer", expression = "java(translateUpdateUserEntityToVo(dto.getLastModifyer()))")
     })
-    OblContentLikeLogVo transferDtoToVo(OblContentLikeLogDto dto);
+    OblArticleLikeRecordVo transferDtoToVo(OblArticleLikeRecordDto dto);
 
 
 }

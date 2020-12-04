@@ -1,6 +1,6 @@
-package com.egg.manager.persistence.obl.article.pojo.vo;
+package com.egg.manager.persistence.obl.article.pojo.dto;
 
-import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
+import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,15 +8,16 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoucj
- * @description 评论点赞表-Vo
+ * @description 评论点赞表-Dto
  * @date 2020-12-02
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class OblContentLikeLogVo extends MyBaseMysqlVo {
-    private static final long serialVersionUID = -298985667691447856L;
+public class OblContentLikeRecordDto extends MyBaseMysqlDto {
+
+    private static final long serialVersionUID = -3859379296122739138L;
     /**
      * 所属文章id
      */
@@ -29,5 +30,6 @@ public class OblContentLikeLogVo extends MyBaseMysqlVo {
      * 操作用户id
      */
     private String operateUserId;
+
 
 }

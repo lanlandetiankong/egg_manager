@@ -21,7 +21,7 @@ public class MySqlDocsGenerator {
     public static String PROJ_VERSION = "2.0.5-SNAPSHOT";
 
     public static void main(String[] args) {
-        generateEmDoc();
+        generateOblDoc();
     }
 
     public static void generateEmDoc() {
@@ -41,7 +41,7 @@ public class MySqlDocsGenerator {
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         hikariConfig.setJdbcUrl(url);
         hikariConfig.setUsername("root");
-        hikariConfig.setPassword("root");
+        hikariConfig.setPassword("egg_root");
         //设置可以获取tables remarks信息
         hikariConfig.addDataSourceProperty("useInformationSchema", "true");
         hikariConfig.setMinimumIdle(2);

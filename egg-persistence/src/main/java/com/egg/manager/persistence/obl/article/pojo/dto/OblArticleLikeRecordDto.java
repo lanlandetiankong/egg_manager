@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class OblArticleLikeLogDto extends MyBaseMysqlDto {
+public class OblArticleLikeRecordDto extends MyBaseMysqlDto {
 
     private static final long serialVersionUID = 5604523563758154875L;
     /**

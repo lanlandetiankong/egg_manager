@@ -21,6 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_user_group")
 public class UserGroupEntity extends Model<UserGroupEntity> {
+    private static final long serialVersionUID = -186511827164267798L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
 

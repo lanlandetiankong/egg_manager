@@ -19,6 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class AnnouncementVo extends MyBaseMysqlVo {
 
+    private static final long serialVersionUID = 5471424614604405865L;
     /**
      * 标题
      */

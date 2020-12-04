@@ -20,6 +20,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_define_permission")
 public class DefinePermissionEntity extends Model<DefinePermissionEntity> {
+    private static final long serialVersionUID = 5666571443549068650L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

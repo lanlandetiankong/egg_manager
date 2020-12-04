@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OblBlogMenuConfVo extends MyBaseMysqlVo {
+    private static final long serialVersionUID = 3924723091511112016L;
     /**
      * 菜单名
      */

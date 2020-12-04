@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DefineMenuDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = -747888772495990919L;
     /**
      * 上级id
      */

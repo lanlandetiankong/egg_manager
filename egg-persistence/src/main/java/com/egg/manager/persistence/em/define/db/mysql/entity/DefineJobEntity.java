@@ -21,6 +21,7 @@ import java.util.Date;
 @TableName("em_define_job")
 public class DefineJobEntity extends Model<DefineJobEntity> {
 
+    private static final long serialVersionUID = -4459402877222525997L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

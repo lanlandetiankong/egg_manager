@@ -21,6 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_define_role")
 public class DefineRoleEntity extends Model<DefineRoleEntity> {
+    private static final long serialVersionUID = 6407866317040095112L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

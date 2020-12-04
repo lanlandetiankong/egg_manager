@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyVerifyDuplicateBean<T> implements Serializable {
+    private static final long serialVersionUID = 5416412070199395643L;
     /**
      * 是否成功
      */

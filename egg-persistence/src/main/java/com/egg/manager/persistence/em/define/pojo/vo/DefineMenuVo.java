@@ -21,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DefineMenuVo extends MyBaseMysqlVo {
+    private static final long serialVersionUID = 2615364203328397224L;
     /**
      * 上级id
      */

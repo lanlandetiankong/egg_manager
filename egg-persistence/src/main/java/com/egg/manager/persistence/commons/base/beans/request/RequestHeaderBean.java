@@ -18,6 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class RequestHeaderBean implements Serializable {
+    private static final long serialVersionUID = -8055699501236682402L;
     private String host;
     private String connection;
     private String contentLength;

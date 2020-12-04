@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OblUserDefCollectCategoryDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = 8143796560623312295L;
     /**
      * 名称
      */

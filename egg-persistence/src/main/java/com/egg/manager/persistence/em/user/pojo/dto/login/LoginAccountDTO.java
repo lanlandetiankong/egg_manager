@@ -17,6 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginAccountDTO implements Serializable {
+    private static final long serialVersionUID = 1945112063521859507L;
     /**
      * 账号
      */

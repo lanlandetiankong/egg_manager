@@ -15,6 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class DefineModuleDto extends MyBaseMysqlDto {
 
+    private static final long serialVersionUID = 7597601436931527211L;
     /**
      * 名称
      */

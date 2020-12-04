@@ -21,6 +21,7 @@ import java.util.Map;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CommonMenuTree extends MyBaseTree {
+    private static final long serialVersionUID = -1666085907329262060L;
     /**
      * 菜单id
      */

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OblArticleVo extends MyBaseMysqlVo {
+    private static final long serialVersionUID = -2002594951996241399L;
     /**
      * 作者id
      */

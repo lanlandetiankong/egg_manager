@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DefineJobDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = 5504212922758380444L;
     /**
      * 名称
      */

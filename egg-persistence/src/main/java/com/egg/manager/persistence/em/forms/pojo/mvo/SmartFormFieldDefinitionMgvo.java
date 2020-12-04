@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class SmartFormFieldDefinitionMgvo extends BaseModelMgvo<String> {
 
+    private static final long serialVersionUID = 2061669198802603580L;
     /**
      * 类型名
      */

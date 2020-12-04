@@ -17,6 +17,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class FileResBean implements Serializable {
+    private static final long serialVersionUID = 1749067442659421589L;
     /**
      * 文件名
      */

@@ -12,6 +12,8 @@ import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage
  */
 public class WebResult extends AbstractResult {
 
+    private static final long serialVersionUID = 4626736174900245688L;
+
     /**
      * 只允许通过static构造类
      */

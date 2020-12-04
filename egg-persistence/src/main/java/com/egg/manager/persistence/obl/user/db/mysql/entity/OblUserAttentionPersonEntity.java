@@ -23,6 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("obl_user_attention_person")
 public class OblUserAttentionPersonEntity extends Model<OblUserAttentionPersonEntity> {
+    private static final long serialVersionUID = 246790112616780642L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

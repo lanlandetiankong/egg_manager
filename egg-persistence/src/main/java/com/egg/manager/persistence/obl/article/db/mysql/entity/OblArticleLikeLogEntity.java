@@ -25,6 +25,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("obl_article_like_log")
 public class OblArticleLikeLogEntity extends Model<OblArticleLikeLogEntity> {
+    private static final long serialVersionUID = 3893981879191504993L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

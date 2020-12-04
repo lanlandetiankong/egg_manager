@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserDepartmentDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = -7363179280676052843L;
     /**
      * 用户账号id
      */

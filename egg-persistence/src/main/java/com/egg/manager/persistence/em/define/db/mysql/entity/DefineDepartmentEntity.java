@@ -20,6 +20,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_define_department")
 public class DefineDepartmentEntity extends Model<DefineDepartmentEntity> {
+    private static final long serialVersionUID = 13269139938733138L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

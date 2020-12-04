@@ -14,6 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SmartFormRecordFieldMgvo extends BaseModelMgvo<String> {
+    private static final long serialVersionUID = -9195750562989111150L;
     /**
      * 表单record
      */

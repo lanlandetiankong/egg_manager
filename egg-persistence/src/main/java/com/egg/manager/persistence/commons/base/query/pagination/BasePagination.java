@@ -9,4 +9,5 @@ import java.io.Serializable;
  */
 public class BasePagination implements Serializable {
 
+    private static final long serialVersionUID = -1584917305039613730L;
 }

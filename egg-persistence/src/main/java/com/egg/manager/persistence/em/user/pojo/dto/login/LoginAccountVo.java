@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class LoginAccountVo extends MyBaseWebVo {
+    private static final long serialVersionUID = -5929723949537124947L;
     /**
      * 账号
      */

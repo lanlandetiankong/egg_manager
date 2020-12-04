@@ -15,6 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class RoleMenuDto extends MyBaseMysqlDto {
 
+    private static final long serialVersionUID = -545897672256570611L;
     /**
      * 角色id
      */

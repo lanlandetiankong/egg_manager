@@ -29,6 +29,7 @@ import java.util.Map;
 })
 public class EmailSendRecordMgo extends MyBaseModelMgo<String> {
 
+    private static final long serialVersionUID = 5292300314286647890L;
     /**
      * 发送者-相关信息
      */

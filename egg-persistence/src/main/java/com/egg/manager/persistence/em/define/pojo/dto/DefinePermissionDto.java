@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DefinePermissionDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = -3303141648139028803L;
     /**
      * 名称
      */

@@ -21,6 +21,8 @@ import java.util.Date;
 @TableName("em_announcement_draft")
 public class AnnouncementDraftEntity extends Model<AnnouncementDraftEntity> {
 
+    private static final long serialVersionUID = -7814877810832045607L;
+
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
 

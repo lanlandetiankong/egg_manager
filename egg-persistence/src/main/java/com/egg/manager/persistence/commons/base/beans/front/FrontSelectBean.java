@@ -18,6 +18,7 @@ import java.io.Serializable;
 @Builder
 public class FrontSelectBean implements Serializable {
 
+    private static final long serialVersionUID = 646463280191488619L;
     /**
      * Select的值
      */

@@ -14,6 +14,8 @@ import java.util.LinkedHashMap;
 public class AntdvSortMap extends LinkedHashMap<String, Boolean> implements ISortAble<AntdvSortMap>, Serializable {
 
 
+    private static final long serialVersionUID = -8079228629308215650L;
+
     public AntdvSortMap() {
     }
 

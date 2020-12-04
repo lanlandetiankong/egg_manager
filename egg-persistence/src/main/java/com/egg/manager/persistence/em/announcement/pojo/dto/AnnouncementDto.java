@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class AnnouncementDto extends MyBaseMysqlDto {
 
+    private static final long serialVersionUID = -5487083086433996494L;
     /**
      * 标题
      */

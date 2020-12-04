@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OblBlogMenuConfDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = -8562470895524271885L;
     /**
      * 菜单名
      */

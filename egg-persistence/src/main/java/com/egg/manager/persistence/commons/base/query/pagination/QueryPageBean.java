@@ -16,6 +16,7 @@ import java.io.Serializable;
  */
 @Builder
 public class QueryPageBean<T> implements Serializable {
+    private static final long serialVersionUID = 1613285396833135958L;
     /**
      * 分页 配置
      */

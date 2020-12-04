@@ -17,6 +17,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class FrontEntitySelectBean<K> implements Serializable {
+    private static final long serialVersionUID = 9043447081130667508L;
     /**
      * Select的值
      */

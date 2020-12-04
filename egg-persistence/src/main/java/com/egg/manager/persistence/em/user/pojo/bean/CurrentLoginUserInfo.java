@@ -18,6 +18,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class CurrentLoginUserInfo extends UserAccountEntity {
 
+    private static final long serialVersionUID = -1948150822329375750L;
     private List<DefineGroupEntity> belongGroupList;
 
     private List<DefineJobEntity> belongJobList;

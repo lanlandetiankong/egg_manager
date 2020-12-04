@@ -8,6 +8,7 @@ import com.egg.manager.persistence.commons.base.sms.MyBaseSms;
  * @date 2020/10/20
  */
 public class SmsSendRequest extends MyBaseSms {
+    private static final long serialVersionUID = -8562979111368955544L;
     /**
      * 用户账号，必填
      */

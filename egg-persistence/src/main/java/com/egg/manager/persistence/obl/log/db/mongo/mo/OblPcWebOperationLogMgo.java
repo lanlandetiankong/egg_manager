@@ -15,5 +15,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(callSuper = true)
 public class OblPcWebOperationLogMgo extends MyBaseWebLogMgo<String> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7174550842304936046L;
 }

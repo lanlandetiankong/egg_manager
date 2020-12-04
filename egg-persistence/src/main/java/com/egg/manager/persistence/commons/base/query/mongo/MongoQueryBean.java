@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
 public class MongoQueryBean<T> extends BaseQueryBean {
+    private static final long serialVersionUID = -3894691493792592241L;
     /**
      * 条件集合
      */

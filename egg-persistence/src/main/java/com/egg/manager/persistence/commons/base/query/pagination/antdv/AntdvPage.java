@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AntdvPage<T> extends BasePagination {
+    private static final long serialVersionUID = -8969490582145367825L;
     /**
      * 当前页数
      */

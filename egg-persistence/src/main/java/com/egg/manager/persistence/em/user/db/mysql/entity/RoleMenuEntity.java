@@ -20,6 +20,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_role_menu")
 public class RoleMenuEntity extends Model<RoleMenuEntity> {
+    private static final long serialVersionUID = 5818971756665466940L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
 

@@ -23,6 +23,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 })
 public class SmartFormDefinitionMgo extends MyBaseModelMgo<String> {
 
+    private static final long serialVersionUID = -3978534704489937334L;
     /**
      * 表单名称
      */

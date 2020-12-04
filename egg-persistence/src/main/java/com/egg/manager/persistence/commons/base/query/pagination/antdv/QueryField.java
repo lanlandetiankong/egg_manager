@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class QueryField extends BaseQueryBean {
+    private static final long serialVersionUID = -9116718167363000711L;
     /**
      * 字段名
      */

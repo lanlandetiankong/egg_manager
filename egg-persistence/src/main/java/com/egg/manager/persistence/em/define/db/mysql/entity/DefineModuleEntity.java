@@ -20,6 +20,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_define_module")
 public class DefineModuleEntity extends Model<DefineModuleEntity> {
+    private static final long serialVersionUID = -7607566928636399258L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
 

@@ -13,4 +13,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OblPcWebLoginLogMgvo extends MyBaseWebLogMgvo<String> {
 
+    private static final long serialVersionUID = 3928998722055919841L;
 }

@@ -21,6 +21,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class AntdFileUploadBean implements Serializable {
+    private static final long serialVersionUID = 5129557810594309843L;
     /**
      * uid
      */

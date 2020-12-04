@@ -12,6 +12,8 @@ import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 public class CommonTreeSelectTranslate extends MyBaseTree {
 
 
+    private static final long serialVersionUID = -6531490965620260001L;
+
     /**
      * 部门 树选择 ->entity 转 CommonTreeSelect
      * @param defineDepartmentEntity

@@ -23,6 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("obl_user_calculate_info")
 public class OblUserCalculateInfoEntity extends Model<OblUserCalculateInfoEntity> {
+    private static final long serialVersionUID = -493288566368349898L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

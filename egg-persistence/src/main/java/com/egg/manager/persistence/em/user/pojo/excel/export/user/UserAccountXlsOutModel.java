@@ -19,6 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserAccountXlsOutModel extends MyBaseXls {
+    private static final long serialVersionUID = -1173346026051450455L;
     @ExcelIgnore
     private String fid;
     /**

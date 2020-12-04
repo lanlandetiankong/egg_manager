@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class AnnouncementTagDto extends MyBaseMysqlDto {
+    private static final long serialVersionUID = -724430792906816655L;
     /**
      * 名称
      */

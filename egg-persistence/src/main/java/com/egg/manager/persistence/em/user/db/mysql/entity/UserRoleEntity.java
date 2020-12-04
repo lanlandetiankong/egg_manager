@@ -24,6 +24,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @TableName("em_user_role")
 public class UserRoleEntity extends Model<UserRoleEntity> {
+    private static final long serialVersionUID = 89201032904672178L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

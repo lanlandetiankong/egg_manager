@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class OblUserCalculateInfoVo extends MyBaseMysqlVo {
+    private static final long serialVersionUID = -942356065197021971L;
     /**
      * 用户id
      */

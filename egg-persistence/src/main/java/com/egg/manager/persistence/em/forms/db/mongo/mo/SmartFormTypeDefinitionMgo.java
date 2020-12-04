@@ -21,6 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
         @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
 })
 public class SmartFormTypeDefinitionMgo extends MyBaseModelMgo<String> {
+    private static final long serialVersionUID = 1910831325507308349L;
     /**
      * 类型名
      */

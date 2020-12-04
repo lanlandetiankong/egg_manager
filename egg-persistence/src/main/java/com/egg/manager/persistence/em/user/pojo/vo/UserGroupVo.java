@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class UserGroupVo extends MyBaseMysqlVo {
 
+    private static final long serialVersionUID = -4067980652372880101L;
     /**
      * 组织id
      */

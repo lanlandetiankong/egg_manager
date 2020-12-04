@@ -21,6 +21,7 @@ import java.util.Date;
 @TableName("em_define_tenant")
 public class DefineTenantEntity extends Model<DefineTenantEntity> {
 
+    private static final long serialVersionUID = -3283491592815770221L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

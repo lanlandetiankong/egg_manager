@@ -21,6 +21,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
 
+    private static final long serialVersionUID = -3634218062624101151L;
+
     public QueryFieldArr() {
     }
 

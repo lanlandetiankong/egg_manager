@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserAccountToken extends MyBaseWebVo {
+    private static final long serialVersionUID = 3474254841894818833L;
     /**
      * 账号
      */

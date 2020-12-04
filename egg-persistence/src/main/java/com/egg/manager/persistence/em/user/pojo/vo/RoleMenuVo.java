@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class RoleMenuVo extends MyBaseMysqlVo {
 
+    private static final long serialVersionUID = 368492393612290603L;
     /**
      * 角色id
      */

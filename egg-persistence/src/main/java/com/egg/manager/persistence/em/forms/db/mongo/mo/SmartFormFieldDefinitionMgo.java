@@ -24,6 +24,7 @@ import java.util.List;
 })
 public class SmartFormFieldDefinitionMgo extends MyBaseModelMgo<String> {
 
+    private static final long serialVersionUID = -6714620475090218358L;
     /**
      * 类型名
      */

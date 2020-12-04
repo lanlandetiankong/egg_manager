@@ -21,6 +21,7 @@ import java.util.Date;
 @TableName("em_define_group")
 public class DefineGroupEntity extends Model<DefineGroupEntity> {
 
+    private static final long serialVersionUID = -7407348350198064641L;
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid;
     /**

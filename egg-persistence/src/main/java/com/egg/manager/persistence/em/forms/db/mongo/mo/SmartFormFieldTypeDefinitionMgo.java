@@ -14,6 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SmartFormFieldTypeDefinitionMgo extends MyBaseModelMgo<String> {
+    private static final long serialVersionUID = 5682520996860050222L;
     /**
      * 字段类型值
      */

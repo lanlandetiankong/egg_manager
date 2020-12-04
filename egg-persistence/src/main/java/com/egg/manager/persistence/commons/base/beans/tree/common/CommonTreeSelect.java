@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class CommonTreeSelect extends MyBaseTree {
+    private static final long serialVersionUID = -1164332140821476333L;
     /**
      * 标题
      */

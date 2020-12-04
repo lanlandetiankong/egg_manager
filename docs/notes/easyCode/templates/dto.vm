@@ -25,6 +25,8 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class $!{tableInfo.name}Dto extends MyBaseMysqlDto {
+private static final long serialVersionUID = $tool.serial();
+
 private String fid ;
 #foreach($column in $tableInfo.otherColumn)
     #if(${column.comment})

@@ -32,6 +32,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("${tableInfo.obj.name}")
 public class $!{tableInfo.name}Entity extends Model<$!{tableInfo.name}Entity> {
+    private static final long serialVersionUID = $tool.serial();
+
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)
     private String fid ;
     #foreach($column in $tableInfo.otherColumn)

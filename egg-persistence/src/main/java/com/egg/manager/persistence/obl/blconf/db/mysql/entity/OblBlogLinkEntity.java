@@ -3,10 +3,7 @@ package com.egg.manager.persistence.obl.blconf.db.mysql.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @TableName("obl_blog_link")
 public class OblBlogLinkEntity extends Model<OblBlogLinkEntity> {
 

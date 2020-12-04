@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @TableName("obl_user_collect_article")
 public class OblUserCollectArticleEntity extends Model<OblUserCollectArticleEntity> {
     private static final long serialVersionUID = -2016850967972302245L;

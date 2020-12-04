@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -28,6 +29,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @TableName("${tableInfo.obj.name}")
 public class $!{tableInfo.name}Entity extends Model<$!{tableInfo.name}Entity> {
     @TableId(type = IdType.ASSIGN_ID, value = FieldConst.COL_FID)

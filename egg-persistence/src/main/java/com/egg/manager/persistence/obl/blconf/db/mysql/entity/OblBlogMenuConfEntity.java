@@ -6,6 +6,7 @@ import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTy
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @TableName("obl_blog_menu_conf")
 public class OblBlogMenuConfEntity extends Model<OblBlogMenuConfEntity> {
     private static final long serialVersionUID = 489914127235951698L;

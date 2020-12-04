@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
@@ -7,12 +7,8 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-
-    <!--                                    dir-start:com.egg.manager.api.services.em.message.services.hello                                                               -->
+    <dubbo:service protocol="dubbo" ref="helloService"
+                   interface="com.egg.manager.api.services.em.hello.basic.HelloService"/>
     <dubbo:service protocol="dubbo" ref="messageHelloService"
                    interface="com.egg.manager.api.services.em.hello.basic.MessageHelloService"/>
-
-    <!--                                    dir-end:com.egg.manager.api.services.em.message.services.hello                                                                -->
-
-
 </beans>

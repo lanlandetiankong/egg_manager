@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:service protocol="dubbo" ref="oblArticleCategoryRelatedService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleCategoryRelatedService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleCategoryService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleCategoryService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleCommentService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleCommentService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleLikeLogService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleLikeLogService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleTagRelatedService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleTagRelatedService"/>
+    <dubbo:service protocol="dubbo" ref="oblArticleTagService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblArticleTagService"/>
+    <dubbo:service protocol="dubbo" ref="oblContentLikeLogService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblContentLikeLogService"/>
+    <dubbo:service protocol="dubbo" ref="oblUserAttentionArticleCategoryService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblUserAttentionArticleCategoryService"/>
+    <dubbo:service protocol="dubbo" ref="oblUserCollectArticleService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblUserCollectArticleService"/>
+    <dubbo:service protocol="dubbo" ref="oblUserDefCollectCategoryService"
+                   interface="com.egg.manager.api.services.obl.article.basic.OblUserDefCollectCategoryService"/>
+</beans>

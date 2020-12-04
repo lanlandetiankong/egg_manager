@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:service protocol="dubbo" ref="defineDepartmentService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineDepartmentService"/>
+    <dubbo:service protocol="dubbo" ref="defineGroupService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineGroupService"/>
+    <dubbo:service protocol="dubbo" ref="defineJobService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineJobService"/>
+    <dubbo:service protocol="dubbo" ref="definePermissionService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefinePermissionService"/>
+    <dubbo:service protocol="dubbo" ref="defineRoleService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineRoleService"/>
+    <dubbo:service protocol="dubbo" ref="defineMenuService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineMenuService"/>
+    <dubbo:service protocol="dubbo" ref="defineModuleService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineModuleService"/>
+    <dubbo:service protocol="dubbo" ref="defineTenantService"
+                   interface="com.egg.manager.api.services.em.define.basic.DefineTenantService"/>
+</beans>

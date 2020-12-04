@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
@@ -6,8 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms                                                                -->
-    <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms.smartform                                                               -->
+
     <dubbo:service protocol="dubbo" ref="smartFormDefinitionMService"
                    interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService"/>
 
@@ -25,17 +24,4 @@
 
     <dubbo:service protocol="dubbo" ref="smartFormTypeDefinitionMService"
                    interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService"/>
-
-
-    <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms.smartform                                                               -->
-    <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.forms                                                                -->
-
-    <!--                                    dir-start:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
-
-
-    <dubbo:service protocol="dubbo" ref="pcWebOperationLogMgoService"
-                   interface="com.egg.manager.api.services.em.log.mongo.EmPcWebOperationLogMgoService"/>
-    <!--                                    dir-end:com.egg.manager.baseservice.services.mongodb.serviceimpl.log                                                              -->
-
-
 </beans>

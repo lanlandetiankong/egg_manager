@@ -7,7 +7,7 @@ import com.egg.manager.api.services.em.define.basic.DefineDepartmentService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
-import com.egg.manager.persistence.commons.base.constant.define.DefineDepartmentConstant;
+import com.egg.manager.persistence.em.user.domain.constant.DefineDepartmentConstant;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineDepartmentEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineDepartmentMapper;

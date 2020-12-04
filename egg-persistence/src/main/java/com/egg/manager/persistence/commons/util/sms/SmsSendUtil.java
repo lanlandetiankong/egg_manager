@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.commons.util.sms;
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.persistence.commons.base.constant.Constant;
-import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.Constant;
+import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.sms.send.SmsSendRequest;
 import com.egg.manager.persistence.commons.base.sms.send.SmsSendResponse;

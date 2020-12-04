@@ -2,7 +2,7 @@ package com.egg.manager.persistence.obl.blconf.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.AllArgsConstructor;
 import lombok.Data;

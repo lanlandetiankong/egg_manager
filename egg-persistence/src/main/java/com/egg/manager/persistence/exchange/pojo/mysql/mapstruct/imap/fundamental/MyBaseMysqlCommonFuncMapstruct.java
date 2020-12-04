@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
-import com.egg.manager.persistence.commons.util.str.MyStringUtil;
+import com.egg.manager.persistence.commons.util.data.str.MyStringUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
 import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;

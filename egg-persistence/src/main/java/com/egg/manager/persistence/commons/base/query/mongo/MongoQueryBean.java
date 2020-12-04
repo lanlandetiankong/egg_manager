@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.base.query.mongo;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
+import com.egg.manager.persistence.commons.base.enums.db.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.BaseQueryBean;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;

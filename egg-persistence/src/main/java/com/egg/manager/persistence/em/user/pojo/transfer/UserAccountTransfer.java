@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.transfer;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.commons.util.data.str.MyUUIDUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
 import com.egg.manager.persistence.em.user.pojo.excel.export.user.UserAccountXlsOutModel;

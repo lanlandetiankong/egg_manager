@@ -3,7 +3,7 @@ package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.user.basic.UserGroupService;
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineGroupMapper;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserGroupEntity;

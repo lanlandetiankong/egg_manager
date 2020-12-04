@@ -1,14 +1,14 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental;
 
-import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.commons.base.enums.base.UserSexEnum;
-import com.egg.manager.persistence.commons.base.enums.define.DefineJobTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.module.DefineModuleTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.permission.DefinePermissionTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.role.DefineRoleTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountStateEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
+import com.egg.manager.persistence.em.user.domain.enums.UserSexEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineJobTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineModuleTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefinePermissionTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineRoleTypeEnum;
+import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.em.user.domain.enums.UserAccountStateEnum;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;

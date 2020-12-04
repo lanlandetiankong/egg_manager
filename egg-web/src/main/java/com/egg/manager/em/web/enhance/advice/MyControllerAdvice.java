@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.enhance.advice;
 
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;

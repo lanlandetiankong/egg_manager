@@ -1,9 +1,9 @@
 package com.egg.manager.persistence.exchange.db.mongo.repositoryimpl;
 
-import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
-import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
+import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
+import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
-import com.egg.manager.persistence.commons.util.reflex.MyReflexUtil;
+import com.egg.manager.persistence.commons.util.basic.jvm.reflex.MyReflexUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.repository.MyBaseMongoRepository;

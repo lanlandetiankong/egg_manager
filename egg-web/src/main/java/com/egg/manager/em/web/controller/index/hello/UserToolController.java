@@ -5,7 +5,7 @@ import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.exchange.helper.UserGenerateHelper;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;

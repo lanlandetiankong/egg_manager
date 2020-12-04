@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.controller.index.hello.mq.activemq;
 
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

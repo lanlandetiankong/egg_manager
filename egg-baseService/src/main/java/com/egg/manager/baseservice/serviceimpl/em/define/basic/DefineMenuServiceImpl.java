@@ -13,11 +13,11 @@ import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
-import com.egg.manager.persistence.commons.base.constant.define.DefineMenuConstant;
-import com.egg.manager.persistence.commons.base.constant.redis.RedisShiroKeyConstant;
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.em.user.domain.constant.DefineMenuConstant;
+import com.egg.manager.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
+import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;

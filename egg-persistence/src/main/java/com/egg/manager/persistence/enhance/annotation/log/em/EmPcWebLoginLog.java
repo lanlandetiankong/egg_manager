@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.enhance.annotation.log.em;
 
-import com.egg.manager.persistence.commons.base.constant.aspect.AspectTypeConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.AspectTypeConstant;
 
 import java.lang.annotation.*;
 

@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.bean;
 
-import com.egg.manager.persistence.commons.util.str.MyUUIDUtil;
+import com.egg.manager.persistence.commons.util.data.str.MyUUIDUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session.UserAccountTokenMapstruct;
 import com.egg.manager.persistence.exchange.bean.webvo.MyBaseWebVo;

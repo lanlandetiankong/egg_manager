@@ -3,7 +3,7 @@ package com.egg.manager.baseservice.serviceimpl.em.forms.mongo;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.mongodb.MyBaseMgoServiceImpl;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
-import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
+import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormDefinitionRepository;

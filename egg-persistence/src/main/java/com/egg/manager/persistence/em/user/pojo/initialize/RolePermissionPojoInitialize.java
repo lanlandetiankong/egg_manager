@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.pojo.initialize;
 
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.em.user.db.mysql.entity.RolePermissionEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.base.helper;
 
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import org.apache.commons.lang3.StringUtils;
 
 /**

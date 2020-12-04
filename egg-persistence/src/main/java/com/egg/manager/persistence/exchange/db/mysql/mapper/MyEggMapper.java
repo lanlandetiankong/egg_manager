@@ -3,7 +3,7 @@ package com.egg.manager.persistence.exchange.db.mysql.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.commons.base.constant.db.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import org.apache.ibatis.annotations.Param;
 

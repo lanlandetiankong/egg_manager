@@ -2,11 +2,11 @@ package com.egg.manager.em.web.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.commons.base.constant.Constant;
-import com.egg.manager.persistence.commons.base.enums.PublicResultEnum;
+import com.egg.manager.persistence.commons.base.constant.basic.Constant;
+import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
-import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
+import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.initialize.UserAccountPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;

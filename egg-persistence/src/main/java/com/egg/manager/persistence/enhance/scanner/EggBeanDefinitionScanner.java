@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.enhance.scanner;
 
-import com.egg.manager.persistence.enhance.annotation.teaegg.EggBean;
+import com.egg.manager.persistence.enhance.annotation.custom.EggBean;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;

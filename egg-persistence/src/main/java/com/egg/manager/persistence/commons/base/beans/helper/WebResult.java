@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.base.beans.helper;
 
 import cn.hutool.http.HttpStatus;
-import com.egg.manager.persistence.commons.base.constant.rst.BaseRstMsgConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 
 

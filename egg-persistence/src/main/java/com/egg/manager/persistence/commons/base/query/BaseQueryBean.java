@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.commons.base.query;
 
-import com.egg.manager.persistence.commons.base.enums.query.QueryMatchingEnum;
+import com.egg.manager.persistence.commons.base.enums.db.QueryMatchingEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
 
 import java.io.Serializable;

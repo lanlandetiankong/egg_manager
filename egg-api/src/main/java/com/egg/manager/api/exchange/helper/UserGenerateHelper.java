@@ -1,7 +1,7 @@
 package com.egg.manager.api.exchange.helper;
 
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.commons.util.test.RandomValueUtil;
+import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.commons.util.data.random.RandomValueUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 
 import java.util.ArrayList;

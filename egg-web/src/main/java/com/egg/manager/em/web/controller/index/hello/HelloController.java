@@ -6,7 +6,7 @@ import com.egg.manager.api.services.em.hello.basic.HelloService;
 import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.beans.tree.common.CommonMenuTree;
-import com.egg.manager.persistence.commons.base.constant.commons.http.HttpMethodConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -2,7 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.tree.common;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.egg.manager.persistence.commons.base.beans.tree.MyBaseTree;
-import com.egg.manager.persistence.commons.base.enums.module.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
 import com.google.common.collect.Maps;
 import lombok.*;

@@ -6,7 +6,7 @@ import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.DefineRoleService;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
-import com.egg.manager.persistence.commons.util.spring.SpringContextBeanUtil;
+import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;

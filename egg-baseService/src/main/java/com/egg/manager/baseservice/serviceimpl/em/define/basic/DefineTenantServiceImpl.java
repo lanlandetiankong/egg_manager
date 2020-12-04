@@ -9,7 +9,7 @@ import com.egg.manager.api.services.em.define.basic.DefineTenantService;
 import com.egg.manager.api.services.em.user.basic.UserTenantService;
 import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
 import com.egg.manager.persistence.em.define.db.mysql.mapper.DefineTenantMapper;

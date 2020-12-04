@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.commons.base.enums.redis.RedisShiroCacheEnum;
+import com.egg.manager.persistence.commons.base.enums.db.RedisShiroCacheEnum;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;

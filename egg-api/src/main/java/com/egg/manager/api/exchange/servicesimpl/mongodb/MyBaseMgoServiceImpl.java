@@ -2,8 +2,8 @@ package com.egg.manager.api.exchange.servicesimpl.mongodb;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
-import com.egg.manager.persistence.commons.base.constant.mongodb.MongoFieldConstant;
-import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
+import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
+import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
 import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;

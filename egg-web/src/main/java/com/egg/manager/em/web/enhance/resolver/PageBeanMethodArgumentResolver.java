@@ -4,7 +4,7 @@ import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.commons.util.page.PageUtil;
+import com.egg.manager.persistence.commons.util.basic.page.PageUtil;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.em.user.db.mysql.mapper;
 
-import com.egg.manager.persistence.commons.base.constant.pojo.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.commons.base.constant.db.mysql.EggMpSqlConst;
 import com.egg.manager.persistence.em.user.db.mysql.entity.RoleMenuEntity;
 import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;

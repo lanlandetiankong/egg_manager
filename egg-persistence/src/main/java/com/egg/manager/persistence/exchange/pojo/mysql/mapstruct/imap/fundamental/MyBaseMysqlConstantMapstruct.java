@@ -1,8 +1,8 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental;
 
-import com.egg.manager.persistence.commons.base.enums.base.BaseStateEnum;
-import com.egg.manager.persistence.commons.base.enums.base.SwitchStateEnum;
-import com.egg.manager.persistence.commons.base.enums.user.UserAccountBaseTypeEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
+import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
+import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;

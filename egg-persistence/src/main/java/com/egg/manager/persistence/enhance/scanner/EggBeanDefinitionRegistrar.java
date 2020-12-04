@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.enhance.scanner;
 
-import com.egg.manager.persistence.enhance.annotation.teaegg.EnableEggBeanScan;
+import com.egg.manager.persistence.enhance.annotation.custom.EnableEggBeanScan;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;

@@ -94,13 +94,13 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
 
     public void putEnumData(List<FrontSelectBean> val) {
         val = val == null ? val : new ArrayList();
-        this.put(ENUM_DATA, EnumRstBean.<FrontSelectBean,String>builder().list(val));
+        this.put(ENUM_DATA, EnumRstBean.<FrontSelectBean,String>builder().list(val).build());
     }
 
     public void putEnumData(List val, List checkeds) {
         val = val == null ? val : new ArrayList();
         checkeds = checkeds == null ? checkeds : new ArrayList();
-        this.put(ENUM_DATA, EnumRstBean.builder().list(val).checkeds(checkeds));
+        this.put(ENUM_DATA, EnumRstBean.builder().list(val).checkeds(checkeds).build());
     }
 
 

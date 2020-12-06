@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Builder
-public class EnumRstBean<T, K> implements Serializable {
+public class EnumRstBean<T extends Serializable, K extends Serializable> implements Serializable {
     /**
      * 集合
      */

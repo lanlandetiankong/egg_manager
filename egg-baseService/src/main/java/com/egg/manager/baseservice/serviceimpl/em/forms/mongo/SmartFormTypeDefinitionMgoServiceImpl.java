@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.mongodb.MyBaseMgoServiceImpl;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;
-import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
+import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormTypeDefinitionRepository;
@@ -25,10 +25,10 @@ public class SmartFormTypeDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<
 
     @Override
     public WebResult dealResultListToEnums(WebResult result, List<SmartFormTypeDefinitionMgo> list) {
-        List<FrontEntitySelectBean> enumList = new ArrayList<>();
+        List<FrontSelectBean> enumList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(list)) {
             for (SmartFormTypeDefinitionMgo typeDefinitionMgo : list) {
-                enumList.add(new FrontEntitySelectBean<String>(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
+                enumList.add(new FrontSelectBean<String>(typeDefinitionMgo.getFid(), typeDefinitionMgo.getName()));
             }
         }
         result.putEnumData(enumList);

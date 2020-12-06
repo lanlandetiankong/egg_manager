@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService;
-import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
+import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
@@ -105,11 +105,11 @@ public class AnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<Announcem
 
     @Override
     public WebResult dealResultListToEnums(WebResult result) {
-        List<FrontEntitySelectBean> enumList = new ArrayList<>();
+        List<FrontSelectBean> enumList = new ArrayList<>();
         List<AnnouncementTagVo> resultList = result.getGridList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (AnnouncementTagVo announcementTagVo : resultList) {
-                enumList.add(new FrontEntitySelectBean<String>(announcementTagVo.getFid(), announcementTagVo.getName()));
+                enumList.add(new FrontSelectBean<String>(announcementTagVo.getFid(), announcementTagVo.getName()));
             }
         }
         result.putEnumData(enumList);

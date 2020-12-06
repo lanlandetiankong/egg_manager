@@ -2,6 +2,7 @@ package com.egg.manager.persistence.commons.base.beans.helper;
 
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
+import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
@@ -91,9 +92,9 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         this.put(DATA_MAP, val);
     }
 
-    public void putEnumData(List val) {
+    public void putEnumData(List<FrontSelectBean> val) {
         val = val == null ? val : new ArrayList();
-        this.put(ENUM_DATA, EnumRstBean.builder().list(val));
+        this.put(ENUM_DATA, EnumRstBean.<FrontSelectBean,String>builder().list(val));
     }
 
     public void putEnumData(List val, List checkeds) {

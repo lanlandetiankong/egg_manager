@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.DefineTenantService;
 import com.egg.manager.api.services.em.user.basic.UserTenantService;
-import com.egg.manager.persistence.commons.base.beans.front.FrontEntitySelectBean;
+import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
@@ -82,11 +82,11 @@ public class DefineTenantServiceImpl extends MyBaseMysqlServiceImpl<DefineTenant
 
     @Override
     public WebResult dealResultListToEnums(CurrentLoginUserInfo loginUserInfo, WebResult result) {
-        List<FrontEntitySelectBean> enumList = new ArrayList<>();
+        List<FrontSelectBean> enumList = new ArrayList<>();
         List<DefineTenantVo> resultList = result.getGridList();
         if (CollectionUtil.isNotEmpty(resultList)) {
             for (DefineTenantVo defineTenantVo : resultList) {
-                enumList.add(new FrontEntitySelectBean<String>(defineTenantVo.getFid(), defineTenantVo.getName()));
+                enumList.add(new FrontSelectBean<String>(defineTenantVo.getFid(), defineTenantVo.getName()));
             }
         }
         result.putEnumData(enumList);

@@ -16,13 +16,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FrontSelectBean implements Serializable {
+public class FrontSelectBean<T extends Serializable> implements Serializable {
 
     private static final long serialVersionUID = 646463280191488619L;
     /**
      * Select的值
      */
-    private Object value;
+    private T value;
     /**
      * Select展示的名称
      */

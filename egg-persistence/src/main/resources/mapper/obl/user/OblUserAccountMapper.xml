@@ -61,7 +61,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,user_name,account,nick_name,avatar_url,password,salt,phone,email,sex,address,user_type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,locked,version,is_deleted,deleted_time,        
+        fid,user_name,account,nick_name,avatar_url,password,salt,phone,email,sex,address,user_type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,locked,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -89,7 +89,7 @@
         ${base_alias_name}.locked,
         ${base_alias_name}.version,
         ${base_alias_name}.is_deleted,
-        ${base_alias_name}.deleted_time,
+        ${base_alias_name}.deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -118,7 +118,7 @@
         ${base_alias_name}.locked AS ${base_alias_col_prefix}locked,
         ${base_alias_name}.version AS ${base_alias_col_prefix}version,
         ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}isDeleted,
-        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime,
+        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime
     </sql>
 
 

@@ -7,7 +7,7 @@ package com.egg.manager.persistence.commons.base.enums.basic;
  * @Date: 2020/12/7 9:21
  */
 public enum PlatformEnum {
-    EggManager("oolong_blog"),
+    EggManager("egg_manager"),
     OolongBlog("oolong_blog");
 
     PlatformEnum(String value) {

@@ -14,7 +14,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface EmUserRoleService extends IService<EmUserRoleEntity>, MyBaseMysqlService<EmUserRoleEntity, EmUserRoleMapper, EmUserRoleVo> {
+public interface EmUserRoleService extends MyBaseMysqlService<EmUserRoleEntity, EmUserRoleMapper, EmUserRoleVo> {
     /**
      * 取得当前用户关联的 UserRole
      * @param account

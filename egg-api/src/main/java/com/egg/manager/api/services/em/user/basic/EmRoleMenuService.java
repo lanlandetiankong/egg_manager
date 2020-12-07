@@ -11,6 +11,6 @@ import com.egg.manager.persistence.em.user.pojo.vo.EmRoleMenuVo;
  * @description [角色-菜单] Service
  * @date 2020/10/20
  */
-public interface EmRoleMenuService extends IService<EmRoleMenuEntity>, MyBaseMysqlService<EmRoleMenuEntity, EmRoleMenuMapper, EmRoleMenuVo> {
+public interface EmRoleMenuService extends MyBaseMysqlService<EmRoleMenuEntity, EmRoleMenuMapper, EmRoleMenuVo> {
 
 }

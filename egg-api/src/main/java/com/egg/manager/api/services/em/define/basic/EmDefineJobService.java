@@ -15,7 +15,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineJobService extends IService<EmDefineJobEntity>, MyBaseMysqlService<EmDefineJobEntity, EmDefineJobMapper, EmDefineJobVo> {
+public interface EmDefineJobService extends MyBaseMysqlService<EmDefineJobEntity, EmDefineJobMapper, EmDefineJobVo> {
 
 
     /**

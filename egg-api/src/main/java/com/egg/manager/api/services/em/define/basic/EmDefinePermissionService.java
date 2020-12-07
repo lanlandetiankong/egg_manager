@@ -19,7 +19,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefinePermissionService extends IService<EmDefinePermissionEntity>, MyBaseMysqlService<EmDefinePermissionEntity, EmDefinePermissionMapper, EmDefinePermissionVo> {
+public interface EmDefinePermissionService extends MyBaseMysqlService<EmDefinePermissionEntity, EmDefinePermissionMapper, EmDefinePermissionVo> {
 
     /**
      * 查询 所有[可用状态]的 [权限定义]

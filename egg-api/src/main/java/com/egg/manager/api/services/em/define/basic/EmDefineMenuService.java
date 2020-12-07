@@ -22,7 +22,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineMenuService extends IService<EmDefineMenuEntity>, MyBaseMysqlService<EmDefineMenuEntity, EmDefineMenuMapper, EmDefineMenuVo> {
+public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEntity, EmDefineMenuMapper, EmDefineMenuVo> {
 
     /**
      * 查询 用户 可访问的[菜单定义]

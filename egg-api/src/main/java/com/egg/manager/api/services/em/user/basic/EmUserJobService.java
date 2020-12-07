@@ -14,7 +14,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface EmUserJobService extends IService<EmUserJobEntity>, MyBaseMysqlService<EmUserJobEntity, EmUserJobMapper, EmUserJobVo> {
+public interface EmUserJobService extends MyBaseMysqlService<EmUserJobEntity, EmUserJobMapper, EmUserJobVo> {
 
     /**
      * 查询用户所归属的职务列表

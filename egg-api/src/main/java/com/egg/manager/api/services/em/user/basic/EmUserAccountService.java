@@ -21,7 +21,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface EmUserAccountService extends IService<EmUserAccountEntity>, MyBaseMysqlService<EmUserAccountEntity, EmUserAccountMapper, EmUserAccountVo> {
+public interface EmUserAccountService extends MyBaseMysqlService<EmUserAccountEntity, EmUserAccountMapper, EmUserAccountVo> {
 
     String FOREIGN_NAME_OF_USER_TENANT = "userTenant";
     String FOREIGN_NAME_OF_USER_DEPARTMENT = "userDepartment";

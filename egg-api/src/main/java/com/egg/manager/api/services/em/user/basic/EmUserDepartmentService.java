@@ -11,6 +11,6 @@ import com.egg.manager.persistence.em.user.pojo.vo.EmUserDepartmentVo;
  * @description
  * @date 2020/10/20
  */
-public interface EmUserDepartmentService extends IService<EmUserDepartmentEntity>, MyBaseMysqlService<EmUserDepartmentEntity, EmUserDepartmentMapper, EmUserDepartmentVo> {
+public interface EmUserDepartmentService extends MyBaseMysqlService<EmUserDepartmentEntity, EmUserDepartmentMapper, EmUserDepartmentVo> {
 
 }

@@ -15,7 +15,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
  * @description
  * @date 2020/10/20
  */
-public interface EmAnnouncementDraftService extends IService<EmAnnouncementDraftEntity>, MyBaseMysqlService<EmAnnouncementDraftEntity, EmAnnouncementDraftMapper, EmAnnouncementDraftVo> {
+public interface EmAnnouncementDraftService extends MyBaseMysqlService<EmAnnouncementDraftEntity, EmAnnouncementDraftMapper, EmAnnouncementDraftVo> {
 
     /**
      * 新增公告草稿

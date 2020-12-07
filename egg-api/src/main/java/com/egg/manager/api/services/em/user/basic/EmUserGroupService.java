@@ -14,7 +14,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface EmUserGroupService extends IService<EmUserGroupEntity>, MyBaseMysqlService<EmUserGroupEntity, EmUserGroupMapper, EmUserGroupVo> {
+public interface EmUserGroupService extends MyBaseMysqlService<EmUserGroupEntity, EmUserGroupMapper, EmUserGroupVo> {
 
     /**
      * 查询-用户拥有的分组-列表

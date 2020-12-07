@@ -15,7 +15,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineModuleService extends IService<EmDefineModuleEntity>, MyBaseMysqlService<EmDefineModuleEntity, EmDefineModuleMapper, EmDefineModuleVo> {
+public interface EmDefineModuleService extends MyBaseMysqlService<EmDefineModuleEntity, EmDefineModuleMapper, EmDefineModuleVo> {
 
     /**
      * 分页查询 模块 dto列表

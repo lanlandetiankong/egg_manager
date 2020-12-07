@@ -17,7 +17,7 @@ import java.util.Map;
  * @description
  * @date 2020/10/20
  */
-public interface EmAnnouncementTagService extends IService<EmAnnouncementTagEntity>, MyBaseMysqlService<EmAnnouncementTagEntity, EmAnnouncementTagMapper, EmAnnouncementTagVo> {
+public interface EmAnnouncementTagService extends MyBaseMysqlService<EmAnnouncementTagEntity, EmAnnouncementTagMapper, EmAnnouncementTagVo> {
 
 
     /**

@@ -15,7 +15,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineTenantService extends IService<EmDefineTenantEntity>, MyBaseMysqlService<EmDefineTenantEntity, EmDefineTenantMapper, EmDefineTenantVo> {
+public interface EmDefineTenantService extends MyBaseMysqlService<EmDefineTenantEntity, EmDefineTenantMapper, EmDefineTenantVo> {
 
 
     /**

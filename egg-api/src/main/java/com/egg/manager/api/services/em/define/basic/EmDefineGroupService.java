@@ -11,7 +11,7 @@ import com.egg.manager.persistence.em.define.pojo.vo.EmDefineGroupVo;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineGroupService extends IService<EmDefineGroupEntity>, MyBaseMysqlService<EmDefineGroupEntity, EmDefineGroupMapper, EmDefineGroupVo> {
+public interface EmDefineGroupService extends MyBaseMysqlService<EmDefineGroupEntity, EmDefineGroupMapper, EmDefineGroupVo> {
 
 
 }

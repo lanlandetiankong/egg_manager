@@ -11,6 +11,6 @@ import com.egg.manager.persistence.em.user.pojo.vo.EmRolePermissionVo;
  * @description
  * @date 2020/10/20
  */
-public interface EmRolePermissionService extends IService<EmRolePermissionEntity>, MyBaseMysqlService<EmRolePermissionEntity, EmRolePermissionMapper, EmRolePermissionVo> {
+public interface EmRolePermissionService extends MyBaseMysqlService<EmRolePermissionEntity, EmRolePermissionMapper, EmRolePermissionVo> {
 
 }

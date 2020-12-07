@@ -18,7 +18,7 @@ import java.util.List;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineDepartmentService extends IService<EmDefineDepartmentEntity>, MyBaseMysqlService<EmDefineDepartmentEntity, EmDefineDepartmentMapper, EmDefineDepartmentVo> {
+public interface EmDefineDepartmentService extends MyBaseMysqlService<EmDefineDepartmentEntity, EmDefineDepartmentMapper, EmDefineDepartmentVo> {
 
     /**
      * 分页查询 部门 dto列表

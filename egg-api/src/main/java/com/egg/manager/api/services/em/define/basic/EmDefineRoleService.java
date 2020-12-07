@@ -20,7 +20,7 @@ import java.util.Set;
  * @description
  * @date 2020/10/20
  */
-public interface EmDefineRoleService extends IService<EmDefineRoleEntity>, MyBaseMysqlService<EmDefineRoleEntity, EmDefineRoleMapper, EmDefineRoleVo> {
+public interface EmDefineRoleService extends MyBaseMysqlService<EmDefineRoleEntity, EmDefineRoleMapper, EmDefineRoleVo> {
     /**
      * 取得用户 所拥有的 角色定义-List集合
      * @param userAccountId

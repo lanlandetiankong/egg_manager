@@ -130,7 +130,7 @@ public class EmAnnouncementController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/announcement/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -145,7 +145,7 @@ public class EmAnnouncementController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "伪删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->公告", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @EmPcWebOperationLog(fullPath = "/announcement/deleteById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

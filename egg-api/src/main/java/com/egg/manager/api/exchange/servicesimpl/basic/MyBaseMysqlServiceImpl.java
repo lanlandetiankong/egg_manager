@@ -54,7 +54,7 @@ public class MyBaseMysqlServiceImpl<M extends MyEggMapper<T>, T extends Model<T>
         Integer delCount = 0;
         if (delIds != null && delIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(delIds);
-            //批量伪删除
+            //批量逻辑删除
             delCount = baseMapper.batchDeleteByIdsWithModifyFill(delIdList, loginUser);
         }
         return delCount;

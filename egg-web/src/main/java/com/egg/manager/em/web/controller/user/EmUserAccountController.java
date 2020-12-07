@@ -166,7 +166,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -176,14 +176,14 @@ public class EmUserAccountController extends BaseController {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-        //批量伪删除
+        //批量逻辑删除
         delCount = emUserAccountService.dealBatchLogicDelete(loginUserInfo, delIds);
         result.putCount(delCount);
         return result;
     }
 
     @EmPcWebOperationLog(fullPath = "/user/userAccount/deleteById")
-    @ApiOperation(value = "伪删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
@@ -209,7 +209,7 @@ public class EmUserAccountController extends BaseController {
 //操作类型为锁定？如果没传递值默认锁定
         lockFlag = lockFlag != null ? lockFlag : true;
         String lockMsg = lockFlag ? "锁定" : "解锁";
-        //批量伪删除
+        //批量逻辑删除
         lockCount = emUserAccountService.dealBatchRenewLock(loginUserInfo, lockIds, lockFlag);
         result.putCount(lockCount);
         return result;

@@ -96,8 +96,8 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
     <U extends EmUserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
 
     /**
-     * 批量伪删除[文档]
-     * @param ids  要伪删除的文档ids
+     * 批量逻辑删除[文档]
+     * @param ids  要逻辑删除的文档ids
      * @param user 用户
      * @return
      */

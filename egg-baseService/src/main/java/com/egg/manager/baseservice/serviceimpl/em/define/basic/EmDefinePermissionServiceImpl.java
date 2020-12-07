@@ -134,7 +134,7 @@ public class EmDefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
         Integer delCount = 0;
         if (ensureIds != null && ensureIds.length > 0) {
             List<String> delIdList = Lists.newArrayList(ensureIds);
-            //批量伪删除
+            //批量逻辑删除
             delCount = emDefinePermissionMapper.batchEnsureByIds(delIdList, loginUserInfo);
         }
         return delCount;

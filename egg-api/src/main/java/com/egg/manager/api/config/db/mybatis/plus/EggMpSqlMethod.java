@@ -2,9 +2,9 @@ package com.egg.manager.api.config.db.mybatis.plus;
 
 public enum EggMpSqlMethod {
     /**
-     * 根据id伪删除
+     * 根据id逻辑删除
      */
-    FAKE_DELETE_BY_ID("fakeDeleteById", "根据id伪删除", "<script>\nupdate %s set %s = %d where %s = #{fid}\n</script>"),
+    LOGIC_DELETE_BY_ID("logicDeleteById", "根据id逻辑删除", "<script>\nupdate %s set %s = %d where %s = #{fid}\n</script>"),
 
     ;
 

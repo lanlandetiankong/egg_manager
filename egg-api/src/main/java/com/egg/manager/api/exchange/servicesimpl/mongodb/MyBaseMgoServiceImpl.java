@@ -82,7 +82,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException {
+    public Long doLogicDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException {
         Integer count = 0;
         if (id == null) {
             throw new MyMongoException("请传入id!");
@@ -100,7 +100,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException {
+    public Long doLogicDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException {
         Integer count = 0;
         if (t == null) {
             throw new MyMongoException("不存在的数据!");
@@ -113,7 +113,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException {
+    public Long doLogicDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException {
         if (iterableList == null) {
             throw new MyMongoException("集合为空!");
         }

@@ -50,7 +50,7 @@ public interface EmUserAccountMapper extends MyEggMapper<EmUserAccountEntity> {
     int batchLockUserByIds(@Param("lockIds") List<String> lockIds, @Param("lockState") int lockState, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) EmUserAccountEntity loginUser);
 
     /**
-     * 批量伪删除 指定用户的所有角色关联
+     * 批量逻辑删除 指定用户的所有角色关联
      * @param userAccountId
      * @param loginUser
      * @return
@@ -58,7 +58,7 @@ public interface EmUserAccountMapper extends MyEggMapper<EmUserAccountEntity> {
     int clearAllRoleByUserId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param(EggMpSqlConst.PARAMOF_LOGIN_USER) EmUserAccountEntity loginUser);
 
     /**
-     * 批量伪删除 指定用户的所有职务关联
+     * 批量逻辑删除 指定用户的所有职务关联
      * @param userAccountId
      * @param loginUser
      * @return

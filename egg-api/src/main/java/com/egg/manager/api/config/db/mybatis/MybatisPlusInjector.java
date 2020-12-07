@@ -3,7 +3,7 @@ package com.egg.manager.api.config.db.mybatis;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.extension.injector.methods.LogicDeleteByIdWithFill;
-import com.egg.manager.api.config.db.mybatis.plus.methods.FakeDeleteByIdMethod;
+import com.egg.manager.api.config.db.mybatis.plus.methods.LogicDeleteByIdMethod;
 import com.egg.manager.api.config.db.mybatis.plus.methods.LogicBatchDeleteWithEntityMethod;
 import com.egg.manager.api.config.db.mybatis.plus.methods.LogicBatchDeleteWithModifyFillMethod;
 import com.egg.manager.api.config.db.mybatis.plus.methods.LogicDeleteByIdWithModifyFill;
@@ -27,8 +27,8 @@ public class MybatisPlusInjector extends DefaultSqlInjector {
         // 这里很重要，先要通过父类方法，获取到原有的集合，不然会自带的通用方法会失效的
         List<AbstractMethod> methodList = super.getMethodList(tClass);
         //||添加自定义方法类
-        //方法-根据id伪删除
-        methodList.add(new FakeDeleteByIdMethod());
+        //方法-根据id逻辑删除
+        methodList.add(new LogicDeleteByIdMethod());
         methodList.add(new LogicDeleteByIdWithFill());
         methodList.add(new LogicDeleteByIdWithModifyFill());
         //methodList.add(new LogicDeleteWithFillMethod());

@@ -19,10 +19,10 @@ import java.util.Map;
  */
 public interface MyEggMapper<T> extends BaseMapper<T> {
     /**
-     * 根据id伪删除
+     * 根据id逻辑删除
      * @return
      */
-    int fakeDeleteById(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid);
+    int logicDeleteById(@Param(EggMpSqlConst.COLUMN_FID) Serializable fid);
 
     /**
      * 批量逻辑删除/删除并填充实体类字段

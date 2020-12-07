@@ -91,7 +91,7 @@ public class EmAnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<EmAnn
     public Integer dealBatchPublishByDraft(CurrentLoginEmUserInfo loginUserInfo, String[] draftIds) throws Exception {
         Integer delCount = 0;
         if (draftIds != null && draftIds.length > 0) {
-            //批量伪删除
+            //批量逻辑删除
             for (String draftId : draftIds) {
                 Integer addCount = this.dealPublishByDraft(loginUserInfo, draftId, true);
                 if (addCount != null) {

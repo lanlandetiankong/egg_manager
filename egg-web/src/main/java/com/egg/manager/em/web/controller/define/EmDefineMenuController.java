@@ -174,7 +174,7 @@ public class EmDefineMenuController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "批量伪删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @EmPcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
@@ -191,7 +191,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/define/defineMenu/deleteById")
-    @ApiOperation(value = "伪删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })

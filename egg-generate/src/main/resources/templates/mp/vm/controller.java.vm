@@ -142,7 +142,7 @@ public MyCommonResult doUpdateByForm(HttpServletRequest request,${cfg.baseEntity
 
 
 @EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/batchDelByIds")
-@ApiOperation(value = "批量伪删除->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
+@ApiOperation(value = "批量逻辑删除->${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delIds", value = "要删除的${cfg.moduleName_Cn}id数组", required = true, dataTypeClass = String[].class),
 })
@@ -163,7 +163,7 @@ public MyCommonResult doBatchDelByIds(HttpServletRequest request,String[]delIds,
 
 
 @EmPcWebOperationLog(fullPath = "${cfg.baseReqUrl}/delOneById")
-@ApiOperation(value = "伪删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
+@ApiOperation(value = "逻辑删除->${cfg.moduleName_Cn}", notes = "根据id删除${cfg.moduleName_Cn}", response = WebResult.class, httpMethod = "POST")
 @ApiImplicitParams({
         @ApiImplicitParam(name = "delId", value = "要删除的${cfg.moduleName_Cn}id", required = true, dataTypeClass = String.class),
 })

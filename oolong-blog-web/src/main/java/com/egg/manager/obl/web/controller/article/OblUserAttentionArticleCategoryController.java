@@ -103,7 +103,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
     }
 
     @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -120,7 +120,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
     }
 
     @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/deleteById")
-    @ApiOperation(value = "伪删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })

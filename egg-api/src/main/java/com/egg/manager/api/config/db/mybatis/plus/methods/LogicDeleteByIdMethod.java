@@ -10,14 +10,14 @@ import org.apache.ibatis.mapping.SqlSource;
 
 /**
  * @author zhoucj
- * @description 自定义-mybatisplus增强方法->根据id伪删除
+ * @description 自定义-mybatisplus增强方法->根据id逻辑删除
  * @date 2020/10/26
  */
-public class FakeDeleteByIdMethod extends AbstractMethod {
+public class LogicDeleteByIdMethod extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
-        EggMpSqlMethod sqlMethod = EggMpSqlMethod.FAKE_DELETE_BY_ID;
+        EggMpSqlMethod sqlMethod = EggMpSqlMethod.LOGIC_DELETE_BY_ID;
         String sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), MyBaseMysqlEntityFieldConstant.IS_DELETED.getColumnName(), SwitchStateEnum.Open.getValue(), MyBaseMysqlEntityFieldConstant.FID.getColumnName());
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
         return addUpdateMappedStatement(mapperClass, modelClass, sqlMethod.getMethod(), sqlSource);

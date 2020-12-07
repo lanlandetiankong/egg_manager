@@ -141,7 +141,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/forms/smartForm/formTypeDefinition/delOneById")
-    @ApiOperation(value = "伪删除->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->表单类型定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })
@@ -149,7 +149,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        Long delCount = smartFormTypeDefinitionMgoService.doFakeDeleteById(loginUserInfo, delId);
+        Long delCount = smartFormTypeDefinitionMgoService.doLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
         return result;
     }
@@ -164,7 +164,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
         WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-        delCount = smartFormTypeDefinitionMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
+        delCount = smartFormTypeDefinitionMgoService.doLogicDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
         result.putCount(delCount);
         return result;
     }

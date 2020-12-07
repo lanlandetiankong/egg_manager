@@ -62,31 +62,31 @@ public interface MyBaseMgoService<T extends MyBaseModelMgo, ID> {
     Long doBatchUpdate(EmUserAccountEntity loginUser, QueryPageBean queryBuffer, MyMongoUpdateBean<T> updateBean);
 
     /**
-     * 根据id-伪删除
+     * 根据id-逻辑删除
      * @param id
      * @param loginUser
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException;
+    Long doLogicDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException;
 
     /**
-     * 根据根据实体类-伪删除
+     * 根据根据实体类-逻辑删除
      * @param t
      * @param loginUser
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException;
+    Long doLogicDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException;
 
     /**
-     * 根据id集合伪删除
+     * 根据id集合逻辑删除
      * @param loginUser    当前登录用户(参数栏非必要，如某些情况确实必要该用户请抛出异常)
      * @param iterableList
      * @return
      * @throws MyMongoException
      */
-    Long doFakeDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException;
+    Long doLogicDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException;
 
     /**
      * 根据id删除对应项

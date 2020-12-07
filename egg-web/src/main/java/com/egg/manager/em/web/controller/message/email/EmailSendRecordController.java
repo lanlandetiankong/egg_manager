@@ -104,30 +104,30 @@ public class EmailSendRecordController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
-    @ApiOperation(value = "伪删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delId", value = "要伪删除的id", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "delId", value = "要逻辑删除的id", required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/delOneById")
     public WebResult doDelOneById(HttpServletRequest request, @NotBlank String delId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Assert.notNull(delId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        Long delCount = emailSendRecordMgoService.doFakeDeleteById(loginUserInfo, delId);
+        Long delCount = emailSendRecordMgoService.doLogicDeleteById(loginUserInfo, delId);
         result.putCount(delCount);
         return result;
     }
 
     @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
-    @ApiOperation(value = "批量伪删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "delIds", value = "要伪删除的id数组", required = true, dataTypeClass = String[].class),
+            @ApiImplicitParam(name = "delIds", value = "要逻辑删除的id数组", required = true, dataTypeClass = String[].class),
     })
     @PostMapping(value = "/batchDelByIds")
     public WebResult doBatchDelByIds(HttpServletRequest request, String[] delIds, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Long delCount = (long) 0;
         Assert.notEmpty(delIds, BaseRstMsgConstant.ErrorMsg.unknowIdCollection());
-        delCount = emailSendRecordMgoService.doFakeDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
+        delCount = emailSendRecordMgoService.doLogicDeleteByIds(loginUserInfo, Lists.newArrayList(delIds));
         result.putCount(delCount);
         return result;
     }

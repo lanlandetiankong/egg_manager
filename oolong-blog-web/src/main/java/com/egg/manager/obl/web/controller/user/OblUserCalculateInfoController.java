@@ -103,7 +103,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/batchDeleteByIds")
-    @ApiOperation(value = "批量伪删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "批量逻辑删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
     })
@@ -120,7 +120,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/deleteById")
-    @ApiOperation(value = "伪删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "逻辑删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
     })

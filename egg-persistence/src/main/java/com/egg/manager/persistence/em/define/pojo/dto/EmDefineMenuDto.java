@@ -23,7 +23,7 @@ public class EmDefineMenuDto extends MyBaseMysqlDto {
     /**
      * 上级id
      */
-    private String parentId;
+    private String pid;
     /**
      * 菜单名称
      */

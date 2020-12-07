@@ -33,7 +33,7 @@ public class CommonTreeSelect extends MyBaseTree {
     /**
      * 上级id
      */
-    private String parentId;
+    private String pid;
     /**
      * 子项
      */

@@ -27,8 +27,8 @@ public class EmDefineMenuEntity extends Model<EmDefineMenuEntity> {
     /**
      * 上级id
      */
-    @TableField(value = "parent_id")
-    private String parentId;
+    @TableField(value = "pid")
+    private String pid;
     /**
      * 菜单名称
      */

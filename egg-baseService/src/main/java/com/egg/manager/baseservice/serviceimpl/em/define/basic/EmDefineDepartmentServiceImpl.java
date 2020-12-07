@@ -56,9 +56,9 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
         for (EmDefineDepartmentEntity emDefineDepartmentEntity : allDepartments) {
-            if (StringUtils.isNotBlank(emDefineDepartmentEntity.getParentId())) {
+            if (StringUtils.isNotBlank(emDefineDepartmentEntity.getPid())) {
                 if (rootId != null) {
-                    if (rootId.equals(emDefineDepartmentEntity.getParentId())) {
+                    if (rootId.equals(emDefineDepartmentEntity.getPid())) {
                         tree = new CommonTreeSelect();
                         childList.add(CommonTreeSelectTranslate.setDefineDepartmentParamToTreeSelect(emDefineDepartmentEntity, tree));
                     }
@@ -88,9 +88,9 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
     public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, EmDefineDepartmentVo emDefineDepartmentVo) throws Exception {
         EmDefineDepartmentEntity emDefineDepartmentEntity = EmDefineDepartmentTransfer.transferVoToEntity(emDefineDepartmentVo);
         emDefineDepartmentEntity = super.doBeforeCreate(loginUserInfo, emDefineDepartmentEntity);
-        String parentId = emDefineDepartmentEntity.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
-            EmDefineDepartmentEntity parentDepartment = emDefineDepartmentMapper.selectById(parentId);
+        String pid = emDefineDepartmentEntity.getPid();
+        if (StringUtils.isNotBlank(pid)) {
+            EmDefineDepartmentEntity parentDepartment = emDefineDepartmentMapper.selectById(pid);
             Integer parentLevel = null;
             if (parentDepartment != null) {
                 parentLevel = parentDepartment.getLevel();
@@ -101,7 +101,7 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
                 emDefineDepartmentEntity.setLevel(parentLevel);
             }
         } else {
-            emDefineDepartmentEntity.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
+            emDefineDepartmentEntity.setPid(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             emDefineDepartmentEntity.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
         return emDefineDepartmentMapper.insert(emDefineDepartmentEntity);
@@ -113,9 +113,9 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
         Integer changeCount = 0;
         EmDefineDepartmentEntity emDefineDepartmentEntity = EmDefineDepartmentTransfer.transferVoToEntity(emDefineDepartmentVo);
         emDefineDepartmentEntity = super.doBeforeUpdate(loginUserInfo, emDefineDepartmentEntity);
-        String parentId = emDefineDepartmentEntity.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
-            EmDefineDepartmentEntity parentDepartment = emDefineDepartmentMapper.selectById(parentId);
+        String pid = emDefineDepartmentEntity.getPid();
+        if (StringUtils.isNotBlank(pid)) {
+            EmDefineDepartmentEntity parentDepartment = emDefineDepartmentMapper.selectById(pid);
             Integer parentLevel = null;
             if (parentDepartment != null) {
                 parentLevel = parentDepartment.getLevel();
@@ -126,7 +126,7 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
                 emDefineDepartmentEntity.setLevel(parentLevel);
             }
         } else {
-            emDefineDepartmentEntity.setParentId(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
+            emDefineDepartmentEntity.setPid(DefineDepartmentConstant.ROOT_DEPARTMENT_ID);
             emDefineDepartmentEntity.setLevel(DefineDepartmentConstant.ROOT_LEVEL);
         }
         changeCount = emDefineDepartmentMapper.updateById(emDefineDepartmentEntity);

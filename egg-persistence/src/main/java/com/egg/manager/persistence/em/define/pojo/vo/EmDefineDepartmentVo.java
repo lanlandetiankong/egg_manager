@@ -28,7 +28,7 @@ public class EmDefineDepartmentVo extends MyBaseMysqlVo {
     /**
      * 上级id
      */
-    private String parentId;
+    private String pid;
     /**
      * 层级
      */

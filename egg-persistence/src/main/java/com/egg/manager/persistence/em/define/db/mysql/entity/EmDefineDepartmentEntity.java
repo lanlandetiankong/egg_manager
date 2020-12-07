@@ -36,8 +36,8 @@ public class EmDefineDepartmentEntity extends Model<EmDefineDepartmentEntity> {
     /**
      * 上级id
      */
-    @TableField("parent_id")
-    private String parentId;
+    @TableField("pid")
+    private String pid;
     /**
      * 层级
      */

@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineMenuEntity">
         <id column="fid" property="fid"/>
-        <result property="parentId" column="parent_id"/>
+        <result property="pid" column="pid"/>
         <result property="menuName" column="menu_name"/>
         <result property="label" column="label"/>
         <result property="level" column="level"/>
@@ -27,11 +27,11 @@
     </resultMap>
 
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.EmDefineMenuDto" extends="BaseResultMap">
-        <association column="parent_id" property="parentMenuDto"
+        <association column="pid" property="parentMenuDto"
                      columnPrefix="parent_"
                      javaType="com.egg.manager.persistence.em.define.pojo.dto.EmDefineMenuDto">
             <id column="fid" property="fid"/>
-            <result property="parentId" column="parent_id"/>
+            <result property="pid" column="pid"/>
             <result property="menuName" column="menu_name"/>
             <result property="label" column="label"/>
             <result property="level" column="level"/>
@@ -58,7 +58,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,parent_id,menu_name,label,level,icon_name,router_url,href_url,url_jump_type,order_num,excel_model_conf,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+        fid,pid,menu_name,label,level,icon_name,router_url,href_url,url_jump_type,order_num,excel_model_conf,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -66,7 +66,7 @@
         -->
     <sql id="Base_Alias_Table_List">
             ${base_alias_name}.fid,
-            ${base_alias_name}.parent_id,
+            ${base_alias_name}.pid,
             ${base_alias_name}.menu_name,
             ${base_alias_name}.label,
             ${base_alias_name}.level,
@@ -93,7 +93,7 @@
         -->
     <sql id="Base_Alias_TableColumn_List">
             ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
-            ${base_alias_name}.parent_id AS ${base_alias_col_prefix}parent_id,
+            ${base_alias_name}.pid AS ${base_alias_col_prefix}pid,
             ${base_alias_name}.menu_name AS ${base_alias_col_prefix}menu_name,
             ${base_alias_name}.label AS ${base_alias_col_prefix}label,
             ${base_alias_name}.level AS ${base_alias_col_prefix}level,
@@ -122,9 +122,9 @@
         </include>
         from em_define_menu dm
         left join em_define_menu dmc
-        on dm.parent_id = dmc.fid
+        on dm.pid = dmc.fid
         where
-        (dm.parent_id != #{filterId} and dm.fid != #{filterId} )
+        (dm.pid != #{filterId} and dm.fid != #{filterId} )
         <if test="onlyEnable == true">
             and dm.state = 1
         </if>
@@ -145,7 +145,7 @@
         </include>
         FROM em_define_menu dm
         LEFT JOIN em_define_menu par_dm
-        on dm.parent_id = par_dm.fid
+        on dm.pid = par_dm.fid
         <where>
             <include
                     refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
@@ -200,9 +200,9 @@
         </include>
         FROM em_define_menu edm
         left JOIN em_role_menu erm on edm.fid = erm.define_menu_id
-        left JOIN em_define_menu edmp on edm.parent_id = edmp.fid
+        left JOIN em_define_menu edmp on edm.pid = edmp.fid
         WHERE erm.define_role_id = #{roleId}
-        and edmp.parent_id is not NULL
+        and edmp.pid is not NULL
         <if test="stateVal != null">
             and erm.state = #{stateVal}
         </if>

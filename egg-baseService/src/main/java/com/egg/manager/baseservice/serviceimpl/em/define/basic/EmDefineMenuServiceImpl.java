@@ -122,9 +122,9 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         List<CommonMenuTree> childList = new ArrayList<CommonMenuTree>();
         CommonMenuTree tree = null;
         for (EmDefineMenuEntity menu : allMenus) {
-            if (StringUtils.isNotBlank(menu.getParentId())) {
+            if (StringUtils.isNotBlank(menu.getPid())) {
                 if (rootId != null) {
-                    if (rootId.equals(menu.getParentId())) {
+                    if (rootId.equals(menu.getPid())) {
                         tree = new CommonMenuTree();
                         childList.add(CommonMenuTree.dealDefineMenuToTree(menu, tree));
                     }
@@ -150,9 +150,9 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         List<CommonTreeSelect> childList = new ArrayList<CommonTreeSelect>();
         CommonTreeSelect tree = null;
         for (EmDefineMenuEntity menu : allMenus) {
-            if (StringUtils.isNotBlank(menu.getParentId())) {
+            if (StringUtils.isNotBlank(menu.getPid())) {
                 if (rootId != null) {
-                    if (rootId.equals(menu.getParentId())) {
+                    if (rootId.equals(menu.getPid())) {
                         tree = new CommonTreeSelect();
                         childList.add(CommonTreeSelectTranslate.setDefineMenuParamToTreeSelect(menu, tree));
                     }
@@ -215,17 +215,17 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         Date now = new Date();
         EmDefineMenuEntity emDefineMenuEntity = EmDefineMenuTransfer.transferVoToEntity(emDefineMenuVo);
         emDefineMenuEntity = super.doBeforeCreate(loginUserInfo, emDefineMenuEntity);
-        String parentId = emDefineMenuEntity.getParentId();
+        String pid = emDefineMenuEntity.getPid();
         //
-        if (StringUtils.isBlank(parentId)) {
-            emDefineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+        if (StringUtils.isBlank(pid)) {
+            emDefineMenuEntity.setPid(DefineMenuConstant.ROOT_ID);
             emDefineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
-        } else if (DefineMenuConstant.ROOT_ID.equals(parentId)) {
+        } else if (DefineMenuConstant.ROOT_ID.equals(pid)) {
             //如果上级是 根级菜单
-            emDefineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+            emDefineMenuEntity.setPid(DefineMenuConstant.ROOT_ID);
             emDefineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
         } else {
-            EmDefineMenuEntity parentMenu = emDefineMenuMapper.selectById(parentId);
+            EmDefineMenuEntity parentMenu = emDefineMenuMapper.selectById(pid);
             Integer parentMenuLevel = null;
             if (parentMenu != null) {
                 parentMenuLevel = parentMenu.getLevel();
@@ -252,9 +252,9 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         Integer changeCount = 0;
         EmDefineMenuEntity emDefineMenuEntity = EmDefineMenuTransfer.transferVoToEntity(emDefineMenuVo);
         emDefineMenuEntity = super.doBeforeUpdate(loginUserInfo, emDefineMenuEntity);
-        String parentId = emDefineMenuEntity.getParentId();
-        if (StringUtils.isNotBlank(parentId)) {
-            EmDefineMenuEntity parentMenu = emDefineMenuMapper.selectById(parentId);
+        String pid = emDefineMenuEntity.getPid();
+        if (StringUtils.isNotBlank(pid)) {
+            EmDefineMenuEntity parentMenu = emDefineMenuMapper.selectById(pid);
             Integer parentMenuLevel = null;
             if (parentMenu != null) {
                 parentMenuLevel = parentMenu.getLevel();
@@ -265,7 +265,7 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
                 emDefineMenuEntity.setLevel(parentMenuLevel);
             }
         } else {
-            emDefineMenuEntity.setParentId(DefineMenuConstant.ROOT_ID);
+            emDefineMenuEntity.setPid(DefineMenuConstant.ROOT_ID);
             emDefineMenuEntity.setLevel(DefineMenuConstant.ROOT_LEVEL);
         }
         changeCount = emDefineMenuMapper.updateById(emDefineMenuEntity);

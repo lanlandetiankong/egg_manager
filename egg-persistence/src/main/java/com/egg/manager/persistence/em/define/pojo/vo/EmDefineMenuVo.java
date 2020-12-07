@@ -25,7 +25,7 @@ public class EmDefineMenuVo extends MyBaseMysqlVo {
     /**
      * 上级id
      */
-    private String parentId;
+    private String pid;
     /**
      * 菜单名称
      */

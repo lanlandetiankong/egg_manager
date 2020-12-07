@@ -7,7 +7,7 @@
         <id column="fid" property="fid"/>
         <result property="name" column="name"/>
         <result property="code" column="code"/>
-        <result property="parentId" column="parent_id"/>
+        <result property="pid" column="pid"/>
         <result property="level" column="level"/>
         <result property="orderNum" column="order_num"/>
         <result property="description" column="description"/>
@@ -25,13 +25,13 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="DtoResultMap" type="com.egg.manager.persistence.em.define.pojo.dto.EmDefineDepartmentDto"
                extends="BaseResultMap">
-        <association column="parent_id" property="parentDepartment"
+        <association column="pid" property="parentDepartment"
                      columnPrefix="parent_"
                      javaType="com.egg.manager.persistence.em.define.pojo.dto.EmDefineDepartmentDto">
             <id column="fid" property="fid"/>
             <result column="name" property="name"/>
             <result column="code" property="code"/>
-            <result column="parent_id" property="parentId"/>
+            <result column="pid" property="pid"/>
             <result column="level" property="level"/>
             <result column="order_num" property="orderNum"/>
             <result column="description" property="description"/>
@@ -48,7 +48,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,name,code,parent_id,level,order_num,description,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+        fid,name,code,pid,level,order_num,description,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -58,7 +58,7 @@
             ${base_alias_name}.fid,
             ${base_alias_name}.name,
             ${base_alias_name}.code,
-            ${base_alias_name}.parent_id,
+            ${base_alias_name}.pid,
             ${base_alias_name}.level,
             ${base_alias_name}.order_num,
             ${base_alias_name}.description,
@@ -81,7 +81,7 @@
             ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
             ${base_alias_name}.name AS ${base_alias_col_prefix}name,
             ${base_alias_name}.code AS ${base_alias_col_prefix}code,
-            ${base_alias_name}.parent_id AS ${base_alias_col_prefix}parent_id,
+            ${base_alias_name}.pid AS ${base_alias_col_prefix}pid,
             ${base_alias_name}.level AS ${base_alias_col_prefix}level,
             ${base_alias_name}.order_num AS ${base_alias_col_prefix}order_num,
             ${base_alias_name}.description AS ${base_alias_col_prefix}description,
@@ -109,7 +109,7 @@
         </include>
         FROM em_define_department edd
         LEFT JOIN em_define_department par_edd
-        on edd.parent_id = par_edd.fid
+        on edd.pid = par_edd.fid
         <where>
             <include
                     refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
@@ -129,8 +129,8 @@
         </include>
         from em_define_department dd
         left join em_define_department ddc
-        on dd.parent_id = ddc.fid
-        where dd.parent_id != #{filterId}
+        on dd.pid = ddc.fid
+        where dd.pid != #{filterId}
         <if test="onlyEnable == true">
             and dd.is_deleted = 0
         </if>

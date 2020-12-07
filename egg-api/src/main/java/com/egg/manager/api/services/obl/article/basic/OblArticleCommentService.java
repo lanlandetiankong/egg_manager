@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCommentEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCommentMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCommentDto;
@@ -24,7 +24,7 @@ public interface OblArticleCommentService extends MyBaseMysqlService<OblArticleC
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCommentDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCommentDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblArticleCommentService extends MyBaseMysqlService<OblArticleC
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception;
 
     /**
      * 更新文章评论表
@@ -43,7 +43,7 @@ public interface OblArticleCommentService extends MyBaseMysqlService<OblArticleC
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception;
 
 
 }

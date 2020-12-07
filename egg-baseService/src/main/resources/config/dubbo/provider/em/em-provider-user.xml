@@ -7,21 +7,21 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:service protocol="dubbo" ref="roleMenuService"
-                   interface="com.egg.manager.api.services.em.user.basic.RoleMenuService"/>
-    <dubbo:service protocol="dubbo" ref="rolePermissionService"
-                   interface="com.egg.manager.api.services.em.user.basic.RolePermissionService"/>
-    <dubbo:service protocol="dubbo" ref="userAccountService"
-                   interface="com.egg.manager.api.services.em.user.basic.UserAccountService"/>
-    <dubbo:service protocol="dubbo" ref="userGroupService"
-                   interface="com.egg.manager.api.services.em.user.basic.UserGroupService"/>
-    <dubbo:service protocol="dubbo" ref="userJobService"
-                   interface="com.egg.manager.api.services.em.user.basic.UserJobService"/>
-    <dubbo:service protocol="dubbo" ref="userRoleService"
-                   interface="com.egg.manager.api.services.em.user.basic.UserRoleService"/>
-    <dubbo:service protocol="dubbo" ref="userTenantService"
-                   interface="com.egg.manager.api.services.em.user.basic.UserTenantService"/>
+    <dubbo:service protocol="dubbo" ref="emRoleMenuService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmRoleMenuService"/>
+    <dubbo:service protocol="dubbo" ref="emRolePermissionService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmRolePermissionService"/>
+    <dubbo:service protocol="dubbo" ref="emUserAccountService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmUserAccountService"/>
+    <dubbo:service protocol="dubbo" ref="emUserGroupService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmUserGroupService"/>
+    <dubbo:service protocol="dubbo" ref="emUserJobService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmUserJobService"/>
+    <dubbo:service protocol="dubbo" ref="emUserRoleService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmUserRoleService"/>
+    <dubbo:service protocol="dubbo" ref="emUserTenantService"
+                   interface="com.egg.manager.api.services.em.user.basic.EmUserTenantService"/>
 
-    <dubbo:service protocol="dubbo" ref="userAccountXlsService"
-                   interface="com.egg.manager.api.services.em.user.xls.UserAccountXlsService"/>
+    <dubbo:service protocol="dubbo" ref="emUserAccountXlsService"
+                   interface="com.egg.manager.api.services.em.user.xls.EmUserAccountXlsService"/>
 </beans>

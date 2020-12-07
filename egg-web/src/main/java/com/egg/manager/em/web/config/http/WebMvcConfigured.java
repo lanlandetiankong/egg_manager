@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.config.http;
 
-import com.egg.manager.em.web.enhance.resolver.CurrentUserAccountMethodArgumentResolver;
-import com.egg.manager.em.web.enhance.resolver.PageBeanMethodArgumentResolver;
+import com.egg.manager.em.web.enhance.resolver.CurrentUserAccountMethodArgResolver;
+import com.egg.manager.em.web.enhance.resolver.PageBeanMethodArgResolver;
 import com.egg.manager.persistence.commons.base.props.build.deploy.DeployConfProps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,13 +33,13 @@ public class WebMvcConfigured extends WebMvcConfigurationSupport {
     }
 
     @Bean
-    public CurrentUserAccountMethodArgumentResolver getCurrentUserAccountMethodArgumentResolver() {
-        return new CurrentUserAccountMethodArgumentResolver();
+    public CurrentUserAccountMethodArgResolver getCurrentUserAccountMethodArgumentResolver() {
+        return new CurrentUserAccountMethodArgResolver();
     }
 
     @Bean
-    public PageBeanMethodArgumentResolver getPageBeanMethodArgumentResolver() {
-        return new PageBeanMethodArgumentResolver();
+    public PageBeanMethodArgResolver getPageBeanMethodArgumentResolver() {
+        return new PageBeanMethodArgResolver();
     }
 
 

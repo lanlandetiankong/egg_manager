@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleCategoryRelatedService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryRelatedEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCategoryRelatedMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCategoryRelatedDto;
@@ -35,7 +35,7 @@ public class OblArticleCategoryRelatedServiceImpl extends MyBaseMysqlServiceImpl
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryRelatedDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryRelatedDto> queryPage) {
         Page<OblArticleCategoryRelatedDto> mpPagination = queryPage.toMpPage();
         List<OblArticleCategoryRelatedDto> dtoList = oblArticleCategoryRelatedMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleCategoryRelatedServiceImpl extends MyBaseMysqlServiceImpl
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception {
         OblArticleCategoryRelatedEntity oblArticleCategoryRelatedEntity = OblArticleCategoryRelatedTransfer.transferVoToEntity(oblArticleCategoryRelatedVo);
         super.doBeforeCreate(loginUserInfo, oblArticleCategoryRelatedEntity);
         return oblArticleCategoryRelatedMapper.insert(oblArticleCategoryRelatedEntity);
@@ -52,7 +52,7 @@ public class OblArticleCategoryRelatedServiceImpl extends MyBaseMysqlServiceImpl
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception {
         Integer changeCount = 0;
         OblArticleCategoryRelatedEntity oblArticleCategoryRelatedEntity = OblArticleCategoryRelatedTransfer.transferVoToEntity(oblArticleCategoryRelatedVo);
         oblArticleCategoryRelatedEntity = super.doBeforeUpdate(loginUserInfo, oblArticleCategoryRelatedEntity);

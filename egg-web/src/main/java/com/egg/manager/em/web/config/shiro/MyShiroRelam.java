@@ -1,13 +1,13 @@
 package com.egg.manager.em.web.config.shiro;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.services.em.define.basic.DefineMenuService;
-import com.egg.manager.api.services.em.define.basic.DefinePermissionService;
-import com.egg.manager.api.services.em.define.basic.DefineRoleService;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
+import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;
+import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -31,20 +31,20 @@ import java.util.Set;
 public class MyShiroRelam extends AuthorizingRealm {
 
     @Reference
-    private DefineRoleService defineRoleService;
+    private EmDefineRoleService emDefineRoleService;
     @Reference
-    private DefinePermissionService definePermissionService;
+    private EmDefinePermissionService emDefinePermissionService;
     @Reference
-    private DefineMenuService defineMenuService;
+    private EmDefineMenuService emDefineMenuService;
     @Reference
-    private UserAccountService userAccountService;
+    private EmUserAccountService emUserAccountService;
 
-    public MyShiroRelam(DefineRoleService defineRoleService, DefinePermissionService definePermissionService,
-                        DefineMenuService defineMenuService, UserAccountService userAccountService) {
-        this.defineRoleService = defineRoleService;
-        this.definePermissionService = definePermissionService;
-        this.defineMenuService = defineMenuService;
-        this.userAccountService = userAccountService;
+    public MyShiroRelam(EmDefineRoleService emDefineRoleService, EmDefinePermissionService emDefinePermissionService,
+                        EmDefineMenuService emDefineMenuService, EmUserAccountService emUserAccountService) {
+        this.emDefineRoleService = emDefineRoleService;
+        this.emDefinePermissionService = emDefinePermissionService;
+        this.emDefineMenuService = emDefineMenuService;
+        this.emUserAccountService = emUserAccountService;
     }
 
 
@@ -60,17 +60,17 @@ public class MyShiroRelam extends AuthorizingRealm {
     }
 
     public void initReference() {
-        if (defineRoleService == null) {
-            this.defineRoleService = SpringContextBeanUtil.getBean(DefineRoleService.class);
+        if (emDefineRoleService == null) {
+            this.emDefineRoleService = SpringContextBeanUtil.getBean(EmDefineRoleService.class);
         }
-        if (definePermissionService == null) {
-            this.definePermissionService = SpringContextBeanUtil.getBean(DefinePermissionService.class);
+        if (emDefinePermissionService == null) {
+            this.emDefinePermissionService = SpringContextBeanUtil.getBean(EmDefinePermissionService.class);
         }
-        if (defineMenuService == null) {
-            this.defineMenuService = SpringContextBeanUtil.getBean(DefineMenuService.class);
+        if (emDefineMenuService == null) {
+            this.emDefineMenuService = SpringContextBeanUtil.getBean(EmDefineMenuService.class);
         }
-        if (userAccountService == null) {
-            this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class);
+        if (emUserAccountService == null) {
+            this.emUserAccountService = SpringContextBeanUtil.getBean(EmUserAccountService.class);
         }
     }
 
@@ -85,13 +85,13 @@ public class MyShiroRelam extends AuthorizingRealm {
         if (StringUtils.isBlank(authorization) || userAccountId == null) {
             return simpleAuthorizationInfo;
         }
-        CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountId);
+        CurrentLoginEmUserInfo loginUserInfo = emUserAccountService.queryDbToCacheable(userAccountId);
         if (loginUserInfo == null) {
             return simpleAuthorizationInfo;
         }
         //取得 当前用户 有用的 角色、权限
-        Set<String> roleSet = defineRoleService.queryDbToCacheable(userAccountId);
-        Set<String> permissionSet = definePermissionService.queryDbToCacheable(userAccountId);
+        Set<String> roleSet = emDefineRoleService.queryDbToCacheable(userAccountId);
+        Set<String> permissionSet = emDefinePermissionService.queryDbToCacheable(userAccountId);
         simpleAuthorizationInfo.setRoles(roleSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;

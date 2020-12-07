@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleTagService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleTagEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleTagMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleTagDto;
@@ -35,7 +35,7 @@ public class OblArticleTagServiceImpl extends MyBaseMysqlServiceImpl<OblArticleT
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagDto> queryPage) {
         Page<OblArticleTagDto> mpPagination = queryPage.toMpPage();
         List<OblArticleTagDto> dtoList = oblArticleTagMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleTagServiceImpl extends MyBaseMysqlServiceImpl<OblArticleT
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception {
         OblArticleTagEntity oblArticleTagEntity = OblArticleTagTransfer.transferVoToEntity(oblArticleTagVo);
         super.doBeforeCreate(loginUserInfo, oblArticleTagEntity);
         return oblArticleTagMapper.insert(oblArticleTagEntity);
@@ -52,7 +52,7 @@ public class OblArticleTagServiceImpl extends MyBaseMysqlServiceImpl<OblArticleT
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception {
         Integer changeCount = 0;
         OblArticleTagEntity oblArticleTagEntity = OblArticleTagTransfer.transferVoToEntity(oblArticleTagVo);
         oblArticleTagEntity = super.doBeforeUpdate(loginUserInfo, oblArticleTagEntity);

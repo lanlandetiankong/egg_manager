@@ -1,15 +1,15 @@
 package com.egg.manager.em.web.controller.common.component.user;
 
 import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
-import com.egg.manager.persistence.em.user.pojo.dto.UserAccountDto;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
+import com.egg.manager.persistence.em.user.pojo.dto.EmUserAccountDto;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/commmon/component/user/userAccount")
 public class UserAccountCommonCompController extends BaseController {
     @Autowired
-    private UserAccountService userAccountService;
+    private EmUserAccountService emUserAccountService;
 
     @EmPcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
@@ -46,11 +46,11 @@ public class UserAccountCommonCompController extends BaseController {
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_SORT_OBJ, value = WebApiConstant.SORT_OBJ_LABEL, required = true, dataTypeClass = String.class),
     })
     @PostMapping(value = "/queryDtoPage")
-    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = UserAccountDto.class) QueryPageBean<UserAccountDto> queryPageBean,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+    public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = EmUserAccountDto.class) QueryPageBean<EmUserAccountDto> queryPageBean,
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
-        result = userAccountService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
+        result = emUserAccountService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }
 }

@@ -12,7 +12,7 @@ import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
@@ -55,7 +55,7 @@ public class OblContentLikeRecordController extends BaseController {
     @EmPcWebQueryLog(fullPath = "/oblContentLikeRecord/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblContentLikeRecordDto.class) QueryPageBean<OblContentLikeRecordDto> queryPageBean,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = oblContentLikeRecordService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
@@ -66,7 +66,7 @@ public class OblContentLikeRecordController extends BaseController {
     @EmPcWebQueryLog(fullPath = "/oblContentLikeRecord/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblContentLikeRecordId,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(oblContentLikeRecordId, BaseRstMsgConstant.ErrorMsg.unknowId());
         OblContentLikeRecordEntity oblContentLikeRecordEntity = oblContentLikeRecordMapper.selectById(oblContentLikeRecordId);
@@ -78,7 +78,7 @@ public class OblContentLikeRecordController extends BaseController {
     @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblContentLikeRecordVo oblContentLikeRecordVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
@@ -92,7 +92,7 @@ public class OblContentLikeRecordController extends BaseController {
     @OblPcWebOperationLog(fullPath = "/oblContentLikeRecord/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblContentLikeRecordVo oblContentLikeRecordVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
@@ -109,7 +109,7 @@ public class OblContentLikeRecordController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
-                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                      @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
@@ -126,7 +126,7 @@ public class OblContentLikeRecordController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId,
-                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

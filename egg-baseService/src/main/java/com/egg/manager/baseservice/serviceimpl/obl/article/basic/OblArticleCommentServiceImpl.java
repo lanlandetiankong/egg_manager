@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleCommentService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCommentEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCommentMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCommentDto;
@@ -35,7 +35,7 @@ public class OblArticleCommentServiceImpl extends MyBaseMysqlServiceImpl<OblArti
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCommentDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCommentDto> queryPage) {
         Page<OblArticleCommentDto> mpPagination = queryPage.toMpPage();
         List<OblArticleCommentDto> dtoList = oblArticleCommentMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleCommentServiceImpl extends MyBaseMysqlServiceImpl<OblArti
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception {
         OblArticleCommentEntity oblArticleCommentEntity = OblArticleCommentTransfer.transferVoToEntity(oblArticleCommentVo);
         super.doBeforeCreate(loginUserInfo, oblArticleCommentEntity);
         return oblArticleCommentMapper.insert(oblArticleCommentEntity);
@@ -52,7 +52,7 @@ public class OblArticleCommentServiceImpl extends MyBaseMysqlServiceImpl<OblArti
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCommentVo oblArticleCommentVo) throws Exception {
         Integer changeCount = 0;
         OblArticleCommentEntity oblArticleCommentEntity = OblArticleCommentTransfer.transferVoToEntity(oblArticleCommentVo);
         oblArticleCommentEntity = super.doBeforeUpdate(loginUserInfo, oblArticleCommentEntity);

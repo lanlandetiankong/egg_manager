@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserGroupMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.EmUserGroupEntity">
+        <id column="fid" property="fid"/>
+        <result property="defineGroupId" column="define_group_id"/>
+        <result property="userAccountId" column="user_account_id"/>
+        <result property="type" column="type"/>
+        <result property="state" column="state"/>
+        <result property="remark" column="remark"/>
+        <result property="lastModifyerId" column="last_modifyer_id"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid,define_group_id,user_account_id,type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+            ${base_alias_name}.fid,
+            ${base_alias_name}.define_group_id,
+            ${base_alias_name}.user_account_id,
+            ${base_alias_name}.type,
+            ${base_alias_name}.state,
+            ${base_alias_name}.remark,
+            ${base_alias_name}.last_modifyer_id,
+            ${base_alias_name}.create_user_id,
+            ${base_alias_name}.create_time,
+            ${base_alias_name}.update_time,
+            ${base_alias_name}.version,
+            ${base_alias_name}.is_deleted,
+            ${base_alias_name}.deleted_time
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+            ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+            ${base_alias_name}.define_group_id AS ${base_alias_col_prefix}define_group_id,
+            ${base_alias_name}.user_account_id AS ${base_alias_col_prefix}user_account_id,
+            ${base_alias_name}.type AS ${base_alias_col_prefix}type,
+            ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+            ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+            ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id,
+            ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+            ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+            ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+            ${base_alias_name}.version AS ${base_alias_col_prefix}version,
+            ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}is_deleted,
+            ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deleted_time
+    </sql>
+
+
+</mapper>

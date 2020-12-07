@@ -3,8 +3,8 @@ package com.egg.manager.api.exchange.servicesimpl.redis;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.services.redis.MyRedisCommonReqService;
-import com.egg.manager.api.services.em.define.basic.DefineRoleService;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,12 +21,12 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
 
 
     @Autowired
-    public UserAccountService userAccountService;
+    public EmUserAccountService emUserAccountService;
     @Reference
-    public DefineRoleService defineRoleService;
+    public EmDefineRoleService emDefineRoleService;
 
 
-    /*protected <T> T dealAutoGetRedisObjectCache(UserAccountEntity loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
+    /*protected <T> T dealAutoGetRedisObjectCache(EmUserAccountEntity loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
         T t = null;
         boolean retryFlag = false;
         if (almostRefresh == true) {
@@ -55,7 +55,7 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
     }
 
 
-    protected <T> List<T> dealAutoGetRedisListCache(UserAccountEntity loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
+    protected <T> List<T> dealAutoGetRedisListCache(EmUserAccountEntity loginUser, String key, String hashKey, String userAccountId, Class<T> tClass, boolean almostRefresh, Long keyTtl) {
         List<T> tList = new ArrayList<>();
         boolean retryFlag = false;
         if (almostRefresh == true) {

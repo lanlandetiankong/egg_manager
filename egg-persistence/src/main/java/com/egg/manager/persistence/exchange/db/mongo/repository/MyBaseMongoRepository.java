@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.exchange.db.mongo.repository;
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -93,7 +93,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * @param user  用户
      * @return
      */
-    <U extends UserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
+    <U extends EmUserAccountEntity> long batchChangeStatusByIds(Iterable<ID> ids, Short state, U user);
 
     /**
      * 批量伪删除[文档]
@@ -101,7 +101,7 @@ public interface MyBaseMongoRepository<T extends MyBaseModelMgo, ID> {
      * @param user 用户
      * @return
      */
-    <U extends UserAccountEntity> long batchLogicDelete(Iterable<ID> ids, U user);
+    <U extends EmUserAccountEntity> long batchLogicDelete(Iterable<ID> ids, U user);
 
 
     /**

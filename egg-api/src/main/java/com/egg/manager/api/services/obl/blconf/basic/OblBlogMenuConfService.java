@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.blconf.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.blconf.db.mysql.entity.OblBlogMenuConfEntity;
 import com.egg.manager.persistence.obl.blconf.db.mysql.mapper.OblBlogMenuConfMapper;
 import com.egg.manager.persistence.obl.blconf.pojo.dto.OblBlogMenuConfDto;
@@ -24,7 +24,7 @@ public interface OblBlogMenuConfService extends MyBaseMysqlService<OblBlogMenuCo
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogMenuConfDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogMenuConfDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblBlogMenuConfService extends MyBaseMysqlService<OblBlogMenuCo
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception;
 
     /**
      * 更新博客菜单定义表
@@ -43,7 +43,7 @@ public interface OblBlogMenuConfService extends MyBaseMysqlService<OblBlogMenuCo
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception;
 
 
 }

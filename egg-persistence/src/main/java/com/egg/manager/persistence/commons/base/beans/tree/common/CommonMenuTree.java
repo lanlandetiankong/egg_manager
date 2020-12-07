@@ -3,7 +3,7 @@ package com.egg.manager.persistence.commons.base.beans.tree.common;
 import cn.hutool.core.collection.CollectionUtil;
 import com.egg.manager.persistence.commons.base.beans.tree.MyBaseTree;
 import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineMenuEntity;
+import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
 import com.google.common.collect.Maps;
 import lombok.*;
 
@@ -77,7 +77,7 @@ public class CommonMenuTree extends MyBaseTree {
      * @param tree
      * @return
      */
-    public static CommonMenuTree dealDefineMenuToTree(DefineMenuEntity menu, CommonMenuTree tree) {
+    public static CommonMenuTree dealDefineMenuToTree(EmDefineMenuEntity menu, CommonMenuTree tree) {
         tree = tree != null ? tree : new CommonMenuTree();
         tree.setId(menu.getFid());
         tree.setPid(menu.getParentId());

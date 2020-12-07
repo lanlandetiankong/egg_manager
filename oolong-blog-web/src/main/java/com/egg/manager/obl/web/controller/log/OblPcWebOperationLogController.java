@@ -10,7 +10,7 @@ import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -52,7 +52,7 @@ public class OblPcWebOperationLogController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = OblPcWebOperationLogMgo.class) QueryPageBean<OblPcWebOperationLogMgo> queryPageBean,
-                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
         queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());

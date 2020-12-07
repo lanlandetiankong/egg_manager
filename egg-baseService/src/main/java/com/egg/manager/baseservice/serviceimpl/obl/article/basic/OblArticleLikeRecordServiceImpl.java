@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleLikeRecordService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleLikeRecordEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleLikeRecordMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleLikeRecordDto;
@@ -35,7 +35,7 @@ public class OblArticleLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleLikeRecordDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleLikeRecordDto> queryPage) {
         Page<OblArticleLikeRecordDto> mpPagination = queryPage.toMpPage();
         List<OblArticleLikeRecordDto> dtoList = oblArticleLikeRecordMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception {
         OblArticleLikeRecordEntity oblArticleLikeRecordEntity = OblArticleLikeRecordTransfer.transferVoToEntity(oblArticleLikeRecordVo);
         super.doBeforeCreate(loginUserInfo, oblArticleLikeRecordEntity);
         return oblArticleLikeRecordMapper.insert(oblArticleLikeRecordEntity);
@@ -52,7 +52,7 @@ public class OblArticleLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleLikeRecordVo oblArticleLikeRecordVo) throws Exception {
         Integer changeCount = 0;
         OblArticleLikeRecordEntity oblArticleLikeRecordEntity = OblArticleLikeRecordTransfer.transferVoToEntity(oblArticleLikeRecordVo);
         oblArticleLikeRecordEntity = super.doBeforeUpdate(loginUserInfo, oblArticleLikeRecordEntity);

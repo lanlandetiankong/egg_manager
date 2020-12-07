@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserAttentionArticleCategoryEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserAttentionArticleCategoryMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblUserAttentionArticleCategoryDto;
@@ -24,7 +24,7 @@ public interface OblUserAttentionArticleCategoryService extends MyBaseMysqlServi
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionArticleCategoryDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionArticleCategoryDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblUserAttentionArticleCategoryService extends MyBaseMysqlServi
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo) throws Exception;
 
     /**
      * 更新用户关注的文章收藏类别
@@ -43,7 +43,7 @@ public interface OblUserAttentionArticleCategoryService extends MyBaseMysqlServi
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo) throws Exception;
 
 
 }

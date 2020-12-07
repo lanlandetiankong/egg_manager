@@ -1,15 +1,15 @@
 package com.egg.manager.obl.web.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.persistence.commons.base.constant.basic.Constant;
 import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.user.pojo.initialize.UserAccountPojoInitialize;
-import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.initialize.EmUserAccountPojoInitialize;
+import com.egg.manager.persistence.em.user.pojo.transfer.EmUserAccountTransfer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -30,7 +30,7 @@ import java.io.PrintWriter;
 @Slf4j
 public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 
-    private UserAccountService userAccountService;
+    private EmUserAccountService emUserAccountService;
 
     /**
      * 检验用户是否想要登录
@@ -123,7 +123,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                 //Constant.isPass = true ;
                 if (StringUtils.isBlank(authorization)) {
                     //如果前端没传递 authorization的话，按游客处理，添加游客信息
-                    httpServletRequest.setAttribute("currentLoginUser", UserAccountPojoInitialize.dealGetVisitor());
+                    httpServletRequest.setAttribute("currentLoginUser", EmUserAccountPojoInitialize.dealGetVisitor());
                     return true;
                 } else {
                     super.preHandle(request, response);
@@ -136,7 +136,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
                         if (checkIsSameUrl(urlSplit[0], httpServletRequest.getRequestURI())) {
                             //Constant.isPass=true;
                             if (StringUtils.isBlank(authorization)) {
-                                httpServletRequest.setAttribute("currentLoginUser", new UserAccountEntity());
+                                httpServletRequest.setAttribute("currentLoginUser", new EmUserAccountEntity());
                                 return true;
                             } else {
                                 super.preHandle(request, response);
@@ -157,14 +157,14 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
      * @param token
      */
     private void handleSetUserAccountBean(ServletRequest request, ServletResponse response, JwtShiroToken token) {
-        if (this.userAccountService == null) {
-            this.userAccountService = SpringContextBeanUtil.getBean(UserAccountService.class);
+        if (this.emUserAccountService == null) {
+            this.emUserAccountService = SpringContextBeanUtil.getBean(EmUserAccountService.class);
         }
         //取得用户id
         String userId = JwtUtil.getUserAccountId(token.getPrincipal().toString());
-        UserAccountEntity userAccountEntity = userAccountService.getById(userId);
-        if (userAccountEntity != null) {
-            request.setAttribute("currentLoginUser", UserAccountTransfer.transferEntityToVo(userAccountEntity));
+        EmUserAccountEntity emUserAccountEntity = emUserAccountService.getById(userId);
+        if (emUserAccountEntity != null) {
+            request.setAttribute("currentLoginUser", EmUserAccountTransfer.transferEntityToVo(emUserAccountEntity));
         }
     }
 

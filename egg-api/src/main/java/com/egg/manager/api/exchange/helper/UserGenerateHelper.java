@@ -1,8 +1,8 @@
 package com.egg.manager.api.exchange.helper;
 
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.commons.util.data.random.RandomValueUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
 
 import java.util.ArrayList;
 
@@ -19,8 +19,8 @@ public class UserGenerateHelper {
      * 生成 用户
      * @return
      */
-    public static UserAccountEntity generateUser() {
-        UserAccountEntity userAccountEntity = UserAccountEntity.builder()
+    public static EmUserAccountEntity generateUser() {
+        EmUserAccountEntity emUserAccountEntity = EmUserAccountEntity.builder()
                 .userName(RandomValueUtil.getChineseName())
                 .email(RandomValueUtil.getEmail(1, 9))
                 .phone(RandomValueUtil.getTel())
@@ -29,8 +29,8 @@ public class UserGenerateHelper {
                 .locked((short) 0)
                 .userType(UserAccountBaseTypeEnum.GeneratedUser.getValue()).build();
         //密码及盐
-        passwordHelper.encryptPassword(userAccountEntity);
-        return userAccountEntity;
+        passwordHelper.encryptPassword(emUserAccountEntity);
+        return emUserAccountEntity;
     }
 
     /**
@@ -38,8 +38,8 @@ public class UserGenerateHelper {
      * @param size 数量
      * @return
      */
-    public static ArrayList<UserAccountEntity> batchGenerateUser(int size) {
-        ArrayList<UserAccountEntity> list = new ArrayList<>();
+    public static ArrayList<EmUserAccountEntity> batchGenerateUser(int size) {
+        ArrayList<EmUserAccountEntity> list = new ArrayList<>();
         if (size <= 0) {
             return list;
         }

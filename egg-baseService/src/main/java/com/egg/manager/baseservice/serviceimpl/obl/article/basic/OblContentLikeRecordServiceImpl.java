@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblContentLikeRecordService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblContentLikeRecordEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblContentLikeRecordMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblContentLikeRecordDto;
@@ -35,7 +35,7 @@ public class OblContentLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblC
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblContentLikeRecordDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblContentLikeRecordDto> queryPage) {
         Page<OblContentLikeRecordDto> mpPagination = queryPage.toMpPage();
         List<OblContentLikeRecordDto> dtoList = oblContentLikeRecordMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblContentLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblC
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception {
         OblContentLikeRecordEntity oblContentLikeRecordEntity = OblContentLikeRecordTransfer.transferVoToEntity(oblContentLikeRecordVo);
         super.doBeforeCreate(loginUserInfo, oblContentLikeRecordEntity);
         return oblContentLikeRecordMapper.insert(oblContentLikeRecordEntity);
@@ -52,7 +52,7 @@ public class OblContentLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblC
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception {
         Integer changeCount = 0;
         OblContentLikeRecordEntity oblContentLikeRecordEntity = OblContentLikeRecordTransfer.transferVoToEntity(oblContentLikeRecordVo);
         oblContentLikeRecordEntity = super.doBeforeUpdate(loginUserInfo, oblContentLikeRecordEntity);

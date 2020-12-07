@@ -6,11 +6,11 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <dubbo:service protocol="dubbo" ref="announcementDraftService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService"/>
-    <dubbo:service protocol="dubbo" ref="announcementService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementService"/>
-    <dubbo:service protocol="dubbo" ref="announcementTagService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService"/>
+    <dubbo:service protocol="dubbo" ref="emAnnouncementDraftService"
+                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementDraftService"/>
+    <dubbo:service protocol="dubbo" ref="emAnnouncementService"
+                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementService"/>
+    <dubbo:service protocol="dubbo" ref="emAnnouncementTagService"
+                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementTagService"/>
 
 </beans>

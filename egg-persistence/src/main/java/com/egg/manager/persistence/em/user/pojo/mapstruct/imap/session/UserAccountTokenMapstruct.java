@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session;
 
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,7 +22,7 @@ public interface UserAccountTokenMapstruct {
 
     /**
      * 复制-UserAccount->UserAccountToken
-     * @param userAccountEntity
+     * @param emUserAccountEntity
      * @return
      */
     @Mappings({
@@ -31,7 +31,7 @@ public interface UserAccountTokenMapstruct {
             @Mapping(target = "token", ignore = true),
             @Mapping(target = "authorization", ignore = true)
     })
-    UserAccountToken translateEntityToToken(UserAccountEntity userAccountEntity);
+    UserAccountToken translateEntityToToken(EmUserAccountEntity emUserAccountEntity);
 
 
 }

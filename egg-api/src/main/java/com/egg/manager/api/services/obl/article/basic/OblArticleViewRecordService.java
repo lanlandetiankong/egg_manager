@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleViewRecordEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleViewRecordMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleViewRecordDto;
@@ -24,7 +24,7 @@ public interface OblArticleViewRecordService extends MyBaseMysqlService<OblArtic
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleViewRecordDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleViewRecordDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblArticleViewRecordService extends MyBaseMysqlService<OblArtic
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception;
 
     /**
      * 更新文章查看记录
@@ -43,7 +43,7 @@ public interface OblArticleViewRecordService extends MyBaseMysqlService<OblArtic
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception;
 
 
 }

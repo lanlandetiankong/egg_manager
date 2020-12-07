@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleTagRelatedService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleTagRelatedEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleTagRelatedMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleTagRelatedDto;
@@ -35,7 +35,7 @@ public class OblArticleTagRelatedServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagRelatedDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagRelatedDto> queryPage) {
         Page<OblArticleTagRelatedDto> mpPagination = queryPage.toMpPage();
         List<OblArticleTagRelatedDto> dtoList = oblArticleTagRelatedMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleTagRelatedServiceImpl extends MyBaseMysqlServiceImpl<OblA
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleTagRelatedVo oblArticleTagRelatedVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagRelatedVo oblArticleTagRelatedVo) throws Exception {
         OblArticleTagRelatedEntity oblArticleTagRelatedEntity = OblArticleTagRelatedTransfer.transferVoToEntity(oblArticleTagRelatedVo);
         super.doBeforeCreate(loginUserInfo, oblArticleTagRelatedEntity);
         return oblArticleTagRelatedMapper.insert(oblArticleTagRelatedEntity);
@@ -52,7 +52,7 @@ public class OblArticleTagRelatedServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleTagRelatedVo oblArticleTagRelatedVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagRelatedVo oblArticleTagRelatedVo) throws Exception {
         Integer changeCount = 0;
         OblArticleTagRelatedEntity oblArticleTagRelatedEntity = OblArticleTagRelatedTransfer.transferVoToEntity(oblArticleTagRelatedVo);
         oblArticleTagRelatedEntity = super.doBeforeUpdate(loginUserInfo, oblArticleTagRelatedEntity);

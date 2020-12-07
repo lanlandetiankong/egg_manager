@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleViewRecordService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleViewRecordEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleViewRecordMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleViewRecordDto;
@@ -35,7 +35,7 @@ public class OblArticleViewRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleViewRecordDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleViewRecordDto> queryPage) {
         Page<OblArticleViewRecordDto> mpPagination = queryPage.toMpPage();
         List<OblArticleViewRecordDto> dtoList = oblArticleViewRecordMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleViewRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception {
         OblArticleViewRecordEntity oblArticleViewRecordEntity = OblArticleViewRecordTransfer.transferVoToEntity(oblArticleViewRecordVo);
         super.doBeforeCreate(loginUserInfo, oblArticleViewRecordEntity);
         return oblArticleViewRecordMapper.insert(oblArticleViewRecordEntity);
@@ -52,7 +52,7 @@ public class OblArticleViewRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleViewRecordVo oblArticleViewRecordVo) throws Exception {
         Integer changeCount = 0;
         OblArticleViewRecordEntity oblArticleViewRecordEntity = OblArticleViewRecordTransfer.transferVoToEntity(oblArticleViewRecordVo);
         oblArticleViewRecordEntity = super.doBeforeUpdate(loginUserInfo, oblArticleViewRecordEntity);

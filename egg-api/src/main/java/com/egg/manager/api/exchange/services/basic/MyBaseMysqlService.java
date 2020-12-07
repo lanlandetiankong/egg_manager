@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
@@ -29,7 +29,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      * @throws Exception
      */
-    Integer dealLogicDeleteById(UserAccountEntity loginUser, String delId) throws Exception;
+    Integer dealLogicDeleteById(EmUserAccountEntity loginUser, String delId) throws Exception;
 
     /**
      * 批量逻辑删除
@@ -38,7 +38,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      * @throws Exception
      */
-    Integer dealBatchLogicDelete(UserAccountEntity loginUser, String[] delIds) throws Exception;
+    Integer dealBatchLogicDelete(EmUserAccountEntity loginUser, String[] delIds) throws Exception;
 
 
     /**
@@ -48,7 +48,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param queryPage 查询分页配置
      * @return
      */
-    QueryWrapper<T> doGetPageQueryWrapper(UserAccountEntity loginUser, WebResult result, QueryPageBean queryPage);
+    QueryWrapper<T> doGetPageQueryWrapper(EmUserAccountEntity loginUser, WebResult result, QueryPageBean queryPage);
 
     /**
      * 将条件封装类集合设置到QueryWrapper
@@ -64,7 +64,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param t
      * @return
      */
-    T doBeforeCreate(UserAccountEntity loginUser, T t);
+    T doBeforeCreate(EmUserAccountEntity loginUser, T t);
 
     /**
      * 更新Entity之前调用
@@ -72,7 +72,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @param t
      * @return
      */
-    T doBeforeUpdate(UserAccountEntity loginUser, T t);
+    T doBeforeUpdate(EmUserAccountEntity loginUser, T t);
 
 
     /**
@@ -83,7 +83,7 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @return
      */
     @Deprecated
-    T doBeforeDeleteOneById(UserAccountEntity loginUser, Class<T> tClass, String idVal);
+    T doBeforeDeleteOneById(EmUserAccountEntity loginUser, Class<T> tClass, String idVal);
 
 
     /**
@@ -94,12 +94,12 @@ public interface MyBaseMysqlService<T extends Model<T>, M extends MyEggMapper<T>
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    UserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
+    EmUserAccountEntity dealUserAccountTokenGetEntity(UserAccountToken userAccountToken, boolean isRequired) throws InvocationTargetException, IllegalAccessException;
 
     /**
      * 判断UserAccount是否为空
-     * @param userAccountEntity
+     * @param emUserAccountEntity
      * @return
      */
-    boolean checkUserAccountIsBlank(UserAccountEntity userAccountEntity);
+    boolean checkUserAccountIsBlank(EmUserAccountEntity emUserAccountEntity);
 }

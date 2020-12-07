@@ -7,11 +7,11 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:reference id="announcementDraftService" check="false"
-                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementDraftService"/>
-    <dubbo:reference id="announcementService" check="false"
-                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementService"/>
-    <dubbo:reference id="announcementTagService" check="false"
-                     interface="com.egg.manager.api.services.em.announcement.basic.AnnouncementTagService"/>
+    <dubbo:reference id="emAnnouncementDraftService" check="false"
+                     interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementDraftService"/>
+    <dubbo:reference id="emAnnouncementService" check="false"
+                     interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementService"/>
+    <dubbo:reference id="emAnnouncementTagService" check="false"
+                     interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementTagService"/>
 
 </beans>

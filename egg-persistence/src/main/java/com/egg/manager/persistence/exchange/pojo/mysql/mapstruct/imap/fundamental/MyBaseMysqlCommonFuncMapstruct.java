@@ -6,16 +6,16 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.util.data.str.MyStringUtil;
-import com.egg.manager.persistence.em.define.db.mysql.entity.DefineTenantEntity;
-import com.egg.manager.persistence.em.define.pojo.dto.DefineDepartmentDto;
-import com.egg.manager.persistence.em.define.pojo.dto.DefineTenantDto;
-import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineDepartmentMapstruct;
-import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
-import com.egg.manager.persistence.em.define.pojo.vo.DefineDepartmentVo;
-import com.egg.manager.persistence.em.define.pojo.vo.DefineTenantVo;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
-import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
+import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineTenantEntity;
+import com.egg.manager.persistence.em.define.pojo.dto.EmDefineDepartmentDto;
+import com.egg.manager.persistence.em.define.pojo.dto.EmDefineTenantDto;
+import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.EmDefineDepartmentMapstruct;
+import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.EmDefineTenantMapstruct;
+import com.egg.manager.persistence.em.define.pojo.vo.EmDefineDepartmentVo;
+import com.egg.manager.persistence.em.define.pojo.vo.EmDefineTenantVo;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.EmUserAccountMapstruct;
+import com.egg.manager.persistence.em.user.pojo.vo.EmUserAccountVo;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import org.apache.commons.lang3.StringUtils;
@@ -34,9 +34,9 @@ import java.util.List;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
-    DefineDepartmentMapstruct DEFINE_DEPARTMENT_MAPSTRUCT = DefineDepartmentMapstruct.INSTANCE;
+    EmUserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = EmUserAccountMapstruct.INSTANCE;
+    EmDefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = EmDefineTenantMapstruct.INSTANCE;
+    EmDefineDepartmentMapstruct DEFINE_DEPARTMENT_MAPSTRUCT = EmDefineDepartmentMapstruct.INSTANCE;
 
 
     /**
@@ -71,18 +71,18 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
 
     /**
      * 取得 登录用户id
-     * @param userAccountEntity
+     * @param emUserAccountEntity
      * @param required          当userAccount为null时是否抛出异常
      * @return
      */
-    default String handleGetLoginUserId(UserAccountEntity userAccountEntity, boolean required) {
-        if (userAccountEntity == null) {
+    default String handleGetLoginUserId(EmUserAccountEntity emUserAccountEntity, boolean required) {
+        if (emUserAccountEntity == null) {
             if (required) {
                 throw new MyRuntimeBusinessException("无法取得当前用户信息！");
             }
             return null;
         } else {
-            return userAccountEntity.getFid();
+            return emUserAccountEntity.getFid();
         }
     }
 
@@ -109,11 +109,11 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default UserAccountVo translateCreateUserEntityToVo(UserAccountEntity entity) {
+    default EmUserAccountVo translateCreateUserEntityToVo(EmUserAccountEntity entity) {
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
+        EmUserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
         return vo;
     }
 
@@ -122,11 +122,11 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default UserAccountVo translateUpdateUserEntityToVo(UserAccountEntity entity) {
+    default EmUserAccountVo translateUpdateUserEntityToVo(EmUserAccountEntity entity) {
         if (entity == null) {
             return null;
         }
-        UserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
+        EmUserAccountVo vo = USER_ACCOUNT_MAPSTRUCT.transferEntityToVo(entity);
         return vo;
     }
 
@@ -135,7 +135,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param entity
      * @return
      */
-    default DefineTenantVo commonTranslateDefineTenantEntityToVo(DefineTenantEntity entity) {
+    default EmDefineTenantVo commonTranslateDefineTenantEntityToVo(EmDefineTenantEntity entity) {
         return DEFINE_TENANT_MAPSTRUCT.transferEntityToVo(entity);
     }
 
@@ -144,7 +144,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param dto
      * @return
      */
-    default DefineTenantVo commonTranslateDefineTenantDtoToVo(DefineTenantDto dto) {
+    default EmDefineTenantVo commonTranslateDefineTenantDtoToVo(EmDefineTenantDto dto) {
         return DEFINE_TENANT_MAPSTRUCT.transferDtoToVo(dto);
     }
 
@@ -153,7 +153,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
      * @param dto
      * @return
      */
-    default DefineDepartmentVo commonTranslateDefineDepartmentDtoToVo(DefineDepartmentDto dto) {
+    default EmDefineDepartmentVo commonTranslateDefineDepartmentDtoToVo(EmDefineDepartmentDto dto) {
         return DEFINE_DEPARTMENT_MAPSTRUCT.transferDtoToVo(dto);
     }
 }

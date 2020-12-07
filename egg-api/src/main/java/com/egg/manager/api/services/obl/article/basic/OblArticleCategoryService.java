@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCategoryMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCategoryDto;
@@ -24,7 +24,7 @@ public interface OblArticleCategoryService extends MyBaseMysqlService<OblArticle
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblArticleCategoryService extends MyBaseMysqlService<OblArticle
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception;
 
     /**
      * 更新文章分类定义表
@@ -43,7 +43,7 @@ public interface OblArticleCategoryService extends MyBaseMysqlService<OblArticle
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception;
 
 
 }

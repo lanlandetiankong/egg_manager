@@ -12,7 +12,7 @@ import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.repository.EmPcWebQueryLogRepository;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
 import com.egg.manager.persistence.enhance.annotation.user.CurrentLoginUser;
@@ -52,7 +52,7 @@ public class EmPcWebQueryLogController extends BaseController {
     })
     @PostMapping(value = "/getDataPage")
     public WebResult doGetDataPage(HttpServletRequest request, @QueryPage(tClass = EmPcWebQueryLogMgo.class) QueryPageBean<EmPcWebQueryLogMgo> queryPageBean,
-                                   @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
         queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());

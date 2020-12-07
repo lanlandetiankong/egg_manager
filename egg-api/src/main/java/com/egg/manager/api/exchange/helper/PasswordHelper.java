@@ -1,7 +1,7 @@
 package com.egg.manager.api.exchange.helper;
 
 
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -18,7 +18,7 @@ public class PasswordHelper {
     private String algorithmName = "md5";
     private final int hashIterations = 2;
 
-    public void encryptPassword(UserAccountEntity user) {
+    public void encryptPassword(EmUserAccountEntity user) {
         if (StringUtils.isNotBlank(user.getPassword()) && StringUtils.isNotBlank(user.getSalt())) {
             return;
         }
@@ -34,18 +34,18 @@ public class PasswordHelper {
     /**
      * 判断账号是否匹配
      * @param formPwd           form表单上的password，未经过
-     * @param userAccountEntity
+     * @param emUserAccountEntity
      * @return
      */
-    public boolean isPasswordMatch(String formPwd, UserAccountEntity userAccountEntity) {
+    public boolean isPasswordMatch(String formPwd, EmUserAccountEntity emUserAccountEntity) {
         if (StringUtils.isBlank(formPwd)) {
             return false;
         }
         String md5Pwd = new SimpleHash(
                 algorithmName,
                 formPwd,
-                ByteSource.Util.bytes(userAccountEntity.getSalt()),
+                ByteSource.Util.bytes(emUserAccountEntity.getSalt()),
                 hashIterations).toHex();
-        return md5Pwd.equalsIgnoreCase(userAccountEntity.getPassword());
+        return md5Pwd.equalsIgnoreCase(emUserAccountEntity.getPassword());
     }
 }

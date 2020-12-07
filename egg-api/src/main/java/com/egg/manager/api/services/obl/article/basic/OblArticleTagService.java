@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleTagEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleTagMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleTagDto;
@@ -24,7 +24,7 @@ public interface OblArticleTagService extends MyBaseMysqlService<OblArticleTagEn
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleTagDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblArticleTagService extends MyBaseMysqlService<OblArticleTagEn
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception;
 
     /**
      * 更新文章标签定义表
@@ -43,7 +43,7 @@ public interface OblArticleTagService extends MyBaseMysqlService<OblArticleTagEn
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleTagVo oblArticleTagVo) throws Exception;
 
 
 }

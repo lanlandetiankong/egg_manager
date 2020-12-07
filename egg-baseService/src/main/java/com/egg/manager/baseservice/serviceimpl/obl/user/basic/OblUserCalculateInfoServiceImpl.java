@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.user.basic.OblUserCalculateInfoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserCalculateInfoEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserCalculateInfoMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserCalculateInfoDto;
@@ -35,7 +35,7 @@ public class OblUserCalculateInfoServiceImpl extends MyBaseMysqlServiceImpl<OblU
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCalculateInfoDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCalculateInfoDto> queryPage) {
         Page<OblUserCalculateInfoDto> mpPagination = queryPage.toMpPage();
         List<OblUserCalculateInfoDto> dtoList = oblUserCalculateInfoMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblUserCalculateInfoServiceImpl extends MyBaseMysqlServiceImpl<OblU
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception {
         OblUserCalculateInfoEntity oblUserCalculateInfoEntity = OblUserCalculateInfoTransfer.transferVoToEntity(oblUserCalculateInfoVo);
         super.doBeforeCreate(loginUserInfo, oblUserCalculateInfoEntity);
         return oblUserCalculateInfoMapper.insert(oblUserCalculateInfoEntity);
@@ -52,7 +52,7 @@ public class OblUserCalculateInfoServiceImpl extends MyBaseMysqlServiceImpl<OblU
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception {
         Integer changeCount = 0;
         OblUserCalculateInfoEntity oblUserCalculateInfoEntity = OblUserCalculateInfoTransfer.transferVoToEntity(oblUserCalculateInfoVo);
         oblUserCalculateInfoEntity = super.doBeforeUpdate(loginUserInfo, oblUserCalculateInfoEntity);

@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.user.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserCalculateInfoEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserCalculateInfoMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserCalculateInfoDto;
@@ -24,7 +24,7 @@ public interface OblUserCalculateInfoService extends MyBaseMysqlService<OblUserC
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCalculateInfoDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCalculateInfoDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblUserCalculateInfoService extends MyBaseMysqlService<OblUserC
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception;
 
     /**
      * 更新用户的计算信息
@@ -43,7 +43,7 @@ public interface OblUserCalculateInfoService extends MyBaseMysqlService<OblUserC
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserCalculateInfoVo oblUserCalculateInfoVo) throws Exception;
 
 
 }

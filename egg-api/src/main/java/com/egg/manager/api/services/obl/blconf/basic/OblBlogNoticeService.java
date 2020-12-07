@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.blconf.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.blconf.db.mysql.entity.OblBlogNoticeEntity;
 import com.egg.manager.persistence.obl.blconf.db.mysql.mapper.OblBlogNoticeMapper;
 import com.egg.manager.persistence.obl.blconf.pojo.dto.OblBlogNoticeDto;
@@ -24,7 +24,7 @@ public interface OblBlogNoticeService extends MyBaseMysqlService<OblBlogNoticeEn
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogNoticeDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogNoticeDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblBlogNoticeService extends MyBaseMysqlService<OblBlogNoticeEn
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception;
 
     /**
      * 更新博客通知表
@@ -43,7 +43,7 @@ public interface OblBlogNoticeService extends MyBaseMysqlService<OblBlogNoticeEn
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception;
 
 
 }

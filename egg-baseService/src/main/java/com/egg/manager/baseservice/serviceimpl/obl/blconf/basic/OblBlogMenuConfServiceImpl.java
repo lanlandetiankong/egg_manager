@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.blconf.basic.OblBlogMenuConfService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.blconf.db.mysql.entity.OblBlogMenuConfEntity;
 import com.egg.manager.persistence.obl.blconf.db.mysql.mapper.OblBlogMenuConfMapper;
 import com.egg.manager.persistence.obl.blconf.pojo.dto.OblBlogMenuConfDto;
@@ -35,7 +35,7 @@ public class OblBlogMenuConfServiceImpl extends MyBaseMysqlServiceImpl<OblBlogMe
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogMenuConfDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogMenuConfDto> queryPage) {
         Page<OblBlogMenuConfDto> mpPagination = queryPage.toMpPage();
         List<OblBlogMenuConfDto> dtoList = oblBlogMenuConfMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblBlogMenuConfServiceImpl extends MyBaseMysqlServiceImpl<OblBlogMe
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception {
         OblBlogMenuConfEntity oblBlogMenuConfEntity = OblBlogMenuConfTransfer.transferVoToEntity(oblBlogMenuConfVo);
         super.doBeforeCreate(loginUserInfo, oblBlogMenuConfEntity);
         return oblBlogMenuConfMapper.insert(oblBlogMenuConfEntity);
@@ -52,7 +52,7 @@ public class OblBlogMenuConfServiceImpl extends MyBaseMysqlServiceImpl<OblBlogMe
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblBlogMenuConfVo oblBlogMenuConfVo) throws Exception {
         Integer changeCount = 0;
         OblBlogMenuConfEntity oblBlogMenuConfEntity = OblBlogMenuConfTransfer.transferVoToEntity(oblBlogMenuConfVo);
         oblBlogMenuConfEntity = super.doBeforeUpdate(loginUserInfo, oblBlogMenuConfEntity);

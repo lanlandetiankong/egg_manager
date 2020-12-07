@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblUserCollectArticleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserCollectArticleEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserCollectArticleMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblUserCollectArticleDto;
@@ -35,7 +35,7 @@ public class OblUserCollectArticleServiceImpl extends MyBaseMysqlServiceImpl<Obl
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCollectArticleDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCollectArticleDto> queryPage) {
         Page<OblUserCollectArticleDto> mpPagination = queryPage.toMpPage();
         List<OblUserCollectArticleDto> dtoList = oblUserCollectArticleMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblUserCollectArticleServiceImpl extends MyBaseMysqlServiceImpl<Obl
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception {
         OblUserCollectArticleEntity oblUserCollectArticleEntity = OblUserCollectArticleTransfer.transferVoToEntity(oblUserCollectArticleVo);
         super.doBeforeCreate(loginUserInfo, oblUserCollectArticleEntity);
         return oblUserCollectArticleMapper.insert(oblUserCollectArticleEntity);
@@ -52,7 +52,7 @@ public class OblUserCollectArticleServiceImpl extends MyBaseMysqlServiceImpl<Obl
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception {
         Integer changeCount = 0;
         OblUserCollectArticleEntity oblUserCollectArticleEntity = OblUserCollectArticleTransfer.transferVoToEntity(oblUserCollectArticleVo);
         oblUserCollectArticleEntity = super.doBeforeUpdate(loginUserInfo, oblUserCollectArticleEntity);

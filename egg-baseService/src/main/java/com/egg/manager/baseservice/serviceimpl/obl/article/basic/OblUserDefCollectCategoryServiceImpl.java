@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblUserDefCollectCategoryService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserDefCollectCategoryEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserDefCollectCategoryMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblUserDefCollectCategoryDto;
@@ -35,7 +35,7 @@ public class OblUserDefCollectCategoryServiceImpl extends MyBaseMysqlServiceImpl
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserDefCollectCategoryDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserDefCollectCategoryDto> queryPage) {
         Page<OblUserDefCollectCategoryDto> mpPagination = queryPage.toMpPage();
         List<OblUserDefCollectCategoryDto> dtoList = oblUserDefCollectCategoryMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblUserDefCollectCategoryServiceImpl extends MyBaseMysqlServiceImpl
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo) throws Exception {
         OblUserDefCollectCategoryEntity oblUserDefCollectCategoryEntity = OblUserDefCollectCategoryTransfer.transferVoToEntity(oblUserDefCollectCategoryVo);
         super.doBeforeCreate(loginUserInfo, oblUserDefCollectCategoryEntity);
         return oblUserDefCollectCategoryMapper.insert(oblUserDefCollectCategoryEntity);
@@ -52,7 +52,7 @@ public class OblUserDefCollectCategoryServiceImpl extends MyBaseMysqlServiceImpl
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo) throws Exception {
         Integer changeCount = 0;
         OblUserDefCollectCategoryEntity oblUserDefCollectCategoryEntity = OblUserDefCollectCategoryTransfer.transferVoToEntity(oblUserDefCollectCategoryVo);
         oblUserDefCollectCategoryEntity = super.doBeforeUpdate(loginUserInfo, oblUserDefCollectCategoryEntity);

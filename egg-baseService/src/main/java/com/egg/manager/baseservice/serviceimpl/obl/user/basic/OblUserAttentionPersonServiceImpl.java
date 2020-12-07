@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.user.basic.OblUserAttentionPersonService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserAttentionPersonEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserAttentionPersonMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserAttentionPersonDto;
@@ -35,7 +35,7 @@ public class OblUserAttentionPersonServiceImpl extends MyBaseMysqlServiceImpl<Ob
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionPersonDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionPersonDto> queryPage) {
         Page<OblUserAttentionPersonDto> mpPagination = queryPage.toMpPage();
         List<OblUserAttentionPersonDto> dtoList = oblUserAttentionPersonMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblUserAttentionPersonServiceImpl extends MyBaseMysqlServiceImpl<Ob
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception {
         OblUserAttentionPersonEntity oblUserAttentionPersonEntity = OblUserAttentionPersonTransfer.transferVoToEntity(oblUserAttentionPersonVo);
         super.doBeforeCreate(loginUserInfo, oblUserAttentionPersonEntity);
         return oblUserAttentionPersonMapper.insert(oblUserAttentionPersonEntity);
@@ -52,7 +52,7 @@ public class OblUserAttentionPersonServiceImpl extends MyBaseMysqlServiceImpl<Ob
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception {
         Integer changeCount = 0;
         OblUserAttentionPersonEntity oblUserAttentionPersonEntity = OblUserAttentionPersonTransfer.transferVoToEntity(oblUserAttentionPersonVo);
         oblUserAttentionPersonEntity = super.doBeforeUpdate(loginUserInfo, oblUserAttentionPersonEntity);

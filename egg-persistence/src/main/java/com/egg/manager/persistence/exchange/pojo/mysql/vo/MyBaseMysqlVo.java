@@ -1,6 +1,6 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.vo;
 
-import com.egg.manager.persistence.em.user.pojo.vo.UserAccountVo;
+import com.egg.manager.persistence.em.user.pojo.vo.EmUserAccountVo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -42,11 +42,11 @@ public class MyBaseMysqlVo implements Serializable {
     /**
      * 创建人-com.egg.manager.persistence.obl.article.pojo.vo
      */
-    private UserAccountVo createUser;
+    private EmUserAccountVo createUser;
     /**
      * 最后更新人-com.egg.manager.persistence.obl.article.pojo.vo
      */
-    private UserAccountVo lastModifyer;
+    private EmUserAccountVo lastModifyer;
 
     /**
      * 版本号

@@ -39,14 +39,14 @@
         <result property="isDeleted" column="is_deleted"/>
         <result property="deletedTime" column="deleted_time"/>
         <association column="create_user_id" property="createUser" fetchType="lazy"
-                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
-                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,from_user_id,from_platform,related_user_id,related_platform,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time,        
+        fid,from_user_id,from_platform,related_user_id,related_platform,state,remark,version,create_user_id,create_time,last_modifyer_id,update_time,is_deleted,deleted_time        
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -66,7 +66,7 @@
         ${base_alias_name}.last_modifyer_id,
         ${base_alias_name}.update_time,
         ${base_alias_name}.is_deleted,
-        ${base_alias_name}.deleted_time,
+        ${base_alias_name}.deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -87,7 +87,7 @@
         ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}lastModifyerId,
         ${base_alias_name}.update_time AS ${base_alias_col_prefix}updateTime,
         ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}isDeleted,
-        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime,
+        ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deletedTime
     </sql>
 
 

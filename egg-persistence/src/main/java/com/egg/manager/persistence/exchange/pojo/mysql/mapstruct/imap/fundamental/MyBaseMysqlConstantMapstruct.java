@@ -2,9 +2,9 @@ package com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundament
 
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
+import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.EmDefineTenantMapstruct;
 import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
-import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
-import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
+import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.EmUserAccountMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import org.mapstruct.MapperConfig;
@@ -18,8 +18,8 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlConstantMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
+    EmUserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = EmUserAccountMapstruct.INSTANCE;
+    EmDefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = EmDefineTenantMapstruct.INSTANCE;
 
     /**
      * 用户账号 默认 用户类型

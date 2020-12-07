@@ -5,7 +5,7 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAppRelatedEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAppRelatedMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.EmUserAppRelatedDto;
 import com.egg.manager.persistence.em.user.pojo.vo.EmUserAppRelatedVo;
 
@@ -24,7 +24,7 @@ public interface EmUserAppRelatedService extends MyBaseMysqlService<EmUserAppRel
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<EmUserAppRelatedDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmUserAppRelatedDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface EmUserAppRelatedService extends MyBaseMysqlService<EmUserAppRel
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception;
 
     /**
      * 更新app用户关联表
@@ -43,7 +43,7 @@ public interface EmUserAppRelatedService extends MyBaseMysqlService<EmUserAppRel
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception;
 
 
 }

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.em.user.pojo.bean;
 
 import com.egg.manager.persistence.commons.util.data.str.MyUUIDUtil;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.session.UserAccountTokenMapstruct;
 import com.egg.manager.persistence.exchange.bean.webvo.MyBaseWebVo;
 import lombok.*;
@@ -54,8 +54,8 @@ public class UserAccountToken extends MyBaseWebVo {
     private String authorization;
 
 
-    public static UserAccountToken gainByUserAccount(UserAccountEntity userAccountEntity) throws InvocationTargetException, IllegalAccessException {
-        UserAccountToken accountToken = UserAccountTokenMapstruct.INSTANCE.translateEntityToToken(userAccountEntity);
+    public static UserAccountToken gainByUserAccount(EmUserAccountEntity emUserAccountEntity) throws InvocationTargetException, IllegalAccessException {
+        UserAccountToken accountToken = UserAccountTokenMapstruct.INSTANCE.translateEntityToToken(emUserAccountEntity);
         String token = MyUUIDUtil.renderSimpleUuid();
         accountToken.setToken(token);
         return accountToken;

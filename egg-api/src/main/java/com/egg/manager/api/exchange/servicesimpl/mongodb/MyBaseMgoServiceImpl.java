@@ -9,7 +9,7 @@ import com.egg.manager.persistence.commons.base.query.mongo.MongoQueryBean;
 import com.egg.manager.persistence.commons.base.query.mongo.MyMongoUpdateBean;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.db.mongo.repository.MyBaseMongoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +39,13 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public T doInsert(UserAccountEntity loginUser, T t) {
+    public T doInsert(EmUserAccountEntity loginUser, T t) {
         dealCreateSetLoginUserToMO(loginUser, t);
         return baseRepository.insert(t);
     }
 
     @Override
-    public List<T> doInsert(UserAccountEntity loginUser, Iterable<T> iterables) {
+    public List<T> doInsert(EmUserAccountEntity loginUser, Iterable<T> iterables) {
         if (iterables != null) {
             for (T t : iterables) {
                 dealCreateSetLoginUserToMO(loginUser, t);
@@ -55,19 +55,19 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public T doUpdateById(UserAccountEntity loginUser, T t) {
+    public T doUpdateById(EmUserAccountEntity loginUser, T t) {
         dealUpdateSetLoginUserToMO(loginUser, t);
         return baseRepository.updateById(t, false);
     }
 
     @Override
-    public T doUpdateAllColById(UserAccountEntity loginUser, T t) {
+    public T doUpdateAllColById(EmUserAccountEntity loginUser, T t) {
         dealUpdateSetLoginUserToMO(loginUser, t);
         return baseRepository.updateById(t, true);
     }
 
     @Override
-    public Long doBatchUpdate(UserAccountEntity loginUser, QueryPageBean queryBuffer, MyMongoUpdateBean<T> updateBean) {
+    public Long doBatchUpdate(EmUserAccountEntity loginUser, QueryPageBean queryBuffer, MyMongoUpdateBean<T> updateBean) {
         Assert.notNull(updateBean, "updateBean不能为空！");
         Assert.notNull(updateBean.getDocument(), "document不能为空！");
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
@@ -82,7 +82,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDeleteById(UserAccountEntity loginUser, ID id) throws MyMongoException {
+    public Long doFakeDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException {
         Integer count = 0;
         if (id == null) {
             throw new MyMongoException("请传入id!");
@@ -100,7 +100,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDelete(UserAccountEntity loginUser, T t) throws MyMongoException {
+    public Long doFakeDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException {
         Integer count = 0;
         if (t == null) {
             throw new MyMongoException("不存在的数据!");
@@ -113,7 +113,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public Long doFakeDeleteByIds(UserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException {
+    public Long doFakeDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException {
         if (iterableList == null) {
             throw new MyMongoException("集合为空!");
         }
@@ -121,22 +121,22 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public void doDeleteById(UserAccountEntity loginUser, ID id) {
+    public void doDeleteById(EmUserAccountEntity loginUser, ID id) {
         baseRepository.deleteById(id);
     }
 
     @Override
-    public void doDelete(UserAccountEntity loginUser, T t) {
+    public void doDelete(EmUserAccountEntity loginUser, T t) {
         baseRepository.delete(t);
     }
 
     @Override
-    public void doDeleteAll(UserAccountEntity loginUser, Iterable<? extends T> iterableList) {
+    public void doDeleteAll(EmUserAccountEntity loginUser, Iterable<? extends T> iterableList) {
         baseRepository.batchDelete(iterableList);
     }
 
     @Override
-    public void doDeleteAll(UserAccountEntity loginUser) throws MyMongoException {
+    public void doDeleteAll(EmUserAccountEntity loginUser) throws MyMongoException {
         if (1 == 1) {
             throw new MyMongoException("不允许使用全部删除功能！");
         }
@@ -145,13 +145,13 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser, QueryPageBean queryBuffer, Sort sort) {
+    public List<T> doFindAll(EmUserAccountEntity loginUser, QueryPageBean queryBuffer, Sort sort) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return doFindAll(loginUser, query, sort);
     }
 
-    private List<T> doFindAll(UserAccountEntity loginUser, Query query, Sort sort) {
+    private List<T> doFindAll(EmUserAccountEntity loginUser, Query query, Sort sort) {
         query = query != null ? query : new Query();
         if (sort == null) {
             return baseRepository.findAll(query);
@@ -162,34 +162,34 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser) {
+    public List<T> doFindAll(EmUserAccountEntity loginUser) {
         return baseRepository.findAll();
     }
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
+    public List<T> doFindAll(EmUserAccountEntity loginUser, QueryPageBean queryBuffer) {
         return this.doFindAll(loginUser, queryBuffer, null);
     }
 
     @Override
-    public List<T> doFindAll(UserAccountEntity loginUser, Sort sort) {
+    public List<T> doFindAll(EmUserAccountEntity loginUser, Sort sort) {
         return baseRepository.findAll(sort);
     }
 
     @Override
-    public T doFindById(UserAccountEntity loginUser, ID id) {
+    public T doFindById(EmUserAccountEntity loginUser, ID id) {
         return baseRepository.findById(id).get();
     }
 
 
     @Override
-    public Iterable<T> doFindAllById(UserAccountEntity loginUser, Iterable<ID> iterableList) {
+    public Iterable<T> doFindAllById(EmUserAccountEntity loginUser, Iterable<ID> iterableList) {
         return baseRepository.findAllById(iterableList);
     }
 
 
     @Override
-    public T doFindOne(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
+    public T doFindOne(EmUserAccountEntity loginUser, QueryPageBean queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.findOne(query).get();
@@ -197,32 +197,32 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
 
     @Override
-    public long doCount(UserAccountEntity loginUser) {
+    public long doCount(EmUserAccountEntity loginUser) {
         return baseRepository.count();
     }
 
     @Override
-    public long doCount(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
+    public long doCount(EmUserAccountEntity loginUser, QueryPageBean queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.count(query);
     }
 
     @Override
-    public boolean doExists(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
+    public boolean doExists(EmUserAccountEntity loginUser, QueryPageBean queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         return baseRepository.exists(query);
     }
 
     @Override
-    public boolean doExistsById(UserAccountEntity loginUser, ID id) {
+    public boolean doExistsById(EmUserAccountEntity loginUser, ID id) {
         return baseRepository.existsById(id);
     }
 
 
     @Override
-    public AntdvPage<T> doFindPage(UserAccountEntity loginUser, QueryPageBean queryBuffer) {
+    public AntdvPage<T> doFindPage(EmUserAccountEntity loginUser, QueryPageBean queryBuffer) {
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         QPageRequest mPageFromBean = MongoQueryBean.getMgPageFromBean(queryBuffer.getPageConf());
@@ -231,19 +231,19 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     }
 
     @Override
-    public AntdvPage<T> doFindPage(UserAccountEntity loginUser, AntdvPage<T> pageBean) {
+    public AntdvPage<T> doFindPage(EmUserAccountEntity loginUser, AntdvPage<T> pageBean) {
         return MongoQueryBean.getPageBeanFromPage(baseRepository.findPage(MongoQueryBean.getMgPageFromBean(pageBean)));
     }
 
 
-    private void dealUpdateSetLoginUserToMO(UserAccountEntity loginUser, T t) {
+    private void dealUpdateSetLoginUserToMO(EmUserAccountEntity loginUser, T t) {
         if (t != null && loginUser != null) {
             t.setLastModifyerId(loginUser.getFid());
             t.setLastModifyerName(loginUser.getUserName());
         }
     }
 
-    private void dealSetModifyInfoToUpdate(UserAccountEntity loginUser, Update update) {
+    private void dealSetModifyInfoToUpdate(EmUserAccountEntity loginUser, Update update) {
         if (loginUser != null) {
             update.set(MongoFieldConstant.FIELD_LASTMODIFYERID, loginUser.getFid());
             update.set(MongoFieldConstant.FIELD_LASTMODIFYER_NAME, loginUser.getUserName());
@@ -256,7 +256,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
      * @param t
      * @param loginUser
      */
-    private void dealCreateSetLoginUserToMO(UserAccountEntity loginUser, T t) {
+    private void dealCreateSetLoginUserToMO(EmUserAccountEntity loginUser, T t) {
         if (t != null && loginUser != null) {
             t.setCreateUserId(loginUser.getFid());
             t.setCreateUserName(loginUser.getUserName());

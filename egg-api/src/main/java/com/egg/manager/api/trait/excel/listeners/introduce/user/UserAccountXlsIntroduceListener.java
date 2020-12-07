@@ -3,10 +3,10 @@ package com.egg.manager.api.trait.excel.listeners.introduce.user;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.UserAccountXlsInModel;
-import com.egg.manager.persistence.em.user.pojo.transfer.UserAccountTransfer;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.persistence.em.user.pojo.excel.introduce.user.EmUserAccountXlsInModel;
+import com.egg.manager.persistence.em.user.pojo.transfer.EmUserAccountTransfer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -20,15 +20,15 @@ import java.util.Set;
  * @date 2020/10/21
  */
 @Slf4j
-public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserAccountXlsInModel> {
+public class UserAccountXlsIntroduceListener extends AnalysisEventListener<EmUserAccountXlsInModel> {
 
-    private UserAccountService userAccountService;
+    private EmUserAccountService emUserAccountService;
     /**
      * 每隔100条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
      */
     private static final int BATCH_COUNT = 100;
 
-    List<UserAccountXlsInModel> list = new ArrayList<UserAccountXlsInModel>();
+    List<EmUserAccountXlsInModel> list = new ArrayList<EmUserAccountXlsInModel>();
 
     /**
      * 已存在的 account
@@ -37,15 +37,15 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     /**
      * 当前登录用户
      */
-    UserAccountEntity loginUser = null;
+    EmUserAccountEntity loginUser = null;
 
 
     /**
      * 如果使用了spring,请使用这个构造方法。每次创建Listener的时候需要把spring管理的类传进来
-     * @param userAccountService
+     * @param emUserAccountService
      */
-    public UserAccountXlsIntroduceListener(UserAccountService userAccountService, UserAccountEntity loginUser, Set<String> accountExistSet) {
-        this.userAccountService = userAccountService;
+    public UserAccountXlsIntroduceListener(EmUserAccountService emUserAccountService, EmUserAccountEntity loginUser, Set<String> accountExistSet) {
+        this.emUserAccountService = emUserAccountService;
         this.loginUser = loginUser;
         if (CollectionUtil.isNotEmpty(accountExistSet)) {
             this.accountExistSet.addAll(accountExistSet);
@@ -58,7 +58,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
      * @param context
      */
     @Override
-    public void invoke(UserAccountXlsInModel data, AnalysisContext context) {
+    public void invoke(EmUserAccountXlsInModel data, AnalysisContext context) {
         list.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (list.size() >= BATCH_COUNT) {
@@ -85,7 +85,7 @@ public class UserAccountXlsIntroduceListener extends AnalysisEventListener<UserA
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
         if (CollectionUtil.isNotEmpty(list)) {
-            userAccountService.saveBatch(UserAccountTransfer.xlsModelListToEntitys(list, loginUser, accountExistSet));
+            emUserAccountService.saveBatch(EmUserAccountTransfer.xlsModelListToEntitys(list, loginUser, accountExistSet));
             log.info("存储数据库成功！");
         }
     }

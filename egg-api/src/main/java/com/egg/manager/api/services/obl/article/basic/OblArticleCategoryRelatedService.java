@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryRelatedEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCategoryRelatedMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCategoryRelatedDto;
@@ -24,7 +24,7 @@ public interface OblArticleCategoryRelatedService extends MyBaseMysqlService<Obl
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryRelatedDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryRelatedDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblArticleCategoryRelatedService extends MyBaseMysqlService<Obl
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception;
 
     /**
      * 更新文章分类关联表
@@ -43,7 +43,7 @@ public interface OblArticleCategoryRelatedService extends MyBaseMysqlService<Obl
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo) throws Exception;
 
 
 }

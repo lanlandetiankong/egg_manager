@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.blconf.basic.OblBlogNoticeService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.blconf.db.mysql.entity.OblBlogNoticeEntity;
 import com.egg.manager.persistence.obl.blconf.db.mysql.mapper.OblBlogNoticeMapper;
 import com.egg.manager.persistence.obl.blconf.pojo.dto.OblBlogNoticeDto;
@@ -35,7 +35,7 @@ public class OblBlogNoticeServiceImpl extends MyBaseMysqlServiceImpl<OblBlogNoti
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogNoticeDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogNoticeDto> queryPage) {
         Page<OblBlogNoticeDto> mpPagination = queryPage.toMpPage();
         List<OblBlogNoticeDto> dtoList = oblBlogNoticeMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblBlogNoticeServiceImpl extends MyBaseMysqlServiceImpl<OblBlogNoti
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception {
         OblBlogNoticeEntity oblBlogNoticeEntity = OblBlogNoticeTransfer.transferVoToEntity(oblBlogNoticeVo);
         super.doBeforeCreate(loginUserInfo, oblBlogNoticeEntity);
         return oblBlogNoticeMapper.insert(oblBlogNoticeEntity);
@@ -52,7 +52,7 @@ public class OblBlogNoticeServiceImpl extends MyBaseMysqlServiceImpl<OblBlogNoti
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblBlogNoticeVo oblBlogNoticeVo) throws Exception {
         Integer changeCount = 0;
         OblBlogNoticeEntity oblBlogNoticeEntity = OblBlogNoticeTransfer.transferVoToEntity(oblBlogNoticeVo);
         oblBlogNoticeEntity = super.doBeforeUpdate(loginUserInfo, oblBlogNoticeEntity);

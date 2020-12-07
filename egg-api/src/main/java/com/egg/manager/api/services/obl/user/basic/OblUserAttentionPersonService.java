@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.user.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserAttentionPersonEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserAttentionPersonMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserAttentionPersonDto;
@@ -24,7 +24,7 @@ public interface OblUserAttentionPersonService extends MyBaseMysqlService<OblUse
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionPersonDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionPersonDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblUserAttentionPersonService extends MyBaseMysqlService<OblUse
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception;
 
     /**
      * 更新用户的关注人关联
@@ -43,7 +43,7 @@ public interface OblUserAttentionPersonService extends MyBaseMysqlService<OblUse
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserAttentionPersonVo oblUserAttentionPersonVo) throws Exception;
 
 
 }

@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.UserAccountMapper;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import java.util.List;
 @Deprecated
 public class OldDataController extends BaseController {
     @Autowired
-    private UserAccountMapper userAccountMapper;
+    private EmUserAccountMapper emUserAccountMapper;
 
     @EmPcWebQueryLog(fullPath = "/index/olddata/restore", flag = false)
     @GetMapping(value = "/testEnv")
@@ -41,7 +41,7 @@ public class OldDataController extends BaseController {
     }
 
     public void runRestore(JSONArray jsonArray) {
-        List<UserAccountEntity> list = new ArrayList<>();
+        List<EmUserAccountEntity> list = new ArrayList<>();
         int count = 0;
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -50,9 +50,9 @@ public class OldDataController extends BaseController {
             jsonObject.put(FieldConst.COL_CREATE_TIME, null);
             jsonObject.put(FieldConst.COL_UPDATE_TIME, null);
             jsonObject.put(FieldConst.COL_FID, null);
-            UserAccountEntity obj = jsonArray.getObject(i, UserAccountEntity.class);
+            EmUserAccountEntity obj = jsonArray.getObject(i, EmUserAccountEntity.class);
             list.add(obj);
-            count += userAccountMapper.insert(obj);
+            count += emUserAccountMapper.insert(obj);
         }
         System.out.println();
     }

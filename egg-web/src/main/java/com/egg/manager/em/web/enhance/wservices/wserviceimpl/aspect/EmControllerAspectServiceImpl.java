@@ -5,7 +5,7 @@ import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
-import com.egg.manager.api.services.em.user.basic.UserAccountService;
+import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.em.web.enhance.wservices.wservice.aspect.EmControllerAspectService;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
 import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
@@ -13,7 +13,7 @@ import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
@@ -54,7 +54,7 @@ public class EmControllerAspectServiceImpl implements EmControllerAspectService 
     private RoutineCommonFunc routineCommonFunc;
 
     @Reference
-    private UserAccountService userAccountService;
+    private EmUserAccountService emUserAccountService;
 
     /**
      * 取得 请求的参数
@@ -151,7 +151,7 @@ public class EmControllerAspectServiceImpl implements EmControllerAspectService 
                 UserAccountToken userAccountToken = routineCommonFunc.gainUserAccountTokenBeanByRequest(request, false);
                 if (userAccountToken != null) {
                     //取得当前登录的用户
-                    CurrentLoginUserInfo loginUserInfo = userAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
+                    CurrentLoginEmUserInfo loginUserInfo = emUserAccountService.queryDbToCacheable(userAccountToken.getUserAccountId());
                     requestInfo.setTokenBean(JSONObject.toJSONString(userAccountToken));
                     String userAccountId = userAccountToken.getUserAccountId();
                     logMgo.setUserAccountId(userAccountId);

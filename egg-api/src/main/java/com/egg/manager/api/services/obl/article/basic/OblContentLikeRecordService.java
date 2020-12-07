@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblContentLikeRecordEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblContentLikeRecordMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblContentLikeRecordDto;
@@ -24,7 +24,7 @@ public interface OblContentLikeRecordService extends MyBaseMysqlService<OblConte
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblContentLikeRecordDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblContentLikeRecordDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblContentLikeRecordService extends MyBaseMysqlService<OblConte
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception;
 
     /**
      * 更新评论点赞表
@@ -43,7 +43,7 @@ public interface OblContentLikeRecordService extends MyBaseMysqlService<OblConte
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblContentLikeRecordVo oblContentLikeRecordVo) throws Exception;
 
 
 }

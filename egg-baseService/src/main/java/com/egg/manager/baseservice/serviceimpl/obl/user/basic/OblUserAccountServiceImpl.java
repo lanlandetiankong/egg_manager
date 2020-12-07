@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.user.basic.OblUserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.user.db.mysql.entity.OblUserAccountEntity;
 import com.egg.manager.persistence.obl.user.db.mysql.mapper.OblUserAccountMapper;
 import com.egg.manager.persistence.obl.user.pojo.dto.OblUserAccountDto;
@@ -34,7 +34,7 @@ public class OblUserAccountServiceImpl extends MyBaseMysqlServiceImpl<OblUserAcc
     private OblUserAccountMapper oblUserAccountMapper;
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAccountDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAccountDto> queryPage) {
         Page<OblUserAccountDto> mpPagination = queryPage.toMpPage();
         List<OblUserAccountDto> dtoList = oblUserAccountMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -43,7 +43,7 @@ public class OblUserAccountServiceImpl extends MyBaseMysqlServiceImpl<OblUserAcc
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserAccountVo oblUserAccountVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserAccountVo oblUserAccountVo) throws Exception {
         OblUserAccountEntity oblUserAccountEntity = OblUserAccountTransfer.transferVoToEntity(oblUserAccountVo);
         super.doBeforeCreate(loginUserInfo, oblUserAccountEntity);
         return oblUserAccountMapper.insert(oblUserAccountEntity);
@@ -51,7 +51,7 @@ public class OblUserAccountServiceImpl extends MyBaseMysqlServiceImpl<OblUserAcc
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserAccountVo oblUserAccountVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserAccountVo oblUserAccountVo) throws Exception {
         Integer changeCount = 0;
         OblUserAccountEntity oblUserAccountEntity = OblUserAccountTransfer.transferVoToEntity(oblUserAccountVo);
         oblUserAccountEntity = super.doBeforeUpdate(loginUserInfo, oblUserAccountEntity);

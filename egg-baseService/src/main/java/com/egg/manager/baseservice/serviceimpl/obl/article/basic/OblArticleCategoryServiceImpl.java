@@ -7,7 +7,7 @@ import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.obl.article.basic.OblArticleCategoryService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblArticleCategoryEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblArticleCategoryMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblArticleCategoryDto;
@@ -35,7 +35,7 @@ public class OblArticleCategoryServiceImpl extends MyBaseMysqlServiceImpl<OblArt
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryDto> queryPage) {
         Page<OblArticleCategoryDto> mpPagination = queryPage.toMpPage();
         List<OblArticleCategoryDto> dtoList = oblArticleCategoryMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class OblArticleCategoryServiceImpl extends MyBaseMysqlServiceImpl<OblArt
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception {
         OblArticleCategoryEntity oblArticleCategoryEntity = OblArticleCategoryTransfer.transferVoToEntity(oblArticleCategoryVo);
         super.doBeforeCreate(loginUserInfo, oblArticleCategoryEntity);
         return oblArticleCategoryMapper.insert(oblArticleCategoryEntity);
@@ -52,7 +52,7 @@ public class OblArticleCategoryServiceImpl extends MyBaseMysqlServiceImpl<OblArt
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblArticleCategoryVo oblArticleCategoryVo) throws Exception {
         Integer changeCount = 0;
         OblArticleCategoryEntity oblArticleCategoryEntity = OblArticleCategoryTransfer.transferVoToEntity(oblArticleCategoryVo);
         oblArticleCategoryEntity = super.doBeforeUpdate(loginUserInfo, oblArticleCategoryEntity);

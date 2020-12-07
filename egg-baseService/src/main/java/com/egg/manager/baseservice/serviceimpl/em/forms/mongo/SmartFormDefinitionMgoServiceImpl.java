@@ -7,7 +7,7 @@ import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
 import com.egg.manager.persistence.em.forms.db.mongo.repository.SmartFormDefinitionRepository;
-import com.egg.manager.persistence.em.user.db.mysql.entity.UserAccountEntity;
+import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -28,7 +28,7 @@ public class SmartFormDefinitionMgoServiceImpl extends MyBaseMgoServiceImpl<Smar
     private SmartFormDefinitionRepository smartFormDefinitionRepository;
 
     @Override
-    public Long updateFormTypeByTypeId(UserAccountEntity userAccountEntity, SmartFormTypeDefinitionMgo smartFormTypeDefinitionMgo) {
+    public Long updateFormTypeByTypeId(EmUserAccountEntity emUserAccountEntity, SmartFormTypeDefinitionMgo smartFormTypeDefinitionMgo) {
         //表单类型id匹配的
         Query query = new Query().addCriteria(Criteria.where("formType." + MongoFieldConstant.FIELD_FID).is(smartFormTypeDefinitionMgo.getFid()));
         Update update = new Update();

@@ -15,6 +15,6 @@ public interface MyRedisCommonReqService {
      * @param userAccountId
      * @param keyTtl
      */
-    //void dealRedisListCacheRefresh(UserAccountEntity loginUser, String key, String hashKey, String userAccountId, Long keyTtl);
+    //void dealRedisListCacheRefresh(EmUserAccountEntity loginUser, String key, String hashKey, String userAccountId, Long keyTtl);
 
 }

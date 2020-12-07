@@ -12,7 +12,7 @@ import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.obl.OblPcWebQueryLog;
 import com.egg.manager.persistence.enhance.annotation.query.QueryPage;
@@ -55,7 +55,7 @@ public class OblUserAccountController extends BaseController {
     @OblPcWebQueryLog(fullPath = "/oblUserAccount/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserAccountDto.class) QueryPageBean<OblUserAccountDto> queryPageBean,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         result = oblUserAccountService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
@@ -66,7 +66,7 @@ public class OblUserAccountController extends BaseController {
     @OblPcWebQueryLog(fullPath = "/oblUserAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserAccountId,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(oblUserAccountId, BaseRstMsgConstant.ErrorMsg.unknowId());
         OblUserAccountEntity oblUserAccountEntity = oblUserAccountMapper.selectById(oblUserAccountId);
@@ -78,7 +78,7 @@ public class OblUserAccountController extends BaseController {
     @OblPcWebOperationLog(fullPath = "/oblUserAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserAccountVo oblUserAccountVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
@@ -92,7 +92,7 @@ public class OblUserAccountController extends BaseController {
     @OblPcWebOperationLog(fullPath = "/oblUserAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserAccountVo oblUserAccountVo,
-                                  @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer changeCount = 0;
@@ -109,7 +109,7 @@ public class OblUserAccountController extends BaseController {
     })
     @PostMapping(value = "/batchDeleteByIds")
     public WebResult batchDeleteByIds(HttpServletRequest request, String[] delIds,
-                                      @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                      @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Integer delCount = 0;
@@ -126,7 +126,7 @@ public class OblUserAccountController extends BaseController {
     })
     @PostMapping(value = "/deleteById")
     public WebResult deleteById(HttpServletRequest request, String delId,
-                                @CurrentLoginUser CurrentLoginUserInfo loginUserInfo)
+                                @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(delId, BaseRstMsgConstant.ErrorMsg.unknowId());

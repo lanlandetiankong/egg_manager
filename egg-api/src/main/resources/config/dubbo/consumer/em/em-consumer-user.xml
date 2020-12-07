@@ -7,23 +7,22 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:reference id="roleMenuService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.RoleMenuService"/>
-    <dubbo:reference id="rolePermissionService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.RolePermissionService"/>
-    <!--                                    dir-start:com.egg.manager.api.services.basic.user                                                              -->
-    <dubbo:reference id="userAccountService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.UserAccountService"/>
-    <dubbo:reference id="userGroupService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.UserGroupService"/>
-    <dubbo:reference id="userJobService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.UserJobService"/>
-    <dubbo:reference id="userRoleService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.UserRoleService"/>
-    <dubbo:reference id="userTenantService" check="false"
-                     interface="com.egg.manager.api.services.em.user.basic.UserTenantService"/>
+    <dubbo:reference id="emRoleMenuService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmRoleMenuService"/>
+    <dubbo:reference id="emRolePermissionService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmRolePermissionService"/>
+    <dubbo:reference id="emUserAccountService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmUserAccountService"/>
+    <dubbo:reference id="emUserGroupService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmUserGroupService"/>
+    <dubbo:reference id="emUserJobService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmUserJobService"/>
+    <dubbo:reference id="emUserRoleService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmUserRoleService"/>
+    <dubbo:reference id="emUserTenantService" check="false"
+                     interface="com.egg.manager.api.services.em.user.basic.EmUserTenantService"/>
 
-    <dubbo:reference id="userAccountXlsService" check="false"
-                     interface="com.egg.manager.api.services.em.user.xls.UserAccountXlsService"/>
+    <dubbo:reference id="emUserAccountXlsService" check="false"
+                     interface="com.egg.manager.api.services.em.user.xls.EmUserAccountXlsService"/>
 
 </beans>

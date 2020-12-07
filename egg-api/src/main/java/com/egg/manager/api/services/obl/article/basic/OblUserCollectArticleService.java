@@ -3,7 +3,7 @@ package com.egg.manager.api.services.obl.article.basic;
 import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.obl.article.db.mysql.entity.OblUserCollectArticleEntity;
 import com.egg.manager.persistence.obl.article.db.mysql.mapper.OblUserCollectArticleMapper;
 import com.egg.manager.persistence.obl.article.pojo.dto.OblUserCollectArticleDto;
@@ -24,7 +24,7 @@ public interface OblUserCollectArticleService extends MyBaseMysqlService<OblUser
      * @param queryPageBean 查询分页配置
      * @return WebResult
      */
-    WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCollectArticleDto> queryPageBean);
+    WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCollectArticleDto> queryPageBean);
 
 
     /**
@@ -34,7 +34,7 @@ public interface OblUserCollectArticleService extends MyBaseMysqlService<OblUser
      * @return Integer
      * @throws Exception
      */
-    Integer dealCreate(CurrentLoginUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception;
+    Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception;
 
     /**
      * 更新用户收藏的文章
@@ -43,7 +43,7 @@ public interface OblUserCollectArticleService extends MyBaseMysqlService<OblUser
      * @return Integer
      * @throws Exception
      */
-    Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception;
+    Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, OblUserCollectArticleVo oblUserCollectArticleVo) throws Exception;
 
 
 }

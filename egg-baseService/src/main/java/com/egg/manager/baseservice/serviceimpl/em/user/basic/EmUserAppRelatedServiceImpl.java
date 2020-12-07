@@ -9,7 +9,7 @@ import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAppRelatedEntity;
 import com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAppRelatedMapper;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.persistence.em.user.pojo.dto.EmUserAppRelatedDto;
 import com.egg.manager.persistence.em.user.pojo.transfer.EmUserAppRelatedTransfer;
 import com.egg.manager.persistence.em.user.pojo.vo.EmUserAppRelatedVo;
@@ -35,7 +35,7 @@ public class EmUserAppRelatedServiceImpl extends MyBaseMysqlServiceImpl<EmUserAp
 
 
     @Override
-    public WebResult dealQueryPageByDtos(CurrentLoginUserInfo loginUserInfo, WebResult result, QueryPageBean<EmUserAppRelatedDto> queryPage) {
+    public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmUserAppRelatedDto> queryPage) {
         Page<EmUserAppRelatedDto> mpPagination = queryPage.toMpPage();
         List<EmUserAppRelatedDto> dtoList = emUserAppRelatedMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
         result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
@@ -44,7 +44,7 @@ public class EmUserAppRelatedServiceImpl extends MyBaseMysqlServiceImpl<EmUserAp
     }
 
     @Override
-    public Integer dealCreate(CurrentLoginUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception {
+    public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception {
         EmUserAppRelatedEntity emUserAppRelatedEntity = EmUserAppRelatedTransfer.transferVoToEntity(emUserAppRelatedVo);
         super.doBeforeCreate(loginUserInfo, emUserAppRelatedEntity);
         return emUserAppRelatedMapper.insert(emUserAppRelatedEntity);
@@ -52,7 +52,7 @@ public class EmUserAppRelatedServiceImpl extends MyBaseMysqlServiceImpl<EmUserAp
 
 
     @Override
-    public Integer dealUpdate(CurrentLoginUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception {
+    public Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, EmUserAppRelatedVo emUserAppRelatedVo) throws Exception {
         Integer changeCount = 0;
         EmUserAppRelatedEntity emUserAppRelatedEntity = EmUserAppRelatedTransfer.transferVoToEntity(emUserAppRelatedVo);
         emUserAppRelatedEntity = super.doBeforeUpdate(loginUserInfo, emUserAppRelatedEntity);

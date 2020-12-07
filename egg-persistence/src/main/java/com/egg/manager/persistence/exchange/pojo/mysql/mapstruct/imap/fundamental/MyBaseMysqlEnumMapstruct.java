@@ -1,6 +1,7 @@
 package com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.imap.fundamental;
 
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
+import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.EmDefineTenantMapstruct;
 import com.egg.manager.persistence.em.user.domain.enums.UserSexEnum;
 import com.egg.manager.persistence.em.define.domain.enums.DefineJobTypeEnum;
 import com.egg.manager.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
@@ -9,8 +10,7 @@ import com.egg.manager.persistence.em.define.domain.enums.DefinePermissionTypeEn
 import com.egg.manager.persistence.em.define.domain.enums.DefineRoleTypeEnum;
 import com.egg.manager.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.persistence.em.user.domain.enums.UserAccountStateEnum;
-import com.egg.manager.persistence.em.define.pojo.mapstruct.imap.DefineTenantMapstruct;
-import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.UserAccountMapstruct;
+import com.egg.manager.persistence.em.user.pojo.mapstruct.imap.EmUserAccountMapstruct;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import com.egg.manager.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import org.mapstruct.MapperConfig;
@@ -23,8 +23,8 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMysqlEnumMapstruct<E, V extends MyBaseMysqlVo, D extends MyBaseMysqlDto> {
 
-    UserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = UserAccountMapstruct.INSTANCE;
-    DefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = DefineTenantMapstruct.INSTANCE;
+    EmUserAccountMapstruct USER_ACCOUNT_MAPSTRUCT = EmUserAccountMapstruct.INSTANCE;
+    EmDefineTenantMapstruct DEFINE_TENANT_MAPSTRUCT = EmDefineTenantMapstruct.INSTANCE;
 
     /**
      * 判断值 是否为 启用

@@ -2,15 +2,15 @@ package com.egg.manager.persistence.commons.base.enums.basic;
 
 /**
  * @Description: 平台类型 枚举
- * @ClassName: PlatformEnum
+ * @ClassName: WebAppTypeEnum
  * @Author: zhoucj
  * @Date: 2020/12/7 9:21
  */
-public enum PlatformEnum {
+public enum WebAppTypeEnum {
     EggManager("egg_manager"),
     OolongBlog("oolong_blog");
 
-    PlatformEnum(String value) {
+    WebAppTypeEnum(String value) {
         this.value = value;
     }
 

@@ -80,7 +80,7 @@ public class CommonMenuTree extends MyBaseTree {
     public static CommonMenuTree dealDefineMenuToTree(EmDefineMenuEntity menu, CommonMenuTree tree) {
         tree = tree != null ? tree : new CommonMenuTree();
         tree.setId(menu.getFid());
-        tree.setPid(menu.getParentId());
+        tree.setPid(menu.getPid());
         tree.setName(menu.getMenuName());
         tree.setIconName(menu.getIconName());
         tree.setLabel(menu.getLabel());

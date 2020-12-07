@@ -24,7 +24,7 @@ public class CommonTreeSelectTranslate extends MyBaseTree {
         tree.setKey(emDefineDepartmentEntity.getFid());
         tree.setValue(emDefineDepartmentEntity.getFid());
         tree.setTitle(emDefineDepartmentEntity.getName());
-        tree.setParentId(emDefineDepartmentEntity.getParentId());
+        tree.setPid(emDefineDepartmentEntity.getPid());
         return tree;
     }
 
@@ -39,7 +39,7 @@ public class CommonTreeSelectTranslate extends MyBaseTree {
         tree.setKey(menu.getFid());
         tree.setValue(menu.getFid());
         tree.setTitle(menu.getMenuName());
-        tree.setParentId(menu.getParentId());
+        tree.setPid(menu.getPid());
         return tree;
     }
 }

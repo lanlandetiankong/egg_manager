@@ -1,6 +1,7 @@
 package com.egg.manager.em.web.controller.index.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.api.config.i18n.I18nUtil;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.hello.basic.HelloService;
 import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
@@ -62,5 +63,16 @@ public class HelloController extends BaseController {
     public void loadMessageBalanceTest() {
         String port = messageHelloService.loadServiceBalancePort();
         log.info("for message  debug..." + port);
+    }
+
+    @EmPcWebQueryLog(fullPath = "/index/hello/i18n", flag = false)
+    @ApiOperation(value = "i18n", response = Void.class, httpMethod = HttpMethodConstant.GET)
+    @GetMapping(value = "/i18n")
+    public void i18n() {
+        String s = I18nUtil.get("index.welcome");
+        String s2 = I18nUtil.get("login.username");
+
+        log.info("for message  debug..." + s);
+        log.info("for message  debug..." + s2);
     }
 }

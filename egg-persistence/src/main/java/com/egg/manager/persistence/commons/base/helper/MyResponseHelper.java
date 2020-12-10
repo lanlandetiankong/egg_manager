@@ -29,7 +29,7 @@ public class MyResponseHelper {
     }
 
     public static WebResult handleAuthenticationExpired() {
-        WebResult result = WebResult.error(BaseRstMsgConstant.ErrorMsg.unauthorized());
+        WebResult result = WebResult.error(BaseRstMsgConstant.ErrorMsg.shiroUnauthorized());
             result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
         return result;
     }

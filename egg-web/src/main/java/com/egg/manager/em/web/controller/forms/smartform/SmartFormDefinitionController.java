@@ -121,7 +121,7 @@ public class SmartFormDefinitionController extends BaseController {
         Assert.notNull(smartFormDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(smartFormDefinitionMgvo.getFormTypeId());
         if (formTypeDefinitionMgoOptional.isPresent() == false) {
-            throw new MyRuntimeBusinessException("不是有效的表单类型！");
+            throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
         }
         SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(smartFormDefinitionMgvo);
         formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());
@@ -142,7 +142,7 @@ public class SmartFormDefinitionController extends BaseController {
         Assert.notNull(formDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
         Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMgvo.getFormTypeId());
         if (formTypeDefinitionMgoOptional.isPresent() == false) {
-            throw new MyRuntimeBusinessException("不是有效的表单类型！");
+            throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
         }
         SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(formDefinitionMgvo);
         formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());

@@ -62,7 +62,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
             String tClassName = ((ParameterizedTypeImpl) firstInterfaceCls.getGenericInterfaces()[0]).getActualTypeArguments()[0].getTypeName();
             tClass = (Class<T>) Class.forName(tClassName);
         } catch (ClassNotFoundException e) {
-            throw new MyMongoException("找不到对应class!");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.reflexClsNotFound());
         }
         return tClass;
     }

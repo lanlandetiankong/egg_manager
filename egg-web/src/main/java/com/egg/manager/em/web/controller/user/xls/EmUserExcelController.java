@@ -62,7 +62,7 @@ public class EmUserExcelController extends BaseController {
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
         EmDefineMenuEntity emDefineMenuEntity = emDefineMenuService.getById(menuId);
         if (emDefineMenuEntity == null) {
-            throw new MyRuntimeBusinessException("指定的无效的菜单！");
+            throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.invalidObject());
         }
         AntdFileUploadBean fileUploadBean = emUserAccountXlsService.dealVerifyMenuExportAble(emDefineMenuEntity);
         emUserAccountXlsService.dealCheckExportSingleWithTemplate2Web(loginUserInfo, response, emDefineMenuEntity, fileUploadBean, checkIds);

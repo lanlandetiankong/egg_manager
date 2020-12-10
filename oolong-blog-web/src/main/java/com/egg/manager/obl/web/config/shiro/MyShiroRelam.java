@@ -5,6 +5,7 @@ import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
 import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
@@ -108,10 +109,10 @@ public class MyShiroRelam extends AuthorizingRealm {
         String token = (String) auth.getCredentials();
         String userAccountId = JwtUtil.getUserAccountId(token);
         if (userAccountId == null) {
-            throw new UnauthorizedException("token invalid");
+            throw new UnauthorizedException(BaseRstMsgConstant.ErrorMsg.jwtTokenInvalid());
         }
         if (!JwtUtil.verify(token, userAccountId)) {
-            throw new UnauthorizedException("JWT:账号信息不匹配！");
+            throw new UnauthorizedException(BaseRstMsgConstant.ErrorMsg.jwtTokenMismatch());
         }
         return new SimpleAuthenticationInfo(token, token, this.getName());
     }

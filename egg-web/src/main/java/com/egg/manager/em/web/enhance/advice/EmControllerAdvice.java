@@ -75,7 +75,7 @@ public class EmControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
-        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.unauthorized()),e);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.shiroUnauthorized()),e);
         return MyResponseHelper.handleAuthenticationExpired();
     }
 

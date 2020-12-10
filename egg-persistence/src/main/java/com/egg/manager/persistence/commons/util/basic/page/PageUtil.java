@@ -3,6 +3,7 @@ package com.egg.manager.persistence.commons.util.basic.page;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.Constant;
 import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
@@ -33,7 +34,7 @@ public class PageUtil {
             }
         }
         if (bean == null && isRequired) {
-            throw new MyRuntimeBusinessException("未取得有效的值：" + paramKey);
+            throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.paramCannotEmpty(paramKey));
         }
         return bean;
     }

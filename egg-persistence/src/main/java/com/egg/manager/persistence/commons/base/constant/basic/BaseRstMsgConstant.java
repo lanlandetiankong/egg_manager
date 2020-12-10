@@ -8,12 +8,12 @@ import org.apache.commons.lang3.StringUtils;
  * @description 控制器操作信息-基本常量
  * @date 2020/10/21
  */
-public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWarningKeyConst, IInfoKeyConst {
+public class BaseRstMsgConstant {
 
     /**
      * 错误信息
      */
-    public static class ErrorMsg {
+    public static class ErrorMsg implements IErrorKeyConst {
         public static String actionFail(){
             return I18nUtil.get(ACTION_FAIL);
         }
@@ -100,8 +100,8 @@ public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWa
         public static String notMatchaccountPassword() {
             return I18nUtil.get(NOT_MATCH_ACCOUNT_PASSWORD) + actionFail();
         }
-        public static String unauthorized() {
-            return I18nUtil.get(UNAUTHORIZED) + actionFail();
+        public static String shiroUnauthorized() {
+            return I18nUtil.get(SHIRO_UNAUTHORIZED) + actionFail();
         }
         public static String noOperationAuthority() {
             return I18nUtil.get(NO_OPERATION_AUTHORITY) + actionFail();
@@ -130,10 +130,19 @@ public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWa
         public static String deleteQuantityDoesNotMatch(Long arg1,Long arg2) {
             return I18nUtil.get(DELETE_QUANTITY_DOES_NOT_MATCH,arg1,arg2) + actionFail();
         }
+        public static String reflexClsNotFound() {
+            return I18nUtil.get(REFLEX_CLS_NOT_FOUND) + actionFail();
+        }
+        public static String jwtTokenInvalid() {
+            return I18nUtil.get(JWT_TOKEN_INVALID) + actionFail();
+        }
+        public static String jwtTokenMismatch() {
+            return I18nUtil.get(JWT_TOKEN_MISMATCH) + actionFail();
+        }
     }
 
 
-    public static class SuccessMsg {
+    public static class SuccessMsg implements ISuccessKeyConst {
         public static String actionSuccess(){
             return I18nUtil.get(ACTION_SUCCESS);
         }
@@ -146,13 +155,13 @@ public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWa
     }
 
 
-    public static class InfoMsg {
+    public static class InfoMsg implements IInfoKeyConst{
         public static String excelExportData(String prefix){
             return StringUtils.defaultIfBlank(prefix,"")+I18nUtil.get(EXCEL_EXPORT_DATA);
         }
     }
 
-    public static class WarningMsg {
+    public static class WarningMsg implements IWarningKeyConst{
         public static String selectAtLeastOneExportData(){
             return I18nUtil.get(SELECT_AT_LEAST_ONE_EXPORT_DATA);
         }

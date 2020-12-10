@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.persistence.commons.util.data.str.MyStringUtil;
 import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineTenantEntity;
@@ -78,7 +79,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
     default String handleGetLoginUserId(EmUserAccountEntity emUserAccountEntity, boolean required) {
         if (emUserAccountEntity == null) {
             if (required) {
-                throw new MyRuntimeBusinessException("无法取得当前用户信息！");
+                throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.shiroUnauthorized());
             }
             return null;
         } else {

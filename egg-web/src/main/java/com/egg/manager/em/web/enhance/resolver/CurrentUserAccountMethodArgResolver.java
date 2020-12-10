@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.enums.db.RedisShiroCacheEnum;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
@@ -70,7 +71,7 @@ public class CurrentUserAccountMethodArgResolver implements HandlerMethodArgumen
         if (currentLoginUserAnno != null) {
             boolean required = currentLoginUserAnno.required();
             if (loginUserInfo == null && required) {
-                throw new MyUnauthorizedException("获取用户信息失败");
+                throw new MyUnauthorizedException(BaseRstMsgConstant.ErrorMsg.userIsLoingOut());
             }
         }
         return loginUserInfo;

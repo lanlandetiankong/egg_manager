@@ -32,7 +32,7 @@ public interface IErrorKeyConst {
     public final static String EXPORT_FAIL = "error.msg.common.export.fail";
     public final static String UPLOAD_EXCEL_NOT_UPLOADED = "error.msg.common.upload.file.excel.not.uploaded";
     public final static String UPLOAD_EXCEL_TEMPLATE_MISTAKEN = "error.msg.common.upload.file.excel.template.mistaken";
-    public final static String UNAUTHORIZED = "error.msg.shiro.unauthorized";
+    public final static String SHIRO_UNAUTHORIZED = "error.msg.shiro.unauthorized";
     public final static String NO_OPERATION_AUTHORITY = "error.msg.shiro.no.operation.authority";
     public final static String BUSINESS_EXCEPTION = "error.msg.business.exception";
     public final static String FORM_INCORRECT_PARAM = "error.msg.form.incorrect.param";
@@ -42,4 +42,7 @@ public interface IErrorKeyConst {
     public final static String NOT_ALLOW_DELETE_ALL_DATA = "error.msg.not.allowed.delete.all.data";
     public final static String UPDATE_QUANTITY_DOES_NOT_MATCH = "error.msg.update.quantity.does.not.match";
     public final static String DELETE_QUANTITY_DOES_NOT_MATCH = "error.msg.delete.quantity.does.not.match";
+    public final static String REFLEX_CLS_NOT_FOUND = "error.msg.reflex.cls.not.found";
+    public final static String JWT_TOKEN_INVALID = "error.msg.jwt.token.invalid";
+    public final static String JWT_TOKEN_MISMATCH = "error.msg.jwt.token.mismatch";
 }

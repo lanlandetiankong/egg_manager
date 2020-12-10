@@ -26,6 +26,10 @@ public interface IErrorKeyConst {
     public final static String EMPTY_COLLECTION = "error.msg.common.empty.collection";
     public final static String USER_IS_LOGIN_OUT = "error.msg.common.user.is.logout";
     public final static String EMPTY_UPLOAD_FILE = "error.msg.common.empty.upload.file";
+    public final static String FILE_NOT_EXIST = "error.msg.common.file.not.exist";
+    public final static String FILE_NAME_EMPTY = "error.msg.common.file.name.empty";
+    public final static String FILE_QUANTITY_EXCEED_LIMIT = "error.msg.common.file.quantity.exceed.limit";
+    public final static String EXPORT_FAIL = "error.msg.common.export.fail";
     public final static String UPLOAD_EXCEL_NOT_UPLOADED = "error.msg.common.upload.file.excel.not.uploaded";
     public final static String UPLOAD_EXCEL_TEMPLATE_MISTAKEN = "error.msg.common.upload.file.excel.template.mistaken";
     public final static String UNAUTHORIZED = "error.msg.shiro.unauthorized";

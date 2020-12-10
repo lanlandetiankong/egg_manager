@@ -27,7 +27,6 @@ public class MpCustomIdGenerator implements IdentifierGenerator {
         MetaObject metaObject = SystemMetaObject.forObject(entity);
         String name = (String) metaObject.getValue("name");
         final long id = al.getAndAdd(1);
-        log.info("为{}生成主键值->:{}", name, id);
         return id;
     }
 

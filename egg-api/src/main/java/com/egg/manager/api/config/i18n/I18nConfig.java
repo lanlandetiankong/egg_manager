@@ -1,5 +1,6 @@
 package com.egg.manager.api.config.i18n;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@Slf4j
 public class I18nConfig {
 
     /**
@@ -83,7 +85,7 @@ public class I18nConfig {
         if (file.exists() && file.isDirectory()) {
             this.getAllFile(baseNames, file, "");
         } else {
-            System.out.println("指定的baseFile不存在或者不是文件夹");
+            log.error("指定的baseFile不存在或者不是文件夹");
         }
         return baseNames.toArray(new String[baseNames.size()]);
     }

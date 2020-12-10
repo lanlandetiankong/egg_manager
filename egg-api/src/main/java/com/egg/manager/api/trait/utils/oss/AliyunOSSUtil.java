@@ -84,7 +84,7 @@ public class AliyunOSSUtil {
             inputStream = file.getInputStream();
         } catch (IOException e) {
             log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
-            return new AliyunOssResult(false, null, null, e.getMessage());
+            return AliyunOssResult.error(e.getMessage());
         }
         // 获取文件类型
         String fileType = file.getContentType();
@@ -103,10 +103,10 @@ public class AliyunOSSUtil {
      */
     public static AliyunOssResult uploadInputStream(InputStream inputStream, String fileType, String fileName) {
         if (inputStream == null) {
-            return new AliyunOssResult(false, null, null, "文件不能为空");
+            return AliyunOssResult.error(BaseRstMsgConstant.ErrorMsg.fileNotExist());
         }
         if (StrUtil.isBlank(fileName)) {
-            return new AliyunOssResult(false, null, null, "文件名不能为空");
+            return AliyunOssResult.error(BaseRstMsgConstant.ErrorMsg.fileNameEmpty());
         }
         // 上传文件最大值 MB->bytes
         long maxSize = AliyunOssConfig.JAVA_MAX_SIZE * 1024 * 1024;
@@ -118,7 +118,7 @@ public class AliyunOSSUtil {
             log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         }
         if (fileSize <= 0 || fileSize > maxSize) {
-            return new AliyunOssResult(false, null, null, "文件超过最大限制");
+            return AliyunOssResult.error(BaseRstMsgConstant.ErrorMsg.fileQuantityExceedLimit());
         }
 
         // 上传文件
@@ -145,12 +145,11 @@ public class AliyunOSSUtil {
             PutObjectRequest request = new PutObjectRequest(AliyunOssConfig.JAVA_BUCKET_NAME, fileName, input, meta);
             //上传文件
             ossClient.putObject(request);
-
             //获取上传成功的文件地址
-            return new AliyunOssResult(true, fileName, getOssUrl(fileName), "上传成功");
+            return AliyunOssResult.success(fileName, getOssUrl(fileName), BaseRstMsgConstant.SuccessMsg.uploadFileOk());
         } catch (OSSException | ClientException e) {
             log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
-            return new AliyunOssResult(false, fileName, null, e.getMessage());
+            return AliyunOssResult.error(fileName,e.getMessage());
         }
     }
 

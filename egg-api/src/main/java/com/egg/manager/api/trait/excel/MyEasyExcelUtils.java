@@ -2,6 +2,7 @@ package com.egg.manager.api.trait.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.util.IOUtils;
 
@@ -65,7 +66,7 @@ public class MyEasyExcelUtils {
     public static String export2Web4File(HttpServletResponse response, String path, String excelName) throws UnsupportedEncodingException {
         File file = new File(path.concat(excelName).concat(ExcelTypeEnum.XLSX.getValue()));
         if (!file.exists()) {
-            return "文件不存在！";
+            return BaseRstMsgConstant.ErrorMsg.fileNotExist();
         }
 
         response.setContentType("application/vnd.ms-excel");
@@ -79,12 +80,12 @@ public class MyEasyExcelUtils {
                 ServletOutputStream out = response.getOutputStream()
         ) {
             IOUtils.copy(in, out);
-            return "导出成功！";
+            return BaseRstMsgConstant.SuccessMsg.exportOk();
         } catch (Exception e) {
-            log.error("导出文件异常：", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.exportFail(), e);
         }
 
-        return "导出失败！";
+        return BaseRstMsgConstant.ErrorMsg.exportFail();
     }
 
     /**
@@ -107,7 +108,7 @@ public class MyEasyExcelUtils {
             response.addHeader("Cache-Control", "max-age=0");
             return response.getOutputStream();
         } catch (IOException e) {
-            throw new Exception("导出文件失败！");
+            throw new Exception(BaseRstMsgConstant.ErrorMsg.exportFail());
         }
     }
 }

@@ -76,7 +76,7 @@ public class ExcelUploadController extends BaseController {
                     .uri(fileUri)
                     .urlLocation(fileUri)
                     .status(AntdFileUploadStatusEnum.Done.getValue())
-                    .response("文件上传成功！")
+                    .response(BaseRstMsgConstant.SuccessMsg.uploadFileOk())
                     .build();
             uploadBeanList.add(uploadBean);
         }

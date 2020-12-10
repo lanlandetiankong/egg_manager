@@ -8,4 +8,6 @@ package com.egg.manager.persistence.commons.base.constant.basic;
  */
 public interface ISuccessKeyConst {
     final static String ACTION_SUCCESS = "success.msg.common.action";
+    final static String EXPORT_OK = "success.msg.common.export.action";
+    final static String UPLOAD_FILE_OK = "success.msg.common.upload.file";
 }

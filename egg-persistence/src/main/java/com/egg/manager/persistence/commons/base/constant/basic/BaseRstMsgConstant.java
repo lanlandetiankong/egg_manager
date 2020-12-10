@@ -78,6 +78,18 @@ public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWa
         public static String emptyUploadFile() {
             return I18nUtil.get(EMPTY_UPLOAD_FILE) + actionFail();
         }
+        public static String fileNotExist() {
+            return I18nUtil.get(FILE_NOT_EXIST) + actionFail();
+        }
+        public static String fileNameEmpty() {
+            return I18nUtil.get(FILE_NAME_EMPTY) + actionFail();
+        }
+        public static String fileQuantityExceedLimit() {
+            return I18nUtil.get(FILE_QUANTITY_EXCEED_LIMIT) + actionFail();
+        }
+        public static String exportFail() {
+            return I18nUtil.get(EXPORT_FAIL) + actionFail();
+        }
         public static String uploadExcelNotUploaded() {
             return I18nUtil.get(UPLOAD_EXCEL_NOT_UPLOADED) + actionFail();
         }
@@ -124,6 +136,12 @@ public class BaseRstMsgConstant implements ISuccessKeyConst, IErrorKeyConst, IWa
     public static class SuccessMsg {
         public static String actionSuccess(){
             return I18nUtil.get(ACTION_SUCCESS);
+        }
+        public static String exportOk(){
+            return I18nUtil.get(EXPORT_OK);
+        }
+        public static String uploadFileOk(){
+            return I18nUtil.get(UPLOAD_FILE_OK);
         }
     }
 

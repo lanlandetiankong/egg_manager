@@ -5,6 +5,7 @@ package com.egg.manager.persistence.commons.base.enums.basic;
  * @description
  * @date 2020/10/20
  */
+@Deprecated
 public enum PublicResultEnum {
     //常见错误
     Failed("Failed", "系统错误", "系统错误"),

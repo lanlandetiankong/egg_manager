@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.data.str;
 
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -73,7 +74,7 @@ public class MyStringUtil {
         try {
             result = URLDecoder.decode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         }
         return result;
     }

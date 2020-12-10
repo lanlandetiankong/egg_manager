@@ -5,10 +5,9 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.WebApiConstant;
-import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyRuntimeBusinessException;
@@ -150,7 +149,7 @@ public class EmDefinePermissionController extends BaseController {
         result.putCount(delCount);
         if (new Integer(0).equals(delCount)) {
             //如果删除的是 [已启用的]，则抛出异常
-            throw new MyRuntimeBusinessException("删除权限定义:" + BaseRstMsgConstant.ACTION_FAIL_MSG + PublicResultEnum.SwitchOpenChangeLimit.getLabel());
+            throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.activatedItemsCannotBeDeleted());
         }
         return result;
     }

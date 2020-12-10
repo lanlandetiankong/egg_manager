@@ -14,6 +14,7 @@ import com.egg.manager.api.services.em.user.basic.EmUserGroupService;
 import com.egg.manager.api.services.em.user.basic.EmUserJobService;
 import com.egg.manager.api.services.em.user.basic.EmUserRoleService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;
 import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineJobEntity;
 import com.egg.manager.persistence.em.user.domain.constant.UserAccountConstant;
@@ -161,7 +162,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
             EmUserTenantEntity emUserTenantEntity = EmUserTenantPojoInitialize.generateSimpleInsertEntity(emUserAccountEntity.getFid(), emUserAccountVo.getBelongTenantId(), loginUserInfo);
             emUserTenantMapper.insert(emUserTenantEntity);
         } else {
-            throw new BusinessException("关联用户与租户失败！创建用户失败！");
+            throw new BusinessException(BaseRstMsgConstant.ErrorMsg.createActionFail());
         }
 
         //关联 部门
@@ -169,7 +170,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
             EmUserDepartmentEntity emUserDepartmentEntity = EmUserDepartmentPojoInitialize.generateSimpleInsertEntity(emUserAccountEntity.getFid(), emUserAccountVo.getBelongDepartmentId(), loginUserInfo);
             emUserDepartmentMapper.insert(emUserDepartmentEntity);
         } else {
-            throw new BusinessException("关联用户与部门失败！创建用户失败！");
+            throw new BusinessException(BaseRstMsgConstant.ErrorMsg.createActionFail());
         }
         return addCount;
     }
@@ -201,7 +202,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
                 emUserTenantMapper.updateById(emUserTenantEntity);
             }
         } else {
-            throw new BusinessException("关联用户与租户失败！更新用户失败！");
+            throw new BusinessException(BaseRstMsgConstant.ErrorMsg.updateActionFail());
         }
         //关联 部门
         if (StringUtils.isNotBlank(emUserAccountEntity.getFid()) && StringUtils.isNotBlank(emUserAccountVo.getBelongDepartmentId())) {
@@ -217,7 +218,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
                 emUserDepartmentMapper.updateById(emUserDepartmentEntity);
             }
         } else {
-            throw new BusinessException("关联用户与租户失败！更新用户失败！");
+            throw new BusinessException(BaseRstMsgConstant.ErrorMsg.updateActionFail());
         }
         return changeCount;
     }

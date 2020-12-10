@@ -25,7 +25,7 @@ public class WebResult extends AbstractResult {
         result.putSuccess(true);
         result.putHasWarning(false);
         result.putCode(HttpStatus.HTTP_OK);
-        result.putMsg(BaseRstMsgConstant.ACTION_SUCCESS_MSG);
+        result.putMsg(BaseRstMsgConstant.SuccessMsg.actionSuccess());
         result.putErrorMsg(null);
         return result;
     }
@@ -48,14 +48,14 @@ public class WebResult extends AbstractResult {
     public static WebResult error(String errorMsg) {
         WebResult result = initResult();
         result.putSuccess(false);
-        result.putMsg(BaseRstMsgConstant.ACTION_FAIL_MSG);
+        result.putMsg(BaseRstMsgConstant.ErrorMsg.actionFail());
         result.putErrorMsg(errorMsg);
         result.putCode(HttpStatus.HTTP_INTERNAL_ERROR);
         return result;
     }
 
     public WebResult toError() {
-        return toError(BaseRstMsgConstant.ACTION_FAIL_MSG);
+        return toError(BaseRstMsgConstant.ErrorMsg.actionFail());
     }
 
     public WebResult toError(String msg) {

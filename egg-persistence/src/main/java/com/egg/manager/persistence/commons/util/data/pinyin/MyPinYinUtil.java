@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.data.pinyin;
 
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -41,7 +42,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0].charAt(0);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    log.error("执行异常--->", e);
+                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
                 }
             } else {
                 pinyinStr += newChar[i];
@@ -69,7 +70,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0];
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    log.error("执行异常--->", e);
+                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
                 }
             } else {
                 pinyinStr += newChar[i];

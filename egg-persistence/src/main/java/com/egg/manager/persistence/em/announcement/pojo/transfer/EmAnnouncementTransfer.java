@@ -3,6 +3,7 @@ package com.egg.manager.persistence.em.announcement.pojo.transfer;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.EmAnnouncementDraftEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.EmAnnouncementEntity;
 import com.egg.manager.persistence.em.announcement.db.mysql.entity.EmAnnouncementTagEntity;
@@ -74,7 +75,7 @@ public class EmAnnouncementTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                log.error("执行异常--->", e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             }
         }
         return vo;
@@ -121,7 +122,7 @@ public class EmAnnouncementTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                log.error("执行异常--->", e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             }
         }
         return vo;

@@ -12,6 +12,7 @@ import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.aliyun.oss.model.*;
 import com.egg.manager.api.config.oss.AliyunOssConfig;
 import com.egg.manager.persistence.commons.base.beans.oss.AliyunOssResult;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,7 +83,7 @@ public class AliyunOSSUtil {
         try {
             inputStream = file.getInputStream();
         } catch (IOException e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             return new AliyunOssResult(false, null, null, e.getMessage());
         }
         // 获取文件类型
@@ -114,7 +115,7 @@ public class AliyunOSSUtil {
         try {
             fileSize = inputStream.available();
         } catch (IOException e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         }
         if (fileSize <= 0 || fileSize > maxSize) {
             return new AliyunOssResult(false, null, null, "文件超过最大限制");
@@ -148,7 +149,7 @@ public class AliyunOSSUtil {
             //获取上传成功的文件地址
             return new AliyunOssResult(true, fileName, getOssUrl(fileName), "上传成功");
         } catch (OSSException | ClientException e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             return new AliyunOssResult(false, fileName, null, e.getMessage());
         }
     }
@@ -217,7 +218,7 @@ public class AliyunOSSUtil {
             GenericRequest request = new DeleteObjectsRequest(AliyunOssConfig.JAVA_BUCKET_NAME).withKey(fileName);
             ossClient.deleteObject(request);
         } catch (Exception e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             return false;
         }
         return true;

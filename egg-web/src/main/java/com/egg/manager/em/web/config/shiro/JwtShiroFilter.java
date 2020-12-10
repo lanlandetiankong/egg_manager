@@ -2,11 +2,11 @@ package com.egg.manager.em.web.config.shiro;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.Constant;
-import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
 import com.egg.manager.persistence.commons.base.helper.MyResponseHelper;
-import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.commons.util.basic.spring.SpringContextBeanUtil;
+import com.egg.manager.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.persistence.em.user.pojo.initialize.EmUserAccountPojoInitialize;
 import com.egg.manager.persistence.em.user.pojo.transfer.EmUserAccountTransfer;
@@ -174,9 +174,9 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             response.setCharacterEncoding("utf-8");
             out = response.getWriter();
             response.setContentType("application/json; charset=utf-8");
-            out.print(JSONObject.toJSONString(MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser)));
+            out.print(JSONObject.toJSONString(MyResponseHelper.handleAuthenticationExpired()));
         } catch (Exception e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         } finally {
             if (out != null) {
                 out.close();

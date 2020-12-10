@@ -2,6 +2,7 @@ package com.egg.manager.baseservice.serviceimpl.em.message.basic.email;
 
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
 import com.egg.manager.persistence.em.message.pojo.mapstruct.imap.email.EmailSendRecordMapstruct;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
@@ -75,7 +76,7 @@ public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
                 fileName = MimeUtility.encodeText(sendFileInfoMgvo.getFileName(), "GB2312", "B");
             }
         } catch (Exception e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         }
         javaMailSender.send(message);
         //TODO 保存记录到数据库

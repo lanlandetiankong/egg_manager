@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.base.helper;
 
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -23,11 +23,14 @@ public class MyResponseHelper {
         return result;
     }
 
-    public static <T> WebResult handleRequestFailure(PublicResultEnum resultEnum) {
-        WebResult result = WebResult.error(resultEnum.getLabel());
-        if (PublicResultEnum.UnauthorizedLoginUser.getValue().equals(resultEnum.getValue())) {
+    public static WebResult handleRequestFailure(String label) {
+        WebResult result = WebResult.error(StringUtils.isNotBlank(label) ? label : BaseRstMsgConstant.ErrorMsg.actionFail());
+        return result;
+    }
+
+    public static WebResult handleAuthenticationExpired() {
+        WebResult result = WebResult.error(BaseRstMsgConstant.ErrorMsg.unauthorized());
             result.putErrorActionType(ErrorActionEnum.AuthenticationExpired.getType());
-        }
         return result;
     }
 

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.basic.file;
 
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -68,7 +69,7 @@ public class PackageScanUtil {
                                             .forName(packageName + '.'
                                                     + className).getName());
                                 } catch (ClassNotFoundException e) {
-                                    log.error("执行异常--->", e);
+                                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
                                 }
                             }
                         }
@@ -76,7 +77,7 @@ public class PackageScanUtil {
                 }
                 return;
             } catch (IOException e) {
-                log.error("执行异常--->", e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             }
         }
         File dir = new File(url.getFile());

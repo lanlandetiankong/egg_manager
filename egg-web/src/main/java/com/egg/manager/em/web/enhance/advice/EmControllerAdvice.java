@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.enhance.advice;
 
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.enums.basic.PublicResultEnum;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.persistence.commons.base.exception.MyParamJsonException;
 import com.egg.manager.persistence.commons.base.exception.MyUnauthorizedException;
@@ -75,24 +75,24 @@ public class EmControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
-        log.error(String.format("执行异常(%d)--->", PublicResultEnum.UnauthorizedLoginUser.getLabel()), e);
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.UnauthorizedLoginUser);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.unauthorized()),e);
+        return MyResponseHelper.handleAuthenticationExpired();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.NoPermissionOfUser.getLabel()), e);
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.NoPermissionOfUser);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.noOperationAuthority()),e);
+        return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.noOperationAuthority());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public WebResult handleBusinessException(BusinessException e) {
-        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.ErrorOfDb.getLabel()), e);
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfDb);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.businessException()),e);
+        return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.businessException());
     }
 
 
@@ -100,8 +100,8 @@ public class EmControllerAdvice {
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
     public WebResult handleParamJsonException(MyParamJsonException e) {
-        log.error(String.format("执行异常(%d)--->" + PublicResultEnum.ErrorOfParam.getLabel()), e);
-        return MyResponseHelper.handleRequestFailure(PublicResultEnum.ErrorOfParam);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.formIncorrectParam()),e);
+        return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.commons.util.data.date;
 
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -251,7 +252,7 @@ public class DateTimeUtil {
         try {
             return parseToDate(formatDateTimetoString(getSystemDate(), fmtstr));
         } catch (Exception e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
             return getSystemDate();
         }
 
@@ -1286,7 +1287,7 @@ public class DateTimeUtil {
         try {
             date = DateTimeUtil.parseToDate(dateStr);
         } catch (Exception e) {
-            log.error("执行异常--->", e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
         }
 
         return date;

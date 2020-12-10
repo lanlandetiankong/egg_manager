@@ -8,6 +8,7 @@ import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.obl.web.enhance.wservices.wservice.aspect.OblControllerAspectService;
 import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
@@ -47,8 +48,6 @@ import java.util.Set;
 @Slf4j
 @Service
 public class OblControllerAspectServiceImpl implements OblControllerAspectService {
-
-    private final String UNKNOW_METHOD_ACTION_NAME = "未知方法操作名!!!";
 
     @Autowired
     private RoutineCommonFunc routineCommonFunc;
@@ -341,6 +340,6 @@ public class OblControllerAspectServiceImpl implements OblControllerAspectServic
                 return anno.notes();
             }
         }
-        return UNKNOW_METHOD_ACTION_NAME;
+        return BaseRstMsgConstant.ErrorMsg.unknowMethodOperationName();
     }
 }

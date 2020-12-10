@@ -2,6 +2,7 @@ package com.egg.manager.api.exchange.servicesimpl.mongodb;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.api.exchange.services.mongo.MyBaseMgoService;
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
@@ -68,8 +69,8 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
 
     @Override
     public Long doBatchUpdate(EmUserAccountEntity loginUser, QueryPageBean queryBuffer, MyMongoUpdateBean<T> updateBean) {
-        Assert.notNull(updateBean, "updateBean不能为空！");
-        Assert.notNull(updateBean.getDocument(), "document不能为空！");
+        Assert.notNull(updateBean, BaseRstMsgConstant.ErrorMsg.paramCannotEmpty("uploadBean"));
+        Assert.notNull(updateBean.getDocument(), BaseRstMsgConstant.ErrorMsg.paramCannotEmpty("document"));
         MongoQueryBean queryBean = (queryBuffer == null) ? new MongoQueryBean<T>() : new MongoQueryBean<T>().appendQueryFieldsToQuery(queryBuffer);
         Query query = getQueryByCriteriaList(null, queryBean.getCriteriaList());
         Document document = updateBean.getDocument();
@@ -85,12 +86,12 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     public Long doLogicDeleteById(EmUserAccountEntity loginUser, ID id) throws MyMongoException {
         Integer count = 0;
         if (id == null) {
-            throw new MyMongoException("请传入id!");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.unknowId());
         }
         Optional<T> optionalT = baseRepository.findById(id);
         T t = optionalT.get();
-        if (t == null) {
-            throw new MyMongoException("不存在的数据!");
+        if (optionalT.isPresent()) {
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.dataDoesNotExist());
         }
         dealUpdateSetLoginUserToMO(loginUser, t);
         t.setIsDeleted(SwitchStateEnum.Open.getValue());
@@ -103,7 +104,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     public Long doLogicDelete(EmUserAccountEntity loginUser, T t) throws MyMongoException {
         Integer count = 0;
         if (t == null) {
-            throw new MyMongoException("不存在的数据!");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.dataDoesNotExist());
         }
         dealUpdateSetLoginUserToMO(loginUser, t);
         t.setIsDeleted(SwitchStateEnum.Open.getValue());
@@ -115,7 +116,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public Long doLogicDeleteByIds(EmUserAccountEntity loginUser, Iterable<ID> iterableList) throws MyMongoException {
         if (iterableList == null) {
-            throw new MyMongoException("集合为空!");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyCollection());
         }
         return baseRepository.batchLogicDelete(iterableList, loginUser);
     }
@@ -138,7 +139,7 @@ public class MyBaseMgoServiceImpl<R extends MyBaseMongoRepository<T, ID>, T exte
     @Override
     public void doDeleteAll(EmUserAccountEntity loginUser) throws MyMongoException {
         if (1 == 1) {
-            throw new MyMongoException("不允许使用全部删除功能！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.notAllowDeleteAllData());
         }
         baseRepository.deleteAll();
     }

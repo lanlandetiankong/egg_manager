@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.exchange.db.mongo.repositoryimpl;
 
+import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.exception.MyMongoException;
@@ -47,7 +48,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     /**
      * 单个更新数量
      */
-    private final long SingleUpdateMaxSize = 1L;
+    private final long singleUpdateMaxSize = 1L;
 
     public Class<T> getTypeClass() {
         if (tClass != null) {
@@ -77,7 +78,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     public <S extends T> List<S> batchInsert(Iterable<S> iterable) {
         List<S> list = dealGetListFromIterable(iterable, true);
         if (CollectionUtils.isEmpty(list)) {
-            throw new MyMongoException("待新增集合为空！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyCollection());
         }
         mongoTemplate.insertAll(list);
         return list;
@@ -105,8 +106,8 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
-        if (result.getModifiedCount() != SingleUpdateMaxSize) {
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
+        if (result.getModifiedCount() != singleUpdateMaxSize) {
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -123,7 +124,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != idSize) {
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", idSize, result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -146,8 +147,8 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
-        if (result.getModifiedCount() != SingleUpdateMaxSize) {
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
+        if (result.getModifiedCount() != singleUpdateMaxSize) {
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -164,8 +165,8 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         //MO转化为更新对象(不忽略null字段,忽略fid)
         Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
-        if (result.getModifiedCount() != SingleUpdateMaxSize) {
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", SingleUpdateMaxSize, result.getModifiedCount());
+        if (result.getModifiedCount() != singleUpdateMaxSize) {
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -181,7 +182,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
-            String errmsg = String.format("更新操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -197,7 +198,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
-            String errmsg = String.format("逻辑删除操作数量不匹配，应为%d,实际为%d", size, result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.deleteQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -236,7 +237,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public void deleteAll() {
         if (1 == 1) {
-            throw new MyMongoException("不允许执行全部删除！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.notAllowDeleteAllData());
         }
     }
 
@@ -293,7 +294,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public Page<T> findPage(Pageable pageable) {
         if (pageable == null) {
-            throw new MyMongoException("请先传入分页配置后再进行查询！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.paramCannotEmpty("pageable"));
         }
         Query query = (pageable == null) ? new Query() : new Query().with(pageable);
         long total = mongoTemplate.count(query, getTypeClass());
@@ -305,7 +306,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public Page<T> findPage(Query query, Pageable pageable) {
         if (pageable == null) {
-            throw new MyMongoException("请先传入分页配置后再进行查询！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.paramCannotEmpty("pageable"));
         }
         query = query != null ? query : new Query();
         query.with(pageable);
@@ -317,7 +318,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     @Override
     public Page<T> findPage(Query query, Sort sort, Pageable pageable) {
         if (pageable == null) {
-            throw new MyMongoException("请先传入分页配置后再进行查询！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.paramCannotEmpty("pageable"));
         }
         query = query != null ? query : new Query();
         if (sort != null) {
@@ -354,7 +355,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
 
     private boolean dealVerifyTypeNotNull(T t, boolean exceptionAble) {
         if (t == null && exceptionAble) {
-            throw new MyMongoException("操作的实体类对象不允许为空!");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyOperationObject());
         }
         return t == null;
     }
@@ -367,7 +368,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     private boolean dealVerifyIdBlank(ID id, boolean exceptionAble) {
         boolean flag = id == null || (id instanceof java.lang.String && StringUtils.isBlank((String) id));
         if (flag && exceptionAble) {
-            throw new MyMongoException("字段fid不允许为空");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.unknowId());
         }
         return flag;
     }
@@ -382,14 +383,14 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
     private <P> List<P> dealGetListFromIterable(Iterable<P> iterable, boolean exceptionAble) {
         if (iterable == null) {
             if (exceptionAble) {
-                throw new MyMongoException("操作集合不允许为空！");
+                throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyCollection());
             } else {
                 return new ArrayList<P>();
             }
         }
         List<P> list = Lists.newArrayList(iterable);
         if ((CollectionUtils.isEmpty(list)) && exceptionAble) {
-            throw new MyMongoException("操作集合不允许为空！");
+            throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyCollection());
         }
         return list;
     }
@@ -433,7 +434,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
                 if (dealVerifyIdBlank(t.getFid(), false)) {
                     idList.add(t.getFid());
                 } else {
-                    throw new MyMongoException("存在空对象，无法取得对应id!");
+                    throw new MyMongoException(BaseRstMsgConstant.ErrorMsg.emptyOperationObject());
                 }
             }
         }

@@ -108,7 +108,7 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         //筛选与排序
         queryWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
-        queryWrapper.orderBy(true, true, "order_num");
+        queryWrapper.orderBy(true, true, "weights");
         queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
         return emDefineMenuMapper.selectList(queryWrapper);
     }

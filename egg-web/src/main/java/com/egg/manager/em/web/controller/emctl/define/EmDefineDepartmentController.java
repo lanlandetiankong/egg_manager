@@ -88,7 +88,7 @@ public class EmDefineDepartmentController extends BaseController {
         QueryWrapper<EmDefineDepartmentEntity> queryWrapper = new QueryWrapper<EmDefineDepartmentEntity>();
         queryWrapper.eq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryWrapper.orderBy(true, true, "level");
-        queryWrapper.orderBy(true, true, "order_num");
+        queryWrapper.orderBy(true, true, "weights");
         queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
         List<EmDefineDepartmentEntity> allDepartments = emDefineDepartmentMapper.selectList(queryWrapper);
         List<CommonTreeSelect> treeList = emDefineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);

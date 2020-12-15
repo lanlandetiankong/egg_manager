@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "smart_form_definition")
 @CompoundIndexes({
-        @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
+        @CompoundIndex(name = "weights_idx", def = "{'weights': 1}")
 })
 public class SmartFormDefinitionMgo extends MyBaseModelMgo<String> {
 

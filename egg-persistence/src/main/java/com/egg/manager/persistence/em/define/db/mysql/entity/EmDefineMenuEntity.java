@@ -66,10 +66,10 @@ public class EmDefineMenuEntity extends Model<EmDefineMenuEntity> {
     @TableField("level")
     private Integer level;
     /**
-     * 排序值
+     * 权重值
      */
-    @TableField("order_num")
-    private Integer orderNum;
+    @TableField("weights")
+    private Integer weights;
     /**
      * excel配置信息
      */

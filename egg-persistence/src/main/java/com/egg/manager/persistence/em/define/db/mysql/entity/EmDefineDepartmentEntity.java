@@ -44,10 +44,10 @@ public class EmDefineDepartmentEntity extends Model<EmDefineDepartmentEntity> {
     @TableField("level")
     private Integer level;
     /**
-     * 排序值
+     * 权重值
      */
-    @TableField("order_num")
-    private Integer orderNum;
+    @TableField("weights")
+    private Integer weights;
     /**
      * 描述
      */

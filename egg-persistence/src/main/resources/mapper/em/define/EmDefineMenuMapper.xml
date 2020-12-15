@@ -13,7 +13,7 @@
         <result property="routerUrl" column="router_url"/>
         <result property="hrefUrl" column="href_url"/>
         <result property="urlJumpType" column="url_jump_type"/>
-        <result property="orderNum" column="order_num"/>
+        <result property="weights" column="weights"/>
         <result property="excelModelConf" column="excel_model_conf"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
@@ -39,7 +39,7 @@
             <result property="routerUrl" column="router_url"/>
             <result property="hrefUrl" column="href_url"/>
             <result property="urlJumpType" column="url_jump_type"/>
-            <result property="orderNum" column="order_num"/>
+            <result property="weights" column="weights"/>
             <result property="excelModelConf" column="excel_model_conf"/>
             <result property="state" column="state"/>
             <result property="remark" column="remark"/>
@@ -58,7 +58,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,pid,menu_name,label,level,icon_name,router_url,href_url,url_jump_type,order_num,excel_model_conf,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+        fid,pid,menu_name,label,level,icon_name,router_url,href_url,url_jump_type,weights,excel_model_conf,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -74,7 +74,7 @@
             ${base_alias_name}.router_url,
             ${base_alias_name}.href_url,
             ${base_alias_name}.url_jump_type,
-            ${base_alias_name}.order_num,
+            ${base_alias_name}.weights,
             ${base_alias_name}.excel_model_conf,
             ${base_alias_name}.state,
             ${base_alias_name}.remark,
@@ -101,7 +101,7 @@
             ${base_alias_name}.router_url AS ${base_alias_col_prefix}router_url,
             ${base_alias_name}.href_url AS ${base_alias_col_prefix}href_url,
             ${base_alias_name}.url_jump_type AS ${base_alias_col_prefix}url_jump_type,
-            ${base_alias_name}.order_num AS ${base_alias_col_prefix}order_num,
+            ${base_alias_name}.weights AS ${base_alias_col_prefix}weights,
             ${base_alias_name}.excel_model_conf AS ${base_alias_col_prefix}excel_model_conf,
             ${base_alias_name}.state AS ${base_alias_col_prefix}state,
             ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
@@ -129,7 +129,7 @@
             and dm.state = 1
         </if>
         and dm.is_deleted = 0
-        order by level,order_num,create_time desc
+        order by level,weights,create_time desc
     </select>
 
 
@@ -190,7 +190,7 @@
         and erm.is_deleted = 0
         and eur.is_deleted = 0
         AND eua.fid = #{userAccountId}
-        order by level,order_num,create_time
+        order by level,weights,create_time
     </select>
 
     <select id="findAllMenuByRoleIdFilterParentNode" resultMap="BaseResultMap">

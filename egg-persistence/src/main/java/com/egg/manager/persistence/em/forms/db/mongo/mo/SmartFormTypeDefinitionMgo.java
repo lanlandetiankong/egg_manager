@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "smart_form_type_definition")
 @CompoundIndexes({
-        @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
+        @CompoundIndex(name = "weights_idx", def = "{'weights': 1}")
 })
 public class SmartFormTypeDefinitionMgo extends MyBaseModelMgo<String> {
     private static final long serialVersionUID = 1910831325507308349L;

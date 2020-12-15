@@ -56,9 +56,9 @@ public class EmDefineMenuVo extends MyBaseMysqlVo {
      */
     private Integer level;
     /**
-     * 排序值
+     * 权重值
      */
-    private Integer orderNum;
+    private Integer weights;
     /**
      * excel配置信息
      */

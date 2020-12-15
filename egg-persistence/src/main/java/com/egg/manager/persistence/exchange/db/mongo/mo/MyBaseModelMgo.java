@@ -60,10 +60,10 @@ public class MyBaseModelMgo<K> implements Serializable {
     private String aspectNotifyType;
 
     /**
-     * 顺序
+     * 权重值
      */
-    @Field(value = "orderNum")
-    private Integer orderNum;
+    @Field(value = "weights")
+    private Integer weights;
     /**
      * 状态
      */

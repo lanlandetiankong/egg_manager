@@ -24,8 +24,8 @@ public class EmAnnouncementTagDto extends MyBaseMysqlDto {
      */
     private String description;
     /**
-     * 排序值
+     * 权重值
      */
-    private Integer ordering;
+    private Integer weights;
 
 }

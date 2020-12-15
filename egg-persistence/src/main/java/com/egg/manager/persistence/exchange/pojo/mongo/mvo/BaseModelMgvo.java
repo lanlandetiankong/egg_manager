@@ -48,7 +48,7 @@ public class BaseModelMgvo<K> extends BaseMgvo {
     /**
      * 顺序
      */
-    private Integer orderNum;
+    private Integer weights;
     /**
      * 状态
      */

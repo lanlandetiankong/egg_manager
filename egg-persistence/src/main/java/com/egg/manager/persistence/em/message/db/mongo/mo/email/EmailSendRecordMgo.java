@@ -25,7 +25,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "email_send_record")
 @CompoundIndexes({
-        @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
+        @CompoundIndex(name = "weights_idx", def = "{'weights': 1}")
 })
 public class EmailSendRecordMgo extends MyBaseModelMgo<String> {
 

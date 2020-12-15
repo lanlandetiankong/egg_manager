@@ -36,10 +36,10 @@ public class EmAnnouncementTagEntity extends Model<EmAnnouncementTagEntity> {
     @TableField("description")
     private String description;
     /**
-     * 排序值
+     * 权重值
      */
-    @TableField("ordering")
-    private Integer ordering;
+    @TableField("weights")
+    private Integer weights;
 
 
     /**

@@ -26,9 +26,9 @@ public class EmAnnouncementTagVo extends MyBaseMysqlVo {
      */
     private String description;
     /**
-     * 排序值
+     * 权重值
      */
-    private Integer ordering;
+    private Integer weights;
 
 
 }

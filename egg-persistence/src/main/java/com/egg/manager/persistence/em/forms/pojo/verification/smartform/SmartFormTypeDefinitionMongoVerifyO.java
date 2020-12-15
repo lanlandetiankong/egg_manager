@@ -24,7 +24,7 @@ public class SmartFormTypeDefinitionMongoVerifyO extends BaseMongoVerifyO<SmartF
     /**
      * 顺序
      */
-    private Integer orderNum;
+    private Integer weights;
     /**
      * 类型名
      */

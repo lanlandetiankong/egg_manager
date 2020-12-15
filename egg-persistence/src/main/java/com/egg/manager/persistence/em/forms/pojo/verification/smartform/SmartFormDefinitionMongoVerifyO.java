@@ -43,7 +43,7 @@ public class SmartFormDefinitionMongoVerifyO extends BaseMongoVerifyO<SmartFormD
     /**
      * 顺序
      */
-    private Integer orderNum;
+    private Integer weights;
     private String remark;
 
     @NotBlank(groups = {VerifyGroupOfDefault.class}, message = "[表单类型]不能为空!")

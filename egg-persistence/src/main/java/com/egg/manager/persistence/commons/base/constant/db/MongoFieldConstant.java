@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class MongoFieldConstant implements Serializable {
 
     public static final String FIELD_FID = "fid";
-    public static final String FIELD_ORDERNUM = "orderNum";
+    public static final String FIELD_WEIGHTS = "weights";
     public static final String FIELD_STATUS = "status";
     public static final String FIELD_ISDELETED = "isDeleted";
 

@@ -7,7 +7,7 @@
         <id property="fid" column="fid"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
-        <result property="ordering" column="ordering"/>
+        <result property="weights" column="weights"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
         <result property="lastModifyerId" column="last_modifyer_id"/>
@@ -25,7 +25,7 @@
         <id column="fid" property="fid"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
-        <result column="ordering" property="ordering"/>
+        <result column="weights" property="weights"/>
 
         <result column="remark" property="remark"/>
         <result column="state" property="state"/>
@@ -41,7 +41,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,name,description,ordering,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+        fid,name,description,weights,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -51,7 +51,7 @@
             ${base_alias_name}.fid,
             ${base_alias_name}.name,
             ${base_alias_name}.description,
-            ${base_alias_name}.ordering,
+            ${base_alias_name}.weights,
             ${base_alias_name}.state,
             ${base_alias_name}.remark,
             ${base_alias_name}.last_modifyer_id,
@@ -71,7 +71,7 @@
             ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
             ${base_alias_name}.name AS ${base_alias_col_prefix}name,
             ${base_alias_name}.description AS ${base_alias_col_prefix}description,
-            ${base_alias_name}.ordering AS ${base_alias_col_prefix}ordering,
+            ${base_alias_name}.weights AS ${base_alias_col_prefix}weights,
             ${base_alias_name}.state AS ${base_alias_col_prefix}state,
             ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
             ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id,

@@ -9,7 +9,7 @@
         <result property="code" column="code"/>
         <result property="pid" column="pid"/>
         <result property="level" column="level"/>
-        <result property="orderNum" column="order_num"/>
+        <result property="weights" column="weights"/>
         <result property="description" column="description"/>
         <result property="state" column="state"/>
         <result property="remark" column="remark"/>
@@ -33,7 +33,7 @@
             <result column="code" property="code"/>
             <result column="pid" property="pid"/>
             <result column="level" property="level"/>
-            <result column="order_num" property="orderNum"/>
+            <result column="weights" property="weights"/>
             <result column="description" property="description"/>
             <result column="state" property="state"/>
             <result column="create_time" property="createTime"/>
@@ -48,7 +48,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        fid,name,code,pid,level,order_num,description,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+        fid,name,code,pid,level,weights,description,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
     </sql>
     <!--
             通用查询结果列(多表查询用)
@@ -60,7 +60,7 @@
             ${base_alias_name}.code,
             ${base_alias_name}.pid,
             ${base_alias_name}.level,
-            ${base_alias_name}.order_num,
+            ${base_alias_name}.weights,
             ${base_alias_name}.description,
             ${base_alias_name}.state,
             ${base_alias_name}.remark,
@@ -83,7 +83,7 @@
             ${base_alias_name}.code AS ${base_alias_col_prefix}code,
             ${base_alias_name}.pid AS ${base_alias_col_prefix}pid,
             ${base_alias_name}.level AS ${base_alias_col_prefix}level,
-            ${base_alias_name}.order_num AS ${base_alias_col_prefix}order_num,
+            ${base_alias_name}.weights AS ${base_alias_col_prefix}weights,
             ${base_alias_name}.description AS ${base_alias_col_prefix}description,
             ${base_alias_name}.state AS ${base_alias_col_prefix}state,
             ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
@@ -134,7 +134,7 @@
         <if test="onlyEnable == true">
             and dd.is_deleted = 0
         </if>
-        order by level,order_num,create_time desc
+        order by level,weights,create_time desc
     </select>
 
 

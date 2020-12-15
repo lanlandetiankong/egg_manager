@@ -32,9 +32,9 @@ public class EmDefineDepartmentDto extends MyBaseMysqlDto {
      */
     private Integer level;
     /**
-     * 排序值
+     * 权重值
      */
-    private Integer orderNum;
+    private Integer weights;
     /**
      * 描述
      */

@@ -20,7 +20,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "smart_form_field_definition")
 @CompoundIndexes({
-        @CompoundIndex(name = "orderNum_idx", def = "{'orderNum': 1}")
+        @CompoundIndex(name = "weights_idx", def = "{'weights': 1}")
 })
 public class SmartFormFieldDefinitionMgo extends MyBaseModelMgo<String> {
 

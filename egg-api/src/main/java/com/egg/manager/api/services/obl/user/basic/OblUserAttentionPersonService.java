@@ -18,7 +18,7 @@ public interface OblUserAttentionPersonService extends MyBaseMysqlService<OblUse
 
     /**
      * 分页查询-用户的关注人关联 -dto列表
-     * (查询的是 com.egg.manager.persistence.obl.user.pojo.dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * (查询的是 Dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param result
      * @param queryPageBean 查询分页配置

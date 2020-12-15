@@ -27,10 +27,7 @@ import java.util.List;
 public class OssTestController {
     /**
      * 测试-上传
-     * -自定义文件
-     * -自定义OSS存储路径
-     * http://localhost:10100/egg_manager/oss/uploadFile
-     * @return {"success":true,"fileName":"png/banner.txt","url":"http://egg-manager-bucket.oss-cn-shanghai.aliyuncs.com/png/banner.txt?Expires=1604130884&OSSAccessKeyId=LTAI4G3VqT7puMGdVjAdKm8m&Signature=GM1CbT9gpKWJRv4UcH1lJYINKY0%3D","msg":"上传成功"}
+     * @return
      */
     @GetMapping("/uploadFile")
     public AliyunOssResult uploadFile() {

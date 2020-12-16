@@ -82,7 +82,6 @@ public class EmDefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
         try{
             Page<EmDefinePermissionDto> mpPagination = queryPageBean.toMpPage();
-            int count = emDefinePermissionMapper.querytest();
             List<EmDefinePermissionDto> emDefinePermissionDtos = emDefinePermissionMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
             result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
             result.putGridList(EmDefinePermissionTransfer.transferDtoToVoList(emDefinePermissionDtos));

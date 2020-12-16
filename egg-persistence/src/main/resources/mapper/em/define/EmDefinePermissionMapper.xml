@@ -161,7 +161,4 @@
         and dp.ensure = 1
     </select>
 
-    <select id="querytest" resultType="int">
-        select count(1) from em_define_permission
-    </select>
 </mapper>

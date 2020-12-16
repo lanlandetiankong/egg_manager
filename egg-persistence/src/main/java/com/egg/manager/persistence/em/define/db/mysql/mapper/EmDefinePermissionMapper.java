@@ -67,5 +67,4 @@ public interface EmDefinePermissionMapper extends MyEggMapper<EmDefinePermission
      */
     List<EmDefinePermissionEntity> findAllPermissionByUserAcccountId(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId);
 
-    int querytest();
 }

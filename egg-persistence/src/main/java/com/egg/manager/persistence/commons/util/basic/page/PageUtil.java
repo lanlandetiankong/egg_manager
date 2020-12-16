@@ -57,13 +57,17 @@ public class PageUtil {
         QueryFieldArr fieldBeanList = new QueryFieldArr();
         if (StringUtils.isNotBlank(queryJson) && (Constant.JSON_EMPTY_ARRAY.equals(queryJson) == false)) {
             QueryFieldArr fieldBeansTemp = QueryFieldArr.parseFromJson(queryJson);
-            if (CollectionUtil.isNotEmpty(fieldBeansTemp)) {
-                for (QueryField fieldBean : fieldBeansTemp) {
-                    //驼峰参数 转 下划线 参数 风格
-                    String fieldName = MyStringUtil.camelToUnderline(fieldBean.getFieldName(), false);
-                    fieldBean.setFieldName(fieldName);
-                    fieldBeanList.add(fieldBean);
+            if(CollectionUtil.isEmpty(fieldBeansTemp)){
+                return fieldBeanList;
+            }
+            for (QueryField fieldBean : fieldBeansTemp) {
+                if(checkIsQueryField(fieldBean) == false){
+                    continue;
                 }
+                //驼峰参数 转 下划线 参数 风格
+                String fieldName = MyStringUtil.camelToUnderline(fieldBean.getFieldName(), false);
+                fieldBean.setFieldName(fieldName);
+                fieldBeanList.add(fieldBean);
             }
         }
         return fieldBeanList;
@@ -136,5 +140,22 @@ public class PageUtil {
         return map;
     }
 
+    /**
+     * 判断是否可以添加为 查询字段
+     * @param fieldBean
+     * @return
+     */
+    public static boolean checkIsQueryField(QueryField fieldBean) {
+        if(fieldBean == null){
+            return false ;
+        }
+        if(fieldBean.getValue() == null || StringUtils.isBlank(fieldBean.getFieldName())){
+            return false ;
+        }
+        if(fieldBean.getValue() instanceof String && StringUtils.isBlank(String.valueOf(fieldBean.getValue()))){
+            return false ;
+        }
+        return true ;
+    }
 
 }

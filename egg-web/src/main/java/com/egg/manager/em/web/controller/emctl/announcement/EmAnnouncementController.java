@@ -66,6 +66,7 @@ public class EmAnnouncementController extends BaseController {
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+        queryPageBean.operateQuery().addEqNotDeleted();
         if (Boolean.TRUE.equals(onlySelf)) {
             //只查询自己发布的公告
             queryPageBean.operateQuery().addEq(FieldConst.COL_CREATE_USER_ID, loginUserInfo.getFid());

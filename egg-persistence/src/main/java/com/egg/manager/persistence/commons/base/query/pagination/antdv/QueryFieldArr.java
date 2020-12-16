@@ -2,6 +2,7 @@ package com.egg.manager.persistence.commons.base.query.pagination.antdv;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONArray;
+import com.egg.manager.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.Builder;
 import lombok.Data;
@@ -99,5 +100,13 @@ public class QueryFieldArr extends ArrayList<QueryField> implements FieldConst {
         return new QueryFieldArr().addBatch(queryFields);
     }
 
+
+    /**
+     * 添加 未删除状态
+     * @return
+     */
+    public QueryFieldArr addEqNotDeleted() {
+        return addEq(true, FieldConst.COL_IS_DELETED, SwitchStateEnum.Close.getValue());
+    }
 
 }

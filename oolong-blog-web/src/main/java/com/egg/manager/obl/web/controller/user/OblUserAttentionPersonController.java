@@ -53,6 +53,7 @@ public class OblUserAttentionPersonController extends BaseController {
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+        queryPageBean.operateQuery().addEqNotDeleted();
         result = oblUserAttentionPersonService.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
         return result;
     }

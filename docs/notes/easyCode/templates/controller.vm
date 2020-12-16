@@ -67,6 +67,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
     WebResult result = WebResult.okQuery();
     queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
+    queryPageBean.operateQuery().addEqNotDeleted();
     result = ${tool.firstLowerCase($!{tableInfo.name})}Service.dealQueryPageByDtos(loginUserInfo, result, queryPageBean);
     return result;
     }

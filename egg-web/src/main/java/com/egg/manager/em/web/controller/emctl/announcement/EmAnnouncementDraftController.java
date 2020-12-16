@@ -64,6 +64,7 @@ public class EmAnnouncementDraftController extends BaseController {
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = EmAnnouncementDraftDto.class) QueryPageBean<EmAnnouncementDraftDto> queryPageBean,
                                   Boolean onlySelf, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
+        queryPageBean.operateQuery().addEqNotDeleted();
         queryPageBean.operateQuery().addEq(FieldConst.COL_STATE, BaseStateEnum.ENABLED.getValue());
         queryPageBean.operateQuery().addNotEq("is_published", BaseStateEnum.ENABLED.getValue());
         //只查询自己发布的公告

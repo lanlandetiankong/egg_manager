@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.em.define.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -8,16 +9,10 @@ import lombok.Getter;
  * @date 2020/10/20
  */
 @Getter
+@AllArgsConstructor
 public enum DefinePermissionCodePrefixEnum {
     PermCtrl("PermCtrl:", "权限控制前缀", "PermCtrl:", true),
     ;
-
-    DefinePermissionCodePrefixEnum(String value, String name, String label, boolean defaultCheck) {
-        this.value = value;
-        this.name = name;
-        this.label = label;
-        this.defaultCheck = defaultCheck;
-    }
 
     private String value;
     private String name;

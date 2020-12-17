@@ -1,10 +1,15 @@
 package com.egg.manager.persistence.em.user.domain.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author zhoucj
  * @description
  * @date 2020/10/20
  */
+@Getter
+@AllArgsConstructor
 public enum UserAccountBaseTypeEnum {
     SimpleUser(0, "普通用户", "普通用户", true),
     Root(10, "管理员", "管理员", true),
@@ -14,13 +19,6 @@ public enum UserAccountBaseTypeEnum {
     GeneratedUser(-20, "随机生成用户", "随机生成用户", true),
     Visitor(-10, "游客", "游客", false);
 
-    UserAccountBaseTypeEnum(Integer value, String name, String label, boolean listAble) {
-        this.value = value;
-        this.name = name;
-        this.label = label;
-        this.listAble = listAble;
-
-    }
 
     public Integer value;
     public String name;
@@ -29,32 +27,6 @@ public enum UserAccountBaseTypeEnum {
      * 是否可转化为 list
      */
     public boolean listAble;
-
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
 
     public static UserAccountBaseTypeEnum doGetEnumByValue(Integer value) {
         if (value == null) {

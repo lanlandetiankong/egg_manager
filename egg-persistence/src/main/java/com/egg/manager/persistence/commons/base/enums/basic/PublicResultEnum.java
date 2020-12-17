@@ -1,11 +1,16 @@
 package com.egg.manager.persistence.commons.base.enums.basic;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author zhoucj
  * @description
  * @date 2020/10/20
  */
 @Deprecated
+@Getter
+@AllArgsConstructor
 public enum PublicResultEnum {
     //常见错误
     Failed("Failed", "系统错误", "系统错误"),
@@ -45,38 +50,10 @@ public enum PublicResultEnum {
     FormatErrorOfMobile("FormatErrorOfMobile", "手机号格式错误", "手机号格式错误"),
     FormatErrorOfEmail("FormatErrorOfEmail", "邮箱格式错误", "邮箱格式错误");
 
-    PublicResultEnum(String value, String name, String label) {
-        this.value = value;
-        this.name = name;
-        this.label = label;
-    }
 
     private String value;
     private String name;
     private String label;
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
 }
 

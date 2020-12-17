@@ -1,10 +1,15 @@
 package com.egg.manager.persistence.em.user.domain.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author zhoucj
  * @description
  * @date 2020/10/20
  */
+@Getter
+@AllArgsConstructor
 public enum UserAccountStateEnum {
     ENABLED((short) 1, "启用", "启用"),
     DISABLED((short) 0, "禁用", "禁用"),
@@ -12,11 +17,6 @@ public enum UserAccountStateEnum {
     LOCKED((short) -10, "锁定", "用户已被锁定"),
     ;
 
-    UserAccountStateEnum(Short value, String name, String info) {
-        this.value = value;
-        this.name = name;
-        this.info = info;
-    }
 
     private Short value;
     private String name;
@@ -34,30 +34,5 @@ public enum UserAccountStateEnum {
             }
         }
         return "";
-    }
-
-
-    public Short getValue() {
-        return value;
-    }
-
-    public void setValue(Short value) {
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 }

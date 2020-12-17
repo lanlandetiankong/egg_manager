@@ -1,12 +1,16 @@
 package com.egg.manager.persistence.commons.base.enums.db;
 
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryField;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author zhoucj
  * @description
  * @date 2020/10/20
  */
+@Getter
+@AllArgsConstructor
 public enum QueryMatchingEnum {
     EqualsMatch("equals", "=", "相等查询"),
     NotEqualsMatch("notEquals", "!=", "字符串非等查询"),
@@ -15,11 +19,6 @@ public enum QueryMatchingEnum {
 
     ;
 
-    QueryMatchingEnum(String value, String sqlMatchingValue, String label) {
-        this.value = value;
-        this.sqlMatchingValue = sqlMatchingValue;
-        this.label = label;
-    }
 
     public void dealSetToQueryFormFieldBean(QueryField bean) {
         bean = bean != null ? bean : new QueryField();
@@ -36,27 +35,5 @@ public enum QueryMatchingEnum {
     }
 
 
-    public String getValue() {
-        return value;
-    }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getSqlMatchingValue() {
-        return sqlMatchingValue;
-    }
-
-    public void setSqlMatchingValue(String sqlMatchingValue) {
-        this.sqlMatchingValue = sqlMatchingValue;
-    }
 }

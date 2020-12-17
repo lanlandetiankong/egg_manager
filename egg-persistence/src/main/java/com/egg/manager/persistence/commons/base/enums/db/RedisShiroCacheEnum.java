@@ -1,6 +1,8 @@
 package com.egg.manager.persistence.commons.base.enums.db;
 
 import com.egg.manager.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @Description:
@@ -8,6 +10,8 @@ import com.egg.manager.persistence.commons.base.constant.db.redis.RedisShiroKeyC
  * @Author: zhoucj
  * @Date: 2020/10/23 14:50
  */
+@Getter
+@AllArgsConstructor
 public enum RedisShiroCacheEnum {
     /**
      * 缓存配置-用户授权值
@@ -103,11 +107,6 @@ public enum RedisShiroCacheEnum {
     userFrontButtons(RedisShiroKeyConstant.KEY_USER_FRONT_BUTTONS, 21600),
     ;
 
-    RedisShiroCacheEnum(String key, long ttl) {
-        this.key = key;
-        this.ttl = ttl;
-    }
-
     /**
      * 存储的key
      */
@@ -117,19 +116,4 @@ public enum RedisShiroCacheEnum {
      */
     private long ttl;
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public long getTtl() {
-        return ttl;
-    }
-
-    public void setTtl(long ttl) {
-        this.ttl = ttl;
-    }
 }

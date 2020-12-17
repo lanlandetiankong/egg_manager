@@ -1,5 +1,7 @@
 package com.egg.manager.persistence.em.user.domain.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -7,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
  * @description
  * @date 2020/10/20
  */
+@Getter
+@AllArgsConstructor
 public enum UserSexEnum {
     Man((short) 1, "男", "男"),
     Woman((short) 0, "女", "女"),
@@ -16,11 +20,6 @@ public enum UserSexEnum {
     private String name;
     private String label;
 
-    UserSexEnum(Short value, String name, String label) {
-        this.value = value;
-        this.name = name;
-        this.label = label;
-    }
 
     public static String dealGetNameByVal(Short value) {
         UserSexEnum[] enums = UserSexEnum.values();
@@ -43,30 +42,5 @@ public enum UserSexEnum {
             }
         }
         return Unknow.getValue();
-    }
-
-
-    public Short getValue() {
-        return value;
-    }
-
-    public void setValue(Short value) {
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 }

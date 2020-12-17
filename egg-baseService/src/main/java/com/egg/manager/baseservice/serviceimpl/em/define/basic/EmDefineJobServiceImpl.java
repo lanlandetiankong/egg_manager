@@ -56,7 +56,7 @@ public class EmDefineJobServiceImpl extends MyBaseMysqlServiceImpl<EmDefineJobMa
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmDefineJobDto> queryPageBean) {
         Page<EmDefineJobDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineJobDto> defineDepartmentDtoList = emDefineJobMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineJobTransfer.transferDtoToVoList(defineDepartmentDtoList));
         return result;
     }

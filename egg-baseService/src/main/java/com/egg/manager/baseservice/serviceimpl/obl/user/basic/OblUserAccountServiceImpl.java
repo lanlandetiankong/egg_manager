@@ -37,7 +37,7 @@ public class OblUserAccountServiceImpl extends MyBaseMysqlServiceImpl<OblUserAcc
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAccountDto> queryPage) {
         Page<OblUserAccountDto> mpPagination = queryPage.toMpPage();
         List<OblUserAccountDto> dtoList = oblUserAccountMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblUserAccountTransfer.transferDtoToVoList(dtoList));
         return result;
     }

@@ -41,7 +41,7 @@ public class EmDefineModuleServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMo
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmDefineModuleDto> queryPageBean) {
         Page<EmDefineModuleDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineModuleDto> emDefineModuleDtoList = emDefineModuleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineModuleTransfer.transferDtoToVoList(emDefineModuleDtoList));
         return result;
     }

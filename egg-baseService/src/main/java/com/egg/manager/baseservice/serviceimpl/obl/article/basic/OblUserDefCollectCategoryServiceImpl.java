@@ -38,7 +38,7 @@ public class OblUserDefCollectCategoryServiceImpl extends MyBaseMysqlServiceImpl
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserDefCollectCategoryDto> queryPage) {
         Page<OblUserDefCollectCategoryDto> mpPagination = queryPage.toMpPage();
         List<OblUserDefCollectCategoryDto> dtoList = oblUserDefCollectCategoryMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblUserDefCollectCategoryTransfer.transferDtoToVoList(dtoList));
         return result;
     }

@@ -56,7 +56,7 @@ public class EmAnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<EmAnn
         Map<String, EmAnnouncementTagEntity> announcementTagMap = emAnnouncementTagService.dealGetAllToMap();
         Page<EmAnnouncementDraftDto> mpPagination = queryPageBean.toMpPage();
         List<EmAnnouncementDraftDto> emAnnouncementDraftDtoList = emAnnouncementDraftMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmAnnouncementDraftTransfer.transferDtoToVoList(emAnnouncementDraftDtoList, announcementTagMap));
         return result;
     }

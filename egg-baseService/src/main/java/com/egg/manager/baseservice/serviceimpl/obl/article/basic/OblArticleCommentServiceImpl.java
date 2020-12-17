@@ -38,7 +38,7 @@ public class OblArticleCommentServiceImpl extends MyBaseMysqlServiceImpl<OblArti
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCommentDto> queryPage) {
         Page<OblArticleCommentDto> mpPagination = queryPage.toMpPage();
         List<OblArticleCommentDto> dtoList = oblArticleCommentMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblArticleCommentTransfer.transferDtoToVoList(dtoList));
         return result;
     }

@@ -38,7 +38,7 @@ public class OblUserAttentionPersonServiceImpl extends MyBaseMysqlServiceImpl<Ob
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionPersonDto> queryPage) {
         Page<OblUserAttentionPersonDto> mpPagination = queryPage.toMpPage();
         List<OblUserAttentionPersonDto> dtoList = oblUserAttentionPersonMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblUserAttentionPersonTransfer.transferDtoToVoList(dtoList));
         return result;
     }

@@ -41,7 +41,7 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmDefineDepartmentDto> queryPageBean) {
         Page<EmDefineDepartmentDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineDepartmentDto> emDefineDepartmentDtoList = emDefineDepartmentMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineDepartmentTransfer.transferDtoToVoList(emDefineDepartmentDtoList));
         return result;
     }

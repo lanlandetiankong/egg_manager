@@ -38,7 +38,7 @@ public class OblUserAttentionArticleCategoryServiceImpl extends MyBaseMysqlServi
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserAttentionArticleCategoryDto> queryPage) {
         Page<OblUserAttentionArticleCategoryDto> mpPagination = queryPage.toMpPage();
         List<OblUserAttentionArticleCategoryDto> dtoList = oblUserAttentionArticleCategoryMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblUserAttentionArticleCategoryTransfer.transferDtoToVoList(dtoList));
         return result;
     }

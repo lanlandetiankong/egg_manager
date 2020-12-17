@@ -38,7 +38,7 @@ public class OblContentLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblC
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblContentLikeRecordDto> queryPage) {
         Page<OblContentLikeRecordDto> mpPagination = queryPage.toMpPage();
         List<OblContentLikeRecordDto> dtoList = oblContentLikeRecordMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblContentLikeRecordTransfer.transferDtoToVoList(dtoList));
         return result;
     }

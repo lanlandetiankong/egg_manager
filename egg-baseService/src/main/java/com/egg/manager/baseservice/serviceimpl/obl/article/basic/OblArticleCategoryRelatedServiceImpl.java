@@ -38,7 +38,7 @@ public class OblArticleCategoryRelatedServiceImpl extends MyBaseMysqlServiceImpl
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleCategoryRelatedDto> queryPage) {
         Page<OblArticleCategoryRelatedDto> mpPagination = queryPage.toMpPage();
         List<OblArticleCategoryRelatedDto> dtoList = oblArticleCategoryRelatedMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblArticleCategoryRelatedTransfer.transferDtoToVoList(dtoList));
         return result;
     }

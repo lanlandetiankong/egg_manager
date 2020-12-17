@@ -38,7 +38,7 @@ public class OblBlogNoticeServiceImpl extends MyBaseMysqlServiceImpl<OblBlogNoti
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogNoticeDto> queryPage) {
         Page<OblBlogNoticeDto> mpPagination = queryPage.toMpPage();
         List<OblBlogNoticeDto> dtoList = oblBlogNoticeMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblBlogNoticeTransfer.transferDtoToVoList(dtoList));
         return result;
     }

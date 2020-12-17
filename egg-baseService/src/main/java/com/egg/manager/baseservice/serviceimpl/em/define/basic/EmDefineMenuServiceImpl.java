@@ -199,7 +199,7 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmDefineMenuDto> queryPageBean) {
         Page<EmDefineMenuDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineMenuDto> emDefineMenuDtoList = emDefineMenuMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineMenuTransfer.transferDtoToVoList(emDefineMenuDtoList));
         return result;
     }

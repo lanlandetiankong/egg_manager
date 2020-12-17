@@ -39,10 +39,11 @@ public class AntdvPage<T> extends BasePagination {
         this(current, pageSize, 0L, null);
     }
 
-    public AntdvPage(Integer current, Integer pageSize, Long total, List<T> list) {
+    public AntdvPage(Integer current, Integer pageSize, Long total, List<T> content) {
         this.current = current;
         this.pageSize = pageSize;
         this.total = total;
+        this.content = content;
     }
 
     public static AntdvPage gainPageWithSize(Integer pageSize) {

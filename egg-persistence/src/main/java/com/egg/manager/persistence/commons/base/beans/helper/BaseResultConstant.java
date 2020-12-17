@@ -40,10 +40,6 @@ public interface BaseResultConstant extends Serializable {
      */
     String COUNT = "count";
     /**
-     * 表格总数量
-     */
-    String TOTAL = "total";
-    /**
      * 树集合
      */
     String GRID_LIST = "gridList";

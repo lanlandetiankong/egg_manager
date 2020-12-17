@@ -38,7 +38,7 @@ public class OblArticleLikeRecordServiceImpl extends MyBaseMysqlServiceImpl<OblA
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblArticleLikeRecordDto> queryPage) {
         Page<OblArticleLikeRecordDto> mpPagination = queryPage.toMpPage();
         List<OblArticleLikeRecordDto> dtoList = oblArticleLikeRecordMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblArticleLikeRecordTransfer.transferDtoToVoList(dtoList));
         return result;
     }

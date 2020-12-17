@@ -184,7 +184,7 @@ public class EmDefineRoleServiceImpl extends MyBaseMysqlServiceImpl<EmDefineRole
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
         Page<EmDefineRoleDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineRoleDto> emDefineRoleDtoList = emDefineRoleMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineRoleTransfer.transferDtoToVoList(emDefineRoleDtoList));
         return result;
     }

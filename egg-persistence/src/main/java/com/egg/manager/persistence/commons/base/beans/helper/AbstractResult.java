@@ -1,8 +1,10 @@
 package com.egg.manager.persistence.commons.base.beans.helper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
 import com.egg.manager.persistence.commons.base.beans.file.FileResBean;
 import com.egg.manager.persistence.commons.base.beans.front.FrontSelectBean;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
 import org.apache.commons.lang3.StringUtils;
@@ -125,6 +127,21 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
     }
 
 
+    /**
+     * 设置分页信息
+     * @param qpage
+     * @param page
+     * @param
+     */
+    public <T> void settingPage(QueryPageBean<T> qpage, Page<T> page) {
+        qpage = qpage == null ? new QueryPageBean() : qpage ;
+        qpage.setPageConf(qpage.getPageConf() == null ? AntdvPage.gainDefault(Object.class) : qpage.getPageConf());
+        AntdvPage pageConf = qpage.getPageConf();
+        if (pageConf != null && page != null) {
+            pageConf.setTotal(page.getTotal());
+        }
+        this.put(PAGINATION_BEAN, pageConf);
+    }
     /**
      * 设置分页信息
      * @param vpage

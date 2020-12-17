@@ -79,7 +79,7 @@ public class EmAnnouncementServiceImpl extends MyBaseMysqlServiceImpl<EmAnnounce
 
         Page<EmAnnouncementDto> mpPagination = queryPageBean.toMpPage();
         List<EmAnnouncementDto> emAnnouncementDtoList = emAnnouncementMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean,mpPagination);
         result.putGridList(EmAnnouncementTransfer.transferDtoToVoList(emAnnouncementDtoList, announcementTagMap));
         return result;
     }

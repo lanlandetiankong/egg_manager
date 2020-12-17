@@ -55,7 +55,7 @@ public class EmDefineTenantServiceImpl extends MyBaseMysqlServiceImpl<EmDefineTe
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmDefineTenantDto> queryPageBean) {
         Page<EmDefineTenantDto> mpPagination = queryPageBean.toMpPage();
         List<EmDefineTenantDto> emDefineTenantDtoList = emDefineTenantMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
-        result.settingPage(queryPageBean.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPageBean, mpPagination);
         result.putGridList(EmDefineTenantTransfer.transferDtoToVoList(emDefineTenantDtoList));
         return result;
     }

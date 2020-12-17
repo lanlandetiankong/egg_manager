@@ -38,7 +38,7 @@ public class OblBlogMenuConfServiceImpl extends MyBaseMysqlServiceImpl<OblBlogMe
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblBlogMenuConfDto> queryPage) {
         Page<OblBlogMenuConfDto> mpPagination = queryPage.toMpPage();
         List<OblBlogMenuConfDto> dtoList = oblBlogMenuConfMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblBlogMenuConfTransfer.transferDtoToVoList(dtoList));
         return result;
     }

@@ -38,7 +38,7 @@ public class OblUserCalculateInfoServiceImpl extends MyBaseMysqlServiceImpl<OblU
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<OblUserCalculateInfoDto> queryPage) {
         Page<OblUserCalculateInfoDto> mpPagination = queryPage.toMpPage();
         List<OblUserCalculateInfoDto> dtoList = oblUserCalculateInfoMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(OblUserCalculateInfoTransfer.transferDtoToVoList(dtoList));
         return result;
     }

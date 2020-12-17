@@ -129,7 +129,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
             }
         }
         List<EmUserAccountDto> emUserAccountDtoList = emUserAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, queryPage.getSortMap(), queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.settingPage(queryPage.getPageConf(), mpPagination.getTotal());
+        result.settingPage(queryPage,mpPagination);
         result.putGridList(EmUserAccountTransfer.transferDtoToVoList(emUserAccountDtoList));
         return result;
     }

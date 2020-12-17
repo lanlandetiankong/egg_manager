@@ -17,9 +17,16 @@ import javax.annotation.PostConstruct;
 @Component
 @Slf4j
 public class SnowflakeConfig {
+    /**
+     * 为终端ID
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private long workerId = 0;//为终端ID
-    private long datacenterId = 1;//数据中心ID
+    private long workerId = 0;
+    /**
+     * 数据中心ID
+     */
+    private long datacenterId = 1;
+
     private Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
 
     @PostConstruct
@@ -32,7 +39,7 @@ public class SnowflakeConfig {
         return snowflake.nextId();
     }
 
-    public synchronized long snowflakeId(long workerId, long datacenterId) {
+    private synchronized long snowflakeId(long workerId, long datacenterId) {
         Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
         return snowflake.nextId();
     }

@@ -23,8 +23,8 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/oss")
-public class OssTestController {
+@RequestMapping("/index/oss")
+public class OssController {
     /**
      * 测试-上传
      * @return

@@ -32,7 +32,7 @@ import java.nio.file.Paths;
 @Slf4j
 @Api(value = "API-图片上传接口")
 @RestController
-@RequestMapping(value = "/commomApi/file/imgUpload")
+@RequestMapping("/emCtl/commomApi/file/imgUpload")
 public class ImgUploadController extends BaseController {
     @Autowired
     private UploadProps uploadProps;

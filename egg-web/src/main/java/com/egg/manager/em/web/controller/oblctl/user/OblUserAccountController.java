@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-用户表")
 @RestController
-@RequestMapping("/oblUserAccount")
+@RequestMapping("/oblCtl/oblUserAccount")
 public class OblUserAccountController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblUserAccountController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/oblUserAccount/queryDtoPage")
+    @OblPcWebQueryLog(fullPath = "/oblCtl/oblUserAccount/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserAccountDto.class) QueryPageBean<OblUserAccountDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/oblUserAccount/queryOneById")
+    @OblPcWebQueryLog(fullPath = "/oblCtl/oblUserAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserAccountId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserAccount/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserAccountVo oblUserAccountVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserAccount/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserAccountVo oblUserAccountVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblUserAccountController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserAccount/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAccount/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblUserAccountController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserAccount/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAccount/deleteById")
     @ApiOperation(value = "逻辑删除->用户表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

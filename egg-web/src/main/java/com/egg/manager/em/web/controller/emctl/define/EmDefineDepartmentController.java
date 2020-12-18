@@ -45,14 +45,14 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-部门定义接口")
 @RestController
-@RequestMapping("/define/defineDepartment")
+@RequestMapping("/emCtl/define/defineDepartment")
 public class EmDefineDepartmentController extends BaseController {
     @Autowired
     private EmDefineDepartmentMapper emDefineDepartmentMapper;
     @Reference
     private EmDefineDepartmentService emDefineDepartmentService;
 
-    @EmPcWebQueryLog(fullPath = "/define/defineDepartment/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineDepartment/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -70,7 +70,7 @@ public class EmDefineDepartmentController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/define/defineDepartment/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineDepartment/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineDepartmentId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -80,7 +80,7 @@ public class EmDefineDepartmentController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/define/defineDepartment/queryTreeSelect")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineDepartment/queryTreeSelect")
     @ApiOperation(value = "查询下拉树->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(@CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -97,7 +97,7 @@ public class EmDefineDepartmentController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineDepartment/queryFilteredTreeSelect")
+    @EmPcWebQueryLog(description = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", fullPath = "/emCtl/define/defineDepartment/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->部门定义", notes = "查询被过滤部门定义TreeSelect(过滤指定节点的所有子节点)", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -109,7 +109,7 @@ public class EmDefineDepartmentController extends BaseController {
     }
 
     @ApiOperation(value = "新增->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineDepartment/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineDepartment/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmDefineDepartmentVo emDefineDepartmentVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -123,7 +123,7 @@ public class EmDefineDepartmentController extends BaseController {
     }
 
     @ApiOperation(value = "更新->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineDepartment/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineDepartment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmDefineDepartmentVo emDefineDepartmentVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -136,7 +136,7 @@ public class EmDefineDepartmentController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineDepartment/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineDepartment/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -152,7 +152,7 @@ public class EmDefineDepartmentController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineDepartment/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineDepartment/deleteById")
     @ApiOperation(value = "逻辑删除->部门定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

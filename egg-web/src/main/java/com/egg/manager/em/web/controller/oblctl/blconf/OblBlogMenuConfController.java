@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-博客菜单定义表")
 @RestController
-@RequestMapping("/oblBlogMenuConf")
+@RequestMapping("/oblCtl/oblBlogMenuConf")
 public class OblBlogMenuConfController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblBlogMenuConfController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblBlogMenuConf/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblBlogMenuConf/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblBlogMenuConfDto.class) QueryPageBean<OblBlogMenuConfDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblBlogMenuConf/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblBlogMenuConf/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblBlogMenuConfId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "新增->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogMenuConf/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblBlogMenuConfVo oblBlogMenuConfVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblBlogMenuConfController extends BaseController {
     }
 
     @ApiOperation(value = "更新->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogMenuConf/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblBlogMenuConfVo oblBlogMenuConfVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblBlogMenuConfController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogMenuConf/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblBlogMenuConfController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblBlogMenuConf/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogMenuConf/deleteById")
     @ApiOperation(value = "逻辑删除->博客菜单定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

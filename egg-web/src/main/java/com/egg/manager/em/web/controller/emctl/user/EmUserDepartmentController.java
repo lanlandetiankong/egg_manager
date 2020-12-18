@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-用户_部门接口")
 @RestController
-@RequestMapping("/user/userDepartment")
+@RequestMapping("/emCtl/user/userDepartment")
 public class EmUserDepartmentController extends BaseController {
     @Autowired
     private EmUserDepartmentMapper emUserDepartmentMapper;

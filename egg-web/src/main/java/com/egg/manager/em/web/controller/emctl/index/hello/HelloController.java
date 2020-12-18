@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-测试接口")
 @RestController
-@RequestMapping("/index/hello")
+@RequestMapping("/emCtl/index/hello")
 public class HelloController extends BaseController {
     @Value("${spring.profiles.active}")
     private String avtiveEnv;
@@ -36,21 +36,21 @@ public class HelloController extends BaseController {
     private MessageHelloService messageHelloService;
     private CommonMenuTree commonMenuTree;
 
-    @EmPcWebQueryLog(fullPath = "/index/hello/testEnv", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/hello/testEnv", flag = false)
     @ApiOperation(value = "测试当前开发环境", response = WebResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/testEnv")
     public String doGetAllDefineDepartmentDtos() {
         return "You run in a " + avtiveEnv + " environment";
     }
 
-    @EmPcWebQueryLog(fullPath = "/index/hello/sayHello", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/hello/sayHello", flag = false)
     @ApiOperation(value = "测试当前开发环境", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/sayHello")
     public void sayHello() {
         helloService.sayHello();
     }
 
-    @EmPcWebQueryLog(fullPath = "/index/hello/loadBalanceTest", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/hello/loadBalanceTest", flag = false)
     @ApiOperation(value = "测试dubbo负载均衡", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadBalanceTest")
     public void loadBalanceTest() {
@@ -58,7 +58,7 @@ public class HelloController extends BaseController {
         log.info("for debug..." + port);
     }
 
-    @EmPcWebQueryLog(fullPath = "/index/hello/loadMessageBalanceTest", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/hello/loadMessageBalanceTest", flag = false)
     @ApiOperation(value = "测试dubbo负载均衡-相互调用", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/loadMessageBalanceTest")
     public void loadMessageBalanceTest() {
@@ -66,7 +66,7 @@ public class HelloController extends BaseController {
         log.info("for message  debug..." + port);
     }
 
-    @EmPcWebQueryLog(fullPath = "/index/hello/i18n", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/hello/i18n", flag = false)
     @ApiOperation(value = "i18n", response = Void.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/i18n")
     public void i18n() {

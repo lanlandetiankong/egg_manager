@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-用户_租户接口")
 @RestController
-@RequestMapping("/user/userTenant")
+@RequestMapping("/emCtl/user/userTenant")
 public class EmUserTenantController extends BaseController {
     @Autowired
     private EmUserTenantMapper emUserTenantMapper;

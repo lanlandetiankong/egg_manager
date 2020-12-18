@@ -41,14 +41,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-公告标签接口")
 @RestController
-@RequestMapping("/announcementTag")
+@RequestMapping("/emCtl/announcementTag")
 public class EmAnnouncementTagController extends BaseController {
     @Autowired
     private EmAnnouncementTagMapper emAnnouncementTagMapper;
     @Reference
     private EmAnnouncementTagService emAnnouncementTagService;
 
-    @EmPcWebQueryLog(fullPath = "/announcementTag/gainEnumSelect")
+    @EmPcWebQueryLog(fullPath = "/emCtl/announcementTag/gainEnumSelect")
     @ApiOperation(value = "分页查询->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -66,7 +66,7 @@ public class EmAnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/announcementTag/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/announcementTag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = EmAnnouncementTagDto.class) QueryPageBean<EmAnnouncementTagDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -78,7 +78,7 @@ public class EmAnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/announcementTag/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/announcementTag/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String announcementTagId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -90,7 +90,7 @@ public class EmAnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "新增->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementTag/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementTag/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmAnnouncementTagVo emAnnouncementTagVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -104,7 +104,7 @@ public class EmAnnouncementTagController extends BaseController {
     }
 
     @ApiOperation(value = "更新->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementTag/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementTag/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmAnnouncementTagVo emAnnouncementTagVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -117,7 +117,7 @@ public class EmAnnouncementTagController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/announcementTag/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementTag/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -134,7 +134,7 @@ public class EmAnnouncementTagController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/announcementTag/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementTag/deleteById")
     @ApiOperation(value = "逻辑删除->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

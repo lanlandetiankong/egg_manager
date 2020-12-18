@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @RestController
-@RequestMapping("/index/hello/message/email/hellomail")
+@RequestMapping("/emCtl/index/hello/message/email/hellomail")
 public class HelloMailController extends BaseController {
     @Value("${spring.mail.username}")
     private String fromUser;
@@ -33,7 +33,7 @@ public class HelloMailController extends BaseController {
     private MyBaseEmailMgoService myBaseEmailMgoService;
 
     @ApiOperation(value = "测试发送消息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/message/email/hello/sendMail")
+    @EmPcWebQueryLog(fullPath = "/emCtl/message/email/hello/sendMail")
     @PostMapping(value = "/sendMail")
     public WebResult doGetDefineModuleById(HttpServletRequest request) {
         WebResult result = WebResult.okOperation();

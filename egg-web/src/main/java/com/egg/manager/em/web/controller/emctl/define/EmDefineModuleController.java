@@ -41,14 +41,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-模块定义接口")
 @RestController
-@RequestMapping("/module/define_module")
+@RequestMapping("/emCtl/module/define_module")
 public class EmDefineModuleController extends BaseController {
     @Autowired
     private EmDefineModuleMapper emDefineModuleMapper;
     @Reference
     private EmDefineModuleService emDefineModuleService;
 
-    @EmPcWebQueryLog(fullPath = "/module/define_module/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/module/define_module/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -66,7 +66,7 @@ public class EmDefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/module/define_module/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/module/define_module/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -76,7 +76,7 @@ public class EmDefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "新增->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/module/define_module/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/module/define_module/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmDefineModuleVo emDefineModuleVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -89,7 +89,7 @@ public class EmDefineModuleController extends BaseController {
     }
 
     @ApiOperation(value = "更新->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/module/define_module/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/module/define_module/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmDefineModuleVo emDefineModuleVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -101,7 +101,7 @@ public class EmDefineModuleController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/module/define_module/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/module/define_module/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -117,7 +117,7 @@ public class EmDefineModuleController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/module/define_module/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/module/define_module/deleteById")
     @ApiOperation(value = "逻辑删除->模块定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口->权限")
 @RestController
-@RequestMapping("/commonApi/permission")
+@RequestMapping("/emCtl/commonApi/permission")
 public class PermissionCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->权限类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllPermissionTypeEnumList")

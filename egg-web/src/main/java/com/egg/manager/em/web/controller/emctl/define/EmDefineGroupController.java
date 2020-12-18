@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-组别定义接口")
 @RestController
-@RequestMapping("/define/defineGroup")
+@RequestMapping("/emCtl/define/defineGroup")
 public class EmDefineGroupController {
 }

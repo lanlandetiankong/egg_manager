@@ -44,7 +44,7 @@ import java.util.Map;
 @Slf4j
 @Api(value = "API-公告草稿接口 ")
 @RestController
-@RequestMapping("/announcementDraft")
+@RequestMapping("/emCtl/announcementDraft")
 public class EmAnnouncementDraftController extends BaseController {
     @Autowired
     private EmAnnouncementDraftMapper emAnnouncementDraftMapper;
@@ -53,7 +53,7 @@ public class EmAnnouncementDraftController extends BaseController {
     @Reference
     private EmAnnouncementTagService emAnnouncementTagService;
 
-    @EmPcWebQueryLog(fullPath = "/announcementDraft/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/announcementDraft/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -74,7 +74,7 @@ public class EmAnnouncementDraftController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/announcementDraft/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/announcementDraft/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String draftId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -88,7 +88,7 @@ public class EmAnnouncementDraftController extends BaseController {
     }
 
     @ApiOperation(value = "新增->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmAnnouncementDraftVo emAnnouncementDraftVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class EmAnnouncementDraftController extends BaseController {
     }
 
     @ApiOperation(value = "更新->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmAnnouncementDraftVo emAnnouncementDraftVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -117,7 +117,7 @@ public class EmAnnouncementDraftController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -133,7 +133,7 @@ public class EmAnnouncementDraftController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/deleteById")
     @ApiOperation(value = "逻辑删除->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -149,7 +149,7 @@ public class EmAnnouncementDraftController extends BaseController {
     }
 
     @ApiOperation(value = "批量发布->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/batchPublishDraft")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/batchPublishDraft")
     @PostMapping(value = "/batchPublishDraft")
     public WebResult batchPublishDraft(HttpServletRequest request, String[] draftIds, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -162,7 +162,7 @@ public class EmAnnouncementDraftController extends BaseController {
     }
 
     @ApiOperation(value = "发布->公告草稿", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/announcementDraft/publishDraft")
+    @EmPcWebOperationLog(fullPath = "/emCtl/announcementDraft/publishDraft")
     @PostMapping(value = "/publishDraft")
     public WebResult publishDraft(HttpServletRequest request, String draftId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {

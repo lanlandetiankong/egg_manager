@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-用户定义的收藏类别")
 @RestController
-@RequestMapping("/oblUserDefCollectCategory")
+@RequestMapping("/oblCtl/oblUserDefCollectCategory")
 public class OblUserDefCollectCategoryController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.user.pojo.dto)->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserDefCollectCategory/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserDefCollectCategoryDto.class) QueryPageBean<OblUserDefCollectCategoryDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserDefCollectCategory/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserDefCollectCategory/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserDefCollectCategoryId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserDefCollectCategory/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserDefCollectCategory/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserDefCollectCategoryVo oblUserDefCollectCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserDefCollectCategory/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblUserDefCollectCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserDefCollectCategory/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserDefCollectCategory/deleteById")
     @ApiOperation(value = "逻辑删除->用户定义的收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

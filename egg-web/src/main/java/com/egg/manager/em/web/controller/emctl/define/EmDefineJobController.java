@@ -41,14 +41,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-职务定义接口 ")
 @RestController
-@RequestMapping("/define/defineJob")
+@RequestMapping("/emCtl/define/defineJob")
 public class EmDefineJobController extends BaseController {
     @Autowired
     private EmDefineJobMapper emDefineJobMapper;
     @Reference
     private EmDefineJobService emDefineJobService;
 
-    @EmPcWebQueryLog(fullPath = "/define/defineJob/queryPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineJob/queryPage")
     @ApiOperation(value = "分页查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -64,7 +64,7 @@ public class EmDefineJobController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/define/defineJob/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineJob/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -82,7 +82,7 @@ public class EmDefineJobController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/define/defineJob/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineJob/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -92,7 +92,7 @@ public class EmDefineJobController extends BaseController {
     }
 
     @ApiOperation(value = "新增->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineJob/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineJob/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmDefineJobVo emDefineJobVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -105,7 +105,7 @@ public class EmDefineJobController extends BaseController {
     }
 
     @ApiOperation(value = "更新->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineJob/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineJob/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmDefineJobVo emDefineJobVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -117,7 +117,7 @@ public class EmDefineJobController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineJob/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineJob/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -134,7 +134,7 @@ public class EmDefineJobController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineJob/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineJob/deleteById")
     @ApiOperation(value = "逻辑删除->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

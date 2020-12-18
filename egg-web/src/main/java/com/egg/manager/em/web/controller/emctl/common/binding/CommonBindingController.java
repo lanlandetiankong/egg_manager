@@ -25,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口/参数绑定")
 @RestController
-@RequestMapping("/commonApi/binding")
+@RequestMapping("/emCtl/commonApi/binding")
 public class CommonBindingController extends BaseController {
     @ApiOperation(value = "查询枚举->开关", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getSwitchEnumList")

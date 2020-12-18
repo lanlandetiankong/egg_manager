@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-用户的计算信息")
 @RestController
-@RequestMapping("/oblUserCalculateInfo")
+@RequestMapping("/oblCtl/oblUserCalculateInfo")
 public class OblUserCalculateInfoController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblUserCalculateInfoController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserCalculateInfo/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserCalculateInfoDto.class) QueryPageBean<OblUserCalculateInfoDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserCalculateInfo/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserCalculateInfo/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserCalculateInfoId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserCalculateInfo/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserCalculateInfoVo oblUserCalculateInfoVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblUserCalculateInfoController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserCalculateInfo/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserCalculateInfoVo oblUserCalculateInfoVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblUserCalculateInfoController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserCalculateInfo/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblUserCalculateInfoController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserCalculateInfo/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserCalculateInfo/deleteById")
     @ApiOperation(value = "逻辑删除->用户的计算信息", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

@@ -43,14 +43,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-权限定义接口")
 @RestController
-@RequestMapping("/define/definePermission")
+@RequestMapping("/emCtl/define/definePermission")
 public class EmDefinePermissionController extends BaseController {
     @Autowired
     private EmDefinePermissionMapper emDefinePermissionMapper;
     @Reference
     private EmDefinePermissionService emDefinePermissionService;
 
-    @EmPcWebQueryLog(fullPath = "/define/definePermission/queryPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/definePermission/queryPage")
     @ApiOperation(value = "分页查询->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -68,7 +68,7 @@ public class EmDefinePermissionController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/define/definePermission/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/definePermission/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -86,7 +86,7 @@ public class EmDefinePermissionController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/define/definePermission/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/definePermission/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -96,7 +96,7 @@ public class EmDefinePermissionController extends BaseController {
     }
 
     @ApiOperation(value = "新增->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/definePermission/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/definePermission/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmDefinePermissionVo emDefinePermissionVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -109,7 +109,7 @@ public class EmDefinePermissionController extends BaseController {
     }
 
     @ApiOperation(value = "更新->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/definePermission/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/definePermission/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmDefinePermissionVo emDefinePermissionVo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -121,7 +121,7 @@ public class EmDefinePermissionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/definePermission/batchEnsureByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/definePermission/batchEnsureByIds")
     @ApiOperation(value = "更新/批量启用->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要启用的权限定义id数组", required = true, dataTypeClass = String[].class),
@@ -136,7 +136,7 @@ public class EmDefinePermissionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/definePermission/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/definePermission/deleteById")
     @ApiOperation(value = "逻辑删除->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -155,7 +155,7 @@ public class EmDefinePermissionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/definePermission/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/definePermission/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),

@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章点赞表")
 @RestController
-@RequestMapping("/oblArticleLikeRecord")
+@RequestMapping("/oblCtl/oblArticleLikeRecord")
 public class OblArticleLikeRecordController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleLikeRecordController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleLikeRecord/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleLikeRecord/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleLikeRecordDto.class) QueryPageBean<OblArticleLikeRecordDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblArticleLikeRecordController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleLikeRecord/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleLikeRecord/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleLikeRecordId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblArticleLikeRecordController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeRecord/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleLikeRecord/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleLikeRecordVo oblArticleLikeRecordVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblArticleLikeRecordController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeRecord/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleLikeRecord/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleLikeRecordVo oblArticleLikeRecordVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblArticleLikeRecordController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeRecord/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleLikeRecord/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblArticleLikeRecordController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleLikeRecord/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleLikeRecord/deleteById")
     @ApiOperation(value = "逻辑删除->文章点赞表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

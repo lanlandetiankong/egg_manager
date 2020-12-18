@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-博客通知表")
 @RestController
-@RequestMapping("/oblBlogNotice")
+@RequestMapping("/oblCtl/oblBlogNotice")
 public class OblBlogNoticeController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblBlogNoticeController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblBlogNotice/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblBlogNotice/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblBlogNoticeDto.class) QueryPageBean<OblBlogNoticeDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblBlogNoticeController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblBlogNotice/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblBlogNotice/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblBlogNoticeId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblBlogNoticeController extends BaseController {
     }
 
     @ApiOperation(value = "新增->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblBlogNotice/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogNotice/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblBlogNoticeVo oblBlogNoticeVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblBlogNoticeController extends BaseController {
     }
 
     @ApiOperation(value = "更新->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblBlogNotice/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogNotice/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblBlogNoticeVo oblBlogNoticeVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblBlogNoticeController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblBlogNotice/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogNotice/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblBlogNoticeController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblBlogNotice/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblBlogNotice/deleteById")
     @ApiOperation(value = "逻辑删除->博客通知表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

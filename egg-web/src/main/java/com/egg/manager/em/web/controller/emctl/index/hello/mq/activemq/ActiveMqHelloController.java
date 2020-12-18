@@ -25,7 +25,7 @@ import javax.jms.Topic;
 @Slf4j
 @Api(value = "API-测试消息")
 @RestController
-@RequestMapping("/index/hello/mq/activemq")
+@RequestMapping("/emCtl/index/hello/mq/activemq")
 public class ActiveMqHelloController extends BaseController {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
@@ -34,7 +34,7 @@ public class ActiveMqHelloController extends BaseController {
     @Autowired
     private Topic topic;
 
-    @EmPcWebOperationLog(fullPath = "/index/hello/mq/activemq/queue/test", flag = false)
+    @EmPcWebOperationLog(fullPath = "/emCtl/index/hello/mq/activemq/queue/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Queue", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queue/test")
     public String sendQueue(@RequestBody String str) {
@@ -42,7 +42,7 @@ public class ActiveMqHelloController extends BaseController {
         return "success";
     }
 
-    @EmPcWebOperationLog(fullPath = "/index/hello/mq/activemq/topic/test", flag = false)
+    @EmPcWebOperationLog(fullPath = "/emCtl/index/hello/mq/activemq/topic/test", flag = false)
     @ApiOperation(value = "测试ActiveMq-Topic", response = String.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/topic/test")
     public String sendTopic(@RequestBody String str) {

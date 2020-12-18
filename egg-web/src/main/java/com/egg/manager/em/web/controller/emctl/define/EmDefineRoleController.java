@@ -54,7 +54,7 @@ import java.util.Set;
 @Slf4j
 @Api(value = "API-角色定义接口")
 @RestController
-@RequestMapping("/define/defineRole")
+@RequestMapping("/emCtl/define/defineRole")
 public class EmDefineRoleController extends BaseController {
     @Autowired
     private EmDefineMenuMapper emDefineMenuMapper;
@@ -69,7 +69,7 @@ public class EmDefineRoleController extends BaseController {
     @Reference
     private EmDefineRoleService emDefineRoleService;
 
-    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryPage")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/queryPage")
     @ApiOperation(value = "分页查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -85,7 +85,7 @@ public class EmDefineRoleController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryDtoPage")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -103,7 +103,7 @@ public class EmDefineRoleController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineRole/queryOneById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -161,7 +161,7 @@ public class EmDefineRoleController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineRole/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -177,7 +177,7 @@ public class EmDefineRoleController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineRole/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/deleteById")
     @ApiOperation(value = "逻辑删除->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

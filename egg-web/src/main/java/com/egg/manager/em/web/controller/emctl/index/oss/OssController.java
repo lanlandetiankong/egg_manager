@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/index/oss")
+@RequestMapping("/emCtl/index/oss")
 public class OssController {
     /**
      * 测试-上传

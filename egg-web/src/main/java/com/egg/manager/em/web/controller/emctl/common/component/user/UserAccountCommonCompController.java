@@ -33,12 +33,12 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-通用组件/用户账号接口")
 @RestController
-@RequestMapping("/commmon/component/user/userAccount")
+@RequestMapping("/emCtl/commmon/component/user/userAccount")
 public class UserAccountCommonCompController extends BaseController {
     @Autowired
     private EmUserAccountService emUserAccountService;
 
-    @EmPcWebOperationLog(fullPath = "/commmon/component/user/userAccount/queryDtoPage", flag = false)
+    @EmPcWebOperationLog(fullPath = "/emCtl/commmon/component/user/userAccount/queryDtoPage", flag = false)
     @ApiOperation(value = "通用组件?分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

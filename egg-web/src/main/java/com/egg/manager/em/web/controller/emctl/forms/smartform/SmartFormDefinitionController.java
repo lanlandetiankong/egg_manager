@@ -53,14 +53,14 @@ import java.util.Optional;
 @Slf4j
 @Api(value = "API-智能表单定义")
 @RestController
-@RequestMapping("/forms/smartForm/formDefinition")
+@RequestMapping("/emCtl/forms/smartForm/formDefinition")
 public class SmartFormDefinitionController extends BaseController {
     @Autowired
     private SmartFormTypeDefinitionRepository smartFormTypeDefinitionRepository;
     @Reference
     private SmartFormDefinitionMgoService smartFormDefinitionMgoService;
 
-    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/forms/smartForm/formDefinition/getDataPage")
     @ApiOperation(value = "分页查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -79,7 +79,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getDataAll")
+    @EmPcWebQueryLog(fullPath = "/emCtl/forms/smartForm/formDefinition/getDataAll")
     @ApiOperation(value = "分页查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -98,7 +98,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/forms/smartForm/formDefinition/getOneItemById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/forms/smartForm/formDefinition/getOneItemById")
     @ApiOperation(value = "根据id查询->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo,
@@ -110,7 +110,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/addByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/forms/smartForm/formDefinition/addByForm")
     @ApiOperation(value = "新增->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo,
@@ -131,7 +131,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/forms/smartForm/formDefinition/updateByForm")
     @ApiOperation(value = "更新->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/updateByForm")
     public WebResult doUpdateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo,
@@ -152,7 +152,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/delOneById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/forms/smartForm/formDefinition/delOneById")
     @ApiOperation(value = "逻辑删除->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -166,7 +166,7 @@ public class SmartFormDefinitionController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/forms/smartForm/formDefinition/batchDelByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/forms/smartForm/formDefinition/batchDelByIds")
     @ApiOperation(value = "批量删除->表单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),

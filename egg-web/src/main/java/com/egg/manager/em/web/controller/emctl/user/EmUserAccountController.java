@@ -49,7 +49,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-用户账号接口")
 @RestController
-@RequestMapping("/user/userAccount")
+@RequestMapping("/emCtl/user/userAccount")
 public class EmUserAccountController extends BaseController {
     @Autowired
     private EmUserAccountMapper emUserAccountMapper;
@@ -67,7 +67,7 @@ public class EmUserAccountController extends BaseController {
     private EmUserAccountService emUserAccountService;
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/queryDtoPage")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -85,7 +85,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/user/userAccount/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/user/userAccount/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -108,7 +108,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedRole")
+    @EmPcWebQueryLog(fullPath = "/emCtl/user/userAccount/gainGrantedRole")
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -118,7 +118,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->权限定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedPermission")
+    @EmPcWebQueryLog(fullPath = "/emCtl/user/userAccount/gainGrantedPermission")
     @PostMapping(value = "/gainGrantedPermission")
     public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -129,7 +129,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "查询已获授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/user/userAccount/gainGrantedJob")
+    @EmPcWebQueryLog(fullPath = "/emCtl/user/userAccount/gainGrantedJob")
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -139,7 +139,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -153,7 +153,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -166,7 +166,7 @@ public class EmUserAccountController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -183,7 +183,7 @@ public class EmUserAccountController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/deleteById")
     @ApiOperation(value = "逻辑删除->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),
@@ -200,7 +200,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新/批量修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/batchUpdateLockByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/batchUpdateLockByIds")
     @PostMapping(value = "/batchUpdateLockByIds")
     public WebResult batchUpdateLockByIds(HttpServletRequest request, String[] lockIds, Boolean lockFlag, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -217,7 +217,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "更新/修改状态->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/updateLockById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/updateLockById")
     @PostMapping(value = "/updateLockById")
     public WebResult updateLockById(HttpServletRequest request, String lockId, Boolean lockFlag, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -233,7 +233,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "授权/用户账号->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/grantRoleToUser")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/grantRoleToUser")
     @PostMapping(value = "/grantRoleToUser")
     public WebResult doGrantRoleToUser(HttpServletRequest request, String userAccountId, String[] checkIds, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -245,7 +245,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/grantJobToUser")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/grantJobToUser")
     @PostMapping(value = "/grantJobToUser")
     public WebResult doGrantJobToUser(HttpServletRequest request, String userAccountId, String[] checkIds,
                                       @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -258,7 +258,7 @@ public class EmUserAccountController extends BaseController {
     }
 
     @ApiOperation(value = "授权/用户账号->职务定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/user/userAccount/reflushSecurePwd")
+    @EmPcWebOperationLog(fullPath = "/emCtl/user/userAccount/reflushSecurePwd")
     @GetMapping(value = "/reflushSecurePwd")
     public WebResult reflushSecurePwd(HttpServletRequest request, @CurrentLoginUser(required = false) CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();

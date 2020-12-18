@@ -49,14 +49,14 @@ import javax.validation.constraints.NotBlank;
 @Slf4j
 @Api(value = "API-邮件发送记录")
 @RestController
-@RequestMapping("/message/email/emailSendRecord")
+@RequestMapping("/emCtl/message/email/emailSendRecord")
 public class EmailSendRecordController extends BaseController {
     @Autowired
     private EmailSendRecordRepository emailSendRecordRepository;
     @Reference
     private EmailSendRecordMgoService emailSendRecordMgoService;
 
-    @EmPcWebQueryLog(fullPath = "/message/email/emailSendRecord/getDataPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/message/email/emailSendRecord/getDataPage")
     @ApiOperation(value = "分页查询->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -75,7 +75,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/message/email/emailSendRecord/getOneItemById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/message/email/emailSendRecord/getOneItemById")
     @ApiOperation(value = "根据id查询->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getOneItemById")
     public WebResult doGetOneItemById(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo,
@@ -87,7 +87,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/addByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/message/email/emailSendRecord/addByForm")
     @ApiOperation(value = "新增->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/addByForm")
     public WebResult doAddByForm(HttpServletRequest request, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo,
@@ -103,7 +103,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/delOneById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/message/email/emailSendRecord/delOneById")
     @ApiOperation(value = "逻辑删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = "要逻辑删除的id", required = true, dataTypeClass = String.class),
@@ -117,7 +117,7 @@ public class EmailSendRecordController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/message/email/emailSendRecord/batchDelByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/message/email/emailSendRecord/batchDelByIds")
     @ApiOperation(value = "批量逻辑删除->邮件记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = "要逻辑删除的id数组", required = true, dataTypeClass = String[].class),

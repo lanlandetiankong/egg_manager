@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章评论表")
 @RestController
-@RequestMapping("/oblArticleComment")
+@RequestMapping("/oblCtl/oblArticleComment")
 public class OblArticleCommentController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleCommentController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleComment/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleComment/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCommentDto.class) QueryPageBean<OblArticleCommentDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblArticleComment/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleComment/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCommentId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleComment/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleComment/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCommentVo oblArticleCommentVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblArticleCommentController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleComment/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleComment/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCommentVo oblArticleCommentVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblArticleCommentController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleComment/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleComment/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblArticleCommentController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleComment/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleComment/deleteById")
     @ApiOperation(value = "逻辑删除->文章评论表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

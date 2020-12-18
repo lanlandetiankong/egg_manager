@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-app用户关联表")
 @RestController
-@RequestMapping("/emUserAppRelated")
+@RequestMapping("/emCtl/emUserAppRelated")
 public class EmUserAppRelatedController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class EmUserAppRelatedController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/emUserAppRelated/queryDtoPage")
+    @OblPcWebQueryLog(fullPath = "/emCtl/emUserAppRelated/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = EmUserAppRelatedDto.class) QueryPageBean<EmUserAppRelatedDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class EmUserAppRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/emUserAppRelated/queryOneById")
+    @OblPcWebQueryLog(fullPath = "/emCtl/emUserAppRelated/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String emUserAppRelatedId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class EmUserAppRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "新增->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/emUserAppRelated/createByForm")
+    @OblPcWebOperationLog(fullPath = "/emCtl/emUserAppRelated/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmUserAppRelatedVo emUserAppRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class EmUserAppRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "更新->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/emUserAppRelated/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/emCtl/emUserAppRelated/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmUserAppRelatedVo emUserAppRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class EmUserAppRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/emUserAppRelated/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/emCtl/emUserAppRelated/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class EmUserAppRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/emUserAppRelated/deleteById")
+    @OblPcWebOperationLog(fullPath = "/emCtl/emUserAppRelated/deleteById")
     @ApiOperation(value = "逻辑删除->app用户关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

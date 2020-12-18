@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @Api(value = "API-通用接口(模块)")
 @RestController
-@RequestMapping("/commonApi/module")
+@RequestMapping("/emCtl/commonApi/module")
 public class ModuleCommonController extends BaseController {
     @ApiOperation(value = "查询枚举->模块类型", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping(value = "/getAllModuleTypeEnumList")

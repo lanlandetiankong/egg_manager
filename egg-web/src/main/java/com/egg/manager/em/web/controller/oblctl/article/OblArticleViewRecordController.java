@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章查看记录")
 @RestController
-@RequestMapping("/oblArticleViewRecord")
+@RequestMapping("/oblCtl/oblArticleViewRecord")
 public class OblArticleViewRecordController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleViewRecordController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/oblArticleViewRecord/queryDtoPage")
+    @OblPcWebQueryLog(fullPath = "/oblCtl/oblArticleViewRecord/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleViewRecordDto.class) QueryPageBean<OblArticleViewRecordDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblArticleViewRecordController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebQueryLog(fullPath = "/oblArticleViewRecord/queryOneById")
+    @OblPcWebQueryLog(fullPath = "/oblCtl/oblArticleViewRecord/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleViewRecordId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblArticleViewRecordController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleViewRecord/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleViewRecord/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleViewRecordVo oblArticleViewRecordVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblArticleViewRecordController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblArticleViewRecord/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleViewRecord/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleViewRecordVo oblArticleViewRecordVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblArticleViewRecordController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleViewRecord/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleViewRecord/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblArticleViewRecordController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblArticleViewRecord/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleViewRecord/deleteById")
     @ApiOperation(value = "逻辑删除->文章查看记录", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

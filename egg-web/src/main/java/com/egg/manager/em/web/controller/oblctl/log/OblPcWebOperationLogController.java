@@ -36,14 +36,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-OolongBlog_PcWeb操作接口日志")
 @RestController
-@RequestMapping("/log/obl/pc/web/operationLog")
+@RequestMapping("/oblCtl/log/obl/pc/web/operationLog")
 public class OblPcWebOperationLogController extends BaseController {
     @Autowired
     private OblPcWebOperationLogRepository oblPcWebOperationLogRepository;
     @Reference
     private OblPcWebOperationLogMgoService oblPcWebOperationLogMgoService;
 
-    @OblPcWebQueryLog(fullPath = "/log/obl/pc/web/operationLog/getDataPage", flag = false)
+    @OblPcWebQueryLog(fullPath = "/oblCtl/log/obl/pc/web/operationLog/getDataPage", flag = false)
     @ApiOperation(value = "分页查询->PcWeb操作接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

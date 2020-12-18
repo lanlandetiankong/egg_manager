@@ -54,7 +54,7 @@ import java.util.Set;
  */
 @Slf4j
 @RestController
-@RequestMapping("user/login")
+@RequestMapping("/emCtl/user/login")
 public class EmUserLoginController extends BaseController {
     @Value("${egg.conf.jwt.sso:true}")
     private boolean jwtSsoFlag;
@@ -73,7 +73,7 @@ public class EmUserLoginController extends BaseController {
     @Reference
     public EmDefineMenuService emDefineMenuService;
 
-    @EmPcWebLoginLog(fullPath = "/user/login/loginByForm")
+    @EmPcWebLoginLog(fullPath = "/emCtl/user/login/loginByForm")
     @ApiOperation(value = "用户登录接口", notes = "账号密码方式登录接口", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginAccountVo", value = "要登录用户的相关信息", required = true, dataTypeClass = LoginAccountVo.class),

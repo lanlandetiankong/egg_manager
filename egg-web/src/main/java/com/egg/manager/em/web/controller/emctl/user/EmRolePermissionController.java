@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "API-角色_权限接口")
 @RestController
-@RequestMapping("/role/role_permission")
+@RequestMapping("/emCtl/role/role_permission")
 public class EmRolePermissionController {
 }

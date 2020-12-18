@@ -36,14 +36,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-EggManager_PcWeb查询日志")
 @RestController
-@RequestMapping("/log/em/pc/web/queryLog")
+@RequestMapping("/emCtl/log/em/pc/web/queryLog")
 public class EmPcWebQueryLogController extends BaseController {
     @Autowired
     private EmPcWebQueryLogRepository pcWebQueryLogRepository;
     @Reference
     private EmPcWebQueryLogMgoService pcWebQueryLogMgoService;
 
-    @EmPcWebQueryLog(fullPath = "/log/em/pc/web/queryLog/getDataPage", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/log/em/pc/web/queryLog/getDataPage", flag = false)
     @ApiOperation(value = "分页查询->PcWeb查询接口日志", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),

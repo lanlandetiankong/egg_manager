@@ -26,14 +26,14 @@ import java.util.ArrayList;
 @Slf4j
 @Api(value = "API-用户工具接口")
 @RestController
-@RequestMapping("/index/usertool")
+@RequestMapping("/emCtl/index/usertool")
 public class EmUserToolController extends BaseController {
 
     @Reference
     private EmUserAccountService emUserAccountService;
 
 
-    @EmPcWebQueryLog(fullPath = "/index/usertool/batchGenerate", flag = false)
+    @EmPcWebQueryLog(fullPath = "/emCtl/index/usertool/batchGenerate", flag = false)
     @ApiOperation(value = "批量生成测试用户", response = WebResult.class, httpMethod = HttpMethodConstant.GET)
     @GetMapping(value = "/batchGenerate")
     public String doGetAllDefineDepartmentDtos() {

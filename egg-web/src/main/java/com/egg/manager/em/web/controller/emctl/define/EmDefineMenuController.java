@@ -54,14 +54,14 @@ import java.util.Map;
 @Slf4j
 @Api(value = "API-菜单定义接口")
 @RestController
-@RequestMapping("/define/defineMenu")
+@RequestMapping("/emCtl/define/defineMenu")
 public class EmDefineMenuController extends BaseController {
     @Autowired
     private EmDefineMenuMapper emDefineMenuMapper;
     @Reference
     private EmDefineMenuService emDefineMenuService;
 
-    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryTreeSelect")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/queryTreeSelect")
     @ApiOperation(value = "查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryTreeSelect")
     public WebResult queryTreeSelect(Boolean withRoot) {
@@ -78,7 +78,7 @@ public class EmDefineMenuController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/define/defineMenu/queryFilteredTreeSelect")
+    @EmPcWebQueryLog(description = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", fullPath = "/emCtl/define/defineMenu/queryFilteredTreeSelect")
     @ApiOperation(value = "筛选查询下拉树->菜单定义", notes = "查询被过滤路由菜单TreeSelect(过滤指定节点的所有子节点)", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId) {
@@ -90,7 +90,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/define/defineMenu/user/gainGrantTree")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
     public WebResult doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
@@ -101,7 +101,7 @@ public class EmDefineMenuController extends BaseController {
         return result;
     }
 
-    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/queryDtoPage")
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
@@ -119,7 +119,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/define/defineMenu/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineMenuId) {
         WebResult result = WebResult.okQuery();
@@ -130,7 +130,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "新增->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineMenu/createByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineMenu/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, EmDefineMenuVo vo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -143,7 +143,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "更新->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineMenu/updateByForm")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineMenu/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, EmDefineMenuVo vo, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
             throws Exception {
@@ -156,7 +156,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "更新->菜单定义/excel模板", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineMenu/updateExcelModel")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineMenu/updateExcelModel")
     @PostMapping(value = "/updateExcelModel")
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
     public WebResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -176,7 +176,7 @@ public class EmDefineMenuController extends BaseController {
     }
 
     @ApiOperation(value = "批量逻辑删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebOperationLog(fullPath = "/define/defineMenu/batchDeleteByIds")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineMenu/batchDeleteByIds")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", required = true, dataTypeClass = String[].class),
     })
@@ -191,7 +191,7 @@ public class EmDefineMenuController extends BaseController {
         return result;
     }
 
-    @EmPcWebOperationLog(fullPath = "/define/defineMenu/deleteById")
+    @EmPcWebOperationLog(fullPath = "/emCtl/define/defineMenu/deleteById")
     @ApiOperation(value = "逻辑删除->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

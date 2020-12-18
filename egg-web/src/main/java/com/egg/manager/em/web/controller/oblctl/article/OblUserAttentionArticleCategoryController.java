@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-用户关注的文章收藏类别")
 @RestController
-@RequestMapping("/oblUserAttentionArticleCategory")
+@RequestMapping("/oblCtl/oblUserAttentionArticleCategory")
 public class OblUserAttentionArticleCategoryController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.user.pojo.dto)->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserAttentionArticleCategory/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserAttentionArticleCategoryDto.class) QueryPageBean<OblUserAttentionArticleCategoryDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblUserAttentionArticleCategory/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserAttentionArticleCategoryId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserAttentionArticleCategoryVo oblUserAttentionArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblUserAttentionArticleCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblUserAttentionArticleCategory/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionArticleCategory/deleteById")
     @ApiOperation(value = "逻辑删除->用户关注的文章收藏类别", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

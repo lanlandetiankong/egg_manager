@@ -67,7 +67,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                    @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         AntdvPage<SmartFormTypeDefinitionMgo> pageBean = smartFormTypeDefinitionMgoService.doFindPage(loginUserInfo, queryPageBean);
         result.putPage(pageBean);
@@ -86,7 +86,7 @@ public class SmartFormTypeDefinitionController extends BaseController {
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         //添加状态过滤,时间倒序排序
-        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Close.getValue());
+        queryPageBean.operateQuery().addNotEq(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         queryPageBean.operateSortMap().putDesc(MongoFieldConstant.FIELD_CREATETIME);
         List<SmartFormTypeDefinitionMgo> list = smartFormTypeDefinitionMgoService.doFindAll(loginUserInfo, queryPageBean);
         result = smartFormTypeDefinitionMgoService.dealResultListToEnums(result, list);

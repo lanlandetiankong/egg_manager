@@ -107,9 +107,21 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      */
     public static QPageRequest getMgPageFromBean(AntdvPage vpage) {
         vpage = vpage != null ? vpage : AntdvPage.gainDefault(Object.class);
-        return QPageRequest.of(vpage.getCurrent(), vpage.getPageSize());
+        return QPageRequest.of(getSuitableCurrent(vpage.getCurrent()), vpage.getPageSize());
     }
 
+    /**
+     * 由于mongodb与mysql 对current的起始含义不一致，需要调用该方法协助取得一个正确的 current
+     * @param current
+     * @return
+     */
+    private static int getSuitableCurrent(Integer current){
+        if(current == null || current <= 0){
+            return 0 ;
+        }
+        //由于mongodb
+        return current - 1 ;
+    }
 
     /**
      * mongodb 使用的分页对象 ==>> 封装的分页bean

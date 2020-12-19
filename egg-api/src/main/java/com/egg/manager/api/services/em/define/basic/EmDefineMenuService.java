@@ -30,20 +30,48 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
      * @return
      */
     List<EmDefineMenuEntity> dealGetUserGrantedMenusByAccountId(String userAccountId);
-
     /**
      * 查询 用户 可访问的 菜单路径
      * @param userAccountId
      * @return
      */
-    Set<String> dealGetUserVisitAbleUrl(String userAccountId);
+    Set<String> queryUserVisitAbleUrl(String userAccountId);
+
+    /**
+     * 查询并缓存 用户 可访问的 菜单路径
+     * @param userAccountId
+     * @return
+     */
+    Set<String> queryUserVisitAbleUrlToCacheable(String userAccountId);
+
+    /**
+     * 刷新缓存 用户 可访问的 菜单路径
+     * @param userAccountId
+     * @return
+     */
+    Set<String> queryUserVisitAbleUrlToCachePut(String userAccountId);
+
 
     /**
      * 查询 用户 可访问的[菜单定义] Tree
      * @param userAccountId
      * @return
      */
-    List<CommonMenuTree> queryDbToCacheable(String userAccountId);
+    List<CommonMenuTree> queryUserVisitAbleMenu(String userAccountId);
+    /**
+     * 查询并缓存 用户 可访问的[菜单定义] Tree
+     * @param userAccountId
+     * @return
+     */
+    List<CommonMenuTree> queryUserVisitAbleMenuToCacheable(String userAccountId);
+
+    /**
+     * 刷新缓存 用户 可访问的[菜单定义] Tree
+     * @param userAccountId
+     * @return
+     */
+    List<CommonMenuTree> queryUserVisitAbleMenuToCachePut(String userAccountId);
+
 
     /**
      * 查询 所有[可用状态]的 [菜单定义]

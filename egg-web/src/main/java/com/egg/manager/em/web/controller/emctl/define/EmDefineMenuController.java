@@ -36,10 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -92,9 +89,23 @@ public class EmDefineMenuController extends BaseController {
     @ApiOperation(value = "权限筛选查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/user/gainGrantTree")
     @PostMapping("/user/gainGrantTree")
-    public WebResult doGetGrantedMenuTree(@RequestHeader("authorization") String authorization, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
+    public WebResult doGetGrantedMenuTree(@RequestHeader("authorization") String authorization,
+                                          @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<CommonMenuTree> treeList = emDefineMenuService.queryDbToCacheable(loginUserInfo.getFid());
+        List<CommonMenuTree> treeList = emDefineMenuService.queryUserVisitAbleMenuToCacheable(loginUserInfo.getFid());
+        result.putGridList(treeList);
+        Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
+        result.putDataMap(urlMap);
+        return result;
+    }
+
+    @ApiOperation(value = "刷新缓存-权限筛选查询下拉树->菜单定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/user/reflushCacheAndGainGrantTree")
+    @PostMapping("/user/reflushCacheAndGainGrantTree")
+    public WebResult reflushCacheAndGainGrantTree(@RequestHeader("authorization") String authorization,
+                                          @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
+        WebResult result = WebResult.okQuery();
+        List<CommonMenuTree> treeList = emDefineMenuService.queryUserVisitAbleMenuToCachePut(loginUserInfo.getFid());
         result.putGridList(treeList);
         Map<String, CommonMenuTree> urlMap = CommonMenuTree.dealTreeListToUrlMap(treeList, Maps.newHashMap());
         result.putDataMap(urlMap);

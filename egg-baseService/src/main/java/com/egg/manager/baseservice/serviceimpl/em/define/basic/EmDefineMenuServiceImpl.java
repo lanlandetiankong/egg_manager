@@ -32,6 +32,7 @@ import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,10 +71,20 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         }
     }
 
-
     @Override
     @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL, key = "#userAccountId", condition = "#userAccountId!=null")
-    public Set<String> dealGetUserVisitAbleUrl(String userAccountId) {
+    public Set<String> queryUserVisitAbleUrlToCacheable(String userAccountId) {
+        return  queryUserVisitAbleUrl(userAccountId);
+    }
+
+    @Override
+    @CachePut(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL, key = "#userAccountId", condition = "#userAccountId!=null")
+    public Set<String> queryUserVisitAbleUrlToCachePut(String userAccountId) {
+        return  queryUserVisitAbleUrl(userAccountId);
+    }
+
+    @Override
+    public Set<String> queryUserVisitAbleUrl(String userAccountId) {
         Set<String> urlSets = new HashSet<>();
         List<EmDefineMenuEntity> emDefineMenuEntityList = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         if (CollectionUtil.isEmpty(emDefineMenuEntityList)) {
@@ -95,11 +106,21 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
 
 
     @Override
-    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS, key = "#userAccountId", condition = "#userAccountId!=null")
-    public List<CommonMenuTree> queryDbToCacheable(String userAccountId) {
+    public List<CommonMenuTree> queryUserVisitAbleMenu(String userAccountId) {
         List<EmDefineMenuEntity> allMenus = this.dealGetUserGrantedMenusByAccountId(userAccountId);
         List<CommonMenuTree> treeList = this.getMenuTreeChildNodes(DefineMenuConstant.ROOT_ID, allMenus);
         return treeList != null ? treeList : new ArrayList<CommonMenuTree>();
+    }
+
+    @Override
+    @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS, key = "#userAccountId", condition = "#userAccountId!=null")
+    public List<CommonMenuTree> queryUserVisitAbleMenuToCacheable(String userAccountId) {
+        return queryUserVisitAbleMenu(userAccountId);
+    }
+    @Override
+    @CachePut(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS, key = "#userAccountId", condition = "#userAccountId!=null")
+    public List<CommonMenuTree> queryUserVisitAbleMenuToCachePut(String userAccountId) {
+        return queryUserVisitAbleMenu(userAccountId);
     }
 
     @Override

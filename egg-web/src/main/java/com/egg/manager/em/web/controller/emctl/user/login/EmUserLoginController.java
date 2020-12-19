@@ -164,7 +164,7 @@ public class EmUserLoginController extends BaseController {
             Set<String> permissionSet = emDefinePermissionService.queryDbToCacheable(userAccountId);
             emDefineRoleService.queryDbToCacheable(userAccountId);
             emDefineRoleService.queryDbToCacheable(userAccountId);
-            Set<String> routerUrlSet = emDefineMenuService.dealGetUserVisitAbleUrl(userAccountId);
+            Set<String> routerUrlSet = emDefineMenuService.queryUserVisitAbleUrlToCacheable(userAccountId);
             if (result != null) {
                 result.putRouterUrlSet(routerUrlSet);
                 result.putPermissionSet(permissionSet);

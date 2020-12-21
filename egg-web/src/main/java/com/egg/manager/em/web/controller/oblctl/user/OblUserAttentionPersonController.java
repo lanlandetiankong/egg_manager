@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-用户的关注人关联")
 @RestController
-@RequestMapping("/oblCtl/oblUserAttentionPerson")
+@RequestMapping("/oblCtl/user/oblUserAttentionPerson")
 public class OblUserAttentionPersonController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblUserAttentionPersonController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.user.pojo.dto)->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserAttentionPerson/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblUserAttentionPersonDto.class) QueryPageBean<OblUserAttentionPersonDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblUserAttentionPersonController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblUserAttentionPerson/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblUserAttentionPersonId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblUserAttentionPersonController extends BaseController {
     }
 
     @ApiOperation(value = "新增->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionPerson/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblUserAttentionPersonVo oblUserAttentionPersonVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblUserAttentionPersonController extends BaseController {
     }
 
     @ApiOperation(value = "更新->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionPerson/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblUserAttentionPersonVo oblUserAttentionPersonVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblUserAttentionPersonController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionPerson/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblUserAttentionPersonController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblUserAttentionPerson/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/user/oblUserAttentionPerson/deleteById")
     @ApiOperation(value = "逻辑删除->用户的关注人关联", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

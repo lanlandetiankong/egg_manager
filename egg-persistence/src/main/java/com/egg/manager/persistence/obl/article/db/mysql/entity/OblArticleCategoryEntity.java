@@ -45,7 +45,16 @@ public class OblArticleCategoryEntity extends Model<OblArticleCategoryEntity> {
      */
     @TableField("icon_name")
     private String iconName;
-
+    /**
+     * 级别
+     */
+    @TableField("level")
+    private Integer level;
+    /**
+     * 权重值
+     */
+    @TableField("weights")
+    private Integer weights;
     /**
      * 备注
      */

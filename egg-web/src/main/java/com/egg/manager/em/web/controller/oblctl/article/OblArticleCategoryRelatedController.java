@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章分类关联表")
 @RestController
-@RequestMapping("/oblCtl/oblArticleCategoryRelated")
+@RequestMapping("/oblCtl/article/oblArticleCategoryRelated")
 public class OblArticleCategoryRelatedController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleCategoryRelated/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCategoryRelatedDto.class) QueryPageBean<OblArticleCategoryRelatedDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleCategoryRelated/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCategoryRelatedId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategoryRelated/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategoryRelated/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCategoryRelatedVo oblArticleCategoryRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategoryRelated/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblArticleCategoryRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategoryRelated/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategoryRelated/deleteById")
     @ApiOperation(value = "逻辑删除->文章分类关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

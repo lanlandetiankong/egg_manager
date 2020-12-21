@@ -1,5 +1,6 @@
 package com.egg.manager.persistence.obl.article.pojo.dto;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.egg.manager.persistence.exchange.pojo.mysql.dto.MyBaseMysqlDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +34,13 @@ public class OblArticleCategoryDto extends MyBaseMysqlDto {
      * 图标名
      */
     private String iconName;
-
+    /**
+     * 级别
+     */
+    private Integer level;
+    /**
+     * 权重值
+     */
+    private Integer weights;
 
 }

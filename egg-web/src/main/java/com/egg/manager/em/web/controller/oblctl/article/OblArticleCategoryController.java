@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章分类定义表")
 @RestController
-@RequestMapping("/oblCtl/oblArticleCategory")
+@RequestMapping("/oblCtl/article/oblArticleCategory")
 public class OblArticleCategoryController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleCategoryController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleCategory/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleCategory/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleCategoryDto.class) QueryPageBean<OblArticleCategoryDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -63,7 +63,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleCategory/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleCategory/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleCategoryId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -75,7 +75,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategory/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategory/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleCategoryVo oblArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -89,7 +89,7 @@ public class OblArticleCategoryController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategory/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategory/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleCategoryVo oblArticleCategoryVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -102,7 +102,7 @@ public class OblArticleCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategory/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategory/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -119,7 +119,7 @@ public class OblArticleCategoryController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleCategory/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleCategory/deleteById")
     @ApiOperation(value = "逻辑删除->文章分类定义表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

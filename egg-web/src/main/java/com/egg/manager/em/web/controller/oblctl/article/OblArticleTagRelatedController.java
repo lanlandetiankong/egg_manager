@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Api(value = "API-文章与标签关联表")
 @RestController
-@RequestMapping("/oblCtl/oblArticleTagRelated")
+@RequestMapping("/oblCtl/article/oblArticleTagRelated")
 public class OblArticleTagRelatedController extends BaseController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class OblArticleTagRelatedController extends BaseController {
 
 
     @ApiOperation(value = "分页查询(dto)->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleTagRelated/queryDtoPage")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleTagRelated/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = OblArticleTagRelatedDto.class) QueryPageBean<OblArticleTagRelatedDto> queryPageBean,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -64,7 +64,7 @@ public class OblArticleTagRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "根据id查询->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @EmPcWebQueryLog(fullPath = "/oblCtl/oblArticleTagRelated/queryOneById")
+    @EmPcWebQueryLog(fullPath = "/oblCtl/article/oblArticleTagRelated/queryOneById")
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String oblArticleTagRelatedId,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
@@ -76,7 +76,7 @@ public class OblArticleTagRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "新增->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleTagRelated/createByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleTagRelated/createByForm")
     @PostMapping(value = "/createByForm")
     public WebResult createByForm(HttpServletRequest request, OblArticleTagRelatedVo oblArticleTagRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -90,7 +90,7 @@ public class OblArticleTagRelatedController extends BaseController {
     }
 
     @ApiOperation(value = "更新->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleTagRelated/updateByForm")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleTagRelated/updateByForm")
     @PostMapping(value = "/updateByForm")
     public WebResult updateByForm(HttpServletRequest request, OblArticleTagRelatedVo oblArticleTagRelatedVo,
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo)
@@ -103,7 +103,7 @@ public class OblArticleTagRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleTagRelated/batchDeleteByIds")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleTagRelated/batchDeleteByIds")
     @ApiOperation(value = "批量逻辑删除->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delIds", value = WebApiConstant.DELETE_ID_ARRAY_LABEL, required = true, dataTypeClass = String[].class),
@@ -120,7 +120,7 @@ public class OblArticleTagRelatedController extends BaseController {
         return result;
     }
 
-    @OblPcWebOperationLog(fullPath = "/oblCtl/oblArticleTagRelated/deleteById")
+    @OblPcWebOperationLog(fullPath = "/oblCtl/article/oblArticleTagRelated/deleteById")
     @ApiOperation(value = "逻辑删除->文章与标签关联表", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "delId", value = WebApiConstant.DELETE_ID_LABEL, required = true, dataTypeClass = String.class),

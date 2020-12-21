@@ -25,4 +25,12 @@ public class OblArticleCategoryRelatedVo extends MyBaseMysqlVo {
      * 类别id
      */
     private String categoryId;
+    /**
+     * 级别
+     */
+    private Integer level;
+    /**
+     * 权重值
+     */
+    private Integer weights;
 }

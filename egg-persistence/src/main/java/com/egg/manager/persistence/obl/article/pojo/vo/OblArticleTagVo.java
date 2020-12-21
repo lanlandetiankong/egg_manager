@@ -26,10 +26,6 @@ public class OblArticleTagVo extends MyBaseMysqlVo {
      */
     private String description;
     /**
-     * 级别
-     */
-    private Integer level;
-    /**
      * 权重值
      */
     private Integer weights;

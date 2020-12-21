@@ -34,11 +34,6 @@ public class OblArticleTagEntity extends Model<OblArticleTagEntity> {
     private String description;
 
     /**
-     * 级别
-     */
-    @TableField("level")
-    private Integer level;
-    /**
      * 权重值
      */
     @TableField("weights")

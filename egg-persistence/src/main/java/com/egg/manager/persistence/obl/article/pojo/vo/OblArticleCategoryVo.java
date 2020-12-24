@@ -33,5 +33,12 @@ public class OblArticleCategoryVo extends MyBaseMysqlVo {
      * 图标名
      */
     private String iconName;
-
+    /**
+     * 级别
+     */
+    private Integer level;
+    /**
+     * 权重值
+     */
+    private Integer weights;
 }

@@ -15,7 +15,6 @@ public class MyRpcReferConfig {
             "classpath:config/dubbo/egg-web-dubboConfig.xml",
             //"classpath*:config/dubbo/beans/*/egg-web-dubboBean-*.xml",
             "classpath*:config/dubbo/consumer/em/em-consumer-*.xml",
-            "classpath*:config/dubbo/consumer/obl/obl-consumer-*.xml"
     })
     static class DubboReferConfig {
 

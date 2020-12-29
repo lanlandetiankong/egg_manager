@@ -14,7 +14,6 @@
         <module>egg-generate</module>
         <module>egg-baseService</module>
         <module>egg-web</module>
-        <module>oolong-blog-web</module>
     </modules>
 
     <parent>

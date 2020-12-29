@@ -1,5 +1,5 @@
 #基本表结构
-CREATE TABLE `obl_` (
+CREATE TABLE `em_` (
   `fid` char(19) NOT NULL DEFAULT '' COMMENT '主键id',
   `state` tinyint(4) DEFAULT NULL COMMENT '状态值',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',

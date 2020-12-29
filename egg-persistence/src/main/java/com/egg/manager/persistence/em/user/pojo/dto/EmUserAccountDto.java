@@ -82,7 +82,7 @@ public class EmUserAccountDto extends MyBaseMysqlDto {
      */
     private String belongTenantId;
     /**
-     * 所属租户-com.egg.manager.persistence.obl.article.pojo.vo
+     * 所属租户
      */
     private EmDefineTenantDto belongTenant;
 
@@ -100,7 +100,7 @@ public class EmUserAccountDto extends MyBaseMysqlDto {
      */
     private String belongDepartmentId;
     /**
-     * 所属部门-com.egg.manager.persistence.obl.article.pojo.vo
+     * 所属部门
      */
     private EmDefineDepartmentDto belongDepartment;
 }

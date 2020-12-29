@@ -45,7 +45,7 @@ public interface EmControllerAspectService {
 
 
     /**
-     * 设置一些值到 OblPcWebLoginLogMgo
+     * 设置一些值到 EmPcWebLoginLogMgo
      * @param emPcWebLoginLogMgo
      * @param joinPoint
      * @param request

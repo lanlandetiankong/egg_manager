@@ -39,7 +39,7 @@ public class UserAccountCommonCompController extends BaseController {
     private EmUserAccountService emUserAccountService;
 
     @EmPcWebOperationLog(fullPath = "/emCtl/commmon/component/user/userAccount/queryDtoPage", flag = false)
-    @ApiOperation(value = "通用组件?分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "通用组件?分页查询(Dto)->用户账号", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),

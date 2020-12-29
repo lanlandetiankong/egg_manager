@@ -20,7 +20,7 @@ public interface EmDefineTenantService extends MyBaseMysqlService<EmDefineTenant
 
     /**
      * 分页查询 租户
-     * (查询的是 com.egg.manager.persistence.obl.article.pojo.dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
+     * (查询的 Dto，最终依然是转化为vo，包含了较多的信息，需要耗费sql的资源相对较多)
      * @param loginUserInfo 当前登录用户
      * @param result
      * @param queryPageBean

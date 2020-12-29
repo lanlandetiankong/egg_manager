@@ -74,7 +74,7 @@ public class EmDefineMenuDto extends MyBaseMysqlDto {
     private List<AntdFileUploadBean> uploadExcelBeanList = new ArrayList<>();
 
     /**
-     * 上级菜单-com.egg.manager.persistence.obl.article.pojo.dto
+     * 上级菜单
      */
     private EmDefineMenuDto parentMenuDto;
 

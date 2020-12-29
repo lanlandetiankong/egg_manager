@@ -14,9 +14,7 @@ public class MyRpcReferConfig {
     @ImportResource(locations = {
             "classpath:config/dubbo/egg-baseService-dubboConfig.xml",
             "classpath:config/dubbo/provider/em/em-provider-*.xml",
-            "classpath:config/dubbo/provider/obl/obl-provider-*.xml",
             "classpath*:config/dubbo/consumer/em/em-consumer-*.xml",
-            "classpath*:config/dubbo/consumer/obl/obl-consumer-*.xml"
     })
     static class DubboReferConfig {
 

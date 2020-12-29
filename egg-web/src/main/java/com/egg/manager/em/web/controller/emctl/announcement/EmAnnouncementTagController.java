@@ -65,7 +65,7 @@ public class EmAnnouncementTagController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(Dto)->公告标签", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @EmPcWebQueryLog(fullPath = "/emCtl/announcementTag/queryDtoPage")
     @PostMapping(value = "/queryDtoPage")
     public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = EmAnnouncementTagDto.class) QueryPageBean<EmAnnouncementTagDto> queryPageBean,

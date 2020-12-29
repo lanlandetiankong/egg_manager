@@ -86,7 +86,7 @@ public class EmDefineRoleController extends BaseController {
     }
 
     @EmPcWebOperationLog(fullPath = "/emCtl/define/defineRole/queryDtoPage")
-    @ApiOperation(value = "分页查询(com.egg.manager.persistence.obl.article.pojo.dto)->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
+    @ApiOperation(value = "分页查询(Dto)->角色定义", response = WebResult.class, httpMethod = HttpMethodConstant.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_QUERY_OBJ, value = WebApiConstant.QUERY_OBJ_LABEL, required = true, dataTypeClass = String.class),
             @ApiImplicitParam(name = WebApiConstant.FIELDNAME_PAGINATION_OBJ, value = WebApiConstant.PAGINATION_OBJ_LABEL, required = true, dataTypeClass = String.class),

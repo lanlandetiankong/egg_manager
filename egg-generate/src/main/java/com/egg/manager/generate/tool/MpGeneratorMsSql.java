@@ -98,7 +98,6 @@ public class MpGeneratorMsSql {
         // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
         // 自定义 service 实现类父类
         // strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
-        // 自定义 com.oolong.blog.web.controller 父类
         // strategy.setSuperControllerClass("com.baomidou.demo.TestController");
         // 【实体】是否生成字段常量（默认 false）
         // public static final String ID = "test_id";

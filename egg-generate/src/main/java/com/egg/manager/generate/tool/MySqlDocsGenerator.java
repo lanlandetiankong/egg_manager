@@ -21,17 +21,12 @@ public class MySqlDocsGenerator {
     public static String PROJ_VERSION = "2.0.5-SNAPSHOT";
 
     public static void main(String[] args) {
-        generateOblDoc();
+        generateEmDoc();
     }
 
     public static void generateEmDoc() {
         String url = "jdbc:mysql://47.99.160.215:3306/egg_manager?useUnicode=true&characterEncoding=utf8&useSSL=false" ;
         String projName = "EggManager" ;
-        generateDoc(url,projName);
-    }
-    public static void generateOblDoc() {
-        String url = "jdbc:mysql://47.99.160.215:3306/oolong_blog?useUnicode=true&characterEncoding=utf8&useSSL=false" ;
-        String projName = "OolongBlog" ;
         generateDoc(url,projName);
     }
 

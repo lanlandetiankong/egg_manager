@@ -38,7 +38,7 @@ public interface EmDefineTenantMapper extends MyEggMapper<EmDefineTenantEntity> 
     EmDefineTenantEntity selectOneOfUserBelongTenant(@Param(EggMpSqlConst.PARAMOF_USER_ACCOUNT_ID) String userAccountId, @Param("tenantState") Short tenantState);
 
     /**
-     * 根据用户id查询 所属的租户详情-com.egg.manager.persistence.obl.article.pojo.dto
+     * 根据用户id查询 所属的租户详情
      * @param userAccountId
      * @return
      */

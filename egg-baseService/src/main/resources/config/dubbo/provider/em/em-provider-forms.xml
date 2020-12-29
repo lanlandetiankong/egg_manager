@@ -8,20 +8,20 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="smartFormDefinitionMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormFieldDefinitionMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldDefinitionMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormFieldDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormFieldTypeDefinitionMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormRecordFieldMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordFieldMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormRecordFieldMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormRecordMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormRecordMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormRecordMgoService"/>
 
     <dubbo:service protocol="dubbo" ref="smartFormTypeDefinitionMService"
-                   interface="com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService"/>
 </beans>

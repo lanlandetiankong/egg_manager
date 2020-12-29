@@ -1,9 +1,9 @@
 package com.egg.manager.em.web.controller.emctl.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
+import com.egg.manager.facade.api.exchange.BaseController;
+import com.egg.manager.facade.api.services.em.define.basic.EmDefineMenuService;
+import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

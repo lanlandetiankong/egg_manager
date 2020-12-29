@@ -1,14 +1,13 @@
 package com.egg.manager;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
-import com.egg.manager.persistence.enhance.annotation.custom.EnableEggBeanScan;
+import com.egg.manager.facade.persistence.enhance.annotation.custom.EnableEggBeanScan;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.jms.annotation.EnableJms;
 
 /**
  * @author zhoucj
@@ -16,7 +15,6 @@ import org.springframework.jms.annotation.EnableJms;
  * @date 2020/06/07
  */
 @SpringBootApplication
-@EnableJms
 @EnableCaching
 @EnableDubbo
 @EnableMongoAuditing

@@ -1,11 +1,11 @@
 package com.egg.manager.baseservice.serviceimpl.em.user.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
-import com.egg.manager.api.services.em.user.basic.EmUserTenantService;
-import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserTenantEntity;
-import com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserTenantMapper;
-import com.egg.manager.persistence.em.user.pojo.vo.EmUserTenantVo;
+import com.egg.manager.facade.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.facade.api.services.em.user.basic.EmUserTenantService;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserTenantEntity;
+import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserTenantMapper;
+import com.egg.manager.facade.persistence.em.user.pojo.vo.EmUserTenantVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 

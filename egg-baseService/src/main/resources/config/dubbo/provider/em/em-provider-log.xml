@@ -8,5 +8,5 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="pcWebOperationLogMgoService"
-                   interface="com.egg.manager.api.services.em.log.mongo.EmPcWebOperationLogMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.log.mongo.EmPcWebOperationLogMgoService"/>
 </beans>

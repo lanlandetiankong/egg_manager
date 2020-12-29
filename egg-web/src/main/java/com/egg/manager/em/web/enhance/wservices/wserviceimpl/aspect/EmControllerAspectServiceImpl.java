@@ -4,25 +4,25 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
-import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.facade.api.exchange.routine.RoutineCommonFunc;
+import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.em.web.enhance.wservices.wservice.aspect.EmControllerAspectService;
-import com.egg.manager.persistence.commons.base.beans.request.RequestHeaderBean;
-import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.persistence.commons.base.enums.basic.BaseStateEnum;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
-import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
-import com.egg.manager.persistence.em.user.pojo.bean.UserAccountToken;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
-import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseWebLogMgo;
-import com.egg.manager.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
-import com.egg.manager.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
-import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
+import com.egg.manager.facade.persistence.commons.base.beans.request.RequestHeaderBean;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
+import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
+import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
+import com.egg.manager.facade.persistence.em.user.pojo.bean.UserAccountToken;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.facade.persistence.exchange.db.mongo.mo.MyBaseWebLogMgo;
+import com.egg.manager.facade.persistence.exchange.db.mongo.mo.clazz.EggClazzInfoLogMgo;
+import com.egg.manager.facade.persistence.exchange.db.mongo.mo.http.EggRequestInfo;
+import com.egg.manager.facade.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -89,10 +89,10 @@ public class EmControllerAspectServiceImpl implements EmControllerAspectService 
 
     /**
      * 设置基本log的基本属性
-     * @param logMgo    要处理的类必须继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
+     * @param logMgo    要处理的类必须继承 com.egg.manager.facade.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo，并且只会对这个类所拥有的字段进行修改、赋值
      * @param joinPoint 切面
      * @param request   http请求
-     * @param <T>       继承 com.egg.manager.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo的类
+     * @param <T>       继承 com.egg.manager.facade.persistence.expand.db.mongo.mo.log.pcMyBaseWebLogMgo的类
      * @return logMgo
      */
     protected <T extends MyBaseWebLogMgo> T dealSetValToBaseLogMgo(T logMgo, JoinPoint joinPoint, HttpServletRequest request) {

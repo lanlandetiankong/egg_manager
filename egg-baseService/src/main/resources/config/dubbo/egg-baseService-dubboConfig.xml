@@ -14,7 +14,7 @@
     <dubbo:protocol port="-1" name="dubbo" host="127.0.0.1" serialization="hessian2"/>
 
 
-    <dubbo:annotation package="com.egg.manager.api.services.**"/>
+    <dubbo:annotation package="com.egg.manager.facade.api.services.**"/>
     <!--关闭服务消费方所有服务的启动检查。dubbo缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止Spring初始化完成。url="dubbo//172.16.1.112:20880"-->
     <dubbo:consumer check="false" lazy="true" timeout="3000"/>
 

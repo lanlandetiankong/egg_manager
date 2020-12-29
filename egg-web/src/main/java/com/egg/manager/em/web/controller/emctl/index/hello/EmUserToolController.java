@@ -1,13 +1,13 @@
 package com.egg.manager.em.web.controller.emctl.index.hello;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.api.exchange.helper.UserGenerateHelper;
-import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
-import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.facade.api.exchange.BaseController;
+import com.egg.manager.facade.api.exchange.helper.UserGenerateHelper;
+import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
+import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

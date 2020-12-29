@@ -7,10 +7,10 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:service protocol="dubbo" ref="emAnnouncementDraftService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementDraftService"/>
+                   interface="com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementDraftService"/>
     <dubbo:service protocol="dubbo" ref="emAnnouncementService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementService"/>
+                   interface="com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementService"/>
     <dubbo:service protocol="dubbo" ref="emAnnouncementTagService"
-                   interface="com.egg.manager.api.services.em.announcement.basic.EmAnnouncementTagService"/>
+                   interface="com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementTagService"/>
 
 </beans>

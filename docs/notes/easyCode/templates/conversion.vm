@@ -9,7 +9,7 @@ $!define
 ##包路径（宏定义）
 #setPackageSuffix("easycode.generate.mapstruct.conversion")
 
-import com.egg.manager.persistence.exchange.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
+import com.egg.manager.facade.persistence.exchange.pojo.mysql.mapstruct.conversion.MyBaseMysqlConversion;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,11 @@
 package com.egg.manager.baseservice.serviceimpl.em.define.basic;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
-import com.egg.manager.api.services.em.define.basic.EmDefineGroupService;
-import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;
-import com.egg.manager.persistence.em.define.db.mysql.mapper.EmDefineGroupMapper;
-import com.egg.manager.persistence.em.define.pojo.vo.EmDefineGroupVo;
+import com.egg.manager.facade.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
+import com.egg.manager.facade.api.services.em.define.basic.EmDefineGroupService;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;
+import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineGroupMapper;
+import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineGroupVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 

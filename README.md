@@ -69,7 +69,7 @@ https://github.com/JacksonTian/anywhere
        默认账号： root
        默认密码： root
    #配置文件路径：
-       com.egg.manager.api.config.db.druid.DruidConfig
+       com.egg.manager.facade.api.config.db.druid.DruidConfig
    ```
 
 2. swagger2

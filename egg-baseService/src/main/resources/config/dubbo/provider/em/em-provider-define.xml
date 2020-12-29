@@ -8,19 +8,19 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="emDefineDepartmentService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineDepartmentService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineDepartmentService"/>
     <dubbo:service protocol="dubbo" ref="emDefineGroupService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineGroupService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineGroupService"/>
     <dubbo:service protocol="dubbo" ref="emDefineJobService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineJobService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineJobService"/>
     <dubbo:service protocol="dubbo" ref="emDefinePermissionService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefinePermissionService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefinePermissionService"/>
     <dubbo:service protocol="dubbo" ref="emDefineRoleService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineRoleService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineRoleService"/>
     <dubbo:service protocol="dubbo" ref="emDefineMenuService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineMenuService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineMenuService"/>
     <dubbo:service protocol="dubbo" ref="emDefineModuleService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineModuleService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineModuleService"/>
     <dubbo:service protocol="dubbo" ref="emDefineTenantService"
-                   interface="com.egg.manager.api.services.em.define.basic.EmDefineTenantService"/>
+                   interface="com.egg.manager.facade.api.services.em.define.basic.EmDefineTenantService"/>
 </beans>

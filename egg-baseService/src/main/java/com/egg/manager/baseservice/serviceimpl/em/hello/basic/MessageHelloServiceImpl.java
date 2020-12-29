@@ -2,8 +2,8 @@ package com.egg.manager.baseservice.serviceimpl.em.hello.basic;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.services.em.hello.basic.HelloService;
-import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
+import com.egg.manager.facade.api.services.em.hello.basic.HelloService;
+import com.egg.manager.facade.api.services.em.hello.basic.MessageHelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 

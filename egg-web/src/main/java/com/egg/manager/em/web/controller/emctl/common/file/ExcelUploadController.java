@@ -1,14 +1,14 @@
 package com.egg.manager.em.web.controller.emctl.common.file;
 
 import cn.hutool.core.lang.Assert;
-import com.egg.manager.api.config.db.SnowflakeConfig;
-import com.egg.manager.api.exchange.BaseController;
-import com.egg.manager.persistence.commons.base.beans.file.AntdFileUploadBean;
-import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.persistence.commons.base.enums.basic.AntdFileUploadStatusEnum;
-import com.egg.manager.persistence.commons.base.props.upload.UploadProps;
+import com.egg.manager.facade.api.config.db.SnowflakeConfig;
+import com.egg.manager.facade.api.exchange.BaseController;
+import com.egg.manager.facade.persistence.commons.base.beans.file.AntdFileUploadBean;
+import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.enums.basic.AntdFileUploadStatusEnum;
+import com.egg.manager.facade.persistence.commons.base.props.upload.UploadProps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

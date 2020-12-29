@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefinePermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefinePermissionEntity">
+        <id column="fid" property="fid"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="ensure" column="ensure"/>
+        <result property="type" column="type"/>
+        <result property="state" column="state"/>
+        <result property="remark" column="remark"/>
+        <result property="lastModifyerId" column="last_modifyer_id"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="version" column="version"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="DtoResultMap" type="com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefinePermissionDto" extends="BaseResultMap">
+        <association column="create_user_id" property="createUser" fetchType="lazy"
+                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+        <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
+                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fid,name,code,ensure,type,state,remark,last_modifyer_id,create_user_id,create_time,update_time,version,is_deleted,deleted_time
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+        -->
+    <sql id="Base_Alias_Table_List">
+            ${base_alias_name}.fid,
+            ${base_alias_name}.name,
+            ${base_alias_name}.code,
+            ${base_alias_name}.ensure,
+            ${base_alias_name}.type,
+            ${base_alias_name}.state,
+            ${base_alias_name}.remark,
+            ${base_alias_name}.last_modifyer_id,
+            ${base_alias_name}.create_user_id,
+            ${base_alias_name}.create_time,
+            ${base_alias_name}.update_time,
+            ${base_alias_name}.version,
+            ${base_alias_name}.is_deleted,
+            ${base_alias_name}.deleted_time
+    </sql>
+    <!--
+            通用查询结果列(多表查询用)
+            需要参数 base_alias_name 本次查询该表的别名
+            参数 base_alias_col_prefix 本次查询的columnPrefix，便于与 association结合，一般建议该参数以 _ 结尾,适用于 层级关系
+        -->
+    <sql id="Base_Alias_TableColumn_List">
+            ${base_alias_name}.fid AS ${base_alias_col_prefix}fid,
+            ${base_alias_name}.name AS ${base_alias_col_prefix}name,
+            ${base_alias_name}.code AS ${base_alias_col_prefix}code,
+            ${base_alias_name}.ensure AS ${base_alias_col_prefix}ensure,
+            ${base_alias_name}.type AS ${base_alias_col_prefix}type,
+            ${base_alias_name}.state AS ${base_alias_col_prefix}state,
+            ${base_alias_name}.remark AS ${base_alias_col_prefix}remark,
+            ${base_alias_name}.last_modifyer_id AS ${base_alias_col_prefix}last_modifyer_id,
+            ${base_alias_name}.create_user_id AS ${base_alias_col_prefix}create_user_id,
+            ${base_alias_name}.create_time AS ${base_alias_col_prefix}create_time,
+            ${base_alias_name}.update_time AS ${base_alias_col_prefix}update_time,
+            ${base_alias_name}.version AS ${base_alias_col_prefix}version,
+            ${base_alias_name}.is_deleted AS ${base_alias_col_prefix}is_deleted,
+            ${base_alias_name}.deleted_time AS ${base_alias_col_prefix}deleted_time
+    </sql>
+
+
+    <select id="selectQueryPage" resultMap="DtoResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="edp"/>
+        </include>
+        FROM em_define_permission edp
+        <where>
+            <include
+                    refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                <property name="table_name_alias" value="edp"/>
+            </include>
+        </where>
+        <include
+                refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+            <property name="table_name_alias" value="edp"/>
+        </include>
+    </select>
+
+    <update id="batchEnsureByIds">
+        UPDATE em_define_permission
+        SET ensure = 1
+        <if test="loginUser != null">
+            ,last_modifyer_id = #{loginUser.fid}
+        </if>
+        WHERE fid IN
+        <foreach collection="ensureIds" index="index" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="clearAllPermissionByRoleId">
+        UPDATE em_role_permission
+        SET state = 0
+        <if test="loginUser != null">
+            ,last_modifyer_id = #{loginUser.fid}
+        </if>
+        WHERE define_role_id = #{roleId}
+    </update>
+
+    <select id="findAllPermissionByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dp"/>
+        </include>
+        FROM em_define_permission dp
+        left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
+        WHERE rp.define_role_id = #{roleId}
+        and rp.state = 1
+        and rp.is_deleted = 0
+        and dp.ensure = 1
+    </select>
+
+    <select id="findAllPermissionIdByRoleId" resultType="java.lang.String">
+        SELECT dp.fid FROM em_define_permission dp
+        left JOIN em_role_permission rp on dp.fid = rp.define_permission_id
+        <where>
+            and rp.define_role_id = #{roleId}
+            and dp.ensure = 1
+            <if test="filterEnable == true">
+                and rp.state = 1
+            </if>
+            and rp.is_deleted = 0
+        </where>
+
+    </select>
+
+    <select id="findAllPermissionByUserAcccountId" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Alias_Table_List">
+            <property name="base_alias_name" value="dp"/>
+        </include>
+        FROM em_define_permission dp
+        left JOIN em_role_permission rp on rp.define_permission_id = dp.fid
+        left JOIN em_user_role ur on ur.define_role_id = rp.define_role_id
+        WHERE
+        ur.user_account_id = #{userAccountId}
+        and dp.state = 1
+        and rp.state = 1
+        and ur.state = 1
+        and dp.is_deleted = 0
+        and rp.is_deleted = 0
+        and ur.is_deleted = 0
+        and dp.ensure = 1
+    </select>
+
+</mapper>

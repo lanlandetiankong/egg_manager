@@ -8,5 +8,5 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="emailSendRecordMService"
-                   interface="com.egg.manager.api.services.em.message.basic.email.EmailSendRecordMgoService"/>
+                   interface="com.egg.manager.facade.api.services.em.message.basic.email.EmailSendRecordMgoService"/>
 </beans>

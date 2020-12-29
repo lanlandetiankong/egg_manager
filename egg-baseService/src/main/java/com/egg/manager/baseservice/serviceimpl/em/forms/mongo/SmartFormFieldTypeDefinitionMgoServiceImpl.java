@@ -1,7 +1,7 @@
 package com.egg.manager.baseservice.serviceimpl.em.forms.mongo;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService;
+import com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormFieldTypeDefinitionMgoService;
 import lombok.extern.slf4j.Slf4j;
 
 /**

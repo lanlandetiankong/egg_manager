@@ -44,7 +44,7 @@
     <dependencies>
         <dependency>
             <groupId>com.teaegg</groupId>
-            <artifactId>egg-api</artifactId>
+            <artifactId>egg-facade</artifactId>
             <version>2.0.6-SNAPSHOT</version>
         </dependency>
         <dependency>

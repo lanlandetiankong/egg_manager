@@ -1,12 +1,12 @@
 package com.egg.manager.em.web.enhance.wservices.wservice.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
-import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
-import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebLoginLogMgo;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
+import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
+import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 

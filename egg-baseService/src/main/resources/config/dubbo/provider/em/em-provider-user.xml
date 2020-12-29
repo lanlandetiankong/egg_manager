@@ -8,20 +8,20 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="emRoleMenuService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmRoleMenuService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmRoleMenuService"/>
     <dubbo:service protocol="dubbo" ref="emRolePermissionService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmRolePermissionService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmRolePermissionService"/>
     <dubbo:service protocol="dubbo" ref="emUserAccountService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmUserAccountService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService"/>
     <dubbo:service protocol="dubbo" ref="emUserGroupService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmUserGroupService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmUserGroupService"/>
     <dubbo:service protocol="dubbo" ref="emUserJobService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmUserJobService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmUserJobService"/>
     <dubbo:service protocol="dubbo" ref="emUserRoleService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmUserRoleService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmUserRoleService"/>
     <dubbo:service protocol="dubbo" ref="emUserTenantService"
-                   interface="com.egg.manager.api.services.em.user.basic.EmUserTenantService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.basic.EmUserTenantService"/>
 
     <dubbo:service protocol="dubbo" ref="emUserAccountXlsService"
-                   interface="com.egg.manager.api.services.em.user.xls.EmUserAccountXlsService"/>
+                   interface="com.egg.manager.facade.api.services.em.user.xls.EmUserAccountXlsService"/>
 </beans>

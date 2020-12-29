@@ -8,7 +8,7 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:service protocol="dubbo" ref="helloService"
-                   interface="com.egg.manager.api.services.em.hello.basic.HelloService"/>
+                   interface="com.egg.manager.facade.api.services.em.hello.basic.HelloService"/>
     <dubbo:service protocol="dubbo" ref="messageHelloService"
-                   interface="com.egg.manager.api.services.em.hello.basic.MessageHelloService"/>
+                   interface="com.egg.manager.facade.api.services.em.hello.basic.MessageHelloService"/>
 </beans>

@@ -9,19 +9,18 @@ import com.egg.manager.facade.persistence.commons.base.beans.file.AntdFileUpload
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonMenuTree;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
-import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineMenuDto;
-import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineMenuVo;
-import com.egg.manager.facade.persistence.em.user.domain.constant.DefineMenuConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.facade.persistence.commons.base.constant.shiro.ShiroRoleConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
+import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineMenuDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineMenuTransfer;
+import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineMenuVo;
+import com.egg.manager.facade.persistence.em.user.domain.constant.DefineMenuConstant;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
@@ -35,8 +34,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -53,8 +54,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/emCtl/define/defineMenu")
 public class EmDefineMenuController extends BaseController {
-    @Autowired
-    private EmDefineMenuMapper emDefineMenuMapper;
+
     @Reference
     private EmDefineMenuService emDefineMenuService;
 
@@ -80,7 +80,7 @@ public class EmDefineMenuController extends BaseController {
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId) {
         WebResult result = WebResult.okQuery();
-        List<EmDefineMenuEntity> allMenus = emDefineMenuMapper.getMenusFilterChildrens(filterId, true);
+        List<EmDefineMenuEntity> allMenus = emDefineMenuService.getMenusFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = emDefineMenuService.getTreeSelectChildNodesWithRoot(DefineMenuConstant.ROOT_ID, allMenus);
         result.putGridList(treeList);
         return result;
@@ -103,7 +103,7 @@ public class EmDefineMenuController extends BaseController {
     @EmPcWebQueryLog(fullPath = "/emCtl/define/defineMenu/user/reflushCacheAndGainGrantTree")
     @PostMapping("/user/reflushCacheAndGainGrantTree")
     public WebResult reflushCacheAndGainGrantTree(@RequestHeader("authorization") String authorization,
-                                          @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
+                                                  @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         List<CommonMenuTree> treeList = emDefineMenuService.queryUserVisitAbleMenuToCachePut(loginUserInfo.getFid());
         result.putGridList(treeList);
@@ -135,7 +135,7 @@ public class EmDefineMenuController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String defineMenuId) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(defineMenuId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmDefineMenuEntity entity = emDefineMenuMapper.selectById(defineMenuId);
+        EmDefineMenuEntity entity = emDefineMenuService.getById(defineMenuId);
         result.putBean(EmDefineMenuTransfer.transferEntityToVo(entity));
         return result;
     }
@@ -173,7 +173,7 @@ public class EmDefineMenuController extends BaseController {
     public WebResult updateExcelModel(HttpServletRequest request, String menuId, AntdFileUploadBean fileUploadBean, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okOperation();
         Assert.notBlank(menuId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmDefineMenuEntity entity = emDefineMenuMapper.selectById(menuId);
+        EmDefineMenuEntity entity = emDefineMenuService.getById(menuId);
         if (fileUploadBean != null) {
             entity.setExcelModelConf(JSONObject.toJSONString(fileUploadBean));
         } else {
@@ -181,8 +181,8 @@ public class EmDefineMenuController extends BaseController {
         }
         entity.setLastModifyerId(loginUserInfo.getFid());
         entity.setUpdateTime(new Date());
-        Integer changeCount = emDefineMenuMapper.updateById(entity);
-        result.putCount(changeCount);
+        boolean flag = emDefineMenuService.updateById(entity);
+        result.putCount(flag ? 1 : 0);
         return result;
     }
 

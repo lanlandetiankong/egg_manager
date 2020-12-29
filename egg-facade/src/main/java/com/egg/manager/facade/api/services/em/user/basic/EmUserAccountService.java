@@ -55,9 +55,9 @@ public interface EmUserAccountService extends MyBaseMysqlService<EmUserAccountEn
 
     /**
      * 用户账号-新增
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo   当前登录用户
      * @param emUserAccountVo
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo   当前登录用户
      * @return
      * @throws Exception
      */
@@ -65,7 +65,7 @@ public interface EmUserAccountService extends MyBaseMysqlService<EmUserAccountEn
 
     /**
      * 用户账号-更新
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo   当前登录用户
      * @param emUserAccountVo
      * @return
      * @throws Exception

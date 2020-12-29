@@ -42,7 +42,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0].charAt(0);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
                 }
             } else {
                 pinyinStr += newChar[i];
@@ -70,7 +70,7 @@ public class MyPinYinUtil {
                 try {
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0];
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
                 }
             } else {
                 pinyinStr += newChar[i];

@@ -7,13 +7,13 @@ import com.egg.manager.facade.api.services.em.define.basic.EmDefineDepartmentSer
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
+import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineDepartmentEntity;
+import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineDepartmentDto;
+import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineDepartmentTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineDepartmentVo;
 import com.egg.manager.facade.persistence.em.user.domain.constant.DefineDepartmentConstant;
-import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper;
-import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineDepartmentTransfer;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -133,4 +133,24 @@ public class EmDefineDepartmentServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
         return changeCount;
     }
 
+    @Override
+    public List<EmDefineDepartmentEntity> getDepartmentFilterChildrens(String filterId, boolean onlyEnable) {
+        return this.baseMapper.getDepartmentFilterChildrens(filterId, onlyEnable);
+    }
+
+    @Override
+    public EmDefineDepartmentDto selectOneDtoOfUserBelongDepartment(String userAccountId) {
+        return this.baseMapper.selectOneDtoOfUserBelongDepartment(userAccountId);
+    }
+
+    /**
+     * 根据用户id查询 所属的部门详情
+     * @param userAccountId
+     * @param departmentState
+     * @return
+     */
+    @Override
+    public EmDefineDepartmentEntity selectOneOfUserBelongDepartment(String userAccountId, Short departmentState) {
+        return this.baseMapper.selectOneOfUserBelongDepartment(userAccountId, departmentState);
+    }
 }

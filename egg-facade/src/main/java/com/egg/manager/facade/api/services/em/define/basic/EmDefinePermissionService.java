@@ -48,7 +48,7 @@ public interface EmDefinePermissionService extends MyBaseMysqlService<EmDefinePe
 
     /**
      * 权限定义-新增
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo        当前登录用户
      * @param emDefinePermissionVo
      * @return
      * @throws Exception
@@ -57,7 +57,7 @@ public interface EmDefinePermissionService extends MyBaseMysqlService<EmDefinePe
 
     /**
      * 权限定义-更新
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo        当前登录用户
      * @param emDefinePermissionVo
      * @return
      * @throws Exception
@@ -95,4 +95,19 @@ public interface EmDefinePermissionService extends MyBaseMysqlService<EmDefinePe
      * @return
      */
     MyVerifyDuplicateBean dealCheckDuplicateKey(EmDefinePermissionVo emDefinePermissionVo, QueryWrapper<EmDefinePermissionEntity> definePermissionWrap);
+
+    /**
+     * 取得角色拥有的所有权限集合
+     * @param roleId
+     * @return
+     */
+    List<EmDefinePermissionEntity> findAllPermissionByRoleId(String roleId);
+
+
+    /**
+     * 查询 用户拥有的所有权限
+     * @param userAccountId
+     * @return
+     */
+    List<EmDefinePermissionEntity> findAllPermissionByUserAcccountId(String userAccountId);
 }

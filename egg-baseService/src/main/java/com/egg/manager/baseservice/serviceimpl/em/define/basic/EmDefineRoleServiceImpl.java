@@ -15,22 +15,22 @@ import com.egg.manager.facade.api.services.em.user.basic.EmUserRoleService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineRoleEntity;
-import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineRoleDto;
-import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmRolePermissionEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserRoleEntity;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineRoleEntity;
 import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
 import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefinePermissionMapper;
 import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineRoleMapper;
+import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineRoleDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineRoleTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineRoleVo;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmRolePermissionEntity;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserRoleEntity;
 import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmRolePermissionMapper;
 import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.initialize.EmRolePermissionPojoInitialize;
 import com.google.common.collect.Lists;
@@ -262,5 +262,10 @@ public class EmDefineRoleServiceImpl extends MyBaseMysqlServiceImpl<EmDefineRole
             }
         }
         return changeCount;
+    }
+
+    @Override
+    public List<EmDefineRoleEntity> findAllRoleByUserAcccountId(String userAccountId, Short stateVal) {
+        return this.baseMapper.findAllRoleByUserAcccountId(userAccountId, stateVal);
     }
 }

@@ -5,14 +5,13 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineTenantService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineTenantEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineTenantMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineTenantDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineTenantTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineTenantVo;
@@ -27,7 +26,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/organization/defineTenant")
 public class EmDefineTenantController extends BaseController {
-    @Autowired
-    private EmDefineTenantMapper emDefineTenantMapper;
     @Reference
     private EmDefineTenantService emDefineTenantService;
 
@@ -73,7 +69,7 @@ public class EmDefineTenantController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String defineTenantId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(defineTenantId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmDefineTenantEntity emDefineTenantEntity = emDefineTenantMapper.selectById(defineTenantId);
+        EmDefineTenantEntity emDefineTenantEntity = emDefineTenantService.getById(defineTenantId);
         result.putBean(EmDefineTenantTransfer.transferEntityToVo(emDefineTenantEntity));
         return result;
     }
@@ -164,7 +160,7 @@ public class EmDefineTenantController extends BaseController {
             throws Exception {
         WebResult result = WebResult.okOperation();
         Assert.notNull(tenantId, BaseRstMsgConstant.ErrorMsg.unknowTenantId());
-        EmDefineTenantEntity emDefineTenantEntity = emDefineTenantMapper.selectById(tenantId);
+        EmDefineTenantEntity emDefineTenantEntity = emDefineTenantService.getById(tenantId);
         Assert.notNull(emDefineTenantEntity, BaseRstMsgConstant.ErrorMsg.invalidObject());
         int count = emDefineTenantService.dealTenantSetupManager(loginUserInfo, tenantId, userAccountIdArr);
         result.putCount(count);

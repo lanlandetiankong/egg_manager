@@ -14,7 +14,6 @@ import com.egg.manager.facade.persistence.commons.base.exception.MyRuntimeBusine
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefinePermissionEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefinePermissionMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefinePermissionDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefinePermissionTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefinePermissionVo;
@@ -28,7 +27,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/define/definePermission")
 public class EmDefinePermissionController extends BaseController {
-    @Autowired
-    private EmDefinePermissionMapper emDefinePermissionMapper;
     @Reference
     private EmDefinePermissionService emDefinePermissionService;
 
@@ -90,7 +86,7 @@ public class EmDefinePermissionController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String definePermissionId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        EmDefinePermissionEntity emDefinePermissionEntity = emDefinePermissionMapper.selectById(definePermissionId);
+        EmDefinePermissionEntity emDefinePermissionEntity = emDefinePermissionService.getById(definePermissionId);
         result.putBean(EmDefinePermissionTransfer.transferEntityToVo(emDefinePermissionEntity));
         return result;
     }

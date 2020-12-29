@@ -19,9 +19,11 @@ public class MyLoginFailureException extends RuntimeException {
 
     public MyLoginFailureException() {
     }
+
     public MyLoginFailureException(Exception e) {
         super(e);
     }
+
     public MyLoginFailureException(String message) {
         super(message);
         this.message = message;

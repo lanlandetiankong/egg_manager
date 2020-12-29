@@ -115,12 +115,12 @@ public class MongoQueryBean<T> extends BaseQueryBean {
      * @param current
      * @return
      */
-    private static int getSuitableCurrent(Integer current){
-        if(current == null || current <= 0){
-            return 0 ;
+    private static int getSuitableCurrent(Integer current) {
+        if (current == null || current <= 0) {
+            return 0;
         }
         //由于mongodb
-        return current - 1 ;
+        return current - 1;
     }
 
     /**

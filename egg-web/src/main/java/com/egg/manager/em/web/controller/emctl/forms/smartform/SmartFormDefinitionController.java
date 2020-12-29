@@ -4,11 +4,12 @@ import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
+import com.egg.manager.facade.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.MyRuntimeBusinessException;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
@@ -16,7 +17,6 @@ import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPag
 import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.facade.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
 import com.egg.manager.facade.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
-import com.egg.manager.facade.persistence.em.forms.db.mongo.repository.SmartFormTypeDefinitionRepository;
 import com.egg.manager.facade.persistence.em.forms.pojo.mapstruct.imap.SmartFormDefinitionMapstruct;
 import com.egg.manager.facade.persistence.em.forms.pojo.mvo.SmartFormDefinitionMgvo;
 import com.egg.manager.facade.persistence.em.forms.pojo.verification.smartform.SmartFormDefinitionMongoVerifyO;
@@ -34,7 +34,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
-import java.util.Optional;
 
 /**
  * @author zhoucj
@@ -55,8 +53,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/emCtl/forms/smartForm/formDefinition")
 public class SmartFormDefinitionController extends BaseController {
-    @Autowired
-    private SmartFormTypeDefinitionRepository smartFormTypeDefinitionRepository;
+    @Reference
+    private SmartFormTypeDefinitionMgoService smartFormTypeDefinitionMgoService;
     @Reference
     private SmartFormDefinitionMgoService smartFormDefinitionMgoService;
 
@@ -119,12 +117,12 @@ public class SmartFormDefinitionController extends BaseController {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         Assert.notNull(smartFormDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-        Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(smartFormDefinitionMgvo.getFormTypeId());
-        if (formTypeDefinitionMgoOptional.isPresent() == false) {
+        SmartFormTypeDefinitionMgo smartFormDefinitionMgo = smartFormTypeDefinitionMgoService.doFindById(loginUserInfo, smartFormDefinitionMgvo.getFormTypeId());
+        if (smartFormDefinitionMgo == null) {
             throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
         }
         SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(smartFormDefinitionMgvo);
-        formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());
+        formDefinitionMgo.setFormType(smartFormDefinitionMgo);
         SmartFormDefinitionMgo newMgo = smartFormDefinitionMgoService.doInsert(loginUserInfo, formDefinitionMgo);
         addCount += (newMgo != null) ? 1 : 0;
         result.putCount(addCount);
@@ -140,12 +138,12 @@ public class SmartFormDefinitionController extends BaseController {
         WebResult result = WebResult.okOperation();
         Integer addCount = 0;
         Assert.notNull(formDefinitionMgvo, BaseRstMsgConstant.ErrorMsg.emptyForm());
-        Optional<SmartFormTypeDefinitionMgo> formTypeDefinitionMgoOptional = smartFormTypeDefinitionRepository.findById(formDefinitionMgvo.getFormTypeId());
-        if (formTypeDefinitionMgoOptional.isPresent() == false) {
+        SmartFormTypeDefinitionMgo smartFormTypeDefinitionMgo = smartFormTypeDefinitionMgoService.doFindById(loginUserInfo, formDefinitionMgvo.getFormTypeId());
+        if (smartFormTypeDefinitionMgo == null) {
             throw new MyRuntimeBusinessException(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
         }
         SmartFormDefinitionMgo formDefinitionMgo = SmartFormDefinitionMapstruct.INSTANCE.translateMgvoToMgo(formDefinitionMgvo);
-        formDefinitionMgo.setFormType(formTypeDefinitionMgoOptional.get());
+        formDefinitionMgo.setFormType(smartFormTypeDefinitionMgo);
         SmartFormDefinitionMgo newMgo = smartFormDefinitionMgoService.doUpdateById(loginUserInfo, formDefinitionMgo);
         addCount += (newMgo != null) ? 1 : 0;
         result.putCount(addCount);

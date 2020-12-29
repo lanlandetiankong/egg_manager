@@ -107,7 +107,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != singleUpdateMaxSize) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -124,7 +124,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = MyReflexUtil.getMoUpdateByObjectWithIgnores(s, !isAllColumn, MongoFieldConstant.FIELD_FID);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != idSize) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -148,7 +148,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != singleUpdateMaxSize) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -166,7 +166,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateFirst(query, update, getTypeClass());
         if (result.getModifiedCount() != singleUpdateMaxSize) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -182,7 +182,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_STATUS, status);
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.updateQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }
@@ -198,7 +198,7 @@ public class MyBaseMongoRepositoryImpl<T extends MyBaseModelMgo<ID>, ID> impleme
         Update update = new Update().set(MongoFieldConstant.FIELD_ISDELETED, SwitchStateEnum.Open.getValue());
         UpdateResult result = mongoTemplate.updateMulti(query, update, getTypeClass());
         if (result.getModifiedCount() != size) {
-            String errmsg = BaseRstMsgConstant.ErrorMsg.deleteQuantityDoesNotMatch(singleUpdateMaxSize,result.getModifiedCount());
+            String errmsg = BaseRstMsgConstant.ErrorMsg.deleteQuantityDoesNotMatch(singleUpdateMaxSize, result.getModifiedCount());
             log.error(errmsg);
             throw new MyMongoException(errmsg);
         }

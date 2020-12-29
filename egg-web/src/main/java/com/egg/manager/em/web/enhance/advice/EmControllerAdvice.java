@@ -75,7 +75,7 @@ public class EmControllerAdvice {
     @ExceptionHandler(value = MyUnauthorizedException.class)
     @ResponseBody
     public WebResult handleUnauthorized(MyUnauthorizedException e) {
-        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.shiroUnauthorized()),e);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->" + BaseRstMsgConstant.ErrorMsg.shiroUnauthorized()), e);
         return MyResponseHelper.handleAuthenticationExpired();
     }
 
@@ -83,7 +83,7 @@ public class EmControllerAdvice {
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
     public WebResult handleShiroException(ShiroException e) {
-        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.noOperationAuthority()),e);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->" + BaseRstMsgConstant.ErrorMsg.noOperationAuthority()), e);
         return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.noOperationAuthority());
     }
 
@@ -91,7 +91,7 @@ public class EmControllerAdvice {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public WebResult handleBusinessException(BusinessException e) {
-        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.businessException()),e);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->" + BaseRstMsgConstant.ErrorMsg.businessException()), e);
         return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.businessException());
     }
 
@@ -100,7 +100,7 @@ public class EmControllerAdvice {
     @ExceptionHandler(value = MyParamJsonException.class)
     @ResponseBody
     public WebResult handleParamJsonException(MyParamJsonException e) {
-        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"+BaseRstMsgConstant.ErrorMsg.formIncorrectParam()),e);
+        log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->" + BaseRstMsgConstant.ErrorMsg.formIncorrectParam()), e);
         return MyResponseHelper.handleRequestFailure(BaseRstMsgConstant.ErrorMsg.formIncorrectParam());
     }
 

@@ -29,6 +29,7 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
      * @return
      */
     List<EmDefineMenuEntity> dealGetUserGrantedMenusByAccountId(String userAccountId);
+
     /**
      * 查询 用户 可访问的 菜单路径
      * @param userAccountId
@@ -57,6 +58,7 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
      * @return
      */
     List<CommonMenuTree> queryUserVisitAbleMenu(String userAccountId);
+
     /**
      * 查询并缓存 用户 可访问的[菜单定义] Tree
      * @param userAccountId
@@ -124,7 +126,7 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
 
     /**
      * 菜单定义-新增
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param emDefineMenuVo
      * @return
      * @throws Exception
@@ -133,7 +135,7 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
 
     /**
      * 菜单定义-更新
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param emDefineMenuVo
      * @return
      * @throws Exception
@@ -148,4 +150,28 @@ public interface EmDefineMenuService extends MyBaseMysqlService<EmDefineMenuEnti
      * @return
      */
     MyVerifyDuplicateBean dealCheckDuplicateKey(CurrentLoginEmUserInfo loginUserInfo, EmDefineMenuVo emDefineMenuVo, QueryWrapper<EmDefineMenuEntity> defineMenuWrapper);
+
+    /**
+     * 查询菜单(过滤指定节点下的所有节点
+     * @param filterId
+     * @param onlyEnable 是否只查询 状态为 可用 的数据
+     * @return
+     */
+    List<EmDefineMenuEntity> getMenusFilterChildrens(String filterId, boolean onlyEnable);
+
+    /**
+     * 取得角色拥有的所有[菜单]集合(忽略 有子节点的菜单节点)
+     * @param roleId
+     * @param state
+     * @return
+     */
+    List<EmDefineMenuEntity> findAllMenuByRoleIdFilterParentNode(String roleId, Short state);
+
+    /**
+     * 取得角色拥有的所有[菜单]集合
+     * @param roleId
+     * @param state
+     * @return
+     */
+    List<EmDefineMenuEntity> findAllMenuByRoleId(String roleId, Short state);
 }

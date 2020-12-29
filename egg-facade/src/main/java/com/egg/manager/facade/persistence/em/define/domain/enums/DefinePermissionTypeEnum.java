@@ -21,8 +21,6 @@ public enum DefinePermissionTypeEnum {
     private boolean isNeedFilter;
 
 
-
-
     public static DefinePermissionTypeEnum doGetEnumByValue(Integer value) {
         if (value == null) {
             return null;

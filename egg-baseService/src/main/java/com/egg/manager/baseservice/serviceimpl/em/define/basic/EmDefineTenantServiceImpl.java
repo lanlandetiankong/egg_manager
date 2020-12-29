@@ -147,4 +147,15 @@ public class EmDefineTenantServiceImpl extends MyBaseMysqlServiceImpl<EmDefineTe
         }
         return changeCount;
     }
+
+    @Override
+    public EmDefineTenantEntity selectOneOfUserBelongTenant(String userAccountId, Short tenantState) {
+        return this.baseMapper.selectOneOfUserBelongTenant(userAccountId, tenantState);
+    }
+
+    @Override
+    public EmDefineTenantDto selectOneDtoOfUserBelongTenant(String userAccountId) {
+        return this.baseMapper.selectOneDtoOfUserBelongTenant(userAccountId);
+    }
+
 }

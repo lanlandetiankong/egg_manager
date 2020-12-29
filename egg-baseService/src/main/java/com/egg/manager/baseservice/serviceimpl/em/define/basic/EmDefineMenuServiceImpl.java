@@ -13,21 +13,21 @@ import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonM
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelect;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelectTranslate;
 import com.egg.manager.facade.persistence.commons.base.beans.verify.MyVerifyDuplicateBean;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
-import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineMenuDto;
-import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineMenuVo;
-import com.egg.manager.facade.persistence.em.user.domain.constant.DefineMenuConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
-import com.egg.manager.facade.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
 import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
+import com.egg.manager.facade.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
+import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineMenuDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineMenuTransfer;
+import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineMenuVo;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper;
+import com.egg.manager.facade.persistence.em.user.domain.constant.DefineMenuConstant;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -74,13 +74,13 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
     @Override
     @Cacheable(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL, key = "#userAccountId", condition = "#userAccountId!=null")
     public Set<String> queryUserVisitAbleUrlToCacheable(String userAccountId) {
-        return  queryUserVisitAbleUrl(userAccountId);
+        return queryUserVisitAbleUrl(userAccountId);
     }
 
     @Override
     @CachePut(value = RedisShiroKeyConstant.KEY_USER_FRONT_ROUTER_URL, key = "#userAccountId", condition = "#userAccountId!=null")
     public Set<String> queryUserVisitAbleUrlToCachePut(String userAccountId) {
-        return  queryUserVisitAbleUrl(userAccountId);
+        return queryUserVisitAbleUrl(userAccountId);
     }
 
     @Override
@@ -117,6 +117,7 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
     public List<CommonMenuTree> queryUserVisitAbleMenuToCacheable(String userAccountId) {
         return queryUserVisitAbleMenu(userAccountId);
     }
+
     @Override
     @CachePut(value = RedisShiroKeyConstant.KEY_USER_FRONT_MENUS, key = "#userAccountId", condition = "#userAccountId!=null")
     public List<CommonMenuTree> queryUserVisitAbleMenuToCachePut(String userAccountId) {
@@ -310,5 +311,18 @@ public class EmDefineMenuServiceImpl extends MyBaseMysqlServiceImpl<EmDefineMenu
         return verifyBean;
     }
 
+    @Override
+    public List<EmDefineMenuEntity> getMenusFilterChildrens(String filterId, boolean onlyEnable) {
+        return this.baseMapper.getMenusFilterChildrens(filterId, onlyEnable);
+    }
 
+    @Override
+    public List<EmDefineMenuEntity> findAllMenuByRoleIdFilterParentNode(String roleId, Short state) {
+        return this.baseMapper.findAllMenuByRoleIdFilterParentNode(roleId, state);
+    }
+
+    @Override
+    public List<EmDefineMenuEntity> findAllMenuByRoleId(String roleId, Short state) {
+        return this.baseMapper.findAllMenuByRoleId(roleId, state);
+    }
 }

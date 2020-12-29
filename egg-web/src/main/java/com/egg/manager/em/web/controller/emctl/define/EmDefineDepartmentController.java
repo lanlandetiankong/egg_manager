@@ -7,18 +7,17 @@ import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineDepartmentService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.beans.tree.common.CommonTreeSelect;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineDepartmentEntity;
-import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineDepartmentDto;
-import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineDepartmentVo;
-import com.egg.manager.facade.persistence.em.user.domain.constant.DefineDepartmentConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineDepartmentEntity;
+import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineDepartmentDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineDepartmentTransfer;
+import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineDepartmentVo;
+import com.egg.manager.facade.persistence.em.user.domain.constant.DefineDepartmentConstant;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
@@ -29,7 +28,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +45,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/emCtl/define/defineDepartment")
 public class EmDefineDepartmentController extends BaseController {
-    @Autowired
-    private EmDefineDepartmentMapper emDefineDepartmentMapper;
     @Reference
     private EmDefineDepartmentService emDefineDepartmentService;
 
@@ -91,7 +87,7 @@ public class EmDefineDepartmentController extends BaseController {
         queryWrapper.orderBy(true, true, "level");
         queryWrapper.orderBy(true, true, "weights");
         queryWrapper.orderBy(true, true, FieldConst.COL_CREATE_TIME);
-        List<EmDefineDepartmentEntity> allDepartments = emDefineDepartmentMapper.selectList(queryWrapper);
+        List<EmDefineDepartmentEntity> allDepartments = emDefineDepartmentService.list(queryWrapper);
         List<CommonTreeSelect> treeList = emDefineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartments);
         result.putGridList(treeList);
         return result;
@@ -102,7 +98,7 @@ public class EmDefineDepartmentController extends BaseController {
     @PostMapping("/queryFilteredTreeSelect")
     public WebResult queryFilteredTreeSelect(String filterId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<EmDefineDepartmentEntity> allDepartment = emDefineDepartmentMapper.getDepartmentFilterChildrens(filterId, true);
+        List<EmDefineDepartmentEntity> allDepartment = emDefineDepartmentService.getDepartmentFilterChildrens(filterId, true);
         List<CommonTreeSelect> treeList = emDefineDepartmentService.getTreeSelectChildNodesWithRoot(loginUserInfo, DefineDepartmentConstant.ROOT_DEPARTMENT_ID, allDepartment);
         result.putGridList(treeList);
         return result;

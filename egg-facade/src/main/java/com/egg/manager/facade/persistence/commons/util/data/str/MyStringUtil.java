@@ -74,7 +74,7 @@ public class MyStringUtil {
         try {
             result = URLDecoder.decode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
         }
         return result;
     }

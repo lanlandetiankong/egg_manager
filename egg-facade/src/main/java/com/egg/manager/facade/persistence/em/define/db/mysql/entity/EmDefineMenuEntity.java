@@ -2,8 +2,8 @@ package com.egg.manager.facade.persistence.em.define.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.egg.manager.facade.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
+import com.egg.manager.facade.persistence.em.define.domain.enums.DefineMenuUrlJumpTypeEnum;
 import lombok.*;
 
 import java.io.Serializable;

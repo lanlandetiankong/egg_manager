@@ -38,7 +38,7 @@ public class EmUserAppRelatedServiceImpl extends MyBaseMysqlServiceImpl<EmUserAp
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmUserAppRelatedDto> queryPage) {
         Page<EmUserAppRelatedDto> mpPagination = queryPage.toMpPage();
         List<EmUserAppRelatedDto> dtoList = emUserAppRelatedMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage,mpPagination);
+        result.settingPage(queryPage, mpPagination);
         result.putGridList(EmUserAppRelatedTransfer.transferDtoToVoList(dtoList));
         return result;
     }

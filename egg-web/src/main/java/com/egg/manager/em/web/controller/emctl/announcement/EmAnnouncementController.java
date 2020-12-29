@@ -6,15 +6,14 @@ import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementService;
 import com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementTagService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.announcement.db.mysql.entity.EmAnnouncementEntity;
 import com.egg.manager.facade.persistence.em.announcement.db.mysql.entity.EmAnnouncementTagEntity;
-import com.egg.manager.facade.persistence.em.announcement.db.mysql.mapper.EmAnnouncementMapper;
 import com.egg.manager.facade.persistence.em.announcement.pojo.dto.EmAnnouncementDto;
 import com.egg.manager.facade.persistence.em.announcement.pojo.transfer.EmAnnouncementTransfer;
 import com.egg.manager.facade.persistence.em.announcement.pojo.vo.EmAnnouncementDraftVo;
@@ -29,7 +28,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +45,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/emCtl/announcement")
 public class EmAnnouncementController extends BaseController {
-    @Autowired
-    private EmAnnouncementMapper emAnnouncementMapper;
     @Reference
     private EmAnnouncementService emAnnouncementService;
     @Reference
@@ -95,7 +91,7 @@ public class EmAnnouncementController extends BaseController {
     public WebResult queryOneById(HttpServletRequest request, String announcementId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(announcementId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmAnnouncementEntity emAnnouncementEntity = emAnnouncementMapper.selectById(announcementId);
+        EmAnnouncementEntity emAnnouncementEntity = emAnnouncementService.getById(announcementId);
         //取得 公告标签 map
         Map<String, EmAnnouncementTagEntity> announcementTagMap = emAnnouncementTagService.dealGetAllToMap();
         result.putBean(EmAnnouncementTransfer.transferEntityToVo(emAnnouncementEntity, announcementTagMap));

@@ -15,22 +15,22 @@ import com.egg.manager.facade.api.services.em.user.basic.EmUserJobService;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserRoleService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineJobEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.entity.*;
-import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.*;
-import com.egg.manager.facade.persistence.em.user.domain.constant.UserAccountConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountStateEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.BusinessException;
 import com.egg.manager.facade.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.QueryField;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineJobEntity;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.*;
+import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.*;
+import com.egg.manager.facade.persistence.em.user.domain.constant.UserAccountConstant;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountStateEnum;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserAccountDto;
 import com.egg.manager.facade.persistence.em.user.pojo.dto.login.LoginAccountDTO;
@@ -129,7 +129,7 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
             }
         }
         List<EmUserAccountDto> emUserAccountDtoList = emUserAccountMapper.selectQueryPage(mpPagination, queryFieldListTemp, queryPage.getSortMap(), queryTenantFieldBeanList, queryDepartmentFieldBeanList);
-        result.settingPage(queryPage,mpPagination);
+        result.settingPage(queryPage, mpPagination);
         result.putGridList(EmUserAccountTransfer.transferDtoToVoList(emUserAccountDtoList));
         return result;
     }

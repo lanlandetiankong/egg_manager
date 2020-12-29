@@ -6,8 +6,8 @@ import com.egg.manager.facade.api.services.em.define.basic.EmDefinePermissionSer
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineRoleService;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.facade.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.facade.persistence.commons.util.basic.spring.SpringContextBeanUtil;
+import com.egg.manager.facade.persistence.commons.util.jwt.JwtUtil;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;

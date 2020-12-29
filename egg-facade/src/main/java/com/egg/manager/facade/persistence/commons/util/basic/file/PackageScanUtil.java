@@ -69,7 +69,7 @@ public class PackageScanUtil {
                                             .forName(packageName + '.'
                                                     + className).getName());
                                 } catch (ClassNotFoundException e) {
-                                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                                    log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
                                 }
                             }
                         }
@@ -77,7 +77,7 @@ public class PackageScanUtil {
                 }
                 return;
             } catch (IOException e) {
-                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             }
         }
         File dir = new File(url.getFile());

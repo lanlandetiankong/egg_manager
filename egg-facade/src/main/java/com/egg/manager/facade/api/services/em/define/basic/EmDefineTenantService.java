@@ -29,7 +29,7 @@ public interface EmDefineTenantService extends MyBaseMysqlService<EmDefineTenant
 
     /**
      * 租户定义-新增
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param emDefineTenantVo
      * @return
      * @throws Exception
@@ -38,7 +38,7 @@ public interface EmDefineTenantService extends MyBaseMysqlService<EmDefineTenant
 
     /**
      * 租户定义-更新
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param emDefineTenantVo
      * @return
      * @throws Exception
@@ -62,4 +62,21 @@ public interface EmDefineTenantService extends MyBaseMysqlService<EmDefineTenant
      * @throws Exception
      */
     Integer dealTenantSetupManager(CurrentLoginEmUserInfo loginUserInfo, String tenantId, String[] checkIds) throws Exception;
+
+    /**
+     * 根据用户id查询 所属的租户详情
+     * @param userAccountId
+     * @param tenantState
+     * @return
+     */
+    EmDefineTenantEntity selectOneOfUserBelongTenant(String userAccountId, Short tenantState);
+
+    /**
+     * 根据用户id查询 所属的租户详情
+     * @param userAccountId
+     * @return
+     */
+    EmDefineTenantDto selectOneDtoOfUserBelongTenant(String userAccountId);
+
+
 }

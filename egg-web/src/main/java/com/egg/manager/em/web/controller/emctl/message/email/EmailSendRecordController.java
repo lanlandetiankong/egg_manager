@@ -5,16 +5,15 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.message.basic.email.EmailSendRecordMgoService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.facade.persistence.em.message.db.mongo.mo.email.EmailSendRecordMgo;
-import com.egg.manager.facade.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
 import com.egg.manager.facade.persistence.em.message.pojo.mapstruct.imap.email.EmailSendRecordMapstruct;
 import com.egg.manager.facade.persistence.em.message.pojo.mvo.email.EmailSendRecordMgvo;
 import com.egg.manager.facade.persistence.em.message.pojo.verification.email.EmailSendRecordMongoVerifyO;
@@ -31,7 +30,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,8 +49,6 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping("/emCtl/message/email/emailSendRecord")
 public class EmailSendRecordController extends BaseController {
-    @Autowired
-    private EmailSendRecordRepository emailSendRecordRepository;
     @Reference
     private EmailSendRecordMgoService emailSendRecordMgoService;
 

@@ -3,9 +3,9 @@ package com.egg.manager.facade.api.config.db.mybatis;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.extension.injector.methods.LogicDeleteByIdWithFill;
-import com.egg.manager.facade.api.config.db.mybatis.plus.methods.LogicDeleteByIdMethod;
 import com.egg.manager.facade.api.config.db.mybatis.plus.methods.LogicBatchDeleteWithEntityMethod;
 import com.egg.manager.facade.api.config.db.mybatis.plus.methods.LogicBatchDeleteWithModifyFillMethod;
+import com.egg.manager.facade.api.config.db.mybatis.plus.methods.LogicDeleteByIdMethod;
 import com.egg.manager.facade.api.config.db.mybatis.plus.methods.LogicDeleteByIdWithModifyFill;
 
 import java.util.List;

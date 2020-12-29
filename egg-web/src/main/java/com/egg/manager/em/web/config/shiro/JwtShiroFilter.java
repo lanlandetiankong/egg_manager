@@ -176,7 +176,7 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
             response.setContentType("application/json; charset=utf-8");
             out.print(JSONObject.toJSONString(MyResponseHelper.handleAuthenticationExpired()));
         } catch (Exception e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
         } finally {
             if (out != null) {
                 out.close();

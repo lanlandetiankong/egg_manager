@@ -87,7 +87,7 @@ public interface EmDefineRoleService extends MyBaseMysqlService<EmDefineRoleEnti
 
     /**
      * 角色定义-新增
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param emDefineRoleVo
      * @return
      * @throws Exception
@@ -96,7 +96,7 @@ public interface EmDefineRoleService extends MyBaseMysqlService<EmDefineRoleEnti
 
     /**
      * 角色定义-更新
-     * @param loginUserInfo 当前登录用户
+     * @param loginUserInfo  当前登录用户
      * @param emDefineRoleVo
      * @return
      * @throws Exception
@@ -114,4 +114,11 @@ public interface EmDefineRoleService extends MyBaseMysqlService<EmDefineRoleEnti
      */
     Integer dealGrantPermissionToRole(CurrentLoginEmUserInfo loginUserInfo, String roleId, String[] checkIds) throws Exception;
 
+    /**
+     * 查询指定用户的 用户-角色 关联表
+     * @param userAccountId
+     * @param stateVal      指定state的值
+     * @return
+     */
+    List<EmDefineRoleEntity> findAllRoleByUserAcccountId(String userAccountId, Short stateVal);
 }

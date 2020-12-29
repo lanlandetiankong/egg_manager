@@ -20,8 +20,6 @@ public enum SwitchStateEnum {
     private String info;
 
 
-
-
     /**
      * 判断是否属于枚举的有效值
      * @param value

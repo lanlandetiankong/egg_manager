@@ -252,7 +252,7 @@ public class DateTimeUtil {
         try {
             return parseToDate(formatDateTimetoString(getSystemDate(), fmtstr));
         } catch (Exception e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             return getSystemDate();
         }
 
@@ -1287,7 +1287,7 @@ public class DateTimeUtil {
         try {
             date = DateTimeUtil.parseToDate(dateStr);
         } catch (Exception e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
         }
 
         return date;

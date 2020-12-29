@@ -4,11 +4,13 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
+import com.egg.manager.facade.api.services.em.define.basic.EmDefineMenuService;
+import com.egg.manager.facade.api.services.em.define.basic.EmDefinePermissionService;
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineRoleService;
 import com.egg.manager.facade.api.services.em.user.basic.EmRoleMenuService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
@@ -16,13 +18,9 @@ import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPag
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineMenuEntity;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefinePermissionEntity;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineRoleEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineMenuMapper;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefinePermissionMapper;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineRoleMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineRoleTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineRoleVo;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmRoleMenuEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmRoleMenuMapper;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserAccountDto;
 import com.egg.manager.facade.persistence.em.user.pojo.initialize.EmRoleMenuPojoInitialize;
@@ -36,7 +34,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,14 +53,11 @@ import java.util.Set;
 @RestController
 @RequestMapping("/emCtl/define/defineRole")
 public class EmDefineRoleController extends BaseController {
-    @Autowired
-    private EmDefineMenuMapper emDefineMenuMapper;
-    @Autowired
-    private EmRoleMenuMapper emRoleMenuMapper;
-    @Autowired
-    private EmDefinePermissionMapper emDefinePermissionMapper;
-    @Autowired
-    private EmDefineRoleMapper emDefineRoleMapper;
+    @Reference
+    private EmDefineMenuService emDefineMenuService;
+    @Reference
+    private EmDefinePermissionService emDefinePermissionService;
+
     @Reference
     private EmRoleMenuService emRoleMenuService;
     @Reference
@@ -107,7 +101,7 @@ public class EmDefineRoleController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        EmDefineRoleEntity emDefineRoleEntity = emDefineRoleMapper.selectById(defineRoleId);
+        EmDefineRoleEntity emDefineRoleEntity = emDefineRoleService.getById(defineRoleId);
         result.putBean(EmDefineRoleTransfer.transferEntityToVo(emDefineRoleEntity));
         return result;
     }
@@ -116,7 +110,7 @@ public class EmDefineRoleController extends BaseController {
     @PostMapping(value = "/gainAllPermissionByRoleId")
     public WebResult gainAllPermissionByRoleId(HttpServletRequest request, String defineRoleId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<EmDefinePermissionEntity> emDefinePermissionEntityList = emDefinePermissionMapper.findAllPermissionByRoleId(defineRoleId);
+        List<EmDefinePermissionEntity> emDefinePermissionEntityList = emDefinePermissionService.findAllPermissionByRoleId(defineRoleId);
         result.putGridList(emDefinePermissionEntityList);
         return result;
     }
@@ -129,9 +123,9 @@ public class EmDefineRoleController extends BaseController {
         List<EmDefineMenuEntity> emDefineMenuEntityList = null;
         if (Boolean.TRUE.equals(filterParentNode)) {
             //是否过滤掉 有子节点的 [菜单节点]
-            emDefineMenuEntityList = emDefineMenuMapper.findAllMenuByRoleIdFilterParentNode(defineRoleId, BaseStateEnum.ENABLED.getValue());
+            emDefineMenuEntityList = emDefineMenuService.findAllMenuByRoleIdFilterParentNode(defineRoleId, BaseStateEnum.ENABLED.getValue());
         } else {
-            emDefineMenuEntityList = emDefineMenuMapper.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
+            emDefineMenuEntityList = emDefineMenuService.findAllMenuByRoleId(defineRoleId, BaseStateEnum.ENABLED.getValue());
         }
         result.putGridList(emDefineMenuEntityList);
         return result;
@@ -236,12 +230,12 @@ public class EmDefineRoleController extends BaseController {
         if (CollectionUtil.isNotEmpty(updateEnableIdSet)) {
             Iterator<String> enableIter = updateEnableIdSet.iterator();
             List enableIdList = Lists.newArrayList(enableIter);
-            int count = emRoleMenuMapper.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
+            int count = emRoleMenuService.batchUpdateStateByRole(roleId, enableIdList, BaseStateEnum.ENABLED.getValue(), loginUserInfo);
         }
         if (CollectionUtil.isNotEmpty(updateDelIdSet)) {
             Iterator<String> delIter = updateDelIdSet.iterator();
             List delIdList = Lists.newArrayList(delIter);
-            int count = emRoleMenuMapper.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
+            int count = emRoleMenuService.batchUpdateStateByRole(roleId, delIdList, BaseStateEnum.DISABLED.getValue(), loginUserInfo);
         }
         return result;
     }

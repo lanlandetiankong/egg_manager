@@ -73,7 +73,6 @@ public class I18nConfig {
 
     /**
      * 获取文件夹下所有的国际化文件名
-     *
      * @param folderName 文件名
      * @return
      * @throws IOException
@@ -92,7 +91,6 @@ public class I18nConfig {
 
     /**
      * 遍历所有文件
-     *
      * @param basenames
      * @param folder
      * @param path
@@ -112,7 +110,6 @@ public class I18nConfig {
 
     /**
      * 把普通文件名转换成国际化文件名
-     *
      * @param filename
      * @return 文件名
      */

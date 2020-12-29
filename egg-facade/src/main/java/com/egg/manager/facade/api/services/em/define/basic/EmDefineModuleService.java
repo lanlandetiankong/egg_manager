@@ -28,7 +28,7 @@ public interface EmDefineModuleService extends MyBaseMysqlService<EmDefineModule
 
     /**
      * 模块定义-新增
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param emDefineModuleVo
      * @return
      * @throws Exception
@@ -37,7 +37,7 @@ public interface EmDefineModuleService extends MyBaseMysqlService<EmDefineModule
 
     /**
      * 模块定义-更新
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param emDefineModuleVo
      * @return
      * @throws Exception

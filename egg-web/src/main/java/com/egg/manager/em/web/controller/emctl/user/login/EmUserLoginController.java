@@ -3,22 +3,18 @@ package com.egg.manager.em.web.controller.emctl.user.login;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.egg.manager.em.web.config.shiro.JwtShiroToken;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.exchange.helper.PasswordHelper;
 import com.egg.manager.facade.api.exchange.helper.redis.RedisHelper;
-import com.egg.manager.facade.api.services.em.define.basic.EmDefineMenuService;
-import com.egg.manager.facade.api.services.em.define.basic.EmDefinePermissionService;
-import com.egg.manager.facade.api.services.em.define.basic.EmDefineRoleService;
+import com.egg.manager.facade.api.services.em.define.basic.*;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
-import com.egg.manager.em.web.config.shiro.JwtShiroToken;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.db.RedisShiroCacheEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.login.MyLoginFailureException;
 import com.egg.manager.facade.persistence.commons.util.jwt.JwtUtil;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineTenantMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineDepartmentDto;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineTenantDto;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
@@ -60,11 +56,11 @@ public class EmUserLoginController extends BaseController {
     private boolean jwtSsoFlag;
     @Reference
     private RedisHelper redisHelper;
-    @Autowired
-    private EmDefineTenantMapper emDefineTenantMapper;
-    @Autowired
-    private EmDefineDepartmentMapper emDefineDepartmentMapper;
-    @Autowired
+    @Reference
+    private EmDefineTenantService emDefineTenantService;
+    @Reference
+    private EmDefineDepartmentService emDefineDepartmentService;
+    @Reference
     private EmUserAccountService emUserAccountService;
     @Reference
     public EmDefineRoleService emDefineRoleService;
@@ -109,12 +105,12 @@ public class EmUserLoginController extends BaseController {
             //进行验证，这里可以捕获异常，然后返回对应信息
             subject.login(jwtShiroToken);
             //所属租户
-            EmDefineTenantDto emDefineTenantDto = emDefineTenantMapper.selectOneDtoOfUserBelongTenant(emUserAccountEntity.getFid());
+            EmDefineTenantDto emDefineTenantDto = emDefineTenantService.selectOneDtoOfUserBelongTenant(emUserAccountEntity.getFid());
             if (emDefineTenantDto != null) {
                 userAccountToken.setUserBelongTenantId(emDefineTenantDto.getFid());
             }
             //所属部门
-            EmDefineDepartmentDto emDefineDepartmentDto = emDefineDepartmentMapper.selectOneDtoOfUserBelongDepartment(emUserAccountEntity.getFid());
+            EmDefineDepartmentDto emDefineDepartmentDto = emDefineDepartmentService.selectOneDtoOfUserBelongDepartment(emUserAccountEntity.getFid());
             if (emDefineDepartmentDto != null) {
                 userAccountToken.setUserBelongTenantId(emDefineDepartmentDto.getFid());
             }

@@ -5,14 +5,13 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineModuleService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineModuleEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineModuleMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineModuleDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineModuleTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineModuleVo;
@@ -26,7 +25,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +41,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/module/define_module")
 public class EmDefineModuleController extends BaseController {
-    @Autowired
-    private EmDefineModuleMapper emDefineModuleMapper;
     @Reference
     private EmDefineModuleService emDefineModuleService;
 
@@ -70,7 +66,7 @@ public class EmDefineModuleController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineModuleId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        EmDefineModuleEntity emDefineModuleEntity = emDefineModuleMapper.selectById(defineModuleId);
+        EmDefineModuleEntity emDefineModuleEntity = emDefineModuleService.getById(defineModuleId);
         result.putBean(EmDefineModuleTransfer.transferEntityToVo(emDefineModuleEntity));
         return result;
     }

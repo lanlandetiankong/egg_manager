@@ -18,7 +18,7 @@ public interface EmAnnouncementDraftService extends MyBaseMysqlService<EmAnnounc
 
     /**
      * 新增公告草稿
-     * @param loginUserInfo       当前登录用户
+     * @param loginUserInfo         当前登录用户
      * @param emAnnouncementDraftVo
      * @return Integer
      * @throws Exception
@@ -27,7 +27,7 @@ public interface EmAnnouncementDraftService extends MyBaseMysqlService<EmAnnounc
 
     /**
      * 更新公告草稿
-     * @param loginUserInfo       当前登录用户
+     * @param loginUserInfo         当前登录用户
      * @param emAnnouncementDraftVo
      * @return Integer
      * @throws Exception

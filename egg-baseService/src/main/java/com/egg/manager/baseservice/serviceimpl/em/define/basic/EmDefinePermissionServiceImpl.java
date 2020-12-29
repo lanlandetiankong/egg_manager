@@ -13,17 +13,17 @@ import com.egg.manager.facade.persistence.commons.base.beans.verify.MyVerifyDupl
 import com.egg.manager.facade.persistence.commons.base.constant.db.redis.RedisShiroKeyConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
-import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefinePermissionEntity;
-import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefinePermissionDto;
-import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefinePermissionVo;
-import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.MyDbException;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefinePermissionEntity;
 import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefinePermissionMapper;
+import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefinePermissionDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefinePermissionTransfer;
+import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefinePermissionVo;
+import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -80,12 +80,12 @@ public class EmDefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
 
     @Override
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean queryPageBean) {
-        try{
+        try {
             Page<EmDefinePermissionDto> mpPagination = queryPageBean.toMpPage();
             List<EmDefinePermissionDto> emDefinePermissionDtos = emDefinePermissionMapper.selectQueryPage(mpPagination, queryPageBean.getQuery(), queryPageBean.getSortMap());
             result.settingPage(queryPageBean, mpPagination);
             result.putGridList(EmDefinePermissionTransfer.transferDtoToVoList(emDefinePermissionDtos));
-        }   catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
@@ -185,5 +185,25 @@ public class EmDefinePermissionServiceImpl extends MyBaseMysqlServiceImpl<EmDefi
         }
         verifyBean.setSuccessFlag(successFlag);
         return verifyBean;
+    }
+
+    /**
+     * 取得角色拥有的所有权限集合
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<EmDefinePermissionEntity> findAllPermissionByRoleId(String roleId) {
+        return this.baseMapper.findAllPermissionByRoleId(roleId);
+    }
+
+    /**
+     * 查询 用户拥有的所有权限
+     * @param userAccountId
+     * @return
+     */
+    @Override
+    public List<EmDefinePermissionEntity> findAllPermissionByUserAcccountId(String userAccountId) {
+        return this.baseMapper.findAllPermissionByUserAcccountId(userAccountId);
     }
 }

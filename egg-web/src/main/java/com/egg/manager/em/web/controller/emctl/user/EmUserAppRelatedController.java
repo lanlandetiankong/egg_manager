@@ -13,7 +13,6 @@ import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAppRelatedEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAppRelatedMapper;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserAppRelatedDto;
 import com.egg.manager.facade.persistence.em.user.pojo.transfer.EmUserAppRelatedTransfer;
@@ -27,7 +26,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/emCtl/emUserAppRelated")
 public class EmUserAppRelatedController extends BaseController {
 
-    @Autowired
-    private EmUserAppRelatedMapper emUserAppRelatedMapper;
     @Reference
     private EmUserAppRelatedService emUserAppRelatedService;
 
@@ -70,7 +66,7 @@ public class EmUserAppRelatedController extends BaseController {
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(emUserAppRelatedId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmUserAppRelatedEntity emUserAppRelatedEntity = emUserAppRelatedMapper.selectById(emUserAppRelatedId);
+        EmUserAppRelatedEntity emUserAppRelatedEntity = emUserAppRelatedService.getById(emUserAppRelatedId);
         result.putBean(EmUserAppRelatedTransfer.transferEntityToVo(emUserAppRelatedEntity));
         return result;
     }

@@ -46,7 +46,7 @@ public interface EmAnnouncementTagService extends MyBaseMysqlService<EmAnnouncem
 
     /**
      * 公告标签-新增
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo       当前登录用户
      * @param emAnnouncementTagVo
      * @return
      * @throws Exception
@@ -56,7 +56,7 @@ public interface EmAnnouncementTagService extends MyBaseMysqlService<EmAnnouncem
 
     /**
      * 公告标签-更新
-     * @param loginUserInfo     当前登录用户
+     * @param loginUserInfo       当前登录用户
      * @param emAnnouncementTagVo
      * @return
      * @throws Exception

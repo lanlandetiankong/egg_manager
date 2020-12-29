@@ -51,7 +51,7 @@ public interface EmDefineDepartmentService extends MyBaseMysqlService<EmDefineDe
 
     /**
      * 部门定义-新增
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo        当前登录用户
      * @param emDefineDepartmentVo
      * @return
      * @throws Exception
@@ -60,11 +60,34 @@ public interface EmDefineDepartmentService extends MyBaseMysqlService<EmDefineDe
 
     /**
      * 部门定义-更新
-     * @param loginUserInfo      当前登录用户
+     * @param loginUserInfo        当前登录用户
      * @param emDefineDepartmentVo
      * @return
      * @throws Exception
      */
     Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, EmDefineDepartmentVo emDefineDepartmentVo) throws Exception;
+
+    /**
+     * 查询部门(过滤指定节点下的所有节点
+     * @param filterId
+     * @param onlyEnable 是否只查询 状态为 可用 的数据
+     * @return
+     */
+    List<EmDefineDepartmentEntity> getDepartmentFilterChildrens(String filterId, boolean onlyEnable);
+
+    /**
+     * 根据用户id查询 所属的部门详情
+     * @param userAccountId
+     * @return
+     */
+    EmDefineDepartmentDto selectOneDtoOfUserBelongDepartment(String userAccountId);
+
+    /**
+     * 根据用户id查询 所属的部门详情
+     * @param userAccountId
+     * @param departmentState
+     * @return
+     */
+    EmDefineDepartmentEntity selectOneOfUserBelongDepartment(String userAccountId, Short departmentState);
 
 }

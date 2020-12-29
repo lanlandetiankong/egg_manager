@@ -20,7 +20,7 @@ public interface EmAnnouncementService extends MyBaseMysqlService<EmAnnouncement
 
     /**
      * 新增公告
-     * @param loginUserInfo  当前登录用户
+     * @param loginUserInfo    当前登录用户
      * @param emAnnouncementVo
      * @return
      * @throws Exception
@@ -29,7 +29,7 @@ public interface EmAnnouncementService extends MyBaseMysqlService<EmAnnouncement
 
     /**
      * 公告草稿发布
-     * @param loginUserInfo       当前登录用户
+     * @param loginUserInfo         当前登录用户
      * @param emAnnouncementDraftVo
      * @return
      * @throws Exception

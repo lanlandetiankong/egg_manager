@@ -75,7 +75,7 @@ public class EmAnnouncementTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             }
         }
         return vo;
@@ -122,7 +122,7 @@ public class EmAnnouncementTransfer extends BaseMysqlTransfer {
                     vo.setTagNameOfStr(Joiner.on(",").join(tagNameList));
                 }
             } catch (JSONException e) {
-                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+                log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             }
         }
         return vo;

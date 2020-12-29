@@ -3,10 +3,8 @@ package com.egg.manager.em.web.controller.emctl.user;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserJobService;
-import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserJobMapper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/emCtl/user/userJob")
 public class EmUserJobController extends BaseController {
-    @Autowired
-    private EmUserJobMapper emUserJobMapper;
     @Reference
     private EmUserJobService emUserJobService;
 }

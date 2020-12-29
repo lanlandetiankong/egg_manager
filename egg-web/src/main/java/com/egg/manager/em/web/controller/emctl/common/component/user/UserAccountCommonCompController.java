@@ -1,5 +1,6 @@
 package com.egg.manager.em.web.controller.emctl.common.component.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
@@ -35,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/commmon/component/user/userAccount")
 public class UserAccountCommonCompController extends BaseController {
-    @Autowired
+    @Reference
     private EmUserAccountService emUserAccountService;
 
     @EmPcWebOperationLog(fullPath = "/emCtl/commmon/component/user/userAccount/queryDtoPage", flag = false)

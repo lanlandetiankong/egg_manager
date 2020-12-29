@@ -73,7 +73,7 @@ public interface MyBaseMysqlCommonFuncMapstruct<E, V extends MyBaseMysqlVo, D ex
     /**
      * 取得 登录用户id
      * @param emUserAccountEntity
-     * @param required          当userAccount为null时是否抛出异常
+     * @param required            当userAccount为null时是否抛出异常
      * @return
      */
     default String handleGetLoginUserId(EmUserAccountEntity emUserAccountEntity, boolean required) {

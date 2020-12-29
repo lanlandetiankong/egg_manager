@@ -5,14 +5,13 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.define.basic.EmDefineJobService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.EmDefineJobEntity;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineJobMapper;
 import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineJobDto;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.EmDefineJobTransfer;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineJobVo;
@@ -26,7 +25,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +41,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/define/defineJob")
 public class EmDefineJobController extends BaseController {
-    @Autowired
-    private EmDefineJobMapper emDefineJobMapper;
     @Reference
     private EmDefineJobService emDefineJobService;
 
@@ -86,7 +82,7 @@ public class EmDefineJobController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String defineJobId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        EmDefineJobEntity emDefineJobEntity = emDefineJobMapper.selectById(defineJobId);
+        EmDefineJobEntity emDefineJobEntity = emDefineJobService.getById(defineJobId);
         result.putBean(EmDefineJobTransfer.transferEntityToVo(emDefineJobEntity));
         return result;
     }

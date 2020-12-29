@@ -6,15 +6,14 @@ import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementDraftService;
 import com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementTagService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.em.announcement.db.mysql.entity.EmAnnouncementDraftEntity;
 import com.egg.manager.facade.persistence.em.announcement.db.mysql.entity.EmAnnouncementTagEntity;
-import com.egg.manager.facade.persistence.em.announcement.db.mysql.mapper.EmAnnouncementDraftMapper;
 import com.egg.manager.facade.persistence.em.announcement.pojo.dto.EmAnnouncementDraftDto;
 import com.egg.manager.facade.persistence.em.announcement.pojo.transfer.EmAnnouncementDraftTransfer;
 import com.egg.manager.facade.persistence.em.announcement.pojo.vo.EmAnnouncementDraftVo;
@@ -28,7 +27,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,8 +44,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/emCtl/announcementDraft")
 public class EmAnnouncementDraftController extends BaseController {
-    @Autowired
-    private EmAnnouncementDraftMapper emAnnouncementDraftMapper;
+
     @Reference
     private EmAnnouncementDraftService emAnnouncementDraftService;
     @Reference
@@ -80,7 +77,7 @@ public class EmAnnouncementDraftController extends BaseController {
                                   @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
         Assert.notBlank(draftId, BaseRstMsgConstant.ErrorMsg.unknowId());
-        EmAnnouncementDraftEntity emAnnouncementDraftEntity = emAnnouncementDraftMapper.selectById(draftId);
+        EmAnnouncementDraftEntity emAnnouncementDraftEntity = emAnnouncementDraftService.getById(draftId);
         //取得 公告标签 map
         Map<String, EmAnnouncementTagEntity> announcementTagMap = emAnnouncementTagService.dealGetAllToMap();
         result.putBean(EmAnnouncementDraftTransfer.transferEntityToVo(emAnnouncementDraftEntity, announcementTagMap));

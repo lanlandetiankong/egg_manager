@@ -18,7 +18,6 @@ public enum DefineJobTypeEnum {
     private String label;
 
 
-
     public static DefineJobTypeEnum doGetEnumByValue(Integer value) {
         if (value == null) {
             return null;

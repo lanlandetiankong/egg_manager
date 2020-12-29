@@ -54,8 +54,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/${tool.firstLowerCase($!{tableInfo.name})}")
 public class $!{tableName} extends BaseController {
 
-@Autowired
-private $!{tableInfo.name}Mapper ${tool.firstLowerCase($!{tableInfo.name})}Mapper;
 @Reference
 private $!{tableInfo.name}Service ${tool.firstLowerCase($!{tableInfo.name})}Service;
 
@@ -79,7 +77,7 @@ public WebResult queryDtoPage(HttpServletRequest request, @QueryPage(tClass = $!
     @CurrentLoginUser CurrentLoginUserInfo loginUserInfo) {
     WebResult result = WebResult.okQuery();
     Assert.notBlank(${tool.firstLowerCase($!{tableInfo.name})}Id, BaseRstMsgConstant.ErrorMsg.unknowId());
-    $!{tableInfo.name}Entity ${tool.firstLowerCase($!{tableInfo.name})}Entity = ${tool.firstLowerCase($!{tableInfo.name})}Mapper.selectById(${tool.firstLowerCase($!{tableInfo.name})}Id);
+    $!{tableInfo.name}Entity ${tool.firstLowerCase($!{tableInfo.name})}Entity = ${tool.firstLowerCase($!{tableInfo.name})}Service.getById(${tool.firstLowerCase($!{tableInfo.name})}Id);
     result.putBean($!{tableInfo.name}Transfer.transferEntityToVo(${tool.firstLowerCase($!{tableInfo.name})}Entity));
     return result;
     }

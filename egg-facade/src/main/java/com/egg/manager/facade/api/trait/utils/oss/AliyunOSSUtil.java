@@ -83,7 +83,7 @@ public class AliyunOSSUtil {
         try {
             inputStream = file.getInputStream();
         } catch (IOException e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             return AliyunOssResult.error(e.getMessage());
         }
         // 获取文件类型
@@ -115,7 +115,7 @@ public class AliyunOSSUtil {
         try {
             fileSize = inputStream.available();
         } catch (IOException e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
         }
         if (fileSize <= 0 || fileSize > maxSize) {
             return AliyunOssResult.error(BaseRstMsgConstant.ErrorMsg.fileQuantityExceedLimit());
@@ -148,8 +148,8 @@ public class AliyunOSSUtil {
             //获取上传成功的文件地址
             return AliyunOssResult.success(fileName, getOssUrl(fileName), BaseRstMsgConstant.SuccessMsg.uploadFileOk());
         } catch (OSSException | ClientException e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
-            return AliyunOssResult.error(fileName,e.getMessage());
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
+            return AliyunOssResult.error(fileName, e.getMessage());
         }
     }
 
@@ -217,7 +217,7 @@ public class AliyunOSSUtil {
             GenericRequest request = new DeleteObjectsRequest(AliyunOssConfig.JAVA_BUCKET_NAME).withKey(fileName);
             ossClient.deleteObject(request);
         } catch (Exception e) {
-            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"),e);
+            log.error(BaseRstMsgConstant.ErrorMsg.executionException("--->"), e);
             return false;
         }
         return true;

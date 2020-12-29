@@ -65,7 +65,7 @@ public class EmAnnouncementTagServiceImpl extends MyBaseMysqlServiceImpl<EmAnnou
     public WebResult dealQueryPageByDtos(CurrentLoginEmUserInfo loginUserInfo, WebResult result, QueryPageBean<EmAnnouncementTagDto> queryPage) {
         Page<EmAnnouncementTagDto> mpPagination = queryPage.toMpPage();
         List<EmAnnouncementTagDto> emAnnouncementTagDtoList = emAnnouncementTagMapper.selectQueryPage(mpPagination, queryPage.getQuery(), queryPage.getSortMap());
-        result.settingPage(queryPage,mpPagination);
+        result.settingPage(queryPage, mpPagination);
         result.putGridList(EmAnnouncementTagTransfer.transferDtoToVoList(emAnnouncementTagDtoList));
         return result;
     }

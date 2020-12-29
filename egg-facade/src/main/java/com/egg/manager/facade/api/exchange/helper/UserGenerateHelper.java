@@ -1,8 +1,8 @@
 package com.egg.manager.facade.api.exchange.helper;
 
+import com.egg.manager.facade.persistence.commons.util.data.random.RandomValueUtil;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
 import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
-import com.egg.manager.facade.persistence.commons.util.data.random.RandomValueUtil;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ package com.egg.manager.facade.persistence.commons.base.constant.basic;
  * @Date: 2020/12/10 14:43
  */
 public interface ISuccessKeyConst {
-    final static String ACTION_SUCCESS = "success.msg.common.action";
-    final static String EXPORT_OK = "success.msg.common.export.action";
-    final static String UPLOAD_FILE_OK = "success.msg.common.upload.file";
+    String ACTION_SUCCESS = "success.msg.common.action";
+    String EXPORT_OK = "success.msg.common.export.action";
+    String UPLOAD_FILE_OK = "success.msg.common.upload.file";
 }

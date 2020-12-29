@@ -5,13 +5,12 @@ import com.egg.manager.facade.api.exchange.BaseController;
 import com.egg.manager.facade.api.services.em.log.mongo.EmPcWebOperationLogMgoService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
-import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.db.MongoFieldConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.AntdvPage;
 import com.egg.manager.facade.persistence.em.logs.db.mongo.mo.EmPcWebOperationLogMgo;
-import com.egg.manager.facade.persistence.em.logs.db.mongo.repository.EmPcWebOperationLogRepository;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
 import com.egg.manager.facade.persistence.enhance.annotation.query.QueryPage;
@@ -21,7 +20,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,8 +36,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/emCtl/log/em/pc/web/operationLog")
 public class EmPcWebOperationLogController extends BaseController {
-    @Autowired
-    private EmPcWebOperationLogRepository pcWebOperationLogRepository;
     @Reference
     private EmPcWebOperationLogMgoService emPcWebOperationLogMgoService;
 

@@ -9,6 +9,8 @@ import com.egg.manager.facade.persistence.em.define.pojo.dto.EmDefineJobDto;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineJobVo;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 
+import java.util.List;
+
 /**
  * @author zhoucj
  * @description
@@ -54,4 +56,11 @@ public interface EmDefineJobService extends MyBaseMysqlService<EmDefineJobEntity
      */
     Integer dealUpdate(CurrentLoginEmUserInfo loginUserInfo, EmDefineJobVo emDefineJobVo) throws Exception;
 
+    /**
+     * 查询指定用户的 用户-职务 关联表
+     * @param userAccountId
+     * @param stateVal      指定state的值
+     * @return
+     */
+    List<EmDefineJobEntity> findAllByUserAcccountId(String userAccountId, Short stateVal);
 }

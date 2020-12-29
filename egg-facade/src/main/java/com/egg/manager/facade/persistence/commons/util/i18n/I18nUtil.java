@@ -23,10 +23,11 @@ public class I18nUtil {
             return msgKey;
         }
     }
+
     /**
      * 获取单个国际化翻译值
      */
-    public static String get(String msgKey,Object... args) {
+    public static String get(String msgKey, Object... args) {
         try {
             return messageSource.getMessage(msgKey, args, LocaleContextHolder.getLocale());
         } catch (Exception e) {

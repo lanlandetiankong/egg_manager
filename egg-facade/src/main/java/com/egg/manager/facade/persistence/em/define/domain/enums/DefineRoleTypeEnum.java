@@ -21,8 +21,6 @@ public enum DefineRoleTypeEnum {
     private boolean isNeedFilter;
 
 
-
-
     public static DefineRoleTypeEnum doGetEnumByValue(Integer value) {
         if (value == null) {
             return null;

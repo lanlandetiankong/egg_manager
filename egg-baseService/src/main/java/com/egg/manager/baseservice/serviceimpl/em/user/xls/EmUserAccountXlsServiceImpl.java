@@ -34,7 +34,7 @@ public class EmUserAccountXlsServiceImpl extends MyXlsBaseServiceImpl implements
 
     @Override
     public void dealCheckExportSingleWithTemplate2Web(CurrentLoginEmUserInfo loginUserInfo, HttpServletResponse response, EmDefineMenuEntity emDefineMenuEntity, AntdFileUploadBean fileUploadBean, String[] checkIds) throws Exception {
-        Assert.notEmpty(checkIds,BaseRstMsgConstant.WarningMsg.selectAtLeastOneExportData());
+        Assert.notEmpty(checkIds, BaseRstMsgConstant.WarningMsg.selectAtLeastOneExportData());
         //导出文件名
         String excelFileName = BaseRstMsgConstant.InfoMsg.excelExportData(emDefineMenuEntity.getMenuName());
         String excelPath = uploadProps.getLocationPrefix() + fileUploadBean.getUrlLocation();

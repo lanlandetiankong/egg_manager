@@ -96,7 +96,7 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
 
     public void putEnumData(List<FrontSelectBean> val) {
         val = val != null ? val : new ArrayList();
-        this.put(ENUM_DATA, EnumRstBean.<FrontSelectBean,String>builder().list(val).build());
+        this.put(ENUM_DATA, EnumRstBean.<FrontSelectBean, String>builder().list(val).build());
     }
 
     public void putEnumData(List val, List checkeds) {
@@ -134,7 +134,7 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
      * @param
      */
     public <T> void settingPage(QueryPageBean<T> qpage, Page<T> page) {
-        qpage = qpage == null ? new QueryPageBean() : qpage ;
+        qpage = qpage == null ? new QueryPageBean() : qpage;
         qpage.setPageConf(qpage.getPageConf() == null ? AntdvPage.gainDefault(Object.class) : qpage.getPageConf());
         AntdvPage pageConf = qpage.getPageConf();
         if (pageConf != null && page != null) {
@@ -142,6 +142,7 @@ public abstract class AbstractResult extends HashMap implements BaseResultConsta
         }
         this.put(PAGINATION_BEAN, pageConf);
     }
+
     /**
      * 设置分页信息
      * @param vpage

@@ -79,4 +79,9 @@ public class EmDefineJobServiceImpl extends MyBaseMysqlServiceImpl<EmDefineJobMa
         return changeCount;
     }
 
+    @Override
+    public List<EmDefineJobEntity> findAllByUserAcccountId(String userAccountId, Short stateVal) {
+        return this.findAllByUserAcccountId(userAccountId, stateVal);
+    }
+
 }

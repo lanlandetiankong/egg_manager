@@ -2,21 +2,20 @@ package com.egg.manager.em.web.controller.emctl.user;
 
 import cn.hutool.core.lang.Assert;
 import com.egg.manager.facade.api.exchange.BaseController;
+import com.egg.manager.facade.api.services.em.define.basic.*;
 import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
-import com.egg.manager.facade.persistence.commons.base.constant.shiro.ShiroRoleConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.WebApiConstant;
+import com.egg.manager.facade.persistence.commons.base.constant.shiro.ShiroRoleConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.BaseStateEnum;
 import com.egg.manager.facade.persistence.commons.base.query.FieldConst;
 import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
 import com.egg.manager.facade.persistence.commons.util.basic.page.PageUtil;
 import com.egg.manager.facade.persistence.em.define.db.mysql.entity.*;
-import com.egg.manager.facade.persistence.em.define.db.mysql.mapper.*;
 import com.egg.manager.facade.persistence.em.define.pojo.transfer.*;
 import com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity;
-import com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserAccountDto;
 import com.egg.manager.facade.persistence.em.user.pojo.transfer.EmUserAccountTransfer;
@@ -29,10 +28,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,19 +50,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/emCtl/user/userAccount")
 public class EmUserAccountController extends BaseController {
-    @Autowired
-    private EmUserAccountMapper emUserAccountMapper;
-    @Autowired
-    private EmDefineRoleMapper emDefineRoleMapper;
-    @Autowired
-    private EmDefinePermissionMapper emDefinePermissionMapper;
-    @Autowired
-    private EmDefineJobMapper emDefineJobMapper;
-    @Autowired
-    private EmDefineTenantMapper emDefineTenantMapper;
-    @Autowired
-    private EmDefineDepartmentMapper emDefineDepartmentMapper;
-    @Autowired
+    @Reference
+    private EmDefineRoleService emDefineRoleService;
+    @Reference
+    private EmDefinePermissionService emDefinePermissionService;
+    @Reference
+    private EmDefineJobService emDefineJobService;
+    @Reference
+    private EmDefineTenantService emDefineTenantService;
+    @Reference
+    private EmDefineDepartmentService emDefineDepartmentService;
+    @Reference
     private EmUserAccountService emUserAccountService;
 
     @RequiresRoles(value = {ShiroRoleConstant.ROOT, ShiroRoleConstant.SUPER_ROOT}, logical = Logical.OR)
@@ -89,16 +86,16 @@ public class EmUserAccountController extends BaseController {
     @PostMapping(value = "/queryOneById")
     public WebResult queryOneById(HttpServletRequest request, String accountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        EmUserAccountEntity account = emUserAccountMapper.selectById(accountId);
+        EmUserAccountEntity account = emUserAccountService.getById(accountId);
         EmUserAccountVo emUserAccountVo = EmUserAccountTransfer.transferEntityToVo(account);
         //取得 所属的 租户定义
-        EmDefineTenantEntity belongTenant = emDefineTenantMapper.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
+        EmDefineTenantEntity belongTenant = emDefineTenantService.selectOneOfUserBelongTenant(account.getFid(), BaseStateEnum.ENABLED.getValue());
         if (belongTenant != null) {
             emUserAccountVo.setBelongTenantId(belongTenant.getFid());
             emUserAccountVo.setBelongTenant(EmDefineTenantTransfer.transferEntityToVo(belongTenant));
         }
         //取得 所属的 部门定义
-        EmDefineDepartmentEntity belongDepartment = emDefineDepartmentMapper.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
+        EmDefineDepartmentEntity belongDepartment = emDefineDepartmentService.selectOneOfUserBelongDepartment(account.getFid(), BaseStateEnum.ENABLED.getValue());
         if (belongDepartment != null) {
             emUserAccountVo.setBelongDepartmentId(belongDepartment.getFid());
             emUserAccountVo.setBelongDepartment(EmDefineDepartmentTransfer.transferEntityToVo(belongDepartment));
@@ -112,7 +109,7 @@ public class EmUserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedRole")
     public WebResult gainGrantedRole(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<EmDefineRoleEntity> emDefineRoleEntityList = emDefineRoleMapper.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+        List<EmDefineRoleEntity> emDefineRoleEntityList = emDefineRoleService.findAllRoleByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         result.putGridList(EmDefineRoleTransfer.transferEntityToVoList(emDefineRoleEntityList));
         return result;
     }
@@ -123,7 +120,7 @@ public class EmUserAccountController extends BaseController {
     public WebResult gainGrantedPermission(HttpServletRequest request, String userAccountId,
                                            @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<EmDefinePermissionEntity> emDefinePermissionEntityList = emDefinePermissionMapper.findAllPermissionByUserAcccountId(userAccountId);
+        List<EmDefinePermissionEntity> emDefinePermissionEntityList = emDefinePermissionService.findAllPermissionByUserAcccountId(userAccountId);
         result.putGridList(EmDefinePermissionTransfer.transferEntityToVoList(emDefinePermissionEntityList));
         return result;
     }
@@ -133,7 +130,7 @@ public class EmUserAccountController extends BaseController {
     @PostMapping(value = "/gainGrantedJob")
     public WebResult gainGrantedJob(HttpServletRequest request, String userAccountId, @CurrentLoginUser CurrentLoginEmUserInfo loginUserInfo) {
         WebResult result = WebResult.okQuery();
-        List<EmDefineJobEntity> emDefineJobEntityList = emDefineJobMapper.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
+        List<EmDefineJobEntity> emDefineJobEntityList = emDefineJobService.findAllByUserAcccountId(userAccountId, BaseStateEnum.ENABLED.getValue());
         result.putGridList(EmDefineJobTransfer.transferEntityToVoList(emDefineJobEntityList));
         return result;
     }

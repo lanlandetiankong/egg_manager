@@ -1,10 +1,10 @@
 package com.egg.manager.facade.persistence.em.user.pojo.vo;
 
 import com.egg.manager.facade.persistence.commons.base.beans.file.FileResBean;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserSexEnum;
-import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineDepartmentVo;
 import com.egg.manager.facade.persistence.em.define.pojo.vo.EmDefineTenantVo;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserAccountBaseTypeEnum;
+import com.egg.manager.facade.persistence.em.user.domain.enums.UserSexEnum;
 import com.egg.manager.facade.persistence.exchange.pojo.mysql.vo.MyBaseMysqlVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

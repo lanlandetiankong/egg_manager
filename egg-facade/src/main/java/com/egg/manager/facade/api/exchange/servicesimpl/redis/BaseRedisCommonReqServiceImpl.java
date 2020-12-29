@@ -20,7 +20,7 @@ public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqS
     private RedisHelper redisHelper;
 
 
-    @Autowired
+    @Reference
     public EmUserAccountService emUserAccountService;
     @Reference
     public EmDefineRoleService emDefineRoleService;

@@ -7,11 +7,14 @@ import com.egg.manager.facade.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.facade.persistence.commons.base.enums.db.RedisShiroCacheEnum;
 import com.egg.manager.facade.persistence.commons.base.exception.MyUnauthorizedException;
+import com.egg.manager.facade.persistence.commons.util.basic.dubbo.DubboUtils;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginEmUserInfo;
 import com.egg.manager.facade.persistence.em.user.pojo.bean.UserAccountToken;
 import com.egg.manager.facade.persistence.enhance.annotation.user.CurrentLoginUser;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
@@ -27,8 +30,15 @@ public class CurrentUserAccountMethodArgResolver implements HandlerMethodArgumen
 
     @Reference
     private EmUserAccountService emUserAccountService;
-    @Reference
+    @Autowired
     private RedisHelper redisHelper;
+
+    /**
+     * 由于引用不到dubbo，所以
+     */
+    public void initReferBeans(){
+        emUserAccountService = (emUserAccountService != null) ? emUserAccountService : DubboUtils.getRefBean(EmUserAccountService.class);
+    }
 
     /**
      * 判断:
@@ -53,6 +63,7 @@ public class CurrentUserAccountMethodArgResolver implements HandlerMethodArgumen
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
+        this.initReferBeans();
         CurrentLoginEmUserInfo loginUserInfo = (CurrentLoginEmUserInfo) nativeWebRequest.getAttribute("currentLoginUser", RequestAttributes.SCOPE_REQUEST);
         if (loginUserInfo == null) {
             String authorization = nativeWebRequest.getHeader("authorization");

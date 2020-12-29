@@ -40,13 +40,13 @@ public class MyShiroRelam extends AuthorizingRealm {
     @Reference
     private EmUserAccountService emUserAccountService;
 
-    public MyShiroRelam(EmDefineRoleService emDefineRoleService, EmDefinePermissionService emDefinePermissionService,
+    /*public MyShiroRelam(EmDefineRoleService emDefineRoleService, EmDefinePermissionService emDefinePermissionService,
                         EmDefineMenuService emDefineMenuService, EmUserAccountService emUserAccountService) {
         this.emDefineRoleService = emDefineRoleService;
         this.emDefinePermissionService = emDefinePermissionService;
         this.emDefineMenuService = emDefineMenuService;
         this.emUserAccountService = emUserAccountService;
-    }
+    }*/
 
 
     /**

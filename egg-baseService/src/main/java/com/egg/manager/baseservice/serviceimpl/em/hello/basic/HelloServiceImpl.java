@@ -28,8 +28,6 @@ public class HelloServiceImpl implements HelloService {
 
     @Value("${server.port}")
     private String serverPort;
-    @Value("${egg.dubbo.application.name}")
-    private String dubboApplicationName;
 
     @Autowired
     private RegistryConfig registryConfig;

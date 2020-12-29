@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 public class MessageHelloServiceImpl implements MessageHelloService {
     @Value("${server.port}")
     private String serverPort;
-    @Value("${egg.dubbo.application.name}")
-    private String dubboApplicationName;
     @Reference
     private HelloService helloService;
 

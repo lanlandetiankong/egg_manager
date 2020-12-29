@@ -2,7 +2,6 @@ package com.egg.manager.em.web.enhance.aop;
 
 
 import com.alibaba.fastjson.JSON;
-import com.egg.manager.em.web.enhance.wservices.wservice.aspect.EmControllerAspectService;
 import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.AspectNotifyTypeEnum;
 import com.egg.manager.facade.persistence.commons.base.enums.basic.SwitchStateEnum;
@@ -15,7 +14,6 @@ import com.egg.manager.facade.persistence.em.logs.db.mongo.repository.EmPcWebQue
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -46,8 +44,8 @@ public class EmControllerAspect {
     @Autowired
     private EmPcWebLoginLogRepository pcWebLoginLogRepository;
 
-    @Reference
-    private EmControllerAspectService emControllerAspectService;
+    @Autowired
+    private EggAspectTool eggAspectTool;
 
 
     @Pointcut("execution(* com.egg.manager.em.web.controller..*(..)) ")
@@ -78,7 +76,7 @@ public class EmControllerAspect {
         boolean printWatchFlag = false;
         //通知类型
         final String aspectNotifyType = AspectNotifyTypeEnum.Around.getValue();
-        Method method = emControllerAspectService.gainReqMethod(joinPoint);
+        Method method = eggAspectTool.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(EmPcWebQueryLog.class)) {
@@ -90,7 +88,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 Before
                 emPcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToQueryLog(emPcWebQueryLogMgo, joinPoint, request, queryLogAnno);
+                eggAspectTool.dealSetValToQueryLog(emPcWebQueryLogMgo, joinPoint, request, queryLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -120,7 +118,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 Before
                 emPcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToOperationLog(emPcWebOperationLogMgo, joinPoint, request, operationLogAnno);
+                eggAspectTool.dealSetValToOperationLog(emPcWebOperationLogMgo, joinPoint, request, operationLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -149,7 +147,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 Before
                 emPcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToLoginLog(emPcWebLoginLogMgo, joinPoint, request, loginLogAnno);
+                eggAspectTool.dealSetValToLoginLog(emPcWebLoginLogMgo, joinPoint, request, loginLogAnno);
                 boolean isSuccess = true;
                 if (result != null) {
                     if (result instanceof WebResult) {
@@ -180,7 +178,7 @@ public class EmControllerAspect {
     public void afterControllerThrowing(JoinPoint joinPoint, Exception exception) throws Throwable {
         //通知类型
         final String aspectNotifyType = AspectNotifyTypeEnum.AfterThrowing.getValue();
-        Method method = emControllerAspectService.gainReqMethod(joinPoint);
+        Method method = eggAspectTool.gainReqMethod(joinPoint);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //是否需要记录[查询]日志
         if (method.isAnnotationPresent(EmPcWebQueryLog.class)) {
@@ -190,7 +188,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 emPcWebQueryLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToQueryLog(emPcWebQueryLogMgo, joinPoint, request, queryLogAnno);
+                eggAspectTool.dealSetValToQueryLog(emPcWebQueryLogMgo, joinPoint, request, queryLogAnno);
                 //请求失败
                 emPcWebQueryLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -207,7 +205,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 emPcWebOperationLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToOperationLog(emPcWebOperationLogMgo, joinPoint, request, operationLogAnno);
+                eggAspectTool.dealSetValToOperationLog(emPcWebOperationLogMgo, joinPoint, request, operationLogAnno);
                 //请求失败
                 emPcWebOperationLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {
@@ -224,7 +222,7 @@ public class EmControllerAspect {
                 //当前log的通知方式是 AfterThrowing
                 emPcWebLoginLogMgo.setAspectNotifyType(aspectNotifyType);
                 //设置一些必要值到log
-                emControllerAspectService.dealSetValToLoginLog(emPcWebLoginLogMgo, joinPoint, request, loginLogAnno);
+                eggAspectTool.dealSetValToLoginLog(emPcWebLoginLogMgo, joinPoint, request, loginLogAnno);
                 //请求失败
                 emPcWebLoginLogMgo.setIsSuccess(SwitchStateEnum.Close.getValue());
                 if (exception != null) {

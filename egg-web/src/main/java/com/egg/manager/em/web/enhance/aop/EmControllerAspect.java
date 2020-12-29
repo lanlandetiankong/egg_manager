@@ -15,6 +15,7 @@ import com.egg.manager.facade.persistence.em.logs.db.mongo.repository.EmPcWebQue
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebLoginLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.facade.persistence.enhance.annotation.log.em.EmPcWebQueryLog;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -45,7 +46,7 @@ public class EmControllerAspect {
     @Autowired
     private EmPcWebLoginLogRepository pcWebLoginLogRepository;
 
-    @Autowired
+    @Reference
     private EmControllerAspectService emControllerAspectService;
 
 

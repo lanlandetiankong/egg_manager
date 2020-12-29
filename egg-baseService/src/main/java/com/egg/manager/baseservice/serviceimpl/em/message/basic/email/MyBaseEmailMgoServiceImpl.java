@@ -1,6 +1,8 @@
 package com.egg.manager.baseservice.serviceimpl.em.message.basic.email;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.egg.manager.facade.api.services.em.announcement.basic.EmAnnouncementDraftService;
 import com.egg.manager.facade.api.services.em.message.basic.email.MyBaseEmailMgoService;
 import com.egg.manager.facade.persistence.commons.base.constant.basic.BaseRstMsgConstant;
 import com.egg.manager.facade.persistence.em.message.db.mongo.repository.email.EmailSendRecordRepository;
@@ -18,7 +20,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.mail.internet.MimeMessage;
@@ -31,7 +32,7 @@ import java.util.Map;
  * @date 2020/10/20
  */
 @Slf4j
-@Service
+@Service(interfaceClass = MyBaseEmailMgoService.class)
 public class MyBaseEmailMgoServiceImpl implements MyBaseEmailMgoService {
     @Autowired
     private EmailSendRecordMapstruct emailSendRecordMapstruct;

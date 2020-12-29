@@ -3,6 +3,7 @@ package com.egg.manager.em.web.enhance.wservices.wserviceimpl.aspect;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.em.web.enhance.wservices.wservice.aspect.EmControllerAspectService;
 import com.egg.manager.facade.api.exchange.routine.RoutineCommonFunc;
@@ -30,7 +31,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +46,7 @@ import java.util.Set;
  * @date 2020/10/21
  */
 @Slf4j
-@Service
+@Service(interfaceClass = EmControllerAspectService.class)
 public class EmControllerAspectServiceImpl implements EmControllerAspectService {
 
     @Autowired

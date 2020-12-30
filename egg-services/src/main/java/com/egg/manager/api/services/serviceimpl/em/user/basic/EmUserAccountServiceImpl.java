@@ -72,11 +72,11 @@ public class EmUserAccountServiceImpl extends MyBaseMysqlServiceImpl<EmUserAccou
     @Autowired
     private EmUserDepartmentMapper emUserDepartmentMapper;
 
-    @Reference
+    @Autowired
     private EmUserJobService emUserJobService;
-    @Reference
+    @Autowired
     private EmUserGroupService emUserGroupService;
-    @Reference
+    @Autowired
     private EmUserRoleService emUserRoleService;
 
     @Override

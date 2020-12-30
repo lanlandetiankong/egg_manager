@@ -1,11 +1,11 @@
 package com.egg.manager.api.exchange.helper.redis;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/10/21
  */
 @Slf4j
-@Service(interfaceClass = RedisHelper.class)
+@Service
 public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
     /**
      * 在构造器中获取RedisTemplate实例，key(not hashKey) 默认使用String类型

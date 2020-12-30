@@ -6,6 +6,7 @@ import com.egg.manager.api.exchange.services.redis.MyRedisCommonReqService;
 import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author zhoucj
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseRedisCommonReqServiceImpl implements MyRedisCommonReqService {
 
-    @Reference
+    @Autowired
     private RedisHelper redisHelper;
 
 

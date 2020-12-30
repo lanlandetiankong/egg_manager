@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * @date 2020/06/07
  */
 @EnableCaching
-@EnableDubbo
+@EnableDubbo(scanBasePackages = {"com.egg.manager.api.services"})
 @EnableMongoAuditing
 @EnableMongoRepositories
 @EnableEncryptableProperties

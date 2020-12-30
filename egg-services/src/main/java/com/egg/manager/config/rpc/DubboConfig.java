@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/10/21
  */
 @Configuration
-@DubboComponentScan(basePackages = "com.egg.manager.api.services")
+@DubboComponentScan(basePackages = {"com.egg.manager.api.services"})
 public class DubboConfig {
 
 }

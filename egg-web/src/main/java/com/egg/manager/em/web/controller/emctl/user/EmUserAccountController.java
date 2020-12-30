@@ -1,6 +1,7 @@
 package com.egg.manager.em.web.controller.emctl.user;
 
 import cn.hutool.core.lang.Assert;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.*;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
@@ -28,7 +29,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;

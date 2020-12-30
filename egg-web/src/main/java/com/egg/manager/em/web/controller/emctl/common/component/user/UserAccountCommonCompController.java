@@ -1,6 +1,6 @@
 package com.egg.manager.em.web.controller.emctl.common.component.user;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;

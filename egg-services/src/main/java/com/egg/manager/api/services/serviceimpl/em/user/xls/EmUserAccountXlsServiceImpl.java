@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.serviceimpl.em.user.xls;
 
 import cn.hutool.core.lang.Assert;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.exchange.servicesimpl.xls.MyXlsBaseServiceImpl;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;

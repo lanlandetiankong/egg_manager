@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.controller.emctl.user.xls;
 
 import cn.hutool.core.lang.Assert;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.egg.manager.api.exchange.BaseController;

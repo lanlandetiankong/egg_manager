@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.serviceimpl.em.define.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -53,7 +53,7 @@ import java.util.*;
 @Service(interfaceClass = EmDefineRoleService.class)
 public class EmDefineRoleServiceImpl extends MyBaseMysqlServiceImpl<EmDefineRoleMapper, EmDefineRoleEntity, EmDefineRoleVo> implements EmDefineRoleService {
 
-    @Reference
+    @Autowired
     private RedisHelper redisHelper;
     @Autowired
     private RoutineCommonFunc routineCommonFunc;

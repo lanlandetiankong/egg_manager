@@ -2,8 +2,7 @@ package com.egg.manager.em.web.enhance.wservices.wserviceimpl.aspect;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.em.web.enhance.wservices.wservice.aspect.EmControllerAspectService;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
@@ -27,6 +26,7 @@ import com.egg.manager.persistence.exchange.db.mongo.mo.http.ua.EggUserAgentMgo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Service;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;

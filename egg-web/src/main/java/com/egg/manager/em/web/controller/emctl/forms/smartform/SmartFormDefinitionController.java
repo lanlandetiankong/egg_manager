@@ -1,7 +1,7 @@
 package com.egg.manager.em.web.controller.emctl.forms.smartform;
 
 import cn.hutool.core.lang.Assert;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormTypeDefinitionMgoService;

@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.serviceimpl.em.hello.basic;
 
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.em.hello.basic.HelloService;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;

@@ -1,7 +1,7 @@
 package com.egg.manager.persistence.commons.util.basic.dubbo;
 
-import com.alibaba.dubbo.config.spring.ReferenceBean;
-import com.alibaba.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor;
+import org.apache.dubbo.config.spring.ReferenceBean;
+import org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -22,7 +22,7 @@ public class DubboUtils implements ApplicationContextAware {
     /**
      * bean-list转map，仅用于查询，请勿对这个map进行增删改等。
      */
-    private static final Map<Class<?>,ReferenceBean<?>> referenceBeanMap = new HashMap<>();
+    private static final Map<Class<?>, ReferenceBean<?>> referenceBeanMap = new HashMap<>();
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

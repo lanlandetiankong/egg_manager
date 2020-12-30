@@ -17,7 +17,7 @@ $!define
 #set($entityName = $!tool.firstLowerCase($!tableInfo.name))
 
 import cn.hutool.core.lang.Assert;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.commons.base.constant.basic.HttpMethodConstant;
 import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;

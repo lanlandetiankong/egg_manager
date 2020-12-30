@@ -2,7 +2,7 @@ package com.egg.manager.em.web.controller.emctl.user.login;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.SecureUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.em.web.config.shiro.JwtShiroToken;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.exchange.helper.PasswordHelper;

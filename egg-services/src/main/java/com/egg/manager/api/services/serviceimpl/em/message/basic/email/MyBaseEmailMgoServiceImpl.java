@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.serviceimpl.em.message.basic.email;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
 import com.egg.manager.persistence.commons.base.constant.basic.BaseRstMsgConstant;

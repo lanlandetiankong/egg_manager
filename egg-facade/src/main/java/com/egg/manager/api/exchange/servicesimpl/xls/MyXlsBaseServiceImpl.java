@@ -1,6 +1,6 @@
 package com.egg.manager.api.exchange.servicesimpl.xls;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.egg.manager.api.exchange.services.xls.MyXlsBaseService;

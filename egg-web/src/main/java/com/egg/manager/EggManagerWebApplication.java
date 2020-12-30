@@ -1,6 +1,6 @@
 package com.egg.manager;
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.egg.manager.persistence.enhance.annotation.custom.EnableEggBeanScan;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;

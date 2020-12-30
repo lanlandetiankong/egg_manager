@@ -1,6 +1,6 @@
 package com.egg.manager.em.web.controller.emctl.index.hello;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.exchange.helper.UserGenerateHelper;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;

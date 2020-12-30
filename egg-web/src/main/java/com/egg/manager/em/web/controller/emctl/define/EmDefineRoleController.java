@@ -2,7 +2,7 @@ package com.egg.manager.em.web.controller.emctl.define;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
 import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;

@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.serviceimpl.em.forms.mongo;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.mongodb.MyBaseMgoServiceImpl;
 import com.egg.manager.api.services.em.forms.mongo.smartform.SmartFormDefinitionMgoService;
 import com.egg.manager.persistence.commons.base.constant.db.MongoFieldConstant;

@@ -1,6 +1,6 @@
 package com.egg.manager.em.web.controller.emctl.index.hello.message.email;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.BaseController;
 import com.egg.manager.api.services.em.message.basic.email.MyBaseEmailMgoService;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;

@@ -1,6 +1,6 @@
 package com.egg.manager.api.exchange.servicesimpl.redis;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.exchange.services.redis.MyRedisCommonReqService;
 import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;

@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.serviceimpl.em.define.basic;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.basic.MyBaseMysqlServiceImpl;
 import com.egg.manager.api.services.em.define.basic.EmDefineGroupService;
 import com.egg.manager.persistence.em.define.db.mysql.entity.EmDefineGroupEntity;

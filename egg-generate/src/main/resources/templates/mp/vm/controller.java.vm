@@ -1,6 +1,6 @@
 package ${package.Controller};
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebOperationLog;
 import com.egg.manager.persistence.enhance.annotation.log.em.EmPcWebQueryLog;

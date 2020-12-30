@@ -1,6 +1,6 @@
 package com.egg.manager.api.services.serviceimpl.em.log.mongo;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
 import com.egg.manager.api.exchange.servicesimpl.mongodb.MyBaseMgoServiceImpl;
 import com.egg.manager.api.services.em.log.mongo.EmPcWebQueryLogMgoService;
 import com.egg.manager.persistence.em.logs.db.mongo.mo.EmPcWebQueryLogMgo;

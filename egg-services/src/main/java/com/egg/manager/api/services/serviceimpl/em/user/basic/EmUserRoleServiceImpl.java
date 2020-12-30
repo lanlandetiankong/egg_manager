@@ -1,8 +1,8 @@
 package com.egg.manager.api.services.serviceimpl.em.user.basic;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
@@ -36,7 +36,7 @@ import java.util.List;
 @Service(interfaceClass = EmUserRoleService.class)
 public class EmUserRoleServiceImpl extends MyBaseMysqlServiceImpl<EmUserRoleMapper, EmUserRoleEntity, EmUserRoleVo> implements EmUserRoleService {
 
-    @Reference
+    @Autowired
     private RedisHelper redisHelper;
     @Autowired
     private RoutineCommonFunc routineCommonFunc;

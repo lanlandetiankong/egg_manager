@@ -1,7 +1,7 @@
 package com.egg.manager.api.services.serviceimpl.em.hello.basic;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import com.egg.manager.api.services.em.hello.basic.HelloService;
 import com.egg.manager.api.services.em.hello.basic.MessageHelloService;
 import lombok.extern.slf4j.Slf4j;

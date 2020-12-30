@@ -1,6 +1,6 @@
 package com.egg.manager.em.web.config.shiro;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
 import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;

@@ -1,11 +1,11 @@
 package com.egg.manager.em.web.config.shiro;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.egg.manager.api.services.em.define.basic.EmDefineMenuService;
 import com.egg.manager.api.services.em.define.basic.EmDefinePermissionService;
 import com.egg.manager.api.services.em.define.basic.EmDefineRoleService;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;
 import com.google.common.collect.Maps;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.realm.Realm;

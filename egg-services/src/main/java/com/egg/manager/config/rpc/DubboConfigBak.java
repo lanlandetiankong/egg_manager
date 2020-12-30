@@ -1,6 +1,5 @@
 package com.egg.manager.config.rpc;
 
-import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 

@@ -2,7 +2,7 @@ package com.egg.manager.em.web.enhance.aop;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.routine.RoutineCommonFunc;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;

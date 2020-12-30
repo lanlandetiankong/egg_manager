@@ -1,6 +1,6 @@
 package com.egg.manager.em.web.enhance.resolver;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.egg.manager.api.exchange.helper.redis.RedisHelper;
 import com.egg.manager.api.services.em.user.basic.EmUserAccountService;

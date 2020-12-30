@@ -11,7 +11,7 @@ $!define
 
 
 
-import com.egg.manager.facade.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
+import com.egg.manager.persistence.exchange.pojo.mysql.transfer.BaseMysqlTransfer;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 

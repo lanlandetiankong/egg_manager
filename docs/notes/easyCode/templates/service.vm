@@ -11,10 +11,10 @@ $!define
 #setPackageSuffix("easycode.generate.service")
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.egg.manager.facade.api.exchange.services.basic.MyBaseMysqlService;
-import com.egg.manager.facade.persistence.commons.base.beans.helper.WebResult;
-import com.egg.manager.facade.persistence.commons.base.query.pagination.QueryPageBean;
-import com.egg.manager.facade.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
+import com.egg.manager.api.exchange.services.basic.MyBaseMysqlService;
+import com.egg.manager.persistence.commons.base.beans.helper.WebResult;
+import com.egg.manager.persistence.commons.base.query.pagination.QueryPageBean;
+import com.egg.manager.persistence.em.user.pojo.bean.CurrentLoginUserInfo;
 /**
 * @author zhoucj
 * @description ${tableInfo.comment}-Service

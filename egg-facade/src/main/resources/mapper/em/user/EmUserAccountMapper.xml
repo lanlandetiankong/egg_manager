@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper">
+<mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserAccountEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.EmUserAccountEntity">
         <id column="fid" property="fid"/>
         <result property="userName" column="user_name"/>
         <result property="account" column="account"/>
@@ -27,15 +27,15 @@
         <result property="deletedTime" column="deleted_time"/>
     </resultMap>
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" extends="BaseResultMap"  type="com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserAccountDto">
+    <resultMap id="DtoResultMap" extends="BaseResultMap"  type="com.egg.manager.persistence.em.user.pojo.dto.EmUserAccountDto">
         <association column="create_user_id" property="createUser" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
         <association column="fid" property="belongTenant" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineTenantMapper.selectOneDtoOfUserBelongTenant"/>
+                     select="com.egg.manager.persistence.em.define.db.mysql.mapper.EmDefineTenantMapper.selectOneDtoOfUserBelongTenant"/>
         <association column="fid" property="belongDepartment" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper.selectOneDtoOfUserBelongDepartment"/>
+                     select="com.egg.manager.persistence.em.define.db.mysql.mapper.EmDefineDepartmentMapper.selectOneDtoOfUserBelongDepartment"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -121,7 +121,7 @@
             <if test="queryTenantFieldBeanList != null and queryTenantFieldBeanList.size()>0">
                 <foreach collection="queryTenantFieldBeanList" index="index" item="item" separator="">
                     <include
-                            refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
+                            refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
                         <property name="table_name_alias" value="eut"/>
                     </include>
                 </foreach>
@@ -129,18 +129,18 @@
             <if test="queryDepartmentFieldBeanList != null and queryDepartmentFieldBeanList.size()>0">
                 <foreach collection="queryDepartmentFieldBeanList" index="index" item="item" separator="">
                     <include
-                            refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
+                            refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_ForItem_Sql">
                         <property name="table_name_alias" value="eud"/>
                     </include>
                 </foreach>
             </if>
             <include
-                    refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="eua"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="eua"/>
         </include>
     </select>

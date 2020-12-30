@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserDepartmentMapper">
+<mapper namespace="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserDepartmentMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.egg.manager.facade.persistence.em.user.db.mysql.entity.EmUserDepartmentEntity">
+    <resultMap id="BaseResultMap" type="com.egg.manager.persistence.em.user.db.mysql.entity.EmUserDepartmentEntity">
         <id column="fid" property="fid"/>
         <result property="userAccountId" column="user_account_id"/>
         <result property="defineDepartmentId" column="define_department_id"/>
@@ -21,11 +21,11 @@
     </resultMap>
 
     <!-- Dto通用查询映射结果 -->
-    <resultMap id="DtoResultMap" extends="BaseResultMap"  type="com.egg.manager.facade.persistence.em.user.pojo.dto.EmUserDepartmentDto">
+    <resultMap id="DtoResultMap" extends="BaseResultMap"  type="com.egg.manager.persistence.em.user.pojo.dto.EmUserDepartmentDto">
         <association column="create_user_id" property="createUser" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
         <association column="last_modifyer_id" property="lastModifyer" fetchType="lazy"
-                     select="com.egg.manager.facade.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
+                     select="com.egg.manager.persistence.em.user.db.mysql.mapper.EmUserAccountMapper.commonSelectUserAccountById"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -81,12 +81,12 @@
         FROM em_user_account eua
         <where>
             <include
-                    refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
+                    refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Where_Sql">
                 <property name="table_name_alias" value="eua"/>
             </include>
         </where>
         <include
-                refid="com.egg.manager.facade.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
+                refid="com.egg.manager.persistence.exchange.db.mysql.mapper.common.DefaultCommonFuncMapper.Default_Common_QueryPage_Sort_Sql">
             <property name="table_name_alias" value="eua"/>
         </include>
     </select>

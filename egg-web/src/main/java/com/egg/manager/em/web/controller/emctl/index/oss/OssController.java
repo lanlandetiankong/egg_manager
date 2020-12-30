@@ -2,8 +2,8 @@ package com.egg.manager.em.web.controller.emctl.index.oss;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
-import com.egg.manager.facade.api.trait.utils.oss.AliyunOSSUtil;
-import com.egg.manager.facade.persistence.commons.base.beans.oss.AliyunOssResult;
+import com.egg.manager.api.trait.utils.oss.AliyunOSSUtil;
+import com.egg.manager.persistence.commons.base.beans.oss.AliyunOssResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;

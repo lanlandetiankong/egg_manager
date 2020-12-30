@@ -11,10 +11,10 @@ $!define
 #setPackageSuffix("easycode.generate.dao")
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.egg.manager.facade.persistence.commons.base.constant.db.mysql.EggMpSqlConst;
-import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
-import com.egg.manager.facade.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
-import com.egg.manager.facade.persistence.exchange.db.mysql.mapper.MyEggMapper;
+import com.egg.manager.persistence.commons.base.constant.db.mysql.EggMpSqlConst;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.AntdvSortMap;
+import com.egg.manager.persistence.commons.base.query.pagination.antdv.QueryFieldArr;
+import com.egg.manager.persistence.exchange.db.mysql.mapper.MyEggMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

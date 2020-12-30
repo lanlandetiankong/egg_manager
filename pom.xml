@@ -11,7 +11,7 @@
     <modules>
         <module>egg-facade</module>
         <module>egg-generate</module>
-        <module>egg-baseService</module>
+        <module>egg-services</module>
         <module>egg-web</module>
     </modules>
 

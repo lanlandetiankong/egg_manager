@@ -6,11 +6,11 @@
     <parent>
         <artifactId>egg-manager-root</artifactId>
         <groupId>com.teaegg</groupId>
-        <version>2.0.6-SNAPSHOT</version>
+        <version>2.0.7-SNAPSHOT</version>
     </parent>
     <groupId>com.teaegg</groupId>
     <artifactId>egg-generate</artifactId>
-    <version>2.0.6-SNAPSHOT</version>
+    <version>2.0.7-SNAPSHOT</version>
     <name>egg-generate</name>
     <packaging>war</packaging>
 
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.teaegg</groupId>
             <artifactId>egg-facade</artifactId>
-            <version>2.0.6-SNAPSHOT</version>
+            <version>2.0.7-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.baomidou</groupId>

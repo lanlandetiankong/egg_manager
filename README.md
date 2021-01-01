@@ -8,11 +8,6 @@
 
 ```
 MapStruct support
-Maven helper
-Rainbow Brackets
-MybatisX
-QAPlug
-translation
 Lombok
 ```
 

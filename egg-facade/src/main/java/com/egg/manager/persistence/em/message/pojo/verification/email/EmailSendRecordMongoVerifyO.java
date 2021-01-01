@@ -1,6 +1,5 @@
 package com.egg.manager.persistence.em.message.pojo.verification.email;
 
-import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormDefinitionMgo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailFromUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailReceiveUserInfoMgvo;
 import com.egg.manager.persistence.em.message.pojo.mvo.email.other.EmailSendFileInfoMgvo;
@@ -18,10 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @description:  EmailSendRecordMgo 验证
  * @author zhoucj
- * @descriptionSmartFormDefinitionMgo 对应的验证对象
- * @date 2020/10/21
- * @see SmartFormDefinitionMgo
+ * @date 2020/12/31
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

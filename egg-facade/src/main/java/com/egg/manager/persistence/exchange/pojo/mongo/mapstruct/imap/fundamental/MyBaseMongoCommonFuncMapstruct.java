@@ -1,11 +1,5 @@
 package com.egg.manager.persistence.exchange.pojo.mongo.mapstruct.imap.fundamental;
 
-import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormRecordMgo;
-import com.egg.manager.persistence.em.forms.db.mongo.mo.SmartFormTypeDefinitionMgo;
-import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormRecordMapstruct;
-import com.egg.manager.persistence.em.forms.pojo.mapstruct.imap.SmartFormTypeDefinitionMapstruct;
-import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormRecordMgvo;
-import com.egg.manager.persistence.em.forms.pojo.mvo.SmartFormTypeDefinitionMgvo;
 import com.egg.manager.persistence.exchange.db.mongo.mo.MyBaseModelMgo;
 import com.egg.manager.persistence.exchange.pojo.mongo.mvo.BaseModelMgvo;
 import org.mapstruct.MapperConfig;
@@ -18,26 +12,6 @@ import org.mapstruct.MapperConfig;
 @MapperConfig(disableSubMappingMethodsGeneration = true)
 public interface MyBaseMongoCommonFuncMapstruct<E extends MyBaseModelMgo, V extends BaseModelMgvo> {
 
-    SmartFormTypeDefinitionMapstruct smartFormTypeDefinitionMapstruct = SmartFormTypeDefinitionMapstruct.INSTANCE;
-    SmartFormRecordMapstruct smartFormRecordMapstruct = SmartFormRecordMapstruct.INSTANCE;
-
-    /**
-     * 表单类型定义 mvo转mo
-     * @param mgvo
-     * @return
-     */
-    default SmartFormTypeDefinitionMgo commonTranslateSmartFormTypeDefinitionMgvoToMo(SmartFormTypeDefinitionMgvo mgvo) {
-        return smartFormTypeDefinitionMapstruct.translateMgvoToMgo(mgvo);
-    }
-
-    /**
-     * 表单记录 mvo转mo
-     * @param mgvo
-     * @return
-     */
-    default SmartFormRecordMgo commonTranslateSmartFormRecordMgvoToMgo(SmartFormRecordMgvo mgvo) {
-        return smartFormRecordMapstruct.translateMgvoToMgo(mgvo);
-    }
 
 
 }

@@ -1,9 +1,6 @@
 package com.egg.manager.persistence.em.user.db.mysql.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.egg.manager.persistence.commons.base.query.FieldConst;
 import lombok.AllArgsConstructor;
@@ -52,47 +49,48 @@ public class EmUserAppRelatedEntity extends Model<EmUserAppRelatedEntity> {
     /**
      * 状态值
      */
-    @TableField("state")
+    @TableField(value = FieldConst.COL_STATE, fill = FieldFill.INSERT)
     private Short state;
     /**
      * 备注
      */
-    @TableField("remark")
+    @TableField(FieldConst.COL_REMARK)
     private String remark;
     /**
      * 版本号
      */
-    @TableField("version")
+    @Version
+    @TableField(value = FieldConst.COL_VERSION)
     private Integer version;
     /**
      * 创建人id
      */
-    @TableField("create_user_id")
+    @TableField(value = FieldConst.COL_CREATE_USER_ID)
     private String createUserId;
     /**
      * 创建时间
      */
-    @TableField("create_time")
+    @TableField(value = FieldConst.COL_CREATE_TIME, fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 最后修改人id
      */
-    @TableField("last_modifyer_id")
+    @TableField(value = FieldConst.COL_LAST_MODIFYER_ID)
     private String lastModifyerId;
     /**
      * 修改时间
      */
-    @TableField("update_time")
+    @TableField(value = FieldConst.COL_UPDATE_TIME, fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 是否已删除?0:否1:是
      */
-    @TableField("is_deleted")
+    @TableField(value = FieldConst.COL_IS_DELETED)
     private Short isDeleted;
     /**
      * 数据删除时间
      */
-    @TableField("deleted_time")
+    @TableField(value = FieldConst.COL_DELETE_TIME)
     private Date deletedTime;
 
 

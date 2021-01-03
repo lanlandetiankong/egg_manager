@@ -86,7 +86,7 @@ public class EmDefineRoleEntity extends Model<EmDefineRoleEntity> {
     /**
      * 数据删除时间
      */
-    @TableField(value = "deleted_time")
+    @TableField(value = FieldConst.COL_DELETE_TIME)
     private Date deletedTime;
 
     @Override

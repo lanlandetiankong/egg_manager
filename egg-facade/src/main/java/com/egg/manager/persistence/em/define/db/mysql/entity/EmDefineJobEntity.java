@@ -85,7 +85,7 @@ public class EmDefineJobEntity extends Model<EmDefineJobEntity> {
     /**
      * 数据删除时间
      */
-    @TableField(value = "deleted_time")
+    @TableField(value = FieldConst.COL_DELETE_TIME)
     private Date deletedTime;
 
     @Override

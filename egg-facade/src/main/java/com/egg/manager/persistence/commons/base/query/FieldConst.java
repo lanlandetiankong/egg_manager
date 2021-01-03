@@ -12,6 +12,7 @@ public interface FieldConst {
     String COL_REMARK = "remark";
     String COL_STATE = "state";
     String COL_IS_DELETED = "is_deleted";
+    String COL_DELETE_TIME = "deleted_time";
     String COL_CREATE_TIME = "create_time";
     String COL_UPDATE_TIME = "update_time";
     String COL_CREATE_USER_ID = "create_user_id";
@@ -23,6 +24,7 @@ public interface FieldConst {
     String FIELD_REMARK = "remark";
     String FIELD_STATE = "state";
     String FIELD_IS_DELETED = "isDeleted";
+    String FIELD_DELETE_TIME = "deletedTime";
     String FIELD_CREATE_TIME = "createTime";
     String FIELD_UPDATE_TIME = "updateTime";
     String FIELD_CREATE_USER_ID = "createUserId";

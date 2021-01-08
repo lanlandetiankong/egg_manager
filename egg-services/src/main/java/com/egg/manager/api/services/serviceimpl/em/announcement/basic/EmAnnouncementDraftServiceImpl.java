@@ -1,5 +1,6 @@
 package com.egg.manager.api.services.serviceimpl.em.announcement.basic;
 
+import com.egg.manager.persistence.commons.util.basic.http.JsoupUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
@@ -64,6 +65,7 @@ public class EmAnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<EmAnn
     @Override
     public Integer dealCreate(CurrentLoginEmUserInfo loginUserInfo, EmAnnouncementDraftVo emAnnouncementDraftVo) throws Exception {
         EmAnnouncementDraftEntity entity = EmAnnouncementDraftTransfer.transferVoToEntity(emAnnouncementDraftVo);
+        entity.setContent(JsoupUtil.clean(entity.getContent()));
         entity = super.doBeforeCreate(loginUserInfo, entity);
         Integer addCount = emAnnouncementDraftMapper.insert(entity);
         return addCount;
@@ -76,7 +78,7 @@ public class EmAnnouncementDraftServiceImpl extends MyBaseMysqlServiceImpl<EmAnn
         entity.setTitle(emAnnouncementDraftVo.getTitle());
         entity.setKeyWord(emAnnouncementDraftVo.getKeyWord());
         entity.setPublishDepartment(emAnnouncementDraftVo.getPublishDepartment());
-        entity.setContent(emAnnouncementDraftVo.getContent());
+        entity.setContent(JsoupUtil.clean(emAnnouncementDraftVo.getContent()));
         List<String> tagIds = emAnnouncementDraftVo.getTagIds();
         if (tagIds != null && tagIds.size() > 0) {
             entity.setTagIds(JSON.toJSONString(tagIds));

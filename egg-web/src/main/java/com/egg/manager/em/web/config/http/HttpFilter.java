@@ -1,5 +1,6 @@
 package com.egg.manager.em.web.config.http;
 
+import com.egg.manager.persistence.commons.util.basic.http.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,9 +9,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 跨域请求过滤器
@@ -18,7 +17,11 @@ import java.util.List;
  * @date 2019/4/29
  */
 @Configuration
-public class OriginFilter {
+public class HttpFilter {
+    /**
+     * 跨域请求过滤器
+     * @return
+     */
     @SuppressWarnings("unchecked")
     @Bean
     public FilterRegistrationBean corsFilter() {
@@ -48,4 +51,21 @@ public class OriginFilter {
         corsConfiguration.setExposedHeaders(exposedHeaderList);
     }
 
+    /**
+     * xss过滤拦截器
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean xssFilterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new XssFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.setEnabled(true);
+        filterRegistrationBean.addUrlPatterns("/*");
+        Map<String, String> initParameters = new HashMap<String, String>();
+        initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*");
+        initParameters.put("isIncludeRichText", "true");
+        filterRegistrationBean.setInitParameters(initParameters);
+        return filterRegistrationBean;
+    }
 }

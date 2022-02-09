@@ -41,7 +41,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <spring-boot-starter-aop.version>2.2.6.RELEASE</spring-boot-starter-aop.version>
         <jsoup.version>1.9.2</jsoup.version>
-        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <shiro-spring.version>1.7.1</shiro-spring.version>
         <java-jwt.version>3.2.0</java-jwt.version>
         <dom4j.version>1.6.1</dom4j.version>
         <pinyin4j.version>2.5.0</pinyin4j.version>
